@@ -1,0 +1,336 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Cloudinary Video Player</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="/cld-video-player.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+  <div class="container">
+    <a href="index.html"><< Back to examples index</a>
+    <h1>Cloudinary Video Player</h1>
+    <h2>API and Events</h2>
+    <p>The cloudinary.VideoPlayer can be controlled by it's API.
+      <br>Additionally, events are always useful: you may register to all
+      standard HTML5 video element events as well as some additional events
+      specific to the Video Player.
+      <br>Consult the API documentation for more information.
+    </p>
+
+    <div class="row">
+      <center>
+        <video
+          id="example-player"
+          controls
+          class="cld-video-player cld-video-player-skin-yellow"
+          width="600">
+        </video>
+      </center>
+      <br>
+      <center>
+        <div id="vid-source-data">
+          <span id="vid-source-public-id"></span><br>
+          <span id="vid-source-url"></span><br>
+        </div>
+        <div>
+          <button id="vid-seek-minus" class="btn btn-default">-10 seconds</button>
+          <button id="vid-seek-plus" class="btn btn-default">+10 seconds</button>
+          <button id="vid-play-prev" class="btn btn-default">Previous</button>
+          <button id="vid-play-next" class="btn btn-default">Next</button>
+          <button id="vid-play" class="btn btn-default">Play</button>
+          <button id="vid-pause" class="btn btn-default">Pause</button>
+          <button id="vid-stop" class="btn btn-default">Stop</button>
+          <button id="vid-mute" class="btn btn-default">Mute</button>
+          <button id="vid-unmute" class="btn btn-default">Unmute</button>
+          <button id="vid-volume-minus" class="btn btn-default">Volume -10%</button>
+          <button id="vid-volume-plus" class="btn btn-default">Volume +10%</button>
+          <button id="vid-maximize" class="btn btn-default">Maximize</button>
+          <button id="vid-toggle-controls" class="btn btn-default">Toggle Controls</button>
+        </div>
+      </center>
+      <br>
+      <div id="vid-events" class="well" style="overflow: scroll; height: 100px">
+      </div>
+    </div>
+
+    <h4>Example Code:</h3>
+    <pre><xmp>
+      HTML:
+
+      <div class="row">
+        <center>
+          <video
+            id="example-player"
+            controls
+            class="cld-video-player cld-video-player-skin-yellow"
+            width="600">
+          </video>
+        </center>
+        <br>
+        <center>
+          <div id="vid-source-data">
+            <span id="vid-source-public-id"></span><br>
+            <span id="vid-source-url"></span><br>
+          </div>
+          <div>
+            <button id="vid-seek-minus" class="btn btn-default">-10 seconds</button>
+            <button id="vid-seek-plus" class="btn btn-default">+10 seconds</button>
+            <button id="vid-play-prev" class="btn btn-default">Previous</button>
+            <button id="vid-play-next" class="btn btn-default">Next</button>
+            <button id="vid-play" class="btn btn-default">Play</button>
+            <button id="vid-pause" class="btn btn-default">Pause</button>
+            <button id="vid-stop" class="btn btn-default">Stop</button>
+            <button id="vid-mute" class="btn btn-default">Mute</button>
+            <button id="vid-unmute" class="btn btn-default">Unmute</button>
+            <button id="vid-volume-minus" class="btn btn-default">Volume -10%</button>
+            <button id="vid-volume-plus" class="btn btn-default">Volume +10%</button>
+            <button id="vid-maximize" class="btn btn-default">Maximize</button>
+            <button id="vid-toggle-controls" class="btn btn-default">Toggle Controls</button>
+          </div>
+        </center>
+        <br>
+        <div id="vid-events" class="well" style="overflow: scroll; height: 100px">
+        </div>
+      </div>
+
+
+      JavaScript:
+
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+
+      // Initialize player with base transformation (applies to all videos)
+      var player = cld.videoPlayer('example-player', {
+        transformation: {
+          overlay: "text:arial_60:Example",
+          gravity: "north_west",
+          x: 20,
+          y: 20,
+          start_offset: 3,
+          end_offset: 10,
+          color: 'red',
+          width: 600,
+          crop: 'limit'
+        },
+        posterOptions: {
+          transformation: { effect: ['sepia'] }
+        }
+      })
+
+      // Button 'click' event handlers
+      document.querySelector("#vid-seek-minus").addEventListener('click', function() {
+        player.currentTime(player.currentTime() - 10)
+      })
+
+      document.querySelector("#vid-seek-plus").addEventListener('click', function() {
+        player.currentTime(player.currentTime() + 10)
+      })
+
+      document.querySelector("#vid-play-prev").addEventListener('click', function() {
+        player.playPrevious()
+      })
+
+      document.querySelector("#vid-play").addEventListener('click', function() {
+        player.play()
+      })
+
+      document.querySelector("#vid-play-next").addEventListener('click', function() {
+        player.playNext()
+      })
+
+      document.querySelector("#vid-pause").addEventListener('click', function() {
+        player.pause()
+      })
+
+      document.querySelector("#vid-stop").addEventListener('click', function() {
+        player.stop()
+      })
+
+      document.querySelector("#vid-mute").addEventListener('click', function() {
+        player.mute()
+      })
+
+      document.querySelector("#vid-unmute").addEventListener('click', function() {
+        player.unmute()
+      })
+
+      document.querySelector("#vid-volume-minus").addEventListener('click', function() {
+        player.volume(player.volume() - 0.1)
+      })
+
+      document.querySelector("#vid-volume-plus").addEventListener('click', function() {
+        player.volume(player.volume() + 0.1)
+      })
+
+      document.querySelector("#vid-maximize").addEventListener('click', function() {
+        player.maximize()
+      })
+
+      document.querySelector("#vid-toggle-controls").addEventListener('click', function() {
+        player.controls(!player.controls())
+      })
+
+      var eventTypes = ['play', 'pause', 'volumechange', 'fullscreenchange', 'volumechange', 'mute', 'unmute',
+        'seek', 'sourcechange', 'percentsplayed']
+
+      eventTypes.forEach(function(eventType) {
+        player.on(eventType, function(event)) {
+          var eventStr = eventType
+          if (event.eventData) {
+            eventStr = eventStr + ": " + JSON.parse(event.eventData)
+          }
+          console.log("Just triggered: ", eventStr)
+        }
+      })
+
+      // Set player playlist
+      player.playlist([
+        'oceans',
+        'negative',
+        'book'
+      ], { autoAdvance: 0 }).play()
+    </xmp></pre>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Cloudinary Video Player Dependencies -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+  <script type="text/javascript" src="/cld-video-player.js"></script>
+
+  <!-- Actual code -->
+  <script type="text/javascript">
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+
+    // Initialize player with base transformation (applies to all transformations)
+    var player = cld.videoPlayer('example-player', {
+      transformation: {
+        overlay: "text:arial_60:Example",
+        gravity: "north_west",
+        x: 20,
+        y: 20,
+        start_offset: 3,
+        end_offset: 10,
+        color: 'red',
+        width: 600,
+        crop: 'limit'
+      },
+      posterOptions: {
+        transformation: { effect: ['sepia'] }
+      }
+    })
+
+    // Button 'click' event handlers
+    document.querySelector("#vid-seek-minus").addEventListener('click', function() {
+      player.currentTime(player.currentTime() - 10)
+    })
+
+    document.querySelector("#vid-seek-plus").addEventListener('click', function() {
+      player.currentTime(player.currentTime() + 10)
+    })
+
+    document.querySelector("#vid-play-prev").addEventListener('click', function() {
+      player.playPrevious()
+    })
+
+    document.querySelector("#vid-play").addEventListener('click', function() {
+      player.play()
+    })
+
+    document.querySelector("#vid-play-next").addEventListener('click', function() {
+      player.playNext()
+    })
+
+    document.querySelector("#vid-pause").addEventListener('click', function() {
+      player.pause()
+    })
+
+    document.querySelector("#vid-stop").addEventListener('click', function() {
+      player.stop()
+    })
+
+    document.querySelector("#vid-mute").addEventListener('click', function() {
+      player.mute()
+    })
+
+    document.querySelector("#vid-unmute").addEventListener('click', function() {
+      player.unmute()
+    })
+
+    document.querySelector("#vid-volume-minus").addEventListener('click', function() {
+      player.volume(player.volume() - 0.1)
+    })
+
+    document.querySelector("#vid-volume-plus").addEventListener('click', function() {
+      player.volume(player.volume() + 0.1)
+    })
+
+    document.querySelector("#vid-maximize").addEventListener('click', function() {
+      player.maximize()
+    })
+
+    document.querySelector("#vid-toggle-controls").addEventListener('click', function() {
+      player.controls(!player.controls())
+    })
+
+    // Register to some video player events
+    var eventTypes = ['play', 'pause', 'volumechange', 'mute', 'unmute', 'fullscreenchange',
+      'seek', 'sourcechanged', 'percentsplayed', 'ended']
+
+    var eventsDiv = document.querySelector('#vid-events')
+    eventTypes.forEach(function(eventType) {
+      player.on(eventType, function(event) {
+        var eventStr = eventType
+        if (event.eventData) {
+          eventStr = eventStr + ": " + JSON.stringify(event.eventData)
+        }
+        var text = document.createTextNode(eventStr)
+        var textDiv = document.createElement('div')
+        textDiv.appendChild(text)
+        eventsDiv.appendChild(textDiv)
+        updateEvents()
+      })
+    })
+
+    function updateEvents() {
+      var eventsDiv = document.querySelector('#vid-events')
+      eventsDiv.scrollTop = eventsDiv.scrollHeight
+    }
+
+    // Update source information when source is changed.
+    player.on('sourcechanged', function() {
+      updateSourceData()
+    })
+
+    function updateSourceData() {
+      document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId()
+      document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl()
+    }
+
+    // Set player playlist
+    player.playlist([
+      'oceans',
+      'negative',
+      'book'
+    ], { autoAdvance: 0 }).play()
+  </script>
+</body>
+</html>
+
+

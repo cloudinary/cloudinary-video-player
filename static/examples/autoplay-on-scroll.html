@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Cloudinary Video Player</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="/cld-video-player.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+  <div class="container">
+    <a href="index.html"><< Back to examples index</a>
+    <h1>Cloudinary Video Player</h1>
+    <h2>Autoplay on scroll</h2>
+    <p>Video will start playing once the majority of the player is visible in the viewport,
+      and pause when the majority is out of the viewport.<br>
+      Furthermore, interacting with the player in any other way will stop the above behaviour:
+      (e.g. pausing the video using the 'pause' button and scrolling up and then down
+      will not resume the playing video again).
+    </p>
+    <p>
+      <b>Scroll down to see the player and then up to see the above in action.</b>
+    </p>
+
+    <h4>Example Code:</h3>
+    <pre><xmp>
+      HTML tag attributes:
+
+      <video
+        id="example-player"
+        controls
+        class="cld-video-player cld-video-player-skin-orange"
+        data-cld-public-id="oceans"
+        data-cld-autoplay-mode='on-scroll'>
+      </video>
+
+
+      JavaScript:
+
+      // Initialize player
+      var player = cld.videoPlayer('example-player')
+    </xmp></pre>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
+      In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
+      Nam tempus enim purus, id pretium tellus mollis non. Integer accumsan pulvinar finibus. Proin tincidunt nibh ut elit venenatis, ac feugiat turpis placerat. Ut et faucibus magna. Sed lectus lectus, dictum in ligula quis, varius mattis eros. Vestibulum in eros neque. Etiam cursus imperdiet aliquet.
+      Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
+      Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
+      In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
+      Nam tempus enim purus, id pretium tellus mollis non. Integer accumsan pulvinar finibus. Proin tincidunt nibh ut elit venenatis, ac feugiat turpis placerat. Ut et faucibus magna. Sed lectus lectus, dictum in ligula quis, varius mattis eros. Vestibulum in eros neque. Etiam cursus imperdiet aliquet.
+      Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
+      Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
+      In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
+      Nam tempus enim purus, id pretium tellus mollis non. Integer accumsan pulvinar finibus. Proin tincidunt nibh ut elit venenatis, ac feugiat turpis placerat. Ut et faucibus magna. Sed lectus lectus, dictum in ligula quis, varius mattis eros. Vestibulum in eros neque. Etiam cursus imperdiet aliquet.
+      Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
+      Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
+      In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
+      Nam tempus enim purus, id pretium tellus mollis non. Integer accumsan pulvinar finibus. Proin tincidunt nibh ut elit venenatis, ac feugiat turpis placerat. Ut et faucibus magna. Sed lectus lectus, dictum in ligula quis, varius mattis eros. Vestibulum in eros neque. Etiam cursus imperdiet aliquet.
+      Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
+      Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
+    </p>
+    <center>
+      <video
+        id="example-player"
+        controls
+        class="cld-video-player cld-video-player-skin-orange"
+        data-cld-public-id="oceans"
+        data-cld-autoplay-mode='on-scroll'>
+      </video>
+    </center>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
+      In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
+      Nam tempus enim purus, id pretium tellus mollis non. Integer accumsan pulvinar finibus. Proin tincidunt nibh ut elit venenatis, ac feugiat turpis placerat. Ut et faucibus magna. Sed lectus lectus, dictum in ligula quis, varius mattis eros. Vestibulum in eros neque. Etiam cursus imperdiet aliquet.
+      Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
+      Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
+    </p>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Cloudinary Video Player Dependencies -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+  <script type="text/javascript" src="/cld-video-player.js"></script>
+
+  <!-- Actual code -->
+  <script type="text/javascript">
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+
+    // Initialize player
+    var players = cld.videoPlayer('example-player')
+  </script>
+</body>
+</html>

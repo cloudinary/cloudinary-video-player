@@ -1,0 +1,11 @@
+# IDE
+.idea/
+.tern-port
+
+# nodejs
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# project
+env.js
