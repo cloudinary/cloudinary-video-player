@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,6 +20,11 @@
 <![endif]-->
 </head>
 <body>
+  <div style="display: flex; flex-direction: column; align-items: stretch; justify-content: space-around; height: 400px; width: 200px">
+    <div style="background-color: red; width: 100%; flex-grow: 1">omething</div>
+    <div style="background-color: yellow; width: 100%; flex-grow: 2">something2</div>
+  </div>
+
   <div class="container">
     <a href="index.html"><< Back to examples index</a>
     <h1>Cloudinary Video Player</h1>
@@ -30,17 +36,14 @@
       <br>Consult the API documentation for more information.
     </p>
 
-    <div class="row">
-      <center>
-        <video
-          id="example-player"
-          controls
-          class="cld-video-player cld-video-player-skin-yellow"
-          width="600">
-        </video>
-      </center>
+    <div class="row video-container">
+      <video
+        id="example-player"
+        controls
+        class="cld-video-player cld-video-player-skin-dark"
+        width="600">
+      </video>
       <br>
-      <center>
         <div id="vid-source-data">
           <span id="vid-source-public-id"></span><br>
           <span id="vid-source-url"></span><br>
@@ -60,58 +63,57 @@
           <button id="vid-maximize" class="btn btn-default">Maximize</button>
           <button id="vid-toggle-controls" class="btn btn-default">Toggle Controls</button>
         </div>
-      </center>
       <br>
       <div id="vid-events" class="well" style="overflow: scroll; height: 100px">
       </div>
     </div>
 
-    <h4>Example Code:</h3>
-    <pre><xmp>
+    <h3>Example Code:</h3>
+    <pre>
       HTML:
 
-      <div class="row">
-        <center>
-          <video
+      &lt;div class="row"&gt;
+        &lt;center&gt;
+          &lt;video
             id="example-player"
             controls
-            class="cld-video-player cld-video-player-skin-yellow"
-            width="600">
-          </video>
-        </center>
-        <br>
-        <center>
-          <div id="vid-source-data">
-            <span id="vid-source-public-id"></span><br>
-            <span id="vid-source-url"></span><br>
-          </div>
-          <div>
-            <button id="vid-seek-minus" class="btn btn-default">-10 seconds</button>
-            <button id="vid-seek-plus" class="btn btn-default">+10 seconds</button>
-            <button id="vid-play-prev" class="btn btn-default">Previous</button>
-            <button id="vid-play-next" class="btn btn-default">Next</button>
-            <button id="vid-play" class="btn btn-default">Play</button>
-            <button id="vid-pause" class="btn btn-default">Pause</button>
-            <button id="vid-stop" class="btn btn-default">Stop</button>
-            <button id="vid-mute" class="btn btn-default">Mute</button>
-            <button id="vid-unmute" class="btn btn-default">Unmute</button>
-            <button id="vid-volume-minus" class="btn btn-default">Volume -10%</button>
-            <button id="vid-volume-plus" class="btn btn-default">Volume +10%</button>
-            <button id="vid-maximize" class="btn btn-default">Maximize</button>
-            <button id="vid-toggle-controls" class="btn btn-default">Toggle Controls</button>
-          </div>
-        </center>
-        <br>
-        <div id="vid-events" class="well" style="overflow: scroll; height: 100px">
-        </div>
-      </div>
+            class="cld-video-player cld-video-player-skin-dark"
+            width="600"&gt;
+          &lt;/video&gt;
+        &lt;/center&gt;
+        &lt;br&gt;
+        &lt;center&gt;
+          &lt;div id="vid-source-data"&gt;
+            &lt;span id="vid-source-public-id"&gt;&lt;/span&gt;&lt;br&gt;
+            &lt;span id="vid-source-url"&gt;&lt;/span&gt;&lt;br&gt;
+          &lt;/div&gt;
+          &lt;div&gt;
+            &lt;button id="vid-seek-minus" class="btn btn-default"&gt;-10 seconds&lt;/button&gt;
+            &lt;button id="vid-seek-plus" class="btn btn-default"&gt;+10 seconds&lt;/button&gt;
+            &lt;button id="vid-play-prev" class="btn btn-default"&gt;Previous&lt;/button&gt;
+            &lt;button id="vid-play-next" class="btn btn-default"&gt;Next&lt;/button&gt;
+            &lt;button id="vid-play" class="btn btn-default"&gt;Play&lt;/button&gt;
+            &lt;button id="vid-pause" class="btn btn-default"&gt;Pause&lt;/button&gt;
+            &lt;button id="vid-stop" class="btn btn-default"&gt;Stop&lt;/button&gt;
+            &lt;button id="vid-mute" class="btn btn-default"&gt;Mute&lt;/button&gt;
+            &lt;button id="vid-unmute" class="btn btn-default"&gt;Unmute&lt;/button&gt;
+            &lt;button id="vid-volume-minus" class="btn btn-default"&gt;Volume -10%&lt;/button&gt;
+            &lt;button id="vid-volume-plus" class="btn btn-default"&gt;Volume +10%&lt;/button&gt;
+            &lt;button id="vid-maximize" class="btn btn-default"&gt;Maximize&lt;/button&gt;
+            &lt;button id="vid-toggle-controls" class="btn btn-default"&gt;Toggle Controls&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/center&gt;
+        &lt;br&gt;
+        &lt;div id="vid-events" class="well" style="overflow: scroll; height: 100px"&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
 
 
       JavaScript:
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
-      // Initialize player with base transformation (applies to all videos)
+      // Initialize player with base transformation (applies to all transformations)
       var player = cld.videoPlayer('example-player', {
         transformation: {
           overlay: "text:arial_60:Example",
@@ -127,81 +129,102 @@
         posterOptions: {
           transformation: { effect: ['sepia'] }
         }
-      })
+      });
 
       // Button 'click' event handlers
       document.querySelector("#vid-seek-minus").addEventListener('click', function() {
-        player.currentTime(player.currentTime() - 10)
-      })
+        player.currentTime(player.currentTime() - 10);
+      });
 
       document.querySelector("#vid-seek-plus").addEventListener('click', function() {
-        player.currentTime(player.currentTime() + 10)
-      })
+        player.currentTime(player.currentTime() + 10);
+      });
 
       document.querySelector("#vid-play-prev").addEventListener('click', function() {
-        player.playPrevious()
-      })
+        player.playPrevious();
+      });
 
       document.querySelector("#vid-play").addEventListener('click', function() {
-        player.play()
-      })
+        player.play();
+      });
 
       document.querySelector("#vid-play-next").addEventListener('click', function() {
-        player.playNext()
-      })
+        player.playNext();
+      });
 
       document.querySelector("#vid-pause").addEventListener('click', function() {
-        player.pause()
-      })
+        player.pause();
+      });
 
       document.querySelector("#vid-stop").addEventListener('click', function() {
-        player.stop()
-      })
+        player.stop();
+      });
 
       document.querySelector("#vid-mute").addEventListener('click', function() {
-        player.mute()
-      })
+        player.mute();
+      });
 
       document.querySelector("#vid-unmute").addEventListener('click', function() {
-        player.unmute()
-      })
+        player.unmute();
+      });
 
       document.querySelector("#vid-volume-minus").addEventListener('click', function() {
-        player.volume(player.volume() - 0.1)
-      })
+        player.volume(player.volume() - 0.1);
+      });
 
       document.querySelector("#vid-volume-plus").addEventListener('click', function() {
-        player.volume(player.volume() + 0.1)
-      })
+        player.volume(player.volume() + 0.1);
+      });
 
       document.querySelector("#vid-maximize").addEventListener('click', function() {
-        player.maximize()
-      })
+        player.maximize();
+      });
 
       document.querySelector("#vid-toggle-controls").addEventListener('click', function() {
-        player.controls(!player.controls())
-      })
+        player.controls(!player.controls());
+      });
 
-      var eventTypes = ['play', 'pause', 'volumechange', 'fullscreenchange', 'volumechange', 'mute', 'unmute',
-        'seek', 'sourcechange', 'percentsplayed']
+      // Register to some video player events
+      var eventTypes = ['play', 'pause', 'volumechange', 'mute', 'unmute', 'fullscreenchange',
+        'seek', 'sourcechanged', 'percentsplayed', 'ended'];
 
+      var eventsDiv = document.querySelector('#vid-events');
       eventTypes.forEach(function(eventType) {
-        player.on(eventType, function(event)) {
-          var eventStr = eventType
+        player.on(eventType, function(event) {
+          var eventStr = eventType;
           if (event.eventData) {
-            eventStr = eventStr + ": " + JSON.parse(event.eventData)
+            eventStr = eventStr + ": " + JSON.stringify(event.eventData);
           }
-          console.log("Just triggered: ", eventStr)
-        }
-      })
+          var text = document.createTextNode(eventStr);
+          var textDiv = document.createElement('div');
+          textDiv.appendChild(text);
+          eventsDiv.appendChild(textDiv);
+          updateEvents();
+        })
+      });
+
+      function updateEvents() {
+        var eventsDiv = document.querySelector('#vid-events');
+        eventsDiv.scrollTop = eventsDiv.scrollHeight;
+      }
+
+      // Update source information when source is changed.
+      player.on('sourcechanged', function() {
+        updateSourceData();
+      });
+
+      function updateSourceData() {
+        document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId();
+        document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl();
+      }
 
       // Set player playlist
       player.playlist([
         'oceans',
         'negative',
         'book'
-      ], { autoAdvance: 0 }).play()
-    </xmp></pre>
+      ], { autoAdvance: 0 }).play();
+    </pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -216,7 +239,7 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player with base transformation (applies to all transformations)
     var player = cld.videoPlayer('example-player', {
@@ -234,93 +257,93 @@
       posterOptions: {
         transformation: { effect: ['sepia'] }
       }
-    })
+    });
 
     // Button 'click' event handlers
     document.querySelector("#vid-seek-minus").addEventListener('click', function() {
-      player.currentTime(player.currentTime() - 10)
-    })
+      player.currentTime(player.currentTime() - 10);
+    });
 
     document.querySelector("#vid-seek-plus").addEventListener('click', function() {
-      player.currentTime(player.currentTime() + 10)
-    })
+      player.currentTime(player.currentTime() + 10);
+    });
 
     document.querySelector("#vid-play-prev").addEventListener('click', function() {
-      player.playPrevious()
-    })
+      player.playPrevious();
+    });
 
     document.querySelector("#vid-play").addEventListener('click', function() {
-      player.play()
-    })
+      player.play();
+    });
 
     document.querySelector("#vid-play-next").addEventListener('click', function() {
-      player.playNext()
-    })
+      player.playNext();
+    });
 
     document.querySelector("#vid-pause").addEventListener('click', function() {
-      player.pause()
-    })
+      player.pause();
+    });
 
     document.querySelector("#vid-stop").addEventListener('click', function() {
-      player.stop()
-    })
+      player.stop();
+    });
 
     document.querySelector("#vid-mute").addEventListener('click', function() {
-      player.mute()
-    })
+      player.mute();
+    });
 
     document.querySelector("#vid-unmute").addEventListener('click', function() {
-      player.unmute()
-    })
+      player.unmute();
+    });
 
     document.querySelector("#vid-volume-minus").addEventListener('click', function() {
-      player.volume(player.volume() - 0.1)
-    })
+      player.volume(player.volume() - 0.1);
+    });
 
     document.querySelector("#vid-volume-plus").addEventListener('click', function() {
-      player.volume(player.volume() + 0.1)
-    })
+      player.volume(player.volume() + 0.1);
+    });
 
     document.querySelector("#vid-maximize").addEventListener('click', function() {
-      player.maximize()
-    })
+      player.maximize();
+    });
 
     document.querySelector("#vid-toggle-controls").addEventListener('click', function() {
-      player.controls(!player.controls())
-    })
+      player.controls(!player.controls());
+    });
 
     // Register to some video player events
     var eventTypes = ['play', 'pause', 'volumechange', 'mute', 'unmute', 'fullscreenchange',
-      'seek', 'sourcechanged', 'percentsplayed', 'ended']
+      'seek', 'sourcechanged', 'percentsplayed', 'ended'];
 
-    var eventsDiv = document.querySelector('#vid-events')
+    var eventsDiv = document.querySelector('#vid-events');
     eventTypes.forEach(function(eventType) {
       player.on(eventType, function(event) {
-        var eventStr = eventType
+        var eventStr = eventType;
         if (event.eventData) {
-          eventStr = eventStr + ": " + JSON.stringify(event.eventData)
+          eventStr = eventStr + ": " + JSON.stringify(event.eventData);
         }
-        var text = document.createTextNode(eventStr)
-        var textDiv = document.createElement('div')
-        textDiv.appendChild(text)
-        eventsDiv.appendChild(textDiv)
-        updateEvents()
+        var text = document.createTextNode(eventStr);
+        var textDiv = document.createElement('div');
+        textDiv.appendChild(text);
+        eventsDiv.appendChild(textDiv);
+        updateEvents();
       })
-    })
+    });
 
     function updateEvents() {
-      var eventsDiv = document.querySelector('#vid-events')
-      eventsDiv.scrollTop = eventsDiv.scrollHeight
+      var eventsDiv = document.querySelector('#vid-events');
+      eventsDiv.scrollTop = eventsDiv.scrollHeight;
     }
 
     // Update source information when source is changed.
     player.on('sourcechanged', function() {
-      updateSourceData()
-    })
+      updateSourceData();
+    });
 
     function updateSourceData() {
-      document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId()
-      document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl()
+      document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId();
+      document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl();
     }
 
     // Set player playlist
@@ -328,7 +351,7 @@
       'oceans',
       'negative',
       'book'
-    ], { autoAdvance: 0 }).play()
+    ], { autoAdvance: 0 }).play();
   </script>
 </body>
 </html>

@@ -1,3 +1,3 @@
 class BaseVideoPlayer {}
 
-export default BaseVideoPlayer
+export default BaseVideoPlayer;

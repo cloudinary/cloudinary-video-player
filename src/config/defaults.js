@@ -1,57 +1,57 @@
 const aboutMenuItem = {
   label: 'About this player',
-  href: 'http://www.cloudinary.com'
-}
+  href: 'http://cloudinary.com/documentation/cloudinary_video_player'
+};
 
 const contextMenuContent = (player) => {
-  const isLooping = player.loop()
-  const isPaused = player.paused()
-  const isMuted = player.muted()
-  const isFullscreen = player.isFullscreen()
+  const isLooping = player.loop();
+  const isPaused = player.paused();
+  const isMuted = player.muted();
+  const isFullscreen = player.isFullscreen();
 
   if (!player.controls()) {
-    return [aboutMenuItem]
+    return [aboutMenuItem];
   }
 
   return [
     {
       label: isLooping ? 'Unloop' : 'Loop',
       listener: () => {
-        player.loop(!isLooping)
+        player.loop(!isLooping);
       }
     },
     {
       label: isPaused ? 'Play' : 'Pause',
       listener: () => {
         if (isPaused) {
-          player.play()
+          player.play();
         } else {
-          player.pause()
+          player.pause();
         }
       }
     },
     {
       label: isMuted ? 'Unmute' : 'Mute',
       listener: () => {
-        player.muted(!isMuted)
+        player.muted(!isMuted);
       }
     },
     {
       label: isFullscreen ? 'Exit Fullscreen' : 'Fullscreen',
       listener: () => {
         if (isFullscreen) {
-          player.exitFullscreen()
+          player.exitFullscreen();
         } else {
-          player.requestFullscreen()
+          player.requestFullscreen();
         }
       }
     },
     aboutMenuItem
-  ]
-}
+  ];
+};
 
 export default {
-  skin: 'blue',
+  skin: 'dark',
   controls: false,
   preload: false,
   loop: false,
@@ -63,4 +63,4 @@ export default {
   },
   analytics: false,
   playedEventPercents: [25, 50, 75, 100]
-}
+};

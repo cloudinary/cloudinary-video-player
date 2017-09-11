@@ -1,13 +1,13 @@
-const path = require('path')
-const merge = require('webpack-merge')
-const webpackCommon = require('./common.config')
-const env = require('../env')
+const path = require('path');
+const merge = require('webpack-merge');
+const webpackCommon = require('./common.config');
+const env = require('../env');
 
 // webpack plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const DefinePlugin = require('webpack/lib/DefinePlugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge.smart(webpackCommon, {
   devtool: 'inline-source-map',
@@ -32,7 +32,8 @@ module.exports = merge.smart(webpackCommon, {
       template: path.resolve(__dirname, '../static/index.html'),
       favicon: path.resolve(__dirname, '../static/favicon.ico')
     }),
-    new CopyWebpackPlugin([{ from: '../static/examples' }])
+    new CopyWebpackPlugin([{ from: '../static/examples' }]),
+    new CopyWebpackPlugin([{ from: '../static/assets' }])
   ],
 
   devServer: {
@@ -45,4 +46,4 @@ module.exports = merge.smart(webpackCommon, {
       poll: 1000
     }
   }
-})
+});

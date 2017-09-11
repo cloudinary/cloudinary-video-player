@@ -1,0 +1,42 @@
+.video-js {
+  .vjs-triangle-volume-bar {
+    $height: 1.2em;
+    $width: 6em;
+
+    width: $width;
+
+    .vjs-triangle-volume-bar-container {
+      margin: 0.9em 0.45em;
+      display: block;
+      height: $height;
+      width: $width;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: none;
+      z-index: 100;
+      cursor: pointer;
+    }
+
+    .vjs-triangle-volume-bar-level {
+      position: absolute;
+      height: $height;
+      width: $width;
+      clip: rect(0px,$width,$width,0px);
+      border-style: solid;
+      border-width: 0 0 $height $width;
+      border-color: transparent transparent #007bff transparent;
+      line-height: 0px;
+    }
+
+    .vjs-triangle-volume-bar-background {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 $height $width;
+        border-color: transparent transparent #999 transparent;
+        line-height: 0px;
+    }
+  }
+}

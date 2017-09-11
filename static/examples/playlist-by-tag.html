@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,38 +30,12 @@
       <br><b>NOTE: In order to support resource listing by tag (required for 'playlist by tag' to work), make sure to enable it in the Cloudinary console: Settings | Security | Restricted image types | Resource list</b>
     </p>
 
-    <div class="row">
-      <center>
-        <video
-          id="example-player"
-          controls
-          autoplay
-          class="cld-video-player cld-video-player-skin-orange"
-          data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-        </video>
-
-        <button id="play-prev" class="btn btn-default">Prev</button>
-        <button id="play-next" class="btn btn-default">Next</button>
-
-        <div id="source-data">
-          <span id="public-id-placeholder"></span><br>
-          <span id="source-url-placeholder"></span>
-        </div>
-
-        <div class="well" id="playlist-data">
-        </div>
-      </center>
-    </div>
-
-    <h4>Example Code:</h3>
-    <pre><xmp>
-      HTML:
-
+    <div class="row video-container">
       <video
         id="example-player"
         controls
         autoplay
-        class="cld-video-player cld-video-player-skin-orange"
+        class="cld-video-player cld-video-player-skin-light"
         data-cld-transformation='{ "width": 500, "crop": "limit" }'>
       </video>
 
@@ -74,61 +49,84 @@
 
       <div class="well" id="playlist-data">
       </div>
+    </div>
+
+    <h3>Example Code:</h3>
+    <pre><code>
+      HTML:
+
+      &lt;video
+        id="example-player"
+        controls
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+      &lt;/video&gt;
+
+      &lt;button id="play-prev" class="btn btn-default"&gt;Prev&lt;/button&gt;
+      &lt;button id="play-next" class="btn btn-default"&gt;Next&lt;/button&gt;
+
+      &lt;div id="source-data"&gt;
+        &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
+        &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class="well" id="playlist-data"&gt;
+      &lt;/div&gt;
 
       JavaScript:
 
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
       // Initialize player
-      var player = cld.videoPlayer('example-player')
+      var player = cld.videoPlayer('example-player');
 
       // Pass a sorter to sort list in alphabetical order by publicId
       var sorter = function(a, b) {
-        if (a.publicId < b.publicId) return 1
-        if (a.publicId > b.publicId) return -1
-        return 0
-      }
+        if (a.publicId < b.publicId) return 1;
+        if (a.publicId > b.publicId) return -1;
+        return 0;
+      };
 
-      // Fetch playlist by tag. Since this operation involves an API call the function returns a Promise object
-      // which will be resolved when the operation completes. The return value is the player.
+      // Fetch playlist by tag. Since this operation involves an API call
+      // the function returns a Promise when the operation completes.
+      // The return value is 'player'.
       player.playlistByTag('demo', {
         sorter: sorter,
         sourceParams: { angle: 13 },
         autoAdvance: 0,
         repeat: true
       }).then(function(player) {
-        var divElem = document.querySelector("div#playlist-data")
+        var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
           return source.publicId()
-        }).join(', ')
+        }).join(', ');
 
         divElem.innerText = "Playlist: " + list
-      })
+      });
 
-      // Update data placeholders on source change
       function updateSource() {
-        var divElem = document.querySelector("div#source-data")
+        var divElem = document.querySelector("div#source-data");
 
-        publicIdElem = divElem.querySelector("#public-id-placeholder")
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+        publicIdElem = divElem.querySelector("#public-id-placeholder");
+        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-        console.log(sourceUrlElem.innerText)
-        divElem.style.display = 'block'
+        divElem.style.display = 'block';
       }
 
-      // Register our 'updateSource' function to the player's sourcechanged event
-      player.on('sourcechanged', updateSource)
+      player.on('sourcechanged', updateSource);
 
-      // register button 'click' event handlers
       document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious()
-      })
+        player.playPrevious();
+      });
 
       document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext()
-      })
-    </xmp></pre>
+        player.playNext();
+      });
+    </code></pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -143,17 +141,17 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player')
+    var player = cld.videoPlayer('example-player');
 
     // Pass a sorter to sort list in alphabetical order by publicId
     var sorter = function(a, b) {
-      if (a.publicId < b.publicId) return 1
-      if (a.publicId > b.publicId) return -1
-      return 0
-    }
+      if (a.publicId < b.publicId) return 1;
+      if (a.publicId > b.publicId) return -1;
+      return 0;
+    };
 
     // Fetch playlist by tag. Since this operation involves an API call
     // the function returns a Promise when the operation completes.
@@ -161,38 +159,39 @@
     player.playlistByTag('demo', {
       sorter: sorter,
       sourceParams: { angle: 13 },
-      autoAdvance: 0,
-      repeat: true
+      autoAdvance: false,
+      repeat: true,
+      presentUpcoming: false
     }).then(function(player) {
-      var divElem = document.querySelector("div#playlist-data")
+      var divElem = document.querySelector("div#playlist-data");
       var list = player.playlist().list().map(function(source) {
         return source.publicId()
-      }).join(', ')
+      }).join(', ');
 
       divElem.innerText = "Playlist: " + list
-    })
+    });
 
     function updateSource() {
-      var divElem = document.querySelector("div#source-data")
+      var divElem = document.querySelector("div#source-data");
 
-      publicIdElem = divElem.querySelector("#public-id-placeholder")
-      sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+      publicIdElem = divElem.querySelector("#public-id-placeholder");
+      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-      publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-      divElem.style.display = 'block'
+      divElem.style.display = 'block';
     }
 
-    player.on('sourcechanged', updateSource)
+    player.on('sourcechanged', updateSource);
 
     document.querySelector("button#play-prev").addEventListener("click", function() {
-      player.playPrevious()
-    })
+      player.playPrevious();
+    });
 
     document.querySelector("button#play-next").addEventListener("click", function() {
-      player.playNext()
-    })
+      player.playNext();
+    });
   </script>
 </body>
 </html>

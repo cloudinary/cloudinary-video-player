@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,23 +33,21 @@
       <li><a href="adaptive-streaming.html">Adaptive Streaming</a></li>
       <li><a href="analytics.html">Analytics</a></li>
       <li><a href="components.html">Components</a></li>
+      <li><a href="recommendations.html">Recommendations</a></li>
     </ul>
 
-    <div class="row">
-      <center>
-        <video
-          id="example-player"
-          controls
-          autoplay
-          class="cld-video-player cld-video-player-skin-orange"
-          data-cld-source='{ "publicId": "oceans", "transformation": { "width": 500 } }'>
-        </video>
+    <div class="row video-container">
+      <video
+        id="example-player"
+        controls
+        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-source='{ "publicId": "oceans", "transformation": { "width": 500 }, "info": { "title": "oceans", "subtitle": "short movie about oceans" } }'>
+      </video>
 
-        <div id="source-data">
-          <span id="public-id-placeholder"></span><br>
-          <span id="source-url-placeholder"></span>
-        </div>
-      </center>
+      <div id="source-data">
+        <span id="public-id-placeholder"></span><br>
+        <span id="source-url-placeholder"></span>
+      </div>
     </div>
   </div>
 
@@ -64,27 +63,25 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
     var player = cld.videoPlayer('example-player', {
-      transformation: { angle: 45, crop: 'pad' }
-    })
+    });
 
     function updateSource() {
-      var divElem = document.querySelector("div#source-data")
+      var divElem = document.querySelector("div#source-data");
 
-      publicIdElem = divElem.querySelector("#public-id-placeholder")
-      sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+      publicIdElem = divElem.querySelector("#public-id-placeholder");
+      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-      publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-      console.log(sourceUrlElem.innerText)
-      divElem.style.display = 'block'
+      divElem.style.display = 'block';
     }
 
-    player.on('sourcechanged', updateSource)
+    player.on('sourcechanged', updateSource);
   </script>
 </body>
 </html>

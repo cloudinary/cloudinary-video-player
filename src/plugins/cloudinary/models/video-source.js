@@ -1,103 +1,137 @@
-import BaseSource from './base-source'
-import ImageSource from './image-source'
-import { normalizeOptions, compareSources } from '../common'
-import { sliceAndUnsetProperties } from 'utils/slicing'
+import BaseSource from './base-source';
+import ImageSource from './image-source';
+import { normalizeOptions, compareSources } from '../common';
+import { sliceAndUnsetProperties } from 'utils/slicing';
 
-const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' }
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv']
+const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv'];
 const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
   type: 'upload',
   transformation: [],
   sourceTransformation: {},
-  sourceTypes: DEFAULT_VIDEO_SOURCE_TYPES
-}
-const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`)
+  sourceTypes: DEFAULT_VIDEO_SOURCE_TYPES,
+  recommendations: null,
+  info: {}
+};
+const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
+
+let objectId = 0;
+const generateId = () => objectId++;
 
 class VideoSource extends BaseSource {
   constructor(publicId, options = {}) {
-    ({ publicId, options } = normalizeOptions(publicId, options))
+    ({ publicId, options } = normalizeOptions(publicId, options));
 
-    publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '')
+    publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
 
-    options = Object.assign({}, DEFAULT_VIDEO_PARAMS, options)
+    options = Object.assign({}, DEFAULT_VIDEO_PARAMS, options);
 
     if (!options.poster) {
-      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS)
+      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    const { poster, sourceTypes, sourceTransformation } =
-      sliceAndUnsetProperties(options, 'poster', 'sourceTypes', 'sourceTransformation')
+    const { poster, sourceTypes, sourceTransformation, info, recommendations } =
+      sliceAndUnsetProperties(options, 'poster', 'sourceTypes', 'sourceTransformation', 'info', 'recommendations');
 
-    super(publicId, options)
+    super(publicId, options);
 
-    this.poster(poster)
-    this.sourceTypes(sourceTypes)
-    this.sourceTransformation(sourceTransformation)
-  }
+    let _poster = null;
+    let _sourceTypes = null;
+    let _sourceTransformation = null;
+    let _info = null;
+    let _recommendations = null;
 
-  poster(publicId, options = {}) {
-    if (!publicId) {
-      return this._poster
-    }
+    this.poster = (publicId, options = {}) => {
+      if (!publicId) {
+        return _poster;
+      }
 
-    if (publicId.constructor.name === 'ImageSource') {
-      this._poster = publicId
-      return this
-    }
+      if (publicId instanceof ImageSource) {
+        _poster = publicId;
+        return this;
+      }
 
-    ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }))
+      ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }));
 
-    if (!publicId) {
-      publicId = this.publicId()
-      options = Object.assign({}, options, DEFAULT_POSTER_PARAMS)
-    }
+      if (!publicId) {
+        publicId = this.publicId();
+        options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
+      }
 
-    options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig()
-    this._poster = new ImageSource(publicId, options)
+      options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
+      _poster = new ImageSource(publicId, options);
 
-    return this
-  }
+      return this;
+    };
 
-  sourceTypes(types) {
-    if (!types) {
-      return this._sourceTypes
-    }
+    this.sourceTypes = (types) => {
+      if (!types) {
+        return _sourceTypes;
+      }
 
-    this._sourceTypes = types
+      _sourceTypes = types;
 
-    return this
-  }
+      return this;
+    };
 
-  sourceTransformation(trans) {
-    if (!trans) {
-      return this._sourceTransformation
-    }
+    this.sourceTransformation = (trans) => {
+      if (!trans) {
+        return _sourceTransformation;
+      }
 
-    this._sourceTransformation = trans
+      _sourceTransformation = trans;
 
-    return this
+      return this;
+    };
+
+    this.info = (info) => {
+      if (!info) {
+        return _info;
+      }
+
+      _info = info;
+
+      return this;
+    };
+
+    this.recommendations = (recommends) => {
+      if (recommends === undefined) {
+        return _recommendations;
+      }
+
+      _recommendations = recommends;
+
+      return this;
+    };
+
+    this.poster(poster);
+    this.sourceTypes(sourceTypes);
+    this.sourceTransformation(sourceTransformation);
+    this.info(info);
+    this.recommendations(recommendations);
+    this.objectId = generateId();
   }
 
   contains(source) {
-    const sources = this.generateSources()
-    return sources.some((_source) => compareSources(_source, source))
+    const sources = this.generateSources();
+    return sources.some((_source) => compareSources(_source, source));
   }
 
   generateSources() {
     return this.sourceTypes().map((sourceType) => {
-      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation()
-      const format = normalizeFormat(sourceType)
-      const opts = {}
+      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
+      const format = normalizeFormat(sourceType);
+      const opts = {};
       if (srcTransformation) {
-        opts.transformation = srcTransformation
+        opts.transformation = srcTransformation;
       }
-      Object.assign(opts, { resource_type: 'video', format })
+      Object.assign(opts, { resource_type: 'video', format });
 
-      const src = this._urlConfig().url(this.publicId(), opts)
-      const type = formatToMimeType(sourceType)
-      return { type, src }
-    })
+      const src = this.config().url(this.publicId(), opts);
+      const type = formatToMimeType(sourceType);
+      return { type, src };
+    });
   }
 }
 
@@ -105,33 +139,33 @@ const FORMAT_MIME_TYPES = {
   ogv: 'video/ogg',
   mpd: 'application/dash+xml',
   m3u8: 'application/x-mpegURL'
-}
+};
 
 function formatToMimeType(format) {
-  format = normalizeFormat(format)
+  format = normalizeFormat(format);
 
-  let res = FORMAT_MIME_TYPES[format]
+  let res = FORMAT_MIME_TYPES[format];
   if (!res) {
-    res = `video/${format}`
+    res = `video/${format}`;
   }
 
-  return res
+  return res;
 }
 
 const FORMAT_MAPPINGS = {
   hls: 'm3u8',
   dash: 'mpd'
-}
+};
 
 function normalizeFormat(format) {
-  format = format.toLowerCase()
+  format = format.toLowerCase();
 
-  let res = FORMAT_MAPPINGS[format]
+  let res = FORMAT_MAPPINGS[format];
   if (!res) {
-    res = format
+    res = format;
   }
 
-  return res
+  return res;
 }
 
-export default VideoSource
+export default VideoSource;

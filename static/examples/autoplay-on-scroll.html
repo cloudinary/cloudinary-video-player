@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,24 +34,26 @@
       <b>Scroll down to see the player and then up to see the above in action.</b>
     </p>
 
-    <h4>Example Code:</h3>
-    <pre><xmp>
+    <h3>Example Code:</h3>
+    <pre>
       HTML tag attributes:
 
-      <video
+      &lt;video
         id="example-player"
         controls
-        class="cld-video-player cld-video-player-skin-orange"
+        class="cld-video-player cld-video-player-skin-dark"
         data-cld-public-id="oceans"
-        data-cld-autoplay-mode='on-scroll'>
-      </video>
+        data-cld-autoplay-mode='on-scroll'&gt;
+      &lt;/video&gt;
 
 
       JavaScript:
 
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
       // Initialize player
-      var player = cld.videoPlayer('example-player')
-    </xmp></pre>
+      var players = cld.videoPlayer('example-player');
+    </pre>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
       In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
@@ -73,15 +76,15 @@
       Ut justo nibh, laoreet aliquet sem eget, vestibulum tempus ligula. Proin mollis enim tortor, vel ullamcorper enim dapibus ut. Integer id suscipit purus. Ut ut nisl pellentesque, consequat lacus id, malesuada ipsum. Maecenas vel velit risus. In eu aliquam orci. Integer eleifend elementum quam sed rhoncus. Donec tincidunt ex id venenatis rhoncus. Cras malesuada interdum quam, vitae cursus enim fermentum a. Aliquam ut libero tempor, posuere est vitae, venenatis nisi. Donec rutrum sapien vel erat convallis efficitur lobortis tempor enim. Suspendisse ex tortor, laoreet eget commodo eget, iaculis non mauris. Aenean vitae ipsum eu nisl aliquam faucibus vel vel turpis. Vivamus efficitur convallis convallis. Sed lobortis laoreet elit, eu aliquam ipsum luctus quis.
       Donec tempor finibus nisl eget venenatis. Curabitur interdum hendrerit magna, at faucibus nunc auctor eget. Etiam nisl tellus, scelerisque vitae volutpat a, consequat nec elit. Nullam sollicitudin magna in sapien cursus, sit amet lobortis lectus condimentum. Phasellus eleifend neque vitae mollis finibus. Praesent mattis, ligula id sagittis consectetur, tortor quam tempor lacus, id rutrum orci tortor nec velit. Aliquam ornare porttitor nunc ut fermentum. Curabitur nunc sapien, vestibulum nec risus non, maximus imperdiet leo. Cras mattis sem quis pharetra suscipit. Ut mi urna, scelerisque id augue quis, tincidunt pharetra lectus. In eget arcu vitae felis iaculis venenatis nec in libero. Aliquam egestas vestibulum turpis vel mollis. Donec ac sem ut sapien egestas faucibus at sed eros. Cras scelerisque felis a sollicitudin euismod.
     </p>
-    <center>
+    <div class="row video-container">
       <video
         id="example-player"
         controls
-        class="cld-video-player cld-video-player-skin-orange"
+        class="cld-video-player cld-video-player-skin-dark"
         data-cld-public-id="oceans"
         data-cld-autoplay-mode='on-scroll'>
       </video>
-    </center>
+    </div>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.
       In eros tortor, sodales fermentum ligula in, aliquet facilisis nisl. Morbi congue volutpat porttitor. Etiam velit metus, laoreet nec consequat sit amet, ullamcorper quis mi. Sed id nulla tincidunt, molestie enim id, mollis odio. Fusce sit amet posuere tellus. Aliquam auctor imperdiet nisi, sed sagittis tortor sagittis sit amet. In dictum metus eu nunc porta malesuada. Quisque congue risus non arcu vehicula, ut rhoncus risus tincidunt. In et augue nunc. Mauris massa magna, condimentum et odio at, convallis maximus turpis. Cras et dolor augue. Fusce in finibus nisi.
@@ -103,10 +106,10 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var players = cld.videoPlayer('example-player')
+    var players = cld.videoPlayer('example-player');
   </script>
 </body>
 </html>

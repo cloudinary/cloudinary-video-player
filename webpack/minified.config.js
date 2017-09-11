@@ -1,11 +1,11 @@
-const path = require('path')
-const merge = require('webpack-merge')
-const webpackCommon = require('./common.config')
+const path = require('path');
+const merge = require('webpack-merge');
+const webpackCommon = require('./common.config');
 
 // webpack plugins
-const DefinePlugin = require('webpack/lib/DefinePlugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
@@ -38,4 +38,4 @@ module.exports = merge.smart(webpackCommon, {
       sourceMap: true
     })
   ]
-})
+});

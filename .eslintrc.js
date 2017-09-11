@@ -58,7 +58,7 @@ module.exports = {
       "never"
     ],
     "consistent-return": "off",
-    "consistent-this": "error",
+    "consistent-this": "off",
     "curly": "error",
     "default-case": "error",
     "dot-location": [
@@ -224,9 +224,10 @@ module.exports = {
       "error",
       "single"
     ],
+    "no-this-before-super": "off",
     "radix": "error",
     "rest-spread-spacing": "error",
-    "semi": ["warn", "never"],
+    "semi": ["warn", "always"],
     "semi-spacing": "error",
     "sort-imports": "off",
     "sort-vars": "error",

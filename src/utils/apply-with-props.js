@@ -1,29 +1,29 @@
 function applyWithProps(context, obj, { order = null } = {}) {
-  let _obj = obj
+  let _obj = obj;
 
   const apply = (key) => {
-    const value = obj[key]
+    const value = obj[key];
     if (value === undefined) {
-      return
+      return;
     }
 
     if (context[key] && typeof context[key] === 'function') {
-      context[key](value)
+      context[key](value);
     }
-  }
+  };
 
   if (order) {
-    _obj = Object.assign({}, obj)
+    _obj = Object.assign({}, obj);
 
     order.forEach((key) => {
-      apply(key)
-      delete _obj[key]
-    })
+      apply(key);
+      delete _obj[key];
+    });
   }
 
   Object.keys(_obj).forEach((key => {
-    apply(key)
-  }))
+    apply(key);
+  }));
 }
 
-export default applyWithProps
+export default applyWithProps;

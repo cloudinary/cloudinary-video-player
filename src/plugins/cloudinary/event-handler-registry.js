@@ -1,49 +1,44 @@
 class EventHandlersRegistry {
   constructor(emitter) {
-    this._emitter = emitter
-    this._eventHandlers = []
+    this._emitter = emitter;
+    this._eventHandlers = [];
   }
 
   on(type, handler) {
-    this._eventHandlers.push({ type, handler })
-    this._emitter.on(type, handler)
+    this._eventHandlers.push({ type, handler });
+    this._emitter.on(type, handler);
   }
 
   one(type, handler) {
     const wrapper = (...args) => {
-      handler(...args)
-      this.off(type, handler)
-    }
+      handler(...args);
+      this.off(type, handler);
+    };
 
-    this._eventHandlers.push({ type, handler, wrapper })
-    this._emitter.one(type, handler)
+    this._eventHandlers.push({ type, handler, wrapper });
+    this._emitter.one(type, handler);
   }
 
   off(type, handler) {
     const index = this._eventHandlers.findIndex((event) =>
-      event.type === type && event.handler === handler)
-
-    console.log('Found index:', index)
-    console.log('old array:', this._eventHandlers)
+      event.type === type && event.handler === handler);
 
     if (index === -1) {
-      return
+      return;
     }
 
-    const event = this._eventHandlers[index]
+    const event = this._eventHandlers[index];
 
-    this._emitter.off(type, event.wrapper || event.handler)
+    this._emitter.off(type, event.wrapper || event.handler);
 
-    this._eventHandlers.splice(index, 1)
-
-    console.log('new array:', this._eventHandlers)
+    this._eventHandlers.splice(index, 1);
   }
 
   removeAllListeners() {
     this._eventHandlers.forEach((event) => {
-      this.off(event)
-    })
+      this.off(event);
+    });
   }
 }
 
-export default EventHandlersRegistry
+export default EventHandlersRegistry;

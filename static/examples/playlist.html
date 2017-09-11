@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,19 +26,24 @@
     <h2>Playlist</h2>
     <p>The player supports a creation of a playlist. A playlist allows you
       to define a list of videos which should be played one after another.
-      You may define the delay (in seconds) between the ending of one video and before the next
-      begins ('autoAdvance' param). You may also define whether the playlist should repeat when the last
-      video ends ('repeat' param).
+      You may also define:
+      <ul>
+        <li>Whether the player should auto advance and play the next video in the playlist when the current video ends (<b>'autoAdvance' param</b>).</li>
+        <li>Whether the player should play the playlist from the start when the last video ends (<b>'repeat' param</b>).</li>
+        <li>Whether the player should present the upcoming video before the current video ends (<b>'presentUpcoming' param</b>).</li>
+      </ul> You may also define whether the playlist should repeat when the last
+      video ends ('repeat' param)<br />
+      Finally.
     </p>
 
-    <div class="row">
+    <div class="row video-container">
       <center>
         <video
           id="example-player"
           controls
           autoplay
-          class="cld-video-player cld-video-player-skin-orange"
-          data-cld-transformation='{ "width": 500, "crop": "limit" }'>
+          class="cld-video-player cld-video-player-skin-dark"
+          data-cld-transformation='{ "width": 720, "crop": "limit" }'>
         </video>
 
         <button id="play-prev" class="btn btn-default">Prev</button>
@@ -51,62 +57,62 @@
     </div>
 
     <h4>Example Code:</h3>
-    <pre><xmp>
+    <pre>
       HTML:
 
-      <video
+      &lt;video
         id="example-player"
         controls
         autoplay
-        class="cld-video-player cld-video-player-skin-orange"
-        data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-      </video>
+        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+      &lt;/video&gt;
 
-      <button id="play-prev" class="btn btn-default">Prev</button>
-      <button id="play-next" class="btn btn-default">Next</button>
+      &lt;button id="play-prev" class="btn btn-default"&gt;Prev&lt;/button&gt;
+      &lt;button id="play-next" class="btn btn-default"&gt;Next&lt;/button&gt;
 
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
+      &lt;div id="source-data"&gt;
+        &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
+        &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
+      &lt;/div&gt;
 
 
       JavaScript:
 
-      // Initialize Player
-      var player = cld.videoPlayer('example-player')
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
-      // Set playlist
-      player.playlist([
-        { publicId: 'oceans', transformation: { angle: 45 } },
-        'book'], { autoAdvance: 0, repeat: true })
+      var source1 = { publicId: 'oceans', transformation: { angle: 1 }, info: { subtitle: 'My Oceans Movie' } }
+      var source2 = { publicId: 'book', info: { title: 'My wonderful Book', subtitle: 'Wonderful book movie', description: 'A movie about a wonderful book' } }
 
-      // Update data placeholders on source change
+      // Initialize player
+      var player = cld.videoPlayer('example-player');
+
+      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
+      player.playlist([source1, source2], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
+
       function updateSource() {
-        var divElem = document.querySelector("div#source-data")
+        var divElem = document.querySelector("div#source-data");
 
-        publicIdElem = divElem.querySelector("#public-id-placeholder")
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+        publicIdElem = divElem.querySelector("#public-id-placeholder");
+        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-        console.log(sourceUrlElem.innerText)
-        divElem.style.display = 'block'
-      }
+        console.log(sourceUrlElem.innerText);
+        divElem.style.display = 'block';
+      };
 
-      // Register our 'updateSource' function to the player's sourcechanged event
-      player.on('sourcechanged', updateSource)
+      player.on('sourcechanged', updateSource);
 
-      // register button 'click' event handlers
       document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious()
-      })
+        player.playPrevious();
+      });
 
       document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext()
-      })
-    </xmp></pre>
+        player.playNext();
+      });
+    </pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -121,36 +127,39 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
+    // Define playlist sources
+    var source1 = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } }
+    var source2 = { publicId: 'book', info: { title: 'Cloud Book Study', subtitle: 'A short video with a nice book animation' } }
 
     // Initialize player
-    var player = cld.videoPlayer('example-player')
-    player.playlist([
-      { publicId: 'oceans', transformation: { angle: 45 } },
-      'book'], { autoAdvance: 0, repeat: true })
+    var player = cld.videoPlayer('example-player');
+
+    // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
+    player.playlist([source1, source2], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
 
     function updateSource() {
-      var divElem = document.querySelector("div#source-data")
+      var divElem = document.querySelector("div#source-data");
 
-      publicIdElem = divElem.querySelector("#public-id-placeholder")
-      sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+      publicIdElem = divElem.querySelector("#public-id-placeholder");
+      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-      publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-      console.log(sourceUrlElem.innerText)
-      divElem.style.display = 'block'
-    }
+      divElem.style.display = 'block';
+    };
 
-    player.on('sourcechanged', updateSource)
+    player.on('sourcechanged', updateSource);
 
     document.querySelector("button#play-prev").addEventListener("click", function() {
-      player.playPrevious()
-    })
+      player.playPrevious();
+    });
 
     document.querySelector("button#play-next").addEventListener("click", function() {
-      player.playNext()
-    })
+      player.playNext();
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,71 @@
+@import 'compass/css3/flexbox';
+@import "compass/functions/lists"; // compass-mixins bug: transition uses 'compact'
+@import "compass/css3/transition";
+
+.video-js .vjs-title-bar {
+  display: none;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 7.2em;
+  text-align: left;
+  padding: 16px 21px;
+
+  .vjs-title-bar-title {
+    width: 100%;
+    font-size: 1.2em;
+    font-weight: 500;
+    line-height: 1.2em;
+    margin-bottom: 0.55em;
+  }
+
+  .vjs-title-bar-subtitle {
+    width: 100%;
+    font-size: 1em;
+    font-weight: 300;
+    line-height: 1em;
+  }
+}
+
+// Video has started playing
+.vjs-has-started .vjs-title-bar {
+  @include display-flex;
+  @include flex-direction(column);
+  @include align-items(center)
+
+  visibility: visible;
+  opacity: 1;
+
+  $trans: visibility 0.1s, opacity 0.1s; // Var needed because of comma
+  @include transition($trans);
+}
+
+// Video has started playing AND user is inactive
+.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-title-bar {
+  // Remain visible for screen reader and keyboard users
+  visibility: visible;
+  opacity: 0;
+
+  $trans: visibility 1.0s, opacity 1.0s;
+  @include transition($trans);
+}
+
+.vjs-controls-disabled .vjs-title-bar,
+.vjs-using-native-controls .vjs-title-bar,
+.vjs-error .vjs-title-bar {
+  // !important is ok in this context.
+  display: none !important;
+}
+
+// Don't hide the control bar if it's audio
+.vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-title-bar {
+  opacity: 1;
+  visibility: visible;
+}
+
+// IE 8 + 9 Support
+.vjs-has-started.vjs-no-flex .vjs-title-bar {
+  display: table;
+}
+
