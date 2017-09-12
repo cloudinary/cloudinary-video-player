@@ -47,7 +47,7 @@ class Playlist {
       this.player().trigger('playlistitemchanged', eventData);
 
       _context.on('ended', () => {
-        if (this.autoAdvance() === false && this.context.autoShowRecommendations()) {
+        if (this.autoAdvance() === false && _context.autoShowRecommendations()) {
           this.player().trigger('recommendationsshow');
         }
       });

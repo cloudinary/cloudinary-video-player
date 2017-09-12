@@ -63,12 +63,12 @@ class CloudinaryContext extends mixin(Playlistable) {
         const recommendations = src.recommendations();
 
         let itemBuilder = null;
-        let autoShow = false;
+        let disableAutoShow = false;
 
         if (options.recommendationOptions) {
-          ({ autoShow, itemBuilder } = sliceAndUnsetProperties(options.recommendationOptions, 'autoShow', 'itemBuilder'));
+          ({ disableAutoShow, itemBuilder } = sliceAndUnsetProperties(options.recommendationOptions, 'disableAutoShow', 'itemBuilder'));
         }
-        setRecommendations(recommendations, { autoShow, itemBuilder });
+        setRecommendations(recommendations, { disableAutoShow, itemBuilder });
       } else {
         unsetRecommendations();
       }
