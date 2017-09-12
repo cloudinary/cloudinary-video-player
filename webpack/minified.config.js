@@ -30,7 +30,7 @@ module.exports = merge.smart(webpackCommon, {
         screw_ie8: true,
         warnings: false
       },
-      mangle: false, // NEED TO FIGURE OUT WHY MANGLING DOESN'T WORK.
+      mangle: true, // NEED TO FIGURE OUT WHY MANGLING DOESN'T WORK.
       output: {
         comments: false,
         screw_ie8: true
