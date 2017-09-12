@@ -7,7 +7,7 @@
 
 $upcoming-video-max-width: 30em;
 // $_upcoming-video-transition: visibility 1s, opacity 1s, background 1.1s 0s step-end;
-$_upcoming-video-transition: visibility 1s, opacity 1s;
+$_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
 
 .vjs-upcoming-video {
   @include opacity(0);
