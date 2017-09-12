@@ -7,6 +7,7 @@ $icon-font-path: '../fonts' !default;
 @import 'compass/css3/flexbox';
 @import 'compass/css3/box-shadow';
 @import 'compass/css3/images';
+@import 'compass/css3/transition';
 
 // Import Video.js style
 @import '~video.js/src/css/vjs.scss';
@@ -71,6 +72,22 @@ $icon-font-path: '../fonts' !default;
     top: 50%;
     margin-left: -($big-play-width / 2);
     margin-top: -($big-play-height / 2);
+  }
+
+  &.vjs-controls-disabled .vjs-big-play-button,
+  &.vjs-has-started .vjs-big-play-button,
+  &.vjs-using-native-controls .vjs-big-play-button,
+  &.vjs-error .vjs-big-play-button {
+    @include transition((visibility 0.2s, opacity 0.2s));
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.vjs-paused .vjs-big-play-button,
+  &.vjs-paused.vjs-has-started .vjs-big-play-button {
+    opacity: 1;
+    visibility: visible;
   }
 
   .vjs-control-bar {
