@@ -24,10 +24,10 @@ class RecommendationsOverlaySecondaryItem extends RecommendationsOverlayItem {
     });
 
     this.title = dom.createEl('span', { className: 'vjs-recommendations-overlay-item-secondary-title' });
-    this.title.innerHTML = 'Reservoir Dogs And The Lollypops';
+    this.title.innerHTML = '';
 
     this.duration = dom.createEl('span', { className: 'vjs-recommendations-overlay-item-secondary-duration' });
-    this.duration.innerHTML = '1:23:28';
+    this.duration.innerHTML = '';
 
     const caption = dom.createEl('div', { className: 'vjs-recommendations-overlay-item-info' });
     caption.appendChild(this.title);

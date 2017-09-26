@@ -10,9 +10,7 @@ class RecommendationsOverlayItem extends ClickableComponent {
 
     const info = source.info();
 
-    if (info.title) {
-      this.setTitle(info.title || '');
-    }
+    this.setTitle(info.title || source.publicId());
 
     this.setPoster(this.source.poster().url({ transformation: { aspect_ratio: '16:9', crop: 'pad', background: 'black' } }));
 
