@@ -464,6 +464,7 @@
 }
 
 .video-js.vjs-fluid,
+.video-js.cld-video-player.cld-fluid,
 .video-js.vjs-16-9,
 .video-js.vjs-4-3 {
   width: 100%;
@@ -1735,6 +1736,11 @@ video::-webkit-media-text-track-display {
   content: "\F119";
 }
 
+.video-js .vjs-control:before {
+  font-size: 2.0em;
+  line-height: 1.5em;
+}
+
 .cld-video-player {
   font-size: 12px;
   font-weight: 300;
@@ -1798,11 +1804,6 @@ video::-webkit-media-text-track-display {
   width: 2.8em;
 }
 
-.cld-video-player .vjs-control-bar .vjs-control:before {
-  font-size: 2.0em;
-  line-height: 1.5em;
-}
-
 .cld-video-player .vjs-control-bar .vjs-menu-button-inline:hover,
 .cld-video-player .vjs-control-bar .vjs-menu-button-inline:focus,
 .cld-video-player .vjs-control-bar .vjs-menu-button-inline.vjs-slider-active,
@@ -1824,6 +1825,7 @@ video::-webkit-media-text-track-display {
 
 .cld-video-player .vjs-control-bar .vjs-progress-control {
   position: absolute;
+  left: 0px;
   width: 100%;
   background-color: inherit;
   height: 1.0em;
@@ -2215,7 +2217,9 @@ video::-webkit-media-text-track-display {
   -webkit-justify-content: center;
   justify-content: center;
   visibility: hidden;
-  position: relative;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
