@@ -1,3 +1,5 @@
+import assign from './assign';
+
 function applyWithProps(context, obj, { order = null } = {}) {
   let _obj = obj;
 
@@ -13,7 +15,7 @@ function applyWithProps(context, obj, { order = null } = {}) {
   };
 
   if (order) {
-    _obj = Object.assign({}, obj);
+    _obj = assign({}, obj);
 
     order.forEach((key) => {
       apply(key);

@@ -1,10 +1,8 @@
-import cloudinary from 'cloudinary-core';
-
-function getCloudinaryInstanceOf(constructorName, obj) {
-  if (obj.constructor.name === constructorName) {
+function getCloudinaryInstanceOf(Klass, obj) {
+  if (obj instanceof Klass) {
     return obj;
   } else {
-    return new cloudinary[constructorName](obj);
+    return new Klass(obj);
   }
 }
 

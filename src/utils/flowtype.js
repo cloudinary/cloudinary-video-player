@@ -1,5 +1,6 @@
 import getSize from 'get-size';
 import { addResizeListener } from './resize-events';
+import assign from 'utils/assign';
 
 const instances = [];
 
@@ -24,7 +25,7 @@ function update(instance) {
 // });
 
 function flowtype(el, settings) {
-  settings = Object.assign({
+  settings = assign({
     maximum: 9999,
     minimum: 1,
     maxFont: 9999,

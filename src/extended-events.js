@@ -1,6 +1,7 @@
 import EventEmitter from 'events';
 import { isPlainObject } from 'utils/type-inference';
 import videojs from 'video.js';
+import assign from 'utils/assign';
 
 const EVENT_DEFAULTS = {
   percentsplayed: {
@@ -149,7 +150,7 @@ const normalizeEventsParam = (events, defaults) => {
       const eventDefaults = defaults[item] || {};
 
       if (isPlainObject(item)) {
-        agg[item.type] = Object.assign({}, eventDefaults, item);
+        agg[item.type] = assign({}, eventDefaults, item);
       } else {
         agg[item] = eventDefaults;
       }

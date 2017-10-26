@@ -2,6 +2,8 @@ import videojs from 'video.js';
 import './components';
 import * as plugins from 'plugins';
 import * as Utils from 'utils';
+import assign from 'utils/assign';
+import { find } from 'utils/find';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
@@ -10,7 +12,7 @@ import normalizeAttributes from './attributes-normalizer';
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics']);
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
 const VALID_SKINS = ['dark', 'light'];
 const CLASS_PREFIX = 'cld-video-player';
 
@@ -64,8 +66,12 @@ const resolveVideoElement = (elem) => {
 const extractOptions = (elem, options) => {
   const elemOptions = normalizeAttributes(elem);
 
+  if (videojs.hasClass(elem, 'cld-fluid')) {
+    options.fluid = true;
+  }
+
   // Default options < Markup options < Player options
-  options = Object.assign({}, defaults, elemOptions, options);
+  options = assign({}, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
@@ -80,7 +86,7 @@ const extractOptions = (elem, options) => {
   // to avoid param name conflicts:
   // VideoPlayer.new({ controls: true, videojs: { controls: false })
   if (options.videojs) {
-    Object.assign(options, options.videojs);
+    assign(options, options.videojs);
     delete options.videojs;
   }
 
@@ -123,6 +129,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const onReady = () => {
       setExtendedEvents();
       setCssClasses();
+      this.fluid(_options.fluid);
 
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
@@ -160,7 +167,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      const currentSkin = VALID_SKINS.find((s) => this.videojs.hasClass(cssClassFromSkin(s)));
+      const currentSkin = find(VALID_SKINS, (s) => this.videojs.hasClass(cssClassFromSkin(s)));
 
       if (!currentSkin) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));
@@ -209,6 +216,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
+
+    console.log(_options, _vjs_options);
 
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
@@ -272,8 +281,24 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.sourcesByTag(tag, options);
   }
 
+  fluid(bool) {
+    if (bool === undefined) {
+      return this.videojs.fluid();
+    }
+
+    if (bool) {
+      this.videojs.addClass('cld-fluid');
+    } else {
+      this.videojs.removeClass('cld-fluid');
+    }
+
+    this.videojs.fluid(bool);
+    return this;
+  }
+
   play() {
-    return this.videojs.play();
+    this.videojs.play();
+    return this;
   }
 
   stop() {

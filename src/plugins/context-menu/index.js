@@ -4,6 +4,7 @@ import 'videojs-contextmenu';
 import ContextMenu from './components/context-menu';
 import { getPointerPosition } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
+import assign from 'utils/assign';
 
 const defaults = {
   showNativeOnRecurringEvent: false
@@ -15,7 +16,7 @@ class ContextMenuPlugin {
       throw new Error('"content" required');
     }
 
-    opts = Object.assign({}, defaults, opts);
+    opts = assign({}, defaults, opts);
 
     this.player = player;
     const _options = sliceProperties(opts, 'content', 'showNativeOnRecurringEvent');

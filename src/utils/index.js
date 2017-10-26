@@ -6,6 +6,7 @@ import * as cloudinaryUtils from './cloudinary';
 import applyWithProps from './apply-with-props';
 import autobind from './autobind';
 import mixin from './mixin';
+import assign from './assign';
 
 function groupBy(collection, iteratee) {
   return collection.reduce((result, value, key) => {
@@ -19,7 +20,7 @@ function groupBy(collection, iteratee) {
   }, {});
 }
 
-const util = Object.assign({},
+const util = assign({},
   core,
   slicing,
   string,

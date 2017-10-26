@@ -3,6 +3,7 @@ import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
+import assign from 'utils/assign';
 import '../components/playlist';
 import '../components/upcoming-video-overlay';
 
@@ -88,7 +89,7 @@ const Playlistable = (superclass) => class extends superclass {
 
           const info = resource.context && resource.context.custom || {};
 
-          const source = Object.assign({ info }, sourceParams, { publicId: resource.publicId });
+          const source = assign({ info }, sourceParams, { publicId: resource.publicId });
           return this.buildSource(source);
         });
 

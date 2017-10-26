@@ -1,4 +1,7 @@
 import VideoSource from './models/video-source';
+import { isInteger } from 'utils/type-inference';
+
+console.log(isInteger);
 
 const DEFAULT_AUTO_ADVANCE = 0;
 const DEFAULT_PRESENT_UPCOMING = 10;
@@ -68,7 +71,7 @@ class Playlist {
         delay = DEFAULT_PRESENT_UPCOMING;
       } else if (delay === false) {
         delay = false;
-      } else if (!Number.isInteger(delay) || delay < 0) {
+      } else if (!isInteger(delay) || delay < 0) {
         throw new Error('presentUpcoming \'delay\' must be either a boolean or a positive integer.');
       }
 
@@ -90,7 +93,7 @@ class Playlist {
         delay = DEFAULT_AUTO_ADVANCE;
       } else if (delay === false) {
         delay = false;
-      } else if (!Number.isInteger(delay) || delay < 0) {
+      } else if (!isInteger(delay) || delay < 0) {
         throw new Error('Auto advance \'delay\' must be either a boolean or a positive integer.');
       }
 

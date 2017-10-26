@@ -50,7 +50,7 @@ class UpcomingVideoOverlay extends ClickableComponent {
   setItem(source) {
     this._source = source;
 
-    const maxWidth = Number.parseInt(window.getComputedStyle(this.el(), null).getPropertyValue('max-width'), 10);
+    const maxWidth = parseInt(window.getComputedStyle(this.el(), null).getPropertyValue('max-width'), 10);
     const maxHeight = Math.round(maxWidth * (9 / 16.0));
 
     const transformation = { crop: 'pad', background: 'auto:predominant', width: maxWidth, height: maxHeight };

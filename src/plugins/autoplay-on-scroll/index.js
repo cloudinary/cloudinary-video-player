@@ -1,5 +1,6 @@
 import { isElementInViewport } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
+import assign from 'utils/assign';
 
 const defaults = {
   fraction: 0.5,
@@ -8,7 +9,7 @@ const defaults = {
 
 class AutoplayOnScrollPlugin {
   constructor(player, opts = {}) {
-    opts = Object.assign({}, defaults, opts);
+    opts = assign({}, defaults, opts);
 
     this.player = player;
     let _options = sliceProperties(opts, 'fraction');

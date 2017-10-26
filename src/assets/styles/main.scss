@@ -13,7 +13,17 @@ $icon-font-path: '../fonts' !default;
 @import '~video.js/src/css/vjs.scss';
 @import 'icons';
 
+// control bar control size
+.video-js .vjs-control:before {
+  font-size: 2.0em;
+  line-height: 1.5em;
+}
+
 .cld-video-player {
+  &.cld-fluid {
+    @extend .vjs-fluid;
+  }
+
   // The base font size controls the size of everything, not just text.
   // All dimensions use em-based sizes so that the scale along with the font size.
   // Try increasing it to 15px and see what happens.
@@ -95,16 +105,10 @@ $icon-font-path: '../fonts' !default;
       width: 2.8em;
     }
 
-    // control bar control size
-    .vjs-control:before {
-      font-size: 2.0em;
-      line-height: 1.5em;
-    }
-
-     .vjs-menu-button-inline:hover,
-     .vjs-menu-button-inline:focus,
-     .vjs-menu-button-inline.vjs-slider-active,
-     .vjs-no-flex .vjs-menu-button-inline {
+   .vjs-menu-button-inline:hover,
+   .vjs-menu-button-inline:focus,
+   .vjs-menu-button-inline.vjs-slider-active,
+   .vjs-no-flex .vjs-menu-button-inline {
       // This width is currently specific to the inline volume bar.
       width: 10em;
     }
@@ -123,6 +127,7 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-progress-control {
       position: absolute;
+      left: 0px;
       width: 100%;
       background-color: inherit;
       height: 1.0em;

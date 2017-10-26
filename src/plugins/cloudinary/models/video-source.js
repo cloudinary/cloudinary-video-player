@@ -2,6 +2,7 @@ import BaseSource from './base-source';
 import ImageSource from './image-source';
 import { normalizeOptions, compareSources } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
+import assign from 'utils/assign';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv'];
@@ -25,10 +26,10 @@ class VideoSource extends BaseSource {
 
     publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
 
-    options = Object.assign({}, DEFAULT_VIDEO_PARAMS, options);
+    options = assign({}, DEFAULT_VIDEO_PARAMS, options);
 
     if (!options.poster) {
-      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
+      options.poster = assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
     const { poster, sourceTypes, sourceTransformation, info, recommendations } =
@@ -56,7 +57,7 @@ class VideoSource extends BaseSource {
 
       if (!publicId) {
         publicId = this.publicId();
-        options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
+        options = assign({}, options, DEFAULT_POSTER_PARAMS);
       }
 
       options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
@@ -126,7 +127,7 @@ class VideoSource extends BaseSource {
       if (srcTransformation) {
         opts.transformation = srcTransformation;
       }
-      Object.assign(opts, { resource_type: 'video', format });
+      assign(opts, { resource_type: 'video', format });
 
       const src = this.config().url(this.publicId(), opts);
       const type = formatToMimeType(sourceType);

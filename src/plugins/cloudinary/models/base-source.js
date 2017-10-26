@@ -27,7 +27,7 @@ class BaseSource {
         return _cloudinaryConfig;
       }
 
-      _cloudinaryConfig = getCloudinaryInstanceOf('Cloudinary', config);
+      _cloudinaryConfig = getCloudinaryInstanceOf(cloudinary.Cloudinary, config);
 
       return this;
     };
@@ -47,7 +47,7 @@ class BaseSource {
         return _transformation;
       }
 
-      _transformation = getCloudinaryInstanceOf('Transformation', trans);
+      _transformation = getCloudinaryInstanceOf(cloudinary.Transformation, trans);
 
       return this;
     };

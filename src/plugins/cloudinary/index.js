@@ -1,7 +1,9 @@
 import mixin from 'utils/mixin';
 import applyWithProps from 'utils/apply-with-props';
+import cloudinary from 'cloudinary-core';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { getCloudinaryInstanceOf } from 'utils/cloudinary';
+import assign from 'utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
 import Playlistable from './mixins/playlistable';
 import VideoSource from './models/video-source';
@@ -22,7 +24,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     super(player, options);
 
     this.player = player;
-    options = Object.assign({}, DEFAULT_PARAMS, options);
+    options = assign({}, DEFAULT_PARAMS, options);
 
     let _source = null;
     let _posterOptions = null;
@@ -44,7 +46,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     //   OR  recommendations: Promise.resolve([{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]) })
     // })
     this.source = (source, options = {}) => {
-      options = Object.assign({}, options);
+      options = assign({}, options);
 
       if (!source) {
         return _source;
@@ -110,7 +112,9 @@ class CloudinaryContext extends mixin(Playlistable) {
         return _cloudinaryConfig;
       }
 
-      _cloudinaryConfig = getCloudinaryInstanceOf('Cloudinary', config);
+      _cloudinaryConfig = getCloudinaryInstanceOf(cloudinary.Cloudinary, config);
+
+      console.log('conf', _cloudinaryConfig.config());
 
       return _chainTarget;
     };
@@ -120,7 +124,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         return _transformation;
       }
 
-      _transformation = getCloudinaryInstanceOf('Transformation', trans);
+      _transformation = getCloudinaryInstanceOf(cloudinary.Transformation, trans);
 
       return _chainTarget;
     };
@@ -224,9 +228,9 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     const posterOptionsForCurrent = () => {
-      const opts = Object.assign({}, this.posterOptions());
+      const opts = assign({}, this.posterOptions());
 
-      opts.transformation = getCloudinaryInstanceOf('Transformation', opts.transformation || {});
+      opts.transformation = getCloudinaryInstanceOf(cloudinary.Transformation, opts.transformation || {});
       if (this.player.width() > 0 && this.player.height() > 0) {
         opts.transformation.width(this.player.width()).height(this.player.height()).crop('limit');
       }
