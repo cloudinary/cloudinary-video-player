@@ -83,8 +83,10 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
-      var source1 = { publicId: 'oceans', transformation: { angle: 1 }, info: { subtitle: 'My Oceans Movie' } }
-      var source2 = { publicId: 'book', info: { title: 'My wonderful Book', subtitle: 'Wonderful book movie', description: 'A movie about a wonderful book' } }
+      // Define playlist sources
+      var source1 = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
+      var source2 = { publicId: 'book', info: { title: 'Cloud Book Study', subtitle: 'A short video with a nice book animation' } };
+      var source3 = { publicId: 'negative', info: { title: 'Negative' } };
 
       // Initialize player
       var player = cld.videoPlayer('example-player');
@@ -132,14 +134,15 @@
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Define playlist sources
-    var source1 = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } }
-    var source2 = { publicId: 'book', info: { title: 'Cloud Book Study', subtitle: 'A short video with a nice book animation' } }
+    var source1 = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
+    var source2 = { publicId: 'book', info: { title: 'Cloud Book Study', subtitle: 'A short video with a nice book animation' } };
+    var source3 = { publicId: 'negative', info: { title: 'Negative' } };
 
     // Initialize player
     var player = cld.videoPlayer('example-player');
 
     // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
-    player.playlist([source1, source2], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
+    player.playlist([source1, source2, source3], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
 
     function updateSource() {
       var divElem = document.querySelector("div#source-data");

@@ -1,6 +1,6 @@
+import cloudinary from 'cloudinary-core';
 import mixin from 'utils/mixin';
 import applyWithProps from 'utils/apply-with-props';
-import cloudinary from 'cloudinary-core';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { getCloudinaryInstanceOf } from 'utils/cloudinary';
 import assign from 'utils/assign';

@@ -1,8 +1,6 @@
 import VideoSource from './models/video-source';
 import { isInteger } from 'utils/type-inference';
 
-console.log(isInteger);
-
 const DEFAULT_AUTO_ADVANCE = 0;
 const DEFAULT_PRESENT_UPCOMING = 10;
 const UPCOMING_VIDEO_TRANSITION = 1;
@@ -15,6 +13,7 @@ class Playlist {
     let _autoAdvance = null;
     let _presentUpcoming = null;
     let _defaultRecResolverCache = {};
+    let _recommendationsHandler = null;
 
     this.enqueue = (source, options = {}) => {
       const src = source instanceof VideoSource ? source
@@ -49,13 +48,7 @@ class Playlist {
 
       this.player().trigger('playlistitemchanged', eventData);
 
-      _context.on('ended', () => {
-        if (this.autoAdvance() === false && _context.autoShowRecommendations()) {
-          this.player().trigger('recommendationsshow');
-        }
-      });
-
-      setup();
+      refreshRecommendations();
 
       return current;
     };
@@ -112,11 +105,7 @@ class Playlist {
       this.player().trigger('upcomingvideohide');
       resetAutoAdvance();
       resetPresentUpcoming();
-    };
-
-    const setup = () => {
-      setupAutoAdvance();
-      setupPresentUpcoming();
+      resetRecommendations();
     };
 
     const setupAutoAdvance = () => {
@@ -135,7 +124,7 @@ class Playlist {
       };
 
       _autoAdvance = { delay, trigger };
-      _context.one('ended', _autoAdvance.trigger);
+      _context.on('ended', _autoAdvance.trigger);
     };
 
     const resetAutoAdvance = () => {
@@ -199,6 +188,25 @@ class Playlist {
       _presentUpcoming.trigger = null;
       _presentUpcoming.showTriggered = false;
     };
+
+    const resetRecommendations = () => {
+      if (_recommendationsHandler) {
+        _context.off('ended', _recommendationsHandler);
+      }
+    };
+
+    const refreshRecommendations = () => {
+      resetRecommendations();
+
+      _recommendationsHandler = () => {
+        if (this.autoAdvance() === false && _context.autoShowRecommendations()) {
+          this.player().trigger('recommendationsshow');
+        }
+      };
+
+      _context.on('ended', _recommendationsHandler);
+    };
+
 
     const recommendationItemBuilder = (source) => {
       const defaultResolver = _defaultRecResolverCache[source.objectId];
