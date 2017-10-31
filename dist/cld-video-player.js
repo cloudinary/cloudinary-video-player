@@ -48376,6 +48376,10 @@ exports.default = function () {
   this.cloudinary = new CloudinaryContext(this, options);
 };
 
+var _cloudinaryCore = __webpack_require__(36);
+
+var _cloudinaryCore2 = _interopRequireDefault(_cloudinaryCore);
+
 var _mixin2 = __webpack_require__(110);
 
 var _mixin3 = _interopRequireDefault(_mixin2);
@@ -48383,10 +48387,6 @@ var _mixin3 = _interopRequireDefault(_mixin2);
 var _applyWithProps = __webpack_require__(107);
 
 var _applyWithProps2 = _interopRequireDefault(_applyWithProps);
-
-var _cloudinaryCore = __webpack_require__(36);
-
-var _cloudinaryCore2 = _interopRequireDefault(_cloudinaryCore);
 
 var _slicing = __webpack_require__(19);
 
@@ -48984,8 +48984,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-console.log(_typeInference.isInteger);
-
 var DEFAULT_AUTO_ADVANCE = 0;
 var DEFAULT_PRESENT_UPCOMING = 10;
 var UPCOMING_VIDEO_TRANSITION = 1;
@@ -49012,6 +49010,7 @@ var Playlist = function () {
     var _autoAdvance = null;
     var _presentUpcoming = null;
     var _defaultRecResolverCache = {};
+    var _recommendationsHandler = null;
 
     this.enqueue = function (source) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -49047,13 +49046,7 @@ var Playlist = function () {
 
       _this.player().trigger('playlistitemchanged', eventData);
 
-      _context.on('ended', function () {
-        if (_this.autoAdvance() === false && _context.autoShowRecommendations()) {
-          _this.player().trigger('recommendationsshow');
-        }
-      });
-
-      setup();
+      refreshRecommendations();
 
       return current;
     };
@@ -49114,11 +49107,7 @@ var Playlist = function () {
       _this.player().trigger('upcomingvideohide');
       resetAutoAdvance();
       resetPresentUpcoming();
-    };
-
-    var setup = function setup() {
-      setupAutoAdvance();
-      setupPresentUpcoming();
+      resetRecommendations();
     };
 
     var setupAutoAdvance = function setupAutoAdvance() {
@@ -49137,7 +49126,7 @@ var Playlist = function () {
       };
 
       _autoAdvance = { delay: delay, trigger: trigger };
-      _context.one('ended', _autoAdvance.trigger);
+      _context.on('ended', _autoAdvance.trigger);
     };
 
     var resetAutoAdvance = function resetAutoAdvance() {
@@ -49200,6 +49189,24 @@ var Playlist = function () {
 
       _presentUpcoming.trigger = null;
       _presentUpcoming.showTriggered = false;
+    };
+
+    var resetRecommendations = function resetRecommendations() {
+      if (_recommendationsHandler) {
+        _context.off('ended', _recommendationsHandler);
+      }
+    };
+
+    var refreshRecommendations = function refreshRecommendations() {
+      resetRecommendations();
+
+      _recommendationsHandler = function _recommendationsHandler() {
+        if (_this.autoAdvance() === false && _context.autoShowRecommendations()) {
+          _this.player().trigger('recommendationsshow');
+        }
+      };
+
+      _context.on('ended', _recommendationsHandler);
     };
 
     var recommendationItemBuilder = function recommendationItemBuilder(source) {
