@@ -84,6 +84,12 @@ $icon-font-path: '../fonts' !default;
     margin-top: -($big-play-height / 2);
   }
 
+  &.vjs-paused .vjs-big-play-button,
+  &.vjs-paused.vjs-has-started .vjs-big-play-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
   &.vjs-controls-disabled .vjs-big-play-button,
   &.vjs-has-started .vjs-big-play-button,
   &.vjs-using-native-controls .vjs-big-play-button,
@@ -92,12 +98,6 @@ $icon-font-path: '../fonts' !default;
     display: block;
     visibility: hidden;
     opacity: 0;
-  }
-
-  &.vjs-paused .vjs-big-play-button,
-  &.vjs-paused.vjs-has-started .vjs-big-play-button {
-    opacity: 1;
-    visibility: visible;
   }
 
   .vjs-control-bar {

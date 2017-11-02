@@ -217,8 +217,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
-    console.log(_options, _vjs_options);
-
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
 
