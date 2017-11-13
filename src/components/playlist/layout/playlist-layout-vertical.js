@@ -11,12 +11,12 @@ class PlaylistLayoutVertical extends PlaylistLayout {
     super(player, options);
     // this.createTwoCols();
     // this.watchVideoDimension();
-    this.addChild("PlaylistPanel", options);
+    this.addChild('PlaylistPanel', options);
   }
 
   getCls() {
     let cls = super.getCls();
-    cls.push("cld-p-vertical");
+    cls.push('cld-p-vertical');
 
     return cls;
   }
@@ -25,9 +25,9 @@ class PlaylistLayoutVertical extends PlaylistLayout {
     const itemHeight = height / this.options_.total;
     const itemWidth = (16 / 9) * itemHeight;
 
-    setWidth(this.contentEl(),itemWidth);
-  }    
-  
+    setWidth(this.contentEl(), itemWidth);
+  }
+
 }
 
 

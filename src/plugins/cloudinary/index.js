@@ -18,7 +18,7 @@ const DEFAULT_PARAMS = {
 };
 
 export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
-  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations','playlistOptions'];
+  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations', 'playlistOptions'];
 
 class CloudinaryContext extends mixin(Playlistable) {
   constructor(player, options = {}) {

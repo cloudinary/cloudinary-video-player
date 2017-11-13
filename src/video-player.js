@@ -13,12 +13,12 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 
 const dom = videojs.dom || videojs;
 const CLOUDINARY_PARAMS = [
-  'cloudinaryConfig', 
-  'transformation', 
-  'sourceTypes', 
-  'sourceTransformation', 
-  'posterOptions', 
-  'autoShowRecommendations', 
+  'cloudinaryConfig',
+  'transformation',
+  'sourceTypes',
+  'sourceTransformation',
+  'posterOptions',
+  'autoShowRecommendations',
   'playlistOptions'
 ];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
@@ -113,7 +113,7 @@ const overrideDefaultVideojsComponents = () => {
   children.push('titleBar');
   children.push('upcomingVideoOverlay');
   children.push('recommendationsOverlay');
-  //children.push('playlist');
+  // children.push('playlist');
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
 
@@ -140,7 +140,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const onReady = () => {
       setExtendedEvents();
       setCssClasses();
-      
+
       this.fluid(_options.fluid);
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
@@ -227,19 +227,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlaylist = () => {
-      this.videojs.on("playlistcreated", () => {
-          const plOptions = this.videojs.cloudinary.playlistOptions();
+      this.videojs.on('playlistcreated', () => {
+        const plOptions = this.videojs.cloudinary.playlistOptions();
 
-          if(!Utils.isEmpty(plOptions)) {
-              this.playlistWidget_ = new PlaylistWidget(this.videojs, { fluid: options.playerOptions.fluid, ...plOptions});
-          }
-        
+        if (!Utils.isEmpty(plOptions)) {
+          this.playlistWidget_ = new PlaylistWidget(this.videojs, { fluid: options.playerOptions.fluid, ...plOptions });
+        }
+
           // if(PlaylistLayout.isRender(plOptions) && !this.playlistLayout ) {
           //   this.playlistLayout = new PlaylistLayout(this.videojs, plOptions);
           // }
       });
-    }
- 
+    };
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
     console.log(_options, _vjs_options);
@@ -255,7 +255,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs.ready(() => {
       onReady();
-      
+
 
       if (ready) {
         ready(this);
@@ -294,7 +294,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.source(publicId, options);
   }
 
-  
+
   posterOptions(options) {
     return this.videojs.cloudinary.posterOptions(options);
   }
@@ -309,7 +309,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistWidget() {
-      return this.playlistWidget_;
+    return this.playlistWidget_;
   }
 
   playlistOptions(options) {
@@ -332,19 +332,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs.fluid(bool);
-    this.videojs.trigger("fluid", bool);
+    this.videojs.trigger('fluid', bool);
     return this;
   }
 
   changeSkin(skin) {
-      if(skin === "dark" || skin === "light") {
-        const prevSkin = this.videojs.options().skin;
+    if (skin === 'dark' || skin === 'light') {
+      const prevSkin = this.videojs.options().skin;
 
-        this.videojs.removeClass('cld-video-player-skin-' + prevSkin);
-        this.videojs.addClass('cld-video-player-skin-' + skin);
-        this.videojs.options({ skin: skin });
-        this.videojs.trigger("themechange", { currSkin: skin, prevSkin: prevSkin })
-      }
+      this.videojs.removeClass(`cld-video-player-skin-${prevSkin}`);
+      this.videojs.addClass(`cld-video-player-skin-${skin}`);
+      this.videojs.options({ skin: skin });
+      this.videojs.trigger('themechange', { currSkin: skin, prevSkin: prevSkin });
+    }
   }
 
   play() {

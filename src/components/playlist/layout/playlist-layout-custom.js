@@ -12,7 +12,7 @@ class PlaylistLayoutCustom extends PlaylistLayout {
 
   getCls() {
     let cls = super.getCls();
-    cls.push("cld-p-custom");
+    cls.push('cld-p-custom');
 
     return cls;
   }
@@ -20,7 +20,7 @@ class PlaylistLayoutCustom extends PlaylistLayout {
   createEl() {
     const el = super.createEl();
     this.options_.renderTo.appendChild(el);
-          
+
     return el;
   }
 }

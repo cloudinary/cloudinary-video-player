@@ -10,13 +10,13 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 const THUMB_DEFAULT_WIDTH = 300;
 const DEFAULT_OPTIONS = {
-    item: null,
-    transformation: { 
-      width: THUMB_DEFAULT_WIDTH, 
-      aspect_ratio: '16:9', 
-      crop: 'pad', 
-      background: 'black' 
-    }
+  item: null,
+  transformation: {
+    width: THUMB_DEFAULT_WIDTH,
+    aspect_ratio: '16:9',
+    crop: 'pad',
+    background: 'black'
+  }
 };
 
 
@@ -35,7 +35,7 @@ class Thumbnail extends ClickableComponent {
   }
 
   getDuration() {
-    return "";//this.getItem().info().title;
+    return '';// this.getItem().info().title;
   }
 
   getThumbnail() {
@@ -48,21 +48,21 @@ class Thumbnail extends ClickableComponent {
 
   createControlTextEl() {}
 
-  createEl(tag = 'a', props = {},attr = {}) {
-    
+  createEl(tag = 'a', props = {}, attr = {}) {
+
     const el = super.createEl(tag, {
       className: 'cld-thumbnail',
       href: '#'
     });
 
-    const img = super.createEl("img", {
+    const img = super.createEl('img', {
       className: 'cld-thumbnail-img',
       src: this.getThumbnail()
     });
 
     el.appendChild(img);
 
-    el.style.backgroundImage = "url('"+this.getThumbnail()+"')";
+    el.style.backgroundImage = `url('${this.getThumbnail()}')`;
 
     return el;
   }

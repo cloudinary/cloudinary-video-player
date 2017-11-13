@@ -9,21 +9,19 @@ class PlaylistLayoutHorizontal extends PlaylistLayout {
   constructor (player, options) {
     options.wrap = true;
     super(player, options);
-    // this.createTwoCols();
-    // this.watchVideoDimension();
-    this.addChild("PlaylistPanel",this.options()); 
+    this.addChild('PlaylistPanel', this.options()); // move to Layout
   }
 
   setContentElDimensions({ width, height }) {
     const itemWidth = width / this.options_.total;
     const itemHeight = (9 / 16) * itemWidth;
 
-    setHeight(this.contentEl(),itemHeight);
-  }    
+    setHeight(this.contentEl(), itemHeight);
+  }
 
   getCls() {
-      let cls = super.getCls();
-          cls.push("cld-p-horizontal");
+    let cls = super.getCls();
+    cls.push('cld-p-horizontal');
     return cls;
   }
 }

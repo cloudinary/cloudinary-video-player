@@ -1,11 +1,11 @@
 let mixinWith = (superclass) => new MixinBuilder(superclass);
 
-class MixinBuilder {  
+class MixinBuilder {
   constructor(superclass) {
     this.superclass = superclass;
   }
 
-  with(...mixins) { 
+  with(...mixins) {
     return mixins.reduce((c, mixin) => mixin(c), this.superclass);
   }
 }
