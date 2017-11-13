@@ -17,6 +17,7 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.css",
   "dependencies": {
+    "clipboard": "^1.7.1",
     "dashjs": "^2.4.1",
     "fetch-ponyfill": "^4.0.0",
     "get-size": "^2.0.2",

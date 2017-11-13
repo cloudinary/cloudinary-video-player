@@ -8,9 +8,16 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
 <link href="/style.css" rel="stylesheet">
+<!-- <link href="./node_modules/prismjs/themes/prism.css" rel="stylesheet" />
+<script src="node_modules/clipboard/dist/clipboard.min.js"></script> -->
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,10 +27,39 @@
 <![endif]-->
 </head>
 <body>
+
+    <style>
+      .resizeImg {
+        border: 1px solid red;
+        background: url(http://res.cloudinary.com/miki-cloudinary/video/upload/ar_16:9,b_black,c_pad,w_175/oceans.jpg) center center no-repeat;
+        background-size: crop;
+        width: 200px;
+        background-size: contain;
+      }
+
+      .dark {
+          background-color: #000;
+          color: #FFF;
+      }
+
+      .fluid-demo-container {
+        width: 100%;
+        max-width: 1024px;
+      }
+
+      
+    </style>
+
+  
+    <div class="resizeImg"></div>
+    
+    
+  
+
   <div class="container">
     <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Playlist</h2>
+    <h1 class="text-primary">Cloudinary Video Player</h1>
+    <h2 class="text-primary">Playlist</h2>
     <p>The player supports a creation of a playlist. A playlist allows you
       to define a list of videos which should be played one after another.
       You may also define:
@@ -35,88 +71,185 @@
       video ends ('repeat' param)<br />
       Finally.
     </p>
+    
+    <!-- HORIZONTAL VIDEO -->
+    <div class="d-flex flex-column justify-content-start align-items-start">
+      <div id="fluid-demo-container">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label class="col-form-label" for="changePlaylistSkin">Skin</label>
+              <select class="form-control" id="changePlaylistSkin" placeholder="Skin">
+                  <option value="dark">Dark</option>
+                  <option value="light">Light</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="changePlaylistDirection">Direction</label>
+              <select class="form-control" id="changePlaylistDirection" placeholder="Direction">
+                  <option value="horizontal">Horizontal</option>
+                  <option value="vertical">Vertical</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="changePlaylistTotal">Total</label>
+                <input type="number" class="form-control" id="changePlaylistTotal" step="1" value="4" placeholder="Total">
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" value="on" id="changePlayerFluid" type="checkbox"> Fluid
+                </label>
+              </div>
+          </div>
+        </form>
+        <div>
+            <video
+              id="example-player"
+              controls
+              muted
+              autoplay
+              class="cld-video-player cld-video-player-skin-dark"
+              data-cld-transformation='{ "width": 720, "crop": "limit" }'>
+            </video>
+        </div>
+      
+        <div class="p-4 text-center">
+            <button id="play-prev" class="btn btn-l btn-primary">Prev</button>
+            <button id="play-next" class="btn btn-l btn-primary">Next</button>
+        </div>
+          
+        <div class="jumbotron jumbotron-fluid p-4 text-center">
+          <div id="source-data">
+            <h6 class="" id="public-id-placeholder"></h6>
+            <small id="source-url-placeholder"></small>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="row video-container">
-      <center>
+    <!-- VERTICAL VIDEO -->
+    <div class="d-flex flex-column justify-content-start align-items-start">
+      <div>
+        <h2 class="text-primary mb-4">Vertical Playlist</h2>
         <video
-          id="example-player"
+          id="example-player-vertical"
           controls
           muted
           autoplay
           class="cld-video-player cld-video-player-skin-dark"
           data-cld-transformation='{ "width": 720, "crop": "limit" }'>
         </video>
-
-        <button id="play-prev" class="btn btn-default">Prev</button>
-        <button id="play-next" class="btn btn-default">Next</button>
-
-        <div id="source-data">
-          <span id="public-id-placeholder"></span><br>
-          <span id="source-url-placeholder"></span>
-        </div>
-      </center>
+      </div>      
     </div>
 
-    <h4>Example Code:</h3>
-    <pre>
-      HTML:
+    <div class="mt-4">
+        <h2 class="text-primary mb-4">Example Code:</h2>
 
-      &lt;video
-        id="example-player"
-        controls
-        muted
-        autoplay
-        class="cld-video-player cld-video-player-skin-dark"
-        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
-      &lt;/video&gt;
+        <pre>
+            <code class="language-html">
+  &lt;!--    HTML  --&gt;
+  &lt;video
+    id="example-player"
+    controls
+    muted
+    autoplay
+    class="cld-video-player cld-video-player-skin-dark"
+    data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+  &lt;/video&gt;
 
-      &lt;button id="play-prev" class="btn btn-default"&gt;Prev&lt;/button&gt;
-      &lt;button id="play-next" class="btn btn-default"&gt;Next&lt;/button&gt;
+  &lt;button id="play-prev" class="btn btn-default"&gt;Prev&lt;/button&gt;
+  &lt;button id="play-next" class="btn btn-default"&gt;Next&lt;/button&gt;
 
-      &lt;div id="source-data"&gt;
-        &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
-        &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
-      &lt;/div&gt;
+  &lt;div id="source-data"&gt;
+    &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
+    &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
+  &lt;/div&gt;
+          </code>
+        </pre>
 
+        <pre>
+            <code class="language-javascript">
+    &lt;!--   JavaScript --&gt;
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
-      JavaScript:
+    // Define playlist sources
+    var source1 = { 
+      publicId: 'oceans', 
+      info: { 
+        title: 'Oceans', 
+        subtitle: 'A movie about oceans' 
+      } 
+    };
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+    var source2 = { 
+      publicId: 'book', 
+      info: { 
+        title: 'Cloud Book Study', 
+        subtitle: 'A short video with a nice book animation' 
+      } 
+    };
 
-      // Define playlist sources
-      var source1 = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
-      var source2 = { publicId: 'book', info: { title: 'Cloud Book Study', subtitle: 'A short video with a nice book animation' } };
-      var source3 = { publicId: 'negative', info: { title: 'Negative' } };
+    var source3 = { 
+      publicId: 'negative', 
+      info: { title: 'Negative' } 
+    };
 
-      // Initialize player
-      var player = cld.videoPlayer('example-player');
+    // Initialize player
+    var player = cld.videoPlayer('example-player',{
+      playlistOptions: {
+        show: true,
+        direction: "horizontal",
+        total: 4
+      }
+    );
 
-      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
-      player.playlist([source1, source2], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
+    // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, 
+    // and present upcoming video 5 seconds before the current video ends.
+    player.playlist(
+      [source1, source2], 
+      { 
+        autoAdvance: true, 
+        repeat: true, 
+        presentUpcoming: 8 
+      }
+    );
 
-      function updateSource() {
-        var divElem = document.querySelector("div#source-data");
+    function updateSource() {
+      var divElem = document.querySelector("div#source-data");
 
-        publicIdElem = divElem.querySelector("#public-id-placeholder");
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
+      publicIdElem = divElem.querySelector("#public-id-placeholder");
+      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
+      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-        console.log(sourceUrlElem.innerText);
-        divElem.style.display = 'block';
-      };
+      console.log(sourceUrlElem.innerText);
+      divElem.style.display = 'block';
+    };
 
-      player.on('sourcechanged', updateSource);
+    player.on('sourcechanged', updateSource);
 
-      document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious();
-      });
+    document.querySelector("button#play-prev").addEventListener("click", function() {
+      player.playPrevious();
+    });
 
-      document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext();
-      });
-    </pre>
+    document.querySelector("button#play-next").addEventListener("click", function() {
+      player.playNext();
+    });
+          </code>
+          </pre> 
+    </div>
+
+  </div>
+     
+    
+    
+    
+
+    
+    
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -139,11 +272,63 @@
     var source3 = { publicId: 'negative', info: { title: 'Negative' } };
 
     // Initialize player
-    var player = cld.videoPlayer('example-player');
+    var player = cld.videoPlayer('example-player',{
+      playlistOptions: {
+        show: true, // TODO: to remove
+        direction: "horizontal",
+        total: 4
+      }
+    });
 
     // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
-    player.playlist([source1, source2, source3], { autoAdvance: true, repeat: true, presentUpcoming: 8 });
+    player.playlist([source1, source2, source3, source1, source2, source3, source1, source2, source3], {
+      autoAdvance: true, 
+      repeat: true, 
+      presentUpcoming: 8 
+    });
 
+
+     // Initialize player
+    var playerVertical = cld.videoPlayer('example-player-vertical',{
+      playlistOptions: {
+        show: true,
+        direction: "vertical",
+        total: 3
+      }
+    }).play();
+
+    playerVertical.playlist([source1, source2, source3, source1, source2, source3, source1, source2, source3], {
+      autoAdvance: true, 
+      repeat: true, 
+      presentUpcoming: 8 
+    });
+
+    document.getElementById("changePlaylistTotal").addEventListener("mouseup",function(e){
+        player.playlistWidget().total(e.srcElement.value);
+    })
+
+    document.getElementById("changePlaylistTotal").addEventListener("keyup",function(e) {
+        player.playlistWidget().total(e.srcElement.value);
+    })
+
+    document.getElementById("changePlaylistDirection").addEventListener("change",function(e){
+        player.playlistWidget().direction(e.srcElement.value);
+    })
+
+    document.getElementById("changePlaylistSkin").addEventListener("change",function(e){
+        player.changeSkin(e.srcElement.value);
+        if(e.srcElement.value == "light")
+          document.body.classList.add("dark");
+        else 
+          document.body.classList.remove("dark");
+    })
+
+    document.getElementById("changePlayerFluid").addEventListener("change",function(e){
+        player.fluid(e.srcElement.checked);
+        document.getElementById("fluid-demo-container").classList[e.srcElement.checked ? "add" : "remove"]("fluid-demo-container");
+    })
+
+  
     function updateSource() {
       var divElem = document.querySelector("div#source-data");
 
@@ -166,6 +351,8 @@
       player.playNext();
     });
   </script>
+
+  
 </body>
 </html>
 

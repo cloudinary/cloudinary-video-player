@@ -31,7 +31,8 @@ const Playlistable = (superclass) => class extends superclass {
       }
 
       createPlaylist(sources, options);
-
+      player.trigger("playlistcreated");
+      
       return _chainTarget;
     };
 

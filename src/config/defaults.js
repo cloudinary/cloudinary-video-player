@@ -57,6 +57,7 @@ export default {
   loop: false,
   muted: false,
   posterOptions: {},
+  playlistOptions: {},
   sourceTypes: ['webm', 'mp4', 'ogv'],
   contextMenu: {
     content: contextMenuContent

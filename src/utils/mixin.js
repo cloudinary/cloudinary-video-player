@@ -3,4 +3,3 @@ function mixin(...mixins) {
 }
 
 export default mixin;
-

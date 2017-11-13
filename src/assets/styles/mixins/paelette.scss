@@ -1,0 +1,20 @@
+@mixin palette($name, $foreground, $background) {
+    .cld-#{$name}-bg { 
+      background-color: $background;
+      color: $foreground; 
+  
+      a {
+        color: $foreground; 
+      }
+    }
+  
+    .cld-#{$name}-text {
+      color: $foreground; 
+    }
+  }
+
+
+  //@include palette('primary',$primary-foreground-color, $primary-background-color);
+  //@include palette('active',$active-foreground-color, $active-background-color);
+  //@include palette('secondary',$secondary-light-color, $secondary-dark-color);
+  

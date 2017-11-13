@@ -8,9 +8,19 @@ import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
+import PlaylistWidget from './components/playlist/playlist-widget';
 
-const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
-  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
+
+const dom = videojs.dom || videojs;
+const CLOUDINARY_PARAMS = [
+  'cloudinaryConfig', 
+  'transformation', 
+  'sourceTypes', 
+  'sourceTransformation', 
+  'posterOptions', 
+  'autoShowRecommendations', 
+  'playlistOptions'
+];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
   'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
 const VALID_SKINS = ['dark', 'light'];
@@ -103,7 +113,7 @@ const overrideDefaultVideojsComponents = () => {
   children.push('titleBar');
   children.push('upcomingVideoOverlay');
   children.push('recommendationsOverlay');
-
+  //children.push('playlist');
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
 
@@ -117,6 +127,7 @@ const overrideDefaultVideojsComponents = () => {
   children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'playlistNextButton');
 };
 
+
 overrideDefaultVideojsComponents();
 
 class VideoPlayer extends Utils.mixin(Eventable) {
@@ -129,14 +140,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const onReady = () => {
       setExtendedEvents();
       setCssClasses();
+      
       this.fluid(_options.fluid);
-
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
       if (source) {
         this.source(source);
       }
     };
+
 
     const setExtendedEvents = () => {
       const events = [];
@@ -214,9 +226,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    const initPlaylist = () => {
+      this.videojs.on("playlistcreated", () => {
+          const plOptions = this.videojs.cloudinary.playlistOptions();
+
+          if(!Utils.isEmpty(plOptions)) {
+              this.playlistWidget_ = new PlaylistWidget(this.videojs, { fluid: options.playerOptions.fluid, ...plOptions});
+          }
+        
+          // if(PlaylistLayout.isRender(plOptions) && !this.playlistLayout ) {
+          //   this.playlistLayout = new PlaylistLayout(this.videojs, plOptions);
+          // }
+      });
+    }
+ 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
-
     console.log(_options, _vjs_options);
 
     // Make sure to add 'video-js' class before creating videojs instance
@@ -224,9 +249,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
+    initPlaylist();
+
+    // TODO: END
 
     this.videojs.ready(() => {
       onReady();
+      
 
       if (ready) {
         ready(this);
@@ -265,6 +294,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.source(publicId, options);
   }
 
+  
   posterOptions(options) {
     return this.videojs.cloudinary.posterOptions(options);
   }
@@ -273,8 +303,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.playlist(sources, options);
   }
 
+
   playlistByTag(tag, options = {}) {
     return this.videojs.cloudinary.playlistByTag(tag, options);
+  }
+
+  playlistWidget() {
+      return this.playlistWidget_;
+  }
+
+  playlistOptions(options) {
+    return this.videojs.cloudinary.playlistOptions(options);
   }
 
   sourcesByTag(tag, options = {}) {
@@ -293,7 +332,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs.fluid(bool);
+    this.videojs.trigger("fluid", bool);
     return this;
+  }
+
+  changeSkin(skin) {
+      if(skin === "dark" || skin === "light") {
+        const prevSkin = this.videojs.options().skin;
+
+        this.videojs.removeClass('cld-video-player-skin-' + prevSkin);
+        this.videojs.addClass('cld-video-player-skin-' + skin);
+        this.videojs.options({ skin: skin });
+        this.videojs.trigger("themechange", { currSkin: skin, prevSkin: prevSkin })
+      }
   }
 
   play() {
@@ -314,6 +365,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   playNext() {
     this.playlist().playNext();
+    return this;
+  }
+
+  playItem(item) {
+    this.playlist().playItem(item);
     return this;
   }
 

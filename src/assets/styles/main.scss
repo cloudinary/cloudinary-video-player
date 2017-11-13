@@ -19,7 +19,18 @@ $icon-font-path: '../fonts' !default;
   line-height: 1.5em;
 }
 
+
+// Need to set base font size for em to all cloudinary components
+.cld-video-player,
+.cld-playlist,
+.cld-p-layout {
+  font-size: 0.75em;
+  font-weight: normal;
+}
+
+
 .cld-video-player {
+
   &.cld-fluid {
     @extend .vjs-fluid;
   }
@@ -27,9 +38,7 @@ $icon-font-path: '../fonts' !default;
   // The base font size controls the size of everything, not just text.
   // All dimensions use em-based sizes so that the scale along with the font size.
   // Try increasing it to 15px and see what happens.
-  font-size: 12px;
-  font-weight: 300;
-
+  
   .vjs-time-control {
     padding-left: 0;
     padding-right: 0;
@@ -147,24 +156,29 @@ $icon-font-path: '../fonts' !default;
         @return rgba($rgb, $opacity)
     }
   }
+}
 
-  @mixin skin($primary-foreground-color,
-    $primary-background-color,
-    $active-foreground-color,
-    $active-background-color,
-    $secondary-dark-color,
-    $secondary-light-color,
-    $control-bar-active-color,
-    $control-bar-inactive-color,
-    $tooltip-background-color,
-    $tooltip-foreground-color,
-    $modal-background-color,
-    $modal-foreground-color,
-    $border-color,
-    $shadow-color,
-    $allow-glows: false,
-    $light: false,
-    $opaque: false) {
+
+
+
+@mixin skin($primary-foreground-color,
+  $primary-background-color,
+  $active-foreground-color,
+  $active-background-color,
+  $secondary-dark-color,
+  $secondary-light-color,
+  $control-bar-active-color,
+  $control-bar-inactive-color,
+  $tooltip-background-color,
+  $tooltip-foreground-color,
+  $modal-background-color,
+  $modal-foreground-color,
+  $border-color,
+  $shadow-color,
+  $allow-glows: false,
+  $light: false,
+  $opaque: false) 
+  {
 
     color: $primary-foreground-color;
 
@@ -353,44 +367,67 @@ $icon-font-path: '../fonts' !default;
         }
       }
     }
-  }
 
-  // Dark skin
-  &.cld-video-player-skin-dark {
-    @include skin($primary-foreground-color: #FFFFFF,
-      $primary-background-color: #000000,
-      $active-foreground-color: #FFFFFF,
-      $active-background-color: #FF620C,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #90A0B3,
-      $control-bar-active-color: #E8E8E9,
-      $control-bar-inactive-color: #0E2F5A,
-      $tooltip-background-color: #E4EBF1,
-      $tooltip-foreground-color: #0E2F5A,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $allow-glows: true)
-  }
+    &.cld-p-layout {
+      background-color: $primary-background-color;
+    }
 
-  // Light skin
-  &.cld-video-player-skin-light {
-    @include skin($primary-foreground-color: #0E2F5A,
-      $primary-background-color: #FFFFFF,
-      $active-foreground-color: #FFFFFF,
-      $active-background-color: #0078FF,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #D0DAE2,
-      $control-bar-active-color: #0078FF,
-      $control-bar-inactive-color: #E4EBF1,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $tooltip-background-color: #0E2F5A,
-      $tooltip-foreground-color: #FFFFFF,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $light: true,
-      $opaque: true)
-  }
+  
+    .cld-p-item-info-wrap {
+      color: $primary-foreground-color;
+    }
+
+    .cld-playlist-item {
+      border-color: $secondary-light-color;
+      
+      &:hover {
+        border-color: $active-background-color;
+
+        .cld-p-item-info-wrap {
+          color: $active-background-color;
+        }
+      }
+    }
 }
+
+
+ // Dark skin
+ .cld-video-player-skin-dark {
+  @include skin($primary-foreground-color: #FFFFFF,
+    $primary-background-color: #000000,
+    $active-foreground-color: #FFFFFF,
+    $active-background-color: #FF620C,
+    $secondary-dark-color: #0E2F5A,
+    $secondary-light-color: #90A0B3,
+    $control-bar-active-color: #E8E8E9,
+    $control-bar-inactive-color: #0E2F5A,
+    $tooltip-background-color: #E4EBF1,
+    $tooltip-foreground-color: #0E2F5A,
+    $modal-background-color: #000000,
+    $modal-foreground-color: #FFFFFF,
+    $shadow-color: #000000,
+    $border-color: #FFFFFF,
+    $allow-glows: true)
+}
+
+// Light skin
+.cld-video-player-skin-light {
+  @include skin($primary-foreground-color: #0E2F5A,
+    $primary-background-color: #FFFFFF,
+    $active-foreground-color: #FFFFFF,
+    $active-background-color: #0078FF,
+    $secondary-dark-color: #0E2F5A,
+    $secondary-light-color: #D0DAE2,
+    $control-bar-active-color: #0078FF,
+    $control-bar-inactive-color: #E4EBF1,
+    $shadow-color: #000000,
+    $border-color: #FFFFFF,
+    $tooltip-background-color: #0E2F5A,
+    $tooltip-foreground-color: #FFFFFF,
+    $modal-background-color: #000000,
+    $modal-foreground-color: #FFFFFF,
+    $light: true,
+    $opaque: true)
+}
+
+

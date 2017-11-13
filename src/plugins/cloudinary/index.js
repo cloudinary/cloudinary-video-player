@@ -13,11 +13,12 @@ const DEFAULT_PARAMS = {
   transformation: {},
   sourceTypes: [],
   sourceTransformation: [],
-  posterOptions: {}
+  posterOptions: {},
+  playlistOptions: {}
 };
 
 export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
-  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
+  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations','playlistOptions'];
 
 class CloudinaryContext extends mixin(Playlistable) {
   constructor(player, options = {}) {
@@ -36,6 +37,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     let _playerEvents = null;
     let _recommendations = null;
     let _autoShowRecommendations = false;
+    let _playlistOptions = null;
 
     // source("oceans")
     // source("oceans", { transformation: { width: 50, height: 100, crop: 'limit' } })
@@ -47,7 +49,6 @@ class CloudinaryContext extends mixin(Playlistable) {
     // })
     this.source = (source, options = {}) => {
       options = assign({}, options);
-
       if (!source) {
         return _source;
       }
@@ -106,6 +107,17 @@ class CloudinaryContext extends mixin(Playlistable) {
 
       return _chainTarget;
     };
+
+    this.playlistOptions = (options) => {
+      if (!options) {
+        return _playlistOptions;
+      }
+
+      _playlistOptions = options;
+
+      return _chainTarget;
+    };
+
 
     this.cloudinaryConfig = (config) => {
       if (!config) {
