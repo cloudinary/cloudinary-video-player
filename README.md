@@ -42,7 +42,7 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
   controls
   autoplay
   data-cld-public-id="dog"
-  class="cld-video-player cld-video-player-skin-orange">
+  class="cld-video-player cld-video-player-skin-dark">
 </video>
 ```
 

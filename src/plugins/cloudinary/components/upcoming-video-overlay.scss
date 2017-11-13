@@ -1,0 +1,75 @@
+@import 'compass/css3/flexbox';
+@import 'compass/functions/lists'; // compass-mixins bug: background-size uses 'compact'
+@import 'compass/css3/background-size';
+@import 'compass/css3/transition';
+@import 'compass/css3/opacity';
+@import '../../../assets/styles/mixins/aspect-ratio';
+
+$upcoming-video-max-width: 30em;
+// $_upcoming-video-transition: visibility 1s, opacity 1s, background 1.1s 0s step-end;
+$_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
+
+.vjs-upcoming-video {
+  @include opacity(0);
+  @include transition(bottom 0.1s, $_upcoming-video-transition);
+  @include aspect-ratio(16, 9);
+
+  visibility: hidden;
+  position: absolute;
+  bottom: 4.5em;
+  right: 0.75em;
+  width: 38.7%;
+  max-width: $upcoming-video-max-width;
+  border: 1px solid #E8E8E9;
+
+  .aspect-ratio-content {
+    @include background-size(cover);
+
+    .vjs-upcoming-video-bar {
+      @include display-flex;
+      @include flex(auto);
+      @include justify-content(space-between);
+
+      position: absolute;
+      height: 3.0em;
+      line-height: 3.0em;
+      width: 100%;
+      bottom: 0px;
+
+      .vjs-upcoming-video-title {
+        @include flex(auto);
+        text-align: left;
+        display: block;
+        width: auto;
+        max-width: 80%;
+        padding-left: 1em;
+        padding-right: 1em;
+
+        .vjs-upcoming-video-title-display {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          .vjs-upcoming-video-title-display-label {
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .vjs-has-started.vjs-user-inactive.vjs-playing & {
+    @include transition(bottom 1s, $_upcoming-video-transition);
+    bottom: 0.7em;
+  }
+
+  &.vjs-upcoming-video-show {
+    @include transition($_upcoming-video-transition);
+    @include opacity(1);
+    visibility: visible;
+  }
+
+  &.disable-transition {
+    @include transition(visibility 0s);
+  }
+}

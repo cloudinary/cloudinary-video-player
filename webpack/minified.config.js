@@ -1,11 +1,11 @@
-const path = require('path')
-const merge = require('webpack-merge')
-const webpackCommon = require('./common.config')
+const path = require('path');
+const merge = require('webpack-merge');
+const webpackCommon = require('./common.config');
 
 // webpack plugins
-const DefinePlugin = require('webpack/lib/DefinePlugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
@@ -30,7 +30,7 @@ module.exports = merge.smart(webpackCommon, {
         screw_ie8: true,
         warnings: false
       },
-      mangle: false, // NEED TO FIGURE OUT WHY MANGLING DOESN'T WORK.
+      mangle: true, // NEED TO FIGURE OUT WHY MANGLING DOESN'T WORK.
       output: {
         comments: false,
         screw_ie8: true
@@ -38,4 +38,4 @@ module.exports = merge.smart(webpackCommon, {
       sourceMap: true
     })
   ]
-})
+});

@@ -1,53 +1,53 @@
-import videojs from 'video.js'
-import ContextMenuItem from './context-menu-item'
+import videojs from 'video.js';
+import ContextMenuItem from './context-menu-item';
 
-const Menu = videojs.getComponent('Menu')
+const Menu = videojs.getComponent('Menu');
 
 // support VJS5 & VJS6 at the same time
-const dom = videojs.dom || videojs
+const dom = videojs.dom || videojs;
 
 class ContextMenu extends Menu {
   constructor(player, options) {
-    super(player, options)
+    super(player, options);
 
     // Each menu component has its own `dispose` method that can be
     // safely bound and unbound to events while maintaining its context.
-    this.dispose = videojs.bind(this, this.dispose)
+    this.dispose = videojs.bind(this, this.dispose);
 
     options.content.forEach(c => {
-      let fn = null
+      let fn = null;
 
       if (typeof c.listener === 'function') {
-        fn = c.listener
+        fn = c.listener;
       } else if (typeof c.href === 'string') {
-        fn = () => window.open(c.href)
+        fn = () => window.open(c.href);
       } else {
-        fn = () => true
+        fn = () => true;
       }
 
-      const that = this
+      const that = this;
 
       this.addItem(new ContextMenuItem(player, {
         label: c.label,
         listener: videojs.bind(player, function() {
-          fn(this)
+          fn(this);
           window.setTimeout(() => {
-            that.dispose()
-          }, 1)
+            that.dispose();
+          }, 1);
         })
-      }))
-    })
+      }));
+    });
   }
 
   createEl() {
-    const el = super.createEl()
+    const el = super.createEl();
 
-    dom.addClass(el, 'vjs-context-menu')
-    el.style.left = `${this.options_.position.left}px`
-    el.style.top = `${this.options_.position.top}px`
+    dom.addClass(el, 'vjs-context-menu-ui');
+    el.style.left = `${this.options_.position.left}px`;
+    el.style.top = `${this.options_.position.top}px`;
 
-    return el
+    return el;
   }
 }
 
-export default ContextMenu
+export default ContextMenu;

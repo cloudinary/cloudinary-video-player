@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
+
 <style type="text/css">
   .vjs-control.vjs-playlist-control:before {
     font-family: FontAwesome;
@@ -50,32 +52,31 @@
       <a href="https://github.com/videojs/video.js/blob/master/docs/guides/components.md">Read more about VideoJS components</a>.
     </p>
 
-    <div class="row">
-      <center>
-        <video
-          id="example-player"
-          controls
-          autoplay
-          class="cld-video-player cld-video-player-skin-orange"
-          data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-        </video>
+    <div class="row video-container">
+      <video
+        id="example-player"
+        controls
+        muted
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'>
+      </video>
 
-        <div id="source-data">
-          <span id="public-id-placeholder"></span><br>
-          <span id="source-url-placeholder"></span>
-        </div>
-      </center>
+      <div id="source-data">
+        <span id="public-id-placeholder"></span><br>
+        <span id="source-url-placeholder"></span>
+      </div>
     </div>
 
-    <h4>Example Code:</h3>
-    <pre><xmp>
+    <h3>Example Code:</h3>
+    <pre><code>
       HTML:
 
-      <!-- We used FontAwesome for the 'Previous' and 'Next' controlBar buttons -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      &lt;!-- We used FontAwesome for the 'Previous' and 'Next' controlBar buttons --&gt;
+      &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
 
-      <!-- Add required CSS for displaying the fonts -->
-      <style type="text/css">
+      &lt;!-- Add required CSS for displaying the fonts --&gt;
+      &lt;style type="text/css"&gt;
         .vjs-control.vjs-playlist-control:before {
           font-family: FontAwesome;
           font-size: 1.5em;
@@ -88,20 +89,21 @@
         .vjs-playlist-control.vjs-playlist-previous-control:before {
           content: "\f049";
         }
-      </style>
+      &lt;/style&gt;
 
-      <video
+      &lt;video
         id="example-player"
         controls
+        muted
         autoplay
-        class="cld-video-player cld-video-player-skin-orange"
-        data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-      </video>
+        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+      &lt;/video&gt;
 
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
+      &lt;div id="source-data"&gt;
+        &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
+        &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
+      &lt;/div&gt;
 
 
       JavaScript:
@@ -110,26 +112,26 @@
       // ===============================================
 
       // Get the ClickableComponent base class from Video.js
-      var ClickableComponent = videojs.getComponent('ClickableComponent')
+      var ClickableComponent = videojs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
       var PlaylistButton = videojs.extend(ClickableComponent, {
         constructor: function(player, options) {
-          var type = options.type
+          var type = options.type;
           if (!type && type != 'previous' && type != 'next') {
-            throw new Error("Playlist must be either 'previous' or 'next'")
+            throw new Error("Playlist must be either 'previous' or 'next'");
           }
 
-          this.type = type
+          this.type = type;
 
           // It is important to invoke the superclass before anything else,
           // to get all the features of components out of the box!
-          Component.apply(this, arguments);
+          ClickableComponent.apply(this, arguments);
         },
 
         // The `createEl` function of a component creates its DOM element.
         createEl: function() {
-          var typeCssClass = 'vjs-playlist-' + this.type + '-control'
+          var typeCssClass = 'vjs-playlist-' + this.type + '-control';
 
           return videojs.createEl('button', {
 
@@ -138,7 +140,7 @@
             className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
           });
         },
-      })
+      });
 
       // Create the NextButton component
       var NextButton = videojs.extend(PlaylistButton, {
@@ -147,11 +149,11 @@
         },
 
         handleClick: function() {
-          PlaylistButton.prototype.handleClick.call(this)
+          PlaylistButton.prototype.handleClick.call(this);
 
           // Since the component has a VideoJS Player object, we use the internal
           // Cloudinary plugin to reach to the playlist object.
-          this.player().cloudinary.playlist().playNext()
+          this.player().cloudinary.playlist().playNext();
         }
       });
 
@@ -162,8 +164,8 @@
         },
 
         handleClick: function() {
-          PlaylistButton.prototype.handleClick.call(this)
-          this.player().cloudinary.playlist().playPrevious()
+          PlaylistButton.prototype.handleClick.call(this);
+          this.player().cloudinary.playlist().playPrevious();
         }
       });
 
@@ -171,11 +173,9 @@
       videojs.registerComponent('NextButton', NextButton);
       videojs.registerComponent('PreviousButton', PreviousButton);
 
-
       // Cloudinary Video Player related code
       // ====================================
-
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player with only the controlBar's 'playToggle' and our
       // custom components set.
@@ -183,34 +183,26 @@
         videojs: {
           controlBar: { children: ['PreviousButton', 'playToggle', 'NextButton'] }
         }
-      })
+      });
 
       player.playlist([
         { publicId: 'oceans', transformation: { angle: 45 } },
-        'book'], { autoAdvance: 0, repeat: true })
+        'book'], { autoAdvance: 0, repeat: true });
 
       function updateSource() {
-        var divElem = document.querySelector("div#source-data")
+        var divElem = document.querySelector("div#source-data");
 
-        publicIdElem = divElem.querySelector("#public-id-placeholder")
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+        publicIdElem = divElem.querySelector("#public-id-placeholder");
+        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-        divElem.style.display = 'block'
+        divElem.style.display = 'block';
       }
 
-      player.on('sourcechanged', updateSource)
-
-      document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious()
-      })
-
-      document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext()
-      })
-    </xmp></pre>
+      player.on('sourcechanged', updateSource);
+    </code></pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -229,17 +221,17 @@
     // ===============================================
 
     // Get the ClickableComponent base class from Video.js
-    var ClickableComponent = videojs.getComponent('ClickableComponent')
+    var ClickableComponent = videojs.getComponent('ClickableComponent');
 
     // Create a common class for playlist buttons
     var PlaylistButton = videojs.extend(ClickableComponent, {
       constructor: function(player, options) {
-        var type = options.type
+        var type = options.type;
         if (!type && type != 'previous' && type != 'next') {
-          throw new Error("Playlist must be either 'previous' or 'next'")
+          throw new Error("Playlist must be either 'previous' or 'next'");
         }
 
-        this.type = type
+        this.type = type;
 
         // It is important to invoke the superclass before anything else,
         // to get all the features of components out of the box!
@@ -248,7 +240,7 @@
 
       // The `createEl` function of a component creates its DOM element.
       createEl: function() {
-        var typeCssClass = 'vjs-playlist-' + this.type + '-control'
+        var typeCssClass = 'vjs-playlist-' + this.type + '-control';
 
         return videojs.createEl('button', {
 
@@ -257,7 +249,7 @@
           className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
         });
       },
-    })
+    });
 
     // Create the NextButton component
     var NextButton = videojs.extend(PlaylistButton, {
@@ -266,11 +258,11 @@
       },
 
       handleClick: function() {
-        PlaylistButton.prototype.handleClick.call(this)
+        PlaylistButton.prototype.handleClick.call(this);
 
         // Since the component has a VideoJS Player object, we use the internal
         // Cloudinary plugin to reach to the playlist object.
-        this.player().cloudinary.playlist().playNext()
+        this.player().cloudinary.playlist().playNext();
       }
     });
 
@@ -281,8 +273,8 @@
       },
 
       handleClick: function() {
-        PlaylistButton.prototype.handleClick.call(this)
-        this.player().cloudinary.playlist().playPrevious()
+        PlaylistButton.prototype.handleClick.call(this);
+        this.player().cloudinary.playlist().playPrevious();
       }
     });
 
@@ -292,7 +284,7 @@
 
     // Cloudinary Video Player related code
     // ====================================
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player with only the controlBar's 'playToggle' and our
     // custom components set.
@@ -300,33 +292,25 @@
       videojs: {
         controlBar: { children: ['PreviousButton', 'playToggle', 'NextButton'] }
       }
-    })
+    });
 
     player.playlist([
       { publicId: 'oceans', transformation: { angle: 45 } },
-      'book'], { autoAdvance: 0, repeat: true })
+      'book'], { autoAdvance: 0, repeat: true });
 
     function updateSource() {
-      var divElem = document.querySelector("div#source-data")
+      var divElem = document.querySelector("div#source-data");
 
-      publicIdElem = divElem.querySelector("#public-id-placeholder")
-      sourceUrlElem = divElem.querySelector("#source-url-placeholder")
+      publicIdElem = divElem.querySelector("#public-id-placeholder");
+      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
 
-      publicIdElem.innerText = "Public Id: " + player.currentPublicId()
-      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl()
+      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
 
-      divElem.style.display = 'block'
+      divElem.style.display = 'block';
     }
 
-    player.on('sourcechanged', updateSource)
-
-    document.querySelector("button#play-prev").addEventListener("click", function() {
-      player.playPrevious()
-    })
-
-    document.querySelector("button#play-next").addEventListener("click", function() {
-      player.playNext()
-    })
+    player.on('sourcechanged', updateSource);
   </script>
 </body>
 </html>

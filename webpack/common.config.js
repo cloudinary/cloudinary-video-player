@@ -1,6 +1,5 @@
-const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin')
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, '../src'),
@@ -32,9 +31,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
-    plugins: [
-      new DirectoryNamedWebpackPlugin({ honorIndex: true })
-    ],
     alias: {
       'video.js$': path.resolve(__dirname, '../node_modules/video.js'),
       'videojs-contrib-media-sources$': path.resolve(__dirname, '../node_modules/videojs-contrib-media-sources'),
@@ -68,7 +64,7 @@ module.exports = {
           use: [
             'css-loader?sourceMap&importLoaders=2',
             'resolve-url-loader',
-            'sass-loader?outputStyle=expanded&sourceMap&sourceMapContents'
+            `sass-loader?outputStyle=expanded&sourceMap&sourceMapContents&includePaths[]=${path.resolve(__dirname, '../node_modules/compass-mixins/lib')}`
           ]
         })
       },
@@ -107,4 +103,4 @@ module.exports = {
     fs: 'empty',
     net: 'empty'
   }
-}
+};

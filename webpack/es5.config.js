@@ -1,10 +1,10 @@
-const path = require('path')
-const merge = require('webpack-merge')
-const webpackCommon = require('./common.config')
+const path = require('path');
+const merge = require('webpack-merge');
+const webpackCommon = require('./common.config');
 
 // webpack plugins
-const DefinePlugin = require('webpack/lib/DefinePlugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
@@ -25,4 +25,4 @@ module.exports = merge.smart(webpackCommon, {
     }),
     new ExtractTextPlugin('[name].css')
   ]
-})
+});

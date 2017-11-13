@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,43 +34,44 @@
         events information in the DevTools console when the actual tracking occurs.</b>
     </p>
 
-    <div class="row">
-      <center>
-        <video
-          id="example-player"
-          controls
-          class="cld-video-player cld-video-player-skin-yellow">
-        </video>
-      </center>
-    </div>
-
-    <h4>Example Code:</h3>
-    <pre><xmp>
-      HTML:
-
+    <div class="row video-container">
       <video
         id="example-player"
         controls
-        class="cld-video-player cld-video-player-skin-yellow">
+        muted
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark">
       </video>
+    </div>
+
+    <h3>Example Code:</h3>
+    <pre>
+      HTML:
+
+      &lt;video
+        id="example-player"
+        controls
+        muted
+        class="cld-video-player cld-video-player-skin-dark"&gt;
+      &lt;/video&gt;
 
 
       JavaScript:
 
-      <!-- Google Analytics Code Snippet -->
-      <script>
+      &lt;!-- Google Analytics Code Snippet --&gt;
+      &lt;script&gt;
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics_debug.js','ga');
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
         ga('create', 'UA-99366171-1', 'auto');
         ga('send', 'pageview');
-      </script>
+      &lt;/script&gt;
 
-      <!-- Actual code -->
-      <script type="text/javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+      &lt;!-- Actual code --&gt;
+      &lt;script type="text/javascript"&gt;
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
         // Initialize player
         var player = cld.videoPlayer('example-player', {
@@ -77,17 +79,17 @@
             events: [
               'play',
               'pause',
-              { type: 'percentsplayed', percents: [10, 50, 75, 100] }, // Some events may have additionals settings
+              { type: 'percentsplayed', percents: [10, 50, 75, 100] }, // Some events may have additional settings
               'start',
               'ended'
             ]
           }
-        })
+        });
 
         // Modify player source
-        player.source('oceans').play()
-      </script>
-    </xmp></pre>
+        player.source('oceans').play();
+      &lt;/script&gt;
+    </pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -105,7 +107,7 @@
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics_debug.js','ga');
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', 'UA-99366171-1', 'auto');
     ga('send', 'pageview');
@@ -113,23 +115,31 @@
 
   <!-- Actual code -->
   <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' })
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
     var player = cld.videoPlayer('example-player', {
+      transformation: {
+        width: 500,
+        height: 500,
+        crop: 'pad'
+      },
       analytics: { // Enable player analytics
         events: [
           'play',
           'pause',
-          { type: 'percentsplayed', percents: [10, 50, 75, 100] }, // Some events may have additionals settings
+          { type: 'percentsplayed', percents: [10, 50, 75, 100] }, // Some events may have additional settings
           'start',
-          'ended'
+          'ended',
+          'fullscreenchange'
         ]
       }
-    })
+    });
 
     // Modify player source
-    player.source('oceans').play()
+    var source = { publicId: 'oceans', info: { title: 'oceans', subtitle: 'oceans subtitle', description: 'lorem ipsum oceans' } };
+
+    player.source(source).play();
   </script>
 </body>
 </html>
