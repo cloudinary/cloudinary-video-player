@@ -21,36 +21,51 @@
 </head>
 <body>
   <div class="container">
+    <a href="index.html"><< Back to examples index</a>
     <h1>Cloudinary Video Player</h1>
-    <h2>Examples</h2>
-    <p>Below is an index to some code examples:</p>
-    <ul>
-      <li><a href="api.html">API and Events</a></li>
-      <li><a href="playlist.html">Playlist</a></li>
-      <li><a href="playlist-by-tag.html">Playlist by Tag</a></li>
-      <li><a href="autoplay-on-scroll.html">Autoplay on Scroll</a></li>
-      <li><a href="multiple-players.html">Multiple Players</a></li>
-      <li><a href="adaptive-streaming.html">Adaptive Streaming</a></li>
-      <li><a href="analytics.html">Analytics</a></li>
-      <li><a href="components.html">Components</a></li>
-      <li><a href="recommendations.html">Recommendations</a></li>
-      <li><a href="fluid.html">Fluid Layouts</a></li>
-    </ul>
+    <h2>Fluid Layouts</h2>
+    <p>The player supports the use of fluid layouts for dynamically adjusting the player size
+       to it's surrounding contents.<br />
+       To use this functionality, simply add the 'cld-fluid' css class to the player, or pass
+       'fluid: true' to the player's constructor.
+       Try decreasing the window size to see the fluid layout support in action</p>
 
     <div class="row video-container">
       <video
         id="example-player"
         controls
         muted
-        class="cld-video-player cld-video-player-skin-dark"
-        data-cld-source='{ "publicId": "oceans", "transformation": { "width": 500 }, "info": { "title": "oceans", "subtitle": "short movie about oceans" } }'>
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark cld-fluid"
+        data-cld-transformation='{ "width": 720, "crop": "limit" }'>
       </video>
-
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
     </div>
+
+    <h4>Example Code:</h3>
+    <pre>
+      HTML:
+
+      &lt;video
+        id="example-player"
+        controls
+        muted
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark cld-fluid"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+      &lt;/video&gt;
+
+      JavaScript:
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
+      // Initialize player
+      var player = cld.videoPlayer('example-player');
+
+      // Define source
+      var source = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
+
+      // Play source
+      player.source(source).play();
+    </pre>
   </div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -68,22 +83,15 @@
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player', {
-    });
+    var player = cld.videoPlayer('example-player');
 
-    function updateSource() {
-      var divElem = document.querySelector("div#source-data");
+    // Define source
+    var source = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
 
-      publicIdElem = divElem.querySelector("#public-id-placeholder");
-      sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-      publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-      sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-      divElem.style.display = 'block';
-    }
-
-    player.on('sourcechanged', updateSource);
+    // Play source
+    player.source(source).play();
   </script>
 </body>
 </html>
+
+
