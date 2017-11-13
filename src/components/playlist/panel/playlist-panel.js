@@ -11,21 +11,23 @@ class PlaylistPanel extends Component {
   constructor(player, options = {}) {
     super(player, options);
 
-    player.on('playlistitemchanged', () => {
+    const itemChangeHandler = () => {
       this.render();
-    });
+    }
+
+    player.on('playlistitemchanged', itemChangeHandler);
 
     this.render();
 
-  }
-
-  dispose() {
-    super.dispose();
+    this.dispose = () => {
+      super.dispose();
+      player.off('playlistitemchanged', itemChangeHandler);
+    } 
   }
 
   createEl() {
     const el = super.createEl();
-    el.classList.add('cld-p-panel');
+    el.classList.add('cld-plw-panel');
 
     return el;
   }
@@ -57,7 +59,6 @@ class PlaylistPanel extends Component {
   }
 
   render() {
-
     const el = this.el();
     const items = this.getItems();
 
@@ -74,7 +75,6 @@ class PlaylistPanel extends Component {
       this.addChild(playlistItem);
 
     });
-
   }
 }
 

@@ -32,33 +32,24 @@ class PlaylistPanelItem extends Thumbnail {
   createEl() {
     const el = super.createEl();
 
-    el.classList.add('cld-playlist-item');
+    el.classList.add('cld-plw-panel-item');
 
-    const info = dom.createEl('div', {
-      className: 'cld-p-item-info-wrap'
-    });
-
-    const titleWrap = dom.createEl('div', {
-      className: 'cld-p-item-title'
-    });
+    const info = dom.createEl('div', { className: 'cld-plw-item-info-wrap' });
+    const titleWrap = dom.createEl('div', { className: 'cld-plw-item-title' });
 
     if (this.isNext()) {
       const nextEl = dom.createEl('span', {
-        className: 'cld-p-item-title-next'
+        className: 'cld-plw-item-title-next'
       }, {}, 'Next Up: ');
 
       titleWrap.appendChild(nextEl);
     }
 
-    const title = dom.createEl('span', {
-      className: 'cld-p-item-title'
-    }, {}, this.getTitle());
+    const title = dom.createEl('span', { className: 'cld-plw-item-title' }, {}, this.getTitle());
 
     titleWrap.appendChild(title);
 
-    const duration = dom.createEl('div', {
-      className: 'cld-p-item-duration'
-    }, {}, this.getDuration());
+    const duration = dom.createEl('div', { className: 'cld-plw-item-duration' }, {}, this.getDuration());
 
     info.appendChild(titleWrap);
     info.appendChild(duration);

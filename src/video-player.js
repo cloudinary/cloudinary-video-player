@@ -10,8 +10,6 @@ import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
 
-
-const dom = videojs.dom || videojs;
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
   'transformation',

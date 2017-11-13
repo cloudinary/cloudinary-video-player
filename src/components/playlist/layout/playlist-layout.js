@@ -1,8 +1,6 @@
 import videojs from 'video.js';
 import { addResizeListener, removeResizeListener } from '../../../utils/resize-events';
-import { setWidth } from '../../../utils/dom';
 import { wrap } from '../../../utils/dom';
-import PlaylistPanel from '../panel/playlist-panel';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
@@ -35,8 +33,8 @@ class PlaylistLayout extends Component {
     const wrapVideoWithLayout = () => {
       const el = this.el();
 
-      this.videoWrap_ = dom.createEl('div', { className: 'cld-p-col-player' });
-      this.contentEl_ = this.contentEl_ = dom.createEl('div', { className: 'cld-p-col-list' });
+      this.videoWrap_ = dom.createEl('div', { className: 'cld-plw-col-player' });
+      this.contentEl_ = this.contentEl_ = dom.createEl('div', { className: 'cld-plw-col-list' });
 
       wrap(this.player().el(), el);
 
@@ -53,7 +51,7 @@ class PlaylistLayout extends Component {
       const videoHeight = this.player_.currentHeight();
       const dims = { width: videoWidth, height: videoHeight };
 
-      if (prev.height != videoHeight || prev.width != videoWidth) {
+      if (prev.height !== videoHeight || prev.width !== videoWidth) {
         this.setContentElDimensions(dims);
         prev = dims;
       }
@@ -84,6 +82,8 @@ class PlaylistLayout extends Component {
     player.on('fluid', fluidHandler);
     player.on('themechange', themeHandler);
 
+    this.addChild('PlaylistPanel', this.options());
+
     this.dispose = () => {
       removeResizeListener(this.el(), resizeHandler);
       super.dispose();
@@ -96,10 +96,10 @@ class PlaylistLayout extends Component {
   }
 
   getCls() {
-    let cls = ['cld-p-layout'];
+    let cls = ['cld-plw-layout'];
     cls.push(`cld-video-player-skin-${this.options_.skin}`);
     if (this.options_.fluid) {
-      cls.push('cld-p-layout-fluid');
+      cls.push('cld-plw-layout-fluid');
     }
 
     return cls;

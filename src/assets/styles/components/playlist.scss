@@ -1,31 +1,27 @@
 @import 'compass/css3/flexbox';
 
 @mixin listLayout() {
-    .cld-p-layout {
-        &.cld-p-vertical {
+    .cld-plw-layout {
+        &.cld-plw-vertical {
             @include flex-direction(column);
             
-            .cld-p-col-list {
+            .cld-plw-col-list {
                 width: inherit !important;
             }
 
-            .cld-playlist-item {
+            .cld-plw-panel-item {
                 background: none !important;
-
-                &:first-child {
-                    
-                }
 
                 img {
                     display: block;
                     width: 150px;
                 }
 
-                .cld-p-item-info-wrap {
+                .cld-plw-item-info-wrap {
                     left: 160px;
                 }
 
-                .cld-p-item-title-next {
+                .cld-plw-item-title-next {
                     display: block;
                 }
             }
@@ -33,17 +29,17 @@
     }
 }
 
-.cld-p-horizontal {
+.cld-plw-horizontal {
     @include display-flex(inline-flex);
     @include flex-direction(row);
 
-    .cld-p-col-list {
+    .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(row);
         padding-top: 4px;
     } 
 
-    .cld-p-panel {
+    .cld-plw-panel {
         overflow: hidden;
         @include flex(1);
         @include display-flex(flex);
@@ -51,7 +47,7 @@
     
     }
 
-    .cld-playlist-item {
+    .cld-plw-panel-item {
         border-width: 1px;
         border-style: solid;
         transition: border-color .25s;
@@ -69,33 +65,33 @@
 }
 
 
-.cld-p-vertical {
+.cld-plw-vertical {
 
     @include display-flex(inline-flex);
     @include flex-direction(row);
 
-    &.cld-p-layout {
+    &.cld-plw-layout {
         > div:first-child {
             flex: 1;
         }
     }
 
-    .cld-p-col-list {
+    .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(column);
     } 
 
-    .cld-p-col-player {
+    .cld-plw-col-player {
         padding-right: 4px;
     }
 
-    .cld-p-panel {
+    .cld-plw-panel {
         @include flex(1);
         @include display-flex(flex);
         @include flex-direction(column);
     }
 
-    .cld-playlist-item {
+    .cld-plw-panel-item {
         
         margin-bottom: 4px;
         
@@ -123,17 +119,17 @@
 }
 
 
-.cld-playlist-item {
+.cld-plw-panel-item {
     border-width: 1px;
     border-style: solid;
     transition: border-color .25s;
 }
 
-.cld-p-item-title-next {
+.cld-plw-item-title-next { 
     font-weight: bold;
 }
 
-.cld-p-item-info-wrap {
+.cld-plw-item-info-wrap {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -144,7 +140,7 @@
     @include flex-direction(row);
 }
 
-.cld-p-item-title {
+.cld-plw-item-title {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -153,26 +149,26 @@
 
 /*  Default Playlist Layout */
 
-.cld-p-layout {
+.cld-plw-layout {
     
     padding: 4px;
 
-    &.cld-p-layout-fluid {
+    &.cld-plw-layout-fluid {
         width: 100%;
     }
 
-    &.cld-p-vertical {
+    &.cld-plw-vertical {
         @include flex-direction(row);
     }
 
-    &.cld-p-horizontal {
+    &.cld-plw-horizontal {
         @include flex-direction(column);
     }
 }
 
-.cld-p-custom {
+.cld-plw-custom {
     padding: 4px;
-    .cld-playlist-item {
+    .cld-plw-panel-item {
         background: none !important;
         margin: 4px 0;
         &:first-child {
@@ -188,11 +184,11 @@
             width: 150px;
         }
 
-        .cld-p-item-info-wrap {
+        .cld-plw-item-info-wrap {
             left: 160px;
         }
 
-        .cld-p-item-title-next {
+        .cld-plw-item-title-next {
             display: block;
         }
     }

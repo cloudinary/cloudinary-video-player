@@ -1,9 +1,6 @@
 import videojs from 'video.js';
 import '../../assets/styles/components/thumbnail.scss';
 
-
-const dom = videojs.dom || videojs;
-
 // Get the ClickableComponent base class from Video.js
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
@@ -35,7 +32,7 @@ class Thumbnail extends ClickableComponent {
   }
 
   getDuration() {
-    return '';// this.getItem().info().title;
+    return ' ';// this.getItem().info().title;
   }
 
   getThumbnail() {
@@ -49,12 +46,10 @@ class Thumbnail extends ClickableComponent {
   createControlTextEl() {}
 
   createEl(tag = 'a', props = {}, attr = {}) {
-
     const el = super.createEl(tag, {
       className: 'cld-thumbnail',
       href: '#'
     });
-
     const img = super.createEl('img', {
       className: 'cld-thumbnail-img',
       src: this.getThumbnail()

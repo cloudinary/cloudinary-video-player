@@ -5,14 +5,9 @@ import PlaylistLayout from './playlist-layout';
 const dom = videojs.dom || videojs;
 
 class PlaylistLayoutCustom extends PlaylistLayout {
-  constructor (player, options) {
-    super(player, options);
-    this.addChild(new PlaylistPanel(player, options));
-  }
-
   getCls() {
     let cls = super.getCls();
-    cls.push('cld-p-custom');
+    cls.push('cld-plw-custom');
 
     return cls;
   }

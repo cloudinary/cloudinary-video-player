@@ -129,21 +129,6 @@
       </div>
     </div>
 
-    <!-- VERTICAL VIDEO -->
-    <div class="d-flex flex-column justify-content-start align-items-start">
-      <div>
-        <h2 class="text-primary mb-4">Vertical Playlist</h2>
-        <video
-          id="example-player-vertical"
-          controls
-          muted
-          autoplay
-          class="cld-video-player cld-video-player-skin-dark"
-          data-cld-transformation='{ "width": 720, "crop": "limit" }'>
-        </video>
-      </div>      
-    </div>
-
     <div class="mt-4">
         <h2 class="text-primary mb-4">Example Code:</h2>
 
@@ -282,22 +267,6 @@
 
     // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
     player.playlist([source1, source2, source3, source1, source2, source3, source1, source2, source3], {
-      autoAdvance: true, 
-      repeat: true, 
-      presentUpcoming: 8 
-    });
-
-
-     // Initialize player
-    var playerVertical = cld.videoPlayer('example-player-vertical',{
-      playlistOptions: {
-        show: true,
-        direction: "vertical",
-        total: 3
-      }
-    }).play();
-
-    playerVertical.playlist([source1, source2, source3, source1, source2, source3, source1, source2, source3], {
       autoAdvance: true, 
       repeat: true, 
       presentUpcoming: 8 

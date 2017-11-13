@@ -23,7 +23,7 @@ $icon-font-path: '../fonts' !default;
 // Need to set base font size for em to all cloudinary components
 .cld-video-player,
 .cld-playlist,
-.cld-p-layout {
+.cld-plw-layout {
   font-size: 0.75em;
   font-weight: normal;
 }
@@ -366,24 +366,24 @@ $icon-font-path: '../fonts' !default;
           }
         }
       }
-    }
+    } 
 
-    &.cld-p-layout {
+    &.cld-plw-layout {
       background-color: $primary-background-color;
-    }
+    } 
 
   
-    .cld-p-item-info-wrap {
+    .cld-plw-item-info-wrap {
       color: $primary-foreground-color;
     }
 
-    .cld-playlist-item {
+    .cld-plw-panel-item {
       border-color: $secondary-light-color;
       
       &:hover {
         border-color: $active-background-color;
 
-        .cld-p-item-info-wrap {
+        .cld-plw-item-info-wrap {
           color: $active-background-color;
         }
       }

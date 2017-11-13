@@ -3,13 +3,10 @@ import PlaylistPanel from '../panel/playlist-panel';
 import PlaylistLayout from './playlist-layout';
 import { setHeight, setWidth } from '../../../utils/dom';
 
-const dom = videojs.dom || videojs;
-
 class PlaylistLayoutHorizontal extends PlaylistLayout {
   constructor (player, options) {
     options.wrap = true;
     super(player, options);
-    this.addChild('PlaylistPanel', this.options()); // move to Layout
   }
 
   setContentElDimensions({ width, height }) {
@@ -21,10 +18,9 @@ class PlaylistLayoutHorizontal extends PlaylistLayout {
 
   getCls() {
     let cls = super.getCls();
-    cls.push('cld-p-horizontal');
+    cls.push('cld-plw-horizontal');
     return cls;
   }
 }
-
 
 export default PlaylistLayoutHorizontal;
