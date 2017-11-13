@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import isObj from 'is-obj';
 import './components';
 import * as plugins from 'plugins';
 import * as Utils from 'utils';
@@ -16,11 +17,10 @@ const CLOUDINARY_PARAMS = [
   'sourceTypes',
   'sourceTransformation',
   'posterOptions',
-  'autoShowRecommendations',
-  'playlistOptions'
+  'autoShowRecommendations'
 ];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'playlistWidget']);
 const VALID_SKINS = ['dark', 'light'];
 const CLASS_PREFIX = 'cld-video-player';
 
@@ -224,41 +224,53 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-    const initPlaylist = () => {
+    let _playlistWidget;
+
+    const initPlaylistWidget = () => {
       this.videojs.on('playlistcreated', () => {
-        const plOptions = this.videojs.cloudinary.playlistOptions();
+        const plwOptions = _options.playlistWidget;
 
-        if (!Utils.isEmpty(plOptions)) {
-          this.playlistWidget_ = new PlaylistWidget(this.videojs, { fluid: options.playerOptions.fluid, ...plOptions });
+        if (isObj(plwOptions)) {
+          if (_options.fluid) {
+            plwOptions.fluid = true;
+          }
+
+          _playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
         }
-
-          // if(PlaylistLayout.isRender(plOptions) && !this.playlistLayout ) {
-          //   this.playlistLayout = new PlaylistLayout(this.videojs, plOptions);
-          // }
       });
     };
 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
-    console.log(_options, _vjs_options);
-
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
 
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
-    initPlaylist();
-
-    // TODO: END
+    initPlaylistWidget();
 
     this.videojs.ready(() => {
       onReady();
-
-
       if (ready) {
         ready(this);
       }
     });
+
+    this.playlistWidget = (options) => {
+      if (!options && !_playlistWidget) {
+        return false;
+      }
+      
+      if (!options && _playlistWidget) {
+        return _playlistWidget;
+      }
+      
+      if(isObj(options)) {
+        _playlistWidget.options(options);
+      }
+      
+      return _playlistWidget;
+    }
   }
 
   static all(selector, ...args) {
@@ -304,14 +316,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   playlistByTag(tag, options = {}) {
     return this.videojs.cloudinary.playlistByTag(tag, options);
-  }
-
-  playlistWidget() {
-    return this.playlistWidget_;
-  }
-
-  playlistOptions(options) {
-    return this.videojs.cloudinary.playlistOptions(options);
   }
 
   sourcesByTag(tag, options = {}) {

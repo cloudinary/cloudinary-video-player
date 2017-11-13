@@ -180,14 +180,13 @@
       publicId: 'negative', 
       info: { title: 'Negative' } 
     };
-
+ 
     // Initialize player
     var player = cld.videoPlayer('example-player',{
-      playlistOptions: {
-        show: true,
+      playlistWidget: {
         direction: "horizontal",
         total: 4
-      }
+      } 
     );
 
     // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, 
@@ -258,8 +257,7 @@
 
     // Initialize player
     var player = cld.videoPlayer('example-player',{
-      playlistOptions: {
-        show: true, // TODO: to remove
+      playlistWidget: {
         direction: "horizontal",
         total: 4
       }
