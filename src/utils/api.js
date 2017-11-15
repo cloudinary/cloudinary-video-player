@@ -11,11 +11,12 @@ const normalizeJsonResponse = (obj) => {
     Object.keys(obj).reduce((agg, key) => {
       const newKey = camelize(key);
 
-      if (TIME_FIELDS.includes(key)) {
+      if (TIME_FIELDS.indexOf(key) !== -1) {
         agg[newKey] = new Date(parseISO8601(obj[key]));
       } else {
         agg[newKey] = normalizeJsonResponse(obj[key]);
       }
+
       return agg;
     }, agg);
 

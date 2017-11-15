@@ -58,7 +58,7 @@ class ExtendedEvents extends EventEmitter {
 
       if (this.events.percentsplayed) {
         this.events.percentsplayed.percents.forEach((percent) => {
-          if (playedAtPercentage(currentTime, duration, percent) && !_percentsTracked.includes(percent)) {
+          if (playedAtPercentage(currentTime, duration, percent) && _percentsTracked.indexOf(percent) === -1) {
             _percentsTracked.push(percent);
             _emit('percentsplayed', { percent });
           }
@@ -70,7 +70,7 @@ class ExtendedEvents extends EventEmitter {
         const times = timeplayed.interval ? [Math.floor(currentTime / timeplayed.interval) * timeplayed.interval] : timeplayed.times;
 
         times.forEach((time) => {
-          if (playedAtTime(currentTime, time) && !_timesTracked.includes(time)) {
+          if (playedAtTime(currentTime, time) && _timesTracked.indexOf(time) === -1) {
             _timesTracked.push(time);
             _emit('timeplayed', { time });
           }

@@ -7,7 +7,7 @@ import assign from 'utils/assign';
 import '../components/playlist';
 import '../components/upcoming-video-overlay';
 
-const { fetch } = fetchPF(Promise);
+const { fetch } = fetchPF({ Promise });
 
 const LIST_BY_TAG_PARAMS = { format: 'json', resource_type: 'video', type: 'list' };
 
@@ -65,7 +65,9 @@ const Playlistable = (superclass) => class extends superclass {
 
   playlistByTag(tag, options = {}) {
     return this.sourcesByTag(tag, options)
-      .then((sources) => this.playlist(sources, options));
+      .then((sources) => {
+        this.playlist(sources, options);
+      });
   }
 
   sourcesByTag(tag, options = {}) {
