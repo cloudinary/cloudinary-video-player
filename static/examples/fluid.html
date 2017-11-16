@@ -27,19 +27,27 @@
     <p>The player supports the use of fluid layouts for dynamically adjusting the player size
        to it's surrounding contents.<br />
        To use this functionality, simply add the 'cld-fluid' css class to the player, or pass
-       'fluid: true' to the player's constructor. <br />
-       Try decreasing/increasing the window size to see the fluid layout support in action.</p>
+       'fluid: true' to the player's constructor. <br /><br />
+       Try decreasing the window size to see the fluid layout support in action.<br />
+       Use the toggle button below the player toggle the 'fluid layout support' feature.</p>
 
     <div class="row video-container">
-      <video
-        id="example-player"
-        controls
-        muted
-        autoplay
-        class="cld-video-player cld-video-player-skin-dark cld-fluid"
-        data-cld-transformation='{ "width": 720, "crop": "limit" }'>
-      </video>
+      <center>
+        <video
+          id="example-player"
+          width="720"
+          controls
+          muted
+          autoplay
+          class="cld-video-player cld-video-player-skin-dark cld-fluid"
+          data-cld-transformation='{ "width": 720, "crop": "limit" }'>
+        </video>
+
+        <br />
+        <button id="toggle-fluid" class="btn btn-default">Disable Fluid</button>
+      </center>
     </div>
+
 
     <h4>Example Code:</h3>
     <pre>
@@ -54,6 +62,9 @@
         data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
       &lt;/video&gt;
 
+      &lt;br /&gt;
+      &lt;button id="toggle-fluid" class="btn btn-default"&gt;Disable Fluid&lt;/button&gt;
+
       JavaScript:
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
@@ -65,6 +76,14 @@
 
       // Play source
       player.source(source).play();
+
+      // Handle Fluid toggle button
+      document.querySelector("button#toggle-fluid").addEventListener("click", function() {
+        isFluid = !player.fluid()
+        player.fluid(isFluid);
+
+        this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
+      });
     </pre>
   </div>
 
@@ -90,6 +109,14 @@
 
     // Play source
     player.source(source).play();
+
+    // Handle Fluid toggle button
+    document.querySelector("button#toggle-fluid").addEventListener("click", function() {
+      isFluid = !player.fluid()
+      player.fluid(isFluid);
+
+      this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
+    });
   </script>
 </body>
 </html>
