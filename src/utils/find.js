@@ -1,5 +1,5 @@
 function find(list, callback) {
-  if (Array.prototype.find) {
+  if (Array.prototype.find && Array.isArray(list)) {
     return list.find(callback);
   }
 

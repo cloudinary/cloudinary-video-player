@@ -14,7 +14,6 @@ const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
   'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
-const VALID_SKINS = ['dark', 'light'];
 const CLASS_PREFIX = 'cld-video-player';
 
 const registerPlugin = videojs.plugin;
@@ -168,7 +167,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      const currentSkin = find(VALID_SKINS, (s) => this.videojs.hasClass(cssClassFromSkin(s)));
+      let currentSkin = find(this.el().classList, (cls) => cls.startsWith(`${CLASS_PREFIX}-skin-`));
 
       if (!currentSkin) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));
