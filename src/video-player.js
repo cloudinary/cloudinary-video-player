@@ -5,6 +5,7 @@ import * as Utils from 'utils';
 import assign from 'utils/assign';
 import { find } from 'utils/find';
 import { isIE11 } from 'utils/user-agent';
+import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
@@ -167,7 +168,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      let currentSkin = find(this.el().classList, (cls) => cls.startsWith(`${CLASS_PREFIX}-skin-`));
+      let currentSkin = find(this.el().classList, (cls) => startsWith(cls, `${CLASS_PREFIX}-skin-`));
 
       if (!currentSkin) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));

@@ -29,4 +29,13 @@ function coerce(string) {
   return val;
 }
 
-export { capitalize, camelize, coerce };
+function startsWith(str, searchStr, position) {
+  if (String.prototype.startsWith) {
+    return str.startsWith(searchStr, position);
+  } else {
+    let position = position || 0;
+    return str.indexOf(searchStr, position) === position;
+  }
+}
+
+export { capitalize, camelize, coerce, startsWith };
