@@ -4,6 +4,7 @@ import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
 import { find } from 'utils/find';
+import { isIE11 } from 'utils/user-agent';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
@@ -171,6 +172,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       if (!currentSkin) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));
+      }
+
+      if (isIE11()) {
+        this.videojs.addClass('cld-ie11');
       }
     };
 

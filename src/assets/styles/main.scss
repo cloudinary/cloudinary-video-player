@@ -19,6 +19,10 @@ $icon-font-path: '../fonts' !default;
   line-height: 1.5em;
 }
 
+.cld-ie11.video-js .vjs-control:before {
+  font-size: 0.6em;
+}
+
 .cld-video-player {
   &.cld-fluid {
     @extend .vjs-fluid;
