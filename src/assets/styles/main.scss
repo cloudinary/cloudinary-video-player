@@ -19,6 +19,7 @@ $icon-font-path: '../fonts' !default;
   line-height: 1.5em;
 }
 
+// IE11 does some weird shenanigans with font-size on :before elements.
 .cld-ie11.video-js .vjs-control:before {
   font-size: 0.6em;
 }
