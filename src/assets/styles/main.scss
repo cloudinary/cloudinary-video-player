@@ -214,7 +214,7 @@ $icon-font-path: '../fonts' !default;
     .vjs-play-progress {
     // .vjs-slider-bar {
       background: linear-gradient(270deg, adjust-hue(lighten($active-background-color, 20%), 10), $active-background-color);
-      @if ($allow-glows == true) {
+      @if ($allow-glows) {
         @include box-shadow(0 2px 12px 0px $active-background-color)
       }
     }
@@ -391,6 +391,7 @@ $icon-font-path: '../fonts' !default;
       $modal-background-color: #000000,
       $modal-foreground-color: #FFFFFF,
       $light: true,
-      $opaque: true)
+      $opaque: true,
+      $allow-glows: false)
   }
 }
