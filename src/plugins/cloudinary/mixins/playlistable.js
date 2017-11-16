@@ -65,9 +65,7 @@ const Playlistable = (superclass) => class extends superclass {
 
   playlistByTag(tag, options = {}) {
     return this.sourcesByTag(tag, options)
-      .then((sources) => {
-        this.playlist(sources, options);
-      });
+      .then((sources) => this.playlist(sources, options));
   }
 
   sourcesByTag(tag, options = {}) {
