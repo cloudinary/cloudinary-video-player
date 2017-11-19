@@ -16,6 +16,9 @@ module.exports = {
   },
   "plugins": [
   ],
+  "globals": {
+    "VERSION": true
+  },
   "rules": {
     "accessor-pairs": "error",
     "array-bracket-spacing": [

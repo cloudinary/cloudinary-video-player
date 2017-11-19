@@ -91,6 +91,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
+      options.queryParams = { _s: `vp-${VERSION}` };
 
       const video = new VideoSource(publicId, options);
 
