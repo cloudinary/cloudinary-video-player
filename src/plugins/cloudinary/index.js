@@ -91,7 +91,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
-      options.queryParams = { _s: `vp-${VERSION}` };
+      options.queryParams = options.usageReport ? { _s: `vp-${VERSION}` } : {};
 
       const video = new VideoSource(publicId, options);
 
@@ -114,8 +114,6 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       _cloudinaryConfig = getCloudinaryInstanceOf(cloudinary.Cloudinary, config);
-
-      console.log('conf', _cloudinaryConfig.config());
 
       return _chainTarget;
     };

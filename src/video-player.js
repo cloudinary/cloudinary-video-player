@@ -120,6 +120,8 @@ const overrideDefaultVideojsComponents = () => {
 
 overrideDefaultVideojsComponents();
 
+let _allowUsageReport = true;
+
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
     super();
@@ -248,6 +250,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return players;
   }
 
+  static allowUsageReport(bool) {
+    if (bool === undefined) {
+      return _allowUsageReport;
+    }
+
+    _allowUsageReport = !!bool;
+    return _allowUsageReport;
+  }
+
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }
@@ -265,6 +276,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    if (VideoPlayer.allowUsageReport()) {
+      options.usageReport = true;
+    }
+
     return this.videojs.cloudinary.source(publicId, options);
   }
 
