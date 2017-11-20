@@ -2,7 +2,6 @@ import videojs from 'video.js';
 import Thumbnail from '../../thumbnail/thumbnail';
 
 const dom = videojs.dom || videojs;
-const Component = videojs.getComponent('Component');
 
 const DEFAULT_OPTIONS = {
   source: null,
@@ -23,7 +22,6 @@ class PlaylistPanelItem extends Thumbnail {
   isNext() {
     return this.options().next;
   }
-
 
   getTitle() {
     return super.getTitle();

@@ -224,7 +224,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-    let _playlistWidget;
+    let _playlistWidget = null;
 
     const initPlaylistWidget = () => {
       this.videojs.on('playlistcreated', () => {
@@ -260,17 +260,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (!options && !_playlistWidget) {
         return false;
       }
-      
+
       if (!options && _playlistWidget) {
         return _playlistWidget;
       }
-      
-      if(isObj(options)) {
+
+      if (isObj(options)) {
         _playlistWidget.options(options);
       }
-      
+
       return _playlistWidget;
-    }
+    };
   }
 
   static all(selector, ...args) {

@@ -2,7 +2,6 @@ import videojs from 'video.js';
 import 'assets/styles/components/playlist.scss';
 import PlaylistPanelItem from './playlist-panel-item';
 
-const dom = videojs.dom || videojs;
 
 const Component = videojs.getComponent('Component');
 
@@ -13,7 +12,7 @@ class PlaylistPanel extends Component {
 
     const itemChangeHandler = () => {
       this.render();
-    }
+    };
 
     player.on('playlistitemchanged', itemChangeHandler);
 
@@ -22,7 +21,7 @@ class PlaylistPanel extends Component {
     this.dispose = () => {
       super.dispose();
       player.off('playlistitemchanged', itemChangeHandler);
-    } 
+    };
   }
 
   createEl() {
@@ -59,7 +58,6 @@ class PlaylistPanel extends Component {
   }
 
   render() {
-    const el = this.el();
     const items = this.getItems();
 
     this.removeAll();
@@ -67,7 +65,7 @@ class PlaylistPanel extends Component {
     items.forEach((source, index) => {
       const playlistItem = new PlaylistPanelItem(this.player(), videojs.mergeOptions(this.options_, {
         item: source,
-        next: index == 0
+        next: index === 0
       }));
 
       const itemCls = `cld-flex-col-${this.options_.total > 3 ? 4 : this.options_.total}`;
