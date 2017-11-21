@@ -27,8 +27,6 @@ $icon-font-path: '../fonts' !default;
 .cld-plw-layout {
   font-size: 12px;
   font-weight: 300;
-  // font-size: 0.75em;
-  // font-weight: normal;
 }
 
 // control bar control size
@@ -173,11 +171,11 @@ $icon-font-path: '../fonts' !default;
   $shadow-color,
   $allow-glows: false,
   $light: false,
-  $opaque: false)
-  {
+  $opaque: false) {
 
-    color: $primary-foreground-color;
+  color: $primary-foreground-color;
 
+  .cld-video-player {
     .vjs-big-play-button {
       border-color: rgba_unless_opaque($primary-foreground-color, 0.5, $opaque);
     }
@@ -274,7 +272,6 @@ $icon-font-path: '../fonts' !default;
             font-weight: 500;
           }
         }
-
       } @else {
         @include background-image(linear-gradient($primary-background-color, rgba(255, 255, 255, 0) 100%));
       }
@@ -363,32 +360,31 @@ $icon-font-path: '../fonts' !default;
         }
       }
     }
+  }
 
-    &.cld-plw-layout {
-      background-color: $primary-background-color;
-    }
+  &.cld-plw-layout {
+    background-color: $primary-background-color;
+  }
 
+  .cld-plw-item-info-wrap {
+    color: $primary-foreground-color;
+  }
 
-    .cld-plw-item-info-wrap {
-      color: $primary-foreground-color;
-    }
+  .cld-plw-panel-item {
+    border-color: $secondary-light-color;
 
-    .cld-plw-panel-item {
-      border-color: $secondary-light-color;
+    &:hover {
+      border-color: $active-background-color;
 
-      &:hover {
-        border-color: $active-background-color;
-
-        .cld-plw-item-info-wrap {
-          color: $active-background-color;
-        }
+      .cld-plw-item-info-wrap {
+        color: $active-background-color;
       }
     }
+  }
 }
 
-
- // Dark skin
- .cld-video-player-skin-dark {
+// Dark skin
+.cld-video-player-skin-dark {
   @include skin($primary-foreground-color: #FFFFFF,
     $primary-background-color: #000000,
     $active-foreground-color: #FFFFFF,
@@ -425,5 +421,3 @@ $icon-font-path: '../fonts' !default;
     $light: true,
     $opaque: true)
 }
-
-
