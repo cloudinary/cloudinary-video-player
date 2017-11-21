@@ -48608,7 +48608,7 @@ var CloudinaryContext = function (_mixin) {
       options.sourceTransformation = options.sourceTransformation || _this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || _this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
-      options.queryParams = options.usageReport ? { _s: 'vp-' + "0.1.0-alpha.9" } : {};
+      options.queryParams = options.usageReport ? { _s: 'vp-' + "1.0.0-alpha" } : {};
 
       var video = new _videoSource2.default(publicId, options);
 
