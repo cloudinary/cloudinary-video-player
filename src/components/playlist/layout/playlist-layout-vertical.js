@@ -1,30 +1,25 @@
-import videojs from 'video.js';
-import PlaylistPanel from '../panel/playlist-panel';
 import PlaylistLayout from './playlist-layout';
 import { setWidth } from '../../../utils/dom';
-
-const dom = videojs.dom || videojs;
 
 class PlaylistLayoutVertical extends PlaylistLayout {
   constructor (player, options) {
     options.wrap = true;
     super(player, options);
-  } 
+  }
 
   getCls() {
     let cls = super.getCls();
-    cls.push("cld-plw-vertical");
+    cls.push('cld-plw-vertical');
 
     return cls;
   }
 
-  setContentElDimensions({ width, height }) {
+  setContentElDimensions({ height }) {
     const itemHeight = height / this.options_.total;
     const itemWidth = (16 / 9) * itemHeight;
 
-    setWidth(this.contentEl(),itemWidth);
-  }    
-  
+    setWidth(this.contentEl(), itemWidth);
+  }
 }
 
 

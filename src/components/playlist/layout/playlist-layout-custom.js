@@ -1,8 +1,4 @@
-import videojs from 'video.js';
-import PlaylistPanel from '../panel/playlist-panel';
 import PlaylistLayout from './playlist-layout';
-
-const dom = videojs.dom || videojs;
 
 class PlaylistLayoutCustom extends PlaylistLayout {
   getCls() {

@@ -4,7 +4,6 @@ import '../../assets/styles/components/thumbnail.scss';
 // Get the ClickableComponent base class from Video.js
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
-
 const THUMB_DEFAULT_WIDTH = 300;
 const DEFAULT_OPTIONS = {
   item: null,
@@ -15,7 +14,6 @@ const DEFAULT_OPTIONS = {
     background: 'black'
   }
 };
-
 
 class Thumbnail extends ClickableComponent {
   constructor(player, options) {
@@ -43,13 +41,16 @@ class Thumbnail extends ClickableComponent {
     e.preventDefault();
   }
 
-  createControlTextEl() {}
+  createControlTextEl() {
+    return;
+  }
 
-  createEl(tag = 'a', props = {}, attr = {}) {
+  createEl(tag = 'a') {
     const el = super.createEl(tag, {
       className: 'cld-thumbnail',
       href: '#'
     });
+
     const img = super.createEl('img', {
       className: 'cld-thumbnail-img',
       src: this.getThumbnail()

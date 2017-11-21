@@ -1,7 +1,5 @@
-import videojs from 'video.js';
-import PlaylistPanel from '../panel/playlist-panel';
 import PlaylistLayout from './playlist-layout';
-import { setHeight, setWidth } from '../../../utils/dom';
+import { setHeight } from '../../../utils/dom';
 
 class PlaylistLayoutHorizontal extends PlaylistLayout {
   constructor (player, options) {
@@ -9,7 +7,7 @@ class PlaylistLayoutHorizontal extends PlaylistLayout {
     super(player, options);
   }
 
-  setContentElDimensions({ width, height }) {
+  setContentElDimensions({ width }) {
     const itemWidth = width / this.options_.total;
     const itemHeight = (9 / 16) * itemWidth;
 

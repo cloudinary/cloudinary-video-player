@@ -13,24 +13,31 @@ $icon-font-path: '../fonts' !default;
 @import '~video.js/src/css/vjs.scss';
 @import 'icons';
 
+@function rgba_unless_opaque($rgb, $opacity, $opaque) {
+  @if ($opaque == true) {
+    @return $rgb
+  } @else {
+    @return rgba($rgb, $opacity)
+  }
+}
+
+// Need to set base font size for em to all cloudinary components
+.cld-video-player,
+.cld-playlist,
+.cld-plw-layout {
+  font-size: 12px;
+  font-weight: 300;
+  // font-size: 0.75em;
+  // font-weight: normal;
+}
+
 // control bar control size
 .video-js .vjs-control:before {
   font-size: 2.0em;
   line-height: 1.5em;
 }
 
-
-// Need to set base font size for em to all cloudinary components
-.cld-video-player,
-.cld-playlist,
-.cld-plw-layout {
-  font-size: 0.75em;
-  font-weight: normal;
-}
-
-
 .cld-video-player {
-
   &.cld-fluid {
     @extend .vjs-fluid;
   }
@@ -38,7 +45,7 @@ $icon-font-path: '../fonts' !default;
   // The base font size controls the size of everything, not just text.
   // All dimensions use em-based sizes so that the scale along with the font size.
   // Try increasing it to 15px and see what happens.
-  
+
   .vjs-time-control {
     padding-left: 0;
     padding-right: 0;
@@ -148,18 +155,7 @@ $icon-font-path: '../fonts' !default;
   .vjs-spacer {
     flex: auto;
   }
-
-  @function rgba_unless_opaque($rgb, $opacity, $opaque) {
-    @if ($opaque == true) {
-        @return $rgb
-    } @else {
-        @return rgba($rgb, $opacity)
-    }
-  }
 }
-
-
-
 
 @mixin skin($primary-foreground-color,
   $primary-background-color,
@@ -177,7 +173,7 @@ $icon-font-path: '../fonts' !default;
   $shadow-color,
   $allow-glows: false,
   $light: false,
-  $opaque: false) 
+  $opaque: false)
   {
 
     color: $primary-foreground-color;
@@ -366,20 +362,20 @@ $icon-font-path: '../fonts' !default;
           }
         }
       }
-    } 
+    }
 
     &.cld-plw-layout {
       background-color: $primary-background-color;
-    } 
+    }
 
-  
+
     .cld-plw-item-info-wrap {
       color: $primary-foreground-color;
     }
 
     .cld-plw-panel-item {
       border-color: $secondary-light-color;
-      
+
       &:hover {
         border-color: $active-background-color;
 
