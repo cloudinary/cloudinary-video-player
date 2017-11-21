@@ -4,7 +4,6 @@ $icon-font-path: '../fonts' !default;
 // Video.js overrides
 @import 'fira-sans';
 @import 'variables';
-@import 'mixins/font-smoothing';
 @import 'compass/css3/flexbox';
 @import 'compass/css3/box-shadow';
 @import 'compass/css3/images';
@@ -39,7 +38,6 @@ $icon-font-path: '../fonts' !default;
 }
 
 .cld-video-player {
-  @include font-smoothing($value: antialiased)
   &.cld-fluid {
     @extend .vjs-fluid;
   }
