@@ -1,0 +1,144 @@
+@import '../../assets/styles/mixins/aspect-ratio';
+@import 'compass/css3/flexbox';
+@import "compass/functions/lists"; // compass-mixins bug: background-size uses 'compact'
+@import "compass/css3/background-size";
+
+.vjs-recommendations-overlay {
+  @include display-flex;
+  @include align-items(center);
+  @include justify-content(center);
+
+  visibility: hidden;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(#000000, 0.5);
+
+  .vjs-recommendations-overlay-hide {
+    font-size: 1em;
+    cursor: pointer;
+    position: absolute;
+    display: inline-block;
+    top: 3.75%;
+    right: 1.72%;
+  }
+
+  .vjs-recommendations-overlay-content {
+    position: relative;
+    width: 85%;
+
+    @include aspect-ratio(16, 9);
+
+    .aspect-ratio-content {
+      @include display-flex;
+      @include flex-flow(column);
+
+      height: auto;
+
+      .vjs-recommendations-overlay-item {
+        border: 1px solid rgba(#FFFFFF, 0.5);
+      }
+
+      .vjs-recommendations-overlay-item-primary {
+        @include flex(1.82);
+        @include display-flex;
+        @include flex-flow(row);
+
+        .vjs-recommendations-overlay-item-primary-image {
+          flex: 1;
+          @include background-size('cover');
+        }
+
+        .vjs-recommendations-overlay-item-primary-content {
+          @include flex(0.5625);
+          @include display-flex;
+          @include flex-flow(column);
+
+          background: rgba(#000000, 0.6);
+          text-align: left;
+          padding: 3%;
+
+          h2 {
+            padding: 0 0 0 0;
+            font-size: 1.6em;
+            margin: 0 0 1em 0;
+            font-weight: 600;
+          }
+
+          h3 {
+            padding: 0 0 0 0;
+            font-size: 1.55em;
+            margin: 0 0 1.3em 0;
+            font-weight: 300;
+          }
+
+          p {
+            padding: 0 0 0 0;
+            margin: 0 0 0 0;
+            display: block;
+            font-size: 1.16em;
+            overflow: scroll;
+            line-height: 1.72em;
+          }
+        }
+      }
+
+      .vjs-recommendations-overlay-item-secondary-container {
+        @include flex(1);
+        @include display-flex;
+        @include flex-flow(row wrap);
+        @include justify-content(flex-start);
+
+        .vjs-recommendations-overlay-item-secondary {
+          @include background-size(100% 100%);
+          @include flex(1);
+
+          max-width: 33%;
+
+          font-size: 1.16em;
+          position: relative;
+
+          margin: 2% 2% 0 0;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          div {
+            @include display-flex;
+            @include flex-direction(row);
+            @include justify-content(space-between);
+
+            text-align: left;
+            line-height: normal;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            padding: 4.5% 5%;
+
+            span {
+              @include flex(1);
+
+              display: block;
+              min-width: 0;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+
+              &.vjs-recommendations-overlay-item-secondary-title {
+                @include flex(2.3);
+              }
+
+              &.vjs-recommendations-overlay-item-secondary-duration {
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

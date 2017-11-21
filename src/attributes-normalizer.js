@@ -1,53 +1,53 @@
-import Utils from 'utils'
+import Utils from 'utils';
 
-const CLD_ATTR_REGEX = /^(data-cld-)(\w+)/
+const CLD_ATTR_REGEX = /^(data-cld-)(\w+)/;
 
 const normalizers = {
-}
+};
 
 function coerce(string) {
-  let val = null
+  let val = null;
 
   // Boolean
   if (string === '') {
-    return true
+    return true;
   }
 
   // Complex object
   try {
-    val = JSON.parse(string)
+    val = JSON.parse(string);
   } catch (e) {
     // Continue execution in case str is not parsable
   }
   if (val) {
-    return val
+    return val;
   }
 
   // Number
-  val = Number(string)
+  val = Number(string);
   if (val) {
-    return val
+    return val;
   }
 
   // TODO: Parse date?
   //
-  return string
+  return string;
 }
 
-const normalizeDefault = (value) => coerce(value)
+const normalizeDefault = (value) => coerce(value);
 
 const normalizeAttributes = (elem) => {
-  const obj = {}
+  const obj = {};
 
   if (elem && elem.attributes && elem.attributes.length > 0) {
-    const attrs = elem.attributes
+    const attrs = elem.attributes;
 
     for (let i = attrs.length - 1; i >= 0; i--) {
-      let attrName = attrs[i].name
-      let attrVal = attrs[i].value
+      let attrName = attrs[i].name;
+      let attrVal = attrs[i].value;
 
       if (attrName.match(CLD_ATTR_REGEX)) {
-        attrName = Utils.camelCase(attrName.replace(CLD_ATTR_REGEX, '$2'))
+        attrName = Utils.camelCase(attrName.replace(CLD_ATTR_REGEX, '$2'));
       }
 
       // check for known booleans
@@ -57,17 +57,17 @@ const normalizeAttributes = (elem) => {
         // the value of an included boolean attribute is typically an empty
         // string ('') which would equal false if we just check for a false value.
         // we also don't want support bad code like autoplay='false'
-        attrVal = (attrVal !== null)
+        attrVal = (attrVal !== null);
       } else {
-        const normalizer = normalizers[attrName] || normalizeDefault
-        attrVal = normalizer(attrVal)
+        const normalizer = normalizers[attrName] || normalizeDefault;
+        attrVal = normalizer(attrVal);
       }
 
-      obj[attrName] = attrVal
+      obj[attrName] = attrVal;
     }
   }
 
-  return obj
-}
+  return obj;
+};
 
-export default normalizeAttributes
+export default normalizeAttributes;

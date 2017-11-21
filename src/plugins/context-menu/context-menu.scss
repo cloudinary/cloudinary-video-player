@@ -1,30 +1,24 @@
-.vjs-context-menu {
-  position: relative;
+.vjs-context-menu-ui {
+  position: absolute;
+  z-index: 2;
 
   .vjs-menu-content {
-    position: absolute;
-
-    // Same background-color as the control bar.
-    background-color: #2B333F;
-    background-color: rgba(43, 51, 63, 0.7);
-    border-radius: 0.3em;
-    padding: 0.25em;
+    border-radius: 0.2em;
+    padding: 0;
   }
 
   .vjs-menu-item {
-    border-radius: 0.3em;
-    cursor: pointer;
-    margin: 0 0 1px;
-    padding: 0.5em 1em;
-
     // Override video.js styles for menus
     font-size: 1em;
-    line-height: 1.2;
+    line-height: 1em;
     text-transform: none;
+
+    cursor: pointer;
+    margin: 0;
+    padding: 0.8em 1.4em;
 
     &:active, &:hover {
       background-color: rgba(0, 0, 0, 0.5);
-      text-shadow: 0em 0em 1em white;
     }
   }
 }

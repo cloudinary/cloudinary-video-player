@@ -1,31 +1,32 @@
-import { isPlainObject } from 'utils/type-inference'
-import { camelize } from 'utils/string'
-import { parseISO8601 } from 'utils/time'
+import { isPlainObject } from 'utils/type-inference';
+import { camelize } from 'utils/string';
+import { parseISO8601 } from 'utils/time';
 
-const TIME_FIELDS = ['created_at', 'updated_at']
+const TIME_FIELDS = ['created_at', 'updated_at'];
 
 const normalizeJsonResponse = (obj) => {
-  const agg = {}
+  const agg = {};
 
   if (isPlainObject(obj)) {
     Object.keys(obj).reduce((agg, key) => {
-      const newKey = camelize(key)
+      const newKey = camelize(key);
 
-      if (TIME_FIELDS.includes(key)) {
-        agg[newKey] = new Date(parseISO8601(obj[key]))
+      if (TIME_FIELDS.indexOf(key) !== -1) {
+        agg[newKey] = new Date(parseISO8601(obj[key]));
       } else {
-        agg[newKey] = normalizeJsonResponse(obj[key])
+        agg[newKey] = normalizeJsonResponse(obj[key]);
       }
-      return agg
-    }, agg)
 
-    return agg
+      return agg;
+    }, agg);
+
+    return agg;
   } else if (Array.isArray(obj)) {
-    return obj.map((item) => normalizeJsonResponse(item))
+    return obj.map((item) => normalizeJsonResponse(item));
   } else {
-    return obj
+    return obj;
   }
-}
+};
 
 
-export { normalizeJsonResponse }
+export { normalizeJsonResponse };

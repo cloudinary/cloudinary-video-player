@@ -1,77 +1,103 @@
-import cloudinary from 'cloudinary-core'
-import { normalizeOptions } from '../common'
-import { sliceAndUnsetProperties } from 'utils/slicing'
-import { getCloudinaryInstanceOf } from 'utils/cloudinary'
+import cloudinary from 'cloudinary-core';
+import { normalizeOptions } from '../common';
+import { sliceAndUnsetProperties } from 'utils/slicing';
+import { getCloudinaryInstanceOf } from 'utils/cloudinary';
+import { objectToQuerystring } from 'utils/querystring';
 
 class BaseSource {
   constructor(publicId, options = {}) {
-    ({ publicId, options } = normalizeOptions(publicId, options))
+    ({ publicId, options } = normalizeOptions(publicId, options));
 
-    const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig')
+    let _publicId = null;
+    let _cloudinaryConfig = null;
+    let _transformation = null;
+    let _resourceConfig = null;
+    let _queryParams = null;
+
+    this.publicId = (publicId) => {
+      if (!publicId) {
+        return _publicId;
+      }
+
+      _publicId = publicId;
+
+      return this;
+    };
+
+    this.cloudinaryConfig = (config) => {
+      if (!config) {
+        return _cloudinaryConfig;
+      }
+
+      _cloudinaryConfig = getCloudinaryInstanceOf(cloudinary.Cloudinary, config);
+
+      return this;
+    };
+
+    this.resourceConfig = (config) => {
+      if (!config) {
+        return _resourceConfig;
+      }
+
+      _resourceConfig = config;
+
+      return this;
+    };
+
+    this.transformation = (trans) => {
+      if (!trans) {
+        return _transformation;
+      }
+
+      _transformation = getCloudinaryInstanceOf(cloudinary.Transformation, trans);
+
+      return this;
+    };
+
+    this.queryParams = (params) => {
+      if (!params) {
+        return _queryParams;
+      }
+
+      _queryParams = params;
+
+      return this;
+    };
+
+    const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
     if (!cloudinaryConfig) {
-      throw new Error('Source is missing \'cloudinaryConfig\'.')
+      throw new Error('Source is missing \'cloudinaryConfig\'.');
     }
-    this.cloudinaryConfig(cloudinaryConfig)
+    this.cloudinaryConfig(cloudinaryConfig);
 
-    const { transformation } = sliceAndUnsetProperties(options, 'transformation')
-    this.transformation(transformation)
+    const { transformation } = sliceAndUnsetProperties(options, 'transformation');
+    this.transformation(transformation);
 
-    this.resourceConfig(options)
+    const { queryParams } = sliceAndUnsetProperties(options, 'queryParams');
+    this.queryParams(queryParams);
 
-    this.publicId(publicId)
+    this.resourceConfig(options);
+
+    this.publicId(publicId);
   }
 
-  publicId(publicId) {
-    if (!publicId) {
-      return this._publicId
-    }
+  config() {
+    const cld = new cloudinary.Cloudinary(this.cloudinaryConfig().config());
+    cld.config(this.resourceConfig());
 
-    this._publicId = publicId
-
-    return this
+    return cld;
   }
 
-  cloudinaryConfig(config) {
-    if (!config) {
-      return this._cloudinaryConfig
-    }
+  url({ transformation } = {}) {
+    const url = this.config().url(this.publicId(), { transformation: transformation || this.transformation() });
 
-    this._cloudinaryConfig = getCloudinaryInstanceOf('Cloudinary', config)
-
-    return this
-  }
-
-  resourceConfig(config) {
-    if (!config) {
-      return this._resourceConfig
+    let queryString = '';
+    if (this.queryParams()) {
+      queryString = objectToQuerystring(this.queryParams());
     }
 
-    this._resourceConfig = config
-
-    return this
-  }
-
-  transformation(trans) {
-    if (!trans) {
-      return this._transformation
-    }
-
-    this._transformation = getCloudinaryInstanceOf('Transformation', trans)
-
-    return this
-  }
-
-
-  url() {
-    return this._urlConfig().url(this.publicId(), { transformation: this.transformation() })
-  }
-
-  _urlConfig() {
-    const cld = new cloudinary.Cloudinary(this.cloudinaryConfig().config())
-    cld.config(this.resourceConfig())
-
-    return cld
+    return `${url}${queryString}`;
   }
 }
 
-export default BaseSource
+export default BaseSource;

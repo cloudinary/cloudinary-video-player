@@ -1,0 +1,3 @@
+  &.disable-transition {
+    @include transition(visibility 0s);
+  }

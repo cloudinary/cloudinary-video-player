@@ -1,0 +1,402 @@
+// Dependencies
+$icon-font-path: '../fonts' !default;
+
+// Video.js overrides
+@import 'fira-sans';
+@import 'variables';
+@import 'compass/css3/flexbox';
+@import 'compass/css3/box-shadow';
+@import 'compass/css3/images';
+@import 'compass/css3/transition';
+
+// Import Video.js style
+@import '~video.js/src/css/vjs.scss';
+@import 'icons';
+
+// control bar control size
+.video-js .vjs-control:before {
+  font-size: 2.0em;
+  line-height: 1.5em;
+}
+
+// IE11 does some weird shenanigans with font-size on :before elements.
+.cld-ie11.video-js .vjs-control:before {
+  font-size: 0.6em;
+}
+
+.cld-video-player {
+  &.cld-fluid {
+    @extend .vjs-fluid;
+  }
+
+  // The base font size controls the size of everything, not just text.
+  // All dimensions use em-based sizes so that the scale along with the font size.
+  // Try increasing it to 15px and see what happens.
+  font-size: 12px;
+  font-weight: 300;
+
+  .vjs-time-control {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .vjs-time-divider {
+    min-width: 1em;
+    display: block;
+  }
+
+  .vjs-current-time {
+    display: block;
+  }
+
+  .vjs-remaining-time {
+    display: none;
+  }
+
+  .vjs-duration {
+    display: block;
+  }
+
+  .vjs-big-play-button {
+    // The font size is what makes the big play button...big.
+    // All width/height values use ems, which are a multiple of the font size.
+    // If the .video-js font-size is 10px, then 3em equals 30px.*/
+    font-size: 5em;
+
+    // We're using SCSS vars here because the values are used in multiple places.
+    // Now that font size is set, the following em values will be a multiple of the
+    // new font size. If the font-size is 3em (30px), then setting any of
+    // the following values to 3em would equal 30px. 3 * font-size. */
+    $big-play-width: 1.5em;
+
+    // 1.5em = 45px default
+    $big-play-height: 1.5em;
+
+    line-height: $big-play-height;
+    height: $big-play-height;
+    width: $big-play-width;
+
+    // 0.06666em = 2px default
+    border: 0;
+
+    // 0.3em = 9px default
+    // border-radius: 0.3em;
+    border-radius: 50%;
+
+    left: 50%;
+    top: 50%;
+    margin-left: -($big-play-width / 2);
+    margin-top: -($big-play-height / 2);
+  }
+
+  &.vjs-paused .vjs-big-play-button,
+  &.vjs-paused.vjs-has-started .vjs-big-play-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.vjs-controls-disabled .vjs-big-play-button,
+  &.vjs-has-started .vjs-big-play-button,
+  &.vjs-using-native-controls .vjs-big-play-button,
+  &.vjs-error .vjs-big-play-button {
+    @include transition((visibility 0.2s, opacity 0.2s));
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .vjs-control-bar {
+    .vjs-control {
+      width: 2.8em;
+    }
+
+   .vjs-menu-button-inline:hover,
+   .vjs-menu-button-inline:focus,
+   .vjs-menu-button-inline.vjs-slider-active,
+   .vjs-no-flex .vjs-menu-button-inline {
+      // This width is currently specific to the inline volume bar.
+      width: 10em;
+    }
+
+    .vjs-menu-button-inline:before {
+      width: 1.6em;
+    }
+
+    .vjs-menu-button-inline .vjs-menu {
+      left: 3em;
+    }
+
+    .vjs-triangle-volume-bar {
+      width: auto;
+    }
+
+    .vjs-progress-control {
+      position: absolute;
+      left: 0px;
+      width: 100%;
+      background-color: inherit;
+      height: 1.0em;
+      padding: 0.7em 0.3em 0 0.3em;
+      bottom: 3.0em;
+    }
+  }
+
+  .vjs-spacer {
+    flex: auto;
+  }
+
+  @function rgba_unless_opaque($rgb, $opacity, $opaque) {
+    @if ($opaque == true) {
+        @return $rgb
+    } @else {
+        @return rgba($rgb, $opacity)
+    }
+  }
+
+  @mixin skin($primary-foreground-color,
+    $primary-background-color,
+    $active-foreground-color,
+    $active-background-color,
+    $secondary-dark-color,
+    $secondary-light-color,
+    $control-bar-active-color,
+    $control-bar-inactive-color,
+    $tooltip-background-color,
+    $tooltip-foreground-color,
+    $modal-background-color,
+    $modal-foreground-color,
+    $border-color,
+    $shadow-color,
+    $allow-glows: false,
+    $light: false,
+    $opaque: false) {
+
+    color: $primary-foreground-color;
+
+    .vjs-big-play-button {
+      border-color: rgba_unless_opaque($primary-foreground-color, 0.5, $opaque);
+    }
+
+    // The default color of control backgrounds is mostly black but with a little
+    // bit of blue so it can still be seen on all-black video frames, which are common.
+    .vjs-control-bar,
+    .vjs-big-play-button,
+    .vjs-menu-button
+    .vjs-menu-content {
+      background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
+    }
+
+    .vjs-time-tooltip,
+    .vjs-mouse-display:after,
+    .vjs-play-progress:after {
+      font-weight: 300;
+      color: $tooltip-foreground-color;
+      background-color: $tooltip-background-color;
+      padding: 0.4em 0.6em;
+      top: -2.6em;
+    }
+
+    $secondary1: '';
+    $secondary2: '';
+
+    // Priority to lighter color when in light skin.
+    @if ($light) {
+      $secondary1: $secondary-light-color;
+      $secondary2: $secondary-dark-color;
+    } @else {
+      $secondary1: $secondary-dark-color;
+      $secondary2: $secondary-light-color;
+    }
+
+    // Slider - used for Volume bar and Progress bar
+    .vjs-slider {
+      background-color: $secondary1;
+    }
+
+    // The slider bar color is used for the progress bar and the volume bar
+    // (the first two can be removed after a fix that's coming) */
+    .vjs-volume-level,
+    .vjs-play-progress {
+    // .vjs-slider-bar {
+      background: linear-gradient(270deg, adjust-hue(lighten($active-background-color, 20%), 10), $active-background-color);
+      @if ($allow-glows) {
+        @include box-shadow(0 2px 12px 0px $active-background-color)
+      }
+    }
+
+    .vjs-triangle-volume-bar {
+      .vjs-triangle-volume-bar-level {
+        border-color: transparent transparent $control-bar-active-color transparent;
+      }
+      .vjs-triangle-volume-bar-background {
+        border-color: transparent transparent $control-bar-inactive-color transparent;
+      }
+    }
+
+    // The main progress bar also has a bar that shows how much has been loaded. */
+    .vjs-load-progress {
+      background-color: rgba($secondary2, 0.5);
+    }
+
+    // The load progress bar also has internal divs that represent
+    // smaller disconnected loaded time ranges
+    .vjs-load-progress div {
+      background: lighten(rgba($secondary2, 0.5), 50%);
+    }
+
+    .vjs-title-bar {
+      color: $primary-foreground-color;
+
+      @if ($opaque == true) {
+        // Keep everything in a single line
+        @include flex-direction(row);
+        @include justify-content(left);
+
+        height: 3.6em;
+        background: $primary-background-color;
+
+        div {
+          width: auto;
+          padding: 0 inherit;
+          margin: 0;
+        }
+
+        .vjs-title-bar-title:not(:empty) + .vjs-title-bar-subtitle:not(:empty) {
+          &:before {
+            content: '\2022';
+            padding: 0 0.45em;
+            font-size: 1.4em;
+            font-weight: 500;
+          }
+        }
+
+      } @else {
+        @include background-image(linear-gradient($primary-background-color, rgba(255, 255, 255, 0) 100%));
+      }
+    }
+
+    .vjs-recommendations-overlay {
+      color: $modal-foreground-color;
+      background-color: rgba($modal-background-color, 0.4);
+
+      .vjs-recommendations-overlay-item {
+        @include box-shadow(0 0.5em 1.2em 0px $shadow-color);
+
+        color: $primary-foreground-color;
+        border: 1px solid rgba_unless_opaque($border-color, 0.5, $opaque) !important;
+        position: relative;
+
+        &:active, &:hover {
+          border: 1px solid $active-background-color !important;
+
+          &:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            background-color: rgba(255, 255, 255, 0.2);
+          }
+        }
+
+        &.vjs-recommendations-overlay-item-primary {
+          .vjs-recommendations-overlay-item-primary-content {
+            background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);;
+          }
+
+          &:active, &:hover {
+            .vjs-recommendations-overlay-item-primary-content {
+              @if ($opaque == true) {
+                color: $active-foreground-color;
+                background-color: rgba($active-background-color, 0.8);
+              }
+            }
+          }
+        }
+
+        &.vjs-recommendations-overlay-item-secondary {
+          &:active, &:hover {
+            div {
+              @if ($opaque == true) {
+                color: $active-foreground-color;
+                background-color: rgba($active-background-color, 0.8);
+              }
+            }
+          }
+
+          div {
+            @if ($opaque == true) {
+              background: $primary-background-color
+            } @else {
+              @include background-image(linear-gradient(bottom, rgba($primary-background-color, 0.8), rgba(255, 255, 255, 0) 100%));
+            }
+          }
+        }
+      }
+    }
+
+    .vjs-upcoming-video {
+      border: 1px solid rgba_unless_opaque($border-color, 0.5, $opaque);
+
+      .vjs-upcoming-video-bar {
+        background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
+      }
+    }
+
+    .vjs-context-menu-ui {
+      .vjs-menu-content {
+        background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
+
+        .vjs-menu-item {
+          text-align: left;
+
+          &:active, &:hover {
+            color: rgba_unless_opaque($active-foreground-color, 0.8, $opaque);
+            background-color: $active-background-color;
+          }
+        }
+      }
+    }
+  }
+
+  // Dark skin
+  &.cld-video-player-skin-dark {
+    @include skin($primary-foreground-color: #FFFFFF,
+      $primary-background-color: #000000,
+      $active-foreground-color: #FFFFFF,
+      $active-background-color: #FF620C,
+      $secondary-dark-color: #0E2F5A,
+      $secondary-light-color: #90A0B3,
+      $control-bar-active-color: #E8E8E9,
+      $control-bar-inactive-color: #0E2F5A,
+      $tooltip-background-color: #E4EBF1,
+      $tooltip-foreground-color: #0E2F5A,
+      $modal-background-color: #000000,
+      $modal-foreground-color: #FFFFFF,
+      $shadow-color: #000000,
+      $border-color: #FFFFFF,
+      $allow-glows: true)
+  }
+
+  // Light skin
+  &.cld-video-player-skin-light {
+    @include skin($primary-foreground-color: #0E2F5A,
+      $primary-background-color: #FFFFFF,
+      $active-foreground-color: #FFFFFF,
+      $active-background-color: #0078FF,
+      $secondary-dark-color: #0E2F5A,
+      $secondary-light-color: #D0DAE2,
+      $control-bar-active-color: #0078FF,
+      $control-bar-inactive-color: #E4EBF1,
+      $shadow-color: #000000,
+      $border-color: #FFFFFF,
+      $tooltip-background-color: #0E2F5A,
+      $tooltip-foreground-color: #FFFFFF,
+      $modal-background-color: #000000,
+      $modal-foreground-color: #FFFFFF,
+      $light: true,
+      $opaque: true,
+      $allow-glows: false)
+  }
+}
