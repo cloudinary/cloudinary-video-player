@@ -78,13 +78,6 @@
         <form>
           <div class="form-row">
             <div class="form-group col-md-4">
-              <label class="col-form-label" for="changePlaylistSkin">Skin</label>
-              <select class="form-control" id="changePlaylistSkin" placeholder="Skin">
-                  <option value="dark">Dark</option>
-                  <option value="light">Light</option>
-              </select>
-            </div>
-            <div class="form-group col-md-4">
                 <label class="col-form-label" for="changePlaylistDirection">Direction</label>
               <select class="form-control" id="changePlaylistDirection" placeholder="Direction">
                   <option value="horizontal">Horizontal</option>
@@ -264,11 +257,13 @@
     });
 
     // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
-    player.playlist([source1, source2, source3, source1, source2, source3, source1, source2, source3], {
+    player.playlist([source1, source2, source3], {
       autoAdvance: true, 
       repeat: true, 
       presentUpcoming: 8 
     });
+
+    ///, source1, source2, source3, source1, source2, source3
 
     document.getElementById("changePlaylistTotal").addEventListener("mouseup",function(e){
         player.playlistWidget().total(e.srcElement.value);
@@ -280,14 +275,6 @@
 
     document.getElementById("changePlaylistDirection").addEventListener("change",function(e){
         player.playlistWidget().direction(e.srcElement.value);
-    })
-
-    document.getElementById("changePlaylistSkin").addEventListener("change",function(e){
-        player.changeSkin(e.srcElement.value);
-        if(e.srcElement.value == "light")
-          document.body.classList.add("dark");
-        else 
-          document.body.classList.remove("dark");
     })
 
     document.getElementById("changePlayerFluid").addEventListener("change",function(e){

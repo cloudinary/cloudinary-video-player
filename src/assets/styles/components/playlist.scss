@@ -102,23 +102,6 @@
     }
 }
 
-.cld-flex-col-1 {
-    flex: 0 1 100%;
-}
-
-.cld-flex-col-2 {
-    flex: 0 1 50%;
-}
-
-.cld-flex-col-3 {
-    flex: 0 1 33.3%;
-}
-
-.cld-flex-col-4 {
-    flex: 0 1 25%;
-}
-
-
 .cld-plw-panel-item {
     border-width: 1px;
     border-style: solid;
@@ -197,6 +180,9 @@
 @media only screen and (max-width: 768px) {
     @include listLayout();
 }
+
+
+
 
    
 

@@ -10,6 +10,7 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import { CLASS_PREFIX, skinClassPrefix } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -22,7 +23,6 @@ const CLOUDINARY_PARAMS = [
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
   'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'playlistWidget']);
 const VALID_SKINS = ['dark', 'light'];
-const CLASS_PREFIX = 'cld-video-player';
 
 const registerPlugin = videojs.plugin;
 
@@ -101,7 +101,6 @@ const extractOptions = (elem, options) => {
   return { playerOptions, videojsOptions: options };
 };
 
-const cssClassFromSkin = (skin) => `${CLASS_PREFIX}-skin-${skin}`;
 
 const overrideDefaultVideojsComponents = () => {
   const Player = videojs.getComponent('Player');
@@ -111,7 +110,7 @@ const overrideDefaultVideojsComponents = () => {
   children.push('titleBar');
   children.push('upcomingVideoOverlay');
   children.push('recommendationsOverlay');
-  // children.push('playlist');
+
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
 
@@ -137,7 +136,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
-      setCssClasses();
 
       this.fluid(_options.fluid);
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
@@ -177,11 +175,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      const currentSkin = find(VALID_SKINS, (s) => this.videojs.hasClass(cssClassFromSkin(s)));
+      let currentSkin = find(VALID_SKINS, (s) => this.videojs.hasClass(skinClassPrefix(s)));
 
       if (!currentSkin) {
-        this.videojs.addClass(cssClassFromSkin(defaults.skin));
+        currentSkin = skinClassPrefix(defaults.skin);
+        this.videojs.addClass(currentSkin);
       }
+
+      this.videojs.options_.skin = currentSkin;
     };
 
     const initPlugins = () => {
@@ -248,6 +249,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
     initPlaylistWidget();
+    setCssClasses();
 
     this.videojs.ready(() => {
       onReady();
@@ -336,17 +338,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.fluid(bool);
     this.videojs.trigger('fluid', bool);
     return this;
-  }
-
-  changeSkin(skin) {
-    if (skin === 'dark' || skin === 'light') {
-      const prevSkin = this.videojs.options().skin;
-
-      this.videojs.removeClass(`cld-video-player-skin-${prevSkin}`);
-      this.videojs.addClass(`cld-video-player-skin-${skin}`);
-      this.videojs.options({ skin: skin });
-      this.videojs.trigger('themechange', { currSkin: skin, prevSkin: prevSkin });
-    }
   }
 
   play() {

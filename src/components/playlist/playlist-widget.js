@@ -3,11 +3,6 @@ import PlaylistLayoutHorizontal from './layout/playlist-layout-horizontal';
 import PlaylistLayoutVertical from './layout/playlist-layout-vertical';
 import PlaylistLayoutCustom from './layout/playlist-layout-custom';
 
-// TODO: create pallete of colors
-// TODO: horizontal vs vertical behaviour
-// TODO: custom playlist - need to decide what we support and what is the behaviour with loop state
-// TODO: cross browser check
-
 const OPTIONS_DEFAULTS = {
   fluid: false,
   show: true,
@@ -63,8 +58,7 @@ class PlaylistWidget {
       }
 
       this.options_ = videojs.mergeOptions(this.options_, options);
-        // TODO: check what have changed and trigger an event - instead of methods
-      player.trigger('playlistWidgetoption', this.options_.playlistWidget);
+      player.trigger('playlistwidgetoption', this.options_.playlistWidget);
       return this.options_;
 
     };

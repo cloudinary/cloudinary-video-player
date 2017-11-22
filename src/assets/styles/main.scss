@@ -155,7 +155,7 @@ $icon-font-path: '../fonts' !default;
   }
 }
 
-@mixin skin($primary-foreground-color,
+@mixin skin($name, $primary-foreground-color,
   $primary-background-color,
   $active-foreground-color,
   $active-background-color,
@@ -381,11 +381,28 @@ $icon-font-path: '../fonts' !default;
       }
     }
   }
+
+  .cld-plw-item-title {
+    color: $active-foreground-color;
+
+    &:hover {
+      color: $active-background-color;
+    }
+  }
+
+  @if (name = "light") {
+    @media only screen and (max-width: 768px) {
+      .cld-plw-vertical .cld-plw-item-title {
+        color: $secondary-dark-color;
+      }
+    }
+  }
 }
+  
 
 // Dark skin
 .cld-video-player-skin-dark {
-  @include skin($primary-foreground-color: #FFFFFF,
+  @include skin("dark", $primary-foreground-color: #FFFFFF,
     $primary-background-color: #000000,
     $active-foreground-color: #FFFFFF,
     $active-background-color: #FF620C,
@@ -404,7 +421,7 @@ $icon-font-path: '../fonts' !default;
 
 // Light skin
 .cld-video-player-skin-light {
-  @include skin($primary-foreground-color: #0E2F5A,
+  @include skin("light", $primary-foreground-color: #0E2F5A,
     $primary-background-color: #FFFFFF,
     $active-foreground-color: #FFFFFF,
     $active-background-color: #0078FF,
