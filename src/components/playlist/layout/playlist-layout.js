@@ -92,7 +92,8 @@ class PlaylistLayout extends Component {
   getCls() {
     let cls = ['cld-plw-layout'];
 
-    cls.push(skinClassPrefix(this.options_.skin));
+    cls.push(skinClassPrefix(this.player()));
+
     if (this.options_.fluid) {
       cls.push('cld-plw-layout-fluid');
     }
@@ -101,9 +102,12 @@ class PlaylistLayout extends Component {
   }
 
   setCls() {
+    this.removeClass(skinClassPrefix(this));
     this.getCls().forEach((cls) => {
       this.addClass(cls);
     });
+
+    // setSkinClassPrefix(this.videojs, );
   }
 
   removeCls() {

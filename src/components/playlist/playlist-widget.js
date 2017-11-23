@@ -98,6 +98,10 @@ class PlaylistWidget {
     }
   }
 
+  setSkin() {
+    this.layout_.setCls();
+  }
+
   total(total = OPTIONS_DEFAULTS.total) {
     total = parseInt(total, 10);
 

@@ -387,22 +387,26 @@ $icon-font-path: '../fonts' !default;
     }
   }
 
-  .cld-plw-item-title {
-    color: $active-foreground-color;
 
-    &:hover {
-      color: $active-background-color;
+  @if ($name == "light") {
+
+    .cld-plw-item-info-wrap {
+      color: $active-foreground-color;
     }
-  }
 
-  @if (name = "light") {
     @media only screen and (max-width: 768px) {
-      .cld-plw-vertical .cld-plw-item-title {
-        color: $secondary-dark-color;
+      &.cld-plw-vertical {
+        .cld-plw-item-info-wrap {
+          color: $active-background-color;
+        }
+
+        .cld-plw-col-player {
+          padding-right: 0;
+        }
       }
     }
   }
-}
+} 
 
 
 // Dark skin

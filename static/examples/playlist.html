@@ -38,8 +38,7 @@
       }
 
       .dark {
-          background-color: #000;
-          color: #FFF;
+          background-color: #DDD;
       }
 
       .fluid-demo-container {
@@ -87,6 +86,13 @@
             <div class="form-group col-md-4">
                 <label class="col-form-label" for="changePlaylistTotal">Total</label>
                 <input type="number" class="form-control" id="changePlaylistTotal" step="1" value="4" placeholder="Total">
+            </div>
+            <div class="form-group col-md-4">
+              <label class="col-form-label" for="changePlaylistSkin">Skin</label>
+              <select class="form-control" id="changePlaylistSkin" placeholder="Skin">
+                <option value="dark">Dark</option>
+                <option value="light">Light</option>
+              </select>
             </div>
           </div>
           <div class="form-group">
@@ -275,6 +281,16 @@
 
     document.getElementById("changePlaylistDirection").addEventListener("change",function(e){
         player.playlistWidget().direction(e.srcElement.value);
+    })
+
+    document.getElementById("changePlaylistSkin").addEventListener("change",function(e){
+      const skin = e.srcElement.value;
+      if(skin == "light") {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+      player.skin(e.srcElement.value);
     })
 
     document.getElementById("changePlayerFluid").addEventListener("change",function(e){

@@ -4,15 +4,13 @@ import './components';
 import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
-import { find } from 'utils/find';
 import { isIE11 } from 'utils/user-agent';
-import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import { CLASS_PREFIX, skinClassPrefix } from './utils/css-prefix';
+import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -138,6 +136,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
+      setCssClasses();
 
       this.fluid(_options.fluid);
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
@@ -176,12 +175,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      let currentSkin = find(this.el().classList, (cls) => startsWith(cls, `${CLASS_PREFIX}-skin-`));
-
-      if (!currentSkin) {
-        currentSkin = skinClassPrefix(defaults.skin);
-        this.videojs.addClass(currentSkin);
-      }
+      setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 
       if (isIE11()) {
         this.videojs.addClass('cld-ie11');
@@ -253,7 +247,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
     initPlaylistWidget();
-    setCssClasses();
 
     this.videojs.ready(() => {
       onReady();
@@ -297,6 +290,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     _allowUsageReport = !!bool;
     return _allowUsageReport;
+  }
+
+  skin(name) {
+    if (typeof name === 'string' && name !== undefined) {
+      setSkinClassPrefix(this.videojs, name);
+
+      if (this.playlistWidget()) {
+        this.playlistWidget().setSkin();
+      }
+    }
+
+    return skinClassPrefix(this.videojs);
   }
 
   cloudinaryConfig(config) {
