@@ -3,6 +3,7 @@ import ImageSource from './image-source';
 import { normalizeOptions, compareSources } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
+import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv'];
@@ -129,7 +130,12 @@ class VideoSource extends BaseSource {
       }
       assign(opts, { resource_type: 'video', format });
 
-      const src = this.config().url(this.publicId(), opts);
+      let queryString = '';
+      if (this.queryParams()) {
+        queryString = objectToQuerystring(this.queryParams());
+      }
+
+      const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       const type = formatToMimeType(sourceType);
       return { type, src };
     });

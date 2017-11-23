@@ -1,5 +1,5 @@
 function find(list, callback) {
-  if (Array.prototype.find) {
+  if (Array.prototype.find && Array.isArray(list)) {
     return list.find(callback);
   }
 
@@ -15,9 +15,9 @@ function findIndex(list, callback) {
 }
 
 function findElementAndIndex(list, callback) {
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < list.length; i++) {
     const element = list[i];
-    if (callback.call(element, i, list)) {
+    if (callback(element, i, list)) {
       return [element, i];
     }
   }

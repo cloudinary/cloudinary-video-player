@@ -5,6 +5,8 @@ import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
 import { find } from 'utils/find';
+import { isIE11 } from 'utils/user-agent';
+import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
@@ -21,7 +23,6 @@ const CLOUDINARY_PARAMS = [
 ];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
   'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'playlistWidget']);
-const VALID_SKINS = ['dark', 'light'];
 const CLASS_PREFIX = 'cld-video-player';
 
 const registerPlugin = videojs.plugin;
@@ -128,6 +129,8 @@ const overrideDefaultVideojsComponents = () => {
 
 overrideDefaultVideojsComponents();
 
+let _allowUsageReport = true;
+
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
     super();
@@ -177,10 +180,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      const currentSkin = find(VALID_SKINS, (s) => this.videojs.hasClass(cssClassFromSkin(s)));
+      let currentSkin = find(this.el().classList, (cls) => startsWith(cls, `${CLASS_PREFIX}-skin-`));
 
       if (!currentSkin) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));
+      }
+
+      if (isIE11()) {
+        this.videojs.addClass('cld-ie11');
       }
     };
 
@@ -242,6 +249,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
+
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
 
@@ -284,6 +292,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return players;
   }
 
+  static allowUsageReport(bool) {
+    if (bool === undefined) {
+      return _allowUsageReport;
+    }
+
+    _allowUsageReport = !!bool;
+    return _allowUsageReport;
+  }
+
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }
@@ -301,6 +318,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    if (VideoPlayer.allowUsageReport()) {
+      options.usageReport = true;
+    }
+
     return this.videojs.cloudinary.source(publicId, options);
   }
 

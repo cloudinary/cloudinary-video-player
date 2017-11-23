@@ -36,6 +36,8 @@ class RecommendationsOverlay extends Component {
   }
 
   open() {
+    // Only show controls on close if they were visible from the first place
+    this._showControlsOnClose = this.player().controls();
     this.player().controls(false);
     this.el().style.visibility = 'visible';
   }
@@ -46,7 +48,9 @@ class RecommendationsOverlay extends Component {
 
   close() {
     this.el().style.visibility = 'hidden';
-    this.player().controls(true);
+    if (this._showControlsOnClose) {
+      this.player().controls(true);
+    }
   }
 
   createEl() {

@@ -1741,6 +1741,10 @@ video::-webkit-media-text-track-display {
   line-height: 1.5em;
 }
 
+.cld-ie11.video-js .vjs-control:before {
+  font-size: 0.6em;
+}
+
 .cld-video-player {
   font-size: 12px;
   font-weight: 300;
@@ -1781,6 +1785,12 @@ video::-webkit-media-text-track-display {
   margin-top: -0.75em;
 }
 
+.cld-video-player.vjs-paused .vjs-big-play-button,
+.cld-video-player.vjs-paused.vjs-has-started .vjs-big-play-button {
+  opacity: 1;
+  visibility: visible;
+}
+
 .cld-video-player.vjs-controls-disabled .vjs-big-play-button,
 .cld-video-player.vjs-has-started .vjs-big-play-button,
 .cld-video-player.vjs-using-native-controls .vjs-big-play-button,
@@ -1792,12 +1802,6 @@ video::-webkit-media-text-track-display {
   display: block;
   visibility: hidden;
   opacity: 0;
-}
-
-.cld-video-player.vjs-paused .vjs-big-play-button,
-.cld-video-player.vjs-paused.vjs-has-started .vjs-big-play-button {
-  opacity: 1;
-  visibility: visible;
 }
 
 .cld-video-player .vjs-control-bar .vjs-control {

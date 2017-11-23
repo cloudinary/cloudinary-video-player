@@ -35,6 +35,11 @@ $icon-font-path: '../fonts' !default;
   line-height: 1.5em;
 }
 
+// IE11 does some weird shenanigans with font-size on :before elements.
+.cld-ie11.video-js .vjs-control:before {
+  font-size: 0.6em;
+}
+
 .cld-video-player {
   &.cld-fluid {
     @extend .vjs-fluid;
@@ -98,6 +103,12 @@ $icon-font-path: '../fonts' !default;
     margin-top: -($big-play-height / 2);
   }
 
+  &.vjs-paused .vjs-big-play-button,
+  &.vjs-paused.vjs-has-started .vjs-big-play-button {
+    opacity: 1;
+    visibility: visible;
+  }
+
   &.vjs-controls-disabled .vjs-big-play-button,
   &.vjs-has-started .vjs-big-play-button,
   &.vjs-using-native-controls .vjs-big-play-button,
@@ -106,12 +117,6 @@ $icon-font-path: '../fonts' !default;
     display: block;
     visibility: hidden;
     opacity: 0;
-  }
-
-  &.vjs-paused .vjs-big-play-button,
-  &.vjs-paused.vjs-has-started .vjs-big-play-button {
-    opacity: 1;
-    visibility: visible;
   }
 
   .vjs-control-bar {
@@ -222,7 +227,7 @@ $icon-font-path: '../fonts' !default;
     .vjs-play-progress {
     // .vjs-slider-bar {
       background: linear-gradient(270deg, adjust-hue(lighten($active-background-color, 20%), 10), $active-background-color);
-      @if ($allow-glows == true) {
+      @if ($allow-glows) {
         @include box-shadow(0 2px 12px 0px $active-background-color)
       }
     }

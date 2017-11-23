@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Cloudinary Video Player</title>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="/cld-video-player.css" rel="stylesheet">
+<link href="/style.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+  <div class="container">
+    <a href="index.html"><< Back to examples index</a>
+    <h1>Cloudinary Video Player</h1>
+    <h2>Fluid Layouts</h2>
+    <p>The player supports the use of fluid layouts for dynamically adjusting the player size
+       to it's surrounding contents.<br />
+       To use this functionality, simply add the 'cld-fluid' css class to the player, or pass
+       'fluid: true' to the player's constructor. <br /><br />
+       Try decreasing the window size to see the fluid layout support in action.<br />
+       Use the toggle button below the player toggle the 'fluid layout support' feature.</p>
+
+    <div class="row video-container">
+      <center>
+        <video
+          id="example-player"
+          width="720"
+          controls
+          muted
+          autoplay
+          class="cld-video-player cld-video-player-skin-dark cld-fluid"
+          data-cld-transformation='{ "width": 720, "crop": "limit" }'>
+        </video>
+
+        <br />
+        <button id="toggle-fluid" class="btn btn-default">Disable Fluid</button>
+      </center>
+    </div>
+
+
+    <h4>Example Code:</h3>
+    <pre>
+      HTML:
+
+      &lt;video
+        id="example-player"
+        controls
+        muted
+        autoplay
+        class="cld-video-player cld-video-player-skin-dark cld-fluid"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+      &lt;/video&gt;
+
+      &lt;br /&gt;
+      &lt;button id="toggle-fluid" class="btn btn-default"&gt;Disable Fluid&lt;/button&gt;
+
+      JavaScript:
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
+      // Initialize player
+      var player = cld.videoPlayer('example-player');
+
+      // Define source
+      var source = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
+
+      // Play source
+      player.source(source).play();
+
+      // Handle Fluid toggle button
+      document.querySelector("button#toggle-fluid").addEventListener("click", function() {
+        isFluid = !player.fluid()
+        player.fluid(isFluid);
+
+        this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
+      });
+    </pre>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Cloudinary Video Player Dependencies -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+  <script type="text/javascript" src="/cld-video-player.js"></script>
+
+  <!-- Actual code -->
+  <script type="text/javascript">
+    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
+
+    // Initialize player
+    var player = cld.videoPlayer('example-player');
+
+    // Define source
+    var source = { publicId: 'oceans', info: { title: 'Oceans', subtitle: 'A movie about oceans' } };
+
+    // Play source
+    player.source(source).play();
+
+    // Handle Fluid toggle button
+    document.querySelector("button#toggle-fluid").addEventListener("click", function() {
+      isFluid = !player.fluid()
+      player.fluid(isFluid);
+
+      this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
+    });
+  </script>
+</body>
+</html>
+
+

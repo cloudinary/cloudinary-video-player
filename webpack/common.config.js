@@ -1,5 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const VERSION = JSON.stringify(require('../package.json').version);
 
 module.exports = {
   context: path.resolve(__dirname, '../src'),
@@ -102,5 +104,9 @@ module.exports = {
   node: {
     fs: 'empty',
     net: 'empty'
-  }
+  },
+
+  plugins: [
+    new DefinePlugin({ VERSION })
+  ]
 };

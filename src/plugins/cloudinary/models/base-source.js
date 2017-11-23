@@ -2,6 +2,7 @@ import cloudinary from 'cloudinary-core';
 import { normalizeOptions } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { getCloudinaryInstanceOf } from 'utils/cloudinary';
+import { objectToQuerystring } from 'utils/querystring';
 
 class BaseSource {
   constructor(publicId, options = {}) {
@@ -11,6 +12,7 @@ class BaseSource {
     let _cloudinaryConfig = null;
     let _transformation = null;
     let _resourceConfig = null;
+    let _queryParams = null;
 
     this.publicId = (publicId) => {
       if (!publicId) {
@@ -52,6 +54,16 @@ class BaseSource {
       return this;
     };
 
+    this.queryParams = (params) => {
+      if (!params) {
+        return _queryParams;
+      }
+
+      _queryParams = params;
+
+      return this;
+    };
+
     const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
     if (!cloudinaryConfig) {
       throw new Error('Source is missing \'cloudinaryConfig\'.');
@@ -60,6 +72,9 @@ class BaseSource {
 
     const { transformation } = sliceAndUnsetProperties(options, 'transformation');
     this.transformation(transformation);
+
+    const { queryParams } = sliceAndUnsetProperties(options, 'queryParams');
+    this.queryParams(queryParams);
 
     this.resourceConfig(options);
 
@@ -74,7 +89,14 @@ class BaseSource {
   }
 
   url({ transformation } = {}) {
-    return this.config().url(this.publicId(), { transformation: transformation || this.transformation() });
+    const url = this.config().url(this.publicId(), { transformation: transformation || this.transformation() });
+
+    let queryString = '';
+    if (this.queryParams()) {
+      queryString = objectToQuerystring(this.queryParams());
+    }
+
+    return `${url}${queryString}`;
   }
 }
 
