@@ -180,7 +180,7 @@ $icon-font-path: '../fonts' !default;
 
   color: $primary-foreground-color;
 
-  .cld-video-player {
+  &.cld-video-player {
     .vjs-big-play-button {
       border-color: rgba_unless_opaque($primary-foreground-color, 0.5, $opaque);
     }
@@ -403,7 +403,7 @@ $icon-font-path: '../fonts' !default;
     }
   }
 }
-  
+
 
 // Dark skin
 .cld-video-player-skin-dark {
