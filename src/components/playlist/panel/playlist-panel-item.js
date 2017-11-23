@@ -16,7 +16,19 @@ class PlaylistPanelItem extends Thumbnail {
 
   handleClick(event) {
     super.handleClick(event);
-    this.player().cloudinary.playlist().playItem(this.getItem());
+    this.play();
+  }
+
+  play() {
+    const item = this.getItem();
+    const list = this.player().cloudinary.playlist().list();
+    const index = list.indexOf(item);
+
+    if (index === -1) {
+      throw new Error('Invalid playlist item...');
+    }
+
+    this.player().cloudinary.playlist().playAtIndex(index);
   }
 
   isNext() {

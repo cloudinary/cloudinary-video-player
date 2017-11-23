@@ -9,3 +9,4 @@ yarn-error.log
 
 # project
 env.js
+dist/

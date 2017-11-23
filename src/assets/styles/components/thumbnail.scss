@@ -35,3 +35,9 @@
     @include thumbnail();
 }
 
+@media only screen and (max-width: 768px) {
+    .cld-thumbnail:before {
+        background: none;
+    }
+}
+

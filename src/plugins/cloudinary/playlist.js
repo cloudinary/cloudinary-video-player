@@ -255,16 +255,6 @@ class Playlist {
     this.currentIndex(0);
   }
 
-  playItem(item) {
-    let index = this.list().indexOf(item);
-
-    if (index === -1) {
-      throw new Error('Invalid playlist item.');
-    }
-
-    this.playAtIndex(index);
-  }
-
   playAtIndex(index) {
     this.currentIndex(index);
     this.player().play();

@@ -40,21 +40,30 @@ class PlaylistPanel extends Component {
 
   getItems() {
     const playlist = this.player().cloudinary.playlist();
+    const repeat = playlist._repeat;
 
     if (this.options_.showAll) {
       return playlist.list();
     }
 
-    const startIndex = playlist.currentIndex() + 1;
-    const endIndex = startIndex + this.options_.total;
-    let selectedItems = playlist.list().slice(startIndex, endIndex);
+    const items = [];
+    const numOfItems = this.options_.total;
 
-    if (selectedItems.length < this.options_.total) {
-      selectedItems = [...selectedItems, ...playlist.list().slice(0, this.options_.total - selectedItems.length)];
+    while (items.length < numOfItems) {
+      let index = playlist.nextIndex(index);
+      if (index === -1) {
+        if (!repeat && items.length > 0) {
+          break;
+        }
+
+        index = 0;
+      }
+
+      const source = playlist.list()[index];
+      items.push(source);
     }
 
-    return selectedItems;
-
+    return items;
   }
 
   render() {
@@ -68,8 +77,12 @@ class PlaylistPanel extends Component {
         next: index === 0
       }));
 
-      const itemCls = `cld-flex-col-${this.options_.total > 3 ? 4 : this.options_.total}`;
-      playlistItem.addClass(itemCls);
+      const el = playlistItem.el();
+
+      const colWidth = `${100 / this.options_.total}%`;
+      el.style.flexBasis = colWidth;
+      el.style.WebkitflexBasis = colWidth;
+
       this.addChild(playlistItem);
 
     });

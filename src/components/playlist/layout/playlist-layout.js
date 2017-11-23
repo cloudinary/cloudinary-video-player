@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import { addResizeListener, removeResizeListener } from '../../../utils/resize-events';
 import { wrap } from '../../../utils/dom';
+import { skinClassPrefix } from '../../../utils/css-prefix';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
@@ -15,14 +16,6 @@ class PlaylistLayout extends Component {
     super(player, layoutOptions);
     this.player_ = player;
     this.setCls();
-
-    const themeHandler = (e, params) => {
-      dom.removeClass(this.el(), `cld-video-player-skin-${params.prevSkin}`);
-      dom.addClass(this.el(), `cld-video-player-skin-${params.currSkin}`);
-      this.options({
-        skin: params.currSkin
-      });
-    };
 
     const fluidHandler = (e, fluid) => {
       this.options_.fluid = fluid;
@@ -50,8 +43,12 @@ class PlaylistLayout extends Component {
       const videoWidth = this.player_.currentWidth();
       const videoHeight = this.player_.currentHeight();
       const dims = { width: videoWidth, height: videoHeight };
+      const heightChange = Math.abs(videoHeight - prev.height);
+      const widthChange = Math.abs(videoWidth - prev.width);
+      // Hack: Need to check if there is not a major change since in some sizes video starts to shake
+      const threshold = 15;
 
-      if (prev.height !== videoHeight || prev.width !== videoWidth) {
+      if (heightChange >= threshold || widthChange >= threshold) {
         this.setContentElDimensions(dims);
         prev = dims;
       }
@@ -72,7 +69,6 @@ class PlaylistLayout extends Component {
 
     if (layoutOptions.wrap) {
       wrapVideoWithLayout();
-      // this.player().on("loadeddata",loadDataHandler);
       this.on('playlistlayoutupdate', layoutUpdateHandler);
       addResizeListener(this.el(), resizeHandler);
       changeDimensions();
@@ -80,7 +76,6 @@ class PlaylistLayout extends Component {
     }
 
     player.on('fluid', fluidHandler);
-    player.on('themechange', themeHandler);
 
     this.addChild('PlaylistPanel', this.options());
 
@@ -88,7 +83,6 @@ class PlaylistLayout extends Component {
       removeResizeListener(this.el(), resizeHandler);
       super.dispose();
       player.off('fluid', fluidHandler);
-      player.off('themechange', themeHandler);
       player.off('loadeddata', loadDataHandler);
       player.off('playlistlayoutupdate', layoutUpdateHandler);
 
@@ -97,7 +91,8 @@ class PlaylistLayout extends Component {
 
   getCls() {
     let cls = ['cld-plw-layout'];
-    cls.push(`cld-video-player-skin-${this.options_.skin}`);
+
+    cls.push(skinClassPrefix(this.options_.skin));
     if (this.options_.fluid) {
       cls.push('cld-plw-layout-fluid');
     }
