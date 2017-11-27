@@ -1,6 +1,7 @@
 # IDE
 .idea/
 .tern-port
+tags
 
 # nodejs
 node_modules/
@@ -9,3 +10,4 @@ yarn-error.log
 
 # project
 env.js
+dist/
