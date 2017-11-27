@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.1",
   "description": "Cloudinary Video Player",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
