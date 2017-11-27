@@ -1,6 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const VERSION = JSON.stringify(require('../package.json').version);
 
 module.exports = {
@@ -34,9 +35,10 @@ module.exports = {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     alias: {
-      'video.js$': path.resolve(__dirname, '../node_modules/video.js'),
+      'video.js': path.resolve(__dirname, '../node_modules/video.js'),
+      'webworkify': 'webworkify-webpack-dropin',
       'videojs-contrib-media-sources$': path.resolve(__dirname, '../node_modules/videojs-contrib-media-sources'),
-      'webworkify': 'webworkify-webpack2'
+      'videojs-contrib-hls': path.resolve(__dirname, '../node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js')
     }
   },
 
@@ -107,6 +109,9 @@ module.exports = {
   },
 
   plugins: [
+    new ProvidePlugin({
+      'window.videojs': 'video.js'
+    }),
     new DefinePlugin({ VERSION })
   ]
 };
