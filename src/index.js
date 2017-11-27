@@ -17,5 +17,3 @@ proto.videoPlayers = function(selector, options = {}, ready = null) {
   assign(options, { cloudinaryConfig: this });
   return VideoPlayer.all(selector, options, ready);
 };
-
-window.videojs = videojs;

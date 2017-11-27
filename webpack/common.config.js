@@ -99,6 +99,10 @@ module.exports = {
       {
         test: /\.(mp4|webm)$/,
         use: 'url-loader?limit=10000'
+      },
+      {
+        test: require.resolve('video.js'),
+        use: 'expose-loader?videojs'
       }
     ]
   },
