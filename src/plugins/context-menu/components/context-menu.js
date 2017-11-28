@@ -39,12 +39,20 @@ class ContextMenu extends Menu {
     });
   }
 
+  setPosition(left, top) {
+    this.el().style.left = `${left}px`;
+    this.el().style.top = `${top}px`;
+  }
+
   createEl() {
     const el = super.createEl();
 
     dom.addClass(el, 'vjs-context-menu-ui');
-    el.style.left = `${this.options_.position.left}px`;
-    el.style.top = `${this.options_.position.top}px`;
+
+    if (this.options_.position) {
+      const { left, top } = this.options_.position;
+      this.setPosition(left, top);
+    }
 
     return el;
   }
