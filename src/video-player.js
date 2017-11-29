@@ -4,7 +4,6 @@ import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
 import { find } from 'utils/find';
-import { IS_IOS, IS_ANDROID, IS_IE11 } from 'utils/user-agent';
 import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
@@ -108,7 +107,7 @@ const overrideDefaultVideojsComponents = () => {
   const SeekBar = videojs.getComponent('SeekBar');
 
   // MouseTimeDisplay tooltips should not be added to a player on mobile devices
-  if (IS_IOS || IS_ANDROID) {
+  if (videojs.browser.IS_IOS || videojs.browser.IS_ANDROID) {
     SeekBar.prototype.options_.children.splice(1, 1);
   }
 
@@ -183,7 +182,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.addClass(cssClassFromSkin(defaults.skin));
       }
 
-      if (IS_IE11) {
+      if (videojs.browser.IE_VERSION === 11) {
         this.videojs.addClass('cld-ie11');
       }
     };

@@ -49,12 +49,6 @@ adjust-sourcemap-loader@^1.1.0:
     object-path "^0.9.2"
     regex-parser "^2.2.1"
 
-aes-decrypter@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/aes-decrypter/-/aes-decrypter-1.0.3.tgz#9c06b8a5435a5ad09db933f8a014afcf184cc34e"
-  dependencies:
-    pkcs7 "^0.2.3"
-
 ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.1.tgz#314dd0a4b3368fad3dfcdc54ede6171b886daf3c"
@@ -875,13 +869,6 @@ browserify-sign@^4.0.0:
     inherits "^2.0.1"
     parse-asn1 "^5.0.0"
 
-browserify-versionify@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/browserify-versionify/-/browserify-versionify-1.0.6.tgz#ab2dc61d6a119e627bec487598d1983b7fdb275e"
-  dependencies:
-    find-root "^0.1.1"
-    through2 "0.6.3"
-
 browserify-zlib@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/browserify-zlib/-/browserify-zlib-0.1.4.tgz#bb35f8a519f600e0fa6b8485241c979d0141fb2d"
@@ -1083,10 +1070,6 @@ coa@~1.0.1:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
-
-codem-isoboxer@0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/codem-isoboxer/-/codem-isoboxer-0.2.7.tgz#a4291993d68bf7b344cff53dc2c6279503dc5f42"
 
 color-convert@^1.3.0:
   version "1.9.0"
@@ -1422,13 +1405,6 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
-
-dashjs@^2.2.0, dashjs@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/dashjs/-/dashjs-2.4.1.tgz#e3f3a280a237e63c4438fe97837bcade8f11f3ee"
-  dependencies:
-    codem-isoboxer "0.2.7"
-    round10 "^1.0.3"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -1971,10 +1947,6 @@ find-cache-dir@^0.1.1:
     commondir "^1.0.1"
     mkdirp "^0.5.1"
     pkg-dir "^1.0.0"
-
-find-root@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/find-root/-/find-root-0.1.2.tgz#98d2267cff1916ccaf2743b3a0eea81d79d7dcd1"
 
 find-up@^1.0.0:
   version "1.1.2"
@@ -2908,10 +2880,6 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
 
-m3u8-parser@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/m3u8-parser/-/m3u8-parser-2.1.0.tgz#c8170329ec1cd515d0d58bb8b762da9896cb0368"
-
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
@@ -3420,10 +3388,6 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
-pkcs7@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/pkcs7/-/pkcs7-0.2.3.tgz#22d60666d01065c5f24439098e4a4830452273be"
-
 pkg-dir@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-1.0.0.tgz#7a4b508a8d5bb2d629d447056ff4e9c9314cf3d4"
@@ -3862,7 +3826,7 @@ read-pkg@^1.0.0:
     normalize-package-data "^2.3.2"
     path-type "^1.0.0"
 
-readable-stream@1.0, "readable-stream@>=1.0.33-1 <1.1.0-0":
+readable-stream@1.0:
   version "1.0.34"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-1.0.34.tgz#125820e34bc842d2f2aaafafe4c2916ee32c157c"
   dependencies:
@@ -4127,10 +4091,6 @@ rimraf@2, rimraf@^2.2.8, rimraf@~2.5.1, rimraf@~2.5.4:
 ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
-
-round10@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/round10/-/round10-1.0.3.tgz#86110f46a10874a1931da7fdd5e06d1857a8e4d0"
 
 run-async@^0.1.0:
   version "0.1.0"
@@ -4532,13 +4492,6 @@ text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-through2@0.6.3:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/through2/-/through2-0.6.3.tgz#795292fde9f254c2a368b38f9cc5d1bd4663afb6"
-  dependencies:
-    readable-stream ">=1.0.33-1 <1.1.0-0"
-    xtend ">=4.0.0 <4.1.0-0"
-
 through@^2.3.6:
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
@@ -4680,10 +4633,6 @@ url-parse@^1.1.1:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-url-toolkit@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/url-toolkit/-/url-toolkit-1.0.9.tgz#6647c84f931c54e1e61fa3b33e10ad34161ed4d9"
-
 url@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -4748,7 +4697,7 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-video.js@^5.0.0, video.js@^5.10.1, video.js@^5.19.0:
+video.js@^5.10.1, video.js@^5.19.0:
   version "5.19.0"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.19.0.tgz#6419315a2395ee4e5ff1afc6eabf5bf24fff60c5"
   dependencies:
@@ -4762,7 +4711,7 @@ video.js@^5.0.0, video.js@^5.10.1, video.js@^5.19.0:
     videojs-vtt.js "0.12.2"
     xhr "2.2.2"
 
-video.js@^5.17.0, video.js@^5.19.1:
+video.js@^5.17.0:
   version "5.19.1"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.19.1.tgz#5d6407aebd078bf4c4f94183f840a53388c34f25"
   dependencies:
@@ -4782,28 +4731,7 @@ videojs-contextmenu@^1.2.2:
   dependencies:
     video.js "^5.10.1"
 
-videojs-contrib-dash@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/videojs-contrib-dash/-/videojs-contrib-dash-2.8.1.tgz#5334dccf5d39c8b18dac9ec53c9d0f058f824d76"
-  dependencies:
-    dashjs "^2.2.0"
-    global "^4.3.0"
-    video.js "^5.0.0"
-
-videojs-contrib-hls@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/videojs-contrib-hls/-/videojs-contrib-hls-5.4.0.tgz#a90e2e7b1447693751e935c2e87cd75be31a7029"
-  dependencies:
-    aes-decrypter "1.0.3"
-    global "^4.3.0"
-    m3u8-parser "2.1.0"
-    mux.js "4.1.1"
-    url-toolkit "1.0.9"
-    video.js "^5.19.1"
-    videojs-contrib-media-sources "4.4.2"
-    webworkify "1.0.2"
-
-videojs-contrib-media-sources@4.4.2, videojs-contrib-media-sources@^4.4.2:
+videojs-contrib-media-sources@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/videojs-contrib-media-sources/-/videojs-contrib-media-sources-4.4.2.tgz#39c4fdaf278fd61e65d9b25513c9723dc3d2a160"
   dependencies:
@@ -4826,14 +4754,6 @@ videojs-per-source-behaviors@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/videojs-per-source-behaviors/-/videojs-per-source-behaviors-1.1.3.tgz#a847f7bb5d689d0be631e820707f88ede591d68d"
   dependencies:
-    video.js "^5.10.1"
-
-videojs-playlist@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/videojs-playlist/-/videojs-playlist-3.0.2.tgz#6743430a9256c056332b01063cde3e5e4996bbd1"
-  dependencies:
-    browserify-versionify "^1.0.6"
-    global "^4.3.0"
     video.js "^5.10.1"
 
 videojs-swf@5.3.0:
@@ -5025,7 +4945,7 @@ xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
 
-"xtend@>=4.0.0 <4.1.0-0", xtend@^4.0.0:
+xtend@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
