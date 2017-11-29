@@ -137,7 +137,7 @@ class VideoSource extends BaseSource {
 
       const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       const type = formatToMimeType(sourceType);
-      return { type, src };
+      return { type, src, cldSrc: this };
     });
   }
 }

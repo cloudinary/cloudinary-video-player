@@ -27,12 +27,20 @@ const Playlistable = (superclass) => class extends superclass {
       }
 
       if (this.playlist()) {
-        disposePlaylist();
+        this.disposePlaylist();
       }
 
       createPlaylist(sources, options);
 
       return _chainTarget;
+    };
+
+    this.disposePlaylist = () => {
+      player.removeClass('vjs-playlist');
+      const playlist = this.playlist();
+      _playlist = undefined;
+      playlist.dispose();
+      this.off('sourcechanged', _playlistDisposer);
     };
 
     const createPlaylist = (sources, options) => {
@@ -42,18 +50,10 @@ const Playlistable = (superclass) => class extends superclass {
       player.addClass('vjs-playlist');
     };
 
-    const disposePlaylist = () => {
-      player.removeClass('vjs-playlist');
-      const playlist = this.playlist();
-      _playlist = undefined;
-      playlist.dispose();
-      this.off('sourcechanged', _playlistDisposer);
-    };
-
     const addSourceChangedListener = () => {
       const disposer = (_, data) => {
         if (!this.playlist().currentSource().contains(data.to)) {
-          disposePlaylist();
+          this.disposePlaylist();
         }
       };
 
