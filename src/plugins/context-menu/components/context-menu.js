@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import ContextMenuItem from './context-menu-item';
+import { setPosition } from '../../../utils/positioning';
 
 const Menu = videojs.getComponent('Menu');
 
@@ -40,8 +41,7 @@ class ContextMenu extends Menu {
   }
 
   setPosition(left, top) {
-    this.el().style.left = `${left}px`;
-    this.el().style.top = `${top}px`;
+    setPosition(this.el(), left, top);
   }
 
   createEl() {

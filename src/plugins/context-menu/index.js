@@ -42,17 +42,28 @@ class ContextMenuPlugin {
       const ptrPosition = getPointerPosition(this.player.el(), e);
       const playerSize = this.player.el().getBoundingClientRect();
 
-      let top = playerSize.height - (playerSize.height * ptrPosition.y) + 1;
-      let left = Math.round(playerSize.width * ptrPosition.x) + 1;
+      let ptrTop = playerSize.height - (playerSize.height * ptrPosition.y) + 1;
+      let ptrLeft = Math.round(playerSize.width * ptrPosition.x) + 1;
 
-      if (top + menuSize.height > playerSize.height) {
+      let top = ptrTop;
+      let left = ptrLeft;
+
+      // Correct top when menu can't fit fully height-wise when pointer is at it's top left corner
+      if (ptrTop + menuSize.height > playerSize.height) {
         let difference = top + menuSize.height - playerSize.height;
         top = difference > menuSize.height / 2 ? top - menuSize.height - 1 : playerSize.height - menuSize.height;
       }
 
-      if (left + menuSize.width > playerSize.width) {
+      // Correct left where menu can't fit fully width-wise when pointer is at it's top left corner
+      if (ptrLeft + menuSize.width > playerSize.width) {
         let difference = left + menuSize.width - playerSize.width;
         left = difference > menuSize.width / 2 ? left - menuSize.width - 1 : playerSize.width - menuSize.width;
+      }
+
+      // Correct top and left in cases that menu is positioned on the pointer
+      if (top < ptrTop && left < ptrLeft) {
+        top = ptrTop - menuSize.height - 1;
+        left = ptrLeft - menuSize.width - 1;
       }
 
       return { left, top };
