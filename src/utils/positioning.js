@@ -70,4 +70,9 @@ function isElementInViewport(el, { fraction }) {
   return visible > fraction;
 }
 
-export { getElementPosition, getPointerPosition, isElementInViewport };
+function setPosition(el, left, top) {
+  el.style.left = `${left}px`;
+  el.style.top = `${top}px`;
+}
+
+export { getElementPosition, getPointerPosition, isElementInViewport, setPosition };
