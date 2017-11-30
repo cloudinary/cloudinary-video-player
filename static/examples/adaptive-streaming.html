@@ -32,9 +32,24 @@
 
     <div class="row video-container">
       <video
-        id="example-player"
+        id="example-player-hls"
         controls
         muted
+        width="680"
+        height="400"
+        class="cld-video-player cld-video-player-skin-dark">
+      </video>
+    </div>
+
+    <br />
+
+    <div class="row video-container">
+      <video
+        id="example-player-dash"
+        controls
+        muted
+        width="680"
+        height="400"
         class="cld-video-player cld-video-player-skin-dark">
       </video>
     </div>
@@ -50,22 +65,30 @@
       &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js>&lt;/script>
 
       &lt;video
-        id="example-player"
+        id="example-player-hls"
         controls
         muted
         class="cld-video-player cld-video-player-skin-dark"&gt;
       &lt;/video&gt;
 
+      &lt;video
+        id="example-player-dash"
+        controls
+        muted
+        class="cld-video-player cld-video-player-skin-dark"&gt;
+      &lt;/video&gt;
 
       JavaScript:
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
-      var player = cld.videoPlayer('example-player');
+      var playerHls = cld.videoPlayer('example-player-hls');
+      var playerDash = cld.videoPlayer('example-player-dash');
 
       // Modify player source
-      player.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' } }).play();
+      playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+      playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
     </pre>
   </div>
 
@@ -86,10 +109,12 @@
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player');
+    var playerHls = cld.videoPlayer('example-player-hls');
+    var playerDash = cld.videoPlayer('example-player-dash');
 
     // Modify player source
-    player.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' } }).play();
+    playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+    playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
   </script>
 </body>
 </html>

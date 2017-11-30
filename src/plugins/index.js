@@ -1,4 +1,6 @@
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
 import 'videojs-contrib-hls';
+// #endif
 import 'videojs-per-source-behaviors';
 import autoplayOnScroll from './autoplay-on-scroll';
 import contextMenu from './context-menu';

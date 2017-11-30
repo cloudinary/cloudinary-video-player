@@ -54,6 +54,7 @@ module.exports = {
               presets: ['es2015']
             }
           },
+          'webpack-conditional-loader',
           'eslint-loader'
         ]
       },
