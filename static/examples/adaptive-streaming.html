@@ -24,10 +24,11 @@
     <a href="index.html"><< Back to examples index</a>
     <h1>Cloudinary Video Player</h1>
     <h2>Adaptive streaming</h2>
-    <p>To use adaptive streaming formats such as HLS and MPEG-DASH, simply define
-      'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired profile using
-      the 'transformation' param.
-    </p>
+    <p>The player supports adaptive streaming formats such as HLS and MPEG-DASH: <br />
+      <b>HLS</b> is supported out-of-the-box and is already bundled in the player's package. <br />
+      <b>MPEG-DASH</b> support can be added by including 'dash.js' and 'videojs-contrib-dash' packages (example below).<br /><br />
+      Simply set 'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired streaming
+      profile ('sd', 'hd', etc') using the 'transformation' param.</p>
 
     <div class="row video-container">
       <video
@@ -41,6 +42,12 @@
     <h3>Example Code:</h3>
     <pre>
       HTML:
+
+      &lt;!-- Cloudinary Video Player Dependencies -->
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js">&lt/script>
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js">&lt;/script>
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js">&lt;/script>
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js>&lt;/script>
 
       &lt;video
         id="example-player"

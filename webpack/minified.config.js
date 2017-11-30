@@ -6,10 +6,10 @@ const webpackCommon = require('./common.config');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
-  devtool: 'source-map',
 
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -25,6 +25,7 @@ module.exports = merge.smart(webpackCommon, {
       }
     }),
     new ExtractTextPlugin('[name].min.css'),
+    // new BundleAnalyzerPlugin(),
     new UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
@@ -35,7 +36,7 @@ module.exports = merge.smart(webpackCommon, {
         comments: false,
         screw_ie8: true
       },
-      sourceMap: true
+      sourceMap: false
     })
   ]
 });
