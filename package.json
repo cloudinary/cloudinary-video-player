@@ -7,10 +7,11 @@
     "start": "webpack-dev-server --config webpack/dev.config.js --watch",
     "clean": "rm -rf dist",
     "build": "NODE_ENV=production webpack --config webpack/es5.config.js --progress --display-error-details --color",
+    "build-light": "NODE_ENV=production WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "build-minified": "NODE_ENV=production webpack --config webpack/minified.config.js --progress --display-error-details --color",
     "build-minified-light": "NODE_ENV=production WEBPACK_BUILD_LIGHT=1 webpack --config webpack/minified.config.js --progress --display-error-details --color",
     "analyze": "NODE_ENV=production webpack --config webpack/minified.config.js --json | webpack-bundle-size-analyzer",
-    "build-all": "npm run clean && npm run build && npm run build-minified && npm run build-minified-light",
+    "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src"
   },
   "author": "Cloudinary",
