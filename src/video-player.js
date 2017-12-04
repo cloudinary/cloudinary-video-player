@@ -466,7 +466,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return this.videojs.loop();
     }
 
-    this.videojs.controls(bool);
+    this.videojs.loop(bool);
 
     return this;
   }
