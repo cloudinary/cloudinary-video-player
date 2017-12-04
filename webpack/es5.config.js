@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const webpackCommon = require('./common.config');
+const { lightFilenamePart } = require('./build-utils');
 
 // webpack plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
@@ -12,9 +13,9 @@ module.exports = merge.smart(webpackCommon, {
 
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js',
-    sourceMapFilename: '[name].map',
-    chunkFilename: '[id]-[chunkhash].js'
+    filename: `[name]${lightFilenamePart}.js`,
+    sourceMapFilename: `[name]${lightFilenamePart}.map`,
+    chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
   },
 
   plugins: [
