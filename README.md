@@ -32,10 +32,10 @@ Cloudinary Video Player can also be included directly from the [Unpkg CDN](https
 ### Packages
 
 For your convenience, there are currently 4 variations for our package:
-`cld-video-player.js` - Non minified version which includes all optional modules.
-`cld-video-player.min.js` - Minified version which includes all optional modules.
-`cld-video-player.light.js` - Non minified version which does not include any optional modules.
-`cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
+- `cld-video-player.js` - Non minified version which includes all optional modules.
+- `cld-video-player.min.js` - Minified version which includes all optional modules.
+- `cld-video-player.light.js` - Non minified version which does not include any optional modules.
+- `cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
 
 #### Optional modules
 
