@@ -7,6 +7,7 @@ const { lightFilenamePart } = require('./build-utils');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge.smart(webpackCommon, {
@@ -26,6 +27,7 @@ module.exports = merge.smart(webpackCommon, {
       }
     }),
     new ExtractTextPlugin(`[name]${lightFilenamePart}.min.css`),
+    new OptimizeCssAssetsPlugin({ canPrint: true }),
     // new BundleAnalyzerPlugin(),
     new UglifyJsPlugin({
       compressor: {

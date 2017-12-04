@@ -79,23 +79,23 @@ module.exports = {
       },
       {
         test: /\.woff$/,
-        use: 'url-loader?mimetype=application/font-woff'
+        use: 'url-loader?limit=7000&mimetype=application/font-woff&name=fonts/[name].[ext]'
       },
       {
         test: /\.woff2$/,
-        use: 'url-loader?mimetype=application/font-woff2'
+        use: 'url-loader?limit=7000&mimetype=application/font-woff2&name=fonts/[name].[ext]'
       },
       {
         test: /\.[ot]tf$/,
-        use: 'url-loader?mimetype=application/octet-stream'
+        use: 'url-loader?limit=7000&mimetype=application/octet-stream&name=fonts/[name].[ext]'
       },
       {
         test: /\.eot$/,
-        use: 'url-loader?mimetype=application/vnd.ms-fontobject'
+        use: 'url-loader?limit=7000&mimetype=application/vnd.ms-fontobject&name=fonts/[name].[ext]'
       },
       {
         test: /\.svg$/,
-        use: 'url-loader?mimetype=image/svg+xml'
+        use: 'url-loader?limit=7000&mimetype=image/svg+xml&name=fonts/[name].[ext]'
       },
       {
         test: /\.(mp4|webm)$/,
