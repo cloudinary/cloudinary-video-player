@@ -29,13 +29,48 @@ class ContextMenuPlugin {
     };
 
     const getMenuPosition = (e) => {
-      const pointerPosition = getPointerPosition(this.player.el(), e);
+      // Calc menu size
+      const menuEl = this.menu.el();
+
+      // Must append to element to get bounding rect
+      menuEl.style.visibility = 'hidden';
+      this.player.el().appendChild(menuEl);
+      const menuSize = menuEl.getBoundingClientRect();
+      this.player.el().removeChild(menuEl);
+      menuEl.style.visibility = 'visible';
+
+      const ptrPosition = getPointerPosition(this.player.el(), e);
       const playerSize = this.player.el().getBoundingClientRect();
 
-      return {
-        left: Math.round(playerSize.width * pointerPosition.x),
-        top: Math.round(playerSize.height - (playerSize.height * pointerPosition.y))
-      };
+      let ptrTop = playerSize.height - (playerSize.height * ptrPosition.y) + 1;
+      let ptrLeft = Math.round(playerSize.width * ptrPosition.x) + 1;
+
+      let top = ptrTop;
+      let left = ptrLeft;
+
+      // Correct top when menu can't fit fully height-wise when pointer is at it's top left corner
+      if (ptrTop + menuSize.height > playerSize.height) {
+        let difference = ptrTop + menuSize.height - playerSize.height;
+        top = difference > menuSize.height / 2 ? ptrTop - menuSize.height - 1 : playerSize.height - menuSize.height;
+      }
+
+      // Correct left where menu can't fit fully width-wise when pointer is at it's top left corner
+      if (ptrLeft + menuSize.width > playerSize.width) {
+        let difference = ptrLeft + menuSize.width - playerSize.width;
+        left = difference > menuSize.width / 2 ? ptrLeft - menuSize.width - 1 : playerSize.width - menuSize.width;
+      }
+
+      // Correct top and left in cases that menu is positioned on the pointer
+      if (top < ptrTop && left < ptrLeft) {
+        top = ptrTop - menuSize.height - 1;
+        left = ptrLeft - menuSize.width - 1;
+      }
+
+      // Make sure that we're still in bounds after the corrections.
+      top = Math.max(0, top);
+      left = Math.max(0, left);
+
+      return { left, top };
     };
 
     const onContextMenu = (e) => {
@@ -64,10 +99,10 @@ class ContextMenuPlugin {
         content = content(this.player);
       }
 
-      this.menu = new ContextMenu(this.player, {
-        content,
-        position: getMenuPosition(e)
-      });
+      this.menu = new ContextMenu(this.player, { content });
+
+      const { left, top } = getMenuPosition(e);
+      this.menu.setPosition(left, top);
 
       // This is to handle a bug where firefox triggers both 'contextmenu' and 'click'
       // events on rightclick, causing menu to open and then immediately close.

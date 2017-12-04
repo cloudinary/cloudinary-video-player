@@ -24,16 +24,32 @@
     <a href="index.html"><< Back to examples index</a>
     <h1>Cloudinary Video Player</h1>
     <h2>Adaptive streaming</h2>
-    <p>To use adaptive streaming formats such as HLS and MPEG-DASH, simply define
-      'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired profile using
-      the 'transformation' param.
-    </p>
+    <p>The player supports adaptive streaming formats such as HLS and MPEG-DASH: <br />
+      <b>HLS</b> is supported out-of-the-box and is already bundled in the player's package. <br />
+      <b>MPEG-DASH</b> support can be added by including 'dash.js' and 'videojs-contrib-dash' packages (example below).<br /><br />
+      Simply set 'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired streaming
+      profile ('sd', 'hd', etc') using the 'transformation' param.</p>
 
     <div class="row video-container">
       <video
-        id="example-player"
+        id="example-player-hls"
         controls
         muted
+        width="680"
+        height="400"
+        class="cld-video-player cld-video-player-skin-dark">
+      </video>
+    </div>
+
+    <br />
+
+    <div class="row video-container">
+      <video
+        id="example-player-dash"
+        controls
+        muted
+        width="680"
+        height="400"
         class="cld-video-player cld-video-player-skin-dark">
       </video>
     </div>
@@ -42,23 +58,37 @@
     <pre>
       HTML:
 
+      &lt;!-- Cloudinary Video Player Dependencies -->
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js">&lt/script>
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js">&lt;/script>
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js">&lt;/script>
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js>&lt;/script>
+
       &lt;video
-        id="example-player"
+        id="example-player-hls"
         controls
         muted
         class="cld-video-player cld-video-player-skin-dark"&gt;
       &lt;/video&gt;
 
+      &lt;video
+        id="example-player-dash"
+        controls
+        muted
+        class="cld-video-player cld-video-player-skin-dark"&gt;
+      &lt;/video&gt;
 
       JavaScript:
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
-      var player = cld.videoPlayer('example-player');
+      var playerHls = cld.videoPlayer('example-player-hls');
+      var playerDash = cld.videoPlayer('example-player-dash');
 
       // Modify player source
-      player.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' } }).play();
+      playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+      playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
     </pre>
   </div>
 
@@ -71,16 +101,20 @@
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js"></script>
 
   <!-- Actual code -->
   <script type="text/javascript">
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player');
+    var playerHls = cld.videoPlayer('example-player-hls');
+    var playerDash = cld.videoPlayer('example-player-dash');
 
     // Modify player source
-    player.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' } }).play();
+    playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+    playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
   </script>
 </body>
 </html>

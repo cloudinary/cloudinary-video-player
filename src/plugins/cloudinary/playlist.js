@@ -164,10 +164,10 @@ class Playlist {
             this.player().trigger('upcomingvideohide');
             _presentUpcoming.showTriggered = false;
           }
-        } else if (remainingTime <= _presentUpcoming.delay && !_presentUpcoming.showTriggered) {
+        } else if (remainingTime <= _presentUpcoming.delay && !_presentUpcoming.showTriggered && !this.player().loop()) {
           this.player().trigger('upcomingvideoshow');
           _presentUpcoming.showTriggered = true;
-        } else if (remainingTime > _presentUpcoming.delay && _presentUpcoming.showTriggered) {
+        } else if (_presentUpcoming.showTriggered && (remainingTime > _presentUpcoming.delay || this.player().loop())) {
           this.player().trigger('upcomingvideohide');
           _presentUpcoming.showTriggered = false;
         }
