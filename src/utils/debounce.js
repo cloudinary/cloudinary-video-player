@@ -16,7 +16,6 @@ function debounce(func, wait, immediate) {
     timeout = setTimeout(later, wait);
 
     if (callNow) {
-      console.log('call now');
       func.apply(self, args);
     }
   };

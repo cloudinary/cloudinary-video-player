@@ -140,6 +140,10 @@ $icon-font-path: '../fonts' !default;
       padding: 0.7em 0.3em 0 0.3em;
       bottom: 3.0em;
     }
+
+    .vjs-progress-control-events-blocker {
+      @extend .vjs-progress-control
+    }
   }
 
   .vjs-spacer {
@@ -359,6 +363,20 @@ $icon-font-path: '../fonts' !default;
         }
       }
     }
+
+    &.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
+      background: yellow;
+    }
+
+    &.vjs-ad-playing .vjs-play-control.vjs-paused,
+    &.vjs-ad-playing .vjs-volume-level {
+      background-color: transparent !important;
+    }
+
+    &.vjs-ad-playing .vjs-play-progress:before {
+      display: none;
+    }
+
   }
 
   // Dark skin

@@ -11,7 +11,7 @@ class TitleBar extends Component {
   constructor(player, options = {}) {
     super(player, options);
 
-    this.on(player, 'cldsourcechanged', (_, { source }) => this.setItem(source));
+    this.on(player, 'sourcechanged', (_, { source }) => this.setItem(source));
 
     this.setItem = (source) => {
       if (!source) {

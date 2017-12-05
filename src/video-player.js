@@ -118,7 +118,8 @@ const overrideDefaultVideojsComponents = () => {
   children[children.indexOf('volumeMenuButton')] = 'triangleVolumeMenuButton';
 
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
-  children.splice(children.indexOf('progressControl'), 0, 'spacer');
+  // Also add a blank div underneath the progress control to stop bubbling up pointer events.
+  children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
   children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'playlistNextButton');

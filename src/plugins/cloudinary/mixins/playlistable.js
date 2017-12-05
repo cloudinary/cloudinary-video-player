@@ -58,8 +58,9 @@ const Playlistable = (superclass) => class extends superclass {
     };
 
     const addSourceChangedListener = () => {
-      const disposer = (_, data) => {
-        if (this.playlist() && !this.playlist().currentSource().contains(data.to)) {
+      const disposer = () => {
+        if (this.playlist() &&
+          !this.playlist().currentSource().contains(this.player.currentSource())) {
           this.disposePlaylist();
         }
       };

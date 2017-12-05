@@ -250,8 +250,8 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     // Handle external (non-cloudinary plugin) source changes (e.g. by ad plugins)
-    const syncState = () => {
-      let src = this.player.currentSource();
+    const syncState = (_, data) => {
+      let src = data.to;
 
       // When source is cloudinary's
       if (_lastSource.contains(src)) {

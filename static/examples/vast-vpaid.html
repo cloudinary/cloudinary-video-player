@@ -24,11 +24,8 @@
   <div class="container">
     <a href="index.html"><< Back to examples index</a>
     <h1>Cloudinary Video Player</h1>
-    <h2>Playlist by tag</h2>
-    <p>Cloudinary allows you to add tags to an uploaded resource.<br />
-      It also allows you to <a href="http://cloudinary.com/documentation/image_transformations#client_side_resource_lists">list resources with a specified tag</a>.
-      The player leverages this ability and supports a creation of a playlist by a specified tag.
-      <br><b>NOTE: In order to support resource listing by tag (required for 'playlist by tag' to work), make sure to enable it in the Cloudinary console: Settings | Security | Restricted image types | Resource list</b>
+    <h2>VAST and VPAID</h2>
+    <p>VAST and VPAID support can be achieved using
     </p>
 
     <div class="row video-container">
@@ -59,6 +56,11 @@
     <pre><code>
       HTML:
 
+      &lt;!-- Cloudinary Video Player Dependencies --&gt;
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"&gt;&lt;/script&gt;
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"&gt;&lt;/script&gt;
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"&gt;&lt;/script&gt;
+
       &lt;video
         id="example-player"
         controls
@@ -84,7 +86,16 @@
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
-      var player = cld.videoPlayer('example-player');
+      var player = cld.videoPlayer('example-player', {
+        plugins: {
+          vastClient: {
+            adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
+            adCancelTimeout: 5000,
+            adsEnabled: true,
+            playAdAlways: true
+          }
+        }
+      });
 
       // Pass a sorter to sort list in alphabetical order by publicId
       var sorter = function(a, b) {
@@ -143,18 +154,18 @@
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"></script>
 
   <!-- Actual code -->
   <script type="text/javascript">
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    // var player = cld.videoPlayer('example-player', {})
     var player = cld.videoPlayer('example-player', {
       plugins: {
         vastClient: {
-          adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
+          //adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
+          adTagUrl: "vast-2-0-example.xml",
           adCancelTimeout: 5000,
           adsEnabled: true,
           playAdAlways: true
