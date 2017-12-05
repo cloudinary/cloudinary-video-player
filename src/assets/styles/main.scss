@@ -12,6 +12,7 @@ $icon-font-path: '../fonts' !default;
 // Import Video.js style
 @import '~video.js/src/css/vjs.scss';
 @import 'icons';
+@import 'ads-label';
 
 // control bar control size
 .video-js .vjs-control:before {

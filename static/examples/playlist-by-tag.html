@@ -10,6 +10,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs.vast.vpaid.css" />
 <link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -140,13 +141,24 @@
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"></script>
 
   <!-- Actual code -->
   <script type="text/javascript">
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player');
+    // var player = cld.videoPlayer('example-player', {})
+    var player = cld.videoPlayer('example-player', {
+      plugins: {
+        vastClient: {
+          adTagUrl: "http://servedby.flashtalking.com/imp/1/31714;812030;208;xml;DailyMail;640x360VASTHTML5/?cachebuster=%%CACHEBUSTER%%",
+          adCancelTimeout: 5000,
+          adsEnabled: true,
+          playAdAlways: true
+        }
+      }
+    });
 
     // Pass a sorter to sort list in alphabetical order by publicId
     var sorter = function(a, b) {
@@ -161,7 +173,7 @@
     player.playlistByTag('demo', {
       sorter: sorter,
       sourceParams: { angle: 13 },
-      autoAdvance: false,
+      autoAdvance: true,
       repeat: true,
       presentUpcoming: false
     }).then(function(player) {

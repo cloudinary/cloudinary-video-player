@@ -44,7 +44,14 @@ const Playlistable = (superclass) => class extends superclass {
     };
 
     const createPlaylist = (sources, options) => {
-      _playlist = new Playlist(this, sources, options);
+      if (sources instanceof Playlist) {
+        _playlist = sources;
+        _playlist.resetState();
+        _playlist.currentIndex(_playlist.currentIndex());
+      } else {
+        _playlist = new Playlist(this, sources, options);
+        _playlist.currentIndex(0);
+      }
 
       _playlistDisposer = addSourceChangedListener();
       player.addClass('vjs-playlist');
@@ -52,7 +59,7 @@ const Playlistable = (superclass) => class extends superclass {
 
     const addSourceChangedListener = () => {
       const disposer = (_, data) => {
-        if (!this.playlist().currentSource().contains(data.to)) {
+        if (this.playlist() && !this.playlist().currentSource().contains(data.to)) {
           this.disposePlaylist();
         }
       };

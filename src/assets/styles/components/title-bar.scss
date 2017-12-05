@@ -53,7 +53,8 @@
 
 .vjs-controls-disabled .vjs-title-bar,
 .vjs-using-native-controls .vjs-title-bar,
-.vjs-error .vjs-title-bar {
+.vjs-error .vjs-title-bar,
+.vjs-ad-playing .vjs-title-bar {
   // !important is ok in this context.
   display: none !important;
 }

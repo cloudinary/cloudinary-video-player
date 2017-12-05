@@ -27,6 +27,8 @@ class CloudinaryContext extends mixin(Playlistable) {
     options = assign({}, DEFAULT_PARAMS, options);
 
     let _source = null;
+    let _lastSource = null;
+    let _lastPlaylist = null;
     let _posterOptions = null;
     let _cloudinaryConfig = null;
     let _transformation = null;
@@ -231,6 +233,9 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       this.player.src(src.generateSources());
+
+      _lastSource = src;
+      _lastPlaylist = this.playlist();
     };
 
     const posterOptionsForCurrent = () => {
@@ -246,16 +251,23 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     // Handle external (non-cloudinary plugin) source changes (e.g. by ad plugins)
     const syncState = () => {
-      let cldSrc = this.player.currentSource().cldSrc;
+      let src = this.player.currentSource();
 
       // When source is cloudinary's
-      if (cldSrc) {
+      if (_lastSource.contains(src)) {
         // If plugin state doesn't have an active VideoSource
         if (!this.source()) {
-          // Rebuild state without calling vjs's 'src' and 'poster'
-          this.source(cldSrc, { skipRefresh: true });
+          // We might have been running a playlist, reset playlist's state.
+          if (_lastPlaylist) {
+            this.playlist(_lastPlaylist);
+          }
+          // Rebuild last source state without calling vjs's 'src' and 'poster'
+          this.source(_lastSource, { skipRefresh: true });
         }
       } else {
+        // Used by cloudinary-only components
+        this.player.trigger('cldsourcechanged', {});
+
         // When source isn't cloudinary's - reset the plugin's state.
         this.dispose();
       }
