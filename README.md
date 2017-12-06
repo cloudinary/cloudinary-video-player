@@ -70,7 +70,7 @@ cld.videoPlayer('example-player')
 ```
 
 #### Examples
-Live demo and examples can be found at CodePen project: https://codepen.io/miki-cloudinary/project/editor/DzvKzy/
+Live demo and examples can be found at CodePen project: https://codepen.io/team/Cloudinary/project/editor/XLYMQV
 
 #### Development
 In order to run this project locally:
