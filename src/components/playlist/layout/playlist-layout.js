@@ -90,7 +90,7 @@ class PlaylistLayout extends Component {
   }
 
   getCls() {
-    let cls = ['cld-plw-layout'];
+    let cls = ['cld-video-player', 'cld-plw-layout'];
 
     cls.push(skinClassPrefix(this.player()));
 
