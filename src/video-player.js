@@ -13,7 +13,7 @@ import normalizeAttributes from './attributes-normalizer';
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'ima', 'fluid']);
 const CLASS_PREFIX = 'cld-video-player';
 
 const registerPlugin = videojs.plugin;
@@ -189,11 +189,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = () => {
+      initIma();
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
+    };
+
+    const initIma = () => {
+      const opts = _options.ima;
+
+      if (!opts) {
+        return;
+      }
+
+      const { adTagUrl, prerollTimeout, postrollTimeout } = opts;
+
+      this.videojs.ima({
+        id: this.el().id,
+        adTagUrl,
+        disableFlashAds: true,
+        prerollTimeout: prerollTimeout || 5000,
+        postrollTimeout: postrollTimeout || 5000,
+        debug: true
+      });
     };
 
     const initAutoplay = () => {
@@ -460,6 +480,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.controls(bool);
 
     return this;
+  }
+
+  ima() {
+    return {
+      playAd: this.videojs.ima.playAd
+    };
   }
 
   loop(bool) {

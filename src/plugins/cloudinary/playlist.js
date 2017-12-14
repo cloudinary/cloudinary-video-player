@@ -123,12 +123,15 @@ class Playlist {
       }
 
       const trigger = () => {
-        _autoAdvance.timeout = setTimeout(() => {
-          this.playNext();
-        }, delay * 1000);
+        if (this.player().ended()) {
+          _autoAdvance.timeout = setTimeout(() => {
+            this.playNext();
+          }, delay * 1000);
+        }
       };
 
       _autoAdvance = { delay, trigger };
+
       _context.on('ended', _autoAdvance.trigger);
     };
 

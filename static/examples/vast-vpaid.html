@@ -10,7 +10,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="/cld-video-player.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs.vast.vpaid.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.css" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.8.0/videojs.ima.min.css" /> -->
 <link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -36,7 +37,7 @@
         autoplay
         class="cld-video-player cld-video-player-skin-light"
         width="500"
-        height="1000"
+        height="500"
         data-cld-transformation='{ "width": 500, "crop": "limit" }'>
       </video>
 
@@ -154,24 +155,25 @@
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"></script>
+
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.8.0/videojs.ima.js"></script> -->
 
   <!-- Actual code -->
   <script type="text/javascript">
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
+    var adTagUrl = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator="
+
     // Initialize player
     var player = cld.videoPlayer('example-player', {
-      plugins: {
-        vastClient: {
-          //adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
-          adTagUrl: "vast-2-0-example.xml",
-          adCancelTimeout: 5000,
-          adsEnabled: true,
-          playAdAlways: true
-        }
-      }
+      ima: { adTagUrl }
     });
+
+    player.on('sourcechanged', () => {
+      player.ima().playAd();
+    })
 
     // Pass a sorter to sort list in alphabetical order by publicId
     var sorter = function(a, b) {
@@ -186,7 +188,7 @@
     player.playlistByTag('demo', {
       sorter: sorter,
       sourceParams: { angle: 13 },
-      autoAdvance: true,
+      autoAdvance: 5,
       repeat: true,
       presentUpcoming: false
     }).then(function(player) {
