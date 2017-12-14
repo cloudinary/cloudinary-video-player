@@ -1,6 +1,6 @@
 import BaseSource from './base-source';
 import ImageSource from './image-source';
-import { normalizeOptions, compareSources } from '../common';
+import { normalizeOptions, isSrcEqual } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -117,7 +117,7 @@ class VideoSource extends BaseSource {
 
   contains(source) {
     const sources = this.generateSources();
-    return sources.some((_source) => compareSources(_source, source));
+    return sources.some((_source) => isSrcEqual(_source, source));
   }
 
   generateSources() {
@@ -137,7 +137,7 @@ class VideoSource extends BaseSource {
 
       const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       const type = formatToMimeType(sourceType);
-      return { type, src };
+      return { type, src, cldSrc: this };
     });
   }
 }

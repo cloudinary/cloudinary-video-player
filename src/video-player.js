@@ -14,7 +14,7 @@ import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-p
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'playlistWidget']);
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget']);
 
 const registerPlugin = videojs.plugin;
 
@@ -116,7 +116,8 @@ const overrideDefaultVideojsComponents = () => {
   children[children.indexOf('volumeMenuButton')] = 'triangleVolumeMenuButton';
 
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
-  children.splice(children.indexOf('progressControl'), 0, 'spacer');
+  // Also add a blank div underneath the progress control to stop bubbling up pointer events.
+  children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
   children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'playlistNextButton');
@@ -182,11 +183,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = () => {
+      initIma();
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
+    };
+
+    const initIma = () => {
+      const opts = _options.ima;
+
+      if (!opts) {
+        return;
+      }
+
+      const { adTagUrl, prerollTimeout, postrollTimeout } = opts;
+
+      this.videojs.ima({
+        id: this.el().id,
+        adTagUrl,
+        disableFlashAds: true,
+        prerollTimeout: prerollTimeout || 5000,
+        postrollTimeout: postrollTimeout || 5000,
+        debug: true
+      });
     };
 
     const initAutoplay = () => {
@@ -502,6 +523,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.controls(bool);
 
     return this;
+  }
+
+  ima() {
+    return {
+      playAd: this.videojs.ima.playAd
+    };
   }
 
   loop(bool) {

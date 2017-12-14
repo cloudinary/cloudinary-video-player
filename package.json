@@ -29,6 +29,7 @@
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-hls": "^5.12.2",
     "videojs-contrib-media-sources": "^4.4.2",
+    "videojs-ima": "^1.0.0",
     "videojs-per-source-behaviors": "^1.1.3",
     "webpack-bundle-analyzer": "^2.9.1",
     "webpack-conditional-loader": "^1.0.11",
