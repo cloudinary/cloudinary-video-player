@@ -359,6 +359,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs.fluid(bool);
+    this.videojs.trigger('fluid', bool);
     return this;
   }
 
