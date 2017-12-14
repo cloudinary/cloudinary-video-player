@@ -1,20 +1,20 @@
 import videojs from 'video.js';
+import isObj from 'is-obj';
 import './components';
 import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
-import { find } from 'utils/find';
-import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
+import PlaylistWidget from './components/playlist/playlist-widget';
+import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
-const CLASS_PREFIX = 'cld-video-player';
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'playlistWidget']);
 
 const registerPlugin = videojs.plugin;
 
@@ -92,8 +92,6 @@ const extractOptions = (elem, options) => {
 
   return { playerOptions, videojsOptions: options };
 };
-
-const cssClassFromSkin = (skin) => `${CLASS_PREFIX}-skin-${skin}`;
 
 const overrideDefaultVideojsComponents = () => {
   const Player = videojs.getComponent('Player');
@@ -176,11 +174,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      let currentSkin = find(this.el().classList, (cls) => startsWith(cls, `${CLASS_PREFIX}-skin-`));
-
-      if (!currentSkin) {
-        this.videojs.addClass(cssClassFromSkin(defaults.skin));
-      }
+      setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 
       if (videojs.browser.IE_VERSION === 11) {
         this.videojs.addClass('cld-ie11');
@@ -227,6 +221,25 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    let _playlistWidget = null;
+
+    const initPlaylistWidget = () => {
+      this.videojs.on('playlistcreated', () => {
+        if (_playlistWidget) {
+          _playlistWidget.dispose();
+        }
+        const plwOptions = _options.playlistWidget;
+
+        if (isObj(plwOptions)) {
+          if (_options.fluid) {
+            plwOptions.fluid = true;
+          }
+
+          _playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
+        }
+      });
+    };
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -235,6 +248,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
+    initPlaylistWidget();
 
     this.videojs.ready(() => {
       onReady();
@@ -243,6 +257,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
     });
+
+    this.playlistWidget = (options) => {
+      if (!options && !_playlistWidget) {
+        return false;
+      }
+
+      if (!options && _playlistWidget) {
+        return _playlistWidget;
+      }
+
+      if (isObj(options)) {
+        _playlistWidget.options(options);
+      }
+
+      return _playlistWidget;
+    };
   }
 
   static all(selector, ...args) {
@@ -291,6 +321,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   posterOptions(options) {
     return this.videojs.cloudinary.posterOptions(options);
+  }
+
+  skin(name) {
+    if (typeof name === 'string' && name !== undefined) {
+      setSkinClassPrefix(this.videojs, name);
+
+      if (this.playlistWidget()) {
+        this.playlistWidget().setSkin();
+      }
+    }
+
+    return skinClassPrefix(this.videojs);
   }
 
   playlist(sources, options = {}) {
