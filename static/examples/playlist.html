@@ -8,14 +8,13 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 <link href="/cld-video-player.css" rel="stylesheet">
 <link href="/style.css" rel="stylesheet">
 <!-- <link href="./node_modules/prismjs/themes/prism.css" rel="stylesheet" />
 <script src="node_modules/clipboard/dist/clipboard.min.js"></script> -->
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
@@ -55,10 +54,13 @@
     
   
 
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
+  <div class="container p-4">
+    <nav class="nav mb-2">
+        <a href="index.html"><< Back to examples index</a>
+    </nav>
+    
     <h1 class="text-primary">Cloudinary Video Player</h1>
-    <h2 class="text-primary">Playlist</h2>
+    <h3 class="text-primary mb-4">Playlist</h3>
     <p>The player supports a creation of a playlist. A playlist allows you
       to define a list of videos which should be played one after another.
       You may also define:
@@ -83,18 +85,18 @@
                   <option value="vertical">Vertical</option>
               </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
                 <label class="col-form-label" for="changePlaylistTotal">Total</label>
                 <input type="number" class="form-control" id="changePlaylistTotal" step="1" value="4" placeholder="Total">
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label class="col-form-label" for="changePlaylistSkin">Skin</label>
               <select class="form-control" id="changePlaylistSkin" placeholder="Skin">
                 <option value="dark">Dark</option>
                 <option value="light">Light</option>
               </select>
             </div>
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label class="col-form-label" for="changePlaylistTag">Tag</label>
               <input type="text" class="form-control" id="changePlaylistTag">
             </div>
@@ -303,6 +305,16 @@
     document.getElementById("changePlayerFluid").addEventListener("change",function(e){
         player.fluid(e.srcElement.checked);
         document.getElementById("fluid-demo-container").classList[e.srcElement.checked ? "add" : "remove"]("fluid-demo-container");
+    })
+
+    document.getElementById("changePlaylistTag").addEventListener("blur",function(e){
+      const tag = e.srcElement.value;
+      if(tag === "") {
+        player.playlist(playlistSources,playlistOptions);
+      } else {
+        player.playlistByTag(e.srcElement.value,playlistOptions);
+      }
+      
     })
 
   

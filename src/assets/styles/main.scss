@@ -16,14 +16,6 @@ $icon-font-path: '../fonts' !default;
 @import 'ads-label';
 @import 'videojs-ima';
 
-@function rgba_unless_opaque($rgb, $opacity, $opaque) {
-  @if ($opaque == true) {
-      @return $rgb
-  } @else {
-      @return rgba($rgb, $opacity)
-  }
-};
-
 // control bar control size
 .video-js .vjs-control:before {
   font-size: 2.0em;
