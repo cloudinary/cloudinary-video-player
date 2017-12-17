@@ -25,10 +25,13 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Recommendations</h2>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Recommendations</h3>
+  
     <p>Recommended videos can be defined when setting a player's video source.
       The recommendations will be shown in the recommendation overlay when a video ends.
       <br />To automatically show recommendations:
@@ -45,7 +48,7 @@
         </li>
       </ol>
 
-      <h3>Recommendations in playlists</h3>
+      <h3 class="text-primary">Recommendations in playlists</h3>
       Playlists honor the player's <b>autoShowRecommendations</b> param, but will only show at the end of a video when <b>auto advance</b> is disabled (<b>autoAdvance: false</b>)<br />
       The following behavior applies to recommendations in playlists:
       <ul>
@@ -56,23 +59,25 @@
         <li>When the currently playing video's recommendations were not set, the next videos in the playlist are automatically shown as recommendations.</li>
       </ul>
 
-      <h3>Video info (title, subtitle, description)</h4>
+      <h3 class="text-primary">Video info (title, subtitle, description)</h4>
       To fully leverage the recommendations overlay, it is recommended that you set the title, subtitle and description when creating source objects, using the <b>info</b> param:
 
-      <pre>var source1 = {
-  publicId: 'book',
-  info: {
-    title: 'Cloud Book Study',
-    subtitle: 'A short video with a nice book animation',
-    description: 'A description of the book movie.'
-  }
-}</pre>
+      <pre class="mt-5 mb-5"><code  class="language-javascript">
+        var source1 = {
+          publicId: 'book',
+          info: {
+            title: 'Cloud Book Study',
+            subtitle: 'A short video with a nice book animation',
+            description: 'A description of the book movie.'
+          }
+        }
+      </code></pre>
 
-      <h3>Video info on playlistByTag</h4>
+      <h3 class="text-primary">Video info on playlistByTag</h4>
       When using <b>player.playlistByTag</b>, <b>source.info</b> will automatically get populated from Cloudinary's resource context (which can be defined both through the <a href="http://cloudinary.com/documentation/image_upload_api_reference#context">Cloudinary API</a> or the Media Library).
       Make sure that the context keys are named exactly: 'title', 'subtitle' and 'description'.
 
-      <h3>Recommendations overlay items</h4>
+      <h3 class="text-primary">Recommendations overlay items</h4>
       The recommendations overlay currently supports showing up to 4 items. You may pass more than 4, in that case the first 4 items will be displayed:
       <ul>
         <li><b>One primary item</b>: large poster with detailed information (title, subtitle and description)</li>
@@ -80,7 +85,7 @@
       </ul>
     </p>
 
-    <div class="row video-container">
+    <div class="video-container">
       <center>
         <video
           id="example-player"
@@ -91,16 +96,17 @@
           data-cld-transformation='{ "width": 720, "crop": "limit" }'>
         </video>
 
-        <div id="source-data">
-          <span id="public-id-placeholder"></span><br>
-          <span id="source-url-placeholder"></span>
-        </div>
+
+        <div class="mt-5" id="source-data">
+            <div class="alert alert-primary" id="public-id-placeholder"></div>
+            <div class="alert alert-primary" id="source-url-placeholder"></div>
+          </div>
       </center>
     </div>
-
-    <h4>Example Code:</h3>
-    <pre>
-      HTML:
+    
+    <h3>Example Code:</h3>
+    <pre class="text-primary">
+        <code  class="language-html">
 
       &lt;video
         id="example-player"
@@ -116,7 +122,8 @@
         &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
       &lt;/div&gt;
 
-
+      </code>
+      <code  class="language-javascript">
       JavaScript:
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
@@ -170,6 +177,7 @@
       };
 
       player.on('sourcechanged', updateSource);
+      </code>
     </pre>
   </div>
 

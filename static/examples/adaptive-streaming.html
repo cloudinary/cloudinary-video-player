@@ -25,45 +25,47 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Adaptive streaming</h2>
-    <p>The player supports adaptive streaming formats such as HLS and MPEG-DASH: <br />
-      <b>HLS</b> is supported out-of-the-box and is already bundled in the player's package. <br />
-      <b>MPEG-DASH</b> support can be added by including 'dash.js' and 'videojs-contrib-dash' packages (example below).<br /><br />
-      Simply set 'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired streaming
-      profile ('sd', 'hd', etc') using the 'transformation' param.</p>
+  
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Adaptive streaming</h3>
+  
+        <p>The player supports adaptive streaming formats such as HLS and MPEG-DASH: <br />
+          <b>HLS</b> is supported out-of-the-box and is already bundled in the player's package. <br />
+          <b>MPEG-DASH</b> support can be added by including 'dash.js' and 'videojs-contrib-dash' packages (example below).<br /><br />
+          Simply set 'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired streaming
+          profile ('sd', 'hd', etc') using the 'transformation' param.</p>
 
-    <div class="row video-container">
-      <video
-        id="example-player-hls"
-        controls
-        muted
-        width="680"
-        height="400"
-        class="cld-video-player cld-video-player-skin-dark">
-      </video>
-    </div>
+        <div class="video-container mb-5">
+          <video
+            id="example-player-hls"
+            controls
+            muted
+            width="680"
+            height="400"
+            class="cld-video-player cld-video-player-skin-dark">
+          </video>
+        </div>
 
-    <br />
+        <div class="video-container">
+          <video
+            id="example-player-dash"
+            controls
+            muted
+            width="680"
+            height="400"
+            class="cld-video-player cld-video-player-skin-dark">
+          </video>
+        </div>
 
-    <div class="row video-container">
-      <video
-        id="example-player-dash"
-        controls
-        muted
-        width="680"
-        height="400"
-        class="cld-video-player cld-video-player-skin-dark">
-      </video>
-    </div>
+        <h3 class="text-primary mt-5">Example Code:</h3>
+        <pre>
+            <code class="language-html">
 
-    <h3>Example Code:</h3>
-    <pre>
-      HTML:
-
-      &lt;!-- Cloudinary Video Player Dependencies -->gt;
+      &lt;!-- Cloudinary Video Player Dependencies -->
       &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js">gt;&lt/script>gt;
       &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js">gt;&lt;/script>gt;
       &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js">gt;&lt;/script>gt;
@@ -82,7 +84,9 @@
         muted
         class="cld-video-player cld-video-player-skin-dark"&gt;
       &lt;/video&gt;
+      </code>
 
+      <code class="language-javascript">
       JavaScript:
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });

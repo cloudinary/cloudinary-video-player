@@ -25,48 +25,61 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>API and Events</h2>
-    <p>The cloudinary.VideoPlayer can be controlled by it's API.
-      <br>Additionally, events are always useful: you may register to all
-      standard HTML5 video element events as well as some additional events
-      specific to the Video Player.
-      <br>Consult the API documentation for more information.
-    </p>
+    <div class="container p-4">
+      <nav class="nav mb-2">
+          <a href="index.html"><< Back to examples index</a>
+      </nav>
+      <h1 class="text-primary">Cloudinary Video Player</h1>
+      <h3 class="text-primary mb-4">API and Events</h3>
+    
+      <p>The cloudinary.VideoPlayer can be controlled by it's API.
+        <br>Additionally, events are always useful: you may register to all
+        standard HTML5 video element events as well as some additional events
+        specific to the Video Player.
+        <br>Consult the API documentation for more information.
+      </p>
 
-    <div class="row video-container">
-      <video
-        id="example-player"
-        controls
-        muted
-        class="cld-video-player cld-video-player-skin-dark"
-        width="600">
-      </video>
-      <br>
-        <div id="vid-source-data">
-          <span id="vid-source-public-id"></span><br>
-          <span id="vid-source-url"></span><br>
+      <div class="video-container">
+        
+        <video
+          id="example-player"
+          controls
+          muted
+          class="cld-video-player cld-video-player-skin-dark"
+          width="600">
+        </video>
+        
+
+        <div class="mt-5">
+          <div class="alert alert-primary" id="vid-source-public-id"></div>
+          <div class="alert alert-primary" id="vid-source-url"></div>
         </div>
+          
         <div>
-          <button id="vid-seek-minus" class="btn btn-default">-10 seconds</button>
-          <button id="vid-seek-plus" class="btn btn-default">+10 seconds</button>
-          <button id="vid-play-prev" class="btn btn-default">Previous</button>
-          <button id="vid-play-next" class="btn btn-default">Next</button>
-          <button id="vid-play" class="btn btn-default">Play</button>
-          <button id="vid-pause" class="btn btn-default">Pause</button>
-          <button id="vid-stop" class="btn btn-default">Stop</button>
-          <button id="vid-mute" class="btn btn-default">Mute</button>
-          <button id="vid-unmute" class="btn btn-default">Unmute</button>
-          <button id="vid-volume-minus" class="btn btn-default">Volume -10%</button>
-          <button id="vid-volume-plus" class="btn btn-default">Volume +10%</button>
-          <button id="vid-maximize" class="btn btn-default">Maximize</button>
-          <button id="vid-toggle-controls" class="btn btn-default">Toggle Controls</button>
+          <div class="btn-group">
+            <button id="vid-seek-minus" class="btn btn-outline-primary mb-2">-10 seconds</button>
+            <button id="vid-seek-plus" class="btn btn-outline-primary border-primary mb-2">+10 seconds</button>
+          </div>
+          <div class="btn-group">
+            <button id="vid-play-prev" class="btn btn-outline-primary mb-2">Previous</button>
+            <button id="vid-play-next" class="btn btn-outline-primary mb-2">Next</button>
+            <button id="vid-play" class="btn btn-outline-primary mb-2">Play</button>
+            <button id="vid-pause" class="btn btn-outline-primary mb-2">Pause</button>
+            <button id="vid-stop" class="btn btn-outline-primary mb-2">Stop</button>
+          </div>
+          <div class="btn-group">
+            <button id="vid-mute" class="btn btn-outline-primary mb-2">Mute</button>
+            <button id="vid-unmute" class="btn btn-outline-primary mb-2">Unmute</button>
+            <button id="vid-volume-minus" class="btn btn-outline-primary mb-2">Volume -10%</button>
+            <button id="vid-volume-plus" class="btn btn-outline-primary mb-2">Volume +10%</button>
+          </div>
+          <div class="btn-group">
+            <button id="vid-maximize" class="btn btn-outline-primary mb-2">Maximize</button>
+            <button id="vid-toggle-controls" class="btn btn-outline-primary mb-2">Toggle Controls</button>
+          </div>
         </div>
-      <br>
-      <div id="vid-events" class="well" style="overflow: scroll; height: 100px">
-      </div>
+
+        <div id="vid-events" class="alert alert-secondary text-center mt-4 p-4 w-100" style="overflow: scroll; height: 150px"></div>
     </div>
 
     <h3>Example Code:</h3>

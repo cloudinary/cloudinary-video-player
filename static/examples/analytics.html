@@ -25,10 +25,14 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Analytics</h2>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Analytics</h3>
+
+  
     <p>The Video Player supports tracking of interesting events to the Google Analytics platform.
       <br>Supported events include: 'play', 'pause', 'ended', 'volumechange', 'resize', 'error', 'fullscreenchange',
       'start', 'videoload', 'percentsplayed', 'timeplayed', 'seek', 'playerload'.
@@ -39,7 +43,7 @@
         events information in the DevTools console when the actual tracking occurs.</b>
     </p>
 
-    <div class="row video-container">
+    <div class="video-container mb-5">
       <video
         id="example-player"
         controls
@@ -49,9 +53,9 @@
       </video>
     </div>
 
-    <h3>Example Code:</h3>
+    <h3 class="text-primary">Example Code:</h3>
     <pre>
-      HTML:
+        <code class="language-html">
 
       &lt;video
         id="example-player"
@@ -59,8 +63,8 @@
         muted
         class="cld-video-player cld-video-player-skin-dark"&gt;
       &lt;/video&gt;
-
-
+        </code>
+        <code class="language-javascript">
       JavaScript:
 
       &lt;!-- Google Analytics Code Snippet --&gt;
@@ -94,6 +98,7 @@
         // Modify player source
         player.source('oceans').play();
       &lt;/script&gt;
+      </code>
     </pre>
   </div>
 

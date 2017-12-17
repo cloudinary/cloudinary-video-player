@@ -25,10 +25,13 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Fluid Layouts</h2>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Fluid Layouts</h3>
+  
     <p>The player supports the use of fluid layouts for dynamically adjusting the player size
        to it's surrounding contents.<br />
        To use this functionality, simply add the 'cld-fluid' css class to the player, or pass
@@ -36,7 +39,7 @@
        Try decreasing the window size to see the fluid layout support in action.<br />
        Use the toggle button below the player toggle the 'fluid layout support' feature.</p>
 
-    <div class="row video-container">
+    <div class="video-container">
       <center>
         <video
           id="example-player"
@@ -48,15 +51,16 @@
           data-cld-transformation='{ "width": 720, "crop": "limit" }'>
         </video>
 
-        <br />
-        <button id="toggle-fluid" class="btn btn-default">Disable Fluid</button>
+        
+        <button id="toggle-fluid" class="btn btn-lg btn-primary mt-5">Disable Fluid</button>
       </center>
     </div>
 
 
-    <h4>Example Code:</h3>
+    <h3 class="text-primary mt-5">Example Code:</h3>
     <pre>
-      HTML:
+        <code class="language-html">
+            
 
       &lt;video
         id="example-player"
@@ -70,7 +74,9 @@
       &lt;br /&gt;
       &lt;button id="toggle-fluid" class="btn btn-default"&gt;Disable Fluid&lt;/button&gt;
 
-      JavaScript:
+        </code>
+        <code class="language-javascript">
+            
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
@@ -89,6 +95,7 @@
 
         this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
       });
+      </code>
     </pre>
   </div>
 

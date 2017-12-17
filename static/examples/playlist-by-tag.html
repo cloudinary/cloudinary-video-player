@@ -24,43 +24,49 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Playlist by tag</h2>
-    <p>Cloudinary allows you to add tags to an uploaded resource.<br />
-      It also allows you to <a href="http://cloudinary.com/documentation/image_transformations#client_side_resource_lists">list resources with a specified tag</a>.
-      The player leverages this ability and supports a creation of a playlist by a specified tag.
-      <br><b>NOTE: In order to support resource listing by tag (required for 'playlist by tag' to work), make sure to enable it in the Cloudinary console: Settings | Security | Restricted image types | Resource list</b>
-    </p>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Playlist by tag</h3>
+ 
+        <p>Cloudinary allows you to add tags to an uploaded resource.<br />
+          It also allows you to <a href="http://cloudinary.com/documentation/image_transformations#client_side_resource_lists">list resources with a specified tag</a>.
+          The player leverages this ability and supports a creation of a playlist by a specified tag.
+          <br><b>NOTE: In order to support resource listing by tag (required for 'playlist by tag' to work), make sure to enable it in the Cloudinary console: Settings | Security | Restricted image types | Resource list</b>
+        </p>
 
-    <div class="row video-container">
-      <video
-        id="example-player"
-        controls
-        muted
-        autoplay
-        class="cld-video-player cld-video-player-skin-light"
-        width="500"
-        height="1000"
-        data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-      </video>
+        <div class="video-container mt-5">
+           
+            <video
+              id="example-player"
+              controls
+              muted
+              autoplay
+              class="cld-video-player cld-video-player-skin-light"
+              width="500"
+              height="1000"
+              data-cld-transformation='{ "width": 500, "crop": "limit" }'>
+            </video>
+           
+            <div class="mt-5">
+                <button id="play-prev" class="btn btn-outline-primary">Prev</button>
+                <button id="play-next" class="btn btn-outline-primary">Next</button>
+            </div>
 
-      <button id="play-prev" class="btn btn-default">Prev</button>
-      <button id="play-next" class="btn btn-default">Next</button>
+            <div id="source-data" class="mt-5">
+              <div class="alert alert-primary" id="public-id-placeholder"></div>
+              <div class="alert alert-primary" id="source-url-placeholder"></div>
+            </div>
 
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
-
-      <div class="well" id="playlist-data">
-      </div>
+            <div class="alert alert-secondary text-center mt-4 p-4 w-100" id="playlist-data"></div>
     </div>
 
-    <h3>Example Code:</h3>
-    <pre><code>
-      HTML:
+    <h3 class="text-primary">Example Code:</h3>
+
+    <pre>
+      <code class="language-html">
 
       &lt;video
         id="example-player"
@@ -81,9 +87,9 @@
 
       &lt;div class="well" id="playlist-data"&gt;
       &lt;/div&gt;
-
-      JavaScript:
-
+      </code>
+      <code class="language-javascript">
+      
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
