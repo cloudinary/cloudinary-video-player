@@ -32,7 +32,7 @@ class PlaylistPanelItem extends Thumbnail {
   }
 
   isNext() {
-    return this.options().next;
+    return this.options_.next;
   }
 
   getTitle() {

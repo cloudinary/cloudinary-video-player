@@ -76,7 +76,7 @@ class PlaylistLayout extends Component {
 
     player.on('fluid', fluidHandler);
 
-    this.addChild('PlaylistPanel', this.options());
+    this.addChild('PlaylistPanel', this.options_);
 
     this.dispose = () => {
       removeResizeListener(this.el(), resizeHandler);

@@ -30,7 +30,7 @@
         </nav>
         <h1 class="text-primary">Cloudinary Video Player</h1>
         <h3 class="text-primary mb-4">Playlist by tag</h3>
- 
+
         <p>Cloudinary allows you to add tags to an uploaded resource.<br />
           It also allows you to <a href="http://cloudinary.com/documentation/image_transformations#client_side_resource_lists">list resources with a specified tag</a>.
           The player leverages this ability and supports a creation of a playlist by a specified tag.
@@ -38,7 +38,7 @@
         </p>
 
         <div class="video-container mt-5">
-           
+
             <video
               id="example-player"
               controls
@@ -46,10 +46,10 @@
               autoplay
               class="cld-video-player cld-video-player-skin-light"
               width="500"
-              height="1000"
+              height="295"
               data-cld-transformation='{ "width": 500, "crop": "limit" }'>
             </video>
-           
+
             <div class="mt-5">
                 <button id="play-prev" class="btn btn-outline-primary">Prev</button>
                 <button id="play-next" class="btn btn-outline-primary">Next</button>
@@ -89,7 +89,7 @@
       &lt;/div&gt;
       </code>
       <code class="language-javascript">
-      
+
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
@@ -107,9 +107,10 @@
       // The return value is 'player'.
       player.playlistByTag('demo', {
         sorter: sorter,
-        sourceParams: { angle: 13 },
-        autoAdvance: 0,
-        repeat: true
+        sourceParams: { transformation: { angle: 13 } },
+        autoAdvance: true,
+        repeat: true,
+        presentUpcoming: false
       }).then(function(player) {
         var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
@@ -173,7 +174,7 @@
     // The return value is 'player'.
     player.playlistByTag('demo', {
       sorter: sorter,
-      sourceParams: { angle: 13 },
+      sourceParams: { transformation: { angle: 13 } },
       autoAdvance: true,
       repeat: true,
       presentUpcoming: false

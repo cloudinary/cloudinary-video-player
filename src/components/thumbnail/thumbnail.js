@@ -22,7 +22,7 @@ class Thumbnail extends ClickableComponent {
   }
 
   getItem() {
-    return this.options().item;
+    return this.options_.item;
   }
 
   getTitle() {
@@ -34,7 +34,7 @@ class Thumbnail extends ClickableComponent {
   }
 
   getThumbnail() {
-    return this.getItem().poster().url({ transformation: this.options().transformation });
+    return this.getItem().poster().url({ transformation: this.options_.transformation });
   }
 
   handleClick(e) {
