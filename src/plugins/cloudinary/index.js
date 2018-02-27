@@ -188,9 +188,11 @@ class CloudinaryContext extends mixin(Playlistable) {
 
       _recommendations.sourceChangedHandler = () => {
         const trigger = (sources) => {
-          if (sources.length > 0) {
+          if (typeof sources !== 'undefined' && sources.length > 0) {
             const items = sources.map((_source) => itemBuilder(_source));
             this.player.trigger('recommendationschanged', { items });
+          } else {
+            this.player.trigger('recommendationsnoshow');
           }
           _recommendations.sources = sources;
         };

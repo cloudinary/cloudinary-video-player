@@ -27,19 +27,27 @@ class RecommendationsOverlay extends Component {
       this.setItems(...eventData.items);
     });
 
+    this.on(player, 'recommendationsnoshow', this.setDoNotOpen);
     this.on(player, 'recommendationsshow', this.open);
     this.on(player, 'recommendationshide', this.close);
     this.on(player, 'sourcechanged', () => {
       this.clearItems();
       this.close();
     });
+    this.doNotOpen = false;
+  }
+
+  setDoNotOpen() {
+    this.doNotOpen = true;
   }
 
   open() {
-    // Only show controls on close if they were visible from the first place
-    this._showControlsOnClose = this.player().controls();
-    this.player().controls(false);
-    this.el().style.visibility = 'visible';
+    if (!this.doNotOpen) {
+      // Only show controls on close if they were visible from the first place
+      this._showControlsOnClose = this.player().controls();
+      this.player().controls(false);
+      this.el().style.visibility = 'visible';
+    }
   }
 
   clearItems() {
