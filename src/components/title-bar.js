@@ -14,6 +14,12 @@ class TitleBar extends Component {
     this.on(player, 'cldsourcechanged', (_, { source }) => this.setItem(source));
 
     this.setItem = (source) => {
+      if (!source) {
+        this.setTitle('');
+        this.setSubtitle('');
+        return;
+      }
+
       const info = source.info();
 
       this.setTitle(info.title);
@@ -41,13 +47,6 @@ class TitleBar extends Component {
         return;
       }
 
-      // if (subtitleValue().length <= 0) {
-        // componentUtils.show(this.spacerEl)
-        // this.spacerEl.style.display = 'none';
-      // } else {
-        // this.spacerEl.style.display = 'block';
-      // }
-
       this.show();
     };
   }
@@ -61,17 +60,12 @@ class TitleBar extends Component {
       className: 'vjs-title-bar-subtitle'
     });
 
-    // this.spacerEl = dom.createEl('div', {
-      // className: 'vjs-title-bar-spacer'
-    // });
-
     const el = super.createEl('div', {
       append: this.titleEl,
       className: 'vjs-title-bar'
     });
 
     el.appendChild(this.titleEl);
-    // el.appendChild(this.spacerEl);
     el.appendChild(this.subtitleEl);
 
     return el;

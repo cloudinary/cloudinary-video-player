@@ -27,6 +27,8 @@ class CloudinaryContext extends mixin(Playlistable) {
     options = assign({}, DEFAULT_PARAMS, options);
 
     let _source = null;
+    let _lastSource = null;
+    let _lastPlaylist = null;
     let _posterOptions = null;
     let _cloudinaryConfig = null;
     let _transformation = null;
@@ -76,7 +78,9 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       _source = src;
-      refresh();
+      if (!options.skipRefresh) {
+        refresh();
+      }
 
       this.player.trigger('cldsourcechanged', { source: src });
 
@@ -162,6 +166,15 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
+    this.dispose = () => {
+      if (this.playlist()) {
+        this.disposePlaylist();
+      }
+      unsetRecommendations();
+      _source = undefined;
+      _playerEvents.removeAllListeners();
+    };
+
     const setRecommendations = (recommendations, { disableAutoShow = false, itemBuilder = null }) => {
       unsetRecommendations();
 
@@ -173,11 +186,7 @@ class CloudinaryContext extends mixin(Playlistable) {
 
       itemBuilder = itemBuilder || ((source) => ({ source: source instanceof VideoSource ? source : this.buildSource(source), action: () => this.source(source) }));
 
-      _recommendations.sourceChangedHandler = (_, eventData) => {
-        if (!isChangedSourceCloudinary(eventData)) {
-          return;
-        }
-
+      _recommendations.sourceChangedHandler = () => {
         const trigger = (sources) => {
           if (sources.length > 0) {
             const items = sources.map((_source) => itemBuilder(_source));
@@ -224,6 +233,9 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       this.player.src(src.generateSources());
+
+      _lastSource = src;
+      _lastPlaylist = this.playlist();
     };
 
     const posterOptionsForCurrent = () => {
@@ -237,17 +249,28 @@ class CloudinaryContext extends mixin(Playlistable) {
       return opts;
     };
 
-    const isChangedSourceCloudinary = (eventData) =>
-      this.source() && this.source().contains(eventData.to);
+    // Handle external (non-cloudinary plugin) source changes (e.g. by ad plugins)
+    const syncState = (_, data) => {
+      let src = data.to;
 
-    const addSourceChangedListener = () => {
-      const disposer = (_, eventData) => {
-        if (!isChangedSourceCloudinary(eventData)) {
-          this._source = undefined;
+      // When source is cloudinary's
+      if (_lastSource.contains(src)) {
+        // If plugin state doesn't have an active VideoSource
+        if (!this.source()) {
+          // We might have been running a playlist, reset playlist's state.
+          if (_lastPlaylist) {
+            this.playlist(_lastPlaylist);
+          }
+          // Rebuild last source state without calling vjs's 'src' and 'poster'
+          this.source(_lastSource, { skipRefresh: true });
         }
-      };
+      } else {
+        // Used by cloudinary-only components
+        this.player.trigger('cldsourcechanged', {});
 
-      this.on('sourcechanged', disposer);
+        // When source isn't cloudinary's - reset the plugin's state.
+        this.dispose();
+      }
     };
 
     _playerEvents = new EventHandlerRegistry(this.player);
@@ -256,7 +279,7 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     applyWithProps(this, constructorParams);
 
-    addSourceChangedListener();
+    this.on('sourcechanged', syncState);
   }
 
   currentPublicId() {
@@ -265,10 +288,6 @@ class CloudinaryContext extends mixin(Playlistable) {
 
   currentPoster() {
     return this.source() && this.source().poster();
-  }
-
-  dispose() {
-    this._playerEvents.removeAllListeners();
   }
 }
 

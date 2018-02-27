@@ -1,0 +1,203 @@
+@import 'compass/css3/flexbox';
+
+@mixin listLayout() {
+    .cld-plw-layout {
+        &.cld-plw-vertical {
+            @include flex-direction(column);
+            
+            .cld-plw-panel {
+                padding-top: 4px; 
+            }
+
+            .cld-plw-col-list {
+                width: inherit !important;
+            }
+
+            .cld-plw-panel-item {
+                background: none !important;
+
+                img {
+                    display: block;
+                    width: 150px;
+                }
+
+                .cld-plw-item-info-wrap {
+                    left: 160px;
+                }
+
+                .cld-plw-item-title-next {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+.cld-plw-horizontal {
+    @include display-flex(inline-flex);
+    @include flex-direction(row);
+
+    .cld-plw-col-list {
+        @include display-flex(flex);
+        @include flex-direction(row);
+        padding-top: 4px;
+    } 
+
+    .cld-plw-panel {
+        overflow: hidden;
+        @include flex(1);
+        @include display-flex(flex);
+        @include flex-direction(row);
+    
+    }
+
+    .cld-plw-panel-item {
+        border-width: 1px;
+        border-style: solid;
+        transition: border-color .25s;
+        margin: 2px;
+        background-image: none;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }   
+}
+
+
+.cld-plw-vertical {
+
+    @include display-flex(inline-flex);
+    @include flex-direction(row);
+
+    &.cld-plw-layout {
+        > div:first-child {
+            flex: 1;
+        }
+    }
+
+    .cld-plw-col-list {
+        @include display-flex(flex);
+        @include flex-direction(column);
+    } 
+
+    .cld-plw-col-player {
+        padding-right: 4px;
+    }
+
+    .cld-plw-panel {
+        @include flex(1);
+        @include display-flex(flex);
+        @include flex-direction(column);
+    }
+
+    .cld-plw-panel-item {
+        
+        margin-bottom: 4px;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+    }
+}
+
+.cld-plw-panel-item {
+    border-width: 1px;
+    border-style: solid;
+    transition: border-color .25s;
+}
+
+.cld-plw-item-title-next { 
+    font-weight: bold;
+}
+
+.cld-plw-item-info-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    width: 100%;
+    transition: color .25s;
+    @include display-flex(flex);
+    @include flex-direction(row);
+}
+
+.cld-plw-item-title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/*  Default Playlist Layout */
+
+.cld-plw-layout {
+    
+    padding: 4px;
+
+    &.cld-plw-layout-fluid {
+        width: 100%;
+    }
+
+    &.cld-plw-vertical {
+        @include flex-direction(row);
+    }
+
+    &.cld-plw-horizontal {
+        @include flex-direction(column);
+    }
+}
+
+.cld-plw-custom {
+    padding: 4px;
+    .cld-plw-panel-item {
+        background: none !important;
+        margin: 4px 0;
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        img {
+            display: block;
+            width: 150px;
+        }
+
+        .cld-plw-item-info-wrap {
+            left: 160px;
+        }
+
+        .cld-plw-item-title-next {
+            display: block;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    @include listLayout();
+}
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+

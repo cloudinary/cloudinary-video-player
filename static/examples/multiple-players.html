@@ -8,8 +8,13 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <link href="/cld-video-player.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,45 +25,49 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html">&lt;&lt; Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Multiple Players</h2>
-    <p>It&apos;s easy to define players with shared configuration. For example: you can use
-      markup to define different public ids, and use &apos;cld.videoPlayers&apos; to create the players
-      using the shared settings.
-    </p>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary">Multiple Players</h3>
+  
+        <p>It&apos;s easy to define players with shared configuration. For example: you can use
+          markup to define different public ids, and use &apos;cld.videoPlayers&apos; to create the players
+          using the shared settings.
+        </p>
 
-    <h3>Player 1</h3>
-    <div class="row video-container">
-      <video
-        muted
-        data-cld-public-id="oceans"
-        class="cld-video-player cld-video-player-skin-dark">
-      </video>
-    </div>
+        <h3 class="text-primary text-center">Player 1</h3>
+        <div class="video-container">
+          <video
+            muted
+            data-cld-public-id="oceans"
+            class="cld-video-player cld-video-player-skin-dark">
+          </video>
+        </div>
 
-    <h3>Player 2</h3>
-    <div class="row video-container">
-      <video
-        muted
-        data-cld-public-id="negative"
-        class="cld-video-player cld-video-player-skin-light">
-      </video>
-    </div>
+        <h3 class="text-primary text-center">Player 2</h3>
+        <div class="video-container">
+          <video
+            muted
+            data-cld-public-id="negative"
+            class="cld-video-player cld-video-player-skin-light">
+          </video>
+        </div>
 
-    <h3>Player 3</h3>
-    <div class="row video-container">
-      <video
-        muted
-        data-cld-public-id="book"
-        class="cld-video-player cld-video-player-skin-dark">
-      </video>
-    </div>
+        <h3 class="text-primary text-center">Player 3</h3>
+        <div class="row video-container">
+          <video
+            muted
+            data-cld-public-id="book"
+            class="cld-video-player cld-video-player-skin-dark">
+          </video>
+        </div>
 
-    <h3>Example Code:</h3>
-    <pre><code>
-      HTML:
+        <h3 class="text-primary">Example Code:</h3>
+        <pre>
+          <code class="language-html">
+      
 
       &lt;h3&gt;Player 1&lt;/h3&gt;
       &lt;div class="row"&gt;
@@ -94,7 +103,8 @@
       &lt;/div&gt;
 
 
-      JavaScript:
+      </code>
+      <code class="language-javascript">
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: &apos;miki-cloudinary&apos; });
 
@@ -106,6 +116,7 @@
       });
     </code></pre>
   </div>
+</div>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

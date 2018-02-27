@@ -8,8 +8,13 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <link href="/cld-video-player.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -20,10 +25,13 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Fluid Layouts</h2>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Fluid Layouts</h3>
+  
     <p>The player supports the use of fluid layouts for dynamically adjusting the player size
        to it's surrounding contents.<br />
        To use this functionality, simply add the 'cld-fluid' css class to the player, or pass
@@ -31,7 +39,7 @@
        Try decreasing the window size to see the fluid layout support in action.<br />
        Use the toggle button below the player toggle the 'fluid layout support' feature.</p>
 
-    <div class="row video-container">
+    <div class="video-container">
       <center>
         <video
           id="example-player"
@@ -43,15 +51,16 @@
           data-cld-transformation='{ "width": 720, "crop": "limit" }'>
         </video>
 
-        <br />
-        <button id="toggle-fluid" class="btn btn-default">Disable Fluid</button>
+        
+        <button id="toggle-fluid" class="btn btn-lg btn-primary mt-5">Disable Fluid</button>
       </center>
     </div>
 
 
-    <h4>Example Code:</h3>
+    <h3 class="text-primary mt-5">Example Code:</h3>
     <pre>
-      HTML:
+        <code class="language-html">
+            
 
       &lt;video
         id="example-player"
@@ -65,7 +74,9 @@
       &lt;br /&gt;
       &lt;button id="toggle-fluid" class="btn btn-default"&gt;Disable Fluid&lt;/button&gt;
 
-      JavaScript:
+        </code>
+        <code class="language-javascript">
+            
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
@@ -84,6 +95,7 @@
 
         this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
       });
+      </code>
     </pre>
   </div>
 

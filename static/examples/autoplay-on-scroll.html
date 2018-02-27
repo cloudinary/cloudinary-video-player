@@ -8,9 +8,14 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <link href="/cld-video-player.css" rel="stylesheet">
 <link href="/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,24 +25,28 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Autoplay on scroll</h2>
-    <p>Video will start playing once the majority of the player is visible in the viewport,
-      and pause when the majority is out of the viewport.<br>
-      Furthermore, interacting with the player in any other way will stop the above behaviour:
-      (e.g. pausing the video using the 'pause' button and scrolling up and then down
-      will not resume the playing video again).
-    </p>
-    <p>
-      <b>Scroll down to see the player and then up to see the above in action.</b>
-    </p>
+  <div class="container p-4">
+      <nav class="nav mb-2">
+          <a href="index.html"><< Back to examples index</a>
+      </nav>
+      <h1 class="text-primary">Cloudinary Video Player</h1>
+      <h3 class="text-primary">Autoplay on scroll</h3>
+  
+      <p>Video will start playing once the majority of the player is visible in the viewport,
+        and pause when the majority is out of the viewport.<br>
+        Furthermore, interacting with the player in any other way will stop the above behaviour:
+        (e.g. pausing the video using the 'pause' button and scrolling up and then down
+        will not resume the playing video again).
+      </p>
 
-    <h3>Example Code:</h3>
+      <p class="alert alert-primary">
+        <b>Scroll down to see the player and then up to see the above in action.</b>
+      </p>
+
+    <h3 class="text-primary">Example Code:</h3>
     <pre>
-      HTML tag attributes:
-
+        <code class="language-html">
+    
       &lt;video
         id="example-player"
         controls
@@ -46,14 +55,13 @@
         data-cld-public-id="oceans"
         data-cld-autoplay-mode='on-scroll'&gt;
       &lt;/video&gt;
-
-
-      JavaScript:
-
+        </code>
+        <code class="language-javascript">      
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
       var players = cld.videoPlayer('example-player');
+      </code>
     </pre>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sit amet egestas lectus. Aenean sit amet ultricies tortor. Sed feugiat sollicitudin quam ut pretium. Fusce placerat pulvinar metus, et mollis nibh. Morbi dictum maximus odio et facilisis. Quisque ac metus ut dui congue feugiat id at eros. Donec cursus nibh arcu, ac vestibulum diam molestie vitae. Sed a lacinia mi. Suspendisse malesuada eget ex vitae commodo. Nulla eget odio nec est pulvinar ornare a sed enim. Mauris et velit nibh. Morbi bibendum leo tellus, vel cursus augue molestie et. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi et nisi ut dolor varius convallis at eu enim.

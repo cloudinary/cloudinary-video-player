@@ -8,12 +8,15 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
+
 <link href="/cld-video-player.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.8.0/videojs.ima.min.css" /> -->
 <link href="/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,44 +32,45 @@
             <a href="index.html"><< Back to examples index</a>
         </nav>
         <h1 class="text-primary">Cloudinary Video Player</h1>
-        <h3 class="text-primary mb-4">Playlist by tag</h3>
+        <h3 class="text-primary mb-4">VAST and VPAID</h3>
+  
 
-        <p>Cloudinary allows you to add tags to an uploaded resource.<br />
-          It also allows you to <a href="http://cloudinary.com/documentation/image_transformations#client_side_resource_lists">list resources with a specified tag</a>.
-          The player leverages this ability and supports a creation of a playlist by a specified tag.
-          <br><b>NOTE: In order to support resource listing by tag (required for 'playlist by tag' to work), make sure to enable it in the Cloudinary console: Settings | Security | Restricted image types | Resource list</b>
-        </p>
+    <div class="video-container">
+      <video
+        id="example-player"
+        controls
+        muted
+        autoplay
+        class="cld-video-player cld-video-player-skin-light"
+        width="500"
+        height="500"
+        data-cld-transformation='{ "width": 500, "crop": "limit" }'>
+      </video>
+      
+      <div class="btn-group mt-5">
+          <button id="play-prev" class="btn btn-lg btn-outline-primary">Prev</button>
+          <button id="play-next" class="btn btn-lg btn-outline-primary">Next</button>
+      </div>
+      
+      <div class="mt-5" id="source-data">
+          <div class="alert alert-primary" id="public-id-placeholder"></div>
+          <div class="alert alert-primary" id="source-url-placeholder"></div>
+      </div>
 
-        <div class="video-container mt-5">
+      
 
-            <video
-              id="example-player"
-              controls
-              muted
-              autoplay
-              class="cld-video-player cld-video-player-skin-light"
-              width="500"
-              height="295"
-              data-cld-transformation='{ "width": 500, "crop": "limit" }'>
-            </video>
-
-            <div class="mt-5">
-                <button id="play-prev" class="btn btn-outline-primary">Prev</button>
-                <button id="play-next" class="btn btn-outline-primary">Next</button>
-            </div>
-
-            <div id="source-data" class="mt-5">
-              <div class="alert alert-primary" id="public-id-placeholder"></div>
-              <div class="alert alert-primary" id="source-url-placeholder"></div>
-            </div>
-
-            <div class="alert alert-secondary text-center mt-4 p-4 w-100" id="playlist-data"></div>
+      <div class="alert alert-secondary text-center mt-4 p-4 w-100" id="playlist-data">
+      </div>
     </div>
 
-    <h3 class="text-primary">Example Code:</h3>
+    <h3 class="text-primary mt-5">Example Code:</h3>
+    <pre><code>
+        <code class="language-html">
 
-    <pre>
-      <code class="language-html">
+      &lt;!-- Cloudinary Video Player Dependencies --&gt;
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"&gt;&lt;/script&gt;
+      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"&gt;&lt;/script&gt;
+      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"&gt;&lt;/script&gt;
 
       &lt;video
         id="example-player"
@@ -87,13 +91,23 @@
 
       &lt;div class="well" id="playlist-data"&gt;
       &lt;/div&gt;
-      </code>
-      <code class="language-javascript">
+
+        </code>
+        <code class="language-javascript"></code>
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
       // Initialize player
-      var player = cld.videoPlayer('example-player');
+      var player = cld.videoPlayer('example-player', {
+        plugins: {
+          vastClient: {
+            adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
+            adCancelTimeout: 5000,
+            adsEnabled: true,
+            playAdAlways: true
+          }
+        }
+      });
 
       // Pass a sorter to sort list in alphabetical order by publicId
       var sorter = function(a, b) {
@@ -107,10 +121,9 @@
       // The return value is 'player'.
       player.playlistByTag('demo', {
         sorter: sorter,
-        sourceParams: { transformation: { angle: 13 } },
-        autoAdvance: true,
-        repeat: true,
-        presentUpcoming: false
+        sourceParams: { angle: 13 },
+        autoAdvance: 0,
+        repeat: true
       }).then(function(player) {
         var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
@@ -153,14 +166,25 @@
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-vast-vpaid/2.0.2/videojs_5.vast.vpaid.js"></script>
+
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.8.0/videojs.ima.js"></script> -->
 
   <!-- Actual code -->
   <script type="text/javascript">
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
+    var adTagUrl = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator="
+
     // Initialize player
-    var player = cld.videoPlayer('example-player', {})
+    var player = cld.videoPlayer('example-player', {
+      ima: { adTagUrl }
+    });
+
+    player.on('sourcechanged', () => {
+      player.ima().playAd();
+    })
 
     // Pass a sorter to sort list in alphabetical order by publicId
     var sorter = function(a, b) {
@@ -174,8 +198,8 @@
     // The return value is 'player'.
     player.playlistByTag('demo', {
       sorter: sorter,
-      sourceParams: { transformation: { angle: 13 } },
-      autoAdvance: true,
+      sourceParams: { angle: 13 },
+      autoAdvance: 5,
       repeat: true,
       presentUpcoming: false
     }).then(function(player) {
@@ -211,3 +235,5 @@
   </script>
 </body>
 </html>
+
+

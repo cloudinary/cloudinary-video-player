@@ -1,20 +1,20 @@
 import videojs from 'video.js';
+import isObj from 'is-obj';
 import './components';
 import * as plugins from 'plugins';
 import * as Utils from 'utils';
 import assign from 'utils/assign';
-import { find } from 'utils/find';
-import { startsWith } from 'utils/string';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
+import PlaylistWidget from './components/playlist/playlist-widget';
+import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid']);
-const CLASS_PREFIX = 'cld-video-player';
+  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget']);
 
 const registerPlugin = videojs.plugin;
 
@@ -93,8 +93,6 @@ const extractOptions = (elem, options) => {
   return { playerOptions, videojsOptions: options };
 };
 
-const cssClassFromSkin = (skin) => `${CLASS_PREFIX}-skin-${skin}`;
-
 const overrideDefaultVideojsComponents = () => {
   const Player = videojs.getComponent('Player');
   let children = Player.prototype.options_.children;
@@ -118,7 +116,8 @@ const overrideDefaultVideojsComponents = () => {
   children[children.indexOf('volumeMenuButton')] = 'triangleVolumeMenuButton';
 
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
-  children.splice(children.indexOf('progressControl'), 0, 'spacer');
+  // Also add a blank div underneath the progress control to stop bubbling up pointer events.
+  children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
   children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'playlistNextButton');
@@ -176,11 +175,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
 
-      let currentSkin = find(this.el().classList, (cls) => startsWith(cls, `${CLASS_PREFIX}-skin-`));
-
-      if (!currentSkin) {
-        this.videojs.addClass(cssClassFromSkin(defaults.skin));
-      }
+      setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 
       if (videojs.browser.IE_VERSION === 11) {
         this.videojs.addClass('cld-ie11');
@@ -188,11 +183,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = () => {
+      initIma();
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
+    };
+
+    const initIma = () => {
+      const opts = _options.ima;
+
+      if (!opts) {
+        return;
+      }
+
+      const { adTagUrl, prerollTimeout, postrollTimeout } = opts;
+
+      this.videojs.ima({
+        id: this.el().id,
+        adTagUrl,
+        disableFlashAds: true,
+        prerollTimeout: prerollTimeout || 5000,
+        postrollTimeout: postrollTimeout || 5000,
+        debug: true
+      });
     };
 
     const initAutoplay = () => {
@@ -227,6 +242,25 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    let _playlistWidget = null;
+
+    const initPlaylistWidget = () => {
+      this.videojs.on('playlistcreated', () => {
+        if (_playlistWidget) {
+          _playlistWidget.dispose();
+        }
+        const plwOptions = _options.playlistWidget;
+
+        if (isObj(plwOptions)) {
+          if (_options.fluid) {
+            plwOptions.fluid = true;
+          }
+
+          _playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
+        }
+      });
+    };
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -235,6 +269,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();
+    initPlaylistWidget();
 
     this.videojs.ready(() => {
       onReady();
@@ -243,6 +278,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
     });
+
+    this.playlistWidget = (options) => {
+      if (!options && !_playlistWidget) {
+        return false;
+      }
+
+      if (!options && _playlistWidget) {
+        return _playlistWidget;
+      }
+
+      if (isObj(options)) {
+        _playlistWidget.options(options);
+      }
+
+      return _playlistWidget;
+    };
   }
 
   static all(selector, ...args) {
@@ -293,6 +344,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.posterOptions(options);
   }
 
+  skin(name) {
+    if (typeof name === 'string' && name !== undefined) {
+      setSkinClassPrefix(this.videojs, name);
+
+      if (this.playlistWidget()) {
+        this.playlistWidget().setSkin();
+      }
+    }
+
+    return skinClassPrefix(this.videojs);
+  }
+
   playlist(sources, options = {}) {
     return this.videojs.cloudinary.playlist(sources, options);
   }
@@ -317,6 +380,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs.fluid(bool);
+    this.videojs.trigger('fluid', bool);
     return this;
   }
 
@@ -459,6 +523,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.controls(bool);
 
     return this;
+  }
+
+  ima() {
+    return {
+      playAd: this.videojs.ima.playAd
+    };
   }
 
   loop(bool) {

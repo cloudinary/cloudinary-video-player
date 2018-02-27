@@ -102,10 +102,15 @@ class Playlist {
     this.player = () => _context.player;
 
     this.dispose = () => {
-      this.player().trigger('upcomingvideohide');
       resetAutoAdvance();
       resetPresentUpcoming();
       resetRecommendations();
+    };
+
+    this.resetState = () => {
+      this.repeat(repeat);
+      this.autoAdvance(autoAdvance);
+      this.presentUpcoming(presentUpcoming);
     };
 
     const setupAutoAdvance = () => {
@@ -118,12 +123,15 @@ class Playlist {
       }
 
       const trigger = () => {
-        _autoAdvance.timeout = setTimeout(() => {
-          this.playNext();
-        }, delay * 1000);
+        if (this.player().ended()) {
+          _autoAdvance.timeout = setTimeout(() => {
+            this.playNext();
+          }, delay * 1000);
+        }
       };
 
       _autoAdvance = { delay, trigger };
+
       _context.on('ended', _autoAdvance.trigger);
     };
 
@@ -177,6 +185,8 @@ class Playlist {
     };
 
     const resetPresentUpcoming = () => {
+      this.player().trigger('upcomingvideohide');
+
       if (!_presentUpcoming) {
         _presentUpcoming = {};
       }
@@ -249,10 +259,7 @@ class Playlist {
 
     sources.forEach((source) => this.enqueue(source));
 
-    this.repeat(repeat);
-    this.autoAdvance(autoAdvance);
-    this.presentUpcoming(presentUpcoming);
-    this.currentIndex(0);
+    this.resetState();
   }
 
   playItem(item) {

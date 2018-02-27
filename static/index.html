@@ -8,7 +8,11 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <link href="/cld-video-player.css" rel="stylesheet">
 <link href="/style.css" rel="stylesheet">
 
@@ -20,24 +24,27 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <h1>Cloudinary Video Player</h1>
-    <h2>Examples</h2>
+    <div class="container p-4">
+        
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Examples</h3>
+  
     <p>Below is an index to some code examples:</p>
-    <ul>
-      <li><a href="api.html">API and Events</a></li>
-      <li><a href="playlist.html">Playlist</a></li>
-      <li><a href="playlist-by-tag.html">Playlist by Tag</a></li>
-      <li><a href="autoplay-on-scroll.html">Autoplay on Scroll</a></li>
-      <li><a href="multiple-players.html">Multiple Players</a></li>
-      <li><a href="adaptive-streaming.html">Adaptive Streaming</a></li>
-      <li><a href="analytics.html">Analytics</a></li>
-      <li><a href="components.html">Components</a></li>
-      <li><a href="recommendations.html">Recommendations</a></li>
-      <li><a href="fluid.html">Fluid Layouts</a></li>
+    <ul class="list-group mb-5">
+      <li class="list-group-item"><a href="api.html">API and Events</a></li>
+      <li class="list-group-item"><a href="playlist.html">Playlist</a></li>
+      <li class="list-group-item"><a href="playlist-by-tag.html">Playlist by Tag</a></li>
+      <li class="list-group-item"><a href="autoplay-on-scroll.html">Autoplay on Scroll</a></li>
+      <li class="list-group-item"><a href="multiple-players.html">Multiple Players</a></li>
+      <li class="list-group-item"><a href="adaptive-streaming.html">Adaptive Streaming</a></li>
+      <li class="list-group-item"><a href="analytics.html">Analytics</a></li>
+      <li class="list-group-item"><a href="components.html">Components</a></li>
+      <li class="list-group-item"><a href="recommendations.html">Recommendations</a></li>
+      <li class="list-group-item"><a href="fluid.html">Fluid Layouts</a></li>
+      <li class="list-group-item"><a href="vast-vpaid.html">VAST & VPAID support</a></li>
     </ul>
 
-    <div class="row video-container">
+    <div class="video-container mt-5">
       <video
         id="example-player"
         controls
@@ -46,10 +53,12 @@
         data-cld-source='{ "publicId": "oceans", "transformation": { "width": 500 }, "info": { "title": "oceans", "subtitle": "short movie about oceans" } }'>
       </video>
 
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
+      <div class="mt-5" id="source-data">
+          <div class="alert alert-primary" id="public-id-placeholder"></div>
+          <div class="alert alert-primary" id="source-url-placeholder"></div>
+        </div>
+
+     
     </div>
   </div>
 
@@ -68,8 +77,7 @@
     var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
 
     // Initialize player
-    var player = cld.videoPlayer('example-player', {
-    });
+    var player = cld.videoPlayer('example-player');
 
     function updateSource() {
       var divElem = document.querySelector("div#source-data");

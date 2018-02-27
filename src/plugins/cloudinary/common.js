@@ -21,7 +21,7 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
   return { publicId, options };
 };
 
-const compareSources = (source1, source2) => {
+const isSrcEqual = (source1, source2) => {
   let src1 = source1;
   let src2 = source2;
 
@@ -67,4 +67,4 @@ const mergeTransformation = (transformation1, transformation2) => {
   return newTransformation.fromOptions(transformation2);
 };
 
-export { normalizeOptions, compareSources, mergeCloudinaryConfig, mergeTransformation };
+export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation };

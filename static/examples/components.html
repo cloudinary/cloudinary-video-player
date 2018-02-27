@@ -8,9 +8,14 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="/cld-video-player.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 <link href="/style.css" rel="stylesheet">
 
 <style type="text/css">
@@ -36,10 +41,14 @@
 <![endif]-->
 </head>
 <body>
-  <div class="container">
-    <a href="index.html"><< Back to examples index</a>
-    <h1>Cloudinary Video Player</h1>
-    <h2>Components</h2>
+    <div class="container p-4">
+        <nav class="nav mb-2">
+            <a href="index.html"><< Back to examples index</a>
+        </nav>
+        <h1 class="text-primary">Cloudinary Video Player</h1>
+        <h3 class="text-primary mb-4">Components</h3>
+
+  
     <p>The player is based on VideoJS. That means that you may customise the
       Player's visual components (buttons, menus, etc') by using VideoJS's <a href="https://github.com/videojs/video.js/blob/master/docs/guides/components.md">components</a>
       architecture.
@@ -52,7 +61,7 @@
       <a href="https://github.com/videojs/video.js/blob/master/docs/guides/components.md">Read more about VideoJS components</a>.
     </p>
 
-    <div class="row video-container">
+    <div class="video-container">
       <video
         id="example-player"
         controls
@@ -62,15 +71,15 @@
         data-cld-transformation='{ "width": 500, "crop": "limit" }'>
       </video>
 
-      <div id="source-data">
-        <span id="public-id-placeholder"></span><br>
-        <span id="source-url-placeholder"></span>
-      </div>
-    </div>
 
-    <h3>Example Code:</h3>
-    <pre><code>
-      HTML:
+      <div class="mt-5" id="source-data">
+        <div class="alert alert-primary" id="public-id-placeholder"></div>
+        <div class="alert alert-primary" id="source-url-placeholder"></div>
+      </div>
+     </div>
+    <h3 class="text-primary mt-5 mb-5">Example Code:</h3>
+    <pre><code class="language-css">
+      
 
       &lt;!-- We used FontAwesome for the 'Previous' and 'Next' controlBar buttons --&gt;
       &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
@@ -90,7 +99,8 @@
           content: "\f049";
         }
       &lt;/style&gt;
-
+      </code>
+      <code class="language-html">
       &lt;video
         id="example-player"
         controls
@@ -105,8 +115,9 @@
         &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
       &lt;/div&gt;
 
+        </code>
 
-      JavaScript:
+      <code class="language-javascript">
 
       // Code for creating the VideoJS components
       // ===============================================
