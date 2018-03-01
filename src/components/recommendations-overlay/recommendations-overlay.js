@@ -79,6 +79,7 @@ class RecommendationsOverlay extends Component {
   }
 
   setItems(primary, ...secondary) {
+    this.doNotOpen = false;
     secondary = secondary.slice(0, MAXIMUM_ITEMS - 1);
     this._content.setItems(primary, ...secondary);
   }
