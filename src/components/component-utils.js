@@ -3,7 +3,7 @@ const hide = (el) => {
 };
 
 const show = (el) => {
-  el.style.display = 'block';
+  el.style.display = '';
 };
 
 const setText = (el, text) => {
