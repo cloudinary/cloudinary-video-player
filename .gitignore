@@ -12,3 +12,5 @@ yarn-error.log
 env.js
 dist/
 .DS_Store
+
+\.history/
