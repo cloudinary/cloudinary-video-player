@@ -1,4 +1,5 @@
 @import '../../assets/styles/mixins/aspect-ratio';
+@import '../../assets/styles/mixins/mixins.scss';
 @import 'compass/css3/flexbox';
 @import "compass/functions/lists"; // compass-mixins bug: background-size uses 'compact'
 @import "compass/css3/background-size";
@@ -59,28 +60,34 @@
           background: rgba(#000000, 0.6);
           text-align: left;
           padding: 3%;
+          min-width: 0; // for use with flex and white-space: nowrap 
 
           h2 {
+            @include ellipsis;
             padding: 0 0 0 0;
-            font-size: 1.6em;
+            font-size: 1.7em;
             margin: 0 0 1em 0;
             font-weight: 600;
           }
 
           h3 {
+            @include ellipsis;
             padding: 0 0 0 0;
-            font-size: 1.55em;
+            font-size: 1.65em;
             margin: 0 0 1.3em 0;
-            font-weight: 300;
+            font-weight: 500;
           }
 
           p {
             padding: 0 0 0 0;
             margin: 0 0 0 0;
-            display: block;
             font-size: 1.16em;
-            overflow: scroll;
+            overflow: hidden;
             line-height: 1.72em;
+            font-weight: 400;
+            @media only screen and (max-width: 768px) {
+              display: none;
+            }
           }
         }
       }
