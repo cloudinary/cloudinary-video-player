@@ -15,7 +15,7 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
     this.setTitle(info.title);
     this.setSubtitle(info.subtitle);
 
-    const descLength = 180;
+    const descLength = 380;
     const description = info.description.length > descLength ? info.description.substring(0, descLength) + '...' : info.description;
     this.setDescription(description);
   }
