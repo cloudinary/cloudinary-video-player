@@ -176,7 +176,7 @@ $icon-font-path: '../fonts' !default;
   &.cld-video-player-skin-light {
     @include skin("light", $primary-foreground-color: #0E2F5A,
       $primary-background-color: #FFFFFF,
-      $active-foreground-color: #FFFFFF,
+      $active-foreground-color: #0E2F5A,
       $active-background-color: #0078FF,
       $secondary-dark-color: #0E2F5A,
       $secondary-light-color: #D0DAE2,

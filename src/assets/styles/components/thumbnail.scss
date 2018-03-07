@@ -23,7 +23,13 @@
         background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,1) 100%);
         background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 60%,rgba(0,0,0,1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=0 );
-        opacity: 1; 
+        opacity: 1;
+
+        .cld-video-player-skin-light & {
+            top: 60%;
+            max-height: 40%;
+            background: #fff;
+        }
     }
         
     .cld-thumbnail-img {
@@ -33,6 +39,36 @@
 
 .cld-thumbnail {
     @include thumbnail();
+
+    .cld-video-player-skin-light & {
+        &.active {
+            border: 1px solid #0078FF;
+
+            &:before {
+                background: rgba(0, 119, 255, 0.8);
+            }
+    
+            .cld-plw-item-info-wrap {
+                color: #fff;
+            }
+
+            &:hover {
+                .cld-plw-item-info-wrap {
+                    color: #fff;
+                }
+            }
+        }    
+    }
+
+    .cld-video-player-skin-dark & {
+        &.active {
+            border: 1px solid #FF620C;
+    
+            .cld-plw-item-info-wrap {
+                color: #FF620C;
+            }
+        }    
+    }
 }
 
 @media only screen and (max-width: 768px) {
