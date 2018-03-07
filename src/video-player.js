@@ -144,6 +144,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (source) {
         this.source(source);
       }
+      let maxTries = (options.videojsOptions.maxTries) ? options.videojsOptions.maxTries : 3;
+      let videoReadyTimeout = (options.videojsOptions.videoTimeout) ? options.videojsOptions.videoTimout : 55000;
+      this.reTryVideo(maxTries, videoReadyTimeout);
     };
 
     const setExtendedEvents = () => {
@@ -264,6 +267,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
+
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
 
@@ -274,10 +278,30 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.ready(() => {
       onReady();
 
+
       if (ready) {
         ready(this);
       }
     });
+
+
+    this.nbCalls = 0;
+    this.reTryVideo = (maxNumberOfCalls, timeout) => {
+      if (!this.isVideoReady()) {
+        if (this.nbCalls < maxNumberOfCalls) {
+          this.nbCalls++;
+          this.videojs.setTimeout(this.reTryVideo, timeout);
+        } else {
+          this.videojs.trigger('error');
+        }
+      }
+
+    };
+
+    this.isVideoReady = () => {
+      let s = this.videojs.readyState();
+      return s === 4;
+    };
 
     this.playlistWidget = (options) => {
       if (!options && !_playlistWidget) {
