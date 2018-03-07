@@ -292,7 +292,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           this.nbCalls++;
           this.videojs.setTimeout(this.reTryVideo, timeout);
         } else {
-          this.videojs.trigger('error');
+          let e = new Error('Video is not ready please try later');
+          this.videojs.trigger('error', e);
         }
       }
 
