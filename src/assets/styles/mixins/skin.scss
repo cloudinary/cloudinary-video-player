@@ -76,6 +76,15 @@
     }
   }
 
+  // light skin icon opacity on hover 
+  @if ($light) { 
+    .video-js button, .vjs-volume-menu-button { 
+      &:hover { 
+        opacity: 0.9; 
+      } 
+    }   
+  }
+
   .vjs-triangle-volume-bar {
     .vjs-triangle-volume-bar-level {
       border-color: transparent transparent $control-bar-active-color transparent;
