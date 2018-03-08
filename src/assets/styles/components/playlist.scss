@@ -4,9 +4,9 @@
     .cld-plw-layout {
         &.cld-plw-vertical {
             @include flex-direction(column);
-            
+
             .cld-plw-panel {
-                padding-top: 4px; 
+                padding-top: 4px;
             }
 
             .cld-plw-col-list {
@@ -40,22 +40,17 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(row);
-        padding-top: 4px;
-    } 
+    }
 
     .cld-plw-panel {
         overflow: hidden;
         @include flex(1);
         @include display-flex(flex);
         @include flex-direction(row);
-    
+
     }
 
     .cld-plw-panel-item {
-        border-width: 1px;
-        border-style: solid;
-        transition: border-color .25s;
-        margin: 2px;
         background-image: none;
 
         &:first-child {
@@ -65,7 +60,7 @@
         &:last-child {
             margin-right: 0;
         }
-    }   
+    }
 }
 
 
@@ -83,7 +78,7 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(column);
-    } 
+    }
 
     .cld-plw-col-player {
         padding-right: 4px;
@@ -96,9 +91,9 @@
     }
 
     .cld-plw-panel-item {
-        
+
         margin-bottom: 4px;
-        
+
         &:last-child {
             margin-bottom: 0;
         }
@@ -106,13 +101,7 @@
     }
 }
 
-.cld-plw-panel-item {
-    border-width: 1px;
-    border-style: solid;
-    transition: border-color .25s;
-}
-
-.cld-plw-item-title-next { 
+.cld-plw-item-title-next {
     font-weight: bold;
 }
 
@@ -137,9 +126,6 @@
 /*  Default Playlist Layout */
 
 .cld-plw-layout {
-    
-    padding: 4px;
-
     &.cld-plw-layout-fluid {
         width: 100%;
     }
@@ -184,20 +170,3 @@
 @media only screen and (max-width: 768px) {
     @include listLayout();
 }
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
