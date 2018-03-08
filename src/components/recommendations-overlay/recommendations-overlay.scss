@@ -126,6 +126,10 @@
             left: 0;
             padding: 9% 5% 4.5% 5%;
 
+            .cld-video-player-skin-light & {
+              padding: 5% 0 5% 7%;
+            }
+
             span {
               @include flex(1);
 
