@@ -48,9 +48,12 @@ class PlaylistPanel extends Component {
 
     const items = [];
     const numOfItems = this.options_.total;
+    let index = playlist.currentIndex();
+    let source = playlist.list()[index];
+    items.push(source);
 
     while (items.length < numOfItems) {
-      let index = playlist.nextIndex(index);
+      index = playlist.nextIndex(index);
       if (index === -1) {
         if (!repeat && items.length > 0) {
           break;
@@ -59,7 +62,7 @@ class PlaylistPanel extends Component {
         index = 0;
       }
 
-      const source = playlist.list()[index];
+      source = playlist.list()[index];
       items.push(source);
     }
 
@@ -74,7 +77,8 @@ class PlaylistPanel extends Component {
     items.forEach((source, index) => {
       const playlistItem = new PlaylistPanelItem(this.player(), videojs.mergeOptions(this.options_, {
         item: source,
-        next: index === 0
+        next: index === 1,
+        current: index === 0
       }));
 
       const el = playlistItem.el();

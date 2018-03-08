@@ -6,7 +6,7 @@
     width: 100%;
     overflow: hidden;
     font-size: 1em;
-    text-align: left; 
+    text-align: left;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -31,7 +31,7 @@
             background: #fff;
         }
     }
-        
+
     .cld-thumbnail-img {
         display: none;
     }
@@ -41,13 +41,13 @@
     @include thumbnail();
 
     .cld-video-player-skin-light & {
-        &.active {
+        &.cld-plw-panel-item-active {
             border: 1px solid #0078FF;
 
             &:before {
                 background: rgba(0, 119, 255, 0.8);
             }
-    
+
             .cld-plw-item-info-wrap {
                 color: #fff;
             }
@@ -57,17 +57,17 @@
                     color: #fff;
                 }
             }
-        }    
+        }
     }
 
     .cld-video-player-skin-dark & {
-        &.active {
+        &.cld-plw-panel-item-active {
             border: 1px solid #FF620C;
-    
+
             .cld-plw-item-info-wrap {
                 color: #FF620C;
             }
-        }    
+        }
     }
 }
 
@@ -76,4 +76,3 @@
         background: none;
     }
 }
-
