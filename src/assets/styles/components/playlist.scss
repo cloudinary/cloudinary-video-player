@@ -40,7 +40,6 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(row);
-        padding-top: 4px;
     } 
 
     .cld-plw-panel {
@@ -52,10 +51,6 @@
     }
 
     .cld-plw-panel-item {
-        border-width: 1px;
-        border-style: solid;
-        transition: border-color .25s;
-        margin: 2px;
         background-image: none;
 
         &:first-child {
@@ -104,12 +99,6 @@
         }
 
     }
-}
-
-.cld-plw-panel-item {
-    border-width: 1px;
-    border-style: solid;
-    transition: border-color .25s;
 }
 
 .cld-plw-item-title-next { 
