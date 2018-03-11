@@ -169,7 +169,7 @@
         &:active, &:hover {
           .vjs-recommendations-overlay-item-primary-content {
             @if ($opaque == true) {
-              color: $active-foreground-color;
+              color: $primary-background-color;
               background-color: rgba($active-background-color, 0.8);
             }
           }
@@ -180,7 +180,7 @@
         &:active, &:hover {
           div {
             @if ($opaque == true) {
-              color: $active-foreground-color;
+              color: $primary-background-color;
               background-color: rgba($active-background-color, 0.8);
             }
           }
@@ -245,18 +245,6 @@
 
   .cld-plw-panel-item {
     border-color: $secondary-light-color;
-
-    &:hover {
-      &:after { 
-        content: ""; 
-        position: absolute; 
-        width: 100%; 
-        height: 100%; 
-        top: 0px; 
-        left: 0px; 
-        background-color: rgba(255, 255, 255, 0.2); 
-      }
-    }
   }
 
   @if ($name == "light") {

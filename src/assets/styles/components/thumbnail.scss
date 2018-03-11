@@ -6,24 +6,11 @@
     width: 100%;
     overflow: hidden;
     font-size: 1em;
-    text-align: left; 
+    text-align: left;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 
-
-    &:before {
-        content: '';
-        position: absolute;
-        top: 40%;
-        max-height: 60%;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 80%);
-        opacity: 1; 
-    }
-        
     .cld-thumbnail-img {
         display: none;
     }
@@ -31,11 +18,67 @@
 
 .cld-thumbnail {
     @include thumbnail();
+
+    .cld-video-player-skin-light & {
+        .cld-plw-item-info-wrap {
+            background: #fff;
+            padding: 5% 0 5% 7%;
+        }
+
+        &.cld-plw-panel-item-active {
+            border: 1px solid #0078FF;
+
+            .cld-plw-item-info-wrap {
+                background: rgba(0, 119, 255, 0.8);
+            }
+
+            .cld-plw-item-info-wrap {
+                color: #fff;
+            }
+
+            &:hover {
+                .cld-plw-item-info-wrap {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .cld-video-player-skin-dark & {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 40%;
+            max-height: 60%;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 80%);
+            opacity: 1;    
+        }
+
+        &.cld-plw-panel-item-active {
+            border: 1px solid #FF620C;
+
+            .cld-plw-item-info-wrap {
+                color: #FF620C;
+            }
+        }
+    }
 }
+
+.cld-plw-panel-item:hover:after {
+    content: ""; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    top: 0px; 
+    left: 0px; 
+    background-color: rgba(255, 255, 255, 0.2); 
+  }
 
 @media only screen and (max-width: 768px) {
     .cld-thumbnail:before {
         background: none;
     }
 }
-

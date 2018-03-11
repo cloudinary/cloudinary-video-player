@@ -4,9 +4,9 @@
     .cld-plw-layout {
         &.cld-plw-vertical {
             @include flex-direction(column);
-            
+
             .cld-plw-panel {
-                padding-top: 4px; 
+                padding-top: 4px;
             }
 
             .cld-plw-col-list {
@@ -40,14 +40,14 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(row);
-    } 
+    }
 
     .cld-plw-panel {
         overflow: hidden;
         @include flex(1);
         @include display-flex(flex);
         @include flex-direction(row);
-    
+
     }
 
     .cld-plw-panel-item {
@@ -60,7 +60,7 @@
         &:last-child {
             margin-right: 0;
         }
-    }   
+    }
 }
 
 
@@ -78,7 +78,7 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(column);
-    } 
+    }
 
     .cld-plw-col-player {
         padding-right: 4px;
@@ -91,9 +91,9 @@
     }
 
     .cld-plw-panel-item {
-        
+
         margin-bottom: 4px;
-        
+
         &:last-child {
             margin-bottom: 0;
         }
@@ -101,7 +101,7 @@
     }
 }
 
-.cld-plw-item-title-next { 
+.cld-plw-item-title-next {
     font-weight: bold;
 }
 
@@ -109,7 +109,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 10px;
+    padding: 5% 0 5% 7%;
     width: 100%;
     transition: color .25s;
     @include display-flex(flex);
@@ -126,9 +126,6 @@
 /*  Default Playlist Layout */
 
 .cld-plw-layout {
-    
-    padding: 4px;
-
     &.cld-plw-layout-fluid {
         width: 100%;
     }
@@ -173,20 +170,3 @@
 @media only screen and (max-width: 768px) {
     @include listLayout();
 }
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-

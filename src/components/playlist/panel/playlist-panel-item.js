@@ -31,12 +31,16 @@ class PlaylistPanelItem extends Thumbnail {
     this.player().cloudinary.playlist().playAtIndex(index);
   }
 
-  isNext() {
-    return this.options_.next;
+  isCurrent() {
+    return this.options_.current;
   }
 
   getTitle() {
     return super.getTitle();
+  }
+
+  getDuration() {
+    return super.getDuration();
   }
 
   createEl() {
@@ -47,12 +51,14 @@ class PlaylistPanelItem extends Thumbnail {
     const info = dom.createEl('div', { className: 'cld-plw-item-info-wrap' });
     const titleWrap = dom.createEl('div', { className: 'cld-plw-item-title' });
 
-    if (this.isNext()) {
-      const nextEl = dom.createEl('span', {
-        className: 'cld-plw-item-title-next'
-      }, {}, 'Next Up: ');
+    if (this.isCurrent()) {
+      el.classList.add('cld-plw-panel-item-active');
 
-      titleWrap.appendChild(nextEl);
+      const currEl = dom.createEl('span', {
+        className: 'cld-plw-item-title-curr'
+      }, {}, 'Now Playing: ');
+
+      titleWrap.appendChild(currEl);
     }
 
     const title = dom.createEl('span', { className: 'cld-plw-item-title' }, {}, this.getTitle());
@@ -77,5 +83,3 @@ class PlaylistPanelItem extends Thumbnail {
 videojs.registerComponent('playlistPanelItem', PlaylistPanelItem);
 
 export default PlaylistPanelItem;
-
-
