@@ -28,6 +28,8 @@ $icon-font-path: '../fonts' !default;
 }
 
 .cld-video-player {
+  font-family: 'Fira Sans';
+
   &.cld-fluid {
     @extend .vjs-fluid;
   }
