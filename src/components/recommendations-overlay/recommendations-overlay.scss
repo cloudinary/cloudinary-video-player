@@ -65,7 +65,7 @@
           h2 {
             @include ellipsis;
             padding: 0 0 0 0;
-            font-size: 1.7em;
+            font-size: 18px;
             margin: 0 0 1em 0;
             font-weight: 600;
           }
@@ -73,7 +73,7 @@
           h3 {
             @include ellipsis;
             padding: 0 0 0 0;
-            font-size: 1.65em;
+            font-size: 20px;
             margin: 0 0 1.3em 0;
             font-weight: 500;
           }
@@ -81,11 +81,34 @@
           p {
             padding: 0 0 0 0;
             margin: 0 0 0 0;
-            font-size: 1.16em;
+            font-size: 14px;
             overflow: hidden;
-            line-height: 1.72em;
+            line-height: 1.4em;
             font-weight: 400;
-            @media only screen and (max-width: 768px) {
+          }
+
+          @media only screen and (max-width: 1050px) {
+            h2 {
+              font-size: 16px
+            }
+
+            h3 {
+              font-size: 18px;
+            }
+
+            p {
+              font-size: 12px;
+            }
+          }
+
+          @media only screen and (max-width: 900px) {
+            p {
+              font-size: 10px;
+            }
+          }
+
+          @media only screen and (max-width: 768px) {
+            p {
               display: none;
             }
           }
@@ -141,6 +164,8 @@
 
               &.vjs-recommendations-overlay-item-secondary-title {
                 @include flex(2.3);
+                font-size: 13px;
+                max-width: 50%;              
               }
 
               &.vjs-recommendations-overlay-item-secondary-duration {

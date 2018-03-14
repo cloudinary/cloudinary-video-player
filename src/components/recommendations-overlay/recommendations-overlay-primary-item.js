@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import flowtype from '../../utils/flowtype';
 import RecommendationsOverlayItem from './recommendations-overlay-item';
 import componentUtils from '../component-utils';
 
@@ -15,7 +14,7 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
     this.setTitle(info.title);
     this.setSubtitle(info.subtitle);
 
-    const descLength = 380;
+    const descLength = 300;
     const description = info.description.length > descLength ? info.description.substring(0, descLength) + '...' : info.description;
     this.setDescription(description);
   }
@@ -71,8 +70,6 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
 
     el.appendChild(this.poster);
     el.appendChild(this.content);
-
-    flowtype(this.content, { minFont: 8 });
 
     return el;
   }

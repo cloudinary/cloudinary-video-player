@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import flowtype from '../../utils/flowtype';
 import RecommendationsOverlaySecondaryItem from './recommendations-overlay-secondary-item';
 
 const Component = videojs.getComponent('Component');
@@ -16,7 +15,6 @@ class RecommendationsOverlaySecondaryItemsContainer extends Component {
       const component = new RecommendationsOverlaySecondaryItem(this.player());
       component.setItem(item);
       this.addChild(component);
-      flowtype(component.el(), { minFont: 10, fontRatio: 25 });
     });
   }
 
