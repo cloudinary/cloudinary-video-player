@@ -27,6 +27,7 @@
 
         &.cld-plw-panel-item-active {
             border: 1px solid #0078FF;
+            box-sizing: border-box;
 
             .cld-plw-item-info-wrap {
                 background: rgba(0, 119, 255, 0.8);
@@ -59,6 +60,7 @@
 
         &.cld-plw-panel-item-active {
             border: 1px solid #FF620C;
+            box-sizing: border-box;
 
             .cld-plw-item-info-wrap {
                 color: #FF620C;

@@ -2,15 +2,16 @@
 
 @mixin listLayout() {
     .cld-plw-layout {
-        &.cld-plw-vertical {
+        &.cld-plw-vertical, &.cld-plw-horizontal {
             @include flex-direction(column);
 
             .cld-plw-panel {
-                padding-top: 4px;
+                @include flex-direction(column);
             }
 
             .cld-plw-col-list {
                 width: inherit !important;
+                height: inherit !important;
             }
 
             .cld-plw-panel-item {
@@ -22,7 +23,9 @@
                 }
 
                 .cld-plw-item-info-wrap {
-                    left: 160px;
+                    left: 150px;
+                    padding: 20px 15px;
+                    top: 0;
                 }
 
                 .cld-plw-item-title-next {
@@ -91,7 +94,6 @@
     }
 
     .cld-plw-panel-item {
-
         margin-bottom: 4px;
 
         &:last-child {
@@ -114,6 +116,12 @@
     transition: color .25s;
     @include display-flex(flex);
     @include flex-direction(row);
+
+    .cld-video-player-skin-dark & {
+        @media only screen and (max-width: 768px) {
+            background: #272727;
+        }
+    }
 }
 
 .cld-plw-item-title {
