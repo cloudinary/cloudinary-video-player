@@ -37,27 +37,6 @@ class PlaylistLayout extends Component {
       wrap(this.player().el(), this.videoWrap_);
     };
 
-    const changeDimensions = (prev) => {
-      prev = prev || { width: 0, height: 0 };
-
-      const videoWidth = this.player_.currentWidth();
-      const videoHeight = this.player_.currentHeight();
-      const dims = { width: videoWidth, height: videoHeight };
-      const heightChange = Math.abs(videoHeight - prev.height);
-      const widthChange = Math.abs(videoWidth - prev.width);
-      // Hack: Need to check if there is not a major change since in some sizes video starts to shake
-      const threshold = 15;
-
-      if (heightChange >= threshold || widthChange >= threshold) {
-        this.setContentElDimensions(dims);
-        prev = dims;
-      }
-    };
-
-    const loadDataHandler = () => {
-      changeDimensions();
-    };
-
     if (layoutOptions.wrap) {
       wrapVideoWithLayout();
     }
@@ -71,7 +50,6 @@ class PlaylistLayout extends Component {
       this.removeLayout();
       super.dispose();
       player.off('fluid', fluidHandler);
-      player.off('loadeddata', loadDataHandler);
     };
   }
 

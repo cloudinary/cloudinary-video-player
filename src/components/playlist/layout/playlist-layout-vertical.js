@@ -13,13 +13,6 @@ class PlaylistLayoutVertical extends PlaylistLayout {
 
     return cls;
   }
-
-  setContentElDimensions({ height }) {
-    const itemHeight = height / this.options_.total;
-    const itemWidth = (16 / 9) * itemHeight;
-
-    setWidth(this.contentEl(), itemWidth);
-  }
 }
 
 

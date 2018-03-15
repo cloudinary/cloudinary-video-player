@@ -7,13 +7,6 @@ class PlaylistLayoutHorizontal extends PlaylistLayout {
     super(player, options);
   }
 
-  setContentElDimensions({ width }) {
-    const itemWidth = width / this.options_.total;
-    const itemHeight = (9 / 16) * itemWidth;
-
-    setHeight(this.contentEl(), itemHeight);
-  }
-
   getCls() {
     let cls = super.getCls();
     cls.push('cld-plw-horizontal');
