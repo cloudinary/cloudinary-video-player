@@ -58,20 +58,8 @@ class PlaylistLayout extends Component {
       changeDimensions();
     };
 
-    const layoutUpdateHandler = () => {
-      changeDimensions({ width: 0, height: 0 });
-    };
-
-    const resizeHandler = () => {
-      this.setContentElDimensions(this.player().currentDimensions());
-    };
-
     if (layoutOptions.wrap) {
       wrapVideoWithLayout();
-      this.on('playlistlayoutupdate', layoutUpdateHandler);
-      addResizeListener(this.el(), resizeHandler);
-      changeDimensions();
-
     }
 
     player.on('fluid', fluidHandler);
@@ -79,13 +67,11 @@ class PlaylistLayout extends Component {
     this.addChild('PlaylistPanel', this.options_);
 
     this.dispose = () => {
-      removeResizeListener(this.el(), resizeHandler);
+      removeResizeListener(this.el());
       this.removeLayout();
       super.dispose();
       player.off('fluid', fluidHandler);
       player.off('loadeddata', loadDataHandler);
-      player.off('playlistlayoutupdate', layoutUpdateHandler);
-
     };
   }
 
