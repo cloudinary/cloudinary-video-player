@@ -1,5 +1,4 @@
 import PlaylistLayout from './playlist-layout';
-import { setWidth } from '../../../utils/dom';
 
 class PlaylistLayoutVertical extends PlaylistLayout {
   constructor (player, options) {
@@ -12,13 +11,6 @@ class PlaylistLayoutVertical extends PlaylistLayout {
     cls.push('cld-plw-vertical');
 
     return cls;
-  }
-
-  setContentElDimensions({ height }) {
-    const itemHeight = height / this.options_.total;
-    const itemWidth = (16 / 9) * itemHeight;
-
-    setWidth(this.contentEl(), itemWidth);
   }
 }
 

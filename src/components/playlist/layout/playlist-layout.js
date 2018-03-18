@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import { addResizeListener, removeResizeListener } from '../../../utils/resize-events';
 import { wrap } from '../../../utils/dom';
 import { skinClassPrefix } from '../../../utils/css-prefix';
 
@@ -37,41 +36,8 @@ class PlaylistLayout extends Component {
       wrap(this.player().el(), this.videoWrap_);
     };
 
-    const changeDimensions = (prev) => {
-      prev = prev || { width: 0, height: 0 };
-
-      const videoWidth = this.player_.currentWidth();
-      const videoHeight = this.player_.currentHeight();
-      const dims = { width: videoWidth, height: videoHeight };
-      const heightChange = Math.abs(videoHeight - prev.height);
-      const widthChange = Math.abs(videoWidth - prev.width);
-      // Hack: Need to check if there is not a major change since in some sizes video starts to shake
-      const threshold = 15;
-
-      if (heightChange >= threshold || widthChange >= threshold) {
-        this.setContentElDimensions(dims);
-        prev = dims;
-      }
-    };
-
-    const loadDataHandler = () => {
-      changeDimensions();
-    };
-
-    const layoutUpdateHandler = () => {
-      changeDimensions({ width: 0, height: 0 });
-    };
-
-    const resizeHandler = () => {
-      this.setContentElDimensions(this.player().currentDimensions());
-    };
-
     if (layoutOptions.wrap) {
       wrapVideoWithLayout();
-      this.on('playlistlayoutupdate', layoutUpdateHandler);
-      addResizeListener(this.el(), resizeHandler);
-      changeDimensions();
-
     }
 
     player.on('fluid', fluidHandler);
@@ -79,13 +45,9 @@ class PlaylistLayout extends Component {
     this.addChild('PlaylistPanel', this.options_);
 
     this.dispose = () => {
-      removeResizeListener(this.el(), resizeHandler);
       this.removeLayout();
       super.dispose();
       player.off('fluid', fluidHandler);
-      player.off('loadeddata', loadDataHandler);
-      player.off('playlistlayoutupdate', layoutUpdateHandler);
-
     };
   }
 

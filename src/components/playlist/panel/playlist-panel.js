@@ -81,12 +81,6 @@ class PlaylistPanel extends Component {
         current: index === 0
       }));
 
-      const el = playlistItem.el();
-
-      const colWidth = `${100 / this.options_.total}%`;
-      el.style.flexBasis = colWidth;
-      el.style.WebkitflexBasis = colWidth;
-
       this.addChild(playlistItem);
 
     });

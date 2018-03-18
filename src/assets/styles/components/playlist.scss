@@ -2,15 +2,17 @@
 
 @mixin listLayout() {
     .cld-plw-layout {
-        &.cld-plw-vertical {
+        &.cld-plw-vertical, &.cld-plw-horizontal {
             @include flex-direction(column);
 
             .cld-plw-panel {
-                padding-top: 4px;
+                @include flex-direction(column);
             }
 
             .cld-plw-col-list {
                 width: inherit !important;
+                height: inherit !important;
+                max-height: 340px;
             }
 
             .cld-plw-panel-item {
@@ -22,7 +24,9 @@
                 }
 
                 .cld-plw-item-info-wrap {
-                    left: 160px;
+                    left: 150px;
+                    padding: 20px 15px;
+                    top: 0;
                 }
 
                 .cld-plw-item-title-next {
@@ -30,28 +34,45 @@
                 }
             }
         }
+
+        &.cld-plw-horizontal {
+            .cld-plw-col-list {
+                padding-top: 0;
+                overflow: auto;
+            }
+
+            .cld-plw-panel {
+                position: initial;
+            }
+
+            .cld-plw-panel-item {
+                max-width: none;
+            }
+        }
     }
 }
 
 .cld-plw-horizontal {
-    @include display-flex(inline-flex);
-    @include flex-direction(row);
-
     .cld-plw-col-list {
-        @include display-flex(flex);
-        @include flex-direction(row);
+        padding-top: 14.0625%;
+        position: relative;
     }
 
     .cld-plw-panel {
-        overflow: hidden;
-        @include flex(1);
+        overflow: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
         @include display-flex(flex);
         @include flex-direction(row);
-
     }
 
     .cld-plw-panel-item {
         background-image: none;
+        min-width: 25%;
+        max-width: 25%;
 
         &:first-child {
             margin-left: 0;
@@ -66,7 +87,7 @@
 
 .cld-plw-vertical {
 
-    @include display-flex(inline-flex);
+    @include display-flex(flex);
     @include flex-direction(row);
 
     &.cld-plw-layout {
@@ -78,6 +99,7 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(column);
+        min-width: 20%;
     }
 
     .cld-plw-col-player {
@@ -85,14 +107,12 @@
     }
 
     .cld-plw-panel {
-        @include flex(1);
-        @include display-flex(flex);
-        @include flex-direction(column);
+        height: 100%;
+        overflow: auto;
     }
 
     .cld-plw-panel-item {
-
-        margin-bottom: 4px;
+        height: 25%;
 
         &:last-child {
             margin-bottom: 0;
@@ -114,6 +134,12 @@
     transition: color .25s;
     @include display-flex(flex);
     @include flex-direction(row);
+
+    .cld-video-player-skin-dark & {
+        @media only screen and (max-width: 768px) {
+            background: #272727;
+        }
+    }
 }
 
 .cld-plw-item-title {

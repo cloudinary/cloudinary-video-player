@@ -22,18 +22,6 @@ class RecommendationsOverlayContent extends Component {
     this._content._secondaryContainer.clearItems();
   }
 
-  resizeToFit(width, height) {
-    let _width = width;
-    let _height = width * 9 / 16.0;
-
-    if (_height > height) {
-      _height = height;
-      _width = _height * 16 / 9.0;
-    }
-
-    this.el().style.width = `${_width}px`;
-  }
-
   createEl() {
     return super.createEl('div', {
       className: 'vjs-recommendations-overlay-content'

@@ -1,11 +1,8 @@
 import videojs from 'video.js';
-import flowtype from '../../utils/flowtype';
-import { addResizeListener, removeResizeListener } from '../../utils/resize-events';
 import RecommendationsOverlayContent from './recommendations-overlay-content';
 import RecommendationsOverlayHideButton from './recommendations-overlay-hide-button';
 import './recommendations-overlay.scss';
 
-const OVERLAY_SCALE = 0.85;
 const MAXIMUM_ITEMS = 4;
 const Component = videojs.getComponent('Component');
 
@@ -20,8 +17,6 @@ class RecommendationsOverlay extends Component {
     this.addChild(new RecommendationsOverlayHideButton(player, { clickHandler: () => {
       this.close();
     } }, ...args));
-
-    this._resizeHandler = null;
 
     this.on(player, 'recommendationschanged', (_, eventData) => {
       this.setItems(...eventData.items);
@@ -68,13 +63,6 @@ class RecommendationsOverlay extends Component {
 
     videojs.addClass(el, 'vjs-recommendations-overlay');
 
-    this._resizeHandler = () => {
-      this._content.resizeToFit(this.width() * OVERLAY_SCALE, this.height() * OVERLAY_SCALE);
-    };
-
-    addResizeListener(el, this._resizeHandler);
-    flowtype(el, { minFont: 14, fontRatio: 60 });
-
     return el;
   }
 
@@ -90,7 +78,6 @@ class RecommendationsOverlay extends Component {
 
   dispose() {
     super.dispose();
-    removeResizeListener(this.el(), this._resizeHandler);
   }
 }
 
