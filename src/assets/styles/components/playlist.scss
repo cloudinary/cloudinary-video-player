@@ -99,7 +99,7 @@
     .cld-plw-col-list {
         @include display-flex(flex);
         @include flex-direction(column);
-        width: 20%;
+        min-width: 20%;
     }
 
     .cld-plw-col-player {
