@@ -1,10 +1,8 @@
 import videojs from 'video.js';
-import { addResizeListener, removeResizeListener } from '../../utils/resize-events';
 import RecommendationsOverlayContent from './recommendations-overlay-content';
 import RecommendationsOverlayHideButton from './recommendations-overlay-hide-button';
 import './recommendations-overlay.scss';
 
-const OVERLAY_SCALE = 0.85;
 const MAXIMUM_ITEMS = 4;
 const Component = videojs.getComponent('Component');
 
@@ -80,7 +78,6 @@ class RecommendationsOverlay extends Component {
 
   dispose() {
     super.dispose();
-    removeResizeListener(this.el(), this._resizeHandler);
   }
 }
 

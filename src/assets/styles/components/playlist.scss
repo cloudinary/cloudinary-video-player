@@ -87,7 +87,7 @@
 
 .cld-plw-vertical {
 
-    @include display-flex(inline-flex);
+    @include display-flex(flex);
     @include flex-direction(row);
 
     &.cld-plw-layout {

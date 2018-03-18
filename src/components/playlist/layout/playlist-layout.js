@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import { addResizeListener, removeResizeListener } from '../../../utils/resize-events';
 import { wrap } from '../../../utils/dom';
 import { skinClassPrefix } from '../../../utils/css-prefix';
 
@@ -46,7 +45,6 @@ class PlaylistLayout extends Component {
     this.addChild('PlaylistPanel', this.options_);
 
     this.dispose = () => {
-      removeResizeListener(this.el());
       this.removeLayout();
       super.dispose();
       player.off('fluid', fluidHandler);

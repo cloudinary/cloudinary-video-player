@@ -14,9 +14,11 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
     this.setTitle(info.title);
     this.setSubtitle(info.subtitle);
 
-    const descLength = 300;
-    const description = info.description.length > descLength ? info.description.substring(0, descLength) + '...' : info.description;
-    this.setDescription(description);
+    if (info.description) {
+      const descLength = 300;
+      const description = info.description.length > descLength ? info.description.substring(0, descLength) + '...' : info.description;
+      this.setDescription(description);
+    }
   }
 
   setPoster(url) {

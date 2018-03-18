@@ -1,5 +1,4 @@
 import PlaylistLayout from './playlist-layout';
-import { setHeight } from '../../../utils/dom';
 
 class PlaylistLayoutHorizontal extends PlaylistLayout {
   constructor (player, options) {
