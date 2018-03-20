@@ -8,6 +8,7 @@ import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './
 import Playlistable from './mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
+import './components/cloudinary-button';
 
 const DEFAULT_PARAMS = {
   transformation: {},
