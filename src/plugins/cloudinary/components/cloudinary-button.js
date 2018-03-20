@@ -55,7 +55,23 @@ class CloudinaryTooltip extends Component {
   }
 }
 
+class CloudinaryTooltipCloseButton extends ClickableComponent {
+  handleClick(event) {
+    super.handleClick(event);
+    this.player().removeClass('vjs-cloudinary-tooltip-show');
+  }
+
+  createEl() {
+    return videojs.createEl('button', {
+      className: 'vjs-control vjs-cloudinary-tooltip-close-button'
+    });
+  }
+}
+
+
+videojs.registerComponent('cloudinaryTooltipCloseButton', CloudinaryTooltipCloseButton);
 videojs.registerComponent('cloudinaryButton', CloudinaryButton);
 videojs.registerComponent('cloudinaryTooltip', CloudinaryTooltip);
+CloudinaryTooltip.prototype.options_ = { children: ['CloudinaryTooltipCloseButton'] };
 
 export default CloudinaryButton;
