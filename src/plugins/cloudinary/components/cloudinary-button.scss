@@ -1,6 +1,6 @@
 
 // Player Cloudinary button
-.video-js button.vjs-cloudinary-button {
+button.vjs-cloudinary-button {
     background: url('../../../assets/icons/cloudinary_icon_for_white_bg.svg') no-repeat;
     background-size: 25px;
     background-position: center;
@@ -55,7 +55,7 @@
             height: 35px;
             width: 135px;
             vertical-align: bottom;
-        }    
+        }
     }
 
     .vjs-cloudinary-tooltip-data-field {
@@ -65,10 +65,10 @@
             max-width: 120px;
         }
     }
-    
+
     .cld-video-player-skin-dark & {
         background: rgba(0, 0, 0, 0.8);
-        
+
         .vjs-cloudinary-tooltip-close-button {
             background-image: url('../../../assets/icons/arrow-left-white.svg');
         }
@@ -86,6 +86,6 @@
 
         .vjs-cloudinary-tooltip-close-button {
             display: inline-block;
-        }    
+        }
     }
 }

@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import './cloudinary-tooltip.scss';
+import './cloudinary-button.scss';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
