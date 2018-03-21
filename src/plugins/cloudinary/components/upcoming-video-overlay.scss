@@ -75,7 +75,10 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
 
 
   @media only screen and (max-width: 768px) {
-    // border: none !important;
+    &:before {
+      display: none;
+    }
+
     .cld-video-player.cld-video-player-skin-dark &,
     .cld-video-player.cld-video-player-skin-light & {
       border: none;
