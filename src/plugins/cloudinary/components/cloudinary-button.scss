@@ -17,16 +17,23 @@ button.vjs-cloudinary-button {
 // Video tooltip
 .vjs-cloudinary-tooltip {
     display: none;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 25px;
+    min-width: 320px;
+    border-radius: 4px;
     position: absolute;
     bottom: 40px;
     right: 45px;
     z-index: 1;
     text-align: left;
+    transition: opacity 1s ease;
 
     .vjs-cloudinary-tooltip-show & {
         display: block;
+    }
+
+    .vjs-has-started.vjs-user-inactive.vjs-playing & {
+        opacity: 0;
     }
 
     .vjs-cloudinary-tooltip-close-button {
@@ -47,7 +54,7 @@ button.vjs-cloudinary-button {
         font-size: 14px;
         font-weight: 500;
         line-height: 25px;
-        margin-bottom: 8px;
+        margin-bottom: 11px;
 
         .logo {
             background: url('../../../assets/icons/cloudinary_logo_for_white_bg.svg') no-repeat;
@@ -59,9 +66,12 @@ button.vjs-cloudinary-button {
     }
 
     .vjs-cloudinary-tooltip-data-field {
+        font-size: 12px;
+        font-weight: 400;
+
         .label {
             display: inline-block;
-            width: 40%;
+            width: 44%;
             max-width: 120px;
         }
     }
