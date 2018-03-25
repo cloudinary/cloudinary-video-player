@@ -22,7 +22,6 @@
     .cld-video-player-skin-light & {
         .cld-plw-item-info-wrap {
             background: #fff;
-            padding: 5% 0 5% 7%;
         }
 
         &.cld-plw-panel-item-active {
@@ -54,13 +53,23 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 80%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 80%);
             opacity: 1;    
         }
 
         &.cld-plw-panel-item-active {
             border: 1px solid #FF620C;
             box-sizing: border-box;
+
+            @media only screen and (min-width: 769px) {
+                &:before {
+                    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 90%);
+                }
+
+                .cld-plw-item-info-wrap {
+                    font-weight: 500;
+                }
+            }
 
             .cld-plw-item-info-wrap {
                 color: #FF620C;

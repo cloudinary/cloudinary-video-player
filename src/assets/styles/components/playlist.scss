@@ -1,4 +1,5 @@
 @import 'compass/css3/flexbox';
+@import '../../../assets/styles/mixins/mixins.scss';
 
 @mixin listLayout() {
     .cld-plw-layout {
@@ -126,11 +127,13 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 5% 0 5% 7%;
+    padding: 5% 7%;
     width: 100%;
     transition: color .25s;
     @include display-flex(flex);
     @include flex-direction(row);
+    justify-content: space-between;
+    box-sizing: border-box;
 
     .cld-video-player-skin-dark & {
         @media only screen and (max-width: 768px) {
@@ -143,7 +146,11 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    max-width: 100%;
+    @include ellipsis;
+}
+
+.cld-plw-item-duration {
+    margin-left: 10px;
 }
 
 /*  Default Playlist Layout */
