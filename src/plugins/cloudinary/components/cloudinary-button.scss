@@ -31,11 +31,6 @@ button.vjs-cloudinary-button {
     display: block;
   }
 
-  .vjs-has-started.vjs-user-inactive.vjs-playing & {
-    transition: opacity 1s ease;
-    opacity: 0;
-  }
-
   .vjs-cloudinary-tooltip-close-button {
     display: none;
     background: url("../../../assets/icons/arrow-left-blue.svg") no-repeat;
@@ -97,5 +92,17 @@ button.vjs-cloudinary-button {
     .vjs-cloudinary-tooltip-close-button {
       display: inline-block;
     }
+  }
+}
+
+// keep control-bar visible while tooltip is open
+
+.vjs-cloudinary-tooltip-show {
+  .vjs-control-bar {
+    opacity: 1 !important;
+  }
+
+  .vjs-upcoming-video {
+    bottom: 4.5em !important;
   }
 }
