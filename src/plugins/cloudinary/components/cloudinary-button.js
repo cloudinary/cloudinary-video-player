@@ -7,12 +7,18 @@ const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
-// Create a common class for playlist buttons
 class CloudinaryButton extends ClickableComponent {
   constructor(player, options) {
-    // It is important to invoke the superclass before anything else,
-    // to get all the features of components out of the box!
     super(player, options);
+
+    const clickOutsideHandler = (e) => {
+      const isClickInside = player.el().querySelector('.vjs-cloudinary-tooltip').contains(e.target);
+      const toggleButtonClicked = player.el().querySelector('.vjs-cloudinary-button') === e.target;
+      if (!isClickInside && !toggleButtonClicked) {
+        player.removeClass('vjs-cloudinary-tooltip-show');
+      }
+    };
+    window.addEventListener('click', clickOutsideHandler);
 
     player.addChild('cloudinaryTooltip');
   }
