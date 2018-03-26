@@ -31,6 +31,10 @@ button.vjs-cloudinary-button {
     display: block;
   }
 
+  .vjs-controls-disabled & {
+    display: none;
+  }
+
   .vjs-cloudinary-tooltip-close-button {
     display: none;
     background: url("../../../assets/icons/arrow-left-blue.svg") no-repeat;
@@ -88,6 +92,7 @@ button.vjs-cloudinary-button {
     left: 0;
     right: 0;
     border-radius: 0;
+    width: auto;
 
     .vjs-cloudinary-tooltip-close-button {
       display: inline-block;
