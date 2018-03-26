@@ -144,9 +144,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (source) {
         this.source(source);
       }
-      let maxTries = (options.videojsOptions.maxTries) ? options.videojsOptions.maxTries : 3;
-      let videoReadyTimeout = (options.videojsOptions.videoTimeout) ? options.videojsOptions.videoTimout : 55000;
-      this.reTryVideo(maxTries, videoReadyTimeout);
     };
 
     const setExtendedEvents = () => {
@@ -301,7 +298,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.isVideoReady = () => {
       let s = this.videojs.readyState();
-      return s === 4;
+       if (s === 4) {
+         this.nbCalls = 0;
+         return true;
+       }
+       return false;
     };
 
     this.playlistWidget = (options) => {
@@ -361,6 +362,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    let maxTries =  this.videojs.options_.maxTries || 3;
+    let videoReadyTimeout = (this.videojs.options_.videoTimeout) ? this.videojs.options_.videoTimout : 55000;
+    this.reTryVideo(maxTries, videoReadyTimeout);
 
     return this.videojs.cloudinary.source(publicId, options);
   }
