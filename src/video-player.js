@@ -362,6 +362,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    this.nbCalls = 0;
     let maxTries =  this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = (this.videojs.options_.videoTimeout) ? this.videojs.options_.videoTimout : 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
