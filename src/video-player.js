@@ -298,11 +298,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.isVideoReady = () => {
       let s = this.videojs.readyState();
-       if (s === 4) {
-         this.nbCalls = 0;
-         return true;
-       }
-       return false;
+      if (s === 4) {
+        this.nbCalls = 0;
+        return true;
+      }
+      return false;
     };
 
     this.playlistWidget = (options) => {
@@ -362,8 +362,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
-    let maxTries =  this.videojs.options_.maxTries || 3;
+    let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = (this.videojs.options_.videoTimeout) ? this.videojs.options_.videoTimout : 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
 
