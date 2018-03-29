@@ -190,7 +190,7 @@
           @if ($opaque == true) {
             background: $primary-background-color
           } @else {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0) 80%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
           }
         }
       }

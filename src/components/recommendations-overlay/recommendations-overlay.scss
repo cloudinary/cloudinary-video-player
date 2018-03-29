@@ -60,7 +60,7 @@
           background: rgba(#000000, 0.6);
           text-align: left;
           padding: 3%;
-          min-width: 0; // for use with flex and white-space: nowrap 
+          min-width: 0; // for use with flex and white-space: nowrap
 
           h2 {
             @include ellipsis;
@@ -147,15 +147,19 @@
             width: 100%;
             bottom: 0;
             left: 0;
-            padding: 9% 5% 4.5% 5%;
+            padding: 20% 7% 4.5% 7%;
 
             .cld-video-player-skin-light & {
-              padding: 5% 0 5% 7%;
+              padding: 5% 7%;
+            }
+
+            .cld-video-player-skin-dark & {
+              &.vjs-recommendations-overlay-item-info {
+                text-shadow: 1px 1px 0px rgba(#000, .3);
+              }
             }
 
             span {
-              @include flex(1);
-
               display: block;
               min-width: 0;
               text-overflow: ellipsis;
@@ -165,11 +169,11 @@
               &.vjs-recommendations-overlay-item-secondary-title {
                 @include flex(2.3);
                 font-size: 13px;
-                max-width: 50%;              
               }
 
               &.vjs-recommendations-overlay-item-secondary-duration {
                 text-align: right;
+                margin-left: 10px;
               }
             }
           }
