@@ -3,13 +3,13 @@ import './cloudinary-button.scss';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
-
 const Component = videojs.getComponent('Component');
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class CloudinaryButton extends ClickableComponent {
   constructor(player, options) {
     super(player, options);
+    this.vJs = player;
 
     const clickOutsideHandler = (e) => {
       const isClickInside = player.el().querySelector('.vjs-cloudinary-tooltip').contains(e.target);
@@ -24,6 +24,15 @@ class CloudinaryButton extends ClickableComponent {
   }
 
   toggleTooltip() {
+    let w = this.player().videoWidth();
+    let h = this.player().videoHeight();
+    let info = {
+      volume: this.player().volume(),
+      dimensions: w + ' X ' + h,
+      videoId: this.player().cloudinary.currentPublicId(),
+      buffered: this.player().bufferedPercent()
+    };
+    console.log(JSON.stringify(info));
     this.player().toggleClass('vjs-cloudinary-tooltip-show');
   }
 
