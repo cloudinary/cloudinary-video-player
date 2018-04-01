@@ -54,11 +54,11 @@ class CloudinaryTooltip extends Component {
     });
     tooltip.appendChild(logo);
 
-    const field = dom.createEl('div', {
+    const fieldsWrpEl = dom.createEl('div', {
       className: 'vjs-cloudinary-tooltip-data-field',
       innerHTML: '<span class="label">Video ID</span><span class="value">asFgS74o8631fh5</span>'
     });
-    tooltip.appendChild(field);
+    tooltip.appendChild(fieldsWrpEl);
 
     const getInfo = () => {
       const fieldsWrp = tooltip.querySelector('.vjs-cloudinary-tooltip-data-field');
@@ -74,14 +74,20 @@ class CloudinaryTooltip extends Component {
       };
       console.log(JSON.stringify(info));
 
-      // const field = dom.createEl('div', {
-      //   className: 'vjs-cloudinary-tooltip-data-field',
-      //   innerHTML: '<span class="label">Video ID</span><span class="value">asFgS74o8631fh5</span>'
-      // });
+      for (const prop in info) {
+        if (Object.prototype.hasOwnProperty.call(info, prop)) {
+          const field = dom.createEl('div', {
+            className: 'vjs-cloudinary-tooltip-data-field',
+            innerHTML: '<span class="label">' + prop + '</span><span class="value">' + info[prop] + '</span>'
+          });
+          fieldsWrp.appendChild(field);
+        }
+      }
 
     };
 
     this.player().on('cld-get-info', getInfo);
+    this.player().on('loadedmetadata', getInfo);
     return tooltip;
   }
 }
