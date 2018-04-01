@@ -48,8 +48,10 @@ class CloudinaryTooltip extends Component {
       className: 'vjs-cloudinary-tooltip'
     });
 
-    const logo = dom.createEl('div', {
+    const logo = dom.createEl('a', {
       className: 'vjs-cloudinary-tooltip-header',
+      href: 'https://cloudinary.com/solutions/video_management',
+      target: '_blank',
       innerHTML: 'Powered By <span class="logo"></span>'
     });
     tooltip.appendChild(logo);
