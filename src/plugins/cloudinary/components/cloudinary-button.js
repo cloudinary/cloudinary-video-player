@@ -23,9 +23,9 @@ class CloudinaryButton extends ClickableComponent {
   }
 
   toggleTooltip() {
-    let tool = this.player().getChild('CloudinaryTooltip');
-    this.player().trigger('info');
-
+    if (!this.player().hasClass('vjs-cloudinary-tooltip-show')) {
+      this.player().trigger('cld-get-info');
+    }
     this.player().toggleClass('vjs-cloudinary-tooltip-show');
   }
 
@@ -43,12 +43,6 @@ class CloudinaryButton extends ClickableComponent {
 }
 
 class CloudinaryTooltip extends Component {
-  constructor(player, options) {
-    super(player, options);
-    this.player_ = player;
-  }
-
-
   createEl() {
     const tooltip = super.createEl('div', {
       className: 'vjs-cloudinary-tooltip'
@@ -65,7 +59,11 @@ class CloudinaryTooltip extends Component {
       innerHTML: '<span class="label">Video ID</span><span class="value">asFgS74o8631fh5</span>'
     });
     tooltip.appendChild(field);
-    const addInfo = () => {
+
+    const getInfo = () => {
+      const fieldsWrp = tooltip.querySelector('.vjs-cloudinary-tooltip-data-field');
+      fieldsWrp.innerHTML = '';
+
       let w = this.player().videoWidth();
       let h = this.player().videoHeight();
       let info = {
@@ -75,10 +73,15 @@ class CloudinaryTooltip extends Component {
         buffered: this.player().bufferedPercent()
       };
       console.log(JSON.stringify(info));
+
+      // const field = dom.createEl('div', {
+      //   className: 'vjs-cloudinary-tooltip-data-field',
+      //   innerHTML: '<span class="label">Video ID</span><span class="value">asFgS74o8631fh5</span>'
+      // });
+
     };
 
-
-    this.player().on('info', addInfo);
+    this.player().on('cld-get-info', getInfo);
     return tooltip;
   }
 }
@@ -100,6 +103,6 @@ class CloudinaryTooltipCloseButton extends ClickableComponent {
 videojs.registerComponent('cloudinaryTooltipCloseButton', CloudinaryTooltipCloseButton);
 videojs.registerComponent('cloudinaryButton', CloudinaryButton);
 videojs.registerComponent('cloudinaryTooltip', CloudinaryTooltip);
-CloudinaryTooltip.prototype.options_ = {children: ['CloudinaryTooltipCloseButton']};
+CloudinaryTooltip.prototype.options_ = { children: ['CloudinaryTooltipCloseButton'] };
 
 export default CloudinaryButton;
