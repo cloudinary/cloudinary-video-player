@@ -67,12 +67,11 @@ class CloudinaryTooltip extends Component {
       let w = this.player().videoWidth();
       let h = this.player().videoHeight();
       let info = {
-        volume: this.player().volume(),
-        dimensions: w + ' X ' + h,
-        videoId: this.player().cloudinary.currentPublicId(),
-        buffered: this.player().bufferedPercent()
+        'Video ID': this.player().cloudinary.currentPublicId(),
+        'Dimensions': w + ' X ' + h,
+        'Buffered': parseInt(this.player().bufferedPercent() * 100, 0) + '%',
+        'Volume': parseInt(this.player().volume() * 100, 0) + '%'
       };
-      console.log(JSON.stringify(info));
 
       for (const prop in info) {
         if (Object.prototype.hasOwnProperty.call(info, prop)) {
