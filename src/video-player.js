@@ -365,7 +365,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
-    let videoReadyTimeout = (this.videojs.options_.videoTimeout) ? this.videojs.options_.videoTimout : 55000;
+    let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
 
     return this.videojs.cloudinary.source(publicId, options);
