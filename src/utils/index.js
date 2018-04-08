@@ -7,6 +7,7 @@ import applyWithProps from './apply-with-props';
 import autobind from './autobind';
 import mixin from './mixin';
 import assign from './assign';
+import fontFace from './fontFace';
 
 function groupBy(collection, iteratee) {
   return collection.reduce((result, value, key) => {
@@ -25,6 +26,7 @@ const util = assign({},
   slicing,
   string,
   positioning,
+  fontFace,
   cloudinaryUtils,
   {
     autobind,

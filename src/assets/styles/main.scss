@@ -2,7 +2,6 @@
 $icon-font-path: '../fonts' !default;
 
 // Video.js overrides
-@import 'fira-sans';
 @import 'variables';
 @import 'compass/css3/flexbox';
 @import 'compass/css3/box-shadow';
@@ -28,7 +27,7 @@ $icon-font-path: '../fonts' !default;
 }
 
 .cld-video-player {
-  font-family: 'Fira Sans';
+  font-family: $text-font-family;
 
   &.cld-fluid {
     @extend .vjs-fluid;
