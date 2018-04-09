@@ -264,6 +264,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
+
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
 
@@ -274,10 +275,35 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.ready(() => {
       onReady();
 
+
       if (ready) {
         ready(this);
       }
     });
+
+
+    this.nbCalls = 0;
+    this.reTryVideo = (maxNumberOfCalls, timeout) => {
+      if (!this.isVideoReady()) {
+        if (this.nbCalls < maxNumberOfCalls) {
+          this.nbCalls++;
+          this.videojs.setTimeout(this.reTryVideo, timeout);
+        } else {
+          let e = new Error('Video is not ready please try later');
+          this.videojs.trigger('error', e);
+        }
+      }
+
+    };
+
+    this.isVideoReady = () => {
+      let s = this.videojs.readyState();
+      if (s === 4) {
+        this.nbCalls = 0;
+        return true;
+      }
+      return false;
+    };
 
     this.playlistWidget = (options) => {
       if (!options && !_playlistWidget) {
@@ -336,6 +362,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    clearTimeout(this.reTryVideo);
+    this.nbCalls = 0;
+    let maxTries = this.videojs.options_.maxTries || 3;
+    let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
+    this.reTryVideo(maxTries, videoReadyTimeout);
 
     return this.videojs.cloudinary.source(publicId, options);
   }
