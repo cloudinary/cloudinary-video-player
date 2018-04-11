@@ -12,9 +12,8 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
-  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
-const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode',
-  'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget']);
+  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations', 'fontFace'];
+const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode', 'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget']);
 
 const registerPlugin = videojs.plugin;
 
@@ -255,7 +254,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           if (_options.fluid) {
             plwOptions.fluid = true;
           }
-
+          if (_options.cloudinary.fontFace) {
+            plwOptions.fontFace = _options.cloudinary.fontFace;
+          }
           _playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
         }
       });
@@ -267,6 +268,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
+    Utils.fontFace(elem, _options);
 
     this.videojs = videojs(elem, _vjs_options);
     initPlugins();

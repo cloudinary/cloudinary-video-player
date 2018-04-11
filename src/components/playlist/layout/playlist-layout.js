@@ -93,6 +93,9 @@ class PlaylistLayout extends Component {
   createEl() {
     const el = super.createEl('div');
 
+    // Apply font styles on wrapper div.
+    el.style.fontFamily = this.player().el().style.fontFamily;
+
     return el;
   }
 
