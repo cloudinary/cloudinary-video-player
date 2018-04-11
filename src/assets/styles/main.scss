@@ -31,6 +31,11 @@ $icon-font-path: '../fonts' !default;
 
   &.cld-fluid {
     @extend .vjs-fluid;
+
+    .vjs-poster {
+      // Work-around for poster having slightly wrong proportions in fluid players.
+      background-size: cover;
+    }
   }
 
   // The base font size controls the size of everything, not just text.
