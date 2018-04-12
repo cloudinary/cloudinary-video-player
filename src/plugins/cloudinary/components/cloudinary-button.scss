@@ -56,7 +56,7 @@ button.vjs-cloudinary-button {
     text-decoration: none;
     color: inherit;
 
-    .cld-logo {
+    .vjs-cloudinary-tooltip-logo {
       background: url("../../../assets/icons/cloudinary_logo_for_white_bg.svg") no-repeat;
       display: inline-block;
       height: 35px;
@@ -70,7 +70,7 @@ button.vjs-cloudinary-button {
     font-weight: 300;
     margin-bottom: 1em;
 
-    .label {
+    .vjs-cloudinary-tooltip-label {
       display: inline-block;
       width: 44%;
       max-width: 120px;

@@ -52,13 +52,13 @@ class CloudinaryTooltip extends Component {
       className: 'vjs-cloudinary-tooltip-header',
       href: 'https://cloudinary.com/solutions/video_management',
       target: '_blank',
-      innerHTML: 'Powered By <span class="cld-logo"></span>'
+      innerHTML: 'Powered By <span class="vjs-cloudinary-tooltip-logo"></span>'
     });
     tooltip.appendChild(logo);
 
     const fieldsWrpEl = dom.createEl('div', {
       className: 'vjs-cloudinary-tooltip-data-field',
-      innerHTML: '<span class="label">Video ID</span><span class="value">asFgS74o8631fh5</span>'
+      innerHTML: '<span class="vjs-cloudinary-tooltip-label">Video ID</span><span class="vjs-cloudinary-tooltip-value">asFgS74o8631fh5</span>'
     });
     tooltip.appendChild(fieldsWrpEl);
 
@@ -79,7 +79,7 @@ class CloudinaryTooltip extends Component {
         if (Object.prototype.hasOwnProperty.call(info, prop)) {
           const field = dom.createEl('div', {
             className: 'vjs-cloudinary-tooltip-data-field',
-            innerHTML: '<span class="label">' + prop + '</span><span class="value">' + info[prop] + '</span>'
+            innerHTML: '<span class="vjs-cloudinary-tooltip-label">' + prop + '</span><span class="vjs-cloudinary-tooltip-value">' + info[prop] + '</span>'
           });
           fieldsWrp.appendChild(field);
         }
