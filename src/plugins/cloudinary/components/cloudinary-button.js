@@ -66,13 +66,17 @@ class CloudinaryTooltip extends Component {
       const fieldsWrp = tooltip.querySelector('.vjs-cloudinary-tooltip-data-field');
       fieldsWrp.innerHTML = '';
 
-      let w = this.player().videoWidth();
-      let h = this.player().videoHeight();
-      let info = {
-        'Video ID': this.player().cloudinary.currentPublicId(),
+      const publicId = this.player().cloudinary.currentPublicId();
+      const w = this.player().videoWidth();
+      const h = this.player().videoHeight();
+      const buffered = this.player().bufferedPercent() || 0;
+      const volume = this.player().volume() || 0;
+      const muted = this.player().muted() || false;
+      const info = {
+        'Video ID': publicId,
         'Dimensions': w + ' X ' + h,
-        'Buffered': parseInt(this.player().bufferedPercent() * 100, 0) + '%',
-        'Volume': parseInt(this.player().volume() * 100, 0) + '%'
+        'Buffered': parseInt(buffered * 100, 0) + '%',
+        'Volume': muted ? 'Muted' : parseInt(volume * 100, 0) + '%'
       };
 
       for (const prop in info) {
