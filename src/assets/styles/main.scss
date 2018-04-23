@@ -29,6 +29,10 @@ $icon-font-path: '../fonts' !default;
 .cld-video-player {
   font-family: $text-font-family;
 
+  &:focus {
+    outline: none;
+  }
+
   &.cld-fluid {
     @extend .vjs-fluid;
 
