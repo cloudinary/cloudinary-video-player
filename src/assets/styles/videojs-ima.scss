@@ -2,6 +2,10 @@
   .ima-fullscreen-div, .ima-mute-div, .ima-play-pause-div, .ima-slider-div {
     line-height: 1.7;
   }
+
+  &.vjs-ad-loading > video {
+    opacity: 0;
+  }
 }
 
 .ima-ad-container {
