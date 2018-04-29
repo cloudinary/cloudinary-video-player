@@ -1426,7 +1426,9 @@
      /**
       * Listener to be called to trigger manual ad break playback.
       */
-    this.adBreakReadyListener = undefined;
+    this.adBreakReadyListener = function() {
+      console.log('Please set adBreakReadyListener');
+    };
 
     /**
      * Stores the content source so we can re-populate it manually after a
@@ -1681,12 +1683,12 @@
     this.contentPlayer = this.player.$('.vjs-tech');
     // Default showing countdown timer to true.
     this.showCountdown = true;
-    if (this.settings['showCountdown'] == false) {
+    if (this.settings['showCountdown'] === false) {
       this.showCountdown = false;
     }
 
     this.autoPlayAdBreaks = true;
-    if (this.settings['autoPlayAdBreaks'] == false) {
+    if (this.settings['autoPlayAdBreaks'] === false) {
       this.autoPlayAdBreaks = false;
     }
 

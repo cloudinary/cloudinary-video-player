@@ -206,7 +206,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         return;
       }
 
-      const { adTagUrl, prerollTimeout, postrollTimeout } = opts;
+      const { adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
+          autoPlayAdBreaks, locale
+      } = opts;
 
       this.videojs.ima({
         id: this.el().id,
@@ -214,6 +216,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         disableFlashAds: true,
         prerollTimeout: prerollTimeout || 5000,
         postrollTimeout: postrollTimeout || 5000,
+        showCountdown: (showCountdown !== false),
+        adLabel: adLabel,
+        locale: locale || 'en',
+        autoPlayAdBreaks: (autoPlayAdBreaks !== false),
         debug: true
       });
     };
