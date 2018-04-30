@@ -264,10 +264,7 @@
         this.settings.postrollTimeout);
 
       this.adsLoader.requestAds(adsRequest);
-      if (this.player.muted()) {
-
-        setAdMuted(true);
-      }
+      setAdMuted(this.player.muted());
     }.bind(this);
 
     /**
@@ -1035,7 +1032,7 @@
       } else {
         addClass_(this.muteDiv, 'ima-non-muted');
         removeClass_(this.muteDiv, 'ima-muted');
-        this.adsManager.setVolume(1);
+        this.adsManager.setVolume(this.player.volume());
         // Bubble down to content player
         this.player.muted(false);
         this.adMuted = false;
