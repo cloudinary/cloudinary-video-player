@@ -264,6 +264,10 @@
         this.settings.postrollTimeout);
 
       this.adsLoader.requestAds(adsRequest);
+      if (this.player.muted()) {
+
+        setAdMuted(true);
+      }
     }.bind(this);
 
     /**
@@ -730,23 +734,7 @@
      * @private
      */
     var onAdMuteClick_ = function() {
-      if (this.adMuted) {
-        addClass_(this.muteDiv, 'ima-non-muted');
-        removeClass_(this.muteDiv, 'ima-muted');
-        this.adsManager.setVolume(1);
-        // Bubble down to content player
-        this.player.muted(false);
-        this.adMuted = false;
-        this.sliderLevelDiv.style.width = this.player.volume() * 100 + "%";
-      } else {
-        addClass_(this.muteDiv, 'ima-muted');
-        removeClass_(this.muteDiv, 'ima-non-muted');
-        this.adsManager.setVolume(0);
-        // Bubble down to content player
-        this.player.muted(true);
-        this.adMuted = true;
-        this.sliderLevelDiv.style.width = "0%";
-      }
+      setAdMuted(!this.adMuted);
     }.bind(this);
 
     /* Listener for mouse down events during ad playback. Used for volume.
@@ -1035,6 +1023,25 @@
       }
     }.bind(this);
 
+    var setAdMuted = function(mute) {
+      if (mute) {
+        addClass_(this.muteDiv, 'ima-muted');
+        removeClass_(this.muteDiv, 'ima-non-muted');
+        this.adsManager.setVolume(0);
+        // Bubble down to content player
+        this.player.muted(true);
+        this.adMuted = true;
+        this.sliderLevelDiv.style.width = "0%";
+      } else {
+        addClass_(this.muteDiv, 'ima-non-muted');
+        removeClass_(this.muteDiv, 'ima-muted');
+        this.adsManager.setVolume(1);
+        // Bubble down to content player
+        this.player.muted(false);
+        this.adMuted = false;
+        this.sliderLevelDiv.style.width = this.player.volume() * 100 + "%";
+      }
+    }.bind(this);
     /**
      * Adds a listener for the 'contentended' event of the video player. This should be
      * used instead of setting an 'contentended' listener directly to ensure that the
