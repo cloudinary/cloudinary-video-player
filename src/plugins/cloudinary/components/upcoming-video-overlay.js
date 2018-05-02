@@ -12,7 +12,13 @@ class UpcomingVideoOverlay extends ClickableComponent {
     super(player, ...args);
 
     const show = () => {
-      this.addClass('vjs-upcoming-video-show');
+      if (this.player().ima && this.player().ima.getAdsManager()) {
+        if (!this.player().ima.getAdsManager().getCurrentAd() || this.player().ima.getAdsManager().getCurrentAd().isLinear()) {
+          this.addClass('vjs-upcoming-video-show');
+        }
+      } else {
+        this.addClass('vjs-upcoming-video-show');
+      }
     };
 
     const hide = () => {
