@@ -990,6 +990,10 @@ camelcase@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.0.0.tgz#8b0f90d44be5e281b903b9887349b92595ef07f2"
 
+can-autoplay@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/can-autoplay/-/can-autoplay-3.0.0.tgz#fc2de8f1d41b36f6d860d9336b66841d30f8b62d"
+
 caniuse-api@^1.5.2:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-1.5.3.tgz#5018e674b51c393e4d50614275dc017e27c4a2a2"
@@ -5019,19 +5023,6 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-video.js@>=5.19.2:
-  version "6.5.1"
-  resolved "https://registry.yarnpkg.com/video.js/-/video.js-6.5.1.tgz#a191c014fc90043e7ff1f6d50279ae904f65a2b6"
-  dependencies:
-    babel-runtime "^6.9.2"
-    global "4.3.2"
-    safe-json-parse "4.0.0"
-    tsml "1.0.1"
-    videojs-font "2.0.0"
-    videojs-ie8 "1.1.2"
-    videojs-vtt.js "0.12.4"
-    xhr "2.4.0"
-
 video.js@^5.10.1, video.js@^5.19.0:
   version "5.19.0"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.19.0.tgz#6419315a2395ee4e5ff1afc6eabf5bf24fff60c5"
@@ -5073,19 +5064,18 @@ video.js@^5.17.0:
     videojs-vtt.js "0.12.4"
     xhr "2.4.0"
 
-video.js@^5.19.2:
-  version "5.20.4"
-  resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.20.4.tgz#85d58129e568527ccc179f95f485f547ee3c2e06"
+"video.js@^5.19.2 || ^6":
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/video.js/-/video.js-6.8.0.tgz#c3cff35d483595e22efc294ba2e720198151f9c9"
   dependencies:
     babel-runtime "^6.9.2"
-    global "4.3.0"
+    global "4.3.2"
     safe-json-parse "4.0.0"
     tsml "1.0.1"
-    videojs-font "2.0.0"
+    videojs-font "2.1.0"
     videojs-ie8 "1.1.2"
-    videojs-swf "5.4.1"
-    videojs-vtt.js "0.12.4"
-    xhr "2.2.2"
+    videojs-vtt.js "0.12.6"
+    xhr "2.4.0"
 
 videojs-contextmenu@^1.2.2:
   version "1.2.2"
@@ -5093,12 +5083,12 @@ videojs-contextmenu@^1.2.2:
   dependencies:
     video.js "^5.10.1"
 
-videojs-contrib-ads@~5.1.0:
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/videojs-contrib-ads/-/videojs-contrib-ads-5.1.5.tgz#145891192627f3e801c89e6506861c3ea9641275"
+videojs-contrib-ads@^6:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/videojs-contrib-ads/-/videojs-contrib-ads-6.2.0.tgz#7f57eb542587b86bf9a29bf4403eaf32517389eb"
   dependencies:
     global "^4.3.2"
-    video.js "^5.19.2"
+    video.js "^5.19.2 || ^6"
 
 videojs-contrib-hls@^5.12.2:
   version "5.12.2"
@@ -5135,6 +5125,10 @@ videojs-font@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/videojs-font/-/videojs-font-2.0.0.tgz#af7461ef9d4b95e0334bffb78b2f2ff0364a9034"
 
+videojs-font@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/videojs-font/-/videojs-font-2.1.0.tgz#a25930a67f6c9cfbf2bb88dacb8c6b451f093379"
+
 videojs-ie8@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/videojs-ie8/-/videojs-ie8-1.1.2.tgz#a23d3d8608ad7192b69c6077fc4eb848998d35d9"
@@ -5142,11 +5136,12 @@ videojs-ie8@1.1.2:
     es5-shim "^4.5.1"
 
 videojs-ima@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/videojs-ima/-/videojs-ima-1.0.0.tgz#5af6f2f51ca9b0ca2660aae205a8eff37aa64d63"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/videojs-ima/-/videojs-ima-1.3.0.tgz#1644ff68dfeaec9d51a77f4ce5d206dbdabcece6"
   dependencies:
-    video.js ">=5.19.2"
-    videojs-contrib-ads "~5.1.0"
+    can-autoplay "^3.0.0"
+    video.js "^5.19.2 || ^6"
+    videojs-contrib-ads "^6"
 
 videojs-per-source-behaviors@^1.1.3:
   version "1.1.3"
@@ -5157,10 +5152,6 @@ videojs-per-source-behaviors@^1.1.3:
 videojs-swf@5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/videojs-swf/-/videojs-swf-5.3.0.tgz#b79408ab4ad5dd8f6f20e8abfc33150b098aab57"
-
-videojs-swf@5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/videojs-swf/-/videojs-swf-5.4.1.tgz#2077ef71c749f2c7823ef49babae4dd2acb08f87"
 
 videojs-vtt.js@0.12.2:
   version "0.12.2"
@@ -5173,6 +5164,12 @@ videojs-vtt.js@0.12.3:
 videojs-vtt.js@0.12.4:
   version "0.12.4"
   resolved "https://registry.yarnpkg.com/videojs-vtt.js/-/videojs-vtt.js-0.12.4.tgz#38f2499e31efb3fa93590ddad4cb663275a4b161"
+  dependencies:
+    global "^4.3.1"
+
+videojs-vtt.js@0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/videojs-vtt.js/-/videojs-vtt.js-0.12.6.tgz#e078600bda899eaa6f9c3307134cd0c811947b8e"
   dependencies:
     global "^4.3.1"
 
@@ -5195,6 +5192,10 @@ wbuf@^1.1.0, wbuf@^1.4.0:
   resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.2.tgz#d697b99f1f59512df2751be42769c1580b5801fe"
   dependencies:
     minimalistic-assert "^1.0.0"
+
+webfontloader@^1.6.28:
+  version "1.6.28"
+  resolved "https://registry.yarnpkg.com/webfontloader/-/webfontloader-1.6.28.tgz#db786129253cb6e8eae54c2fb05f870af6675bae"
 
 webpack-bundle-analyzer@^2.9.1:
   version "2.9.1"

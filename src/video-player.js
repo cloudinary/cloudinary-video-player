@@ -13,7 +13,7 @@ import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-p
 
 const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations', 'fontFace'];
-const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode', 'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget']);
+const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode', 'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget', 'ads']);
 
 const registerPlugin = videojs.plugin;
 
@@ -194,13 +194,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initIma = () => {
-      const opts = _options.ima;
+      if (!_options.ads) {
+        _options.ads = {};
+      }
+      if (_options.ima) {
+        console.log('Deprecated:\n "ima" option as changed to "ads" please update your code');
+      }
+      const opts = Object.assign(_options.ads, _options.ima);
 
       if (!opts) {
         return;
       }
 
-      const { adTagUrl, prerollTimeout, postrollTimeout } = opts;
+      const { adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
+          autoPlayAdBreaks, locale
+      } = opts;
 
       this.videojs.ima({
         id: this.el().id,
@@ -208,6 +216,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         disableFlashAds: true,
         prerollTimeout: prerollTimeout || 5000,
         postrollTimeout: postrollTimeout || 5000,
+        showCountdown: (showCountdown !== false),
+        adLabel: adLabel,
+        locale: locale || 'en',
+        autoPlayAdBreaks: (autoPlayAdBreaks !== false),
         debug: true
       });
     };
@@ -285,6 +297,20 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
     });
+
+
+    if (Object.keys(options.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
+      if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
+        this.videojs.one('sourcechanged', () => {
+          this.videojs.ima.playAd();
+        });
+
+      } else {
+        this.videojs.on('sourcechanged', () => {
+          this.videojs.ima.playAd();
+        });
+      }
+    }
 
 
     this.nbCalls = 0;
