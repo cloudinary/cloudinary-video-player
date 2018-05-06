@@ -264,7 +264,7 @@
         this.settings.postrollTimeout);
 
       this.adsLoader.requestAds(adsRequest);
-      setAdMuted(this.player.muted());
+
     }.bind(this);
 
     /**
@@ -337,6 +337,8 @@
               this.player.trigger('ads-'+event);
           }.bind(this));
       }.bind(this));
+
+      setAdMuted(this.player.muted());
 
       if (!this.autoPlayAdBreaks) {
         try {
