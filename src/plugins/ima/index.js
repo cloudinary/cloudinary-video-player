@@ -264,7 +264,6 @@
         this.settings.postrollTimeout);
 
       this.adsLoader.requestAds(adsRequest);
-      setAdMuted(this.player.muted());
     }.bind(this);
 
     /**
@@ -335,6 +334,7 @@
           this.adsManager.addEventListener(eventsMap[event], function(){
               this.player.trigger('ads-'+event);
           }.bind(this));
+        setAdMuted(this.player.muted());
       }.bind(this));
 
       if (!this.autoPlayAdBreaks) {
