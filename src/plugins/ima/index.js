@@ -264,6 +264,7 @@
         this.settings.postrollTimeout);
 
       this.adsLoader.requestAds(adsRequest);
+      setAdMuted(this.player.muted());
     }.bind(this);
 
     /**
@@ -273,6 +274,7 @@
      * @private
      */
     var onAdsManagerLoaded_ = function(adsManagerLoadedEvent) {
+
       this.adsManager = adsManagerLoadedEvent.getAdsManager(
           this.contentPlayheadTracker, this.adsRenderingSettings);
 
@@ -334,10 +336,7 @@
           this.adsManager.addEventListener(eventsMap[event], function(){
               this.player.trigger('ads-'+event);
           }.bind(this));
-
       }.bind(this));
-
-      setAdMuted(this.player.muted());
 
       if (!this.autoPlayAdBreaks) {
         try {
@@ -774,7 +773,7 @@
       this.sliderLevelDiv.style.width = percent + "%";
       this.player.volume(percent / 100); //0-1
       this.adsManager.setVolume(percent / 100);
-      if (this.player.volume() == 0) {
+      if (this.player.volume() === 0) {
         addClass_(this.muteDiv, 'ima-muted');
         removeClass_(this.muteDiv, 'ima-non-muted');
         this.player.muted(true);
@@ -1031,6 +1030,7 @@
         this.player.muted(true);
         this.adMuted = true;
         this.sliderLevelDiv.style.width = "0%";
+        this.player.volume(0);
       } else {
         addClass_(this.muteDiv, 'ima-non-muted');
         removeClass_(this.muteDiv, 'ima-muted');
