@@ -334,8 +334,10 @@
           this.adsManager.addEventListener(eventsMap[event], function(){
               this.player.trigger('ads-'+event);
           }.bind(this));
-        setAdMuted(this.player.muted());
+
       }.bind(this));
+
+      setAdMuted(this.player.muted());
 
       if (!this.autoPlayAdBreaks) {
         try {
