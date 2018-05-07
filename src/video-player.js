@@ -261,7 +261,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         prerollTimeout: prerollTimeout || 5000,
         postrollTimeout: postrollTimeout || 5000,
         showCountdown: (showCountdown !== false),
-        adLabel: adLabel,
+        adLabel: adLabel || 'Advertisement',
         locale: locale || 'en',
         autoPlayAdBreaks: (autoPlayAdBreaks !== false),
         debug: true
