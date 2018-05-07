@@ -331,6 +331,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(elem, _vjs_options);
 
+    if (_vjs_options.muted) {
+      this.videojs.volume(0.4);
+    }
+
     /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
