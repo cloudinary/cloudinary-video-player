@@ -245,7 +245,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       const opts = Object.assign(_options.ads, _options.ima);
 
-      if (!opts) {
+      if (Object.keys(opts).length === 0) {
         return false;
       }
 
