@@ -27,7 +27,6 @@
     "video.js": "^5.19.0",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-hls": "^5.12.2",
-    "videojs-contrib-ads": "^6.2.0",
     "videojs-contrib-media-sources": "^4.4.2",
     "videojs-ima": "^1.0.0",
     "videojs-per-source-behaviors": "^1.1.3",
