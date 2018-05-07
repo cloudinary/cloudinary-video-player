@@ -184,8 +184,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-    const initPlugins = () => {
-      initIma();
+    const initPlugins = (loaded) => {
+     this.adsEnabled =  initIma(loaded);
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
@@ -193,35 +193,49 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initAnalytics();
     };
 
-    const initIma = () => {
-      if (!_options.ads) {
-        _options.ads = {};
+    const initIma = (loaded) => {
+      if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
+        if (_options.ads || _options.ima) {
+          if (!loaded.contribAdsLoaded) {
+            console.log('contribAds is not loaded');
+          }
+          if (!loaded.imaAdsLoaded) {
+            console.log('imaSdk is not loaded');
+          }
+        }
+        return false;
       }
-      if (_options.ima) {
-        console.log('Deprecated:\n "ima" option as changed to "ads" please update your code');
-      }
-      const opts = Object.assign(_options.ads, _options.ima);
+        if (!_options.ads) {
+          _options.ads = {};
+        }
+        if (_options.ima) {
+          console.log(
+              'Deprecated:\n "ima" option as changed to "ads" please update your code');
+        }
+        const opts = Object.assign(_options.ads, _options.ima);
 
-      if (!opts) {
-        return;
-      }
+        if (!opts) {
+          return false;
+        }
 
-      const { adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
+        const {
+          adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
           autoPlayAdBreaks, locale
-      } = opts;
+        } = opts;
 
-      this.videojs.ima({
-        id: this.el().id,
-        adTagUrl,
-        disableFlashAds: true,
-        prerollTimeout: prerollTimeout || 5000,
-        postrollTimeout: postrollTimeout || 5000,
-        showCountdown: (showCountdown !== false),
-        adLabel: adLabel,
-        locale: locale || 'en',
-        autoPlayAdBreaks: (autoPlayAdBreaks !== false),
-        debug: true
-      });
+        this.videojs.ima({
+          id: this.el().id,
+          adTagUrl,
+          disableFlashAds: true,
+          prerollTimeout: prerollTimeout || 5000,
+          postrollTimeout: postrollTimeout || 5000,
+          showCountdown: (showCountdown !== false),
+          adLabel: adLabel,
+          locale: locale || 'en',
+          autoPlayAdBreaks: (autoPlayAdBreaks !== false),
+          debug: true
+        });
+        return true;
     };
 
     const initAutoplay = () => {
@@ -286,7 +300,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     Utils.fontFace(elem, _options);
 
     this.videojs = videojs(elem, _vjs_options);
-    initPlugins();
+    let loaded = {
+      contribAdsLoaded: typeof this.videojs.ads === 'function',
+      imaAdsLoaded:  (typeof google === 'object' &&  typeof google.ima === 'object')
+    };
+    initPlugins(loaded);
     initPlaylistWidget();
 
     this.videojs.ready(() => {
@@ -299,16 +317,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     });
 
 
-    if (Object.keys(options.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
-      if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
-        this.videojs.one('sourcechanged', () => {
-          this.videojs.ima.playAd();
-        });
+    if (this.adsEnabled) {
+      if (Object.keys(options.playerOptions.ads).length > 0 &&
+          typeof this.videojs.ima === 'object') {
+        if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
+          this.videojs.one('sourcechanged', () => {
+            this.videojs.ima.playAd();
+          });
 
-      } else {
-        this.videojs.on('sourcechanged', () => {
-          this.videojs.ima.playAd();
-        });
+        } else {
+          this.videojs.on('sourcechanged', () => {
+            this.videojs.ima.playAd();
+          });
+        }
       }
     }
 
