@@ -111,7 +111,7 @@ const extractOptions = (elem, options) => {
     delete options.videojs;
   }
 
-  return {playerOptions, videojsOptions: options};
+  return { playerOptions, videojsOptions: options };
 };
 
 const overrideDefaultVideojsComponents = () => {
@@ -193,13 +193,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       events.push(...['seek', 'mute', 'unmute']);
 
-      const extendedEvents = new ExtendedEvents(this.videojs, {events});
+      const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
       const normalizedEvents = extendedEvents.events;
 
       Object.keys(normalizedEvents).forEach((_event) => {
         const handler = (event, data) => {
-          this.videojs.trigger({type: _event, eventData: data});
+          this.videojs.trigger({ type: _event, eventData: data });
         };
         extendedEvents.on(_event, handler);
       });
