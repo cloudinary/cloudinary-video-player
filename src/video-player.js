@@ -9,11 +9,31 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import { CLASS_PREFIX, skinClassPrefix, setSkinClassPrefix } from './utils/css-prefix';
+import {
+  CLASS_PREFIX,
+  skinClassPrefix,
+  setSkinClassPrefix
+} from './utils/css-prefix';
 
-const CLOUDINARY_PARAMS = ['cloudinaryConfig', 'transformation',
-  'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations', 'fontFace'];
-const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat(['publicId', 'source', 'autoplayMode', 'playedEventPercents', 'playedEventTimes', 'analytics', 'fluid', 'ima', 'playlistWidget', 'ads']);
+const CLOUDINARY_PARAMS = [
+  'cloudinaryConfig',
+  'transformation',
+  'sourceTypes',
+  'sourceTransformation',
+  'posterOptions',
+  'autoShowRecommendations',
+  'fontFace'];
+const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
+  'publicId',
+  'source',
+  'autoplayMode',
+  'playedEventPercents',
+  'playedEventTimes',
+  'analytics',
+  'fluid',
+  'ima',
+  'playlistWidget',
+  'ads']);
 
 const registerPlugin = videojs.plugin;
 
@@ -76,10 +96,12 @@ const extractOptions = (elem, options) => {
   normalizeAutoplay(options);
 
   // VideoPlayer specific options
-  const playerOptions = Utils.sliceAndUnsetProperties(options, ...PLAYER_PARAMS);
+  const playerOptions = Utils.sliceAndUnsetProperties(options,
+      ...PLAYER_PARAMS);
 
   // Cloudinary plugin specific options
-  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions, ...CLOUDINARY_PARAMS);
+  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions,
+      ...CLOUDINARY_PARAMS);
 
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
   // to avoid param name conflicts:
@@ -89,7 +111,7 @@ const extractOptions = (elem, options) => {
     delete options.videojs;
   }
 
-  return { playerOptions, videojsOptions: options };
+  return {playerOptions, videojsOptions: options};
 };
 
 const overrideDefaultVideojsComponents = () => {
@@ -116,13 +138,16 @@ const overrideDefaultVideojsComponents = () => {
 
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
   // Also add a blank div underneath the progress control to stop bubbling up pointer events.
-  children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
+  children.splice(children.indexOf('progressControl'), 0, 'spacer',
+      'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
-  children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'playlistNextButton');
+  children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton',
+      'playToggle', 'playlistNextButton');
 
   // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
-  children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton', 'fullscreenToggle');
+  children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
+      'fullscreenToggle');
 };
 
 overrideDefaultVideojsComponents();
@@ -151,24 +176,30 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const setExtendedEvents = () => {
       const events = [];
       if (_options.playedEventPercents) {
-        const percentsplayed = { type: 'percentsplayed', percents: _options.playedEventPercents };
+        const percentsplayed = {
+          type: 'percentsplayed',
+          percents: _options.playedEventPercents
+        };
         events.push(percentsplayed);
       }
 
       if (_options.playedEventTimes) {
-        const timeplayed = { type: 'timeplayed', times: _options.playedEventTimes };
+        const timeplayed = {
+          type: 'timeplayed',
+          times: _options.playedEventTimes
+        };
         events.push(timeplayed);
       }
 
       events.push(...['seek', 'mute', 'unmute']);
 
-      const extendedEvents = new ExtendedEvents(this.videojs, { events });
+      const extendedEvents = new ExtendedEvents(this.videojs, {events});
 
       const normalizedEvents = extendedEvents.events;
 
       Object.keys(normalizedEvents).forEach((_event) => {
         const handler = (event, data) => {
-          this.videojs.trigger({ type: _event, eventData: data });
+          this.videojs.trigger({type: _event, eventData: data});
         };
         extendedEvents.on(_event, handler);
       });
@@ -185,7 +216,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = (loaded) => {
-     this.adsEnabled =  initIma(loaded);
+      this.adsEnabled = initIma(loaded);
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
@@ -205,37 +236,37 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
         return false;
       }
-        if (!_options.ads) {
-          _options.ads = {};
-        }
-        if (_options.ima) {
-          console.log(
-              'Deprecated:\n "ima" option as changed to "ads" please update your code');
-        }
-        const opts = Object.assign(_options.ads, _options.ima);
+      if (!_options.ads) {
+        _options.ads = {};
+      }
+      if (_options.ima) {
+        console.log(
+            'Deprecated:\n "ima" option as changed to "ads" please update your code');
+      }
+      const opts = Object.assign(_options.ads, _options.ima);
 
-        if (!opts) {
-          return false;
-        }
+      if (!opts) {
+        return false;
+      }
 
-        const {
-          adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
-          autoPlayAdBreaks, locale
-        } = opts;
+      const {
+        adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
+        autoPlayAdBreaks, locale
+      } = opts;
 
-        this.videojs.ima({
-          id: this.el().id,
-          adTagUrl,
-          disableFlashAds: true,
-          prerollTimeout: prerollTimeout || 5000,
-          postrollTimeout: postrollTimeout || 5000,
-          showCountdown: (showCountdown !== false),
-          adLabel: adLabel,
-          locale: locale || 'en',
-          autoPlayAdBreaks: (autoPlayAdBreaks !== false),
-          debug: true
-        });
-        return true;
+      this.videojs.ima({
+        id: this.el().id,
+        adTagUrl,
+        disableFlashAds: true,
+        prerollTimeout: prerollTimeout || 5000,
+        postrollTimeout: postrollTimeout || 5000,
+        showCountdown: (showCountdown !== false),
+        adLabel: adLabel,
+        locale: locale || 'en',
+        autoPlayAdBreaks: (autoPlayAdBreaks !== false),
+        debug: true
+      });
+      return true;
     };
 
     const initAutoplay = () => {
@@ -294,15 +325,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
-
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
     Utils.fontFace(elem, _options);
 
     this.videojs = videojs(elem, _vjs_options);
+
+    /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
-      imaAdsLoaded:  (typeof google === 'object' &&  typeof google.ima === 'object')
+      imaAdsLoaded: (typeof google === 'object' && typeof google.ima ===
+          'object')
     };
     initPlugins(loaded);
     initPlaylistWidget();
@@ -310,12 +343,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.ready(() => {
       onReady();
 
-
       if (ready) {
         ready(this);
       }
     });
-
 
     if (this.adsEnabled) {
       if (Object.keys(options.playerOptions.ads).length > 0 &&
@@ -332,7 +363,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       }
     }
-
 
     this.nbCalls = 0;
     this.reTryVideo = (maxNumberOfCalls, timeout) => {

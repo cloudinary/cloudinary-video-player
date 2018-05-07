@@ -1027,7 +1027,6 @@
         addClass_(this.muteDiv, 'ima-muted');
         removeClass_(this.muteDiv, 'ima-non-muted');
         this.adsManager.setVolume(0);
-        console.log(this.player.volume());
         // Bubble down to content player
         this.player.muted(true);
         this.adMuted = true;
@@ -1035,7 +1034,6 @@
       } else {
         addClass_(this.muteDiv, 'ima-non-muted');
         removeClass_(this.muteDiv, 'ima-muted');
-        console.log(this.player.volume());
         this.adsManager.setVolume(this.player.volume());
         // Bubble down to content player
         this.player.muted(false);
