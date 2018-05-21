@@ -17,14 +17,14 @@ class TriangleVolumeBar extends VolumeBar {
       className: 'vjs-triangle-volume-bar-level'
     });
 
-    const container = dom.createEl('div', {
+    this.container = dom.createEl('div', {
       className: 'vjs-triangle-volume-bar-container'
     });
 
     this.bar = this;
 
-    container.appendChild(bg);
-    container.appendChild(this.level);
+    this.container.appendChild(bg);
+    this.container.appendChild(this.level);
 
     const el = Slider.prototype.createEl.call(this, 'div', {
       className: 'vjs-triangle-volume-bar vjs-control'
@@ -32,17 +32,17 @@ class TriangleVolumeBar extends VolumeBar {
 
     videojs.removeClass(el, 'vjs-slider');
 
-    el.appendChild(container);
+    el.appendChild(this.container);
 
     return el;
   }
 
   width() {
-    return this.el().offsetWidth;
+    return this.container.offsetWidth;
   }
 
   height() {
-    return this.el().offsetHeight;
+    return this.container.offsetHeight;
   }
 
   update() {

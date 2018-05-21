@@ -4947,9 +4947,9 @@ url-parse@^1.1.1:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-url-toolkit@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/url-toolkit/-/url-toolkit-1.0.9.tgz#6647c84f931c54e1e61fa3b33e10ad34161ed4d9"
+url-toolkit@^2.1.3:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/url-toolkit/-/url-toolkit-2.1.4.tgz#e0dac60e5fdd50b8ac984307699e8b72439b3fd3"
 
 url@^0.11.0:
   version "0.11.0"
@@ -5023,7 +5023,7 @@ verror@1.3.6:
   dependencies:
     extsprintf "1.0.2"
 
-video.js@^5.10.1, video.js@^5.19.0:
+video.js@^5.10.1:
   version "5.19.0"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.19.0.tgz#6419315a2395ee4e5ff1afc6eabf5bf24fff60c5"
   dependencies:
@@ -5050,6 +5050,19 @@ video.js@^5.17.0:
     videojs-swf "5.3.0"
     videojs-vtt.js "0.12.3"
     xhr "2.2.2"
+
+"video.js@^5.17.0 || ^6.2.0", video.js@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/video.js/-/video.js-6.9.0.tgz#8ad4fbc8d7380b60c703f0a780bc21796a5666cf"
+  dependencies:
+    babel-runtime "^6.9.2"
+    global "4.3.2"
+    safe-json-parse "4.0.0"
+    tsml "1.0.1"
+    videojs-font "2.1.0"
+    videojs-ie8 "1.1.2"
+    videojs-vtt.js "0.12.6"
+    xhr "2.4.0"
 
 "video.js@^5.19.1 || ^6.2.0":
   version "6.5.0"
@@ -5090,27 +5103,27 @@ videojs-contrib-ads@^6:
     global "^4.3.2"
     video.js "^5.19.2 || ^6"
 
-videojs-contrib-hls@^5.12.2:
-  version "5.12.2"
-  resolved "https://registry.yarnpkg.com/videojs-contrib-hls/-/videojs-contrib-hls-5.12.2.tgz#6d567a9ceb7dd4049e6bd53dff17b96caa4c339c"
+videojs-contrib-hls@^5.14.1:
+  version "5.14.1"
+  resolved "https://registry.yarnpkg.com/videojs-contrib-hls/-/videojs-contrib-hls-5.14.1.tgz#eba4f4f6772a74a68ee7a213536ed7d2738972bd"
   dependencies:
     aes-decrypter "1.0.3"
     global "^4.3.0"
     m3u8-parser "2.1.0"
     mux.js "4.3.2"
-    url-toolkit "1.0.9"
+    url-toolkit "^2.1.3"
     video.js "^5.19.1 || ^6.2.0"
-    videojs-contrib-media-sources "4.6.2"
-    webworkify "1.0.2"
+    videojs-contrib-media-sources "4.7.2"
+    webwackify "0.1.6"
 
-videojs-contrib-media-sources@4.6.2:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/videojs-contrib-media-sources/-/videojs-contrib-media-sources-4.6.2.tgz#cfea40752cc80de868b70d0826809157493a19b6"
+videojs-contrib-media-sources@4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/videojs-contrib-media-sources/-/videojs-contrib-media-sources-4.7.2.tgz#0adf929107d5b74cf2c8abb2824c82177e43858e"
   dependencies:
     global "^4.3.0"
     mux.js "4.3.2"
-    video.js "^5.17.0"
-    webworkify "1.0.2"
+    video.js "^5.17.0 || ^6.2.0"
+    webwackify "0.1.6"
 
 videojs-contrib-media-sources@^4.4.2:
   version "4.4.2"
@@ -5302,6 +5315,10 @@ websocket-driver@>=0.5.1:
 websocket-extensions@>=0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
+
+webwackify@0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/webwackify/-/webwackify-0.1.6.tgz#1d42a12ac61823d7e345abde084eaaa62a4a95eb"
 
 webworkify@1.0.2:
   version "1.0.2"
