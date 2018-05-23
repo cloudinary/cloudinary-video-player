@@ -130,11 +130,6 @@ const overrideDefaultVideojsComponents = () => {
     SeekBar.prototype.options_.children.splice(1, 1);
   }
 
-  // const volumePanel = videojs.getComponent('volumePanel');
-  // children = volumePanel.prototype.options_.children;
-
-  // Add our custom TriangleVolumeMenuButton
-  // children[children.indexOf('volumeControl')] = 'TriangleVolumeControl';
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
