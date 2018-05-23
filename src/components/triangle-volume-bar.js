@@ -63,6 +63,6 @@ class TriangleVolumeBar extends VolumeBar {
   }
 }
 
-videojs.registerComponent('TriangleVolumeBar', TriangleVolumeBar);
+videojs.registerComponent('volumeBar', TriangleVolumeBar);
 
 export default TriangleVolumeBar;
