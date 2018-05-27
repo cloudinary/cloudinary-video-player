@@ -119,8 +119,8 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-control-bar {
-    .vjs-control {
-      width: 2.8em;
+    .vjs-volume-panel {
+      margin-right: 1em;
     }
 
    .vjs-menu-button-inline:hover,
@@ -137,10 +137,6 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-menu-button-inline .vjs-menu {
       left: 3em;
-    }
-
-    .vjs-triangle-volume-bar {
-      width: auto;
     }
 
     .vjs-progress-control {
