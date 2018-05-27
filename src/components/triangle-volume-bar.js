@@ -30,7 +30,7 @@ class TriangleVolumeBar extends VolumeBar {
       className: 'vjs-triangle-volume-bar vjs-control'
     });
 
-    videojs.removeClass(el, 'vjs-slider');
+    videojs.dom.removeClass(el, 'vjs-slider');
 
     el.appendChild(this.container);
 
@@ -67,7 +67,6 @@ class TriangleVolumeBar extends VolumeBar {
 
     // Protect against no duration and other division issues
     if (typeof progress !== 'number' ||
-      progress !== progress ||
       progress < 0 ||
       progress === Infinity) {
       progress = 0;

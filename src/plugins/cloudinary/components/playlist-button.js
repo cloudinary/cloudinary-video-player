@@ -21,7 +21,7 @@ class PlaylistButton extends ClickableComponent {
     const type = this.options_.type;
     const typeCssClass = `vjs-icon-play-${type}`;
 
-    return videojs.createEl('button', {
+    return videojs.dom.createEl('button', {
       // Prefixing classes of elements within a player with "vjs-"
       // is a convention used in Video.js.
       className: `vjs-control vjs-playlist-button vjs-button ${typeCssClass}`

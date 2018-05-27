@@ -23,7 +23,7 @@ class CloudinaryButton extends ClickableComponent {
   }
 
   toggleTooltip() {
-    if (!this.player().hasClass('vjs-cloudinary-tooltip-show')) {
+    if (!this.player().dom.hasClass('vjs-cloudinary-tooltip-show')) {
       this.player().trigger('cld-get-info');
     }
     this.player().toggleClass('vjs-cloudinary-tooltip-show');
@@ -36,7 +36,7 @@ class CloudinaryButton extends ClickableComponent {
 
   // The `createEl` function of a component creates its DOM element.
   createEl() {
-    return videojs.createEl('button', {
+    return videojs.dom.createEl('button', {
       className: 'vjs-control vjs-cloudinary-button vjs-button'
     });
   }
@@ -105,7 +105,7 @@ class CloudinaryTooltipCloseButton extends ClickableComponent {
   }
 
   createEl() {
-    return videojs.createEl('button', {
+    return videojs.dom.createEl('button', {
       className: 'vjs-control vjs-cloudinary-tooltip-close-button'
     });
   }
