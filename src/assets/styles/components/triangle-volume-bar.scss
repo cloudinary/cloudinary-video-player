@@ -40,7 +40,8 @@
     .vjs-volume-level {
       overflow: hidden;
       height: 100%;
-      background-color: transparent;
+      background: transparent;
+      box-shadow: none;
 
       &:before {
         @extend %triangle-volume-bar;
