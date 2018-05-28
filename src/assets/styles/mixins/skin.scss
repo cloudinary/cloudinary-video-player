@@ -85,13 +85,16 @@
     }   
   }
 
-  .vjs-triangle-volume-bar {
-    .vjs-triangle-volume-bar-level {
-      border-color: transparent transparent $control-bar-active-color transparent;
+  .vjs-volume-vertical {
+    background-color: rgba($primary-background-color, 0.7);
+  }
+  .vjs-volume-panel-horizontal {
+    .vjs-control:before {
+      border-color: transparent transparent $control-bar-inactive-color transparent;
     }
 
-    .vjs-triangle-volume-bar-background {
-      border-color: transparent transparent $control-bar-inactive-color transparent;
+    .vjs-volume-level:before {
+      border-color: transparent transparent $control-bar-active-color transparent;
     }
   }
 
