@@ -1,11 +1,11 @@
 // Player Cloudinary button
 button.vjs-cloudinary-button {
-  background: url("../../../assets/icons/cloudinary_icon_for_white_bg.svg") no-repeat;
+  background: url("../../../assets/icons/cloudinary_icon_for_black_bg.svg") no-repeat;
   background-size: 25px;
   background-position: center;
 
-  .cld-video-player-skin-dark & {
-    background-image: url("../../../assets/icons/cloudinary_icon_for_black_bg.svg");
+  .cld-video-player-skin-light & {
+    background-image: url("../../../assets/icons/cloudinary_icon_for_white_bg.svg");
   }
 
   &:hover {
@@ -16,7 +16,7 @@ button.vjs-cloudinary-button {
 // Video tooltip
 .vjs-cloudinary-tooltip {
   display: none;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.9);
   padding: 20px;
   width: 320px;
   max-width: 100%;
@@ -37,7 +37,7 @@ button.vjs-cloudinary-button {
 
   .vjs-cloudinary-tooltip-close-button {
     display: none;
-    background: url("../../../assets/icons/arrow-left-blue.svg") no-repeat;
+    background: url("../../../assets/icons/arrow-left-white.svg") no-repeat;
     background-size: 22px;
     height: 20px;
     width: 22px;
@@ -57,7 +57,7 @@ button.vjs-cloudinary-button {
     color: inherit;
 
     .vjs-cloudinary-tooltip-logo {
-      background: url("../../../assets/icons/cloudinary_logo_for_white_bg.svg") no-repeat;
+      background: url("../../../assets/icons/cloudinary_logo_for_dark_bg.svg") no-repeat;
       display: inline-block;
       height: 35px;
       width: 135px;
@@ -77,15 +77,16 @@ button.vjs-cloudinary-button {
     }
   }
 
-  .cld-video-player-skin-dark & {
-    background: rgba(0, 0, 0, 0.9);
+  .cld-video-player-skin-light & {
+    background: rgba(255, 255, 255, 0.9);
+
 
     .vjs-cloudinary-tooltip-close-button {
-      background-image: url("../../../assets/icons/arrow-left-white.svg");
+      background-image: url("../../../assets/icons/arrow-left-blue.svg");
     }
 
     .vjs-cloudinary-tooltip-logo {
-      background-image: url("../../../assets/icons/cloudinary_logo_for_dark_bg.svg");
+      background-image: url("../../../assets/icons/cloudinary_logo_for_white_bg.svg");
     }
   }
 
