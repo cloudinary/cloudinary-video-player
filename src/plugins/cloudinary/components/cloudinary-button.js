@@ -23,7 +23,7 @@ class CloudinaryButton extends ClickableComponent {
   }
 
   toggleTooltip() {
-    if (!this.player().dom.hasClass('vjs-cloudinary-tooltip-show')) {
+    if (!this.player().hasClass('vjs-cloudinary-tooltip-show')) {
       this.player().trigger('cld-get-info');
     }
     this.player().toggleClass('vjs-cloudinary-tooltip-show');
