@@ -27,12 +27,21 @@
 
                 .cld-plw-item-info-wrap {
                     left: 150px;
-                    padding: 20px 15px;
+                    padding: 15px 10px;
                     top: 0;
+                    max-width: calc(100% - 150px);
                 }
 
                 .cld-plw-item-title-next {
                     display: block;
+                }
+
+                .cld-plw-item-title-curr {
+                    display: block;
+                }
+
+                .cld-plw-item-title {
+                    white-space: normal;
                 }
             }
         }
