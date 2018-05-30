@@ -35,6 +35,10 @@ $icon-font-path: '../fonts' !default;
   }
 }
 
+.vjs-cloudinary-button:focus {
+  opacity: 0.8;
+}
+
 .vjs-big-play-button:focus {
   .cld-video-player.cld-video-player-skin-dark & {
     background-color: rgba(40, 40, 40, 0.8);
