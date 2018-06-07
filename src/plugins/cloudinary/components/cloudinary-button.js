@@ -11,13 +11,20 @@ class CloudinaryButton extends ClickableComponent {
     super(player, options);
 
     const clickOutsideHandler = (e) => {
-      const isClickInside = player.el().querySelector('.vjs-cloudinary-tooltip').contains(e.target);
-      const toggleButtonClicked = player.el().querySelector('.vjs-cloudinary-button') === e.target;
-      if (!isClickInside && !toggleButtonClicked) {
-        player.removeClass('vjs-cloudinary-tooltip-show');
+      const playerEl = player.el();
+      if (playerEl) {
+        const isClickInside = player.el().querySelector('.vjs-cloudinary-tooltip').contains(e.target);
+        const toggleButtonClicked = player.el().querySelector('.vjs-cloudinary-button') === e.target;
+        if (!isClickInside && !toggleButtonClicked) {
+          player.removeClass('vjs-cloudinary-tooltip-show');
+        }
       }
     };
     window.addEventListener('click', clickOutsideHandler);
+
+    player.on('dispose', () => {
+      window.removeEventListener('click', clickOutsideHandler);
+    });
 
     player.addChild('cloudinaryTooltip');
   }
