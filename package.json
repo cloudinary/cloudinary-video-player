@@ -13,7 +13,8 @@
     "analyze": "NODE_ENV=production webpack --config webpack/minified.config.js --json | webpack-bundle-size-analyzer",
     "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src",
-    "deploy:edge": "npm run build-all && npm version prerelease && npm publish --tag edge && git push --follow-tags"
+    "preversion": "npm run build-all",
+    "deploy:edge": "npm version prerelease && npm publish --tag edge && git push --follow-tags"
   },
   "author": "Cloudinary",
   "license": "MIT",
