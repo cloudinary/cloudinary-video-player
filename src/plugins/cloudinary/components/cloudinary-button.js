@@ -43,7 +43,7 @@ class CloudinaryButton extends ClickableComponent {
 
   // The `createEl` function of a component creates its DOM element.
   createEl() {
-    return videojs.createEl('button', {
+    return videojs.dom.createEl('button', {
       className: 'vjs-control vjs-cloudinary-button vjs-button'
     });
   }
@@ -112,7 +112,7 @@ class CloudinaryTooltipCloseButton extends ClickableComponent {
   }
 
   createEl() {
-    return videojs.createEl('button', {
+    return videojs.dom.createEl('button', {
       className: 'vjs-control vjs-cloudinary-tooltip-close-button'
     });
   }

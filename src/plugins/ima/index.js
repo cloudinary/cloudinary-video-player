@@ -1772,5 +1772,5 @@
     this.proxyClickEvents();
   };
 
-  videojs.plugin('ima', init);
+  videojs.registerPlugin('ima', init);
 });
