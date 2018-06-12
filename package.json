@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.0.2-edge.7",
+  "version": "1.0.2-edge.8",
   "description": "Cloudinary Video Player",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
