@@ -145,7 +145,6 @@
               document.createElement('div'));
       assignControlAttributes_(this.adContainerDiv, 'ima-ad-container');
       this.adContainerDiv.style.position = "absolute";
-      this.adContainerDiv.style.zIndex = 1111;
       this.adContainerDiv.addEventListener(
           'mouseenter',
           showAdControls_,
