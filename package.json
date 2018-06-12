@@ -14,7 +14,7 @@
     "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src",
     "preversion": "npm run build-all",
-    "deploy:edge": "npm version prerelease && npm publish --tag edge && git push --follow-tags"
+    "deploy:edge": "npm version prerelease && npm publish --tag edge && git push origin master --follow-tags"
   },
   "author": "Cloudinary",
   "license": "MIT",
