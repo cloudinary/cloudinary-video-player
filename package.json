@@ -14,7 +14,8 @@
     "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src",
     "preversion": "npm run build-all",
-    "deploy:edge": "npm version prerelease && npm publish --tag edge && git push origin master --follow-tags"
+    "version-prerelease": "npm version $(node -e \"version = require('./package.json').version; semver = require('semver'); console.log(semver.inc(version, 'prerelease', undefined, 'edge'))\")",
+    "deploy:edge": "npm run version-prerelease && npm publish --tag edge && git push origin master --follow-tags"
   },
   "author": "Cloudinary",
   "license": "MIT",
