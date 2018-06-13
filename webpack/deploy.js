@@ -12,4 +12,6 @@ const nextVersion = () => {
 
 const cmd = `npm version ${nextVersion()}`;
 
+console.log(`Executing ${cmd}...`);
+
 execSync(cmd);
