@@ -14,7 +14,7 @@ const publishCmd = (tag) => {
   let cmd = 'npm publish';
 
   if (tag !== 'stable') {
-    cmd += ' --tag edge';
+    cmd += ` --tag ${tag}`;
   }
 
   return cmd;
