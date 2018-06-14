@@ -28,7 +28,7 @@ const extractTag = () => {
   }
 
   if (!VALID_TAGS.find((t) => t === tag)) {
-    throw Error.new(`Invalid tag ${tag}. Valid tags are: ${VALID_TAGS.join(', ')}`);
+    throw new Error(`Invalid tag ${tag}. Valid tags are: ${VALID_TAGS.join(', ')}`);
   }
 
   return tag;
@@ -37,6 +37,6 @@ const extractTag = () => {
 const tag = extractTag();
 const cmd = `${versionCmd(tag)} && ${publishCmd(tag)}`;
 
-console.log(`Executing ${cmd}...`);
+console.log(`Executing: "${cmd}" ...`);
 
-// execSync(cmd);
+execSync(cmd);
