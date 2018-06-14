@@ -9,6 +9,7 @@ import Playlistable from './mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import './components/cloudinary-button';
+import AudioSource from './models/audio-source';
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -89,6 +90,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     this.buildSource = (publicId, options = {}) => {
+      let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
 
       options.cloudinaryConfig = mergeCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
@@ -98,9 +100,14 @@ class CloudinaryContext extends mixin(Playlistable) {
       options.poster = options.poster || posterOptionsForCurrent();
       options.queryParams = options.usageReport ? { _s: `vp-${VERSION}` } : {};
 
-      const video = new VideoSource(publicId, options);
+      if (options.sourceTypes.includes('audio')) {
+        builtSrc = new AudioSource(publicId, options);
+      } else {
+        builtSrc = new VideoSource(publicId, options);
+      }
 
-      return video;
+
+      return builtSrc;
     };
 
     this.posterOptions = (options) => {
