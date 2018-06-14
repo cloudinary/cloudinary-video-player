@@ -8,6 +8,8 @@ const nextEdgeVersion = () => semver.inc(CURRENT_VERSION, 'prerelease', undefine
 const nextStableVersion = () => semver.inc(CURRENT_VERSION, 'patch');
 const nextVersion = (tag) => (tag === 'edge') ? nextEdgeVersion() : nextStableVersion();
 
+const versionCmd = (tag) => `npm version ${nextVersion(tag)}`;
+
 const publishCmd = (tag) => {
   let cmd = 'npm publish';
 
@@ -17,8 +19,6 @@ const publishCmd = (tag) => {
 
   return cmd;
 };
-
-const versionCmd = (tag) => `npm version ${nextVersion(tag)}`;
 
 const extractTag = () => {
   let tag = process.argv[2];
