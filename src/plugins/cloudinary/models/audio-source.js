@@ -49,6 +49,7 @@ class AudioSource extends VideoSource {
       return this;
     };
     this.poster(poster);
+    this.getPoster = () => _poster;
 
   }
 
@@ -67,8 +68,8 @@ class AudioSource extends VideoSource {
       const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       // const type = formatToMimeType(sourceType);
       const type = 'video/mp4';
-      return { type, src, cldSrc: this };
-    });
+      return { type, src, cldSrc: this, poster: this.getPoster().url() };
+    }, this);
   }
 }
 
