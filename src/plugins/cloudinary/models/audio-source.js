@@ -56,19 +56,23 @@ class AudioSource extends VideoSource {
 
   generateSources() {
     return this.sourceTypes().map((sourceType) => {
-      const format = 'mp3';
-      const opts = {};
-      assign(opts, { resource_type: 'video', format });
+      if (sourceType === 'audio') {
+        const format = 'mp3';
+        const opts = {};
+        assign(opts, { resource_type: 'video', format });
 
-      let queryString = '';
-      if (this.queryParams()) {
-        queryString = objectToQuerystring(this.queryParams());
+        let queryString = '';
+        if (this.queryParams()) {
+          queryString = objectToQuerystring(this.queryParams());
+        }
+
+        const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+        // const type = formatToMimeType(sourceType);
+        const type = 'video/mp4';
+        return { type, src, cldSrc: this, poster: this.getPoster().url() };
+      } else {
+        return null;
       }
-
-      const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
-      // const type = formatToMimeType(sourceType);
-      const type = 'video/mp4';
-      return { type, src, cldSrc: this, poster: this.getPoster().url() };
     }, this);
   }
 }
