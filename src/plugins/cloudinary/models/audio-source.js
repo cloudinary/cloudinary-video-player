@@ -60,14 +60,11 @@ class AudioSource extends VideoSource {
         const format = 'mp3';
         const opts = {};
         assign(opts, { resource_type: 'video', format });
-
         let queryString = '';
         if (this.queryParams()) {
           queryString = objectToQuerystring(this.queryParams());
         }
-
         const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
-        // const type = formatToMimeType(sourceType);
         const type = 'video/mp4';
         return { type, src, cldSrc: this, poster: this.getPoster().url() };
       } else {
