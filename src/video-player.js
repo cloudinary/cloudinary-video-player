@@ -35,11 +35,9 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'playlistWidget',
   'ads']);
 
-const registerPlugin = videojs.plugin;
-
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
-  registerPlugin(key, plugins[key]);
+  videojs.registerPlugin(key, plugins[key]);
 });
 
 const normalizeAutoplay = (options) => {
@@ -85,7 +83,7 @@ const resolveVideoElement = (elem) => {
 const extractOptions = (elem, options) => {
   const elemOptions = normalizeAttributes(elem);
 
-  if (videojs.hasClass(elem, 'cld-fluid')) {
+  if (videojs.dom.hasClass(elem, 'cld-fluid')) {
     options.fluid = true;
   }
 
@@ -97,11 +95,11 @@ const extractOptions = (elem, options) => {
 
   // VideoPlayer specific options
   const playerOptions = Utils.sliceAndUnsetProperties(options,
-      ...PLAYER_PARAMS);
+    ...PLAYER_PARAMS);
 
   // Cloudinary plugin specific options
   playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions,
-      ...CLOUDINARY_PARAMS);
+    ...CLOUDINARY_PARAMS);
 
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
   // to avoid param name conflicts:
@@ -132,22 +130,18 @@ const overrideDefaultVideojsComponents = () => {
 
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
-
-  // Add our custom TriangleVolumeMenuButton
-  children[children.indexOf('volumeMenuButton')] = 'triangleVolumeMenuButton';
-
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
   // Also add a blank div underneath the progress control to stop bubbling up pointer events.
   children.splice(children.indexOf('progressControl'), 0, 'spacer',
-      'progressControlEventsBlocker');
+    'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
   children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton',
-      'playToggle', 'playlistNextButton');
+    'playToggle', 'playlistNextButton');
 
   // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
   children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
-      'fullscreenToggle');
+    'fullscreenToggle');
 };
 
 overrideDefaultVideojsComponents();
@@ -241,7 +235,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       if (_options.ima) {
         console.log(
-            'Deprecated:\n "ima" option as changed to "ads" please update your code');
+          'Deprecated:\n "ima" option as changed to "ads" please update your code');
       }
       const opts = Object.assign(_options.ads, _options.ima);
 
@@ -339,7 +333,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
       imaAdsLoaded: (typeof google === 'object' && typeof google.ima ===
-          'object')
+        'object')
     };
     initPlugins(loaded);
     initPlaylistWidget();
@@ -354,7 +348,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.adsEnabled) {
       if (Object.keys(options.playerOptions.ads).length > 0 &&
-          typeof this.videojs.ima === 'object') {
+        typeof this.videojs.ima === 'object') {
         if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
           this.videojs.one('sourcechanged', () => {
             this.videojs.ima.playAd();

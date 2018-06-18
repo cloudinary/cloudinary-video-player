@@ -21,6 +21,41 @@ $icon-font-path: '../fonts' !default;
   line-height: 1.5em;
 }
 
+// focus and hover states
+.video-js .vjs-control,
+.vjs-big-play-button,
+.vjs-icon-close,
+.vjs-volume-bar {
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.vjs-cloudinary-button:focus {
+  opacity: 0.8;
+}
+
+.vjs-big-play-button:focus {
+  .cld-video-player.cld-video-player-skin-dark & {
+    background-color: rgba(40, 40, 40, 0.8);
+  }
+
+  .cld-video-player.cld-video-player-skin-light & {
+    background-color: rgba(223, 234, 252, 0.8);
+  }
+}
+
+// light skin focus glow effect
+.cld-video-player-skin-light {
+  .vjs-control:focus {
+    text-shadow: 0em 0em 1em #0E2F5A;
+  }  
+}
+
 // IE11 does some weird shenanigans with font-size on :before elements.
 .cld-ie11.video-js .vjs-control:before {
   font-size: 0.6em;
@@ -106,6 +141,10 @@ $icon-font-path: '../fonts' !default;
   &.vjs-paused.vjs-has-started .vjs-big-play-button {
     opacity: 1;
     visibility: visible;
+
+    &:hover {
+      // opacity: 0.8;
+    }
   }
 
   &.vjs-controls-disabled .vjs-big-play-button,
@@ -119,8 +158,8 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-control-bar {
-    .vjs-control {
-      width: 2.8em;
+    .vjs-volume-panel {
+      margin-right: 1em;
     }
 
    .vjs-menu-button-inline:hover,
@@ -137,10 +176,6 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-menu-button-inline .vjs-menu {
       left: 3em;
-    }
-
-    .vjs-triangle-volume-bar {
-      width: auto;
     }
 
     .vjs-progress-control {

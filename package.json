@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.0.0-edge.9",
+  "version": "1.0.2-edge.18",
   "description": "Cloudinary Video Player",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
@@ -13,9 +13,9 @@
     "analyze": "NODE_ENV=production webpack --config webpack/minified.config.js --json | webpack-bundle-size-analyzer",
     "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src",
-    "preversion": "npm run build-all",
-    "deploy:edge": "npm version prerelease && npm publish --tag edge",
-    "postversion": "git push --tags"
+    "predeploy": "npm run build-all",
+    "deploy": "node webpack/deploy.js",
+    "postdeploy": "git push origin master --follow-tags"
   },
   "author": "Cloudinary",
   "license": "MIT",
@@ -27,9 +27,9 @@
     "get-size": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "promise-polyfill": "^6.0.2",
-    "video.js": "^5.19.0",
+    "video.js": "^6.9.0",
     "videojs-contextmenu": "^1.2.2",
-    "videojs-contrib-hls": "^5.12.2",
+    "videojs-contrib-hls": "^5.14.1",
     "videojs-contrib-media-sources": "^4.4.2",
     "videojs-ima": "^1.0.0",
     "videojs-per-source-behaviors": "^1.1.3",

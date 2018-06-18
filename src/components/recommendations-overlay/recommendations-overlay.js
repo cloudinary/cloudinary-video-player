@@ -61,7 +61,7 @@ class RecommendationsOverlay extends Component {
       className: 'vjs-recommendations-overlay'
     });
 
-    videojs.addClass(el, 'vjs-recommendations-overlay');
+    videojs.dom.addClass(el, 'vjs-recommendations-overlay');
 
     return el;
   }
