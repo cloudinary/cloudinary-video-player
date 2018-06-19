@@ -23,12 +23,6 @@ module.exports = {
       amd: 'cloudinary-core',
       root: 'cloudinary'
     },
-    'videojs-contrib-ads': {
-      commonjs: 'videojs-contrib-ads',
-      commonjs2: 'videojs-contrib-ads',
-      amd: 'videojs-contrib-ads',
-      root: 'videojs-contrib-ads'
-    },
     lodash: {
       commonjs: 'lodash',
       commonjs2: 'lodash',
