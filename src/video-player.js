@@ -220,7 +220,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const initIma = (loaded) => {
       if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-        if (_options.ads || _options.ima) {
+        if (_options.ads) {
           if (!loaded.contribAdsLoaded) {
             console.log('contribAds is not loaded');
           }
@@ -233,11 +233,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (!_options.ads) {
         _options.ads = {};
       }
-      if (_options.ima) {
-        console.log(
-          'Deprecated:\n "ima" option as changed to "ads" please update your code');
-      }
-      const opts = Object.assign(_options.ads, _options.ima);
+      const opts = _options.ads;
 
       if (Object.keys(opts).length === 0) {
         return false;

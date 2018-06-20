@@ -167,9 +167,7 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
   <script type="text/javascript" src="/cld-video-player.js"></script>
 
-  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.js"></script>
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/0.8.0/videojs.ima.js"></script> -->
+  <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 
   <!-- Actual code -->
   <script type="text/javascript">
@@ -179,12 +177,12 @@
 
     // Initialize player
     var player = cld.videoPlayer('example-player', {
-      ima: { adTagUrl }
+      ads: { adTagUrl: adTagUrl }
     });
 
-    player.on('sourcechanged', () => {
+/*    player.on('sourcechanged', () => {
       player.ima().playAd();
-    })
+    })*/
 
     // Pass a sorter to sort list in alphabetical order by publicId
     var sorter = function(a, b) {
