@@ -3,8 +3,11 @@
     line-height: 1.7;
   }
 
-  &.vjs-ad-loading > video {
-    opacity: 0;
+  &.vjs-ad-loading {
+    > video,
+    > .vjs-poster {
+      opacity: 0;
+    }
   }
 }
 
