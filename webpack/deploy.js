@@ -4,8 +4,8 @@ const { execSync } = require('child_process');
 const CURRENT_VERSION = require('../package.json').version;
 const VALID_TAGS = ['edge', 'stable', 'dry'];
 
-const nextEdgeVersion = () => semver.inc(CURRENT_VERSION, 'patch', undefined, 'edge');
-const nextStableVersion = () => semver.inc(CURRENT_VERSION, 'minor');
+const nextEdgeVersion = () => semver.inc(CURRENT_VERSION, 'prerelease', undefined, 'edge');
+const nextStableVersion = () => semver.inc(CURRENT_VERSION, 'patch');
 const nextVersion = (tag) => (tag === 'edge') ? nextEdgeVersion() : nextStableVersion();
 
 const versionCmd = (tag) => `npm version ${nextVersion(tag)}`;
