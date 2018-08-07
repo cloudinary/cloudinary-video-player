@@ -15,7 +15,8 @@
     "precommit": "eslint src",
     "predeploy": "npm run build-all",
     "deploy": "node webpack/deploy.js",
-    "postdeploy": "git push origin master --follow-tags"
+    "postdeploy": "git push origin master --follow-tags",
+    "dry:deploy": "node webpack/deploy.js dry"
   },
   "author": "Cloudinary",
   "license": "MIT",
