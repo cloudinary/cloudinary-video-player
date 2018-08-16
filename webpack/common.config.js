@@ -36,11 +36,11 @@ module.exports = {
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     alias: {
       'video.js': path.resolve(__dirname, '../node_modules/video.js'),
-      'webworkify': 'webworkify-webpack-dropin',
+      'webworkify': 'webworkify-webpack2',
       'videojs-contrib-media-sources$': path.resolve(__dirname, '../node_modules/videojs-contrib-media-sources'),
-      'videojs-contrib-hls': path.resolve(__dirname, '../node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js'),
-      'videojs-contrib-ads': path.resolve(__dirname, '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.js'),
-      'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js')
+      'videojs-contrib-ads': path.resolve(__dirname, '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.min.js'),
+      'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js'),
+      'videojs-contrib-hls': path.resolve(__dirname, '../node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js')
     }
   },
 
