@@ -14,7 +14,7 @@
     "build-all": "npm run clean && npm run build && npm run build-light && npm run build-minified && npm run build-minified-light",
     "precommit": "eslint src",
     "predeploy": "deploy=true npm run build-all",
-    "deploy": "node webpack/deploy.js",
+    "deploy": "deploy=true node webpack/deploy.js",
     "postdeploy": "git push origin master --follow-tags",
     "dry:deploy": "node webpack/deploy.js dry"
   },
