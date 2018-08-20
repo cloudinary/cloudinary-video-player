@@ -2,8 +2,10 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
-const VERSION = JSON.stringify(require('../package.json').version);
+const ver = require('./versioning');
 
+let VERSION = (process.env.deploy === 'true') ? ver.getNextVersion() : JSON.stringify(require('../package.json').version);
+console.log(VERSION);
 module.exports = {
   context: path.resolve(__dirname, '../src'),
 
