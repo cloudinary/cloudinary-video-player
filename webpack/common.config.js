@@ -4,7 +4,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const ver = require('./versioning');
 
-let VERSION = (process.env.deploy === 'true') ? ver.getNextVersion() : JSON.stringify(require('../package.json').version);
+let VERSION = (process.env.deploy === 'true') ? JSON.stringify(ver.getNextVersion()) : JSON.stringify(require('../package.json').version);
 console.log(VERSION);
 module.exports = {
   context: path.resolve(__dirname, '../src'),
