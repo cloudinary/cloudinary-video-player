@@ -121,13 +121,6 @@ const overrideDefaultVideojsComponents = () => {
   children.push('upcomingVideoOverlay');
   children.push('recommendationsOverlay');
 
-  const SeekBar = videojs.getComponent('SeekBar');
-
-  // MouseTimeDisplay tooltips should not be added to a player on mobile devices
-  if (videojs.browser.IS_IOS || videojs.browser.IS_ANDROID) {
-    SeekBar.prototype.options_.children.splice(1, 1);
-  }
-
   const ControlBar = videojs.getComponent('ControlBar');
   children = ControlBar.prototype.options_.children;
   // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
