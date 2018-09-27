@@ -19,7 +19,11 @@ module.exports = {
       "jest"
   ],
   "globals": {
-    "VERSION": true
+    "VERSION": true,
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
   },
   "rules": {
     "accessor-pairs": "error",
