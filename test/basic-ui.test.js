@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const url = require('url');
 const path = require('path');
 describe('basic player tests', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     // const browser = await puppeteer.launch({ headless: false });
     // const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
@@ -26,5 +26,13 @@ describe('basic player tests', () => {
     await page.waitFor(1000);
     let playing = await page.$eval('#example-player video', el => el.playing);
     await expect(playing).toBe(true);
+  });
+  it('test cloudinery icon', async () => {
+    jest.setTimeout(35000);
+    await page.waitForSelector('.vjs-big-play-button');
+    await page.click('#example-player > button.vjs-big-play-button');
+    await page.waitFor(1000);
+    await expect(page).toClick('button.vjs-cloudinary-button');
+    await expect(page.$eval('.vjs-cloudinary-tooltip', (tt) => tt.style.display !== 'none'));
   });
 });
