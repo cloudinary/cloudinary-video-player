@@ -1,10 +1,5 @@
-const puppeteer = require('puppeteer');
-const url = require('url');
-const path = require('path');
 describe('basic player tests', () => {
   beforeEach(async () => {
-    // const browser = await puppeteer.launch({ headless: false });
-    // const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto('http://localhost:3000/', { waitUntil: 'load' });
     await page.evaluate(() => {
@@ -34,5 +29,34 @@ describe('basic player tests', () => {
     await page.waitFor(1000);
     await expect(page).toClick('button.vjs-cloudinary-button');
     await expect(page.$eval('.vjs-cloudinary-tooltip', (tt) => tt.style.display !== 'none'));
+    await page.waitFor(1000);
+  });
+  it('Pause button test', async () => {
+    jest.setTimeout(35000);
+    await page.waitForSelector('.vjs-big-play-button');
+    await page.click('#example-player > button.vjs-big-play-button');
+    await page.waitFor(500);
+    let playing = await page.$eval('#example-player video', el => el.playing);
+    await expect(playing).toBe(true);
+    await page.click('#example-player > div.vjs-control-bar > button.vjs-play-control.vjs-control');
+    await page.waitFor(500);
+    playing = await page.$eval('#example-player video', el => el.playing);
+    await expect(playing).toBe(false);
+  });
+  it('Test mute', async () => {
+    await page.waitForSelector('.vjs-big-play-button');
+    await page.click('#example-player > button.vjs-big-play-button');
+    await page.waitFor(500);
+    expect(await page.$eval('#example-player video', v => v.muted)).toBe(true);
+    await page.click('#example-player > div.vjs-control-bar > div.vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
+    expect(await page.$eval('#example-player video', v => v.muted)).toBe(false);
+  });
+  it('Test video time', async () => {
+    await page.waitForSelector('.vjs-big-play-button');
+    await page.click('#example-player > button.vjs-big-play-button');
+    await page.waitFor(2000);
+    let time = await page.$eval('#example-player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > div.vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')));
+    await page.waitFor(2000);
+    expect(await page.$eval('#example-player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > div.vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')))).toBeGreaterThan(time);
   });
 });
