@@ -83,10 +83,10 @@ describe('API player tests', () => {
   });
   it('Test fullscreen', async () => {
     await page.waitFor(500);
-    expect(await page.evaluate(() => document.fullscreen)).toBe(false);
-    await page.click('#vid-vid-maximize');
+    expect(await page.evaluate(() => document.webkitIsFullScreen)).toBeFalsy();
+    await page.click('#vid-maximize');
     await page.waitFor(500);
-    expect(await page.evaluate(() => document.fullscreen)).toBe(true);
+    expect(await page.evaluate(() => document.webkitIsFullScreen)).toBeTruthy();
   });
 });
 
