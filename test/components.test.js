@@ -1,7 +1,7 @@
-describe('Auto-play tests', () => {
+describe('Components tests', () => {
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
-    await page.goto('http://localhost:3000/autoplay-on-scroll.html', {waitUntil: 'load'});
+    await page.goto('http://localhost:3000/components.html', {waitUntil: 'load'});
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {
@@ -11,10 +11,9 @@ describe('Auto-play tests', () => {
       });
     });
   }, 10000);
-  it('Test scroll', async () => {
-    expect(await page.$eval('#example-player_html5_api', p => p.playing)).toEqual(false);
-    await page.tap('#example-player_html5_api');
+  it('Test components', async () => {
     page.waitFor(1000);
-    expect(await page.$eval('#example-player_html5_api', p => p.playing)).toEqual(true);
+    expect(await page.$eval('.vjs-playlist-control.vjs-playlist-next-control', (b => b.tagName))).toEqual('BUTTON');
+    expect(await page.$eval('.vjs-playlist-control.vjs-playlist-previous-control', (b => b.tagName))).toEqual('BUTTON');
   });
 });

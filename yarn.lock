@@ -7947,6 +7947,11 @@ punycode@^2.1.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+puppeteer-request-spy@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/puppeteer-request-spy/-/puppeteer-request-spy-1.1.2.tgz#076f6af01e5a58bff21c546fad01e209c07c62fc"
+  integrity sha512-0yT5MngjFaYY1Z5WDUpakjyWjfDbtW2bsVsu4PaZvNA2HjKLTj/ewpHais1nSlPU3YfPyuw+o2yX8WBHRrD26A==
+
 puppeteer@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.8.0.tgz#9e8bbd2f5448cc19cac220efc0512837104877ad"

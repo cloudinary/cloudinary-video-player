@@ -24,6 +24,9 @@ module.exports = {
     browser: true,
     context: true,
     jestPuppeteer: true,
+    RequestInterceptor: true,
+    RequestSpy: true,
+    ResponseFaker: true
   },
   "rules": {
     "accessor-pairs": "error",
