@@ -7,7 +7,7 @@ module.exports = {
     launchTimeout: 200000
   },
   launch: {
-    headless: false
+    headless: true
   },
   browserContext: 'default'
 

@@ -10,14 +10,22 @@ describe('Ads tests', () => {
         }
       });
     });
+    await page.evaluate(() => (window.ev = []));
     await page.evaluate(() => player.on('readyforpreroll', () => {
-      window.ev = [];
       window.ev.push('preroll');
     }));
+    await page.evaluate(() => player.on('readyforpostroll', () => {
+      window.ev.push('postroll');
+    }));
   }, 10000);
-  it('Preroll test', async () => {
-    await page.waitFor(3000);
-    expect(await page.evaluate(() => window.ev.length)).toEqual(1);
+  it('event test', async () => {
+    jest.setTimeout(65000);
+    await page.waitFor(1000);
+    let duration = await page.evaluate(() => player.duration());
+    await page.waitFor(duration * 1000 + 1000);
+    let events = await page.evaluate(() => window.ev);
+    expect(events.includes('preroll')).toEqual(true);
+    expect(events.includes('postroll')).toEqual(true);
   });
 
 });
