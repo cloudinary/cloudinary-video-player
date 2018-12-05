@@ -3,7 +3,8 @@ module.exports = {
     "browser": true,
     "node": true,
     "commonjs": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
@@ -15,9 +16,17 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
+      "jest"
   ],
   "globals": {
-    "VERSION": true
+    "VERSION": true,
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
+    RequestInterceptor: true,
+    RequestSpy: true,
+    ResponseFaker: true
   },
   "rules": {
     "accessor-pairs": "error",
