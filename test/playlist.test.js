@@ -10,7 +10,7 @@ describe('Playlist tests', () => {
         }
       });
     });
-  }, 10000);
+  }, 30000);
 
   it('Test playlist layout', async () => {
     await page.waitForSelector('#example-player_html5_api', { visible: true, timeout: 35000 });

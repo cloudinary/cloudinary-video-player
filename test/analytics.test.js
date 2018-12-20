@@ -8,11 +8,10 @@ describe('Analytics tests', () => {
     // parameter Interceptor
     paramInterceptor = new RequestInterceptor((testee, keyword) => {
       let urlObj = new URL(testee);
-      console.log(urlObj.searchParams);
       return urlObj.searchParams.get('ea') === keyword;
-    }, console);
+    });
     await page.setRequestInterception(true);
-    await page.setViewport({ width: 1280, height: 800 });
+    await page.setViewport({ width: 1280, height: 1800 });
   }, 35000);
   it('Analytics requests', async () => {
     jest.setTimeout(35000);
@@ -53,17 +52,16 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > div.vjs-control-bar > div.vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
+    await page.click('#example-player > .vjs-control-bar > .vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
     expect(spy.hasMatch()).toBe(true);
   });
   it('Test percentage event', async () => {
     jest.setTimeout(60000);
     let fussyParamInterceptor = new RequestInterceptor((testee, keyword) => {
       let urlObj = new URL(testee);
-      console.log(urlObj.searchParams);
       let event = urlObj.searchParams.get('ea');
       return event !== null && event.includes(keyword);
-    }, console);
+    });
     let spy = new RequestSpy('Percents Played');
     fussyParamInterceptor.addSpy(spy);
     await page.on('request', fussyParamInterceptor.intercept.bind(fussyParamInterceptor));
@@ -76,10 +74,9 @@ describe('Analytics tests', () => {
     jest.setTimeout(35000);
     let fussyParamInterceptor = new RequestInterceptor((testee, keyword) => {
       let urlObj = new URL(testee);
-      console.log(urlObj.searchParams);
       let event = urlObj.searchParams.get('ea');
       return event !== null && event.includes(keyword);
-    }, console);
+    });
     let spy = new RequestSpy('Seek');
     fussyParamInterceptor.addSpy(spy);
     await page.on('request', fussyParamInterceptor.intercept.bind(fussyParamInterceptor));
@@ -96,7 +93,7 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > div.vjs-control-bar > button.vjs-fullscreen-control.vjs-control.vjs-button');
+    await page.click('#example-player > .vjs-control-bar > button.vjs-fullscreen-control.vjs-control.vjs-button');
     await page.waitFor(500);
     expect(spy.hasMatch()).toBe(true);
   });

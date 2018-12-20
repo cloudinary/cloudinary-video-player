@@ -14,12 +14,12 @@ describe('basic player tests', () => {
   }, 10000);
   it('Test title bar title', async () => {
     let ds = JSON.parse(await page.$eval('#example-player', v => v.getAttribute('data-cld-source')));
-    let titlebarTitle = await page.$eval('#example-player > div.vjs-title-bar > div.vjs-title-bar-title', t => t.textContent);
+    let titlebarTitle = await page.$eval('#example-player > .vjs-title-bar > .vjs-title-bar-title', t => t.textContent);
     await expect(ds.info.title).toEqual(titlebarTitle);
   });
   it('Test title bar subtitle', async () => {
     let ds = JSON.parse(await page.$eval('#example-player', v => v.getAttribute('data-cld-source')));
-    let sub = await page.$eval('#example-player > div.vjs-title-bar > div.vjs-title-bar-subtitle', t => t.textContent);
+    let sub = await page.$eval('#example-player > .vjs-title-bar > .vjs-title-bar-subtitle', t => t.textContent);
     await expect(ds.info.subtitle).toEqual(sub);
   });
 

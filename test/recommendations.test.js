@@ -1,6 +1,6 @@
 describe('Recommendations tests', () => {
   beforeEach(async () => {
-    await page.setViewport({width: 1280, height: 800});
+    await page.setViewport({width: 1280, height: 1800});
     await page.goto('http://localhost:3000/recommendations.html', {waitUntil: 'load'});
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
@@ -25,7 +25,7 @@ describe('Recommendations tests', () => {
     await page.waitFor(1000);
     await page.evaluate((dur) => player.currentTime(dur), duration - 1);
     await page.waitFor('.vjs-recommendations-overlay', {visible: true});
-    await page.click('#example-player > div.vjs-recommendations-overlay > div > div > div.vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary > div.vjs-recommendations-overlay-item-primary-image');
+    await page.click('#example-player > div.vjs-recommendations-overlay > div > div > .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary > .vjs-recommendations-overlay-item-primary-image');
     await page.waitFor(1000);
     let recSourceUrl = await page.evaluate(() => player.currentSourceUrl());
     expect(currentSrcUrl).not.toEqual(recSourceUrl);
