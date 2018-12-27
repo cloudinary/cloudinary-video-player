@@ -232,10 +232,10 @@
     // ===============================================
 
     // Get the ClickableComponent base class from Video.js
-    var ClickableComponent = videojs.getComponent('ClickableComponent');
+    var ClickableComponent = videojs.default.getComponent('ClickableComponent');
 
     // Create a common class for playlist buttons
-    var PlaylistButton = videojs.extend(ClickableComponent, {
+    var PlaylistButton = videojs.default.extend(ClickableComponent, {
       constructor: function(player, options) {
         var type = options.type;
         if (!type && type != 'previous' && type != 'next') {
@@ -253,7 +253,7 @@
       createEl: function() {
         var typeCssClass = 'vjs-playlist-' + this.type + '-control';
 
-        return videojs.createEl('button', {
+        return videojs.default.createEl('button', {
 
           // Prefixing classes of elements within a player with "vjs-"
           // is a convention used in Video.js.
@@ -263,7 +263,7 @@
     });
 
     // Create the NextButton component
-    var NextButton = videojs.extend(PlaylistButton, {
+    var NextButton = videojs.default.extend(PlaylistButton, {
       constructor: function(player, options) {
         PlaylistButton.apply(this, [player, { type: 'next' }]);
       },
@@ -278,7 +278,7 @@
     });
 
     // Create the PreviousButton component
-    var PreviousButton = videojs.extend(PlaylistButton, {
+    var PreviousButton = videojs.default.extend(PlaylistButton, {
       constructor: function(player, options) {
         PlaylistButton.apply(this, [player, { type: 'previous' }]);
       },
@@ -290,8 +290,8 @@
     });
 
     // Register the component with Video.js, so it can be used in players.
-    videojs.registerComponent('NextButton', NextButton);
-    videojs.registerComponent('PreviousButton', PreviousButton);
+    videojs.default.registerComponent('NextButton', NextButton);
+    videojs.default.registerComponent('PreviousButton', PreviousButton);
 
     // Cloudinary Video Player related code
     // ====================================

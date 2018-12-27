@@ -40,6 +40,7 @@ Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
 });
 
+
 const normalizeAutoplay = (options) => {
   const autoplayMode = options.autoplayMode;
   if (autoplayMode) {

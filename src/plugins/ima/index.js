@@ -20,7 +20,7 @@
 
 (function(factory) {
   if (typeof define === 'function' && define['amd']) {
-    define(['video.js', 'videojs-contrib-ads'], function(videojs){ factory(window, document, videojs) });
+    define(['video.js', 'videojs-contrib-ads'], function(videojs){ factory(window, document, videojs.default) });
   } else if (typeof exports === 'object' && typeof module === 'object') {
     var vjs = require('video.js');
     require('videojs-contrib-ads');

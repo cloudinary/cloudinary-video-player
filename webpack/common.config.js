@@ -39,10 +39,8 @@ module.exports = {
     alias: {
       'video.js': path.resolve(__dirname, '../node_modules/video.js'),
       'webworkify': 'webworkify-webpack2',
-      'videojs-contrib-media-sources$': path.resolve(__dirname, '../node_modules/videojs-contrib-media-sources'),
       'videojs-contrib-ads': path.resolve(__dirname, '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.min.js'),
-      'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js'),
-      'videojs-contrib-hls': path.resolve(__dirname, '../node_modules/videojs-contrib-hls/dist/videojs-contrib-hls.min.js')
+      'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js')
     }
   },
 
@@ -106,8 +104,13 @@ module.exports = {
         use: 'url-loader?limit=10000'
       },
       {
-        test: require.resolve('video.js'),
-        use: 'expose-loader?videojs'
+        test: path.resolve(__dirname, '../node_modules/video.js'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'videojs'
+          }
+        ]
       }
     ]
   },

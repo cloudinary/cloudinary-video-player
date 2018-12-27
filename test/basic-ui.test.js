@@ -38,7 +38,7 @@ describe('basic player tests', () => {
     await page.waitFor(500);
     let playing = await page.$eval('#example-player video', el => el.playing);
     await expect(playing).toBe(true);
-    await page.click('#example-player > div.vjs-control-bar > button.vjs-play-control.vjs-control');
+    await page.click('#example-player > .vjs-control-bar > button.vjs-play-control.vjs-control');
     await page.waitFor(500);
     playing = await page.$eval('#example-player video', el => el.playing);
     await expect(playing).toBe(false);
@@ -48,15 +48,15 @@ describe('basic player tests', () => {
     await page.click('#example-player > button.vjs-big-play-button');
     await page.waitFor(500);
     expect(await page.$eval('#example-player video', v => v.muted)).toBe(true);
-    await page.click('#example-player > div.vjs-control-bar > div.vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
+    await page.click('#example-player > .vjs-control-bar > .vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
     expect(await page.$eval('#example-player video', v => v.muted)).toBe(false);
   });
   it('Test video time', async () => {
     await page.waitForSelector('.vjs-big-play-button');
     await page.click('#example-player > button.vjs-big-play-button');
     await page.waitFor(2000);
-    let time = await page.$eval('#example-player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > div.vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')));
+    let time = await page.$eval('#example-player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')));
     await page.waitFor(2000);
-    expect(await page.$eval('#example-player > div.vjs-control-bar > div.vjs-current-time.vjs-time-control.vjs-control > div.vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')))).toBeGreaterThan(time);
+    expect(await page.$eval('#example-player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace(':', '')))).toBeGreaterThan(time);
   });
 });
