@@ -16,7 +16,6 @@ module.exports = merge.smart(webpackCommon, {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: `[name]${lightFilenamePart}.min.js`,
-    sourceMapFilename: `[name]${lightFilenamePart}.min.map`,
     chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.min.js`
   },
 
