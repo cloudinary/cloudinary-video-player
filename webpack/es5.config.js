@@ -9,12 +9,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
-  devtool: 'source-map',
 
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: `[name]${lightFilenamePart}.js`,
-    sourceMapFilename: `[name]${lightFilenamePart}.map`,
     chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
   },
 
