@@ -1,13 +1,12 @@
-@import 'compass/css3/flexbox';
 @import '../../../assets/styles/mixins/mixins.scss';
 
 @mixin listLayout() {
     .cld-plw-layout {
         &.cld-plw-vertical, &.cld-plw-horizontal {
-            @include flex-direction(column);
+            flex-direction: column;
 
             .cld-plw-panel {
-                @include flex-direction(column);
+                flex-direction: column;
             }
 
             .cld-plw-col-list {
@@ -77,8 +76,8 @@
         bottom: 0;
         right: 0;
         left: 0;
-        @include display-flex(flex);
-        @include flex-direction(row);
+        display: flex;
+        flex-direction: row;
     }
 
     .cld-plw-panel-item {
@@ -99,8 +98,8 @@
 
 .cld-plw-vertical {
 
-    @include display-flex(flex);
-    @include flex-direction(row);
+    display: flex;
+    flex-direction: row;
 
     &.cld-plw-layout {
         > div:first-child {
@@ -109,8 +108,8 @@
     }
 
     .cld-plw-col-list {
-        @include display-flex(flex);
-        @include flex-direction(column);
+        display: flex;
+        flex-direction: column;
         min-width: 20%;
     }
 
@@ -140,8 +139,8 @@
     padding: 5% 7%;
     width: 100%;
     transition: color .25s;
-    @include display-flex(flex);
-    @include flex-direction(row);
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     box-sizing: border-box;
 
@@ -173,11 +172,11 @@
     }
 
     &.cld-plw-vertical {
-        @include flex-direction(row);
+        flex-direction: row;
     }
 
     &.cld-plw-horizontal {
-        @include flex-direction(column);
+        flex-direction: column;
     }
 }
 
