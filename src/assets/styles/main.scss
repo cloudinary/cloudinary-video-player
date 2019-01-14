@@ -53,7 +53,7 @@ $icon-font-path: '../fonts' !default;
 .cld-video-player-skin-light {
   .vjs-control:focus {
     text-shadow: 0em 0em 1em #0E2F5A;
-  }  
+  }
 }
 
 // IE11 does some weird shenanigans with font-size on :before elements.
@@ -69,10 +69,9 @@ $icon-font-path: '../fonts' !default;
   }
 
   &.cld-fluid {
-    @extend .vjs-fluid;
-
     .vjs-poster {
       // Work-around for poster having slightly wrong proportions in fluid players.
+      background: #000;
       background-size: cover;
     }
   }
