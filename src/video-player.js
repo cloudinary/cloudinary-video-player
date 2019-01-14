@@ -84,7 +84,7 @@ const resolveVideoElement = (elem) => {
 const extractOptions = (elem, options) => {
   const elemOptions = normalizeAttributes(elem);
 
-  if (videojs.dom.hasClass(elem, 'cld-fluid')) {
+  if (videojs.dom.hasClass(elem, 'cld-fluid') || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
 
