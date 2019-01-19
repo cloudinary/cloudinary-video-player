@@ -4,7 +4,7 @@
   "description": "Cloudinary Video Player",
   "scripts": {
     "postinstall": "cp env.example.js env.js",
-    "start": "webpack-dev-server --config webpack/dev.config.js --watch",
+    "start": "webpack-dev-server --config webpack/dev.config.js",
     "clean": "rm -rf dist",
     "build": "NODE_ENV=production webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "build-light": "NODE_ENV=production WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color",
