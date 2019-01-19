@@ -41,9 +41,10 @@ module.exports = merge.smart(webpackCommon, {
     port: env.devServer.port || 3000,
     open: true,
     historyApiFallback: true,
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    }
+  },
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 7000,
+    ignored: [path.resolve(__dirname, '../node_modules')]
   }
 });
