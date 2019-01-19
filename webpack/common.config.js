@@ -71,7 +71,7 @@ module.exports = {
           use: [
             'css-loader?sourceMap&importLoaders=2',
             'resolve-url-loader',
-            `sass-loader?outputStyle=expanded&sourceMap&sourceMapContents&includePaths[]=${path.resolve(__dirname, '../node_modules/compass-mixins/lib')}`
+            `sass-loader?outputStyle=expanded&sourceMap&sourceMapContents`
           ]
         })
       },

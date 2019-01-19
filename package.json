@@ -53,7 +53,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-latest": "^6.22.0",
     "clean-webpack-plugin": "^0.1.15",
-    "compass-mixins": "^0.12.10",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "deep-assign": "^2.0.0",
