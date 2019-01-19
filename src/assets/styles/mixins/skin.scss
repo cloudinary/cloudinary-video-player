@@ -72,7 +72,7 @@
   .vjs-play-progress {
     background: linear-gradient(270deg, adjust-hue(lighten($active-background-color, 20%), 10), $active-background-color);
     @if ($allow-glows) {
-      @include box-shadow(0 2px 12px 0px $active-background-color)
+      box-shadow: 0 2px 12px 0px $active-background-color;
     }
   }
 
@@ -114,8 +114,8 @@
 
     @if ($opaque == true) {
       // Keep everything in a single line
-      @include flex-direction(row);
-      @include justify-content(left);
+      flex-direction: row;
+      justify-content: left;
 
       height: 3.6em;
       background: $primary-background-color;
@@ -135,7 +135,7 @@
         }
       }
     } @else {
-      @include background-image(linear-gradient($primary-background-color, rgba(255, 255, 255, 0) 100%));
+      background-image: linear-gradient($primary-background-color, rgba(255, 255, 255, 0) 100%);
     }
   }
 
@@ -144,7 +144,7 @@
     background-color: rgba($modal-background-color, 0.4);
 
     .vjs-recommendations-overlay-item {
-      @include box-shadow(0 0.5em 1.2em 0px $shadow-color);
+      box-shadow: 0 0.5em 1.2em 0px $shadow-color;
 
       color: $primary-foreground-color;
       border: 1px solid rgba_unless_opaque($border-color, 0.5, $opaque) !important;

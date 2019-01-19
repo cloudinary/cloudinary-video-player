@@ -1,13 +1,10 @@
 @import '../../assets/styles/mixins/aspect-ratio';
 @import '../../assets/styles/mixins/mixins.scss';
-@import 'compass/css3/flexbox';
-@import "compass/functions/lists"; // compass-mixins bug: background-size uses 'compact'
-@import "compass/css3/background-size";
 
 .vjs-recommendations-overlay {
-  @include display-flex;
-  @include align-items(center);
-  @include justify-content(center);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   visibility: hidden;
   position: absolute;
@@ -33,8 +30,8 @@
     @include aspect-ratio(16, 9);
 
     .aspect-ratio-content {
-      @include display-flex;
-      @include flex-flow(column);
+      display: flex;
+      flex-flow: column;
 
       height: auto;
 
@@ -43,19 +40,19 @@
       }
 
       .vjs-recommendations-overlay-item-primary {
-        @include flex(1.82);
-        @include display-flex;
-        @include flex-flow(row);
+        flex: 1.82;
+        display: flex;
+        flex-flow: row;
 
         .vjs-recommendations-overlay-item-primary-image {
           flex: 1;
-          @include background-size('cover');
+          background-size: cover;
         }
 
         .vjs-recommendations-overlay-item-primary-content {
-          @include flex(0.5625);
-          @include display-flex;
-          @include flex-flow(column);
+          flex: 0.5625;
+          display: flex;
+          flex-flow: column;
 
           background: rgba(#000000, 0.6);
           text-align: left;
@@ -116,14 +113,14 @@
       }
 
       .vjs-recommendations-overlay-item-secondary-container {
-        @include flex(1);
-        @include display-flex;
-        @include flex-flow(row wrap);
-        @include justify-content(flex-start);
+        flex: 1;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
 
         .vjs-recommendations-overlay-item-secondary {
-          @include background-size(100% 100%);
-          @include flex(1);
+          background-size: 100% 100%;
+          flex: 1;
 
           max-width: 33%;
 
@@ -137,9 +134,9 @@
           }
 
           div {
-            @include display-flex;
-            @include flex-direction(row);
-            @include justify-content(space-between);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
 
             text-align: left;
             line-height: normal;
@@ -167,7 +164,7 @@
               white-space: nowrap;
 
               &.vjs-recommendations-overlay-item-secondary-title {
-                @include flex(2.3);
+                flex: 2.3;
                 font-size: 13px;
               }
 
