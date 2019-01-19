@@ -1,8 +1,3 @@
-@import 'compass/css3/flexbox';
-@import 'compass/functions/lists'; // compass-mixins bug: background-size uses 'compact'
-@import 'compass/css3/background-size';
-@import 'compass/css3/transition';
-@import 'compass/css3/opacity';
 @import '../../../assets/styles/mixins/aspect-ratio';
 
 $upcoming-video-max-width: 30em;
@@ -10,8 +5,8 @@ $upcoming-video-max-width: 30em;
 $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
 
 .vjs-upcoming-video {
-  @include opacity(0);
-  @include transition(bottom 0.1s, $_upcoming-video-transition);
+  opacity: 0;
+  transition: bottom 0.1s, $_upcoming-video-transition;
   @include aspect-ratio(16, 9);
 
   visibility: hidden;
@@ -23,12 +18,12 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
   border: 1px solid #E8E8E9;
 
   .aspect-ratio-content {
-    @include background-size(cover);
+    background-size: cover;
 
     .vjs-upcoming-video-bar {
-      @include display-flex;
-      @include flex(auto);
-      @include justify-content(space-between);
+      display: flex;
+      flex: auto;
+      justify-content: space-between;
 
       position: absolute;
       height: 3.0em;
@@ -37,7 +32,7 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
       bottom: 0px;
 
       .vjs-upcoming-video-title {
-        @include flex(auto);
+        flex: auto;
         text-align: left;
         display: block;
         width: auto;
@@ -59,18 +54,18 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
   }
 
   .vjs-has-started.vjs-user-inactive.vjs-playing & {
-    @include transition(bottom 1s, $_upcoming-video-transition);
+    transition: bottom 1s, $_upcoming-video-transition;
     bottom: 0.7em;
   }
 
   &.vjs-upcoming-video-show {
-    @include transition($_upcoming-video-transition);
-    @include opacity(1);
+    transition: $_upcoming-video-transition;
+    opacity: 1;
     visibility: visible;
   }
 
   &.disable-transition {
-    @include transition(visibility 0s);
+    transition: visibility 0s;
   }
 
 

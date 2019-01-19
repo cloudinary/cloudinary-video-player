@@ -3,10 +3,6 @@ $icon-font-path: '../fonts' !default;
 
 // Video.js overrides
 @import 'variables';
-@import 'compass/css3/flexbox';
-@import 'compass/css3/box-shadow';
-@import 'compass/css3/images';
-@import 'compass/css3/transition';
 
 // Import Video.js style
 @import '~video.js/src/css/vjs.scss';
@@ -150,7 +146,7 @@ $icon-font-path: '../fonts' !default;
   &.vjs-has-started .vjs-big-play-button,
   &.vjs-using-native-controls .vjs-big-play-button,
   &.vjs-error .vjs-big-play-button {
-    @include transition((visibility 0.2s, opacity 0.2s));
+    transition: visibility 0.2s, opacity 0.2s;
     display: block;
     visibility: hidden;
     opacity: 0;
