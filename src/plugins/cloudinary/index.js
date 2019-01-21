@@ -250,8 +250,10 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     const posterOptionsForCurrent = () => {
       const opts = assign({}, this.posterOptions());
-      if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
-        opts.transformation.crop = 'scale';
+      if (opts.transformation) {
+        if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
+          opts.transformation.crop = 'scale';
+        }
       }
 
       opts.transformation = getCloudinaryInstanceOf(cloudinary.Transformation, opts.transformation || {});
