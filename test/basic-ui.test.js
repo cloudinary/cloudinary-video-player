@@ -1,6 +1,6 @@
 describe('basic player tests', () => {
   beforeEach(async () => {
-    await page.setViewport({ width: 1280, height: 800 });
+    await page.setViewport({ width: 1280, height: 1300 });
     await page.goto('http://localhost:3000/', { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
@@ -12,7 +12,7 @@ describe('basic player tests', () => {
   }, 10000);
 
   it('video player should load', async () => {
-    await expect(page).toMatchElement('#example-player');
+    await expect(page).toMatchElement('#example-player_html5_api');
   });
   it('Video should play', async () => {
     jest.setTimeout(35000);
