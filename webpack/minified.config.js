@@ -15,8 +15,8 @@ module.exports = merge.smart(webpackCommon, {
 
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: `[name]${lightFilenamePart}.min.js`,
-    chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.min.js`
+    filename: `[name]${lightFilenamePart}.js`,
+    chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
   },
 
   plugins: [
@@ -29,7 +29,8 @@ module.exports = merge.smart(webpackCommon, {
     new OptimizeCssAssetsPlugin({ canPrint: true }),
     new WebpackShellPlugin({
       onBuildStart: ['echo "Starting Minification"'],
-      onBuildEnd: ['./node_modules/uglify-js/bin/uglifyjs --ie8 -m -o ./dist/cld-video-player.min.js ./dist/cld-video-player.js']
+      // onBuildEnd: ['./node_modules/uglify-js/bin/uglifyjs --ie8 -m -o ./dist/cld-video-player.min.js ./dist/cld-video-player.js']
+      onBuildEnd: ['node ./webpack/minify.js']
     })
   ]
 });
