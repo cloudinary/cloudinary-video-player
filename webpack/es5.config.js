@@ -5,10 +5,12 @@ const { lightFilenamePart } = require('./build-utils');
 
 // webpack plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge.smart(webpackCommon, {
   bail: false,
+  mode: 'production',
 
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -22,6 +24,6 @@ module.exports = merge.smart(webpackCommon, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin('[name].css')
+    new MiniCssExtractPlugin('[name].css')
   ]
 });
