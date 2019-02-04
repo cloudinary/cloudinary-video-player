@@ -1,6 +1,5 @@
 const aboutMenuItem = {
-  label: 'About this player',
-  href: 'http://cloudinary.com/documentation/cloudinary_video_player'
+  label: 'Cloudinary Player v-' + VERSION
 };
 
 const contextMenuContent = (player) => {
@@ -61,6 +60,7 @@ export default {
   contextMenu: {
     content: contextMenuContent
   },
+  hideContextMenu: false,
   analytics: false,
   playedEventPercents: [25, 50, 75, 100]
 };
