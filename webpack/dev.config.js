@@ -13,7 +13,7 @@ module.exports = merge.smart(webpackCommon, {
   devtool: 'inline-source-map',
 
   output: {
-    path: path.resolve(__dirname, '../static/dist'),
+    path: path.resolve(__dirname, '../docs/dist'),
     filename: '[name].js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id]-chunk.js',
@@ -29,11 +29,11 @@ module.exports = merge.smart(webpackCommon, {
     new ExtractTextPlugin('[name].css'),
     new HtmlWebpackPlugin({
       inject: false,
-      template: path.resolve(__dirname, '../static/index.html'),
-      favicon: path.resolve(__dirname, '../static/favicon.ico')
+      template: path.resolve(__dirname, '../docs/index.html'),
+      favicon: path.resolve(__dirname, '../docs/favicon.ico')
     }),
-    new CopyWebpackPlugin([{ from: '../static/examples' }]),
-    new CopyWebpackPlugin([{ from: '../static/assets' }])
+    new CopyWebpackPlugin([{ from: '../docs/examples' }]),
+    new CopyWebpackPlugin([{ from: '../docs/assets' }])
   ],
 
   devServer: {

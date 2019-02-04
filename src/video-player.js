@@ -33,6 +33,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'fluid',
   'ima',
   'playlistWidget',
+  'hideContextMenu',
   'ads']);
 
 // Register all plugins
@@ -262,7 +263,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initContextMenu = () => {
-      this.videojs.contextMenu(defaults.contextMenu);
+      if (!options.playerOptions.hideContextMenu) {
+        this.videojs.contextMenu(defaults.contextMenu);
+      }
     };
 
     const initPerSrcBehaviors = () => {
