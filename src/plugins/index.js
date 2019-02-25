@@ -4,8 +4,15 @@ import './ima';
 // #endif
 import 'videojs-per-source-behaviors';
 import autoplayOnScroll from './autoplay-on-scroll';
+import floatingPlayer from './floating-player';
 import contextMenu from './context-menu';
 import cloudinary from './cloudinary';
 import analytics from './analytics';
 
-export { autoplayOnScroll, contextMenu, cloudinary, analytics };
+export {
+  autoplayOnScroll,
+  floatingPlayer,
+  contextMenu,
+  cloudinary,
+  analytics
+};

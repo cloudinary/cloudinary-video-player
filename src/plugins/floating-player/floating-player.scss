@@ -1,0 +1,18 @@
+.cld-video-player-floater {
+  transition: all 0.5s ease-out;
+  transition-property: bottom, right, left;
+
+  &-bottom-right {
+    bottom: 20px !important;
+    right: 20px !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  &-bottom-left {
+    bottom: 20px !important;
+    left: 20px !important;
+    top: auto !important;
+    right: auto !important;
+  }
+}
