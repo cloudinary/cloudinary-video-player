@@ -12,6 +12,10 @@ module.exports = {
   entry: {
     'cld-video-player': './index.js'
   },
+  performance: {
+    maxEntrypointSize: 800000,
+    maxAssetSize: 800000
+  },
 
   output: {
     libraryTarget: 'umd',

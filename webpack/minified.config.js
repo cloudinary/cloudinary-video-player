@@ -6,9 +6,7 @@ const { lightFilenamePart } = require('./build-utils');
 // webpack plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const WebpackShellPlugin = require('webpack-shell-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 
@@ -46,7 +44,10 @@ function optimization() {
       new TerserPlugin({
         terserOptions: {
           ecma: 6,
-          compress: true,
+          compress: {
+            drop_debugger: true,
+            drop_console: true
+          },
           output: {
             comments: false,
             beautify: false
