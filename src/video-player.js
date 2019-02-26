@@ -34,7 +34,9 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ima',
   'playlistWidget',
   'hideContextMenu',
-  'ads']);
+  'floatingWhenNotVisible',
+  'ads'
+]);
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -208,6 +210,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.adsEnabled = initIma(loaded);
       initAutoplay();
       initContextMenu();
+      initFloatingPlayer();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
@@ -265,6 +268,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const initContextMenu = () => {
       if (!options.playerOptions.hideContextMenu) {
         this.videojs.contextMenu(defaults.contextMenu);
+      }
+    };
+
+    const initFloatingPlayer = () => {
+      if (options.playerOptions.floatingWhenNotVisible) {
+        this.videojs.floatingPlayer({ 'floatTo': options.playerOptions.floatingWhenNotVisible });
       }
     };
 

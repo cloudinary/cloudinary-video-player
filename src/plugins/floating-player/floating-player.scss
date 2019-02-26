@@ -1,0 +1,56 @@
+.cld-video-player-floater {
+  position: static;
+  transition: all 0.5s ease-out;
+  transition-property: bottom, right, left;
+
+  .cld-video-player-floater-close {
+    display: none;
+  }
+
+  // Floated
+  &.cld-video-player-floating {
+    position: fixed;
+    z-index: 9;
+    border: 4px solid #fff;
+    box-shadow: 0 0 10px rgba(#000, .3);
+
+    .cld-video-player-floater-inner {
+      height: 0;
+      width: 100%;
+    }
+
+    .cld-video-player-floater-close {
+      position: absolute;
+      bottom: 100%;
+      color: #999;
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-bottom: none;
+      margin-bottom: 4px;
+      padding: 4px 6px 2px;
+      display: block;
+      cursor: pointer;
+    }
+
+    &.cld-video-player-floater-bottom-right {
+      bottom: 20px !important;
+      right: 20px !important;
+      top: auto !important;
+      left: auto !important;
+      .cld-video-player-floater-close {
+        right: 0;
+      }
+    }
+
+    &.cld-video-player-floater-bottom-left {
+      bottom: 20px !important;
+      left: 20px !important;
+      top: auto !important;
+      right: auto !important;
+      .cld-video-player-floater-close {
+        left: 0;
+      }
+    }
+
+  }
+}
