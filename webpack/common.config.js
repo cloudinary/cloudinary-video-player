@@ -1,5 +1,5 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const ver = require('./versioning');
@@ -11,6 +11,10 @@ module.exports = {
 
   entry: {
     'cld-video-player': './index.js'
+  },
+  performance: {
+    maxEntrypointSize: 800000,
+    maxAssetSize: 800000
   },
 
   output: {
@@ -51,10 +55,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-            options: {
-              presets: ['es2015']
-            }
+            loader: 'babel-loader'
           },
           'webpack-conditional-loader',
           'eslint-loader'
@@ -66,14 +67,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader?sourceMap&importLoaders=2',
-            'resolve-url-loader',
-            `sass-loader?outputStyle=expanded&sourceMap&sourceMapContents`
-          ]
-        })
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(jpg|png|gif)$/,

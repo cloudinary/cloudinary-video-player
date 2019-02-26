@@ -5,9 +5,11 @@ const { lightFilenamePart } = require('./build-utils');
 
 // webpack plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge.smart(webpackCommon, {
@@ -15,9 +17,10 @@ module.exports = merge.smart(webpackCommon, {
 
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: `[name]${lightFilenamePart}.js`,
-    chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
+    filename: `[name]${lightFilenamePart}.min.js`,
+    chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.min.js`
   },
+  optimization: optimization(),
 
   plugins: [
     new DefinePlugin({
@@ -25,12 +28,34 @@ module.exports = merge.smart(webpackCommon, {
         NODE_ENV: '"production"'
       }
     }),
-    new ExtractTextPlugin(`[name]${lightFilenamePart}.min.css`),
-    new OptimizeCssAssetsPlugin({ canPrint: true }),
-    new WebpackShellPlugin({
-      onBuildStart: ['echo "Starting Minification"'],
-      // onBuildEnd: ['./node_modules/uglify-js/bin/uglifyjs --ie8 -m -o ./dist/cld-video-player.min.js ./dist/cld-video-player.js']
-      onBuildEnd: ['node ./webpack/minify.js']
-    })
+    new MiniCssExtractPlugin(`[name]${lightFilenamePart}.min.css`),
+    new OptimizeCssAssetsPlugin({ canPrint: true })
   ]
 });
+
+function optimization() {
+  if (process.env.NODE_ENV !== 'production') {
+    return;
+  }
+
+  return {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          compress: {
+            drop_debugger: true,
+            drop_console: true
+          },
+          output: {
+            comments: false,
+            beautify: false
+          }
+        }
+      })
+    ]
+  };
+}
+
+
