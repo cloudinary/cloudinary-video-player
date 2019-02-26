@@ -16,8 +16,9 @@ class FloatingPlayer {
     this.player = player;
     let _options = sliceProperties(opts, 'fraction');
 
-    let _floated = false;
     let _floater = null;
+    let _floated = false;
+    let _wrapped = false;
 
     this.init = () => {
       registerEventHandlers();
@@ -32,14 +33,6 @@ class FloatingPlayer {
       return wrapper;
     };
 
-    const unwrap = (wrapper) => {
-      const fragment = document.createDocumentFragment();
-      while (wrapper.firstChild) {
-        fragment.appendChild(wrapper.firstChild);
-      }
-      wrapper.parentNode.replaceChild(fragment, wrapper);
-    };
-
     const removeWindowEventHandlers = () => {
       window.removeEventListener('DOMContentLoaded', checkViewportState, false);
       window.removeEventListener('load', checkViewportState, false);
@@ -48,6 +41,7 @@ class FloatingPlayer {
     };
 
     const addWindowEventHandlers = () => {
+      console.log('ADDING');
       window.addEventListener('DOMContentLoaded', checkViewportState, false);
       window.addEventListener('load', checkViewportState, false);
       window.addEventListener('scroll', checkViewportState, false);
@@ -65,23 +59,51 @@ class FloatingPlayer {
       const el = this.player.el();
       const elRect = el.getBoundingClientRect();
 
-      // create floater element
-      _floater = wrapInner(el);
-      _floater.setAttribute('class', 'cld-video-player-floater cld-video-player-floater');
-      _floater.setAttribute('style', 'position: fixed; top: ' + elRect.top + 'px; left: ' + elRect.left + 'px; right: ' + (document.documentElement.clientWidth - elRect.right) + 'px; bottom: ' + (document.documentElement.clientHeight - elRect.bottom) + 'px; width: ' + elRect.width + 'px; height: ' + elRect.height + 'px;');
+      if (!_wrapped) {
+        // Create floater element
+        _floater = wrapInner(el);
+        _floater.setAttribute('class', 'cld-video-player-floater cld-video-player-floater-bottom-' + opts.floatTo);
+        _floater.setAttribute('style', [
+          'width: ' + opts.collapsedWidth + 'px;',
+          'top: ' + elRect.top + 'px;',
+          'left: ' + elRect.left + 'px;',
+          'right: ' + (document.documentElement.clientWidth - elRect.right) + 'px;',
+          'bottom: ' + (document.documentElement.clientHeight - elRect.bottom) + 'px;'
+        ].join(''));
+
+        // Create inner element
+        const inner = wrapInner(_floater);
+        inner.setAttribute('class', 'cld-video-player-floater-inner');
+        inner.setAttribute('style', 'padding-bottom: ' + (100 * elRect.height / elRect.width) + '%;');
+
+        const close = document.createElement('button');
+        close.setAttribute('class', 'cld-video-player-floater-close');
+        close.innerHTML = 'X';
+        close.onclick = () => {
+          unfloat();
+          disable();
+        };
+        _floater.appendChild(close);
+
+        _wrapped = true;
+      }
 
       setTimeout(() => {
-        _floater.classList.add('cld-video-player-floater-bottom-' + opts.floatTo);
-        _floater.style.height = elRect.height / elRect.width * opts.collapsedWidth + 'px';
-        _floater.style.width = opts.collapsedWidth + 'px';
+        _floater.classList.add('cld-video-player-floating');
       });
 
       _floated = true;
     };
 
     const unfloat = () => {
-      unwrap(_floater);
+      _floater.classList.remove('cld-video-player-floating');
       _floated = false;
+    };
+
+    const disable = () => {
+      removeWindowEventHandlers();
+      this.player.off('play', checkViewportState);
+      this.player.off('play', addWindowEventHandlers);
     };
 
     const checkViewportState = () => {
