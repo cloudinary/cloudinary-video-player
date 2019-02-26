@@ -6,11 +6,13 @@ const env = require('../env');
 // webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge.smart(webpackCommon, {
   devtool: 'inline-source-map',
+  mode: 'development',
 
   output: {
     path: path.resolve(__dirname, '../docs/dist'),
@@ -26,7 +28,7 @@ module.exports = merge.smart(webpackCommon, {
         NODE_ENV: '"development"'
       }
     }),
-    new ExtractTextPlugin('[name].css'),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve(__dirname, '../docs/index.html'),
