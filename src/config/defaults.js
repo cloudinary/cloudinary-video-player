@@ -60,6 +60,7 @@ export default {
   contextMenu: {
     content: contextMenuContent
   },
+  floatingWhenNotVisible: false,
   hideContextMenu: false,
   analytics: false,
   playedEventPercents: [25, 50, 75, 100]
