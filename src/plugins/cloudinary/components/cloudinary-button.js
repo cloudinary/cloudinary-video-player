@@ -7,12 +7,12 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 class CloudinaryButton extends ClickableComponent {
 
   createEl() {
-    let display = this.options_.playerOptions.showPoweredBy ? 'block' : 'none';
+    let display = this.options_.playerOptions.showLogo ? 'block' : 'none';
     return videojs.dom.createEl('a', {
       className: 'vjs-control vjs-cloudinary-button vjs-button',
-      href: this.options_.playerOptions.poweredByUrl,
+      href: this.options_.playerOptions.logoOnclickUrl,
       target: '_blank',
-      style: 'display: ' + display + ';background-image: url(' + this.options_.playerOptions.poweredByLogo + ')'
+      style: 'display: ' + display + ';background-image: url(' + this.options_.playerOptions.logoImageUrl + ')'
     });
   }
 }
