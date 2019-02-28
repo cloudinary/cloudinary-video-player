@@ -7,7 +7,7 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 class CloudinaryButton extends ClickableComponent {
 
   createEl() {
-    let display = this.options_.playerOptions.poweredByUrl ? 'block' : 'none';
+    let display = this.options_.playerOptions.showPoweredBy ? 'block' : 'none';
     return videojs.dom.createEl('a', {
       className: 'vjs-control vjs-cloudinary-button vjs-button',
       href: this.options_.playerOptions.poweredByUrl,
