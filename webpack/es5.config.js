@@ -6,6 +6,8 @@ let { lightFilenamePart } = require('./build-utils');
 // webpack plugins
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
   lightFilenamePart = argv.mode === 'development' ? lightFilenamePart : lightFilenamePart + '.min';
@@ -20,13 +22,51 @@ module.exports = (env, argv) => {
       chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
     },
 
-    plugins: [
-      new DefinePlugin({
-        'process.env': {
-          NODE_ENV: '"production"'
-        }
-      }),
-      new MiniCssExtractPlugin('[name].css')
-    ]
+    optimization: optimization(argv.mode),
+    plugins: plugins(argv.mode)
   });
 };
+
+function optimization(mode) {
+  if (mode !== 'production') {
+    return;
+  }
+
+  return {
+    minimize: true,
+    minimizer: [
+      new OptimizeCssAssetsPlugin({}),
+      new TerserPlugin({
+        terserOptions: {
+          ecma: 6,
+          compress: {
+            drop_debugger: true,
+            drop_console: true
+          },
+          output: {
+            comments: false,
+            beautify: false
+          }
+        }
+      })
+    ]
+  };
+}
+
+function plugins(mode) {
+  let plugins = [
+    new DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(mode)
+      }
+    }),
+    new MiniCssExtractPlugin({
+      filename: `[name]${lightFilenamePart}.css`,
+      chunkFilename: '[id].css'
+    })
+  ];
+  if (mode !== 'development') {
+    plugins.push(new OptimizeCssAssetsPlugin({}));
+  }
+  return plugins;
+}
