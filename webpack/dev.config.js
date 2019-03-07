@@ -34,8 +34,7 @@ module.exports = merge.smart(webpackCommon, {
       template: path.resolve(__dirname, '../docs/index.html'),
       favicon: path.resolve(__dirname, '../docs/favicon.ico')
     }),
-    new CopyWebpackPlugin([{ from: '../docs/examples' }]),
-    new CopyWebpackPlugin([{ from: '../docs/assets' }])
+    new CopyWebpackPlugin([{ from: '../docs/examples' }])
   ],
 
   devServer: {
