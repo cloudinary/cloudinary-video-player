@@ -1,43 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Cloudinary Video Player</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<!-- Bootstrap -->
+  <title>Cloudinary Video Player</title>
 
-<link href="/cld-video-player.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <link href="/cld-video-player.css" rel="stylesheet">
 
-<link href="/style.css" rel="stylesheet">
+  <!-- Cloudinary Video Player Dependencies -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+  <script type="text/javascript" src="/cld-video-player.js"></script>
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body>
     <div class="container p-4">
         <nav class="nav mb-2">
             <a href="index.html"><< Back to examples index</a>
         </nav>
-        <h1 class="text-primary">Cloudinary Video Player</h1>
-        <h3 class="text-primary">Multiple Players</h3>
-  
-        <p>It&apos;s easy to define players with shared configuration. For example: you can use
-          markup to define different public ids, and use &apos;cld.videoPlayers&apos; to create the players
-          using the shared settings.
-        </p>
+        <h1>Cloudinary Video Player</h1>
+        <h3 class="mb-4">Multiple Players</h3>
 
-        <h3 class="text-primary text-center">Player 1</h3>
+        <h3 class="text-primary">Player 1</h3>
         <div class="video-container">
           <video
             muted
@@ -46,7 +32,7 @@
           </video>
         </div>
 
-        <h3 class="text-primary text-center">Player 2</h3>
+        <h3 class="text-primary mt-4">Player 2</h3>
         <div class="video-container">
           <video
             muted
@@ -55,8 +41,8 @@
           </video>
         </div>
 
-        <h3 class="text-primary text-center">Player 3</h3>
-        <div class="row video-container">
+        <h3 class="text-primary mt-4">Player 3</h3>
+        <div class="video-container">
           <video
             muted
             data-cld-public-id="book"
@@ -64,7 +50,11 @@
           </video>
         </div>
 
-        <h3 class="text-primary">Example Code:</h3>
+        <p class="mt-4">
+          <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation (needs anchor)</a>
+        </p>
+
+        <h3 class="mt-4">Example Code:</h3>
         <pre>
           <code class="language-html">
       
@@ -122,11 +112,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
   <!-- Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-  <!-- Cloudinary Video Player Dependencies -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
   <!-- Actual code -->
   <script type="text/javascript">
