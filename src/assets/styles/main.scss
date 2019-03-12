@@ -211,41 +211,19 @@ $icon-font-path: '../fonts' !default;
 
   // Dark skin
   &.cld-video-player-skin-dark {
-    @include skin("dark",$primary-foreground-color: #FFFFFF,
-      $primary-background-color: #000000,
-      $active-foreground-color: #FFFFFF,
-      $active-background-color: #FF620C,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #90A0B3,
-      $control-bar-active-color: #E8E8E9,
-      $control-bar-inactive-color: #0E2F5A,
-      $tooltip-background-color: #E4EBF1,
-      $tooltip-foreground-color: #0E2F5A,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $allow-glows: true)
+    @include skin("dark",
+      $base-color: #000E1F,
+      $accent-color: #FF620C,
+      $text-color: #FFFFFF
+    )
   }
 
   // Light skin
   &.cld-video-player-skin-light {
-    @include skin("light", $primary-foreground-color: #0E2F5A,
-      $primary-background-color: #FFFFFF,
-      $active-foreground-color: #0E2F5A,
-      $active-background-color: #0078FF,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #D0DAE2,
-      $control-bar-active-color: #0078FF,
-      $control-bar-inactive-color: #E4EBF1,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $tooltip-background-color: #0E2F5A,
-      $tooltip-foreground-color: #FFFFFF,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $light: true,
-      $opaque: true,
-      $allow-glows: false)
+    @include skin("light",
+      $base-color: #FFFFFF,
+      $accent-color: #0078FF,
+      $text-color: #0E2F5A
+    )
   }
 }
