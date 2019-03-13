@@ -1,130 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Cloudinary Video Player</title>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player</title>
 
-<!-- Bootstrap -->
+  <link href="/cld-video-player.css" rel="stylesheet">
 
-<link href="/cld-video-player.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+  <script type="text/javascript" src="/cld-video-player.js"></script>
 
-<link href="/style.css" rel="stylesheet">
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-</head>
-<body>
-  
-    <div class="container p-4">
-        <nav class="nav mb-2">
-            <a href="index.html"><< Back to examples index</a>
-        </nav>
-        <h1 class="text-primary">Cloudinary Video Player</h1>
-        <h3 class="text-primary mb-4">Adaptive streaming</h3>
-  
-        <p>The player supports adaptive streaming formats such as HLS and MPEG-DASH: <br />
-          <b>HLS</b> is supported out-of-the-box and is already bundled in the player's package. <br />
-          <b>MPEG-DASH</b> support can be added by including 'dash.js' and 'videojs-contrib-dash' packages (example below).<br /><br />
-          Simply set 'sourceTypes' to the desired format ('dash' or 'hls'). You can define a desired streaming
-          profile ('sd', 'hd', etc') using the 'transformation' param.</p>
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        <div class="video-container mb-5">
-          <video
-            id="example-player-hls"
-            controls
-            muted
-            width="680"
-            height="400"
-            class="cld-video-player cld-video-player-skin-dark">
-          </video>
-        </div>
-
-        <div class="video-container">
-          <video
-            id="example-player-dash"
-            controls
-            muted
-            width="680"
-            height="400"
-            class="cld-video-player cld-video-player-skin-dark">
-          </video>
-        </div>
-
-        <h3 class="text-primary mt-5">Example Code:</h3>
-        <pre>
-            <code class="language-html">
-
-      &lt;!-- Cloudinary Video Player Dependencies -->
-      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js">gt;&lt/script>gt;
-      &lt;script type="text/javascript" src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js">gt;&lt;/script>gt;
-      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js">gt;&lt;/script>gt;
-      &lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js>gt;&lt;/script>gt;
-
-      &lt;video
-        id="example-player-hls"
-        controls
-        muted
-        class="cld-video-player cld-video-player-skin-dark"&gt;
-      &lt;/video&gt;
-
-      &lt;video
-        id="example-player-dash"
-        controls
-        muted
-        class="cld-video-player cld-video-player-skin-dark"&gt;
-      &lt;/video&gt;
-      </code>
-
-      <code class="language-javascript">
-      JavaScript:
-
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
-
-      // Initialize player
       var playerHls = cld.videoPlayer('example-player-hls');
       var playerDash = cld.videoPlayer('example-player-dash');
 
-      // Modify player source
-      playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
-      playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+      playerHls.source('dirt_bike', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+      playerDash.source('surf_competition', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+
+    }, false);
+  </script>
+
+</head>
+<body>
+
+  <div class="container p-4 col-12 col-md-9 col-xl-6">
+    <nav class="nav mb-2">
+        <a href="index.html"><< Back to examples index</a>
+    </nav>
+    <h1>Cloudinary Video Player</h1>
+    <h3 class="mb-4">Adaptive streaming</h3>
+
+    <div class="video-container mb-4">
+      <video
+        id="example-player-hls"
+        controls
+        autoplay
+        muted
+        width="500"
+        class="cld-video-player">
+      </video>
+    </div>
+
+    <div class="video-container mb-4">
+      <video
+        id="example-player-dash"
+        controls
+        autoplay
+        muted
+        width="500"
+        class="cld-video-player">
+      </video>
+    </div>
+
+    <p class="mt-4">
+      <a href="https://cloudinary.com/documentation/video_player_hls_dash">Adaptive streaming documentation</a>
+    </p>
+
+    <h3>Example Code:</h3>
+    <pre>
+      <code class="language-html">
+
+        &lt;video
+          id="example-player-hls"
+          controls
+          autoplay
+          muted
+          width="500"
+          class="cld-video-player">&gt;
+        &lt;/video&gt;
+
+        &lt;video
+          id="example-player-dash"
+          controls
+          autoplay
+          muted
+          width="500"
+          class="cld-video-player">&gt;
+        &lt;/video&gt;
+
+      </code>
+      <code class="language-javascript">
+
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+        var playerHls = cld.videoPlayer('example-player-hls');
+        var playerDash = cld.videoPlayer('example-player-dash');
+  
+        playerHls.source('dirt_bike', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+        playerDash.source('surf_competition', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+
+      </code>
     </pre>
   </div>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
   <!-- Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <!-- Cloudinary Video Player Dependencies -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.2/dash.all.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.10.0/videojs-dash.min.js"></script>
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
-  <!-- Actual code -->
-  <script type="text/javascript">
-    var cld = cloudinary.Cloudinary.new({ cloud_name: 'miki-cloudinary' });
-
-    // Initialize player
-    var playerHls = cld.videoPlayer('example-player-hls');
-    var playerDash = cld.videoPlayer('example-player-dash');
-
-    // Modify player source
-    playerHls.source('oceans', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
-    playerDash.source('oceans', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
-  </script>
 </body>
 </html>
 
