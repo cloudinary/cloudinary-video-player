@@ -11,18 +11,17 @@
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function(){
+
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       var player = cld.videoPlayer('player');
-
-      player.source("sea_turtle");
 
     }, false);
   </script>
 
 </head>
 <body>
-  
+
   <div class="container p-4 col-12 col-md-9 col-xl-6">
       <nav class="nav mb-2">
           <a href="index.html"><< Back to examples index</a>
@@ -37,14 +36,13 @@
     <h3 class="mb-4">Example Code:</h3>
 
     <pre><code class="language-html">
-
       &lt;video
         id="player"
         controls
-        autoplay
         class="cld-video-player"
         width="500"
-        data-cld-autoplay-mode='on-scroll'&gt;
+        data-cld-public-id="sea_turtle"
+        data-cld-autoplay-mode="on-scroll"
       &lt;/video&gt;
     </code></pre>
 
@@ -53,8 +51,6 @@
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       var player = cld.videoPlayer('player');
-
-      player.source("sea_turtle");
 
     </code></pre>
 
@@ -72,10 +68,10 @@
       <video
         id="player"
         controls
-        autoplay
         class="cld-video-player"
         width="500"
-        data-cld-autoplay-mode='on-scroll'
+        data-cld-public-id="sea_turtle"
+        data-cld-autoplay-mode="on-scroll"
       ></video>
     </div>
 
