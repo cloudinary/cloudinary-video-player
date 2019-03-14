@@ -43,6 +43,10 @@ module.exports = merge.smart(webpackCommon, {
     port: env.devServer.port || 3000,
     open: true,
     historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*'
+    }
   },
   watchOptions: {
     aggregateTimeout: 300,
