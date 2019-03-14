@@ -99,16 +99,6 @@
       eventsDiv.scrollTop = eventsDiv.scrollHeight;
     }
 
-    // Update source information when source is changed.
-    player.on('sourcechanged', function() {
-      updateSourceData();
-    });
-
-    function updateSourceData() {
-      document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId();
-      document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl();
-    }
-
     }, false);
   </script>
 
@@ -285,15 +275,6 @@
           eventsDiv.scrollTop = eventsDiv.scrollHeight;
         }
 
-        // Update source information when source is changed.
-        player.on('sourcechanged', function() {
-          updateSourceData();
-        });
-
-        function updateSourceData() {
-          document.querySelector("#vid-source-public-id").innerText = "Public Id: " + player.currentPublicId();
-          document.querySelector("#vid-source-url").innerText = "Source URL: " + player.currentSourceUrl();
-        }
         </code>
     </pre>
   </div>

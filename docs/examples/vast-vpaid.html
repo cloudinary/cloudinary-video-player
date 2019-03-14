@@ -44,28 +44,6 @@
         divElem.innerText = "Playlist: " + list
       });
 
-      function updateSource() {
-        var divElem = document.querySelector("div#source-data");
-
-        publicIdElem = divElem.querySelector("#public-id-placeholder");
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-        divElem.style.display = 'block';
-      }
-
-      player.on('sourcechanged', updateSource);
-
-      document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious();
-      });
-
-      document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext();
-      });
-
     }, false);
   </script>
 
@@ -144,27 +122,6 @@
           divElem.innerText = "Playlist: " + list
         });
 
-        function updateSource() {
-          var divElem = document.querySelector("div#source-data");
-
-          publicIdElem = divElem.querySelector("#public-id-placeholder");
-          sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-          publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-          sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-          divElem.style.display = 'block';
-        }
-
-        player.on('sourcechanged', updateSource);
-
-        document.querySelector("button#play-prev").addEventListener("click", function() {
-          player.playPrevious();
-        });
-
-        document.querySelector("button#play-next").addEventListener("click", function() {
-          player.playNext();
-        });
       </code>
     </pre>
   </div>

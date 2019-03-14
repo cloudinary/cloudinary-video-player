@@ -34,66 +34,6 @@
         // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
         player.playlist(playlistSources, playlistOptions);
 
-        ///, source1, source2, source3, source1, source2, source3
-
-        document.getElementById("changePlaylistTotal").addEventListener("mouseup",function(e){
-          player.playlistWidget().total(e.target.value);
-        });
-
-        document.getElementById("changePlaylistTotal").addEventListener("keyup",function(e) {
-          player.playlistWidget().total(e.target.value);
-        });
-
-        document.getElementById("changePlaylistDirection").addEventListener("change",function(e){
-          player.playlistWidget().direction(e.target.value);
-        });
-
-        document.getElementById("changePlaylistSkin").addEventListener("change",function(e){
-          const skin = e.target.value;
-          if (skin == "light") {
-            document.body.classList.add("dark");
-          } else {
-            document.body.classList.remove("dark");
-          }
-          player.skin(e.target.value);
-        });
-
-        document.getElementById("changePlayerFluid").addEventListener("change",function(e){
-          player.fluid(e.target.checked);
-          document.getElementById("fluid-demo-container").classList[e.target.checked ? "add" : "remove"]("fluid-demo-container");
-        });
-
-        document.getElementById("changePlaylistTag").addEventListener("blur",function(e){
-          const tag = e.target.value;
-          if (tag === "") {
-            player.playlist(playlistSources,playlistOptions);
-          } else {
-            player.playlistByTag(e.target.value, playlistOptions);
-          }
-        });
-
-        function updateSource() {
-          var divElem = document.querySelector("div#source-data");
-
-          publicIdElem = divElem.querySelector("#public-id-placeholder");
-          sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-          publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-          sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-          divElem.style.display = 'block';
-        };
-
-        player.on('sourcechanged', updateSource);
-
-        document.querySelector("button#play-prev").addEventListener("click", function() {
-          player.playPrevious();
-        });
-
-        document.querySelector("button#play-next").addEventListener("click", function() {
-          player.playNext();
-        });
-
       }, false);
     </script>
 
@@ -165,66 +105,6 @@
       };
       // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
       player.playlist(playlistSources, playlistOptions);
-
-      ///, source1, source2, source3, source1, source2, source3
-
-      document.getElementById("changePlaylistTotal").addEventListener("mouseup",function(e){
-        player.playlistWidget().total(e.target.value);
-      });
-
-      document.getElementById("changePlaylistTotal").addEventListener("keyup",function(e) {
-        player.playlistWidget().total(e.target.value);
-      });
-
-      document.getElementById("changePlaylistDirection").addEventListener("change",function(e){
-        player.playlistWidget().direction(e.target.value);
-      });
-
-      document.getElementById("changePlaylistSkin").addEventListener("change",function(e){
-        const skin = e.target.value;
-        if (skin == "light") {
-          document.body.classList.add("dark");
-        } else {
-          document.body.classList.remove("dark");
-        }
-        player.skin(e.target.value);
-      });
-
-      document.getElementById("changePlayerFluid").addEventListener("change",function(e){
-        player.fluid(e.target.checked);
-        document.getElementById("fluid-demo-container").classList[e.target.checked ? "add" : "remove"]("fluid-demo-container");
-      });
-
-      document.getElementById("changePlaylistTag").addEventListener("blur",function(e){
-        const tag = e.target.value;
-        if (tag === "") {
-          player.playlist(playlistSources,playlistOptions);
-        } else {
-          player.playlistByTag(e.target.value, playlistOptions);
-        }
-      });
-
-      function updateSource() {
-        var divElem = document.querySelector("div#source-data");
-
-        publicIdElem = divElem.querySelector("#public-id-placeholder");
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-        divElem.style.display = 'block';
-      };
-
-      player.on('sourcechanged', updateSource);
-
-      document.querySelector("button#play-prev").addEventListener("click", function() {
-        player.playPrevious();
-      });
-
-      document.querySelector("button#play-next").addEventListener("click", function() {
-        player.playNext();
-      });
 
     </code></pre>
   </div>
