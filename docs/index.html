@@ -8,13 +8,13 @@
 <title>Cloudinary Video Player</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<link href="/cld-video-player.css" rel="stylesheet">
-<link href="/style.css" rel="stylesheet">
+<link href="dist/cld-video-player.min.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -31,17 +31,17 @@
   
     <p>Below is an index to some code examples:</p>
     <ul class="list-group mb-5">
-      <li class="list-group-item"><a href="api.html">API and Events</a></li>
-      <li class="list-group-item"><a href="playlist.html">Playlist</a></li>
-      <li class="list-group-item"><a href="playlist-by-tag.html">Playlist by Tag</a></li>
-      <li class="list-group-item"><a href="autoplay-on-scroll.html">Autoplay on Scroll</a></li>
-      <li class="list-group-item"><a href="multiple-players.html">Multiple Players</a></li>
-      <li class="list-group-item"><a href="adaptive-streaming.html">Adaptive Streaming</a></li>
-      <li class="list-group-item"><a href="analytics.html">Analytics</a></li>
-      <li class="list-group-item"><a href="components.html">Components</a></li>
-      <li class="list-group-item"><a href="recommendations.html">Recommendations</a></li>
-      <li class="list-group-item"><a href="fluid.html">Fluid Layouts</a></li>
-      <li class="list-group-item"><a href="vast-vpaid.html">VAST & VPAID support</a></li>
+      <li class="list-group-item"><a href="examples/api.html">API and Events</a></li>
+      <li class="list-group-item"><a href="examples/playlist.html">Playlist</a></li>
+      <li class="list-group-item"><a href="examples/playlist-by-tag.html">Playlist by Tag</a></li>
+      <li class="list-group-item"><a href="examples/autoplay-on-scroll.html">Autoplay on Scroll</a></li>
+      <li class="list-group-item"><a href="examples/multiple-players.html">Multiple Players</a></li>
+      <li class="list-group-item"><a href="examples/adaptive-streaming.html">Adaptive Streaming</a></li>
+      <li class="list-group-item"><a href="examples/analytics.html">Analytics</a></li>
+      <li class="list-group-item"><a href="examples/components.html">Components</a></li>
+      <li class="list-group-item"><a href="examples/recommendations.html">Recommendations</a></li>
+      <li class="list-group-item"><a href="examples/fluid.html">Fluid Layouts</a></li>
+      <li class="list-group-item"><a href="examples/vast-vpaid.html">VAST & VPAID support</a></li>
     </ul>
 
     <div class="video-container mt-5">
@@ -70,7 +70,7 @@
 
   <!-- Cloudinary Video Player Dependencies -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
+  <script type="text/javascript" src="dist/cld-video-player.min.js"></script>
 
   <!-- Actual code -->
   <script type="text/javascript">
