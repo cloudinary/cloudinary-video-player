@@ -22,7 +22,7 @@ class CloudinaryButton extends ClickableComponent {
       className: 'vjs-control vjs-cloudinary-button vjs-button',
       href: this.options_.playerOptions.logoOnclickUrl,
       target: '_blank',
-      style: `display: ${display} ;background-image: url(${bgIcon})`,
+      style: `display: ${display} ;background-image: url(${bgIcon})`
     });
   }
 }
