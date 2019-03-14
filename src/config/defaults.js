@@ -51,7 +51,6 @@ const contextMenuContent = (player) => {
 
 export default {
   logoOnclickUrl: 'https://cloudinary.com/',
-  logoImageUrl: '/fonts/cloudinary_icon_for_black_bg.svg',
   showLogo: true,
   skin: 'dark',
   controls: false,
