@@ -8,7 +8,7 @@ const nextVersion = (tag) => (tag === 'edge') ? nextEdgeVersion() : nextStableVe
 
 const extractTag = () => {
   let tag = process.env.npm_config_tag;
-  console.log(tag);
+  console.log('Current config tag: "' + tag + '"');
 
   if (!tag) {
     return 'edge';
@@ -25,4 +25,3 @@ const getNextVersion = () => nextVersion(extractTag());
 
 
 module.exports = { nextStableVersion, nextEdgeVersion, extractTag, getNextVersion };
-
