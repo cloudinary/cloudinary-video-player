@@ -14,7 +14,8 @@ const DEFAULT_EVENTS = [
   'pausenoseek',
   'seek',
   'mute',
-  'unmute'
+  'unmute',
+  'qualitychanged'
 ];
 
 const DEFAULT_OPTIONS = {
@@ -108,6 +109,39 @@ class ExtendedEvents extends EventEmitter {
       }
     };
 
+    const adaptiveEvents = (event) => {
+      let ee = this;
+      let tracks = this.player.textTracks();
+      let segmentMetadataTrack = null;
+      for (let i = 0; i < tracks.length; i++) {
+        if (tracks[i].label === 'segment-metadata') {
+          segmentMetadataTrack = tracks[i];
+        }
+
+      }
+      let previousResolution = null;
+
+      if (segmentMetadataTrack) {
+        segmentMetadataTrack.on('cuechange', function() {
+          let activeCue = segmentMetadataTrack.activeCues[0];
+
+          if (activeCue) {
+            let currentRes = activeCue.value.resolution;
+            if (previousResolution !== currentRes) {
+              let data = {
+                from: previousResolution,
+                to: currentRes
+              };
+              ee.emit('qualitychanged', event, data);
+            }
+            previousResolution = currentRes;
+          }
+        });
+      }
+
+
+    };
+
     const resetState = () => {
       _muteData = { lastState: undefined };
       _seekStart = _seekEnd = 0;
@@ -139,6 +173,8 @@ class ExtendedEvents extends EventEmitter {
     }
 
     this.player.on('loadedmetadata', loadedmetadata.bind(this));
+    this.player.on('loadeddata', adaptiveEvents.bind(this));
+
   }
 }
 
