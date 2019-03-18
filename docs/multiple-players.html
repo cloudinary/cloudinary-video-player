@@ -5,13 +5,20 @@
   <title>Cloudinary Video Player</title>
   <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
 
-  <link href="/cld-video-player.css" rel="stylesheet">
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
+  -->
+  <script type="text/javascript" src="./docs/scripts.js"></script>
 
   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function(){
+    window.addEventListener('load', function(){
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
