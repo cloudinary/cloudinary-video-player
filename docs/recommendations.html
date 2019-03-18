@@ -3,14 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
 
-  <link href="/cld-video-player.css" rel="stylesheet">
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
+  -->
+  <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function(){
+    window.addEventListener('load', function(){
+
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       var source1 = {
@@ -33,7 +42,7 @@
 
       // Recommendations can be as simple as an array of other video source objects
       source1.recommendations = [source2]
-  
+
       // For async fetching of recommendations (e.g. fetching from database), promises can be used
       source2.recommendations = new Promise((resolve, _) => {
         console.log('Going to database...');
@@ -45,18 +54,18 @@
 
       // Initialize player
       var player = cld.videoPlayer('player', { autoShowRecommendations: true });
-  
+
       player.source(source1);
-  
+
       function updateSource() {
         var divElem = document.querySelector("div#source-data");
 
         publicIdElem = divElem.querySelector("#public-id-placeholder");
         sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-  
+
         publicIdElem.innerText = "Public Id: " + player.currentPublicId();
         sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-  
+
         divElem.style.display = 'block';
       };
 
@@ -69,7 +78,7 @@
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-        <a href="index.html"><< Back to examples index</a>
+        <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Recommendations</h3>
@@ -119,7 +128,7 @@
             description: 'A description of the surf competition movie'
           }
         };
-  
+
         var source2 = {
           publicId: 'finish_line',
           info: {

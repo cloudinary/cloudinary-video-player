@@ -3,39 +3,47 @@
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
 
-  <link href="/cld-video-player.css" rel="stylesheet">
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
-  <script type="text/javascript" src="/cld-video-player.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
 
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function(){
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+  -->
+  <script type="text/javascript" src="./scripts.js"></script>
 
-        var source1 = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' } };
-        var source2 = { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } };
-        var source3 = { publicId: 'marmots', info: { title: 'Marmots' } };
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
 
-        var player = cld.videoPlayer('player',{
-          playlistWidget: {
-            direction: "horizontal",
-            total: 4
-          }
-        });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        var playlistSources = [source1, source2, source3];
-        var playlistOptions = {
-            autoAdvance: true,
-            repeat: true,
-            presentUpcoming: 8
-        };
-        // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
-        player.playlist(playlistSources, playlistOptions);
+      var source1 = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' } };
+      var source2 = { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } };
+      var source3 = { publicId: 'marmots', info: { title: 'Marmots' } };
 
-      }, false);
-    </script>
+      var player = cld.videoPlayer('player',{
+        playlistWidget: {
+          direction: "horizontal",
+          total: 4
+        }
+      });
+
+      var playlistSources = [source1, source2, source3];
+      var playlistOptions = {
+          autoAdvance: true,
+          repeat: true,
+          presentUpcoming: 8
+      };
+      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 5 seconds before the current video ends.
+      player.playlist(playlistSources, playlistOptions);
+
+    }, false);
+  </script>
 
 </head>
 <body>
@@ -48,7 +56,7 @@
 
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-        <a href="index.html"><< Back to examples index</a>
+        <a href="../index.html"><< Back to examples index</a>
     </nav>
 
     <h1>Cloudinary Video Player</h1>
@@ -119,4 +127,3 @@
 
 </body>
 </html>
-

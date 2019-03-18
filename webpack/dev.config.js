@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const webpackCommon = require('./common.config');
 const env = require('../env');
 
-// webpack plugins
+// Webpack plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -15,7 +15,7 @@ module.exports = merge.smart(webpackCommon, {
   mode: 'development',
 
   output: {
-    path: path.resolve(__dirname, '../docs/dist'),
+    path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
     sourceMapFilename: '[name].map',
     chunkFilename: '[id]-chunk.js',
@@ -31,10 +31,9 @@ module.exports = merge.smart(webpackCommon, {
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: path.resolve(__dirname, '../docs/index.html'),
-      favicon: path.resolve(__dirname, '../docs/favicon.ico')
+      template: path.resolve(__dirname, '../index.html')
     }),
-    new CopyWebpackPlugin([{ from: '../docs/examples' }])
+    new CopyWebpackPlugin([{ from: '../docs' }])
   ],
 
   devServer: {
