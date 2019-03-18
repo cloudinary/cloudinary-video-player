@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
 
   <link href="/cld-video-player.css" rel="stylesheet">
 
@@ -33,7 +34,7 @@
 
       // Recommendations can be as simple as an array of other video source objects
       source1.recommendations = [source2]
-  
+
       // For async fetching of recommendations (e.g. fetching from database), promises can be used
       source2.recommendations = new Promise((resolve, _) => {
         console.log('Going to database...');
@@ -45,18 +46,18 @@
 
       // Initialize player
       var player = cld.videoPlayer('player', { autoShowRecommendations: true });
-  
+
       player.source(source1);
-  
+
       function updateSource() {
         var divElem = document.querySelector("div#source-data");
 
         publicIdElem = divElem.querySelector("#public-id-placeholder");
         sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-  
+
         publicIdElem.innerText = "Public Id: " + player.currentPublicId();
         sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-  
+
         divElem.style.display = 'block';
       };
 
@@ -119,7 +120,7 @@
             description: 'A description of the surf competition movie'
           }
         };
-  
+
         var source2 = {
           publicId: 'finish_line',
           info: {

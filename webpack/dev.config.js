@@ -31,10 +31,9 @@ module.exports = merge.smart(webpackCommon, {
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     new HtmlWebpackPlugin({
       inject: false,
-      template: path.resolve(__dirname, '../docs/index.html'),
-      favicon: path.resolve(__dirname, '../docs/favicon.ico')
+      template: path.resolve(__dirname, '../index.html')
     }),
-    new CopyWebpackPlugin([{ from: '../docs/examples' }])
+    new CopyWebpackPlugin([{ from: '../docs' }])
   ],
 
   devServer: {
