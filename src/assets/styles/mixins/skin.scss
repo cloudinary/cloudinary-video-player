@@ -64,6 +64,36 @@
   .vjs-title-bar {
     color: $text-color;
     background-image: linear-gradient($base-color, rgba(255, 255, 255, 0) 100%);
+
+
+    @if ($name == "light") {
+      // Keep everything in a single line
+      flex-direction: row;
+      justify-content: left;
+
+      height: 3.6em;
+      background: $base-color;
+
+      div {
+        width: auto;
+        padding: 0 inherit;
+        margin: 0;
+      }
+
+      .vjs-title-bar-title:not(:empty) + .vjs-title-bar-subtitle:not(:empty) {
+        &:before {
+          content: '\2022';
+          padding: 0 0.45em;
+          font-size: 1.4em;
+          font-weight: 500;
+        }
+      }
+    } @else {
+      background-image: linear-gradient($base-color, rgba(255, 255, 255, 0) 100%);
+    }
+
+
+
   }
 
   .vjs-recommendations-overlay {
@@ -95,11 +125,33 @@
         .vjs-recommendations-overlay-item-primary-content {
           background-color: $base-color;
         }
+
+        &:active, &:hover {
+          .vjs-recommendations-overlay-item-primary-content {
+            @if ($name == "light") {
+              color: $base-color;
+              background-color: rgba($accent-color, 0.8);
+            }
+          }
+        }
       }
 
       &.vjs-recommendations-overlay-item-secondary {
+        &:active, &:hover {
+          div {
+            @if ($name == "light") {
+              color: $base-color;
+              background-color: rgba($accent-color, 0.8);
+            }
+          }
+        }
+
         div {
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+          @if ($name == "light") {
+            background: $base-color;
+          } @else {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+          }
         }
       }
     }
