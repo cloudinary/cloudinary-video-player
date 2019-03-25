@@ -1,187 +1,26 @@
-
-@mixin skin($name,
-  $base-color,
-  $accent-color,
-  $text-color) {
-
-  color: $text-color;
-
-  .vjs-big-play-button {
-    border-color: $text-color;
-  }
-
-  // The default color of control backgrounds is mostly black but with a little
-  // bit of blue so it can still be seen on all-black video frames, which are common.
-  .vjs-control-bar,
-  .vjs-big-play-button,
-  .vjs-menu-button
-  .vjs-menu-content {
-    background-color: $base-color;
-  }
+.cld-video-player {
 
   .vjs-time-tooltip,
   .vjs-mouse-display:after,
   .vjs-play-progress:after {
     font-weight: 300;
-    color: $base-color;
-    background-color: $text-color;
     padding: 0.4em 0.6em;
     top: -2.6em;
   }
 
-  // Slider - used for Volume bar and Progress bar
-  .vjs-slider {
-    background-color: rgba($accent-color, 0.3);
+  .vjs-recommendations-overlay .vjs-recommendations-overlay-item:active:after,
+  .vjs-recommendations-overlay .vjs-recommendations-overlay-item:hover:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
-  // The load progress bar also has internal divs that represent
-  // smaller disconnected loaded time ranges
-  .vjs-load-progress,
-  .vjs-load-progress div {
-    background: rgba($accent-color, 0.2);
-  }
-
-  // The slider bar color is used for the progress bar and the volume bar
-  // (the first two can be removed after a fix that's coming) */
-  .vjs-volume-level,
-  .vjs-play-progress {
-    background: $accent-color;
-  }
-
-  .vjs-volume-vertical {
-    background-color: rgba($base-color, 0.7);
-  }
-  .vjs-volume-panel-horizontal {
-    .vjs-control:before {
-      border-color: transparent transparent rgba($accent-color, 0.4) transparent;
-    }
-
-    .vjs-volume-level:before {
-      border-color: transparent transparent $accent-color transparent;
-    }
-  }
-
-  .vjs-title-bar {
-    color: $text-color;
-    background-image: linear-gradient($base-color, rgba(255, 255, 255, 0) 100%);
-
-
-    @if ($name == "light") {
-      // Keep everything in a single line
-      flex-direction: row;
-      justify-content: left;
-
-      height: 3.6em;
-      background: $base-color;
-
-      div {
-        width: auto;
-        padding: 0 inherit;
-        margin: 0;
-      }
-
-      .vjs-title-bar-title:not(:empty) + .vjs-title-bar-subtitle:not(:empty) {
-        &:before {
-          content: '\2022';
-          padding: 0 0.45em;
-          font-size: 1.4em;
-          font-weight: 500;
-        }
-      }
-    } @else {
-      background-image: linear-gradient($base-color, rgba(255, 255, 255, 0) 100%);
-    }
-
-
-
-  }
-
-  .vjs-recommendations-overlay {
-    color: $text-color;
-    background-color: rgba($base-color, 0.4);
-
-    .vjs-recommendations-overlay-item {
-      box-shadow: 0 0.5em 1.2em 0px $base-color;
-
-      color: $text-color;
-      border: 1px solid $text-color !important;
-      position: relative;
-
-      &:active, &:hover {
-        border: 1px solid $accent-color !important;
-
-        &:after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0px;
-          left: 0px;
-          background-color: rgba(255, 255, 255, 0.2);
-        }
-      }
-
-      &.vjs-recommendations-overlay-item-primary {
-        .vjs-recommendations-overlay-item-primary-content {
-          background-color: $base-color;
-        }
-
-        &:active, &:hover {
-          .vjs-recommendations-overlay-item-primary-content {
-            @if ($name == "light") {
-              color: $base-color;
-              background-color: rgba($accent-color, 0.8);
-            }
-          }
-        }
-      }
-
-      &.vjs-recommendations-overlay-item-secondary {
-        &:active, &:hover {
-          div {
-            @if ($name == "light") {
-              color: $base-color;
-              background-color: rgba($accent-color, 0.8);
-            }
-          }
-        }
-
-        div {
-          @if ($name == "light") {
-            background: $base-color;
-          } @else {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
-          }
-        }
-      }
-    }
-  }
-
-  .vjs-upcoming-video {
-    border: 1px solid $text-color;
-
-    .vjs-upcoming-video-bar {
-      background-color: $base-color;
-    }
-  }
-
-  .vjs-context-menu-ui {
-    .vjs-menu-content {
-      background-color: $base-color;
-
-      .vjs-menu-item {
-        text-align: left;
-
-        &:active, &:hover {
-          color: $text-color;
-          background-color: $accent-color;
-        }
-      }
-    }
-  }
-
-  &.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
-    background: yellow;
+  .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item {
+    text-align: left;
   }
 
   &.vjs-ad-playing .vjs-play-control.vjs-paused,
@@ -193,31 +32,28 @@
     display: none;
   }
 
-  /* PLAYLIST */
+}
 
-  &.cld-plw-layout {
-    background-color: $base-color;
+.cld-video-player-skin-light {
+
+  .vjs-title-bar .vjs-title-bar-title:not(:empty) +
+  .vjs-title-bar-subtitle:not(:empty):before {
+    content: "\2022";
+    padding: 0 0.45em;
+    font-size: 1.4em;
+    font-weight: 500;
   }
 
-  .cld-plw-item-info-wrap {
-    color: $text-color;
-  }
+  .vjs-title-bar {
+    flex-direction: row;
+    justify-content: left;
+    height: 3.6em;
 
-  .cld-plw-panel-item {
-    border-color: $text-color;
-  }
-
-  @if ($name == "light") {
-    .cld-plw-item-info-wrap {
-      color: $text-color;
-    }
-
-    @media only screen and (max-width: 768px) {
-      &.cld-plw-vertical {
-        .cld-plw-item-info-wrap {
-          color: $accent-color;
-        }
-      }
+    div {
+      width: auto;
+      padding: 0 inherit;
+      margin: 0;
     }
   }
+
 }

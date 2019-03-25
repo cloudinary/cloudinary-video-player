@@ -215,22 +215,4 @@ $icon-font-path: '../fonts' !default;
   .vjs-spacer {
     flex: auto;
   }
-
-  // Dark skin
-  &.cld-video-player-skin-dark {
-    @include skin("dark",
-      $base-color: #000E1F,
-      $accent-color: #FF620C,
-      $text-color: #FFFFFF
-    )
-  }
-
-  // Light skin
-  &.cld-video-player-skin-light {
-    @include skin("light",
-      $base-color: #FFFFFF,
-      $accent-color: #0078FF,
-      $text-color: #0E2F5A
-    )
-  }
 }
