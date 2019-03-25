@@ -14,7 +14,7 @@ class CloudinaryButton extends ClickableComponent {
     let bgIcon = '';
     if (!this.options_.playerOptions.logoImageUrl) {
       let clasess = this.options_.playerOptions.class.split(' ');
-      bgIcon = (clasess.includes('cld-video-player-skin-dark')) ? DARK_BG_ICON : LIGHT_BG_ICON;
+      bgIcon = (clasess.includes('cld-video-player-skin-light')) ? LIGHT_BG_ICON : DARK_BG_ICON;
     } else {
       bgIcon = this.options_.playerOptions.logoImageUrl;
     }
