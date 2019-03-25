@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player</title>
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
+
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
+
+    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
+   -->
+  <script type="text/javascript" src="./docs/scripts.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      var player = cld.videoPlayer('player');
+
+    }, false);
+  </script>
+
+</head>
+<body>
+
+  <div class="container p-4 col-12 col-md-9 col-xl-6">
+    <h1 class="mb-4">Cloudinary Video Player</h1>
+
+    <video
+      id="player"
+      controls
+      muted
+      class="cld-video-player cld-video-player-skin-dark cld-fluid"
+      data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+    ></video>
+
+    <p class="mt-4">
+      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation @ cloudinary.com/documentation</a>
+    </p>
+
+    <h3 class="mt-4">Some code examples:</h3>
+    <ul>
+      <li><a href="./docs/api.html">API and Events</a></li>
+      <li><a href="./docs/playlist.html">Playlist</a></li>
+      <li><a href="./docs/playlist-by-tag.html">Playlist by Tag</a></li>
+      <li><a href="./docs/autoplay-on-scroll.html">Autoplay on Scroll</a></li>
+      <li><a href="./docs/multiple-players.html">Multiple Players</a></li>
+      <li><a href="./docs/adaptive-streaming.html">Adaptive Streaming</a></li>
+      <li><a href="./docs/analytics.html">Analytics</a></li>
+      <li><a href="./docs/components.html">Components</a></li>
+      <li><a href="./docs/recommendations.html">Recommendations</a></li>
+      <li><a href="./docs/fluid.html">Fluid Layouts</a></li>
+      <li><a href="./docs/vast-vpaid.html">VAST & VPAID support</a></li>
+      <li><a href="./docs/floating-player.html">Floating player</a></li>
+    </ul>
+
+  </div>
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</body>
+</html>
