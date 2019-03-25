@@ -19,10 +19,13 @@ const setSkinClassPrefix = (componentInstance, name) => {
 
   let newSkinPrefix = '';
   if (skinName) {
+    // From html class
     newSkinPrefix = skinClass(skinName);
   } else if (componentInstance.options_.skin) {
+    // From JS config
     newSkinPrefix = skinClass(componentInstance.options_.skin);
   } else {
+    // Defult
     newSkinPrefix = skinClass(defaults.skin);
   }
 
