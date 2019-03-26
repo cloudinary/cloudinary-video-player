@@ -44,14 +44,14 @@
     font-weight: 500;
   }
 
-  .vjs-title-bar {
+  &.cld-video-player .vjs-title-bar {
     flex-direction: row;
     justify-content: left;
     height: 3.6em;
 
-    div {
+    > div {
       width: auto;
-      padding: 0 inherit;
+      padding: 0;
       margin: 0;
     }
   }

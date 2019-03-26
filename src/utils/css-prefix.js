@@ -5,6 +5,8 @@ import { find } from './find';
 const CLASS_PREFIX = 'cld-video-player';
 const SKIN_CLASS_PREFIX = `${CLASS_PREFIX}-skin-`;
 
+const playerClassPrefix = (componentInstance) => `${CLASS_PREFIX}-${componentInstance.id_}`;
+
 const skinClass = (skin) => `${SKIN_CLASS_PREFIX}${skin}`;
 
 const skinClassPrefix = (componentInstance) => {
@@ -42,4 +44,4 @@ const setSkinClassPrefix = (componentInstance, name) => {
 
 };
 
-export { CLASS_PREFIX, skinClassPrefix, skinClass, setSkinClassPrefix };
+export { CLASS_PREFIX, playerClassPrefix, skinClassPrefix, skinClass, setSkinClassPrefix };

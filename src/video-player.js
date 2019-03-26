@@ -12,7 +12,8 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
-  setSkinClassPrefix
+  setSkinClassPrefix,
+  playerClassPrefix
 } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = [
@@ -198,6 +199,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
+      this.videojs.addClass(playerClassPrefix(this.videojs));
 
       setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 

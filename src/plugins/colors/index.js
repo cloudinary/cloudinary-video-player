@@ -1,4 +1,5 @@
 import assign from 'utils/assign';
+import { playerClassPrefix } from 'utils/css-prefix';
 
 const colorStyles = `
   .cld-video-player {
@@ -184,8 +185,8 @@ const colorLightOverrides = `
 `;
 
 const defaults = {
-  colors: {
-    'base': '#000E1F',
+  colorsDark: {
+    'base': '#000000',
     'accent': '#FF620C',
     'text': '#FFFFFF'
   },
@@ -198,8 +199,11 @@ const defaults = {
 
 class Colors {
   constructor(player, opts = {}) {
-    opts = assign({}, defaults, opts);
     this.player = player;
+
+    const skinDefaults = this.player.options_.skin === 'light' ? { colors: defaults.colorsLight } : { colors: defaults.colorsDark };
+
+    opts = assign({}, skinDefaults, opts);
 
     this.init = () => {
       injectCSS(parseStyles(colorStyles));
@@ -236,7 +240,7 @@ class Colors {
     const parseStyles = (styles) => {
       const parsed = styles
         // wrapper class
-        .replace(/.cld\-video\-player/g, '#' + this.player.id_)
+        .replace(/cld\-video\-player/g, playerClassPrefix(this.player))
         // rgba first
         .replace(/rgba\(\-\-base\-color/g, 'rgba(' + hexToRgb(opts.colors.base))
         .replace(/rgba\(\-\-accent\-color/g, 'rgba(' + hexToRgb(opts.colors.accent))
