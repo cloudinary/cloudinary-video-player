@@ -25,8 +25,15 @@
       var playerHls = cld.videoPlayer('example-player-hls');
       var playerDash = cld.videoPlayer('example-player-dash');
 
-      playerHls.source('dirt_bike', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
-      playerDash.source('surf_competition', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+      playerHls.source('sea_turtle', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
+      playerDash.source('sea_turtle', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+
+      playerHls.on('qualitychanged', (data) => {
+        console.log('HLS player', data);
+      })
+      playerDash.on('qualitychanged', (data) => {
+        console.log('Dash player', data);
+      })
 
     }, false);
   </script>
