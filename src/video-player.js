@@ -343,6 +343,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.on('error', () => {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
         let currSrc = this.videojs.currentSource();
+        // let mp4Src = srcs.filter(src => src.type === 'video/mp4').pop();
         this.videojs.src(currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
         this.fallbackTrys++;
       }

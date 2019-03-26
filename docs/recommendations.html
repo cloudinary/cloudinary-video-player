@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player</title>
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
+
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
+
+    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
+  -->
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      var source1 = {
+        publicId: 'surf_competition',
+        info: {
+          title: 'Surf competition',
+          subtitle: 'A movie about a surf competition',
+          description: 'A description of the surf competition movie'
+        }
+      };
+
+      var source2 = {
+        publicId: 'finish_line',
+        info: {
+          title: 'Finish line',
+          subtitle: 'A short video of a finish line',
+          description: 'A description of the finish line movie.'
+        }
+      };
+
+      // Recommendations can be as simple as an array of other video source objects
+      source1.recommendations = [source2]
+
+      // For async fetching of recommendations (e.g. fetching from database), promises can be used
+      source2.recommendations = new Promise((resolve, _) => {
+        console.log('Going to database...');
+        setTimeout(() => {
+          console.log('Fetched source from database.', source1)
+          resolve([source1]);
+        }, 3000);
+      })
+
+      // Initialize player
+      var player = cld.videoPlayer('player', { autoShowRecommendations: true });
+
+      player.source(source1);
+
+      function updateSource() {
+        var divElem = document.querySelector("div#source-data");
+
+        publicIdElem = divElem.querySelector("#public-id-placeholder");
+        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
+
+        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
+
+        divElem.style.display = 'block';
+      };
+
+      player.on('sourcechanged', updateSource);
+
+    }, false);
+  </script>
+
+</head>
+<body>
+  <div class="container p-4 col-12 col-md-9 col-xl-6">
+    <nav class="nav mb-2">
+        <a href="../index.html"><< Back to examples index</a>
+    </nav>
+    <h1>Cloudinary Video Player</h1>
+    <h3 class="mb-4">Recommendations</h3>
+
+    <video
+      id="player"
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p class="mt-4">
+      <a href="https://cloudinary.com/documentation/video_player_playlists_recommendations#showing_video_recommendations">Recommendations documentation</a>
+    </p>
+
+    <h3>Example Code:</h3>
+    <pre>
+      <code  class="language-html">
+
+        &lt;video
+          id="player"
+          controls
+          muted
+          autoplay
+          class="cld-video-player cld-video-player-skin-dark"
+          data-cld-transformation='{ "width": 500, "crop": "limit" }'&gt;
+        &lt;/video&gt;
+
+        &lt;div id="source-data"&gt;
+          &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
+          &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
+        &lt;/div&gt;
+
+      </code>
+      <code  class="language-javascript">
+
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+        // Set video sources
+        var source1 = {
+          publicId: 'surf_competition',
+          info: {
+            title: 'Surf competition',
+            subtitle: 'A movie about a surf competition',
+            description: 'A description of the surf competition movie'
+          }
+        };
+
+        var source2 = {
+          publicId: 'finish_line',
+          info: {
+            title: 'Finish line',
+            subtitle: 'A short video of a finish line',
+            description: 'A description of the finish line movie.'
+          }
+        };
+
+        // Recommendations can be as simple as an array of other video source objects
+        source1.recommendations = [source2];
+
+        // For async fetching of recommendations (e.g. fetching from database), promises can be used
+        source2.recommendations = new Promise((resolve, _) => {
+          console.log('Going to database...');
+          setTimeout(() => {
+            console.log('Fetched source from database.', source1)
+            resolve([source1]);
+          }, 3000);
+        });
+
+        // Initialize player
+        var player = cld.videoPlayer('player', { autoShowRecommendations: true });
+
+        player.source(source1);
+
+        function updateSource() {
+          var divElem = document.querySelector("div#source-data");
+
+          publicIdElem = divElem.querySelector("#public-id-placeholder");
+          sourceUrlElem = divElem.querySelector("#source-url-placeholder");
+
+          publicIdElem.innerText = "Public Id: " + player.currentPublicId();
+          sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
+
+          divElem.style.display = 'block';
+        };
+
+        player.on('sourcechanged', updateSource);
+      </code>
+    </pre>
+  </div>
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
