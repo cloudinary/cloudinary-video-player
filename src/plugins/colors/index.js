@@ -1,184 +1,187 @@
 import assign from 'utils/assign';
 import { playerClassPrefix } from 'utils/css-prefix';
 
-const colorStyles = `
-  .cld-video-player {
+const playerColors = `
+  .PLAYER-CLASS-PREFIX {
     color: --text-color;
   }
 
-  .cld-video-player .vjs-big-play-button {
-    border-color: rgba(--text-color, 0.5);
-  }
-
-  .cld-video-player .vjs-control-bar,
-  .cld-video-player .vjs-big-play-button,
-  .cld-video-player .vjs-menu-button
-  .vjs-menu-content {
-    background-color: rgba(--base-color, 0.6);
-  }
-
-  .cld-video-player .vjs-time-tooltip,
-  .cld-video-player .vjs-mouse-display:after,
-  .cld-video-player .vjs-play-progress:after {
+  .PLAYER-CLASS-PREFIX .vjs-time-tooltip,
+  .PLAYER-CLASS-PREFIX .vjs-mouse-display:after,
+  .PLAYER-CLASS-PREFIX .vjs-play-progress:after {
     color: --base-color;
     background-color: --text-color;
   }
 
-  .cld-video-player .vjs-slider {
+  .PLAYER-CLASS-PREFIX .vjs-slider {
     background-color: rgba(--accent-color, 0.3);
   }
 
-  .cld-video-player .vjs-load-progress,
-  .cld-video-player .vjs-load-progress div {
+  .PLAYER-CLASS-PREFIX .vjs-load-progress,
+  .PLAYER-CLASS-PREFIX .vjs-load-progress div {
     background: rgba(--accent-color, 0.2);
   }
 
-  .cld-video-player .vjs-volume-level,
-  .cld-video-player .vjs-play-progress {
+  .PLAYER-CLASS-PREFIX .vjs-volume-level,
+  .PLAYER-CLASS-PREFIX .vjs-play-progress {
     background: --accent-color;
   }
 
-  .cld-video-player .vjs-volume-vertical {
+  .PLAYER-CLASS-PREFIX .vjs-volume-vertical {
     background-color: rgba(--base-color, 0.7);
   }
 
-  .cld-video-player .vjs-volume-panel-horizontal .vjs-control:before {
+  .PLAYER-CLASS-PREFIX .vjs-volume-panel-horizontal .vjs-control:before {
     border-color: transparent transparent rgba(--accent-color, 0.4) transparent;
   }
 
-  .cld-video-player .vjs-volume-panel-horizontal .vjs-volume-level:before {
+  .PLAYER-CLASS-PREFIX .vjs-volume-panel-horizontal .vjs-volume-level:before {
     border-color: transparent transparent --accent-color transparent;
   }
 
-  .cld-video-player .vjs-title-bar {
+  .PLAYER-CLASS-PREFIX .vjs-title-bar {
     color: --text-color;
-    background-image: linear-gradient(--base-color, rgba(255, 255, 255, 0) 100%);
-    background-image: linear-gradient(--base-color, rgba(255, 255, 255, 0) 100%);
   }
 
-  .cld-video-player .vjs-recommendations-overlay {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay {
     color: --text-color;
     background-color: rgba(--base-color, 0.4);
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item {
     box-shadow: 0 0.5em 1.2em 0px --base-color;
     color: --text-color;
     border: 1px solid --text-color !important;
     position: relative;
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item:active,
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item:hover {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item:active,
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item:hover {
     border: 1px solid --accent-color !important;
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
-    background-color: rgba(--base-color, 0.6);
-  }
-
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
-  }
-
-  .cld-video-player .vjs-upcoming-video {
-    border: 1px solid rgba(--text-color, 0.5);
-  }
-
-  .cld-video-player .vjs-upcoming-video .vjs-upcoming-video-bar {
-    background-color: rgba(--base-color, 0.6);
-  }
-
-  .cld-video-player .vjs-context-menu-ui .vjs-menu-content {
-    background-color: rgba(--base-color, 0.6);
-  }
-
-  .cld-video-player .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:active,
-  .cld-video-player .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:hover {
+  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:active,
+  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:hover {
     color: --text-color;
     background-color: --accent-color;
   }
 
-  .cld-video-player.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
+  .PLAYER-CLASS-PREFIX.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
     background: --base-color;
   }
 
-  .cld-video-player.cld-plw-layout {
+  .PLAYER-CLASS-PREFIX.cld-plw-layout {
     background-color: --base-color;
   }
 
-  .cld-video-player .cld-plw-item-info-wrap {
+  .PLAYER-CLASS-PREFIX .cld-plw-item-info-wrap {
     color: --text-color;
   }
 
-  .cld-video-player .cld-plw-panel-item {
+  .PLAYER-CLASS-PREFIX .cld-plw-panel-item {
     border-color: --text-color;
   }
 `;
 
-const colorLightOverrides = `
-  .cld-video-player .vjs-title-bar {
+const darkOnlyColors = `
+  .PLAYER-CLASS-PREFIX .vjs-big-play-button {
+    border-color: rgba(--text-color, 0.5);
+  }
+
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-control-bar,
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-big-play-button,
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-menu-button
+  .vjs-menu-content {
+    background-color: rgba(--base-color, 0.6);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-title-bar {
+    background-image: linear-gradient(--base-color, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
+    background-color: rgba(--base-color, 0.6);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-upcoming-video {
+    border: 1px solid rgba(--text-color, 0.5);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-upcoming-video .vjs-upcoming-video-bar {
+    background-color: rgba(--base-color, 0.6);
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content {
+    background-color: rgba(--base-color, 0.6);
+  }
+`;
+
+const lightOnlyColors = `
+  .PLAYER-CLASS-PREFIX .vjs-title-bar {
     flex-direction: row;
     justify-content: left;
     height: 3.6em;
     background: --base-color;
   }
 
-  .cld-video-player .vjs-title-bar div {
+  .PLAYER-CLASS-PREFIX .vjs-title-bar div {
     width: auto;
     padding: 0 inherit;
     margin: 0;
   }
 
-  .cld-video-player .vjs-big-play-button {
+  .PLAYER-CLASS-PREFIX .vjs-big-play-button {
     border-color: --text-color;
   }
 
-  .cld-video-player .vjs-control-bar,
-  .cld-video-player .vjs-big-play-button,
-  .cld-video-player .vjs-menu-button
-  .vjs-menu-content {
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-control-bar,
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-big-play-button,
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-menu-button .vjs-menu-content {
     background-color: --base-color;
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
     background-color: --base-color;
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:active .vjs-recommendations-overlay-item-primary-content,
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:hover .vjs-recommendations-overlay-item-primary-content {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:active .vjs-recommendations-overlay-item-primary-content,
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:hover .vjs-recommendations-overlay-item-primary-content {
     color: --base-color;
     background-color: rgba(--accent-color, 0.8);
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:active div,
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:hover div {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:active div,
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:hover div {
     color: --base-color;
     background-color: rgba(--accent-color, 0.8);
   }
 
-  .cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
+  .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
     background: --base-color;
   }
 
-  .cld-video-player .vjs-upcoming-video {
+  .PLAYER-CLASS-PREFIX .vjs-upcoming-video {
     border: 1px solid --text-color;
   }
 
-  .cld-video-player .vjs-upcoming-video .vjs-upcoming-video-bar {
+  .PLAYER-CLASS-PREFIX .vjs-upcoming-video .vjs-upcoming-video-bar {
     background-color: --base-color;
   }
 
-  .cld-video-player .vjs-context-menu-ui .vjs-menu-content {
+  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content {
     background-color: --base-color;
   }
 
-  .cld-video-player .cld-plw-item-info-wrap {
+  .PLAYER-CLASS-PREFIX .cld-plw-item-info-wrap {
     color: --text-color;
   }
 
   @media only screen and (max-width: 768px) {
-    .cld-video-player.cld-plw-vertical .cld-plw-item-info-wrap {
+    .PLAYER-CLASS-PREFIX.cld-plw-vertical .cld-plw-item-info-wrap {
       color: --accent-color;
     }
   }
@@ -206,10 +209,12 @@ class Colors {
     opts = assign({}, skinDefaults, opts);
 
     this.init = () => {
-      injectCSS(parseStyles(colorStyles));
+      injectCSS(parseStyles(playerColors));
 
       if (this.player.options_.skin === 'light') {
-        injectCSS(parseStyles(colorLightOverrides));
+        injectCSS(parseStyles(lightOnlyColors));
+      } else {
+        injectCSS(parseStyles(darkOnlyColors));
       }
     };
 
@@ -240,7 +245,7 @@ class Colors {
     const parseStyles = (styles) => {
       const parsed = styles
         // wrapper class
-        .replace(/cld\-video\-player/g, playerClassPrefix(this.player))
+        .replace(/PLAYER\-CLASS\-PREFIX/g, playerClassPrefix(this.player))
         // rgba first
         .replace(/rgba\(\-\-base\-color/g, 'rgba(' + hexToRgb(opts.colors.base))
         .replace(/rgba\(\-\-accent\-color/g, 'rgba(' + hexToRgb(opts.colors.accent))

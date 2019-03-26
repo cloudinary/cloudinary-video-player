@@ -34,7 +34,12 @@
 
 }
 
-.cld-video-player-skin-light {
+.cld-video-player.cld-video-player-skin-light {
+
+  .video-js button:hover,
+  .vjs-volume-menu-button:hover {
+    opacity: 0.9;
+  }
 
   .vjs-title-bar .vjs-title-bar-title:not(:empty) +
   .vjs-title-bar-subtitle:not(:empty):before {
@@ -44,7 +49,7 @@
     font-weight: 500;
   }
 
-  &.cld-video-player .vjs-title-bar {
+  .vjs-title-bar {
     flex-direction: row;
     justify-content: left;
     height: 3.6em;
