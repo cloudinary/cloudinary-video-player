@@ -13,6 +13,7 @@ var loadScript = function (source, ver) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = from + source;
+  script.async = false;
   document.getElementsByTagName('head')[0].appendChild(script);
 };
 

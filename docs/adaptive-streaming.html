@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
-  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
+  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png"
+    rel="icon" sizes="32x32" type="image/png">
 
   <!--
     We're loading scripts & style dynamically for development/testing.
@@ -13,30 +15,56 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.3/dash.all.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js"></script>
 
-   -->
+    -->
   <script type="text/javascript" src="./scripts.js"></script>
 
-  <script type="text/javascript">
-    window.addEventListener('load', function(){
+  <script>
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js');
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js');
+  </script>
 
+  <script>
+    window.addEventListener('load', function () {
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
       var playerHls = cld.videoPlayer('example-player-hls');
       var playerDash = cld.videoPlayer('example-player-dash');
 
-      playerHls.source('dirt_bike', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
-      playerDash.source('surf_competition', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+      playerHls.source(
+        'sea_turtle',
+        {
+          sourceTypes: ['hls'],
+          transformation: {streaming_profile: 'hd'},
+          info: {title: 'HLS'}
+        }
+      );
+      playerDash.source(
+        'sea_turtle',
+        {
+          sourceTypes: ['dash'],
+          transformation: {streaming_profile: 'hd'},
+          info: {title: 'MPEG-DASH'}
+        }
+      );
 
+      playerHls.on('qualitychanged', (data) => {
+        console.log('HLS player', data);
+      });
+      playerDash.on('qualitychanged', (data) => {
+        console.log('Dash player', data);
+      });
     }, false);
   </script>
 
 </head>
+
 <body>
 
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-        <a href="../index.html"><< Back to examples index</a>
+      <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Adaptive streaming</h3>
@@ -45,22 +73,20 @@
       <video
         id="example-player-hls"
         controls
-        autoplay
         muted
         width="500"
-        class="cld-video-player">
-      </video>
+        class="cld-video-player"
+      ></video>
     </div>
 
     <div class="video-container mb-4">
       <video
         id="example-player-dash"
         controls
-        autoplay
         muted
         width="500"
-        class="cld-video-player">
-      </video>
+        class="cld-video-player"
+      ></video>
     </div>
 
     <p class="mt-4">
@@ -70,15 +96,14 @@
     <h3>Example Code:</h3>
     <pre>
       <code class="language-html">
-
         &lt;video
           id="example-player-hls"
           controls
           autoplay
           muted
           width="500"
-          class="cld-video-player">&gt;
-        &lt;/video&gt;
+          class="cld-video-player"
+        &gt;&lt;/video&gt;
 
         &lt;video
           id="example-player-dash"
@@ -86,26 +111,44 @@
           autoplay
           muted
           width="500"
-          class="cld-video-player">&gt;
-        &lt;/video&gt;
-
+          class="cld-video-player"
+        &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
+        var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
         var playerHls = cld.videoPlayer('example-player-hls');
         var playerDash = cld.videoPlayer('example-player-dash');
 
-        playerHls.source('dirt_bike', { sourceTypes: ['hls'], transformation: { streaming_profile: 'hd' }, info: { title: "HLS" } }).play();
-        playerDash.source('surf_competition', { sourceTypes: ['dash'], transformation: { streaming_profile: 'hd' }, info: { title: "MPEG-DASH" } }).play();
+        playerHls.source(
+          'sea_turtle',
+          {
+            sourceTypes: ['hls'],
+            transformation: {streaming_profile: 'hd'},
+            info: {title: 'HLS'}
+          }
+        );
+        playerDash.source(
+          'sea_turtle',
+          {
+            sourceTypes: ['dash'],
+            transformation: {streaming_profile: 'hd'},
+            info: {title: 'MPEG-DASH'}
+          }
+        );
 
+        playerHls.on('qualitychanged', (data) => {
+          console.log('HLS player', data);
+        });
+        playerDash.on('qualitychanged', (data) => {
+          console.log('Dash player', data);
+        });
       </code>
     </pre>
   </div>
 
   <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- highlight.js -->
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
@@ -113,4 +156,5 @@
   <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
+
 </html>

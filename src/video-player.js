@@ -43,7 +43,6 @@ Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
 });
 
-
 const normalizeAutoplay = (options) => {
   const autoplayMode = options.autoplayMode;
   if (autoplayMode) {
@@ -98,11 +97,13 @@ const extractOptions = (elem, options) => {
   normalizeAutoplay(options);
 
   // VideoPlayer specific options
-  const playerOptions = Utils.sliceAndUnsetProperties(options,
+  const playerOptions = Utils.sliceAndUnsetProperties(
+    options,
     ...PLAYER_PARAMS);
 
   // Cloudinary plugin specific options
-  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions,
+  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(
+    playerOptions,
     ...CLOUDINARY_PARAMS);
 
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
@@ -182,7 +183,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         events.push(timeplayed);
       }
 
-      events.push(...['seek', 'mute', 'unmute']);
+      events.push(...['seek', 'mute', 'unmute', 'qualitychanged']);
 
       const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
@@ -334,8 +335,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima ===
-        'object')
+      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
     };
     initPlugins(loaded);
     initPlaylistWidget();
@@ -344,7 +344,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
         let currSrc = this.videojs.currentSource();
         // let mp4Src = srcs.filter(src => src.type === 'video/mp4').pop();
-        this.videojs.src(currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
+        this.videojs.src(
+          currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
         this.fallbackTrys++;
       }
     });
@@ -359,7 +360,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.adsEnabled) {
       if (Object.keys(options.playerOptions.ads).length > 0 &&
-        typeof this.videojs.ima === 'object') {
+          typeof this.videojs.ima === 'object') {
         if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
           this.videojs.one('sourcechanged', () => {
             this.videojs.ima.playAd();
