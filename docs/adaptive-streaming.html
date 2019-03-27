@@ -14,43 +14,37 @@
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
       <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.3/dash.all.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js"></script>
 
-     -->
+    -->
     <script type="text/javascript" src="./scripts.js"></script>
-    <script type="text/javascript">
+
+    <script>
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.6.3/dash.all.min.js');
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.9.2/videojs-dash.min.js');
+    </script>
+
+    <script>
       window.addEventListener('load', function() {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.3/dash.all.min.js";
-        script.onload = function() {
-          var script2 = document.createElement('script');
-          script2.type = 'text/javascript';
-          script2.src =  "https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js";
-          script2.onload = function() {
-            var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
-            var playerHls = cld.videoPlayer('example-player-hls');
-            var playerDash = cld.videoPlayer('example-player-dash');
+        var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+        var playerHls = cld.videoPlayer('example-player-hls');
+        var playerDash = cld.videoPlayer('example-player-dash');
 
-            playerHls.source(
-                'sea_turtle', {sourceTypes: ['hls'], transformation: {streaming_profile: 'hd'}, info: {title: 'HLS'}})
-            ;
-            playerDash.source(
-                'sea_turtle',
-                {sourceTypes: ['dash'], transformation: {streaming_profile: 'hd'}, info: {title: 'MPEG-DASH'}});
+        playerHls.source(
+            'sea_turtle', {sourceTypes: ['hls'], transformation: {streaming_profile: 'hd'}, info: {title: 'HLS'}})
+        ;
+        playerDash.source(
+          'sea_turtle',
+          {sourceTypes: ['dash'], transformation: {streaming_profile: 'hd'}, info: {title: 'MPEG-DASH'}}
+        );
 
-            playerHls.on('qualitychanged', (data) => {
-              console.log('HLS player', data);
-            });
-            playerDash.on('qualitychanged', (data) => {
-              console.log('Dash player', data);
-            });
-
-          };
-          document.getElementsByTagName('head')[0].appendChild(script2);
-
-
-        };
-        document.getElementsByTagName('head')[0].appendChild(script);
+        playerHls.on('qualitychanged', (data) => {
+          console.log('HLS player', data);
+        });
+        playerDash.on('qualitychanged', (data) => {
+          console.log('Dash player', data);
+        });
       }, false);
     </script>
 
