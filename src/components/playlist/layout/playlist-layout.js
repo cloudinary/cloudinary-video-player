@@ -1,6 +1,9 @@
 import videojs from 'video.js';
 import { wrap } from '../../../utils/dom';
-import { skinClassPrefix } from '../../../utils/css-prefix';
+import {
+  skinClassPrefix,
+  playerClassPrefix
+} from '../../../utils/css-prefix';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
@@ -55,6 +58,7 @@ class PlaylistLayout extends Component {
     let cls = ['cld-video-player', 'cld-plw-layout'];
 
     cls.push(skinClassPrefix(this.player()));
+    cls.push(playerClassPrefix(this.player()));
 
     if (this.options_.fluid) {
       cls.push('cld-plw-layout-fluid');

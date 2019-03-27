@@ -16,6 +16,9 @@ $icon-font-path: '../fonts' !default;
   font-size: 2.0em;
   line-height: 1.5em;
 }
+.video-js .vjs-control {
+  width: 3em;
+}
 
 // focus and hover states
 .video-js .vjs-control,
@@ -27,7 +30,7 @@ $icon-font-path: '../fonts' !default;
   }
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.95;
   }
 }
 
@@ -179,9 +182,29 @@ $icon-font-path: '../fonts' !default;
       width: 100%;
       background-color: inherit;
       height: 1.0em;
-      padding: 0.7em 0.3em 0 0.3em;
+      padding: 0.7em 0.2em 0 0.2em;
       bottom: 3.0em;
     }
+
+    .vjs-progress-holder {
+      height: 0.25em;
+    }
+    .vjs-progress-control:hover {
+      .vjs-progress-holder {
+        font-size: 1.2em;
+        transition: none;
+      }
+      .vjs-time-tooltip {
+        font-size: 0.8em;
+      }
+    }
+
+    .vjs-play-progress {
+      &::before {
+        top: -0.25em;
+      }
+    }
+
 
     .vjs-progress-control-events-blocker {
       background-color: transparent;
@@ -191,45 +214,5 @@ $icon-font-path: '../fonts' !default;
 
   .vjs-spacer {
     flex: auto;
-  }
-
-  // Dark skin
-  &.cld-video-player-skin-dark {
-    @include skin("dark",$primary-foreground-color: #FFFFFF,
-      $primary-background-color: #000000,
-      $active-foreground-color: #FFFFFF,
-      $active-background-color: #FF620C,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #90A0B3,
-      $control-bar-active-color: #E8E8E9,
-      $control-bar-inactive-color: #0E2F5A,
-      $tooltip-background-color: #E4EBF1,
-      $tooltip-foreground-color: #0E2F5A,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $allow-glows: true)
-  }
-
-  // Light skin
-  &.cld-video-player-skin-light {
-    @include skin("light", $primary-foreground-color: #0E2F5A,
-      $primary-background-color: #FFFFFF,
-      $active-foreground-color: #0E2F5A,
-      $active-background-color: #0078FF,
-      $secondary-dark-color: #0E2F5A,
-      $secondary-light-color: #D0DAE2,
-      $control-bar-active-color: #0078FF,
-      $control-bar-inactive-color: #E4EBF1,
-      $shadow-color: #000000,
-      $border-color: #FFFFFF,
-      $tooltip-background-color: #0E2F5A,
-      $tooltip-foreground-color: #FFFFFF,
-      $modal-background-color: #000000,
-      $modal-foreground-color: #FFFFFF,
-      $light: true,
-      $opaque: true,
-      $allow-glows: false)
   }
 }

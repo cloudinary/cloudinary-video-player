@@ -1,230 +1,26 @@
-@function rgba_unless_opaque($rgb, $opacity, $opaque) {
-  @if ($opaque == true) {
-      @return $rgb
-  } @else {
-      @return rgba($rgb, $opacity)
-  }
-};
-
-@mixin skin($name, $primary-foreground-color,
-  $primary-background-color,
-  $active-foreground-color,
-  $active-background-color,
-  $secondary-dark-color,
-  $secondary-light-color,
-  $control-bar-active-color,
-  $control-bar-inactive-color,
-  $tooltip-background-color,
-  $tooltip-foreground-color,
-  $modal-background-color,
-  $modal-foreground-color,
-  $border-color,
-  $shadow-color,
-  $allow-glows: false,
-  $light: false,
-  $opaque: false) {
-
-  color: $primary-foreground-color;
-
-  .vjs-big-play-button {
-    border-color: rgba_unless_opaque($primary-foreground-color, 0.5, $opaque);
-  }
-
-  // The default color of control backgrounds is mostly black but with a little
-  // bit of blue so it can still be seen on all-black video frames, which are common.
-  .vjs-control-bar,
-  .vjs-big-play-button,
-  .vjs-menu-button
-  .vjs-menu-content {
-    background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
-  }
+.cld-video-player {
 
   .vjs-time-tooltip,
   .vjs-mouse-display:after,
   .vjs-play-progress:after {
     font-weight: 300;
-    color: $tooltip-foreground-color;
-    background-color: $tooltip-background-color;
     padding: 0.4em 0.6em;
     top: -2.6em;
   }
 
-  $secondary1: '';
-  $secondary2: '';
-
-  // Priority to lighter color when in light skin.
-  @if ($light) {
-    $secondary1: $secondary-light-color;
-    $secondary2: $secondary-dark-color;
-  } @else {
-    $secondary1: $secondary-dark-color;
-    $secondary2: $secondary-light-color;
+  .vjs-recommendations-overlay .vjs-recommendations-overlay-item:active:after,
+  .vjs-recommendations-overlay .vjs-recommendations-overlay-item:hover:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
-  // Slider - used for Volume bar and Progress bar
-  .vjs-slider {
-    background-color: $secondary1;
-  }
-
-  // The slider bar color is used for the progress bar and the volume bar
-  // (the first two can be removed after a fix that's coming) */
-  .vjs-volume-level,
-  .vjs-play-progress {
-    background: linear-gradient(270deg, adjust-hue(lighten($active-background-color, 20%), 10), $active-background-color);
-    @if ($allow-glows) {
-      box-shadow: 0 2px 12px 0px $active-background-color;
-    }
-  }
-
-  // light skin icon opacity on hover 
-  @if ($light) { 
-    .video-js button, .vjs-volume-menu-button { 
-      &:hover { 
-        opacity: 0.9; 
-      } 
-    }   
-  }
-
-  .vjs-volume-vertical {
-    background-color: rgba($primary-background-color, 0.7);
-  }
-  .vjs-volume-panel-horizontal {
-    .vjs-control:before {
-      border-color: transparent transparent $control-bar-inactive-color transparent;
-    }
-
-    .vjs-volume-level:before {
-      border-color: transparent transparent $control-bar-active-color transparent;
-    }
-  }
-
-  // The main progress bar also has a bar that shows how much has been loaded. */
-  .vjs-load-progress {
-    background-color: rgba($secondary2, 0.5);
-  }
-
-  // The load progress bar also has internal divs that represent
-  // smaller disconnected loaded time ranges
-  .vjs-load-progress div {
-    background: lighten(rgba($secondary2, 0.5), 50%);
-  }
-
-  .vjs-title-bar {
-    color: $primary-foreground-color;
-
-    @if ($opaque == true) {
-      // Keep everything in a single line
-      flex-direction: row;
-      justify-content: left;
-
-      height: 3.6em;
-      background: $primary-background-color;
-
-      div {
-        width: auto;
-        padding: 0 inherit;
-        margin: 0;
-      }
-
-      .vjs-title-bar-title:not(:empty) + .vjs-title-bar-subtitle:not(:empty) {
-        &:before {
-          content: '\2022';
-          padding: 0 0.45em;
-          font-size: 1.4em;
-          font-weight: 500;
-        }
-      }
-    } @else {
-      background-image: linear-gradient($primary-background-color, rgba(255, 255, 255, 0) 100%);
-    }
-  }
-
-  .vjs-recommendations-overlay {
-    color: $modal-foreground-color;
-    background-color: rgba($modal-background-color, 0.4);
-
-    .vjs-recommendations-overlay-item {
-      box-shadow: 0 0.5em 1.2em 0px $shadow-color;
-
-      color: $primary-foreground-color;
-      border: 1px solid rgba_unless_opaque($border-color, 0.5, $opaque) !important;
-      position: relative;
-
-      &:active, &:hover {
-        border: 1px solid $active-background-color !important;
-
-        &:after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          top: 0px;
-          left: 0px;
-          background-color: rgba(255, 255, 255, 0.2);
-        }
-      }
-
-      &.vjs-recommendations-overlay-item-primary {
-        .vjs-recommendations-overlay-item-primary-content {
-          background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);;
-        }
-
-        &:active, &:hover {
-          .vjs-recommendations-overlay-item-primary-content {
-            @if ($opaque == true) {
-              color: $primary-background-color;
-              background-color: rgba($active-background-color, 0.8);
-            }
-          }
-        }
-      }
-
-      &.vjs-recommendations-overlay-item-secondary {
-        &:active, &:hover {
-          div {
-            @if ($opaque == true) {
-              color: $primary-background-color;
-              background-color: rgba($active-background-color, 0.8);
-            }
-          }
-        }
-
-        div {
-          @if ($opaque == true) {
-            background: $primary-background-color
-          } @else {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
-          }
-        }
-      }
-    }
-  }
-
-  .vjs-upcoming-video {
-    border: 1px solid rgba_unless_opaque($border-color, 0.5, $opaque);
-
-    .vjs-upcoming-video-bar {
-      background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
-    }
-  }
-
-  .vjs-context-menu-ui {
-    .vjs-menu-content {
-      background-color: rgba_unless_opaque($primary-background-color, 0.6, $opaque);
-
-      .vjs-menu-item {
-        text-align: left;
-
-        &:active, &:hover {
-          color: rgba_unless_opaque($active-foreground-color, 0.8, $opaque);
-          background-color: $active-background-color;
-        }
-      }
-    }
-  }
-
-  &.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
-    background: yellow;
+  .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item {
+    text-align: left;
   }
 
   &.vjs-ad-playing .vjs-play-control.vjs-paused,
@@ -236,31 +32,33 @@
     display: none;
   }
 
-  /* PLAYLIST */
+}
 
-  &.cld-plw-layout {
-    background-color: $primary-background-color;
+.cld-video-player.cld-video-player-skin-light {
+
+  .video-js button:hover,
+  .vjs-volume-menu-button:hover {
+    opacity: 0.9;
   }
 
-  .cld-plw-item-info-wrap {
-    color: $primary-foreground-color;
+  .vjs-title-bar .vjs-title-bar-title:not(:empty) +
+  .vjs-title-bar-subtitle:not(:empty):before {
+    content: "\2022";
+    padding: 0 0.45em;
+    font-size: 1.4em;
+    font-weight: 500;
   }
 
-  .cld-plw-panel-item {
-    border-color: $secondary-light-color;
-  }
+  .vjs-title-bar {
+    flex-direction: row;
+    justify-content: left;
+    height: 3.6em;
 
-  @if ($name == "light") {
-    .cld-plw-item-info-wrap {
-      color: $active-foreground-color;
+    > div {
+      width: auto;
+      padding: 0;
+      margin: 0;
     }
-
-    @media only screen and (max-width: 768px) {
-      &.cld-plw-vertical {
-        .cld-plw-item-info-wrap {
-          color: $active-background-color;
-        }
-      }
-    }
   }
+
 }

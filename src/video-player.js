@@ -12,7 +12,8 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
-  setSkinClassPrefix
+  setSkinClassPrefix,
+  playerClassPrefix
 } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = [
@@ -34,6 +35,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ima',
   'playlistWidget',
   'hideContextMenu',
+  'colors',
   'floatingWhenNotVisible',
   'ads'
 ]);
@@ -155,7 +157,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
-      setCssClasses();
       this.fluid(_options.fluid);
 
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
@@ -199,6 +200,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
+      this.videojs.addClass(playerClassPrefix(this.videojs));
 
       setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 
@@ -211,10 +213,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.adsEnabled = initIma(loaded);
       initAutoplay();
       initContextMenu();
-      initFloatingPlayer();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
+      initFloatingPlayer();
+      initColors();
     };
 
     const initIma = (loaded) => {
@@ -278,6 +281,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    const initColors = () => {
+      this.videojs.colors(options.playerOptions.colors ? { 'colors': options.playerOptions.colors } : {});
+    };
+
     const initPerSrcBehaviors = () => {
       this.videojs.perSourceBehaviors();
     };
@@ -337,6 +344,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
       imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
     };
+    setCssClasses();
     initPlugins(loaded);
     initPlaylistWidget();
     this.fallbackTrys = 0;
