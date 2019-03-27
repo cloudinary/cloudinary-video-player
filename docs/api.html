@@ -113,57 +113,58 @@
 </head>
 <body>
 
-    <div class="container p-4 col-12 col-md-9 col-xl-6">
-      <nav class="nav mb-2">
-          <a href="../index.html"><< Back to examples index</a>
-      </nav>
-      <h1>Cloudinary Video Player</h1>
-      <h3 class="mb-4">API and Events</h3>
+  <div class="container p-4 col-12 col-md-9 col-xl-6">
+    <nav class="nav mb-2">
+        <a href="../index.html"><< Back to examples index</a>
+    </nav>
+    <h1>Cloudinary Video Player</h1>
+    <h3 class="mb-4">API and Events</h3>
 
-      <div class="video-container">
+    <div class="video-container">
 
-        <video
-          id="player"
-          controls
-          muted
-          class="cld-video-player"
-          width="600"
-        ></video>
+      <video
+        id="player"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="600"
+      ></video>
 
-        <div class="mt-4">
-          <div class="btn-group">
-            <button id="vid-seek-minus" class="btn btn-outline-primary mb-2">-10 seconds</button>
-            <button id="vid-seek-plus" class="btn btn-outline-primary border-primary mb-2">+10 seconds</button>
-          </div>
-          <div class="btn-group">
-            <button id="vid-play-prev" class="btn btn-outline-primary mb-2">Previous</button>
-            <button id="vid-play-next" class="btn btn-outline-primary mb-2">Next</button>
-            <button id="vid-play" class="btn btn-outline-primary mb-2">Play</button>
-            <button id="vid-pause" class="btn btn-outline-primary mb-2">Pause</button>
-            <button id="vid-stop" class="btn btn-outline-primary mb-2">Stop</button>
-          </div>
+      <div class="mt-4">
+        <div class="btn-group">
+          <button id="vid-seek-minus" class="btn btn-outline-primary mb-2">-10 seconds</button>
+          <button id="vid-seek-plus" class="btn btn-outline-primary border-primary mb-2">+10 seconds</button>
         </div>
-
-        <div>
-          <div class="btn-group">
-            <button id="vid-mute" class="btn btn-outline-primary mb-2">Mute</button>
-            <button id="vid-unmute" class="btn btn-outline-primary mb-2">Unmute</button>
-            <button id="vid-volume-minus" class="btn btn-outline-primary mb-2">Volume -10%</button>
-            <button id="vid-volume-plus" class="btn btn-outline-primary mb-2">Volume +10%</button>
-          </div>
-          <div class="btn-group">
-            <button id="vid-maximize" class="btn btn-outline-primary mb-2">Maximize</button>
-            <button id="vid-toggle-controls" class="btn btn-outline-primary mb-2">Toggle Controls</button>
-          </div>
+        <div class="btn-group">
+          <button id="vid-play-prev" class="btn btn-outline-primary mb-2">Previous</button>
+          <button id="vid-play-next" class="btn btn-outline-primary mb-2">Next</button>
+          <button id="vid-play" class="btn btn-outline-primary mb-2">Play</button>
+          <button id="vid-pause" class="btn btn-outline-primary mb-2">Pause</button>
+          <button id="vid-stop" class="btn btn-outline-primary mb-2">Stop</button>
         </div>
-
-        <div id="vid-events" class="alert alert-secondary text-center mt-4 p-4 w-100" style="overflow: scroll; height: 150px"></div>
-
-        <p class="mt-4">
-          <a href="https://cloudinary.com/documentation/video_player_api_reference#events">API and Events documentation</a>
-        </p>
-
       </div>
+
+      <div>
+        <div class="btn-group">
+          <button id="vid-mute" class="btn btn-outline-primary mb-2">Mute</button>
+          <button id="vid-unmute" class="btn btn-outline-primary mb-2">Unmute</button>
+          <button id="vid-volume-minus" class="btn btn-outline-primary mb-2">Volume -10%</button>
+          <button id="vid-volume-plus" class="btn btn-outline-primary mb-2">Volume +10%</button>
+        </div>
+        <div class="btn-group">
+          <button id="vid-maximize" class="btn btn-outline-primary mb-2">Maximize</button>
+          <button id="vid-toggle-controls" class="btn btn-outline-primary mb-2">Toggle Controls</button>
+        </div>
+      </div>
+
+      <div id="vid-events" class="alert alert-secondary text-center mt-4 p-4 w-100" style="overflow: scroll; height: 150px"></div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/video_player_api_reference#events">API and Events documentation</a>
+      </p>
+
+    </div>
 
     <h3>Example Code:</h3>
     <pre>
@@ -173,8 +174,8 @@
           controls
           muted
           class="cld-video-player"
-          width="600"&gt;
-        &lt;/video&gt;
+          width="600"
+        &gt;&lt;/video&gt;
 
         &lt;div&gt;
           &lt;button id="vid-seek-minus" class="btn btn-default"&gt;-10 seconds&lt;/button&gt;
@@ -283,17 +284,17 @@
           eventsDiv.scrollTop = eventsDiv.scrollHeight;
         }
 
-        </code>
+      </code>
     </pre>
   </div>
 
-    <!-- Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- highlight.js -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>
