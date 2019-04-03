@@ -11,7 +11,7 @@ module.exports = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
-    'cld-video-player': ['./index.js']
+    'cld-video-player': './index.js'
   },
   performance: {
     maxEntrypointSize: 800000,
