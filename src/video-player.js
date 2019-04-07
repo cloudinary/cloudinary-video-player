@@ -37,7 +37,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'hideContextMenu',
   'colors',
   'floatingWhenNotVisible',
-  'ads'
+  'ads',
+  'showJumpControl'
 ]);
 
 // Register all plugins
@@ -136,8 +137,7 @@ const overrideDefaultVideojsComponents = () => {
     'progressControlEventsBlocker');
 
   // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
-  children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton',
-    'playToggle', 'playlistNextButton');
+  children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
 
   // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
   children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
@@ -326,6 +326,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
+    const initJumpButtons = () => {
+      if (!_options.showJumpControl) {
+        this.videojs.controlBar.removeChild('JumpForwardButton');
+        this.videojs.controlBar.removeChild('JumpBackButton');
+      }
+    };
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -347,6 +354,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     setCssClasses();
     initPlugins(loaded);
     initPlaylistWidget();
+    initJumpButtons();
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
