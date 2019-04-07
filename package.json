@@ -3,7 +3,7 @@
   "version": "1.1.4-edge.2",
   "description": "Cloudinary Video Player",
   "scripts": {
-    "postinstall": "cp env.example.js env.js",
+    "postinstall": "shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
     "clean": "rm -rf dist",
     "build-dev": "webpack --config webpack/es5.config.js --progress --display-error-details --color --mode=development",
@@ -73,6 +73,7 @@
     "raw-loader": "0.5.1",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.0",
+    "shx": "^0.3.2",
     "style-loader": "^0.13.1",
     "terser-webpack-plugin": "^1.2.1",
     "uglify-js": "^3.4.7",
