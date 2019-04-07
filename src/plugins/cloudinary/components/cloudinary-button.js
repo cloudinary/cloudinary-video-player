@@ -13,8 +13,8 @@ class CloudinaryButton extends ClickableComponent {
     const display = this.options_.playerOptions.showLogo ? 'block' : 'none';
     let bgIcon = '';
     if (!this.options_.playerOptions.logoImageUrl) {
-      let clasess = this.options_.playerOptions.class.split(' ');
-      bgIcon = (clasess.includes('cld-video-player-skin-light')) ? LIGHT_BG_ICON : DARK_BG_ICON;
+      let classes = this.options_.playerOptions.class.split(' ');
+      bgIcon = (classes.indexOf('cld-video-player-skin-light') > -1) ? LIGHT_BG_ICON : DARK_BG_ICON;
     } else {
       bgIcon = this.options_.playerOptions.logoImageUrl;
     }

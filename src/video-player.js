@@ -12,7 +12,8 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
-  setSkinClassPrefix
+  setSkinClassPrefix,
+  playerClassPrefix
 } from './utils/css-prefix';
 
 const CLOUDINARY_PARAMS = [
@@ -34,6 +35,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ima',
   'playlistWidget',
   'hideContextMenu',
+  'colors',
   'floatingWhenNotVisible',
   'ads'
 ]);
@@ -42,7 +44,6 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
 });
-
 
 const normalizeAutoplay = (options) => {
   const autoplayMode = options.autoplayMode;
@@ -98,11 +99,13 @@ const extractOptions = (elem, options) => {
   normalizeAutoplay(options);
 
   // VideoPlayer specific options
-  const playerOptions = Utils.sliceAndUnsetProperties(options,
+  const playerOptions = Utils.sliceAndUnsetProperties(
+    options,
     ...PLAYER_PARAMS);
 
   // Cloudinary plugin specific options
-  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions,
+  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(
+    playerOptions,
     ...CLOUDINARY_PARAMS);
 
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
@@ -153,7 +156,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
-      setCssClasses();
       this.fluid(_options.fluid);
 
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
@@ -181,7 +183,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         events.push(timeplayed);
       }
 
-      events.push(...['seek', 'mute', 'unmute']);
+      events.push(...['seek', 'mute', 'unmute', 'qualitychanged']);
 
       const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
@@ -197,6 +199,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const setCssClasses = () => {
       this.videojs.addClass(CLASS_PREFIX);
+      this.videojs.addClass(playerClassPrefix(this.videojs));
 
       setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
 
@@ -209,10 +212,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.adsEnabled = initIma(loaded);
       initAutoplay();
       initContextMenu();
-      initFloatingPlayer();
       initPerSrcBehaviors();
       initCloudinary();
       initAnalytics();
+      initFloatingPlayer();
+      initColors();
     };
 
     const initIma = (loaded) => {
@@ -276,6 +280,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    const initColors = () => {
+      this.videojs.colors(options.playerOptions.colors ? { 'colors': options.playerOptions.colors } : {});
+    };
+
     const initPerSrcBehaviors = () => {
       this.videojs.perSourceBehaviors();
     };
@@ -333,18 +341,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima ===
-        'object')
+      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
     };
+    setCssClasses();
     initPlugins(loaded);
     initPlaylistWidget();
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
-      // console.log(this.videojs.error());
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
         let currSrc = this.videojs.currentSource();
         // let mp4Src = srcs.filter(src => src.type === 'video/mp4').pop();
-        this.videojs.src(currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
+        this.videojs.src(
+          currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
         this.fallbackTrys++;
       }
     });
@@ -359,7 +367,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.adsEnabled) {
       if (Object.keys(options.playerOptions.ads).length > 0 &&
-        typeof this.videojs.ima === 'object') {
+          typeof this.videojs.ima === 'object') {
         if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
           this.videojs.one('sourcechanged', () => {
             this.videojs.ima.playAd();

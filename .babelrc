@@ -4,7 +4,8 @@
       "@babel/preset-env",
       {
         "targets": {
-          "esmodules": true
+          "esmodules": true,
+          "ie": "11"
         },
         "modules": "cjs"
       }

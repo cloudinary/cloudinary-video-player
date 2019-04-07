@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
-  -->
+   -->
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
@@ -22,29 +22,13 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      var player = cld.videoPlayer('player', {})
-
-      var sorter = function(a, b) {
-        if (a.publicId < b.publicId) return 1;
-        if (a.publicId > b.publicId) return -1;
-        return 0;
-      };
-
-      // Fetch playlist by tag. Since this operation involves an API call
-      // the function returns a Promise when the operation completes.
-      // The return value is 'player'.
-      player.playlistByTag('video_race', {
-        sorter: sorter,
-        autoAdvance: true,
-        repeat: true,
-        presentUpcoming: false
-      }).then(function(player) {
-        var divElem = document.querySelector("div#playlist-data");
-        var list = player.playlist().list().map(function(source) {
-          return source.publicId()
-        }).join(', ');
-
-        divElem.innerText = "Playlist: " + list
+      var player = cld.videoPlayer('player', {
+        publicId: 'snow_horses',
+        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
+        hideContextMenu: true,
+        logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png',
+        logoOnclickUrl: 'https://google.com',
+        showLogo: true,
       });
 
     }, false);
@@ -57,63 +41,49 @@
       <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Playlist by tag</h3>
+    <h3 class="mb-4">Custom Logo & Hide Context Menu</h3>
 
     <video
       id="player"
       playsinline
       controls
-      autoplay
       muted
+      autoplay
       class="cld-video-player"
       width="500"
     ></video>
 
+
     <p class="mt-4">
-      <a href="https://cloudinary.com/documentation/video_player_playlists_recommendations#create_a_playlist_for_a_specified_tag">Playlist by tag documentation</a>
+      <a href="https://cloudinary.com/documentation/video_player_customization#configuration_options">Full documentation</a>
     </p>
 
     <h3 class="mt-4">Example Code:</h3>
+    <pre>
+      <code class="language-html">
 
-    <pre><code class="language-html">
+        &lt;video
+          id="player"
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          width="500"
+        &gt;&lt;/video&gt;
 
-      &lt;video
-        id="player"
-        controls
-        autoplay
-        muted
-        class="cld-video-player"
-        width="500"
-      &gt;&lt;/video&gt;
 
       </code>
       <code class="language-javascript">
 
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        var player = cld.videoPlayer('player', {})
-
-        var sorter = function(a, b) {
-          if (a.publicId < b.publicId) return 1;
-          if (a.publicId > b.publicId) return -1;
-          return 0;
-        };
-
-        // Fetch playlist by tag. Since this operation involves an API call
-        // the function returns a Promise when the operation completes.
-        // The return value is 'player'.
-        player.playlistByTag('video_race', {
-          sorter: sorter,
-          autoAdvance: true,
-          repeat: true,
-          presentUpcoming: false
-        }).then(function(player) {
-          var divElem = document.querySelector("div#playlist-data");
-          var list = player.playlist().list().map(function(source) {
-            return source.publicId()
-          }).join(', ');
-
-          divElem.innerText = "Playlist: " + list
+        var player = cld.videoPlayer('player', {
+          publicId: 'snow_horses',
+          info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
+          hideContextMenu: true,
+          logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png',
+          logoOnclickUrl: 'https://google.com',
+          showLogo: true,
         });
 
       </code>
