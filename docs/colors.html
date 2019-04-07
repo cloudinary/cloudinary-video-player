@@ -25,7 +25,9 @@
       var players = cld.videoPlayers('.cld-video-player', {
         autoplay: true,
         controls: true,
-        transformation: { width: 500, crop: 'limit' }
+        transformation: { width: 700, crop: 'limit' },
+        // We use html data-attr to set colors, but you can also do it here:
+        // colors: { "base": "#111", "accent": "#03a9f4", "text": "#ffeb3b" }
       });
 
     }, false);
@@ -35,28 +37,31 @@
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-        <a href="../index.html"><< Back to examples index</a>
+      <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Multiple Players</h3>
+    <h3 class="mb-4">Colors API</h3>
+
+    <p>Set custom colors via JS config or HTML data attributes</p>
 
     <h3 class="text-primary">Player 1</h3>
     <div class="video-container mt-4 mb-4">
       <video
         muted
         playsinline
-        data-cld-public-id="elephants"
-        class="cld-video-player cld-video-player-skin-dark"
+        data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+        data-cld-colors='{ "base": "#f44336", "accent": "#a70b00", "text": "#fff" }'
+        class="cld-video-player cld-video-player-skin-light"
       ></video>
     </div>
-
     <h3 class="text-primary">Player 2</h3>
     <div class="video-container mt-4 mb-4">
       <video
         muted
         playsinline
-        data-cld-public-id="marmots"
-        class="cld-video-player cld-video-player-skin-light"
+        data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+        data-cld-colors='{ "base": "#111", "accent": "#03a9f4", "text": "#ffeb3b" }'
+        class="cld-video-player cld-video-player-skin-dark"
       ></video>
     </div>
 
@@ -65,8 +70,9 @@
       <video
         muted
         playsinline
-        data-cld-public-id="snow_deer_short"
-        class="cld-video-player"
+        data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+        data-cld-colors='{ "base": "#eef9ee", "accent": "#00e64c", "text": "#009688" }'
+        class="cld-video-player cld-video-player-skin-light"
       ></video>
     </div>
 
@@ -80,32 +86,36 @@
 
         &lt;video
           muted
-          data-cld-public-id="elephants"
-          class="cld-video-player cld-video-player-skin-dark"
-        &gt;&lt;/video&gt;
-
-        &lt;video
-          muted
-          data-cld-public-id="marmots"
+          data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+          data-cld-colors='{ "base": "#3b4146", "accent": "#17a2b8", "text": "#e83e8c" }'
           class="cld-video-player cld-video-player-skin-light"
         &gt;&lt;/video&gt;
 
         &lt;video
           muted
-          data-cld-public-id="snow_deer_short"
-          class="cld-video-player"
+          data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+          data-cld-colors='{ "base": "#111", "accent": "#03a9f4", "text": "#ffeb3b" }'
+          class="cld-video-player cld-video-player-skin-dark"
+        &gt;&lt;/video&gt;
+
+        &lt;video
+          muted
+          data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
+          data-cld-colors='{ "base": "#eef9ee", "accent": "#00e64c", "text": "#009688" }'
+          class="cld-video-player cld-video-player-skin-light"
         &gt;&lt;/video&gt;
 
       </code>
       <code class="language-javascript">
-
         var cld = cloudinary.Cloudinary.new({ cloud_name: &apos;demo&apos; });
 
         // Initialize players
-        var players = cld.videoPlayers(&apos;.cld-video-player&apos;, {
+        var players = cld.videoPlayers('.cld-video-player', {
           autoplay: true,
           controls: true,
-          transformation: { width: 500, crop: &apos;limit&apos; }
+          transformation: { width: 700, crop: 'limit' },
+          // We use html data-attr to set colors, but you can also do it here:
+          // colors: { "base": "#111", "accent": "#03a9f4", "text": "#ffeb3b" }
         });
       </code>
     </pre>
