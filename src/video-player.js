@@ -37,7 +37,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'hideContextMenu',
   'colors',
   'floatingWhenNotVisible',
-  'ads'
+  'ads',
+  'showJumpControl'
 ]);
 
 // Register all plugins
@@ -325,6 +326,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
+    const initJumpButtons = () => {
+      if (!_options.showJumpControl) {
+        this.videojs.controlBar.removeChild('JumpForwardButton');
+        this.videojs.controlBar.removeChild('JumpBackButton');
+      }
+    };
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -346,6 +354,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     setCssClasses();
     initPlugins(loaded);
     initPlaylistWidget();
+    initJumpButtons();
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
