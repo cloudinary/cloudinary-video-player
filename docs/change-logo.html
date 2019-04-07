@@ -23,15 +23,13 @@
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       var player = cld.videoPlayer('player', {
+        publicId: 'snow_horses',
+        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
         hideContextMenu: true,
-        logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Atom_editor_logo.svg',
+        logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png',
         logoOnclickUrl: 'https://google.com',
         showLogo: true,
       });
-
-      var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
-
-      player.source(source).play();
 
     }, false);
   </script>
@@ -43,7 +41,7 @@
       <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Change Logo and hide Contextmenu</h3>
+    <h3 class="mb-4">Custom Logo & Hide Context Menu</h3>
 
     <video
       id="player"
@@ -51,13 +49,13 @@
       controls
       muted
       autoplay
-      class="cld-video-player cld-fluid"
+      class="cld-video-player"
       width="500"
     ></video>
 
 
     <p class="mt-4">
-      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
+      <a href="https://cloudinary.com/documentation/video_player_customization#configuration_options">Full documentation</a>
     </p>
 
     <h3 class="mt-4">Example Code:</h3>
@@ -69,7 +67,7 @@
           controls
           muted
           autoplay
-          class="cld-video-player cld-fluid"
+          class="cld-video-player"
           width="500"
         &gt;&lt;/video&gt;
 
@@ -79,19 +77,14 @@
 
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        // Initialize player
         var player = cld.videoPlayer('player', {
-            hideContextMenu: true,
-            logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Atom_editor_logo.svg',
-            logoOnclickUrl: 'https://google.com',
-            showLogo: true,
+          publicId: 'snow_horses',
+          info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
+          hideContextMenu: true,
+          logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png',
+          logoOnclickUrl: 'https://google.com',
+          showLogo: true,
         });
-
-        // Define source
-        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
-
-        // Play source
-        player.source(source).play();
 
       </code>
     </pre>
