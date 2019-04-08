@@ -204,9 +204,9 @@ class Colors {
   constructor(player, opts = {}) {
     this.player = player;
 
-    const skinDefaults = this.player.options_.skin === 'light' ? { colors: defaults.colorsLight } : { colors: defaults.colorsDark };
+    const skinDefaults = this.player.options_.skin === 'light' ? defaults.colorsLight : defaults.colorsDark;
 
-    opts = assign({}, skinDefaults, opts);
+    opts.colors = assign({}, skinDefaults, opts.colors);
 
     this.init = () => {
       injectCSS(parseStyles(playerColors));
@@ -221,7 +221,7 @@ class Colors {
     const injectCSS = (css) => {
       const style = document.createElement('style');
       style.innerHTML = css;
-      document.body.appendChild(style);
+      this.player.el_.appendChild(style);
     };
 
     const hexToRgb = (hex) => {
