@@ -3,7 +3,7 @@
   "version": "1.1.4-edge.3",
   "description": "Cloudinary Video Player",
   "scripts": {
-    "postinstall": "shx cp env.example.js env.js",
+    "prepare": "shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
     "clean": "rm -rf dist",
     "build-dev": "webpack --config webpack/es5.config.js --progress --display-error-details --color --mode=development",
@@ -20,8 +20,8 @@
   },
   "author": "Cloudinary",
   "license": "MIT",
-  "main": "./dist/cld-video-player.js",
-  "style": "./dist/cld-video-player.css",
+  "main": "./dist/cld-video-player.min.js",
+  "style": "./dist/cld-video-player.min.css",
   "dependencies": {
     "expose-loader": "^0.7.5",
     "fetch-ponyfill": "^4.0.0",
