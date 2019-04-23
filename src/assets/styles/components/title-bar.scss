@@ -8,6 +8,7 @@
   height: 7.2em;
   text-align: left;
   padding: 16px 21px;
+  pointer-events: none;
 
   .vjs-title-bar-title {
     width: 100%;
@@ -64,4 +65,3 @@
 .vjs-has-started.vjs-no-flex .vjs-title-bar {
   display: table;
 }
-
