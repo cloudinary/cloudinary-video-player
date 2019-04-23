@@ -8,7 +8,7 @@ import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video', transformation: { flags: 'waveform' } };
 const COMMON_AUDIO_FORMATS = ['mp3', 'ogg', 'wav', 'mp4'];
-const AUDIO_SUFFIX_REMOVAL_PATTERN = RegExp(`\.(${COMMON_AUDIO_FORMATS.join('|')})$$`);
+const AUDIO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_AUDIO_FORMATS.join('|')})$$`);
 const DEFAULT_AUDIO_PARAMS = {
   resource_type: 'video',
   type: 'upload',
