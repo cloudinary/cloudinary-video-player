@@ -32,6 +32,15 @@
       cursor: pointer;
     }
 
+    .vjs-time-control,
+    .vjs-upcoming-video-title-display,
+    .vjs-recommendations-overlay {
+      display: none;
+    }
+    .vjs-upcoming-video .vjs-upcoming-video-bar {
+      background-color: transparent;
+    }
+
     &.cld-video-player-floater-bottom-right {
       bottom: 20px !important;
       right: 20px !important;
