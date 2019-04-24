@@ -34,7 +34,7 @@
     "videojs-ima": "^1.5.1",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
-    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-conditional-loader": "^1.0.11",
     "webworkify-webpack2": "^1.1.9",
     "wolfy87-eventemitter": "^5.1.0"
