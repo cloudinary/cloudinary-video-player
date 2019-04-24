@@ -16,7 +16,7 @@ const DEFAULT_VIDEO_PARAMS = {
   recommendations: null,
   info: {}
 };
-const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
+const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
 
 let objectId = 0;
 const generateId = () => objectId++;
