@@ -85,11 +85,11 @@ class CloudinaryContext extends mixin(Playlistable) {
       if (!options.skipRefresh) {
         refresh();
       }
-
       this.player.trigger('cldsourcechanged', { source: src });
 
       return _chainTarget;
     };
+
 
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;

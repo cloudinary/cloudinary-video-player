@@ -98,6 +98,8 @@ class BaseSource {
 
     return `${url}${queryString}`;
   }
+
 }
+
 
 export default BaseSource;

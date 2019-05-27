@@ -356,13 +356,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlaylistWidget();
     initJumpButtons();
     this.fallbackTrys = 0;
-    this.videojs.on('error', () => {
+    this.videojs.on('error', (e) => {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
         let currSrc = this.videojs.currentSource();
         // let mp4Src = srcs.filter(src => src.type === 'video/mp4').pop();
         this.videojs.src(
           currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
         this.fallbackTrys++;
+      }
+      if (this.videojs.error().code === 10) {
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+        console.log(this.videojs.error().message);
+        this.videojs.pause();
       }
     });
 
@@ -476,7 +482,30 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
 
-    return this.videojs.cloudinary.source(publicId, options);
+    let src = this.videojs.cloudinary.source(publicId, options);
+    this.testUrl(src.videojs.currentSrc());
+    return src;
+  }
+
+  testUrl(url) {
+    try {
+      let params = {
+        method: 'head',
+        uri: url
+      };
+      videojs.xhr(params, (err, resp) => {
+        if (err) {
+          this.videojs.error({ code: 10, message: 'msg' });
+        }
+        if (resp.statusCode !== 200) {
+          let headers = resp.headers;
+          let cldError = headers['x-cld-error'];
+          this.videojs.error({ code: 10, message: cldError });
+        }
+      });
+    } catch (e) {
+      this.videojs.error({ code: 10, message: e.message });
+    }
   }
 
   posterOptions(options) {
