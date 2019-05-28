@@ -368,7 +368,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         e.stopImmediatePropagation();
         e.stopPropagation();
         console.log(this.videojs.error().message);
-        this.videojs.pause();
+        this.videojs.reset();
       }
     });
 
