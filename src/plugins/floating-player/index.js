@@ -12,6 +12,10 @@ const defaults = {
 class FloatingPlayer {
   constructor(player, opts = {}) {
     opts = assign({}, defaults, opts);
+    // Handle non left-right values.
+    if (opts.floatTo && opts.floatTo !== 'left' && opts.floatTo !== 'right') {
+      opts.floatTo = defaults.floatTo;
+    }
 
     this.player = player;
     let _options = sliceProperties(opts, 'fraction');
@@ -41,7 +45,6 @@ class FloatingPlayer {
     };
 
     const addWindowEventHandlers = () => {
-      console.log('ADDING');
       window.addEventListener('DOMContentLoaded', checkViewportState, false);
       window.addEventListener('load', checkViewportState, false);
       window.addEventListener('scroll', checkViewportState, false);
@@ -51,7 +54,7 @@ class FloatingPlayer {
     const registerEventHandlers = () => {
       this.player.on('play', checkViewportState);
       this.player.on('play', addWindowEventHandlers);
-      this.player.on('pause', removeWindowEventHandlers);
+      // this.player.on('pause', removeWindowEventHandlers);
       this.player.on('dispose', removeWindowEventHandlers);
     };
 
