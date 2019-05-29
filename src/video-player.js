@@ -406,7 +406,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.isVideoReady = () => {
       let s = this.videojs.readyState();
-      if (s === 4) {
+      if (s >= (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4)) {
         this.nbCalls = 0;
         return true;
       }
