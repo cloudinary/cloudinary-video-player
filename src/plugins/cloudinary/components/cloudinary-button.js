@@ -10,17 +10,18 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 class CloudinaryButton extends ClickableComponent {
 
   createEl() {
-    const display = this.options_.playerOptions.showLogo ? 'block' : 'none';
+    const opts = this.options_.playerOptions;
+    const display = opts.showLogo ? 'block' : 'none';
     let bgIcon = '';
-    if (!this.options_.playerOptions.logoImageUrl) {
-      let classes = this.options_.playerOptions.class.split(' ');
-      bgIcon = (classes.indexOf('cld-video-player-skin-light') > -1) ? LIGHT_BG_ICON : DARK_BG_ICON;
+    if (opts.logoImageUrl) {
+      bgIcon = opts.logoImageUrl;
     } else {
-      bgIcon = this.options_.playerOptions.logoImageUrl;
+      const isLight = opts.class.indexOf('cld-video-player-skin-light') > -1 || opts.skin === 'light';
+      bgIcon = isLight ? LIGHT_BG_ICON : DARK_BG_ICON;
     }
     return videojs.dom.createEl('a', {
       className: 'vjs-control vjs-cloudinary-button vjs-button',
-      href: this.options_.playerOptions.logoOnclickUrl,
+      href: opts.logoOnclickUrl,
       target: '_blank',
       style: `display: ${display} ;background-image: url(${bgIcon})`
     });
