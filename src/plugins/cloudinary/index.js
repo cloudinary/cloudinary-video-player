@@ -298,6 +298,10 @@ class CloudinaryContext extends mixin(Playlistable) {
     this.on('sourcechanged', syncState);
   }
 
+  currentSourceType() {
+    return this.source().constructor.name;
+  }
+
   currentPublicId() {
     return this.source() && this.source().publicId();
   }

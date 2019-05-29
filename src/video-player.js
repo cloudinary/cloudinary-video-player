@@ -511,6 +511,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.reTryVideo(maxTries, videoReadyTimeout);
 
     let src = this.videojs.cloudinary.source(publicId, options);
+    let s = this.videojs.cloudinary.source();
     this.testUrl(src.videojs.currentSrc());
     return src;
   }
