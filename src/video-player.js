@@ -38,7 +38,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'colors',
   'floatingWhenNotVisible',
   'ads',
-  'showJumpControl'
+  'showJumpControl',
+  'textTracks'
 ]);
 
 // Register all plugins
@@ -218,7 +219,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initAnalytics();
       initFloatingPlayer();
       initColors();
-      initTextTracks()
+      this.initTextTracks(options.videojsOptions.textTracks);
     };
 
     const initIma = (loaded) => {
@@ -334,9 +335,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-    const initTextTracks = () => {
-      if (options.videojsOptions.textTracks) {
-        const conf = options.videojsOptions.textTracks;
+    this.initTextTracks = (conf) => {
+      if (conf) {
         const tracks = Object.keys(conf);
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
@@ -497,6 +497,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    this.initTextTracks(options.textTracks);
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
