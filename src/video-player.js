@@ -38,7 +38,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'colors',
   'floatingWhenNotVisible',
   'ads',
-  'showJumpControl'
+  'showJumpControl',
+  'textTracks'
 ]);
 
 // Register all plugins
@@ -218,6 +219,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initAnalytics();
       initFloatingPlayer();
       initColors();
+      this.initTextTracks(options.videojsOptions.textTracks);
     };
 
     const initIma = (loaded) => {
@@ -332,6 +334,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.controlBar.removeChild('JumpBackButton');
       }
     };
+
+    this.initTextTracks = (conf) => {
+      if (conf) {
+        const tracks = Object.keys(conf);
+        for (const track of tracks) {
+          if (Array.isArray(conf[track])) {
+            const trks = conf[track];
+            for (let i = 0; i < trks.length; i++) {
+              let cnf = trks[i];
+              this.videojs.addRemoteTextTrack(buildTextTrackObj(track, cnf), true);
+            }
+          } else {
+            this.videojs.addRemoteTextTrack(buildTextTrackObj(track, conf[track]), true);
+          }
+        }
+      }
+    };
+
+    const buildTextTrackObj = (type, conf) => ({
+      kind: type,
+      label: conf.label,
+      srclang: conf.language,
+      default: !!(conf.default),
+      src: conf.url
+    });
 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
@@ -470,6 +497,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+    this.initTextTracks(options.textTracks);
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
