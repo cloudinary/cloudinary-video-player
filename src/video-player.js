@@ -9,7 +9,6 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import { cloudinaryErrorsConverter } from './plugins/cloudinary/common';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
