@@ -67,4 +67,25 @@ const mergeTransformation = (transformation1, transformation2) => {
   return newTransformation.fromOptions(transformation2);
 };
 
-export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation };
+const cloudinaryErrorsConverter = (cError) => {
+  let error = { code: 10, message: cError };
+  let err = cError.toLowerCase();
+  if (err.startsWith('unknown customer')) {
+    error.code = 11;
+    error.message = 'Wrong cloud name';
+  }
+  if (err.startsWith('resource not found')) {
+    error.code = 12;
+    error.message = 'Wrong video public id';
+  }
+  if (err.startsWith('private resource')) {
+    error.code = 13;
+    error.message = 'This video is private';
+  }
+  if (err.startsWith('unauthenticated access')) {
+    error.code = 14;
+  }
+  return error;
+};
+
+export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter };

@@ -9,6 +9,7 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import { cloudinaryErrorsConverter } from './plugins/cloudinary/common';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
@@ -383,19 +384,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlaylistWidget();
     initJumpButtons();
     this.fallbackTrys = 0;
-    this.videojs.on('error', (e) => {
+    this.videojs.on('error', () => {
       if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
         let currSrc = this.videojs.currentSource();
-        // let mp4Src = srcs.filter(src => src.type === 'video/mp4').pop();
         this.videojs.src(
           currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
         this.fallbackTrys++;
-      }
-      if (this.videojs.error().code === 10) {
-        e.stopImmediatePropagation();
-        e.stopPropagation();
-        console.log(this.videojs.error().message);
-        this.videojs.reset();
       }
     });
 
@@ -511,8 +505,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.reTryVideo(maxTries, videoReadyTimeout);
 
     let src = this.videojs.cloudinary.source(publicId, options);
-    let s = this.videojs.cloudinary.source();
-    this.testUrl(src.videojs.currentSrc());
+    let type = this.videojs.cloudinary.currentSourceType();
+    if (type === 'VideoSource' || type === 'AudioSource') {
+      this.testUrl(src.videojs.currentSrc());
+    }
     return src;
   }
 
@@ -524,16 +520,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       };
       videojs.xhr(params, (err, resp) => {
         if (err) {
-          this.videojs.error({ code: 10, message: 'msg' });
+          this.videojs.error({ code: 10, message: err.message });
         }
         if (resp.statusCode !== 200) {
           let headers = resp.headers;
           let cldError = headers['x-cld-error'];
-          this.videojs.error({ code: 10, message: cldError });
+          this.videojs.error(cloudinaryErrorsConverter(cldError));
+          this.videojs.reset();
         }
       });
     } catch (e) {
       this.videojs.error({ code: 10, message: e.message });
+      this.videojs.reset();
     }
   }
 
