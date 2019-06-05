@@ -9,6 +9,7 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import { cloudinaryErrorsConverter } from './plugins/cloudinary/common';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
@@ -524,7 +525,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         if (resp.statusCode !== 200) {
           let headers = resp.headers;
           let cldError = headers['x-cld-error'];
-          this.videojs.error(cloudinaryErrorsConverter(cldError));
+          let cldName = this.cloudinaryConfig().config().cloud_name;
+          this.videojs.error(cloudinaryErrorsConverter(cldError, this.currentPublicId(), cldName));
           this.videojs.reset();
         }
       });

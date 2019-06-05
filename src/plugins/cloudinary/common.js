@@ -67,22 +67,24 @@ const mergeTransformation = (transformation1, transformation2) => {
   return newTransformation.fromOptions(transformation2);
 };
 
-const cloudinaryErrorsConverter = (cError) => {
-  let error = { code: 10, message: cError };
+const cloudinaryErrorsConverter = (cError, publicId, cloudName) => {
+  const msg = 'Video cannot be played -';
+  let error = { code: 10, message: `${msg} ${cError}` };
   let err = cError.toLowerCase();
   if (err.startsWith('unknown customer')) {
     error.code = 11;
-    error.message = 'Wrong cloud name';
+    error.message = `${msg} Unknown cloud-name ${cloudName}`;
   }
   if (err.startsWith('resource not found')) {
     error.code = 12;
-    error.message = 'Wrong video public id';
+    error.message = `${msg} Public ID ${publicId} not found`;
   }
   if (err.startsWith('private resource')) {
     error.code = 13;
-    error.message = 'This video is private';
+    error.message = `${msg} Private video`;
   }
   if (err.startsWith('unauthenticated access')) {
+    error.message = `${msg} Requires authentication`;
     error.code = 14;
   }
   return error;
