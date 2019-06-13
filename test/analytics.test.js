@@ -30,7 +30,7 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > div.vjs-control-bar > button.vjs-play-control');
+    await page.click('#player > div.vjs-control-bar > button.vjs-play-control');
     expect(puseSpy.hasMatch()).toBe(true);
   });
   it('Test play event', async () => {
@@ -40,9 +40,9 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > div.vjs-control-bar > button.vjs-play-control');
+    await page.click('#player > div.vjs-control-bar > button.vjs-play-control');
     await page.waitFor(500);
-    await page.click('#example-player > div.vjs-control-bar > button.vjs-play-control');
+    await page.click('#player > div.vjs-control-bar > button.vjs-play-control');
     expect(playSpy.getMatchCount()).toBe(2);
   });
   it('Test volume event', async () => {
@@ -52,7 +52,7 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > .vjs-control-bar > .vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
+    await page.click('#player > .vjs-control-bar > .vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
     expect(spy.hasMatch()).toBe(true);
   });
   it('Test percentage event', async () => {
@@ -93,7 +93,7 @@ describe('Analytics tests', () => {
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
     await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
     await page.waitFor(1000);
-    await page.click('#example-player > .vjs-control-bar > button.vjs-fullscreen-control.vjs-control.vjs-button');
+    await page.click('#player > .vjs-control-bar > button.vjs-fullscreen-control.vjs-control.vjs-button');
     await page.waitFor(500);
     expect(spy.hasMatch()).toBe(true);
   });
