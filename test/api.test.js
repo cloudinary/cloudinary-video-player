@@ -85,6 +85,7 @@ describe('API player tests', () => {
     await page.waitFor(500);
     expect(await page.$eval('#player > .vjs-control-bar', p => p.offsetWidth)).toBe(0);
   });
+
 /*  it('Test fullscreen', async () => {
     await page.waitFor(1000);
     expect(await page.evaluate(() => document.webkitIsFullScreen)).toBeFalsy();
