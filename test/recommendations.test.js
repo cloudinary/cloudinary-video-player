@@ -18,7 +18,7 @@ describe('Recommendations tests', () => {
     await page.waitFor(1000);
     expect(await page.$eval('.vjs-recommendations-overlay', (o => o.style.visibility))).toEqual('hidden');
     await page.evaluate((dur) => player.currentTime(dur), duration - 1);
-    await page.waitFor(3000);
+    await page.waitForSelector('.vjs-recommendations-overlay', {visible: true});
     expect(await page.$eval('.vjs-recommendations-overlay', (o => o.style.visibility))).toEqual('visible');
   });
   it('Test recommendations click', async () => {
@@ -29,6 +29,7 @@ describe('Recommendations tests', () => {
     await page.evaluate((dur) => player.currentTime(dur), duration - 1);
     await page.waitFor('.vjs-recommendations-overlay', {visible: true});
     await page.click('#player > div.vjs-recommendations-overlay > div > div > .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary > .vjs-recommendations-overlay-item-primary-image');
+    await page.waitForFunction('player.videojs.readyState() === 4');
     await page.waitFor(1000);
     let recSourceUrl = await page.evaluate(() => player.currentSourceUrl());
     expect(currentSrcUrl).not.toEqual(recSourceUrl);

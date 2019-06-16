@@ -18,7 +18,7 @@ describe('API player tests', () => {
     await page.click('#vid-seek-plus');
     await page.waitForFunction('player.videojs.readyState() === 4');
     let newtime = await page.$eval('#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace('0:', '')));
-    expect(newtime).toEqual(time + 10);
+    expect(newtime).toBeGreaterThanOrEqual(time + 10);
   });
   it('Test back 10 seconds', async () => {
     jest.setTimeout(35000);

@@ -12,9 +12,10 @@ describe('Auto-play tests', () => {
     });
   }, 10000);
   it('Test scroll', async () => {
-    expect(await page.$eval('#player_html5_api', p => p.playing)).toEqual(false);
-    await page.tap('player_html5_api');
-    page.waitFor(1000);
+    let player = await page.$('#player_html5_api');
+    expect(await player.isIntersectingViewport()).toEqual(false);
+    await player.tap();
+    await page.waitFor(1000);
     expect(await page.$eval('#player_html5_api', p => p.playing)).toEqual(true);
   });
 });

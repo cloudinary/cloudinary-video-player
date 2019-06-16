@@ -26,7 +26,8 @@ describe('basic player tests', () => {
     jest.setTimeout(35000);
     await page.waitForSelector('.vjs-big-play-button');
     await page.click('#player > button.vjs-big-play-button');
-    await page.waitFor(500);
+    await page.waitForFunction('player.videojs.readyState() === 4');
+    await page.waitFor(1000);
     let playing = await page.$eval('#player video', el => el.playing);
     await expect(playing).toBe(true);
     await page.click('#player > .vjs-control-bar > button.vjs-play-control.vjs-control');
