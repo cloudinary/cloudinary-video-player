@@ -6,17 +6,18 @@ const versionCmd = () => `npm version ${VERSION}`;
 const publishCmd = (tag) => {
   let cmd = 'npm publish';
 
-  if (tag !== 'stable') {
+  if (tag === 'edge') {
     cmd += ` --tag ${tag}`;
   }
 
   return cmd;
 };
 
-
 if (tag === 'dry') {
-  console.log(`"edge" will deploy: "${ver.nextEdgeVersion()}"`);
-  console.log(`"stable" will deploy: "${ver.nextStableVersion()}"`);
+  console.log(`"edge" will deploy: "${ver.getNextVersion('edge')}"`);
+  console.log(`"stable" will deploy: "${ver.getNextVersion('stable')}"`);
+  console.log(`"minor" will deploy: "${ver.getNextVersion('minor')}"`);
+  console.log(`"major" will deploy: "${ver.getNextVersion('major')}"`);
 } else {
   const cmd = `${versionCmd()} && ${publishCmd(tag)}`;
   console.log(`Executing: "${cmd}" ...`);

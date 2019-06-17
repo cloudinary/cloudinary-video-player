@@ -1,10 +1,13 @@
 const semver = require('semver');
 const CURRENT_VERSION = require('../package.json').version;
-const VALID_TAGS = ['edge', 'stable', 'dry'];
+const VALID_TAGS = ['edge', 'stable', 'minor', 'major', 'dry'];
 
-const nextEdgeVersion = () => semver.inc(CURRENT_VERSION, 'prerelease', undefined, 'edge');
-const nextStableVersion = () => semver.inc(CURRENT_VERSION, 'patch');
-const nextVersion = (tag) => (tag === 'edge') ? nextEdgeVersion() : nextStableVersion();
+const nextSemver = {
+  'edge': () => semver.inc(CURRENT_VERSION, 'prerelease', undefined, 'edge'),
+  'stable': () => semver.inc(CURRENT_VERSION, 'patch'),
+  'minor': () => semver.inc(CURRENT_VERSION, 'minor'),
+  'major': () => semver.inc(CURRENT_VERSION, 'major')
+};
 
 const extractTag = () => {
   let tag = process.env.npm_config_tag;
@@ -21,7 +24,6 @@ const extractTag = () => {
   return tag;
 };
 
-const getNextVersion = () => nextVersion(extractTag());
+const getNextVersion = (tag) => nextSemver[tag || extractTag()]();
 
-
-module.exports = { nextStableVersion, nextEdgeVersion, extractTag, getNextVersion };
+module.exports = { extractTag, getNextVersion };
