@@ -24,6 +24,6 @@ const extractTag = () => {
   return tag;
 };
 
-const getNextVersion = (tag) => nextSemver[tag || extractTag()]();
+const getNextVersion = (tag) => nextSemver[tag] ? nextSemver[tag]() : console.log('No tag specified: ', tag);
 
 module.exports = { extractTag, getNextVersion };

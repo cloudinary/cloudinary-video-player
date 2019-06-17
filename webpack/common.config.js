@@ -4,7 +4,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const ver = require('./versioning');
 
-let VERSION = (process.env.deploy === 'true') ? JSON.stringify(ver.getNextVersion()) : JSON.stringify(require('../package.json').version);
+let VERSION = (process.env.deploy === 'true') ? JSON.stringify(ver.getNextVersion(ver.extractTag())) : JSON.stringify(require('../package.json').version);
 console.log('Current version: ' + VERSION);
 
 module.exports = {
