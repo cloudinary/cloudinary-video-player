@@ -43,7 +43,7 @@ describe('UI configuration tests', () => {
     let backImage = await page.$eval('#player > div.vjs-control-bar > a', (a) => a.style.backgroundImage);
     expect(opts.logoOnclickUrl).toEqual(href.slice(0, href.length - 1));
     expect(opts.logoImageUrl).toEqual(backImage.replace('url\("', ''). replace('"\)', ''));
-  })
+  });
 });
 
 
