@@ -39,7 +39,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'colors',
   'floatingWhenNotVisible',
   'ads',
-  'showJumpControl',
+  'showJumpControls',
   'textTracks'
 ]);
 
@@ -330,7 +330,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initJumpButtons = () => {
-      if (!_options.showJumpControl) {
+      if (!_options.showJumpControls) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
         this.videojs.controlBar.removeChild('JumpBackButton');
       }
