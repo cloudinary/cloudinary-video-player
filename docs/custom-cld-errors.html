@@ -24,15 +24,14 @@
 
       player = cld.videoPlayer('player', {
         publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
       });
-       player.on('error', (e) => {
-         if (e.Player.videojs.error_.code === 11) {
-           var title = document.querySelector("h3.mb-4");
-           title.innerHTML = "Error !!!!!!!!! " + e.Player.videojs.error_.message;
-           title.style.color = 'red';
-         }
-       })
+      player.on('error', (e) => {
+        if (e.Player.videojs.error_.code === 11) {
+          var title = document.querySelector('.error-container');
+          title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message;
+          title.style.color = 'red';
+        }
+      })
 
     }, false);
   </script>
@@ -44,7 +43,7 @@
       <a href="../index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">TITLE</h3>
+    <h3 class="mb-4">Custom Errors</h3>
 
     <video
       id="player"
@@ -55,6 +54,8 @@
       class="cld-video-player"
       width="500"
     ></video>
+
+    <div class="error-container"></div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -71,21 +72,21 @@
           class="cld-video-player"
           width="500"
         &gt;&lt;/video&gt;
+        &lt;div class="error-container"&gt;&lt;/div&gt;
       </code>
       <code class="language-javascript">
-       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo_err' });
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo_err' });
 
-      player = cld.videoPlayer('player', {
-        publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
-      });
-       player.on('error', (e) => {
-         if (e.Player.videojs.error_.code === 11) {
-           var title = document.querySelector("h3.mb-4");
-           title.innerHTML = "Error !!!!!!!!! " + e.Player.videojs.error_.message;
-           title.style.color = 'red';
-         }
-       })
+        var player = cld.videoPlayer('player', {
+          publicId: 'snow_horses',
+        });
+        player.on('error', (e) => {
+          if (e.Player.videojs.error_.code === 11) {
+            var title = document.querySelector('.error-container');
+            title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message;
+            title.style.color = 'red';
+          }
+        })
       </code>
     </pre>
   </div>
