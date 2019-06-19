@@ -132,18 +132,20 @@ const overrideDefaultVideojsComponents = () => {
   children.push('recommendationsOverlay');
 
   const ControlBar = videojs.getComponent('ControlBar');
-  children = ControlBar.prototype.options_.children;
-  // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
-  // Also add a blank div underneath the progress control to stop bubbling up pointer events.
-  children.splice(children.indexOf('progressControl'), 0, 'spacer',
-    'progressControlEventsBlocker');
+  if (ControlBar) {
+    children = ControlBar.prototype.options_.children;
+    // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
+    // Also add a blank div underneath the progress control to stop bubbling up pointer events.
+    children.splice(children.indexOf('progressControl'), 0, 'spacer',
+      'progressControlEventsBlocker');
 
-  // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
-  children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
+    // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
+    children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
 
-  // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
-  children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
-    'fullscreenToggle');
+    // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
+    children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
+      'fullscreenToggle');
+  }
 };
 
 overrideDefaultVideojsComponents();
@@ -330,7 +332,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initJumpButtons = () => {
-      if (!_options.showJumpControl) {
+      if (!_options.showJumpControl && this.videojs.controlBar) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
         this.videojs.controlBar.removeChild('JumpBackButton');
       }
@@ -541,7 +543,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   skin(name) {
-    if (typeof name === 'string' && name !== undefined) {
+    if (name !== undefined && typeof name === 'string') {
       setSkinClassPrefix(this.videojs, name);
 
       if (this.playlistWidget()) {
