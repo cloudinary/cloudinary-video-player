@@ -52,7 +52,7 @@ const contextMenuContent = (player) => {
 export default {
   logoOnclickUrl: 'https://cloudinary.com/',
   showLogo: true,
-  showJumpControl: false,
+  showJumpControls: false,
   skin: 'dark',
   controls: false,
   preload: false,
