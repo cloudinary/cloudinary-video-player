@@ -22,7 +22,7 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      var players = cld.videoPlayers('.cld-video-player', {
+      players = cld.videoPlayers('.cld-video-player', {
         autoplay: true,
         controls: true,
         transformation: { width: 700, crop: 'limit' },

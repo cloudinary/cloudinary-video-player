@@ -20,6 +20,7 @@ describe('Ads tests', () => {
   }, 10000);
   it('event test', async () => {
     jest.setTimeout(65000);
+    await page.waitForSelector('#player_ima-ad-container', {visible: true});
     await page.waitFor(1000);
     let duration = await page.evaluate(() => player.duration());
     await page.waitFor(duration * 1000 + 1000);
