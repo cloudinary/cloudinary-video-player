@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
