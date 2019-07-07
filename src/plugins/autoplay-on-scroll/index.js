@@ -51,7 +51,7 @@ class AutoplayOnScrollPlugin {
         if (this.player.paused()) {
           play();
         }
-      } else if (!this.player.paused()) {
+      } else if (!this.player.paused() && !this.player.activePlugins_.floatingPlayer) {
         pause();
       }
     };
