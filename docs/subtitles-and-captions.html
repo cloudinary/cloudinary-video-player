@@ -22,57 +22,33 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'yaronr' });
 
-/*      var player = cld.videoPlayer('player', {
-        publicId: 'stubhub',
-        textTracks: {
-          captions: {
-            label: 'English captions',
-            language: 'en',
-            default: true,
-            url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
-          },
-          subtitles: [
-            {
-              label: 'German subtitles',
-              language: 'de',
-              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
+      var player = cld.videoPlayer('player');
+
+      player.source(
+        'stubhub',
+        {
+          textTracks: {
+            captions: {
+              label: 'English captions',
+              language: 'en',
+              default: true,
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
             },
-            {
-              label: 'Russian subtitles',
-              language: 'ru',
-              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
-            }
-          ]
+            subtitles: [
+              {
+                label: 'German subtitles',
+                language: 'de',
+                url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
+              },
+              {
+                label: 'Russian subtitles',
+                language: 'ru',
+                url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
+              }
+            ]
+          }
         }
-      });*/
-
-       var player = cld.videoPlayer('player');
-
-       player.source(
-         'stubhub',
-         {
-           textTracks: {
-             captions: {
-               label: 'English captions',
-               language: 'en',
-               default: true,
-               url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
-             },
-             subtitles: [
-               {
-                 label: 'German subtitles',
-                 language: 'de',
-                 url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
-               },
-               {
-                 label: 'Russian subtitles',
-                 language: 'ru',
-                 url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
-               }
-             ]
-           }
-         }
-       );
+      );
 
     }, false);
   </script>
