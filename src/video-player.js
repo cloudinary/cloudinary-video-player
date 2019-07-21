@@ -385,13 +385,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlugins(loaded);
     initPlaylistWidget();
     initJumpButtons();
-    this.fallbackTrys = 0;
+
     this.videojs.on('error', () => {
-      if (this.videojs.error().code === 4 && this.fallbackTrys === 0) {
-        let currSrc = this.videojs.currentSource();
-        this.videojs.src(
-          currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
-        this.fallbackTrys++;
+      if (this.videojs.error().code === 4) {
+        this.switchToNextSourceType();
       }
     });
 
@@ -496,6 +493,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    this.publicId = publicId;
+    this.options = options;
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
@@ -512,6 +511,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.testUrl(src.videojs.currentSrc());
     }
     return src;
+  }
+
+  switchToNextSourceType() {
+    if (this.options && this.options.sourceTypes && this.options.sourceTypes.length > 1) {
+      console.log('Switching to next source type: ' + this.options.sourceTypes[1] + ', due to ' + this.options.sourceTypes[0] + ' failing');
+      this.options.sourceTypes.shift();
+      this.source(this.publicId, this.options);
+    } else {
+      console.log('Switching to default source type: mp4');
+      let currSrc = this.videojs.currentSource();
+      this.videojs.src(
+        currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
+    }
   }
 
   testUrl(url) {
