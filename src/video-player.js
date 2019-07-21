@@ -402,7 +402,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.adsEnabled) {
       if (Object.keys(options.playerOptions.ads).length > 0 &&
-          typeof this.videojs.ima === 'object') {
+        typeof this.videojs.ima === 'object') {
         if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
           this.videojs.one('sourcechanged', () => {
             this.videojs.ima.playAd();
@@ -518,8 +518,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       console.log('Switching to next source type: ' + this.options.sourceTypes[1] + ', due to ' + this.options.sourceTypes[0] + ' failing');
       this.options.sourceTypes.shift();
       this.source(this.publicId, this.options);
-    } else {
+    } else if (!this.switchedToDefaultSourceType) {
       console.log('Switching to default source type: mp4');
+      this.switchedToDefaultSourceType = true;
       let currSrc = this.videojs.currentSource();
       this.videojs.src(
         currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
