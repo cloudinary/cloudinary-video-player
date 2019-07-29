@@ -53,26 +53,28 @@
     <h3 class="mt-4">Example Code:</h3>
     <pre>
       <code class="language-html">
-        &lt;video
-          id="player"
-          controls
-          muted
-          autoplay
-          class="cld-video-player"
-          width="500"
-        &gt;&lt;/video&gt;
+    <video
+            id="player"
+            playsinline
+            controls
+            muted
+            crossorigin="anonymous"
+            class="cld-video-player"
+            width="500"
+    ></video>
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'benco' });
 
-        // Initialize player
-        var player = cld.videoPlayer('player');
-
-        // Define source
-        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
-
-        // Play source
-        player.source(source);
+      player = cld.videoPlayer('player', {
+        publicId: '360/Golden-Gate-Bridge',
+        sourceTypes: ['mp4'],
+        transformation: {
+          width: 950,
+          vc: "auto"
+        }
+      });
+      player.videojs.vr({projection: '360'});
       </code>
     </pre>
   </div>
