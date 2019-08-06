@@ -90,4 +90,14 @@ const cloudinaryErrorsConverter = (cError, publicId, cloudName) => {
   return error;
 };
 
-export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter };
+const codecShorthandTrans = (short) => {
+  const transTable = {
+    hevc: 'hev1.1.6.L93.B0',
+    vp9: 'vp09.00.50.08',
+    av1: 'av01.0.08M.08',
+    avc1: 'avc1.42000a'
+  };
+  return transTable[short] ? transTable[short] : short;
+};
+
+export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter, codecShorthandTrans };

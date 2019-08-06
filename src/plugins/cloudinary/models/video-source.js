@@ -1,12 +1,19 @@
 import BaseSource from './base-source';
 import ImageSource from './image-source';
-import { normalizeOptions, isSrcEqual } from '../common';
+import { normalizeOptions, isSrcEqual, codecShorthandTrans } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv'];
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4'];
+const DEFAULT_CODEC_FOR_CONTAINER = {
+  mp4: 'hvc',
+  webm: 'vp8',
+  hls: 'hvc',
+  dash: 'hvc'
+};
+
 const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
   type: 'upload',
@@ -142,22 +149,29 @@ class VideoSource extends BaseSource {
   }
 }
 
-const FORMAT_MIME_TYPES = {
-  ogv: 'video/ogg',
-  mpd: 'application/dash+xml',
-  m3u8: 'application/x-mpegURL'
+const CONTAINER_MIME_TYPES = {
+  dash: 'application/dash+xml',
+  hls: 'application/x-mpegURL'
 };
 
 function formatToMimeType(format) {
-  format = normalizeFormat(format);
-
-  let res = FORMAT_MIME_TYPES[format];
+  let [container, codec] = format.toLowerCase().split('\/');
+  if (!codec) {
+    codec = DEFAULT_CODEC_FOR_CONTAINER[container];
+  }
+  let res = CONTAINER_MIME_TYPES[container];
   if (!res) {
-    res = `video/${format}`;
+    res = `video/${container}`;
   }
 
   return res;
 }
+
+function buildMimeFromArray(formatArray) {
+
+
+}
+
 
 const FORMAT_MAPPINGS = {
   hls: 'm3u8',

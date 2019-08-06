@@ -59,7 +59,7 @@ export default {
   loop: false,
   muted: false,
   posterOptions: {},
-  sourceTypes: ['webm', 'mp4', 'ogv'],
+  sourceTypes: ['webm', 'mp4'],
   contextMenu: {
     content: contextMenuContent
   },
