@@ -81,7 +81,7 @@ class FloatingPlayer {
 
         const close = document.createElement('button');
         close.setAttribute('class', 'cld-video-player-floater-close');
-        close.innerHTML = 'X';
+        close.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><polygon fill-rule="evenodd" points="370 7.41 368.59 6 364 10.59 359.41 6 358 7.41 362.59 12 358 16.59 359.41 18 364 13.41 368.59 18 370 16.59 365.41 12" transform="translate(-358 -6)"/></svg>';
         close.onclick = () => {
           unfloat();
           disable();
