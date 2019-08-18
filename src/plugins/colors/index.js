@@ -81,6 +81,10 @@ const playerColors = `
   .PLAYER-CLASS-PREFIX .cld-plw-panel-item {
     border-color: --text-color;
   }
+
+  .PLAYER-CLASS-PREFIX .cld-video-player-floater-close polygon {
+    fill: --base-color;
+  }
 `;
 
 const darkOnlyColors = `
