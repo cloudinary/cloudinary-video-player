@@ -551,8 +551,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           const errorMsg = resp.headers['x-cld-error'] || err.message;
           const cloudName = this.cloudinaryConfig().config().cloud_name;
           this.videojs.error(cloudinaryErrorsConverter({
-            errorMsg, 
-            publicId: this.currentPublicId(), 
+            errorMsg,
+            publicId: this.currentPublicId(),
             cloudName,
             statusCode: resp.statusCode
           }));
