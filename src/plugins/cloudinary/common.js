@@ -92,12 +92,92 @@ const cloudinaryErrorsConverter = (cError, publicId, cloudName) => {
 
 const codecShorthandTrans = (short) => {
   const transTable = {
-    hevc: 'hev1.1.6.L93.B0',
-    vp9: 'vp09.00.50.08',
-    av1: 'av01.0.08M.08',
-    avc1: 'avc1.42000a'
+    h265: 'hev1',
+    vp9: 'vp9',
+    h264: 'avc1.42E01E'
   };
   return transTable[short] ? transTable[short] : short;
 };
 
-export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter, codecShorthandTrans };
+const ISOAVC_MAP = {
+  'avc1': 'h264',
+  'avc2': 'h264',
+  'svc1': 'Scalable Video Coding',
+  'mvc1': 'Multiview Video Coding',
+  'mvc2': 'Multiview Video Coding'
+};
+
+
+const PROFILE = {
+  '0': 'No', //  0             - *** when profile=RCDO and level=0 - "RCDO"  - RCDO bitstream MUST obey to all the constraints of the Baseline profile
+  '42': 'baseline', // 66 in-decimal
+  '4d': 'main', // 77 in-decimal
+  '58': 'extended', // 88 in-decimal
+  '64': 'high', // 100 in-decimal
+  '6e': 'high 10', // 110 in-decimal
+  '7a': 'high 4:2:2', // 122 in-decimal
+  'f4': 'high 4:4:4', // 244 in-decimal
+  '2c': 'CAVLC 4:4:4', // 44 in-decimal
+
+  // profiles for SVC - Scalable Video Coding extension to H.264
+  '53': 'Scalable Baseline', // 83 in-decimal
+  '56': 'Scalable High', // 86 in-decimal
+
+  // profiles for MVC - Multiview Video Coding extension to H.264
+  '80': 'Stereo High', // 128 in-decimal
+  '76': 'Multiview High', // 118 in-decimal
+  '8a': 'Multiview Depth High' // 138 in-decimal
+};
+
+
+function avcotiToStr(s) {
+  let REGEX = /([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i;
+
+  if (REGEX.test(s) === false) {
+    throw new Error('error: please provide a 3-bytes hex-sequence for example: 42001e');
+  }
+  let matches = s.match(REGEX);
+  matches.shift(); // kills first one (regex matchs entire string)
+
+  let profile_idc = matches[0];
+  profile_idc = PROFILE[profile_idc];
+  profile_idc = typeof profile_idc === 'string' ? profile_idc : 'Unknown'; // explicit fix.
+
+  // constraint_set_flags  = matches[1]; //maybe some other time..
+
+  let level_idc = matches[2];
+  level_idc = Number.parseInt(level_idc, 16); // will give something like 30  (integer thirty)
+  level_idc = String(level_idc).split('').join('.'); // will give something like "3.0"
+  return `${profile_idc}:${level_idc}`;
+}
+
+
+const h264avcToString = (s) => {
+  let REGEX = /(avc1|avc2|svc1|mvc1|mvc2)\.([0-9a-f]{6})/i;
+  if (REGEX.test('avc1.42001e') === false) {
+    throw new Error('Codec string is not formatted according to H.264/AVC standards for example avc1.42001e (maybe an iOS friendly version...)');
+  }
+  let matches = s.match(REGEX);
+  matches.shift(); // first one is the entire-string.
+
+  let vc_codec = ISOAVC_MAP[matches[0]];
+  let avc_codec = typeof avc_codec === 'string' ? avc_codec : 'Unknown'; // explicit fix
+
+  return vc_codec + ':' + avcotiToStr(matches[1]);
+};
+
+const codecToSrcTransformation = (codec) => {
+  switch (codec) {
+    case 'vp9':
+      return { video_codec: 'vp9' };
+    case 'h265':
+      return { video_codec: 'h265' };
+    case 'h264':
+      return { video_codec: 'h264:baseline:3.0' };
+    default:
+      return { video_codec: h264avcToString(codec) };
+  }
+}
+
+
+export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter, codecShorthandTrans, h264avcToString, codecToSrcTransformation };

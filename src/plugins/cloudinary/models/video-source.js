@@ -1,6 +1,6 @@
 import BaseSource from './base-source';
 import ImageSource from './image-source';
-import { normalizeOptions, isSrcEqual, codecShorthandTrans } from '../common';
+import { normalizeOptions, isSrcEqual, codecShorthandTrans, codecToSrcTransformation } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -8,10 +8,8 @@ import { objectToQuerystring } from 'utils/querystring';
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4'];
 const DEFAULT_CODEC_FOR_CONTAINER = {
-  mp4: 'hvc',
-  webm: 'vp8',
-  hls: 'hvc',
-  dash: 'hvc'
+  mp4: 'h264',
+  webm: 'vp9'
 };
 
 const DEFAULT_VIDEO_PARAMS = {
@@ -129,7 +127,7 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     return this.sourceTypes().map((sourceType) => {
-      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
+      const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
       const opts = {};
       if (srcTransformation) {
@@ -142,8 +140,9 @@ class VideoSource extends BaseSource {
         queryString = objectToQuerystring(this.queryParams());
       }
 
+      const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+      opts.transformation.push(codecTrans);
       const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
-      const type = formatToMimeType(sourceType);
       return { type, src, cldSrc: this };
     });
   }
@@ -154,24 +153,19 @@ const CONTAINER_MIME_TYPES = {
   hls: 'application/x-mpegURL'
 };
 
-function formatToMimeType(format) {
+function formatToMimeTypeAndTransformation(format) {
   let [container, codec] = format.toLowerCase().split('\/');
   if (!codec) {
     codec = DEFAULT_CODEC_FOR_CONTAINER[container];
   }
+  codec = codecShorthandTrans(codec);
   let res = CONTAINER_MIME_TYPES[container];
   if (!res) {
     res = `video/${container}`;
   }
-
-  return res;
+  let transformation = codecToSrcTransformation(codec);
+  return [`${res}; codec="${codec}"`, transformation];
 }
-
-function buildMimeFromArray(formatArray) {
-
-
-}
-
 
 const FORMAT_MAPPINGS = {
   hls: 'm3u8',
