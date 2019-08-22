@@ -16,6 +16,7 @@ import {
   setSkinClassPrefix,
   playerClassPrefix
 } from './utils/css-prefix';
+import VideoSource from './plugins/cloudinary/models/video-source';
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -34,6 +35,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'analytics',
   'fluid',
   'ima',
+  'skipFallback',
   'playlistWidget',
   'hideContextMenu',
   'colors',
@@ -385,11 +387,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlugins(loaded);
     initPlaylistWidget();
     initJumpButtons();
-
+    this.fallbackTrys = 0;
     this.videojs.on('error', () => {
-      if (this.videojs.error().code === 4) {
-        this.switchToNextSourceType();
-      }
+      // if (this.videojs.error().code === 4 && !options.playerOptions.skipFallback) {
+
+      this.fallbackToOrigFile();
+      // }
     });
 
     this.videojs.ready(() => {
@@ -493,6 +496,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    if (publicId instanceof VideoSource) {
+      return this.videojs.cloudinary.source(publicId);
+    }
     this.publicId = publicId;
     this.options = options;
 
@@ -521,19 +527,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return src;
   }
 
-  switchToNextSourceType() {
-    // We have more then 1 source type so lets try next source type.
-    if (this.options && this.options.sourceTypes && this.options.sourceTypes.length > 1) {
-      console.log('Switching to next source type: ' + this.options.sourceTypes[1] + ', due to ' + this.options.sourceTypes[0] + ' failing');
-      this.options.sourceTypes.shift();
-      this.source(this.publicId, this.options);
-      // Didn't try default source type (mp4) yet so lets try it as a last resort.
-    } else if (!this.switchedToDefaultSourceType) {
-      console.log('Switching to default source type: mp4');
-      this.switchedToDefaultSourceType = true;
-      let currSrc = this.videojs.currentSource();
-      this.videojs.src(
-        currSrc.cldSrc.cloudinaryConfig().url(currSrc.cldSrc.publicId(), { resource_type: 'video' }) + '.mp4');
+  fallbackToOrigFile() {
+    if (this.fallbackTrys === 0) {
+
+      let src = this.videojs.currentSources().filter(src => src.isFallback);
+      if (src.length > 0) {
+        this.source(src.pop().cldSrc);
+      }
+      this.fallbackTrys++;
     }
   }
 

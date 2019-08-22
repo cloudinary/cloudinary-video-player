@@ -59,12 +59,13 @@ export default {
   loop: false,
   muted: false,
   posterOptions: {},
-  sourceTypes: ['webm', 'mp4'],
+  sourceTypes: ['webm', 'mp4', 'fallback'],
   contextMenu: {
     content: contextMenuContent
   },
   floatingWhenNotVisible: false,
   hideContextMenu: false,
   analytics: false,
+  skipFallback: false,
   playedEventPercents: [25, 50, 75, 100]
 };
