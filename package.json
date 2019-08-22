@@ -26,7 +26,6 @@
     "expose-loader": "^0.7.5",
     "fetch-ponyfill": "^4.0.0",
     "get-size": "^2.0.2",
-    "optimize-css-assets-webpack-plugin": "^4.0.3",
     "promise-polyfill": "^6.0.2",
     "video.js": "^7.4.1",
     "videojs-contextmenu": "^1.2.2",
@@ -34,9 +33,6 @@
     "videojs-ima": "^1.5.1",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-conditional-loader": "^1.0.11",
-    "webworkify-webpack2": "^1.1.9",
     "wolfy87-eventemitter": "^5.1.0"
   },
   "devDependencies": {
@@ -82,6 +78,10 @@
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.2.1",
-    "webpack-shell-plugin": "^0.5.0"
+    "webpack-shell-plugin": "^0.5.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-conditional-loader": "^1.0.11",
+    "webworkify-webpack2": "^1.1.9"
   }
 }
