@@ -540,27 +540,33 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   testUrl(url) {
     try {
       let params = {
-        method: 'head',
-        uri: url
+        method: 'get',
+        uri: url,
+        headers: {
+          'Sec-Fetch-Mode': 'no-cors',
+          mode: 'no-cors'
+        },
+        withCredentials: true
       };
       videojs.xhr(params, (err, resp) => {
         if (err) {
           this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
         }
         if (resp.statusCode !== 200) {
-          const errorMsg = resp.headers['x-cld-error'] || err.message;
+          const errorMsg = resp.headers['x-cld-error'] || '';
           const cloudName = this.cloudinaryConfig().config().cloud_name;
           this.videojs.error(cloudinaryErrorsConverter({
             errorMsg,
             publicId: this.currentPublicId(),
             cloudName,
+            error: resp,
             statusCode: resp.statusCode
           }));
           this.videojs.reset();
         }
       });
     } catch (e) {
-      this.videojs.error({ code: 10, message: e.message });
+      this.videojs.error({ code: 10, message: e ? e.message : '' });
       this.videojs.reset();
     }
   }
