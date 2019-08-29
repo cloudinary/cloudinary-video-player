@@ -553,7 +553,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
         }
         if (resp.statusCode !== 200) {
-          const errorMsg = resp.headers['x-cld-error'] || '';
+          const errorMsg = resp.headers['x-cld-error'] || (err && err.message ? err.message : '');
           const cloudName = this.cloudinaryConfig().config().cloud_name;
           this.videojs.error(cloudinaryErrorsConverter({
             errorMsg,
