@@ -76,7 +76,9 @@ class VideoSource extends BaseSource {
       if (!types) {
         return _sourceTypes;
       }
-
+      if (types.indexOf('fallback') === -1) {
+        types.push('fallback');
+      }
       _sourceTypes = types;
 
       return this;
@@ -144,12 +146,16 @@ class VideoSource extends BaseSource {
       let type = null;
       if (sourceType === 'fallback') {
         src = `${this.config().url(this.publicId(), { resource_type: 'video' })}.mp4${queryString}`;
-        type = 'video/mp4'
+        type = 'video/mp4';
         isFallback = true;
       } else {
-        let codecTrans = null;
-        [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-        opts.transformation.push(codecTrans);
+        if (Object.keys(CONTAINER_MIME_TYPES).includes(sourceType)) {
+          type = CONTAINER_MIME_TYPES[sourceType];
+        } else {
+          let codecTrans = null;
+          [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+          opts.transformation.push(codecTrans);
+        }
         src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       }
       return { type, src, cldSrc: this, isFallback: isFallback };

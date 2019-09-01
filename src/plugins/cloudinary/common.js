@@ -177,7 +177,7 @@ const codecToSrcTransformation = (codec) => {
     default:
       return { video_codec: h264avcToString(codec) };
   }
-}
+};
 
 
 export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter, codecShorthandTrans, h264avcToString, codecToSrcTransformation };

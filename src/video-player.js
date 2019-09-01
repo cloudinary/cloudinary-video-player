@@ -389,7 +389,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initJumpButtons();
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
-      if (this.videojs.error().code === 10 && !options.playerOptions.skipFallback) {
+      if ((this.videojs.error().code === 10 || this.videojs.error().code === 4) && !options.playerOptions.skipFallback) {
         this.videojs.error(null);
         this.fallbackToOrigFile();
       }
