@@ -66,6 +66,6 @@ export default {
   floatingWhenNotVisible: false,
   hideContextMenu: false,
   analytics: false,
-  skipFallback: false,
+  skipFallback: true,
   playedEventPercents: [25, 50, 75, 100]
 };

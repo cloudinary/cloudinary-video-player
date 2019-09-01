@@ -389,10 +389,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initJumpButtons();
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
-      // if (this.videojs.error().code === 4 && !options.playerOptions.skipFallback) {
-
-      this.fallbackToOrigFile();
-      // }
+      if (this.videojs.error().code === 10 && !options.playerOptions.skipFallback) {
+        this.videojs.error(null);
+        this.fallbackToOrigFile();
+      }
     });
 
     this.videojs.ready(() => {
@@ -497,18 +497,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   source(publicId, options = {}) {
     if (publicId instanceof VideoSource) {
-      return this.videojs.cloudinary.source(publicId);
+      return this.videojs.cloudinary.source(publicId, options);
     }
     this.publicId = publicId;
     this.options = options;
 
     // reset switchedToDefaultSourceType if can fallback to mp4
-    if (options && options.sourceTypes) {
-      if (options.sourceTypes[0] && options.sourceTypes[0] !== 'mp4') {
-        this.switchedToDefaultSourceType = false;
-      }
-    }
-
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
@@ -532,7 +526,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       let src = this.videojs.currentSources().filter(src => src.isFallback);
       if (src.length > 0) {
-        this.source(src.pop().cldSrc);
+        this.videojs.src(src.pop());
       }
       this.fallbackTrys++;
     }
