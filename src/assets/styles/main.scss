@@ -131,8 +131,7 @@ $icon-font-path: '../fonts' !default;
 
     left: 50%;
     top: 50%;
-    margin-left: -($big-play-width / 2);
-    margin-top: -($big-play-height / 2);
+    transform: translateX(-50%) translateY(-50%);
   }
 
   &.vjs-paused .vjs-big-play-button,

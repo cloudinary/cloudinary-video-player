@@ -540,13 +540,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       };
       videojs.xhr(params, (err, resp) => {
         if (err) {
-          this.videojs.error({ code: 10, message: err.message });
+          this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
         }
         if (resp.statusCode !== 200) {
-          let headers = resp.headers;
-          let cldError = headers['x-cld-error'];
-          let cldName = this.cloudinaryConfig().config().cloud_name;
-          this.videojs.error(cloudinaryErrorsConverter(cldError, this.currentPublicId(), cldName));
+          const errorMsg = resp.headers['x-cld-error'] || err.message;
+          const cloudName = this.cloudinaryConfig().config().cloud_name;
+          this.videojs.error(cloudinaryErrorsConverter({
+            errorMsg,
+            publicId: this.currentPublicId(),
+            cloudName,
+            statusCode: resp.statusCode
+          }));
           this.videojs.reset();
         }
       });
