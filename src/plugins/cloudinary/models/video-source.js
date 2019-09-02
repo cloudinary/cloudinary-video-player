@@ -1,12 +1,17 @@
 import BaseSource from './base-source';
 import ImageSource from './image-source';
-import { normalizeOptions, isSrcEqual } from '../common';
+import { normalizeOptions, isSrcEqual, codecShorthandTrans, codecToSrcTransformation } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'ogv'];
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'fallback'];
+const DEFAULT_CODEC_FOR_CONTAINER = {
+  mp4: 'h264',
+  webm: 'vp9'
+};
+
 const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
   type: 'upload',
@@ -71,7 +76,9 @@ class VideoSource extends BaseSource {
       if (!types) {
         return _sourceTypes;
       }
-
+      if (types.indexOf('fallback') === -1) {
+        types.push('fallback');
+      }
       _sourceTypes = types;
 
       return this;
@@ -122,7 +129,9 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     return this.sourceTypes().map((sourceType) => {
-      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
+      let src = null;
+      let isFallback = false;
+      const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
       const opts = {};
       if (srcTransformation) {
@@ -134,29 +143,43 @@ class VideoSource extends BaseSource {
       if (this.queryParams()) {
         queryString = objectToQuerystring(this.queryParams());
       }
-
-      const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
-      const type = formatToMimeType(sourceType);
-      return { type, src, cldSrc: this };
+      let type = null;
+      if (sourceType === 'fallback') {
+        src = `${this.config().url(this.publicId(), { resource_type: 'video' })}.mp4${queryString}`;
+        type = 'video/mp4';
+        isFallback = true;
+      } else {
+        if (Object.keys(CONTAINER_MIME_TYPES).includes(sourceType)) {
+          type = CONTAINER_MIME_TYPES[sourceType];
+        } else {
+          let codecTrans = null;
+          [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+          opts.transformation.push(codecTrans);
+        }
+        src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+      }
+      return { type, src, cldSrc: this, isFallback: isFallback };
     });
   }
 }
 
-const FORMAT_MIME_TYPES = {
-  ogv: 'video/ogg',
-  mpd: 'application/dash+xml',
-  m3u8: 'application/x-mpegURL'
+const CONTAINER_MIME_TYPES = {
+  dash: 'application/dash+xml',
+  hls: 'application/x-mpegURL'
 };
 
-function formatToMimeType(format) {
-  format = normalizeFormat(format);
-
-  let res = FORMAT_MIME_TYPES[format];
-  if (!res) {
-    res = `video/${format}`;
+function formatToMimeTypeAndTransformation(format) {
+  let [container, codec] = format.toLowerCase().split('\/');
+  if (!codec) {
+    codec = DEFAULT_CODEC_FOR_CONTAINER[container];
   }
-
-  return res;
+  codec = codecShorthandTrans(codec);
+  let res = CONTAINER_MIME_TYPES[container];
+  if (!res) {
+    res = `video/${container}`;
+  }
+  let transformation = codecToSrcTransformation(codec);
+  return [`${res}; codec="${codec}"`, transformation];
 }
 
 const FORMAT_MAPPINGS = {
