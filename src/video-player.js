@@ -540,7 +540,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   testUrl(url) {
     try {
       let params = {
-        method: 'get',
+        method: 'head',
         uri: url,
         headers: {
           'Sec-Fetch-Mode': 'no-cors',
