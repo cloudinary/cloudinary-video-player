@@ -15,8 +15,9 @@ describe('custom error tests', () => {
   it('Test error', async () => {
     jest.setTimeout(35000);
     await page.waitFor(1000);
+    // eslint-disable-next-line no-undef
     let errorMsg = await page.evaluate(() => player.videojs.error_.message);
-    let title = await page.$eval('h3.mb-4', (t) => t.innerHTML);
+    let title = await page.$eval('.error-container', (t) => t.innerHTML);
     expect(title.includes(errorMsg)).toBe(true);
   });
 });
