@@ -68,8 +68,8 @@ const mergeTransformation = (transformation1, transformation2) => {
 };
 
 const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }) => {
-  const msg = 'Video cannot be played -';
-  let error = { code: 10, message: `${msg} ${errorMsg}`, statusCode: statusCode };
+  const msg = 'Video cannot be played';
+  let error = { code: 10, message: `${msg}${errorMsg ? '- ' + errorMsg : ''}`, statusCode: statusCode };
   let err = errorMsg.toLowerCase();
   if (err.startsWith('unknown customer')) {
     error.code = 11;
