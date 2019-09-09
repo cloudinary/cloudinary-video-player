@@ -536,12 +536,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     try {
       let params = {
         method: 'head',
-        uri: url,
-        headers: {
-          'Sec-Fetch-Mode': 'no-cors',
-          mode: 'no-cors'
-        },
-        withCredentials: true
+        uri: url
       };
       videojs.xhr(params, (err, resp) => {
         if (err) {
