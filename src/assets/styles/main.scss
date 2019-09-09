@@ -144,6 +144,32 @@ $icon-font-path: '../fonts' !default;
     }
   }
 
+  &.vjs-error .vjs-error-display {
+    background: #90A0B3;
+    &:after {
+      content: "No video available";
+      font-size: 20px;
+      font-weight: 500;
+      position: absolute;
+      top: 50%;
+      line-height: 0;
+      padding-left: calc(10% + 45px);
+      font-family: "Fira Sans";
+    }
+    &:before {
+      content: "";
+      width: 34px;
+      height: 34px;
+      text-align: left;
+      margin-left: 10%;
+      background: url("../icons/info-circle.svg");
+      transform: translateY(6px);
+    }
+    .vjs-modal-dialog-content {
+      display: none;
+    }
+  }
+
   &.vjs-controls-disabled .vjs-big-play-button,
   &.vjs-has-started .vjs-big-play-button,
   &.vjs-using-native-controls .vjs-big-play-button,
