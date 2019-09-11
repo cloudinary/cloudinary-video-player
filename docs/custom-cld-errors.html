@@ -28,7 +28,7 @@
       player.on('error', (e) => {
         if (e.Player.videojs.error_.code === 11) {
           var title = document.querySelector('.error-container');
-          title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message;
+          title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' + e.Player.videojs.error_.statusCode;
           title.style.color = 'red';
         }
       })
