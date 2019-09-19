@@ -146,7 +146,7 @@ function avcotiToStr(s) {
   // constraint_set_flags  = matches[1]; //maybe some other time..
 
   let level_idc = matches[2];
-  level_idc = Number.parseInt(level_idc, 16); // will give something like 30  (integer thirty)
+  level_idc = parseInt(level_idc, 16); // will give something like 30  (integer thirty)
   level_idc = String(level_idc).split('').join('.'); // will give something like "3.0"
   return `${profile_idc}:${level_idc}`;
 }
