@@ -149,7 +149,7 @@ class VideoSource extends BaseSource {
         type = 'video/mp4';
         isFallback = true;
       } else {
-        if (Object.keys(CONTAINER_MIME_TYPES).includes(sourceType)) {
+        if (Object.keys(CONTAINER_MIME_TYPES).indexOf(sourceType) > -1) {
           type = CONTAINER_MIME_TYPES[sourceType];
         } else {
           let codecTrans = null;

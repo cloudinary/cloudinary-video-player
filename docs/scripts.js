@@ -3,6 +3,14 @@
 // Get scripts & styles from:
 // `localhost` while developing
 // `unpkg.com` while demoing OR if a specific version is specified
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function(searchString, position){
+    position = position || 0;
+    return this.substr(position, searchString.length) === searchString;
+  };
+}
+
+
 
 var loadScript = function (source, ver) {
   var external = source.startsWith('http');
@@ -39,14 +47,16 @@ var loadStyle = function (source, ver) {
   if (ver || flavor) {
     // Maintain the 'ver' query param on internal links.
     window.addEventListener('load', function (e) {
-      Array.from(document.querySelectorAll('a')).forEach(a => {
+      var links = document.querySelectorAll('a');
+      for (var i = 0; links.length; ++i) {
+        var a = links[i];
         if (a.hostname === location.hostname) {
           var url = new URL(a.href);
           if (ver) url.searchParams.set('ver', ver);
           if (flavor) url.searchParams.set('flavor', flavor);
           a.setAttribute('href', url);
         }
-      });
+      }
     }, false);
     ver = ver || 'edge'; // Set default version in case flavor is provided but version isn't.
   }
