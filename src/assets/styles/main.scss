@@ -146,27 +146,28 @@ $icon-font-path: '../fonts' !default;
 
   &.vjs-error .vjs-error-display {
     background: #90A0B3;
-    &:after {
-      content: "No video available";
-      font-size: 20px;
-      font-weight: 500;
-      position: absolute;
-      top: 50%;
-      line-height: 0;
-      padding-left: calc(10% + 45px);
-      font-family: "Fira Sans";
-    }
+
     &:before {
-      content: "";
-      width: 34px;
-      height: 34px;
-      text-align: left;
-      margin-left: 10%;
-      background: url("../icons/info-circle.svg");
-      transform: translateY(6px);
-    }
-    .vjs-modal-dialog-content {
       display: none;
+    }
+
+    .vjs-modal-dialog-content {
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+        padding: 0 10%;
+        display: flex;
+        align-items: center;
+
+      &:before {
+        content: "";
+        width: 34px;
+        height: 34px;
+        margin-right: 10px;
+        background: url("../icons/info-circle.svg");
+        transform: translateY(-1px);
+        flex-shrink: 0;
+      }
     }
   }
 
