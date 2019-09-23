@@ -144,6 +144,33 @@ $icon-font-path: '../fonts' !default;
     }
   }
 
+  &.vjs-error .vjs-error-display {
+    background: #90A0B3;
+
+    &:before {
+      display: none;
+    }
+
+    .vjs-modal-dialog-content {
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+        padding: 0 10%;
+        display: flex;
+        align-items: center;
+
+      &:before {
+        content: "";
+        width: 34px;
+        height: 34px;
+        margin-right: 10px;
+        background: url("../icons/info-circle.svg");
+        transform: translateY(-1px);
+        flex-shrink: 0;
+      }
+    }
+  }
+
   &.vjs-controls-disabled .vjs-big-play-button,
   &.vjs-has-started .vjs-big-play-button,
   &.vjs-using-native-controls .vjs-big-play-button,
