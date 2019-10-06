@@ -173,7 +173,7 @@ const codecToSrcTransformation = (codec) => {
   switch (codec) {
     case 'vp9':
       return { video_codec: 'vp9' };
-    case 'h265':
+    case 'hev1':
       return { video_codec: 'h265' };
     case 'h264':
       return { video_codec: 'h264:baseline:3.0' };
