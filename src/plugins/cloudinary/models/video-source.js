@@ -6,7 +6,7 @@ import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4', 'fallback'];
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4/h265', 'mp4', 'fallback'];
 const DEFAULT_CODEC_FOR_CONTAINER = {
   mp4: 'h264',
   webm: 'vp9'
@@ -192,7 +192,7 @@ function normalizeFormat(format) {
 
   let res = FORMAT_MAPPINGS[format];
   if (!res) {
-    res = format;
+    res = format.split('\/').shift();
   }
 
   return res;

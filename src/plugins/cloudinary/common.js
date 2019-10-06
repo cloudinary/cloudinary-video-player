@@ -158,12 +158,15 @@ const h264avcToString = (s) => {
     throw new Error('Codec string is not formatted according to H.264/AVC standards for example avc1.42001e (maybe an iOS friendly version...)');
   }
   let matches = s.match(REGEX);
-  matches.shift(); // first one is the entire-string.
+  if (matches !== null) {
+    matches.shift(); // first one is the entire-string.
 
-  let vc_codec = ISOAVC_MAP[matches[0]];
-  let avc_codec = typeof avc_codec === 'string' ? avc_codec : 'Unknown'; // explicit fix
+    let vc_codec = ISOAVC_MAP[matches[0]];
+    let avc_codec = typeof avc_codec === 'string' ? avc_codec : 'Unknown'; // explicit fix
 
-  return vc_codec + ':' + avcotiToStr(matches[1]);
+    return vc_codec + ':' + avcotiToStr(matches[1]);
+  }
+  return s;
 };
 
 const codecToSrcTransformation = (codec) => {

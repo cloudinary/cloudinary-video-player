@@ -390,7 +390,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.fallbackTrys = 0;
     this.videojs.on('error', () => {
       if ((this.videojs.error().code === 10 || this.videojs.error().code === 4) && !options.playerOptions.skipFallback) {
-        this.videojs.error(null);
         this.fallbackToOrigFile();
       }
     });
@@ -522,13 +521,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   fallbackToOrigFile() {
-    if (this.fallbackTrys === 0) {
-
-      let src = this.videojs.currentSources().filter(src => src.isFallback);
+    if (this.videojs.currentSources().length > 0) {
+      this.videojs.error(null);
+      let src = this.videojs.currentSources();
       if (src.length > 0) {
-        this.videojs.src(src.pop());
+        src.pop();
+        this.videojs.src(src);
       }
-      this.fallbackTrys++;
     }
   }
 
