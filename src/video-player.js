@@ -387,7 +387,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlugins(loaded);
     initPlaylistWidget();
     initJumpButtons();
-    this.fallbackTrys = 0;
     this.videojs.on('error', () => {
       if ((this.videojs.error().code === 10 || this.videojs.error().code === 4) && !options.playerOptions.skipFallback) {
         this.fallbackToOrigFile();
@@ -525,7 +524,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.error(null);
       let src = this.videojs.currentSources();
       if (src.length > 0) {
-        src.pop();
+        src.shift();
         this.videojs.src(src);
       }
     }
