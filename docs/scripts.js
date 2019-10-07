@@ -1,8 +1,6 @@
 /* eslint no-var: "off", vars-on-top: "off", curly: "off" */
 
-// Get scripts & styles from:
-// `localhost` while developing
-// `unpkg.com` while demoing OR if a specific version is specified
+// String.startsWith() polyfill
 if (!String.prototype.startsWith) {
   String.prototype.startsWith = function(searchString, position){
     position = position || 0;
@@ -10,8 +8,9 @@ if (!String.prototype.startsWith) {
   };
 }
 
-
-
+// Get scripts & styles from:
+// `localhost` while developing
+// `unpkg.com` while demoing OR if a specific version is specified
 var loadScript = function (source, ver) {
   var external = source.startsWith('http');
   var from =
