@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
    -->
+  <script src=”https://cdn.polyfill.io/v2/polyfill.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/url-search-params/1.1.0/url-search-params.js"></script>
   <script type="text/javascript" src="./scripts.js"></script>
 
@@ -26,7 +27,7 @@
       player = cld.videoPlayer('player', {
         publicId: 'snow_horses',
       });
-      player.on('error', (e) => {
+      player.on('error', function (e) {
         if (e.Player.videojs.error_.code === 11) {
           var title = document.querySelector('.error-container');
           title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' + e.Player.videojs.error_.statusCode;

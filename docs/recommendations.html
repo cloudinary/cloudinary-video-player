@@ -45,13 +45,13 @@
       source1.recommendations = [source2]
 
       // For async fetching of recommendations (e.g. fetching from database), promises can be used
-      source2.recommendations = new Promise((resolve, _) => {
+      source2.recommendations = new Promise(function (resolve, _) {
         console.log('Going to database...');
-        setTimeout(() => {
-          console.log('Fetched source from database.', source1)
+        setTimeout(function() {
+          console.log('Fetched source from database.', source1);
           resolve([source1]);
         }, 3000);
-      })
+      });
 
       // Initialize player
       player = cld.videoPlayer('player', { autoShowRecommendations: true });
