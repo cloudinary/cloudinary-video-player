@@ -11,13 +11,14 @@
     "build-light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "analyze": "webpack --config webpack/minified.config.js --json | webpack-bundle-size-analyzer",
     "build-all": "npm run clean && npm run build-dev && npm run build && npm run build-light",
-    "prebuild": "sed -i.bak 's:../../node_modules:../../..:' node_modules/video.js/src/css/video-js.scss",
+    "prebuild": "node webpack/pre-build.js",
     "precommit": "eslint src",
     "predeploy": "deploy=true npm run build-all",
     "deploy": "deploy=true node webpack/deploy.js",
     "postdeploy": "git push origin master --follow-tags",
     "dry:deploy": "node webpack/deploy.js dry",
-    "test": "jest --no-cache --detectOpenHandles"
+    "test": "jest --no-cache --detectOpenHandles",
+    "pretest": "node webpack/pre-build.js"
   },
   "author": "Cloudinary",
   "license": "MIT",
