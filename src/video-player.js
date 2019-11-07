@@ -44,6 +44,15 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'textTracks'
 ]);
 
+const TEST_URL_DEFAULT_REQUEST = { method: 'head' };
+const TEST_URL_GET_REQUEST = { method: 'get', withCredentials: true, headers: { Range: 'bytes=0-0' } };
+
+const getTestUrlRequest = (uri, options = {}) => {
+  const requestParams = options.testUrlWithGet ? TEST_URL_GET_REQUEST : TEST_URL_DEFAULT_REQUEST;
+
+  return { ...requestParams, uri };
+};
+
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
@@ -530,10 +539,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   testUrl(url) {
     try {
-      let params = {
-        method: 'head',
-        uri: url
-      };
+      let params = getTestUrlRequest(url, this.options);
+
       videojs.xhr(params, (err, resp) => {
         if (err) {
           this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
