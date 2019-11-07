@@ -35,7 +35,6 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'analytics',
   'fluid',
   'ima',
-  'skipFallback',
   'playlistWidget',
   'hideContextMenu',
   'colors',
@@ -388,8 +387,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlaylistWidget();
     initJumpButtons();
     this.videojs.on('error', () => {
-      if ((this.videojs.error().code === 10 || this.videojs.error().code === 4) && !options.playerOptions.skipFallback) {
-        this.fallbackToOrigFile();
+      if ((this.videojs.error().code === 10 || this.videojs.error().code === 4)) {
+        this.fallbackThroughSources();
       }
     });
 
@@ -500,7 +499,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.publicId = publicId;
     this.options = options;
 
-    // reset switchedToDefaultSourceType if can fallback to mp4
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
@@ -519,7 +517,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return src;
   }
 
-  fallbackToOrigFile() {
+  fallbackThroughSources() {
     if (this.videojs.currentSources().length > 0) {
       this.videojs.error(null);
       let src = this.videojs.currentSources();

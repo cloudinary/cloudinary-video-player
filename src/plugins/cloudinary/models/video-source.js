@@ -6,7 +6,7 @@ import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4/h265', 'mp4', 'fallback'];
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4/h265', 'mp4/h264'];
 const DEFAULT_CODEC_FOR_CONTAINER = {
   mp4: 'h264',
   webm: 'vp9'
@@ -76,9 +76,6 @@ class VideoSource extends BaseSource {
       if (!types) {
         return _sourceTypes;
       }
-      if (types.indexOf('fallback') === -1) {
-        types.push('fallback');
-      }
       _sourceTypes = types;
 
       return this;
@@ -130,7 +127,6 @@ class VideoSource extends BaseSource {
   generateSources() {
     return this.sourceTypes().map((sourceType) => {
       let src = null;
-      let isFallback = false;
       const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
       const opts = {};
@@ -144,21 +140,15 @@ class VideoSource extends BaseSource {
         queryString = objectToQuerystring(this.queryParams());
       }
       let type = null;
-      if (sourceType === 'fallback') {
-        src = `${this.config().url(this.publicId(), { resource_type: 'video' })}.mp4${queryString}`;
-        type = 'video/mp4';
-        isFallback = true;
+      if (Object.keys(CONTAINER_MIME_TYPES).indexOf(sourceType) > -1) {
+        type = CONTAINER_MIME_TYPES[sourceType];
       } else {
-        if (Object.keys(CONTAINER_MIME_TYPES).indexOf(sourceType) > -1) {
-          type = CONTAINER_MIME_TYPES[sourceType];
-        } else {
-          let codecTrans = null;
-          [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-          opts.transformation.push(codecTrans);
-        }
-        src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+        let codecTrans = null;
+        [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+        opts.transformation.push(codecTrans);
       }
-      return { type, src, cldSrc: this, isFallback: isFallback };
+      src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+      return { type, src, cldSrc: this };
     });
   }
 }
