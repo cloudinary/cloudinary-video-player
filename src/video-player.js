@@ -47,8 +47,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 const TEST_URL_DEFAULT_REQUEST = { method: 'head' };
 const TEST_URL_GET_REQUEST = { method: 'get', withCredentials: true, headers: { Range: 'bytes=0-0' } };
 
-const getTestUrlRequest = (uri, options = {}) => {
-  const requestParams = options.testUrlWithGet ? TEST_URL_GET_REQUEST : TEST_URL_DEFAULT_REQUEST;
+const getTestUrlRequest = (uri, testUrlWithGet) => {
+  const requestParams = testUrlWithGet ? TEST_URL_GET_REQUEST : TEST_URL_DEFAULT_REQUEST;
 
   return { ...requestParams, uri };
 };
@@ -539,7 +539,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   testUrl(url) {
     try {
-      let params = getTestUrlRequest(url, this.options);
+      let params = getTestUrlRequest(url, this.options.testUrlWithGet);
 
       videojs.xhr(params, (err, resp) => {
         if (err) {

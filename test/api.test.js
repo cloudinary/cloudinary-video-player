@@ -1,7 +1,7 @@
-const urls = ['http://localhost:3000/api.html', 'http://localhost:3000/api.html?testUrlWithGet=true'];
+const urls = ['http://localhost:3000/api.html?testUrlWith=head', 'http://localhost:3000/api.html?testUrlWith=get'];
 
 urls.forEach((url, index) => {
-  describe(`API player tests ${index ? 'testUrlWithGet' : ''}`, () => {
+  describe(`API player tests ${index ? 'test url with get' : 'test url with head'}`, () => {
     beforeEach(async () => {
       await page.setViewport({ width: 1280, height: 1800 });
       await page.goto(url, { waitUntil: 'load' });
