@@ -19,6 +19,7 @@ class ImageSource extends BaseSource {
     options = assign({}, DEFAULT_IMAGE_PARAMS, options);
 
     super(publicId, options);
+    this._type = 'ImageSource';
   }
 }
 

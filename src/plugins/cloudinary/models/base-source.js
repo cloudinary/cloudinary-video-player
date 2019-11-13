@@ -64,6 +64,8 @@ class BaseSource {
       return this;
     };
 
+    this.getType = () => this._type;
+
     const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
     if (!cloudinaryConfig) {
       throw new Error('Source is missing \'cloudinaryConfig\'.');
@@ -80,6 +82,7 @@ class BaseSource {
 
     this.publicId(publicId);
   }
+
 
   config() {
     const cld = new cloudinary.Cloudinary(this.cloudinaryConfig().config());

@@ -26,6 +26,8 @@ class AudioSource extends VideoSource {
 
     super(publicId, options);
     let _poster = null;
+    this._type = 'AudioSource';
+
     this.poster = (publicId, options = {}) => {
       if (!publicId) {
         return _poster;
