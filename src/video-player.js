@@ -41,7 +41,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'floatingWhenNotVisible',
   'ads',
   'showJumpControls',
-  'textTracks'
+  'textTracks',
+  'testUrlWithGet'
 ]);
 
 const TEST_URL_DEFAULT_REQUEST = { method: 'head' };
@@ -545,7 +546,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         if (err) {
           this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
         }
-        if (resp.statusCode !== 200) {
+        if (resp.statusCode < 200 || resp.statusCode > 299) {
           const errorMsg = resp.headers['x-cld-error'] || (err && err.message ? err.message : '');
           const cloudName = this.cloudinaryConfig().config().cloud_name;
           this.videojs.error(cloudinaryErrorsConverter({
