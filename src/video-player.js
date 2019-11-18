@@ -54,6 +54,15 @@ const getTestUrlRequest = (uri, testUrlWithGet) => {
   return { ...requestParams, uri };
 };
 
+const getNextSourceUrl = (videoJs) => {
+  const sources = videoJs.currentSources();
+  if (sources.length) {
+    return sources[0].src;
+  }
+
+  return null;
+};
+
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
@@ -397,7 +406,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlaylistWidget();
     initJumpButtons();
     this.videojs.on('error', () => {
-      if ((this.videojs.error().code === 10 || this.videojs.error().code === 4)) {
+      const error = this.videojs.error().code;
+      if ((error === 10 || error === 4)) {
         this.fallbackThroughSources();
       }
     });
@@ -519,20 +529,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     let src = this.videojs.cloudinary.source(publicId, options);
     let type = this.videojs.cloudinary.currentSourceType();
+
     if (type === 'VideoSource' || type === 'AudioSource') {
-      this.testUrl(src.videojs.currentSrc(), options);
+      const url = getNextSourceUrl(this.videojs);
+
+      // Number of sources we started with
+      this.sourcesCount = this.videojs.currentSources().length;
+
+      this.testUrl(url, options);
     }
+
     return src;
   }
 
   fallbackThroughSources() {
-    if (this.videojs.currentSources().length > 0) {
+    const sources = this.videojs.currentSources();
+
+    // Remove first source if sourcesCount did not change
+    if (this.sourcesCount >= sources.length) {
+      sources.shift();
+      this.sourcesCount = sources.length;
+    }
+
+    if (sources.length) {
       this.videojs.error(null);
-      let src = this.videojs.currentSources();
-      if (src.length > 0) {
-        src.shift();
-        this.videojs.src(src);
-      }
+      this.videojs.src(sources);
     }
   }
 
