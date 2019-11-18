@@ -8,36 +8,37 @@ if (!String.prototype.startsWith) {
   };
 }
 
+// Get scripts & styles from:
+// `localhost` while developing
+// `unpkg.com` while demoing OR if a specific version is specified
+// These SHOULD be global since they are called by some examples
+var loadScript = function (source, ver) {
+  var external = source.startsWith('http');
+  var from =
+    !ver && (external || window.location.hostname === 'localhost')
+      ? ''
+      : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = from + source;
+  script.async = false;
+  document.getElementsByTagName('head')[0].appendChild(script);
+};
+
+var loadStyle = function (source, ver) {
+  var external = source.startsWith('http');
+  var from =
+    !ver && (external || window.location.hostname === 'localhost')
+      ? ''
+      : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
+  var style = document.createElement('link');
+  style.type = 'text/css';
+  style.rel = 'stylesheet';
+  style.href = from + source;
+  document.getElementsByTagName('head')[0].appendChild(style);
+};
+
 (function () {
-
-  // Get scripts & styles from:
-  // `localhost` while developing
-  // `unpkg.com` while demoing OR if a specific version is specified
-  var loadScript = function (source, ver) {
-    var external = source.startsWith('http');
-    var from =
-      !ver && (external || window.location.hostname === 'localhost')
-        ? ''
-        : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = from + source;
-    script.async = false;
-    document.getElementsByTagName('head')[0].appendChild(script);
-  };
-
-  var loadStyle = function (source, ver) {
-    var external = source.startsWith('http');
-    var from =
-      !ver && (external || window.location.hostname === 'localhost')
-        ? ''
-        : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
-    var style = document.createElement('link');
-    style.type = 'text/css';
-    style.rel = 'stylesheet';
-    style.href = from + source;
-    document.getElementsByTagName('head')[0].appendChild(style);
-  };
 
   var createVersionSelector = function() {
 
