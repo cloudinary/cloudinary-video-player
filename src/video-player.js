@@ -544,13 +544,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   fallbackThroughSources() {
     const sources = this.videojs.currentSources();
+    const shouldRemoveFirstSource = (sources.length >= this.sourcesCount);
 
-    // Remove first source if sourcesCount did not change
-    if (this.sourcesCount >= sources.length) {
+    if (shouldRemoveFirstSource) {
       sources.shift();
       this.sourcesCount = sources.length;
     }
 
+    // Try next source if exists
     if (sources.length) {
       this.videojs.error(null);
       this.videojs.src(sources);
