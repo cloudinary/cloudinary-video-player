@@ -177,7 +177,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
       if (source) {
-        this.source(source);
+        this.source(source, _options);
       }
     };
 
@@ -506,8 +506,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
-    this.publicId = publicId;
-    this.options = options;
 
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
@@ -522,7 +520,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     let src = this.videojs.cloudinary.source(publicId, options);
     let type = this.videojs.cloudinary.currentSourceType();
     if (type === 'VideoSource' || type === 'AudioSource') {
-      this.testUrl(src.videojs.currentSrc());
+      this.testUrl(src.videojs.currentSrc(), options);
     }
     return src;
   }
@@ -538,9 +536,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  testUrl(url) {
+  testUrl(url, options = {}) {
     try {
-      let params = getTestUrlRequest(url, this.options.testUrlWithGet);
+      let params = getTestUrlRequest(url, options.testUrlWithGet);
 
       videojs.xhr(params, (err, resp) => {
         if (err) {
