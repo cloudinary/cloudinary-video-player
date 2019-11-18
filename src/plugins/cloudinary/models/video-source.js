@@ -48,6 +48,7 @@ class VideoSource extends BaseSource {
     let _sourceTransformation = null;
     let _info = null;
     let _recommendations = null;
+    this._type = 'VideoSource';
 
     this.poster = (publicId, options = {}) => {
       if (!publicId) {

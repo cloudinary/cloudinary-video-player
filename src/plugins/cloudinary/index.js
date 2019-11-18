@@ -299,7 +299,7 @@ class CloudinaryContext extends mixin(Playlistable) {
   }
 
   currentSourceType() {
-    return this.source().constructor.name;
+    return this.source().getType();
   }
 
   currentPublicId() {
