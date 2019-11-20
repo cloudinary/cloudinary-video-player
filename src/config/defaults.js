@@ -55,6 +55,9 @@ export default {
   showJumpControls: false,
   skin: 'dark',
   controls: false,
+  controlBar: {
+    'pictureInPictureToggle': false
+  },
   preload: false,
   loop: false,
   muted: false,
