@@ -173,7 +173,6 @@ const codecToSrcTransformation = (codec) => {
   if (!codec) {
     return {};
   }
-
   switch (codec) {
     case 'vp9':
       return { video_codec: 'vp9' };

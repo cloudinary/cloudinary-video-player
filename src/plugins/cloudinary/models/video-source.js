@@ -5,12 +5,9 @@ import { sliceAndUnsetProperties } from 'utils/slicing';
 import assign from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
+
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
-const DEFAULT_VIDEO_SOURCE_TYPES = ['webm', 'mp4/h265', 'mp4/h264'];
-const DEFAULT_CODEC_FOR_CONTAINER = {
-  mp4: 'h264',
-  webm: 'vp9'
-};
+const DEFAULT_VIDEO_SOURCE_TYPES = ['webm/vp9', 'mp4/h265', 'mp4'];
 
 const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
@@ -146,7 +143,9 @@ class VideoSource extends BaseSource {
       } else {
         let codecTrans = null;
         [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-        opts.transformation.push(codecTrans);
+        if (codecTrans) {
+          opts.transformation.push(codecTrans);
+        }
       }
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       return { type, src, cldSrc: this };
@@ -161,16 +160,16 @@ const CONTAINER_MIME_TYPES = {
 
 function formatToMimeTypeAndTransformation(format) {
   let [container, codec] = format.toLowerCase().split('\/');
-  if (!codec) {
-    codec = DEFAULT_CODEC_FOR_CONTAINER[container];
-  }
-  codec = codecShorthandTrans(codec);
   let res = CONTAINER_MIME_TYPES[container];
   if (!res) {
-    res = `video/${container}`;
+    res = [`video/${container}`, null];
   }
-  let transformation = codecToSrcTransformation(codec);
-  return [`${res}; codec="${codec}"`, transformation];
+  if (codec) {
+    codec = codecShorthandTrans(codec);
+    let transformation = codecToSrcTransformation(codec);
+    return [`${res}; codec="${codec}"`, transformation];
+  }
+  return res;
 }
 
 const FORMAT_MAPPINGS = {

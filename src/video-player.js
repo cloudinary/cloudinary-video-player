@@ -9,7 +9,6 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import { cloudinaryErrorsConverter } from './plugins/cloudinary/common';
 import {
   CLASS_PREFIX,
   skinClassPrefix,
@@ -17,6 +16,7 @@ import {
   playerClassPrefix
 } from './utils/css-prefix';
 import VideoSource from './plugins/cloudinary/models/video-source';
+
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -44,24 +44,6 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'textTracks',
   'testUrlWithGet'
 ]);
-
-const TEST_URL_DEFAULT_REQUEST = { method: 'head' };
-const TEST_URL_GET_REQUEST = { method: 'get', withCredentials: true, headers: { Range: 'bytes=0-0' } };
-
-const getTestUrlRequest = (uri, testUrlWithGet) => {
-  const requestParams = testUrlWithGet ? TEST_URL_GET_REQUEST : TEST_URL_DEFAULT_REQUEST;
-
-  return { ...requestParams, uri };
-};
-
-const getNextSourceUrl = (videoJs) => {
-  const sources = videoJs.currentSources();
-  if (sources.length) {
-    return sources[0].src;
-  }
-
-  return null;
-};
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -375,6 +357,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+
     const buildTextTrackObj = (type, conf) => ({
       kind: type,
       label: conf.label,
@@ -407,8 +390,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initJumpButtons();
     this.videojs.on('error', () => {
       const error = this.videojs.error().code;
-      if ((error === 10 || error === 4)) {
-        this.fallbackThroughSources();
+      console.log(error);
+      let type = this.videojs.cloudinary.currentSourceType();
+      if (error === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
+        Utils.getCldError(this.videojs.currentSource(), this);
+      } else {
+        this.videojs.clearTimeout(this.retyId);
       }
     });
 
@@ -441,7 +428,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (!this.isVideoReady()) {
         if (this.nbCalls < maxNumberOfCalls) {
           this.nbCalls++;
-          this.videojs.setTimeout(this.reTryVideo, timeout);
+          this.retyId = this.videojs.setTimeout(this.reTryVideo, timeout);
         } else {
           let e = new Error('Video is not ready please try later');
           this.videojs.trigger('error', e);
@@ -526,63 +513,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
-
     let src = this.videojs.cloudinary.source(publicId, options);
-    let type = this.videojs.cloudinary.currentSourceType();
-
-    if (type === 'VideoSource' || type === 'AudioSource') {
-      const url = getNextSourceUrl(this.videojs);
-
-      // Number of sources we started with
-      this.sourcesCount = this.videojs.currentSources().length;
-
-      this.testUrl(url, options);
-    }
-
     return src;
-  }
-
-  fallbackThroughSources() {
-    const sources = this.videojs.currentSources();
-    const shouldRemoveFirstSource = (sources.length >= this.sourcesCount);
-
-    if (shouldRemoveFirstSource) {
-      sources.shift();
-      this.sourcesCount = sources.length;
-    }
-
-    // Try next source if exists
-    if (sources.length) {
-      this.videojs.error(null);
-      this.videojs.src(sources);
-    }
-  }
-
-  testUrl(url, options = {}) {
-    try {
-      let params = getTestUrlRequest(url, options.testUrlWithGet);
-
-      videojs.xhr(params, (err, resp) => {
-        if (err) {
-          this.videojs.error({ code: 10, message: err.message, statusCode: resp.statusCode });
-        }
-        if (resp.statusCode < 200 || resp.statusCode > 299) {
-          const errorMsg = resp.headers['x-cld-error'] || (err && err.message ? err.message : '');
-          const cloudName = this.cloudinaryConfig().config().cloud_name;
-          this.videojs.error(cloudinaryErrorsConverter({
-            errorMsg,
-            publicId: this.currentPublicId(),
-            cloudName,
-            error: resp,
-            statusCode: resp.statusCode
-          }));
-          this.videojs.reset();
-        }
-      });
-    } catch (e) {
-      this.videojs.error({ code: 10, message: e ? e.message : '' });
-      this.videojs.reset();
-    }
   }
 
   posterOptions(options) {
