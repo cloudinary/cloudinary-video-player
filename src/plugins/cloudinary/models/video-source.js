@@ -167,7 +167,7 @@ function formatToMimeTypeAndTransformation(format) {
   if (codec) {
     codec = codecShorthandTrans(codec);
     let transformation = codecToSrcTransformation(codec);
-    return [`${res}; codec="${codec}"`, transformation];
+    return [`${res[0]}; codec="${codec}"`, transformation];
   }
   return res;
 }
