@@ -31,6 +31,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     options = assign({}, DEFAULT_PARAMS, options);
 
     let _source = null;
+    let _sources = null;
     let _lastSource = null;
     let _lastPlaylist = null;
     let _posterOptions = null;
@@ -151,6 +152,8 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
+    this.getCurrentSources = () => _sources;
+
     this.sourceTransformation = (trans) => {
       if (!trans) {
         return _sourceTransformation;
@@ -243,7 +246,8 @@ class CloudinaryContext extends mixin(Playlistable) {
         this.player.poster(src.poster().url());
       }
 
-      this.player.src(src.generateSources());
+      _sources = src.generateSources();
+      this.player.src(_sources);
 
       _lastSource = src;
       _lastPlaylist = this.playlist();
