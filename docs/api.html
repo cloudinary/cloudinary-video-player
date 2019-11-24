@@ -22,7 +22,7 @@
     window.addEventListener('load', function(){
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-      var options = location.search.split('testUrlWith=')[1] === 'get' ? {testUrlWithGet : true} : {};
+      var options = location.search.split('fetchErrorUsing=')[1] === 'get' ? {fetchErrorUsingGet : true} : {};
 
       player = cld.videoPlayer('player', options);
 
