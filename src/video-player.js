@@ -42,7 +42,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
-  'testUrlWithGet'
+  'fetchErrorUsingGet'
 ]);
 
 // Register all plugins
@@ -390,10 +390,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initJumpButtons();
     this.videojs.on('error', () => {
       const error = this.videojs.error().code;
-      console.log(error);
       let type = this.videojs.cloudinary.currentSourceType();
       if (error === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
-        Utils.getCldError(this.videojs.currentSource(), this);
+        this.videojs.error(null);
+        Utils.handleCldError(this, _options);
       } else {
         this.videojs.clearTimeout(this.retyId);
       }
