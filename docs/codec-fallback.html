@@ -15,6 +15,7 @@
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
    -->
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.20/src/ua-parser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/url-search-params/1.1.0/url-search-params.js"></script>
   <script type="text/javascript" src="./scripts.js"></script>
 
@@ -22,13 +23,28 @@
     window.addEventListener('load', function(){
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+      var uap = new UAParser(navigator.userAgent);
 
       player = cld.videoPlayer('player', {
-        publicId: 'Image_Performance',
-        info: { title: 'Image Performance' },
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: 'Video too big cached' },
       });
-
+      player.videojs.on('playing', () => {
+        document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
+      });
+      playerTooBig = cld.videoPlayer('player-too-big', {
+        publicId: 'Image_Performance',
+        info: { title: 'Video too big to transcode' },
+      });
+      playerSmall = cld.videoPlayer('player-small', {
+        publicId: 'what_is_cloudinary_sd',
+        info: { title: 'Small video' },
+      });
+      playerSmall.videojs.on('playing', () => {
+        document.getElementById('small-info').innerHTML = uap.getBrowser().name + ' is playing ' + playerSmall.videojs.currentSrc();
+      });
     }, false);
+
   </script>
 
 </head>
@@ -38,7 +54,7 @@
       <a href="./index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">TITLE</h3>
+    <h3 class="mb-4">Too big cached</h3>
 
     <video
       id="player"
@@ -49,6 +65,32 @@
       class="cld-video-player"
       width="500"
     ></video>
+    <span id="cached-info"></span>
+    <h3 class="mb-4">Too big error</h3>
+    <br/>
+    <video
+            id="player-too-big"
+            playsinline
+            controls
+            muted
+            autoplay
+            class="cld-video-player"
+            width="500"
+    ></video>
+      <br/>
+    <h3 class="mb-4">Small video can transcode</h3>
+
+    <video
+            id="player-small"
+            playsinline
+            controls
+            muted
+            autoplay
+            class="cld-video-player"
+            width="500"
+    ></video>
+    <span id="small-info"></span>
+
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>

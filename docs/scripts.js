@@ -7,6 +7,14 @@ if (!String.prototype.startsWith) {
     return this.substr(position, searchString.length) === searchString;
   };
 }
+if (!Array.prototype.forEach) {
+  Array.prototype.forEach = function (callback, thisArg) {
+    thisArg = thisArg || window;
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
 
 // Get scripts & styles from:
 // `localhost` while developing
@@ -21,7 +29,7 @@ var loadScript = function (source, ver) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = from + source;
-  script.async = false;
+  script.async = true;
   document.getElementsByTagName('head')[0].appendChild(script);
 };
 
@@ -65,7 +73,7 @@ var loadStyle = function (source, ver) {
     parent.appendChild(selectList);
 
     // Create and append the options
-    versions.forEach(v => {
+    versions.forEach(function (v) {
       var option = document.createElement('option');
       if (v.value) {
         option.value = v.value;
@@ -80,7 +88,6 @@ var loadStyle = function (source, ver) {
   };
 
   var initPlayerExamples = function () {
-
     // Allows testing of various build flavors (min/light) & versions (1.1.x)
     var search = new URLSearchParams(window.location.search);
     var ver = search.get('ver');
