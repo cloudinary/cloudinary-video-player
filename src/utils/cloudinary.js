@@ -8,29 +8,33 @@ const ERROR_WITH_GET_REQUEST = { method: 'get', withCredentials: 'include', head
 const handleCldError = (that, options) => {
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   let srcs = that.videojs.cloudinary.getCurrentSources();
-  Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
-    let filtered = [];
-    res.forEach(r => {
-      if (r.status >= 200 && r.status < 399) {
-        filtered.push(r.url);
+  if (srcs.length > 0) {
+    Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
+      let filtered = [];
+      res.forEach(r => {
+        if (r.status >= 200 && r.status < 399 && r.url !== '') {
+          filtered.push(r.url);
+        }
+      });
+      if (filtered.length === 0) {
+        const errorMsg = res[0].headers.get('x-cld-error') || '';
+        const cloudName = that.cloudinaryConfig().config().cloud_name;
+        that.videojs.error(cloudinaryErrorsConverter({
+          errorMsg,
+          publicId: that.currentPublicId(),
+          cloudName,
+          error: res[0],
+          statusCode: res[0].status
+        }));
+      } else {
+        let goodSrcs = srcs.filter(s => filtered.indexOf(s.src) > -1);
+        console.log('trying urls: ' + JSON.stringify(goodSrcs));
+        that.videojs.src(goodSrcs);
       }
     });
-    if (filtered.length === 0) {
-      const errorMsg = res[0].headers.get('x-cld-error') || '';
-      const cloudName = that.cloudinaryConfig().config().cloud_name;
-      that.videojs.error(cloudinaryErrorsConverter({
-        errorMsg,
-        publicId: that.currentPublicId(),
-        cloudName,
-        error: res[0],
-        statusCode: res[0].status
-      }));
-    } else {
-      let goodSrcs = srcs.filter(s => filtered.includes(s.src));
-      console.log('trying urls: ' + goodSrcs);
-      that.videojs.src(goodSrcs);
-    }
-  });
+  } else {
+    that.videojs.error({ code: 6, message: 'No supported media sources' });
+  }
 };
 
 function getCloudinaryInstanceOf(Klass, obj) {

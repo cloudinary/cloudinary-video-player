@@ -29,7 +29,7 @@
         publicId: 'product-gallery-tutorial_hlk0na',
         info: { title: 'Video too big cached' },
       });
-      player.videojs.on('playing', () => {
+      player.videojs.on('playing', function() {
         document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
       });
       playerTooBig = cld.videoPlayer('player-too-big', {
@@ -40,7 +40,7 @@
         publicId: 'what_is_cloudinary_sd',
         info: { title: 'Small video' },
       });
-      playerSmall.videojs.on('playing', () => {
+      playerSmall.videojs.on('playing', function() {
         document.getElementById('small-info').innerHTML = uap.getBrowser().name + ' is playing ' + playerSmall.videojs.currentSrc();
       });
     }, false);
