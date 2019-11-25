@@ -11,7 +11,7 @@ const handleCldError = (that, options) => {
   Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
     let filtered = [];
     res.forEach(r => {
-      if (r.status >= 200 && r.status < 299) {
+      if (r.status >= 200 && r.status < 399) {
         filtered.push(r.url);
       }
     });
