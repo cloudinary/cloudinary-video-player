@@ -4,7 +4,7 @@ import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
 const { fetch } = fetchPF({ Promise });
 
 const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
-const ERROR_WITH_GET_REQUEST = { method: 'get', withCredentials: 'include', headers: { Range: 'bytes=0-0' } };
+const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { Range: 'bytes=0-0' } };
 const handleCldError = (that, options) => {
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   let srcs = that.videojs.cloudinary.getCurrentSources();
