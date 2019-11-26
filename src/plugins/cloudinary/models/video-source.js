@@ -123,7 +123,8 @@ class VideoSource extends BaseSource {
   }
 
   generateSources() {
-    return this.sourceTypes().map((sourceType) => {
+    let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
+    let srcs = this.sourceTypes().map((sourceType) => {
       let src = null;
       const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
@@ -150,6 +151,11 @@ class VideoSource extends BaseSource {
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       return { type, src, cldSrc: this };
     });
+    if (isIe) {
+      return srcs.filter(s => s.type !== 'video/mp4; codec="hev1"');
+    } else {
+      return srcs;
+    }
   }
 }
 
