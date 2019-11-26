@@ -32,6 +32,14 @@
       player.videojs.on('playing', function() {
         document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
       });
+      playerWebm = cld.videoPlayer('player-webm', {
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: 'Video too big cached' },
+        sourceTypes: ['webm']
+      });
+      playerWebm.videojs.on('playing', function() {
+        document.getElementById('cached-info-webm').innerHTML = uap.getBrowser().name + ' is playing ' + playerWebm.videojs.currentSrc();
+      });
       playerTooBig = cld.videoPlayer('player-too-big', {
         publicId: 'Image_Performance',
         info: { title: 'Video too big to transcode' },
@@ -54,7 +62,7 @@
       <a href="./index.html"><< Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Too big cached</h3>
+    <h3 class="mb-4">Too big cached mp4</h3>
 
     <video
       id="player"
@@ -66,6 +74,18 @@
       width="500"
     ></video>
     <span id="cached-info"></span>
+    <h3 class="mb-4">Too big cached webm</h3>
+
+    <video
+            id="player-webm"
+            playsinline
+            controls
+            muted
+            autoplay
+            class="cld-video-player"
+            width="500"
+    ></video>
+    <span id="cached-info-webm"></span>
     <h3 class="mb-4">Too big error</h3>
     <br/>
     <video
