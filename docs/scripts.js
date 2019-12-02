@@ -7,12 +7,19 @@ if (!String.prototype.startsWith) {
     return this.substr(position, searchString.length) === searchString;
   };
 }
-if (!Array.prototype.forEach) {
-  Array.prototype.forEach = function (callback, thisArg) {
-    thisArg = thisArg || window;
-    for (var i = 0; i < this.length; i++) {
-      callback.call(thisArg, this[i], i, this);
-    }
+// URLSearchParams.get() polyfill
+if (!window.URLSearchParams) {
+  window.URLSearchParams = window.URLSearchParams || function (searchString) {
+    var self = this;
+    self.searchString = searchString;
+    self.get = function (name) {
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
+      if (results === null) {
+        return null;
+      } else {
+        return decodeURI(results[1]) || 0;
+      }
+    };
   };
 }
 
@@ -29,7 +36,7 @@ var loadScript = function (source, ver) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.src = from + source;
-  script.async = true;
+  script.async = false;
   document.getElementsByTagName('head')[0].appendChild(script);
 };
 
@@ -73,17 +80,17 @@ var loadStyle = function (source, ver) {
     parent.appendChild(selectList);
 
     // Create and append the options
-    versions.forEach(function (v) {
+    for (var i = 0; i < versions.length; ++i) {
       var option = document.createElement('option');
-      if (v.value) {
-        option.value = v.value;
+      if (versions[i].value) {
+        option.value = versions[i].value;
       } else {
         option.disabled = true;
         option.selected = true;
       }
-      option.text = v.label;
+      option.text = versions[i].label;
       selectList.appendChild(option);
-    });
+    }
 
   };
 
@@ -96,12 +103,12 @@ var loadStyle = function (source, ver) {
       // Maintain the 'ver' query param on internal links.
       window.addEventListener('load', function (e) {
         var links = document.querySelectorAll('a');
-        for (var i = 0; links.length; ++i) {
+        for (var i = 0; i < links.length; ++i) {
           var a = links[i];
           if (a.hostname === location.hostname) {
-            var url = new URL(a.href);
-            if (ver) url.searchParams.set('ver', ver);
-            if (flavor) url.searchParams.set('flavor', flavor);
+            var url = a.href + '?';
+            if (ver) url = url + 'ver=' + ver + '&';
+            if (flavor) url = url + 'flavor=' + flavor;
             a.setAttribute('href', url);
           }
         }
@@ -109,7 +116,7 @@ var loadStyle = function (source, ver) {
       ver = ver || 'edge'; // Set default version in case flavor is provided but version isn't.
     }
 
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.3.0/cloudinary-core-shrinkwrap.js');
+    loadScript('https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js');
     loadStyle('/cld-video-player' + (flavor ? '.' + flavor : '') + '.css', ver);
     loadScript('/cld-video-player' + (flavor ? '.' + flavor : '') + '.js', ver);
 
