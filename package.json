@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.3.0-edge.8",
+  "version": "1.3.0-edge.9",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
@@ -11,7 +11,7 @@
     "build": "webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "build-light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "analyze": "webpack --config webpack/minified.config.js --json | webpack-bundle-size-analyzer",
-    "build-all": "npm run clean && npm run build-dev && npm run build && npm run build-light",
+    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light",
     "prebuild": "node webpack/pre-build.js",
     "precommit": "eslint src",
     "predeploy": "deploy=true npm run build-all",
