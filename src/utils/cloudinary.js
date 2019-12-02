@@ -1,11 +1,13 @@
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
+
 const { fetch } = fetchPF({ Promise });
 
 const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { Range: 'bytes=0-0' } };
 const handleCldError = (that, options) => {
+  const cloudName = that.cloudinaryConfig().config().cloud_name;
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   let srcs = that.videojs.cloudinary.getCurrentSources();
   if (srcs.length > 0) {
@@ -18,7 +20,6 @@ const handleCldError = (that, options) => {
       });
       if (filtered.length === 0) {
         const errorMsg = res[0].headers.get('x-cld-error') || '';
-        const cloudName = that.cloudinaryConfig().config().cloud_name;
         that.videojs.error(cloudinaryErrorsConverter({
           errorMsg,
           publicId: that.currentPublicId(),
@@ -31,7 +32,11 @@ const handleCldError = (that, options) => {
         console.log('trying urls: ' + JSON.stringify(goodSrcs));
         that.videojs.src(goodSrcs);
       }
-    });
+    })
+      .catch(error => that.videojs.error({
+        code: 7,
+        message: error && error.message ? error.message : 'Failed to test sources'
+      }));
   } else {
     that.videojs.error({ code: 6, message: 'No supported media sources' });
   }
