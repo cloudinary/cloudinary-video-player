@@ -389,13 +389,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlaylistWidget();
     initJumpButtons();
     this.videojs.on('error', () => {
-      const error = this.videojs.error().code;
-      let type = this.videojs.cloudinary.currentSourceType();
-      if (error === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
-        this.videojs.error(null);
-        Utils.handleCldError(this, _options);
-      } else {
-        this.videojs.clearTimeout(this.retyId);
+      const error = this.videojs.error();
+      if (error) {
+        let type = this.videojs.cloudinary.currentSourceType();
+        if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
+          this.videojs.error(null);
+          Utils.handleCldError(this, _options);
+        } else {
+          this.videojs.clearTimeout(this.reTryId);
+        }
       }
     });
 
@@ -428,7 +430,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (!this.isVideoReady()) {
         if (this.nbCalls < maxNumberOfCalls) {
           this.nbCalls++;
-          this.retyId = this.videojs.setTimeout(this.reTryVideo, timeout);
+          this.reTryId = this.videojs.setTimeout(this.reTryVideo, timeout);
         } else {
           let e = new Error('Video is not ready please try later');
           this.videojs.trigger('error', e);
@@ -513,8 +515,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
-    let src = this.videojs.cloudinary.source(publicId, options);
-    return src;
+    return this.videojs.cloudinary.source(publicId, options);
   }
 
   posterOptions(options) {
