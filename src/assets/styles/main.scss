@@ -55,11 +55,6 @@ $icon-font-path: '../fonts' !default;
   }
 }
 
-// IE11 does some weird shenanigans with font-size on :before elements.
-.cld-ie11.video-js .vjs-control:before {
-  font-size: 0.6em;
-}
-
 .cld-video-player {
   font-family: $text-font-family;
 
