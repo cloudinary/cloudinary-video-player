@@ -30,8 +30,7 @@
       player.on('error', function (e) {
         if (e.Player.videojs.error_) {
           var title = document.querySelector('.error-container');
-          title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' +
-                  e.Player.videojs.error_.statusCode;
+          title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' + e.Player.videojs.error_.statusCode;
           title.style.color = 'red';
         }
       })
@@ -81,13 +80,12 @@
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo_err' });
 
         player = cld.videoPlayer('player', {
-            publicId: 'snow_horses',
-          });
+          publicId: 'snow_horses',
+        });
         player.on('error', function (e) {
           if (e.Player.videojs.error_) {
             var title = document.querySelector('.error-container');
-            title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' +
-                    e.Player.videojs.error_.statusCode;
+            title.innerHTML = 'Error !!!!!!!!! ' + e.Player.videojs.error_.message + 'and status code was ' + e.Player.videojs.error_.statusCode;
             title.style.color = 'red';
           }
         })
