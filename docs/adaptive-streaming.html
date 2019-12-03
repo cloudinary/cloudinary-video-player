@@ -50,10 +50,10 @@
         }
       );
 
-      playerHls.on('qualitychanged', (data) => {
+      playerHls.on('qualitychanged', function(data) {
         console.log('HLS player', data);
       });
-      playerDash.on('qualitychanged', (data) => {
+      playerDash.on('qualitychanged', function(data) {
         console.log('Dash player', data);
       });
     }, false);
