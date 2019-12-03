@@ -19,11 +19,11 @@ class CloudinaryButton extends ClickableComponent {
       const isLight = opts.class.indexOf('cld-video-player-skin-light') > -1 || opts.skin === 'light';
       bgIcon = isLight ? LIGHT_BG_ICON : DARK_BG_ICON;
     }
-    return videojs.dom.createEl('a', {
-      className: 'vjs-control vjs-cloudinary-button vjs-button',
+    return videojs.dom.createEl('a', {}, {
+      class: 'vjs-control vjs-cloudinary-button vjs-button',
       href: opts.logoOnclickUrl,
       target: '_blank',
-      style: `display: ${display} ;background-image: url(${bgIcon})`
+      style: `display: ${display}; background-image: url(${bgIcon})`
     });
   }
 }
