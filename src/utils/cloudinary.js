@@ -29,8 +29,13 @@ const handleCldError = (that, options) => {
         }));
       } else {
         let goodSrcs = srcs.filter(s => filtered.indexOf(s.src) > -1);
-        console.log('trying urls: ' + JSON.stringify(goodSrcs));
-        that.videojs.src(goodSrcs);
+        if (goodSrcs && goodSrcs.length) {
+          console.log('Trying urls: ' + JSON.stringify(goodSrcs));
+          that.videojs.src(goodSrcs);
+        } else {
+          console.log('No urls left to try so stopping');
+          that.videojs.error({ code: 6, message: 'No supported media sources' });
+        }
       }
     })
       .catch(error => that.videojs.error({
