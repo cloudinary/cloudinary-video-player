@@ -22,8 +22,6 @@ if (tag === 'dry') {
   console.log(`"stable" will deploy: "${ver.getNextVersion('stable')}"`);
   console.log(`"minor" will deploy: "${ver.getNextVersion('minor')}"`);
   console.log(`"major" will deploy: "${ver.getNextVersion('major')}"`);
-  const cmd = `npm version ${ver.getNextVersion('stable')} && ${publishCmd('stable')}`;
-  console.log(`Would be: "${cmd}" ...`);
 } else {
   const cmd = `${versionCmd()} && ${publishCmd(tag)}`;
   console.log(`Executing: "${cmd}" ...`);
