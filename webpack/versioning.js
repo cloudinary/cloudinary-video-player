@@ -1,6 +1,6 @@
 const semver = require('semver');
 const CURRENT_VERSION = require('../package.json').version;
-const VALID_TAGS = ['edge', 'stable', 'minor', 'major', 'dry'];
+const VALID_TAGS = ['edge', 'stable', 'latest', 'minor', 'major', 'dry'];
 
 const nextSemver = {
   'edge': () => semver.inc(CURRENT_VERSION, 'prerelease', undefined, 'edge'),
@@ -24,6 +24,6 @@ const extractTag = () => {
   return tag;
 };
 
-const getNextVersion = (tag) => nextSemver[tag] ? nextSemver[tag]() : console.log('No tag specified: ', tag);
+const getNextVersion = (tag) => nextSemver[tag] && nextSemver[tag]();
 
 module.exports = { extractTag, getNextVersion };

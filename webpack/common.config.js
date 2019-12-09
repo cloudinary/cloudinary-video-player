@@ -4,8 +4,16 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const ver = require('./versioning');
 
-let VERSION = (process.env.deploy === 'true') ? JSON.stringify(ver.getNextVersion(ver.extractTag())) : JSON.stringify(require('../package.json').version);
+const tag = ver.extractTag();
+const calculatedVersion = JSON.stringify(ver.getNextVersion(tag));
+const packageVersion = JSON.stringify(require('../package.json').version);
+
+let VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
 console.log('Current version: ' + VERSION);
+
+if (!calculatedVersion) {
+  console.log('No tag specified: ', tag);
+}
 
 module.exports = {
   context: path.resolve(__dirname, '../src'),
