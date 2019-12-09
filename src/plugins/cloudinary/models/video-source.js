@@ -166,16 +166,25 @@ const CONTAINER_MIME_TYPES = {
 
 function formatToMimeTypeAndTransformation(format) {
   let [container, codec] = format.toLowerCase().split('\/');
-  let res = CONTAINER_MIME_TYPES[container];
-  if (!res) {
-    res = [`video/${container}`, null];
+  let result = CONTAINER_MIME_TYPES[container];
+  let transformation = null;
+
+  if (!result) {
+    result = [`video/${container}`, transformation];
   }
+
   if (codec) {
     codec = codecShorthandTrans(codec);
-    let transformation = codecToSrcTransformation(codec);
-    return [`${res[0]}; codec="${codec}"`, transformation];
+    transformation = codecToSrcTransformation(codec);
+    result = [`${result[0]}; codec="${codec}"`, transformation];
   }
-  return res;
+
+  if (container === 'webm' || container === 'mp4') {
+    transformation = { ...(transformation || {}), fetch_format: container };
+    result[1] = transformation;
+  }
+
+  return result;
 }
 
 const FORMAT_MAPPINGS = {
