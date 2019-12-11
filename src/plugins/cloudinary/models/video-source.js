@@ -179,11 +179,6 @@ function formatToMimeTypeAndTransformation(format) {
     result = [`${result[0]}; codec="${codec}"`, transformation];
   }
 
-  if (container === 'webm' || container === 'mp4') {
-    transformation = { ...(transformation || {}), fetch_format: container };
-    result[1] = transformation;
-  }
-
   return result;
 }
 
