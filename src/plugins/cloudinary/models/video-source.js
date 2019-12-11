@@ -23,6 +23,31 @@ const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.jo
 let objectId = 0;
 const generateId = () => objectId++;
 
+/**
+ * Check if key exist in transformation
+ * @param transformation
+ * @param key
+ * @returns true if key exists in transformation, false otherwise
+ */
+const isKeyInTransformation = (transformation, key) => {
+  if (!transformation || !key) {
+    return false;
+  }
+
+  // Handle array
+  if (Array.isArray(transformation)) {
+    return !!(transformation.find(t => isKeyInTransformation(t, key)));
+  }
+
+  // Handle transformation
+  if (transformation.toOptions) {
+    return isKeyInTransformation(transformation.toOptions(), key);
+  }
+
+  // Handle Object {*}
+  return !!transformation[key];
+};
+
 class VideoSource extends BaseSource {
   constructor(publicId, options = {}) {
     ({ publicId, options } = normalizeOptions(publicId, options));
@@ -144,7 +169,9 @@ class VideoSource extends BaseSource {
       } else {
         let codecTrans = null;
         [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-        if (codecTrans) {
+
+        // If user's transformation include video_codec then don't add another video codec to transformation
+        if (codecTrans && !isKeyInTransformation(opts.transformation, 'video_codec')) {
           opts.transformation.push(codecTrans);
         }
       }
