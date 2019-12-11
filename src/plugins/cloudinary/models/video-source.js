@@ -34,17 +34,17 @@ const isKeyInTransformation = (transformation, key) => {
     return false;
   }
 
-  // Handle array
+  // transformation is an array so run this function for each item
   if (Array.isArray(transformation)) {
-    return !!(transformation.find(t => isKeyInTransformation(t, key)));
+    return !!transformation.find(t => isKeyInTransformation(t, key));
   }
 
-  // Handle transformation
-  if (transformation.toOptions) {
-    return isKeyInTransformation(transformation.toOptions(), key);
+  // transformation is a Transformation object so use getValue() to check key
+  if (transformation.getValue) {
+    return !!transformation.getValue(key);
   }
 
-  // Handle Object {*}
+  // transformation is an Object so just check for key existence in object
   return !!transformation[key];
 };
 
