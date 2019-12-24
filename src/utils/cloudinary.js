@@ -32,6 +32,7 @@ const handleCldError = (that, options) => {
         if (goodSrcs && goodSrcs.length) {
           console.log('Trying urls: ' + JSON.stringify(goodSrcs));
           that.videojs.src(goodSrcs);
+          that.play();
         } else {
           console.log('No urls left to try so stopping');
           that.videojs.error({ code: 6, message: 'No supported media sources' });
