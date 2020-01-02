@@ -9,6 +9,8 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import ShoppableWidget from './components/shoppable-bar/shoppable-widget';
+
 import {
   CLASS_PREFIX,
   skinClassPrefix,
@@ -333,6 +335,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
+    let _shoppable = null;
+    this.initShoppable = (shoppableOptions) => {
+      _shoppable = new ShoppableWidget(this.videojs, shoppableOptions);
+      // this.addChild('shoppablePanel');
+    };
+
     const initJumpButtons = () => {
       if (!_options.showJumpControls && this.videojs.controlBar) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
@@ -510,6 +518,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
     this.initTextTracks(options.textTracks);
+    this.initShoppable(options.shoppable);
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
