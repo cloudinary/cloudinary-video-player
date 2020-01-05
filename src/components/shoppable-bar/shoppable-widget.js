@@ -1,8 +1,8 @@
 import videojs from 'video.js';
-import ShoppableLayoutVertical from './layout/bar-layout';
+import ShoppableBarLayout from './layout/bar-layout';
+import './shoppable-widget.scss';
 
 const OPTIONS_DEFAULTS = {
-  fluid: false,
   show: true,
   direction: 'vertical',
   total: 4,
@@ -31,8 +31,6 @@ const modifyOptions = (player, opt) => {
 
   options.direction = options.direction.toLowerCase() === 'horizontal' ? 'horizontal' : 'vertical';
 
-  options.skin = player.options_.skin;
-
   return options;
 };
 
@@ -44,44 +42,23 @@ class ShoppableWidget {
     this.player_ = player;
     this.render();
 
-    const fluidHandler = (e, fluid) => {
-      this.options_.fluid = fluid;
-    };
-
-    player.on('fluid', fluidHandler);
-
     this.options = (options) => {
       if (!options) {
         return this.options_;
       }
 
       this.options_ = videojs.mergeOptions(this.options_, options);
-      // player.trigger('playlistwidgetoption', this.options_.playlistWidget);
       return this.options_;
 
     };
 
     this.dispose = () => {
       this.layout_.dispose();
-      player.off('fluid', fluidHandler);
     };
   }
 
   render() {
-    this.layout_ = new ShoppableLayoutVertical(this.player_, this.options_);
-
-    /*
-    if (this.options_.useDefaultLayout) {
-      if (this.options_.direction === 'horizontal') {
-        this.layout_ = new PlaylistLayoutHorizontal(this.player_, this.options_);
-      } else {
-      }
-    }
-
-    if (this.options_.useCustomLayout) {
-      this.layout_ = new PlaylistLayoutCustom(this.player_, this.options_);
-    }
-*/
+    this.layout_ = new ShoppableBarLayout(this.player_, this.options_);
   }
 
   getLayout() {
@@ -98,10 +75,6 @@ class ShoppableWidget {
     } else {
       this.layout_.update(optionName, this.options_);
     }
-  }
-
-  setSkin() {
-    this.layout_.setCls();
   }
 
   total(total = OPTIONS_DEFAULTS.total) {

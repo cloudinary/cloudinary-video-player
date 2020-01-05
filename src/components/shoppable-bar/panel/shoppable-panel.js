@@ -3,7 +3,6 @@ import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
 
-
 const Component = videojs.getComponent('Component');
 
 class ShoppablePanel extends Component {
@@ -27,7 +26,7 @@ class ShoppablePanel extends Component {
 
   createEl() {
     const el = super.createEl();
-    el.classList.add('cld-plw-panel');
+    el.classList.add('cld-spbl-panel');
 
     return el;
   }
@@ -66,14 +65,14 @@ class ShoppablePanel extends Component {
         current: index === 0
       });
       shoppablePanelItem.on('mouseover', e => {
-        let target = e.target;
+        let target = e.currentTarget;
         if (target.dataset.action === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.switchUrl;
         }
       });
       shoppablePanelItem.on('mouseout', e => {
-        let target = e.target;
+        let target = e.currentTarget;
         if (target.dataset.action === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.origUrl;

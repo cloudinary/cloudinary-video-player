@@ -1,0 +1,63 @@
+$width: 30%;
+.cld-spbl-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transform: translateX($width);
+  transition: transform .2s;
+  .shoppable-panel-visible & {
+    transform: translateX(0);
+  }
+}
+.cld-spbl-toggle {
+  position: absolute;
+  top: 0;
+  right: $width;
+  border: 2px double orange;
+  width: 3em;
+  height: 3em;
+  pointer-events: all;
+}
+.cld-spbl-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $width;
+  overflow: auto;
+  pointer-events: all;
+}
+.cld-spbl-item {
+  display: block;
+  position: relative;
+}
+.cld-spbl-img {
+  max-width: 100%;
+  height: auto;
+}
+.cld-spbl-item-info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.cld-spbl-tooltip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+.cld-spbl-item:hover {
+  .cld-spbl-tooltip {
+    display: block;
+  }
+  .cld-spbl-item-info {
+    display: none;
+  }
+}

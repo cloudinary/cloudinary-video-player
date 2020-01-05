@@ -4,7 +4,6 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 const dom = videojs.dom || videojs;
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
 
-
 class ShoppablePanelItem extends ClickableComponent {
   constructor(player, options) {
     super(player, options);
@@ -15,7 +14,6 @@ class ShoppablePanelItem extends ClickableComponent {
     super.handleClick(event);
   }
 
-
   isCurrent() {
     return this.options_.current;
   }
@@ -24,15 +22,13 @@ class ShoppablePanelItem extends ClickableComponent {
     return 'test';
   }
 
-
   createEl() {
     const el = super.createEl('a', {
-      className: 'cld-thumbnail',
+      className: 'cld-spbl-item',
       href: '#'
-    }
-    );
+    });
     const img = super.createEl('img', {
-      className: 'cld-shoppable-thumbnail-img',
+      className: 'cld-spbl-img',
       src: this.options_.item.url()
     });
     el.appendChild(img);
@@ -43,18 +39,10 @@ class ShoppablePanelItem extends ClickableComponent {
       addOnClick(img, this.options_.conf.onClick);
     }
 
-    el.classList.add('cld-plw-panel-item');
-    const info = dom.createEl('div', { className: 'cld-plw-item-info-wrap' });
-    const titleWrap = dom.createEl('div', { className: 'cld-plw-item-title' });
-    const title = dom.createEl('span', { className: 'cld-plw-item-title' }, {}, this.getTitle());
+    const info = dom.createEl('div', { className: 'cld-spbl-item-info' });
+    const title = dom.createEl('span', { className: 'cld-spbl-item-title' }, {}, this.getTitle());
 
-    titleWrap.appendChild(title);
-    info.appendChild(titleWrap);
-
-    if (el) {
-      el.appendChild(info);
-    }
-
+    info.appendChild(title);
     el.appendChild(info);
 
     return el;
@@ -64,7 +52,7 @@ class ShoppablePanelItem extends ClickableComponent {
 const addOnHoverAction = (el, conf, cldConf) => {
   el.setAttribute('data-action', conf.action);
   if (conf.action === 'tooltip') {
-    let tooltip = dom.createEl('span', { className: 'shoppable-tooltip' }, {}, conf.args);
+    let tooltip = dom.createEl('span', { className: 'cld-spbl-tooltip' }, {}, conf.args);
     el.appendChild(tooltip);
   } else {
     const switchImgSource = new ImageSource(conf.args, { cloudinaryConfig: cldConf });
