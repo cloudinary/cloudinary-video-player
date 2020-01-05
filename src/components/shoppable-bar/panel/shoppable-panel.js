@@ -40,8 +40,17 @@ class ShoppablePanel extends Component {
   }
 
   getItems() {
-    let options = {cloudinaryConfig: this.player_.cloudinary.cloudinaryConfig()};
-    return this.options.products.map(product => new ImageSource(product.publicId, options));
+    let cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
+    return this.options.products.map(product => {
+      let conf = {
+        onHover: product.onHover,
+        onClick: product.onClick
+      };
+      return {
+        imageSrc: new ImageSource(product.publicId, { cloudinaryConfig: cloudinaryConfig }),
+        conf: conf
+      };
+    });
   }
 
   render() {
@@ -50,13 +59,27 @@ class ShoppablePanel extends Component {
     this.removeAll();
 
     items.forEach((item, index) => {
-      const playlistItem = new ShoppablePanelItem(this.player(), {
-        item: item,
+      const shoppablePanelItem = new ShoppablePanelItem(this.player(), {
+        item: item.imageSrc,
+        conf: item.conf,
         next: index === 1,
         current: index === 0
       });
-
-      this.addChild(playlistItem);
+      shoppablePanelItem.on('mouseover', e => {
+        let target = e.target;
+        if (target.dataset.action === 'switch') {
+          let img = target.getElementsByTagName('img')[0];
+          img.src = target.dataset.switchUrl;
+        }
+      });
+      shoppablePanelItem.on('mouseout', e => {
+        let target = e.target;
+        if (target.dataset.action === 'switch') {
+          let img = target.getElementsByTagName('img')[0];
+          img.src = target.dataset.origUrl;
+        }
+      });
+      this.addChild(shoppablePanelItem);
 
     });
   }

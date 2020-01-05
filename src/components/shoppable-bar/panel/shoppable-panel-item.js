@@ -2,6 +2,7 @@ import videojs from 'video.js';
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 const dom = videojs.dom || videojs;
+import ImageSource from '../../../plugins/cloudinary/models/image-source';
 
 
 class ShoppablePanelItem extends ClickableComponent {
@@ -35,24 +36,16 @@ class ShoppablePanelItem extends ClickableComponent {
       src: this.options_.item.url()
     });
     el.appendChild(img);
+    if (this.options_.conf.onHover) {
+      addOnHoverAction(el, this.options_.conf.onHover, this.options_.item.cloudinaryConfig());
+    }
+    if (this.options_.conf.onClick) {
+      addOnClick(img, this.options_.conf.onClick);
+    }
 
     el.classList.add('cld-plw-panel-item');
-
     const info = dom.createEl('div', { className: 'cld-plw-item-info-wrap' });
     const titleWrap = dom.createEl('div', { className: 'cld-plw-item-title' });
-
-    /*
-    if (this.isCurrent()) {
-      el.classList.add('cld-plw-panel-item-active');
-
-      const currEl = dom.createEl('span', {
-        className: 'cld-plw-item-title-curr'
-      }, {}, 'Now Playing: ');
-
-      titleWrap.appendChild(currEl);
-    }
-*/
-
     const title = dom.createEl('span', { className: 'cld-plw-item-title' }, {}, this.getTitle());
 
     titleWrap.appendChild(title);
@@ -67,6 +60,30 @@ class ShoppablePanelItem extends ClickableComponent {
     return el;
   }
 }
+
+const addOnHoverAction = (el, conf, cldConf) => {
+  el.setAttribute('data-action', conf.action);
+  if (conf.action === 'tooltip') {
+    let tooltip = dom.createEl('span', { className: 'shoppable-tooltip' }, {}, conf.args);
+    el.appendChild(tooltip);
+  } else {
+    const switchImgSource = new ImageSource(conf.args, { cloudinaryConfig: cldConf });
+    el.setAttribute('data-switch-url', switchImgSource.url());
+    el.setAttribute('data-orig-url', el.getElementsByTagName('img')[0].src);
+  }
+};
+
+const addOnClick = (el, conf) => {
+  if (conf.pause) {
+    this.player_.pause();
+  }
+  if (conf.action === 'seek') {
+    this.player_.seek(conf.args.time);
+
+  } else if (conf.action === 'goto') {
+    window.open(conf.args.url, '_blank');
+  }
+};
 
 videojs.registerComponent('shoppablePanelItem', ShoppablePanelItem);
 

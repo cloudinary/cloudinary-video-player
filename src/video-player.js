@@ -335,10 +335,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
-    let _shoppable = null;
     this.initShoppable = (shoppableOptions) => {
-      _shoppable = new ShoppableWidget(this.videojs, shoppableOptions);
-      // this.addChild('shoppablePanel');
+      // eslint-disable-next-line no-new
+      new ShoppableWidget(this.videojs, shoppableOptions);
     };
 
     const initJumpButtons = () => {
@@ -518,7 +517,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
     this.initTextTracks(options.textTracks);
-    this.initShoppable(options.shoppable);
+    if (options.shoppable) {
+      this.initShoppable(options.shoppable);
+    }
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;

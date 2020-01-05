@@ -40,10 +40,6 @@ class ShoppableBarLayout extends Component {
     };
 
     wrapVideoWithLayout();
-    if (layoutOptions.wrap) {
-      wrapVideoWithLayout();
-    }
-
     player.on('fluid', fluidHandler);
 
     this.addChild('ShoppablePanel', this.options_);
