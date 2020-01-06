@@ -38,6 +38,13 @@
               onHover: {
                 action: 'tooltip',
                 args: 'Product 1 tooltip'
+              },
+              onClick: {
+                action: 'goto',
+                pause: true,
+                args: {
+                  url: 'https://cloudinary.com'
+                }
               }
             },
             {
@@ -46,6 +53,13 @@
               onHover: {
                 action: 'switch',
                 args: 'car_lady_dog'
+              },
+              onClick: {
+                action: 'seek',
+                pause: false,
+                args: {
+                  time: '00:09'
+                }
               }
             },
             {
