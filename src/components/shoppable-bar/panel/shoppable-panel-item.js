@@ -11,7 +11,7 @@ class ShoppablePanelItem extends ClickableComponent {
   }
 
   getTitle() {
-    return 'test';
+    return this.options_.conf.title;
   }
 
   createEl() {
@@ -31,11 +31,12 @@ class ShoppablePanelItem extends ClickableComponent {
       addOnClick(el, this.options_.conf.onClick);
     }
 
-    const info = dom.createEl('div', { className: 'cld-spbl-item-info' });
-    const title = dom.createEl('span', { className: 'cld-spbl-item-title' }, {}, this.getTitle());
-
-    info.appendChild(title);
-    el.appendChild(info);
+    if (this.getTitle()) {
+      const info = dom.createEl('div', { className: 'cld-spbl-item-info' });
+      const title = dom.createEl('span', { className: 'cld-spbl-item-title' }, {}, this.getTitle());
+      info.appendChild(title);
+      el.appendChild(info);
+    }
 
     return el;
   }

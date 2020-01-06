@@ -42,6 +42,7 @@ class ShoppablePanel extends Component {
     let cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
     return this.options.products.map(product => {
       let conf = {
+        title: product.title,
         onHover: product.onHover,
         onClick: product.onClick
       };
