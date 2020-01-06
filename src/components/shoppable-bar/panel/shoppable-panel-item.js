@@ -10,14 +10,6 @@ class ShoppablePanelItem extends ClickableComponent {
     this.options_ = options;
   }
 
-  handleClick(event) {
-    super.handleClick(event);
-  }
-
-  isCurrent() {
-    return this.options_.current;
-  }
-
   getTitle() {
     return 'test';
   }
@@ -36,7 +28,7 @@ class ShoppablePanelItem extends ClickableComponent {
       addOnHoverAction(el, this.options_.conf.onHover, this.options_.item.cloudinaryConfig());
     }
     if (this.options_.conf.onClick) {
-      addOnClick(img, this.options_.conf.onClick);
+      addOnClick(el, this.options_.conf.onClick);
     }
 
     const info = dom.createEl('div', { className: 'cld-spbl-item-info' });
@@ -50,7 +42,7 @@ class ShoppablePanelItem extends ClickableComponent {
 }
 
 const addOnHoverAction = (el, conf, cldConf) => {
-  el.setAttribute('data-action', conf.action);
+  el.setAttribute('data-hover-action', conf.action);
   if (conf.action === 'tooltip') {
     let tooltip = dom.createEl('span', { className: 'cld-spbl-tooltip' }, {}, conf.args);
     el.appendChild(tooltip);
@@ -62,14 +54,12 @@ const addOnHoverAction = (el, conf, cldConf) => {
 };
 
 const addOnClick = (el, conf) => {
-  if (conf.pause) {
-    this.player_.pause();
-  }
+  el.setAttribute('data-click-action', conf.action);
+  el.setAttribute('data-pause', conf.pause);
   if (conf.action === 'seek') {
-    this.player_.seek(conf.args.time);
-
+    el.setAttribute('data-seek', conf.args.time);
   } else if (conf.action === 'goto') {
-    window.open(conf.args.url, '_blank');
+    el.setAttribute('data-goto-url', conf.args.url);
   }
 };
 

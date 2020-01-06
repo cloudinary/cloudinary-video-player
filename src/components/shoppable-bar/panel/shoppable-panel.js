@@ -66,16 +66,36 @@ class ShoppablePanel extends Component {
       });
       shoppablePanelItem.on('mouseover', e => {
         let target = e.currentTarget;
-        if (target.dataset.action === 'switch') {
+        if (target.dataset.hoverAction === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.switchUrl;
         }
       });
       shoppablePanelItem.on('mouseout', e => {
         let target = e.currentTarget;
-        if (target.dataset.action === 'switch') {
+        if (target.dataset.hoverAction === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.origUrl;
+        }
+      });
+      shoppablePanelItem.on('click', e => {
+        let target = e.currentTarget;
+        if (target.dataset.pause === 'true') {
+          this.player_.pause();
+        }
+        if (target.dataset.clickAction === 'goto') {
+          window.open(target.dataset.gotoUrl, '_blank');
+        } else if (target.dataset.clickAction === 'seek') {
+          let timeParts = target.dataset.seek.split(':');
+          let gotoSecs = null;
+          if (timeParts.length === 3) {
+            gotoSecs = (parseInt(timeParts[0], 10) * 60 * 60) + (parseInt(timeParts[1], 10) * 60) + parseInt(timeParts[2], 10);
+          } else {
+            gotoSecs = (parseInt(timeParts[0], 10) * 60) + parseInt(timeParts[1], 10);
+          }
+          if (gotoSecs !== null) {
+            this.player_.currentTime(gotoSecs);
+          }
         }
       });
       this.addChild(shoppablePanelItem);
