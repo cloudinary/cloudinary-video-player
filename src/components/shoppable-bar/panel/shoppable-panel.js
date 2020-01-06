@@ -45,8 +45,12 @@ class ShoppablePanel extends Component {
         onHover: product.onHover,
         onClick: product.onClick
       };
+      let imgSrc = {
+        cloudinaryConfig: cloudinaryConfig,
+        transformation: product.transformation
+      }
       return {
-        imageSrc: new ImageSource(product.publicId, { cloudinaryConfig: cloudinaryConfig }),
+        imageSrc: new ImageSource(product.publicId, imgSrc),
         conf: conf
       };
     });
