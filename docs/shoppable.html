@@ -34,10 +34,11 @@
           products : [
             {
               productName: 'Product 1',
+              title: 'Overlay on-hover & Link on-click',
               publicId: 'sample',
               onHover: {
                 action: 'tooltip',
-                args: 'Product 1 tooltip'
+                args: 'Product 1 Overlay'
               },
               onClick: {
                 action: 'goto',
@@ -49,10 +50,24 @@
             },
             {
               productName: 'Product 2',
+              title: 'Switch image & Seek video',
               publicId: 'woman',
+              transformation: {
+                width: 300,
+                height: 200,
+                crop: "fill"
+              },
               onHover: {
                 action: 'switch',
-                args: 'car_lady_dog'
+                args: {
+                  publicId: 'car_lady_dog',
+                  transformation: {
+                    width: 300,
+                    height: 200,
+                    crop: "fill",
+                    effect: "grayscale"
+                  }
+                }
               },
               onClick: {
                 action: 'seek',
@@ -65,14 +80,11 @@
             {
               productName: 'Product 3',
               publicId: 'sofa_cat',
-              onHover: {
-                action: 'tooltip',
-                args: 'Product 3 tooltip'
-              },
+              title: 'Custom Image Tranformations',
               transformation: {
-                width: 250,
-                height: 250,
-                radius: "50",
+                width: 300,
+                height: 300,
+                radius: "150",
                 crop: "fill"
               }
             },
@@ -121,10 +133,11 @@
       <code class="language-html">
         &lt;video
           id="player"
+          playsinline
           controls
           muted
           autoplay
-          class="cld-video-player"
+          class="cld-video-player cld-fluid"
           width="500"
         &gt;&lt;/video&gt;
       </code>
@@ -142,44 +155,76 @@
           },
           shoppable: {
             products : [
-                {
-                  productName: 'Product 1',
-                  publicId: 'ihkanprdxlxcbzp3i7x0',
-                  onHover: {
-                    action: 'tooltip',
-                    args: 'Product 1 tooltip'
-                  }
+              {
+                productName: 'Product 1',
+                title: 'Overlay on-hover & Link on-click',
+                publicId: 'sample',
+                onHover: {
+                  action: 'tooltip',
+                  args: 'Product 1 Overlay'
                 },
+                onClick: {
+                  action: 'goto',
+                  pause: true,
+                  args: {
+                    url: 'https://cloudinary.com'
+                  }
+                }
+              },
               {
                 productName: 'Product 2',
-                publicId: 'dqhwndse1fjrdxbmrbvq',
+                title: 'Switch image & Seek video',
+                publicId: 'woman',
+                transformation: {
+                  width: 300,
+                  height: 200,
+                  crop: "fill"
+                },
                 onHover: {
                   action: 'switch',
-                  args: 'ihkanprdxlxcbzp3i7x0'
+                  args: {
+                    publicId: 'car_lady_dog',
+                    transformation: {
+                      width: 300,
+                      height: 200,
+                      crop: "fill",
+                      effect: "grayscale"
+                    }
+                  }
+                },
+                onClick: {
+                  action: 'seek',
+                  pause: false,
+                  args: {
+                    time: '00:09'
+                  }
                 }
               },
               {
                 productName: 'Product 3',
-                publicId: 'wj86zasak3y7vh5j0dhg',
-                onHover: {
-                  action: 'tooltip',
-                  args: 'Product 3 tooltip'
+                publicId: 'sofa_cat',
+                title: 'Custom Image Tranformations',
+                transformation: {
+                  width: 300,
+                  height: 300,
+                  radius: "150",
+                  crop: "fill"
                 }
               },
               {
                 productName: 'Product 4',
-                publicId: 'vaix7e5hbbxxu108a9a3'
+                publicId: 'balloons'
               },
               {
                 productName: 'Product 5',
-                publicId: 'dg0gqxbhm51uu72cyrly'
+                publicId: 'friends'
               }
             ]
           }
         };
 
         // Play source
-        player.source(source);
+        player.source('snow_horses', source);
 
       </code>
     </pre>
