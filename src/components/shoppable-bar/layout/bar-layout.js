@@ -10,9 +10,11 @@ class ShoppableBarLayout extends Component {
     super(player, layoutOptions);
     this.player_ = player;
 
-    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar' });
+    this.contentWrpEl_ = dom.createEl('div', { className: 'cld-spbl-bar' });
+    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar-inner' });
 
-    this.player().el().appendChild(this.contentEl_);
+    this.contentWrpEl_.appendChild(this.contentEl_);
+    this.player().el().appendChild(this.contentWrpEl_);
 
     const shoppablePanelToggle = new ShoppablePanelToggle(this.player(), {});
     shoppablePanelToggle.on('click', e => {

@@ -14,7 +14,7 @@ class ShoppablePanelToggle extends ClickableComponent {
 
   createEl() {
     const el = super.createEl('a', {
-      className: 'cld-spbl-toggle',
+      className: 'cld-spbl-toggle vjs-icon-cart',
       href: '#'
     });
 
