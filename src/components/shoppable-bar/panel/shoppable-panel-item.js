@@ -32,7 +32,7 @@ class ShoppablePanelItem extends ClickableComponent {
     }
 
     if (this.getTitle()) {
-      const info = dom.createEl('div', { className: 'cld-spbl-item-info' });
+      const info = dom.createEl('div', { className: 'cld-spbl-item-info base-color-semi-bg' });
       const title = dom.createEl('span', { className: 'cld-spbl-item-title' }, {}, this.getTitle());
       info.appendChild(title);
       el.appendChild(info);
@@ -45,7 +45,7 @@ class ShoppablePanelItem extends ClickableComponent {
 const addOnHoverAction = (el, conf, cldConf) => {
   el.setAttribute('data-hover-action', conf.action);
   if (conf.action === 'tooltip') {
-    let tooltip = dom.createEl('span', { className: 'cld-spbl-tooltip' }, {}, conf.args);
+    let tooltip = dom.createEl('span', { className: 'cld-spbl-tooltip text-color-semi-bg base-color-text' }, {}, conf.args);
     el.appendChild(tooltip);
   } else {
     const switchImgSource = new ImageSource(conf.args, { cloudinaryConfig: cldConf });
