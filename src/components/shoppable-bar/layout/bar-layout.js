@@ -17,8 +17,10 @@ class ShoppableBarLayout extends Component {
     this.player().el().appendChild(this.contentWrpEl_);
 
     const shoppablePanelToggle = new ShoppablePanelToggle(this.player(), {});
-    shoppablePanelToggle.on('click', e => {
+    shoppablePanelToggle.on('click', () => {
       this.player().toggleClass('shoppable-panel-visible');
+      let eventName = this.player().hasClass('shoppable-panel-visible') ? 'productBarMax' : 'productBarMin';
+      this.player().trigger(eventName);
     });
     this.addChild(shoppablePanelToggle);
 

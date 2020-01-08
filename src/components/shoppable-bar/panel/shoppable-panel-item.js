@@ -24,6 +24,8 @@ class ShoppablePanelItem extends ClickableComponent {
       src: this.options_.item.url()
     });
     el.appendChild(img);
+    el.setAttribute('data-product-id', this.options_.conf.productId || '');
+    el.setAttribute('data-product-name', this.options_.conf.productName || '');
     if (this.options_.conf.onHover) {
       addOnHoverAction(el, this.options_.conf.onHover, this.options_.item.cloudinaryConfig());
     }

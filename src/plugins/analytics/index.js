@@ -130,6 +130,29 @@ class AnalyticsPlugin {
         }
       };
 
+      const shoppableProductHover = (event, data) => {
+        this.track({ action: 'productHover', value: data });
+      };
+
+      const shoppableProductClick = (event, data) => {
+        this.track({ action: 'productClick', value: data });
+      };
+
+      const shoppableBarMax = () => {
+        this.track({ action: 'shoppableBar', value: 'opened' });
+      };
+
+      const shoppableBarMin = () => {
+        this.track({ action: 'shoppableBar', value: 'closed' });
+      };
+
+      if (this.events.shoppable) {
+        this.player.on('productHover', shoppableProductHover.bind(this));
+        this.player.on('productClick', shoppableProductClick.bind(this));
+        this.player.on('productBarMin', shoppableBarMin.bind(this));
+        this.player.on('productBarMax', shoppableBarMax.bind(this));
+      }
+
       if (this.events.play) {
         this.player.on('play', play.bind(this));
       }
