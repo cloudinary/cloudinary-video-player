@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import assign from 'utils/assign';
 import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
@@ -51,7 +52,7 @@ class ShoppablePanel extends Component {
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: Object.assign(globalTrans, product.transformation)
+        transformation: assign(globalTrans, product.transformation)
       };
       return {
         imageSrc: new ImageSource(product.publicId, imgSrc),

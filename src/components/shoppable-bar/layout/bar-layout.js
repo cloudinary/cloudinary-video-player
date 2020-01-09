@@ -6,8 +6,7 @@ import ShoppablePanelToggle from './shoppable-panel-toggle';
 
 class ShoppableBarLayout extends Component {
   constructor(player, options) {
-    const layoutOptions = { ...options };
-    super(player, layoutOptions);
+    super(player, options);
     this.player_ = player;
 
     this.player().addClass('cld-shoppable-panel');
@@ -36,13 +35,6 @@ class ShoppableBarLayout extends Component {
       this.removeLayout();
       super.dispose();
     };
-  }
-
-  update(optionToChange, options) {
-    this.options(options);
-    this.removeChild('ShoppablePanel');
-    this.addChild('ShoppablePanel', this.options_);
-    this.trigger('shoppablebarlayoutupdate');
   }
 
   createEl() {

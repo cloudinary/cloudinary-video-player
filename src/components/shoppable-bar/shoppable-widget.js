@@ -12,19 +12,9 @@ const OPTIONS_DEFAULTS = {
 
 class ShoppableWidget {
   constructor(player, options = {}) {
-    this.options_ = { ...OPTIONS_DEFAULTS, ...options };
+    this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
     this.render();
-
-    this.options = (options) => {
-      if (!options) {
-        return this.options_;
-      }
-
-      this.options_ = videojs.mergeOptions(this.options_, options);
-      return this.options_;
-
-    };
 
     const injectCSS = (css) => {
       const style = document.createElement('style');
@@ -59,10 +49,6 @@ class ShoppableWidget {
 
   getLayout() {
     return this.layout_;
-  }
-
-  update(optionName, optionValue) {
-    this.options(optionValue);
   }
 
 }
