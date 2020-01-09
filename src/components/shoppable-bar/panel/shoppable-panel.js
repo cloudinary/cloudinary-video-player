@@ -51,7 +51,7 @@ class ShoppablePanel extends Component {
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: Object.assign(globalTrans, product.transformation || {})
+        transformation: Object.assign(globalTrans, product.transformation)
       };
       return {
         imageSrc: new ImageSource(product.publicId, imgSrc),

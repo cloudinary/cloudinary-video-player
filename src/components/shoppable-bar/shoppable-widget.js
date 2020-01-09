@@ -6,6 +6,7 @@ const OPTIONS_DEFAULTS = {
   location: 'right',
   toggleIcon: '',
   width: '20%',
+  transformation: {},
   products: []
 };
 
