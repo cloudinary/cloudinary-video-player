@@ -131,19 +131,19 @@ class AnalyticsPlugin {
       };
 
       const shoppableProductHover = (event, data) => {
-        this.track({ action: 'productHover', value: data });
+        this.track({ action: 'productHover', label: data.productName });
       };
 
       const shoppableProductClick = (event, data) => {
-        this.track({ action: 'productClick', value: data });
+        this.track({ action: 'productClick', label: data.productName });
       };
 
       const shoppableBarMax = () => {
-        this.track({ action: 'shoppableBar', value: 'opened' });
+        this.track({ action: 'shoppableBar', label: 'opened' });
       };
 
       const shoppableBarMin = () => {
-        this.track({ action: 'shoppableBar', value: 'closed' });
+        this.track({ action: 'shoppableBar', label: 'closed' });
       };
 
       if (this.events.shoppable) {

@@ -23,7 +23,7 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      var player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player', {analytics: {events: ['shoppable']}});
 
       var source = {
         info: {
