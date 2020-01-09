@@ -40,6 +40,7 @@ class ShoppablePanel extends Component {
 
   getItems() {
     let cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
+    let globalTrans = this.options.transformation;
     return this.options.products.map(product => {
       let conf = {
         productId: product.productId,
@@ -50,7 +51,7 @@ class ShoppablePanel extends Component {
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: product.transformation
+        transformation: Object.assign(globalTrans, product.transformation || {})
       };
       return {
         imageSrc: new ImageSource(product.publicId, imgSrc),
