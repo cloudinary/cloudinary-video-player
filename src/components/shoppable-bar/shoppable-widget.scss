@@ -32,6 +32,18 @@ $width: 20%;
     content: "\f119";
   }
 }
+.cld-spbl-banner-msg {
+  position: absolute;
+  font-size: 2em;
+  left: 50%;
+  top: calc(50% + 3.5em);
+  text-shadow: 0 0 5px rgba(#000, .5);
+  transform: translateX(-50%) translateY(-50%);
+  .cld-video-player.vjs-has-started &,
+  .cld-video-player.vjs-error & {
+    display: none;
+  }
+}
 .cld-spbl-toggle {
   position: absolute;
   top: 3%;
@@ -43,6 +55,7 @@ $width: 20%;
   line-height: 40px;
   font-size: 24px;
   text-align: center;
+  cursor: pointer;
   pointer-events: all;
   text-decoration: none;
   &:hover {
