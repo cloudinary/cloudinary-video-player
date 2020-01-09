@@ -109,7 +109,7 @@ $width: 20%;
   left: 0;
   padding: 6px;
 }
-.cld-spbl-tooltip {
+.cld-spbl-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -121,7 +121,7 @@ $width: 20%;
   display: none;
 }
 .cld-spbl-item:hover {
-  .cld-spbl-tooltip {
+  .cld-spbl-overlay {
     display: block;
     ~ .cld-spbl-item-info {
       display: none;

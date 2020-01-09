@@ -31,7 +31,8 @@
           description: 'Browse products shown in the video.',
         },
         shoppable: {
-          transformation: {effect: 'grayscale'},
+          bannerMsg: 'START SHOPPING',
+          width: '30%',
           products : [
             {
               productName: 'Product 1',
@@ -39,7 +40,7 @@
               title: 'Overlay on-hover & Link on-click',
               publicId: 'sample',
               onHover: {
-                action: 'tooltip',
+                action: 'overlay',
                 args: 'Product 1 Overlay'
               },
               onClick: {
@@ -107,6 +108,8 @@
       };
 
       player.source('snow_horses', source);
+
+      // Player Events
       player.on('productHover', function(e, data) {
         console.log('Product Hover: ' + JSON.stringify(data));
       });
@@ -137,8 +140,7 @@
       playsinline
       controls
       muted
-      autoplay
-      class="cld-video-player cld-fluid"
+      class="cld-video-player cld-fluid cld-video-player-skin-light"
     ></video>
 
     <p class="mt-4">
@@ -154,7 +156,7 @@
           controls
           muted
           autoplay
-          class="cld-video-player cld-fluid"
+          class="cld-video-player cld-fluid cld-video-player-skin-light"
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
@@ -170,13 +172,16 @@
             description: 'Browse products shown in the video.',
           },
           shoppable: {
+            bannerMsg: 'START SHOPPING',
+            width: '30%',
             products : [
               {
                 productName: 'Product 1',
+                productId: 1,
                 title: 'Overlay on-hover & Link on-click',
                 publicId: 'sample',
                 onHover: {
-                  action: 'tooltip',
+                  action: 'overlay',
                   args: 'Product 1 Overlay'
                 },
                 onClick: {
@@ -190,6 +195,7 @@
               {
                 productName: 'Product 2',
                 title: 'Switch image & Seek video',
+                productId: 2,
                 publicId: 'woman',
                 transformation: {
                   width: 300,
@@ -218,6 +224,7 @@
               },
               {
                 productName: 'Product 3',
+                productId: 3,
                 publicId: 'sofa_cat',
                 title: 'Custom Image Tranformations',
                 transformation: {
@@ -229,15 +236,31 @@
               },
               {
                 productName: 'Product 4',
+                productId: 4,
                 publicId: 'balloons'
               },
               {
                 productName: 'Product 5',
+                productId: 5,
                 publicId: 'friends'
               }
             ]
           }
         };
+
+        // Player Events
+        player.on('productHover', function(e, data) {
+          console.log('Product Hover: ' + JSON.stringify(data));
+        });
+        player.on('productClick', function(e, data) {
+          console.log('Product Click: ' + JSON.stringify(data));
+        });
+        player.on('productBarMin', function(e) {
+          console.log('Product bar close');
+        });
+        player.on('productBarMax', function(e) {
+          console.log('Product bar open');
+        });
 
         // Play source
         player.source('snow_horses', source);

@@ -46,9 +46,9 @@ class ShoppablePanelItem extends ClickableComponent {
 
 const addOnHoverAction = (el, conf, cldConf) => {
   el.setAttribute('data-hover-action', conf.action);
-  if (conf.action === 'tooltip') {
-    let tooltip = dom.createEl('span', { className: 'cld-spbl-tooltip text-color-semi-bg base-color-text' }, {}, conf.args);
-    el.appendChild(tooltip);
+  if (conf.action === 'overlay') {
+    let overlay = dom.createEl('span', { className: 'cld-spbl-overlay text-color-semi-bg base-color-text' }, {}, conf.args);
+    el.appendChild(overlay);
   } else {
     const switchImgSource = new ImageSource(conf.args, { cloudinaryConfig: cldConf });
     el.setAttribute('data-switch-url', switchImgSource.url());
