@@ -40,16 +40,19 @@ class ShoppablePanel extends Component {
 
   getItems() {
     let cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
+    let globalTrans = this.options.transformation;
     return this.options.products.map(product => {
       let conf = {
+        productId: product.productId,
+        productName: product.productName,
         title: product.title,
         onHover: product.onHover,
         onClick: product.onClick
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: product.transformation
-      }
+        transformation: Object.assign(globalTrans, product.transformation || {})
+      };
       return {
         imageSrc: new ImageSource(product.publicId, imgSrc),
         conf: conf
@@ -71,6 +74,7 @@ class ShoppablePanel extends Component {
       });
       shoppablePanelItem.on('mouseover', e => {
         let target = e.currentTarget;
+        this.player_.trigger('productHover', { productId: target.dataset.productId, productName: target.dataset.productName });
         if (target.dataset.hoverAction === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.switchUrl;
@@ -85,6 +89,7 @@ class ShoppablePanel extends Component {
       });
       shoppablePanelItem.on('click', e => {
         let target = e.currentTarget;
+        this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
         if (target.dataset.pause === 'true') {
           this.player_.pause();
         }

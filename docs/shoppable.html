@@ -31,9 +31,11 @@
           description: 'Browse products shown in the video.',
         },
         shoppable: {
+          transformation: {effect: 'grayscale'},
           products : [
             {
               productName: 'Product 1',
+              productId: 1,
               title: 'Overlay on-hover & Link on-click',
               publicId: 'sample',
               onHover: {
@@ -51,6 +53,7 @@
             {
               productName: 'Product 2',
               title: 'Switch image & Seek video',
+              productId: 2,
               publicId: 'woman',
               transformation: {
                 width: 300,
@@ -79,6 +82,7 @@
             },
             {
               productName: 'Product 3',
+              productId: 3,
               publicId: 'sofa_cat',
               title: 'Custom Image Tranformations',
               transformation: {
@@ -90,10 +94,12 @@
             },
             {
               productName: 'Product 4',
+              productId: 4,
               publicId: 'balloons'
             },
             {
               productName: 'Product 5',
+              productId: 5,
               publicId: 'friends'
             }
           ]
@@ -101,6 +107,18 @@
       };
 
       player.source('snow_horses', source);
+      player.on('productHover', function(e, data) {
+        console.log('Product Hover: ' + JSON.stringify(data));
+      });
+      player.on('productClick', function(e, data) {
+        console.log('Product Click: ' + JSON.stringify(data));
+      });
+      player.on('productBarMin', function(e) {
+        console.log('Product bar close');
+      });
+      player.on('productBarMax', function(e) {
+        console.log('Product bar open');
+      });
 
     }, false);
   </script>

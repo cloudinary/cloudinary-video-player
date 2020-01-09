@@ -25,6 +25,8 @@ class ShoppableBarLayout extends Component {
       e.stopPropagation();
       this.player().toggleClass('shoppable-panel-hidden');
       this.player().toggleClass('shoppable-panel-visible');
+      let eventName = this.player().hasClass('shoppable-panel-visible') ? 'productBarMax' : 'productBarMin';
+      this.player().trigger(eventName);
     });
     this.addChild(shoppablePanelToggle);
 
