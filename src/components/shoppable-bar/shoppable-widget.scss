@@ -1,4 +1,4 @@
-$width: 30%;
+$width: 20%;
 .cld-spbl-bar {
   position: absolute;
   top: 0;
@@ -7,6 +7,7 @@ $width: 30%;
   left: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 1;
 }
 .cld-spbl-bar-inner {
   position: absolute;
@@ -43,12 +44,27 @@ $width: 30%;
   font-size: 24px;
   text-align: center;
   pointer-events: all;
+  text-decoration: none;
   &:hover {
     color: inherit;
     text-decoration: none;
   }
   &:focus {
     outline: none;
+  }
+  // Custom toggle icon
+  &.cld-spbl-toggle-custom-icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    .shoppable-panel-hidden & {
+      &:before {
+        display: none;
+      }
+    }
+    .shoppable-panel-visible & {
+      background-image: none !important;
+    }
   }
 }
 .cld-spbl-panel {

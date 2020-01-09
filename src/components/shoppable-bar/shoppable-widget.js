@@ -3,42 +3,15 @@ import ShoppableBarLayout from './layout/bar-layout';
 import './shoppable-widget.scss';
 
 const OPTIONS_DEFAULTS = {
-  show: true,
-  direction: 'vertical',
-  total: 4,
-  selector: false,
-  renderTo: []
+  location: 'right',
+  toggleIcon: '',
+  width: '20%',
+  products: []
 };
-
-const modifyOptions = (player, opt) => {
-  const options = { ...OPTIONS_DEFAULTS, ...opt };
-
-  if (options.show && typeof options.selector === 'string') {
-    options.useDefaultLayout = false;
-    options.useCustomLayout = true;
-    options.renderTo = document.querySelector(options.selector);
-    options.showAll = true;
-
-    if (!options.renderTo.length === 0) {
-      throw new Error(`Couldn't find element(s) by selector '${options.selector}' for playlist`);
-    }
-  }
-
-  if (options.show && !options.selector) {
-    options.useDefaultLayout = true;
-    options.useCustomLayout = false;
-  }
-
-  options.direction = options.direction.toLowerCase() === 'horizontal' ? 'horizontal' : 'vertical';
-
-  return options;
-};
-
 
 class ShoppableWidget {
   constructor(player, options = {}) {
-    options = modifyOptions(player, options);
-    this.options_ = options;
+    this.options_ = { ...OPTIONS_DEFAULTS, ...options };
     this.player_ = player;
     this.render();
 
@@ -51,6 +24,28 @@ class ShoppableWidget {
       return this.options_;
 
     };
+
+    const injectCSS = (css) => {
+      const style = document.createElement('style');
+      style.innerHTML = css;
+      player.el_.appendChild(style);
+    };
+
+    const width = options.width || '20%';
+    injectCSS(`
+      .cld-spbl-bar-inner {
+        transform: translateX(${width});
+      }
+      .shoppable-panel-visible .vjs-control-bar {
+        width: calc(100% - ${width});
+      }
+      .cld-spbl-toggle {
+        right: ${width};
+      }
+      .cld-spbl-panel {
+        width: ${width};
+      }
+    `);
 
     this.dispose = () => {
       this.layout_.dispose();
@@ -67,33 +62,8 @@ class ShoppableWidget {
 
   update(optionName, optionValue) {
     this.options(optionValue);
-
-    if (optionName === 'direction') {
-      this.layout_.removeLayout();
-      this.layout_.dispose();
-      this.render();
-    } else {
-      this.layout_.update(optionName, this.options_);
-    }
   }
 
-  total(total = OPTIONS_DEFAULTS.total) {
-    total = parseInt(total, 10);
-
-    if (total !== this.options_.total && typeof total === 'number' && total > 0) {
-      this.update('total', { total: total });
-    }
-
-    return this;
-  }
-
-  direction(direction = OPTIONS_DEFAULTS.direction) {
-    if (direction === 'horizontal' || direction === 'vertical') {
-      this.update('direction', { direction: direction });
-    }
-
-    return this;
-  }
 }
 
 

@@ -13,10 +13,19 @@ class ShoppablePanelToggle extends ClickableComponent {
   }
 
   createEl() {
-    const el = super.createEl('a', {
-      className: 'cld-spbl-toggle vjs-icon-cart base-color-bg',
-      href: '#'
-    });
+    let toggleProps = {};
+    if (this.options_.toggleIcon) {
+      toggleProps = {
+        className: 'cld-spbl-toggle cld-spbl-toggle-custom-icon vjs-icon-close base-color-bg',
+        style: `background-image: url(${this.options_.toggleIcon})`
+      };
+    } else {
+      toggleProps = {
+        className: 'cld-spbl-toggle vjs-icon-cart base-color-bg'
+      };
+    }
+
+    const el = super.createEl('a', toggleProps);
 
     return el;
   }

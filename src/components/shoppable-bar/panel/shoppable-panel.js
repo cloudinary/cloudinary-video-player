@@ -58,9 +58,9 @@ class ShoppablePanel extends Component {
   }
 
   render() {
-    const items = this.getItems();
-
     this.removeAll();
+
+    const items = this.getItems();
 
     items.forEach((item, index) => {
       const shoppablePanelItem = new ShoppablePanelItem(this.player(), {
@@ -106,6 +106,7 @@ class ShoppablePanel extends Component {
       this.addChild(shoppablePanelItem);
 
     });
+
   }
 }
 
