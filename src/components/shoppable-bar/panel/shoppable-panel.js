@@ -106,6 +106,9 @@ class ShoppablePanel extends Component {
           }
           if (gotoSecs !== null) {
             this.player_.currentTime(gotoSecs);
+            if (this.player_.paused()) {
+              this.player_.play();
+            }
           }
         }
       });
