@@ -9,7 +9,9 @@ class ShoppablePanelToggle extends ClickableComponent {
   }
 
   handleClick(event) {
-    super.handleClick(event);
+    event.preventDefault();
+    event.stopPropagation();
+    this.options_.clickHandler();
   }
 
   createEl() {

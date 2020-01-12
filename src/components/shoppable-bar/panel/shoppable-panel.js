@@ -71,8 +71,33 @@ class ShoppablePanel extends Component {
         item: item.imageSrc,
         conf: item.conf,
         next: index === 1,
-        current: index === 0
+        current: index === 0,
+        clickHandler: (e) => {
+          let target = e.target;
+          this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
+          if (target.dataset.pause === 'true') {
+            this.player_.pause();
+          }
+          if (target.dataset.clickAction === 'goto') {
+            window.open(target.dataset.gotoUrl, '_blank');
+          } else if (target.dataset.clickAction === 'seek') {
+            let timeParts = target.dataset.seek.split(':');
+            let gotoSecs = null;
+            if (timeParts.length === 3) {
+              gotoSecs = (parseInt(timeParts[0], 10) * 60 * 60) + (parseInt(timeParts[1], 10) * 60) + parseInt(timeParts[2], 10);
+            } else {
+              gotoSecs = (parseInt(timeParts[0], 10) * 60) + parseInt(timeParts[1], 10);
+            }
+            if (gotoSecs !== null) {
+              this.player_.currentTime(gotoSecs);
+              if (this.player_.paused()) {
+                this.player_.play();
+              }
+            }
+          }
+        }
       });
+
       shoppablePanelItem.on('mouseover', e => {
         let target = e.currentTarget;
         this.player_.trigger('productHover', { productId: target.dataset.productId, productName: target.dataset.productName });
@@ -81,6 +106,7 @@ class ShoppablePanel extends Component {
           img.src = target.dataset.switchUrl;
         }
       });
+
       shoppablePanelItem.on('mouseout', e => {
         let target = e.currentTarget;
         if (target.dataset.hoverAction === 'switch') {
@@ -88,30 +114,7 @@ class ShoppablePanel extends Component {
           img.src = target.dataset.origUrl;
         }
       });
-      shoppablePanelItem.on('click', e => {
-        let target = e.currentTarget;
-        this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
-        if (target.dataset.pause === 'true') {
-          this.player_.pause();
-        }
-        if (target.dataset.clickAction === 'goto') {
-          window.open(target.dataset.gotoUrl, '_blank');
-        } else if (target.dataset.clickAction === 'seek') {
-          let timeParts = target.dataset.seek.split(':');
-          let gotoSecs = null;
-          if (timeParts.length === 3) {
-            gotoSecs = (parseInt(timeParts[0], 10) * 60 * 60) + (parseInt(timeParts[1], 10) * 60) + parseInt(timeParts[2], 10);
-          } else {
-            gotoSecs = (parseInt(timeParts[0], 10) * 60) + parseInt(timeParts[1], 10);
-          }
-          if (gotoSecs !== null) {
-            this.player_.currentTime(gotoSecs);
-            if (this.player_.paused()) {
-              this.player_.play();
-            }
-          }
-        }
-      });
+
       this.addChild(shoppablePanelItem);
 
     });

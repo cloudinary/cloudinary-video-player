@@ -10,6 +10,12 @@ class ShoppablePanelItem extends ClickableComponent {
     this.options_ = options;
   }
 
+  handleClick(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.options_.clickHandler(event);
+  }
+
   getTitle() {
     return this.options_.conf.title;
   }
