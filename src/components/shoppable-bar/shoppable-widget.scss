@@ -35,10 +35,11 @@ $width: 20%;
 .cld-spbl-banner-msg {
   position: absolute;
   font-size: 2em;
-  left: 50%;
-  top: calc(50% + 3.5em);
   text-shadow: 0 0 5px rgba(#000, .5);
-  transform: translateX(-50%) translateY(-50%);
+  left: 0;
+  top: calc(50% + 3em);
+  width: 100%;
+  text-align: center;
   .cld-video-player.vjs-has-started &,
   .cld-video-player.vjs-error & {
     display: none;
