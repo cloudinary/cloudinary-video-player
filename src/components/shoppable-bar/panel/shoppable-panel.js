@@ -73,7 +73,7 @@ class ShoppablePanel extends Component {
         next: index === 1,
         current: index === 0,
         clickHandler: (e) => {
-          let target = e.target;
+          let target = e.currentTarget || e.target;
           this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
           if (target.dataset.pause === 'true') {
             this.player_.pause();
@@ -99,7 +99,7 @@ class ShoppablePanel extends Component {
       });
 
       shoppablePanelItem.on('mouseover', e => {
-        let target = e.currentTarget;
+        let target = e.currentTarget || e.target;
         this.player_.trigger('productHover', { productId: target.dataset.productId, productName: target.dataset.productName });
         if (target.dataset.hoverAction === 'switch') {
           let img = target.getElementsByTagName('img')[0];
@@ -108,7 +108,7 @@ class ShoppablePanel extends Component {
       });
 
       shoppablePanelItem.on('mouseout', e => {
-        let target = e.currentTarget;
+        let target = e.currentTarget || e.target;
         if (target.dataset.hoverAction === 'switch') {
           let img = target.getElementsByTagName('img')[0];
           img.src = target.dataset.origUrl;
