@@ -37,6 +37,7 @@ class ExtendedEvents extends EventEmitter {
     let _percentsTracked = [];
     let _timesTracked = [];
     let _currentSource = null;
+    let _ended = false;
 
     const volumechange = (event) => {
       if (this.player.muted() && _muteData.lastState !== 'muted') {
@@ -101,6 +102,12 @@ class ExtendedEvents extends EventEmitter {
     const play = () => {
       _seeking = false;
     };
+    const replay = () => {
+      if (_ended) {
+        this.player.trigger('replay');
+        _ended = false;
+      }
+    };
 
     const loadedmetadata = () => {
       if (this.player.currentSource().src !== _currentSource) {
@@ -154,9 +161,15 @@ class ExtendedEvents extends EventEmitter {
       _timesTracked = [];
     };
 
+    const ended = () => {
+      _ended = true;
+    };
+
     this.events = normalizeEventsParam(options.events, EVENT_DEFAULTS);
     resetState();
 
+    this.player.on('play', replay.bind(this));
+    this.player.on('ended', ended.bind(this));
     if (this.events.percentsplayed || this.events.timeplayed ||
       this.events.seek || this.events.totaltimeplayed) {
 

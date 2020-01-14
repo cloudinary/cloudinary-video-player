@@ -24,7 +24,7 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      var player = cld.videoPlayer('player', {
+      player = cld.videoPlayer('player', {
         // Enable 'shoppable' analytics
         // analytics: {events: ['shoppable']}
       });
@@ -126,6 +126,10 @@
       player.on('productBarMax', function(e) {
         console.log('Product bar open');
       });
+      player.on('replay', function(e) {
+        console.log('replay');
+      });
+
 
     }, false);
   </script>

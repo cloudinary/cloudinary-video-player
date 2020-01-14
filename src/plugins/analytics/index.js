@@ -145,12 +145,16 @@ class AnalyticsPlugin {
       const shoppableBarMin = () => {
         this.track({ action: 'shoppableBar', label: 'closed' });
       };
+      const shoppableReplay = () => {
+        this.track({ action: 'replay'});
+      };
 
       if (this.events.shoppable) {
         this.player.on('productHover', shoppableProductHover.bind(this));
         this.player.on('productClick', shoppableProductClick.bind(this));
         this.player.on('productBarMin', shoppableBarMin.bind(this));
         this.player.on('productBarMax', shoppableBarMax.bind(this));
+        this.player.on('replay', shoppableReplay.bind(this));
       }
 
       if (this.events.play) {
