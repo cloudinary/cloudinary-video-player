@@ -129,3 +129,38 @@ $width: 20%;
     }
   }
 }
+
+.cld-spbl-post-play {
+  .cld-spbl-post-play-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.7;
+  }
+  .cld-spbl-panel {
+    width:  100%;
+    padding-top: 10%;
+    white-space: nowrap;
+    background: none !important;
+  }
+  .cld-spbl-item {
+    display: inline-block;
+    width: 25%;
+    white-space: normal;
+  }
+  .cld-spbl-replay-btn {
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    font-family: inherit;
+    padding: 8px 15px;
+    border-radius: 5px;
+    &:before {
+      font-family: VideoJS;
+      vertical-align: bottom;
+      margin-right: 4px;
+    }
+  }
+}

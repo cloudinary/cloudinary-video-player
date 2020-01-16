@@ -1,4 +1,6 @@
+import videojs from 'video.js';
 import ShoppablePanel from './panel/shoppable-panel.js';
+const dom = videojs.dom || videojs;
 
 class ShoppablePostWidget {
   constructor(player, options = {}) {
@@ -12,8 +14,27 @@ class ShoppablePostWidget {
   }
 
   render() {
-    let panel = new ShoppablePanel(this.player_, this.options_);
-    this.player_.createModal(panel.el(), { name: 'postModal' });
+
+    const el = dom.createEl('div', { className: 'cld-spbl-post-play' });
+    const panel = new ShoppablePanel(this.player_, this.options_);
+    const panelBg = dom.createEl('div', { className: 'cld-spbl-post-play-bg base-color-bg' });
+    const replayBtn = dom.createEl('button',
+      {
+        className: 'cld-spbl-replay-btn base-color-bg vjs-icon-replay',
+        onclick: () => {
+          debugger; // eslint-disable-line
+          console.log('replay');
+        }
+      },
+      {},
+      'Replay'
+    );
+
+    el.appendChild(panelBg);
+    el.appendChild(panel.el());
+    el.appendChild(replayBtn);
+
+    this.player_.createModal(el, { name: 'postModal' });
   }
 
   getLayout() {
