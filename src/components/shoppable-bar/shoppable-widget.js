@@ -8,7 +8,8 @@ const OPTIONS_DEFAULTS = {
   toggleIcon: '',
   width: '20%',
   transformation: {},
-  products: []
+  products: [],
+  showPostPlayOverlay: false
 };
 
 class ShoppableWidget {
@@ -16,9 +17,12 @@ class ShoppableWidget {
     this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
     this.render();
-    this.player_.on('ended', () => {
-      let post = new ShoppablePostWidget(this.player_, this.options_);
-    });
+
+    if (this.options_.showPostPlayOverlay) {
+      this.player_.on('ended', () => {
+        let post = new ShoppablePostWidget(this.player_, this.options_);
+      });
+    }
 
     const injectCSS = (css) => {
       const style = document.createElement('style');
@@ -26,7 +30,7 @@ class ShoppableWidget {
       player.el_.appendChild(style);
     };
 
-    const width = options.width || '20%';
+    const width = this.options_.width;
     injectCSS(`
       .cld-spbl-bar-inner {
         transform: translateX(${width});

@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import PostPanel from './panel/shoppable-post-panel.js';
+import ShoppablePanel from './panel/shoppable-panel.js';
 
 class ShoppablePostWidget {
   constructor(player, options = {}) {
@@ -13,7 +13,7 @@ class ShoppablePostWidget {
   }
 
   render() {
-    let panel = new PostPanel(this.player_, this.options_);
+    let panel = new ShoppablePanel(this.player_, this.options_);
     this.player_.createModal(panel.el(), { name: 'postModal' });
   }
 
