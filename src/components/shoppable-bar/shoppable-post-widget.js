@@ -1,9 +1,8 @@
-import videojs from 'video.js';
 import ShoppablePanel from './panel/shoppable-panel.js';
 
 class ShoppablePostWidget {
   constructor(player, options = {}) {
-    this.options_ = options;
+    this.options_ = { ...options, postPlay: true };
     this.player_ = player;
     this.render();
 

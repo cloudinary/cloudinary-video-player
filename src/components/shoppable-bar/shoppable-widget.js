@@ -7,6 +7,8 @@ const OPTIONS_DEFAULTS = {
   location: 'right',
   toggleIcon: '',
   width: '20%',
+  startState: 'openOnPlay',
+  autoClose: 2,
   transformation: {},
   products: [],
   showPostPlayOverlay: false
@@ -20,7 +22,7 @@ class ShoppableWidget {
 
     if (this.options_.showPostPlayOverlay) {
       this.player_.on('ended', () => {
-        let post = new ShoppablePostWidget(this.player_, this.options_);
+        this.player_.addChild(new ShoppablePostWidget(this.player_, this.options_));
       });
     }
 

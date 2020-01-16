@@ -27,8 +27,7 @@ class ShoppablePanel extends Component {
 
   createEl() {
     const el = super.createEl();
-    el.classList.add('cld-spbl-panel', 'base-color-bg');
-
+    el.classList.add('cld-spbl-panel', 'base-color-bg', this.options_.postPlay ? 'post-play-panel' : 'sidebar-panel');
     return el;
   }
 
@@ -52,7 +51,7 @@ class ShoppablePanel extends Component {
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: assign(globalTrans, product.transformation)
+        transformation: assign({}, globalTrans, product.transformation)
       };
       return {
         imageSrc: new ImageSource(product.publicId, imgSrc),

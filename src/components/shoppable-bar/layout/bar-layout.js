@@ -22,10 +22,7 @@ class ShoppableBarLayout extends Component {
 
     this.addChild(new ShoppablePanelToggle(this.player_, {
       clickHandler: () => {
-        this.player().toggleClass('shoppable-panel-hidden');
-        this.player().toggleClass('shoppable-panel-visible');
-        let eventName = this.player().hasClass('shoppable-panel-visible') ? 'productBarMax' : 'productBarMin';
-        this.player().trigger(eventName);
+        this.togglePanel();
       }
     }));
 
@@ -35,6 +32,49 @@ class ShoppableBarLayout extends Component {
       this.removeLayout();
       super.dispose();
     };
+
+    this.togglePanel = (open) => {
+      if (open === true) {
+        // Open
+        this.player().addClass('shoppable-panel-hidden');
+        this.player().addClass('shoppable-panel-visible');
+      } else if (open === false) {
+        // Close
+        this.player().removeClass('shoppable-panel-hidden');
+        this.player().removeClass('shoppable-panel-visible');
+      } else {
+        // Toggle
+        this.player().toggleClass('shoppable-panel-hidden');
+        this.player().toggleClass('shoppable-panel-visible');
+      }
+      let eventName = this.player().hasClass('shoppable-panel-visible') ? 'productBarMax' : 'productBarMin';
+      this.player().trigger(eventName);
+    };
+
+    // Open shoppable
+    if (this.options_.startState === 'open') {
+      this.togglePanel(true);
+    }
+
+    // On play start
+    this.player_.on('play', () => {
+      if (this.player_.currentTime() < 0.01) {
+
+        // Open shoppable on-play
+        if (this.options_.startState === 'openOnPlay') {
+          this.togglePanel(true, this.options_.autoClose);
+        }
+
+        // Auto-close shoppable
+        if (this.options_.autoClose && this.options_.startState.indexOf('open') !== -1) {
+          setTimeout(() => {
+            this.togglePanel(false);
+          }, this.options_.autoClose * 1000);
+        }
+
+      }
+
+    });
   }
 
   createEl() {
