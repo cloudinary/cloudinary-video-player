@@ -146,7 +146,7 @@ class AnalyticsPlugin {
         this.track({ action: 'shoppableBar', label: 'closed' });
       };
       const shoppableReplay = () => {
-        this.track({ action: 'replay'});
+        this.track({ action: 'replay' });
       };
 
       if (this.events.shoppable) {

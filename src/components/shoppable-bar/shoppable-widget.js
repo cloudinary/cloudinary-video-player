@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import ShoppableBarLayout from './layout/bar-layout';
+import ShoppablePostWidget from './shoppable-post-widget';
 import './shoppable-widget.scss';
 
 const OPTIONS_DEFAULTS = {
@@ -15,6 +16,9 @@ class ShoppableWidget {
     this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
     this.render();
+    this.player_.on('ended', () => {
+      let post = new ShoppablePostWidget(this.player_, this.options_);
+    });
 
     const injectCSS = (css) => {
       const style = document.createElement('style');
