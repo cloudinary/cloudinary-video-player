@@ -15,6 +15,8 @@ class ShoppablePostWidget {
 
   render() {
 
+    this.postModal = null;
+
     const el = dom.createEl('div', { className: 'cld-spbl-post-play' });
     const panel = new ShoppablePanel(this.player_, this.options_);
     const panelBg = dom.createEl('div', { className: 'cld-spbl-post-play-bg base-color-bg' });
@@ -22,8 +24,8 @@ class ShoppablePostWidget {
       {
         className: 'cld-spbl-replay-btn base-color-bg vjs-icon-replay',
         onclick: () => {
-          debugger; // eslint-disable-line
-          console.log('replay');
+          this.postModal.close();
+          this.player_.play();
         }
       },
       {},
@@ -34,7 +36,7 @@ class ShoppablePostWidget {
     el.appendChild(panel.el());
     el.appendChild(replayBtn);
 
-    this.player_.createModal(el, { name: 'postModal' });
+    this.postModal = this.player_.createModal(el, { name: 'postModal' });
   }
 
   getLayout() {
