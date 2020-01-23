@@ -26,6 +26,7 @@ const CLOUDINARY_PARAMS = [
   'posterOptions',
   'autoShowRecommendations',
   'fontFace'];
+
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'publicId',
   'source',
@@ -44,6 +45,14 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'textTracks',
   'fetchErrorUsingGet'
 ]);
+
+const DEFAULT_HLS_OPTIONS = {
+  html5: {
+    hls: {
+      overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
+    }
+  }
+};
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -97,8 +106,8 @@ const extractOptions = (elem, options) => {
     options.fluid = true;
   }
 
-  // Default options < Markup options < Player options
-  options = assign({}, defaults, elemOptions, options);
+  // Default HLS options < Default options < Markup options < Player options
+  options = assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
