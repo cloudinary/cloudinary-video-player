@@ -92,6 +92,9 @@ class ShoppablePanel extends Component {
               if (this.player_.paused()) {
                 this.player_.play();
               }
+              if (this.player_.postModal) {
+                this.player_.postModal.close();
+              }
             }
           }
         }
