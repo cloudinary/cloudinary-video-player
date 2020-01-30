@@ -68,7 +68,14 @@ class ShoppableBarLayout extends Component {
         // Auto-close shoppable
         if (this.options_.autoClose && this.options_.startState.indexOf('open') !== -1) {
           setTimeout(() => {
-            this.togglePanel(false);
+            // Keep it open while hovered
+            if (!this.contentEl_.matches(':hover')) {
+              this.togglePanel(false);
+            } else {
+              this.contentEl_.addEventListener('mouseleave', () => {
+                this.togglePanel(false);
+              }, { once: true });
+            }
           }, this.options_.autoClose * 1000);
         }
 
