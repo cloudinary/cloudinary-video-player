@@ -22,7 +22,7 @@ class ShoppablePanelItem extends ClickableComponent {
 
   createEl() {
     const el = super.createEl('a', {
-      className: 'cld-spbl-item',
+      className: 'cld-spbl-item base-color-bg',
       href: '#'
     });
     const img = super.createEl('img', {

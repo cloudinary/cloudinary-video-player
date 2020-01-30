@@ -19,7 +19,19 @@ class ShoppablePostWidget {
 
     const el = dom.createEl('div', { className: 'cld-spbl-post-play' });
     const panel = new ShoppablePanel(this.player_, this.options_);
-    const panelBg = dom.createEl('div', { className: 'cld-spbl-post-play-bg base-color-bg' });
+
+    // Background - poster + blur effect
+    const bgSrc = this.player_.cloudinary.currentPoster();
+    bgSrc.transformation([
+      bgSrc.transformation().toOptions(),
+      { effect: 'blur:3000' }
+    ]);
+
+    const panelBg = dom.createEl('div', {
+      className: 'cld-spbl-post-play-bg',
+      style: 'background-image: url("' + bgSrc.url() + '")'
+    });
+
     const replayBtn = dom.createEl('button',
       {
         className: 'cld-spbl-replay-btn base-color-bg vjs-icon-replay',
@@ -36,7 +48,7 @@ class ShoppablePostWidget {
     el.appendChild(panel.el());
     el.appendChild(replayBtn);
 
-    this.player_.postModal = this.player_.createModal(el, { name: 'postModal' });
+    this.player_.postModal = this.player_.createModal(el, { name: 'postModal', uncloseable: true });
   }
 
   getLayout() {
@@ -44,6 +56,5 @@ class ShoppablePostWidget {
   }
 
 }
-
 
 export default ShoppablePostWidget;
