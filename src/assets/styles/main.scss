@@ -236,4 +236,8 @@ $icon-font-path: '../fonts' !default;
   .vjs-spacer {
     flex: auto;
   }
+
+  .vjs-modal-dialog {
+    background: none;
+  }
 }

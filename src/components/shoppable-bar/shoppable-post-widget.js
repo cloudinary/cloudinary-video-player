@@ -49,6 +49,11 @@ class ShoppablePostWidget {
     el.appendChild(replayBtn);
 
     this.player_.postModal = this.player_.createModal(el, { name: 'postModal', uncloseable: true });
+
+    this.player_.addClass('cld-spbl-post-modal');
+    this.player_.postModal.on('beforemodalclose', () => {
+      this.player_.removeClass('cld-spbl-post-modal');
+    })
   }
 
   getLayout() {
