@@ -53,7 +53,7 @@ class ShoppablePostWidget {
     this.player_.addClass('cld-spbl-post-modal');
     this.player_.postModal.on('beforemodalclose', () => {
       this.player_.removeClass('cld-spbl-post-modal');
-    })
+    });
   }
 
   getLayout() {

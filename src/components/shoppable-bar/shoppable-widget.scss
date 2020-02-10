@@ -102,6 +102,19 @@ $width: 20%;
   position: relative;
   margin: 8px 0 8px 8px;
   color: inherit;
+  transform: scale(0.95);
+  transform-origin: center right;
+  transition: transform .5s;
+  .cld-spbl-img {
+    box-shadow: 0 0 0;
+    transition: box-shadow .3s;
+  }
+  &.active {
+    transform: scale(1);
+    .cld-spbl-img {
+      box-shadow: 0 0 4px 2px;
+    }
+  }
   &:hover {
     color: inherit;
   }
@@ -164,6 +177,7 @@ $width: 20%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px 1.2px rgba(0,0,0,0.24), 0 6px 8px 4px rgba(0,0,0,0.24);
+    transform: none;
   }
   .cld-spbl-img {
     max-width: 100%;

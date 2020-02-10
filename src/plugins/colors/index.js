@@ -97,6 +97,10 @@ const playerColors = `
   .PLAYER-CLASS-PREFIX .base-color-text {
     color: --base-color;
   }
+
+  .PLAYER-CLASS-PREFIX .accent-color-text {
+    color: --accent-color;
+  }
 `;
 
 const darkOnlyColors = `

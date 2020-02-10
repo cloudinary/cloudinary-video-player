@@ -26,7 +26,7 @@ class ShoppablePanelItem extends ClickableComponent {
       href: '#'
     });
     const img = super.createEl('img', {
-      className: 'cld-spbl-img',
+      className: 'cld-spbl-img accent-color-text',
       src: this.options_.item.url()
     });
     el.appendChild(img);

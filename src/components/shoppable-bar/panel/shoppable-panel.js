@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import assign from 'utils/assign';
+import throttle from 'utils/throttle';
 import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
@@ -47,7 +48,9 @@ class ShoppablePanel extends Component {
         productName: product.productName,
         title: product.title,
         onHover: product.onHover,
-        onClick: product.onClick
+        onClick: product.onClick,
+        startTime: product.startTime,
+        endTime: product.endTime
       };
       let imgSrc = {
         cloudinaryConfig: cloudinaryConfig,
@@ -60,10 +63,22 @@ class ShoppablePanel extends Component {
     });
   }
 
+  scrollToActiveItem() {
+    const activeItems = this.el_.getElementsByClassName('active');
+    if (activeItems.length > 0) {
+      this.el_.scrollTo({
+        top: activeItems[0].offsetTop - 8,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   render() {
     this.removeAll();
 
     const items = this.getItems();
+
+    const throttledScrollToActiveItem = throttle(() => this.scrollToActiveItem(), 1000);
 
     items.forEach((item, index) => {
       const shoppablePanelItem = new ShoppablePanelItem(this.player(), {
@@ -116,6 +131,18 @@ class ShoppablePanel extends Component {
           img.src = target.dataset.origUrl;
         }
       });
+
+      if (typeof item.conf.startTime !== 'undefined' && typeof item.conf.endTime !== 'undefined') {
+        this.player_.on('timeupdate', () => {
+          const time = this.player_.currentTime();
+          if (time >= item.conf.startTime && time < item.conf.endTime) {
+            shoppablePanelItem.el_.classList.add('active');
+            throttledScrollToActiveItem();
+          } else if (shoppablePanelItem.el_.classList.contains('active')) {
+            shoppablePanelItem.el_.classList.remove('active');
+          }
+        });
+      }
 
       this.addChild(shoppablePanelItem);
 
