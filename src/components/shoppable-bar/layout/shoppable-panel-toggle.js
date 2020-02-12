@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+const dom = videojs.dom || videojs;
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
@@ -15,19 +16,33 @@ class ShoppablePanelToggle extends ClickableComponent {
   }
 
   createEl() {
-    let toggleProps = {};
+
+    let iconProps = {};
     if (this.options_.toggleIcon) {
-      toggleProps = {
-        className: 'cld-spbl-toggle cld-spbl-toggle-custom-icon vjs-icon-close base-color-bg',
+      iconProps = {
+        className: 'cld-spbl-toggle-icon cld-spbl-toggle-custom-icon vjs-icon-close',
         style: `background-image: url(${this.options_.toggleIcon})`
       };
     } else {
-      toggleProps = {
-        className: 'cld-spbl-toggle vjs-icon-cart base-color-bg'
+      iconProps = {
+        className: 'cld-spbl-toggle-icon vjs-icon-cart'
       };
     }
+    const icon = dom.createEl('span', iconProps);
 
-    const el = super.createEl('a', toggleProps);
+    const el = super.createEl('a', {
+      className: 'cld-spbl-toggle base-color-bg'
+    });
+    el.appendChild(icon);
+
+    this.player_.on('productBarMin', () => {
+      setTimeout(() => {
+        icon.classList.add('animate');
+        setTimeout(() => {
+          icon.classList.remove('animate');
+        }, 1000);
+      }, 500);
+    });
 
     return el;
   }

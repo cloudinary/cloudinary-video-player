@@ -89,12 +89,12 @@ class ShoppablePanel extends Component {
         clickHandler: (e) => {
           let target = e.currentTarget || e.target;
           this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
-          if (target.dataset.pause === 'true') {
-            this.player_.pause();
-          }
+
+          // Go to URL, or seek video (set currentTime)
           if (target.dataset.clickAction === 'goto') {
             window.open(target.dataset.gotoUrl, '_blank');
           } else if (target.dataset.clickAction === 'seek') {
+            // ToDo: extarct to utils and use for startTime & endTime
             let timeParts = target.dataset.seek.split(':');
             let gotoSecs = null;
             if (timeParts.length === 3) {
@@ -104,13 +104,21 @@ class ShoppablePanel extends Component {
             }
             if (gotoSecs !== null) {
               this.player_.currentTime(gotoSecs);
-              if (this.player_.paused()) {
-                this.player_.play();
-              }
+              this.player_.addClass('vjs-has-started');
               if (this.player_.postModal) {
                 this.player_.postModal.close();
               }
             }
+          }
+
+          // pause - true, or number of seconds
+          if (target.dataset.pause === 'true') {
+            this.player_.pause();
+          } else if (!isNaN(target.dataset.pause)) {
+            this.player_.pause();
+            setTimeout(() => {
+              this.player_.play();
+            }, target.dataset.pause * 1000);
           }
         }
       });

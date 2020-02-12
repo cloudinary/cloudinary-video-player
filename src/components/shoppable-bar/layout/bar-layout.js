@@ -21,6 +21,7 @@ class ShoppableBarLayout extends Component {
     this.player().el().appendChild(this.contentWrpEl_);
 
     this.addChild(new ShoppablePanelToggle(this.player_, {
+      toggleIcon: this.options_.toggleIcon,
       clickHandler: () => {
         this.togglePanel();
       }
@@ -36,12 +37,12 @@ class ShoppableBarLayout extends Component {
     this.togglePanel = (open) => {
       if (open === true) {
         // Open
-        this.player().addClass('shoppable-panel-hidden');
+        this.player().removeClass('shoppable-panel-hidden');
         this.player().addClass('shoppable-panel-visible');
       } else if (open === false) {
         // Close
-        this.player().removeClass('shoppable-panel-hidden');
         this.player().removeClass('shoppable-panel-visible');
+        this.player().addClass('shoppable-panel-hidden');
       } else {
         // Toggle
         this.player().toggleClass('shoppable-panel-hidden');

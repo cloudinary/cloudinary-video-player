@@ -28,7 +28,7 @@ $width: 20%;
   .vjs-control-bar {
     width: 100% - $width;
   }
-  .cld-spbl-toggle:before {
+  .cld-spbl-toggle-icon:before {
     content: "\f119";
   }
 }
@@ -66,8 +66,16 @@ $width: 20%;
   &:focus {
     outline: none;
   }
+}
+.cld-spbl-toggle-icon {
+
   // Custom toggle icon
   &.cld-spbl-toggle-custom-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 75%;
@@ -80,6 +88,17 @@ $width: 20%;
       background-image: none !important;
     }
   }
+
+  // Animate
+  display: block;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  &.animate,
+  .shoppable-panel-hidden &:hover {
+    animation-name: tada;
+    animation-iteration-count: infinite;
+  }
+
 }
 .cld-spbl-panel {
   position: absolute;
@@ -209,5 +228,23 @@ $width: 20%;
   .vjs-big-play-button,
   .vjs-recommendations-overlay {
     display: none;
+  }
+}
+
+@keyframes tada {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  10%, 20% {
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%, 50%, 70%, 90% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%, 60%, 80% {
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
   }
 }
