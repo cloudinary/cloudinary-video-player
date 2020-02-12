@@ -29,30 +29,18 @@
 
   <script>
     window.addEventListener('load', function () {
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-      playerHls = cld.videoPlayer('example-player-hls');
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'nirmaoz' });
       playerDash = cld.videoPlayer('example-player-dash');
 
-      playerHls.source(
-        'sea_turtle',
-        {
-          sourceTypes: ['hls'],
-          transformation: {streaming_profile: 'hd'},
-          info: {title: 'HLS'}
-        }
-      );
       playerDash.source(
-        'sea_turtle',
+        'bunny_all_2',
         {
           sourceTypes: ['dash'],
-          transformation: {streaming_profile: 'hd'},
+          transformation: {streaming_profile: 'full_hd_vp9'},
           info: {title: 'MPEG-DASH'}
         }
       );
 
-      playerHls.on('qualitychanged', function(data) {
-        console.log('HLS player', data);
-      });
       playerDash.on('qualitychanged', function(data) {
         console.log('Dash player', data);
       });
@@ -69,17 +57,6 @@
     </nav>
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Adaptive streaming</h3>
-
-    <div class="video-container mb-4">
-      <video
-        id="example-player-hls"
-        playsinline
-        controls
-        muted
-        width="500"
-        class="cld-video-player"
-      ></video>
-    </div>
 
     <div class="video-container mb-4">
       <video

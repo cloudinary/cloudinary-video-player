@@ -54,6 +54,41 @@ const DEFAULT_HLS_OPTIONS = {
   }
 };
 
+const loadedPlugins = [];
+const pluginScripts = {
+  dash: [
+    'https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.0.2/dash.all.min.js'
+  ]
+};
+
+const serial = funcs =>
+  funcs.reduce((promise, func) =>
+    promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([]));
+
+const isDashRequired = sourceTypes => {
+  if (Array.isArray(sourceTypes)) {
+    return (sourceTypes.indexOf('dash') > -1 || sourceTypes.indexOf('DASH') > -1);
+  }
+
+  return false;
+};
+
+const loadScriptAsync = (src) => new Promise((resolve, reject) => {
+  let script = document.createElement('script');
+  script.src = src;
+  script.onload = resolve;
+  script.onerror = reject;
+  document.head.appendChild(script);
+});
+
+const loadPlugin = pluginName => {
+  loadedPlugins[pluginName] = true;
+  console.log(`Cloudinary: loading ${pluginName} plugin`);
+  const pluginList = pluginScripts[pluginName];
+  serial(pluginList.map(script => () => loadScriptAsync(script)));
+};
+
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
@@ -511,6 +546,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    if (!loadedPlugins.dash && isDashRequired(options.sourceTypes)) {
+      loadPlugin('dash');
+    }
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
