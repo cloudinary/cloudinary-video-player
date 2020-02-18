@@ -22,11 +22,11 @@ class ShoppablePanelItem extends ClickableComponent {
 
   createEl() {
     const el = super.createEl('a', {
-      className: 'cld-spbl-item base-color-bg',
+      className: 'cld-spbl-item base-color-bg accent-color-text',
       href: '#'
     });
     const img = super.createEl('img', {
-      className: 'cld-spbl-img accent-color-text',
+      className: 'cld-spbl-img',
       src: this.options_.item.url()
     });
     el.appendChild(img);
@@ -40,7 +40,7 @@ class ShoppablePanelItem extends ClickableComponent {
     }
 
     if (this.getTitle()) {
-      const info = dom.createEl('div', { className: 'cld-spbl-item-info base-color-semi-bg' });
+      const info = dom.createEl('div', { className: 'cld-spbl-item-info base-color-semi-bg text-color-text' });
       const title = dom.createEl('span', { className: 'cld-spbl-item-title' }, {}, this.getTitle());
       info.appendChild(title);
       el.appendChild(info);

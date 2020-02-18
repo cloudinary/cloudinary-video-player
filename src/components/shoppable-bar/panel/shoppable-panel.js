@@ -67,7 +67,7 @@ class ShoppablePanel extends Component {
     const activeItems = this.el_.getElementsByClassName('active');
     if (activeItems.length > 0) {
       this.el_.scrollTo({
-        top: activeItems[0].offsetTop - 8,
+        top: activeItems[0].offsetTop - 12,
         behavior: 'smooth'
       });
     }

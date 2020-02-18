@@ -94,6 +94,10 @@ const playerColors = `
     background: rgba(--text-color, 0.7);
   }
 
+  .PLAYER-CLASS-PREFIX .text-color-text {
+    color: --text-color;
+  }
+
   .PLAYER-CLASS-PREFIX .base-color-text {
     color: --base-color;
   }
