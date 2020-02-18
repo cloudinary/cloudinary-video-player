@@ -122,22 +122,23 @@ $width: 20%;
   margin: 12px 8px;
   color: inherit;
   transform: scale(0.98);
-  transition: transform .4s;
+  transition: transform .3s;
+  &:before,
+  &:after {
+    content:  "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow: 0 0 0;
+    transition: box-shadow .3s;
+    border-radius: 3px;
+  }
   &.active {
     transform: scale(1);
-    &:before,
-    &:after {
-      content:  "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 0;
-      pointer-events: none;
-      box-shadow: 0 0 0 4px;
-      border-radius: 3px;
-    }
     &:before {
       opacity: .5;
       box-shadow: 0 0 0 4px;
