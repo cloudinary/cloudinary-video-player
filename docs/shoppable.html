@@ -131,6 +131,12 @@
       player.on('replay', function(e) {
         console.log('replay');
       });
+      player.on('productHoverPost', function(e, data) {
+        console.log('Product Hover Post Playback: ' + JSON.stringify(data));
+      });
+      player.on('productClickPost', function(e, data) {
+        console.log('Product Click Post Playback: ' + JSON.stringify(data));
+      });
 
 
     }, false);

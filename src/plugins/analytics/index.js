@@ -148,10 +148,18 @@ class AnalyticsPlugin {
       const shoppableReplay = () => {
         this.track({ action: 'replay' });
       };
+      const shoppableProductClickPost = (event, data) => {
+        this.track({ action: 'productClickPostPlay', label: data.productName });
+      };
+      const shoppableProductHoverPost = (event, data) => {
+        this.track({ action: 'productHoverPostPlay', label: data.productName });
+      };
 
       if (this.events.shoppable) {
         this.player.on('productHover', shoppableProductHover.bind(this));
         this.player.on('productClick', shoppableProductClick.bind(this));
+        this.player.on('productHoverPost', shoppableProductHoverPost.bind(this));
+        this.player.on('productClickPost', shoppableProductClickPost.bind(this));
         this.player.on('productBarMin', shoppableBarMin.bind(this));
         this.player.on('productBarMax', shoppableBarMax.bind(this));
         this.player.on('replay', shoppableReplay.bind(this));
