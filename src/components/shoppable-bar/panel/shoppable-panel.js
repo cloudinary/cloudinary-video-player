@@ -93,7 +93,8 @@ class ShoppablePanel extends Component {
         current: index === 0,
         clickHandler: (e) => {
           let target = e.currentTarget || e.target;
-          this.player_.trigger('productClick', { productId: target.dataset.productId, productName: target.dataset.productName });
+          let evName = this.player_.ended() ? 'productClickPost' : 'productClick';
+          this.player_.trigger(evName, { productId: target.dataset.productId, productName: target.dataset.productName });
 
           // Go to URL, or seek video (set currentTime)
           if (target.dataset.clickAction === 'goto') {
@@ -130,10 +131,8 @@ class ShoppablePanel extends Component {
 
       shoppablePanelItem.on('mouseover', e => {
         let target = e.currentTarget || e.target;
-        this.player_.trigger('productHover', {
-          productId: target.dataset.productId,
-          productName: target.dataset.productName
-        });
+        let evName = this.player_.ended() ? 'productHoverPost' : 'productHover';
+        this.player_.trigger(evName, { productId: target.dataset.productId, productName: target.dataset.productName });
       });
 
       if (typeof item.conf.startTime !== 'undefined' && typeof item.conf.endTime !== 'undefined') {

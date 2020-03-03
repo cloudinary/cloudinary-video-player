@@ -175,6 +175,9 @@ class VideoSource extends BaseSource {
           opts.transformation.push(codecTrans);
         }
       }
+      if (opts.format === 'auto') {
+        delete opts.format;
+      }
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       return { type, src, cldSrc: this };
     });
@@ -192,6 +195,9 @@ const CONTAINER_MIME_TYPES = {
 };
 
 function formatToMimeTypeAndTransformation(format) {
+  if (format === 'auto') {
+    format = 'mp4';
+  }
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;

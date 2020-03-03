@@ -36,6 +36,7 @@ class ShoppablePostWidget {
       {
         className: 'cld-spbl-replay-btn base-color-bg vjs-icon-replay',
         onclick: () => {
+          this.player_.trigger('replay');
           this.player_.postModal.close();
           this.player_.play();
         }
