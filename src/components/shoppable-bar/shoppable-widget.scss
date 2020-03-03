@@ -156,6 +156,9 @@ $width: 20%;
   max-width: 100%;
   height: auto;
 }
+.cld-spbl-hover-img {
+  display: none;
+}
 .cld-spbl-item-info {
   position: absolute;
   right: 0;
@@ -172,6 +175,7 @@ $width: 20%;
   text-align: center;
   font-size: 120%;
   padding: 16px;
+  z-index: 1;
   display: none;
 }
 .cld-spbl-item:hover {
@@ -179,6 +183,14 @@ $width: 20%;
     display: block;
     ~ .cld-spbl-item-info {
       display: none;
+    }
+  }
+  .cld-spbl-hover-img {
+    display: block;
+    + {
+      .cld-spbl-img {
+        display: none;
+      }
     }
   }
 }

@@ -9,7 +9,12 @@ const OPTIONS_DEFAULTS = {
   width: '20%',
   startState: 'openOnPlay',
   autoClose: 2,
-  transformation: {},
+  transformation: {
+    quality: 'auto',
+    width: 'auto',
+    fetch_format: 'auto',
+    crop: 'scale'
+  },
   products: [],
   showPostPlayOverlay: false
 };
@@ -23,6 +28,8 @@ class ShoppableWidget {
     if (this.options_.showPostPlayOverlay) {
       this.player_.on('ended', () => {
         this.player_.addChild(new ShoppablePostWidget(this.player_, this.options_));
+        // Handle responsive images.
+        this.player_.player_.cloudinary.cloudinaryConfig().responsive();
       });
     }
 
@@ -55,6 +62,10 @@ class ShoppableWidget {
 
   render() {
     this.layout_ = new ShoppableBarLayout(this.player_, this.options_);
+    this.player_.on('loadeddata', () => {
+      // Handle responsive images.
+      this.player_.player_.cloudinary.cloudinaryConfig().responsive();
+    });
   }
 
   getLayout() {

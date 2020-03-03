@@ -40,10 +40,15 @@ class ShoppablePanel extends Component {
   }
 
   getItems() {
-    let cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
-    let globalTrans = this.options.transformation;
+    const cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
     return this.options.products.map(product => {
-      let conf = {
+      if (product.onHover && typeof product.onHover.args === 'object') {
+        product.onHover.args.transformation = assign({},
+          this.options.transformation,
+          product.onHover.args.transformation
+        );
+      }
+      const conf = {
         productId: product.productId,
         productName: product.productName,
         title: product.title,
@@ -52,12 +57,12 @@ class ShoppablePanel extends Component {
         startTime: product.startTime,
         endTime: product.endTime
       };
-      let imgSrc = {
+      const imageSource = new ImageSource(product.publicId, {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: assign({}, globalTrans, product.transformation)
-      };
+        transformation: assign({}, this.options.transformation, product.transformation)
+      });
       return {
-        imageSrc: new ImageSource(product.publicId, imgSrc),
+        imageSrc: imageSource,
         conf: conf
       };
     });
@@ -125,19 +130,10 @@ class ShoppablePanel extends Component {
 
       shoppablePanelItem.on('mouseover', e => {
         let target = e.currentTarget || e.target;
-        this.player_.trigger('productHover', { productId: target.dataset.productId, productName: target.dataset.productName });
-        if (target.dataset.hoverAction === 'switch') {
-          let img = target.getElementsByTagName('img')[0];
-          img.src = target.dataset.switchUrl;
-        }
-      });
-
-      shoppablePanelItem.on('mouseout', e => {
-        let target = e.currentTarget || e.target;
-        if (target.dataset.hoverAction === 'switch') {
-          let img = target.getElementsByTagName('img')[0];
-          img.src = target.dataset.origUrl;
-        }
+        this.player_.trigger('productHover', {
+          productId: target.dataset.productId,
+          productName: target.dataset.productName
+        });
       });
 
       if (typeof item.conf.startTime !== 'undefined' && typeof item.conf.endTime !== 'undefined') {
