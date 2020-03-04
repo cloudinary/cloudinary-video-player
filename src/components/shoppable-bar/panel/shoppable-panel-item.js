@@ -8,12 +8,17 @@ class ShoppablePanelItem extends ClickableComponent {
   constructor(player, options) {
     super(player, options);
     this.options_ = options;
+    this.isDragged = false;
   }
 
   handleClick(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.options_.clickHandler(event);
+    if (!this.el_.matches('.dragged .cld-spbl-item')) {
+      // Prevent click event if dragged
+      this.options_.clickHandler(event);
+    }
+    this.isDragged = false;
   }
 
   getTitle() {

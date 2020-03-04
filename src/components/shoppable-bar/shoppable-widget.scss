@@ -204,13 +204,27 @@ $width: 20%;
     right: 0;
     background-size: cover;
   }
+  .cld-spbl-post-title {
+    position: absolute;
+    font-size: 1.5em;
+    text-shadow: 0 0 5px rgba(#000, .5);
+    left: 0;
+    top: 0.8em;
+    width: 100%;
+    text-align: center;
+  }
   .cld-spbl-panel {
     width:  100%;
-    top: 15%;
+    top: 16%;
     height: 60%;
-    padding: 20px 8px;
+    padding: 10px 8px;
     white-space: nowrap;
     background: none !important;
+
+    cursor: grab;
+    &:active {
+      cursor: grabbing;
+    }
   }
   .cld-spbl-item {
     display: inline-block;
