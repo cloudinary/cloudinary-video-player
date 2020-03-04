@@ -35,9 +35,8 @@ class ShoppablePanelItem extends ClickableComponent {
       addOnClick(el, this.options_.conf.onClick);
     }
 
-    console.log(this.options_.item);
     const img = super.createEl('img',
-      { className: 'cld-spbl-img cld-responsive' },
+      { className: 'cld-spbl-img cld-vp-responsive' },
       { 'data-src': this.options_.item.url() }
     );
     el.appendChild(img);
@@ -64,7 +63,7 @@ const addOnHover = (el, conf, cldConf) => {
       transformation: conf.args.transformation
     });
     const hoverImg = dom.createEl('img',
-      { className: 'cld-spbl-img cld-spbl-hover-img cld-responsive' },
+      { className: 'cld-spbl-img cld-spbl-hover-img cld-vp-responsive' },
       { 'data-src': switchImgSource.url() }
     );
     el.appendChild(hoverImg);

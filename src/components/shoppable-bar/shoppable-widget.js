@@ -29,7 +29,9 @@ class ShoppableWidget {
       this.player_.on('ended', () => {
         this.player_.addChild(new ShoppablePostWidget(this.player_, this.options_));
         // Handle responsive images.
-        this.player_.player_.cloudinary.cloudinaryConfig().responsive();
+        this.player_.player_.cloudinary.cloudinaryConfig().responsive({
+          responsive_class: 'cld-vp-responsive'
+        });
       });
     }
 
@@ -64,7 +66,9 @@ class ShoppableWidget {
     this.layout_ = new ShoppableBarLayout(this.player_, this.options_);
     this.player_.on('loadeddata', () => {
       // Handle responsive images.
-      this.player_.player_.cloudinary.cloudinaryConfig().responsive();
+      this.player_.player_.cloudinary.cloudinaryConfig().responsive({
+        responsive_class: 'cld-vp-responsive'
+      });
     });
   }
 
