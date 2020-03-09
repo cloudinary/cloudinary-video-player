@@ -2,6 +2,7 @@ import videojs from 'video.js';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
+import ShoppableProductsOverlay from './shoppable-products-overlay';
 import ShoppablePanelToggle from './shoppable-panel-toggle';
 
 class ShoppableBarLayout extends Component {
@@ -18,6 +19,10 @@ class ShoppableBarLayout extends Component {
 
     this.contentWrpEl_.appendChild(this.contentBannerEl_);
     this.contentWrpEl_.appendChild(this.contentEl_);
+
+    const productsOverlay = new ShoppableProductsOverlay(this.player_, this.options_);
+    this.contentWrpEl_.appendChild(productsOverlay.el_);
+
     this.player().el().appendChild(this.contentWrpEl_);
 
     this.addChild(new ShoppablePanelToggle(this.player_, {

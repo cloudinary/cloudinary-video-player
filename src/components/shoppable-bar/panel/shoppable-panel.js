@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import assign from 'utils/assign';
 import throttle from 'utils/throttle';
+import { parseTime } from 'utils/time';
 import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
@@ -100,31 +101,31 @@ class ShoppablePanel extends Component {
           if (target.dataset.clickAction === 'goto') {
             window.open(target.dataset.gotoUrl, '_blank');
           } else if (target.dataset.clickAction === 'seek') {
-            // ToDo: extarct to utils and use for startTime & endTime
-            let timeParts = target.dataset.seek.split(':');
-            let gotoSecs = null;
-            if (timeParts.length === 3) {
-              gotoSecs = (parseInt(timeParts[0], 10) * 60 * 60) + (parseInt(timeParts[1], 10) * 60) + parseInt(timeParts[2], 10);
-            } else {
-              gotoSecs = (parseInt(timeParts[0], 10) * 60) + parseInt(timeParts[1], 10);
-            }
+            // this.player_.pause();
+            const gotoSecs = parseTime(target.dataset.seek);
             if (gotoSecs !== null) {
-              this.player_.currentTime(gotoSecs);
-              this.player_.addClass('vjs-has-started');
+              this.player_.addClass('vjs-has-started'); // Hide the poster image
               if (this.player_.postModal) {
                 this.player_.postModal.close();
               }
+              this.player_.currentTime(gotoSecs);
+              // Close products side-panel
+              this.player_.removeClass('shoppable-panel-visible');
+              this.player_.addClass('shoppable-panel-hidden');
+              this.player_.addClass('shoppable-products-overlay');
+              // Wait for the time update and show the tooltips
+              this.player_.one('seeked', () => this.player_.trigger('showProductsOverlay'));
             }
           }
 
-          // pause - true, or number of seconds
-          if (target.dataset.pause === 'true') {
+          // pause - true (default), false, or number of seconds
+          if (target.dataset.pause !== 'false') {
             this.player_.pause();
-          } else if (!isNaN(target.dataset.pause)) {
-            this.player_.pause();
-            setTimeout(() => {
-              this.player_.play();
-            }, target.dataset.pause * 1000);
+            if (parseTime(target.dataset.pause)) {
+              setTimeout(() => {
+                this.player_.play();
+              }, parseTime(target.dataset.pause) * 1000);
+            }
           }
         }
       });

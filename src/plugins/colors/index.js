@@ -86,6 +86,16 @@ const playerColors = `
     fill: --base-color;
   }
 
+  .PLAYER-CLASS-PREFIX .cld-spbl-product-hotspot:after {
+    background: --base-color;
+    box-shadow: 0 0 0 4px --accent-color, 0 0 0 8px rgba(--text-color, 0.24);
+  }
+
+  .PLAYER-CLASS-PREFIX .cld-spbl-product-tooltip {
+    color: --base-color;
+    background: --text-color;
+  }
+
   .PLAYER-CLASS-PREFIX .base-color-semi-bg {
     background: rgba(--base-color, 0.7);
   }

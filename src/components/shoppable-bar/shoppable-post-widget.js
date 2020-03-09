@@ -102,10 +102,6 @@ class ShoppablePostWidget {
     });
   }
 
-  getLayout() {
-    return this.layout_;
-  }
-
 }
 
 export default ShoppablePostWidget;

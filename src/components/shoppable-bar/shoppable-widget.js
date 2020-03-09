@@ -72,10 +72,6 @@ class ShoppableWidget {
     });
   }
 
-  getLayout() {
-    return this.layout_;
-  }
-
 }
 
 
