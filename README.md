@@ -39,7 +39,7 @@ For your convenience, there are currently 4 variations for our package:
 
 #### Adaptive Streaming
 
-- HLS is supported out of the box, to use an m3u8 as source, you can specify sourceTypes=['hls'] for your video source.
+- HLS is supported out of the box, to use an m3u8 as the video source, you can specify sourceTypes=['hls'].
 
 - MPEG-DASH support:
 If you plan to use adaptive bitrate streaming to deliver MPEG-DASH files in your video player, include the following files in addition to the files described above:
