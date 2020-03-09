@@ -37,9 +37,17 @@ For your convenience, there are currently 4 variations for our package:
 - `cld-video-player.light.js` - Non minified version which does not include any optional modules.
 - `cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
 
-#### Optional modules
+#### Adaptive Streaming
 
-- HLS support
+- HLS is supported out of the box, to use an m3u8 as source, you can specify sourceTypes=['hls'] for your video source.
+
+- MPEG-DASH support:
+If you plan to use adaptive bitrate streaming to deliver MPEG-DASH files in your video player, include the following files in addition to the files described above:
+```javascript
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.0.2/dash.all.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.min.js" type="text/javascript"></script>
+```
+Afterwards, you can specify sourceTypes=['dash'] for your video source.
 
 ### Cloudinary JavaScript library
 
