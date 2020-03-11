@@ -92,8 +92,8 @@ const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }
 
 const codecShorthandTrans = (short) => {
   const transTable = {
-    h265: 'hev1',
-    vp9: 'vp9',
+    h265: 'hev1.1.6.L93.B0',
+    vp9: 'vp09.00.50.08',
     h264: 'avc1.42E01E'
   };
   return transTable[short] ? transTable[short] : short;
