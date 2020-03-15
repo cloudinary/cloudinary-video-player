@@ -166,7 +166,7 @@ class VideoSource extends BaseSource {
       }
       let type = null;
       let codecTrans = null;
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive);
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !isKeyInTransformation(opts.transformation, 'video_codec') && !isKeyInTransformation(opts.transformation, 'streaming_profile')) {
         opts.transformation.push(codecTrans);
@@ -187,7 +187,7 @@ const CONTAINER_MIME_TYPES = {
   hls: ['application/x-mpegURL']
 };
 
-function formatToMimeTypeAndTransformation(format) {
+function formatToMimeTypeAndTransformation(format, isAdaptive) {
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;
@@ -195,18 +195,24 @@ function formatToMimeTypeAndTransformation(format) {
   if (!result) {
     result = [`video/${container}`, transformation];
   }
-
+  if (isAdaptive && codec === undefined) {
+    codec = DEFAULT_ADPTIVE_CODECS[container];
+  }
   if (codec) {
     transformation = codecToSrcTransformation(codec);
     result = [`${result[0]}; codecs="${codecShorthandTrans(codec)}"`, transformation];
   }
-
   return result;
 }
 
 const FORMAT_MAPPINGS = {
   hls: 'm3u8',
   dash: 'mpd'
+};
+
+const DEFAULT_ADPTIVE_CODECS = {
+  dash: 'vp9',
+  hls: 'h265'
 };
 
 function normalizeFormat(format) {
