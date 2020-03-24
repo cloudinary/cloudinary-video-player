@@ -153,6 +153,7 @@ class VideoSource extends BaseSource {
       let src = null;
       const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
+      let isAdaptive = ['mpd', 'm3u8'].includes(format);
       const opts = {};
       if (srcTransformation) {
         opts.transformation = srcTransformation;
@@ -164,25 +165,20 @@ class VideoSource extends BaseSource {
         queryString = objectToQuerystring(this.queryParams());
       }
       let type = null;
-      if (Object.keys(CONTAINER_MIME_TYPES).indexOf(sourceType) > -1) {
-        type = CONTAINER_MIME_TYPES[sourceType];
-      } else {
-        let codecTrans = null;
-        [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-
-        // If user's transformation include video_codec then don't add another video codec to transformation
-        if (codecTrans && !isKeyInTransformation(opts.transformation, 'video_codec')) {
-          opts.transformation.push(codecTrans);
-        }
+      let codecTrans = null;
+      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive);
+      // If user's transformation include video_codec then don't add another video codec to transformation
+      if (codecTrans && !isKeyInTransformation(opts.transformation, 'video_codec') && !isKeyInTransformation(opts.transformation, 'streaming_profile')) {
+        opts.transformation.push(codecTrans);
       }
       if (opts.format === 'auto') {
         delete opts.format;
       }
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
-      return { type, src, cldSrc: this };
+      return { type, src, cldSrc: this, isAdaptive: isAdaptive };
     });
     if (isIe) {
-      return srcs.filter(s => s.type !== 'video/mp4; codec="hev1"');
+      return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
     } else {
       return srcs;
     }
@@ -190,14 +186,11 @@ class VideoSource extends BaseSource {
 }
 
 const CONTAINER_MIME_TYPES = {
-  dash: 'application/dash+xml',
-  hls: 'application/x-mpegURL'
+  dash: ['application/dash+xml'],
+  hls: ['application/x-mpegURL']
 };
 
-function formatToMimeTypeAndTransformation(format) {
-  if (format === 'auto') {
-    format = 'mp4';
-  }
+function formatToMimeTypeAndTransformation(format, isAdaptive) {
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;
@@ -205,13 +198,13 @@ function formatToMimeTypeAndTransformation(format) {
   if (!result) {
     result = [`video/${container}`, transformation];
   }
-
-  if (codec) {
-    codec = codecShorthandTrans(codec);
-    transformation = codecToSrcTransformation(codec);
-    result = [`${result[0]}; codec="${codec}"`, transformation];
+  if (isAdaptive && codec === undefined) {
+    codec = DEFAULT_ADPTIVE_CODECS[container];
   }
-
+  if (codec) {
+    transformation = codecToSrcTransformation(codec);
+    result = [`${result[0]}; codecs="${codecShorthandTrans(codec)}"`, transformation];
+  }
   return result;
 }
 
@@ -220,8 +213,13 @@ const FORMAT_MAPPINGS = {
   dash: 'mpd'
 };
 
+const DEFAULT_ADPTIVE_CODECS = {
+  dash: 'vp9',
+  hls: 'h265'
+};
+
 function normalizeFormat(format) {
-  format = format.toLowerCase();
+  format = format.toLowerCase().split('\/').shift();
 
   let res = FORMAT_MAPPINGS[format];
   if (!res) {

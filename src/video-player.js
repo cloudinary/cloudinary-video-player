@@ -50,6 +50,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 
 const DEFAULT_HLS_OPTIONS = {
   html5: {
+    nativeTextTracks: false,
     hls: {
       overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
     }

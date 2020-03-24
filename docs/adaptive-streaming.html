@@ -36,7 +36,7 @@
       playerHls.source(
         'sea_turtle',
         {
-          sourceTypes: ['hls'],
+          sourceTypes: ['hls/h264'],
           transformation: {streaming_profile: 'hd'},
           info: {title: 'HLS'}
         }
@@ -44,7 +44,7 @@
       playerDash.source(
         'sea_turtle',
         {
-          sourceTypes: ['dash'],
+          sourceTypes: ['dash/h264'],
           transformation: {streaming_profile: 'hd'},
           info: {title: 'MPEG-DASH'}
         }
