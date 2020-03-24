@@ -331,6 +331,7 @@ $width: 20%;
   &.cld-spbl-product-tooltip-left {
     top: 50%;
     right: 100%;
+    left: auto;
     transform: translateY(-50%);
   }
   &.cld-spbl-product-tooltip-right {

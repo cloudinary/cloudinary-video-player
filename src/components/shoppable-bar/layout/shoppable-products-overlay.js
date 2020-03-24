@@ -20,27 +20,37 @@ class ShoppableProductsOverlay extends Component {
   }
 
   renderProducts() {
+    // Close products side-panel
+    this.player_.removeClass('shoppable-panel-visible');
+    this.player_.addClass('shoppable-panel-hidden');
+    this.player_.addClass('shoppable-products-overlay');
+
     this.layout_.innerHTML = '';
 
     // Filter products with appearance on currentTime
     const currentTime = this.player_.currentTime();
-    const currentProducts = this.options_.products.filter(product => product.appearance && product.appearance.some(a => parseTime(a.time) === currentTime));
+    const currentProducts = this.options_.products.filter(product => product.hotspots && product.hotspots.some(a => parseTime(a.time) === currentTime));
 
     currentProducts.forEach(product => {
-      const appearance = product.appearance.filter(a => parseTime(a.time) === currentTime)[0];
+      const hotspot = product.hotspots.find(hs => parseTime(hs.time) === currentTime);
+
       const productName = dom.createEl('div',
         { className: 'cld-spbl-product-hotspot-name' },
         {},
         product.productName
       );
       const productTooltip = dom.createEl('div',
-        { className: 'cld-spbl-product-tooltip cld-spbl-product-tooltip-' + appearance.tooltipPosition },
+        { className: 'cld-spbl-product-tooltip cld-spbl-product-tooltip-' + hotspot.tooltipPosition },
         {},
         productName
       );
-      const productHotSpot = dom.createEl('div',
-        { className: 'cld-spbl-product-hotspot accent-color-text' },
-        { style: 'left:' + appearance.x + '; top:' + appearance.y + ';' },
+      const productHotSpot = dom.createEl('a',
+        {
+          className: 'cld-spbl-product-hotspot accent-color-text',
+          href: hotspot.clickUrl,
+          target: '_blank'
+        },
+        { style: 'left:' + hotspot.x + '; top:' + hotspot.y + ';' },
         productTooltip
       );
 
@@ -48,7 +58,7 @@ class ShoppableProductsOverlay extends Component {
     });
 
     // Remove
-    this.player_.one('timeupdate', (e) => this.clearLayout(e));
+    this.player_.one('seeking', (e) => this.clearLayout(e));
     this.player_.one('play', (e) => this.clearLayout(e));
   }
 

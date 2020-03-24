@@ -14,14 +14,15 @@ class ShoppableBarLayout extends Component {
     this.player().addClass('shoppable-panel-hidden');
 
     this.contentWrpEl_ = dom.createEl('div', { className: 'cld-spbl-bar' });
-    this.contentBannerEl_ = dom.createEl('div', { className: 'cld-spbl-banner-msg base-color-text' }, {}, this.options_.bannerMsg || 'Shop the Video');
-    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar-inner' });
 
+    this.contentBannerEl_ = dom.createEl('div', { className: 'cld-spbl-banner-msg base-color-text' }, {}, this.options_.bannerMsg || 'Shop the Video');
     this.contentWrpEl_.appendChild(this.contentBannerEl_);
-    this.contentWrpEl_.appendChild(this.contentEl_);
 
     const productsOverlay = new ShoppableProductsOverlay(this.player_, this.options_);
     this.contentWrpEl_.appendChild(productsOverlay.el_);
+
+    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar-inner' });
+    this.contentWrpEl_.appendChild(this.contentEl_);
 
     this.player().el().appendChild(this.contentWrpEl_);
 
