@@ -88,9 +88,6 @@ const playerColors = `
 `;
 
 const darkOnlyColors = `
-  .PLAYER-CLASS-PREFIX .vjs-big-play-button {
-    border-color: rgba(--text-color, 0.5);
-  }
 
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-control-bar,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-big-play-button,
@@ -136,10 +133,6 @@ const lightOnlyColors = `
     width: auto;
     padding: 0 inherit;
     margin: 0;
-  }
-
-  .PLAYER-CLASS-PREFIX .vjs-big-play-button {
-    border-color: --text-color;
   }
 
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-control-bar,
