@@ -105,40 +105,42 @@ $icon-font-path: '../fonts' !default;
     // If the .video-js font-size is 10px, then 3em equals 30px.*/
     font-size: 5em;
     width: 1.5em;
+    height: 1.5em;
 
-    height: 0;
     border: 0;
+    border-radius: 50%;
 
     left: 50%;
     top: 50%;
+    transform: translateX(-50%) translateY(-50%);
 
     .vjs-icon-placeholder {
       display: block;
-      width: 100%;
-      height: 0;
-      padding-top: 100%;
-      border-radius: 50%;
-      background: inherit;
-      transform: translateX(-50%) translateY(-50%);
+      position: relative;
+      // position and clip the play button triangle, responsively
+      top: 30%;
+      left: 40%;
+      height: 40%;
+      width: 30%;
+      overflow: hidden;
 
       &:before {
         content: "";
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
+        top: 50%;
+        left: 100%;
+
+        display: block;
+        width: 0;
+        height: 0;
 
         // currentColor sets the triangle color to the text-color.
         // text-color is defined by the active color skin.
-        background-color: currentColor;
-
-        // We use clip-path to draw the play-button triangle.
-        clip-path: polygon(
-          40% 30%, // top
-          40% 70%, // bottom
-          70% 50% // right
-        );
+        border-left: 300px solid currentColor;
+        border-top: 200px solid transparent;
+        border-bottom: 200px solid transparent;
+        margin-left: -300px;
+        margin-top:-200px;
       }
     }
   }
