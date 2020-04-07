@@ -381,7 +381,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     // Make sure to add 'video-js' class before creating videojs instance
     Utils.addClass(elem, 'video-js');
+
+    // Handle WebFont loading
     Utils.fontFace(elem, _options);
+
+    // Handle play button options
+    Utils.playButton(elem, _vjs_options);
 
     this.videojs = videojs(elem, _vjs_options);
 

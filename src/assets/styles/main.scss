@@ -148,6 +148,10 @@ $icon-font-path: '../fonts' !default;
     max-width: 15%;
   }
 
+  // Init-only big-play-button
+  &.vjs-big-play-button-init-only.vjs-has-started .vjs-big-play-button {
+    display: none;
+  }
 
   &.vjs-paused .vjs-big-play-button,
   &.vjs-paused.vjs-has-started .vjs-big-play-button {
