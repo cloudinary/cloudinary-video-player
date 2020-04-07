@@ -166,9 +166,10 @@ class VideoSource extends BaseSource {
       }
       let type = null;
       let codecTrans = null;
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive);
+      let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
+      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive, hasCodecSrcTrans);
       // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !isKeyInTransformation(opts.transformation, 'video_codec') && !isKeyInTransformation(opts.transformation, 'streaming_profile')) {
+      if (codecTrans && !hasCodecSrcTrans) {
         opts.transformation.push(codecTrans);
       }
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
@@ -187,7 +188,7 @@ const CONTAINER_MIME_TYPES = {
   hls: ['application/x-mpegURL']
 };
 
-function formatToMimeTypeAndTransformation(format, isAdaptive) {
+function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformation) {
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;
@@ -195,7 +196,7 @@ function formatToMimeTypeAndTransformation(format, isAdaptive) {
   if (!result) {
     result = [`video/${container}`, transformation];
   }
-  if (isAdaptive && codec === undefined) {
+  if (isAdaptive && codec === undefined && !hasSrcTransformation) {
     codec = DEFAULT_ADPTIVE_CODECS[container];
   }
   if (codec) {

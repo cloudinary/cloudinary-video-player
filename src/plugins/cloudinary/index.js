@@ -248,8 +248,11 @@ class CloudinaryContext extends mixin(Playlistable) {
 
       _sources = src.generateSources().filter((src) => {
         if (src.isAdaptive) {
-          let typeStr = `video/mp4; ${src.type.split('; ')[1] || ''}`;
-          return 'MediaSource' in window && MediaSource.isTypeSupported(typeStr);
+          let codec = src.type.split('; ')[1] || null;
+          if (codec) {
+            let typeStr = `video/mp4; ${src.type.split('; ')[1] || ''}`;
+            return 'MediaSource' in window && MediaSource.isTypeSupported(typeStr);
+          }
         }
         return true;
       });
