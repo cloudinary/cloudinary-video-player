@@ -1,6 +1,8 @@
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import 'videojs-contrib-ads';
 import './ima';
+import 'dashjs';
+import 'videojs-contrib-dash';
 // #endif
 import 'videojs-per-source-behaviors';
 import autoplayOnScroll from './autoplay-on-scroll';

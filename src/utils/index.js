@@ -8,6 +8,7 @@ import autobind from './autobind';
 import mixin from './mixin';
 import assign from './assign';
 import fontFace from './fontFace';
+import playButton from './playButton';
 
 function groupBy(collection, iteratee) {
   return collection.reduce((result, value, key) => {
@@ -27,6 +28,7 @@ const util = assign({},
   string,
   positioning,
   fontFace,
+  playButton,
   cloudinaryUtils,
   {
     autobind,

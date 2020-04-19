@@ -99,44 +99,66 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-big-play-button {
+
     // The font size is what makes the big play button...big.
     // All width/height values use ems, which are a multiple of the font size.
     // If the .video-js font-size is 10px, then 3em equals 30px.*/
     font-size: 5em;
+    width: 1.5em;
+    height: 1.5em;
 
-    // We're using SCSS vars here because the values are used in multiple places.
-    // Now that font size is set, the following em values will be a multiple of the
-    // new font size. If the font-size is 3em (30px), then setting any of
-    // the following values to 3em would equal 30px. 3 * font-size. */
-    $big-play-width: 1.5em;
-
-    // 1.5em = 45px default
-    $big-play-height: 1.5em;
-
-    line-height: $big-play-height;
-    height: $big-play-height;
-    width: $big-play-width;
-
-    // 0.06666em = 2px default
     border: 0;
-
-    // 0.3em = 9px default
-    // border-radius: 0.3em;
     border-radius: 50%;
 
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
+
+    .vjs-icon-placeholder {
+      display: block;
+      position: relative;
+      // position and clip the play button triangle, responsively
+      top: 30%;
+      left: 40%;
+      height: 40%;
+      width: 30%;
+      overflow: hidden;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 100%;
+
+        display: block;
+        width: 0;
+        height: 0;
+
+        // currentColor sets the triangle color to the text-color.
+        // text-color is defined by the active color skin.
+        border-left: 300px solid currentColor;
+        border-top: 200px solid transparent;
+        border-bottom: 200px solid transparent;
+        margin-left: -300px;
+        margin-top:-200px;
+      }
+    }
+  }
+
+  // Fluid big-play-button
+  &.cld-fluid .vjs-big-play-button {
+    max-width: 15%;
+  }
+
+  // Init-only big-play-button
+  &.vjs-big-play-button-init-only.vjs-has-started .vjs-big-play-button {
+    display: none;
   }
 
   &.vjs-paused .vjs-big-play-button,
   &.vjs-paused.vjs-has-started .vjs-big-play-button {
     opacity: 1;
     visibility: visible;
-
-    &:hover {
-      // opacity: 0.8;
-    }
   }
 
   &.vjs-error .vjs-error-display {
