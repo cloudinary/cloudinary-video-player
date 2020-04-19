@@ -57,7 +57,32 @@ class ShoppableWidget {
       }
     `);
 
+    const resizeHandler = () => {
+      const shoppableBarBreakpoints = [
+        ['sm', 0, 80],
+        ['md', 81, 110],
+        ['lg', 111, 170]
+      ];
+      const shoppableBarWidth = parseFloat(this.options_.width) / 100.0 * player.el_.clientWidth;
+      let inRange = false;
+      if (shoppableBarWidth) {
+        for (const [name, min, max] of shoppableBarBreakpoints) {
+          if (shoppableBarWidth > min && shoppableBarWidth <= max) {
+            this.layout_.contentWrpEl_.setAttribute('size', name);
+            inRange = name;
+          }
+        }
+        if (!inRange) {
+          this.layout_.contentWrpEl_.removeAttribute('size');
+        }
+      }
+    };
+    this.player_.on('resize', resizeHandler);
+    window.addEventListener('resize', resizeHandler);
+
     this.dispose = () => {
+      this.player_.off('resize', resizeHandler);
+      window.removeEventListener('resize', resizeHandler);
       this.layout_.dispose();
     };
   }

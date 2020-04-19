@@ -60,7 +60,8 @@ class ShoppablePanelItem extends ClickableComponent {
 const addOnHover = (el, conf, cldConf) => {
   el.setAttribute('data-hover-action', conf.action);
   if (conf.action === 'overlay') {
-    let overlay = dom.createEl('span', { className: 'cld-spbl-overlay text-color-semi-bg base-color-text' }, {}, conf.args);
+    const overlayText = dom.createEl('span', { className: 'cld-spbl-overlay-text base-color-text' }, {}, conf.args);
+    const overlay = dom.createEl('span', { className: 'cld-spbl-overlay text-color-semi-bg base-color-text' }, { title: conf.args }, overlayText);
     el.appendChild(overlay);
   } else {
     const switchImgSource = new ImageSource(conf.args.publicId, {

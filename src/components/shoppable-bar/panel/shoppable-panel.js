@@ -16,7 +16,6 @@ class ShoppablePanel extends Component {
     const itemChangeHandler = () => {
       this.render();
     };
-
     player.on('shoppableitemchanged', itemChangeHandler);
 
     this.render();

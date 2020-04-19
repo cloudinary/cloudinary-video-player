@@ -64,7 +64,9 @@ var loadStyle = function (source, ver) {
       { value: 'latest', label: 'Latest (Stable)' },
       { value: 'edge', label: 'Edge (Dev Only)' },
       { value: 'latest&flavor=min', label: 'Latest, minified' },
-      { value: 'edge&flavor=min', label: 'Edge, minified' }
+      { value: 'latest&flavor=min&dist=light', label: 'Latest, light, minified' },
+      { value: 'edge&flavor=min', label: 'Edge, minified' },
+      { value: 'edge&flavor=min&dist=light', label: 'Edge, light, minified' }
     ];
 
     // Create and append select list
@@ -99,6 +101,7 @@ var loadStyle = function (source, ver) {
     var search = new URLSearchParams(window.location.search);
     var ver = search.get('ver');
     var flavor = search.get('flavor');
+    var dist = search.get('dist');
     if (ver || flavor) {
       // Maintain the 'ver' query param on internal links.
       window.addEventListener('load', function (e) {
@@ -118,7 +121,7 @@ var loadStyle = function (source, ver) {
 
     loadScript('https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js');
     loadStyle('/cld-video-player' + (flavor ? '.' + flavor : '') + '.css', ver);
-    loadScript('/cld-video-player' + (flavor ? '.' + flavor : '') + '.js', ver);
+    loadScript('/cld-video-player' + (dist ? '.' + dist : '') + (flavor ? '.' + flavor : '') + '.js', ver);
 
     window.addEventListener('load', function() {
 
