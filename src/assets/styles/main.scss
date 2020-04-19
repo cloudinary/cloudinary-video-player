@@ -105,8 +105,7 @@ $icon-font-path: '../fonts' !default;
     // If the .video-js font-size is 10px, then 3em equals 30px.*/
     font-size: 5em;
     width: 1.5em;
-    height: 1.5em;
-
+    height: auto;
     border: 0;
     border-radius: 50%;
 
@@ -114,9 +113,17 @@ $icon-font-path: '../fonts' !default;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
 
+    &:before {
+      content: '';
+      position: relative;
+      display: block;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+
     .vjs-icon-placeholder {
       display: block;
-      position: relative;
+      position: absolute;
       // position and clip the play button triangle, responsively
       top: 30%;
       left: 40%;
