@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
@@ -20,14 +21,11 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', function(){
+    window.addEventListener('load', function () {
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      player = cld.videoPlayer('player', {
-        // Enable 'shoppable' analytics
-        // analytics: {events: ['shoppable']}
-      });
+      player = cld.videoPlayer('player');
 
       var source = {
         info: {
@@ -35,68 +33,85 @@
           description: 'Browse products shown in the video.',
         },
         shoppable: {
-          startState: 'close',
+          startState: 'openOnPlay',
+          autoClose: 2,
           showPostPlayOverlay: true,
           bannerMsg: 'START SHOPPING',
-          width: '30%',
-          products : [
+          width: '20%',
+          toggleIcon: "https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_200/v1/logo/for_white_bg/cloudinary_icon_for_white_bg.png",
+          transformation: {
+            crop: "fill",
+            aspect_ratio: "1"
+          },
+          products: [
             {
-              productName: 'Product 1',
               productId: 1,
-              title: 'Overlay on-hover & Link on-click',
-              publicId: 'sample',
+              productName: "Bell Pepper",
+              startTime: 0,
+              endTime: 2,
+              title: 'Overlay on-hover & seek on-click',
+              publicId: "docs/pepper",
+              hotspots: [
+                {
+                  time: "00:02",
+                  x: "50%",
+                  y: "50%",
+                  tooltipPosition: "left",
+                  clickUrl: "https://www.example.net/product-one"
+                }
+              ],
               onHover: {
-                action: 'overlay',
-                args: 'Product 1 Overlay'
+                action: "overlay",
+                args: "Click to see this product in the video"
               },
               onClick: {
-                action: 'goto',
+                action: "seek",
+                pause: 5,
+                args: {
+                  time: "00:01"
+                }
+              }
+            },
+            {
+              productId: 2,
+              productName: "Tomato",
+              startTime: 2,
+              endTime: 5,
+              publicId: "docs/tomatoes",
+              onHover: {
+                action: "switch",
+                args: {
+                  publicId: "docs/tomatoes_alternate"
+                }
+              },
+              onClick: {
+                action: "goto",
                 pause: true,
                 args: {
-                  url: 'https://cloudinary.com'
+                  url: "https://www.example.net/product-two"
                 }
               }
             },
             {
-              productName: 'Product 2',
-              title: 'Switch image & Seek video',
-              productId: 2,
-              publicId: 'woman',
-              transformation: {
-                width: 300,
-                height: 200,
-                crop: "fill"
-              },
+              productId: 3,
+              productName: "Banana",
+              startTime: 7,
+              endTime: 11,
+              publicId:
+                "docs/banana",
               onHover: {
-                action: 'switch',
+                action: "switch",
                 args: {
-                  publicId: 'car_lady_dog',
-                  transformation: {
-                    width: 300,
-                    height: 200,
-                    crop: "fill",
-                    effect: "grayscale"
-                  }
+                  publicId: "docs/banana_alternate"
                 }
               },
               onClick: {
-                action: 'seek',
-                pause: false,
+                action: "goto",
+                pause: true,
                 args: {
-                  time: '00:09'
+                  url:
+                    "https://www.example.net/product-three"
                 }
-              }
-            },
-            {
-              productName: 'Product 3',
-              productId: 3,
-              publicId: 'sofa_cat',
-              title: 'Custom Image Tranformations',
-              transformation: {
-                width: 300,
-                height: 300,
-                radius: "150",
-                crop: "fill"
               }
             },
             {
@@ -116,33 +131,33 @@
       player.source('snow_horses', source);
 
       // Player Events
-      player.on('productHover', function(e, data) {
+      player.on('productHover', function (e, data) {
         console.log('Product Hover: ' + JSON.stringify(data));
       });
-      player.on('productClick', function(e, data) {
+      player.on('productClick', function (e, data) {
         console.log('Product Click: ' + JSON.stringify(data));
       });
-      player.on('productBarMin', function(e) {
+      player.on('productBarMin', function (e) {
         console.log('Product bar close');
       });
-      player.on('productBarMax', function(e) {
+      player.on('productBarMax', function (e) {
         console.log('Product bar open');
       });
-      player.on('replay', function(e) {
+      player.on('replay', function (e) {
         console.log('replay');
       });
-      player.on('productHoverPost', function(e, data) {
+      player.on('productHoverPost', function (e, data) {
         console.log('Product Hover Post Playback: ' + JSON.stringify(data));
       });
-      player.on('productClickPost', function(e, data) {
+      player.on('productClickPost', function (e, data) {
         console.log('Product Click Post Playback: ' + JSON.stringify(data));
       });
-
 
     }, false);
   </script>
 
 </head>
+
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
@@ -151,13 +166,8 @@
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Shoppable Videos</h3>
 
-    <video
-      id="player"
-      playsinline
-      controls
-      muted
-      class="cld-video-player cld-fluid cld-video-player-skin-light"
-    ></video>
+    <video id="player" playsinline controls muted
+      class="cld-video-player cld-fluid cld-video-player-skin-light"></video>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -188,66 +198,85 @@
             description: 'Browse products shown in the video.',
           },
           shoppable: {
+            startState: 'openOnPlay',
+            autoClose: 2,
+            showPostPlayOverlay: true,
             bannerMsg: 'START SHOPPING',
-            width: '30%',
-            products : [
+            width: '20%',
+            toggleIcon: "https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_200/v1/logo/for_white_bg/cloudinary_icon_for_white_bg.png",
+            transformation: {
+              crop: "fill",
+              aspect_ratio: "1"
+            },
+            products: [
               {
-                productName: 'Product 1',
                 productId: 1,
-                title: 'Overlay on-hover & Link on-click',
-                publicId: 'sample',
+                productName: "Bell Pepper",
+                startTime: 0,
+                endTime: 2,
+                title: 'Overlay on-hover & seek on-click',
+                publicId: "docs/pepper",
+                hotspots: [
+                  {
+                    time: "00:02",
+                    x: "50%",
+                    y: "50%",
+                    tooltipPosition: "left",
+                    clickUrl: "https://www.example.net/product-one"
+                  }
+                ],
                 onHover: {
-                  action: 'overlay',
-                  args: 'Product 1 Overlay'
+                  action: "overlay",
+                  args: "Click to see this product in the video"
                 },
                 onClick: {
-                  action: 'goto',
+                  action: "seek",
+                  pause: 5,
+                  args: {
+                    time: "00:01"
+                  }
+                }
+              },
+              {
+                productId: 2,
+                productName: "Tomato",
+                startTime: 2,
+                endTime: 5,
+                publicId: "docs/tomatoes",
+                onHover: {
+                  action: "switch",
+                  args: {
+                    publicId: "docs/tomatoes_alternate"
+                  }
+                },
+                onClick: {
+                  action: "goto",
                   pause: true,
                   args: {
-                    url: 'https://cloudinary.com'
+                    url: "https://www.example.net/product-two"
                   }
                 }
               },
               {
-                productName: 'Product 2',
-                title: 'Switch image & Seek video',
-                productId: 2,
-                publicId: 'woman',
-                transformation: {
-                  width: 300,
-                  height: 200,
-                  crop: "fill"
-                },
+                productId: 3,
+                productName: "Banana",
+                startTime: 7,
+                endTime: 11,
+                publicId:
+                  "docs/banana",
                 onHover: {
-                  action: 'switch',
+                  action: "switch",
                   args: {
-                    publicId: 'car_lady_dog',
-                    transformation: {
-                      width: 300,
-                      height: 200,
-                      crop: "fill",
-                      effect: "grayscale"
-                    }
+                    publicId: "docs/banana_alternate"
                   }
                 },
                 onClick: {
-                  action: 'seek',
-                  pause: false,
+                  action: "goto",
+                  pause: true,
                   args: {
-                    time: '00:09'
+                    url:
+                      "https://www.example.net/product-three"
                   }
-                }
-              },
-              {
-                productName: 'Product 3',
-                productId: 3,
-                publicId: 'sofa_cat',
-                title: 'Custom Image Tranformations',
-                transformation: {
-                  width: 300,
-                  height: 300,
-                  radius: "150",
-                  crop: "fill"
                 }
               },
               {
@@ -264,22 +293,31 @@
           }
         };
 
-        // Player Events
-        player.on('productHover', function(e, data) {
-          console.log('Product Hover: ' + JSON.stringify(data));
-        });
-        player.on('productClick', function(e, data) {
-          console.log('Product Click: ' + JSON.stringify(data));
-        });
-        player.on('productBarMin', function(e) {
-          console.log('Product bar close');
-        });
-        player.on('productBarMax', function(e) {
-          console.log('Product bar open');
-        });
-
         // Play source
         player.source('snow_horses', source);
+
+        // Player Events
+        player.on('productHover', function (e, data) {
+          console.log('Product Hover: ' + JSON.stringify(data));
+        });
+        player.on('productClick', function (e, data) {
+          console.log('Product Click: ' + JSON.stringify(data));
+        });
+        player.on('productBarMin', function (e) {
+          console.log('Product bar close');
+        });
+        player.on('productBarMax', function (e) {
+          console.log('Product bar open');
+        });
+        player.on('replay', function (e) {
+          console.log('replay');
+        });
+        player.on('productHoverPost', function (e, data) {
+          console.log('Product Hover Post Playback: ' + JSON.stringify(data));
+        });
+        player.on('productClickPost', function (e, data) {
+          console.log('Product Click Post Playback: ' + JSON.stringify(data));
+        });
 
       </code>
     </pre>
@@ -294,4 +332,5 @@
   <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
+
 </html>
