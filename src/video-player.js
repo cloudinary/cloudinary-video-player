@@ -522,6 +522,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
+    if (this.videojs.shoppable) {
+      this.videojs.shoppable(this.videojs, options.shoppable);
+    }
 
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
