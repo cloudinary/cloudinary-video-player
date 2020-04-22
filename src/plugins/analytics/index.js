@@ -130,6 +130,41 @@ class AnalyticsPlugin {
         }
       };
 
+      const shoppableProductHover = (event, data) => {
+        this.track({ action: 'productHover', label: data.productName });
+      };
+
+      const shoppableProductClick = (event, data) => {
+        this.track({ action: 'productClick', label: data.productName });
+      };
+
+      const shoppableBarMax = () => {
+        this.track({ action: 'shoppableBar', label: 'opened' });
+      };
+
+      const shoppableBarMin = () => {
+        this.track({ action: 'shoppableBar', label: 'closed' });
+      };
+      const shoppableReplay = () => {
+        this.track({ action: 'replay' });
+      };
+      const shoppableProductClickPost = (event, data) => {
+        this.track({ action: 'productClickPostPlay', label: data.productName });
+      };
+      const shoppableProductHoverPost = (event, data) => {
+        this.track({ action: 'productHoverPostPlay', label: data.productName });
+      };
+
+      if (this.events.shoppable) {
+        this.player.on('productHover', shoppableProductHover.bind(this));
+        this.player.on('productClick', shoppableProductClick.bind(this));
+        this.player.on('productHoverPost', shoppableProductHoverPost.bind(this));
+        this.player.on('productClickPost', shoppableProductClickPost.bind(this));
+        this.player.on('productBarMin', shoppableBarMin.bind(this));
+        this.player.on('productBarMax', shoppableBarMax.bind(this));
+        this.player.on('replay', shoppableReplay.bind(this));
+      }
+
       if (this.events.play) {
         this.player.on('play', play.bind(this));
       }

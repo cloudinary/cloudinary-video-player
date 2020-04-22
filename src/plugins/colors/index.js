@@ -85,10 +85,41 @@ const playerColors = `
   .PLAYER-CLASS-PREFIX .cld-video-player-floater-close polygon {
     fill: --base-color;
   }
+
+  .PLAYER-CLASS-PREFIX .cld-spbl-product-hotspot:after {
+    background: --base-color;
+    box-shadow: 0 0 0 4px --accent-color, 0 0 0 8px rgba(--text-color, 0.24);
+  }
+
+  .PLAYER-CLASS-PREFIX .cld-spbl-product-tooltip {
+    color: --base-color;
+    background: --text-color;
+  }
+
+  .PLAYER-CLASS-PREFIX .base-color-semi-bg {
+    background: rgba(--base-color, 0.7);
+  }
+
+  .PLAYER-CLASS-PREFIX .text-color-semi-bg {
+    background: rgba(--text-color, 0.7);
+  }
+
+  .PLAYER-CLASS-PREFIX .text-color-text {
+    color: --text-color;
+  }
+
+  .PLAYER-CLASS-PREFIX .base-color-text {
+    color: --base-color;
+  }
+
+  .PLAYER-CLASS-PREFIX .accent-color-text {
+    color: --accent-color;
+  }
 `;
 
 const darkOnlyColors = `
 
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .base-color-bg,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-control-bar,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-big-play-button,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-menu-button
@@ -135,6 +166,7 @@ const lightOnlyColors = `
     margin: 0;
   }
 
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .base-color-bg,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-control-bar,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-big-play-button,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-menu-button .vjs-menu-content {

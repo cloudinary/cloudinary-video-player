@@ -9,6 +9,7 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+
 import {
   CLASS_PREFIX,
   skinClassPrefix,
@@ -343,6 +344,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
+
     const initJumpButtons = () => {
       if (!_options.showJumpControls && this.videojs.controlBar) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
@@ -519,6 +521,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   source(publicId, options = {}) {
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
+    }
+    if (this.videojs.shoppable) {
+      this.videojs.shoppable(this.videojs, options.shoppable);
     }
 
     if (VideoPlayer.allowUsageReport()) {

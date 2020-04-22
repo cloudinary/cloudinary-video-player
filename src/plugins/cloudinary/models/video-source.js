@@ -172,6 +172,9 @@ class VideoSource extends BaseSource {
       if (codecTrans && !hasCodecSrcTrans) {
         opts.transformation.push(codecTrans);
       }
+      if (opts.format === 'auto') {
+        delete opts.format;
+      }
       src = `${this.config().url(this.publicId(), opts)}${queryString}`;
       return { type, src, cldSrc: this, isAdaptive: isAdaptive };
     });

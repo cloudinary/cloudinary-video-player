@@ -113,5 +113,8 @@
   }, {
     "name": "audio",
     "svg": "hardware/svg/production/ic_headset_48px.svg"
+  }, {
+    "name": "cart",
+    "svg": "action/svg/production/ic_shopping_cart_48px.svg"
   }]
 }
