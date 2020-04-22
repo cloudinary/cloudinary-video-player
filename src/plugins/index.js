@@ -3,7 +3,7 @@ import 'videojs-contrib-ads';
 import './ima';
 import 'dashjs';
 import 'videojs-contrib-dash';
-import shoppable from './cld-interactive-video';
+import interactive from './interactive-plugin';
 // #endif
 import 'videojs-per-source-behaviors';
 import autoplayOnScroll from './autoplay-on-scroll';
@@ -21,6 +21,6 @@ export {
   cloudinary,
   analytics,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  shoppable
+  interactive
   // #endif
 };
