@@ -23,7 +23,10 @@ class ShoppableWidget {
   constructor(player, options = {}) {
     this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
-    this.render();
+
+    this.init = () => {
+      this.render();
+    };
 
     if (this.options_.showPostPlayOverlay) {
       this.player_.on('ended', () => {
