@@ -28,7 +28,7 @@
       });
 
       // Add a custom error handler on 'error' event
-      player.on('error', (e) => {
+      player.on('error', function(e) {
         const error = e.Player.videojs.error(); // Get current error
 
         // Custom error code should be > 99, smaller values might already be used by the player.
@@ -36,7 +36,7 @@
 
         // Replace current error message with your custom error message
         if (error && error.code !== customErrorCode) {
-          errorContainerText = `Error: ${error.statusCode}, ${error.message}`;
+          errorContainerText = 'Error:' + error.statusCode + ',' + error.message;
 
           // Set text under the video player
           let errorContainer = document.querySelector('.error-container');
