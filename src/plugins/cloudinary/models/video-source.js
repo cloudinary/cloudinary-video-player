@@ -153,7 +153,7 @@ class VideoSource extends BaseSource {
       let src = null;
       const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
       const format = normalizeFormat(sourceType);
-      let isAdaptive = ['mpd', 'm3u8'].includes(format);
+      let isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
       const opts = {};
       if (srcTransformation) {
         opts.transformation = srcTransformation;
