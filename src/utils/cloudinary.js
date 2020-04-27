@@ -15,7 +15,8 @@ const handleCldError = (that, options) => {
       let filtered = [];
       res.forEach(r => {
         if (r.status >= 200 && r.status < 399 && r.url !== '') {
-          filtered.push(r.url);
+          let parsedUri = parseUri(r.url);
+          filtered.push(parsedUri.host + parsedUri.path);
         }
       });
       if (filtered.length === 0) {
@@ -28,7 +29,10 @@ const handleCldError = (that, options) => {
           statusCode: res[0].status
         }));
       } else {
-        let goodSrcs = srcs.filter(s => filtered.indexOf(s.src) > -1);
+        let goodSrcs = srcs.filter(s => {
+          let origUrl = parseUri(s.src);
+          return filtered.indexOf(origUrl.host + origUrl.path) !== -1;
+        });
         if (goodSrcs && goodSrcs.length) {
           console.log('Trying urls: ' + JSON.stringify(goodSrcs));
           that.videojs.src(goodSrcs);
@@ -47,6 +51,38 @@ const handleCldError = (that, options) => {
     that.videojs.error({ code: 6, message: 'No supported media sources' });
   }
 };
+
+// for IE 11
+function parseUri (str) {
+  let o = {
+    strictMode: false,
+    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
+    q: {
+      name: 'queryKey',
+      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+    },
+    parser: {
+      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+    }
+  };
+  let m = o.parser[o.strictMode ? 'strict' : 'loose'].exec(str);
+  let uri = {};
+  let i = 14;
+
+  while (i--) {
+    uri[o.key[i]] = m[i] || '';
+  }
+
+  uri[o.q.name] = {};
+  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+    if ($1) {
+      uri[o.q.name][$1] = $2;
+    }
+  });
+
+  return uri;
+}
 
 function getCloudinaryInstanceOf(Klass, obj) {
   if (obj instanceof Klass) {
