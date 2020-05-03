@@ -31,10 +31,13 @@ const handleCldError = (that, options) => {
       } else {
         let goodSrcs = srcs.filter(s => {
           let origUrl = parseUri(s.src);
-          return filtered.indexOf(origUrl.host + origUrl.path) !== -1;
+          return filtered.indexOf(origUrl.host + origUrl.path) !== -1 && s.try !== true;
         });
         if (goodSrcs && goodSrcs.length) {
           console.log('Trying urls: ' + JSON.stringify(goodSrcs));
+          goodSrcs.forEach(s => {
+            s.try = true;
+          });
           that.videojs.src(goodSrcs);
           that.play();
         } else {
