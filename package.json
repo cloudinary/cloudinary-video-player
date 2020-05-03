@@ -20,8 +20,7 @@
     "dry:deploy": "node webpack/deploy.js dry",
     "test": "jest --no-cache --detectOpenHandles",
     "pretest": "node webpack/pre-build.js",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "snyk-protect": "snyk protect"
   },
   "author": "Cloudinary",
   "license": "MIT",
