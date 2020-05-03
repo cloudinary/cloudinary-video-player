@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "description": "Cloudinary Video Player",
   "scripts": {
-    "prepare": "shx cp env.example.js env.js",
+    "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
     "prestart": "node webpack/pre-build.js",
     "clean": "rm -rf dist",
@@ -19,7 +19,8 @@
     "postdeploy": "git push origin master --follow-tags",
     "dry:deploy": "node webpack/deploy.js dry",
     "test": "jest --no-cache --detectOpenHandles",
-    "pretest": "node webpack/pre-build.js"
+    "pretest": "node webpack/pre-build.js",
+    "snyk-protect": "snyk protect"
   },
   "author": "Cloudinary",
   "license": "MIT",
@@ -38,7 +39,8 @@
     "videojs-ima": "^1.5.1",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
-    "wolfy87-eventemitter": "^5.1.0"
+    "wolfy87-eventemitter": "^5.1.0",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -88,5 +90,6 @@
     "webpack-merge": "^4.2.1",
     "webpack-shell-plugin": "^0.5.0",
     "webworkify-webpack2": "^1.1.9"
-  }
+  },
+  "snyk": true
 }
