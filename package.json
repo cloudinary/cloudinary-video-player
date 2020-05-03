@@ -3,7 +3,7 @@
   "version": "1.4.0",
   "description": "Cloudinary Video Player",
   "scripts": {
-    "prepare": "shx cp env.example.js env.js",
+    "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
     "prestart": "node webpack/pre-build.js",
     "clean": "rm -rf dist",
@@ -41,7 +41,7 @@
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
     "wolfy87-eventemitter": "^5.1.0",
-    "snyk": "^1.189.0"
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
