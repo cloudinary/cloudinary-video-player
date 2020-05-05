@@ -31,7 +31,10 @@ Cloudinary Video Player can also be included directly from the [Unpkg CDN](https
 
 ### Packages
 
-For your convenience, there are currently 4 variations for our package:
+The Cloudinary video player offers standard and light package variations, available in either minified or non-minified formats.
+* Standard package: Includes all functionality described in this video player [documentation](https://cloudinary.com/documentation/cloudinary_video_player).  
+* Light package: Excludes the following optional functionality: Adaptive bitrate streaming (HLS and MPEG-DASH), Video ads, Shoppable videos (alpha)  
+
 - `cld-video-player.js` - Non minified version which includes all optional modules.
 - `cld-video-player.min.js` - Minified version which includes all optional modules.
 - `cld-video-player.light.js` - Non minified version which does not include any optional modules.
@@ -39,15 +42,19 @@ For your convenience, there are currently 4 variations for our package:
 
 #### Adaptive Streaming
 
-- HLS is supported out of the box. To use an m3u8 as the video source, you can specify sourceTypes=['hls'].
+- HLS is supported out of the box in both standard and light packages. To use an m3u8 as the video source, you can specify sourceTypes=['hls'].
 
 - MPEG-DASH support:
-If you plan to use adaptive bitrate streaming to deliver MPEG-DASH files in your video player, include the following files in addition to the files described above:
+Is enabled by specifying sourceTypes=['dash'] for your video source.
+
+- MPEG-DASH dependencies:
+For version 1.4.0 and higher: MPEG-DASH dependencies are already included in the standard package.  
+For older versions, or if using the light package: to use MPEG-DASH files in your video player, include the following files in addition to the files described above:
+
 ```javascript
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.0.2/dash.all.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.min.js" type="text/javascript"></script>
 ```
-Afterwards, you can specify sourceTypes=['dash'] for your video source.
 
 ### Cloudinary JavaScript library
 
@@ -77,8 +84,12 @@ Instantiate a new cloudinary Video Player:
 cld.videoPlayer('example-player')
 ```
 
-#### Examples
-Live demo and examples can be found at CodePen project: https://codepen.io/team/Cloudinary/project/editor/XLYMQV
+#### Documentation
+- [Documentation](https://cloudinary.com/documentation/cloudinary_video_player)
+- [API Reference](https://cloudinary.com/documentation/video_player_api_reference)
+- [Demo](https://demo.cloudinary.com/video-player/)
+- [Code Examples](https://cloudinary.github.io/cloudinary-video-player/)
+- [Video Player Studio](https://studio.cloudinary.com/) 
 
 #### Development
 In order to run this project locally:
