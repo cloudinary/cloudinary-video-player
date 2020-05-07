@@ -1,5 +1,9 @@
 # cloudinary-video-player
 
+The Cloudinary Video Player is a JavaScript-based HTML5 video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
+
+This README includes basic information for installation and getting started. View the [documentation](https://cloudinary.com/documentation/cloudinary_video_player) for comprehensive guidance on integration and all the available features.
+
 ## Installation
 
 ### NPM
@@ -40,27 +44,11 @@ The Cloudinary video player offers standard and light package variations, availa
 - `cld-video-player.light.js` - Non minified version which does not include any optional modules.
 - `cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
 
-#### Adaptive Streaming
-
-- HLS is supported out of the box in both standard and light packages. To use an m3u8 as the video source, you can specify sourceTypes=['hls'].
-
-- MPEG-DASH support:
-Is enabled by specifying sourceTypes=['dash'] for your video source.
-
-- MPEG-DASH dependencies:
-For version 1.4.0 and higher: MPEG-DASH dependencies are already included in the standard package.  
-For older versions, or if using the light package: to use MPEG-DASH files in your video player, include the following files in addition to the files described above:
-
-```javascript
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.0.2/dash.all.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.min.js" type="text/javascript"></script>
-```
-
 ### Cloudinary JavaScript library
 
 The Core Cloudinary JavaScript library provides several classes, defined under the "`cloudinary`" domain. The reference documentation is located at https://cloudinary.github.io/pkg-cloudinary-core
 
-#### Getting started
+## Getting started
 
 Create a video tag containing `cld-video-player` class and a supported skin class:
 ```html
@@ -84,14 +72,14 @@ Instantiate a new cloudinary Video Player:
 cld.videoPlayer('example-player')
 ```
 
-#### Documentation
+## Documentation
 - [Documentation](https://cloudinary.com/documentation/cloudinary_video_player)
 - [API Reference](https://cloudinary.com/documentation/video_player_api_reference)
 - [Demo](https://demo.cloudinary.com/video-player/)
 - [Code Examples](https://cloudinary.github.io/cloudinary-video-player/)
 - [Video Player Studio](https://studio.cloudinary.com/) 
 
-#### Development
+## Development
 In order to run this project locally:
 1. [Install yarn](https://yarnpkg.com/lang/en/docs/install/)
 1. Clone this repository
