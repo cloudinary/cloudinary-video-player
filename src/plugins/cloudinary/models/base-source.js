@@ -104,5 +104,4 @@ class BaseSource {
 
 }
 
-
 export default BaseSource;
