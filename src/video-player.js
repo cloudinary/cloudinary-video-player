@@ -91,6 +91,8 @@ const resolveVideoElement = (elem) => {
       elem = null;
     }
 
+    elem = elem || document.querySelector(`#${id}_html5_api`);
+
     if (!elem) {
       throw new Error(`Could not find element with id ${id}`);
     }
