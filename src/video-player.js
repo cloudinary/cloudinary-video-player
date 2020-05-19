@@ -85,7 +85,7 @@ const resolveVideoElement = (elem) => {
       id = id.slice(1);
     }
 
-    elem = document.querySelector(`#${id}`);
+    elem = document.querySelector(`#${id}`) || videojs.getPlayers(id);
 
     if (!elem) {
       throw new Error(`Could not find element with id ${id}`);
