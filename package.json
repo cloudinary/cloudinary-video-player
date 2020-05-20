@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.4.1-edge.2",
+  "version": "1.4.1-edge.3",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
