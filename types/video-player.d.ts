@@ -1,412 +1,406 @@
 /* eslint-disable */
-
-// Type definitions for ./src/video-player.js
+// Type definitions for ../src/video-player.js
 // Project: [LIBRARY_URL_HERE]
 // Definitions by: [YOUR_NAME_HERE] <[YOUR_URL_HERE]>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-// normalizeAutoplay.!0
 
 import {VideoJsPlayerOptions} from "video.js";
 import {Transformation} from "cloudinary-core"
 
-declare namespace VideoPlayer {
+export interface PosterOptions {
+    publicId: string,
+    transformation: Transformation[]
+}
 
-    interface PosterOptions {
-        publicId: string,
-        transformation: Transformation[]
-    }
+/**
+ * Default HLS options < Default options < Markup options < Player options
+ */
+export interface Options {
+    bigPlayButton?: boolean | string,
+    colors?: {
+        base: string,
+        accent: string,
+        text: string
+    },
+    controls?: boolean,
+    floatingWhenNotVisible?: string,
+    fluid?: boolean,
+    autoplay?: boolean,
+    fontFace?: string | boolean,
+    hideContextMenu?: boolean,
+    playbackRates?: string[],
+    playlistWidget?: {
+        direction?: string,
+        /**
+         * The total number of next videos to include in the widget.
+         * A maximum of four thumbnails can be displayed at once.
+         * If a larger number is specified for total, the widget scrolls to show the rest.
+         */
+        total?: number,
+    },
+    poster?: string,
+    posterOptions?: PosterOptions,
+    showLogo?: boolean,
+    logoImageUrl?: string,
+    logoOnclickUrl?: string,
+    transformation?: Transformation[],
+    ads?: AdsOptions,
+    analytics?: boolean,
+    allowUsageReport?: boolean,
+    /**
+     * Access all underlying capabilities of the VideoJS API
+     */
+    videoJS?: VideoJsPlayerOptions;
+}
+
+export interface SourceOptions {
+    preload?: string,
+    publicId?: string,
+    sourceTransformation?: Transformation[],
+    sourceTypes?: string[],
+}
+
+export interface AdsOptions {
+    /*
+    * The full URL of the adTag to run
+    */
+    adTagUrl: string,
+    /*
+    * string value setting when to call the adTag
+    * first-video: Calls the adTag on the first video in the playlist only.
+    * every-video: Calls the adTag on every video in the playlist.
+    * default first-video
+    */
+    adsInPlaylist?: string,
+    showCountdown?: boolean,
+    adLabel?: string
+    locale?: string,
+    prerollTimeout?: number
+    postrollTimeout?: number
+
+}
+
+export class BaseSource {
+    constructor(publicId: any, options?: {});
+
+    publicId: (publicId: string) => BaseSource;
+    cloudinaryConfig: (config: {}) => BaseSource;
+    resourceConfig: (config: any) => BaseSource;
+    transformation: (trans: any) => BaseSource;
+    queryParams: (params: any) => BaseSource;
+    getType: () => string;
+
+    config(): any;
+
+    url({transformation}?: {
+        transformation: any;
+    }): string;
+}
+
+export interface imaAdPlayer {
+    playAd: (adTad: string) => void;
+}
+
+export class VideoSource {
+    constructor(publicId: any, options?: {});
+
+    _type: string;
+    poster: (publicId: string, options?: {}) => VideoSource;
+    sourceTypes: (types: Array<string>) => VideoSource;
+    sourceTransformation: (trans: any) => VideoSource;
+    info: (info: {}) => VideoSource;
+    recommendations: (recommends: any) => VideoSource;
+    objectId: number;
+}
+
+export class ImageSource {
+    constructor(publicId: string, options?: {});
+
+    _type: string;
+}
+
+/**
+ *
+ */
+export default class VideoPlayer {
+    /**
+     *
+     * @param elem
+     *          The video element for the player
+     * @param options
+     *        Video player options
+     * @param ready
+     *        Is the player ready to play
+     */
+    constructor(elem: string, options: Options, ready: boolean)
 
     /**
-     * Default HLS options < Default options < Markup options < Player options
+     *
+     * @param config
      */
-    interface Options {
-        bigPlayButton?: boolean | string,
-        colors?: {
-            base: string,
-            accent: string,
-            text: string
-        },
-        controls?: boolean,
-        floatingWhenNotVisible?: string,
-        fluid?: boolean,
-        autoplay?: boolean,
-        fontFace?: string | boolean,
-        hideContextMenu?: boolean,
-        playbackRates?: string[],
-        playlistWidget?: {
-            direction?: string,
-            /**
-             * The total number of next videos to include in the widget.
-             * A maximum of four thumbnails can be displayed at once.
-             * If a larger number is specified for total, the widget scrolls to show the rest.
-             */
-            total?: number,
-        },
-        poster?: string,
-        posterOptions?: PosterOptions,
-        showLogo?: boolean,
-        logoImageUrl?: string,
-        logoOnclickUrl?: string,
-        transformation?: Transformation[],
-        ads?: AdsOptions,
-        analytics?: boolean,
-        allowUsageReport?: boolean,
-        /**
-         * Access all underlying capabilities of the VideoJS API
-         */
-        videoJS: VideoJsPlayerOptions;
-    }
-
-    interface SourceOptions {
-        preload?: string,
-        publicId: string,
-        sourceTransformation?: Transformation[],
-        sourceTypes?: string[],
-    }
-
-    interface AdsOptions {
-        /*
-        * The full URL of the adTag to run
-        */
-        adTagUrl: string,
-        /*
-        * string value setting when to call the adTag
-        * first-video: Calls the adTag on the first video in the playlist only.
-        * every-video: Calls the adTag on every video in the playlist.
-        * default first-video
-        */
-        adsInPlaylist?: string,
-        showCountdown?: boolean,
-        adLabel?: string
-        locale?: string,
-        prerollTimeout?: number
-        postrollTimeout?: number
-
-    }
-
-    class BaseSource {
-        constructor(publicId: any, options?: {});
-
-        publicId: (publicId: string) => BaseSource;
-        cloudinaryConfig: (config: {}) => BaseSource;
-        resourceConfig: (config: any) => BaseSource;
-        transformation: (trans: any) => BaseSource;
-        queryParams: (params: any) => BaseSource;
-        getType: () => string;
-
-        config(): any;
-
-        url({transformation}?: {
-            transformation: any;
-        }): string;
-    }
-
-    interface imaAdPlayer {
-        playAd: (adTad: string) => void;
-    }
-
-    class VideoSource {
-        constructor(publicId: any, options?: {});
-
-        _type: string;
-        poster: (publicId: string, options?: {}) => VideoSource;
-        sourceTypes: (types: Array<string>) => VideoSource;
-        sourceTransformation: (trans: any) => VideoSource;
-        info: (info: {}) => VideoSource;
-        recommendations: (recommends: any) => VideoSource;
-        objectId: number;
-    }
-
-    class ImageSource {
-        constructor(publicId: string, options?: {});
-
-        _type: string;
-    }
+    cloudinaryConfig(config: any): any;
 
     /**
      *
      */
-    class VideoPlayer {
+    currentPublicId(): string;
 
-        /**
-         *
-         * @param elem
-         *          The video element for the player
-         * @param options
-         *        Video player options
-         * @param ready
-         *        Is the player ready to play
-         */
-        new(elem: string, options: Options, ready: boolean);
+    /**
+     *
+     */
+    currentSourceUrl(): string;
 
-        /**
-         *
-         * @param config
-         */
-        cloudinaryConfig(config: any): any;
+    /**
+     *
+     */
+    currentPoster(): ImageSource;
 
-        /**
-         *
-         */
-        currentPublicId(): string;
+    /**
+     *
+     * @param publicId
+     * @param options
+     */
+    source(publicId: string, options: SourceOptions): VideoSource;
 
-        /**
-         *
-         */
-        currentSourceUrl(): string;
+    /**
+     *
+     * @param options
+     */
+    posterOptions(options: any): VideoPlayer;
 
-        /**
-         *
-         */
-        currentPoster(): ImageSource;
+    /**
+     *
+     * @param name
+     */
+    skin(name: any): string;
 
-        /**
-         *
-         * @param publicId
-         * @param options
-         */
-        source(publicId: string, options: object): VideoSource;
+    /**
+     *
+     * @param sources
+     * @param options
+     */
+    playlist(sources: Array<{}>, options: {}): VideoPlayer;
 
-        /**
-         *
-         * @param options
-         */
-        posterOptions(options: any): VideoPlayer;
+    /**
+     *
+     * @param tag
+     * @param options
+     */
+    playlistByTag(tag: string, options: {}): Array<VideoSource>;
 
-        /**
-         *
-         * @param name
-         */
-        skin(name: any): string;
+    /**
+     *
+     * @param tag
+     * @param options
+     */
+    sourcesByTag(tag: string, options: {}): Array<VideoSource>;
 
-        /**
-         *
-         * @param sources
-         * @param options
-         */
-        playlist(sources: Array<{}>, options: {}): VideoPlayer;
+    /**
+     *
+     * @param bool
+     * @return
+     */
+    fluid(bool: boolean): boolean | undefined | VideoPlayer;
 
-        /**
-         *
-         * @param tag
-         * @param options
-         */
-        playlistByTag(tag: string, options: {}): Array<VideoSource>;
+    /**
+     *
+     * @return
+     */
+    play(): VideoPlayer;
 
-        /**
-         *
-         * @param tag
-         * @param options
-         */
-        sourcesByTag(tag: string, options: {}): Array<VideoSource>;
+    /**
+     *
+     * @return
+     */
+    stop(): VideoPlayer;
 
-        /**
-         *
-         * @param bool
-         * @return
-         */
-        fluid(bool: boolean): boolean | undefined | VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    playPrevious(): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        play(): VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    playNext(): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        stop(): VideoPlayer;
+    /**
+     *
+     * @param trans
+     */
+    transformation(trans: Transformation[]): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        playPrevious(): VideoPlayer;
+    /**
+     *
+     * @param types
+     */
+    sourceTypes(types: string[]): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        playNext(): VideoPlayer;
+    /**
+     *
+     * @param trans
+     */
+    sourceTransformation(trans: Transformation[]): VideoPlayer;
 
-        /**
-         *
-         * @param trans
-         */
-        transformation(trans: Transformation[]): VideoPlayer;
+    /**
+     *
+     * @param autoShow
+     */
+    autoShowRecommendations(autoShow: boolean): VideoPlayer;
 
-        /**
-         *
-         * @param types
-         */
-        sourceTypes(types: string[]): VideoPlayer;
+    /**
+     *
+     */
+    duration(): number;
 
-        /**
-         *
-         * @param trans
-         */
-        sourceTransformation(trans: Transformation[]): VideoPlayer;
+    /**
+     *
+     * @param dimension
+     * @return
+     */
+    height(dimension: number): VideoPlayer;
 
-        /**
-         *
-         * @param autoShow
-         */
-        autoShowRecommendations(autoShow: boolean): VideoPlayer;
+    /**
+     *
+     * @param dimension
+     * @return
+     */
+    width(dimension: number): VideoPlayer;
 
-        /**
-         *
-         */
-        duration(): number;
+    /**
+     *
+     * @param volume
+     * @return
+     */
+    volume(volume: number): VideoPlayer;
 
-        /**
-         *
-         * @param dimension
-         * @return
-         */
-        height(dimension: number): VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    mute(): VideoPlayer;
 
-        /**
-         *
-         * @param dimension
-         * @return
-         */
-        width(dimension: number): VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    unmute(): VideoPlayer;
 
-        /**
-         *
-         * @param volume
-         * @return
-         */
-        volume(volume: number): VideoPlayer;
+    /**
+     *
+     */
+    isMuted(): boolean;
 
-        /**
-         *
-         * @return
-         */
-        mute(): VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    pause(): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        unmute(): VideoPlayer;
+    /**
+     *
+     * @param offsetSeconds
+     * @return
+     */
+    currentTime(offsetSeconds: number): VideoPlayer;
 
-        /**
-         *
-         */
-        isMuted(): boolean;
+    /**
+     *
+     * @return
+     */
+    maximize(): VideoPlayer;
 
-        /**
-         *
-         * @return
-         */
-        pause(): VideoPlayer;
+    /**
+     *
+     * @return
+     */
+    exitMaximize(): VideoPlayer;
 
-        /**
-         *
-         * @param offsetSeconds
-         * @return
-         */
-        currentTime(offsetSeconds: number): VideoPlayer;
+    /**
+     *
+     */
+    isMaximized(): boolean;
 
-        /**
-         *
-         * @return
-         */
-        maximize(): VideoPlayer;
+    /**
+     *
+     */
+    dispose(): void;
 
-        /**
-         *
-         * @return
-         */
-        exitMaximize(): VideoPlayer;
+    /**
+     *
+     * @param bool
+     * @return
+     */
+    controls(bool: boolean): VideoPlayer;
 
-        /**
-         *
-         */
-        isMaximized(): boolean;
+    /**
+     *
+     * @return
+     */
+    ima(): imaAdPlayer;
 
-        /**
-         *
-         */
-        dispose(): void;
+    /**
+     *
+     * @param bool
+     * @return
+     */
+    loop(bool: boolean): VideoPlayer;
 
-        /**
-         *
-         * @param bool
-         * @return
-         */
-        controls(bool: boolean): VideoPlayer;
+    /**
+     *
+     */
+    el(): Element;
 
-        /**
-         *
-         * @return
-         */
-        ima(): imaAdPlayer;
+    /**
+     *
+     * @param selector
+     * @param ...args
+     * @return
+     */
+    static all(selector: string, ...args: any): VideoPlayer[];
 
-        /**
-         *
-         * @param bool
-         * @return
-         */
-        loop(bool: boolean): VideoPlayer;
+    /**
+     *
+     * @param bool
+     * @return
+     */
+    allowUsageReport(bool: any): boolean;
 
-        /**
-         *
-         */
-        el(): Element;
+    /**
+     *
+     * @param conf
+     */
+    initTextTracks(conf: any): void;
 
-        /**
-         *
-         * @param selector
-         * @param ...args
-         * @return
-         */
-        static all(selector: string, ...args: any): VideoPlayer[];
+    /**
+     *
+     */
+    nbCalls: number;
 
-        /**
-         *
-         * @param bool
-         * @return
-         */
-        allowUsageReport(bool: any): boolean;
+    /**
+     *
+     * @param maxNumberOfCalls
+     * @param timeout
+     */
+    reTryVideo(maxNumberOfCalls: number, timeout: number): void;
 
-        /**
-         *
-         * @param conf
-         */
-        initTextTracks(conf: any): void;
+    /**
+     *
+     * @return
+     */
+    isVideoReady(): boolean;
 
-        /**
-         *
-         */
-        nbCalls: number;
+    /**
+     *
+     * @param options
+     * @return
+     */
+    playlistWidget(options: any): boolean;
 
-        /**
-         *
-         * @param maxNumberOfCalls
-         * @param timeout
-         */
-        reTryVideo(maxNumberOfCalls: number, timeout: number): void;
-
-        /**
-         *
-         * @return
-         */
-        isVideoReady(): boolean;
-
-        /**
-         *
-         * @param options
-         * @return
-         */
-        playlistWidget(options: any): boolean;
-
-        /**
-         *
-         */
-        adsEnabled: boolean;
-    }
+    /**
+     *
+     */
+    adsEnabled: boolean;
 }

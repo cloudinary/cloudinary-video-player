@@ -1,6 +1,6 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
-
+const { defaults } = require('jest-config');
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -24,7 +24,7 @@ module.exports = {
   // collectCoverageFrom: null,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -61,7 +61,7 @@ module.exports = {
 
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
-      "node_modules",
+    'node_modules'
   ],
 
   // An array of file extensions your modules use
@@ -71,10 +71,10 @@ module.exports = {
   //   "jsx",
   //   "node"
   // ],
-
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'd.ts'],
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    "cloudinary-core": "<rootDir>/test/mocks/cloudinary-core-mock.js"
+    'cloudinary-core': '<rootDir>/test/mocks/cloudinary-core-mock.js'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -87,7 +87,7 @@ module.exports = {
   // notifyMode: "always",
 
   // A preset that is used as a base for Jest's configuration
-  preset: "jest-puppeteer",
+  preset: 'jest-puppeteer',
 
   // Run tests from one or more projects
   // projects: null,
@@ -180,5 +180,8 @@ module.exports = {
   // watchPathIgnorePatterns: [],
 
   // Whether to use watchman for file crawling
-  watchman: false
+  watchman: false,
+  'transform': {
+    '^.+\\.(ts|tsx)$': 'ts-jest'
+  }
 };
