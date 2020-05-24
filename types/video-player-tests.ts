@@ -10,3 +10,9 @@ player.source('test', {
 })
 player.play();
 player.currentPublicId();
+player.pause()
+
+
+let player2 = new VideoPlayer('player2' , {
+    bigPlayButton: false,
+}, false)
