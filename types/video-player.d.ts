@@ -234,24 +234,24 @@ export class Playlist {
 }
 
 export class CloudinaryContext {
-    constructor(player: any, options?: {});
-    player: any;
-    source: (source: any, options?: {}) => any;
-    buildSource: (publicId: any, options?: {}) => any;
-    posterOptions: (options: any) => any;
-    cloudinaryConfig: (config: any) => any;
-    transformation: (trans: any) => any;
-    sourceTypes: (types: any) => any;
-    getCurrentSources: () => any;
-    sourceTransformation: (trans: any) => any;
+    constructor(player: VideoPlayer, options?: Options);
+    player: VideoPlayer;
+    source: (source: VideoSource, options?: SourceOptions) => VideoPlayer;
+    buildSource: (publicId: string|SourceOptions, options?: SourceOptions) => VideoPlayer;
+    posterOptions: (options: PosterOptions) => VideoPlayer;
+    cloudinaryConfig: (config: Configuration) => VideoPlayer;
+    transformation: (trans: Transformation[]) => VideoPlayer;
+    sourceTypes: (types: string[],) => VideoPlayer;
+    getCurrentSources: () => VideoSource[];
+    sourceTransformation: (trans: Transformation[]) => VideoPlayer;
     on: (...args: any[]) => any;
     one: (...args: any[]) => any;
     off: (...args: any[]) => any;
-    autoShowRecommendations: (autoShow: any) => any;
+    autoShowRecommendations: (autoShow: any) => boolean;
     dispose: () => void;
-    currentSourceType(): any;
-    currentPublicId(): any;
-    currentPoster(): any;
+    currentSourceType(): string;
+    currentPublicId(): string;
+    currentPoster(): ImageSource;
 }
 
 export default class VideoPlayer {
@@ -318,232 +318,228 @@ export default class VideoPlayer {
     skin(name: string): string;
 
     /**
+     * Create a playlist
+     * @param {Array.<Object>} sources
+     *        A list of sources for the playlist
      *
-     * @param sources
-     * @param options
+     * @param {Object} options
+     *        Options from the playlist sources the options would be added to each source
+     * @return {Object} The video player
      */
-    playlist(sources: Array<SourceOptions>, options: {}): VideoPlayer;
+    playlist(sources: SourceOptions[], options: SourceOptions): VideoPlayer;
 
     /**
-     *
-     * @param tag
-     * @param options
+     * Create a playlist from a cloudinary tag
+     * @param {String} tag
+     *        The tag name to build the playlist from
+     * @param {Object} options
+     *        Options from the playlist sources the options would be added to each source
+     * @return {Object} The video player
      */
-    playlistByTag(tag: string, options: {}): Array<VideoSource>;
+    playlistByTag(tag: string, options: SourceOptions): VideoPlayer;
 
     /**
-     *
-     * @param tag
-     * @param options
+     * Get an Array ot sources from a cloudinary tag
+     * @param {String} tag
+     *        The tag name to get the sources by
+     * @param {Object} options
+     *        Options to apply to all sources
+     * @return An array of sources
      */
-    sourcesByTag(tag: string, options: {}): Array<VideoSource>;
+    sourcesByTag(tag: string, options: {}): VideoSource[];
 
     /**
-     *
-     * @param bool
+     * Should the player be responsive
+     * @param {boolean} bool
      * @return
      */
     fluid(bool: boolean): boolean | undefined | VideoPlayer;
 
     /**
-     *
-     * @return
+     * Play the video
+     * @return {Object} the video player
      */
     play(): VideoPlayer;
 
     /**
-     *
-     * @return
+     * Stop the video
+     * @return {Object} the video player
      */
     stop(): VideoPlayer;
 
     /**
-     *
-     * @return
+     * In a playlist play the previous video
+     * @return {Object} the video player
      */
     playPrevious(): VideoPlayer;
 
     /**
      *
-     * @return
+     * In a playlist play the next video
+     * @return {Object} the video player
      */
     playNext(): VideoPlayer;
 
     /**
-     *
-     * @param trans
+     * Apply transformations to the video
+     * @param {Array.Transformation} trans
+     *        An array of transformations to apply
+     * @return {Object} the video player
      */
     transformation(trans: Transformation[]): VideoPlayer;
 
     /**
-     *
-     * @param types
+     * Set the source types for the video
+     * @param {array} types
+     *        The array of types
+     * @return {Object} the video player
      */
     sourceTypes(types: string[]): VideoPlayer;
 
     /**
      *
-     * @param trans
+     * Apply transformations to this source
+     * @param {Array.Transformation} trans
+     *        An array of transformations to apply
+     * @return {Object} the video player
      */
     sourceTransformation(trans: Transformation[]): VideoPlayer;
 
     /**
+     * get or set would auto recommendation be shown
      *
-     * @param autoShow
+     * @param {boolean} autoShow
+     * @return {Object} the video player
      */
-    autoShowRecommendations(autoShow: boolean): VideoPlayer;
+    autoShowRecommendations(autoShow?: boolean): VideoPlayer;
 
     /**
-     *
+     * Get the video duration
+     * @return {number} the video duration
      */
     duration(): number;
 
     /**
-     *
-     * @param dimension
-     * @return
+     * Set the player height
+     * @param {number} dimension
+     *        The height in pixels
+     * @return {Object} the video player
      */
     height(dimension: number): VideoPlayer;
 
     /**
-     *
-     * @param dimension
-     * @return
+     * Set the width of the player
+     * @param {number} dimension
+     *        The width in pixels
+     * @return {Object} the video player
      */
     width(dimension: number): VideoPlayer;
 
     /**
-     *
-     * @param volume
-     * @return
+     * Set the player volume
+     * @param {number} volume
+     *        Volume to apply
+     * @return {Object} the video player
      */
     volume(volume: number): VideoPlayer;
 
     /**
-     *
-     * @return
+     * Mute the video
+     * @return {Object} the video player
      */
     mute(): VideoPlayer;
 
     /**
-     *
-     * @return
+     * Unmute the player
+     * @return {Object} the video player
      */
     unmute(): VideoPlayer;
 
     /**
-     *
+     * Is the player muted
+     * @return {boolean}
+     *         true if the player is muted
      */
     isMuted(): boolean;
 
     /**
-     *
-     * @return
+     * Pause the video
+     * @return {Object} the video player
      */
     pause(): VideoPlayer;
 
     /**
-     *
-     * @param offsetSeconds
-     * @return
+     * Set or get the current video time
+     * @param {number} offsetSeconds
+     *        optional if given the video would seek to that time
+     *        if non is given would return the current video time
+     * @return {object} the video player
      */
-    currentTime(offsetSeconds: number): VideoPlayer;
+    currentTime(offsetSeconds?: number): VideoPlayer|number;
 
     /**
-     *
-     * @return
+     * Enter fullscreen mode
+     * @return {object} The video player
      */
     maximize(): VideoPlayer;
 
     /**
-     *
-     * @return
+     * Exit full screen mode
+     * @return {object} The video player
      */
     exitMaximize(): VideoPlayer;
 
     /**
-     *
+     * Is the video player is in fullscreen mode
+     * @return {boolean}
      */
     isMaximized(): boolean;
 
     /**
-     *
+     * Delete the current video player
      */
     dispose(): void;
 
     /**
-     *
-     * @param bool
-     * @return
+     * Get or set would the controls be shown
+     * @param {boolean} bool
+     *        if given true to show the controls false to hide
+     *        if non is given returns the current control status
+     * @return {object|Boolean}
+     *         if the an options is given would return the video player
+     *         if not the boolean with the current state
      */
-    controls(bool: boolean): VideoPlayer;
+    controls(bool?: boolean): VideoPlayer;
 
     /**
-     *
-     * @return
+     * Get the interface to play ads
+     * @return {object} interface to play ads
      */
     ima(): imaAdPlayer;
 
     /**
-     *
-     * @param bool
-     * @return
+     * get or set if the video should automatically restart
+     * @param {boolean} bool
+     *        true to auto restart false not to
+     * @return {object|Boolean}
+     *         if the an options is given would return the video player
+     *         if not the boolean with the current state
      */
-    loop(bool: boolean): VideoPlayer;
+    loop(bool?: boolean): VideoPlayer|boolean;
 
     /**
-     *
+     * Proxy method for videojs el
      */
     el(): Element;
 
     /**
-     *
-     * @param selector
+     * create video players from a css class class selector
+     * @param {string} selector
+     *        Class name
      * @param ...args
-     * @return
+     *        arguments to pass to the video player constructor
+     * @return {Array.VideoPlayer}
+     *         An array of video player objects
      */
     static all(selector: string, ...args: any): VideoPlayer[];
-
-    /**
-     *
-     * @param bool
-     * @return
-     */
-    allowUsageReport(bool: any): boolean;
-
-    /**
-     *
-     * @param conf
-     */
-    initTextTracks(conf: any): void;
-
-    /**
-     *
-     */
-    nbCalls: number;
-
-    /**
-     *
-     * @param maxNumberOfCalls
-     * @param timeout
-     */
-    reTryVideo(maxNumberOfCalls: number, timeout: number): void;
-
-    /**
-     *
-     * @return
-     */
-    isVideoReady(): boolean;
-
-    /**
-     *
-     * @param options
-     * @return
-     */
-    playlistWidget(options: any): boolean;
-
-    /**
-     *
-     */
-    adsEnabled: boolean;
 }
