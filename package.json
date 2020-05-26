@@ -32,6 +32,7 @@
     "fetch-ponyfill": "^4.0.0",
     "get-size": "^2.0.2",
     "promise-polyfill": "^6.0.2",
+    "snyk": "^1.328.0",
     "video.js": "^7.6.5",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
@@ -39,8 +40,7 @@
     "videojs-ima": "^1.5.1",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
-    "wolfy87-eventemitter": "^5.1.0",
-    "snyk": "^1.316.2"
+    "wolfy87-eventemitter": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
