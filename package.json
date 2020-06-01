@@ -35,6 +35,8 @@
     "video.js": "^7.8.2",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
+    "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-hls-quality-selector": "^1.1.1",
     "videojs-ima": "^1.5.1",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",

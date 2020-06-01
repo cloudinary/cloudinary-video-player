@@ -5,6 +5,8 @@ import dashPlugin from './dash';
 import interactive from './interactive-plugin';
 // #endif
 import 'videojs-per-source-behaviors';
+import 'videojs-hls-quality-selector';
+import 'videojs-contrib-quality-levels';
 import autoplayOnScroll from './autoplay-on-scroll';
 import floatingPlayer from './floating-player';
 import colors from './colors';

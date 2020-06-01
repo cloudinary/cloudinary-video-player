@@ -233,6 +233,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initAnalytics();
       initFloatingPlayer();
       initColors();
+      this.initQualitySelector();
       initTextTracks();
     };
 
@@ -349,6 +350,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    this.initQualitySelector = () => {
+      this.videojs.hlsQualitySelector({
+        displayCurrentQuality: true
+      });
+    };
     const initTextTracks = () => {
       this.videojs.on('refreshTextTracks', (e, tracks) => {
         this.setTextTracks(tracks);
