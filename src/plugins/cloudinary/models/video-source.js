@@ -264,8 +264,8 @@ const FORMAT_MAPPINGS = {
 };
 
 const DEFAULT_ADPTIVE_CODECS = {
-  dash: 'vp9',
-  hls: 'h265'
+  dash: 'vp8',
+  hls: 'h264'
 };
 
 function normalizeFormat(format) {
