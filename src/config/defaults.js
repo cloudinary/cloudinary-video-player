@@ -1,5 +1,5 @@
 const aboutMenuItem = {
-  label: 'Cloudinary Player v-' + VERSION
+  label: '<span class="player-version">Cloudinary Player v' + VERSION + '</span>'
 };
 
 const contextMenuContent = (player) => {

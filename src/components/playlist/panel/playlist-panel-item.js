@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import Thumbnail from '../../thumbnail/thumbnail';
+import Thumbnail from '../thumbnail/thumbnail';
 
 const dom = videojs.dom || videojs;
 
