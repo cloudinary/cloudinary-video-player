@@ -209,10 +209,6 @@ class VideoSource extends BaseSource {
       }
       assign(opts, { resource_type: 'video', format });
 
-      let queryString = '';
-      if (this.queryParams()) {
-        queryString = objectToQuerystring(this.queryParams());
-      }
       let type = null;
       let codecTrans = null;
       let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
@@ -224,7 +220,13 @@ class VideoSource extends BaseSource {
       if (opts.format === 'auto') {
         delete opts.format;
       }
-      src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+
+      let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
+
+      src = this.config().url(this.publicId(), opts);
+      // if src is a url that already contains query params then replace '?' with '&'
+      src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
+
       return { type, src, cldSrc: this, isAdaptive: isAdaptive };
     });
     if (isIe) {
