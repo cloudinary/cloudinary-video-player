@@ -249,7 +249,7 @@ function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformat
     result = [`video/${container}`, transformation];
   }
   if (isAdaptive && codec === undefined && !hasSrcTransformation) {
-    codec = DEFAULT_ADPTIVE_CODECS[container];
+    codec = DEFAULT_ADAPTIVE_CODECS[container];
   }
   if (codec) {
     transformation = codecToSrcTransformation(codec);
@@ -263,7 +263,7 @@ const FORMAT_MAPPINGS = {
   dash: 'mpd'
 };
 
-const DEFAULT_ADPTIVE_CODECS = {
+const DEFAULT_ADAPTIVE_CODECS = {
   dash: 'vp8',
   hls: 'h264'
 };
