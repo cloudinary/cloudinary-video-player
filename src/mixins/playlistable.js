@@ -17,8 +17,6 @@ const Playlistable = (superclass) => class extends superclass {
     let _playlist = null;
     let _playlistDisposer = null;
 
-    // playlist(['oceans', 'book', 'dog'])
-    // playlist([{ publicId: 'oceans', { transformation: { width: 50, height: 100, crop: 'limit } }, 'book', 'dog'])
     this.playlist = (sources, options = {}) => {
       if (sources === undefined) {
         return _playlist;

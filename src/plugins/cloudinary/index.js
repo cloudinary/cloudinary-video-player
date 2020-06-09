@@ -5,7 +5,7 @@ import { sliceAndUnsetProperties } from 'utils/slicing';
 import { getCloudinaryInstanceOf } from 'utils/cloudinary';
 import assign from 'utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
-import Playlistable from './mixins/playlistable';
+import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import './components/cloudinary-button';
@@ -44,14 +44,6 @@ class CloudinaryContext extends mixin(Playlistable) {
     let _recommendations = null;
     let _autoShowRecommendations = false;
 
-    // source("oceans")
-    // source("oceans", { transformation: { width: 50, height: 100, crop: 'limit' } })
-    // source({ publicId: 'oceans', transformation: { width: 50, height: 100, crop: 'limit' } })
-    // source({ publicId: 'oceans', transformation: { width: 50, height: 100, crop: 'limit' },
-    //   recommendations: [{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]
-    //   OR  recommendations: (done) => done([{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]) })
-    //   OR  recommendations: Promise.resolve([{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]) })
-    // })
     this.source = (source, options = {}) => {
       options = assign({}, options);
 
