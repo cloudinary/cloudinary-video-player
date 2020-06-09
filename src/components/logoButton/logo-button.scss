@@ -1,11 +1,11 @@
 // Player Cloudinary button
 a.vjs-cloudinary-button {
-  background: url("../../../assets/icons/cloudinary_icon_for_black_bg.svg") no-repeat;
+  background: url("../../assets/icons/cloudinary_icon_for_black_bg.svg") no-repeat;
   background-size: 25px;
   background-position: center;
 
   .cld-video-player-skin-light & {
-    background-image: url("../../../assets/icons/cloudinary_icon_for_white_bg.svg");
+    background-image: url("../../assets/icons/cloudinary_icon_for_white_bg.svg");
   }
 
   &:hover {

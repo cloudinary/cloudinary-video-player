@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import './cloudinary-button.scss';
+import './logo-button.scss';
 
 const LIGHT_BG_ICON = 'https://cloudinary-res.cloudinary.com/image/upload/fl_attachment/v1/logo/for_white_bg/cloudinary_icon_for_white_bg.svg';
 const DARK_BG_ICON = 'https://cloudinary-res.cloudinary.com/image/upload/fl_attachment/v1/logo/for_black_bg/cloudinary_icon_for_black_bg.svg';
@@ -7,7 +7,7 @@ const DARK_BG_ICON = 'https://cloudinary-res.cloudinary.com/image/upload/fl_atta
 // support VJS5 & VJS6 at the same time
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
-class CloudinaryButton extends ClickableComponent {
+class LogoButton extends ClickableComponent {
 
   createEl() {
     const opts = this.options_.playerOptions;
@@ -28,6 +28,6 @@ class CloudinaryButton extends ClickableComponent {
   }
 }
 
-videojs.registerComponent('cloudinaryButton', CloudinaryButton);
+videojs.registerComponent('logoButton', LogoButton);
 
-export default CloudinaryButton;
+export default LogoButton;

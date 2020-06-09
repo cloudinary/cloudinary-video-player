@@ -159,8 +159,8 @@ const overrideDefaultVideojsComponents = () => {
     // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
     children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
 
-    // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
-    children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
+    // Position the 'logo-button' button right next to 'fullscreenToggle'
+    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton',
       'fullscreenToggle');
   }
 };
