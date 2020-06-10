@@ -9,6 +9,7 @@ import * as mixin from './mixin';
 import * as fontFace from './fontFace';
 import * as playButton from './playButton';
 import * as cssPrefix from './css-prefix';
+import * as normalizeAttributes from './attributes-normalizer';
 
 const Utils = assign.assign({},
   assign,
@@ -21,7 +22,8 @@ const Utils = assign.assign({},
   groupBy,
   applyWithProps,
   mixin,
-  cssPrefix
+  cssPrefix,
+  normalizeAttributes
 );
 
 export default Utils;

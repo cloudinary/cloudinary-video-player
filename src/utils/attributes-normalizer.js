@@ -1,9 +1,8 @@
-import Utils from 'utils';
+import { camelize } from './string';
 
 const CLD_ATTR_REGEX = /^(data-cld-)(\w+)/;
 
-const normalizers = {
-};
+const normalizers = {};
 
 function coerce(string) {
   let val = null;
@@ -47,7 +46,7 @@ const normalizeAttributes = (elem) => {
       let attrVal = attrs[i].value;
 
       if (attrName.match(CLD_ATTR_REGEX)) {
-        attrName = Utils.camelize(attrName.replace(CLD_ATTR_REGEX, '$2'));
+        attrName = camelize(attrName.replace(CLD_ATTR_REGEX, '$2'));
       }
 
       // check for known booleans
@@ -70,4 +69,4 @@ const normalizeAttributes = (elem) => {
   return obj;
 };
 
-export default normalizeAttributes;
+export { normalizeAttributes };

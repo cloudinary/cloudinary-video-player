@@ -6,7 +6,6 @@ import Utils from 'utils';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
-import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
 
 import VideoSource from './plugins/cloudinary/models/video-source';
@@ -99,7 +98,7 @@ const resolveVideoElement = (elem) => {
 };
 
 const extractOptions = (elem, options) => {
-  const elemOptions = normalizeAttributes(elem);
+  const elemOptions = Utils.normalizeAttributes(elem);
 
   if (videojs.dom.hasClass(elem, 'cld-fluid') || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
