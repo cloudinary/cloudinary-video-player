@@ -3,7 +3,7 @@ import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 
 const { fetch } = fetchPF({ Promise });
 

@@ -1,7 +1,7 @@
-import EventEmitter from 'events';
-import { isPlainObject } from 'utils/type-inference';
 import videojs from 'video.js';
-import assign from 'utils/assign';
+import EventEmitter from 'events';
+import { assign } from 'utils/assign';
+import { isPlainObject } from 'utils/type-inference';
 
 const EVENT_DEFAULTS = {
   percentsplayed: {

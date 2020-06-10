@@ -13,7 +13,7 @@ import contextMenu from './context-menu';
 import cloudinary from './cloudinary';
 import analytics from './analytics';
 
-export {
+const plugins = {
   autoplayOnScroll,
   floatingPlayer,
   colors,
@@ -24,3 +24,5 @@ export {
   interactive
   // #endif
 };
+
+export default plugins;

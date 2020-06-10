@@ -47,7 +47,7 @@ const normalizeAttributes = (elem) => {
       let attrVal = attrs[i].value;
 
       if (attrName.match(CLD_ATTR_REGEX)) {
-        attrName = Utils.camelCase(attrName.replace(CLD_ATTR_REGEX, '$2'));
+        attrName = Utils.camelize(attrName.replace(CLD_ATTR_REGEX, '$2'));
       }
 
       // check for known booleans

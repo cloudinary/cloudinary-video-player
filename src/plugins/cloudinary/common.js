@@ -1,7 +1,7 @@
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
 import cloudinary from 'cloudinary-core';
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isPlainObject(publicId)) {

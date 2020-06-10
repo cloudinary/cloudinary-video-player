@@ -1,6 +1,6 @@
 import { isElementInViewport } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 
 const defaults = {
   fraction: 0.5,

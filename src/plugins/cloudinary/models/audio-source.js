@@ -2,7 +2,7 @@ import VideoSource from './video-source';
 import ImageSource from './image-source';
 import { normalizeOptions } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 
 

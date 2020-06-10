@@ -1,23 +1,15 @@
 import videojs from 'video.js';
 import isObj from 'is-obj';
 import './components';
-import * as plugins from 'plugins';
-import * as Utils from 'utils';
-import assign from 'utils/assign';
+import plugins from 'plugins';
+import Utils from 'utils';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
 
-import {
-  CLASS_PREFIX,
-  skinClassPrefix,
-  setSkinClassPrefix,
-  playerClassPrefix
-} from './utils/css-prefix';
 import VideoSource from './plugins/cloudinary/models/video-source';
-
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -26,7 +18,8 @@ const CLOUDINARY_PARAMS = [
   'sourceTransformation',
   'posterOptions',
   'autoShowRecommendations',
-  'fontFace'];
+  'fontFace'
+];
 
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'publicId',
@@ -113,7 +106,7 @@ const extractOptions = (elem, options) => {
   }
 
   // Default HLS options < Default options < Markup options < Player options
-  options = assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
+  options = Utils.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
@@ -132,7 +125,7 @@ const extractOptions = (elem, options) => {
   // to avoid param name conflicts:
   // VideoPlayer.new({ controls: true, videojs: { controls: false })
   if (options.videojs) {
-    assign(options, options.videojs);
+    Utils.assign(options, options.videojs);
     delete options.videojs;
   }
 
@@ -220,10 +213,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const setCssClasses = () => {
-      this.videojs.addClass(CLASS_PREFIX);
-      this.videojs.addClass(playerClassPrefix(this.videojs));
+      this.videojs.addClass(Utils.CLASS_PREFIX);
+      this.videojs.addClass(Utils.playerClassPrefix(this.videojs));
 
-      setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
+      Utils.setSkinClassPrefix(this.videojs, Utils.skinClassPrefix(this.videojs));
 
       if (videojs.browser.IE_VERSION === 11) {
         this.videojs.addClass('cld-ie11');
@@ -348,7 +341,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
-
     const initJumpButtons = () => {
       if (!_options.showJumpControls && this.videojs.controlBar) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
@@ -380,7 +372,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-
     const buildTextTrackObj = (type, conf) => ({
       kind: type,
       label: conf.label,
@@ -393,7 +384,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _vjs_options = options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
-    Utils.addClass(elem, 'video-js');
+    elem.classList.add('video-js');
 
     // Handle WebFont loading
     Utils.fontFace(elem, _options);
@@ -557,14 +548,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   skin(name) {
     if (name !== undefined && typeof name === 'string') {
-      setSkinClassPrefix(this.videojs, name);
+      Utils.setSkinClassPrefix(this.videojs, name);
 
       if (this.playlistWidget()) {
         this.playlistWidget().setSkin();
       }
     }
 
-    return skinClassPrefix(this.videojs);
+    return Utils.skinClassPrefix(this.videojs);
   }
 
   playlist(sources, options = {}) {

@@ -1,4 +1,4 @@
-import assign from './assign';
+import { assign } from './assign';
 
 function applyWithProps(context, obj, { order = null } = {}) {
   let _obj = obj;
@@ -28,4 +28,4 @@ function applyWithProps(context, obj, { order = null } = {}) {
   }));
 }
 
-export default applyWithProps;
+export { applyWithProps };

@@ -1,40 +1,27 @@
-import { Util as core } from 'cloudinary-core';
+import * as assign from './assign';
 import * as slicing from './slicing';
 import * as positioning from './positioning';
 import * as string from './string';
 import * as cloudinaryUtils from './cloudinary';
-import applyWithProps from './apply-with-props';
-import autobind from './autobind';
-import mixin from './mixin';
-import assign from './assign';
-import fontFace from './fontFace';
-import playButton from './playButton';
+import * as applyWithProps from './apply-with-props';
+import * as groupBy from './groupBy';
+import * as mixin from './mixin';
+import * as fontFace from './fontFace';
+import * as playButton from './playButton';
+import * as cssPrefix from './css-prefix';
 
-function groupBy(collection, iteratee) {
-  return collection.reduce((result, value, key) => {
-    key = iteratee(value);
-    if (Object.prototype.hasOwnProperty.call(result, key)) {
-      result[key].push(value);
-    } else {
-      result[key] = [value];
-    }
-    return result;
-  }, {});
-}
-
-const util = assign({},
-  core,
+const Utils = assign.assign({},
+  assign,
   slicing,
-  string,
   positioning,
+  string,
+  cloudinaryUtils,
   fontFace,
   playButton,
-  cloudinaryUtils,
-  {
-    autobind,
-    mixin,
-    applyWithProps,
-    groupBy
-  });
+  groupBy,
+  applyWithProps,
+  mixin,
+  cssPrefix
+);
 
-module.exports = util;
+export default Utils;
