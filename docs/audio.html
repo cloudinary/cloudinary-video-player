@@ -23,11 +23,23 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      var player = cld.videoPlayer('player');
+      player = cld.videoPlayer('player');
 
       var source = { publicId: 'dog', 'sourceTypes': ['audio'] };
 
       player.source(source);
+      player_t = cld.videoPlayer('player-t');
+
+      var sourceTransformation = {
+        publicId: 'dog',
+        'sourceTypes': ['audio'],
+        transformation: {
+          start_offset: 3,
+          duration: 5
+        }
+      };
+
+      player_t.source(sourceTransformation);
 
     }, false);
   </script>
@@ -47,6 +59,15 @@
       controls
       class="cld-video-player"
       width="500"
+    ></video>
+    <h3 class="mb-4">Audio Player</h3>
+
+    <video
+            id="player-t"
+            playsinline
+            controls
+            class="cld-video-player"
+            width="500"
     ></video>
 
     <p class="mt-4">
