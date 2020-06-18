@@ -223,7 +223,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = (loaded) => {
+      // #if (!process.env.WEBPACK_BUILD_LIGHT)
       this.adsEnabled = initIma(loaded);
+      // #endif
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
