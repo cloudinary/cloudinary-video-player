@@ -200,12 +200,12 @@ class VideoSource extends BaseSource {
     let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
     let srcs = this.sourceTypes().map((sourceType) => {
       let src = null;
-      const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
+      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
       let isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
       const opts = {};
       if (srcTransformation) {
-        opts.transformation = srcTransformation;
+        opts.transformation = Array.isArray(srcTransformation) ? srcTransformation : [srcTransformation];
       }
       assign(opts, { resource_type: 'video', format });
 
