@@ -61,6 +61,10 @@ class AudioSource extends VideoSource {
       if (sourceType === 'audio') {
         const format = 'mp3';
         const opts = {};
+        const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
+        if (srcTransformation) {
+          opts.transformation = srcTransformation;
+        }
         assign(opts, { resource_type: 'video', format });
         let queryString = '';
         if (this.queryParams()) {
