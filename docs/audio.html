@@ -23,12 +23,13 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player');
 
       var source = { publicId: 'dog', 'sourceTypes': ['audio'] };
 
       player.source(source);
-      player_t = cld.videoPlayer('player-t');
+
+      var player_t = cld.videoPlayer('player-t');
 
       var sourceTransformation = {
         publicId: 'dog',
@@ -60,14 +61,15 @@
       class="cld-video-player"
       width="500"
     ></video>
-    <h3 class="mb-4">Audio Player</h3>
+
+    <h3 class="mb-4 mt-4">Audio Player - with transformations</h3>
 
     <video
-            id="player-t"
-            playsinline
-            controls
-            class="cld-video-player"
-            width="500"
+      id="player-t"
+      playsinline
+      controls
+      class="cld-video-player"
+      width="500"
     ></video>
 
     <p class="mt-4">
@@ -79,6 +81,14 @@
       <code class="language-html">
         &lt;video
           id="player"
+          playsinline
+          controls
+          class="cld-video-player"
+          width="500"
+        &gt;&lt;/video&gt;
+
+        &lt;video
+          id="player-t"
           playsinline
           controls
           class="cld-video-player"
@@ -96,6 +106,20 @@
 
         // Play source
         player.source(source);
+
+        var player_t = cld.videoPlayer('player-t');
+
+        // Define source with transformations
+        var sourceTransformation = {
+          publicId: 'dog',
+          'sourceTypes': ['audio'],
+          transformation: {
+            start_offset: 3,
+            duration: 5
+          }
+        };
+
+        player_t.source(sourceTransformation);
       </code>
     </pre>
   </div>
