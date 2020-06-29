@@ -212,7 +212,7 @@ class VideoSource extends BaseSource {
       let type = null;
       let codecTrans = null;
       let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive, hasCodecSrcTrans);
+      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !hasCodecSrcTrans) {
         opts.transformation.push(codecTrans);
@@ -242,7 +242,7 @@ const CONTAINER_MIME_TYPES = {
   hls: ['application/x-mpegURL']
 };
 
-function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformation) {
+function formatToMimeTypeAndTransformation(format) {
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;
@@ -250,9 +250,7 @@ function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformat
   if (!result) {
     result = [`video/${container}`, transformation];
   }
-  if (isAdaptive && codec === undefined && !hasSrcTransformation) {
-    codec = DEFAULT_ADAPTIVE_CODECS[container];
-  }
+
   if (codec) {
     transformation = codecToSrcTransformation(codec);
     result = [`${result[0]}; codecs="${codecShorthandTrans(codec)}"`, transformation];

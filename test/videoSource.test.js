@@ -45,6 +45,36 @@ describe('video source tests', () => {
     // eslint-disable-next-line no-unused-expressions
     expect(srcs[0]).toContain('f_auto');
   });
+  it('Test transformation input string (named transformation)', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      transformation: 'test'
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).toContain('t_test');
+  });
+  it('Test hls no codec', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['hls']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).not.toContain('vc_');
+  });
+  it('Test hls with codec', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['hls/h265']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).toContain('vc_h265');
+  });
 });
 
 
