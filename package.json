@@ -28,7 +28,7 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
-    "dashjs": "^3.0.3",
+    "dashjs": "^3.1.1",
     "expose-loader": "^0.7.5",
     "fetch-ponyfill": "^4.0.0",
     "get-size": "^2.0.2",

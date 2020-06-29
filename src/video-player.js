@@ -9,6 +9,8 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import dashjs from 'dashjs';
+import Html5DashJS from 'videojs-contrib-dash';
 
 import {
   CLASS_PREFIX,
@@ -50,6 +52,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 const DEFAULT_HLS_OPTIONS = {
   html5: {
     nativeTextTracks: false,
+    handlePartialData: false,
     hls: {
       overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
     }
@@ -168,6 +171,19 @@ const overrideDefaultVideojsComponents = () => {
 overrideDefaultVideojsComponents();
 
 let _allowUsageReport = true;
+
+const dashInit = (player, mediaPlayer) => {
+  let settings = {
+    streaming: {
+      liveDelayFragmentCount: null
+    }
+  };
+  mediaPlayer.updateSettings(settings);
+  mediaPlayer.on(dashjs.MediaPlayer.events.PLAYBACK_STALLED, (a) => {
+    console.log(a);
+    console.log('stalled');
+  })
+};
 
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
@@ -400,6 +416,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     // Handle play button options
     Utils.playButton(elem, _vjs_options);
+    videojs.Html5DashJS.hook('beforeinitialize', dashInit);
 
     this.videojs = videojs(elem, _vjs_options);
 
