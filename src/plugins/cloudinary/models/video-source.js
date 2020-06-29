@@ -200,19 +200,19 @@ class VideoSource extends BaseSource {
     let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
     let srcs = this.sourceTypes().map((sourceType) => {
       let src = null;
-      const srcTransformation = this.sourceTransformation()[sourceType] || [this.transformation()];
+      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
       let isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
       const opts = {};
       if (srcTransformation) {
-        opts.transformation = srcTransformation;
+        opts.transformation = Array.isArray(srcTransformation) ? srcTransformation : [srcTransformation];
       }
       assign(opts, { resource_type: 'video', format });
 
       let type = null;
       let codecTrans = null;
       let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType, isAdaptive, hasCodecSrcTrans);
+      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !hasCodecSrcTrans) {
         opts.transformation.push(codecTrans);
@@ -242,7 +242,7 @@ const CONTAINER_MIME_TYPES = {
   hls: ['application/x-mpegURL']
 };
 
-function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformation) {
+function formatToMimeTypeAndTransformation(format) {
   let [container, codec] = format.toLowerCase().split('\/');
   let result = CONTAINER_MIME_TYPES[container];
   let transformation = null;
@@ -250,9 +250,7 @@ function formatToMimeTypeAndTransformation(format, isAdaptive, hasSrcTransformat
   if (!result) {
     result = [`video/${container}`, transformation];
   }
-  if (isAdaptive && codec === undefined && !hasSrcTransformation) {
-    codec = DEFAULT_ADAPTIVE_CODECS[container];
-  }
+
   if (codec) {
     transformation = codecToSrcTransformation(codec);
     result = [`${result[0]}; codecs="${codecShorthandTrans(codec)}"`, transformation];
