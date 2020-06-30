@@ -19,6 +19,7 @@
     "postdeploy": "git push origin master --follow-tags",
     "dry:deploy": "node webpack/deploy.js dry",
     "test": "jest --no-cache --detectOpenHandles",
+    "test:unit":"UNIT=TRUE jest --no-cache --testPathPattern='test\/unit\/(.*)+test.js'",
     "pretest": "node webpack/pre-build.js",
     "snyk-protect": "snyk protect"
   },

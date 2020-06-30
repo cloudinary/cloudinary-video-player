@@ -90,7 +90,7 @@ module.exports = {
   // notifyMode: "always",
 
   // A preset that is used as a base for Jest's configuration
-  preset: 'jest-puppeteer',
+  preset: process.env.UNIT ? '' : 'jest-puppeteer',
 
   // Run tests from one or more projects
   // projects: null,
