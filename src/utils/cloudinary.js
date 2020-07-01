@@ -89,6 +89,9 @@ function parseUri(str) {
 }
 
 function getCloudinaryInstanceOf(Klass, obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(e => getCloudinaryInstanceOf(Klass, e));
+  }
   if (obj instanceof Klass) {
     return obj;
   } else {

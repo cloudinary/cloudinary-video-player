@@ -61,7 +61,8 @@ module.exports = {
 
   // An array of directory names to be searched recursively up from the requiring module's location
   moduleDirectories: [
-    'node_modules'
+    'node_modules',
+    'src'
   ],
 
   // An array of file extensions your modules use
@@ -73,9 +74,11 @@ module.exports = {
   // ],
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'd.ts'],
   // A map from regular expressions to module names that allow to stub out resources with a single module
+  /*
   moduleNameMapper: {
-    'cloudinary-core': '<rootDir>/test/mocks/cloudinary-core-mock.js'
+    'cloudinary-core': '<rootDir>/test/mocks/cloudinary-core-mock.js',
   },
+*/
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -181,4 +184,10 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   watchman: false
+
+/*
+  transform: {
+    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
+  }
+*/
 };

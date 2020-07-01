@@ -86,7 +86,14 @@ class CloudinaryContext extends mixin(Playlistable) {
       ({ publicId, options } = normalizeOptions(publicId, options));
 
       options.cloudinaryConfig = mergeCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
-      options.transformation = mergeTransformation(this.transformation(), options.transformation || {});
+      if (options.transformation) {
+        if (Array.isArray(options.transformation)) {
+          options.transformation.push(this.transformation());
+        } else {
+          options.transformation = [options.transformation, this.transformation()]
+        }
+      }
+      // options.transformation = mergeTransformation(this.transformation(), options.transformation || {});
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
