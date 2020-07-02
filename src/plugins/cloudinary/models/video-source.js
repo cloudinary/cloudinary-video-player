@@ -263,11 +263,6 @@ const FORMAT_MAPPINGS = {
   dash: 'mpd'
 };
 
-const DEFAULT_ADAPTIVE_CODECS = {
-  dash: 'vp8',
-  hls: 'h264'
-};
-
 function normalizeFormat(format) {
   format = format.toLowerCase().split('\/').shift();
 

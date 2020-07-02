@@ -1,4 +1,4 @@
-import VideoSource from '../src/plugins/cloudinary/models/video-source.js';
+import VideoSource from '../../src/plugins/cloudinary/models/video-source.js';
 import cloudinary from 'cloudinary-core';
 const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
@@ -55,6 +55,8 @@ describe('video source tests', () => {
     // eslint-disable-next-line no-unused-expressions
     expect(srcs[0]).toContain('t_test');
   });
+});
+describe('Adaptive source type tests', () => {
   it('Test hls no codec', () => {
     let sourceDef = {
       cloudinaryConfig: cld
@@ -74,6 +76,66 @@ describe('video source tests', () => {
     let srcs = source.generateSources().map(s => s.src);
     // eslint-disable-next-line no-unused-expressions
     expect(srcs[0]).toContain('vc_h265');
+  });
+  it('Test dash no codec', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['dash']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).not.toContain('vc_');
+  });
+  it('Test dash codec', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['dash/vp9']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).toContain('vc_vp9');
+  });
+  it('Test dash codec + transformation', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      transformation: [{
+        fetch_format: 'auto'
+      },
+      {
+        streaming_profile: 'hd'
+      }
+      ]
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['dash/vp9']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).not.toContain('vc_vp9');
+    expect(srcs[0]).toContain('f_auto');
+    expect(srcs[0]).toContain('sp_hd');
+    expect(srcs[0]).toContain('.mpd');
+  });
+  it('Test hls codec + transformation', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      transformation: [{
+        fetch_format: 'auto'
+      },
+      {
+        streaming_profile: 'hd'
+      }
+      ]
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['hls/h265']);
+    let srcs = source.generateSources().map(s => s.src);
+    // eslint-disable-next-line no-unused-expressions
+    expect(srcs[0]).not.toContain('vc_h265');
+    expect(srcs[0]).toContain('f_auto');
+    expect(srcs[0]).toContain('sp_hd');
+    expect(srcs[0]).toContain('.m3u8');
   });
 });
 
