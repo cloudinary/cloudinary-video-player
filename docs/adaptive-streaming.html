@@ -28,7 +28,9 @@
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
       var uap = new UAParser(navigator.userAgent);
       playerHls = cld.videoPlayer('example-player-hls');
+      playerHlsH265 = cld.videoPlayer('example-player-hls-h265');
       playerDash = cld.videoPlayer('example-player-dash');
+      playerDashVp9 = cld.videoPlayer('example-player-dash-vp9');
       playerHlsNoCodec = cld.videoPlayer('example-player-hls-no-codec');
       playerDashNoCodec = cld.videoPlayer('example-player-dash-no-codec');
 
@@ -40,6 +42,13 @@
           info: {title: 'HLS'}
         }
       );
+      playerHlsH265.source(
+              'sea_turtle',
+              {
+                sourceTypes: ['hls/h265'],
+                info: {title: 'HLS 265'}
+              }
+      );
       playerDash.source(
         'sea_turtle',
         {
@@ -47,6 +56,13 @@
           transformation: {streaming_profile: 'hd'},
           info: {title: 'MPEG-DASH'}
         }
+      );
+      playerDashVp9.source(
+              'sea_turtle',
+              {
+                sourceTypes: ['dash/vp9'],
+                info: {title: 'MPEG-DASH vp9'}
+              }
       );
       playerHlsNoCodec.source(
               'sea_turtle',
@@ -69,11 +85,17 @@
       playerHls.videojs.on('playing', function() {
         document.getElementById('info-hls').innerHTML = uap.getBrowser().name + ' is playing ' + playerHls.videojs.currentSrc();
       });
+      playerHlsH265.videojs.on('playing', function() {
+        document.getElementById('info-hls-h265').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsH265.videojs.currentSrc();
+      });
       playerDash.on('qualitychanged', function(data) {
         console.log('Dash player', data);
       });
       playerDash.videojs.on('playing', function() {
         document.getElementById('info-dash').innerHTML = uap.getBrowser().name + ' is playing ' + playerDash.videojs.currentSrc();
+      });
+      playerDashVp9.videojs.on('playing', function() {
+        document.getElementById('info-dash-vp9').innerHTML = uap.getBrowser().name + ' is playing ' + playerDashVp9.videojs.currentSrc();
       });
       playerDashNoCodec.videojs.on('playing', function() {
         document.getElementById('info-hls-no-codec').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsNoCodec.videojs.currentSrc();
@@ -96,6 +118,7 @@
     <h3 class="mb-4">Adaptive streaming</h3>
 
     <div class="video-container mb-4">
+      <h4>HLS 264</h4>
       <video
         id="example-player-hls"
         playsinline
@@ -106,8 +129,21 @@
       ></video>
       <span id="info-hls"></span>
     </div>
+    <div class="video-container mb-4">
+      <h4>HLS 265</h4>
+      <video
+              id="example-player-hls-h265"
+              playsinline
+              controls
+              muted
+              width="500"
+              class="cld-video-player"
+      ></video>
+      <span id="info-hls-h265"></span>
+    </div>
 
     <div class="video-container mb-4">
+      <h4>MPEG-DASH h264</h4>
       <video
         id="example-player-dash"
         playsinline
@@ -119,6 +155,19 @@
       <span id="info-dash"></span>
     </div>
     <div class="video-container mb-4">
+      <h4>MPEG-DASH vp9</h4>
+      <video
+              id="example-player-dash-vp9"
+              playsinline
+              controls
+              muted
+              width="500"
+              class="cld-video-player"
+      ></video>
+      <span id="info-dash-vp9"></span>
+    </div>
+    <div class="video-container mb-4">
+      <h4>HLS no codec</h4>
       <video
               id="example-player-hls-no-codec"
               playsinline
@@ -131,6 +180,7 @@
     </div>
 
     <div class="video-container mb-4">
+      <h4>DASH no codec</h4>
       <video
               id="example-player-dash-no-codec"
               playsinline
