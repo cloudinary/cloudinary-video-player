@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.4.1-edge.7",
+  "version": "1.4.1-edge.8",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
@@ -57,7 +57,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-latest": "^6.22.0",
     "clean-webpack-plugin": "^1.0.1",
-    "cloudinary-core": "^2.8.2",
+    "cloudinary-core": "^2.10.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^0.26.1",
     "deep-assign": "^2.0.0",
