@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.14.1
+version: v1.16.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:mem:20180117':
@@ -15,3 +15,5 @@ patch:
   SNYK-JS-LODASH-567746:
     - videojs-ima > lodash:
         patched: '2020-05-03T06:05:08.670Z'
+    - dashjs > request-promise > request-promise-core > lodash:
+        patched: '2020-07-06T12:04:07.601Z'

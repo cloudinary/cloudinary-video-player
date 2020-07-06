@@ -33,7 +33,7 @@
     "fetch-ponyfill": "^4.0.0",
     "get-size": "^2.0.2",
     "promise-polyfill": "^6.0.2",
-    "snyk": "^1.328.0",
+    "snyk": "^1.360.0",
     "video.js": "^7.6.5",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
