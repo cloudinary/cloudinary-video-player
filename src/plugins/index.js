@@ -1,8 +1,6 @@
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import 'videojs-contrib-ads';
 import './ima';
-import 'dashjs';
-import 'videojs-contrib-dash';
 import interactive from './interactive-plugin';
 // #endif
 import 'videojs-per-source-behaviors';
