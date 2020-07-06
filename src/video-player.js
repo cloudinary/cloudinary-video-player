@@ -365,9 +365,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // remove current text tracks
       let currentTracks = this.videojs.remoteTextTracks();
       if (currentTracks) {
-        currentTracks.tracks_.forEach(track => {
-          this.videojs.removeRemoteTextTrack(track);
-        });
+        for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
+          this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
+        }
       }
       if (conf) {
         const tracks = Object.keys(conf);
