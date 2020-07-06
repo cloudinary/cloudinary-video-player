@@ -10,6 +10,7 @@ import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
 import djs from 'dashjs';
+// eslint-disable-next-line no-unused-vars
 import Html5DashJS from 'plugins/dash/videojs-dash';
 
 import {

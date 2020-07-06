@@ -262,7 +262,7 @@ class Html5DashJS extends Component {
     this.mediaPlayer_.setProtectionData(this.keySystemOptions_);
     this.mediaPlayer_.attachSource(manifestSource);
     this.tech_.triggerReady();
-    this.on(this.tech_, 'seeking', (ev) => {
+    this.on(this.tech_, 'seeking', () => {
       this.mediaPlayer_.seek(this.tech_.currentTime());
     });
   }

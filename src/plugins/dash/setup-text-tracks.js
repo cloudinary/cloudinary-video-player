@@ -165,6 +165,7 @@ export default function setupTextTracks(player, tech, options) {
     dashTracksAttachedToVideoJs = [];
   }
 
+  // eslint-disable-next-line no-unused-vars
   function handleTextTracksAdded({ index, tracks }) {
     // Stop listening for this event. We only want to hear it once.
     mediaPlayer.off(dashjs.MediaPlayer.events.TEXT_TRACKS_ADDED, handleTextTracksAdded);
