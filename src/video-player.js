@@ -348,7 +348,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     };
 
-
     const initJumpButtons = () => {
       if (!_options.showJumpControls && this.videojs.controlBar) {
         this.videojs.controlBar.removeChild('JumpForwardButton');
@@ -379,7 +378,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       }
     };
-
 
     const buildTextTrackObj = (type, conf) => ({
       kind: type,
