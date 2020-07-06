@@ -109,8 +109,22 @@ class VideoSource extends BaseSource {
       options.poster = assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    const { poster, sourceTypes, sourceTransformation, info, recommendations } =
-      sliceAndUnsetProperties(options, 'poster', 'sourceTypes', 'sourceTransformation', 'info', 'recommendations');
+    const {
+      poster,
+      sourceTypes,
+      sourceTransformation,
+      info,
+      recommendations,
+      textTracks
+    } = sliceAndUnsetProperties(
+      options,
+      'poster',
+      'sourceTypes',
+      'sourceTransformation',
+      'info',
+      'recommendations',
+      'textTracks'
+    );
 
     super(publicId, options);
 
@@ -119,6 +133,7 @@ class VideoSource extends BaseSource {
     let _sourceTransformation = null;
     let _info = null;
     let _recommendations = null;
+    let _textTracks = null;
     this._type = 'VideoSource';
 
     this.poster = (publicId, options = {}) => {
@@ -183,11 +198,22 @@ class VideoSource extends BaseSource {
       return this;
     };
 
+    this.textTracks = (textTracks) => {
+      if (textTracks === undefined) {
+        return _textTracks;
+      }
+
+      _textTracks = textTracks;
+
+      return this;
+    };
+
     this.poster(poster);
     this.sourceTypes(sourceTypes);
     this.sourceTransformation(sourceTransformation);
     this.info(info);
     this.recommendations(recommendations);
+    this.textTracks(textTracks);
     this.objectId = generateId();
   }
 
