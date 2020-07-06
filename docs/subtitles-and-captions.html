@@ -51,6 +51,58 @@
         }
       );
 
+      // Playlist
+      var playlist = cld.videoPlayer('playlist');
+
+      var source1 = {
+        publicId: 'stubhub',
+        info: { title: 'Subtitles & Captions playlist' },
+        textTracks: {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            default: true,
+            url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
+          },
+          subtitles: [
+            {
+              label: 'German subtitles',
+              language: 'de',
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
+            },
+            {
+              label: 'Russian subtitles',
+              language: 'ru',
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
+            }
+          ]
+        }
+      };
+      var source2 = {
+        publicId: 'outdoors',
+        info: { title: 'Outdoors', subtitle: 'Outdoors movie with captions' },
+        textTracks: {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            default: true,
+            url: 'https://res.cloudinary.com/demo/raw/upload/outdoors.vtt',
+          }
+        }
+      };
+      var source3 = {
+        publicId: 'dog',
+        info: { title: 'Dog', subtitle: 'Video of a dog, no captions' }
+      };
+
+      var playlistSources = [source1, source2, source3];
+      var playlistOptions = {
+          autoAdvance: true,
+          repeat: true,
+          presentUpcoming: 8
+      };
+      playlist.playlist(playlistSources, playlistOptions);
+
     }, false);
   </script>
 
@@ -73,6 +125,17 @@
       width="500"
     ></video>
 
+    <h4 class="mt-4 mb-2">Playlist Subtitles (switch per source)</h3>
+
+    <video
+      id="playlist"
+      playsinline
+      controls
+      muted
+      class="cld-video-player cld-fluid"
+      width="500"
+    ></video>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -85,6 +148,14 @@
           controls
           muted
           autoplay
+          class="cld-video-player"
+          width="500"
+        &gt;&lt;/video&gt;
+
+        &lt;video
+          id="playlist"
+          controls
+          muted
           class="cld-video-player"
           width="500"
         &gt;&lt;/video&gt;
@@ -120,6 +191,58 @@
             }
           }
         );
+
+        // Playlist
+        var playlist = cld.videoPlayer('playlist');
+
+        var source1 = {
+          publicId: 'stubhub',
+          info: { title: 'Subtitles & Captions playlist' },
+          textTracks: {
+            captions: {
+              label: 'English captions',
+              language: 'en',
+              default: true,
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
+            },
+            subtitles: [
+              {
+                label: 'German subtitles',
+                language: 'de',
+                url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
+              },
+              {
+                label: 'Russian subtitles',
+                language: 'ru',
+                url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
+              }
+            ]
+          }
+        };
+        var source2 = {
+          publicId: 'outdoors',
+          info: { title: 'Outdoors', subtitle: 'Outdoors movie with captions' },
+          textTracks: {
+            captions: {
+              label: 'English captions',
+              language: 'en',
+              default: true,
+              url: 'https://res.cloudinary.com/demo/raw/upload/outdoors.vtt',
+            }
+          }
+        };
+        var source3 = {
+          publicId: 'dog',
+          info: { title: 'Dog', subtitle: 'Video of a dog, no captions' }
+        };
+
+        var playlistSources = [source1, source2, source3];
+        var playlistOptions = {
+            autoAdvance: true,
+            repeat: true,
+            presentUpcoming: 8
+        };
+        playlist.playlist(playlistSources, playlistOptions);
       </code>
     </pre>
   </div>
