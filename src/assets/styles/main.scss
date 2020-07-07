@@ -262,6 +262,37 @@ $icon-font-path: '../fonts' !default;
     }
   }
 
+  .vjs-subs-caps-button {
+    .vjs-menu {
+      width: auto;
+      left: -5em;
+    }
+    .vjs-menu-content {
+      width: auto;
+      overflow: visible;
+      padding: 0.2em 0;
+    }
+    .vjs-texttrack-settings {
+      display: none;
+    }
+    .vjs-menu-item {
+      text-align: left;
+      white-space: nowrap;
+      text-transform: capitalize;
+      font-size: 1em;
+      padding: 0 1em;
+      line-height: 2em;
+      &.vjs-selected {
+        font-weight: bold;
+      }
+      &.vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
+        vertical-align: top;
+        display: inline-block;
+        margin-bottom: -0.3em;
+      }
+    }
+  }
+
   .vjs-spacer {
     flex: auto;
   }

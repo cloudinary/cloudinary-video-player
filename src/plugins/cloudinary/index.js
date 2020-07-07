@@ -91,7 +91,6 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
-
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
