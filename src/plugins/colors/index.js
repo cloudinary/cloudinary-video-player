@@ -2,6 +2,12 @@ import assign from 'utils/assign';
 import { playerClassPrefix } from 'utils/css-prefix';
 
 const playerColors = `
+  :root {
+    --color-accent: --accent-color;
+    --color-base: --base-color;
+    --color-text: --text-color;
+  }
+
   .PLAYER-CLASS-PREFIX {
     color: --text-color;
   }
