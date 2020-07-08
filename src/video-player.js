@@ -252,7 +252,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initAnalytics();
       initFloatingPlayer();
       initColors();
-      this.initTextTracks(options.videojsOptions.textTracks);
+      initTextTracks();
     };
 
     const initIma = (loaded) => {
@@ -368,15 +368,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
-    this.initTextTracks = (conf) => {
-      if (conf) {
-        // remove current text tracks
-        let currentTracks = this.videojs.remoteTextTracks();
-        if (currentTracks) {
-          currentTracks.tracks_.forEach(track => {
-            this.videojs.removeRemoteTextTrack(track);
-          });
+    const initTextTracks = () => {
+      this.videojs.on('refreshTextTracks', (e, tracks) => {
+        this.setTextTracks(tracks);
+      });
+    };
+
+    this.setTextTracks = (conf) => {
+      // remove current text tracks
+      let currentTracks = this.videojs.remoteTextTracks();
+      if (currentTracks) {
+        for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
+          this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
         }
+      }
+      if (conf) {
         const tracks = Object.keys(conf);
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
@@ -554,7 +560,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
-    this.initTextTracks(options.textTracks);
+    this.setTextTracks(options.textTracks);
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;

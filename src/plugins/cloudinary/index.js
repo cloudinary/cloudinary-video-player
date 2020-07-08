@@ -80,7 +80,6 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
-
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
@@ -260,8 +259,18 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       opts.transformation = getCloudinaryInstanceOf(cloudinary.Transformation, opts.transformation || {});
-      if (this.player.width() > 0 && this.player.height() > 0) {
-        opts.transformation.width(this.player.width()).height(this.player.height()).crop('limit');
+
+      // Set poster dimensions to player actual size.
+      // (unless they were explicitly set via `posterOptions`)
+      const playerEl = this.player.el();
+      if (playerEl && !opts.transformation.getValue('width') && !opts.transformation.getValue('height')) {
+
+        const roundUp100 = (val) => 100 * Math.ceil(val / 100);
+
+        opts.transformation
+          .width(roundUp100(playerEl.clientWidth))
+          .height(roundUp100(playerEl.clientHeight))
+          .crop('limit');
       }
 
       return opts;

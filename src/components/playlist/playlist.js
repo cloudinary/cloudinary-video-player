@@ -52,6 +52,8 @@ class Playlist {
 
       refreshRecommendations();
 
+      refreshTextTracks();
+
       return current;
     };
 
@@ -255,6 +257,10 @@ class Playlist {
       };
 
       return _defaultRecResolverCache[source.objectId];
+    };
+
+    const refreshTextTracks = () => {
+      this.player().trigger('refreshTextTracks', this.currentSource().textTracks());
     };
 
     const buildSource = (source, options = {}) => _context.buildSource(source, options);
