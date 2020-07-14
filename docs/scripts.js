@@ -26,6 +26,11 @@ function isIPaddress(ipaddress) {
   return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
       ipaddress);
 }
+
+function isLocal() {
+  // eslint-disable-next-line no-unused-expressions
+ return window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.')) + 1) === 'local';
+}
 // Get scripts & styles from:
 // `localhost` while developing
 // `unpkg.com` while demoing OR if a specific version is specified
@@ -33,7 +38,7 @@ function isIPaddress(ipaddress) {
 var loadScript = function (source, ver) {
   var external = source.startsWith('http');
   var from =
-    !ver && (external || window.location.hostname === 'localhost' || isIPaddress(window.location.hostname))
+    !ver && (external || window.location.hostname === 'localhost' || isIPaddress(window.location.hostname) || isLocal())
       ? ''
       : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
   var script = document.createElement('script');
