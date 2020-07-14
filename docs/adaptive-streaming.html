@@ -37,7 +37,7 @@
       playerHls.source(
         'sea_turtle',
         {
-          sourceTypes: ['hls/h264'],
+          sourceTypes: ['hls'],
           transformation: {streaming_profile: 'hd'},
           info: {title: 'HLS'}
         }
@@ -85,6 +85,9 @@
       playerHls.videojs.on('playing', function() {
         document.getElementById('info-hls').innerHTML = uap.getBrowser().name + ' is playing ' + playerHls.videojs.currentSrc();
       });
+      playerHls.on('error', function() {
+        console.log(playerHls.videojs.error());
+      })
       playerHlsH265.videojs.on('playing', function() {
         document.getElementById('info-hls-h265').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsH265.videojs.currentSrc();
       });
@@ -97,7 +100,7 @@
       playerDashVp9.videojs.on('playing', function() {
         document.getElementById('info-dash-vp9').innerHTML = uap.getBrowser().name + ' is playing ' + playerDashVp9.videojs.currentSrc();
       });
-      playerDashNoCodec.videojs.on('playing', function() {
+      playerHlsNoCodec.videojs.on('playing', function() {
         document.getElementById('info-hls-no-codec').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsNoCodec.videojs.currentSrc();
       });
       playerDashNoCodec.videojs.on('playing', function() {
@@ -133,7 +136,6 @@
       <h4>HLS 265</h4>
       <video
               id="example-player-hls-h265"
-              playsinline
               controls
               muted
               width="500"
