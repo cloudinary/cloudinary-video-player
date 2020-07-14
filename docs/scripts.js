@@ -32,7 +32,7 @@ function isLocal() {
  return window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.')) + 1) === 'local';
 }
 // Get scripts & styles from:
-// `localhost` while developing
+// `localhost` while developing or if the host is an ip address or a .local domain
 // `unpkg.com` while demoing OR if a specific version is specified
 // These SHOULD be global since they are called by some examples
 var loadScript = function (source, ver) {
