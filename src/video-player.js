@@ -47,7 +47,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
-  'fetchErrorUsingGet'
+  'fetchErrorUsingGet',
+  'seekThumbnails'
 ]);
 
 const DEFAULT_HLS_OPTIONS = {
@@ -259,6 +260,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initFloatingPlayer();
       initColors();
       initTextTracks();
+      initSeekThumbs();
     };
 
     const initIma = (loaded) => {
@@ -401,6 +403,29 @@ class VideoPlayer extends Utils.mixin(Eventable) {
             this.videojs.addRemoteTextTrack(buildTextTrackObj(track, conf[track]), true);
           }
         }
+      }
+    };
+
+    const initSeekThumbs = () => {
+      if (_options.seekThumbnails) {
+
+        this.videojs.on('cldsourcechanged', (e, { source }) => {
+          const cloudinaryConfig = source.cloudinaryConfig();
+          const publicId = source.publicId();
+
+          // build VTT url
+          const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', {
+            raw_transformation: 'fl_sprite'
+          });
+
+          // vttThumbnails must be called differently on init and on source update.
+          if (typeof this.videojs.vttThumbnails === 'function') {
+            this.videojs.vttThumbnails({ src: vttSrc });
+          } else {
+            this.videojs.vttThumbnails.src(vttSrc);
+          }
+        });
+
       }
     };
 
