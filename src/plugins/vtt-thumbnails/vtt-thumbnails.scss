@@ -7,6 +7,7 @@
   transition: opacity 0.2s;
   bottom: 3em;
   pointer-events: none;
+  border-color: 3px solid #fff;
   border: 3px solid var(--color-base);
   border-radius: 3px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
@@ -18,6 +19,7 @@
   left: 0;
   right: 0;
   margin: auto;
+  color: #fff;
   color: var(--color-base);
   text-shadow: 0 0 3px var(--color-text);
 }
