@@ -24,8 +24,6 @@
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       var player = cld.videoPlayer('player', {
-        publicId: 'elephants',
-        info: { title: 'Elephants' },
         seekThumbnails: true
       });
 
@@ -60,10 +58,11 @@
       <code class="language-html">
         &lt;video
           id="player"
+          playsinline
           controls
           muted
           autoplay
-          class="cld-video-player cld-fluid"
+          class="cld-video-player cld-fluid cld-video-player-skin-light"
           data-cld-public-id="elephants"
         &gt;&lt;/video&gt;
       </code>
