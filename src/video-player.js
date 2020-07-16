@@ -9,9 +9,11 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
 import djs from 'dashjs';
 // eslint-disable-next-line no-unused-vars
 import Html5DashJS from 'plugins/dash/videojs-dash';
+// #endif
 
 import {
   CLASS_PREFIX,
@@ -173,6 +175,7 @@ overrideDefaultVideojsComponents();
 
 let _allowUsageReport = true;
 
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
 const dashInit = (player, mediaPlayer) => {
   // eslint-disable-next-line new-cap
   mediaPlayer = djs.MediaPlayer().create();
@@ -187,6 +190,7 @@ const dashInit = (player, mediaPlayer) => {
     console.log('stalled');
   });
 };
+// #endif
 
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
@@ -423,7 +427,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     // Handle play button options
     Utils.playButton(elem, _vjs_options);
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     videojs.Html5DashJS.hook('beforeinitialize', dashInit);
+    // #endif
 
     this.videojs = videojs(elem, _vjs_options);
 
