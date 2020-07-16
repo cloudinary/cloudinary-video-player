@@ -1,6 +1,7 @@
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import 'videojs-contrib-ads';
 import './ima';
+import dashPlugin from './dash';
 import interactive from './interactive-plugin';
 // #endif
 import 'videojs-per-source-behaviors';
@@ -19,6 +20,7 @@ export {
   cloudinary,
   analytics,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  interactive
+  interactive,
+  dashPlugin
   // #endif
 };
