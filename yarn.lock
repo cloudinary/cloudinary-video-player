@@ -3852,10 +3852,10 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-cloudinary-core@^2.10.2:
-  version "2.10.2"
-  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.10.2.tgz#966bdd7e4545b83cf8253a2454a5f87fac673d6e"
-  integrity sha512-1JvgOCMRTke5S7/Nps8GW8gqmxq3unB4e6kDePuyG7VOFXrhFIOT0q9REiPBfFnHhkuyNYWLySSFaNIAZocOBw==
+cloudinary-core@^2.10.3:
+  version "2.10.3"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.10.3.tgz#57706cf966bc627706ad8e1ee78db478ea69a6c5"
+  integrity sha512-uI7jASEcfjYBdoTb2uj4wgTB0cWPDwrQV4paYFOgEdU22z74eeJ1zI83ew2kuNnXBnbuPZFt310H329UfiHG2w==
 
 co@^4.6.0:
   version "4.6.0"

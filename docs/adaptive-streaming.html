@@ -43,11 +43,11 @@
         }
       );
       playerHlsH265.source(
-              'sea_turtle',
-              {
-                sourceTypes: ['hls/h265'],
-                info: {title: 'HLS 265'}
-              }
+        'sea_turtle',
+        {
+          sourceTypes: ['hls/h265'],
+          info: {title: 'HLS 265'}
+        }
       );
       playerDash.source(
         'sea_turtle',
@@ -58,25 +58,25 @@
         }
       );
       playerDashVp9.source(
-              'sea_turtle',
-              {
-                sourceTypes: ['dash/vp9'],
-                info: {title: 'MPEG-DASH vp9'}
-              }
+        'sea_turtle',
+        {
+          sourceTypes: ['dash/vp9'],
+          info: {title: 'MPEG-DASH vp9'}
+        }
       );
       playerHlsNoCodec.source(
-              'sea_turtle',
-              {
-                sourceTypes: ['hls'],
-                info: {title: 'HLS'}
-              }
+        'sea_turtle',
+        {
+          sourceTypes: ['hls'],
+          info: {title: 'HLS'}
+        }
       );
       playerDashNoCodec.source(
-              'sea_turtle',
-              {
-                sourceTypes: ['dash'],
-                info: {title: 'MPEG-DASH'}
-              }
+        'sea_turtle',
+        {
+          sourceTypes: ['dash'],
+          info: {title: 'MPEG-DASH'}
+        }
       );
 
       playerHls.on('qualitychanged', function(data) {
@@ -132,14 +132,15 @@
       ></video>
       <span id="info-hls"></span>
     </div>
+
     <div class="video-container mb-4">
       <h4>HLS 265</h4>
       <video
-              id="example-player-hls-h265"
-              controls
-              muted
-              width="500"
-              class="cld-video-player"
+        id="example-player-hls-h265"
+        controls
+        muted
+        width="500"
+        class="cld-video-player"
       ></video>
       <span id="info-hls-h265"></span>
     </div>
@@ -156,27 +157,29 @@
       ></video>
       <span id="info-dash"></span>
     </div>
+
     <div class="video-container mb-4">
       <h4>MPEG-DASH vp9</h4>
       <video
-              id="example-player-dash-vp9"
-              playsinline
-              controls
-              muted
-              width="500"
-              class="cld-video-player"
+        id="example-player-dash-vp9"
+        playsinline
+        controls
+        muted
+        width="500"
+        class="cld-video-player"
       ></video>
       <span id="info-dash-vp9"></span>
     </div>
+
     <div class="video-container mb-4">
       <h4>HLS no codec</h4>
       <video
-              id="example-player-hls-no-codec"
-              playsinline
-              controls
-              muted
-              width="500"
-              class="cld-video-player"
+        id="example-player-hls-no-codec"
+        playsinline
+        controls
+        muted
+        width="500"
+        class="cld-video-player"
       ></video>
       <span id="info-hls-no-codec"></span>
     </div>
@@ -184,19 +187,15 @@
     <div class="video-container mb-4">
       <h4>DASH no codec</h4>
       <video
-              id="example-player-dash-no-codec"
-              playsinline
-              controls
-              muted
-              width="500"
-              class="cld-video-player"
+        id="example-player-dash-no-codec"
+        playsinline
+        controls
+        muted
+        width="500"
+        class="cld-video-player"
       ></video>
       <span id="info-dash-no-codec"></span>
     </div>
-
-
-
-
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_hls_dash">Adaptive streaming documentation</a>

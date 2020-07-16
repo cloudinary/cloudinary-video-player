@@ -255,7 +255,6 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
         return true;
       });
-      console.log(_sources);
       this.player.src(_sources);
 
       _lastSource = src;

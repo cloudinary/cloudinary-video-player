@@ -9,9 +9,6 @@ import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import djs from 'dashjs';
-// eslint-disable-next-line no-unused-vars
-import Html5DashJS from 'plugins/dash/videojs-dash';
 
 import {
   CLASS_PREFIX,
@@ -172,21 +169,6 @@ const overrideDefaultVideojsComponents = () => {
 overrideDefaultVideojsComponents();
 
 let _allowUsageReport = true;
-
-const dashInit = (player, mediaPlayer) => {
-  // eslint-disable-next-line new-cap
-  mediaPlayer = djs.MediaPlayer().create();
-  let settings = {
-    streaming: {
-      liveDelayFragmentCount: null
-    }
-  };
-  mediaPlayer.updateSettings(settings);
-  mediaPlayer.on(djs.MediaPlayer.events.PLAYBACK_STALLED, (a) => {
-    console.log(a);
-    console.log('stalled');
-  });
-};
 
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
@@ -423,7 +405,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     // Handle play button options
     Utils.playButton(elem, _vjs_options);
-    videojs.Html5DashJS.hook('beforeinitialize', dashInit);
+
+    // Dash plugin - available in full (not light) build only
+    if (plugins.dashPlugin) {
+      plugins.dashPlugin();
+    }
 
     this.videojs = videojs(elem, _vjs_options);
 
