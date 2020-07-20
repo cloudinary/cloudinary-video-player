@@ -8,7 +8,11 @@ class VideoPlayerEnvironment extends PuppeteerEnvironment {
 
   async teardown() {
     // Your teardown
-    await super.teardown();
+    try {
+      await super.teardown();
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 

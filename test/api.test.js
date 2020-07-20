@@ -1,7 +1,7 @@
-const urls = ['http://localhost:3000/api.html?testUrlWith=head', 'http://localhost:3000/api.html?fetchErrorUsing=get'];
+const url = 'http://localhost:3000/api.html';
 
-urls.forEach((url, index) => {
-  describe(`API player tests ${index ? 'fetch error using get' : 'fetch error using head'}`, () => {
+describe('API player tests ', () => {
+  try {
     beforeEach(async () => {
       await page.setViewport({ width: 1280, height: 1800 });
       await page.goto(url, { waitUntil: 'load' });
@@ -9,7 +9,7 @@ urls.forEach((url, index) => {
         Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
           get: function() {
             return !!(this.currentTime > 0 && !this.paused && !this.ended &&
-              this.readyState > 2);
+                this.readyState > 2);
           }
         });
       });
@@ -17,10 +17,14 @@ urls.forEach((url, index) => {
     it('Test forward 10 seconds', async () => {
       jest.setTimeout(35000);
       await page.waitForFunction('player.videojs.readyState() === 4');
-      let time = await page.$eval('#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace('0:', '')));
+      let time = await page.$eval(
+        '#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display',
+        vt => Number(vt.textContent.replace('0:', '')));
       await page.click('#vid-seek-plus');
       await page.waitForFunction('player.videojs.readyState() === 4');
-      let newtime = await page.$eval('#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace('0:', '')));
+      let newtime = await page.$eval(
+        '#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display',
+        vt => Number(vt.textContent.replace('0:', '')));
       expect(newtime).toBeGreaterThanOrEqual(time + 10);
     });
     it('Test back 10 seconds', async () => {
@@ -30,7 +34,9 @@ urls.forEach((url, index) => {
       await page.waitForFunction('player.videojs.readyState() === 4');
       await page.click('#vid-seek-minus');
       await page.waitForFunction('player.videojs.readyState() === 4');
-      let newtime = await page.$eval('#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display', vt => Number(vt.textContent.replace('0:', '')));
+      let newtime = await page.$eval(
+        '#player > .vjs-control-bar > .vjs-current-time.vjs-time-control.vjs-control > .vjs-current-time-display',
+        vt => Number(vt.textContent.replace('0:', '')));
       expect(newtime).toEqual(0);
     });
     it('Test mute un-mute', async () => {
@@ -88,13 +94,8 @@ urls.forEach((url, index) => {
       await page.waitFor(500);
       expect(await page.$eval('#player > .vjs-control-bar', p => p.offsetWidth)).toBe(0);
     });
-
-    /*  it('Test fullscreen', async () => {
-        await page.waitFor(1000);
-        expect(await page.evaluate(() => document.webkitIsFullScreen)).toBeFalsy();
-        await page.click('#vid-maximize');
-        await page.waitFor(1000);
-        expect(await page.evaluate(() => document.webkitIsFullScreen)).toBeTruthy();
-      });*/
-  });
+  } catch (err) {
+    console.log(err);
+    browser.close();
+  }
 });
