@@ -17,7 +17,6 @@ describe('custom error tests', () => {
     await page.waitFor(1000);
     // eslint-disable-next-line no-undef
     let errorMsg = await page.evaluate(() => player.videojs.error_.message);
-    let title = await page.$eval('.error-container', (t) => t.innerHTML);
-    expect(title.includes(errorMsg)).toBe(true);
+    expect(errorMsg).toBe('My custom error message');
   });
 });
