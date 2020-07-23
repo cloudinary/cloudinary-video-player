@@ -98,4 +98,33 @@ function getCloudinaryInstanceOf(Klass, obj) {
   }
 }
 
-export { getCloudinaryInstanceOf, handleCldError };
+/**
+ * Check if key exist in transformation
+ * @param transformation
+ * @param key
+ * @returns true if key exists in transformation, false otherwise
+ */
+const isKeyInTransformation = (transformation, key) => {
+  if (!transformation || !key) {
+    return false;
+  }
+
+  // transformation is an array so run this function for each item
+  if (Array.isArray(transformation)) {
+    return !!transformation.find(t => isKeyInTransformation(t, key));
+  }
+
+  // transformation is a Transformation object so use getValue() to check key
+  if (transformation.getValue) {
+    return !!transformation.getValue(key);
+  }
+
+  // transformation is an Object so just check for key existence in object
+  return !!transformation[key];
+};
+
+export {
+  getCloudinaryInstanceOf,
+  handleCldError,
+  isKeyInTransformation
+};
