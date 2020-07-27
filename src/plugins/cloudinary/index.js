@@ -2,7 +2,7 @@ import cloudinary from 'cloudinary-core';
 import { mixin } from 'utils/mixin';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { getCloudinaryInstanceOf } from 'utils/cloudinary';
+import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
 import Playlistable from 'mixins/playlistable';
@@ -263,8 +263,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
       const playerEl = this.player.el();
-      if (playerEl && !opts.transformation.getValue('width') && !opts.transformation.getValue('height')) {
-
+      if (playerEl && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
         opts.transformation

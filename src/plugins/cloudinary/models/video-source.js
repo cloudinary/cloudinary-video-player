@@ -4,6 +4,7 @@ import { normalizeOptions, isSrcEqual, codecShorthandTrans, codecToSrcTransforma
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
+import { isKeyInTransformation } from 'utils/cloudinary';
 
 if (!Array.prototype.find) {
   // eslint-disable-next-line no-extend-native
@@ -71,31 +72,6 @@ const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.jo
 
 let objectId = 0;
 const generateId = () => objectId++;
-
-/**
- * Check if key exist in transformation
- * @param transformation
- * @param key
- * @returns true if key exists in transformation, false otherwise
- */
-const isKeyInTransformation = (transformation, key) => {
-  if (!transformation || !key) {
-    return false;
-  }
-
-  // transformation is an array so run this function for each item
-  if (Array.isArray(transformation)) {
-    return !!transformation.find(t => isKeyInTransformation(t, key));
-  }
-
-  // transformation is a Transformation object so use getValue() to check key
-  if (transformation.getValue) {
-    return !!transformation.getValue(key);
-  }
-
-  // transformation is an Object so just check for key existence in object
-  return !!transformation[key];
-};
 
 class VideoSource extends BaseSource {
   constructor(publicId, options = {}) {

@@ -171,7 +171,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
-      this.fluid(_options.fluid);
 
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
@@ -411,6 +410,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.volume(0.4);
     }
 
+    if (_options.fluid) {
+      this.fluid(_options.fluid);
+    }
+
     /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
@@ -420,6 +423,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlugins(loaded);
     initPlaylistWidget();
     initJumpButtons();
+
     this.videojs.on('error', () => {
       const error = this.videojs.error();
       if (error) {
