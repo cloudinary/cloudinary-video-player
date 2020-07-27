@@ -1,7 +1,7 @@
 import 'assets/styles/main.scss';
 import cloudinary from 'cloudinary-core';
-import VideoPlayer from 'video-player';
-import assign from 'utils/assign';
+import VideoPlayer from './video-player';
+import { assign } from 'utils/assign';
 
 cloudinary.VideoPlayer = VideoPlayer;
 

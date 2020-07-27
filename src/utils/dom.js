@@ -5,12 +5,4 @@ const wrap = (el, wrapper) => {
   return wrapper;
 };
 
-const setWidth = (el, width) => {
-  el.style.width = `${width}px`;
-};
-
-const setHeight = (el, height) => {
-  el.style.height = `${height}px`;
-};
-
-export { wrap, setWidth, setHeight };
+export { wrap };

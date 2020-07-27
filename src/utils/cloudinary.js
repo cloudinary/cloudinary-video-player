@@ -6,6 +6,7 @@ const { fetch } = fetchPF({ Promise });
 
 const GET_ERROR_DEFAULT_REQUEST = { method: 'get', headers: { 'Content-Range': 'bytes=0-0' } };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };
+
 const handleCldError = (that, options) => {
   const cloudName = that.cloudinaryConfig().config().cloud_name;
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
@@ -56,7 +57,7 @@ const handleCldError = (that, options) => {
 };
 
 // for IE 11
-function parseUri (str) {
+function parseUri(str) {
   let o = {
     strictMode: false,
     key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],

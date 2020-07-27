@@ -20,7 +20,7 @@
 
 (function(factory) {
   if (typeof define === 'function' && define['amd']) {
-    define(['video.js', 'videojs-contrib-ads'], function(videojs){ factory(window, document, videojs.default) });
+    define(['video.js', 'videojs-contrib-ads'], function(videojs){ factory(window, document, (videojs.default || videojs)) });
   } else if (typeof exports === 'object' && typeof module === 'object') {
     var vjs = require('video.js');
     require('videojs-contrib-ads');
@@ -1623,7 +1623,7 @@
 
     // proxy click events to the video element when non-linear ad is active
     this.proxyClickEvents = function() {
-      var events = (videojs.browser.IS_ANDROID || videojs.browser.IS_IOS) ?
+      var events = (videojs && videojs.browser && videojs.browser.IS_ANDROID || videojs.browser.IS_IOS) ?
           ['touchstart', 'touchend'] :
           ['click', 'dblclick', 'mousedown', 'mouseup'];
       var player = this.player, el = player.el(), _this = this;

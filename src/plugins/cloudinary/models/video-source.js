@@ -2,7 +2,7 @@ import BaseSource from './base-source';
 import ImageSource from './image-source';
 import { normalizeOptions, isSrcEqual, codecShorthandTrans, codecToSrcTransformation } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { isKeyInTransformation } from 'utils/cloudinary';
 

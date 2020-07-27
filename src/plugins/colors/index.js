@@ -1,4 +1,4 @@
-import assign from 'utils/assign';
+import { assign } from 'utils/assign';
 import { playerClassPrefix } from 'utils/css-prefix';
 
 const playerColors = `

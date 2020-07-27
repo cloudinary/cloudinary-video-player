@@ -1,4 +1,4 @@
-function objectToQuerystring(obj) {
+const objectToQuerystring = (obj) => {
   const keys = Object.keys(obj);
 
   if (!keys.length) {
@@ -7,6 +7,6 @@ function objectToQuerystring(obj) {
 
   const query = keys.map((key) => `${key}=${obj[key]}`).join('&');
   return `?${query}`;
-}
+};
 
-module.exports = { objectToQuerystring };
+export { objectToQuerystring };

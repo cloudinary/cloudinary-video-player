@@ -1,6 +1,6 @@
 import videojs from 'video.js';
-import assign from 'utils/assign';
-import throttle from 'utils/throttle';
+import { assign } from 'utils/assign';
+import { throttle } from 'utils/throttle';
 import { parseTime } from 'utils/time';
 import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
