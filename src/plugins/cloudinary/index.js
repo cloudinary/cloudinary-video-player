@@ -263,7 +263,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
       const playerEl = this.player.el();
-      if (playerEl && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
+      if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
         opts.transformation
