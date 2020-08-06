@@ -382,7 +382,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initSeekThumbs = () => {
-      if (_options.seekThumbnails) {
+      if (_options.seekThumbnails !== false) {
 
         this.videojs.on('cldsourcechanged', (e, { source }) => {
           const cloudinaryConfig = source.cloudinaryConfig();
