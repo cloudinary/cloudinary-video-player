@@ -1,6 +1,6 @@
 import { findIndex } from 'utils/find';
 
-class EventHandlersRegistry {
+class EventHandlerRegistry {
   constructor(emitter) {
     this._emitter = emitter;
     this._eventHandlers = [];
@@ -43,4 +43,4 @@ class EventHandlersRegistry {
   }
 }
 
-export default EventHandlersRegistry;
+export default EventHandlerRegistry;

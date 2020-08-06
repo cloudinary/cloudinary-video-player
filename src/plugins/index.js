@@ -1,6 +1,7 @@
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import 'videojs-contrib-ads';
 import './ima';
+import dashPlugin from './dash';
 import interactive from './interactive-plugin';
 // #endif
 import 'videojs-per-source-behaviors';
@@ -12,7 +13,7 @@ import cloudinary from './cloudinary';
 import analytics from './analytics';
 import vttThumbnails from './vtt-thumbnails';
 
-export {
+const plugins = {
   autoplayOnScroll,
   floatingPlayer,
   colors,
@@ -21,6 +22,9 @@ export {
   analytics,
   vttThumbnails,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  interactive
+  interactive,
+  dashPlugin
   // #endif
 };
+
+export default plugins;

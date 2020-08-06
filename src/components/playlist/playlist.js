@@ -1,5 +1,7 @@
-import VideoSource from './models/video-source';
+import VideoSource from 'plugins/cloudinary/models/video-source';
 import { isInteger } from 'utils/type-inference';
+
+import 'components/playlist/components/upcoming-video-overlay';
 
 const DEFAULT_AUTO_ADVANCE = 0;
 const DEFAULT_PRESENT_UPCOMING = 10;

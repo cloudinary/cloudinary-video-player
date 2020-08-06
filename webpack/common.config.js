@@ -50,7 +50,10 @@ module.exports = {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     alias: {
-      'video.js': path.resolve(__dirname, '../node_modules/video.js'),
+      'video.js': process.env.WEBPACK_BUILD_LIGHT
+        ? path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js')
+        : path.resolve(__dirname, '../node_modules/video.js'),
+      'video.root.js': path.resolve(__dirname, '../node_modules/video.js'),
       'webworkify': 'webworkify-webpack2',
       'videojs-contrib-ads': path.resolve(__dirname, '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.min.js'),
       'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js')
@@ -128,9 +131,9 @@ module.exports = {
   },
 
   plugins: [
-    new ProvidePlugin({
-      'window.videojs': 'video.js'
-    }),
+    // new ProvidePlugin({
+    //   'window.videojs': 'video.js'
+    // }),
     new DefinePlugin({ VERSION })
   ]
 };

@@ -27,4 +27,4 @@ function throttle(fn, wait) {
   return throttled;
 }
 
-export default throttle;
+export { throttle };

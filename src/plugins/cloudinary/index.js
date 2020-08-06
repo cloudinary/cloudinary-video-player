@@ -1,16 +1,13 @@
 import cloudinary from 'cloudinary-core';
-import mixin from 'utils/mixin';
-import applyWithProps from 'utils/apply-with-props';
+import { mixin } from 'utils/mixin';
+import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { getCloudinaryInstanceOf } from 'utils/cloudinary';
-import assign from 'utils/assign';
+import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary';
+import { assign } from 'utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
-import Playlistable from './mixins/playlistable';
+import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
-import './components/cloudinary-button';
-import './components/cloudinary-10-plus';
-import './components/cloudinary-10-min';
 import AudioSource from './models/audio-source';
 
 const DEFAULT_PARAMS = {
@@ -44,14 +41,6 @@ class CloudinaryContext extends mixin(Playlistable) {
     let _recommendations = null;
     let _autoShowRecommendations = false;
 
-    // source("oceans")
-    // source("oceans", { transformation: { width: 50, height: 100, crop: 'limit' } })
-    // source({ publicId: 'oceans', transformation: { width: 50, height: 100, crop: 'limit' } })
-    // source({ publicId: 'oceans', transformation: { width: 50, height: 100, crop: 'limit' },
-    //   recommendations: [{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]
-    //   OR  recommendations: (done) => done([{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]) })
-    //   OR  recommendations: Promise.resolve([{ publicId: 'book', info: { title: 'book', subtitle: 'book subtitle', description: 'lorem ipsum' } }]) })
-    // })
     this.source = (source, options = {}) => {
       options = assign({}, options);
 
@@ -255,7 +244,6 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
         return true;
       });
-      console.log(_sources);
       this.player.src(_sources);
 
       _lastSource = src;
@@ -275,8 +263,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
       const playerEl = this.player.el();
-      if (playerEl && !opts.transformation.getValue('width') && !opts.transformation.getValue('height')) {
-
+      if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
         opts.transformation

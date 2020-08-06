@@ -24,4 +24,4 @@ function assign(target, ...sources) {
   return target;
 }
 
-export default assign;
+export { assign };

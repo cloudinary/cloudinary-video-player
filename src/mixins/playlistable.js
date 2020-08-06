@@ -1,11 +1,9 @@
-import Playlist from '../playlist';
+import Playlist from 'components/playlist/playlist';
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
-import assign from 'utils/assign';
-import '../components/playlist';
-import '../components/upcoming-video-overlay';
+import { assign } from 'utils/assign';
 
 const { fetch } = fetchPF({ Promise });
 
@@ -19,8 +17,6 @@ const Playlistable = (superclass) => class extends superclass {
     let _playlist = null;
     let _playlistDisposer = null;
 
-    // playlist(['oceans', 'book', 'dog'])
-    // playlist([{ publicId: 'oceans', { transformation: { width: 50, height: 100, crop: 'limit } }, 'book', 'dog'])
     this.playlist = (sources, options = {}) => {
       if (sources === undefined) {
         return _playlist;

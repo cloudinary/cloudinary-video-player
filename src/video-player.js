@@ -1,26 +1,14 @@
 import videojs from 'video.js';
 import isObj from 'is-obj';
 import './components';
-import * as plugins from 'plugins';
-import * as Utils from 'utils';
-import assign from 'utils/assign';
+import plugins from 'plugins';
+import Utils from 'utils';
 import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
-import normalizeAttributes from './attributes-normalizer';
 import PlaylistWidget from './components/playlist/playlist-widget';
-import djs from 'dashjs';
-// eslint-disable-next-line no-unused-vars
-import Html5DashJS from 'plugins/dash/videojs-dash';
 
-import {
-  CLASS_PREFIX,
-  skinClassPrefix,
-  setSkinClassPrefix,
-  playerClassPrefix
-} from './utils/css-prefix';
 import VideoSource from './plugins/cloudinary/models/video-source';
-
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -29,7 +17,8 @@ const CLOUDINARY_PARAMS = [
   'sourceTransformation',
   'posterOptions',
   'autoShowRecommendations',
-  'fontFace'];
+  'fontFace'
+];
 
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'publicId',
@@ -111,14 +100,14 @@ const resolveVideoElement = (elem) => {
 };
 
 const extractOptions = (elem, options) => {
-  const elemOptions = normalizeAttributes(elem);
+  const elemOptions = Utils.normalizeAttributes(elem);
 
   if (videojs.dom.hasClass(elem, 'cld-fluid') || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
 
   // Default HLS options < Default options < Markup options < Player options
-  options = assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
+  options = Utils.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
@@ -137,7 +126,7 @@ const extractOptions = (elem, options) => {
   // to avoid param name conflicts:
   // VideoPlayer.new({ controls: true, videojs: { controls: false })
   if (options.videojs) {
-    assign(options, options.videojs);
+    Utils.assign(options, options.videojs);
     delete options.videojs;
   }
 
@@ -164,8 +153,8 @@ const overrideDefaultVideojsComponents = () => {
     // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
     children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
 
-    // Position the 'cloudinary-button' button right next to 'fullscreenToggle'
-    children.splice(children.indexOf('fullscreenToggle'), 1, 'cloudinaryButton',
+    // Position the 'logo-button' button right next to 'fullscreenToggle'
+    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton',
       'fullscreenToggle');
   }
 };
@@ -173,21 +162,6 @@ const overrideDefaultVideojsComponents = () => {
 overrideDefaultVideojsComponents();
 
 let _allowUsageReport = true;
-
-const dashInit = (player, mediaPlayer) => {
-  // eslint-disable-next-line new-cap
-  mediaPlayer = djs.MediaPlayer().create();
-  let settings = {
-    streaming: {
-      liveDelayFragmentCount: null
-    }
-  };
-  mediaPlayer.updateSettings(settings);
-  mediaPlayer.on(djs.MediaPlayer.events.PLAYBACK_STALLED, (a) => {
-    console.log(a);
-    console.log('stalled');
-  });
-};
 
 class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
@@ -198,7 +172,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     const onReady = () => {
       setExtendedEvents();
-      this.fluid(_options.fluid);
 
       // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
       const source = _options.source || _options.publicId;
@@ -240,10 +213,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const setCssClasses = () => {
-      this.videojs.addClass(CLASS_PREFIX);
-      this.videojs.addClass(playerClassPrefix(this.videojs));
+      this.videojs.addClass(Utils.CLASS_PREFIX);
+      this.videojs.addClass(Utils.playerClassPrefix(this.videojs));
 
-      setSkinClassPrefix(this.videojs, skinClassPrefix(this.videojs));
+      Utils.setSkinClassPrefix(this.videojs, Utils.skinClassPrefix(this.videojs));
 
       if (videojs.browser.IE_VERSION === 11) {
         this.videojs.addClass('cld-ie11');
@@ -251,7 +224,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPlugins = (loaded) => {
+      // #if (!process.env.WEBPACK_BUILD_LIGHT)
       this.adsEnabled = initIma(loaded);
+      // #endif
       initAutoplay();
       initContextMenu();
       initPerSrcBehaviors();
@@ -441,19 +416,27 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const _vjs_options = options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
-    Utils.addClass(elem, 'video-js');
+    elem.classList.add('video-js');
 
     // Handle WebFont loading
     Utils.fontFace(elem, _options);
 
     // Handle play button options
     Utils.playButton(elem, _vjs_options);
-    videojs.Html5DashJS.hook('beforeinitialize', dashInit);
+
+    // Dash plugin - available in full (not light) build only
+    if (plugins.dashPlugin) {
+      plugins.dashPlugin();
+    }
 
     this.videojs = videojs(elem, _vjs_options);
 
     if (_vjs_options.muted) {
       this.videojs.volume(0.4);
+    }
+
+    if (_options.fluid) {
+      this.fluid(_options.fluid);
     }
 
     /* global google */
@@ -465,6 +448,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     initPlugins(loaded);
     initPlaylistWidget();
     initJumpButtons();
+
     this.videojs.on('error', () => {
       const error = this.videojs.error();
       if (error) {
@@ -606,14 +590,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   skin(name) {
     if (name !== undefined && typeof name === 'string') {
-      setSkinClassPrefix(this.videojs, name);
+      Utils.setSkinClassPrefix(this.videojs, name);
 
       if (this.playlistWidget()) {
         this.playlistWidget().setSkin();
       }
     }
 
-    return skinClassPrefix(this.videojs);
+    return Utils.skinClassPrefix(this.videojs);
   }
 
   playlist(sources, options = {}) {
