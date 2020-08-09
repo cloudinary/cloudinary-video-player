@@ -1,4 +1,4 @@
-const objectToQuerystring = (obj) => {
+const objectToQuerystring = (obj = {}) => {
   const keys = Object.keys(obj);
 
   if (!keys.length) {

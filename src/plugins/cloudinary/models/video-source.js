@@ -58,6 +58,7 @@ if (!Array.prototype.find) {
 }
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm/vp9', 'mp4/h265', 'mp4'];
+const isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
 
 const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
@@ -198,44 +199,40 @@ class VideoSource extends BaseSource {
     return sources.some((_source) => isSrcEqual(_source, source));
   }
 
-  generateSources() {
-    let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
-    let srcs = this.sourceTypes().map((sourceType) => {
-      let src = null;
-      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
-      const format = normalizeFormat(sourceType);
-      let isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
-      const opts = {};
-      if (srcTransformation) {
-        opts.transformation = Array.isArray(srcTransformation) ? srcTransformation : [srcTransformation];
+  generateSource(sourceType) {
+    // Create source transformation array
+    let transformation = this.sourceTransformation()[sourceType] || this.transformation();
+    transformation = Array.isArray(transformation) ? transformation : [transformation];
+    const format = normalizeFormat(sourceType);
+    const isAdaptive = (format === 'mpd' || format === 'm3u8');
+    const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+    if (codecTrans) {
+      // Add video codec if not already exist in transformation
+      if (!['video_codec', 'streaming_profile'].find(key => isKeyInTransformation(transformation, key))) {
+        transformation.push(codecTrans);
       }
-      assign(opts, { resource_type: 'video', format });
-
-      let type = null;
-      let codecTrans = null;
-      let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-      // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !hasCodecSrcTrans) {
-        opts.transformation.push(codecTrans);
-      }
-      if (opts.format === 'auto') {
-        delete opts.format;
-      }
-
-      let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
-
-      src = this.config().url(this.publicId(), opts);
-      // if src is a url that already contains query params then replace '?' with '&'
-      src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
-
-      return { type, src, cldSrc: this, isAdaptive: isAdaptive };
-    });
-    if (isIe) {
-      return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
-    } else {
-      return srcs;
     }
+
+    // Create source options
+    const options = {
+      resource_type: 'video',
+      ...(transformation ? { transformation } : {}),
+      ...(format !== 'auto' ? { format } : {})
+    };
+
+    // Create src and append query string to it.
+    let src = this.config().url(this.publicId(), options);
+    let queryString = objectToQuerystring(this.queryParams());
+    // if src is a url that already contains query params then replace '?' with '&'
+    src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
+
+    return { type, src, cldSrc: this, isAdaptive };
+  }
+
+  generateSources() {
+    let srcs = this.sourceTypes().map((sourceType) => this.generateSource(sourceType));
+
+    return isIe ? srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"') : srcs;
   }
 }
 
