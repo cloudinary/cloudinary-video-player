@@ -205,6 +205,7 @@ class VideoSource extends BaseSource {
     const sourceTypeFormat = normalizeFormat(sourceType);
     const isAdaptive = (['mpd', 'm3u8'].indexOf(sourceTypeFormat) > -1);
     const transformationFormat = (transformation.find(t => t && t.format) || {}).format;
+    const trustPublicId = (transformation.find(t => t && t.trustPublicId) || {}).trustPublicId;
     // Get format from transformation, or from sourceType
     const format = transformationFormat || sourceTypeFormat;
     const isCodecTransformation = (isKeyInTransformation(transformation, 'video_codec') || isKeyInTransformation(transformation, 'streaming_profile'));
@@ -217,9 +218,12 @@ class VideoSource extends BaseSource {
     // Create source options
     const options = {
       resource_type: 'video',
-      ...(transformation ? { transformation } : {}),
-      ...(format === 'auto' ? {} : { format })
+      ...(transformation ? { transformation } : {})
     };
+
+    if (!trustPublicId && format !== 'auto') {
+      options.format = format;
+    }
 
     // Create src and append query string to it.
     let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
