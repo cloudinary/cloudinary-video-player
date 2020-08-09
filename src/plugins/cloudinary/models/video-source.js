@@ -198,39 +198,42 @@ class VideoSource extends BaseSource {
     return sources.some((_source) => isSrcEqual(_source, source));
   }
 
+  generateSource(sourceType) {
+    // Create source transformation array
+    let transformation = this.sourceTransformation()[sourceType] || this.transformation();
+    transformation = Array.isArray(transformation) ? transformation : [transformation];
+    const sourceTypeFormat = normalizeFormat(sourceType);
+    const isAdaptive = (['mpd', 'm3u8'].indexOf(sourceTypeFormat) > -1);
+    const transformationFormat = (transformation.find(t => t && t.format) || {}).format;
+    // Get format from transformation, or from sourceType
+    const format = transformationFormat || sourceTypeFormat;
+    const isCodecTransformation = (isKeyInTransformation(transformation, 'video_codec') || isKeyInTransformation(transformation, 'streaming_profile'));
+    const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+    if (codecTrans && !isCodecTransformation) {
+      // Add video codec if not already exist in transformation
+      transformation.push(codecTrans);
+    }
+
+    // Create source options
+    const options = {
+      resource_type: 'video',
+      ...(transformation ? { transformation } : {}),
+      ...(format === 'auto' ? {} : { format })
+    };
+
+    // Create src and append query string to it.
+    let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
+    let src = this.config().url(this.publicId(), options);
+    // if src is a url that already contains query params then replace '?' with '&'
+    src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
+
+    return { type, src, cldSrc: this, isAdaptive };
+  }
+
   generateSources() {
     let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
-    let srcs = this.sourceTypes().map((sourceType) => {
-      let src = null;
-      const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
-      const format = normalizeFormat(sourceType);
-      let isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
-      const opts = {};
-      if (srcTransformation) {
-        opts.transformation = Array.isArray(srcTransformation) ? srcTransformation : [srcTransformation];
-      }
-      assign(opts, { resource_type: 'video', format });
+    let srcs = this.sourceTypes().map((sourceType) => this.generateSource(sourceType));
 
-      let type = null;
-      let codecTrans = null;
-      let hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
-      [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-      // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !hasCodecSrcTrans) {
-        opts.transformation.push(codecTrans);
-      }
-      if (opts.format === 'auto') {
-        delete opts.format;
-      }
-
-      let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
-
-      src = this.config().url(this.publicId(), opts);
-      // if src is a url that already contains query params then replace '?' with '&'
-      src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
-
-      return { type, src, cldSrc: this, isAdaptive: isAdaptive };
-    });
     if (isIe) {
       return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
     } else {
