@@ -385,12 +385,24 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (_options.seekThumbnails !== false) {
 
         this.videojs.on('cldsourcechanged', (e, { source }) => {
+
+          if ( // Bail if...
+            source.getType() === 'AudioSource' || // it's an audio player
+            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+          ) {
+            return;
+          }
+
           const cloudinaryConfig = source.cloudinaryConfig();
           const publicId = source.publicId();
 
+          let transformations = source.transformation().toOptions();
+          transformations.flags = transformations.flags || [];
+          transformations.flags.push('sprite');
+
           // build VTT url
           const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', {
-            raw_transformation: 'fl_sprite'
+            transformation: transformations
           });
 
           // vttThumbnails must be called differently on init and on source update.

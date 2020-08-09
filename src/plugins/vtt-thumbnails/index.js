@@ -219,6 +219,11 @@ var vttThumbnailsPlugin = (function() {
   vttThumbnailsPlugin.prototype.onBarMouseenter = function onBarMouseenter() {
     var _this5 = this
 
+    if (this.progressBar.offsetWidth < 400) {
+      // Don't show in small players
+      return;
+    }
+
     this.mouseMoveCallback = function(e) {
       _this5.onBarMousemove(e)
     }
