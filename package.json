@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.4.3-edge.0",
+  "version": "1.4.3-edge.1",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
@@ -27,15 +27,15 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
-    "dashjs": "^3.1.1",
+    "dashjs": "^3.1.2",
     "expose-loader": "^0.7.5",
     "fetch-ponyfill": "^4.0.0",
     "promise-polyfill": "^6.0.2",
     "snyk": "^1.360.0",
-    "video.js": "^7.8.2",
+    "video.js": "^7.8.4",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
-    "videojs-ima": "^1.5.1",
+    "videojs-ima": "^1.5.2",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
     "wolfy87-eventemitter": "^5.1.0"
