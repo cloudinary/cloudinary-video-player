@@ -1,13 +1,12 @@
-/* eslint-disable */
 import videojs from 'video.js';
 
 import './vtt-thumbnails.scss';
 
 // Default options for the plugin.
-var defaults = {}
+let defaults = {};
 
 // Cache for image elements
-var cache = {}
+let cache = {};
 
 /**
  * Function to invoke when the player is ready.
@@ -23,10 +22,10 @@ var cache = {}
  * @param    {Object} [options={}]
  *           A plain object containing options for the plugin.
  */
-var onPlayerReady = function onPlayerReady(player, options) {
-  player.addClass("vjs-vtt-thumbnails")
-  player.vttThumbnails = new vttThumbnailsPlugin(player, options)
-}
+const onPlayerReady = function onPlayerReady(player, options) {
+  player.addClass('vjs-vtt-thumbnails');
+  player.vttThumbnails = new VttThumbnailsPlugin(player, options);
+};
 
 /**
  * A video.js plugin.
@@ -40,13 +39,13 @@ var onPlayerReady = function onPlayerReady(player, options) {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-var vttThumbnails = function vttThumbnails(options) {
-  var _this = this
+const vttThumbnails = function vttThumbnails(options) {
+  let _this = this;
 
-  this.ready(function() {
-    onPlayerReady(_this, videojs.mergeOptions(defaults, options))
-  })
-}
+  this.ready(function () {
+    onPlayerReady(_this, videojs.mergeOptions(defaults, options));
+  });
+};
 
 /**
  * VTT Thumbnails class.
@@ -54,7 +53,8 @@ var vttThumbnails = function vttThumbnails(options) {
  * This class performs all functions related to displaying the vtt
  * thumbnails.
  */
-var vttThumbnailsPlugin = (function() {
+const VttThumbnailsPlugin = (function () {
+
   /**
    * Plugin class constructor, called by videojs on
    * ready event.
@@ -66,73 +66,75 @@ var vttThumbnailsPlugin = (function() {
    * @param    {Object} [options={}]
    *           A plain object containing options for the plugin.
    */
-  function vttThumbnailsPlugin(player, options) {
-    this.player = player
-    this.options = options
-    this.listenForDurationChange()
-    this.initializeThumbnails()
-    this.registeredEvents = {}
-    return this
+  function VttThumbnailsPlugin(player, options) {
+    this.player = player;
+    this.options = options;
+    this.listenForDurationChange();
+    this.initializeThumbnails();
+    this.registeredEvents = {};
+    return this;
   }
 
-  vttThumbnailsPlugin.prototype.src = function src(source) {
-    this.resetPlugin()
-    this.options.src = source
-    this.initializeThumbnails()
-  }
+  VttThumbnailsPlugin.prototype.src = function src(source) {
+    this.resetPlugin();
+    this.options.src = source;
+    this.initializeThumbnails();
+  };
 
-  vttThumbnailsPlugin.prototype.detach = function detach() {
-    this.resetPlugin()
-  }
+  VttThumbnailsPlugin.prototype.detach = function detach() {
+    this.resetPlugin();
+  };
 
-  vttThumbnailsPlugin.prototype.resetPlugin = function resetPlugin() {
-    this.thumbnailHolder &&
-      this.thumbnailHolder.parentNode.removeChild(this.thumbnailHolder)
-    this.progressBar &&
+  VttThumbnailsPlugin.prototype.resetPlugin = function resetPlugin() {
+    if (this.thumbnailHolder) {
+      this.thumbnailHolder.parentNode.removeChild(this.thumbnailHolder);
+    }
+    if (this.progressBar) {
       this.progressBar.removeEventListener(
-        "mouseenter",
+        'mouseenter',
         this.registeredEvents.progressBarMouseEnter
-      )
-    this.progressBar &&
+      );
       this.progressBar.removeEventListener(
-        "mouseleave",
+        'mouseleave',
         this.registeredEvents.progressBarMouseLeave
-      )
-    this.progressBar &&
+      );
       this.progressBar.removeEventListener(
-        "mousemove",
+        'mousemove',
         this.registeredEvents.progressBarMouseMove
-      )
-    delete this.registeredEvents.progressBarMouseEnter
-    delete this.registeredEvents.progressBarMouseLeave
-    delete this.registeredEvents.progressBarMouseMove
-    delete this.progressBar
-    delete this.vttData
-    delete this.thumbnailHolder
-    delete this.lastStyle
-  }
+      );
+    }
+    delete this.registeredEvents.progressBarMouseEnter;
+    delete this.registeredEvents.progressBarMouseLeave;
+    delete this.registeredEvents.progressBarMouseMove;
+    delete this.progressBar;
+    delete this.vttData;
+    delete this.thumbnailHolder;
+    delete this.lastStyle;
+  };
 
-  vttThumbnailsPlugin.prototype.listenForDurationChange = function listenForDurationChange() {
-    this.player.on("durationchange", function() {})
-  }
+  VttThumbnailsPlugin.prototype.listenForDurationChange = function listenForDurationChange() {
+    this.player.on('durationchange', function () {
+      // ToDo
+    });
+  };
 
   /**
    * Bootstrap the plugin.
    */
 
-  vttThumbnailsPlugin.prototype.initializeThumbnails = function initializeThumbnails() {
-    var _this2 = this
+  VttThumbnailsPlugin.prototype.initializeThumbnails = function initializeThumbnails() {
+    let _this2 = this;
 
     if (!this.options.src) {
-      return
+      return;
     }
-    var baseUrl = this.getBaseUrl()
-    var url = this.getFullyQualifiedUrl(this.options.src, baseUrl)
-    this.getVttFile(url).then(function(data) {
-      _this2.vttData = _this2.processVtt(data)
-      _this2.setupThumbnailElement()
-    })
-  }
+    let baseUrl = this.getBaseUrl();
+    let url = this.getFullyQualifiedUrl(this.options.src, baseUrl);
+    this.getVttFile(url).then(function (data) {
+      _this2.vttData = _this2.processVtt(data);
+      _this2.setupThumbnailElement();
+    });
+  };
 
   /**
    * Builds a base URL should we require one.
@@ -140,18 +142,18 @@ var vttThumbnailsPlugin = (function() {
    * @returns {string}
    */
 
-  vttThumbnailsPlugin.prototype.getBaseUrl = function getBaseUrl() {
+  VttThumbnailsPlugin.prototype.getBaseUrl = function getBaseUrl() {
     return [
       window.location.protocol,
-      "//",
+      '//',
       window.location.hostname,
-      window.location.port ? ":" + window.location.port : "",
+      window.location.port ? ':' + window.location.port : '',
       window.location.pathname
     ]
-      .join("")
+      .join('')
       .split(/([^\/]*)$/gi)
-      .shift()
-  }
+      .shift();
+  };
 
   /**
    * Grabs the contents of the VTT file.
@@ -160,363 +162,363 @@ var vttThumbnailsPlugin = (function() {
    * @returns {Promise}
    */
 
-  vttThumbnailsPlugin.prototype.getVttFile = function getVttFile(url) {
-    var _this3 = this
+  VttThumbnailsPlugin.prototype.getVttFile = function getVttFile(url) {
+    let _this3 = this;
 
-    return new Promise(function(resolve, reject) {
-      var req = new XMLHttpRequest()
+    return new Promise(function (resolve) {
+      let req = new XMLHttpRequest();
       req.data = {
         resolve: resolve
-      }
-      req.addEventListener("load", _this3.vttFileLoaded)
-      req.open("GET", url)
-      req.send()
-    })
-  }
+      };
+      req.addEventListener('load', _this3.vttFileLoaded);
+      req.open('GET', url);
+      req.send();
+    });
+  };
 
   /**
    * Callback for loaded VTT file.
    */
 
-  vttThumbnailsPlugin.prototype.vttFileLoaded = function vttFileLoaded() {
-    this.data.resolve(this.responseText)
-  }
+  VttThumbnailsPlugin.prototype.vttFileLoaded = function vttFileLoaded() {
+    this.data.resolve(this.responseText);
+  };
 
-  vttThumbnailsPlugin.prototype.setupThumbnailElement = function setupThumbnailElement(
-    data
-  ) {
-    var _this4 = this
+  VttThumbnailsPlugin.prototype.setupThumbnailElement = function setupThumbnailElement() {
+    let _this4 = this;
 
-    var mouseDisplay = this.player.$(".vjs-mouse-display")
-    this.progressBar = this.player.$(".vjs-progress-control")
-    var thumbHolder = document.createElement("div")
-    thumbHolder.setAttribute("class", "vjs-vtt-thumbnail-display")
-    this.progressBar.appendChild(thumbHolder)
-    this.thumbnailHolder = thumbHolder
-    var timeHolder = document.createElement("div")
-    timeHolder.setAttribute("class", "vjs-vtt-time-display")
-    this.thumbnailHolder.appendChild(timeHolder)
-    this.timeHolder = timeHolder
+    let mouseDisplay = this.player.$('.vjs-mouse-display');
+    this.progressBar = this.player.$('.vjs-progress-control');
+    let thumbHolder = document.createElement('div');
+    thumbHolder.setAttribute('class', 'vjs-vtt-thumbnail-display');
+    this.progressBar.appendChild(thumbHolder);
+    this.thumbnailHolder = thumbHolder;
+    let timeHolder = document.createElement('div');
+    timeHolder.setAttribute('class', 'vjs-vtt-time-display');
+    this.thumbnailHolder.appendChild(timeHolder);
+    this.timeHolder = timeHolder;
     if (mouseDisplay) {
-      mouseDisplay.classList.add("vjs-hidden")
+      mouseDisplay.classList.add('vjs-hidden');
     }
-    this.registeredEvents.progressBarMouseEnter = function() {
-      return _this4.onBarMouseenter()
-    }
-    this.registeredEvents.progressBarMouseLeave = function() {
-      return _this4.onBarMouseleave()
-    }
+    this.registeredEvents.progressBarMouseEnter = function () {
+      return _this4.onBarMouseenter();
+    };
+    this.registeredEvents.progressBarMouseLeave = function () {
+      return _this4.onBarMouseleave();
+    };
     this.progressBar.addEventListener(
-      "mouseenter",
+      'mouseenter',
       this.registeredEvents.progressBarMouseEnter
-    )
+    );
     this.progressBar.addEventListener(
-      "mouseleave",
+      'mouseleave',
       this.registeredEvents.progressBarMouseLeave
-    )
-  }
+    );
+  };
 
-  vttThumbnailsPlugin.prototype.onBarMouseenter = function onBarMouseenter() {
-    var _this5 = this
+  VttThumbnailsPlugin.prototype.onBarMouseenter = function onBarMouseenter() {
+    let _this5 = this;
 
     if (this.progressBar.offsetWidth < 400) {
       // Don't show in small players
       return;
     }
 
-    this.mouseMoveCallback = function(e) {
-      _this5.onBarMousemove(e)
-    }
-    this.registeredEvents.progressBarMouseMove = this.mouseMoveCallback
+    this.mouseMoveCallback = function (e) {
+      _this5.onBarMousemove(e);
+    };
+    this.registeredEvents.progressBarMouseMove = this.mouseMoveCallback;
     this.progressBar.addEventListener(
-      "mousemove",
+      'mousemove',
       this.registeredEvents.progressBarMouseMove
-    )
-    this.showThumbnailHolder()
-  }
+    );
+    this.showThumbnailHolder();
+  };
 
-  vttThumbnailsPlugin.prototype.onBarMouseleave = function onBarMouseleave() {
+  VttThumbnailsPlugin.prototype.onBarMouseleave = function onBarMouseleave() {
     if (this.registeredEvents.progressBarMouseMove) {
       this.progressBar.removeEventListener(
-        "mousemove",
+        'mousemove',
         this.registeredEvents.progressBarMouseMove
-      )
+      );
     }
-    this.hideThumbnailHolder()
-  }
+    this.hideThumbnailHolder();
+  };
 
-  vttThumbnailsPlugin.prototype.getXCoord = function getXCoord(bar, mouseX) {
-    var rect = bar.getBoundingClientRect()
-    var docEl = document.documentElement
+  VttThumbnailsPlugin.prototype.getXCoord = function getXCoord(bar, mouseX) {
+    let rect = bar.getBoundingClientRect();
+    let docEl = document.documentElement;
     return (
       mouseX - (rect.left + (window.pageXOffset || docEl.scrollLeft || 0))
-    )
-  }
+    );
+  };
 
-  vttThumbnailsPlugin.prototype.onBarMousemove = function onBarMousemove(
+  VttThumbnailsPlugin.prototype.onBarMousemove = function onBarMousemove(
     event
   ) {
     this.updateThumbnailStyle(
       videojs.dom.getPointerPosition(this.progressBar, event).x,
       this.progressBar.offsetWidth
-    )
-  }
+    );
+  };
 
-  vttThumbnailsPlugin.prototype.getStyleForTime = function getStyleForTime(
+  VttThumbnailsPlugin.prototype.getStyleForTime = function getStyleForTime(
     time
   ) {
-    for (var i = 0; i < this.vttData.length; ++i) {
-      var item = this.vttData[i]
+    for (let i = 0; i < this.vttData.length; ++i) {
+      let item = this.vttData[i];
       if (time >= item.start && time < item.end) {
         // Cache miss
         if (item.css.url && !cache[item.css.url]) {
-          var image = new Image()
-          image.src = item.css.url
-          cache[item.css.url] = image
+          let image = new Image();
+          image.src = item.css.url;
+          cache[item.css.url] = image;
         }
 
-        return item.css
+        return item.css;
       }
     }
-  }
+  };
 
-  vttThumbnailsPlugin.prototype.showThumbnailHolder = function showThumbnailHolder() {
-    this.thumbnailHolder.style.opacity = "1"
-  }
+  VttThumbnailsPlugin.prototype.showThumbnailHolder = function showThumbnailHolder() {
+    this.thumbnailHolder.style.opacity = '1';
+  };
 
-  vttThumbnailsPlugin.prototype.hideThumbnailHolder = function hideThumbnailHolder() {
-    this.thumbnailHolder.style.opacity = "0"
-  }
+  VttThumbnailsPlugin.prototype.hideThumbnailHolder = function hideThumbnailHolder() {
+    this.thumbnailHolder.style.opacity = '0';
+  };
 
-  vttThumbnailsPlugin.prototype.updateThumbnailStyle = function updateThumbnailStyle(
+  VttThumbnailsPlugin.prototype.updateThumbnailStyle = function updateThumbnailStyle(
     percent,
     width
   ) {
-    var duration = this.player.duration()
-    var time = percent * duration
-    var currentStyle = this.getStyleForTime(time)
+    let duration = this.player.duration();
+    let time = percent * duration;
+    let currentStyle = this.getStyleForTime(time);
 
     if (!currentStyle) {
-      return this.hideThumbnailHolder()
+      return this.hideThumbnailHolder();
     }
 
-    var xPos = percent * width
-    var thumbnailWidth = parseInt(currentStyle.width)
-    var halfthumbnailWidth = thumbnailWidth >> 1
-    var marginRight = width - (xPos + halfthumbnailWidth)
-    var marginLeft = xPos - halfthumbnailWidth
+    let xPos = percent * width;
+    let thumbnailWidth = parseInt(currentStyle.width, 10);
+    let halfthumbnailWidth = thumbnailWidth / 2;
+    let marginRight = width - (xPos + halfthumbnailWidth);
+    let marginLeft = xPos - halfthumbnailWidth;
     if (marginLeft > 0 && marginRight > 0) {
       this.thumbnailHolder.style.transform =
-        "translateX(" + (xPos - halfthumbnailWidth) + "px)"
+        'translateX(' + (xPos - halfthumbnailWidth) + 'px)';
     } else if (marginLeft <= 0) {
-      this.thumbnailHolder.style.transform = "translateX(" + 0 + "px)"
+      this.thumbnailHolder.style.transform = 'translateX(' + 0 + 'px)';
     } else if (marginRight <= 0) {
       this.thumbnailHolder.style.transform =
-        "translateX(" + (width - thumbnailWidth) + "px)"
+        'translateX(' + (width - thumbnailWidth) + 'px)';
     }
 
-    this.timeHolder.innerHTML = this.getTimestampFromSeconds(time)
+    this.timeHolder.innerHTML = this.getTimestampFromSeconds(time);
 
     if (this.lastStyle && this.lastStyle === currentStyle) {
-      return
+      return;
     }
-    this.lastStyle = currentStyle
+    this.lastStyle = currentStyle;
 
-    for (var style in currentStyle) {
-      if (currentStyle.hasOwnProperty(style)) {
-        this.thumbnailHolder.style[style] = currentStyle[style]
+    for (let style in currentStyle) {
+      if (Object.prototype.hasOwnProperty.call(currentStyle, style)) {
+        this.thumbnailHolder.style[style] = currentStyle[style];
       }
     }
-  }
+  };
 
-  vttThumbnailsPlugin.prototype.processVtt = function processVtt(data) {
-    var _this6 = this
+  VttThumbnailsPlugin.prototype.processVtt = function processVtt(data) {
+    let _this6 = this;
 
-    var processedVtts = []
-    var vttDefinitions = data.split(/[\r\n][\r\n]/i)
-    vttDefinitions.forEach(function(vttDef) {
+    let processedVtts = [];
+    let vttDefinitions = data.split(/[\r\n][\r\n]/i);
+    vttDefinitions.forEach(function (vttDef) {
       if (
         vttDef.match(
           /([0-9]{2}:)?([0-9]{2}:)?[0-9]{2}(.[0-9]{3})?( ?--> ?)([0-9]{2}:)?([0-9]{2}:)?[0-9]{2}(.[0-9]{3})?[\r\n]{1}.*/gi
         )
       ) {
-        var vttDefSplit = vttDef.split(/[\r\n]/i)
-        var vttTiming = vttDefSplit[0]
-        var vttTimingSplit = vttTiming.split(/ ?--> ?/i)
-        var vttTimeStart = vttTimingSplit[0]
-        var vttTimeEnd = vttTimingSplit[1]
-        var vttImageDef = vttDefSplit[1]
-        var vttCssDef = _this6.getVttCss(vttImageDef)
+        let vttDefSplit = vttDef.split(/[\r\n]/i);
+        let vttTiming = vttDefSplit[0];
+        let vttTimingSplit = vttTiming.split(/ ?--> ?/i);
+        let vttTimeStart = vttTimingSplit[0];
+        let vttTimeEnd = vttTimingSplit[1];
+        let vttImageDef = vttDefSplit[1];
+        let vttCssDef = _this6.getVttCss(vttImageDef);
 
         processedVtts.push({
           start: _this6.getSecondsFromTimestamp(vttTimeStart),
           end: _this6.getSecondsFromTimestamp(vttTimeEnd),
           css: vttCssDef
-        })
+        });
       }
-    })
-    return processedVtts
-  }
+    });
+    return processedVtts;
+  };
 
-  vttThumbnailsPlugin.prototype.getFullyQualifiedUrl = function getFullyQualifiedUrl(
+  VttThumbnailsPlugin.prototype.getFullyQualifiedUrl = function getFullyQualifiedUrl(
     path,
     base
   ) {
     // ToDo: remove this? also remove trim?
-    if (path.indexOf("//") >= 0) {
+    if (path.indexOf('//') >= 0) {
       // We have a fully qualified path.
-      return path
+      return path;
     }
-    if (base.indexOf("//") === 0) {
+    if (base.indexOf('//') === 0) {
       // We don't have a fully qualified path, but need to
       // be careful with trimming.
-      return [base.replace(/\/$/gi, ""), this.trim(path, "/")].join("/")
+      return [base.replace(/\/$/gi, ''), this.trim(path, '/')].join('/');
     }
-    if (base.indexOf("//") > 0) {
+    if (base.indexOf('//') > 0) {
       // We don't have a fully qualified path, and should
       // trim both sides of base and path.
-      return [this.trim(base, "/"), this.trim(path, "/")].join("/")
+      return [this.trim(base, '/'), this.trim(path, '/')].join('/');
     }
 
     // If all else fails.
-    return path
-  }
+    return path;
+  };
 
-  vttThumbnailsPlugin.prototype.getPropsFromDef = function getPropsFromDef(
+  VttThumbnailsPlugin.prototype.getPropsFromDef = function getPropsFromDef(
     def
   ) {
-    var imageDefSplit = def.split(/#xywh=/i)
-    var imageUrl = imageDefSplit[0]
-    var imageCoords = imageDefSplit[1]
-    var splitCoords = imageCoords.match(/[0-9]+/gi)
+    let imageDefSplit = def.split(/#xywh=/i);
+    let imageUrl = imageDefSplit[0];
+    let imageCoords = imageDefSplit[1];
+    let splitCoords = imageCoords.match(/[0-9]+/gi);
     return {
       x: splitCoords[0],
       y: splitCoords[1],
       w: splitCoords[2],
       h: splitCoords[3],
       image: imageUrl
-    }
-  }
+    };
+  };
 
-  vttThumbnailsPlugin.prototype.getVttCss = function getVttCss(vttImageDef) {
-    var cssObj = {}
+  VttThumbnailsPlugin.prototype.getVttCss = function getVttCss(vttImageDef) {
+    let cssObj = {};
 
     // If there isn't a protocol, use the VTT source URL.
-    var baseSplit = void 0
-    if (this.options.src.indexOf("//") >= 0) {
-      baseSplit = this.options.src.split(/([^\/]*)$/gi).shift()
+    let baseSplit = '';
+    if (this.options.src.indexOf('//') >= 0) {
+      baseSplit = this.options.src.split(/([^\/]*)$/gi).shift();
     } else {
       baseSplit =
-        this.getBaseUrl() + this.options.src.split(/([^\/]*)$/gi).shift()
+        this.getBaseUrl() + this.options.src.split(/([^\/]*)$/gi).shift();
     }
 
-    vttImageDef = this.getFullyQualifiedUrl(vttImageDef, baseSplit)
+    vttImageDef = this.getFullyQualifiedUrl(vttImageDef, baseSplit);
 
     if (!vttImageDef.match(/#xywh=/i)) {
-      cssObj.background = 'url("' + vttImageDef + '")'
-      return cssObj
+      cssObj.background = 'url("' + vttImageDef + '")';
+      return cssObj;
     }
 
-    var imageProps = this.getPropsFromDef(vttImageDef)
+    let imageProps = this.getPropsFromDef(vttImageDef);
     cssObj.background =
       'url("' +
       imageProps.image +
       '") no-repeat -' +
       imageProps.x +
-      "px -" +
+      'px -' +
       imageProps.y +
-      "px"
-    cssObj.width = imageProps.w + "px"
-    cssObj.height = imageProps.h + "px"
-    cssObj.url = imageProps.image
+      'px';
+    cssObj.width = imageProps.w + 'px';
+    cssObj.height = imageProps.h + 'px';
+    cssObj.url = imageProps.image;
 
-    return cssObj
-  }
+    return cssObj;
+  };
 
-  vttThumbnailsPlugin.prototype.doconstructTimestamp = function doconstructTimestamp(
+  VttThumbnailsPlugin.prototype.doconstructTimestamp = function doconstructTimestamp(
     timestamp
   ) {
-    var splitStampMilliseconds = timestamp.split(".")
-    var timeParts = splitStampMilliseconds[0]
-    var timePartsSplit = timeParts.split(":")
+    let splitStampMilliseconds = timestamp.split('.');
+    let timeParts = splitStampMilliseconds[0];
+    let timePartsSplit = timeParts.split(':');
     return {
-      milliseconds: parseInt(splitStampMilliseconds[1]) || 0,
-      seconds: parseInt(timePartsSplit.pop()) || 0,
-      minutes: parseInt(timePartsSplit.pop()) || 0,
-      hours: parseInt(timePartsSplit.pop()) || 0
-    }
-  }
+      milliseconds: parseInt(splitStampMilliseconds[1], 10) || 0,
+      seconds: parseInt(timePartsSplit.pop(), 10) || 0,
+      minutes: parseInt(timePartsSplit.pop(), 10) || 0,
+      hours: parseInt(timePartsSplit.pop(), 10) || 0
+    };
+  };
 
-  vttThumbnailsPlugin.prototype.getSecondsFromTimestamp = function getSecondsFromTimestamp(
+  VttThumbnailsPlugin.prototype.getSecondsFromTimestamp = function getSecondsFromTimestamp(
     timestamp
   ) {
-    var timestampParts = this.doconstructTimestamp(timestamp)
+    let timestampParts = this.doconstructTimestamp(timestamp);
     return parseInt(
       timestampParts.hours * (60 * 60) +
-        timestampParts.minutes * 60 +
-        timestampParts.seconds +
-        timestampParts.milliseconds / 1000
-    )
-  }
+      timestampParts.minutes * 60 +
+      timestampParts.seconds +
+      timestampParts.milliseconds / 1000
+      , 10);
+  };
 
-  vttThumbnailsPlugin.prototype.getTimestampFromSeconds = function getTimestampFromSeconds(
+  VttThumbnailsPlugin.prototype.getTimestampFromSeconds = function getTimestampFromSeconds(
     totalSeconds
   ) {
-    var minutes = Math.floor(totalSeconds / 60);
-    var seconds = Math.floor(totalSeconds % 60);
-    if (seconds < 10) { seconds = '0' + seconds }
-    return minutes + ':' + seconds;
-  }
-
-  vttThumbnailsPlugin.prototype.trim = function trim(str, charlist) {
-    var whitespace = [
-      " ",
-      "\n",
-      "\r",
-      "\t",
-      "\f",
-      "\x0b",
-      "\xa0",
-      "\u2000",
-      "\u2001",
-      "\u2002",
-      "\u2003",
-      "\u2004",
-      "\u2005",
-      "\u2006",
-      "\u2007",
-      "\u2008",
-      "\u2009",
-      "\u200A",
-      "\u200B",
-      "\u2028",
-      "\u2029",
-      "\u3000"
-    ].join("")
-    var l = 0
-    var i = 0
-    str += ""
-    if (charlist) {
-      whitespace = (charlist + "").replace(/([[\]().?/*{}+$^:])/g, "$1")
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = Math.floor(totalSeconds % 60);
+    if (seconds < 10) {
+      seconds = '0' + seconds;
     }
-    l = str.length
+    return minutes + ':' + seconds;
+  };
+
+  VttThumbnailsPlugin.prototype.trim = function trim(str, charlist) {
+    let whitespace = [
+      ' ',
+      '\n',
+      '\r',
+      '\t',
+      '\f',
+      '\x0b',
+      '\xa0',
+      '\u2000',
+      '\u2001',
+      '\u2002',
+      '\u2003',
+      '\u2004',
+      '\u2005',
+      '\u2006',
+      '\u2007',
+      '\u2008',
+      '\u2009',
+      '\u200A',
+      '\u200B',
+      '\u2028',
+      '\u2029',
+      '\u3000'
+    ].join('');
+    let l = 0;
+    let i = 0;
+    str += '';
+    if (charlist) {
+      whitespace = (charlist + '').replace(/([[\]().?/*{}+$^:])/g, '$1');
+    }
+    l = str.length;
     for (i = 0; i < l; i++) {
       if (whitespace.indexOf(str.charAt(i)) === -1) {
-        str = str.substring(i)
-        break
+        str = str.substring(i);
+        break;
       }
     }
-    l = str.length
+    l = str.length;
     for (i = l - 1; i >= 0; i--) {
       if (whitespace.indexOf(str.charAt(i)) === -1) {
-        str = str.substring(0, i + 1)
-        break
+        str = str.substring(0, i + 1);
+        break;
       }
     }
-    return whitespace.indexOf(str.charAt(0)) === -1 ? str : ""
-  }
+    return whitespace.indexOf(str.charAt(0)) === -1 ? str : '';
+  };
 
-  return vttThumbnailsPlugin
-})()
+  return VttThumbnailsPlugin;
+}());
 
 export default vttThumbnails;
