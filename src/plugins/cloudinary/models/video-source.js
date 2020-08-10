@@ -203,7 +203,7 @@ class VideoSource extends BaseSource {
     // Create source transformation array
     let transformation = this.sourceTransformation()[sourceType] || this.transformation();
     transformation = Array.isArray(transformation) ? transformation : [transformation];
-    const format = normalizeFormat(sourceType);
+    let format = normalizeFormat(sourceType);
     const isAdaptive = (format === 'mpd' || format === 'm3u8');
     const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
     if (codecTrans) {
@@ -214,11 +214,11 @@ class VideoSource extends BaseSource {
     }
 
     // Create source options
-    const options = {
-      resource_type: 'video',
-      ...(transformation ? { transformation } : {}),
-      ...(format !== 'auto' ? { format } : {})
-    };
+    const options = assign(
+      { resource_type: 'video' },
+      transformation ? { transformation } : {},
+      format !== 'auto' ? { format } : {}
+    );
 
     // Create src and append query string to it.
     let src = this.config().url(this.publicId(), options);
