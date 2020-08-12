@@ -11,7 +11,7 @@ const handleCldError = (that, options) => {
   const cloudName = that.cloudinaryConfig().config().cloud_name;
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   let srcs = that.videojs.cloudinary.getCurrentSources();
-  if (srcs.length > 0) {
+  if (srcs.length > 1) {
     Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
       let filtered = [];
       res.forEach(r => {
