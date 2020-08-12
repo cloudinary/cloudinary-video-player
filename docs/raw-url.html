@@ -23,10 +23,9 @@
 
       var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
 
-      var player = cld.videoPlayer('player', {
-        publicId: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4',
-        info: { title: 'Big Buck Bunny', subtitle: 'Raw url' },
-      });
+      var player = cld.videoPlayer('player');
+
+      player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
 
     }, false);
   </script>
@@ -38,7 +37,7 @@
       <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Video with raw url</h3>
+    <h3 class="mb-4">Video with raw URL</h3>
 
     <video
       id="player"
@@ -67,11 +66,11 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
-      var player = cld.videoPlayer('player', {
-        publicId: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4',
-        info: { title: 'Big Buck Bunny', subtitle: 'Raw url' },
-      });
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
+
+        var player = cld.videoPlayer('player');
+
+        player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
       </code>
     </pre>
   </div>
