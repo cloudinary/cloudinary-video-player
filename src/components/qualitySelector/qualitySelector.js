@@ -98,7 +98,17 @@ const qualitySelector = {
       } else {
         sourceMenuButton.hide();
       }
+
+      // Labels: 720p => 1280x720 @ 3500Kbps
+      sourceMenuButton.items.forEach((item) => {
+        const level = qualityLevels.levels_.find(ql => ql.height + 'p' === item.options_.label);
+        if (level) {
+          item.el_.innerText = level.width + 'x' + level.height + (level.bitrate ? ' @ ' + (Math.round(level.bitrate / 100)) + 'Kbps' : '');
+        }
+      });
+
     }
+
   }
 
 };
