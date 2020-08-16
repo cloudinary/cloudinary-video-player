@@ -37,6 +37,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
+  'qualitySelector',
   'fetchErrorUsingGet'
 ]);
 
@@ -351,17 +352,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     this.initQualitySelector = () => {
-      this.videojs.httpSourceSelector({ default: 'high' });
+      if (_options.qualitySelector !== false) {
+        this.videojs.httpSourceSelector({ default: 'high' });
 
-      this.videojs.on('loadedmetadata', () => {
-        qualitySelector.init(this.videojs);
-      });
+        this.videojs.on('loadedmetadata', () => {
+          qualitySelector.init(this.videojs);
+        });
 
-      // Show only if more then one option available
-      this.videojs.on('loadeddata', () => {
-        qualitySelector.setVisibility(this.videojs);
-      });
-
+        // Show only if more then one option available
+        this.videojs.on('loadeddata', () => {
+          qualitySelector.setVisibility(this.videojs);
+        });
+      }
     };
 
     const initTextTracks = () => {

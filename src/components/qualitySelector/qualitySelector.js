@@ -1,4 +1,3 @@
-import videojs from 'video.js';
 import * as djs from 'dashjs';
 import 'videojs-per-source-behaviors';
 import 'videojs-contrib-quality-levels';
@@ -7,7 +6,6 @@ import 'videojs-http-source-selector';
 import './quality-selector.scss';
 
 const qualitySelector = {
-
   init: (player) => {
     if (
       player &&
