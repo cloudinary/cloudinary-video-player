@@ -352,9 +352,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.initQualitySelector = () => {
       this.videojs.httpSourceSelector({ default: 'high' });
+
       this.videojs.on('loadedmetadata', () => {
-        qualitySelector(this.videojs);
+        qualitySelector.init(this.videojs);
       });
+
+      // Show only if more then one option available
+      this.videojs.on('loadeddata', () => {
+        qualitySelector.setVisibility(this.videojs);
+      });
+
     };
 
     const initTextTracks = () => {
