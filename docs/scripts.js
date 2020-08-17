@@ -7,6 +7,7 @@ if (!String.prototype.startsWith) {
     return this.substr(position, searchString.length) === searchString;
   };
 }
+
 // URLSearchParams.get() polyfill
 if (!window.URLSearchParams) {
   window.URLSearchParams = window.URLSearchParams || function (searchString) {
@@ -22,119 +23,136 @@ if (!window.URLSearchParams) {
     };
   };
 }
-function isIPaddress(ipaddress) {
-  return /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
-      ipaddress);
-}
 
-function isLocal() {
-  // eslint-disable-next-line no-unused-expressions
- return window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.')) + 1) === 'local';
-}
-// Get scripts & styles from:
-// `localhost` while developing or if the host is an ip address or a .local domain
-// `unpkg.com` while demoing OR if a specific version is specified
-// These SHOULD be global since they are called by some examples
-var loadScript = function (source, ver) {
+// true on /localhost or /anything.local
+var isLocal = window.location.hostname === 'localhost' || window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.')) + 1) === 'local';
+
+// true if testing in an IP page URL
+var isIpAddress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.hostname);
+
+var cdnPrefix = function (source, ver) {
   var external = source.startsWith('http');
-  var from =
-    !ver && (external || window.location.hostname === 'localhost' || isIPaddress(window.location.hostname) || isLocal())
-      ? ''
-      : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
+  if (!ver && (external || isLocal || isIpAddress)) {
+    return '';
+  } else {
+    return 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
+  }
+};
+
+// Get scripts & styles from:
+// `localhost` while developing (localhost/ip address/.local domain)
+// `unpkg.com` while demoing OR if a specific version is specified
+// These MUST be global since they are called by some examples
+var loadScript = function(source, ver) {
+  var prefix = cdnPrefix(source, ver);
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.src = from + source;
+  script.src = prefix + source;
   script.async = false;
   document.getElementsByTagName('head')[0].appendChild(script);
 };
 
 var loadStyle = function (source, ver) {
-  var external = source.startsWith('http');
-  var from =
-    !ver && (external || window.location.hostname === 'localhost')
-      ? ''
-      : 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
+  var prefix = cdnPrefix(source, ver);
   var style = document.createElement('link');
   style.type = 'text/css';
   style.rel = 'stylesheet';
-  style.href = from + source;
+  style.href = prefix + source;
   document.getElementsByTagName('head')[0].appendChild(style);
 };
 
 (function () {
 
-  var createVersionSelector = function() {
+  // Allows testing of various build flavors (min/light) & versions (1.1.x)
+  var search = new URLSearchParams(window.location.search);
+  var ver = search.get('ver');
+  var min = search.get('min');
+  var light = search.get('light');
 
-    var parent = document.body;
+  var createVersionSelector = function() {
 
     var versions = [
       { label: 'Select Player Version:' },
-      { value: 'latest', label: 'Latest (Stable)' },
-      { value: 'edge', label: 'Edge (Dev Only)' },
-      { value: 'latest&flavor=min', label: 'Latest, minified' },
-      { value: 'latest&flavor=min&dist=light', label: 'Latest, light, minified' },
-      { value: 'edge&flavor=min', label: 'Edge, minified' },
-      { value: 'edge&flavor=min&dist=light', label: 'Edge, light, minified' }
+      { value: 'ver=latest', label: 'Stable (Latest)' },
+      { value: 'ver=latest&min=true', label: 'Stable, Minified' },
+      { value: 'ver=latest&light=true', label: 'Stable, Light' },
+      { value: 'ver=latest&min=true&light=true', label: 'Stable, Light, Minified' },
+      { value: 'ver=edge', label: 'Edge (Next Stable)' },
+      { value: 'ver=edge&min=true', label: 'Edge, Minified' },
+      { value: 'ver=edge&light=true', label: 'Edge, Light' },
+      { value: 'ver=edge&min=true&light=true', label: 'Edge, Light, Minified' }
     ];
 
     // Create and append select list
     var selectList = document.createElement('select');
     selectList.id = 'version-switch';
-    selectList.style.cssText = 'appearance: none;position:fixed;bottom:20px;right:20px;background:#fff;min-width:220px;height:2em;border:1px solid #ddd;';
+    selectList.style.cssText = 'appearance: none;position:fixed;bottom:20px;right:20px;background:#fff;min-width:220px;height:2em;border:1px solid #ddd;padding:0 1em;';
     selectList.onchange = function (e) {
       var selected = e.target.value;
       if (selected) {
-        window.location.href = window.location.origin + window.location.pathname + '?ver=' + selected;
+        window.location.href = window.location.origin + window.location.pathname + '?' + selected;
       }
     };
-    parent.appendChild(selectList);
+    document.body.appendChild(selectList);
+
+    // Current flavor
+    var current = 'ver=' + (ver || !isLocal && 'edge');
+    if (min) current = current + '&min=' + min;
+    if (light) current = current + '&light=' + light;
 
     // Create and append the options
     for (var i = 0; i < versions.length; ++i) {
       var option = document.createElement('option');
+      option.text = versions[i].label;
       if (versions[i].value) {
         option.value = versions[i].value;
+
+        // Find if this is the flavor currently in use
+        if (option.value === current) {
+          option.selected = true;
+          option.text = 'Testing: ' + option.text;
+        }
+
       } else {
+        // 'Select Player Version:'
         option.disabled = true;
         option.selected = true;
       }
-      option.text = versions[i].label;
       selectList.appendChild(option);
     }
 
   };
 
-  var initPlayerExamples = function () {
-    // Allows testing of various build flavors (min/light) & versions (1.1.x)
-    var search = new URLSearchParams(window.location.search);
-    var ver = search.get('ver');
-    var flavor = search.get('flavor');
-    var dist = search.get('dist');
-    if (ver || flavor) {
-      // Maintain the 'ver' query param on internal links.
-      window.addEventListener('load', function (e) {
-        var links = document.querySelectorAll('a');
-        for (var i = 0; i < links.length; ++i) {
-          var a = links[i];
-          if (a.hostname === location.hostname) {
-            var url = a.href + '?';
-            if (ver) url = url + 'ver=' + ver + '&';
-            if (flavor) url = url + 'flavor=' + flavor;
-            a.setAttribute('href', url);
-          }
-        }
-      }, false);
-      ver = ver || 'edge'; // Set default version in case flavor is provided but version isn't.
+  var updatePageAnchors = () => {
+    // Maintain the 'ver' query param on internal links.
+    var links = document.querySelectorAll('a');
+    for (var i = 0; i < links.length; ++i) {
+      var a = links[i];
+      if (a.hostname === location.hostname) {
+        var url = a.href + '?';
+        if (ver) url = url + 'ver=' + ver + '&';
+        if (min) url = url + 'min=' + min + '&';
+        if (light) url = url + 'light=' + light;
+        a.setAttribute('href', url);
+      }
     }
+  };
+
+  var initPlayerExamples = function () {
 
     loadScript('https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js');
-    loadStyle('/cld-video-player' + (flavor ? '.' + flavor : '') + '.css', ver);
-    loadScript('/cld-video-player' + (dist ? '.' + dist : '') + (flavor ? '.' + flavor : '') + '.js', ver);
+    loadStyle('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.css', ver);
+    loadScript('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.js', ver);
 
     window.addEventListener('load', function() {
 
       createVersionSelector();
 
+      if (ver || min || light) {
+        // // Set default version in case flavor is provided but version isn't.
+        // ver = ver || 'edge';
+        updatePageAnchors();
+      }
     }, false);
 
   };
