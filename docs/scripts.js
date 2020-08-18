@@ -2,7 +2,7 @@
 
 // String.startsWith() polyfill
 if (!String.prototype.startsWith) {
-  String.prototype.startsWith = function(searchString, position) {
+  String.prototype.startsWith = function (searchString, position) {
     position = position || 0;
     return this.substr(position, searchString.length) === searchString;
   };
@@ -43,7 +43,7 @@ var cdnPrefix = function (source, ver) {
 // `localhost` while developing (localhost/ip address/.local domain)
 // `unpkg.com` while demoing OR if a specific version is specified
 // These MUST be global since they are called by some examples
-var loadScript = function(source, ver) {
+var loadScript = function (source, ver) {
   var prefix = cdnPrefix(source, ver);
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -69,7 +69,7 @@ var loadStyle = function (source, ver) {
   var min = search.get('min');
   var light = search.get('light');
 
-  var createVersionSelector = function() {
+  var createVersionSelector = function () {
 
     var versions = [
       { label: 'Select Player Version:' },
@@ -123,7 +123,7 @@ var loadStyle = function (source, ver) {
 
   };
 
-  var updatePageAnchors = () => {
+  var updatePageAnchors = function () {
     // Maintain the 'ver' query param on internal links.
     var links = document.querySelectorAll('a');
     for (var i = 0; i < links.length; ++i) {
@@ -144,13 +144,11 @@ var loadStyle = function (source, ver) {
     loadStyle('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.css', ver);
     loadScript('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.js', ver);
 
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
 
       createVersionSelector();
 
       if (ver || min || light) {
-        // // Set default version in case flavor is provided but version isn't.
-        // ver = ver || 'edge';
         updatePageAnchors();
       }
     }, false);
