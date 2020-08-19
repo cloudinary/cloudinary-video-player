@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+  - "lts/*"
+before_script:
+  - npm run build-all
+jobs:
+  - name: "src"
+    env: TEST_SUBJECT=src
+    script: npm run test:unit
