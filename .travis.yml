@@ -1,11 +1,12 @@
 language: node_js
-install: yarn
 node_js:
-  - "node"
-  - "lts/*"
+  - "14"
+  - "12"
+  - "10"
+  - "8"
+install:
+  - yarn install
 before_script:
   - npm run build-all
-jobs:
-  - name: "src"
-    env: TEST_SUBJECT=src
-    script: npm run test:unit
+script:
+  - yarn run test:unit
