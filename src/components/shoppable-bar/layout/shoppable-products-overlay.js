@@ -1,6 +1,8 @@
 import videojs from 'video.js';
 const dom = videojs.dom || videojs;
 import { parseTime } from 'utils/time';
+import { find } from 'utils/find';
+
 const Component = videojs.getComponent('Component');
 
 class ShoppableProductsOverlay extends Component {
@@ -32,7 +34,7 @@ class ShoppableProductsOverlay extends Component {
     const currentProducts = this.options_.products.filter(product => product.hotspots && product.hotspots.some(a => parseTime(a.time) === currentTime));
 
     currentProducts.forEach(product => {
-      const hotspot = product.hotspots.find(hs => parseTime(hs.time) === currentTime);
+      const hotspot = find(product.hotspots, (hs) => parseTime(hs.time) === currentTime);
 
       const productName = dom.createEl('div',
         { className: 'cld-spbl-product-hotspot-name' },
