@@ -16,9 +16,9 @@ function findIndex(list, callback) {
 
 function findElementAndIndex(list, callback) {
   for (let i = 0; i < list.length; i++) {
-    const e = list[i];
-    if (callback(e, i, list)) {
-      return [e, i];
+    const element = list[i];
+    if (callback(element, i, list)) {
+      return [element, i];
     }
   }
 
