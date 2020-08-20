@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.4.3-edge.2",
+  "version": "1.4.3-edge.4",
   "description": "Cloudinary Video Player",
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
@@ -31,7 +31,6 @@
     "expose-loader": "^0.7.5",
     "fetch-ponyfill": "^4.0.0",
     "promise-polyfill": "^6.0.2",
-    "snyk": "^1.360.0",
     "video.js": "^7.8.4",
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
@@ -73,6 +72,7 @@
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
     "shx": "^0.3.2",
+    "snyk": "^1.360.0",
     "terser-webpack-plugin": "^1.2.1",
     "uglify-js": "^3.4.7",
     "uglifyjs-webpack-plugin": "^2.1.1",
