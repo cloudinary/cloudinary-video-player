@@ -71,10 +71,16 @@ class ShoppablePanel extends Component {
   scrollToActiveItem() {
     const activeItems = this.el_.getElementsByClassName('active');
     if (activeItems.length > 0) {
-      this.el_.scrollTo({
-        top: activeItems[0].offsetTop - 12,
-        behavior: 'smooth'
-      });
+      const toScroll = activeItems[0].offsetTop - 12;
+      // Test for native scrollTo support (IE will fail)
+      if ('scrollBehavior' in document.documentElement.style) {
+        this.el_.scrollTo({
+          top: toScroll,
+          behavior: 'smooth'
+        });
+      } else {
+        this.el_.scrollTop = toScroll;
+      }
     }
   }
 
