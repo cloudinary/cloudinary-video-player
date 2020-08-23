@@ -28,7 +28,7 @@ class ShoppablePanel extends Component {
 
   createEl() {
     const el = super.createEl();
-    el.classList.add('cld-spbl-panel', 'base-color-bg');
+    ['cld-spbl-panel', 'base-color-bg'].map(cls => el.classList.add(cls));
     return el;
   }
 
