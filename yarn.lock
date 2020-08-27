@@ -3794,7 +3794,7 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cryptiles@^4.1.2:
+cryptiles@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/cryptiles/-/cryptiles-4.1.3.tgz#2461d3390ea0b82c643a6ba79f0ed491b0934c25"
   integrity sha512-gT9nyTMSUC1JnziQpPbxKGBbUg8VL7Zn2NB4E1cJYvuXdElHrwxrV9bmltZGDzet45zSDGyYceueke1TjynGzw==
@@ -4082,10 +4082,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dashjs@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/dashjs/-/dashjs-3.1.1.tgz#8ef0000d6accb4f80f1332c7c47f28f82b2732db"
-  integrity sha512-nss4D6keV63Vr+5yhpMAu6rdlqAngf08ZbEPF0ZxBvv2BaDi/FfEmORMrHLw0yux5e2LTZ/OMp6kbjT9/9Jn/g==
+dashjs@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/dashjs/-/dashjs-3.1.2.tgz#348e51461c49b38d071f64ce86a8b1e9e5052158"
+  integrity sha512-FSOF32b7v+PZxYSiYSk/O018HS/ZnEse0ehMxUOeMIdmxtuXVNTn7WohBnmvevi+yQHw809XWXy/7lzeAgAaUA==
   dependencies:
     codem-isoboxer "0.3.6"
     fast-deep-equal "2.0.1"
@@ -7739,7 +7739,12 @@ lodash.values@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
   integrity sha1-o6bCsOvsxcLLocF+bmIP6BtT00c=
 
-lodash@>=4.17.13, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
+lodash@>=4.17.19:
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
+  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
+
+lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
@@ -12278,7 +12283,7 @@ video.js@^5.10.1:
     videojs-vtt.js "0.12.6"
     xhr "2.2.2"
 
-"video.js@^5.19.2 || ^6 || ^7", "video.js@^6 || ^7", "video.js@^6.8.0 || ^7.0.0":
+"video.js@^6 || ^7", "video.js@^6.8.0 || ^7.0.0":
   version "7.6.5"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.6.5.tgz#af66a71bc05fd79c581c1673ac5a78a6b31bc831"
   integrity sha512-r0kC9SNJhXz9th/wwbRaLVOIZTvXkF+rhFq9/FWU+e+EJClwClRCgP8STGmfrPHDXrfWiJwH9YY21JZK61vGGQ==
@@ -12292,10 +12297,10 @@ video.js@^5.10.1:
     videojs-vtt.js "^0.14.1"
     xhr "2.4.0"
 
-video.js@^7.8.2:
-  version "7.8.2"
-  resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.8.2.tgz#1394df0ba05680f0821c280ff14e6b3e1c3846d4"
-  integrity sha512-NIxRWCpq5N9QFnwPtemgdBf3IE3GAqLUR6R/12+qv6Flc/o2hRvPw3aFQwytRvBAqgc6Wg2whrHCh8ltQ3RiRA==
+video.js@^7.8.4:
+  version "7.8.4"
+  resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.8.4.tgz#645bf40400b413047d2b873c0c65fc8b42128f2a"
+  integrity sha512-XTWWrhfdrk7nTBkqhWKslfXMpUhsDRsZ2L3ISxjuAgadpiomxFV/OARchtwxO+FdnxTm4njJstPmXbVe3F765g==
   dependencies:
     "@babel/runtime" "^7.9.2"
     "@videojs/http-streaming" "1.13.2"
@@ -12313,10 +12318,18 @@ videojs-contextmenu@^1.2.2:
   dependencies:
     video.js "^5.10.1"
 
-videojs-contrib-ads@^6, videojs-contrib-ads@^6.6.1:
+videojs-contrib-ads@^6.6.1:
   version "6.6.5"
   resolved "https://registry.yarnpkg.com/videojs-contrib-ads/-/videojs-contrib-ads-6.6.5.tgz#70804209789808c8090ee51a7c4a8abf121fa3d0"
   integrity sha512-ONKzojNIxDwaNgUW0/uJuMWmcpENyg8LQP4zwyWe5ca8ImR30Bs7PCy3T9K5EqTX5kq29YlfMppV1u+CayV6HQ==
+  dependencies:
+    global "^4.3.2"
+    video.js "^6 || ^7"
+
+videojs-contrib-ads@^6.6.5:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/videojs-contrib-ads/-/videojs-contrib-ads-6.7.0.tgz#01baa1359097026087d55197aa9984d80aa2fa80"
+  integrity sha512-1Mh3bw4YidxE3BLc+pRic+t91TrmOU7+Leiy98loe32x4nExjxmIQQfkf7EumJzqYbXzI/6UfQBD3LwRLd5Otg==
   dependencies:
     global "^4.3.2"
     video.js "^6 || ^7"
@@ -12338,18 +12351,17 @@ videojs-ie8@1.1.2:
   dependencies:
     es5-shim "^4.5.1"
 
-videojs-ima@^1.5.1:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/videojs-ima/-/videojs-ima-1.8.0.tgz#97fda64720fd420f86185695506d9da51f2ad8cf"
-  integrity sha512-1GFEnEOTxI/JxiPntjxWplGENCpGc6QQkfraUfM6xFk7UwLTApaBP1Ql/J2mp3D0D6i6FaCcym5TMylox0Aq4A==
+videojs-ima@^1.5.2:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/videojs-ima/-/videojs-ima-1.8.1.tgz#ea9b24a6c0dc77ac01f12198993319c08b3b3fa5"
+  integrity sha512-t7LeL6ud6XzIyFwX6pQblNmQBxuAgsnhd/DZiJd3i8kPayPcU793m3dX/5ev4cDJey1zW3eU2W7HF8+fwD3xSg==
   dependencies:
     can-autoplay "^3.0.0"
-    cryptiles "^4.1.2"
+    cryptiles "^4.1.3"
     extend ">=3.0.2"
-    lodash ">=4.17.13"
+    lodash ">=4.17.19"
     lodash.template ">=4.5.0"
-    video.js "^5.19.2 || ^6 || ^7"
-    videojs-contrib-ads "^6"
+    videojs-contrib-ads "^6.6.5"
 
 videojs-per-source-behaviors@^2.1.0:
   version "2.1.0"
