@@ -19,15 +19,20 @@ const DEFAULT_VIDEO_PARAMS = {
   info: {}
 };
 const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
+// eslint-disable-next-line no-control-regex
+const URL_PATTERN = RegExp('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\+.~#?&/=]*)');
 
 let objectId = 0;
 const generateId = () => objectId++;
 
 class VideoSource extends BaseSource {
   constructor(publicId, options = {}) {
+    let isRawUrl = URL_PATTERN.test(publicId);
     ({ publicId, options } = normalizeOptions(publicId, options));
 
-    publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
+    if (!isRawUrl) {
+      publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
+    }
 
     options = assign({}, DEFAULT_VIDEO_PARAMS, options);
 
@@ -61,6 +66,7 @@ class VideoSource extends BaseSource {
     let _recommendations = null;
     let _textTracks = null;
     this._type = 'VideoSource';
+    this.isRawUrl = isRawUrl;
 
     this.poster = (publicId, options = {}) => {
       if (!publicId) {
@@ -149,6 +155,10 @@ class VideoSource extends BaseSource {
   }
 
   generateSources() {
+    if (this.isRawUrl) {
+      let type = this.sourceTypes().length > 1 ? null : this.sourceTypes()[0];
+      return [this.generateRawSource(this.publicId(), type)];
+    }
     let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
     let srcs = this.sourceTypes().map((sourceType) => {
       let src = null;
@@ -187,7 +197,12 @@ class VideoSource extends BaseSource {
       return srcs;
     }
   }
+  generateRawSource(url, type) {
+    type = type ? 'video/' + type : 'video/' + url.split('.').pop();
+    return { type, src: url, cldSrc: this, isAdaptive: false };
+  }
 }
+
 
 const CONTAINER_MIME_TYPES = {
   dash: ['application/dash+xml'],
