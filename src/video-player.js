@@ -36,7 +36,8 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
-  'fetchErrorUsingGet'
+  'fetchErrorUsingGet',
+  'seekThumbnails'
 ]);
 
 const DEFAULT_HLS_OPTIONS = {
@@ -234,6 +235,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initFloatingPlayer();
       initColors();
       initTextTracks();
+      initSeekThumbs();
     };
 
     const initIma = (loaded) => {
@@ -376,6 +378,41 @@ class VideoPlayer extends Utils.mixin(Eventable) {
             this.videojs.addRemoteTextTrack(buildTextTrackObj(track, conf[track]), true);
           }
         }
+      }
+    };
+
+    const initSeekThumbs = () => {
+      if (_options.seekThumbnails !== false) {
+
+        this.videojs.on('cldsourcechanged', (e, { source }) => {
+
+          if ( // Bail if...
+            source.getType() === 'AudioSource' || // it's an audio player
+            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+          ) {
+            return;
+          }
+
+          const cloudinaryConfig = source.cloudinaryConfig();
+          const publicId = source.publicId();
+
+          let transformations = source.transformation().toOptions();
+          transformations.flags = transformations.flags || [];
+          transformations.flags.push('sprite');
+
+          // build VTT url
+          const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', {
+            transformation: transformations
+          });
+
+          // vttThumbnails must be called differently on init and on source update.
+          if (typeof this.videojs.vttThumbnails === 'function') {
+            this.videojs.vttThumbnails({ src: vttSrc });
+          } else {
+            this.videojs.vttThumbnails.src(vttSrc);
+          }
+        });
+
       }
     };
 

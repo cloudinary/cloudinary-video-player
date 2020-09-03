@@ -1,0 +1,29 @@
+.vjs-vtt-thumbnail-display {
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+  bottom: 3em;
+  pointer-events: none;
+  border: 3px solid #fff;
+  // border: 3px solid var(--color-base);
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.vjs-vtt-time-display {
+  position: absolute;
+  bottom: -1.7em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: #fff;
+  // color: var(--color-base);
+  text-shadow: 0 0 3px #000;
+}
+
+.vjs-vtt-thumbnails .vjs-time-tooltip {
+  display: none !important;
+}

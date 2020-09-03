@@ -11,6 +11,7 @@ import colors from './colors';
 import contextMenu from './context-menu';
 import cloudinary from './cloudinary';
 import analytics from './analytics';
+import vttThumbnails from './vtt-thumbnails';
 
 const plugins = {
   autoplayOnScroll,
@@ -19,6 +20,7 @@ const plugins = {
   contextMenu,
   cloudinary,
   analytics,
+  vttThumbnails,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin
