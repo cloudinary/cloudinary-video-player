@@ -18,9 +18,12 @@ class ShoppablePanelToggle extends ClickableComponent {
   createEl() {
 
     let iconProps = {};
+    let iconAttrs = {};
     if (this.options_.toggleIcon) {
       iconProps = {
-        className: 'cld-spbl-toggle-icon cld-spbl-toggle-custom-icon vjs-icon-close',
+        className: 'cld-spbl-toggle-icon cld-spbl-toggle-custom-icon vjs-icon-close'
+      };
+      iconAttrs = {
         style: `background-image: url(${this.options_.toggleIcon})`
       };
     } else {
@@ -28,7 +31,7 @@ class ShoppablePanelToggle extends ClickableComponent {
         className: 'cld-spbl-toggle-icon vjs-icon-cart'
       };
     }
-    const icon = dom.createEl('span', iconProps);
+    const icon = dom.createEl('span', iconProps, iconAttrs);
 
     const el = super.createEl('a', {
       className: 'cld-spbl-toggle base-color-bg'
