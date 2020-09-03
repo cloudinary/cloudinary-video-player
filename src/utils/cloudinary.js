@@ -1,6 +1,7 @@
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
+import { find } from 'utils/find';
 
 const { fetch } = fetchPF({ Promise });
 
@@ -112,7 +113,7 @@ const isKeyInTransformation = (transformation, key) => {
 
   // transformation is an array so run this function for each item
   if (Array.isArray(transformation)) {
-    return !!transformation.find(t => isKeyInTransformation(t, key));
+    return !!find(transformation, (t) => isKeyInTransformation(t, key));
   }
 
   // transformation is a Transformation object so use getValue() to check key
