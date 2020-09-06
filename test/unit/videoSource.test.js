@@ -138,5 +138,68 @@ describe('Adaptive source type tests', () => {
     expect(srcs[0]).toContain('.m3u8');
   });
 });
+describe('Raw url tests', () => {
+  it('Test raw url', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mp4';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).toEqual(url);
+  });
+  it('Test raw url without type', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mp4';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].type).toEqual('video/mp4');
+  });
+  it('Test raw url without extension', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      sourceTypes: ['mp4']
+    };
+    let url = 'https://exmaple.com/test';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].type).toEqual('video/mp4');
+  });
+  it('Test raw url with params', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mp4?test=1234&user=eeeee&format=webm';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).toEqual(url);
+  });
+  it('Test raw url with anchor', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mp4#123454';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).toEqual(url);
+  });
+  it('Test raw url with anchor', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mp4#123454';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).toEqual(url);
+  });
+});
 
 

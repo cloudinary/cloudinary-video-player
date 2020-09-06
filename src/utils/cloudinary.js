@@ -1,6 +1,7 @@
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
+import { find } from 'utils/find';
 
 const { fetch } = fetchPF({ Promise });
 
@@ -11,7 +12,7 @@ const handleCldError = (that, options) => {
   const cloudName = that.cloudinaryConfig().config().cloud_name;
   const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   let srcs = that.videojs.cloudinary.getCurrentSources();
-  if (srcs.length > 0) {
+  if (srcs.length > 1) {
     Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
       let filtered = [];
       res.forEach(r => {
@@ -112,7 +113,7 @@ const isKeyInTransformation = (transformation, key) => {
 
   // transformation is an array so run this function for each item
   if (Array.isArray(transformation)) {
-    return !!transformation.find(t => isKeyInTransformation(t, key));
+    return !!find(transformation, (t) => isKeyInTransformation(t, key));
   }
 
   // transformation is a Transformation object so use getValue() to check key

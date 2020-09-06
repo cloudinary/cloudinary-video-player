@@ -280,7 +280,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       let src = data.to;
 
       // When source is cloudinary's
-      if (_lastSource.contains(src)) {
+      if (_lastSource && _lastSource.contains(src)) {
         // If plugin state doesn't have an active VideoSource
         if (!this.source()) {
           // We might have been running a playlist, reset playlist's state.

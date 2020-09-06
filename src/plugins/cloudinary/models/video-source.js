@@ -6,56 +6,6 @@ import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { isKeyInTransformation } from 'utils/cloudinary';
 
-if (!Array.prototype.find) {
-  // eslint-disable-next-line no-extend-native
-  Object.defineProperty(Array.prototype, 'find', {
-    value: function(predicate) {
-      // 1. Let O be ? ToObject(this value).
-      if (this === null) {
-        // eslint-disable-next-line new-cap
-        throw TypeError('"this" is null or not defined');
-      }
-
-      let o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      // eslint-disable-next-line no-bitwise
-      let len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        // eslint-disable-next-line new-cap
-        throw TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      // eslint-disable-next-line prefer-rest-params
-      let thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      let k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-        // d. If testResult is true, return kValue.
-        let kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return kValue;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return undefined.
-      return undefined;
-    },
-    configurable: true,
-    writable: true
-  });
-}
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm/vp9', 'mp4/h265', 'mp4'];
 
@@ -69,15 +19,20 @@ const DEFAULT_VIDEO_PARAMS = {
   info: {}
 };
 const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
+// eslint-disable-next-line no-control-regex
+const URL_PATTERN = RegExp('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\+.~#?&/=]*)');
 
 let objectId = 0;
 const generateId = () => objectId++;
 
 class VideoSource extends BaseSource {
   constructor(publicId, options = {}) {
+    let isRawUrl = URL_PATTERN.test(publicId);
     ({ publicId, options } = normalizeOptions(publicId, options));
 
-    publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
+    if (!isRawUrl) {
+      publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
+    }
 
     options = assign({}, DEFAULT_VIDEO_PARAMS, options);
 
@@ -111,6 +66,7 @@ class VideoSource extends BaseSource {
     let _recommendations = null;
     let _textTracks = null;
     this._type = 'VideoSource';
+    this.isRawUrl = isRawUrl;
 
     this.poster = (publicId, options = {}) => {
       if (!publicId) {
@@ -199,6 +155,10 @@ class VideoSource extends BaseSource {
   }
 
   generateSources() {
+    if (this.isRawUrl) {
+      let type = this.sourceTypes().length > 1 ? null : this.sourceTypes()[0];
+      return [this.generateRawSource(this.publicId(), type)];
+    }
     let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
     let srcs = this.sourceTypes().map((sourceType) => {
       let src = null;
@@ -237,7 +197,12 @@ class VideoSource extends BaseSource {
       return srcs;
     }
   }
+  generateRawSource(url, type) {
+    type = type ? 'video/' + type : 'video/' + url.split('.').pop();
+    return { type, src: url, cldSrc: this, isAdaptive: false };
+  }
 }
+
 
 const CONTAINER_MIME_TYPES = {
   dash: ['application/dash+xml'],

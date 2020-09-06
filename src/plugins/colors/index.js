@@ -3,6 +3,10 @@ import { playerClassPrefix } from 'utils/css-prefix';
 
 const playerColors = `
   .PLAYER-CLASS-PREFIX {
+    --color-accent: --accent-color;
+    --color-base: --base-color;
+    --color-text: --text-color;
+
     color: --text-color;
   }
 
