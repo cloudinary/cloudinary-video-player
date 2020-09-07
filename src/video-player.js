@@ -7,6 +7,7 @@ import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import qualitySelector from './components/qualitySelector/qualitySelector.js';
 
 import VideoSource from './plugins/cloudinary/models/video-source';
 
@@ -36,6 +37,7 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
+  'qualitySelector',
   'fetchErrorUsingGet',
   'seekThumbnails'
 ]);
@@ -351,6 +353,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    this.initQualitySelector = () => {
+      if (_options.qualitySelector !== false) {
+        this.videojs.httpSourceSelector({ default: 'high' });
+
+        this.videojs.on('loadedmetadata', () => {
+          qualitySelector.init(this.videojs);
+        });
+
+        // Show only if more then one option available
+        this.videojs.on('loadeddata', () => {
+          qualitySelector.setVisibility(this.videojs);
+        });
+      }
+    };
+
     const initTextTracks = () => {
       this.videojs.on('refreshTextTracks', (e, tracks) => {
         this.setTextTracks(tracks);
@@ -588,6 +605,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
     this.setTextTracks(options.textTracks);
+    this.initQualitySelector();
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;

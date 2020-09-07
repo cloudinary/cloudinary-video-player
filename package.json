@@ -35,6 +35,9 @@
     "videojs-contextmenu": "^1.2.2",
     "videojs-contrib-ads": "^6.6.1",
     "videojs-ima": "^1.5.2",
+    "videojs-contrib-quality-levels": "^2.0.9",
+    "videojs-hls-quality-selector": "^1.1.1",
+    "videojs-http-source-selector": "^1.1.6",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28",
     "wolfy87-eventemitter": "^5.1.0"
