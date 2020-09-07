@@ -7,6 +7,7 @@ import './quality-selector.scss';
 
 const qualitySelector = {
   init: (player) => {
+    // Handle DASH sources, HLS are handled internally.
     if (
       player &&
       player.qualityLevels &&
@@ -17,6 +18,7 @@ const qualitySelector = {
 
       player.dash.qualityLevels = player.qualityLevels();
 
+      // When loaded, build quality-level list.
       player.dash.mediaPlayer.on(
         MediaPlayer.events.PLAYBACK_METADATA_LOADED,
         () => {
@@ -53,6 +55,7 @@ const qualitySelector = {
         }
       );
 
+      // Pass qualityLevels 'change' event into the DASH player.
       player.qualityLevels().on('change', (event) => {
         let enabledQualities = player.dash.qualityLevels.levels.filter(
           (q) => q.enabled
@@ -73,6 +76,7 @@ const qualitySelector = {
         }
       });
 
+      // Handle 'change' event on the DASH player
       player.dash.mediaPlayer.on(
         MediaPlayer.events.QUALITY_CHANGE_REQUESTED,
         (event) => {
@@ -88,8 +92,8 @@ const qualitySelector = {
     }
   },
 
+  // Show selector only if more then one option available
   setVisibility: (player) => {
-    // Show selector only if more then one option available
     const sourceMenuButton = player.controlBar.getChild('sourceMenuButton');
     if (sourceMenuButton) {
       const qualityLevels = player.qualityLevels();
@@ -99,7 +103,9 @@ const qualitySelector = {
         sourceMenuButton.hide();
       }
 
-      // // Labels: 720p => 1280x720 @ 3500Kbps
+      // ToDo: if there are multiple sources with same height (i.e. 720p)
+      // add a bitrate indicator to distinguish them.
+      // Labels: 720p => 1280x720 @ 3500Kbps
       // sourceMenuButton.items.forEach((item) => {
       //   const level = qualityLevels.levels_.find(ql => ql.height + 'p' === item.options_.label);
       //   if (level) {
