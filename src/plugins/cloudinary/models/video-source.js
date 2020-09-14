@@ -46,7 +46,8 @@ class VideoSource extends BaseSource {
       sourceTransformation,
       info,
       recommendations,
-      textTracks
+      textTracks,
+      withCredentials
     } = sliceAndUnsetProperties(
       options,
       'poster',
@@ -54,7 +55,8 @@ class VideoSource extends BaseSource {
       'sourceTransformation',
       'info',
       'recommendations',
-      'textTracks'
+      'textTracks',
+      'withCredentials'
     );
 
     super(publicId, options);
@@ -67,6 +69,7 @@ class VideoSource extends BaseSource {
     let _textTracks = null;
     this._type = 'VideoSource';
     this.isRawUrl = isRawUrl;
+    this.withCredentials = !!withCredentials;
 
     this.poster = (publicId, options = {}) => {
       if (!publicId) {
@@ -189,7 +192,7 @@ class VideoSource extends BaseSource {
       // if src is a url that already contains query params then replace '?' with '&'
       src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
 
-      return { type, src, cldSrc: this, isAdaptive: isAdaptive };
+      return { type, src, cldSrc: this, isAdaptive: isAdaptive, withCredentials: this.withCredentials };
     });
     if (isIe) {
       return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
@@ -199,7 +202,7 @@ class VideoSource extends BaseSource {
   }
   generateRawSource(url, type) {
     type = type ? 'video/' + type : 'video/' + url.split('.').pop();
-    return { type, src: url, cldSrc: this, isAdaptive: false };
+    return { type, src: url, cldSrc: this, isAdaptive: false, withCredentials: this.withCredentials };
   }
 }
 
