@@ -248,15 +248,23 @@ class VideoSource extends BaseSource {
     }
   }
   generateRawSource(url, type) {
-    type = type ? 'video/' + type : 'video/' + url.split('.').pop();
-    return { type, src: url, cldSrc: this, isAdaptive: false };
+    let t = type ? type : url.split('.').pop();
+    let isAdaptive = (['mpd', 'm3u8', 'hls', 'dash'].indexOf(t) !== -1);
+    if (isAdaptive) {
+      type = CONTAINER_MIME_TYPES[t] ? CONTAINER_MIME_TYPES[t][0] : 'video/mp4';
+    } else {
+      type = type ? 'video/' + type : 'video/' + url.split('.').pop();
+    }
+    return { type, src: url, cldSrc: this, isAdaptive: isAdaptive };
   }
 }
 
 
 const CONTAINER_MIME_TYPES = {
   dash: ['application/dash+xml'],
-  hls: ['application/x-mpegURL']
+  hls: ['application/x-mpegURL'],
+  mpd: ['application/dash+xml'],
+  m3u8: ['application/x-mpegURL']
 };
 
 function formatToMimeTypeAndTransformation(format) {
