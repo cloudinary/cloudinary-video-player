@@ -1,8 +1,8 @@
 import videojs from 'video.js';
 import './logo-button.scss';
 
-const LIGHT_BG_ICON = 'https://cloudinary-res.cloudinary.com/image/upload/fl_attachment/v1/logo/for_white_bg/cloudinary_icon_for_white_bg.svg';
-const DARK_BG_ICON = 'https://cloudinary-res.cloudinary.com/image/upload/fl_attachment/v1/logo/for_black_bg/cloudinary_icon_for_black_bg.svg';
+const LIGHT_BG_ICON = 'https://res.cloudinary.com/cloudinary-marketing/image/upload/v1597164189/creative_source/Logo/Cloud%20Glyph/cloudinary_cloud_glyph_regular.svg';
+const DARK_BG_ICON = 'https://res.cloudinary.com/cloudinary-marketing/image/upload/v1597164191/creative_source/Logo/Cloud%20Glyph/cloudinary_cloud_glyph_white.svg';
 
 // support VJS5 & VJS6 at the same time
 const ClickableComponent = videojs.getComponent('ClickableComponent');

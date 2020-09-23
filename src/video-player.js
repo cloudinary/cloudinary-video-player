@@ -7,6 +7,7 @@ import defaults from 'config/defaults';
 import Eventable from 'mixins/eventable';
 import ExtendedEvents from 'extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
+import qualitySelector from './components/qualitySelector/qualitySelector.js';
 
 import VideoSource from './plugins/cloudinary/models/video-source';
 
@@ -36,7 +37,9 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'ads',
   'showJumpControls',
   'textTracks',
-  'fetchErrorUsingGet'
+  'qualitySelector',
+  'fetchErrorUsingGet',
+  'seekThumbnails'
 ]);
 
 const DEFAULT_HLS_OPTIONS = {
@@ -234,6 +237,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       initFloatingPlayer();
       initColors();
       initTextTracks();
+      initSeekThumbs();
     };
 
     const initIma = (loaded) => {
@@ -349,6 +353,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    this.initQualitySelector = () => {
+      if (_options.qualitySelector !== false) {
+        this.videojs.httpSourceSelector({ default: 'high' });
+
+        this.videojs.on('loadedmetadata', () => {
+          qualitySelector.init(this.videojs);
+        });
+
+        // Show only if more then one option available
+        this.videojs.on('loadeddata', () => {
+          qualitySelector.setVisibility(this.videojs);
+        });
+      }
+    };
+
     const initTextTracks = () => {
       this.videojs.on('refreshTextTracks', (e, tracks) => {
         this.setTextTracks(tracks);
@@ -376,6 +395,41 @@ class VideoPlayer extends Utils.mixin(Eventable) {
             this.videojs.addRemoteTextTrack(buildTextTrackObj(track, conf[track]), true);
           }
         }
+      }
+    };
+
+    const initSeekThumbs = () => {
+      if (_options.seekThumbnails !== false) {
+
+        this.videojs.on('cldsourcechanged', (e, { source }) => {
+
+          if ( // Bail if...
+            source.getType() === 'AudioSource' || // it's an audio player
+            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+          ) {
+            return;
+          }
+
+          const cloudinaryConfig = source.cloudinaryConfig();
+          const publicId = source.publicId();
+
+          let transformations = source.transformation().toOptions();
+          transformations.flags = transformations.flags || [];
+          transformations.flags.push('sprite');
+
+          // build VTT url
+          const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', {
+            transformation: transformations
+          });
+
+          // vttThumbnails must be called differently on init and on source update.
+          if (typeof this.videojs.vttThumbnails === 'function') {
+            this.videojs.vttThumbnails({ src: vttSrc });
+          } else {
+            this.videojs.vttThumbnails.src(vttSrc);
+          }
+        });
+
       }
     };
 
@@ -551,6 +605,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
     this.setTextTracks(options.textTracks);
+    this.initQualitySelector();
     clearTimeout(this.reTryVideo);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;

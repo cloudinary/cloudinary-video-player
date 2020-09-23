@@ -212,6 +212,7 @@ describe('Raw url tests', () => {
     let srcs = source.generateSources().map(s => s.src);
     expect(srcs[0]).toEqual(url);
   });
+
   it('Test raw url adaptive m3u8', () => {
     let sourceDef = {
       cloudinaryConfig: cld

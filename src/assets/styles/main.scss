@@ -263,17 +263,22 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-subs-caps-button {
-    .vjs-menu {
-      width: auto;
-      left: -5em;
+    .vjs-texttrack-settings {
+      display: none;
     }
+    .vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
+      vertical-align: top;
+      display: inline-block;
+      margin-bottom: -0.3em;
+    }
+  }
+
+  .vjs-menu {
     .vjs-menu-content {
+      min-width: 10em;
       width: auto;
       overflow: visible;
       padding: 0.2em 0;
-    }
-    .vjs-texttrack-settings {
-      display: none;
     }
     .vjs-menu-item {
       text-align: left;
@@ -284,11 +289,6 @@ $icon-font-path: '../fonts' !default;
       line-height: 2em;
       &.vjs-selected {
         font-weight: bold;
-      }
-      &.vjs-captions-menu-item .vjs-menu-item-text .vjs-icon-placeholder {
-        vertical-align: top;
-        display: inline-block;
-        margin-bottom: -0.3em;
       }
     }
   }
