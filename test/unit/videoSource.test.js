@@ -160,6 +160,17 @@ describe('Raw url tests', () => {
     expect(srcs[0].type).toEqual('video/mp4');
     expect(srcs[0].isAdaptive).toEqual(false);
   });
+  it('Test raw url with transformations', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://media.castit.biz/castit-dev/video/upload/a_0,c_limit,f_mp4,vc_h264,w_600/cit-qa/Videoback/2020/08/03/269085_358976.mp4';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].type).toEqual('video/mp4');
+    expect(srcs[0].isAdaptive).toEqual(false);
+  });
   it('Test raw url without extension', () => {
     let sourceDef = {
       cloudinaryConfig: cld,
