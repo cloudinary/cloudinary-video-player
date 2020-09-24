@@ -197,16 +197,13 @@ class VideoSource extends BaseSource {
       return srcs;
     }
   }
-  generateRawSource(url, type) {
 
-    let t = type ? type : url.split('.').pop();
-    let isAdaptive = (['mpd', 'm3u8', 'hls', 'dash'].indexOf(t) !== -1);
-    if (isAdaptive) {
-      type = CONTAINER_MIME_TYPES[t] ? CONTAINER_MIME_TYPES[t][0] : 'video/mp4';
-    } else {
-      type = type ? 'video/' + type : 'video/' + url.split('.').pop();
-    }
-    return { type, src: url, cldSrc: this, isAdaptive: isAdaptive };
+  generateRawSource(url, type) {
+    type = type || url.split('.').pop();
+    const isAdaptive = (['mpd', 'm3u8', 'hls', 'dash'].indexOf(type) !== -1);
+    type = isAdaptive ? (CONTAINER_MIME_TYPES[type] || ['video/mp4'])[0] : `video/${type}`;
+
+    return { type, src: url, cldSrc: this, isAdaptive };
   }
 }
 
