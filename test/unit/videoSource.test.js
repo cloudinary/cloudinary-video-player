@@ -158,6 +158,18 @@ describe('Raw url tests', () => {
     let srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
     expect(srcs[0].type).toEqual('video/mp4');
+    expect(srcs[0].isAdaptive).toEqual(false);
+  });
+  it('Test raw url with transformations', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://media.castit.biz/castit-dev/video/upload/a_0,c_limit,f_mp4,vc_h264,w_600/cit-qa/Videoback/2020/08/03/269085_358976.mp4';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].type).toEqual('video/mp4');
+    expect(srcs[0].isAdaptive).toEqual(false);
   });
   it('Test raw url without extension', () => {
     let sourceDef = {
@@ -199,6 +211,53 @@ describe('Raw url tests', () => {
     source.sourceTypes(['webm']);
     let srcs = source.generateSources().map(s => s.src);
     expect(srcs[0]).toEqual(url);
+  });
+
+  it('Test raw url adaptive m3u8', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.m3u8';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].isAdaptive).toEqual(true);
+    expect(srcs[0].type).toEqual('application/x-mpegURL');
+  });
+  it('Test raw url adaptive hls', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['hls']);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].isAdaptive).toEqual(true);
+    expect(srcs[0].type).toEqual('application/x-mpegURL');
+  });
+  it('Test raw url adaptive mpd', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test.mpd';
+    let source = new VideoSource(url, sourceDef);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].isAdaptive).toEqual(true);
+    expect(srcs[0].type).toEqual('application/dash+xml');
+  });
+  it('Test raw url adaptive dash', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let url = 'https://exmaple.com/test';
+    let source = new VideoSource(url, sourceDef);
+    source.sourceTypes(['dash']);
+    let srcs = source.generateSources();
+    expect(srcs[0].src).toEqual(url);
+    expect(srcs[0].isAdaptive).toEqual(true);
+    expect(srcs[0].type).toEqual('application/dash+xml');
   });
 });
 
