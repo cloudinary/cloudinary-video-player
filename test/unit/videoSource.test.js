@@ -141,11 +141,11 @@ describe('Adaptive source type tests', () => {
 describe('Raw url tests', () => {
   it('Test raw url', () => {
     let sourceDef = {
-      cloudinaryConfig: cld
+      cloudinaryConfig: cld,
+      sourceTypes: ['webm']
     };
     let url = 'https://exmaple.com/test.mp4';
     let source = new VideoSource(url, sourceDef);
-    source.sourceTypes(['webm']);
     let srcs = source.generateSources().map(s => s.src);
     expect(srcs[0]).toEqual(url);
   });
@@ -157,7 +157,7 @@ describe('Raw url tests', () => {
     let source = new VideoSource(url, sourceDef);
     let srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
-    expect(srcs[0].type).toEqual('video/mp4');
+    expect(srcs[0].type).toEqual(null);
     expect(srcs[0].isAdaptive).toEqual(false);
   });
   it('Test raw url with transformations', () => {
@@ -168,7 +168,7 @@ describe('Raw url tests', () => {
     let source = new VideoSource(url, sourceDef);
     let srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
-    expect(srcs[0].type).toEqual('video/mp4');
+    expect(srcs[0].type).toEqual(null);
     expect(srcs[0].isAdaptive).toEqual(false);
   });
   it('Test raw url without extension', () => {
