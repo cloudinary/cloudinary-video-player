@@ -18,7 +18,8 @@ const CLOUDINARY_PARAMS = [
   'sourceTransformation',
   'posterOptions',
   'autoShowRecommendations',
-  'fontFace'
+  'fontFace',
+  'secure'
 ];
 
 const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
@@ -306,13 +307,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
 
     const initPerSrcBehaviors = () => {
-      this.videojs.perSourceBehaviors();
+      if (this.videojs.perSourceBehaviors) {
+        this.videojs.perSourceBehaviors();
+      }
     };
 
     const initCloudinary = () => {
       const opts = _options.cloudinary;
       opts.chainTarget = this;
-      _options.cloudinary.cloudinaryConfig.config('secure', true);
+      if (opts.secure !== false) {
+        _options.cloudinary.cloudinaryConfig.config('secure', true);
+      }
       this.videojs.cloudinary(_options.cloudinary);
     };
 
