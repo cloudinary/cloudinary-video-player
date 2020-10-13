@@ -45,6 +45,7 @@
         'sea_turtle',
         {
           sourceTypes: ['hls/h265'],
+          transformation: {streaming_profile: 'h265_full_hd'},
           info: {title: 'HLS 265'}
         }
       );
@@ -60,6 +61,7 @@
         'sea_turtle',
         {
           sourceTypes: ['dash/vp9'],
+          transformation: {streaming_profile: 'vp9_full_hd'},
           info: {title: 'MPEG-DASH vp9'}
         }
       );
