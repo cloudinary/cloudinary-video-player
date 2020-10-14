@@ -1,0 +1,55 @@
+const tracks = [
+  {
+    default: false,
+    kind: 'subtitles',
+    label: 'German subtitles',
+    src: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt',
+    srclang: 'de'
+  },
+  {
+    default: false,
+    kind: 'subtitles',
+    label: 'Hebrew subtitles',
+    src: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_hebrew.vtt',
+    srclang: 'he'
+  },
+  {
+    default: false,
+    kind: 'subtitles',
+    label: 'Swedish subtitles',
+    src: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_swedish.vtt',
+    srclang: 'se'
+  }
+];
+import Utils from '../../src/utils';
+jest.doMock('fetch-ponyfill/build/fetch-browser', () => ({
+  __esModule: true,
+  fetch: jest.fn((url, options) => {
+    if (url === tracks[2].src) {
+      return Promise.resolve({
+        json: () => Promise.resolve({ status: 404 })
+      });
+    } else {
+      Promise.resolve({
+        json: () => Promise.resolve({ status: 200 })
+      });
+    }
+  })
+}));
+import fetchPF from 'fetch-ponyfill/build/fetch-browser';
+
+// require('jest-fetch-mock').enableMocks();
+
+describe('video source tests', () => {
+  it('test filter out bad vtt', async () => {
+    jest.useFakeTimers();
+    let vjs = jest.createMockFromModule('video.js');
+    vjs.addRemoteTextTrack = jest.fn();
+    jest.spyOn(vjs, 'addRemoteTextTrack');
+    let a = await Utils.filterAndAddTextTracks(tracks, vjs);
+    console.log(a);
+    // expect(vjs.addRemoteTextTrack).toBeCalled();
+
+  });
+
+});
