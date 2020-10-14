@@ -389,17 +389,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       if (conf) {
         const tracks = Object.keys(conf);
+        let allTracks = [];
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
-            const trks = conf[track];
+            let trks = conf[track];
             for (let i = 0; i < trks.length; i++) {
               let cnf = trks[i];
-              this.videojs.addRemoteTextTrack(buildTextTrackObj(track, cnf), true);
+              allTracks.push(buildTextTrackObj(track, cnf));
             }
           } else {
-            this.videojs.addRemoteTextTrack(buildTextTrackObj(track, conf[track]), true);
+            allTracks.push(buildTextTrackObj(track, conf[track]));
           }
         }
+        Utils.filterAndAddTextTracks(allTracks, this.videojs);
       }
     };
 
