@@ -41,13 +41,14 @@
       // ===============================================
 
       // Get the ClickableComponent base class from Video.js
-      var ClickableComponent = videojs.default.getComponent('ClickableComponent');
+      let vjs =  videojs.default ? videojs.default : videojs;
+      var ClickableComponent = vjs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
-      var PlaylistButton = videojs.default.extend(ClickableComponent, {
+      var PlaylistButton = vjs.extend(ClickableComponent, {
         constructor: function(player, options) {
           var type = options.type;
-          if (!type && type != 'previous' && type != 'next') {
+          if (!type && type !== 'previous' && type !== 'next') {
             throw new Error("Playlist must be either 'previous' or 'next'");
           }
 
@@ -62,7 +63,7 @@
         createEl: function() {
           var typeCssClass = 'vjs-playlist-' + this.type + '-control';
 
-          return videojs.default.createEl('button', {
+          return vjs.createEl('button', {
 
             // Prefixing classes of elements within a player with "vjs-"
             // is a convention used in Video.js.
@@ -72,7 +73,7 @@
       });
 
       // Create the NextButton component
-      var NextButton = videojs.default.extend(PlaylistButton, {
+      var NextButton = vjs.extend(PlaylistButton, {
         constructor: function(player, options) {
           PlaylistButton.apply(this, [player, { type: 'next' }]);
         },
@@ -87,7 +88,7 @@
       });
 
       // Create the PreviousButton component
-      var PreviousButton = videojs.default.extend(PlaylistButton, {
+      var PreviousButton = vjs.extend(PlaylistButton, {
         constructor: function(player, options) {
           PlaylistButton.apply(this, [player, { type: 'previous' }]);
         },
@@ -99,8 +100,8 @@
       });
 
       // Register the component with Video.js, so it can be used in players.
-      videojs.default.registerComponent('NextButton', NextButton);
-      videojs.default.registerComponent('PreviousButton', PreviousButton);
+      vjs.registerComponent('NextButton', NextButton);
+      vjs.registerComponent('PreviousButton', PreviousButton);
 
       // Cloudinary Video Player related code
       // ====================================
