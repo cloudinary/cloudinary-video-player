@@ -1,8 +1,9 @@
 // Player Cloudinary button
-a.vjs-cloudinary-button {
-  background: url("../../assets/icons/cloudinary_icon_for_black_bg.svg") no-repeat;
+.vjs-control-bar a.vjs-control.vjs-cloudinary-button {
+  background-image: url("../../assets/icons/cloudinary_icon_for_black_bg.svg");
   background-size: 25px;
   background-position: center;
+  background-repeat: no-repeat;
 
   .cld-video-player-skin-light & {
     background-image: url("../../assets/icons/cloudinary_icon_for_white_bg.svg");
