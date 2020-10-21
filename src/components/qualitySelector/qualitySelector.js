@@ -124,6 +124,13 @@ const qualitySelector = {
     if (sourceMenuButton) {
       const qualityLevels = player.qualityLevels();
       if (qualityLevels && qualityLevels.length > 1) {
+        let levels = qualityLevels.levels_.filter((q) => q.enabled);
+        if (levels.length === 1) {
+          let idx = qualityLevels.levels_.findIndex(l => l.id === levels[0].id);
+          sourceMenuButton.children()[1].children()[idx].selected(true);
+        } else {
+          sourceMenuButton.children()[1].children()[0].selected(true);
+        }
         sourceMenuButton.show();
       } else {
         sourceMenuButton.hide();
