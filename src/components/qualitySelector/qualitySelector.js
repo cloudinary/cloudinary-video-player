@@ -68,7 +68,7 @@ const qualitySelector = {
                     let selectedIdx = player.qualityLevels().levels_.findIndex(l => l.id === this.id);
                     player.qualityLevels().selectedIndex_ = selectedIdx;
                     player.qualityLevels().trigger({
-                      type: 'changed',
+                      type: 'change',
                       selectedIndex: selectedIdx
                     });
                   }
@@ -84,9 +84,9 @@ const qualitySelector = {
       );
 
       // Pass qualityLevels 'change' event into the DASH player.
-      player.qualityLevels().on('changed', (event) => {
+      player.qualityLevels().on('change', (event) => {
         let enabledQualities = player.dash.qualityLevels.levels_.filter(
-          (q) => q.selected
+          (q) => q.enabled
         );
         if (enabledQualities.length === 1) {
           player.dash.mediaPlayer.setQualityFor('video', event.selectedIndex);
@@ -101,6 +101,7 @@ const qualitySelector = {
       });
 
       // Handle 'change' event on the DASH player
+      /*
       player.dash.mediaPlayer.on(
         MediaPlayer.events.QUALITY_CHANGE_REQUESTED,
         (event) => {
@@ -113,6 +114,7 @@ const qualitySelector = {
           }
         }
       );
+*/
     }
   },
 
