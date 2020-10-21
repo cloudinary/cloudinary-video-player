@@ -17,6 +17,25 @@ const qualitySelector = {
       const MediaPlayer = djs.default.MediaPlayer;
 
       player.dash.qualityLevels = player.qualityLevels();
+      player.dash.mediaPlayer.getAutoSwitchQualityFor = (type) => {
+        let dashPlayer = player.dash.mediaPlayer;
+        let settings = dashPlayer.getSettings();
+        if (settings) {
+          return settings.streaming.abr.autoSwitchBitrate[type];
+        }
+        return true;
+      };
+
+      player.dash.mediaPlayer.setAutoSwitchQualityFor = (type, val) => {
+        let dashPlayer = player.dash.mediaPlayer;
+        let upSettings = { streaming: {
+          abr: {
+            autoSwitchBitrate: {}
+          }
+        } };
+        upSettings.streaming.abr.autoSwitchBitrate[type] = val;
+        dashPlayer.updateSettings(upSettings);
+      };
 
       // When loaded, build quality-level list.
       player.dash.mediaPlayer.on(
@@ -41,12 +60,21 @@ const qualitySelector = {
               width: vrate.width,
               height: vrate.height,
               bandwidth: vrate.bitrate,
+              selected: true,
               enabled: function (val) {
                 if (val !== undefined) {
-                  player.dash.enabled = val;
+                  this.selected = val;
+                  if (val === true) {
+                    let selectedIdx = player.qualityLevels().levels_.findIndex(l => l.id === this.id);
+                    player.qualityLevels().selectedIndex_ = selectedIdx;
+                    player.qualityLevels().trigger({
+                      type: 'changed',
+                      selectedIndex: selectedIdx
+                    });
+                  }
                 } else {
-                  return player.dash.enabled !== undefined
-                    ? player.dash.enabled
+                  return this.selected !== undefined
+                    ? this.selected
                     : true;
                 }
               }
@@ -56,15 +84,11 @@ const qualitySelector = {
       );
 
       // Pass qualityLevels 'change' event into the DASH player.
-      player.qualityLevels().on('change', (event) => {
-        let enabledQualities = player.dash.qualityLevels.levels.filter(
-          (q) => q.enabled
+      player.qualityLevels().on('changed', (event) => {
+        let enabledQualities = player.dash.qualityLevels.levels_.filter(
+          (q) => q.selected
         );
         if (enabledQualities.length === 1) {
-          if (player.dash.mediaPlayer.getAutoSwitchQualityFor('video')) {
-            player.dash.mediaPlayer.setAutoSwitchQualityFor('video', false);
-            player.dash.mediaPlayer.setAutoSwitchQualityFor('audio', false);
-          }
           player.dash.mediaPlayer.setQualityFor('video', event.selectedIndex);
           player.dash.mediaPlayer.setQualityFor(
             'audio',
@@ -81,7 +105,7 @@ const qualitySelector = {
         MediaPlayer.events.QUALITY_CHANGE_REQUESTED,
         (event) => {
           if (event.mediaType === 'video') {
-            player.dash.qualityLevels.selectedIndex = event.newQuality;
+            player.dash.qualityLevels.selectedIndex_ = event.newQuality;
             player.dash.qualityLevels.trigger({
               selectedIndex: event.newQuality,
               type: 'change'
