@@ -28,16 +28,16 @@ class SourceMenuItem extends MenuItem {
       }
     }
     if (isAuto) {
-      this.deselectRest(0);
+      this.deselectRest(6);
     } else {
-      this.deselectRest(selected.index + 1);
+      this.deselectRest(selected.index);
     }
   }
 
   deselectRest(idx) {
     if (this.parentComponent_) {
-      this.parentComponent_.children().forEach((item, i) => {
-        item.selected(idx === i);
+      this.parentComponent_.children().forEach((item) => {
+        item.selected(idx === item.options_.index);
       });
     }
   }

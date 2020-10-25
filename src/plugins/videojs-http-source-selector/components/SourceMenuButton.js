@@ -27,7 +27,7 @@ class SourceMenuButton extends MenuButton {
     }
 
     // Bind update to qualityLevels changes
-    //  this.player().qualityLevels().on(['change',addqualitylevel'], videojs.bind(this, this.update));
+    this.player().qualityLevels().on(['addqualitylevel'], videojs.bind(this, this.update));
   }
 
   createEl() {

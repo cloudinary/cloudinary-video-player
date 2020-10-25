@@ -2,6 +2,7 @@ import videojs from 'video.js';
 
 import SourceMenuButton from './components/SourceMenuButton';
 import SourceMenuItem from './components/SourceMenuItem';
+import qualitySelector from '../../components/qualitySelector/qualitySelector';
 
 // Default options for the plugin.
 const defaults = {};
