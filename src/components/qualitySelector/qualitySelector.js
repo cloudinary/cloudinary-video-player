@@ -1,7 +1,7 @@
 import * as djs from 'dashjs';
 import 'videojs-per-source-behaviors';
 import 'videojs-contrib-quality-levels';
-import 'videojs-http-source-selector';
+import '../../plugins/videojs-http-source-selector/plugin';
 
 import './quality-selector.scss';
 

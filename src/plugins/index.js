@@ -3,6 +3,7 @@ import 'videojs-contrib-ads';
 import './ima';
 import dashPlugin from './dash';
 import interactive from './interactive-plugin';
+import './videojs-http-source-selector/plugin';
 // #endif
 
 import autoplayOnScroll from './autoplay-on-scroll';
