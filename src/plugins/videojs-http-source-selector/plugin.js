@@ -81,7 +81,4 @@ const httpSourceSelector = function(options) {
 // Register the plugin with video.js.
 registerPlugin('httpSourceSelector', httpSourceSelector);
 
-// Include the version number.
-httpSourceSelector.VERSION = VERSION;
-
 export default httpSourceSelector;
