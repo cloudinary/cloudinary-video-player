@@ -130,6 +130,11 @@ const qualitySelector = {
           sourceMenuButton.children()[1].children()[idx].selected(true);
         } else {
           sourceMenuButton.children()[1].children()[0].selected(true);
+          sourceMenuButton.children()[1].children().forEach((item, i) => {
+            if (i > 0) {
+              item.selected(false);
+            }
+          });
         }
         sourceMenuButton.show();
       } else {
