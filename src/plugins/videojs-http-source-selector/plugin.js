@@ -2,7 +2,6 @@ import videojs from 'video.js';
 
 import SourceMenuButton from './components/SourceMenuButton';
 import SourceMenuItem from './components/SourceMenuItem';
-import qualitySelector from '../../components/qualitySelector/qualitySelector';
 
 // Default options for the plugin.
 const defaults = {};
@@ -41,7 +40,6 @@ const onPlayerReady = (player, options) => {
   *
   **/
   player.on(['loadedmetadata'], function(e) {
-    let qualityLevels = player.qualityLevels();
     videojs.log('loadmetadata event');
     // hack for plugin idempodency... prevents duplicate menubuttons from being inserted into the player if multiple player.httpSourceSelector() functions called.
     if (player.videojs_http_source_selector_initialized === 'undefined' || player.videojs_http_source_selector_initialized === true) {
