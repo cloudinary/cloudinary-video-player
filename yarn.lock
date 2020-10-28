@@ -13046,7 +13046,7 @@ video.js@^5.10.1:
     videojs-vtt.js "^0.14.1"
     xhr "2.4.0"
 
-video.js@^7.0.0, video.js@^7.5.5:
+video.js@^7.5.5:
   version "7.9.7"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.9.7.tgz#d2654b61b2348ffc792784ec2b3e830f31d67801"
   integrity sha512-vbeWndPCNuTdxcN3AeihuJiP0IvKijwBC62brn3Kt6zsKT0fT485E39lV158EHF5BA/aTmL4gTWo+vQbN4XcRg==
@@ -13097,7 +13097,7 @@ videojs-contrib-ads@^6.6.5:
     global "^4.3.2"
     video.js "^6 || ^7"
 
-videojs-contrib-quality-levels@^2.0.4, videojs-contrib-quality-levels@^2.0.9:
+videojs-contrib-quality-levels@^2.0.9:
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/videojs-contrib-quality-levels/-/videojs-contrib-quality-levels-2.0.9.tgz#b5d533d5092a6fc7d29eae1b43e4597d89bd527b"
   integrity sha512-HJeaJJQdSufi9Y5T7jlyyhkeq+mWPCog86q6ypoTi66boBMMJTo2abiOSHS9KaOGAJjH72gfvrjVY5FRdjlxYA==
@@ -13124,15 +13124,6 @@ videojs-hls-quality-selector@^1.1.1:
     karma-safaritechpreview-launcher "0.0.6"
     video.js "^7.5.5"
     videojs-contrib-quality-levels "^2.0.9"
-
-videojs-http-source-selector@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/videojs-http-source-selector/-/videojs-http-source-selector-1.1.6.tgz#073aadbea0106ba6c98d6b611094dbf8554ffa1f"
-  integrity sha512-6b5MmKTT2cVnrjtdNj4z1VO91udbXkZkTYA6LlD8WN2aHlG2rqFTmtMab4NK4nlkkkbRnm3c2q2IddL3jffLmg==
-  dependencies:
-    global "^4.3.2"
-    video.js "^7.0.0"
-    videojs-contrib-quality-levels "^2.0.4"
 
 videojs-ie8@1.1.2:
   version "1.1.2"
