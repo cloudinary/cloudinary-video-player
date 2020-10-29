@@ -2,8 +2,10 @@ import * as djs from 'dashjs';
 import 'videojs-per-source-behaviors';
 import 'videojs-contrib-quality-levels';
 import '../../plugins/videojs-http-source-selector/plugin';
+import { findIndex } from '../../utils/find';
 
 import './quality-selector.scss';
+
 
 const qualitySelector = {
   init: (player) => {
@@ -65,7 +67,7 @@ const qualitySelector = {
                 if (val !== undefined) {
                   this.selected = val;
                   if (val === true) {
-                    let selectedIdx = player.qualityLevels().levels_.findIndex(l => l.id === this.id);
+                    let selectedIdx = findIndex(player.qualityLevels().levels_, (l => l.id === this.id));
                     player.qualityLevels().selectedIndex_ = selectedIdx;
                     player.qualityLevels().trigger({
                       type: 'change',

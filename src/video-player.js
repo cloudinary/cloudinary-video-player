@@ -360,7 +360,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.initQualitySelector = () => {
       if (_options.qualitySelector !== false) {
-        this.videojs.httpSourceSelector({ default: 'auto' });
+        if (videojs.browser.IE_VERSION === null) {
+          this.videojs.httpSourceSelector({default: 'auto'});
+        }
 
         this.videojs.on('loadedmetadata', () => {
           qualitySelector.init(this.videojs);

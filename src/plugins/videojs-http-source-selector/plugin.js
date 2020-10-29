@@ -24,7 +24,7 @@ const registerPlugin = videojs.registerPlugin || videojs.plugin;
 * @param    {Object} [options={}]
 *           A plain object containing options for the plugin.
 */
-const onPlayerReady = (player, options) => {
+const onPlayerReady = (player) => {
   player.addClass('vjs-http-source-selector');
   console.log('videojs-http-source-selector initialized!');
 
@@ -39,7 +39,7 @@ const onPlayerReady = (player, options) => {
   * We have to wait for the manifest to load before we can scan renditions for resolutions/bitrates to populate selections
   *
   **/
-  player.on(['loadedmetadata'], function(e) {
+  player.on(['loadedmetadata'], function() {
     videojs.log('loadmetadata event');
     // hack for plugin idempodency... prevents duplicate menubuttons from being inserted into the player if multiple player.httpSourceSelector() functions called.
     if (player.videojs_http_source_selector_initialized === 'undefined' || player.videojs_http_source_selector_initialized === true) {
