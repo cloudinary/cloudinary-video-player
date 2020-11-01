@@ -32,9 +32,16 @@
       playerDashVp9 = cld.videoPlayer('example-player-dash-vp9');
       playerHlsNoCodec = cld.videoPlayer('example-player-hls-no-codec');
       playerDashNoCodec = cld.videoPlayer('example-player-dash-no-codec');
+      playerHlsIos = cld.videoPlayer('example-player-hls-ios', {
+        html5: {
+          hls: {
+            overrideNative: true
+          }
+        }
+      });
 
       playerHls.source(
-        'sea_turtle',
+              'sea_turtle',
         {
           sourceTypes: ['hls'],
           transformation: {streaming_profile: 'hd'},
@@ -78,6 +85,14 @@
           sourceTypes: ['dash'],
           info: {title: 'MPEG-DASH'}
         }
+      );
+      playerHlsIos.source(
+              'sea_turtle',
+              {
+                sourceTypes: ['hls'],
+                transformation: {streaming_profile: 'hd'},
+                info: {title: 'HLS'}
+              }
       );
 
       playerHls.on('qualitychanged', function(data) {
@@ -196,6 +211,19 @@
         class="cld-video-player"
       ></video>
       <span id="info-dash-no-codec"></span>
+    </div>
+
+    <div class="video-container mb-4">
+      <h4>HLS 264 safari ios native override</h4>
+      <video
+              id="example-player-hls-ios"
+              playsinline
+              controls
+              muted
+              width="500"
+              class="cld-video-player"
+      ></video>
+      <span id="info-hls-ios"></span>
     </div>
 
     <p class="mt-4">
