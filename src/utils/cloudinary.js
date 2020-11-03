@@ -2,6 +2,7 @@ import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
+import { assign } from 'utils/assign';
 
 const { fetch } = fetchPF({ Promise });
 
@@ -126,11 +127,10 @@ const isKeyInTransformation = (transformation, key) => {
 };
 
 const filterAndAddTextTracks = (tracks, videojs) => {
-  Promise.all(tracks.map(track => fetch(track.src, GET_ERROR_DEFAULT_REQUEST))).then((res) => {
-    res.forEach(r => {
+  tracks.forEach(track => {
+    fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
       if (r.status >= 200 && r.status <= 399) {
-        let t = tracks.filter(track => track.src === r.url).pop();
-        videojs.addRemoteTextTrack(t, true);
+        videojs.addRemoteTextTrack(track, true);
       }
     });
   });
