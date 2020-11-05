@@ -126,11 +126,10 @@ const isKeyInTransformation = (transformation, key) => {
 };
 
 const filterAndAddTextTracks = (tracks, videojs) => {
-  Promise.all(tracks.map(track => fetch(track.src, GET_ERROR_DEFAULT_REQUEST))).then((res) => {
-    res.forEach(r => {
+  tracks.forEach(track => {
+    fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
       if (r.status >= 200 && r.status <= 399) {
-        let t = tracks.filter(track => track.src === r.url).pop();
-        videojs.addRemoteTextTrack(t, true);
+        videojs.addRemoteTextTrack(track, true);
       }
     });
   });
