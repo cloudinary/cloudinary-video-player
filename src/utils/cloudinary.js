@@ -2,7 +2,6 @@ import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
-import { assign } from 'utils/assign';
 
 const { fetch } = fetchPF({ Promise });
 
