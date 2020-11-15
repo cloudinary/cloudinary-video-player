@@ -361,7 +361,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.initQualitySelector = () => {
       if (_options.qualitySelector !== false) {
         if (videojs.browser.IE_VERSION === null) {
-          this.videojs.httpSourceSelector({default: 'auto'});
+          this.videojs.httpSourceSelector({ default: 'auto' });
         }
 
         this.videojs.on('loadedmetadata', () => {
@@ -491,7 +491,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const error = this.videojs.error();
       if (error) {
         let type = this.videojs.cloudinary.currentSourceType();
-        if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
+        if ((error.code === 4 || error.code === 25) && (type === 'VideoSource' || type === 'AudioSource')) {
           this.videojs.error(null);
           Utils.handleCldError(this, _options);
         } else {
