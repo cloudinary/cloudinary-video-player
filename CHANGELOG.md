@@ -1,3 +1,8 @@
+1.5.1-edge.0 / 2020-11-22
+==================
+
+* Fix: remove adaptive streaming from light version
+
 1.5.0 / 2020-11-10
 ==================
 
