@@ -95,6 +95,9 @@ class Html5DashJS extends Component {
     // - mediaKeyMessageError (only fires under 'might not work' circumstances)
     // eslint-disable-next-line complexity
     this.retriggerError_ = (event) => {
+      if (event.type === 'error') {
+        this.player.error({ code: event.error.code, message: event.error.message });
+      }
       if (event.error === 'capability' && event.event === 'mediasource') {
         // No support for MSE
         this.player.error({
