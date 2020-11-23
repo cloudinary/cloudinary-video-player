@@ -1,3 +1,10 @@
+1.5.2-edge.0 / 2020-11-23
+==================
+
+* Fix dash.js error handling: pass dash errors to videojs (#219)
+* Add example for subtitles for playlistByTag (#220)
+
+
 1.5.1-edge.0 / 2020-11-22
 ==================
 
