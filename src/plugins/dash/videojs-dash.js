@@ -187,7 +187,7 @@ class Html5DashJS extends Component {
     this.mediaPlayer_.attachSource(manifestSource);
     this.tech_.triggerReady();
     this.on(this.tech_, 'seeking', () => {
-      this.mediaPlayer_.seek(this.tech_.currentTime());
+      this.mediaPlayer_.seek((this.tech_.currentTime() - 8).toFixed(2));
     });
   }
 
