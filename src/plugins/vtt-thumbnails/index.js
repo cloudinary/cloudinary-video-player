@@ -131,6 +131,7 @@ const VttThumbnailsPlugin = (function () {
     }
     let baseUrl = this.getBaseUrl();
     let url = this.getFullyQualifiedUrl(this.options.src, baseUrl);
+
     this.getVttFile(url).then(function (data) {
       _this2.vttData = _this2.processVtt(data);
       _this2.setupThumbnailElement();
@@ -346,7 +347,9 @@ const VttThumbnailsPlugin = (function () {
         let vttTimingSplit = vttTiming.split(/ ?--> ?/i);
         let vttTimeStart = vttTimingSplit[0];
         let vttTimeEnd = vttTimingSplit[1];
-        let vttImageDef = vttDefSplit[1];
+
+        let vttImageFullPath = vttDefSplit[1];
+        let vttImageDef = vttImageFullPath.split('\/').pop();
         let vttCssDef = _this6.getVttCss(vttImageDef);
 
         processedVtts.push({
@@ -367,13 +370,11 @@ const VttThumbnailsPlugin = (function () {
     if (path.indexOf('//') >= 0) {
       // We have a fully qualified path.
       return path;
-    }
-    if (base.indexOf('//') === 0) {
+    } else if (base.indexOf('//') === 0) {
       // We don't have a fully qualified path, but need to
       // be careful with trimming.
       return [base.replace(/\/$/gi, ''), this.trim(path, '/')].join('/');
-    }
-    if (base.indexOf('//') > 0) {
+    } else if (base.indexOf('//') > 0) {
       // We don't have a fully qualified path, and should
       // trim both sides of base and path.
       return [this.trim(base, '/'), this.trim(path, '/')].join('/');
