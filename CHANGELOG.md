@@ -1,3 +1,11 @@
+1.5.2-edge.1 / 2020-12-29
+==================
+
+* Fix seek thumbnails image path (#223)
+* Add type declaration for cloudinary-core module
+* Bump node-notifier from 8.0.0 to 8.0.1
+* Bump ini from 1.3.5 to 1.3.7
+
 1.5.2-edge.0 / 2020-11-23
 ==================
 
