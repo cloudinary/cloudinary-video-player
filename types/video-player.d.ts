@@ -5,7 +5,32 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 import {VideoJsPlayerOptions} from "video.js";
-import {Configuration, Transformation} from "cloudinary-core"
+import {Configuration, Transformation, Cloudinary} from "cloudinary-core"
+
+declare module 'cloudinary-core' {
+    interface Cloudinary {
+        /**
+         *
+         * @param elem
+         *          The video element for the player
+         * @param options
+         *        Video player options
+         * @param ready
+         *        Is the player ready to play
+         */
+        videoPlayer(elem: string, options?: Options, ready?: boolean): VideoPlayer;
+        /**
+         * create video players from a css class class selector
+         * @param {string} selector
+         *        Class name
+         * @param ...args
+         *        arguments to pass to the video player constructor
+         * @return {Array.VideoPlayer}
+         *         An array of video player objects
+         */
+        videoPlayers(selector: string, ...args: any): VideoPlayer[];
+    }
+}
 
 export interface PosterOptions {
     /**
