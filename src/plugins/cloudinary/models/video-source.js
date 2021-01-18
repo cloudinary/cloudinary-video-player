@@ -202,7 +202,7 @@ class VideoSource extends BaseSource {
     let t = type || url.split('.').pop();
     const isAdaptive = (['mpd', 'm3u8', 'hls', 'dash'].indexOf(t) !== -1);
     if (isAdaptive && CONTAINER_MIME_TYPES[t]) {
-      type = CONTAINER_MIME_TYPES[t].pop();
+      type = CONTAINER_MIME_TYPES[t][0];
     } else {
       type = type ? `video/${type}` : null;
     }
