@@ -200,7 +200,7 @@ class VideoSource extends BaseSource {
 
   generateRawSource(url, type) {
     let t = type || url.split('.').pop();
-    const isAdaptive = CONTAINER_MIME_TYPES[t];
+    const isAdaptive = !!CONTAINER_MIME_TYPES[t];
     if (isAdaptive) {
       type = CONTAINER_MIME_TYPES[t][0];
     } else {
