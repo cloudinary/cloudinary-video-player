@@ -192,6 +192,7 @@ class Html5DashJS extends Component {
     this.tech_.triggerReady();
     // map videojs seek
     this.on(this.tech_, 'seeking', () => {
+      // handle seek the same way as in dash.js
       this.mediaPlayer_.seek((this.tech_.currentTime() - 8).toFixed(2));
     });
   }
