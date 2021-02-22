@@ -1,3 +1,15 @@
+1.5.2-edge.3 / 2021-02-22
+==================
+
+Fixes
+-----
+* Fix autoplay on fallback (#227)
+* Fix dash seek behavior and error handling (#228)
+
+Other changes
+-------------
+* Use native hls text tracks by default (#229)
+
 1.5.2-edge.2 / 2021-01-18
 ==================
 
