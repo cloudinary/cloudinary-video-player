@@ -453,6 +453,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       src: conf.url
     });
 
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -479,6 +480,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (_options.fluid) {
       this.fluid(_options.fluid);
     }
+
 
     /* global google */
     let loaded = {
@@ -673,6 +675,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   play() {
+    this.playWasCalled = true;
     this.videojs.play();
     return this;
   }
