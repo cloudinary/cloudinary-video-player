@@ -81,7 +81,7 @@
     </p>
 
     <h3 class="mt-4">Example Code:</h3>
-    <p>To force subtitle in hls streem even if the manifest does not declares them you should add</p>
+    <p>To force subtitles in an HLS stream even if the manifest does not declare them, add the following to the player configuration and then add your text tracks in the source:</p>
         <pre>
         <code class="language-javascript">
             html5: {
@@ -91,8 +91,8 @@
             }
         </code>
         </pre>
-        <p>to the player configuration and them add you text tracks in the source</p>
-    <p>Make sure to add</p>
+       
+    <p>Make sure to add the following to your video element as the subtitles are coming from a different origin:</p>
     <pre>
       <code class="language-html">
         crossorigin="anonymous"
