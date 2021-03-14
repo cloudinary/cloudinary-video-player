@@ -25,7 +25,7 @@ class RecommendationsOverlay extends Component {
     this.on(player, 'recommendationsnoshow', this.setDoNotOpen);
     this.on(player, 'recommendationsshow', this.open);
     this.on(player, 'recommendationshide', this.close);
-    this.on(player, 'sourcechanged', () => {
+    this.on(player, 'cldsourcechanged', () => {
       this.clearItems();
       this.close();
     });

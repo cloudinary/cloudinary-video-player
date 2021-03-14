@@ -37,7 +37,7 @@ const Playlistable = (superclass) => class extends superclass {
       const playlist = this.playlist();
       _playlist = undefined;
       playlist.dispose();
-      this.off('sourcechanged', _playlistDisposer);
+      this.off('cldsourcechanged', _playlistDisposer);
     };
 
     const createPlaylist = (sources, options) => {
@@ -62,7 +62,7 @@ const Playlistable = (superclass) => class extends superclass {
         }
       };
 
-      this.on('sourcechanged', disposer);
+      this.on('cldsourcechanged', disposer);
 
       return disposer;
     };
