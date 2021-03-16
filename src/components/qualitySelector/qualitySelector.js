@@ -50,38 +50,40 @@ const qualitySelector = {
             'audio'
           );
 
-          let normalizeFactor = videoRates[videoRates.length - 1].bitrate;
-          player.dash.audioMapper = videoRates.map((rate) =>
-            Math.round(
-              (rate.bitrate / normalizeFactor) * (audioRates.length - 1)
-            )
-          );
-          videoRates.forEach((vrate) => {
-            player.dash.qualityLevels.addQualityLevel({
-              id: vrate.bitrate,
-              width: vrate.width,
-              height: vrate.height,
-              bandwidth: vrate.bitrate,
-              selected: true,
-              enabled: function (val) {
-                if (val !== undefined) {
-                  this.selected = val;
-                  if (val === true) {
-                    let selectedIdx = findIndex(player.qualityLevels().levels_, (l => l.id === this.id));
-                    player.qualityLevels().selectedIndex_ = selectedIdx;
-                    player.qualityLevels().trigger({
-                      type: 'change',
-                      selectedIndex: selectedIdx
-                    });
+          if (videoRates.length > 0) {
+            let normalizeFactor = videoRates[videoRates.length - 1].bitrate;
+            player.dash.audioMapper = videoRates.map((rate) =>
+              Math.round(
+                (rate.bitrate / normalizeFactor) * (audioRates.length - 1)
+              )
+            );
+            videoRates.forEach((vrate) => {
+              player.dash.qualityLevels.addQualityLevel({
+                id: vrate.bitrate,
+                width: vrate.width,
+                height: vrate.height,
+                bandwidth: vrate.bitrate,
+                selected: true,
+                enabled: function(val) {
+                  if (val !== undefined) {
+                    this.selected = val;
+                    if (val === true) {
+                      let selectedIdx = findIndex(player.qualityLevels().levels_, (l => l.id === this.id));
+                      player.qualityLevels().selectedIndex_ = selectedIdx;
+                      player.qualityLevels().trigger({
+                        type: 'change',
+                        selectedIndex: selectedIdx
+                      });
+                    }
+                  } else {
+                    return this.selected !== undefined
+                      ? this.selected
+                      : true;
                   }
-                } else {
-                  return this.selected !== undefined
-                    ? this.selected
-                    : true;
                 }
-              }
+              });
             });
-          });
+          }
         }
       );
 
