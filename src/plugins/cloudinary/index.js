@@ -206,7 +206,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
       };
 
-      this.one('sourcechanged', _recommendations.sourceChangedHandler);
+      this.one('cldsourcechanged', _recommendations.sourceChangedHandler);
 
       _recommendations.endedHandler = () => {
         if (!disableAutoShow && this.autoShowRecommendations()) {
@@ -219,7 +219,7 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     const unsetRecommendations = () => {
       if (_recommendations) {
-        this.off('sourcechanged', _recommendations.sourceChangedHandler);
+        this.off('cldsourcechanged', _recommendations.sourceChangedHandler);
         this.off('ended', _recommendations.endedHandler);
         delete _recommendations.endedHandler;
         delete _recommendations.sourceChangedHandler;
