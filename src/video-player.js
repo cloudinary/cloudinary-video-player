@@ -426,6 +426,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           const publicId = source.publicId();
 
           let transformations = source.transformation().toOptions();
+
+          if (transformations && transformations.streaming_profile) {
+            delete transformations.streaming_profile;
+          }
+
           transformations.flags = transformations.flags || [];
           transformations.flags.push('sprite');
 
