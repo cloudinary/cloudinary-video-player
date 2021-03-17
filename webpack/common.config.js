@@ -114,7 +114,7 @@ module.exports = {
         use: 'url-loader?limit=10000'
       },
       {
-        test: path.resolve(__dirname, '../node_modules/video.js'),
+        test: require.resolve('video.js'),
         use: [
           {
             loader: 'expose-loader',

@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 const env = require('../env');
 
@@ -10,7 +10,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = merge.smart(webpackCommon, {
+module.exports = merge(webpackCommon, {
   devtool: 'inline-source-map',
   mode: 'development',
 
