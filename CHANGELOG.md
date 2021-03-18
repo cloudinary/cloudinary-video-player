@@ -1,3 +1,19 @@
+1.5.2-edge.4 / 2021-03-18
+==================
+
+Fixes
+-----
+* Fix seek thumbnails for adaptive videos (#232)
+* Filter out dash sources on safari (#235)
+* Update subtitles crossorigin definition to be "anonymous"
+* Fix recommendations displayed in the light version
+
+Other Changes
+-------------
+* Bump elliptic from 6.5.3 to 6.5.4
+* Add example of how to force subtitles in an HLS stream (#231)
+* bump dashjs to version 3.2.1
+
 1.5.2-edge.3 / 2021-02-22
 ==================
 
