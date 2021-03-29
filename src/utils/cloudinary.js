@@ -40,8 +40,8 @@ const handleCldError = (that, options) => {
           goodSrcs.forEach(s => {
             s.try = true;
           });
+          that.videojs.autoplay(that.videojs.autoplay() || that.playWasCalled);
           that.videojs.src(goodSrcs);
-          that.play();
         } else {
           console.log('No urls left to try so stopping');
           that.videojs.error({ code: 6, message: 'No supported media sources' });

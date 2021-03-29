@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
-  <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
 
   <!--
     We're loading scripts & style dynamically for development/testing.
@@ -16,19 +16,32 @@
 
   -->
 
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.20/src/ua-parser.min.js"></script>
+
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-      player = cld.videoPlayer('player');
-
-      player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
-      adpPlayer = cld.videoPlayer('adpPlayer');
-      adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
+      player = cld.videoPlayer('player', {
+        publicId: 'product-gallery-tutorial_hlk0na',
+      });
+      playerNoAuto = cld.videoPlayer('player-no-auto', {
+        publicId: 'product-gallery-tutorial_hlk0na',
+      });
+      playerAutoProg = cld.videoPlayer('player-auto-prog', {
+        publicId: 'product-gallery-tutorial_hlk0na',
+      });
+      playerAutoProg.play()
+/*
+      player.videojs.on('playing', function() {
+        document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
+      });
+*/
     }, false);
+
   </script>
 
 </head>
@@ -38,7 +51,6 @@
       <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Video with raw URL</h3>
 
     <video
       id="player"
@@ -49,20 +61,33 @@
       class="cld-video-player"
       width="500"
     ></video>
-  </div>
-  <div class="container p-4 col-12 col-md-9 col-xl-6">
-
-    <h3 class="mb-4">Video with raw URL adaptive</h3>
+    <span id="cached-info"></span>
+    <h3 class="mb-4">Autoplay inline</h3>
+    <br/>
+    <br/>
 
     <video
-            id="adpPlayer"
+            id="player-no-auto"
             playsinline
             controls
             muted
-            autoplay
             class="cld-video-player"
             width="500"
     ></video>
+    <span id="cached-info-webm"></span>
+    <h3 class="mb-4">No autoplay</h3>
+    <br/>
+    <br/>
+    <video
+            id="player-auto-prog"
+            playsinline
+            controls
+            muted
+            class="cld-video-player"
+            width="500"
+    ></video>
+    <h3 class="mb-4">Call play api</h3>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -80,13 +105,16 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
+        // Initialize player
         var player = cld.videoPlayer('player');
 
-        player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
-        var  adpPlayer = cld.videoPlayer('adpPlayer');
-        adpPlayer.source('http://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
+        // Define source
+        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
+
+        // Play source
+        player.source(source);
       </code>
     </pre>
   </div>

@@ -268,19 +268,6 @@
         { publicId: 'elephants' },
         'sea_turtle'], { autoAdvance: 0, repeat: true });
 
-      function updateSource() {
-        var divElem = document.querySelector("div#source-data");
-
-        publicIdElem = divElem.querySelector("#public-id-placeholder");
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-        divElem.style.display = 'block';
-      }
-
-      player.on('sourcechanged', updateSource);
     </code></pre>
   </div>
 

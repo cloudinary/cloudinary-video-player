@@ -47,7 +47,6 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 
 const DEFAULT_HLS_OPTIONS = {
   html5: {
-    nativeTextTracks: false,
     handlePartialData: false,
     hls: {
       overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
@@ -427,6 +426,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           const publicId = source.publicId();
 
           let transformations = source.transformation().toOptions();
+
+          if (transformations && transformations.streaming_profile) {
+            delete transformations.streaming_profile;
+          }
+
           transformations.flags = transformations.flags || [];
           transformations.flags.push('sprite');
 
@@ -454,6 +458,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       src: conf.url
     });
 
+
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
 
@@ -480,6 +485,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (_options.fluid) {
       this.fluid(_options.fluid);
     }
+
 
     /* global google */
     let loaded = {
@@ -674,6 +680,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   play() {
+    this.playWasCalled = true;
     this.videojs.play();
     return this;
   }

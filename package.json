@@ -2,6 +2,18 @@
   "name": "cloudinary-video-player",
   "version": "1.5.2",
   "description": "Cloudinary Video Player",
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./dist/cld-video-player.min.js",
+        "maxSize": "470kb"
+      },
+      {
+        "path": "./dist/cld-video-player.light.min.js",
+        "maxSize": "105kb"
+      }
+    ]
+  },
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
@@ -9,6 +21,7 @@
     "clean": "rm -rf dist",
     "build-dev": "webpack --config webpack/es5.config.js --progress --display-error-details --color --mode=development",
     "build": "webpack --config webpack/es5.config.js --progress --display-error-details --color",
+    "postbuild-all": "bundlewatch",
     "build-light-dev": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color --mode=development",
     "build-light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/es5.config.js --progress --display-error-details --color",
     "analyze": "webpack --config webpack/analyzer.config.js --json | webpack-bundle-analyzer",
@@ -28,7 +41,7 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
-    "dashjs": "^3.1.2",
+    "dashjs": "^3.2.1",
     "fetch-ponyfill": "^6.1.1",
     "promise-polyfill": "^6.0.2",
     "video.js": "^7.8.4",
@@ -46,10 +59,12 @@
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@types/video.js": "^7.3.11",
     "autoprefixer": "^6.7.7",
     "babel-eslint": "^7.1.1",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.1.0",
+    "bundlewatch": "^0.3.2",
     "clean-webpack-plugin": "^1.0.1",
     "cloudinary-core": "^2.11.2",
     "copy-webpack-plugin": "^4.6.0",

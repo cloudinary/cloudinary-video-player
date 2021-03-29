@@ -5,6 +5,7 @@ import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { isKeyInTransformation } from 'utils/cloudinary';
+import { default as vjs } from 'video.js';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 const DEFAULT_VIDEO_SOURCE_TYPES = ['webm/vp9', 'mp4/h265', 'mp4'];
@@ -193,6 +194,9 @@ class VideoSource extends BaseSource {
     });
     if (isIe) {
       return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
+    } else if (vjs.browser.IS_ANY_SAFARI) {
+      // filter out dash on safari
+      return srcs.filter(s => s.type.indexOf('application/dash+xml') === -1);
     } else {
       return srcs;
     }
@@ -200,9 +204,9 @@ class VideoSource extends BaseSource {
 
   generateRawSource(url, type) {
     let t = type || url.split('.').pop();
-    const isAdaptive = (['mpd', 'm3u8', 'hls', 'dash'].indexOf(t) !== -1);
-    if (isAdaptive && CONTAINER_MIME_TYPES[t]) {
-      type = CONTAINER_MIME_TYPES[t].pop();
+    const isAdaptive = !!CONTAINER_MIME_TYPES[t];
+    if (isAdaptive) {
+      type = CONTAINER_MIME_TYPES[t][0];
     } else {
       type = type ? `video/${type}` : null;
     }
