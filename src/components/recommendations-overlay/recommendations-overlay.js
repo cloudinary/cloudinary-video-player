@@ -14,18 +14,12 @@ class RecommendationsOverlay extends Component {
     this._content = new RecommendationsOverlayContent(player);
 
     this.addChild(this._content);
-
     this.addChild(new RecommendationsOverlayHideButton(player, {
       clickHandler: () => {
         this.close();
       }
     }, ...args));
 
-    this.setPlayerEvents(player);
-    this.doNotOpen = false;
-  }
-
-  setPlayerEvents(player) {
     this.on(player, 'recommendationschanged', (_, eventData) => {
       this.setItems(...eventData.items);
     });
@@ -37,6 +31,7 @@ class RecommendationsOverlay extends Component {
       this.clearItems();
       this.close();
     });
+    this.doNotOpen = false;
   }
 
   setDoNotOpen() {

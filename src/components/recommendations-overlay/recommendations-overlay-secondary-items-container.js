@@ -4,7 +4,6 @@ import RecommendationsOverlaySecondaryItem from './recommendations-overlay-secon
 const Component = videojs.getComponent('Component');
 
 class RecommendationsOverlaySecondaryItemsContainer extends Component {
-
   setItems(...items) {
     this.clearItems();
 

@@ -20,10 +20,13 @@ const OPTIONS_DEFAULTS = {
 };
 
 class ShoppableWidget {
-
   constructor(player, options = {}) {
     this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
+
+    this.init = () => {
+      this.render();
+    };
 
     if (this.options_.showPostPlayOverlay) {
       this.player_.on('ended', () => {
@@ -35,39 +38,6 @@ class ShoppableWidget {
       });
     }
 
-    this.setStyle(player);
-    this.resizeHandler = this._resizeHandler.bind(this);
-    this.player_.on('resize', this.resizeHandler);
-    window.addEventListener('resize', this.resizeHandler);
-  }
-
-  _resizeHandler() {
-    const shoppableBarBreakpoints = [
-      ['sm', 0, 80],
-      ['md', 81, 110],
-      ['lg', 111, 170]
-    ];
-    const shoppableBarWidth = parseFloat(this.options_.width) / 100.0 * this.player_.el_.clientWidth;
-    let inRange = false;
-
-    if (shoppableBarWidth) {
-      for (const [name, min, max] of shoppableBarBreakpoints) {
-        if (shoppableBarWidth > min && shoppableBarWidth <= max) {
-          this.layout_.contentWrpEl_.setAttribute('size', name);
-          inRange = name;
-        }
-      }
-      if (!inRange) {
-        this.layout_.contentWrpEl_.removeAttribute('size');
-      }
-    }
-  }
-
-  init() {
-    this.render();
-  }
-
-  setStyle(player) {
     const injectCSS = (css) => {
       const style = document.createElement('style');
       style.innerHTML = css;
@@ -89,12 +59,35 @@ class ShoppableWidget {
         width: ${width};
       }
     `);
-  }
 
-  dispose() {
-    this.player_.off('resize', this.resizeHandler);
-    window.removeEventListener('resize', this.resizeHandler);
-    this.layout_.dispose();
+    const resizeHandler = () => {
+      const shoppableBarBreakpoints = [
+        ['sm', 0, 80],
+        ['md', 81, 110],
+        ['lg', 111, 170]
+      ];
+      const shoppableBarWidth = parseFloat(this.options_.width) / 100.0 * player.el_.clientWidth;
+      let inRange = false;
+      if (shoppableBarWidth) {
+        for (const [name, min, max] of shoppableBarBreakpoints) {
+          if (shoppableBarWidth > min && shoppableBarWidth <= max) {
+            this.layout_.contentWrpEl_.setAttribute('size', name);
+            inRange = name;
+          }
+        }
+        if (!inRange) {
+          this.layout_.contentWrpEl_.removeAttribute('size');
+        }
+      }
+    };
+    this.player_.on('resize', resizeHandler);
+    window.addEventListener('resize', resizeHandler);
+
+    this.dispose = () => {
+      this.player_.off('resize', resizeHandler);
+      window.removeEventListener('resize', resizeHandler);
+      this.layout_.dispose();
+    };
   }
 
   render() {

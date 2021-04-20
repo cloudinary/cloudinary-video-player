@@ -1,5 +1,4 @@
 $width: 20%;
-
 .cld-spbl-bar {
   position: absolute;
   top: 0;
@@ -10,7 +9,6 @@ $width: 20%;
   overflow: hidden;
   z-index: 1;
 }
-
 .cld-spbl-bar-inner {
   position: absolute;
   top: 0;
@@ -20,26 +18,20 @@ $width: 20%;
   transform: translateX($width);
   transition: transform .3s;
 }
-
 .cld-video-player .vjs-control-bar {
   transition: width .3s;
 }
-
 .shoppable-panel-visible {
-
   .cld-spbl-bar-inner {
     transform: translateX(0);
   }
-
   .vjs-control-bar {
     width: 100% - $width;
   }
-
   .cld-spbl-toggle-icon:before {
     content: "\f119";
   }
 }
-
 .cld-spbl-banner-msg {
   position: absolute;
   font-size: 2em;
@@ -48,13 +40,11 @@ $width: 20%;
   top: calc(50% + 3em);
   width: 100%;
   text-align: center;
-
   .cld-video-player.vjs-has-started &,
   .cld-video-player.vjs-error & {
     display: none;
   }
 }
-
 .cld-spbl-toggle {
   position: absolute;
   top: 3%;
@@ -69,17 +59,14 @@ $width: 20%;
   cursor: pointer;
   pointer-events: all;
   text-decoration: none;
-
   &:hover {
     color: inherit;
     text-decoration: none;
   }
-
   &:focus {
     outline: none;
   }
 }
-
 .cld-spbl-toggle-icon {
 
   // Custom toggle icon
@@ -92,14 +79,11 @@ $width: 20%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: 75%;
-
     .shoppable-panel-hidden & {
-
       &:before {
         display: none;
       }
     }
-
     .shoppable-panel-visible & {
       background-image: none !important;
     }
@@ -109,14 +93,13 @@ $width: 20%;
   display: block;
   animation-duration: 1s;
   animation-fill-mode: both;
-
   &.animate,
   .shoppable-panel-hidden &:hover {
     animation-name: tada;
     animation-iteration-count: infinite;
   }
-}
 
+}
 .cld-spbl-panel {
   position: absolute;
   top: 0;
@@ -129,12 +112,10 @@ $width: 20%;
   // Hide scrollbar
   -ms-overflow-style: none;  // Internet Explorer 10+
   scrollbar-width: none;  // Firefox
-
   &::-webkit-scrollbar {
     display: none;  // Safari and Chrome
   }
 }
-
 .cld-spbl-item {
   display: block;
   position: relative;
@@ -146,7 +127,6 @@ $width: 20%;
   .cld-spbl-bar[size="md"] & {
     font-size: 10px;
   }
-
   .cld-spbl-bar[size="sm"] & {
     font-size: 8px;
   }
@@ -165,34 +145,28 @@ $width: 20%;
     transition: box-shadow .3s;
     border-radius: 3px;
   }
-
   &.active {
     transform: scale(1);
-
     &:before {
       opacity: .5;
       box-shadow: 0 0 0 4px;
     }
-
     &:after {
       box-shadow: 0 0 0 2px;
     }
-  }
 
+  }
   &:hover {
     color: inherit;
   }
 }
-
 .cld-spbl-img {
   max-width: 100%;
   height: auto;
 }
-
 .cld-spbl-hover-img {
   display: none;
 }
-
 .cld-spbl-item-info {
   position: absolute;
   right: 0;
@@ -202,7 +176,6 @@ $width: 20%;
   overflow: hidden;
   padding: 6%;
 }
-
 .cld-spbl-overlay {
   display: inline-flex;
   position: absolute;
@@ -221,16 +194,13 @@ $width: 20%;
     margin: auto;
   }
 }
-
 .cld-spbl-item:hover {
-
   .cld-spbl-overlay {
     opacity: 1;
     ~ .cld-spbl-item-info {
       display: none;
     }
   }
-
   .cld-spbl-hover-img {
     display: block;
     + {
@@ -242,7 +212,6 @@ $width: 20%;
 }
 
 .cld-spbl-post-play {
-
   .cld-spbl-post-play-bg {
     position: absolute;
     top: 0;
@@ -251,7 +220,6 @@ $width: 20%;
     right: 0;
     background-size: cover;
   }
-
   .cld-spbl-post-title {
     position: absolute;
     font-size: 1.5em;
@@ -261,7 +229,6 @@ $width: 20%;
     width: 100%;
     text-align: center;
   }
-
   .cld-spbl-panel {
     width:  100%;
     top: 16%;
@@ -269,13 +236,12 @@ $width: 20%;
     padding: 10px 8px;
     white-space: nowrap;
     background: none !important;
-    cursor: grab;
 
+    cursor: grab;
     &:active {
       cursor: grabbing;
     }
   }
-
   .cld-spbl-item {
     display: inline-block;
     width: 28%;
@@ -288,7 +254,6 @@ $width: 20%;
     box-shadow: 0 4px 6px 1.2px rgba(0,0,0,0.24), 0 6px 8px 4px rgba(0,0,0,0.24);
     transform: none;
   }
-
   .cld-spbl-img {
     max-width: 100%;
     max-height: 100%;
@@ -299,7 +264,6 @@ $width: 20%;
     right: 0;
     margin: 0 auto auto;
   }
-
   .cld-spbl-replay-btn {
     position: absolute;
     left: 5%;
@@ -348,13 +312,11 @@ $width: 20%;
     display: none !important;
   }
 }
-
 .cld-spbl-product-hotspot {
   pointer-events: all;
   position: absolute;
   cursor: pointer;
   padding: 15px;
-
   &:after {
     content: '';
     display: block;
@@ -369,7 +331,6 @@ $width: 20%;
     display: block;
   }
 }
-
 .cld-spbl-product-tooltip {
   display: none;
   position: absolute;
@@ -379,19 +340,16 @@ $width: 20%;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-
   &.cld-spbl-product-tooltip-top {
     top: auto;
     bottom: 100%;
   }
-
   &.cld-spbl-product-tooltip-left {
     top: 50%;
     right: 100%;
     left: auto;
     transform: translateY(-50%);
   }
-
   &.cld-spbl-product-tooltip-right {
     top: 50%;
     left: 100%;
