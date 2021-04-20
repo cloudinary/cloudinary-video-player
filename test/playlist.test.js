@@ -52,7 +52,7 @@ describe('Playlist tests', () => {
     await page.waitForSelector('#player_html5_api', { visible: true, timeout: 35000 });
     const curruntVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
     await page.click('div.cld-plw-col-list > div > a:nth-child(2)');
-    let nextVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
+    const nextVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
     expect(curruntVideoUrl).not.toEqual(nextVideoUrl);
   });
 });
