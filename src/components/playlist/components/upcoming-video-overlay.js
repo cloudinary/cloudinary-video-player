@@ -8,46 +8,41 @@ const Component = videojs.getComponent('Component');
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class UpcomingVideoOverlay extends ClickableComponent {
-
   constructor(player, ...args) {
     super(player, ...args);
-    this.setPlayerEvents(player);
-  }
 
-  setPlayerEvents(player) {
-    player.on('upcomingvideoshow', this.show.bind(this));
-    player.on('upcomingvideohide', this.hide.bind(this));
-    player.on('playlistitemchanged', this.onPlaylistItemChange.bind(this));
-  }
-
-  onPlaylistItemChange(_, event) {
-    this.hide();
-    this.disableTransition(() => {
-      if (event.next) {
-        this.setItem(event.next);
-      }
-    });
-  }
-
-  disableTransition(block) {
-    this.addClass('disable-transition');
-    block();
-    this.removeClass('disable-transition');
-  }
-
-  hide() {
-    this.removeClass('vjs-upcoming-video-show');
-  }
-
-  show() {
-    if (typeof this.player().ima === 'object' && this.player().ima.getAdsManager()) {
-      const adsManager = this.player().ima.getAdsManager();
-      if (!adsManager.getCurrentAd() || adsManager.getCurrentAd().isLinear()) {
+    const show = () => {
+      if (typeof this.player().ima === 'object' && this.player().ima.getAdsManager()) {
+        if (!this.player().ima.getAdsManager().getCurrentAd() || this.player().ima.getAdsManager().getCurrentAd().isLinear()) {
+          this.addClass('vjs-upcoming-video-show');
+        }
+      } else {
         this.addClass('vjs-upcoming-video-show');
       }
-    } else {
-      this.addClass('vjs-upcoming-video-show');
-    }
+    };
+
+    const hide = () => {
+      this.removeClass('vjs-upcoming-video-show');
+    };
+
+    const disableTransition = (block) => {
+      this.addClass('disable-transition');
+      block();
+      this.removeClass('disable-transition');
+    };
+
+    const onPlaylistItemChange = (_, event) => {
+      hide();
+      disableTransition(() => {
+        if (event.next) {
+          this.setItem(event.next);
+        }
+      });
+    };
+
+    player.on('upcomingvideoshow', show);
+    player.on('upcomingvideohide', hide);
+    player.on('playlistitemchanged', onPlaylistItemChange);
   }
 
   setTitle(source) {
@@ -79,9 +74,11 @@ class UpcomingVideoOverlay extends ClickableComponent {
   }
 
   createEl() {
-    return super.createEl('div', {
+    const el = super.createEl('div', {
       className: 'vjs-upcoming-video'
     });
+
+    return el;
   }
 }
 
