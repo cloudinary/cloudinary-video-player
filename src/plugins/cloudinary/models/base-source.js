@@ -1,8 +1,8 @@
 import cloudinary from 'cloudinary-core';
 import { normalizeOptions } from '../common';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { getCloudinaryInstanceOf } from 'utils/cloudinary';
-import { objectToQuerystring } from 'utils/querystring';
+import { sliceAndUnsetProperties } from '../../../utils/slicing';
+import { getCloudinaryInstanceOf } from '../../../utils/cloudinary';
+import { objectToQuerystring } from '../../../utils/querystring';
 
 class BaseSource {
   constructor(publicId, options = {}) {

@@ -10,12 +10,6 @@ function _sliceProperties(obj, isUnset, ...props) {
   }, {});
 }
 
-function sliceProperties(obj, ...props) {
-  return _sliceProperties(obj, false, ...props);
-}
+export const sliceProperties = (obj, ...props) => _sliceProperties(obj, false, ...props);
 
-function sliceAndUnsetProperties(obj, ...props) {
-  return _sliceProperties(obj, true, ...props);
-}
-
-export { sliceProperties, sliceAndUnsetProperties };
+export const sliceAndUnsetProperties = (obj, ...props) => _sliceProperties(obj, true, ...props);

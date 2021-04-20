@@ -12,50 +12,53 @@ const OPTIONS_DEFAULT = {
   wrap: false
 };
 
-class PlaylistLayout extends Component {
+export default class PlaylistLayout extends Component {
+
   constructor(player, options) {
     const layoutOptions = { ...OPTIONS_DEFAULT, ...options };
     super(player, layoutOptions);
     this.player_ = player;
     this.setCls();
+    this.setFluidHandler(layoutOptions);
+    this.addChild('PlaylistPanel', this.options_);
+  }
 
-    const fluidHandler = (e, fluid) => {
+  setFluidHandler(layoutOptions) {
+    this.fluidHandler = (e, fluid) => {
       this.options_.fluid = fluid;
       this.removeCls();
       this.setCls();
     };
 
-    const wrapVideoWithLayout = () => {
-      const el = this.el();
-
-      this.videoWrap_ = dom.createEl('div', { className: 'cld-plw-col-player' });
-      this.contentEl_ = this.contentEl_ = dom.createEl('div', { className: 'cld-plw-col-list' });
-
-      wrap(this.player().el(), el);
-
-      el.appendChild(this.videoWrap_);
-      el.appendChild(this.contentEl_);
-
-      wrap(this.player().el(), this.videoWrap_);
-    };
-
     if (layoutOptions.wrap) {
-      wrapVideoWithLayout();
+      this.wrapVideoWithLayout();
     }
 
-    player.on('fluid', fluidHandler);
+    this.player_.on('fluid', this.fluidHandler);
+  }
 
-    this.addChild('PlaylistPanel', this.options_);
+  wrapVideoWithLayout() {
+    const el = this.el();
 
-    this.dispose = () => {
-      this.removeLayout();
-      super.dispose();
-      player.off('fluid', fluidHandler);
-    };
+    this.videoWrap_ = dom.createEl('div', { className: 'cld-plw-col-player' });
+    this.contentEl_ = this.contentEl_ = dom.createEl('div', { className: 'cld-plw-col-list' });
+
+    wrap(this.player().el(), el);
+
+    el.appendChild(this.videoWrap_);
+    el.appendChild(this.contentEl_);
+
+    wrap(this.player().el(), this.videoWrap_);
+  }
+
+  dispose() {
+    this.removeLayout();
+    super.dispose();
+    this.player_.off('fluid', this.fluidHandler);
   }
 
   getCls() {
-    let cls = ['cld-video-player', 'cld-plw-layout'];
+    const cls = ['cld-video-player', 'cld-plw-layout'];
 
     cls.push(skinClassPrefix(this.player()));
     cls.push(playerClassPrefix(this.player()));
@@ -89,7 +92,7 @@ class PlaylistLayout extends Component {
 
   removeLayout() {
     const parentElem = this.el().parentElement;
-    if (this.el().parentElement) {
+    if (parentElem) {
       parentElem.appendChild(this.player().el());
     }
   }
@@ -106,5 +109,3 @@ class PlaylistLayout extends Component {
 }
 
 videojs.registerComponent('playlistLayout', PlaylistLayout);
-
-export default PlaylistLayout;

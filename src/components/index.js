@@ -7,7 +7,7 @@ import RecommendationsOverlay from './recommendations-overlay';
 import ShoppablePanel from './shoppable-bar/panel/shoppable-panel';
 import TitleBar from './title-bar/title-bar';
 
-import 'assets/styles/components/triangle-volume-bar.scss';
+import '../assets/styles/components/triangle-volume-bar.scss';
 
 export {
   JumpForwardButton,

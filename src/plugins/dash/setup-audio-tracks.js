@@ -1,6 +1,6 @@
 import dashjs from 'dashjs';
 import videojs from 'video.js';
-import { find } from 'utils/find';
+import { find } from '../../utils/find';
 
 /**
  * Setup audio tracks. Take the tracks from dash and add the tracks to videojs. Listen for when

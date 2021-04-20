@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { elMatches } from 'utils/matches';
+import { elMatches } from '../../../utils/matches';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');

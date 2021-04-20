@@ -1,11 +1,11 @@
 import cloudinary from 'cloudinary-core';
-import { mixin } from 'utils/mixin';
-import { applyWithProps } from 'utils/apply-with-props';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary';
-import { assign } from 'utils/assign';
+import { mixin } from '../../utils/mixin';
+import { applyWithProps } from '../../utils/apply-with-props';
+import { sliceAndUnsetProperties } from '../../utils/slicing';
+import { getCloudinaryInstanceOf, isKeyInTransformation } from '../../utils/cloudinary';
+import { assign } from '../../utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
-import Playlistable from 'mixins/playlistable';
+import Playlistable from '../../mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source';

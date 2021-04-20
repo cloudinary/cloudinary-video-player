@@ -2,7 +2,7 @@ import WebFont from 'webfontloader';
 
 const FONT_FAMILY = 'Fira Sans';
 
-const fontFace = (elem, options) => {
+export const fontFace = (elem, options) => {
   let fontFace = options.cloudinary.fontFace;
 
   // Default font-face is "Fira sans"
@@ -21,5 +21,3 @@ const fontFace = (elem, options) => {
     elem.style.fontFamily = 'inherit';
   }
 };
-
-export { fontFace };

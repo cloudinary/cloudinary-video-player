@@ -1,10 +1,10 @@
 import BaseSource from './base-source';
 import ImageSource from './image-source';
 import { normalizeOptions, isSrcEqual, codecShorthandTrans, codecToSrcTransformation } from '../common';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
-import { objectToQuerystring } from 'utils/querystring';
-import { isKeyInTransformation } from 'utils/cloudinary';
+import { sliceAndUnsetProperties } from '../../../utils/slicing';
+import { assign } from '../../../utils/assign';
+import { objectToQuerystring } from '../../../utils/querystring';
+import { isKeyInTransformation } from '../../../utils/cloudinary';
 import { default as vjs } from 'video.js';
 
 const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };

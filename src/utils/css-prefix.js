@@ -2,20 +2,18 @@ import { startsWith } from './string';
 import defaults from '../config/defaults';
 import { find } from './find';
 
-const CLASS_PREFIX = 'cld-video-player';
+export const CLASS_PREFIX = 'cld-video-player';
 const SKIN_CLASS_PREFIX = `${CLASS_PREFIX}-skin-`;
 
-const playerClassPrefix = (componentInstance) => `${CLASS_PREFIX}-${componentInstance.id_}`;
+export const playerClassPrefix = (componentInstance) => `${CLASS_PREFIX}-${componentInstance.id_}`;
 
-const skinClass = (skin) => `${SKIN_CLASS_PREFIX}${skin}`;
+export const skinClass = (skin) => `${SKIN_CLASS_PREFIX}${skin}`;
 
-const skinClassPrefix = (componentInstance) => {
-  let currentSkin = find(componentInstance.el().classList, (cls) => startsWith(cls, SKIN_CLASS_PREFIX));
-
-  return currentSkin;
+export const skinClassPrefix = (componentInstance) => {
+  return find(componentInstance.el().classList, (cls) => startsWith(cls, SKIN_CLASS_PREFIX));
 };
 
-const setSkinClassPrefix = (componentInstance, name) => {
+export const setSkinClassPrefix = (componentInstance, name) => {
   const currentSkinPrefix = skinClassPrefix(componentInstance);
   const skinName = name ? name.replace(SKIN_CLASS_PREFIX, '') : false;
 
@@ -43,5 +41,3 @@ const setSkinClassPrefix = (componentInstance, name) => {
   }
 
 };
-
-export { CLASS_PREFIX, playerClassPrefix, skinClassPrefix, skinClass, setSkinClassPrefix };

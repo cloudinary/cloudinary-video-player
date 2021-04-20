@@ -1,9 +1,9 @@
-import Playlist from 'components/playlist/playlist';
+import Playlist from '../components/playlist/playlist';
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
-import { sliceProperties } from 'utils/slicing';
-import { normalizeJsonResponse } from 'utils/api';
-import { assign } from 'utils/assign';
+import { sliceProperties } from '../utils/slicing';
+import { normalizeJsonResponse } from '../utils/api';
+import { assign } from '../utils/assign';
 
 const { fetch } = fetchPF({ Promise });
 

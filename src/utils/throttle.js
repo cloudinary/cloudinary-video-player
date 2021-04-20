@@ -12,10 +12,10 @@
  * @return   {Function}
  */
 
-function throttle(fn, wait) {
+export const throttle = (fn, wait) => {
   let last = window.performance.now();
 
-  const throttled = function(...args) {
+  return function (...args) {
     const now = window.performance.now();
 
     if (now - last >= wait) {
@@ -23,8 +23,4 @@ function throttle(fn, wait) {
       last = now;
     }
   };
-
-  return throttled;
-}
-
-export { throttle };
+};

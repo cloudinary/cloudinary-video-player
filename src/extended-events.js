@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import EventEmitter from 'events';
-import { assign } from 'utils/assign';
-import { isPlainObject } from 'utils/type-inference';
+import { assign } from './utils/assign';
+import { isPlainObject } from './utils/type-inference';
 
 const EVENT_DEFAULTS = {
   percentsplayed: {
@@ -9,26 +9,25 @@ const EVENT_DEFAULTS = {
   }
 };
 
-const DEFAULT_EVENTS = [
-  'percentsplayed',
-  'pausenoseek',
-  'seek',
-  'mute',
-  'unmute',
-  'qualitychanged'
-];
-
 const DEFAULT_OPTIONS = {
-  events: DEFAULT_EVENTS
+  events: [
+    'percentsplayed',
+    'pausenoseek',
+    'seek',
+    'mute',
+    'unmute',
+    'qualitychanged'
+  ]
 };
 
 // Emits the following additional events:
 // percentsplayed, timeplayed, pausenoseek, seek, mute, unmute
 class ExtendedEvents extends EventEmitter {
-  constructor(player, options = {}) {
+
+  constructor(player, initOptions = {}) {
     super();
     this.player = player;
-    options = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
 
     let _muteData = { lastState: undefined };
     let _seekStart = 0;

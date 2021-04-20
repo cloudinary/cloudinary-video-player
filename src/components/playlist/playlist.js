@@ -1,20 +1,21 @@
-import VideoSource from 'plugins/cloudinary/models/video-source';
-import { isInteger } from 'utils/type-inference';
+import VideoSource from '../../plugins/cloudinary/models/video-source';
+import { isInteger } from '../../utils/type-inference';
 
-import 'components/playlist/components/upcoming-video-overlay';
+import '../../components/playlist/components/upcoming-video-overlay';
 
 const DEFAULT_AUTO_ADVANCE = 0;
 const DEFAULT_PRESENT_UPCOMING = 10;
 const UPCOMING_VIDEO_TRANSITION = 1;
 
 class Playlist {
+
   constructor(context, sources = [], { repeat = false, autoAdvance = false, presentUpcoming = false } = {}) {
     const _context = context;
-    let _sources = [];
+    const _sources = [];
+    const _defaultRecResolverCache = {};
     let _currentIndex = null;
     let _autoAdvance = null;
     let _presentUpcoming = null;
-    let _defaultRecResolverCache = {};
     let _recommendationsHandler = null;
 
     this.enqueue = (source, options = {}) => {
@@ -320,7 +321,7 @@ class Playlist {
   }
 
   next() {
-    let nextIndex = this.nextIndex();
+    const nextIndex = this.nextIndex();
 
     if (nextIndex === -1) {
       return null;
@@ -336,7 +337,7 @@ class Playlist {
       throw new Error('Invalid playlist index.');
     }
 
-    let isLast = index === this.length() - 1;
+    const isLast = index === this.length() - 1;
 
     let nextIndex = index + 1;
 

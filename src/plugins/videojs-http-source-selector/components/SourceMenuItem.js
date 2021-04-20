@@ -11,7 +11,7 @@ class SourceMenuItem extends MenuItem {
   }
 
   handleClick() {
-    let selected = this.options_;
+    const selected = this.options_;
     console.log('Changing quality to:', selected.label);
     super.handleClick();
 

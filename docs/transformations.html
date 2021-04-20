@@ -35,7 +35,7 @@
         ],
       });
 
-      var player2 = cld.videoPlayer('player-2', {
+      cld.videoPlayer('player-2', {
         transformation: [
           { width: 400, crop: 'limit' },
           { effect: 'blur:500' },
@@ -43,7 +43,7 @@
         ],
       });
 
-      var player3 = cld.videoPlayer('player-3');
+      cld.videoPlayer('player-3');
 
     }, false);
   </script>
@@ -57,17 +57,17 @@
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Transformations Arrays</h3>
 
-    <h4 class="mb-2">via source()</h3>
+    <h4 class="mb-2">via source()</h4>
     <video
       id="player-1"
       playsinline
       controls
       muted
       autoplay
-      class="cld-video-player"
-    ></video>
+      class="cld-video-player">
+    </video>
 
-    <h4 class="mt-4 mb-2">via player()</h3>
+    <h4 class="mt-4 mb-2">via player()</h4>
     <video
       id="player-2"
       playsinline
@@ -75,10 +75,10 @@
       muted
       autoplay
       class="cld-video-player"
-      data-cld-source='{ "publicId": "dog", "info": { "title": "Dog", "subtitle": "Short movie about a dog" } }'
-    ></video>
+      data-cld-source='{ "publicId": "dog", "info": { "title": "Dog", "subtitle": "Short movie about a dog" } }'>
+    </video>
 
-    <h4 class="mt-4 mb-2">via data-cld-transformation</h3>
+    <h4 class="mt-4 mb-2">via data-cld-transformation</h4>
     <video
       id="player-3"
       playsinline
@@ -87,8 +87,8 @@
       autoplay
       class="cld-video-player"
       data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
-      data-cld-transformation='[{ "width": "400", "crop": "limit" },{ "effect": "blur:500" },{ "effect": "saturation:-100" }]'
-    ></video>
+      data-cld-transformation='[{ "width": "400", "crop": "limit" },{ "effect": "blur:500" },{ "effect": "saturation:-100" }]'>
+    </video>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>

@@ -1,6 +1,6 @@
 import videojs from 'video.js';
-import { sliceProperties } from 'utils/slicing';
-import { normalizeEventsParam, default as ExtendedEvents } from 'extended-events';
+import { sliceProperties } from '../../utils/slicing';
+import { normalizeEventsParam, default as ExtendedEvents } from '../../extended-events';
 
 const DEFAULT_EVENTS = [
   'play',

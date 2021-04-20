@@ -6,10 +6,10 @@ const { execFile } = require('child_process');
 
 
 const run = async () => {
-  let files = fs.readdirSync(buildDir);
-  files.map(file => {
+  const files = fs.readdirSync(buildDir);
+  files.forEach((file) => {
     if (path.extname(file) === '.js' && !file.includes('.min.')) {
-      let fileName = path.basename(file, '.js');
+      const fileName = path.basename(file, '.js');
       execFile('./node_modules/uglify-js/bin/uglifyjs', ['--ie8', '-m', '-o', buildDir + fileName + '.min.js', buildDir + file], (error, stdout, stderr) => {
         if (error) {
           console.log(error);

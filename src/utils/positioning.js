@@ -1,4 +1,5 @@
-function getElementPosition(el) {
+export const getElementPosition = (el) => {
+
   const box = el.getBoundingClientRect();
 
   const body = document.body;
@@ -17,7 +18,7 @@ function getElementPosition(el) {
     top: Math.round(top),
     left: Math.round(left)
   };
-}
+};
 
 /**
  * Get pointer position in element
@@ -31,7 +32,7 @@ function getElementPosition(el) {
  *         This object will have x and y coordinates corresponding to the
  *         mouse position
  */
-function getPointerPosition(el, event) {
+export const getPointerPosition = (el, event) => {
   const position = {};
   const box = getElementPosition(el);
   const boxW = el.offsetWidth;
@@ -50,9 +51,9 @@ function getPointerPosition(el, event) {
   position.x = Math.max(0, Math.min(1, (pageX - boxX) / boxW));
 
   return position;
-}
+};
 
-function isElementInViewport(el, { fraction }) {
+export const isElementInViewport = (el, { fraction }) => {
   const topLeft = getElementPosition(el);
   const x = topLeft.left;
   const y = topLeft.top;
@@ -68,11 +69,9 @@ function isElementInViewport(el, { fraction }) {
   const visible = visibleX * visibleY / (w * h);
 
   return visible > fraction;
-}
+};
 
-function setPosition(el, left, top) {
+export const setPosition = (el, left, top) => {
   el.style.left = `${left}px`;
   el.style.top = `${top}px`;
-}
-
-export { getElementPosition, getPointerPosition, isElementInViewport, setPosition };
+};

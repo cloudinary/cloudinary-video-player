@@ -1,4 +1,4 @@
-import { findIndex } from 'utils/find';
+import { findIndex } from '../../utils/find';
 
 class EventHandlerRegistry {
   constructor(emitter) {

@@ -8,7 +8,7 @@ const tag = ver.extractTag();
 const calculatedVersion = JSON.stringify(ver.getNextVersion(tag));
 const packageVersion = JSON.stringify(require('../package.json').version);
 
-let VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
+const VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
 console.log('Current version: ' + VERSION);
 
 if (!calculatedVersion) {
@@ -21,6 +21,7 @@ module.exports = {
   entry: {
     'cld-video-player': './index.js'
   },
+
   performance: {
     maxEntrypointSize: 800000,
     maxAssetSize: 800000
@@ -48,7 +49,6 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.scss'],
-    modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     alias: {
       'video.js': process.env.WEBPACK_BUILD_LIGHT
         ? path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js')

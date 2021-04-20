@@ -1,5 +1,5 @@
 
-const groupBy = (collection, iteratee) => collection.reduce((result, value, key) => {
+export const groupBy = (collection, iteratee) => collection.reduce((result, value, key) => {
   key = iteratee(value);
   if (Object.prototype.hasOwnProperty.call(result, key)) {
     result[key].push(value);
@@ -8,5 +8,3 @@ const groupBy = (collection, iteratee) => collection.reduce((result, value, key)
   }
   return result;
 }, {});
-
-export { groupBy };

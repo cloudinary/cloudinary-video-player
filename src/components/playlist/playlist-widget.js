@@ -32,7 +32,6 @@ const modifyOptions = (player, opt) => {
   }
 
   options.direction = options.direction.toLowerCase() === 'horizontal' ? 'horizontal' : 'vertical';
-
   options.skin = player.options_.skin;
 
   return options;
@@ -40,33 +39,37 @@ const modifyOptions = (player, opt) => {
 
 
 class PlaylistWidget {
-  constructor(player, options = {}) {
-    options = modifyOptions(player, options);
+
+  constructor(player, iniOptions = {}) {
+    const options = modifyOptions(player, iniOptions);
     this.options_ = options;
     this.player_ = player;
     this.render();
+    this.setFluidHandler();
+  }
 
-    const fluidHandler = (e, fluid) => {
+  setFluidHandler() {
+    this.fluidHandler = (e, fluid) => {
       this.options_.fluid = fluid;
     };
 
-    player.on('fluid', fluidHandler);
+    this.player_.on('fluid', this.fluidHandler);
+  }
 
-    this.options = (options) => {
-      if (!options) {
-        return this.options_;
-      }
-
-      this.options_ = videojs.mergeOptions(this.options_, options);
-      player.trigger('playlistwidgetoption', this.options_.playlistWidget);
+  options(options) {
+    if (!options) {
       return this.options_;
+    }
 
-    };
+    this.options_ = videojs.mergeOptions(this.options_, options);
+    this.player_.trigger('playlistwidgetoption', this.options_.playlistWidget);
+    return this.options_;
 
-    this.dispose = () => {
-      this.layout_.dispose();
-      player.off('fluid', fluidHandler);
-    };
+  }
+
+  dispose() {
+    this.layout_.dispose();
+    this.player_.off('fluid', this.fluidHandler);
   }
 
   render() {
@@ -103,8 +106,8 @@ class PlaylistWidget {
     this.layout_.setCls();
   }
 
-  total(total = OPTIONS_DEFAULTS.total) {
-    total = parseInt(total, 10);
+  total(totalNumber = OPTIONS_DEFAULTS.total) {
+    const total = parseInt(totalNumber, 10);
 
     if (total !== this.options_.total && typeof total === 'number' && total > 0) {
       this.update('total', { total: total });

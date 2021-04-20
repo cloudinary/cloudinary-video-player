@@ -1,15 +1,10 @@
+export const camelize = (str) => str.replace(/[_.-](\w|$)/g, (_, x) => x.toUpperCase());
 
-function camelize(str) {
-  return str.replace(/[_.-](\w|$)/g, (_, x) => x.toUpperCase());
-}
-
-function startsWith(str, searchStr, position) {
+export const startsWith = (str, searchStr, position) => {
   if (String.prototype.startsWith) {
     return str.startsWith(searchStr, position);
   } else {
-    let position = position || 0;
-    return str.indexOf(searchStr, position) === position;
+    const newPosition = position || 0;
+    return str.indexOf(searchStr, newPosition) === newPosition;
   }
-}
-
-export { camelize, startsWith };
+};

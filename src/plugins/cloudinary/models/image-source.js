@@ -1,6 +1,6 @@
 import BaseSource from './base-source';
 import { normalizeOptions } from '../common';
-import { assign } from 'utils/assign';
+import { assign } from '../../../utils/assign';
 
 const COMMON_IMAGE_FORMATS = ['jpg', 'png', 'gif', 'webp'];
 const IMAGE_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_IMAGE_FORMATS.join('|')})$$`);

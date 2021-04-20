@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import 'assets/styles/components/playlist.scss';
+import '../../../assets/styles/components/playlist.scss';
 import PlaylistPanelItem from './playlist-panel-item';
 
 
@@ -9,19 +9,19 @@ class PlaylistPanel extends Component {
 
   constructor(player, options = {}) {
     super(player, options);
+    this.player_ = player;
 
-    const itemChangeHandler = () => {
-      this.render();
-    };
-
-    player.on('playlistitemchanged', itemChangeHandler);
-
+    player.on('playlistitemchanged', this.itemChangeHandler.bind(this));
     this.render();
+  }
 
-    this.dispose = () => {
-      super.dispose();
-      player.off('playlistitemchanged', itemChangeHandler);
-    };
+  itemChangeHandler() {
+    this.render();
+  }
+
+  dispose () {
+    super.dispose();
+    this.player_.off('playlistitemchanged', this.itemChangeHandler.bind(this));
   }
 
   createEl() {

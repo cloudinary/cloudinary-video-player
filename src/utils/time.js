@@ -1,7 +1,7 @@
 // https://github.com/csnover/js-iso8601/blob/master/iso8601.js
 const numericKeys = [1, 4, 5, 6, 7, 10, 11];
 
-const parseISO8601 = function (date) {
+export const parseISO8601 = function (date) {
   let timestamp = 0;
   let struct = 0;
   let minutesOffset = 0;
@@ -38,7 +38,7 @@ const parseISO8601 = function (date) {
 
 // Convert time string i.e. '2:40' to seconds number (160)
 // Also allows h:m:s format and mm:ss, m:s etc.
-const parseTime = function (hms) {
+export const parseTime = function (hms) {
   const [seconds, minutes, hours] = hms.split(':').reverse();
   let sum = null;
   if (!isNaN(seconds)) {
@@ -46,5 +46,3 @@ const parseTime = function (hms) {
   }
   return sum;
 };
-
-export { parseISO8601, parseTime };

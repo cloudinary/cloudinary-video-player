@@ -4,13 +4,14 @@ import SourceMenuItem from './SourceMenuItem';
 const MenuButton = videojs.getComponent('MenuButton');
 
 class SourceMenuButton extends MenuButton {
+
   constructor(player, options) {
     super(player, options);
 
     // eslint-disable-next-line prefer-rest-params
     MenuButton.apply(this, arguments);
 
-    let qualityLevels = this.player().qualityLevels();
+    const qualityLevels = this.player().qualityLevels();
 
     // Handle options: We accept an options.default value of ( high || low )
     // This determines a bias to set initial resolution selection.
@@ -45,9 +46,9 @@ class SourceMenuButton extends MenuButton {
   }
 
   createItems() {
-    let menuItems = [];
-    let levels = this.player().qualityLevels();
-    let labels = [];
+    const menuItems = [];
+    const levels = this.player().qualityLevels();
+    const labels = [];
 
     for (let i = 0; i < levels.length; i++) {
       let index = levels.length - (i + 1);

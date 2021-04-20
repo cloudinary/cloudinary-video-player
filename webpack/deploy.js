@@ -1,10 +1,15 @@
 const ver = require('./versioning');
+
 const { execSync } = require('child_process');
+
 const tag = ver.extractTag();
+
 const VERSION = (process.env.deploy === 'true')
   ? JSON.stringify(ver.getNextVersion(tag))
   : JSON.stringify(require('../package.json').version);
+
 const versionCmd = () => `npm version ${VERSION}`;
+
 const publishCmd = (tag) => {
   let cmd = 'npm publish';
 

@@ -1,6 +1,6 @@
-import { isPlainObject } from 'utils/type-inference';
-import { camelize } from 'utils/string';
-import { parseISO8601 } from 'utils/time';
+import { isPlainObject } from '../utils/type-inference';
+import { camelize } from '../utils/string';
+import { parseISO8601 } from '../utils/time';
 
 const TIME_FIELDS = ['created_at', 'updated_at'];
 

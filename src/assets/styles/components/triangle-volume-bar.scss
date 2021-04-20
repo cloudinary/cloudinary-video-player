@@ -1,7 +1,8 @@
+$size: 20px;
+$height: 1.2em;
+$width: 6em;
+
 .video-js {
-  $size: 20px;
-  $height: 1.2em;
-  $width: 6em;
 
   %triangle-volume-bar {
     content: '';

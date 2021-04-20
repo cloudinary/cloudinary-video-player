@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import djs from 'dashjs';
 // eslint-disable-next-line no-unused-vars
-import Html5DashJS from 'plugins/dash/videojs-dash';
+import Html5DashJS from './videojs-dash';
 
 export default function dashPlugin() {
 
