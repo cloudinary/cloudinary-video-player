@@ -49,6 +49,7 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.scss'],
+    modules: ['node_modules'],
     alias: {
       'video.js': process.env.WEBPACK_BUILD_LIGHT
         ? path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js')
