@@ -8,7 +8,7 @@ const tag = ver.extractTag();
 const calculatedVersion = JSON.stringify(ver.getNextVersion(tag));
 const packageVersion = JSON.stringify(require('../package.json').version);
 
-let VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
+const VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
 console.log('Current version: ' + VERSION);
 
 if (!calculatedVersion) {
@@ -21,6 +21,7 @@ module.exports = {
   entry: {
     'cld-video-player': './index.js'
   },
+
   performance: {
     maxEntrypointSize: 800000,
     maxAssetSize: 800000

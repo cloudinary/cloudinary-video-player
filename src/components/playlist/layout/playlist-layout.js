@@ -89,7 +89,7 @@ class PlaylistLayout extends Component {
 
   removeLayout() {
     const parentElem = this.el().parentElement;
-    if (this.el().parentElement) {
+    if (parentElem) {
       parentElem.appendChild(this.player().el());
     }
   }
