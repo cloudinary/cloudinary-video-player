@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/playlist.html';
+const url = 'http://localhost:3000/playlist/playlist.html';
 
 describe('Playlist tests', () => {
 

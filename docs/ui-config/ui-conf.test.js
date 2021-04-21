@@ -9,8 +9,7 @@ describe('UI configuration tests', () => {
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {
-          return !!(this.currentTime > 0 && !this.paused && !this.ended &&
-              this.readyState > 2);
+          return !!(this.currentTime > 0 && !this.paused && !this.ended && this.readyState > 2);
         }
       });
     });
