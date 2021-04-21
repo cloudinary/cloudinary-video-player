@@ -35,7 +35,6 @@ module.exports = {
       "never"
     ],
     "array-callback-return": "error",
-    "arrow-body-style": "error",
     "arrow-parens": "off",
     "arrow-spacing": [
       "error",
@@ -190,7 +189,6 @@ module.exports = {
     "no-sync": "error",
     "no-ternary": "off",
     "no-throw-literal": "error",
-    "no-trailing-spaces": "error",
     "no-undef-init": "error",
     "no-undefined": "off",
     "no-underscore-dangle": "off",

@@ -6,6 +6,15 @@
   <title>Cloudinary Video Player</title>
   <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
 
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
   <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
@@ -156,8 +165,8 @@
         controls
         muted
         width="500"
-        class="cld-video-player"
-      ></video>
+        class="cld-video-player">
+      </video>
       <span id="info-hls-h265"></span>
     </div>
 
@@ -169,8 +178,8 @@
         controls
         muted
         width="500"
-        class="cld-video-player"
-      ></video>
+        class="cld-video-player">
+      </video>
       <span id="info-dash"></span>
     </div>
 
@@ -182,8 +191,8 @@
         controls
         muted
         width="500"
-        class="cld-video-player"
-      ></video>
+        class="cld-video-player">
+      </video>
       <span id="info-dash-vp9"></span>
     </div>
 
@@ -195,8 +204,8 @@
         controls
         muted
         width="500"
-        class="cld-video-player"
-      ></video>
+        class="cld-video-player">
+      </video>
       <span id="info-hls-no-codec"></span>
     </div>
 
@@ -208,21 +217,21 @@
         controls
         muted
         width="500"
-        class="cld-video-player"
-      ></video>
+        class="cld-video-player">
+      </video>
       <span id="info-dash-no-codec"></span>
     </div>
 
     <div class="video-container mb-4">
       <h4>HLS 264 safari ios native override</h4>
       <video
-              id="example-player-hls-ios"
-              playsinline
-              controls
-              muted
-              width="500"
-              class="cld-video-player"
-      ></video>
+          id="example-player-hls-ios"
+          playsinline
+          controls
+          muted
+          width="500"
+          class="cld-video-player">
+      </video>
       <span id="info-hls-ios"></span>
     </div>
 
@@ -239,8 +248,8 @@
           autoplay
           muted
           width="500"
-          class="cld-video-player"
-        &gt;&lt;/video&gt;
+          class="cld-video-player"&gt;
+        &lt;/video&gt;
 
         &lt;video
           id="example-player-dash"
@@ -248,8 +257,8 @@
           autoplay
           muted
           width="500"
-          class="cld-video-player"
-        &gt;&lt;/video&gt;
+          class="cld-video-player"&gt;
+        &lt;/video&gt;
       </code>
       <code class="language-javascript">
         var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
@@ -282,15 +291,6 @@
       </code>
     </pre>
   </div>
-
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 
