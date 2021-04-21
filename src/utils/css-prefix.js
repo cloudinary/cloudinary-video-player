@@ -9,9 +9,7 @@ const playerClassPrefix = (componentInstance) => `${CLASS_PREFIX}-${componentIns
 
 const skinClass = (skin) => `${SKIN_CLASS_PREFIX}${skin}`;
 
-const skinClassPrefix = (componentInstance) => {
-  return find(componentInstance.el().classList, (cls) => startsWith(cls, SKIN_CLASS_PREFIX));
-};
+const skinClassPrefix = (componentInstance) => find(componentInstance.el().classList, (cls) => startsWith(cls, SKIN_CLASS_PREFIX));
 
 const setSkinClassPrefix = (componentInstance, name) => {
   const currentSkinPrefix = skinClassPrefix(componentInstance);
