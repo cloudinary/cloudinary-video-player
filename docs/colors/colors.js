@@ -1,4 +1,4 @@
-//needed for testing
+// needed for tests
 var players = null;
 
 window.addEventListener('load', function() {

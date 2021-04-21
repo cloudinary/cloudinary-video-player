@@ -1,4 +1,5 @@
 describe('Adaptive streaming tests', () => {
+
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({ width: 1280, height: 800 });
@@ -12,6 +13,7 @@ describe('Adaptive streaming tests', () => {
       });
     });
   }, 10000);
+
   it('Should not throw an error when setting new hls source', async () => {
     jest.setTimeout(35000);
     await page.waitFor(1000);
