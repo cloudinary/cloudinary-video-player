@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
   var cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
   var uap = new window.UAParser(navigator.userAgent);
   var playerHls = cld.videoPlayer('example-player-hls');
+
   var playerHlsH265 = cld.videoPlayer('example-player-hls-h265');
   var playerDash = cld.videoPlayer('example-player-dash');
   var playerDashVp9 = cld.videoPlayer('example-player-dash-vp9');

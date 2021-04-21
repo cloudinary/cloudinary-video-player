@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/api.html';
+const url = 'http://localhost:3000/api/api.html';
 
 describe('API player tests ', () => {
   try {

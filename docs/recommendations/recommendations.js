@@ -1,3 +1,6 @@
+// needed for tests
+var player = null;
+
 window.addEventListener('load', function() {
 
   var cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo' });
@@ -32,8 +35,7 @@ window.addEventListener('load', function() {
     }, 3000);
   });
 
-  // Initialize player
-  var player = cld.videoPlayer('player', { autoShowRecommendations: true });
+  player = cld.videoPlayer('player', { autoShowRecommendations: true });
 
   player.source(source1);
 

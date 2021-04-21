@@ -5,6 +5,8 @@ const URL = require('url').URL;
 describe('Analytics tests', () => {
   let paramInterceptor = null;
 
+  const analyticsUrl = 'http://localhost:3000/analytics/analytics.html';
+
   beforeEach(async () => {
     // parameter Interceptor
     paramInterceptor = new RequestInterceptor((testee, keyword) => {
@@ -21,7 +23,7 @@ describe('Analytics tests', () => {
     const reqSpy = new RequestSpy('https://www.google-analytics.com/collect');
     requestInterceptor.addSpy(reqSpy);
     await page.on('request', requestInterceptor.intercept.bind(requestInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     expect(reqSpy.hasMatch()).toBe(true);
   });
@@ -31,7 +33,7 @@ describe('Analytics tests', () => {
     const puseSpy = new RequestSpy('Pause');
     paramInterceptor.addSpy(puseSpy);
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     await page.click('#player > div.vjs-control-bar > button.vjs-play-control');
     expect(puseSpy.hasMatch()).toBe(true);
@@ -42,7 +44,7 @@ describe('Analytics tests', () => {
     const playSpy = new RequestSpy('Play');
     paramInterceptor.addSpy(playSpy);
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     await page.click('#player > div.vjs-control-bar > button.vjs-play-control');
     await page.waitFor(500);
@@ -55,7 +57,7 @@ describe('Analytics tests', () => {
     const spy = new RequestSpy('Volume Change');
     paramInterceptor.addSpy(spy);
     await page.on('request', paramInterceptor.intercept.bind(paramInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     await page.click('#player > .vjs-control-bar > .vjs-volume-panel.vjs-control.vjs-volume-panel-horizontal > button');
     expect(spy.hasMatch()).toBe(true);
@@ -71,7 +73,7 @@ describe('Analytics tests', () => {
     const spy = new RequestSpy('Percents Played');
     fussyParamInterceptor.addSpy(spy);
     await page.on('request', fussyParamInterceptor.intercept.bind(fussyParamInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     const duration = await page.evaluate(() => player.duration());
     await page.waitFor(duration * 1000 + 1000);
@@ -90,7 +92,7 @@ describe('Analytics tests', () => {
     const spy = new RequestSpy('Seek');
     fussyParamInterceptor.addSpy(spy);
     await page.on('request', fussyParamInterceptor.intercept.bind(fussyParamInterceptor));
-    await page.goto('http://localhost:3000/analytics.html', { waitUntil: 'load' });
+    await page.goto(analyticsUrl, { waitUntil: 'load' });
     await page.waitFor(1000);
     await page.evaluate(() => player.currentTime(player.currentTime() + 10));
     await page.waitFor(1000);

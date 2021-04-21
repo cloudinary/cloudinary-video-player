@@ -1,8 +1,10 @@
 describe('Fluid tests', () => {
 
+  const url = 'http://localhost:3000/fluid/fluid.html';
+
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
-    await page.goto('http://localhost:3000/fluid.html', {waitUntil: 'load'});
+    await page.goto(url, {waitUntil: 'load'});
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {

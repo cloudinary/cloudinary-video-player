@@ -1,8 +1,10 @@
+const url = 'http://localhost:3000/multiple-players/multiple-players.html';
+
 describe('Multi-player tests', () => {
 
   beforeEach(async () => {
     await page.setViewport({ width: 1280, height: 1800 });
-    await page.goto('http://localhost:3000/multiple-players.html', { waitUntil: 'load' });
+    await page.goto(url, { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {

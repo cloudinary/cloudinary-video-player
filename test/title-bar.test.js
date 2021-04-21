@@ -1,4 +1,5 @@
 describe('basic player tests', () => {
+
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({width: 1280, height: 800});
@@ -12,11 +13,13 @@ describe('basic player tests', () => {
       });
     });
   }, 10000);
+
   it('Test title bar title', async () => {
-    let ds = JSON.parse(await page.$eval('#player', v => v.getAttribute('data-cld-source')));
-    let titlebarTitle = await page.$eval('#player > .vjs-title-bar > .vjs-title-bar-title', t => t.textContent);
-    await expect(ds.info.title).toEqual(titlebarTitle);
+    const ds = JSON.parse(await page.$eval('#player', v => v.getAttribute('data-cld-source')));
+    const titleBarTitle = await page.$eval('#player > .vjs-title-bar > .vjs-title-bar-title', t => t.textContent);
+    await expect(ds.info.title).toEqual(titleBarTitle);
   });
+
   it('Test title bar subtitle', async () => {
     let ds = JSON.parse(await page.$eval('#player', v => v.getAttribute('data-cld-source')));
     let sub = await page.$eval('#player > .vjs-title-bar > .vjs-title-bar-subtitle', t => t.textContent);

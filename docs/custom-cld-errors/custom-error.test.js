@@ -1,9 +1,11 @@
+const url = 'http://localhost:3000/custom-cld-errors/custom-cld-errors.html';
+
 describe('custom error tests', () => {
 
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto('http://localhost:3000/docs/custom-cld-errors.html', { waitUntil: 'load' });
+    await page.goto(url, { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {

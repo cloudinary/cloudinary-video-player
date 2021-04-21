@@ -1,8 +1,10 @@
+const url = 'http://localhost:3000/autoplay-on-scroll/autoplay-on-scroll.html';
+
 describe('Auto-play tests', () => {
 
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
-    await page.goto('http://localhost:3000/autoplay-on-scroll.html', {waitUntil: 'load'});
+    await page.goto(url, {waitUntil: 'load'});
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {

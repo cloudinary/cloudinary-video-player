@@ -1,8 +1,11 @@
+//needed for testing
+var players = null;
+
 window.addEventListener('load', function() {
 
   var cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-  cld.videoPlayers('.cld-video-player', {
+  players = cld.videoPlayers('.cld-video-player', {
     autoplay: true,
     controls: true,
     transformation: { width: 700, crop: 'limit' }

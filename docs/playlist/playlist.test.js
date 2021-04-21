@@ -1,8 +1,10 @@
+const url = 'http://localhost:3000/playlist.html';
+
 describe('Playlist tests', () => {
 
   beforeEach(async () => {
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto('http://localhost:3000/playlist.html', { waitUntil: 'load' });
+    await page.goto(url, { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function() {

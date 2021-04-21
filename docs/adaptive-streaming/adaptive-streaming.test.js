@@ -2,7 +2,7 @@ describe('Adaptive streaming tests', () => {
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto('http://localhost:3000/docs/adaptive-streaming.html', { waitUntil: 'load' });
+    await page.goto('http://localhost:3000/daptive-streaming/adaptive-streaming.html', { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function () {

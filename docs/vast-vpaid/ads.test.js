@@ -2,7 +2,7 @@ describe('Ads tests', () => {
 
   beforeEach(async () => {
     await page.setViewport({ width: 1280, height: 800 });
-    await page.goto('http://localhost:3000/vast-vpaid.html', { waitUntil: 'load' });
+    await page.goto('http://localhost:3000/vast-vpaid/vast-vpaid.html', { waitUntil: 'load' });
     await page.evaluate(() => {
       Object.defineProperty(HTMLMediaElement.prototype, 'playing', {
         get: function () {
