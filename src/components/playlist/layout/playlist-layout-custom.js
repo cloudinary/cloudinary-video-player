@@ -1,6 +1,7 @@
 import PlaylistLayout from './playlist-layout';
 
 class PlaylistLayoutCustom extends PlaylistLayout {
+
   getCls() {
     let cls = super.getCls();
     cls.push('cld-plw-custom');

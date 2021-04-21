@@ -1,4 +1,5 @@
 describe('Playlist tests', () => {
+
   beforeEach(async () => {
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto('http://localhost:3000/playlist.html', { waitUntil: 'load' });
@@ -46,11 +47,12 @@ describe('Playlist tests', () => {
     expect(await page.$('.cld-video-player-skin-dark')).toBeNull();
     expect(await page.$('.cld-video-player-skin-light')).not.toBeNull();
   });*/
+
   it('Test video change', async () => {
     await page.waitForSelector('#player_html5_api', { visible: true, timeout: 35000 });
-    let curruntVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
+    const curruntVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
     await page.click('div.cld-plw-col-list > div > a:nth-child(2)');
-    let nextVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
+    const nextVideoUrl = await page.$eval('#player_html5_api', vid => vid.src);
     expect(curruntVideoUrl).not.toEqual(nextVideoUrl);
   });
 });

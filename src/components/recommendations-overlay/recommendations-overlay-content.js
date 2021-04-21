@@ -6,6 +6,7 @@ import RecommendationsOverlaySecondaryItemsContainer from './recommendations-ove
 const Component = videojs.getComponent('Component');
 
 class RecommendationsOverlayContent extends Component {
+
   constructor(player, ...args) {
     super(player, ...args);
 
@@ -30,6 +31,7 @@ class RecommendationsOverlayContent extends Component {
 }
 
 class AspectRatioContent extends Component {
+
   constructor(player, ...args) {
     super(player, ...args);
 

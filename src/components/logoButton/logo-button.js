@@ -19,6 +19,7 @@ class LogoButton extends ClickableComponent {
       const isLight = opts.class.indexOf('cld-video-player-skin-light') > -1 || opts.skin === 'light';
       bgIcon = isLight ? LIGHT_BG_ICON : DARK_BG_ICON;
     }
+
     return videojs.dom.createEl('a', {}, {
       class: 'vjs-control vjs-cloudinary-button vjs-button',
       href: opts.logoOnclickUrl,

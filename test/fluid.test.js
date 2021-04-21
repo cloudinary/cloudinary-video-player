@@ -1,4 +1,5 @@
 describe('Fluid tests', () => {
+
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
     await page.goto('http://localhost:3000/fluid.html', {waitUntil: 'load'});
@@ -11,22 +12,24 @@ describe('Fluid tests', () => {
       });
     });
   }, 10000);
+
   it('Test fluid change', async () => {
     await page.waitFor(1000);
-    let origWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
+    const origWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
     await page.setViewport({ width: 800, height: 800 });
     await page.waitFor(1000);
-    let currWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
+    const currWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
     expect(origWidth).toBeGreaterThan(currWidth);
   });
+
   it('Test no fluid change', async () => {
     await page.waitFor(1000);
     await page.click('#toggle-fluid');
     await page.waitFor(500);
-    let origWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
+    const origWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
     await page.setViewport({ width: 800, height: 800 });
     await page.waitFor(1000);
-    let currWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
+    const currWidth = await page.$eval('#player_html5_api', p => p.clientWidth);
     expect(origWidth).toEqual(currWidth);
   });
 

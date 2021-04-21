@@ -20,6 +20,7 @@ const OPTIONS_DEFAULTS = {
 };
 
 class ShoppableWidget {
+
   constructor(player, options = {}) {
     this.options_ = videojs.mergeOptions(OPTIONS_DEFAULTS, options);
     this.player_ = player;
