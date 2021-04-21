@@ -1,0 +1,12 @@
+.vjs-control.vjs-playlist-control:before {
+    font-family: FontAwesome;
+    font-size: 1.5em;
+    line-height: 2.0;
+}
+
+.vjs-playlist-control.vjs-playlist-next-control:before {
+    content: "\f050";
+}
+.vjs-playlist-control.vjs-playlist-previous-control:before {
+    content: "\f049";
+}

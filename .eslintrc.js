@@ -6,6 +6,15 @@ module.exports = {
     "es6": true,
     "jest": true
   },
+  "overrides":[
+    {
+      "files": [ "docs/**/*.js" ],
+      "rules":{
+        "no-var": "off",
+        "vars-on-top":"off"
+      }
+    }
+  ],
   "extends": "eslint:recommended",
   "parser": "babel-eslint",
   "parserOptions": {

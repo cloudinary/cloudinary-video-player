@@ -24,29 +24,17 @@
 
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
-
-  <script type="text/javascript">
-    window.addEventListener('load', function(){
-
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player', {
-        publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
-      });
-
-    }, false);
-  </script>
+  <script type="text/javascript" src="../scripts.js"></script>
+  <script type="text/javascript" src="custom-cld-errors.js"></script>
 
 </head>
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-      <a href="./index.html">&#60;&#60; Back to examples index</a>
+      <a href="../index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">TITLE</h3>
+    <h3 class="mb-4">Custom Errors</h3>
 
     <video
       id="player"
@@ -55,8 +43,10 @@
       muted
       autoplay
       class="cld-video-player"
-      width="500">
-    </video>
+      width="500"
+    ></video>
+
+    <div class="error-container"></div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -73,18 +63,36 @@
           class="cld-video-player"
           width="500"&gt;
         &lt;/video&gt;
+        &lt;div class="error-container"&gt;&lt;/div&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo_err' });
 
-        // Initialize player
-        var player = cld.videoPlayer('player');
+        player = cld.videoPlayer('player', {
+          publicId: 'snow_horses',
+        });
 
-        // Define source
-        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
+        // Add a custom error handler on 'error' event
+        player.on('error', (e) => {
+          const error = e.Player.videojs.error(); // Get current error
 
-        // Play source
-        player.source(source);
+          // Custom error code should be > 99, smaller values might already be used by the player.
+          const customErrorCode = 999;
+
+          // Replace current error message with your custom error message
+          if (error && error.code !== customErrorCode) {
+            errorContainerText = `Error: ${error.statusCode}, ${error.message}`;
+
+            // Set text under the video player
+            let errorContainer = document.querySelector('.error-container');
+            errorContainer.innerHTML = errorContainerText;
+            errorContainer.style.color = 'red';
+
+            // Set video player custom error message
+            player.videojs.error(null); // Stop default error handling
+            player.videojs.error({code: customErrorCode, message: "My custom error message"}); // Set error
+          }
+        });
       </code>
     </pre>
   </div>

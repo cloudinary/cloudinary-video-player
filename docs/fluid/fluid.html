@@ -24,29 +24,17 @@
 
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
-
-  <script type="text/javascript">
-    window.addEventListener('load', function(){
-
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player', {
-        publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
-      });
-
-    }, false);
-  </script>
+  <script type="text/javascript" src="../scripts.js"></script>
+  <script type="text/javascript" src="fluid.js"></script>
 
 </head>
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-      <a href="./index.html">&#60;&#60; Back to examples index</a>
+      <a href="../index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">TITLE</h3>
+    <h3 class="mb-4">Fluid Layouts</h3>
 
     <video
       id="player"
@@ -54,9 +42,11 @@
       controls
       muted
       autoplay
-      class="cld-video-player"
-      width="500">
-    </video>
+      class="cld-video-player cld-fluid"
+      width="500"
+    ></video>
+
+    <button id="toggle-fluid" class="btn btn-lg btn-primary mt-2">Disable Fluid</button>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -65,16 +55,21 @@
     <h3 class="mt-4">Example Code:</h3>
     <pre>
       <code class="language-html">
+
         &lt;video
           id="player"
           controls
           muted
           autoplay
-          class="cld-video-player"
+          class="cld-video-player cld-fluid"
           width="500"&gt;
         &lt;/video&gt;
+
+        &lt;button id="toggle-fluid" class="btn btn-default"&gt;Disable Fluid&lt;/button&gt;
+
       </code>
       <code class="language-javascript">
+
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
@@ -84,7 +79,16 @@
         var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
 
         // Play source
-        player.source(source);
+        player.source(source).play();
+
+        // Handle Fluid toggle button
+        document.querySelector("button#toggle-fluid").addEventListener("click", function() {
+          isFluid = !player.fluid()
+          player.fluid(isFluid);
+
+          this.innerHTML = isFluid ? 'Disable Fluid' : 'Enable Fluid'
+        });
+
       </code>
     </pre>
   </div>

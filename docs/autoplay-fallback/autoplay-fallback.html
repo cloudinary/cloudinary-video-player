@@ -24,29 +24,19 @@
 
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.20/src/ua-parser.min.js"></script>
 
-  <script type="text/javascript">
-    window.addEventListener('load', function(){
+  <script type="text/javascript" src="../scripts.js"></script>
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player', {
-        publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
-      });
-
-    }, false);
-  </script>
+  <script type="text/javascript" src="autoplay-fallback.js"></script>
 
 </head>
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
     <nav class="nav mb-2">
-      <a href="./index.html">&#60;&#60; Back to examples index</a>
+      <a href="../index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">TITLE</h3>
 
     <video
       id="player"
@@ -57,6 +47,39 @@
       class="cld-video-player"
       width="500">
     </video>
+
+    <span id="cached-info"></span>
+    <h3 class="mb-4">Autoplay inline</h3>
+
+    <br/>
+    <br/>
+
+    <video
+        id="player-no-auto"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="500">
+    </video>
+
+    <span id="cached-info-webm"></span>
+
+    <h3 class="mb-4">No autoplay</h3>
+
+    <br/>
+    <br/>
+
+    <video
+          id="player-auto-prog"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+          width="500">
+    </video>
+
+    <h3 class="mb-4">Call play api</h3>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
