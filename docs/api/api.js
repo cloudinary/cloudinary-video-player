@@ -1,9 +1,12 @@
+// needed for test
+var player = null;
+
 window.addEventListener('load', function() {
 
   var cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo' });
   var options = location.search.split('fetchErrorUsing=')[1] === 'get' ? { fetchErrorUsingGet: true } : {};
 
-  var player = cld.videoPlayer('player', options);
+  player = cld.videoPlayer('player', options);
 
   player.playlist([
     'snow_deer',
