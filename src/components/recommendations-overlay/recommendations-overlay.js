@@ -8,6 +8,7 @@ const Component = videojs.getComponent('Component');
 
 // TODO: Use Video.js's ModalDialog instead. It handles clicking block logic.
 class RecommendationsOverlay extends Component {
+
   constructor(player, options, ...args) {
     super(player, ...args);
 

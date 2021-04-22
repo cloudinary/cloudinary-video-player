@@ -11,12 +11,13 @@ const defaults = {
 };
 
 class ContextMenuPlugin {
-  constructor(player, opts) {
-    if (!Array.isArray(opts.content) && typeof opts.content !== 'function') {
+
+  constructor(player, initOpts) {
+    if (!Array.isArray(initOpts.content) && typeof initOpts.content !== 'function') {
       throw new Error('"content" required');
     }
 
-    opts = assign({}, defaults, opts);
+    const opts = assign({}, defaults, initOpts);
 
     this.player = player;
     const _options = sliceProperties(opts, 'content', 'showNativeOnRecurringEvent');
@@ -29,7 +30,7 @@ class ContextMenuPlugin {
     };
 
     const getMenuPosition = (e) => {
-      // Calc menu size
+    // Calc menu size
       const menuEl = this.menu.el();
 
       // Must append to element to get bounding rect
@@ -77,10 +78,10 @@ class ContextMenuPlugin {
       if (this.menu) {
         this.menu.dispose();
         if (_options.showNativeOnRecurringEvent) {
-          // If this event happens while the custom menu is open, close it and do
-          // nothing else. This will cause native contextmenu events to be intercepted
-          // once again; so, the next time a contextmenu event is encountered, we'll
-          // open the custom menu.
+        // If this event happens while the custom menu is open, close it and do
+        // nothing else. This will cause native contextmenu events to be intercepted
+        // once again; so, the next time a contextmenu event is encountered, we'll
+        // open the custom menu.
           return;
         }
       }
@@ -113,8 +114,8 @@ class ContextMenuPlugin {
       };
 
       this.menu.on('dispose', () => {
-        // Begin canceling contextmenu events again, so subsequent events will
-        // cause the custom menu to be displayed again.
+      // Begin canceling contextmenu events again, so subsequent events will
+      // cause the custom menu to be displayed again.
         this.player.contextmenu.options.cancel = true;
         this.player.removeChild(this.menu);
         videojs.off(document, ['click', 'tap'], clickHandler);

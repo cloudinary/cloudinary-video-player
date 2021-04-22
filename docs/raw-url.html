@@ -5,6 +5,14 @@
   <title>Cloudinary Video Player</title>
   <link href="https://cloudinary-res.cloudinary.com/image/asset/favicon-32x32-2991a47c2caa80211bf2dbf3f29317c8.png" rel="icon" sizes="32x32" type="image/png">
 
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
   <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
@@ -47,8 +55,8 @@
       muted
       autoplay
       class="cld-video-player"
-      width="500"
-    ></video>
+      width="500">
+    </video>
   </div>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
 
@@ -61,8 +69,9 @@
             muted
             autoplay
             class="cld-video-player"
-            width="500"
-    ></video>
+            width="500">
+    </video>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -76,8 +85,8 @@
           muted
           autoplay
           class="cld-video-player"
-          width="500"
-        &gt;&lt;/video&gt;
+          width="500"&gt;
+        &lt;/video&gt;
       </code>
       <code class="language-javascript">
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
@@ -90,14 +99,6 @@
       </code>
     </pre>
   </div>
-
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>

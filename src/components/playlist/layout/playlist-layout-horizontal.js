@@ -7,7 +7,7 @@ class PlaylistLayoutHorizontal extends PlaylistLayout {
   }
 
   getCls() {
-    let cls = super.getCls();
+    const cls = super.getCls();
     cls.push('cld-plw-horizontal');
     return cls;
   }

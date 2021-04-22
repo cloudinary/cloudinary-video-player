@@ -1,11 +1,11 @@
 import videojs from 'video.js';
 import isObj from 'is-obj';
 import './components';
-import plugins from 'plugins';
-import Utils from 'utils';
-import defaults from 'config/defaults';
-import Eventable from 'mixins/eventable';
-import ExtendedEvents from 'extended-events';
+import plugins from './plugins';
+import Utils from './utils';
+import defaults from './config/defaults';
+import Eventable from './mixins/eventable';
+import ExtendedEvents from './extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
@@ -394,7 +394,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       if (conf) {
         const tracks = Object.keys(conf);
-        let allTracks = [];
+        const allTracks = [];
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
             let trks = conf[track];

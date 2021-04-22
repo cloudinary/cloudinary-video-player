@@ -3,6 +3,7 @@ import videojs from 'video.js';
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class RecommendationsOverlayItem extends ClickableComponent {
+
   setItem(item) {
     const { action, source } = item;
 

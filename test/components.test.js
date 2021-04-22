@@ -1,4 +1,5 @@
 describe('Components tests', () => {
+
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
     await page.goto('http://localhost:3000/components.html', {waitUntil: 'load'});
@@ -11,6 +12,7 @@ describe('Components tests', () => {
       });
     });
   }, 10000);
+
   it('Test components', async () => {
     page.waitFor(1000);
     expect(await page.$eval('.vjs-playlist-control.vjs-playlist-next-control', (b => b.tagName))).toEqual('BUTTON');
