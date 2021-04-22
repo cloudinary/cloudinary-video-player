@@ -15,10 +15,17 @@ class RecommendationsOverlay extends Component {
     this._content = new RecommendationsOverlayContent(player);
 
     this.addChild(this._content);
+
     this.addChild(new RecommendationsOverlayHideButton(player, { clickHandler: () => {
       this.close();
     } }, ...args));
 
+    this.setEvents(player);
+
+    this.doNotOpen = false;
+  }
+
+  setEvents(player) {
     this.on(player, 'recommendationschanged', (_, eventData) => {
       this.setItems(...eventData.items);
     });
@@ -30,7 +37,6 @@ class RecommendationsOverlay extends Component {
       this.clearItems();
       this.close();
     });
-    this.doNotOpen = false;
   }
 
   setDoNotOpen() {
@@ -58,11 +64,12 @@ class RecommendationsOverlay extends Component {
   }
 
   createEl() {
-    const el = super.createEl('div', {
-      className: 'vjs-recommendations-overlay'
-    });
+    const recommendationsOverlayClass = 'vjs-recommendations-overlay';
 
-    videojs.dom.addClass(el, 'vjs-recommendations-overlay');
+    const el = super.createEl('div', {
+      className: recommendationsOverlayClass
+    });
+    videojs.dom.addClass(el, recommendationsOverlayClass);
 
     return el;
   }

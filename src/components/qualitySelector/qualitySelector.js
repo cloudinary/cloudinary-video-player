@@ -17,6 +17,7 @@ const qualitySelector = {
       player.dash.mediaPlayer.getAutoSwitchQualityFor = (type) => {
         const dashPlayer = player.dash.mediaPlayer;
         const settings = dashPlayer.getSettings();
+
         if (settings) {
           return settings.streaming.abr.autoSwitchBitrate[type];
         }

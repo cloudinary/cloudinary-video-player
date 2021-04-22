@@ -6,7 +6,6 @@ class RecommendationsOverlayItem extends ClickableComponent {
 
   setItem(item) {
     const { action, source } = item;
-
     this.source = source;
 
     const info = source.info();
