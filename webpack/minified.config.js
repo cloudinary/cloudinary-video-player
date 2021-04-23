@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 const { lightFilenamePart } = require('./build-utils');
 
@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-module.exports = merge.smart(webpackCommon, {
+module.exports = merge(webpackCommon, {
   bail: false,
 
   output: {

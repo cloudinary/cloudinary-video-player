@@ -1,6 +1,6 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackDev = require('./dev.config');
-module.exports = merge.smart(webpackDev, {
+module.exports = merge(webpackDev, {
   watch: false,
   devServer: {
     open: false,
