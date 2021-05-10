@@ -103,8 +103,8 @@ class PlaylistWidget {
     this.layout_.setCls();
   }
 
-  total(total = OPTIONS_DEFAULTS.total) {
-    total = parseInt(total, 10);
+  total(totalNumber = OPTIONS_DEFAULTS.total) {
+    const total = parseInt(totalNumber, 10);
 
     if (total !== this.options_.total && typeof total === 'number' && total > 0) {
       this.update('total', { total: total });

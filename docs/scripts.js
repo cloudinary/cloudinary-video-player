@@ -15,11 +15,12 @@ if (!window.URLSearchParams) {
     self.searchString = searchString;
     self.get = function (name) {
       var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
+
       if (results === null) {
         return null;
-      } else {
-        return decodeURI(results[1]) || 0;
       }
+
+      return decodeURI(results[1]) || 0;
     };
   };
 }
@@ -32,11 +33,12 @@ var isIpAddress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]
 
 var cdnPrefix = function (source, ver) {
   var external = source.startsWith('http');
+
   if (!ver && (external || isLocal || isIpAddress)) {
     return '';
-  } else {
-    return 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
   }
+
+  return 'https://unpkg.com/cloudinary-video-player@' + (ver || 'edge') + '/dist';
 };
 
 // Get scripts & styles from:
@@ -69,20 +71,21 @@ var loadStyle = function (source, ver) {
   var min = search.get('min');
   var light = search.get('light');
 
-  var createVersionSelector = function () {
+  var versions = [
+    { label: 'Select Player Version:' },
+    { value: 'ver=latest', label: 'Stable (Latest)' },
+    { value: 'ver=latest&min=true', label: 'Stable, Minified' },
+    { value: 'ver=latest&light=true', label: 'Stable, Light' },
+    { value: 'ver=latest&min=true&light=true', label: 'Stable, Light, Minified' },
+    { value: 'ver=edge', label: 'Edge (Next Stable)' },
+    { value: 'ver=edge&min=true', label: 'Edge, Minified' },
+    { value: 'ver=edge&light=true', label: 'Edge, Light' },
+    { value: 'ver=edge&min=true&light=true', label: 'Edge, Light, Minified' }
+  ];
 
-    var versions = [
-      { label: 'Select Player Version:' },
-      { value: 'ver=latest', label: 'Stable (Latest)' },
-      { value: 'ver=latest&min=true', label: 'Stable, Minified' },
-      { value: 'ver=latest&light=true', label: 'Stable, Light' },
-      { value: 'ver=latest&min=true&light=true', label: 'Stable, Light, Minified' },
-      { value: 'ver=edge', label: 'Edge (Next Stable)' },
-      { value: 'ver=edge&min=true', label: 'Edge, Minified' },
-      { value: 'ver=edge&light=true', label: 'Edge, Light' },
-      { value: 'ver=edge&min=true&light=true', label: 'Edge, Light, Minified' }
-    ];
+  initPlayerExamples();
 
+  function createVersionSelector() {
     // Create and append select list
     var selectList = document.createElement('select');
     selectList.id = 'version-switch';
@@ -101,33 +104,30 @@ var loadStyle = function (source, ver) {
     if (light) current = current + '&light=' + light;
 
     // Create and append the options
-    for (var i = 0; i < versions.length; ++i) {
+    versions.forEach(function (version){
       var option = document.createElement('option');
-      option.text = versions[i].label;
-      if (versions[i].value) {
-        option.value = versions[i].value;
+      option.text = version.label;
 
+      if (version.value) {
+        option.value = version.value;
         // Find if this is the flavor currently in use
         if (option.value === current) {
           option.selected = true;
           option.text = 'Testing: ' + option.text;
         }
-
       } else {
         // 'Select Player Version:'
         option.disabled = true;
         option.selected = true;
       }
+
       selectList.appendChild(option);
-    }
+    });
+  }
 
-  };
-
-  var updatePageAnchors = function () {
+  function updatePageAnchors() {
     // Maintain the 'ver' query param on internal links.
-    var links = document.querySelectorAll('a');
-    for (var i = 0; i < links.length; ++i) {
-      var a = links[i];
+    document.querySelectorAll('a').forEach(function (a) {
       if (a.hostname === location.hostname) {
         var url = a.href + '?';
         if (ver) url = url + 'ver=' + ver + '&';
@@ -135,11 +135,10 @@ var loadStyle = function (source, ver) {
         if (light) url = url + 'light=' + light;
         a.setAttribute('href', url);
       }
-    }
-  };
+    });
+  }
 
-  var initPlayerExamples = function () {
-
+  function initPlayerExamples() {
     loadScript('https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js');
     loadStyle('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.css', ver);
     loadScript('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.js', ver);
@@ -152,9 +151,6 @@ var loadStyle = function (source, ver) {
         updatePageAnchors();
       }
     }, false);
-
-  };
-
-  initPlayerExamples();
+  }
 
 }());

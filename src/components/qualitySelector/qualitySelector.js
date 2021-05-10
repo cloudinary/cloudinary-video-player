@@ -6,35 +6,33 @@ import { findIndex } from '../../utils/find';
 
 import './quality-selector.scss';
 
-
 const qualitySelector = {
+
   init: (player) => {
     // Handle DASH sources, HLS are handled internally.
-    if (
-      player &&
-      player.qualityLevels &&
-      player.dash &&
-      player.dash.mediaPlayer
-    ) {
+    if (player && player.qualityLevels && player.dash && player.dash.mediaPlayer) {
       const MediaPlayer = djs.default.MediaPlayer;
 
       player.dash.qualityLevels = player.qualityLevels();
       player.dash.mediaPlayer.getAutoSwitchQualityFor = (type) => {
-        let dashPlayer = player.dash.mediaPlayer;
-        let settings = dashPlayer.getSettings();
+        const dashPlayer = player.dash.mediaPlayer;
+        const settings = dashPlayer.getSettings();
         if (settings) {
           return settings.streaming.abr.autoSwitchBitrate[type];
         }
+
         return true;
       };
 
       player.dash.mediaPlayer.setAutoSwitchQualityFor = (type, val) => {
-        let dashPlayer = player.dash.mediaPlayer;
-        let upSettings = { streaming: {
-          abr: {
-            autoSwitchBitrate: {}
+        const dashPlayer = player.dash.mediaPlayer;
+        const upSettings = {
+          streaming: {
+            abr: {
+              autoSwitchBitrate: {}
+            }
           }
-        } };
+        };
         upSettings.streaming.abr.autoSwitchBitrate[type] = val;
         dashPlayer.updateSettings(upSettings);
       };
@@ -43,19 +41,13 @@ const qualitySelector = {
       player.dash.mediaPlayer.on(
         MediaPlayer.events.PLAYBACK_METADATA_LOADED,
         () => {
-          let videoRates = player.dash.mediaPlayer.getBitrateInfoListFor(
-            'video'
-          );
-          let audioRates = player.dash.mediaPlayer.getBitrateInfoListFor(
-            'audio'
-          );
+          const videoRates = player.dash.mediaPlayer.getBitrateInfoListFor('video');
+          const audioRates = player.dash.mediaPlayer.getBitrateInfoListFor('audio');
 
           if (videoRates.length > 0) {
-            let normalizeFactor = videoRates[videoRates.length - 1].bitrate;
+            const normalizeFactor = videoRates[videoRates.length - 1].bitrate;
             player.dash.audioMapper = videoRates.map((rate) =>
-              Math.round(
-                (rate.bitrate / normalizeFactor) * (audioRates.length - 1)
-              )
+              Math.round((rate.bitrate / normalizeFactor) * (audioRates.length - 1))
             );
             videoRates.forEach((vrate) => {
               player.dash.qualityLevels.addQualityLevel({
@@ -76,9 +68,7 @@ const qualitySelector = {
                       });
                     }
                   } else {
-                    return this.selected !== undefined
-                      ? this.selected
-                      : true;
+                    return (this.selected !== undefined ? this.selected : true);
                   }
                 }
               });
@@ -94,10 +84,7 @@ const qualitySelector = {
         );
         if (enabledQualities.length === 1) {
           player.dash.mediaPlayer.setQualityFor('video', event.selectedIndex);
-          player.dash.mediaPlayer.setQualityFor(
-            'audio',
-            player.dash.audioMapper[event.selectedIndex]
-          );
+          player.dash.mediaPlayer.setQualityFor('audio', player.dash.audioMapper[event.selectedIndex]);
         } else if (!player.dash.mediaPlayer.getAutoSwitchQualityFor('video')) {
           player.dash.mediaPlayer.setAutoSwitchQualityFor('video', true);
           player.dash.mediaPlayer.setAutoSwitchQualityFor('audio', true);
@@ -128,9 +115,9 @@ const qualitySelector = {
     if (sourceMenuButton) {
       const qualityLevels = player.qualityLevels();
       if (qualityLevels && qualityLevels.length > 1) {
-        let levels = qualityLevels.levels_.filter((q) => q.enabled);
+        const levels = qualityLevels.levels_.filter((q) => q.enabled);
         if (levels.length === 1) {
-          let idx = qualityLevels.levels_.findIndex(l => l.id === levels[0].id);
+          const idx = qualityLevels.levels_.findIndex(l => l.id === levels[0].id);
           sourceMenuButton.children()[1].children()[idx].selected(true);
         } else {
           sourceMenuButton.children()[1].children()[0].selected(true);
