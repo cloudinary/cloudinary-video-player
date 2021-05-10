@@ -46,7 +46,6 @@ class AnalyticsPlugin {
 
     this._extendedEvents = new ExtendedEvents(player, { events: extendedEvents });
 
-
     this._currentSource = null;
     this._startTracked = null;
     this._endTracked = null;
@@ -205,13 +204,10 @@ class AnalyticsPlugin {
   }
 
   track({ action, label, value = null, nonInteraction = false }) {
-    const _defaultLabel = this.options.defaultLabel;
-    const _category = this.options.category;
-
     const eventData = {
-      eventCategory: _category,
+      eventCategory: this.options.category,
       eventAction: action,
-      eventLabel: label || _defaultLabel(this.player),
+      eventLabel: label || this.options.defaultLabel(this.player),
       eventValue: value || Math.round(this.player.currentTime()),
       nonInteraction: nonInteraction
     };

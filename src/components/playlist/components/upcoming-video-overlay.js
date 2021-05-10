@@ -12,35 +12,35 @@ class UpcomingVideoOverlay extends ClickableComponent {
   constructor(player, ...args) {
     super(player, ...args);
 
-    this.setEvents(player);
+    this._setEvents(player);
   }
 
-  setEvents(player) {
-    player.on('upcomingvideoshow', this.show.bind(this));
-    player.on('upcomingvideohide', this.hide.bind(this));
-    player.on('playlistitemchanged', this.onPlaylistItemChange.bind(this));
+  _setEvents(player) {
+    player.on('upcomingvideoshow', this._show.bind(this));
+    player.on('upcomingvideohide', this._hide.bind(this));
+    player.on('playlistitemchanged', this._onPlaylistItemChange.bind(this));
   }
 
-  hide() {
+  _hide() {
     this.removeClass('vjs-upcoming-video-show');
   }
 
-  disableTransition(block) {
+  _disableTransition(block) {
     this.addClass('disable-transition');
     block();
     this.removeClass('disable-transition');
   }
 
-  onPlaylistItemChange(_, event) {
-    this.hide();
-    this.disableTransition(() => {
+  _onPlaylistItemChange(_, event) {
+    this._hide();
+    this._disableTransition(() => {
       if (event.next) {
         this.setItem(event.next);
       }
     });
   }
 
-  show() {
+  _show() {
     const videoShowClass = 'vjs-upcoming-video-show';
     const adsManager = this.player().ima.getAdsManager();
 
