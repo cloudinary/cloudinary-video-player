@@ -106,7 +106,6 @@ class ShoppablePanel extends Component {
           if (target.dataset.clickAction === 'goto') {
             window.open(target.dataset.gotoUrl, '_blank');
           } else if (target.dataset.clickAction === 'seek') {
-            // this.player_.pause();
             const gotoSecs = parseTime(target.dataset.seek);
             if (gotoSecs !== null) {
               this.player_.addClass('vjs-has-started'); // Hide the poster image

@@ -3,7 +3,7 @@
 const { defaults } = require('jest-config');
 module.exports = {
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  // automock: true,
 
   // Stop running tests after the first failure
   // bail: false,
@@ -56,7 +56,7 @@ module.exports = {
 
   // A set of global variables that need to be available in all test environments
   globals: {
-    window: true
+    window: {}
   },
 
   // An array of directory names to be searched recursively up from the requiring module's location
@@ -131,7 +131,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: (process.env.UNIT === 'TRUE') ? 'node' : './test/puppeteer/vp-env.js',
+  testEnvironment: (process.env.UNIT === 'TRUE') ? 'jsdom' : './test/puppeteer/vp-env.js',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -183,7 +183,10 @@ module.exports = {
   // watchPathIgnorePatterns: [],
 
   // Whether to use watchman for file crawling
-  watchman: false
+  watchman: false,
+  moduleNameMapper: {
+    '\\.(css|less|scss)$': '<rootDir>/test/mocks/styleMock.js'
+  }
 
 /*
   transform: {

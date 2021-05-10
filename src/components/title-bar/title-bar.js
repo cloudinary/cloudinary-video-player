@@ -8,6 +8,7 @@ const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
 
 class TitleBar extends Component {
+
   constructor(player, options = {}) {
     super(player, options);
 

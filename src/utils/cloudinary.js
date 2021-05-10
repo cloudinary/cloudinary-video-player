@@ -40,8 +40,8 @@ const handleCldError = (that, options) => {
           goodSrcs.forEach(s => {
             s.try = true;
           });
+          that.videojs.autoplay(that.videojs.autoplay() || that.playWasCalled);
           that.videojs.src(goodSrcs);
-          that.play();
         } else {
           console.log('No urls left to try so stopping');
           that.videojs.error({ code: 6, message: 'No supported media sources' });
@@ -125,8 +125,19 @@ const isKeyInTransformation = (transformation, key) => {
   return !!transformation[key];
 };
 
+const filterAndAddTextTracks = (tracks, videojs) => {
+  tracks.forEach(track => {
+    fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
+      if (r.status >= 200 && r.status <= 399) {
+        videojs.addRemoteTextTrack(track, true);
+      }
+    });
+  });
+};
+
 export {
   getCloudinaryInstanceOf,
   handleCldError,
-  isKeyInTransformation
+  isKeyInTransformation,
+  filterAndAddTextTracks
 };

@@ -5,6 +5,7 @@ import RecommendationsOverlayItem from './recommendations-overlay-item';
 const dom = videojs.dom || videojs;
 
 class RecommendationsOverlaySecondaryItem extends RecommendationsOverlayItem {
+
   setItem(item) {
     super.setItem(item);
     this.setDuration('');

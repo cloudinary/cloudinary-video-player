@@ -9,8 +9,9 @@ const DEFAULT_OPTIONS = {
 };
 
 class PlaylistPanelItem extends Thumbnail {
-  constructor(player, options) {
-    options = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+
+  constructor(player, initOptions) {
+    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
     super(player, options);
   }
 

@@ -1,4 +1,5 @@
 describe('Colors api tests', () => {
+
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({width: 1280, height: 800});
@@ -8,25 +9,27 @@ describe('Colors api tests', () => {
         get: function() {
           return !!(this.currentTime > 0 && !this.paused && !this.ended &&
               this.readyState > 2);
-        },
+        }
       });
     });
   }, 10000);
+
   it('Test colors', async () => {
     jest.setTimeout(35000);
     await page.waitFor(1000);
-    let playersInf = await page.evaluate(() => players.map((p) => {
-      let op = {};
+    const playersInf = await page.evaluate(() => players.map((p) => {
+      const op = {};
       op[p.videojs.id_] = p.videojs.options_['data-cld-colors'];
       return op;
     }),
     );
+
     for (const player of playersInf) {
-      let id = Object.keys(player);
-      let opts = player[id];
-      let tooltipColor = rgb2hex(await page.$eval(`#${id} .vjs-time-tooltip`, e => getComputedStyle(e).color));
-      let progressColor = rgb2hex(await page.$eval(`#${id} .vjs-play-progress`, e => getComputedStyle(e).backgroundColor));
-      let titleBarColor = rgb2hex(await page.$eval(`#${id} .vjs-title-bar`, e => getComputedStyle(e).color));
+      const id = Object.keys(player);
+      const opts = player[id];
+      const tooltipColor = rgb2hex(await page.$eval(`#${id} .vjs-time-tooltip`, e => getComputedStyle(e).color));
+      const progressColor = rgb2hex(await page.$eval(`#${id} .vjs-play-progress`, e => getComputedStyle(e).backgroundColor));
+      const titleBarColor = rgb2hex(await page.$eval(`#${id} .vjs-title-bar`, e => getComputedStyle(e).color));
       const optColors = JSON.parse(opts);
       expect(tooltipColor).toEqual(extendHex(optColors.base));
       expect(progressColor).toEqual(extendHex(optColors.accent));

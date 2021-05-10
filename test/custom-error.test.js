@@ -1,4 +1,5 @@
 describe('custom error tests', () => {
+
   beforeAll(async () => {
     jest.setTimeout(35000);
     await page.setViewport({ width: 1280, height: 800 });
@@ -12,11 +13,12 @@ describe('custom error tests', () => {
       });
     });
   }, 10000);
+
   it('Test error', async () => {
     jest.setTimeout(35000);
     await page.waitFor(1000);
     // eslint-disable-next-line no-undef
-    let errorMsg = await page.evaluate(() => player.videojs.error_.message);
+    const errorMsg = await page.evaluate(() => player.videojs.error_.message);
     expect(errorMsg).toBe('My custom error message');
   });
 });

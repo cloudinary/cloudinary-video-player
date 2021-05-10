@@ -25,10 +25,11 @@ const DEFAULT_OPTIONS = {
 // Emits the following additional events:
 // percentsplayed, timeplayed, pausenoseek, seek, mute, unmute
 class ExtendedEvents extends EventEmitter {
-  constructor(player, options = {}) {
+
+  constructor(player, initOptions = {}) {
     super();
     this.player = player;
-    options = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
 
     let _muteData = { lastState: undefined };
     let _seekStart = 0;
