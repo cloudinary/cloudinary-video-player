@@ -273,5 +273,27 @@ describe('Raw url tests', () => {
     expect(srcs[0].type).toEqual('application/x-mpegURL');
   });
 });
+describe('tests withCredentials', () => {
+  it('test withCredentials true', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      withCredentials: true
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.withCredentials);
+    expect(srcs[0]).toEqual(true);
+  });
+  it('test withCredentials false', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      withCredentials: false
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['webm']);
+    let srcs = source.generateSources().map(s => s.withCredentials);
+    expect(srcs[0]).toEqual(false);
+  });
+});
 
 
