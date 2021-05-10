@@ -20,11 +20,9 @@ class RecommendationsOverlaySecondaryItemsContainer extends Component {
   }
 
   clearItems() {
-    let childrenSize = this.children().length;
-
-    for (let i = 0; i < childrenSize; ++i) {
+    this.children().forEach(() => {
       this.removeChild(this.children()[0]);
-    }
+    });
   }
 
   createEl() {

@@ -8,41 +8,49 @@ const Component = videojs.getComponent('Component');
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class UpcomingVideoOverlay extends ClickableComponent {
+
   constructor(player, ...args) {
     super(player, ...args);
 
-    const show = () => {
-      if (typeof this.player().ima === 'object' && this.player().ima.getAdsManager()) {
-        if (!this.player().ima.getAdsManager().getCurrentAd() || this.player().ima.getAdsManager().getCurrentAd().isLinear()) {
-          this.addClass('vjs-upcoming-video-show');
-        }
-      } else {
-        this.addClass('vjs-upcoming-video-show');
+    this._setEvents(player);
+  }
+
+  _setEvents(player) {
+    player.on('upcomingvideoshow', this._show.bind(this));
+    player.on('upcomingvideohide', this._hide.bind(this));
+    player.on('playlistitemchanged', this._onPlaylistItemChange.bind(this));
+  }
+
+  _hide() {
+    this.removeClass('vjs-upcoming-video-show');
+  }
+
+  _disableTransition(block) {
+    this.addClass('disable-transition');
+    block();
+    this.removeClass('disable-transition');
+  }
+
+  _onPlaylistItemChange(_, event) {
+    this._hide();
+    this._disableTransition(() => {
+      if (event.next) {
+        this.setItem(event.next);
       }
-    };
+    });
+  }
 
-    const hide = () => {
-      this.removeClass('vjs-upcoming-video-show');
-    };
+  _show() {
+    const videoShowClass = 'vjs-upcoming-video-show';
+    const adsManager = this.player().ima.getAdsManager();
 
-    const disableTransition = (block) => {
-      this.addClass('disable-transition');
-      block();
-      this.removeClass('disable-transition');
-    };
-
-    const onPlaylistItemChange = (_, event) => {
-      hide();
-      disableTransition(() => {
-        if (event.next) {
-          this.setItem(event.next);
-        }
-      });
-    };
-
-    player.on('upcomingvideoshow', show);
-    player.on('upcomingvideohide', hide);
-    player.on('playlistitemchanged', onPlaylistItemChange);
+    if (typeof this.player().ima === 'object' && adsManager) {
+      if (!adsManager.getCurrentAd() || adsManager.getCurrentAd().isLinear()) {
+        this.addClass(videoShowClass);
+      }
+    } else {
+      this.addClass(videoShowClass);
+    }
   }
 
   setTitle(source) {
@@ -74,11 +82,9 @@ class UpcomingVideoOverlay extends ClickableComponent {
   }
 
   createEl() {
-    const el = super.createEl('div', {
+    return super.createEl('div', {
       className: 'vjs-upcoming-video'
     });
-
-    return el;
   }
 }
 
@@ -92,6 +98,7 @@ class UpcomingVideoOverlayContent extends Component {
 }
 
 class UpcomingVideoOverlayTitle extends Component {
+
   setContent(title) {
     this._contentSpan.innerText = title;
   }
@@ -119,6 +126,7 @@ class UpcomingVideoOverlayTitle extends Component {
 }
 
 class UpcomingVideoOverlayBar extends Component {
+
   createEl() {
     const el = super.createEl('div', {
       className: 'vjs-upcoming-video-bar'

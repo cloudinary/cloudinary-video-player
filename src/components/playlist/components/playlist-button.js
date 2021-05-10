@@ -12,6 +12,7 @@ class PlaylistButton extends ClickableComponent {
     super(player, options);
 
     const type = options.type;
+
     if (!type && type !== 'previous' && type !== 'next') {
       throw new Error('Type must be either \'previous\' or \'next\'');
     }
