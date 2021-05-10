@@ -513,6 +513,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.clearTimeout(this.reTryId);
     });
 
+    this.videojs.on('canplaythrough', () => {
+      // clear retry timeout
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
     this.videojs.ready(() => {
       onReady();
 
