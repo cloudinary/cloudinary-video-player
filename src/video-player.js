@@ -509,6 +509,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       }
     });
+    this.videojs.on('play', () => {
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
+    this.videojs.on('canplaythrough', () => {
+      // clear retry timeout
+      this.videojs.clearTimeout(this.reTryId);
+    });
 
     this.videojs.ready(() => {
       onReady();
@@ -627,7 +635,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.initQualitySelector();
     // #endif
-    clearTimeout(this.reTryVideo);
+    clearTimeout(this.reTryId);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;

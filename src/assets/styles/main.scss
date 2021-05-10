@@ -63,6 +63,9 @@ $icon-font-path: '../fonts' !default;
   }
 
   &.cld-fluid {
+    width: 100%;
+    max-width: 100%;
+
     .vjs-poster {
       // Work-around for poster having slightly wrong proportions in fluid players.
       background: #000;

@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 let { lightFilenamePart } = require('./build-utils');
 
@@ -12,7 +12,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = (env, argv) => {
   lightFilenamePart = argv.mode === 'development' ? lightFilenamePart : lightFilenamePart + '.min';
 
-  return merge.smart(webpackCommon, {
+  return merge(webpackCommon, {
     bail: false,
     mode: 'production',
     output: {
