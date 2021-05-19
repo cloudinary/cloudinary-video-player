@@ -126,7 +126,7 @@ export interface Options {
     ads?: AdsOptions,
     analytics?: boolean,
     allowUsageReport?: boolean,
-    videoJS?: VideoJsPlayerOptions;
+    videojs?: VideoJsPlayerOptions;
 }
 
 /**
