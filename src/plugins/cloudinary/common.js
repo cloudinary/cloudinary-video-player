@@ -67,25 +67,34 @@ const mergeTransformation = (transformation1, transformation2) => {
   return newTransformation.fromOptions(transformation2);
 };
 
+const ERROR_CODE = {
+  NO_SUPPORTED_MEDIA: 6,
+  CUSTOM: 10,
+  UNKNOWN_CUSTOMER: 11,
+  RESOURCE_NOT_FOUND: 12,
+  PRIVATE_RESOURCE: 13,
+  UNAUTHENTICATED: 14
+};
+
 const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }) => {
   const msg = 'Video cannot be played';
-  let error = { code: 10, message: `${msg}${errorMsg ? '- ' + errorMsg : ''}`, statusCode: statusCode };
+  let error = { code: ERROR_CODE.CUSTOM, message: `${msg}${errorMsg ? '- ' + errorMsg : ''}`, statusCode: statusCode };
   let err = errorMsg.toLowerCase();
   if (err.startsWith('unknown customer')) {
-    error.code = 11;
+    error.code = ERROR_CODE.UNKNOWN_CUSTOMER;
     error.message = `${msg} Unknown cloud-name ${cloudName}`;
   }
   if (err.startsWith('resource not found')) {
-    error.code = 12;
+    error.code = ERROR_CODE.RESOURCE_NOT_FOUND;
     error.message = `${msg} Public ID ${publicId} not found`;
   }
   if (err.startsWith('private resource')) {
-    error.code = 13;
+    error.code = ERROR_CODE.PRIVATE_RESOURCE;
     error.message = `${msg} Private video`;
   }
   if (err.startsWith('unauthenticated access')) {
     error.message = `${msg} Requires authentication`;
-    error.code = 14;
+    error.code = ERROR_CODE.UNAUTHENTICATED;
   }
   return error;
 };
@@ -186,4 +195,14 @@ const codecToSrcTransformation = (codec) => {
 };
 
 
-export { normalizeOptions, isSrcEqual, mergeCloudinaryConfig, mergeTransformation, cloudinaryErrorsConverter, codecShorthandTrans, h264avcToString, codecToSrcTransformation };
+export {
+  normalizeOptions,
+  isSrcEqual,
+  mergeCloudinaryConfig,
+  mergeTransformation,
+  cloudinaryErrorsConverter,
+  codecShorthandTrans,
+  h264avcToString,
+  codecToSrcTransformation,
+  ERROR_CODE
+};
