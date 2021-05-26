@@ -1,13 +1,15 @@
 import videojs from 'video.js';
 import isObj from 'is-obj';
 import './components';
-import plugins from 'plugins';
-import Utils from 'utils';
-import defaults from 'config/defaults';
-import Eventable from 'mixins/eventable';
-import ExtendedEvents from 'extended-events';
+import plugins from './plugins';
+import Utils from './utils';
+import defaults from './config/defaults';
+import Eventable from './mixins/eventable';
+import ExtendedEvents from './extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
+// #endif
 
 import VideoSource from './plugins/cloudinary/models/video-source';
 
@@ -45,7 +47,6 @@ const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 
 const DEFAULT_HLS_OPTIONS = {
   html5: {
-    nativeTextTracks: false,
     handlePartialData: false,
     hls: {
       overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
@@ -358,9 +359,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     };
 
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.initQualitySelector = () => {
       if (_options.qualitySelector !== false) {
-        this.videojs.httpSourceSelector({ default: 'high' });
+        if (videojs.browser.IE_VERSION === null) {
+          this.videojs.httpSourceSelector({ default: 'auto' });
+        }
 
         this.videojs.on('loadedmetadata', () => {
           qualitySelector.init(this.videojs);
@@ -372,6 +376,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         });
       }
     };
+    // #endif
 
     const initTextTracks = () => {
       this.videojs.on('refreshTextTracks', (e, tracks) => {
@@ -389,7 +394,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       if (conf) {
         const tracks = Object.keys(conf);
-        let allTracks = [];
+        const allTracks = [];
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
             let trks = conf[track];
@@ -421,6 +426,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           const publicId = source.publicId();
 
           let transformations = source.transformation().toOptions();
+
+          if (transformations && transformations.streaming_profile) {
+            delete transformations.streaming_profile;
+          }
+
           transformations.flags = transformations.flags || [];
           transformations.flags.push('sprite');
 
@@ -447,6 +457,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       default: !!(conf.default),
       src: conf.url
     });
+
 
     const _options = options.playerOptions;
     const _vjs_options = options.videojsOptions;
@@ -475,6 +486,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.fluid(_options.fluid);
     }
 
+
     /* global google */
     let loaded = {
       contribAdsLoaded: typeof this.videojs.ads === 'function',
@@ -496,6 +508,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           this.videojs.clearTimeout(this.reTryId);
         }
       }
+    });
+    this.videojs.on('play', () => {
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
+    this.videojs.on('canplaythrough', () => {
+      // clear retry timeout
+      this.videojs.clearTimeout(this.reTryId);
     });
 
     this.videojs.ready(() => {
@@ -612,8 +632,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
     this.setTextTracks(options.textTracks);
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.initQualitySelector();
-    clearTimeout(this.reTryVideo);
+    // #endif
+    clearTimeout(this.reTryId);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
@@ -666,6 +688,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   play() {
+    this.playWasCalled = true;
     this.videojs.play();
     return this;
   }

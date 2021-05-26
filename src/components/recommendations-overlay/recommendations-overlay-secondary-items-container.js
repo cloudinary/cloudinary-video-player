@@ -4,6 +4,7 @@ import RecommendationsOverlaySecondaryItem from './recommendations-overlay-secon
 const Component = videojs.getComponent('Component');
 
 class RecommendationsOverlaySecondaryItemsContainer extends Component {
+
   setItems(...items) {
     this.clearItems();
 
@@ -19,11 +20,9 @@ class RecommendationsOverlaySecondaryItemsContainer extends Component {
   }
 
   clearItems() {
-    let childrenSize = this.children().length;
-
-    for (let i = 0; i < childrenSize; ++i) {
+    this.children().forEach(() => {
       this.removeChild(this.children()[0]);
-    }
+    });
   }
 
   createEl() {

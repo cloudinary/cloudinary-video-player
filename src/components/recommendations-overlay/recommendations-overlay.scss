@@ -151,8 +151,9 @@
             }
 
             .cld-video-player-skin-dark & {
+
               &.vjs-recommendations-overlay-item-info {
-                text-shadow: 1px 1px 0px rgba(#000, .3);
+                text-shadow: 1px 1px 0 rgba(#000, .3);
               }
             }
 

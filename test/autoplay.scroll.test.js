@@ -1,4 +1,5 @@
 describe('Auto-play tests', () => {
+
   beforeEach(async () => {
     await page.setViewport({width: 1280, height: 800});
     await page.goto('http://localhost:3000/autoplay-on-scroll.html', {waitUntil: 'load'});
@@ -11,8 +12,9 @@ describe('Auto-play tests', () => {
       });
     });
   }, 10000);
+
   it('Test scroll', async () => {
-    let player = await page.$('#player_html5_api');
+    const player = await page.$('#player_html5_api');
     expect(await player.isIntersectingViewport()).toEqual(false);
     await player.tap();
     await page.waitFor(1000);

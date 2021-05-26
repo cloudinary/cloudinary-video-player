@@ -5,6 +5,9 @@
   <title>Cloudinary Video Player</title>
   <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
 
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
@@ -15,7 +18,7 @@
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
+  <script type="text/javascript" src="scripts.js"></script>
 
   <script type="text/javascript">
     window.addEventListener('load', function(){
@@ -38,8 +41,8 @@
       controls
       muted
       class="cld-video-player cld-video-player-skin-dark cld-fluid"
-      data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'
-    ></video>
+      data-cld-source='{ "publicId": "sea_turtle", "info": { "title": "Sea turtle", "subtitle": "Short movie about a sea turtle" } }'>
+    </video>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation @ cloudinary.com/documentation</a>
@@ -65,6 +68,7 @@
       <li><a href="./ui-config.html">Display Configurations</a></li>
       <li><a href="./poster.html">Poster Options</a></li>
       <li><a href="./subtitles-and-captions.html">Subtitles & Captions</a></li>
+      <li><a href="./force-hls-subtitles-ios.html">Force HLS Subtitles</a></li>
       <li><a href="./custom-cld-errors.html">Custom Errors</a></li>
       <li><a href="./codec-fallback.html">Codec and Fallback</a></li>
       <li><a href="./live-customer.html">Live customer</a></li>
@@ -75,8 +79,5 @@
     </ul>
 
   </div>
-
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </body>
 </html>

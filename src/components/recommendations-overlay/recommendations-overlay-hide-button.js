@@ -3,12 +3,11 @@ import videojs from 'video.js';
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class RecommendationOverlayHideButton extends ClickableComponent {
+
   createEl() {
-    const el = super.createEl('span', {
+    return super.createEl('span', {
       className: 'vjs-recommendations-overlay-hide vjs-icon-close'
     });
-
-    return el;
   }
 
   handleClick() {

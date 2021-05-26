@@ -6,6 +6,7 @@ import componentUtils from '../component-utils';
 const dom = videojs.dom || videojs;
 
 class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
+
   setItem(item) {
     super.setItem(item);
 

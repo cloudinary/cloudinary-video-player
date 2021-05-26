@@ -8,6 +8,7 @@ const Menu = videojs.getComponent('Menu');
 const dom = videojs.dom || videojs;
 
 class ContextMenu extends Menu {
+
   constructor(player, options) {
     super(player, options);
 

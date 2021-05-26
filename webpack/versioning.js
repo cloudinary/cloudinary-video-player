@@ -10,7 +10,7 @@ const nextSemver = {
 };
 
 const extractTag = () => {
-  let tag = process.env.npm_config_tag;
+  const tag = process.env.npm_config_tag;
   console.log('Current config tag: "' + tag + '"');
 
   if (!tag) {
