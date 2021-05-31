@@ -10,8 +10,14 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
-
 import VideoSource from './plugins/cloudinary/models/video-source';
+import { createElement } from './utils/dom';
+import {
+  getMetaDataTracker,
+  getTrackerItem,
+  setTrackersContainer,
+  TRACKERS_CONTAINER_CLASS_NAME
+} from './video-player.utils';
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -168,6 +174,7 @@ overrideDefaultVideojsComponents();
 let _allowUsageReport = true;
 
 class VideoPlayer extends Utils.mixin(Eventable) {
+
   constructor(elem, options, ready) {
     super();
 
@@ -604,6 +611,60 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
+  }
+
+  _setGoBackButton() {
+    const button = createElement('button', { 'class': 'go-back-button' }, 'Go back');
+    const currentSourceUrl = this.currentSourceUrl();
+
+    button.addEventListener('click', () => {
+      this.reAddTrackers && this.reAddTrackers();
+      this.source(currentSourceUrl).play();
+    }, false);
+
+    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
+    setTrackersContainer(this.videojs, tracksContainer);
+  }
+
+  addTrackers(tracksData, trackersOptions) {
+    this.reAddTrackers = () => {
+      this._addTrackersItems(tracksData, trackersOptions);
+    };
+
+    this.reAddTrackers();
+  }
+
+  _addTrackersItems(trackersData, trackersOptions) {
+    const trackerItems = trackersData.map((item, index) => {
+      return getTrackerItem(item, (event) => {
+        this._setGoBackButton();
+        trackersOptions && trackersOptions.onClick({ item, index, event });
+      });
+    });
+
+    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, trackerItems);
+
+    setTrackersContainer(this.videojs, tracksContainer);
+  }
+
+  addCueListener() {
+    const textTracks = this.videojs.textTracks();
+    if (!textTracks.length) {
+      return;
+    }
+
+    const track = getMetaDataTracker(textTracks);
+
+    if (!track) {
+      return;
+    }
+
+    track.mode = 'hidden';
+
+    track.addEventListener('cuechange', () => {
+      const tracksData = JSON.parse(track.activeCues[0].text);
+      this._addTrackersItems(tracksData);
+    });
   }
 
   currentPublicId() {

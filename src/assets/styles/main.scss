@@ -25,6 +25,9 @@ $icon-font-path: '../fonts' !default;
 .vjs-big-play-button,
 .vjs-icon-close,
 .vjs-volume-bar {
+
+  z-index: 1;
+
   &:focus {
     outline: none;
   }
@@ -51,12 +54,40 @@ $icon-font-path: '../fonts' !default;
 // light skin focus glow effect
 .cld-video-player-skin-light {
   .vjs-control:focus {
-    text-shadow: 0em 0em 1em #0E2F5A;
+    text-shadow: 0 0 1em #0E2F5A;
   }
 }
 
 .cld-video-player {
   font-family: $text-font-family;
+
+  &.vjs-user-active {
+    .trackers-container {
+      opacity: 1;
+    }
+  }
+
+  .trackers-container {
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    .go-back-button,
+    .video-player-tracker{
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .go-back-button {
+      top: 5px;
+      left: 5px;
+      border: solid 1px white;
+    }
+
+    .video-player-tracker {
+      border: solid 1px red;
+    }
+  }
+
 
   &:focus {
     outline: none;
@@ -209,6 +240,8 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-control-bar {
+    z-index: 1;
+
     .vjs-volume-panel {
       margin-right: 1em;
     }
