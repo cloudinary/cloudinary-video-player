@@ -178,7 +178,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
     super();
 
-    this.isZoomed = false;
+    this._isZoomed = false;
 
     elem = resolveVideoElement(elem);
     options = extractOptions(elem, options);
@@ -634,8 +634,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const currentSourceUrl = this.currentSourceUrl();
 
     this.goBack = () => {
-      if (this.isZoomed) {
-        this.isZoomed = false;
+      if (this._isZoomed) {
+        this._isZoomed = false;
         this.source(currentSourceUrl).play();
         this._addTrackersItems(tracksData, trackersOptions);
       }
@@ -647,7 +647,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _addTrackersItems(trackersData, trackersOptions) {
     const trackerItems = trackersData.map((item, index) => {
       return getTrackerItem(item, (event) => {
-        this.isZoomed = true;
+        this._isZoomed = true;
         this._setGoBackButton();
         trackersOptions && trackersOptions.onClick({ item, index, event });
       });
