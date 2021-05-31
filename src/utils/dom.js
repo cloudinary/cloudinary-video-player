@@ -32,4 +32,4 @@ const appendChild = (child, element) => {
 };
 
 
-export { wrap, createElement};
+export { wrap, createElement };
