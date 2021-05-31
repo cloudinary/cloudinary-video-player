@@ -178,6 +178,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, options, ready) {
     super();
 
+    this.isZoomed = false;
+
     elem = resolveVideoElement(elem);
     options = extractOptions(elem, options);
 
@@ -531,6 +533,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (ready) {
         ready(this);
       }
+
+      this.videojs.on('ended', () => {
+        this.goBack && this.goBack();
+      });
     });
 
     if (this.adsEnabled) {
@@ -615,11 +621,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _setGoBackButton() {
     const button = createElement('button', { 'class': 'go-back-button' }, 'Go back');
-    const currentSourceUrl = this.currentSourceUrl();
 
     button.addEventListener('click', () => {
-      this.reAddTrackers && this.reAddTrackers();
-      this.source(currentSourceUrl).play();
+      this.goBack && this.goBack();
     }, false);
 
     const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
@@ -627,16 +631,23 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   addTrackers(tracksData, trackersOptions) {
-    this.reAddTrackers = () => {
-      this._addTrackersItems(tracksData, trackersOptions);
+    const currentSourceUrl = this.currentSourceUrl();
+
+    this.goBack = () => {
+      if (this.isZoomed) {
+        this.isZoomed = false;
+        this.source(currentSourceUrl).play();
+        this._addTrackersItems(tracksData, trackersOptions);
+      }
     };
 
-    this.reAddTrackers();
+    this._addTrackersItems(tracksData, trackersOptions);
   }
 
   _addTrackersItems(trackersData, trackersOptions) {
     const trackerItems = trackersData.map((item, index) => {
       return getTrackerItem(item, (event) => {
+        this.isZoomed = true;
         this._setGoBackButton();
         trackersOptions && trackersOptions.onClick({ item, index, event });
       });
