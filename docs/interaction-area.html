@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <script type="text/javascript">
+
+    window.addEventListener('load', function() {
+
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+      var options = {fluid: true};
+
+      player = cld.videoPlayer('player', options);
+
+      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
+
+      var tracksItems = [
+        {
+          left : 10 ,
+          top: 10,
+          width: 80,
+          height: 40,
+          src: 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        },
+        {
+          left : 10 ,
+          top: 75,
+          width: 80,
+          height : 20,
+          src: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
+      ];
+
+      player.addTrackers(tracksItems, {
+        onClick: (event) => {
+          player.source(tracksItems[event.index].src);
+          player.play();
+        },
+      });
+
+    });
+  </script>
+</head>
+<body>
+
+<div class="container p-4 col-12 col-md-9 col-xl-6">
+
+  <nav class="nav mb-2">
+    <a href="./index.html">&#60;&#60; Back to examples index</a>
+  </nav>
+  <h1>Cloudinary Video Player</h1>
+
+  <div style="max-width: 250px;margin: 0 auto">
+    <video id="player"
+          playsinline
+          controls
+          muted
+          class="cld-video-player">
+    </video>
+  </div>
+
+
+  <h3>Example Code:</h3>
+  <pre>
+      <code class="language-html">
+
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+      var options = {fluid: true};
+
+      player = cld.videoPlayer('player', options);
+
+      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
+
+      var tracksItems = [
+        {
+          left : 10 ,
+          top: 10,
+          width: 80,
+          height: 40,
+          src: 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        },
+        {
+          left : 10 ,
+          top: 75,
+          width: 80,
+          height : 20,
+          src: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
+      ];
+
+      player.addTrackers(tracksItems, {
+        onClick: (event) => {
+          player.source(tracksItems[event.index].src);
+          player.play();
+        },
+      });
+      </code>
+
+  </pre>
+</div>
+
+
+</body>
+</html>
