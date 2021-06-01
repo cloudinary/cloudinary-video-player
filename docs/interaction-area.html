@@ -26,7 +26,7 @@
 
       player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
 
-      var tracksItems = [
+      var interactionAreas = [
         {
           left : 10 ,
           top: 10,
@@ -43,9 +43,9 @@
         }
       ];
 
-      player.addTrackers(tracksItems, {
+      player.addInteractionAreas(interactionAreas, {
         onClick: (event) => {
-          player.source(tracksItems[event.index].src);
+          player.source(interactionAreas[event.index].src);
           player.play();
         },
       });
@@ -92,7 +92,7 @@
 
       player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
 
-      var tracksItems = [
+      var interactionAreas = [
         {
           left : 10 ,
           top: 10,
@@ -109,9 +109,9 @@
         }
       ];
 
-      player.addTrackers(tracksItems, {
+      player.addInteractionAreas(interactionAreas, {
         onClick: (event) => {
-          player.source(tracksItems[event.index].src);
+          player.source(interactionAreas[event.index].src);
           player.play();
         },
       });

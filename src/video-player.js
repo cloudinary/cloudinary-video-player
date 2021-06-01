@@ -632,7 +632,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     setTrackersContainer(this.videojs, tracksContainer);
   }
 
-  addTrackers(tracksData, trackersOptions) {
+  addInteractionAreas(tracksData, trackersOptions) {
     this.unZoom = () => {
       if (this._isZoomed) {
         this._isZoomed = false;
