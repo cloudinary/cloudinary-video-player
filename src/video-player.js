@@ -12,6 +12,7 @@ import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
 import VideoSource from './plugins/cloudinary/models/video-source';
 import { createElement } from './utils/dom';
+import { noop } from './utils/type-inference';
 import {
   getMetaDataTracker,
   getTrackerItem,
@@ -179,6 +180,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     super();
 
     this._isZoomed = false;
+    this.unZoom = noop;
 
     elem = resolveVideoElement(elem);
     options = extractOptions(elem, options);
@@ -535,7 +537,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
 
       this.videojs.on('ended', () => {
-        this.unZoom && this.unZoom();
+        this.unZoom();
       });
     });
 
@@ -619,11 +621,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }
 
-  _setGoBackButton() {
+  _setGoBackButton(sourceUrl) {
     const button = createElement('button', { 'class': 'go-back-button' }, 'Go back');
 
     button.addEventListener('click', () => {
-      this.unZoom && this.unZoom();
+      this.unZoom(sourceUrl);
     }, false);
 
     const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
@@ -631,12 +633,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   addTrackers(tracksData, trackersOptions) {
-    const currentSourceUrl = this.currentSourceUrl();
-
-    this.unZoom = () => {
+    this.unZoom = (sourceUrl) => {
       if (this._isZoomed) {
         this._isZoomed = false;
-        this.source(currentSourceUrl).play();
+        this.source(sourceUrl).play();
         this._addTrackersItems(tracksData, trackersOptions);
       }
     };
@@ -648,7 +648,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const trackerItems = trackersData.map((item, index) => {
       return getTrackerItem(item, (event) => {
         this._isZoomed = true;
-        this._setGoBackButton();
+        this._setGoBackButton(this.currentSourceUrl());
         trackersOptions && trackersOptions.onClick({ item, index, event });
       });
     });
