@@ -621,11 +621,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }
 
-  _setGoBackButton(sourceUrl) {
+  _setGoBackButton() {
     const button = createElement('button', { 'class': 'go-back-button' }, 'Go back');
 
     button.addEventListener('click', () => {
-      this.unZoom(sourceUrl);
+      this.unZoom();
     }, false);
 
     const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
@@ -633,10 +633,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   addTrackers(tracksData, trackersOptions) {
-    this.unZoom = (sourceUrl) => {
+    this.unZoom = () => {
       if (this._isZoomed) {
         this._isZoomed = false;
-        this.source(sourceUrl).play();
+        this.source(this.prvSrc).play();
         this._addTrackersItems(tracksData, trackersOptions);
       }
     };
@@ -648,7 +648,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const trackerItems = trackersData.map((item, index) => {
       return getTrackerItem(item, (event) => {
         this._isZoomed = true;
-        this._setGoBackButton(this.currentSourceUrl());
+        this.prvSrc = this.currentSourceUrl();
+        this._setGoBackButton();
         trackersOptions && trackersOptions.onClick({ item, index, event });
       });
     });
