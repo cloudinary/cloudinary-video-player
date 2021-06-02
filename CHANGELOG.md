@@ -1,3 +1,23 @@
+1.6.0-edge.0 / 2021-06-02
+==================
+
+New functionality and features
+------------------------------
+* Add interaction areas (#254)
+* Add handling non existent texttracks (#252)
+
+Fixes
+------------------------------
+* Fix fluid posted CSS (#247)
+* Fix handleCldError not returning statusCode (#248)
+* Fix retry timeout not clearing on play (#240)
+* Fix big button disappearing in IE11 (#244)
+
+Other Changes
+------------------------------
+* Update dependencies (#236)
+* Minor refactor for code syntax (linting + let/const)
+
 1.5.3 / 2021-03-29
 ==================
 
