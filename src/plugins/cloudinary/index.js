@@ -257,8 +257,6 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
         return srcs;
       }, []);
-      // eslint-disable-next-line no-debugger
-      debugger;
       this.player.src(_sources);
 
       _lastSource = src;
