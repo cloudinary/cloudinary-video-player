@@ -235,7 +235,9 @@ class CloudinaryContext extends mixin(Playlistable) {
         this.player.poster(src.poster().url());
       }
 
-      _sources = src.generateSources().map((src) => {
+      _sources = src.generateSources().reduce((srcs, src) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
         if (src.isAdaptive) {
           let codec = src.type.split('; ')[1] || null;
           if (codec && 'MediaSource' in window) {
@@ -247,14 +249,16 @@ class CloudinaryContext extends mixin(Playlistable) {
               src.type = `${parts[0]}; ${codecShorthandTrans('h264')}`;
             }
             if (canPlay) {
-              return src;
+              srcs.push(src);
             }
           }
+        } else {
+          srcs.push(src);
         }
-        return src;
-      });
-      // filter out undefined
-      _sources.filter(s => s);
+        return srcs;
+      }, []);
+      // eslint-disable-next-line no-debugger
+      debugger;
       this.player.src(_sources);
 
       _lastSource = src;
