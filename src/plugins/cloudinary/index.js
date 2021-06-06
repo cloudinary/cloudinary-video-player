@@ -249,6 +249,8 @@ class CloudinaryContext extends mixin(Playlistable) {
             if (canPlay) {
               srcs.push(src);
             }
+          } else {
+            srcs.push(src);
           }
         } else {
           srcs.push(src);
