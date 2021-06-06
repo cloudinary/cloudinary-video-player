@@ -236,8 +236,6 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       _sources = src.generateSources().reduce((srcs, src) => {
-        // eslint-disable-next-line no-debugger
-        debugger;
         if (src.isAdaptive) {
           let codec = src.type.split('; ')[1] || null;
           if (codec && 'MediaSource' in window) {
