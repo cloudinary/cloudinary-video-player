@@ -1,10 +1,11 @@
 import cloudinary from 'cloudinary-core';
+import { default as vjs } from 'video.js';
 import { mixin } from 'utils/mixin';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
-import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig } from './common';
+import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig, codecShorthandTrans } from './common';
 import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source';
 import EventHandlerRegistry from './event-handler-registry';
@@ -234,20 +235,34 @@ class CloudinaryContext extends mixin(Playlistable) {
         this.player.poster(src.poster().url());
       }
 
-      _sources = src.generateSources().filter((src) => {
+      _sources = src.generateSources().map((src) => {
         if (src.isAdaptive) {
           let codec = src.type.split('; ')[1] || null;
           if (codec && 'MediaSource' in window) {
-            let typeStr = `video/mp4; ${src.type.split('; ')[1] || ''}`;
-            return MediaSource.isTypeSupported(typeStr);
+            const parts = src.type.split('; ');
+            let typeStr = `video/mp4; ${parts[1] || ''}`;
+            const canPlay = testCanPlayTypeAndTypeSupported(typeStr);
+            if (vjs.browser.IS_ANY_SAFARI) {
+              // work around safari saying it cant play h265
+              src.type = `${parts[0]}; ${codecShorthandTrans('h264')}`;
+            }
+            if (canPlay) {
+              return src;
+            }
           }
         }
-        return true;
+        return src;
       });
+      // filter out undefined
+      _sources.filter(s => s);
       this.player.src(_sources);
 
       _lastSource = src;
       _lastPlaylist = this.playlist();
+    };
+    const testCanPlayTypeAndTypeSupported = (codec) => {
+      const v = document.createElement('video');
+      return v.canPlayType(codec) || 'MediaSource' in window && MediaSource.isTypeSupported(codec);
     };
 
     const posterOptionsForCurrent = () => {

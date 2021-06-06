@@ -1,6 +1,6 @@
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
-import {cloudinaryErrorsConverter, ERROR_CODE} from '../plugins/cloudinary/common';
+import { cloudinaryErrorsConverter, ERROR_CODE } from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
 
 const { fetch } = fetchPF({ Promise });
@@ -64,7 +64,7 @@ const handleCldError = (that, options) => {
           setVideoSrc(that, goodSrcs);
         } else {
           console.log('No urls left to try so stopping');
-          that.videojs.error({code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources', statusCode: res.status });
+          that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources', statusCode: res.status });
         }
       }
     })
@@ -75,7 +75,7 @@ const handleCldError = (that, options) => {
         });
       });
   } else {
-    that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources'});
+    that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources' });
   }
 };
 
