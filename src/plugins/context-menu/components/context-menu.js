@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import ContextMenuItem from './context-menu-item';
 import { setPosition } from '../../../utils/positioning';
+import { isFunction } from '../../../utils/type-inference';
 
 const Menu = videojs.getComponent('Menu');
 
@@ -19,7 +20,7 @@ class ContextMenu extends Menu {
     options.content.forEach(c => {
       let fn = null;
 
-      if (typeof c.listener === 'function') {
+      if (isFunction(c.listener)) {
         fn = c.listener;
       } else if (typeof c.href === 'string') {
         fn = () => window.open(c.href);

@@ -7,9 +7,10 @@ import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary
 import { assign } from 'utils/assign';
 import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig, codecShorthandTrans } from './common';
 import Playlistable from 'mixins/playlistable';
-import VideoSource from './models/video-source';
+import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
-import AudioSource from './models/audio-source';
+import AudioSource from './models/audio-source/audio-source';
+import { isFunction } from '../../utils/type-inference';
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -198,7 +199,7 @@ class CloudinaryContext extends mixin(Playlistable) {
           _recommendations.sources = sources;
         };
 
-        if (typeof recommendations === 'function') {
+        if (isFunction(recommendations)) {
           trigger(recommendations());
         } else if (recommendations.then) {
           recommendations.then(trigger);

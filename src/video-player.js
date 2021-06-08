@@ -10,139 +10,23 @@ import PlaylistWidget from './components/playlist/playlist-widget';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
-import VideoSource from './plugins/cloudinary/models/video-source';
+import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { createElement } from './utils/dom';
-import { noop } from './utils/type-inference';
+import { isFunction, isString, noop } from './utils/type-inference';
 import {
+  extractOptions,
   getMetaDataTracker,
+  getResolveVideoElement,
   getTrackerItem,
-  setTrackersContainer,
-  TRACKERS_CONTAINER_CLASS_NAME
+  setTrackersContainer
 } from './video-player.utils';
+import { TRACKERS_CONTAINER_CLASS_NAME } from './video-player.const';
 
-const CLOUDINARY_PARAMS = [
-  'cloudinaryConfig',
-  'transformation',
-  'sourceTypes',
-  'sourceTransformation',
-  'posterOptions',
-  'autoShowRecommendations',
-  'fontFace',
-  'secure'
-];
-
-const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
-  'publicId',
-  'source',
-  'autoplayMode',
-  'playedEventPercents',
-  'playedEventTimes',
-  'analytics',
-  'fluid',
-  'ima',
-  'playlistWidget',
-  'hideContextMenu',
-  'colors',
-  'floatingWhenNotVisible',
-  'ads',
-  'showJumpControls',
-  'textTracks',
-  'qualitySelector',
-  'fetchErrorUsingGet',
-  'seekThumbnails'
-]);
-
-const DEFAULT_HLS_OPTIONS = {
-  html5: {
-    handlePartialData: false,
-    hls: {
-      overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
-    }
-  }
-};
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
   videojs.registerPlugin(key, plugins[key]);
 });
-
-const normalizeAutoplay = (options) => {
-  const autoplayMode = options.autoplayMode;
-  if (autoplayMode) {
-    switch (autoplayMode) {
-      case 'always':
-        options.autoplay = true;
-        break;
-      case 'on-scroll':
-      case 'never':
-      default:
-        options.autoplay = false;
-    }
-  }
-};
-
-const resolveVideoElement = (elem) => {
-  if (typeof elem === 'string') {
-    let id = elem;
-
-    // Adjust for jQuery ID syntax
-    if (id.indexOf('#') === 0) {
-      id = id.slice(1);
-    }
-
-    try {
-      elem = document.querySelector(`#${id}`) || videojs.getPlayer(id);
-    } catch (e) {
-      elem = null;
-    }
-
-    if (!elem) {
-      throw new Error(`Could not find element with id ${id}`);
-    }
-  }
-
-  if (!elem.tagName) {
-    throw new Error('Must specify either an element or an element id.');
-  } else if (elem.tagName !== 'VIDEO') {
-    throw new Error('Element is not a video tag.');
-  }
-
-  return elem;
-};
-
-const extractOptions = (elem, options) => {
-  const elemOptions = Utils.normalizeAttributes(elem);
-
-  if (videojs.dom.hasClass(elem, 'cld-fluid') || videojs.dom.hasClass(elem, 'vjs-fluid')) {
-    options.fluid = true;
-  }
-
-  // Default HLS options < Default options < Markup options < Player options
-  options = Utils.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
-
-  // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
-  normalizeAutoplay(options);
-
-  // VideoPlayer specific options
-  const playerOptions = Utils.sliceAndUnsetProperties(
-    options,
-    ...PLAYER_PARAMS);
-
-  // Cloudinary plugin specific options
-  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(
-    playerOptions,
-    ...CLOUDINARY_PARAMS);
-
-  // Allow explicitly passing options to videojs using the `videojs` namespace, in order
-  // to avoid param name conflicts:
-  // VideoPlayer.new({ controls: true, videojs: { controls: false })
-  if (options.videojs) {
-    Utils.assign(options, options.videojs);
-    delete options.videojs;
-  }
-
-  return { playerOptions, videojsOptions: options };
-};
 
 const overrideDefaultVideojsComponents = () => {
   const Player = videojs.getComponent('Player');
@@ -154,19 +38,18 @@ const overrideDefaultVideojsComponents = () => {
   children.push('recommendationsOverlay');
 
   const ControlBar = videojs.getComponent('ControlBar');
+
   if (ControlBar) {
     children = ControlBar.prototype.options_.children;
     // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
     // Also add a blank div underneath the progress control to stop bubbling up pointer events.
-    children.splice(children.indexOf('progressControl'), 0, 'spacer',
-      'progressControlEventsBlocker');
+    children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
     // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
     children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
 
     // Position the 'logo-button' button right next to 'fullscreenToggle'
-    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton',
-      'fullscreenToggle');
+    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton', 'fullscreenToggle');
   }
 };
 
@@ -175,427 +58,6 @@ overrideDefaultVideojsComponents();
 let _allowUsageReport = true;
 
 class VideoPlayer extends Utils.mixin(Eventable) {
-
-  constructor(elem, options, ready) {
-    super();
-
-    this._isZoomed = false;
-    this.unZoom = noop;
-
-    elem = resolveVideoElement(elem);
-    options = extractOptions(elem, options);
-
-    const onReady = () => {
-      setExtendedEvents();
-
-      // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
-      const source = _options.source || _options.publicId;
-      if (source) {
-        this.source(source, _options);
-      }
-    };
-
-    const setExtendedEvents = () => {
-      const events = [];
-      if (_options.playedEventPercents) {
-        const percentsplayed = {
-          type: 'percentsplayed',
-          percents: _options.playedEventPercents
-        };
-        events.push(percentsplayed);
-      }
-
-      if (_options.playedEventTimes) {
-        const timeplayed = {
-          type: 'timeplayed',
-          times: _options.playedEventTimes
-        };
-        events.push(timeplayed);
-      }
-
-      events.push(...['seek', 'mute', 'unmute', 'qualitychanged']);
-
-      const extendedEvents = new ExtendedEvents(this.videojs, { events });
-
-      const normalizedEvents = extendedEvents.events;
-
-      Object.keys(normalizedEvents).forEach((_event) => {
-        const handler = (event, data) => {
-          this.videojs.trigger({ type: _event, eventData: data });
-        };
-        extendedEvents.on(_event, handler);
-      });
-    };
-
-    const setCssClasses = () => {
-      this.videojs.addClass(Utils.CLASS_PREFIX);
-      this.videojs.addClass(Utils.playerClassPrefix(this.videojs));
-
-      Utils.setSkinClassPrefix(this.videojs, Utils.skinClassPrefix(this.videojs));
-
-      if (videojs.browser.IE_VERSION === 11) {
-        this.videojs.addClass('cld-ie11');
-      }
-    };
-
-    const initPlugins = (loaded) => {
-      // #if (!process.env.WEBPACK_BUILD_LIGHT)
-      this.adsEnabled = initIma(loaded);
-      // #endif
-      initAutoplay();
-      initContextMenu();
-      initPerSrcBehaviors();
-      initCloudinary();
-      initAnalytics();
-      initFloatingPlayer();
-      initColors();
-      initTextTracks();
-      initSeekThumbs();
-    };
-
-    const initIma = (loaded) => {
-      if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-        if (_options.ads) {
-          if (!loaded.contribAdsLoaded) {
-            console.log('contribAds is not loaded');
-          }
-          if (!loaded.imaAdsLoaded) {
-            console.log('imaSdk is not loaded');
-          }
-        }
-        return false;
-      }
-      if (!_options.ads) {
-        _options.ads = {};
-      }
-      const opts = _options.ads;
-
-      if (Object.keys(opts).length === 0) {
-        return false;
-      }
-
-      const {
-        adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
-        autoPlayAdBreaks, locale
-      } = opts;
-
-      this.videojs.ima({
-        id: this.el().id,
-        adTagUrl,
-        disableFlashAds: true,
-        prerollTimeout: prerollTimeout || 5000,
-        postrollTimeout: postrollTimeout || 5000,
-        showCountdown: (showCountdown !== false),
-        adLabel: adLabel || 'Advertisement',
-        locale: locale || 'en',
-        autoPlayAdBreaks: (autoPlayAdBreaks !== false),
-        debug: true
-      });
-      return true;
-    };
-
-    const initAutoplay = () => {
-      const autoplayMode = _options.autoplayMode;
-
-      if (autoplayMode === 'on-scroll') {
-        this.videojs.autoplayOnScroll();
-      }
-    };
-
-    const initContextMenu = () => {
-      if (!options.playerOptions.hideContextMenu) {
-        this.videojs.contextMenu(defaults.contextMenu);
-      }
-    };
-
-    const initFloatingPlayer = () => {
-      if (options.playerOptions.floatingWhenNotVisible) {
-        this.videojs.floatingPlayer({ 'floatTo': options.playerOptions.floatingWhenNotVisible });
-      }
-    };
-
-    const initColors = () => {
-      this.videojs.colors(options.playerOptions.colors ? { 'colors': options.playerOptions.colors } : {});
-    };
-
-    const initPerSrcBehaviors = () => {
-      if (this.videojs.perSourceBehaviors) {
-        this.videojs.perSourceBehaviors();
-      }
-    };
-
-    const initCloudinary = () => {
-      const opts = _options.cloudinary;
-      opts.chainTarget = this;
-      if (opts.secure !== false) {
-        _options.cloudinary.cloudinaryConfig.config('secure', true);
-      }
-      this.videojs.cloudinary(_options.cloudinary);
-    };
-
-    const initAnalytics = () => {
-      const analyticsOpts = _options.analytics;
-
-      if (analyticsOpts) {
-        const opts = typeof analyticsOpts === 'object' ? analyticsOpts : {};
-        this.videojs.analytics(opts);
-      }
-    };
-
-    let _playlistWidget = null;
-
-    const initPlaylistWidget = () => {
-      this.videojs.on('playlistcreated', () => {
-        if (_playlistWidget) {
-          _playlistWidget.dispose();
-        }
-        const plwOptions = _options.playlistWidget;
-
-        if (isObj(plwOptions)) {
-          if (_options.fluid) {
-            plwOptions.fluid = true;
-          }
-          if (_options.cloudinary.fontFace) {
-            plwOptions.fontFace = _options.cloudinary.fontFace;
-          }
-          _playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
-        }
-      });
-    };
-
-    const initJumpButtons = () => {
-      if (!_options.showJumpControls && this.videojs.controlBar) {
-        this.videojs.controlBar.removeChild('JumpForwardButton');
-        this.videojs.controlBar.removeChild('JumpBackButton');
-      }
-    };
-
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.initQualitySelector = () => {
-      if (_options.qualitySelector !== false) {
-        if (videojs.browser.IE_VERSION === null) {
-          this.videojs.httpSourceSelector({ default: 'auto' });
-        }
-
-        this.videojs.on('loadedmetadata', () => {
-          qualitySelector.init(this.videojs);
-        });
-
-        // Show only if more then one option available
-        this.videojs.on('loadeddata', () => {
-          qualitySelector.setVisibility(this.videojs);
-        });
-      }
-    };
-    // #endif
-
-    const initTextTracks = () => {
-      this.videojs.on('refreshTextTracks', (e, tracks) => {
-        this.setTextTracks(tracks);
-      });
-    };
-
-    this.setTextTracks = (conf) => {
-      // remove current text tracks
-      let currentTracks = this.videojs.remoteTextTracks();
-      if (currentTracks) {
-        for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
-          this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
-        }
-      }
-      if (conf) {
-        const tracks = Object.keys(conf);
-        const allTracks = [];
-        for (const track of tracks) {
-          if (Array.isArray(conf[track])) {
-            let trks = conf[track];
-            for (let i = 0; i < trks.length; i++) {
-              let cnf = trks[i];
-              allTracks.push(buildTextTrackObj(track, cnf));
-            }
-          } else {
-            allTracks.push(buildTextTrackObj(track, conf[track]));
-          }
-        }
-        Utils.filterAndAddTextTracks(allTracks, this.videojs);
-      }
-    };
-
-    const initSeekThumbs = () => {
-      if (_options.seekThumbnails) {
-
-        this.videojs.on('cldsourcechanged', (e, { source }) => {
-
-          if ( // Bail if...
-            source.getType() === 'AudioSource' || // it's an audio player
-            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
-          ) {
-            return;
-          }
-
-          const cloudinaryConfig = source.cloudinaryConfig();
-          const publicId = source.publicId();
-
-          let transformations = source.transformation().toOptions();
-
-          if (transformations && transformations.streaming_profile) {
-            delete transformations.streaming_profile;
-          }
-
-          transformations.flags = transformations.flags || [];
-          transformations.flags.push('sprite');
-
-          // build VTT url
-          const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', {
-            transformation: transformations
-          });
-
-          // vttThumbnails must be called differently on init and on source update.
-          if (typeof this.videojs.vttThumbnails === 'function') {
-            this.videojs.vttThumbnails({ src: vttSrc });
-          } else {
-            this.videojs.vttThumbnails.src(vttSrc);
-          }
-        });
-
-      }
-    };
-
-    const buildTextTrackObj = (type, conf) => ({
-      kind: type,
-      label: conf.label,
-      srclang: conf.language,
-      default: !!(conf.default),
-      src: conf.url
-    });
-
-
-    const _options = options.playerOptions;
-    const _vjs_options = options.videojsOptions;
-
-    // Make sure to add 'video-js' class before creating videojs instance
-    elem.classList.add('video-js');
-
-    // Handle WebFont loading
-    Utils.fontFace(elem, _options);
-
-    // Handle play button options
-    Utils.playButton(elem, _vjs_options);
-
-    // Dash plugin - available in full (not light) build only
-    if (plugins.dashPlugin) {
-      plugins.dashPlugin();
-    }
-
-    this.videojs = videojs(elem, _vjs_options);
-
-    if (_vjs_options.muted) {
-      this.videojs.volume(0.4);
-    }
-
-    if (_options.fluid) {
-      this.fluid(_options.fluid);
-    }
-
-
-    /* global google */
-    let loaded = {
-      contribAdsLoaded: typeof this.videojs.ads === 'function',
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
-    };
-    setCssClasses();
-    initPlugins(loaded);
-    initPlaylistWidget();
-    initJumpButtons();
-
-    this.videojs.on('error', () => {
-      const error = this.videojs.error();
-      if (error) {
-        let type = this.videojs.cloudinary.currentSourceType();
-        if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
-          this.videojs.error(null);
-          Utils.handleCldError(this, _options);
-        } else {
-          this.videojs.clearTimeout(this.reTryId);
-        }
-      }
-    });
-    this.videojs.on('play', () => {
-      this.videojs.clearTimeout(this.reTryId);
-    });
-
-    this.videojs.on('canplaythrough', () => {
-      // clear retry timeout
-      this.videojs.clearTimeout(this.reTryId);
-    });
-
-    this.videojs.ready(() => {
-      onReady();
-
-      if (ready) {
-        ready(this);
-      }
-
-      this.videojs.on('ended', () => {
-        this.unZoom();
-      });
-    });
-
-    if (this.adsEnabled) {
-      if (Object.keys(options.playerOptions.ads).length > 0 &&
-        typeof this.videojs.ima === 'object') {
-        if (options.playerOptions.ads.adsInPlaylist === 'first-video') {
-          this.videojs.one('sourcechanged', () => {
-            this.videojs.ima.playAd();
-          });
-
-        } else {
-          this.videojs.on('sourcechanged', () => {
-            this.videojs.ima.playAd();
-          });
-        }
-      }
-    }
-
-    this.nbCalls = 0;
-    this.reTryVideo = (maxNumberOfCalls, timeout) => {
-      if (!this.isVideoReady()) {
-        if (this.nbCalls < maxNumberOfCalls) {
-          this.nbCalls++;
-          this.reTryId = this.videojs.setTimeout(this.reTryVideo, timeout);
-        } else {
-          let e = new Error('Video is not ready please try later');
-          this.videojs.trigger('error', e);
-        }
-      }
-
-    };
-
-    this.isVideoReady = () => {
-      let s = this.videojs.readyState();
-      if (s >= (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4)) {
-        this.nbCalls = 0;
-        return true;
-      }
-      return false;
-    };
-
-    this.playlistWidget = (options) => {
-      if (!options && !_playlistWidget) {
-        return false;
-      }
-
-      if (!options && _playlistWidget) {
-        return _playlistWidget;
-      }
-
-      if (isObj(options)) {
-        _playlistWidget.options(options);
-      }
-
-      return _playlistWidget;
-    };
-  }
 
   static all(selector, ...args) {
     const nodeList = document.querySelectorAll(selector);
@@ -617,8 +79,434 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return _allowUsageReport;
   }
 
+  static buildTextTrackObj (type, conf) {
+    return {
+      kind: type,
+      label: conf.label,
+      srclang: conf.language,
+      default: !!(conf.default),
+      src: conf.url
+    };
+  }
+
+  constructor(elem, initOptions, ready) {
+    super();
+
+    this._isZoomed = false;
+    this.unZoom = noop;
+    this._playlistWidget = null;
+    this.nbCalls = 0;
+
+    const element = getResolveVideoElement(elem);
+    this.options = extractOptions(element, initOptions);
+
+    const vjsOptions = this.options.videojsOptions;
+
+    // Make sure to add 'video-js' class before creating videojs instance
+    element.classList.add('video-js');
+
+    // Handle WebFont loading
+    Utils.fontFace(element, this.playerOptions);
+
+    // Handle play button options
+    Utils.playButton(element, vjsOptions);
+
+    // Dash plugin - available in full (not light) build only
+    if (plugins.dashPlugin) {
+      plugins.dashPlugin();
+    }
+
+    this.videojs = videojs(element, vjsOptions);
+
+    if (vjsOptions.muted) {
+      this.videojs.volume(0.4);
+    }
+
+    if (this.playerOptions.fluid) {
+      this.fluid(this.playerOptions.fluid);
+    }
+
+    /* global google */
+    const loaded = {
+      contribAdsLoaded: isFunction(this.videojs.ads),
+      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
+    };
+
+    this._setCssClasses();
+    this._initPlugins(loaded);
+    this._initPlaylistWidget();
+    this._initJumpButtons();
+    this._setVideoJsListeners(ready);
+  }
+
+  _setVideoJsListeners(ready) {
+
+    this.videojs.on('error', () => {
+      const error = this.videojs.error();
+      if (error) {
+        const type = this.videojs.cloudinary.currentSourceType();
+        if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
+          this.videojs.error(null);
+          Utils.handleCldError(this, this.playerOptions);
+        } else {
+          this.videojs.clearTimeout(this.reTryId);
+        }
+      }
+    });
+
+    this.videojs.on('play', () => {
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
+    this.videojs.on('canplaythrough', () => {
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
+    this.videojs.ready(() => {
+      this._onReady();
+
+      if (ready) {
+        ready(this);
+      }
+
+      this.videojs.on('ended', () => {
+        this.unZoom();
+      });
+    });
+
+    if (this.adsEnabled) {
+      if (Object.keys(this.playerOptions.ads).length > 0 &&
+          typeof this.videojs.ima === 'object') {
+        if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
+          this.videojs.one('sourcechanged', () => {
+            this.videojs.ima.playAd();
+          });
+
+        } else {
+          this.videojs.on('sourcechanged', () => {
+            this.videojs.ima.playAd();
+          });
+        }
+      }
+    }
+  }
+
+  _initPlugins (loaded) {
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
+    this.adsEnabled = this._initIma(loaded);
+    // #endif
+    this._initAutoplay();
+    this._initContextMenu();
+    this._initPerSrcBehaviors();
+    this._initCloudinary();
+    this._initAnalytics();
+    this._initFloatingPlayer();
+    this._initColors();
+    this._initTextTracks();
+    this._initSeekThumbs();
+  }
+
+  _initIma (loaded) {
+    if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
+      if (this.playerOptions.ads) {
+        if (!loaded.contribAdsLoaded) {
+          console.log('contribAds is not loaded');
+        }
+        if (!loaded.imaAdsLoaded) {
+          console.log('imaSdk is not loaded');
+        }
+      }
+
+      return false;
+    }
+
+    if (!this.playerOptions.ads) {
+      this.playerOptions.ads = {};
+    }
+    const opts = this.playerOptions.ads;
+
+    if (Object.keys(opts).length === 0) {
+      return false;
+    }
+
+    const {
+      adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
+      autoPlayAdBreaks, locale
+    } = opts;
+
+    this.videojs.ima({
+      id: this.el().id,
+      adTagUrl,
+      disableFlashAds: true,
+      prerollTimeout: prerollTimeout || 5000,
+      postrollTimeout: postrollTimeout || 5000,
+      showCountdown: (showCountdown !== false),
+      adLabel: adLabel || 'Advertisement',
+      locale: locale || 'en',
+      autoPlayAdBreaks: (autoPlayAdBreaks !== false),
+      debug: true
+    });
+
+    return true;
+  }
+
+  setTextTracks (conf) {
+    // remove current text tracks
+    const currentTracks = this.videojs.remoteTextTracks();
+    if (currentTracks) {
+      for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
+        this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
+      }
+    }
+    if (conf) {
+      const tracks = Object.keys(conf);
+      const allTracks = [];
+      for (const track of tracks) {
+        if (Array.isArray(conf[track])) {
+          const trks = conf[track];
+          for (let i = 0; i < trks.length; i++) {
+            allTracks.push(VideoPlayer.buildTextTrackObj(track, trks[i]));
+          }
+        } else {
+          allTracks.push(VideoPlayer.buildTextTrackObj(track, conf[track]));
+        }
+      }
+
+      Utils.filterAndAddTextTracks(allTracks, this.videojs);
+    }
+  }
+
+  _initSeekThumbs() {
+    if (this.playerOptions.seekThumbnails) {
+
+      this.videojs.on('cldsourcechanged', (e, { source }) => {
+        // Bail if...
+        if (source.getType() === 'AudioSource' || // it's an audio player
+            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+        ) {
+          return;
+        }
+
+        const cloudinaryConfig = source.cloudinaryConfig();
+        const publicId = source.publicId();
+
+        const transformations = source.transformation().toOptions();
+
+        if (transformations && transformations.streaming_profile) {
+          delete transformations.streaming_profile;
+        }
+
+        transformations.flags = transformations.flags || [];
+        transformations.flags.push('sprite');
+
+        // build VTT url
+        const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', { transformation: transformations });
+
+        // vttThumbnails must be called differently on init and on source update.
+        if (isFunction(this.videojs.vttThumbnails)) {
+          this.videojs.vttThumbnails({ src: vttSrc });
+        } else {
+          this.videojs.vttThumbnails.src(vttSrc);
+        }
+      });
+    }
+  }
+
+  _initColors () {
+    this.videojs.colors(this.playerOptions.colors ? { 'colors': this.playerOptions.colors } : {});
+  }
+
+  // #if (!process.env.WEBPACK_BUILD_LIGHT)
+  _initQualitySelector() {
+    if (this.playerOptions.qualitySelector !== false) {
+      if (videojs.browser.IE_VERSION === null) {
+        this.videojs.httpSourceSelector({ default: 'auto' });
+      }
+
+      this.videojs.on('loadedmetadata', () => {
+        qualitySelector.init(this.videojs);
+      });
+
+      // Show only if more then one option available
+      this.videojs.on('loadeddata', () => {
+        qualitySelector.setVisibility(this.videojs);
+      });
+    }
+  }
+  // #endif
+
+  _initTextTracks () {
+    this.videojs.on('refreshTextTracks', (e, tracks) => {
+      this.setTextTracks(tracks);
+    });
+  }
+
+  _initPerSrcBehaviors() {
+    if (this.videojs.perSourceBehaviors) {
+      this.videojs.perSourceBehaviors();
+    }
+  }
+
+  _initJumpButtons() {
+    if (!this.playerOptions.showJumpControls && this.videojs.controlBar) {
+      this.videojs.controlBar.removeChild('JumpForwardButton');
+      this.videojs.controlBar.removeChild('JumpBackButton');
+    }
+  }
+
+  _initCloudinary() {
+    const opts = this.playerOptions.cloudinary;
+    opts.chainTarget = this;
+    if (opts.secure !== false) {
+      this.playerOptions.cloudinary.cloudinaryConfig.config('secure', true);
+    }
+
+    this.videojs.cloudinary(this.playerOptions.cloudinary);
+  }
+
+  _initAnalytics() {
+    const analyticsOpts = this.playerOptions.analytics;
+
+    if (analyticsOpts) {
+      const opts = typeof analyticsOpts === 'object' ? analyticsOpts : {};
+      this.videojs.analytics(opts);
+    }
+  }
+
+  reTryVideo(maxNumberOfCalls, timeout) {
+    if (!this.isVideoReady()) {
+      if (this.nbCalls < maxNumberOfCalls) {
+        this.nbCalls++;
+        this.reTryId = this.videojs.setTimeout(this.reTryVideo, timeout);
+      } else {
+        let e = new Error('Video is not ready please try later');
+        this.videojs.trigger('error', e);
+      }
+    }
+  }
+
+  isVideoReady() {
+    const s = this.videojs.readyState();
+    if (s >= (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4)) {
+      this.nbCalls = 0;
+      return true;
+    }
+
+    return false;
+  }
+
+  _initPlaylistWidget () {
+    this.videojs.on('playlistcreated', () => {
+
+      if (this._playlistWidget) {
+        this._playlistWidget.dispose();
+      }
+      const plwOptions = this.playerOptions.playlistWidget;
+
+      if (isObj(plwOptions)) {
+        if (this.playerOptions.fluid) {
+          plwOptions.fluid = true;
+        }
+        if (this.playerOptions.cloudinary.fontFace) {
+          plwOptions.fontFace = this.playerOptions.cloudinary.fontFace;
+        }
+        this._playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
+      }
+    });
+  }
+
+  playlistWidget(options) {
+    if (!options && !this._playlistWidget) {
+      return false;
+    }
+
+    if (!options && this._playlistWidget) {
+      return this._playlistWidget;
+    }
+
+    if (isObj(options)) {
+      this._playlistWidget.options(options);
+    }
+
+    return this._playlistWidget;
+  }
+
+  _initAutoplay() {
+    const autoplayMode = this.playerOptions.autoplayMode;
+
+    if (autoplayMode === 'on-scroll') {
+      this.videojs.autoplayOnScroll();
+    }
+  }
+
+  _initContextMenu() {
+    if (!this.playerOptions.hideContextMenu) {
+      this.videojs.contextMenu(defaults.contextMenu);
+    }
+  }
+
+  _initFloatingPlayer() {
+    if (this.playerOptions.floatingWhenNotVisible) {
+      this.videojs.floatingPlayer({ 'floatTo': this.playerOptions.floatingWhenNotVisible });
+    }
+  }
+
+  _setCssClasses() {
+    this.videojs.addClass(Utils.CLASS_PREFIX);
+    this.videojs.addClass(Utils.playerClassPrefix(this.videojs));
+
+    Utils.setSkinClassPrefix(this.videojs, Utils.skinClassPrefix(this.videojs));
+
+    if (videojs.browser.IE_VERSION === 11) {
+      this.videojs.addClass('cld-ie11');
+    }
+  }
+
+  _onReady() {
+    this._setExtendedEvents();
+
+    // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
+    const source = this.playerOptions.source || this.playerOptions.publicId;
+
+    if (source) {
+      this.source(source, this.playerOptions);
+    }
+  }
+
+  _setExtendedEvents() {
+    const events = [];
+    if (this.playerOptions.playedEventPercents) {
+      events.push({
+        type: 'percentsplayed',
+        percents: this.playerOptions.playedEventPercents
+      });
+    }
+
+    if (this.playerOptions.playedEventTimes) {
+      events.push({
+        type: 'timeplayed',
+        times: this.playerOptions.playedEventTimes
+      });
+    }
+
+    events.push(...['seek', 'mute', 'unmute', 'qualitychanged']);
+
+    const extendedEvents = new ExtendedEvents(this.videojs, { events });
+
+    Object.keys(extendedEvents.events).forEach((_event) => {
+      const handler = (event, data) => {
+        this.videojs.trigger({ type: _event, eventData: data });
+      };
+      extendedEvents.on(_event, handler);
+    });
+  }
+
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
+  }
+
+  get playerOptions() {
+    return this.options.playerOptions;
   }
 
   _setGoBackButton() {
@@ -704,14 +592,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
+
     this.setTextTracks(options.textTracks);
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.initQualitySelector();
+    this._initQualitySelector();
     // #endif
     clearTimeout(this.reTryId);
     this.nbCalls = 0;
-    let maxTries = this.videojs.options_.maxTries || 3;
-    let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
+    const maxTries = this.videojs.options_.maxTries || 3;
+    const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
     return this.videojs.cloudinary.source(publicId, options);
   }
@@ -721,11 +610,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   skin(name) {
-    if (name !== undefined && typeof name === 'string') {
+    if (name !== undefined && isString(name)) {
       Utils.setSkinClassPrefix(this.videojs, name);
 
+      const playlistWidget = this.playlistWidget();
+
       if (this.playlistWidget()) {
-        this.playlistWidget().setSkin();
+        playlistWidget.setSkin();
       }
     }
 

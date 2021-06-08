@@ -5,6 +5,7 @@ import ContextMenu from './components/context-menu';
 import { getPointerPosition } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
+import { isFunction } from '../../utils/type-inference';
 
 const defaults = {
   showNativeOnRecurringEvent: false
@@ -13,7 +14,7 @@ const defaults = {
 class ContextMenuPlugin {
 
   constructor(player, initOpts) {
-    if (!Array.isArray(initOpts.content) && typeof initOpts.content !== 'function') {
+    if (!Array.isArray(initOpts.content) && !isFunction(initOpts.content)) {
       throw new Error('"content" required');
     }
 
@@ -96,7 +97,7 @@ class ContextMenuPlugin {
       // Allow dynamically setting the menu labels based on player
       let content = _options.content;
 
-      if (typeof content === 'function') {
+      if (isFunction(content)) {
         content = content(this.player);
       }
 
