@@ -119,3 +119,28 @@ export const extractOptions = (elem, options) => {
 
   return { playerOptions, videojsOptions: options };
 };
+
+export const overrideDefaultVideojsComponents = () => {
+  const Player = videojs.getComponent('Player');
+  let children = Player.prototype.options_.children;
+
+  // Add TitleBar as default
+  children.push('titleBar');
+  children.push('upcomingVideoOverlay');
+  children.push('recommendationsOverlay');
+
+  const ControlBar = videojs.getComponent('ControlBar');
+
+  if (ControlBar) {
+    children = ControlBar.prototype.options_.children;
+    // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
+    // Also add a blank div underneath the progress control to stop bubbling up pointer events.
+    children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
+
+    // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
+    children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
+
+    // Position the 'logo-button' button right next to 'fullscreenToggle'
+    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton', 'fullscreenToggle');
+  }
+};
