@@ -1,4 +1,4 @@
-import VideoSource from '../../src/plugins/cloudinary/models/video-source.js';
+import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import cloudinary from 'cloudinary-core';
 const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 

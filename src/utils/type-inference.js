@@ -20,8 +20,12 @@ function isElement(value) {
   return value instanceof Element;
 }
 
+function isFunction(data) {
+  return typeof data === 'function';
+}
+
 function noop() {
   return null;
 }
 
-export { isPlainObject, isString, isInteger, isNumber, isElement, noop };
+export { isPlainObject, isString, isInteger, isNumber, isElement, noop, isFunction };

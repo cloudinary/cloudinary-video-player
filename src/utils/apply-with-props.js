@@ -1,4 +1,5 @@
 import { assign } from './assign';
+import { isFunction } from './type-inference';
 
 function applyWithProps(context, obj, { order = null } = {}) {
   let _obj = obj;
@@ -9,7 +10,7 @@ function applyWithProps(context, obj, { order = null } = {}) {
       return;
     }
 
-    if (context[key] && typeof context[key] === 'function') {
+    if (context[key] && isFunction(context[key])) {
       context[key](value);
     }
   };

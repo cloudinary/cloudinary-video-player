@@ -1,4 +1,4 @@
-import VideoSource from 'plugins/cloudinary/models/video-source';
+import VideoSource from 'plugins/cloudinary/models/video-source/video-source';
 import { isInteger } from 'utils/type-inference';
 
 import 'components/playlist/components/upcoming-video-overlay';
