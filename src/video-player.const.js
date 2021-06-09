@@ -32,6 +32,20 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'seekThumbnails'
 ]);
 
+const INTERACTION_AREAS_TEMPLATE = {
+  PORTRAIT: 'portrait',
+  LANDSCAPE: 'landscape',
+  All: 'all',
+  CENTER: 'center'
+};
+
+export const TEMPLATE_INTERACTION_AREAS_VTT = {
+  [INTERACTION_AREAS_TEMPLATE.PORTRAIT]: 'https://res.cloudinary.com/prod/raw/upload/v1623225301/video-player/vtts/portrait.vtt',
+  [INTERACTION_AREAS_TEMPLATE.LANDSCAPE]: 'https://res.cloudinary.com/prod/raw/upload/v1623231369/video-player/vtts/landscape.vtt',
+  [INTERACTION_AREAS_TEMPLATE.All]: 'https://res.cloudinary.com/prod/raw/upload/v1623233609/video-player/vtts/all.vtt',
+  [INTERACTION_AREAS_TEMPLATE.CENTER]: 'https://res.cloudinary.com/prod/raw/upload/v1623233896/video-player/vtts/center.vtt'
+};
+
 export const DEFAULT_HLS_OPTIONS = {
   html5: {
     handlePartialData: false,
@@ -42,3 +56,5 @@ export const DEFAULT_HLS_OPTIONS = {
 };
 
 export const TRACKERS_CONTAINER_CLASS_NAME = 'trackers-container';
+
+export const FLUID_CLASS_NAME = 'cld-fluid';

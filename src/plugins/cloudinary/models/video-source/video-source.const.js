@@ -9,7 +9,8 @@ export const DEFAULT_VIDEO_PARAMS = {
   sourceTransformation: {},
   sourceTypes: DEFAULT_VIDEO_SOURCE_TYPES,
   recommendations: null,
-  info: {}
+  info: {},
+  interactionAreas: {}
 };
 
 export const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);

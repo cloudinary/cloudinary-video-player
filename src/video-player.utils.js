@@ -45,6 +45,16 @@ export const getTrackerItem = (item, onClick) => {
 };
 
 
+export const addMetadataTrack = (videoJs, vttSource) => {
+  return videoJs.addRemoteTextTrack({
+    kind: 'metadata',
+    srclang: 'en',
+    src: vttSource,
+    default: true,
+    manualCleanup: true
+  }).track;
+};
+
 export const getResolveVideoElement = (elem) => {
   if (isString(elem)) {
     let id = elem;

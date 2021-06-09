@@ -22,10 +22,6 @@
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
       var options = {fluid: true};
 
-      player = cld.videoPlayer('player', options);
-
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
-
       var interactionAreas = [
         {
           left : 10 ,
@@ -43,11 +39,35 @@
         }
       ];
 
+      var player = cld.videoPlayer('manually', options);
+
+      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
+
       player.addInteractionAreas(interactionAreas, {
-        onClick: (event) => {
-          player.source(interactionAreas[event.index].src);
-          player.play();
-        },
+          onClick: (event) => {
+            event.zoom(interactionAreas[event.index].src);
+         }
+      });
+
+
+
+      var player2 = cld.videoPlayer('custom-template', options);
+
+      var videoZoomSources = [
+        'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+         null,
+        'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      ];
+
+      player2.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+        interactionAreas: {
+          enable: true,
+          templateName: 'portrait',
+          onClick: (event) => {
+            const src = videoZoomSources[event.index];
+            src && event.zoom(src);
+          }
+        }
       });
 
     });
@@ -62,8 +82,14 @@
   </nav>
   <h1>Cloudinary Video Player</h1>
 
+  <br/>
+
+  <h3>Define Interaction Areas manually</h3>
+
+  <br/>
+
   <div style="max-width: 250px;margin: 0 auto">
-    <video id="player"
+    <video id="manually"
           playsinline
           controls
           muted
@@ -71,9 +97,7 @@
     </video>
   </div>
 
-
-  <h3>Example Code:</h3>
-  <pre>
+    <pre>
       <code class="language-html">
 
          &lt;video
@@ -88,7 +112,7 @@
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
       var options = {fluid: true};
 
-      player = cld.videoPlayer('player', options);
+      var player = cld.videoPlayer('player', options);
 
       player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
 
@@ -111,13 +135,64 @@
 
       player.addInteractionAreas(interactionAreas, {
         onClick: (event) => {
-          player.source(interactionAreas[event.index].src);
-          player.play();
+          event.zoom(interactionAreas[event.index].src);
         },
       });
       </code>
 
   </pre>
+
+  <br/>
+
+  <h3>Define Interaction Areas using custom template</h3>
+
+  <br/>
+
+  <div style="max-width: 250px;margin: 0 auto">
+        <video id="custom-template"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+   </div>
+
+  <pre>
+      <code class="language-html">
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+
+      var options = {fluid: true};
+
+      var player = cld.videoPlayer('custom-template', options);
+
+      var videoZoomSources = [
+        'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      ]
+
+      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+        interactionAreas: {
+          enable: true,
+          templateName: 'portrait', // or landscape/all/center
+          onClick: (event) => {
+            event.zoom(videoZoomSources[event.index]);
+          }
+        }
+      });
+      </code>
+
+  </pre>
+
 </div>
 
 
