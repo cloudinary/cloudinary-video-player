@@ -5,6 +5,7 @@ import '../../../assets/styles/components/thumbnail.scss';
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 const THUMB_DEFAULT_WIDTH = 300;
+
 const DEFAULT_OPTIONS = {
   item: null,
   transformation: {
@@ -16,8 +17,9 @@ const DEFAULT_OPTIONS = {
 };
 
 class Thumbnail extends ClickableComponent {
-  constructor(player, options) {
-    options = videojs.mergeOptions(DEFAULT_OPTIONS, options);
+
+  constructor(player, initOptions) {
+    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
     super(player, options);
   }
 

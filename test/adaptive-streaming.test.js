@@ -18,7 +18,7 @@ describe('Adaptive streaming tests', () => {
 
     // async function not working without being put inside a template string,
     // See https://github.com/puppeteer/puppeteer/issues/1665
-    let error = await page.evaluate(`(async () => {
+    const error = await page.evaluate(`(async () => {
       let error = null;
       
       // Get any error into error variable

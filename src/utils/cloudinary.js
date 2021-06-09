@@ -1,6 +1,6 @@
 import Promise from 'promise-polyfill';
 import fetchPF from 'fetch-ponyfill/build/fetch-browser';
-import { cloudinaryErrorsConverter } from '../plugins/cloudinary/common';
+import {cloudinaryErrorsConverter, ERROR_CODE} from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
 
 const { fetch } = fetchPF({ Promise });
@@ -8,58 +8,80 @@ const { fetch } = fetchPF({ Promise });
 const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };
 
+
+const getGoodSrcs = (srcs, parsedUris) => {
+  return srcs.filter((s) => {
+    const origUrl = parseUri(s.src);
+    return parsedUris.indexOf(origUrl.host + origUrl.path) !== -1 && s.try !== true;
+  });
+};
+
+
+const getParsedUris = (res) => {
+  return res.reduce((acc, r) => {
+    if (r.status >= 200 && r.status < 399 && r.url !== '') {
+      const parsedUri = parseUri(r.url);
+      acc.push(parsedUri.host + parsedUri.path);
+    }
+
+    return acc;
+  }, []);
+};
+
+const setError = (that, res) => {
+  that.videojs.error(cloudinaryErrorsConverter({
+    errorMsg: res.headers.get('x-cld-error') || '',
+    publicId: that.currentPublicId(),
+    cloudName: that.cloudinaryConfig().config().cloud_name,
+    error: res,
+    statusCode: res.status
+  }));
+};
+
+const setVideoSrc = (that, srcs) => {
+  console.log('Trying urls: ' + JSON.stringify(srcs));
+  srcs.forEach(s => {
+    s.try = true;
+  });
+  that.videojs.autoplay(that.videojs.autoplay() || that.playWasCalled);
+  that.videojs.src(srcs);
+};
+
 const handleCldError = (that, options) => {
-  const cloudName = that.cloudinaryConfig().config().cloud_name;
-  const opts = (options.fetchErrorUsingGet) ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
-  let srcs = that.videojs.cloudinary.getCurrentSources();
-  if (srcs.length > 1) {
+  const opts = options.fetchErrorUsingGet ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
+  const srcs = that.videojs.cloudinary.getCurrentSources();
+
+  if (srcs.length > 0) {
     Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
-      let filtered = [];
-      res.forEach(r => {
-        if (r.status >= 200 && r.status < 399 && r.url !== '') {
-          let parsedUri = parseUri(r.url);
-          filtered.push(parsedUri.host + parsedUri.path);
-        }
-      });
-      if (filtered.length === 0) {
-        const errorMsg = res[0].headers.get('x-cld-error') || '';
-        that.videojs.error(cloudinaryErrorsConverter({
-          errorMsg,
-          publicId: that.currentPublicId(),
-          cloudName,
-          error: res[0],
-          statusCode: res[0].status
-        }));
+      const parsedUris = getParsedUris(res);
+      const firstRes = res[0];
+      if (!parsedUris.length) {
+        setError(that, firstRes);
       } else {
-        let goodSrcs = srcs.filter(s => {
-          let origUrl = parseUri(s.src);
-          return filtered.indexOf(origUrl.host + origUrl.path) !== -1 && s.try !== true;
-        });
+        const goodSrcs = getGoodSrcs(srcs, parsedUris);
+
         if (goodSrcs && goodSrcs.length) {
-          console.log('Trying urls: ' + JSON.stringify(goodSrcs));
-          goodSrcs.forEach(s => {
-            s.try = true;
-          });
-          that.videojs.autoplay(that.videojs.autoplay() || that.playWasCalled);
-          that.videojs.src(goodSrcs);
+          setVideoSrc(that, goodSrcs);
         } else {
           console.log('No urls left to try so stopping');
-          that.videojs.error({ code: 6, message: 'No supported media sources' });
+          that.videojs.error({code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources', statusCode: res.status });
         }
       }
     })
-      .catch(error => that.videojs.error({
-        code: 7,
-        message: error && error.message ? error.message : 'Failed to test sources'
-      }));
+      .catch(error => {
+        that.videojs.error({
+          code: 7,
+          message: error && error.message ? error.message : 'Failed to test sources'
+        });
+      });
   } else {
-    that.videojs.error({ code: 6, message: 'No supported media sources' });
+    that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources'});
   }
 };
 
 // for IE 11
 function parseUri(str) {
-  let o = {
+  const o = {
     strictMode: false,
     key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
     q: {
@@ -71,8 +93,8 @@ function parseUri(str) {
       loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
     }
   };
-  let m = o.parser[o.strictMode ? 'strict' : 'loose'].exec(str);
-  let uri = {};
+  const m = o.parser[o.strictMode ? 'strict' : 'loose'].exec(str);
+  const uri = {};
   let i = 14;
 
   while (i--) {

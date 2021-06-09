@@ -8,8 +8,20 @@ function isString(obj) {
   return obj instanceof String || typeof obj === 'string';
 }
 
+function isNumber(data) {
+  return data instanceof Number || typeof data === 'number';
+}
+
 function isInteger(data) {
   return typeof data === 'number' && (data % 1) === 0;
 }
 
-export { isPlainObject, isString, isInteger };
+function isElement(value) {
+  return value instanceof Element;
+}
+
+function noop() {
+  return null;
+}
+
+export { isPlainObject, isString, isInteger, isNumber, isElement, noop };

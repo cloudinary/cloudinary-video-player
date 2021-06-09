@@ -1,17 +1,24 @@
 import videojs from 'video.js';
 import isObj from 'is-obj';
 import './components';
-import plugins from 'plugins';
-import Utils from 'utils';
-import defaults from 'config/defaults';
-import Eventable from 'mixins/eventable';
-import ExtendedEvents from 'extended-events';
+import plugins from './plugins';
+import Utils from './utils';
+import defaults from './config/defaults';
+import Eventable from './mixins/eventable';
+import ExtendedEvents from './extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
-
 import VideoSource from './plugins/cloudinary/models/video-source';
+import { createElement } from './utils/dom';
+import { noop } from './utils/type-inference';
+import {
+  getMetaDataTracker,
+  getTrackerItem,
+  setTrackersContainer,
+  TRACKERS_CONTAINER_CLASS_NAME
+} from './video-player.utils';
 
 const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -168,8 +175,12 @@ overrideDefaultVideojsComponents();
 let _allowUsageReport = true;
 
 class VideoPlayer extends Utils.mixin(Eventable) {
+
   constructor(elem, options, ready) {
     super();
+
+    this._isZoomed = false;
+    this.unZoom = noop;
 
     elem = resolveVideoElement(elem);
     options = extractOptions(elem, options);
@@ -394,7 +405,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       if (conf) {
         const tracks = Object.keys(conf);
-        let allTracks = [];
+        const allTracks = [];
         for (const track of tracks) {
           if (Array.isArray(conf[track])) {
             let trks = conf[track];
@@ -426,6 +437,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           const publicId = source.publicId();
 
           let transformations = source.transformation().toOptions();
+
+          if (transformations && transformations.streaming_profile) {
+            delete transformations.streaming_profile;
+          }
+
           transformations.flags = transformations.flags || [];
           transformations.flags.push('sprite');
 
@@ -504,6 +520,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       }
     });
+    this.videojs.on('play', () => {
+      this.videojs.clearTimeout(this.reTryId);
+    });
+
+    this.videojs.on('canplaythrough', () => {
+      // clear retry timeout
+      this.videojs.clearTimeout(this.reTryId);
+    });
 
     this.videojs.ready(() => {
       onReady();
@@ -511,6 +535,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (ready) {
         ready(this);
       }
+
+      this.videojs.on('ended', () => {
+        this.unZoom();
+      });
     });
 
     if (this.adsEnabled) {
@@ -593,6 +621,64 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }
 
+  _setGoBackButton() {
+    const button = createElement('button', { 'class': 'go-back-button' }, 'Go back');
+
+    button.addEventListener('click', () => {
+      this.unZoom();
+    }, false);
+
+    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
+    setTrackersContainer(this.videojs, tracksContainer);
+  }
+
+  addInteractionAreas(interactionAreas, trackersOptions) {
+    this.unZoom = () => {
+      if (this._isZoomed) {
+        this._isZoomed = false;
+        this.source(this.prvSrc).play();
+        this._addTrackersItems(interactionAreas, trackersOptions);
+      }
+    };
+
+    this._addTrackersItems(interactionAreas, trackersOptions);
+  }
+
+  _addTrackersItems(trackersData, trackersOptions) {
+    const trackerItems = trackersData.map((item, index) => {
+      return getTrackerItem(item, (event) => {
+        this._isZoomed = true;
+        this.prvSrc = this.currentSourceUrl();
+        this._setGoBackButton();
+        trackersOptions && trackersOptions.onClick({ item, index, event });
+      });
+    });
+
+    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, trackerItems);
+
+    setTrackersContainer(this.videojs, tracksContainer);
+  }
+
+  addCueListener() {
+    const textTracks = this.videojs.textTracks();
+    if (!textTracks.length) {
+      return;
+    }
+
+    const track = getMetaDataTracker(textTracks);
+
+    if (!track) {
+      return;
+    }
+
+    track.mode = 'hidden';
+
+    track.addEventListener('cuechange', () => {
+      const tracksData = JSON.parse(track.activeCues[0].text);
+      this._addTrackersItems(tracksData);
+    });
+  }
+
   currentPublicId() {
     return this.videojs.cloudinary.currentPublicId();
   }
@@ -622,7 +708,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.initQualitySelector();
     // #endif
-    clearTimeout(this.reTryVideo);
+    clearTimeout(this.reTryId);
     this.nbCalls = 0;
     let maxTries = this.videojs.options_.maxTries || 3;
     let videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;

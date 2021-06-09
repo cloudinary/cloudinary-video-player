@@ -35,7 +35,6 @@ module.exports = {
       "never"
     ],
     "array-callback-return": "error",
-    "arrow-body-style": "error",
     "arrow-parens": "off",
     "arrow-spacing": [
       "error",
@@ -190,13 +189,12 @@ module.exports = {
     "no-sync": "error",
     "no-ternary": "off",
     "no-throw-literal": "error",
-    "no-trailing-spaces": "error",
     "no-undef-init": "error",
     "no-undefined": "off",
     "no-underscore-dangle": "off",
     "no-unmodified-loop-condition": "error",
     "no-unneeded-ternary": "error",
-    "no-unused-expressions": "error",
+    "no-unused-expressions": "off",
     "no-unused-vars": "warn",
     "no-use-before-define": "off",
     "no-useless-call": "error",

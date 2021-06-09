@@ -21,35 +21,33 @@ const tracks = [
     srclang: 'se'
   }
 ];
-import Utils from '../../src/utils';
-jest.doMock('fetch-ponyfill/build/fetch-browser', () => ({
-  __esModule: true,
-  fetch: jest.fn((url, options) => {
-    if (url === tracks[2].src) {
-      return Promise.resolve({
-        json: () => Promise.resolve({ status: 404 })
+jest.mock('fetch-ponyfill/build/fetch-browser', () => (() => {
+  return {
+    fetch: jest.fn((url, options) => {
+      return new Promise((resolve) => {
+        if (url === tracks[2].src) {
+          resolve({ status: 404 });
+        } else {
+          resolve({ status: 200 });
+        }
       });
-    } else {
-      Promise.resolve({
-        json: () => Promise.resolve({ status: 200 })
-      });
-    }
-  })
+    }),
+    default: jest.fn()
+  };
 }));
-import fetchPF from 'fetch-ponyfill/build/fetch-browser';
-
-// require('jest-fetch-mock').enableMocks();
+import { fetch } from 'fetch-ponyfill/build/fetch-browser';
+import { filterAndAddTextTracks } from '../../src/utils/cloudinary';
 
 describe('video source tests', () => {
-  it('test filter out bad vtt', async () => {
-    jest.useFakeTimers();
+  it('test filter out bad vtt', async (done) => {
     let vjs = jest.createMockFromModule('video.js');
     vjs.addRemoteTextTrack = jest.fn();
     jest.spyOn(vjs, 'addRemoteTextTrack');
-    let a = await Utils.filterAndAddTextTracks(tracks, vjs);
-    console.log(a);
-    // expect(vjs.addRemoteTextTrack).toBeCalled();
-
+    filterAndAddTextTracks(tracks, vjs);
+    setTimeout(() => {
+      expect(vjs.addRemoteTextTrack).toBeCalledTimes(2);
+      done();
+    }, 1000);
   });
 
 });

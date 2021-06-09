@@ -5,6 +5,14 @@
   <title>Cloudinary Video Player</title>
   <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
 
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
   <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
@@ -13,7 +21,6 @@
 
     <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
@@ -139,15 +146,16 @@
       muted
       autoplay
       class="cld-video-player"
-      width="500"
-    ></video>
+      width="500">
+    </video>
 
     <p class="mt-4">
       <a href="https://github.com/videojs/video.js/blob/master/docs/guides/components.md">Read more about VideoJS components</a>
     </p>
 
     <h3 class="mt-4">Example Code:</h3>
-    <pre><code class="language-css">
+    <pre>
+      <code class="language-css">
 
       &lt;!-- We used FontAwesome for the 'Previous' and 'Next' controlBar buttons --&gt;
       &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"&gt;
@@ -175,8 +183,8 @@
         muted
         autoplay
         class="cld-video-player"
-        width="500"
-      &gt;&lt;/video&gt;
+        width="500"&gt;
+       &lt;/video&gt;
 
       &lt;div id="source-data"&gt;
         &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
@@ -268,29 +276,9 @@
         { publicId: 'elephants' },
         'sea_turtle'], { autoAdvance: 0, repeat: true });
 
-      function updateSource() {
-        var divElem = document.querySelector("div#source-data");
-
-        publicIdElem = divElem.querySelector("#public-id-placeholder");
-        sourceUrlElem = divElem.querySelector("#source-url-placeholder");
-
-        publicIdElem.innerText = "Public Id: " + player.currentPublicId();
-        sourceUrlElem.innerText = "Source URL: " + player.currentSourceUrl();
-
-        divElem.style.display = 'block';
-      }
-
-      player.on('sourcechanged', updateSource);
-    </code></pre>
+    </code>
+    </pre>
   </div>
-
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>

@@ -8,47 +8,49 @@ const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
 
 class TitleBar extends Component {
+
   constructor(player, options = {}) {
     super(player, options);
 
     this.on(player, 'cldsourcechanged', (_, { source }) => this.setItem(source));
+  }
 
-    this.setItem = (source) => {
-      if (!source) {
-        this.setTitle('');
-        this.setSubtitle('');
-        return;
-      }
+  setItem(source) {
+    if (!source) {
+      this.setTitle('');
+      this.setSubtitle('');
 
-      const info = source.info();
+      return;
+    }
 
-      this.setTitle(info.title);
-      this.setSubtitle(info.subtitle);
-    };
+    const info = source.info();
 
-    this.setTitle = (text) => {
-      componentUtils.setText(this.titleEl, text);
-      refresh();
-      return text;
-    };
+    this.setTitle(info.title);
+    this.setSubtitle(info.subtitle);
+  }
 
-    this.setSubtitle = (text) => {
-      componentUtils.setText(this.subtitleEl, text);
-      refresh();
-      return text;
-    };
+  setTitle(text) {
+    componentUtils.setText(this.titleEl, text);
+    this.refresh();
+    return text;
+  }
 
+  setSubtitle(text) {
+    componentUtils.setText(this.subtitleEl, text);
+    this.refresh();
+    return text;
+  }
+
+  refresh() {
     const titleValue = () => this.titleEl.innerText;
     const subtitleValue = () => this.subtitleEl.innerText;
 
-    const refresh = () => {
-      if (!titleValue() && !subtitleValue()) {
-        this.hide();
-        return;
-      }
+    if (!titleValue() && !subtitleValue()) {
+      this.hide();
+      return;
+    }
 
-      this.show();
-    };
+    this.show();
   }
 
   createEl() {

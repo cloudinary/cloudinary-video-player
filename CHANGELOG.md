@@ -1,3 +1,69 @@
+1.6.0-edge.0 / 2021-06-02
+==================
+
+New functionality and features
+------------------------------
+* Add interaction areas (#254)
+* Add handling non existent texttracks (#252)
+
+Fixes
+------------------------------
+* Fix fluid posted CSS (#247)
+* Fix handleCldError not returning statusCode (#248)
+* Fix retry timeout not clearing on play (#240)
+* Fix big button disappearing in IE11 (#244)
+
+Other Changes
+------------------------------
+* Update dependencies (#236)
+* Minor refactor for code syntax (linting + let/const)
+
+1.5.3 / 2021-03-29
+==================
+
+Fixes
+-----
+* Fix seek thumbnails for adaptive videos (#232)
+* Filter out dash sources on safari (#235)
+* Update subtitles crossorigin definition to be "anonymous"
+* Fix recommendations displayed in the light version
+* Fix autoplay on fallback (#227)
+* Fix dash seek behavior and error handling (#228)
+* Fix error when playing a second HLS video (#226)
+* Fix seek thumbnails image path (#223)
+* Fix dash.js error handling: pass dash errors to videojs (#219)
+
+Other Changes
+---------------
+* Add example of how to force subtitles in an HLS stream (#231)
+* Use native hls text tracks by default (#229)
+* Add type declaration for cloudinary-core module
+* Add example of subtitles for playlistByTag (#220)
+* bump dashjs to version 3.2.1
+* Bump elliptic from 6.5.3 to 6.5.4
+* Bump node-notifier from 8.0.0 to 8.0.1
+* Bump ini from 1.3.5 to 1.3.7
+
+1.5.2 / 2021-03-25
+==================
+* This version is identical to 1.5.1
+
+1.5.2-edge.4 / 2021-03-18
+==================
+
+Fixes
+-----
+* Fix seek thumbnails for adaptive videos (#232)
+* Filter out dash sources on safari (#235)
+* Update subtitles crossorigin definition to be "anonymous"
+* Fix recommendations displayed in the light version
+
+Other Changes
+-------------
+* Bump elliptic from 6.5.3 to 6.5.4
+* Add example of how to force subtitles in an HLS stream (#231)
+* bump dashjs to version 3.2.1
+
 1.5.2-edge.3 / 2021-02-22
 ==================
 
