@@ -55,11 +55,11 @@
          }
       });
 
-        var videoZoomSources = [
-            'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
-            'https://www2.hm.com/en_in/productpage.0687948004.html',
-            'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
-       ];
+      var videoZoomSources = {
+        top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        middle:'https://www2.hm.com/en_in/productpage.0687948004.html',
+        bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
 
       var player2 = cld.videoPlayer('custom-template', options);
 
@@ -68,8 +68,8 @@
           enable: true,
           templateName: 'portrait',
           onClick: (event) => {
-            const src = videoZoomSources[event.index];
-            if(event.index === 1){
+            const src = videoZoomSources[event.item.id];
+            if(event.item.id === 'middle'){
                 if(window.confirm('Do you like this shirt ?')) {
                     window.open(src, '_blank').focus();
                 }
@@ -83,12 +83,16 @@
 
         var player3 = cld.videoPlayer('custom-vtt', options);
 
+        var videoZoomSources3 = {
+            center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
+
         player3.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
             interactionAreas: {
                 enable: true,
-                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623233896/video-player/vtts/center.vtt',
+                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
                 onClick: (event) => {
-                    event.zoom(videoZoomSources[event.index]);
+                    event.zoom(videoZoomSources3[event.item.id]);
                 }
             }
         });
@@ -203,20 +207,20 @@
 
       var player = cld.videoPlayer('player', options);
 
-      var sources = [
-        'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
-        'https://www2.hm.com/en_in/productpage.0687948004.html',
-        'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
-      ]
+       var sources = {
+        top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        middle:'https://www2.hm.com/en_in/productpage.0687948004.html',
+        bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
 
       player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
         interactionAreas: {
           enable: true,
           templateName: 'portrait', // or landscape/all/center
           onClick: (event) => {
-            // 'event.index' is the index of the clicked interaction area
-            const src = sources[event.index];
-            if(event.index === 1){
+            // 'event.item.id' is an id that been defined in vtt file
+            const src = sources[event.item.id];
+            if(event.item.id === 'middle'){
                 if(window.confirm("Do you like this shirt ?")) {
                     window.open(src, '_blank').focus();
                 }
@@ -262,17 +266,17 @@
 
       var player = cld.videoPlayer('player', options);
 
-      const sources = [
-          'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
-      ]
+        var sources = {
+            center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
 
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+        player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
             interactionAreas: {
                 enable: true,
-                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623233896/video-player/vtts/center.vtt',
+                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
                 onClick: (event) => {
-                   // 'event.index' is the index of the clicked interaction area
-                   event.zoom(sources[event.index])
+                    // 'event.item.id' is an id that been defined in vtt file
+                    event.zoom(sources[event.item.id]);
                 }
             }
         });
