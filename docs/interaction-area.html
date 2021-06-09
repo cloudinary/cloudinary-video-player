@@ -262,13 +262,17 @@
 
       var player = cld.videoPlayer('player', options);
 
+      const sources = [
+          'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      ]
+
       player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
             interactionAreas: {
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623233896/video-player/vtts/center.vtt',
                 onClick: (event) => {
                    // 'event.index' is the index of the clicked interaction area
-                   event.zoom(videoZoomSources[event.index])
+                   event.zoom(sources[event.index])
                 }
             }
         });
