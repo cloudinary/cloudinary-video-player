@@ -55,7 +55,7 @@
 
       var videoZoomSources = [
         'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
-         null,
+        'https://www2.hm.com/en_in/productpage.0687948004.html',
         'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       ];
 
@@ -65,7 +65,14 @@
           templateName: 'portrait',
           onClick: (event) => {
             const src = videoZoomSources[event.index];
-            src && event.zoom(src);
+            if(event.index === 1){
+                if(window.confirm("Do you like this shirt ?")) {
+                    window.open(src, '_blank').focus();
+                }
+            }
+            else {
+                event.zoom(src)
+            }
           }
         }
       });
@@ -176,7 +183,7 @@
 
       var videoZoomSources = [
         'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
-        'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        'https://www2.hm.com/en_in/productpage.0687948004.html',
         'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       ]
 
@@ -185,7 +192,15 @@
           enable: true,
           templateName: 'portrait', // or landscape/all/center
           onClick: (event) => {
-            event.zoom(videoZoomSources[event.index]);
+            const src = videoZoomSources[event.index];
+            if(event.index === 1){
+                if(window.confirm("Do you like this shirt ?")) {
+                    window.open(src, '_blank').focus();
+                }
+            }
+            else {
+                event.zoom(src)
+            }
           }
         }
       });
