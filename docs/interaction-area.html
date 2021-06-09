@@ -218,7 +218,7 @@
           enable: true,
           templateName: 'portrait', // or landscape/all/center
           onClick: (event) => {
-            // 'event.item.id' is an id that been defined in vtt file
+            // 'event.item.id' is an id that been defined in the vtt file
             const src = sources[event.item.id];
             if(event.item.id === 'middle'){
                 if(window.confirm("Do you like this shirt ?")) {
@@ -275,7 +275,7 @@
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
                 onClick: (event) => {
-                    // 'event.item.id' is an id that been defined in vtt file
+                    // 'event.item.id' is an id that been defined in the vtt file
                     event.zoom(sources[event.item.id]);
                 }
             }
