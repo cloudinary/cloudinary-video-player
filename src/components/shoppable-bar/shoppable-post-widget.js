@@ -29,6 +29,7 @@ class ShoppablePostWidget {
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     });
+
     document.addEventListener('mouseup', (e) => {
       isDown = false;
       setTimeout(() => {
@@ -41,6 +42,7 @@ class ShoppablePostWidget {
         e.preventDefault();
       }
     });
+
     document.addEventListener('mousemove', (e) => {
       if (!isDown) {
         return;
@@ -73,7 +75,7 @@ class ShoppablePostWidget {
 
     const panelBg = dom.createEl('div', {
       className: 'cld-spbl-post-play-bg',
-      style: 'background-image: url("' + bgSrc.url() + '")'
+      style: `background-image: url("${bgSrc.url()}")`
     });
 
     const replayBtn = dom.createEl('button',

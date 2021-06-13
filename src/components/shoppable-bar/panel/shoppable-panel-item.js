@@ -4,18 +4,26 @@ import { elMatches } from 'utils/matches';
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 const dom = videojs.dom || videojs;
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
+import {
+  CLD_SPBL_IMAGE,
+  CLD_SPBL_ITEM,
+  SHOPPABLE_CLICK_ACTIONS, SHOPPABLE_HOVER_ACTIONS,
+  SHOPPABLE_WIDGET_RESPONSIVE_CLASS
+} from '../shoppable-widget.const';
 
 class ShoppablePanelItem extends ClickableComponent {
-  constructor(player, options) {
-    super(player, options);
-    this.options_ = options;
+
+  constructor(player, initOptions) {
+    super(player, initOptions);
+    this.options_ = initOptions;
     this.isDragged = false;
   }
 
   handleClick(event) {
     event.preventDefault();
     event.stopPropagation();
-    if (!elMatches(this.el_, '.dragged .cld-spbl-item')) {
+
+    if (!elMatches(this.el_, `.dragged .${CLD_SPBL_ITEM}`)) {
       // Prevent click event if dragged
       this.options_.clickHandler(event);
     }
@@ -28,12 +36,13 @@ class ShoppablePanelItem extends ClickableComponent {
 
   createEl() {
     const el = super.createEl('a', {
-      className: 'cld-spbl-item base-color-bg accent-color-text',
+      className: `${CLD_SPBL_ITEM} base-color-bg accent-color-text`,
       href: '#'
     });
 
     el.setAttribute('data-product-id', this.options_.conf.productId || '');
     el.setAttribute('data-product-name', this.options_.conf.productName || '');
+
     if (this.options_.conf.onHover) {
       addOnHover(el, this.options_.conf.onHover, this.options_.item.cloudinaryConfig());
     }
@@ -42,9 +51,10 @@ class ShoppablePanelItem extends ClickableComponent {
     }
 
     const img = super.createEl('img',
-      { className: 'cld-spbl-img cld-vp-responsive' },
+      { className: `${CLD_SPBL_IMAGE} ${SHOPPABLE_WIDGET_RESPONSIVE_CLASS}` },
       { 'data-src': this.options_.item.url() }
     );
+
     el.appendChild(img);
 
     if (this.getTitle()) {
@@ -60,19 +70,22 @@ class ShoppablePanelItem extends ClickableComponent {
 
 const addOnHover = (el, conf, cldConf) => {
   el.setAttribute('data-hover-action', conf.action);
-  if (conf.action === 'overlay') {
+  if (conf.action === SHOPPABLE_HOVER_ACTIONS.OVERLAY) {
     const overlayText = dom.createEl('span', { className: 'cld-spbl-overlay-text base-color-text' }, {}, conf.args);
     const overlay = dom.createEl('span', { className: 'cld-spbl-overlay text-color-semi-bg base-color-text' }, { title: conf.args }, overlayText);
     el.appendChild(overlay);
   } else {
+
     const switchImgSource = new ImageSource(conf.args.publicId, {
       cloudinaryConfig: cldConf,
       transformation: conf.args.transformation
     });
+
     const hoverImg = dom.createEl('img',
-      { className: 'cld-spbl-img cld-spbl-hover-img cld-vp-responsive' },
+      { className: `${CLD_SPBL_IMAGE} cld-spbl-hover-img ${SHOPPABLE_WIDGET_RESPONSIVE_CLASS}` },
       { 'data-src': switchImgSource.url() }
     );
+
     el.appendChild(hoverImg);
   }
 };
@@ -80,9 +93,9 @@ const addOnHover = (el, conf, cldConf) => {
 const addOnClick = (el, conf) => {
   el.setAttribute('data-click-action', conf.action);
   el.setAttribute('data-pause', conf.pause);
-  if (conf.action === 'seek') {
+  if (conf.action === SHOPPABLE_CLICK_ACTIONS.SEEk) {
     el.setAttribute('data-seek', conf.args.time);
-  } else if (conf.action === 'goto') {
+  } else if (conf.action === SHOPPABLE_CLICK_ACTIONS.GO_TO) {
     el.setAttribute('data-goto-url', conf.args.url);
   }
 };

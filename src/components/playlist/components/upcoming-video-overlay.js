@@ -129,11 +129,9 @@ class UpcomingVideoOverlayTitle extends Component {
 class UpcomingVideoOverlayBar extends Component {
 
   createEl() {
-    const el = super.createEl('div', {
+    return super.createEl('div', {
       className: 'vjs-upcoming-video-bar'
     });
-
-    return el;
   }
 }
 
