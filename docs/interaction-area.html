@@ -46,12 +46,11 @@
 
       var player = cld.videoPlayer('manually', options);
 
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
+      player.source('video-player/girl_in_a_dress');
 
       player.addInteractionAreas(interactionAreas, {
           onClick: (event) => {
-            const source = sources[event.item.id];
-            event.zoom(source);
+            event.zoom(sources[event.item.id]);
          }
       });
 
@@ -63,7 +62,7 @@
 
       var player2 = cld.videoPlayer('custom-template', options);
 
-      player2.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+      player2.source('video-player/girl_in_a_dress', {
         interactionAreas: {
           enable: true,
           templateName: 'portrait',
@@ -93,6 +92,22 @@
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
                 onClick: (event) => {
                     event.zoom(videoZoomSources3[event.item.id]);
+                }
+            }
+        });
+
+
+        var player4 = cld.videoPlayer('auto-zoom', options);
+
+        player4.source('video-player/girl_in_a_dress', {
+            transformation:{
+                quality: 'auto',
+            },
+            interactionAreas: {
+                enable: true,
+                templateName: 'portrait',
+                onClick: (event) => {
+                    event.zoom();
                 }
             }
         });
@@ -163,7 +178,7 @@
 
       var player = cld.videoPlayer('player', options);
 
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
+      player.source('video-player/girl_in_a_dress');
 
       player.addInteractionAreas(interactionAreas, {
           onClick: (event) => {
@@ -213,7 +228,7 @@
         bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+      player.source('video-player/girl_in_a_dress', {
         interactionAreas: {
           enable: true,
           templateName: 'portrait', // or landscape/all/center
@@ -270,7 +285,7 @@
             center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
         }
 
-        player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+        player.source('video-player/girl_in_a_dress', {
             interactionAreas: {
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
@@ -284,9 +299,56 @@
 
   </pre>
 
+    <h3>Auto-zoom video cropping</h3>
+
+    <br/>
+
+    <div style="max-width: 250px;margin: 0 auto">
+        <video id="auto-zoom"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+    </div>
+
+    <pre>
+      <code class="language-html">
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+
+      var options = {fluid: true};
+
+      var player = cld.videoPlayer('player', options);
+
+      // auto-zoom works only if the source is a cloudinary source object or a public id
+      // does not work for a full raw url
+      player.source('video-player/girl_in_a_dress', {
+           transformation:{
+                quality: 'auto',
+            },
+            interactionAreas: {
+                enable: true,
+                templateName: 'portrait',
+                onClick: (event) => {
+                    //in case you not passing a source to the zoom function auto zoom will be enabled
+                    event.zoom();
+                }
+            }
+      });
+      </code>
+
+  </pre>
 
 </div>
-
 
 </body>
 </html>

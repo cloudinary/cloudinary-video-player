@@ -62,17 +62,17 @@ $icon-font-path: '../fonts' !default;
   font-family: $text-font-family;
 
   &.vjs-user-active {
-    .trackers-container {
+    .interaction-areas-container {
       opacity: 1;
     }
   }
 
-  .trackers-container {
+  .interaction-areas-container {
     opacity: 0;
     transition: opacity 0.5s;
 
     .go-back-button,
-    .video-player-tracker{
+    .video-player-interaction-area{
       position: absolute;
       cursor: pointer;
     }
@@ -84,7 +84,7 @@ $icon-font-path: '../fonts' !default;
       height: 100%;
     }
 
-    .video-player-tracker {
+    .video-player-interaction-area {
       border: solid 1px red;
     }
   }

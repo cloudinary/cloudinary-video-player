@@ -18,11 +18,16 @@ import {
   extractOptions,
   getMetaDataTracker,
   getResolveVideoElement,
-  getTrackerItem,
+  getInteractionAreaItem,
+  getZoomTransformation,
   overrideDefaultVideojsComponents,
-  setTrackersContainer
+  setInteractionAreasContainer
 } from './video-player.utils';
-import { FLUID_CLASS_NAME, TEMPLATE_INTERACTION_AREAS_VTT, TRACKERS_CONTAINER_CLASS_NAME } from './video-player.const';
+import {
+  FLUID_CLASS_NAME,
+  TEMPLATE_INTERACTION_AREAS_VTT,
+  INTERACTION_AREAS_CONTAINER_CLASS_NAME
+} from './video-player.const';
 
 
 // Register all plugins
@@ -75,27 +80,27 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._playlistWidget = null;
     this.nbCalls = 0;
 
-    const element = getResolveVideoElement(elem);
+    this.videoElement = getResolveVideoElement(elem);
 
-    this.options = extractOptions(element, initOptions);
+    this.options = extractOptions(this.videoElement, initOptions);
 
     const vjsOptions = this.options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
-    element.classList.add('video-js');
+    this.videoElement.classList.add('video-js');
 
     // Handle WebFont loading
-    Utils.fontFace(element, this.playerOptions);
+    Utils.fontFace(this.videoElement, this.playerOptions);
 
     // Handle play button options
-    Utils.playButton(element, vjsOptions);
+    Utils.playButton(this.videoElement, vjsOptions);
 
     // Dash plugin - available in full (not light) build only
     if (plugins.dashPlugin) {
       plugins.dashPlugin();
     }
 
-    this.videojs = videojs(element, vjsOptions);
+    this.videojs = videojs(this.videoElement, vjsOptions);
 
     if (vjsOptions.muted) {
       this.videojs.volume(0.4);
@@ -140,8 +145,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.on('canplaythrough', () => {
       this.videojs.clearTimeout(this.reTryId);
     });
-
-    this.addCueListenerAdd = false;
 
     this.videojs.ready(() => {
       this._onReady();
@@ -190,7 +193,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _updateInteractionAreasTrack() {
-    const interactionAreasConfig = this.getInteractionAreas();
+    const interactionAreasConfig = this.getInteractionAreasConfig();
     this._currentTrack && this.videojs.removeRemoteTextTrack(this._currentTrack);
 
     if (!interactionAreasConfig) {
@@ -224,27 +227,23 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (!this.playerOptions.ads) {
       this.playerOptions.ads = {};
     }
+
     const opts = this.playerOptions.ads;
 
     if (Object.keys(opts).length === 0) {
       return false;
     }
 
-    const {
-      adTagUrl, prerollTimeout, postrollTimeout, showCountdown, adLabel,
-      autoPlayAdBreaks, locale
-    } = opts;
-
     this.videojs.ima({
       id: this.el().id,
-      adTagUrl,
+      adTagUrl: opts.adTagUrl,
       disableFlashAds: true,
-      prerollTimeout: prerollTimeout || 5000,
-      postrollTimeout: postrollTimeout || 5000,
-      showCountdown: (showCountdown !== false),
-      adLabel: adLabel || 'Advertisement',
-      locale: locale || 'en',
-      autoPlayAdBreaks: (autoPlayAdBreaks !== false),
+      prerollTimeout: opts.prerollTimeout || 5000,
+      postrollTimeout: opts.postrollTimeout || 5000,
+      showCountdown: (opts.showCountdown !== false),
+      adLabel: opts.adLabel || 'Advertisement',
+      locale: opts.locale || 'en',
+      autoPlayAdBreaks: (opts.autoPlayAdBreaks !== false),
       debug: true
     });
 
@@ -518,55 +517,62 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.unZoom();
     }, false);
 
-    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, button);
-    setTrackersContainer(this.videojs, tracksContainer);
+    const tracksContainer = createElement('div', { 'class': INTERACTION_AREAS_CONTAINER_CLASS_NAME }, button);
+    setInteractionAreasContainer(this.videojs, tracksContainer);
   }
 
-  addInteractionAreas(interactionAreas, trackersOptions) {
+  addInteractionAreas(interactionAreas, interactionAreasOptions) {
     this._setStaticInteractionAreas = () => {
-      this._addTrackersItems(interactionAreas, trackersOptions);
+      this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
     };
 
-    this._addTrackersItems(interactionAreas, trackersOptions);
+    this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
   }
 
-  getInteractionAreas() {
+  getInteractionAreasConfig() {
     return this.videojs.currentSource().cldSrc.getInteractionAreas();
   }
 
-  _onZoom(src, option) {
-    const prvSrc = this.currentSourceUrl();
-    const prvSrcOptions = this.videojs.currentSource().cldSrc.getInitOptions();
+  _onZoom(src, newOption, item) {
+    const currentSource = this.videojs.currentSource();
+    const { cldSrc } = currentSource;
+    const currentSrcOptions = cldSrc.getInitOptions();
+    const option = newOption || { transformation: currentSrcOptions.transformation.toOptions() };
+    const transformation = !src && getZoomTransformation(this.videoElement, item);
+    const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
+
+    const newSource = cldSrc.isRawUrl ? currentSource.src : { publicId: cldSrc.publicId() };
+    this.source(transformation ? { publicId: cldSrc.publicId() } : src, sourceOptions).play();
 
     this._isZoomed = true;
+
     this._setGoBackButton();
 
     this.unZoom = () => {
       if (this._isZoomed) {
         this._isZoomed = false;
         this._setStaticInteractionAreas();
-        this.source(prvSrc, prvSrcOptions).play();
+        this.source(newSource, currentSrcOptions).play();
       }
     };
-
-    this.source(src, option).play();
   }
 
-  _addTrackersItems(trackersData, trackersOptions = {}) {
-    const onZoom = this._onZoom.bind(this);
-    const trackerItems = trackersData.map((item, index) => {
-      return getTrackerItem(item, (event) => {
-        trackersOptions.onClick && trackersOptions.onClick({
+  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}) {
+    const interactionAreasItems = interactionAreasData.map((item, index) => {
+      return getInteractionAreaItem(item, (event) => {
+        interactionAreasOptions.onClick && interactionAreasOptions.onClick({
           item,
           index,
           event,
-          zoom: onZoom
+          zoom: (source, option) => {
+            this._onZoom(source, option, item);
+          }
         });
       });
     });
 
-    const tracksContainer = createElement('div', { 'class': TRACKERS_CONTAINER_CLASS_NAME }, trackerItems);
-    setTrackersContainer(this.videojs, tracksContainer);
+    const interactionAreasContainer = createElement('div', { 'class': INTERACTION_AREAS_CONTAINER_CLASS_NAME }, interactionAreasItems);
+    setInteractionAreasContainer(this.videojs, interactionAreasContainer);
   }
 
   addCueListener(interactionAreasConfig) {
@@ -585,7 +591,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     track.addEventListener('cuechange', () => {
       const tracksData = JSON.parse(track.activeCues[0].text);
-      this._addTrackersItems(tracksData, interactionAreasConfig);
+      this._addInteractionAreasItems(tracksData, interactionAreasConfig);
     });
   }
 

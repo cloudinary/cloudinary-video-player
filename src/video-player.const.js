@@ -55,6 +55,6 @@ export const DEFAULT_HLS_OPTIONS = {
   }
 };
 
-export const TRACKERS_CONTAINER_CLASS_NAME = 'trackers-container';
+export const INTERACTION_AREAS_CONTAINER_CLASS_NAME = 'interaction-areas-container';
 
 export const FLUID_CLASS_NAME = 'cld-fluid';
