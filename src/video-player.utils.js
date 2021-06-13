@@ -6,7 +6,8 @@ import {
   CLOUDINARY_PARAMS,
   DEFAULT_HLS_OPTIONS,
   PLAYER_PARAMS,
-  TRACKERS_CONTAINER_CLASS_NAME
+  INTERACTION_AREAS_CONTAINER_CLASS_NAME,
+  FLUID_CLASS_NAME
 } from './video-player.const';
 import { isString } from './utils/type-inference';
 
@@ -20,20 +21,41 @@ export const getMetaDataTracker = (textTracks) => {
 };
 
 
-export const setTrackersContainer = (videojs, newTracksContainer) => {
+export const setInteractionAreasContainer = (videojs, newInteractionAreasContainer) => {
   const videoContainer = videojs.el();
-  const currentTracksElementContainer = videoContainer.querySelector(`.${TRACKERS_CONTAINER_CLASS_NAME}`);
+  const currentInteractionAreasContainer = videoContainer.querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
 
-  if (currentTracksElementContainer) {
-    currentTracksElementContainer.replaceWith(newTracksContainer);
+  if (currentInteractionAreasContainer) {
+    currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
   } else {
-    videoContainer.append(newTracksContainer);
+    videoContainer.append(newInteractionAreasContainer);
   }
 };
 
+export const percentageToFixedValue = (outOf, value) => (outOf / (100 / +value));
 
-export const getTrackerItem = (item, onClick) => {
-  const element = createElement('div', { class: 'video-player-tracker' });
+export const getZoomTransformation = (videoElement, interactionAreaItem) => {
+
+  const { videoHeight, videoWidth } = videoElement;
+
+  const x = percentageToFixedValue(videoWidth, interactionAreaItem.left);
+  const y = percentageToFixedValue(videoHeight, interactionAreaItem.top);
+  const width = percentageToFixedValue(videoWidth, interactionAreaItem.width);
+  const height = percentageToFixedValue(videoHeight, interactionAreaItem.height);
+
+  const videoAspectRatio = videoWidth / videoHeight;
+  const itemAspectRatio = width / height;
+
+  return {
+    width: Math.round(itemAspectRatio > 1 ? videoAspectRatio * height : width),
+    x: Math.round(itemAspectRatio > 1 ? x + width / 2 : x),
+    y: Math.round(y + height / 2),
+    crop: 'crop'
+  };
+};
+
+export const getInteractionAreaItem = (item, onClick) => {
+  const element = createElement('div', { class: 'video-player-interaction-area' });
   element.style.left = `${item.left}%`;
   element.style.top = `${item.top}%`;
   element.style.width = `${item.width}%`;
@@ -44,6 +66,15 @@ export const getTrackerItem = (item, onClick) => {
   return element;
 };
 
+
+export const addMetadataTrack = (videoJs, vttSource) => {
+  return videoJs.addRemoteTextTrack({
+    kind: 'metadata',
+    srclang: 'en',
+    src: vttSource,
+    default: true
+  }, true).track;
+};
 
 export const getResolveVideoElement = (elem) => {
   if (isString(elem)) {
@@ -93,7 +124,7 @@ export const normalizeAutoplay = (options) => {
 export const extractOptions = (elem, options) => {
   const elemOptions = Utils.normalizeAttributes(elem);
 
-  if (videojs.dom.hasClass(elem, 'cld-fluid') || videojs.dom.hasClass(elem, 'vjs-fluid')) {
+  if (videojs.dom.hasClass(elem, FLUID_CLASS_NAME) || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
 

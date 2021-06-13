@@ -22,33 +22,95 @@
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
       var options = {fluid: true};
 
-      player = cld.videoPlayer('player', options);
-
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
-
       var interactionAreas = [
         {
           left : 10 ,
           top: 10,
           width: 80,
           height: 40,
-          src: 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+          id: 'topSource'
         },
         {
           left : 10 ,
           top: 75,
           width: 80,
           height : 20,
-          src: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+          id: 'topSource'
         }
       ];
 
+      const sources = {
+         topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+         bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
+
+      var player = cld.videoPlayer('manually', options);
+
+      player.source('video-player/girl_in_a_dress');
+
       player.addInteractionAreas(interactionAreas, {
-        onClick: (event) => {
-          player.source(interactionAreas[event.index].src);
-          player.play();
-        },
+          onClick: (event) => {
+            event.zoom(sources[event.item.id]);
+         }
       });
+
+      var videoZoomSources = {
+        top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        middle:'https://www2.hm.com/en_in/productpage.0687948004.html',
+        bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
+
+      var player2 = cld.videoPlayer('custom-template', options);
+
+      player2.source('video-player/girl_in_a_dress', {
+        interactionAreas: {
+          enable: true,
+          templateName: 'portrait',
+          onClick: (event) => {
+            const src = videoZoomSources[event.item.id];
+            if(event.item.id === 'middle'){
+                if(window.confirm('Do you like this shirt ?')) {
+                    window.open(src, '_blank').focus();
+                }
+            }
+            else {
+                event.zoom(src)
+            }
+          }
+        }
+      });
+
+        var player3 = cld.videoPlayer('custom-vtt', options);
+
+        var videoZoomSources3 = {
+            center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
+
+        player3.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+            interactionAreas: {
+                enable: true,
+                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
+                onClick: (event) => {
+                    event.zoom(videoZoomSources3[event.item.id]);
+                }
+            }
+        });
+
+
+        var player4 = cld.videoPlayer('auto-zoom', options);
+
+        player4.source('video-player/girl_in_a_dress', {
+            transformation:{
+                quality: 'auto',
+            },
+            interactionAreas: {
+                enable: true,
+                templateName: 'portrait',
+                onClick: (event) => {
+                    event.zoom();
+                }
+            }
+        });
 
     });
   </script>
@@ -62,8 +124,14 @@
   </nav>
   <h1>Cloudinary Video Player</h1>
 
+  <br/>
+
+  <h3>Define Interaction Areas manually</h3>
+
+  <br/>
+
   <div style="max-width: 250px;margin: 0 auto">
-    <video id="player"
+    <video id="manually"
           playsinline
           controls
           muted
@@ -71,9 +139,7 @@
     </video>
   </div>
 
-
-  <h3>Example Code:</h3>
-  <pre>
+    <pre>
       <code class="language-html">
 
          &lt;video
@@ -88,38 +154,201 @@
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
       var options = {fluid: true};
 
-      player = cld.videoPlayer('player', options);
-
-      player.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4');
-
       var interactionAreas = [
         {
           left : 10 ,
           top: 10,
           width: 80,
           height: 40,
-          src: 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+          id: 'topSource'
         },
         {
           left : 10 ,
           top: 75,
           width: 80,
           height : 20,
-          src: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+          id: 'topSource'
         }
       ];
 
+      const sources = {
+         topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+         bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
+
+      var player = cld.videoPlayer('player', options);
+
+      player.source('video-player/girl_in_a_dress');
+
       player.addInteractionAreas(interactionAreas, {
-        onClick: (event) => {
-          player.source(interactionAreas[event.index].src);
-          player.play();
-        },
+          onClick: (event) => {
+            const source = sources[event.item.id];
+            event.zoom(source);
+         }
       });
       </code>
 
   </pre>
-</div>
 
+  <br/>
+
+  <h3>Interaction Areas using predefined templates</h3>
+
+  <br/>
+
+  <div style="max-width: 250px;margin: 0 auto">
+        <video id="custom-template"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+   </div>
+
+  <pre>
+      <code class="language-html">
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+
+      var options = {fluid: true};
+
+      var player = cld.videoPlayer('player', options);
+
+       var sources = {
+        top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        middle:'https://www2.hm.com/en_in/productpage.0687948004.html',
+        bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      }
+
+      player.source('video-player/girl_in_a_dress', {
+        interactionAreas: {
+          enable: true,
+          templateName: 'portrait', // or landscape/all/center
+          onClick: (event) => {
+            // 'event.item.id' is an id that been defined in the vtt file
+            const src = sources[event.item.id];
+            if(event.item.id === 'middle'){
+                if(window.confirm("Do you like this shirt ?")) {
+                    window.open(src, '_blank').focus();
+                }
+            }
+            else {
+                event.zoom(src)
+            }
+          }
+        }
+      });
+      </code>
+
+  </pre>
+
+    <h3>Using your own VTT file</h3>
+
+    <br/>
+
+    <div style="max-width: 250px;margin: 0 auto">
+        <video id="custom-vtt"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+    </div>
+
+
+    <pre>
+      <code class="language-html">
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+
+      var options = {fluid: true};
+
+      var player = cld.videoPlayer('player', options);
+
+        var sources = {
+            center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+        }
+
+        player.source('video-player/girl_in_a_dress', {
+            interactionAreas: {
+                enable: true,
+                vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
+                onClick: (event) => {
+                    // 'event.item.id' is an id that been defined in the vtt file
+                    event.zoom(sources[event.item.id]);
+                }
+            }
+        });
+      </code>
+
+  </pre>
+
+    <h3>Auto-zoom video cropping</h3>
+
+    <br/>
+
+    <div style="max-width: 250px;margin: 0 auto">
+        <video id="auto-zoom"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+    </div>
+
+    <pre>
+      <code class="language-html">
+         &lt;video
+          id="player"
+          controls
+          muted
+          class="cld-video-player"&gt;
+         &lt;/video&gt;
+      </code>
+
+      <code class="language-javascript">
+      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+
+      var options = {fluid: true};
+
+      var player = cld.videoPlayer('player', options);
+
+      // auto-zoom works only if the source is a cloudinary source object or a public id
+      // does not work for a full raw url
+      player.source('video-player/girl_in_a_dress', {
+           transformation:{
+                quality: 'auto',
+            },
+            interactionAreas: {
+                enable: true,
+                templateName: 'portrait',
+                onClick: (event) => {
+                    //in case you not passing a source to the zoom function auto zoom will be enabled
+                    event.zoom();
+                }
+            }
+      });
+      </code>
+
+  </pre>
+
+</div>
 
 </body>
 </html>
