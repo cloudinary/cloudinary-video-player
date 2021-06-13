@@ -43,9 +43,9 @@ class UpcomingVideoOverlay extends ClickableComponent {
   _show() {
     const videoShowClass = 'vjs-upcoming-video-show';
     const ima = this.player().ima;
+    const adsManager = ima === 'object' && ima.getAdsManager();
 
-    if (ima === 'object' && ima.getAdsManager()) {
-      const adsManager = ima.getAdsManager();
+    if (adsManager) {
       if (!adsManager.getCurrentAd() || adsManager.getCurrentAd().isLinear()) {
         this.addClass(videoShowClass);
       }
