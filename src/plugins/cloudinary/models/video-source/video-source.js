@@ -21,10 +21,10 @@ const generateId = () => objectId++;
 
 class VideoSource extends BaseSource {
 
-  constructor(publicId, options = {}) {
+  constructor(_publicId, initOptions = {}) {
 
-    const isRawUrl = URL_PATTERN.test(publicId);
-    ({ publicId, options } = normalizeOptions(publicId, options));
+    const isRawUrl = URL_PATTERN.test(_publicId);
+    let { publicId, options } = normalizeOptions(_publicId, initOptions);
 
     if (!isRawUrl) {
       publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
@@ -43,7 +43,8 @@ class VideoSource extends BaseSource {
       info,
       recommendations,
       textTracks,
-      withCredentials
+      withCredentials,
+      interactionAreas
     } = sliceAndUnsetProperties(
       options,
       'poster',
@@ -52,7 +53,8 @@ class VideoSource extends BaseSource {
       'info',
       'recommendations',
       'textTracks',
-      'withCredentials'
+      'withCredentials',
+      'interactionAreas'
     );
 
     super(publicId, options);
@@ -63,14 +65,17 @@ class VideoSource extends BaseSource {
     this._poster = null;
     this._info = null;
     this._sourceTransformation = null;
+    this._interactionAreas = null;
     this._type = 'VideoSource';
     this.isRawUrl = isRawUrl;
     this.withCredentials = !!withCredentials;
+    this.getInitOptions = () => initOptions;
 
     this.poster(poster);
     this.sourceTypes(sourceTypes);
     this.sourceTransformation(sourceTransformation);
     this.info(info);
+    this.interactionAreas(interactionAreas);
     this.recommendations(recommendations);
     this.textTracks(textTracks);
     this.objectId = generateId();
@@ -111,6 +116,16 @@ class VideoSource extends BaseSource {
     }
 
     this._info = info;
+
+    return this;
+  }
+
+  interactionAreas(interactionAreas) {
+    if (!interactionAreas) {
+      return this._interactionAreas;
+    }
+
+    this._interactionAreas = interactionAreas;
 
     return this;
   }
@@ -210,6 +225,10 @@ class VideoSource extends BaseSource {
     }
 
     return { type, src: url, cldSrc: this, isAdaptive, withCredentials: this.withCredentials };
+  }
+
+  getInteractionAreas() {
+    return this._interactionAreas;
   }
 }
 

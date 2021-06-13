@@ -1,3 +1,12 @@
+1.6.0-edge.1 / 2021-06-13
+==================
+
+Fixes
+------
+fix:  workaround safari hls h265 problem
+fix: add a source if there is no codec
+
+
 1.6.0-edge.0 / 2021-06-02
 ==================
 

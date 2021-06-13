@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.6.0-edge.0",
+  "version": "1.6.0-edge.1",
   "description": "Cloudinary Video Player",
   "bundlewatch": {
     "files": [
@@ -10,7 +10,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "108kb"
+        "maxSize": "109kb"
       }
     ]
   },
