@@ -1,3 +1,4 @@
+
 import videojs from 'video.js';
 import { elMatches } from 'utils/matches';
 
@@ -5,6 +6,11 @@ const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
 import ShoppableProductsOverlay from './shoppable-products-overlay';
 import ShoppablePanelToggle from './shoppable-panel-toggle';
+import {
+  CLD_SPBL_INNER_BAR,
+  SHOPPABLE_PANEL_HIDDEN_CLASS,
+  SHOPPABLE_PANEL_VISIBLE_CLASS
+} from '../shoppable-widget.const';
 
 class ShoppableBarLayout extends Component {
   constructor(player, options) {
@@ -12,7 +18,7 @@ class ShoppableBarLayout extends Component {
     this.player_ = player;
 
     this.player().addClass('cld-shoppable-panel');
-    this.player().addClass('shoppable-panel-hidden');
+    this.player().addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
 
     this.contentWrpEl_ = dom.createEl('div', { className: 'cld-spbl-bar' });
 
@@ -22,7 +28,7 @@ class ShoppableBarLayout extends Component {
     const productsOverlay = new ShoppableProductsOverlay(this.player_, this.options_);
     this.contentWrpEl_.appendChild(productsOverlay.el_);
 
-    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar-inner' });
+    this.contentEl_ = dom.createEl('div', { className: CLD_SPBL_INNER_BAR });
     this.contentWrpEl_.appendChild(this.contentEl_);
 
     this.player().el().appendChild(this.contentWrpEl_);
@@ -44,18 +50,18 @@ class ShoppableBarLayout extends Component {
     this.togglePanel = (open) => {
       if (open === true) {
         // Open
-        this.player().removeClass('shoppable-panel-hidden');
-        this.player().addClass('shoppable-panel-visible');
+        this.player().removeClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
+        this.player().addClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
       } else if (open === false) {
         // Close
-        this.player().removeClass('shoppable-panel-visible');
-        this.player().addClass('shoppable-panel-hidden');
+        this.player().removeClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
+        this.player().addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
       } else {
         // Toggle
-        this.player().toggleClass('shoppable-panel-hidden');
-        this.player().toggleClass('shoppable-panel-visible');
+        this.player().toggleClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
+        this.player().toggleClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
       }
-      let eventName = this.player().hasClass('shoppable-panel-visible') ? 'productBarMax' : 'productBarMin';
+      let eventName = this.player().hasClass(SHOPPABLE_PANEL_VISIBLE_CLASS) ? 'productBarMax' : 'productBarMin';
       this.player().trigger(eventName);
     };
 

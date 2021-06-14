@@ -2,18 +2,11 @@ import videojs from 'video.js';
 import PlaylistLayoutHorizontal from './layout/playlist-layout-horizontal';
 import PlaylistLayoutVertical from './layout/playlist-layout-vertical';
 import PlaylistLayoutCustom from './layout/playlist-layout-custom';
+import { PLAYLIST_DEFAULTS_OPTIONS } from './playlist.const';
 
-const OPTIONS_DEFAULTS = {
-  fluid: false,
-  show: true,
-  direction: 'vertical',
-  total: 4,
-  selector: false,
-  renderTo: []
-};
 
 const modifyOptions = (player, opt) => {
-  const options = { ...OPTIONS_DEFAULTS, ...opt };
+  const options = { ...PLAYLIST_DEFAULTS_OPTIONS, ...opt };
 
   if (options.show && typeof options.selector === 'string') {
     options.useDefaultLayout = false;
@@ -103,7 +96,7 @@ class PlaylistWidget {
     this.layout_.setCls();
   }
 
-  total(totalNumber = OPTIONS_DEFAULTS.total) {
+  total(totalNumber = PLAYLIST_DEFAULTS_OPTIONS.total) {
     const total = parseInt(totalNumber, 10);
 
     if (total !== this.options_.total && typeof total === 'number' && total > 0) {
@@ -113,7 +106,7 @@ class PlaylistWidget {
     return this;
   }
 
-  direction(direction = OPTIONS_DEFAULTS.direction) {
+  direction(direction = PLAYLIST_DEFAULTS_OPTIONS.direction) {
     if (direction === 'horizontal' || direction === 'vertical') {
       this.update('direction', { direction: direction });
     }

@@ -5,10 +5,18 @@ import { parseTime } from 'utils/time';
 import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
+import {
+  CLD_SPBL_PANEL_CLASS,
+  SHOPPABLE_CLICK_ACTIONS,
+  SHOPPABLE_PANEL_HIDDEN_CLASS,
+  SHOPPABLE_PANEL_VISIBLE_CLASS,
+  SHOPPABLE_PRODUCTS_OVERLAY_CLASS
+} from '../shoppable-widget.const';
 
 const Component = videojs.getComponent('Component');
 
 class ShoppablePanel extends Component {
+
   constructor(player, options = {}) {
     super(player, options);
     this.options = options;
@@ -28,7 +36,7 @@ class ShoppablePanel extends Component {
 
   createEl() {
     const el = super.createEl();
-    ['cld-spbl-panel', 'base-color-bg'].map(cls => el.classList.add(cls));
+    [CLD_SPBL_PANEL_CLASS, 'base-color-bg'].map(cls => el.classList.add(cls));
     return el;
   }
 
@@ -103,9 +111,9 @@ class ShoppablePanel extends Component {
           this.player_.trigger(evName, { productId: target.dataset.productId, productName: target.dataset.productName });
 
           // Go to URL, or seek video (set currentTime)
-          if (target.dataset.clickAction === 'goto') {
+          if (target.dataset.clickAction === SHOPPABLE_CLICK_ACTIONS.GO_TO) {
             window.open(target.dataset.gotoUrl, '_blank');
-          } else if (target.dataset.clickAction === 'seek') {
+          } else if (target.dataset.clickAction === SHOPPABLE_CLICK_ACTIONS.SEEk) {
             const gotoSecs = parseTime(target.dataset.seek);
             if (gotoSecs !== null) {
               this.player_.addClass('vjs-has-started'); // Hide the poster image
@@ -114,9 +122,9 @@ class ShoppablePanel extends Component {
               }
               this.player_.currentTime(gotoSecs);
               // Close products side-panel
-              this.player_.removeClass('shoppable-panel-visible');
-              this.player_.addClass('shoppable-panel-hidden');
-              this.player_.addClass('shoppable-products-overlay');
+              this.player_.removeClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
+              this.player_.addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
+              this.player_.addClass(SHOPPABLE_PRODUCTS_OVERLAY_CLASS);
               // Wait for the time update and show the tooltips
               this.player_.one('seeked', () => this.player_.trigger('showProductsOverlay'));
             }
