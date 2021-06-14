@@ -49,7 +49,7 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
   return {
     width: Math.round(itemAspectRatio > 1 ? videoAspectRatio * height : width),
     x: Math.round(itemAspectRatio > 1 ? x + width / 2 : x),
-    y: Math.round(y + height / 2),
+    y: Math.round(itemAspectRatio < 1 ? y + height / 2 : y),
     crop: 'crop'
   };
 };
