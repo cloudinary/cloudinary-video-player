@@ -55,7 +55,7 @@ class ShoppableBarLayout extends Component {
       } else if (open === false) {
         // Close
         this.player().removeClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
-        this.player().addClass('shoppable-panel-hidden');
+        this.player().addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
       } else {
         // Toggle
         this.player().toggleClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
