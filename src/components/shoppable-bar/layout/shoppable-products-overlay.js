@@ -2,6 +2,11 @@ import videojs from 'video.js';
 const dom = videojs.dom || videojs;
 import { parseTime } from 'utils/time';
 import { find } from 'utils/find';
+import {
+  SHOPPABLE_PANEL_HIDDEN_CLASS,
+  SHOPPABLE_PANEL_VISIBLE_CLASS,
+  SHOPPABLE_PRODUCTS_OVERLAY_CLASS
+} from '../shoppable-widget.const';
 
 const Component = videojs.getComponent('Component');
 
@@ -23,9 +28,9 @@ class ShoppableProductsOverlay extends Component {
 
   renderProducts() {
     // Close products side-panel
-    this.player_.removeClass('shoppable-panel-visible');
-    this.player_.addClass('shoppable-panel-hidden');
-    this.player_.addClass('shoppable-products-overlay');
+    this.player_.removeClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
+    this.player_.addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
+    this.player_.addClass(SHOPPABLE_PRODUCTS_OVERLAY_CLASS);
 
     this.layout_.innerHTML = '';
 
@@ -66,7 +71,7 @@ class ShoppableProductsOverlay extends Component {
 
   clearLayout() {
     this.layout_.innerHTML = '';
-    this.player_.removeClass('shoppable-products-overlay');
+    this.player_.removeClass(SHOPPABLE_PRODUCTS_OVERLAY_CLASS);
   }
 
   createEl() {

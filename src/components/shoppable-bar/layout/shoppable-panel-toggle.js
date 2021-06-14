@@ -1,9 +1,18 @@
 import videojs from 'video.js';
+import {
+  CLD_SPBL_TOGGLE_CLASS,
+  CLD_SPBL_TOGGLE_CUSTOM_ICON_CLASS,
+  CLD_SPBL_TOGGLE_ICON_CLASS,
+  CLOSE_ICON_CLASS,
+  ICON_CART_CLASS,
+  SHOPPABLE_ANIMATION_CLASS
+} from '../shoppable-widget.const';
 const dom = videojs.dom || videojs;
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class ShoppablePanelToggle extends ClickableComponent {
+
   constructor(player, options) {
     super(player, options);
     this.options_ = options;
@@ -16,33 +25,32 @@ class ShoppablePanelToggle extends ClickableComponent {
   }
 
   createEl() {
-
     let iconProps = {};
     let iconAttrs = {};
     if (this.options_.toggleIcon) {
       iconProps = {
-        className: 'cld-spbl-toggle-icon cld-spbl-toggle-custom-icon vjs-icon-close'
+        className: `${CLD_SPBL_TOGGLE_ICON_CLASS} ${CLD_SPBL_TOGGLE_CUSTOM_ICON_CLASS} ${CLOSE_ICON_CLASS}`
       };
       iconAttrs = {
         style: `background-image: url(${this.options_.toggleIcon})`
       };
     } else {
       iconProps = {
-        className: 'cld-spbl-toggle-icon vjs-icon-cart'
+        className: `${CLD_SPBL_TOGGLE_ICON_CLASS} ${ICON_CART_CLASS}`
       };
     }
     const icon = dom.createEl('span', iconProps, iconAttrs);
 
     const el = super.createEl('a', {
-      className: 'cld-spbl-toggle base-color-bg'
+      className: `${CLD_SPBL_TOGGLE_CLASS} base-color-bg`
     });
     el.appendChild(icon);
 
     this.player_.on('productBarMin', () => {
       setTimeout(() => {
-        icon.classList.add('animate');
+        icon.classList.add(SHOPPABLE_ANIMATION_CLASS);
         setTimeout(() => {
-          icon.classList.remove('animate');
+          icon.classList.remove(SHOPPABLE_ANIMATION_CLASS);
         }, 1000);
       }, 500);
     });

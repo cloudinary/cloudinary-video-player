@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import ShoppablePanel from './panel/shoppable-panel.js';
+import { CLD_SPBL_PANEL_CLASS } from './shoppable-widget.const';
 const dom = videojs.dom || videojs;
 
 class ShoppablePostWidget {
@@ -18,7 +19,7 @@ class ShoppablePostWidget {
 
   handleDragToScroll() {
     const postModal = this.player_.postModal.el_;
-    const slider = postModal.querySelector('.cld-spbl-panel');
+    const slider = postModal.querySelector(`.${CLD_SPBL_PANEL_CLASS}`);
 
     let isDown = false;
     let startX = 0;
@@ -29,6 +30,7 @@ class ShoppablePostWidget {
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     });
+
     document.addEventListener('mouseup', (e) => {
       isDown = false;
       setTimeout(() => {
@@ -41,6 +43,7 @@ class ShoppablePostWidget {
         e.preventDefault();
       }
     });
+
     document.addEventListener('mousemove', (e) => {
       if (!isDown) {
         return;
@@ -73,7 +76,7 @@ class ShoppablePostWidget {
 
     const panelBg = dom.createEl('div', {
       className: 'cld-spbl-post-play-bg',
-      style: 'background-image: url("' + bgSrc.url() + '")'
+      style: `background-image: url("${bgSrc.url()}")`
     });
 
     const replayBtn = dom.createEl('button',
