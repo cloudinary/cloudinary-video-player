@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import {
+  CLD_SPBL_TOGGLE_CLASS,
   CLD_SPBL_TOGGLE_CUSTOM_ICON_CLASS,
   CLD_SPBL_TOGGLE_ICON_CLASS,
   CLOSE_ICON_CLASS,
@@ -41,7 +42,7 @@ class ShoppablePanelToggle extends ClickableComponent {
     const icon = dom.createEl('span', iconProps, iconAttrs);
 
     const el = super.createEl('a', {
-      className: 'cld-spbl-toggle base-color-bg'
+      className: `${CLD_SPBL_TOGGLE_CLASS} base-color-bg`
     });
     el.appendChild(icon);
 

@@ -3,6 +3,9 @@ import ShoppableBarLayout from './layout/bar-layout';
 import ShoppablePostWidget from './shoppable-post-widget';
 import './shoppable-widget.scss';
 import {
+  CLD_SPBL_INNER_BAR,
+  CLD_SPBL_PANEL_CLASS,
+  CLD_SPBL_TOGGLE_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,
   SHOPPABLE_WIDGET_OPTIONS_DEFAULTS,
   SHOPPABLE_WIDGET_RESPONSIVE_CLASS
@@ -29,16 +32,16 @@ class ShoppableWidget {
     const width = this.options_.width;
 
     this._injectCSS(`
-      .cld-spbl-bar-inner {
+      .${CLD_SPBL_INNER_BAR} {
         transform: translateX(${width});
       }
       .${SHOPPABLE_PANEL_VISIBLE_CLASS} .vjs-control-bar {
         width: calc(100% - ${width});
       }
-      .cld-spbl-toggle {
+      .${CLD_SPBL_TOGGLE_CLASS} {
         right: ${width};
       }
-      .cld-spbl-panel {
+      .${CLD_SPBL_PANEL_CLASS}{
         width: ${width};
       }
     `);

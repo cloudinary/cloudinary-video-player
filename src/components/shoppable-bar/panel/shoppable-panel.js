@@ -6,6 +6,7 @@ import 'assets/styles/components/playlist.scss';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';
 import {
+  CLD_SPBL_PANEL_CLASS,
   SHOPPABLE_CLICK_ACTIONS,
   SHOPPABLE_PANEL_HIDDEN_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,
@@ -35,7 +36,7 @@ class ShoppablePanel extends Component {
 
   createEl() {
     const el = super.createEl();
-    ['cld-spbl-panel', 'base-color-bg'].map(cls => el.classList.add(cls));
+    [CLD_SPBL_PANEL_CLASS, 'base-color-bg'].map(cls => el.classList.add(cls));
     return el;
   }
 

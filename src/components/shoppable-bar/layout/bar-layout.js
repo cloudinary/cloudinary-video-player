@@ -6,7 +6,11 @@ const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
 import ShoppableProductsOverlay from './shoppable-products-overlay';
 import ShoppablePanelToggle from './shoppable-panel-toggle';
-import { SHOPPABLE_PANEL_HIDDEN_CLASS, SHOPPABLE_PANEL_VISIBLE_CLASS } from '../shoppable-widget.const';
+import {
+  CLD_SPBL_INNER_BAR,
+  SHOPPABLE_PANEL_HIDDEN_CLASS,
+  SHOPPABLE_PANEL_VISIBLE_CLASS
+} from '../shoppable-widget.const';
 
 class ShoppableBarLayout extends Component {
   constructor(player, options) {
@@ -24,7 +28,7 @@ class ShoppableBarLayout extends Component {
     const productsOverlay = new ShoppableProductsOverlay(this.player_, this.options_);
     this.contentWrpEl_.appendChild(productsOverlay.el_);
 
-    this.contentEl_ = dom.createEl('div', { className: 'cld-spbl-bar-inner' });
+    this.contentEl_ = dom.createEl('div', { className: CLD_SPBL_INNER_BAR });
     this.contentWrpEl_.appendChild(this.contentEl_);
 
     this.player().el().appendChild(this.contentWrpEl_);

@@ -31,7 +31,13 @@ export const SHOPPABLE_PANEL_HIDDEN_CLASS = 'shoppable-panel-hidden';
 
 export const SHOPPABLE_PRODUCTS_OVERLAY_CLASS = 'shoppable-products-overlay';
 
+export const CLD_SPBL_PANEL_CLASS = 'cld-spbl-panel';
+
+export const CLD_SPBL_TOGGLE_CLASS = 'cld-spbl-toggle';
+
 export const CLD_SPBL_TOGGLE_ICON_CLASS = 'cld-spbl-toggle-icon';
+
+export const CLD_SPBL_INNER_BAR = 'cld-spbl-bar-inner';
 
 export const CLD_SPBL_TOGGLE_CUSTOM_ICON_CLASS = 'cld-spbl-toggle-custom-icon';
 
