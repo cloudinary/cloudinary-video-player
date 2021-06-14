@@ -35,7 +35,7 @@
           top: 75,
           width: 80,
           height : 20,
-          id: 'topSource'
+          id: 'bottomSource'
         }
       ];
 
@@ -167,7 +167,7 @@
           top: 75,
           width: 80,
           height : 20,
-          id: 'topSource'
+          id: 'bottomSource'
         }
       ];
 
@@ -182,7 +182,7 @@
 
       player.addInteractionAreas(interactionAreas, {
           onClick: (event) => {
-            const source = sources[event.item.id];
+            var source = sources[event.item.id];
             event.zoom(source);
          }
       });
@@ -234,7 +234,7 @@
           templateName: 'portrait', // or landscape/all/center
           onClick: (event) => {
             // 'event.item.id' is an id that been defined in the vtt file
-            const src = sources[event.item.id];
+            var src = sources[event.item.id];
             if(event.item.id === 'middle'){
                 if(window.confirm("Do you like this shirt ?")) {
                     window.open(src, '_blank').focus();
