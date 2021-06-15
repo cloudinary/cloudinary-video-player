@@ -38,18 +38,22 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
 
   const { videoHeight, videoWidth } = videoElement;
 
-  const x = percentageToFixedValue(videoWidth, interactionAreaItem.left);
-  const y = percentageToFixedValue(videoHeight, interactionAreaItem.top);
-  const width = percentageToFixedValue(videoWidth, interactionAreaItem.width);
-  const height = percentageToFixedValue(videoHeight, interactionAreaItem.height);
+  const itemX = percentageToFixedValue(videoWidth, interactionAreaItem.left);
+  const itemY = percentageToFixedValue(videoHeight, interactionAreaItem.top);
+  const itemWidth = percentageToFixedValue(videoWidth, interactionAreaItem.width);
+  const itemHeight = percentageToFixedValue(videoHeight, interactionAreaItem.height);
 
   const videoAspectRatio = videoWidth / videoHeight;
-  const itemAspectRatio = width / height;
+  const itemAspectRatio = itemWidth / itemHeight;
+
+  const width = Math.round(itemAspectRatio > 1 ? itemHeight * itemAspectRatio : itemWidth);
+  const height = Math.round(width / videoAspectRatio);
 
   return {
-    width: Math.round(itemAspectRatio > 1 ? videoAspectRatio * height : width),
-    x: Math.round(itemAspectRatio > 1 ? x + width / 2 : x),
-    y: Math.round(itemAspectRatio < 1 ? y + height / 2 : y),
+    width,
+    height,
+    x: Math.round(itemX),
+    y: Math.round(itemY),
     crop: 'crop'
   };
 };
