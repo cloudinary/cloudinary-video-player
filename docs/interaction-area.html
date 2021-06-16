@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Cloudinary Video Player</title>
+  <style>
+        .video-container{
+            display: flex;
+            justify-content: center;
+        }
+  </style>
   <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
 
   <!-- Bootstrap -->
@@ -20,7 +26,6 @@
     window.addEventListener('load', function() {
 
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
-      var options = {fluid: true};
 
       var interactionAreas = [
         {
@@ -44,7 +49,7 @@
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player = cld.videoPlayer('manually', options);
+      var player = cld.videoPlayer('manually');
 
       player.source('video-player/girl_in_a_dress');
 
@@ -60,12 +65,12 @@
         bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player2 = cld.videoPlayer('custom-template', options);
+      var player2 = cld.videoPlayer('custom-template');
 
       player2.source('video-player/girl_in_a_dress', {
         interactionAreas: {
           enable: true,
-          templateName: 'portrait',
+          template: 'portrait',
           onClick: (event) => {
             const src = videoZoomSources[event.item.id];
             if(event.item.id === 'middle'){
@@ -80,7 +85,7 @@
         }
       });
 
-        var player3 = cld.videoPlayer('custom-vtt', options);
+        var player3 = cld.videoPlayer('custom-vtt');
 
         var videoZoomSources3 = {
             center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
@@ -97,7 +102,7 @@
         });
 
 
-        var player4 = cld.videoPlayer('auto-zoom', options);
+        var player4 = cld.videoPlayer('auto-zoom');
 
         player4.source('video-player/girl_in_a_dress', {
             transformation:{
@@ -105,7 +110,7 @@
             },
             interactionAreas: {
                 enable: true,
-                templateName: 'portrait',
+                template: 'portrait',
                 onClick: (event) => {
                     event.zoom();
                 }
@@ -129,21 +134,22 @@
   <h3>Define Interaction Areas manually</h3>
 
   <br/>
-
-  <div style="max-width: 250px;margin: 0 auto">
-    <video id="manually"
-          playsinline
-          controls
-          muted
-          class="cld-video-player">
-    </video>
-  </div>
+    <div class="video-container">
+        <video id="manually"
+               width="250"
+               playsinline
+               controls
+               muted
+               class="cld-video-player">
+        </video>
+    </div>
 
     <pre>
       <code class="language-html">
 
          &lt;video
           id="player"
+          width="250"
           controls
           muted
           class="cld-video-player"&gt;
@@ -152,7 +158,6 @@
 
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
-      var options = {fluid: true};
 
       var interactionAreas = [
         {
@@ -176,7 +181,7 @@
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player = cld.videoPlayer('player', options);
+      var player = cld.videoPlayer('player');
 
       player.source('video-player/girl_in_a_dress');
 
@@ -196,8 +201,9 @@
 
   <br/>
 
-  <div style="max-width: 250px;margin: 0 auto">
+  <div class="video-container">
         <video id="custom-template"
+               width="250"
                playsinline
                controls
                muted
@@ -209,6 +215,7 @@
       <code class="language-html">
          &lt;video
           id="player"
+          width="250"
           controls
           muted
           class="cld-video-player"&gt;
@@ -218,9 +225,7 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var options = {fluid: true};
-
-      var player = cld.videoPlayer('player', options);
+      var player = cld.videoPlayer('player');
 
        var sources = {
         top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
@@ -231,7 +236,7 @@
       player.source('video-player/girl_in_a_dress', {
         interactionAreas: {
           enable: true,
-          templateName: 'portrait', // or landscape/all/center
+          template: 'portrait', // or landscape/all/center
           onClick: (event) => {
             // 'event.item.id' is an id that been defined in the vtt file
             var src = sources[event.item.id];
@@ -254,8 +259,9 @@
 
     <br/>
 
-    <div style="max-width: 250px;margin: 0 auto">
+    <div class="video-container">
         <video id="custom-vtt"
+               width="250"
                playsinline
                controls
                muted
@@ -268,6 +274,7 @@
       <code class="language-html">
          &lt;video
           id="player"
+          width="250"
           controls
           muted
           class="cld-video-player"&gt;
@@ -277,9 +284,7 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var options = {fluid: true};
-
-      var player = cld.videoPlayer('player', options);
+      var player = cld.videoPlayer('player');
 
         var sources = {
             center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
@@ -303,8 +308,9 @@
 
     <br/>
 
-    <div style="max-width: 250px;margin: 0 auto">
+    <div class="video-container">
         <video id="auto-zoom"
+               width="250"
                playsinline
                controls
                muted
@@ -325,9 +331,7 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var options = {fluid: true};
-
-      var player = cld.videoPlayer('player', options);
+      var player = cld.videoPlayer('player');
 
       // auto-zoom works only if the source is a cloudinary source object or a public id
       // does not work for a full raw url
@@ -337,7 +341,7 @@
             },
             interactionAreas: {
                 enable: true,
-                templateName: 'portrait',
+                template: 'portrait',
                 onClick: (event) => {
                     //in case you not passing a source to the zoom function auto zoom will be enabled
                     event.zoom();

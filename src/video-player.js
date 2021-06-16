@@ -200,7 +200,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
-    const vttUrl = interactionAreasConfig.vttUrl || TEMPLATE_INTERACTION_AREAS_VTT[interactionAreasConfig.templateName];
+    const vttUrl = interactionAreasConfig.vttUrl || TEMPLATE_INTERACTION_AREAS_VTT[interactionAreasConfig.template];
 
     this.videojs.removeRemoteTextTrack(this._currentTrack);
 
