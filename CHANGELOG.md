@@ -1,3 +1,10 @@
+1.6.1-edge.1 / 2021-06-16
+==================
+
+fix
+----
+fix: interaction-area auto-cropping calculation function
+
 1.6.1-edge.0 / 2021-06-14
 ==================
 
