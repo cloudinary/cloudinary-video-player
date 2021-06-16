@@ -46,14 +46,17 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
   const videoAspectRatio = videoWidth / videoHeight;
   const itemAspectRatio = itemWidth / itemHeight;
 
-  const width = Math.round(itemAspectRatio > 1 ? itemHeight * itemAspectRatio : itemWidth);
+  const width = Math.round(itemAspectRatio > 1 || videoAspectRatio > 1 ? itemHeight * itemAspectRatio : itemWidth);
   const height = Math.round(width / videoAspectRatio);
+
+  const x = Math.round(itemX - (width - itemWidth) / 2);
+  const y = Math.round(itemY - (height - itemHeight) / 2);
 
   return {
     width,
     height,
-    x: Math.round(itemX),
-    y: Math.round(itemY),
+    x: Math.min(Math.max(x, 0), videoWidth - width),
+    y: Math.min(Math.max(y, 0), videoHeight - height),
     crop: 'crop'
   };
 };
