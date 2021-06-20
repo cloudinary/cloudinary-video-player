@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import isObj from 'is-obj';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -29,6 +28,10 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME
 } from './video-player.const';
 
+// replace is isObj module to work in IE11
+function isObj(val) {
+  return typeof val === 'object';
+}
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {

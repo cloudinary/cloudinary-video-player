@@ -10,7 +10,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(webpackCommon, {
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'post',
+        use: ['source-map-loader']
+      }
+    ]
+  },
   mode: 'development',
 
   output: {
