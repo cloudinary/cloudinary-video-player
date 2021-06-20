@@ -30,7 +30,7 @@ import {
 
 // replace is isObj module to work in IE11
 function isObj(val) {
-  return typeof val === 'object';
+  val !== null && typeof val === 'object' && Array.isArray(val) === false;
 }
 
 // Register all plugins
