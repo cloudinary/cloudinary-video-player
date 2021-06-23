@@ -20,13 +20,19 @@ $icon-font-path: '../fonts' !default;
   width: 3em;
 }
 
+
+
+.video-js .vjs-control,
+.vjs-icon-close,
+.vjs-volume-bar{
+  z-index: 1;
+}
+
 // focus and hover states
 .video-js .vjs-control,
 .vjs-big-play-button,
 .vjs-icon-close,
 .vjs-volume-bar {
-
-  z-index: 1;
 
   &:focus {
     outline: none;
