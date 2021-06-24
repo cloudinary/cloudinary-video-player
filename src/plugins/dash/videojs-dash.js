@@ -4,7 +4,6 @@ import dashjs from 'dashjs';
 import setupAudioTracks from './setup-audio-tracks';
 import setupTextTracks from './setup-text-tracks';
 import document from 'global/document';
-const Component = videojs.getComponent('Component');
 
 /**
  * videojs-contrib-dash
@@ -12,9 +11,8 @@ const Component = videojs.getComponent('Component');
  * Use Dash.js to playback DASH content inside of Video.js via a SourceHandler
  */
 
-class Html5DashJS extends Component {
+class Html5DashJS {
   constructor(source, tech, options) {
-    super(source, tech, options);
     // Get options from tech if not provided for backwards compatibility
     options = options || tech.options_;
 
@@ -191,7 +189,7 @@ class Html5DashJS extends Component {
     this.mediaPlayer_.attachSource(manifestSource);
     this.tech_.triggerReady();
     // map videojs seek
-    this.on(this.tech_, 'seeking', () => {
+    this.player.on(this.tech_, 'seeking', () => {
       // handle seek the same way as in dash.js
       this.mediaPlayer_.seek((this.tech_.currentTime() - 8).toFixed(2));
     });

@@ -1,3 +1,24 @@
+1.6.1-edge.4 / 2021-06-23
+==================
+
+Fixes
+--------
+fix play big button z-index bug
+
+1.6.1-edge.3 / 2021-06-22
+==================
+
+Fixes
+------------
+fix videos in dash not playing
+
+1.6.1-edge.2 / 2021-06-20
+==================
+
+Fixes
+--------
+reimplement isObj to work in IE11
+
 1.6.1-edge.1 / 2021-06-16
 ==================
 
