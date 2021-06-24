@@ -11,7 +11,7 @@ import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { createElement } from './utils/dom';
-import { isFunction, isString, noop } from './utils/type-inference';
+import { isFunction, isString, noop, isPlainObject } from './utils/type-inference';
 import {
   addMetadataTrack,
   extractOptions,
@@ -28,10 +28,6 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME
 } from './video-player.const';
 
-// replace is isObj module to work in IE11
-function isObj(val) {
-  val !== null && typeof val === 'object' && Array.isArray(val) === false;
-}
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -407,7 +403,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
       const plwOptions = this.playerOptions.playlistWidget;
 
-      if (isObj(plwOptions)) {
+      if (isPlainObject(plwOptions)) {
         if (this.playerOptions.fluid) {
           plwOptions.fluid = true;
         }
@@ -428,7 +424,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return this._playlistWidget;
     }
 
-    if (isObj(options)) {
+    if (isPlainObject(options)) {
       this._playlistWidget.options(options);
     }
 
