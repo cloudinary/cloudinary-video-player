@@ -341,7 +341,9 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player'{
+          bigPlayButton: false
+      });
 
       // auto-zoom works only if the source is a cloudinary source object or a public id
       // does not work for a full raw url
