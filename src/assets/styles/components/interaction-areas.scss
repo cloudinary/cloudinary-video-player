@@ -20,6 +20,7 @@ $video-player-interaction-area-marker-default-color : #FF620C;
     opacity: 0;
     transform: translate(-50%, -50%);
     transition: opacity 0.5s;
+    z-index: 0;
 
     .go-back-button,
     .vp-ia-item {
@@ -39,15 +40,28 @@ $video-player-interaction-area-marker-default-color : #FF620C;
       align-items: center;
       justify-content: center;
 
+      &:hover{
+        .vp-ia-marker-main:before {
+          content: "";
+          width: $interaction-area-marker-size;
+          height: $interaction-area-marker-size;
+          border: solid $interaction-area-marker-border-size rgba(0,0,0,0.25);
+        }
+      }
+
       .vp-ia-area-marker {
         position: relative;
         width: $interaction-area-marker-size;
         height: $interaction-area-marker-size;
 
         .vp-ia-marker-main,
+        .vp-ia-marker-main:before,
         .vp-ia-marker-shadow {
           position: absolute;
           border-radius: 50%;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
         }
 
         .vp-ia-marker-main {
@@ -55,13 +69,9 @@ $video-player-interaction-area-marker-default-color : #FF620C;
           border:solid $interaction-area-marker-border-size $video-player-interaction-area-marker-default-color;
           height: 100%;
           width: 100%;
-          left:0;
-          top:0;
         }
 
         .vp-ia-marker-shadow {
-          left: -$interaction-area-marker-box-shadow-extra-size;
-          top: -$interaction-area-marker-box-shadow-extra-size;
           width: 2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
           height:2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
           background-color: $video-player-interaction-area-marker-default-color;
@@ -69,7 +79,6 @@ $video-player-interaction-area-marker-default-color : #FF620C;
         }
       }
     }
-
 
     .vp-ia-layout-message {
       display: flex;
@@ -103,11 +112,8 @@ $video-player-interaction-area-marker-default-color : #FF620C;
         .vp-ia-layout-message-checkbox-title {
           margin: 0 0 0 5px;
         }
+
       }
-
     }
-
-
   }
-
 }
