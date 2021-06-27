@@ -31,5 +31,34 @@ const appendChild = (child, element) => {
   }
 };
 
+const elementsCreator = (item) => {
+  const children = Array.isArray(item.children) ? item.children.map(elementsCreator) : item.children;
 
-export { wrap, createElement };
+  const element = createElement(item.tag, item.attr, children);
+
+  if (item.event) {
+    element.addEventListener(item.event.name, item.event.callback, false);
+  }
+
+  if (item.style) {
+    for (let key in item.style) {
+      if (Object.prototype.hasOwnProperty.call(item.style, key)) {
+        element.style[key] = item.style[key];
+      }
+    }
+  }
+
+  return element;
+};
+
+
+const addEventListener = (element, name, cb) => {
+  element.addEventListener(name, cb, false);
+
+  return () => {
+    element.removeEventListener(name, cb, false);
+  };
+};
+
+
+export { wrap, createElement, elementsCreator, addEventListener };

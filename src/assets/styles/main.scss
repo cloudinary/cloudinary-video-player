@@ -10,6 +10,8 @@ $icon-font-path: '../fonts' !default;
 @import 'icons';
 @import 'ads-label';
 @import 'videojs-ima';
+@import 'components/interaction-areas.scss';
+
 
 // control bar control size
 .video-js .vjs-control:before {
@@ -66,34 +68,6 @@ $icon-font-path: '../fonts' !default;
 
 .cld-video-player {
   font-family: $text-font-family;
-
-  &.vjs-user-active {
-    .interaction-areas-container {
-      opacity: 1;
-    }
-  }
-
-  .interaction-areas-container {
-    opacity: 0;
-    transition: opacity 0.5s;
-
-    .go-back-button,
-    .video-player-interaction-area{
-      position: absolute;
-      cursor: pointer;
-    }
-
-    .go-back-button {
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .video-player-interaction-area {
-      border: solid 1px red;
-    }
-  }
 
 
   &:focus {

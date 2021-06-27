@@ -27,6 +27,10 @@
 
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
+      var playerOption = {
+          bigPlayButton: false
+      };
+
       var interactionAreas = [
         {
           left : 10 ,
@@ -49,7 +53,7 @@
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player = cld.videoPlayer('manually');
+      var player = cld.videoPlayer('manually', playerOption);
 
       player.source('video-player/girl_in_a_dress');
 
@@ -65,7 +69,7 @@
         bottom:'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player2 = cld.videoPlayer('custom-template');
+      var player2 = cld.videoPlayer('custom-template', playerOption);
 
       player2.source('video-player/girl_in_a_dress', {
         interactionAreas: {
@@ -85,13 +89,13 @@
         }
       });
 
-        var player3 = cld.videoPlayer('custom-vtt');
+        var player3 = cld.videoPlayer('custom-vtt', playerOption);
 
         var videoZoomSources3 = {
             center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
         }
 
-        player3.source('https://res.cloudinary.com/eran2903/video/upload/eo_8,w_270,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4', {
+        player3.source('video-player/girl_in_a_dress', {
             interactionAreas: {
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
@@ -102,7 +106,7 @@
         });
 
 
-        var player4 = cld.videoPlayer('auto-zoom');
+        var player4 = cld.videoPlayer('auto-zoom', playerOption);
 
         player4.source('video-player/girl_in_a_dress', {
             transformation:{
@@ -181,7 +185,9 @@
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player',{
+          bigPlayButton: false
+      });
 
       player.source('video-player/girl_in_a_dress');
 
@@ -225,7 +231,9 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player',{
+          bigPlayButton: false
+      });
 
        var sources = {
         top:'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
@@ -284,7 +292,9 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player');
+      var player = cld.videoPlayer('player',{
+          bigPlayButton: false
+      });
 
         var sources = {
             center : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
