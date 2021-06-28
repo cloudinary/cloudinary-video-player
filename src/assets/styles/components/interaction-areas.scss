@@ -20,9 +20,10 @@ $video-player-interaction-area-marker-default-color : #FF620C;
     opacity: 0;
     transform: translate(-50%, -50%);
     transition: opacity 0.5s;
+    z-index: 1;
 
     &:hover {
-      z-index: 1;
+      opacity: 1;
     }
 
     .go-back-button,
