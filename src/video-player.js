@@ -31,6 +31,7 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   TEMPLATE_INTERACTION_AREAS_VTT
 } from './components/interaction-area/interaction-area.const';
+import { throttle } from './utils/time';
 
 
 // Register all plugins
@@ -176,7 +177,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (this._isInteractionAreasEnabled()) {
         this._setInteractionAreaLayoutMessage();
 
-        const setInteractionAreasContainerSize = this._setInteractionAreasContainerSize.bind(this);
+        const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
 
         this.videojs.on('fullscreenchange', () => {
           setTimeout(setInteractionAreasContainerSize, 0);
