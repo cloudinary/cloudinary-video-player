@@ -83,7 +83,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.options = extractOptions(this.videoElement, initOptions);
 
-    const vjsOptions = this.options.videojsOptions;
+    this._videojsOptions = this.options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
     this.videoElement.classList.add('video-js');
@@ -92,16 +92,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     Utils.fontFace(this.videoElement, this.playerOptions);
 
     // Handle play button options
-    Utils.playButton(this.videoElement, vjsOptions);
+    Utils.playButton(this.videoElement, this._videojsOptions);
 
     // Dash plugin - available in full (not light) build only
     if (plugins.dashPlugin) {
       plugins.dashPlugin();
     }
 
-    this.videojs = videojs(this.videoElement, vjsOptions);
+    this.videojs = videojs(this.videoElement, this._videojsOptions);
 
-    if (vjsOptions.muted) {
+    if (this._videojsOptions.muted) {
       this.videojs.volume(0.4);
     }
 
@@ -318,7 +318,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   _initQualitySelector() {
-    if (this.playerOptions.qualitySelector !== false) {
+    if (this._videojsOptions.controlBar && this.playerOptions.qualitySelector !== false) {
       if (videojs.browser.IE_VERSION === null) {
         this.videojs.httpSourceSelector({ default: 'auto' });
       }

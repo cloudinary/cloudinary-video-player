@@ -112,7 +112,7 @@ const qualitySelector = {
 
   // Show selector only if more then one option available
   setVisibility: (player) => {
-    const sourceMenuButton = player.controlBar && player.controlBar.getChild('sourceMenuButton');
+    const sourceMenuButton = player.controlBar.getChild('sourceMenuButton');
     if (sourceMenuButton) {
       const qualityLevels = player.qualityLevels();
       if (qualityLevels && qualityLevels.length > 1) {
