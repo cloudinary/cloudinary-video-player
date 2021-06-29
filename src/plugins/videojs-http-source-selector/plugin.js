@@ -44,6 +44,8 @@ const onPlayerReady = (player) => {
     // hack for plugin idempodency... prevents duplicate menubuttons from being inserted into the player if multiple player.httpSourceSelector() functions called.
     if (player.videojs_http_source_selector_initialized === 'undefined' || player.videojs_http_source_selector_initialized === true) {
       console.log('player.videojs_http_source_selector_initialized == true');
+    } else if (!player.controlBar) {
+      console.log('player.controlBard == false');
     } else {
       console.log('player.videojs_http_source_selector_initialized == false');
       player.videojs_http_source_selector_initialized = true;
