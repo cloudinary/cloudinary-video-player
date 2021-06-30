@@ -1,3 +1,11 @@
+1.6.1-edge.6 / 2021-06-30
+==================
+
+Fixes
+--------
+fix: option { controlBar: false } generates errors 
+fix: more ie fix , source copy for ie fix
+
 1.6.1-edge.5 / 2021-06-27
 ==================
 
