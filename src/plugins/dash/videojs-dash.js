@@ -4,6 +4,7 @@ import dashjs from 'dashjs';
 import setupAudioTracks from './setup-audio-tracks';
 import setupTextTracks from './setup-text-tracks';
 import document from 'global/document';
+import {assign} from '../../utils/assign';
 
 /**
  * videojs-contrib-dash
@@ -298,7 +299,7 @@ Html5DashJS.hooks_ = {};
 
 const canHandleKeySystems = function(source) {
   // copy the source
-  source = JSON.parse(JSON.stringify(source));
+  source = assign({}, source);
 
   if (Html5DashJS.updateSourceData) {
     videojs.log.warn('updateSourceData has been deprecated.' +
