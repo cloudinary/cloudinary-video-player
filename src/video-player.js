@@ -80,7 +80,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this._isZoomed = false;
     this.unZoom = noop;
-    this._setStaticInteractionAreas = noop;
+    this._setStaticInteractionAreas = null;
     this._playlistWidget = null;
     this.nbCalls = 0;
     this._firstPlayed = false;
@@ -161,7 +161,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        this._setStaticInteractionAreas();
+        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
         this._updateInteractionAreasTrack();
       });
 
@@ -174,7 +174,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
 
 
-      if (this._isInteractionAreasEnabled()) {
+      if (this._shouldSetResize()) {
         this._setInteractionAreaLayoutMessage();
 
         const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
@@ -225,8 +225,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return interactionAreasConfig && interactionAreasConfig.enable;
   }
 
+  _shouldSetResize() {
+    return this._isInteractionAreasEnabled() || this._setStaticInteractionAreas;
+  }
+
   _setInteractionAreasContainerSize() {
-    if (this._isInteractionAreasEnabled()) {
+    if (this._shouldSetResize()) {
       setInteractionAreasContainerSize(this.videojs, this.videoElement);
     }
   }
@@ -602,7 +606,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.unZoom = () => {
       if (this._isZoomed) {
         this._isZoomed = false;
-        this._setStaticInteractionAreas();
+        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
         this.source(newSource, currentSrcOptions).play();
       }
     };
