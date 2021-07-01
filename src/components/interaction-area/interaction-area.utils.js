@@ -83,15 +83,11 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
 };
 
 
-const shouldShowAreaLayoutMessage = () => {
-  return localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
+export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
+  return (!interactionLayoutConfig || interactionLayoutConfig.enable) && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
 };
 
 export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
-
-  if (!shouldShowAreaLayoutMessage()) {
-    return;
-  }
 
   let checked = false;
 

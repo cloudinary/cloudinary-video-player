@@ -25,7 +25,7 @@ import {
   getInteractionAreaItem,
   getZoomTransformation,
   setInteractionAreasContainer,
-  setInteractionAreasContainerSize
+  setInteractionAreasContainerSize, shouldShowAreaLayoutMessage
 } from './components/interaction-area/interaction-area.utils';
 import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
@@ -236,9 +236,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _setInteractionAreaLayoutMessage() {
-    createInteractionAreaLayoutMessage(this.videojs, () => {
-      this.play();
-    });
+    if (shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout)) {
+      createInteractionAreaLayoutMessage(this.videojs, () => {
+        this.play();
+      });
+    }
   }
 
   _isFullScreen() {
