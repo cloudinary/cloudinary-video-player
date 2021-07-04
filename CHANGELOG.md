@@ -1,3 +1,27 @@
+1.5.4 / 2021-07-04
+==================
+
+New functionality and features
+---------------------------
+Add interaction areas (#254)
+Add handling non existent texttracks (#252)
+
+Fixes
+-----------------
+fix fluid poster CSS (#247)
+fix handleCldError not returning statusCode (#248)
+fix retry timeout not clearing on play (#240)
+fix: workaround safari hls h265 problem
+fix: add a source if there is no codec
+fix: videos in dash not playing
+fix: IE11 fixes
+fix: option { controlBar: false } generates errors
+
+Other Changes
+-------------------
+Update dependencies (#236)
+Minor refactor for code syntax (linting + let/const)
+
 1.6.1-edge.7 / 2021-07-01
 ==================
 
