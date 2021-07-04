@@ -1,4 +1,3 @@
-import { createElement } from './utils/dom';
 import videojs from 'video.js';
 import Utils from './utils';
 import defaults from './config/defaults';
@@ -6,7 +5,6 @@ import {
   CLOUDINARY_PARAMS,
   DEFAULT_HLS_OPTIONS,
   PLAYER_PARAMS,
-  INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   FLUID_CLASS_NAME
 } from './video-player.const';
 import { isString } from './utils/type-inference';
@@ -18,59 +16,6 @@ export const getMetaDataTracker = (textTracks) => {
       return value;
     }
   }
-};
-
-
-export const setInteractionAreasContainer = (videojs, newInteractionAreasContainer) => {
-  const videoContainer = videojs.el();
-  const currentInteractionAreasContainer = videoContainer.querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
-
-  if (currentInteractionAreasContainer) {
-    currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
-  } else {
-    videoContainer.append(newInteractionAreasContainer);
-  }
-};
-
-export const percentageToFixedValue = (outOf, value) => (outOf / (100 / +value));
-
-export const getZoomTransformation = (videoElement, interactionAreaItem) => {
-
-  const { videoHeight, videoWidth } = videoElement;
-
-  const itemX = percentageToFixedValue(videoWidth, interactionAreaItem.left);
-  const itemY = percentageToFixedValue(videoHeight, interactionAreaItem.top);
-  const itemWidth = percentageToFixedValue(videoWidth, interactionAreaItem.width);
-  const itemHeight = percentageToFixedValue(videoHeight, interactionAreaItem.height);
-
-  const videoAspectRatio = videoWidth / videoHeight;
-  const itemAspectRatio = itemWidth / itemHeight;
-
-  const width = Math.round(itemAspectRatio > 1 || videoAspectRatio > 1 ? itemHeight * itemAspectRatio : itemWidth);
-  const height = Math.round(width / videoAspectRatio);
-
-  const x = Math.round(itemX - (width - itemWidth) / 2);
-  const y = Math.round(itemY - (height - itemHeight) / 2);
-
-  return {
-    width,
-    height,
-    x: Math.min(Math.max(x, 0), videoWidth - width),
-    y: Math.min(Math.max(y, 0), videoHeight - height),
-    crop: 'crop'
-  };
-};
-
-export const getInteractionAreaItem = (item, onClick) => {
-  const element = createElement('div', { class: 'video-player-interaction-area' });
-  element.style.left = `${item.left}%`;
-  element.style.top = `${item.top}%`;
-  element.style.width = `${item.width}%`;
-  element.style.height = `${item.height}%`;
-
-  element.addEventListener('click', onClick, false);
-
-  return element;
 };
 
 
@@ -134,7 +79,6 @@ export const extractOptions = (elem, options) => {
   if (videojs.dom.hasClass(elem, FLUID_CLASS_NAME) || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
-
   // Default HLS options < Default options < Markup options < Player options
   options = Utils.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
 
