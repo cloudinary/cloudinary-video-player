@@ -1,3 +1,15 @@
+1.6.2-edge.0 / 2021-07-05
+==================
+
+Fixes:
+--------
+fix: source copy, ie11 fix
+fix: interaction areas size in full screen are not on the right size
+
+Other Changes
+--------------
+interaction areas new look
+
 1.6.1-edge.6 / 2021-06-30
 ==================
 
