@@ -242,8 +242,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _setInteractionAreaLayoutMessage() {
     if (shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout)) {
       createInteractionAreaLayoutMessage(this.videojs, () => {
-        this._updateInteractionAreasTrack();
-        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+        if (!this._videojsOptions.autoplay) {
+          this.play();
+        } else {
+          this._updateInteractionAreasTrack();
+          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+        }
       });
     }
   }
