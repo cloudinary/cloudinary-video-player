@@ -51,7 +51,7 @@
         }
       ];
 
-      const sources = {
+      var sources = {
          topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
@@ -61,7 +61,7 @@
       player.source('video-player/girl_in_a_dress');
 
       player.addInteractionAreas(interactionAreas, {
-          onClick: (event) => {
+          onClick: function (event) {
             event.zoom(sources[event.item.id]);
          }
       });
@@ -78,8 +78,8 @@
         interactionAreas: {
           enable: true,
           template: 'portrait',
-          onClick: (event) => {
-            const src = videoZoomSources[event.item.id];
+          onClick:function (event) {
+            var src = videoZoomSources[event.item.id];
             if(event.item.id === 'middle'){
                 if(window.confirm('Do you like this shirt ?')) {
                     window.open(src, '_blank').focus();
@@ -102,7 +102,7 @@
             interactionAreas: {
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
-                onClick: (event) => {
+                onClick: function (event) {
                     event.zoom(videoZoomSources3[event.item.id]);
                 }
             }
@@ -118,7 +118,7 @@
             interactionAreas: {
                 enable: true,
                 template: 'portrait',
-                onClick: (event) => {
+                onClick: function (event) {
                     event.zoom();
                 }
             }
@@ -183,7 +183,7 @@
         }
       ];
 
-      const sources = {
+      var sources = {
          topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
@@ -195,7 +195,7 @@
       player.source('video-player/girl_in_a_dress');
 
       player.addInteractionAreas(interactionAreas, {
-          onClick: (event) => {
+          onClick: function(event) {
             var source = sources[event.item.id];
             event.zoom(source);
          }
@@ -248,7 +248,7 @@
         interactionAreas: {
           enable: true,
           template: 'portrait', // or landscape/all/center
-          onClick: (event) => {
+          onClick: function(event) {
             // 'event.item.id' is an id that been defined in the vtt file
             var src = sources[event.item.id];
             if(event.item.id === 'middle'){
@@ -307,7 +307,7 @@
             interactionAreas: {
                 enable: true,
                 vttUrl: 'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
-                onClick: (event) => {
+                onClick: function(event) {
                     // 'event.item.id' is an id that been defined in the vtt file
                     event.zoom(sources[event.item.id]);
                 }
@@ -357,7 +357,7 @@
             interactionAreas: {
                 enable: true,
                 template: 'portrait',
-                onClick: (event) => {
+                onClick: function (event) {
                     //in case you not passing a source to the zoom function auto zoom will be enabled
                     event.zoom();
                 }

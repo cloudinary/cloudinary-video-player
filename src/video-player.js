@@ -180,7 +180,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
 
         this.videojs.on('fullscreenchange', () => {
-          setTimeout(setInteractionAreasContainerSize, 0);
+          // waiting for fullscreen will end
+          setTimeout(setInteractionAreasContainerSize, 100);
         });
 
         const resizeDestroy = addEventListener(window, 'resize', setInteractionAreasContainerSize, false);
@@ -580,6 +581,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   addInteractionAreas(interactionAreas, interactionAreasOptions) {
     this._setStaticInteractionAreas = () => {
       this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
+      this._setInteractionAreasContainerSize();
     };
 
     this._setInteractionAreaLayoutMessage();

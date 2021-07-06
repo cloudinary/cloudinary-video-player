@@ -161,6 +161,6 @@ export const setInteractionAreasContainerSize = (videojs, videoElement) => {
 
   const width = videoAspectRatio * videoElement.clientHeight;
 
-  interactionAreasContainer.style.width = `${videoElement.clientWidth < width ? videoElement.clientWidth : width}px`;
+  interactionAreasContainer.style.width = `${videoElement.clientWidth < width ? '100%' : width}px`;
   interactionAreasContainer.style.height = videoElement.clientWidth < width ? `${videoElement.clientWidth / videoAspectRatio}px` : '100%';
 };
