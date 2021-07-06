@@ -161,8 +161,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-        this._updateInteractionAreasTrack();
+        if (!this._videojsOptions.autoplay) {
+          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+          this._updateInteractionAreasTrack();
+        }
       });
 
       this.videojs.on('sourcechanged', () => {
@@ -236,10 +238,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
+
   _setInteractionAreaLayoutMessage() {
     if (shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout)) {
       createInteractionAreaLayoutMessage(this.videojs, () => {
-        this.play();
+        this._updateInteractionAreasTrack();
+        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
       });
     }
   }
