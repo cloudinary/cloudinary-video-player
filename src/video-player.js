@@ -25,7 +25,8 @@ import {
   getInteractionAreaItem,
   getZoomTransformation,
   setInteractionAreasContainer,
-  setInteractionAreasContainerSize, shouldShowAreaLayoutMessage
+  setInteractionAreasContainerSize,
+  shouldShowAreaLayoutMessage
 } from './components/interaction-area/interaction-area.utils';
 import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
