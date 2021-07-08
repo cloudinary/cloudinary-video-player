@@ -161,7 +161,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        if (!this._videojsOptions.autoplay) {
+        if (!this._videojsOptions.autoplay || !this._shouldShowAreaLayoutMessage()) {
           this._setStaticInteractionAreas && this._setStaticInteractionAreas();
           this._updateInteractionAreasTrack();
         }
@@ -238,9 +238,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
+  _shouldShowAreaLayoutMessage() {
+    return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout);
+  }
 
   _setInteractionAreaLayoutMessage() {
-    if (shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout)) {
+    if (this._shouldShowAreaLayoutMessage()) {
       createInteractionAreaLayoutMessage(this.videojs, () => {
         if (!this._videojsOptions.autoplay) {
           this.play();
