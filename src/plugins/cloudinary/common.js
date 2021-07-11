@@ -178,17 +178,25 @@ const h264avcToString = (s) => {
   return s;
 };
 
+export const VIDEO_CODEC = {
+  VP9: 'vp9',
+  HEV1: 'hev1',
+  H265: 'h265',
+  H264: 'h264'
+};
+
 const codecToSrcTransformation = (codec) => {
   if (!codec) {
     return {};
   }
+
   switch (codec) {
-    case 'vp9':
-      return { video_codec: 'vp9' };
-    case 'hev1':
-      return { video_codec: 'h265' };
-    case 'h264':
-      return { video_codec: 'h264:baseline:3.0' };
+    case VIDEO_CODEC.VP9:
+      return { video_codec: VIDEO_CODEC.VP9 };
+    case VIDEO_CODEC.HEV1:
+      return { video_codec: VIDEO_CODEC.H265 };
+    case VIDEO_CODEC.H264:
+      return { video_codec: `${VIDEO_CODEC}:baseline:3.0` };
     default:
       return { video_codec: h264avcToString(codec) };
   }
