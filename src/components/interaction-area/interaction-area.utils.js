@@ -1,14 +1,15 @@
-import { elementsCreator } from '../../utils/dom';
+import { elementsCreator, styleElement } from '../../utils/dom';
 import {
   INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX
 } from './interaction-area.const';
+import { forEach, some } from '../../utils/array';
 
 export const getInteractionAreaItem = (playerOptions, item, onClick) => {
   return elementsCreator({
     tag: 'div',
-    attr: { class: `${INTERACTION_AREAS_PREFIX}-item` },
+    attr: { class: `${INTERACTION_AREAS_PREFIX}-item`, id: item.id },
     style: {
       left: `${item.left}%`,
       top: `${item.top}%`,
@@ -82,6 +83,42 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
   }
 };
 
+export const updateInteractionAreasItem = (videojs, playerOptions, interactionAreasData, previousInteractionAreasData, onClick) => {
+  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+
+  forEach(interactionAreasData, (item, index) => {
+    const itemElement = interactionAreasContainer.querySelector(`#${item.id}`);
+    const isExistItem = some(previousInteractionAreasData, i => i.id === item.id);
+
+    if (isExistItem && itemElement) {
+      styleElement(itemElement, {
+        left: `${item.left}%`,
+        top: `${item.top}%`,
+        width: `${item.width}%`,
+        height: `${item.height}%`
+      });
+    } else if (!isExistItem && !itemElement) {
+      interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, (event) => {
+        onClick({ event, item, index });
+      }));
+    }
+  });
+
+  forEach(previousInteractionAreasData, (item) => {
+    const itemElement = interactionAreasContainer.querySelector(`#${item.id}`);
+    const shouldBeRemoved = !some(interactionAreasData, i => i.id === item.id);
+
+    if (itemElement && shouldBeRemoved) {
+      itemElement.remove();
+    }
+  });
+
+};
+
+export const removeInteractionAreasContainer = (videojs) => {
+  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  interactionAreasContainer && interactionAreasContainer.remove();
+};
 
 export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
   return (!interactionLayoutConfig || interactionLayoutConfig.enable) && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';

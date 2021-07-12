@@ -12,7 +12,7 @@ const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);
 
   for (let key in attributes) {
-    if (attributes[key]) {
+    if (Object.prototype.hasOwnProperty.call(attributes, key)) {
       element.setAttribute(key, attributes[key]);
     }
   }
@@ -31,6 +31,16 @@ const appendChild = (child, element) => {
   }
 };
 
+export const styleElement = (element, style) => {
+  for (let key in style) {
+    if (Object.prototype.hasOwnProperty.call(style, key)) {
+      element.style[key] = style[key];
+    }
+  }
+
+  return element;
+};
+
 const elementsCreator = (item) => {
   const children = Array.isArray(item.children) ? item.children.map(elementsCreator) : item.children;
 
@@ -41,11 +51,7 @@ const elementsCreator = (item) => {
   }
 
   if (item.style) {
-    for (let key in item.style) {
-      if (Object.prototype.hasOwnProperty.call(item.style, key)) {
-        element.style[key] = item.style[key];
-      }
-    }
+    styleElement(element, item.style);
   }
 
   return element;

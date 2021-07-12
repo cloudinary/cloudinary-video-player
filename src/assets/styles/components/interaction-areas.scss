@@ -2,12 +2,13 @@ $interaction-area-marker-size: 20px;
 $interaction-area-marker-border-size : 2px;
 $interaction-area-marker-box-shadow-extra-size: 4px;
 $video-player-interaction-area-marker-default-color : #FF620C;
+$interaction-area-item-transition-delay : 100ms;
 
 .cld-video-player{
 
   &.vjs-user-active {
     .interaction-areas-container {
-      opacity: 1;
+      display: block;
     }
   }
 
@@ -17,13 +18,12 @@ $video-player-interaction-area-marker-default-color : #FF620C;
     height: 100%;
     top: 50%;
     left: 50%;
-    opacity: 0;
     transform: translate(-50%, -50%);
-    transition: opacity 0.5s;
+    display: none;
     z-index: 1;
 
     &:hover {
-      opacity: 1;
+      display: block;
     }
 
     .go-back-button,
@@ -43,6 +43,10 @@ $video-player-interaction-area-marker-default-color : #FF620C;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      transition: width $interaction-area-item-transition-delay,
+                  height $interaction-area-item-transition-delay,
+                  left $interaction-area-item-transition-delay,
+                  top $interaction-area-item-transition-delay;
 
       &:hover{
         .vp-ia-marker-main:before {
