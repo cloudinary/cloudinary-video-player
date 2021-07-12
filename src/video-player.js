@@ -15,7 +15,6 @@ import { isFunction, isString, noop, isPlainObject } from './utils/type-inferenc
 import {
   addMetadataTrack,
   extractOptions,
-  getMetaDataTracker,
   getResolveVideoElement,
   overrideDefaultVideojsComponents
 } from './video-player.utils';
@@ -275,7 +274,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (!this._isZoomed && interactionAreasConfig.enable && vttUrl) {
       this._currentTrack = addMetadataTrack(this.videojs, vttUrl);
-      this.addCueListener(interactionAreasConfig);
+      this.addCueListener(interactionAreasConfig, this._currentTrack);
     }
   }
 
@@ -646,20 +645,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     setInteractionAreasContainer(this.videojs, interactionAreasContainer);
   }
 
-  addCueListener(interactionAreasConfig) {
-    const textTracks = this.videojs.textTracks();
-    if (!textTracks.length) {
-      return;
-    }
-
-    const track = getMetaDataTracker(textTracks);
-
+  addCueListener(interactionAreasConfig, track) {
     if (!track) {
       return;
     }
 
     let initSetInteractionAreasSize = true;
-    track.mode = 'hidden';
 
     track.addEventListener('cuechange', () => {
       const tracksData = JSON.parse(track.activeCues[0].text);
