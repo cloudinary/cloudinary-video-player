@@ -34,7 +34,7 @@ export function normalizeFormat(format) {
 const isContainCodec = (value) => Object.values(VIDEO_CODEC).some((codec) => value.includes(codec));
 
 export const isCodecAlreadyExist = (transformations, rawTransformation) => {
-  if (!transformations) {
+  if (!(transformations || rawTransformation)) {
     return false;
   }
 
@@ -48,7 +48,7 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
     return isContainCodec(rawTransformation);
   }
 
-  return Array.isArray(transformations) && transformations.find((transformation) => {
+  return Array.isArray(transformations) && transformations.some((transformation) => {
     const options = transformation.toOptions();
 
     if (Array.isArray(options && options.transformation)) {

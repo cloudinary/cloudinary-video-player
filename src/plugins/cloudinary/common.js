@@ -196,7 +196,7 @@ const codecToSrcTransformation = (codec) => {
     case VIDEO_CODEC.HEV1:
       return { video_codec: VIDEO_CODEC.H265 };
     case VIDEO_CODEC.H264:
-      return { video_codec: `${VIDEO_CODEC}:baseline:3.0` };
+      return { video_codec: `${VIDEO_CODEC.H264}:baseline:3.0` };
     default:
       return { video_codec: h264avcToString(codec) };
   }
