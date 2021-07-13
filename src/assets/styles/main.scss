@@ -5,7 +5,7 @@ $icon-font-path: '../fonts' !default;
 @import 'variables';
 
 // Import Video.js style
-@import '~video.root.js/src/css/vjs.scss';
+@import '~video.root.js/dist/video-js.min.css';
 @import 'mixins/skin';
 @import 'icons';
 @import 'ads-label';

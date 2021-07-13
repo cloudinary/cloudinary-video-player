@@ -1,3 +1,17 @@
+1.6.2-edge.1 / 2021-07-13
+==================
+
+Fixes:
+--------------
+fix: in some cases interaction area dots get stuck 
+fix: layout message disappears when video on autoplay mode
+fix: after zoom out in full screen the interaction areas move (set manually) 
+fix: interaction area dots flickering 
+
+Other Changes
+--------------
+update dependencies
+
 1.6.2-edge.0 / 2021-07-05
 ==================
 

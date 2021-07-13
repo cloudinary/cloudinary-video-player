@@ -15,7 +15,6 @@ import { isFunction, isString, noop, isPlainObject } from './utils/type-inferenc
 import {
   addMetadataTrack,
   extractOptions,
-  getMetaDataTracker,
   getResolveVideoElement,
   overrideDefaultVideojsComponents
 } from './video-player.utils';
@@ -25,7 +24,8 @@ import {
   getInteractionAreaItem,
   getZoomTransformation,
   setInteractionAreasContainer,
-  setInteractionAreasContainerSize, shouldShowAreaLayoutMessage
+  setInteractionAreasContainerSize,
+  shouldShowAreaLayoutMessage
 } from './components/interaction-area/interaction-area.utils';
 import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
@@ -161,8 +161,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-        this._updateInteractionAreasTrack();
+        if (!this._videojsOptions.autoplay || !this._shouldShowAreaLayoutMessage()) {
+          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+          this._updateInteractionAreasTrack();
+        }
       });
 
       this.videojs.on('sourcechanged', () => {
@@ -180,7 +182,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
 
         this.videojs.on('fullscreenchange', () => {
-          setTimeout(setInteractionAreasContainerSize, 0);
+          // waiting for fullscreen will end
+          setTimeout(setInteractionAreasContainerSize, 100);
         });
 
         const resizeDestroy = addEventListener(window, 'resize', setInteractionAreasContainerSize, false);
@@ -235,10 +238,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
+  _shouldShowAreaLayoutMessage() {
+    return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout);
+  }
+
   _setInteractionAreaLayoutMessage() {
-    if (shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout)) {
+    if (this._shouldShowAreaLayoutMessage()) {
       createInteractionAreaLayoutMessage(this.videojs, () => {
-        this.play();
+        if (!this._videojsOptions.autoplay) {
+          this.play();
+        } else {
+          this._updateInteractionAreasTrack();
+          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+        }
       });
     }
   }
@@ -262,7 +274,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (!this._isZoomed && interactionAreasConfig.enable && vttUrl) {
       this._currentTrack = addMetadataTrack(this.videojs, vttUrl);
-      this.addCueListener(interactionAreasConfig);
+      this.addCueListener(interactionAreasConfig, this._currentTrack);
     }
   }
 
@@ -580,6 +592,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   addInteractionAreas(interactionAreas, interactionAreasOptions) {
     this._setStaticInteractionAreas = () => {
       this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
+      this._setInteractionAreasContainerSize();
     };
 
     this._setInteractionAreaLayoutMessage();
@@ -632,20 +645,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     setInteractionAreasContainer(this.videojs, interactionAreasContainer);
   }
 
-  addCueListener(interactionAreasConfig) {
-    const textTracks = this.videojs.textTracks();
-    if (!textTracks.length) {
-      return;
-    }
-
-    const track = getMetaDataTracker(textTracks);
-
+  addCueListener(interactionAreasConfig, track) {
     if (!track) {
       return;
     }
 
     let initSetInteractionAreasSize = true;
-    track.mode = 'hidden';
 
     track.addEventListener('cuechange', () => {
       const tracksData = JSON.parse(track.activeCues[0].text);
