@@ -9,16 +9,6 @@ import {
 } from './video-player.const';
 import { isString } from './utils/type-inference';
 
-export const getMetaDataTracker = (textTracks) => {
-  for (let i = 0; textTracks.length; i++) {
-    const value = textTracks[i];
-    if (value.kind === 'metadata') {
-      return value;
-    }
-  }
-};
-
-
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
     kind: 'metadata',
