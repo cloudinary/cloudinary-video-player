@@ -23,6 +23,9 @@ $icon-font-path: '../fonts' !default;
 }
 
 
+.video-js {
+  overflow: hidden;
+}
 
 .video-js .vjs-control,
 .vjs-icon-close,
