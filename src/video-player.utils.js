@@ -18,6 +18,10 @@ export const addMetadataTrack = (videoJs, vttSource) => {
   }, true).track;
 };
 
+export const isLight = (opts) => {
+  return opts.class.indexOf('cld-video-player-skin-light') > -1 || opts.skin === 'light';
+};
+
 export const getResolveVideoElement = (elem) => {
   if (isString(elem)) {
     let id = elem;
