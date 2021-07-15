@@ -6,10 +6,13 @@ import {
 } from './interaction-area.const';
 import { forEach, some } from '../../utils/array';
 
-export const getInteractionAreaItem = (playerOptions, item, onClick) => {
+
+const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
+
+export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
   return elementsCreator({
     tag: 'div',
-    attr: { class: `${INTERACTION_AREAS_PREFIX}-item`, 'data-id': item.id },
+    attr: { class: `${INTERACTION_AREAS_PREFIX}-item`, 'data-id': getInteractionAreaItemId(item, index) },
     style: {
       left: `${item.left}%`,
       top: `${item.top}%`,
@@ -83,13 +86,13 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
   }
 };
 
-const getInteractionAreaElementById = (interactionAreasContainer, id) => interactionAreasContainer.querySelector(`[data-id=${id}]`);
+const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
 
 export const updateInteractionAreasItem = (videojs, playerOptions, interactionAreasData, previousInteractionAreasData, onClick) => {
   const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
 
   forEach(interactionAreasData, (item, index) => {
-    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item.id);
+    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
     const isExistItem = some(previousInteractionAreasData, i => i.id === item.id);
 
     if (isExistItem && itemElement) {
@@ -100,14 +103,14 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
         height: `${item.height}%`
       });
     } else if (!isExistItem && !itemElement) {
-      interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, (event) => {
+      interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, index, (event) => {
         onClick({ event, item, index });
       }));
     }
   });
 
-  forEach(previousInteractionAreasData, (item) => {
-    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item.id);
+  forEach(previousInteractionAreasData, (item, index) => {
+    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
     const shouldBeRemoved = !some(interactionAreasData, i => i.id === item.id);
 
     if (itemElement && shouldBeRemoved) {

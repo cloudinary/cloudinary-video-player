@@ -647,7 +647,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     } else {
       const interactionAreasItems = interactionAreasData.map((item, index) => {
-        return getInteractionAreaItem(this.playerOptions, item, (event) => {
+        return getInteractionAreaItem(this.playerOptions, item, index, (event) => {
           this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
         });
       });
