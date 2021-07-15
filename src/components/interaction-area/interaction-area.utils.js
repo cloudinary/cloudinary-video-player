@@ -72,13 +72,12 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
 
 
 export const setInteractionAreasContainer = (videojs, newInteractionAreasContainer) => {
-  const videoContainer = videojs.el();
-  const currentInteractionAreasContainer = videoContainer.querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  const currentInteractionAreasContainer = getInteractionAreasContainer(videojs);
 
   if (currentInteractionAreasContainer) {
     currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
   } else {
-    videoContainer.append(newInteractionAreasContainer);
+    videojs.el().append(newInteractionAreasContainer);
   }
 };
 
@@ -147,10 +146,18 @@ export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
   setInteractionAreasContainer(videojs, tracksContainer);
 };
 
+const getInteractionAreasContainer = (videojs) => videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+
+export const removeInteractionAreasContainer = (videojs) => {
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
+
+  interactionAreasContainer && interactionAreasContainer.remove();
+};
+
 
 export const setInteractionAreasContainerSize = (videojs, videoElement) => {
 
-  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
   if (!interactionAreasContainer) {
     return;
