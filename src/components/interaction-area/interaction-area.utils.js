@@ -4,8 +4,12 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX
 } from './interaction-area.const';
+import { getDefaultPlayerColor } from '../../plugins/colors';
 
 export const getInteractionAreaItem = (playerOptions, item, onClick) => {
+  const defaultColor = getDefaultPlayerColor(playerOptions.cloudinary.chainTarget._videojsOptions);
+  const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
+
   return elementsCreator({
     tag: 'div',
     attr: { class: `${INTERACTION_AREAS_PREFIX}-item` },
@@ -27,12 +31,12 @@ export const getInteractionAreaItem = (playerOptions, item, onClick) => {
           {
             tag: 'div',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-marker-shadow` },
-            style: playerOptions && playerOptions.colors && { backgroundColor: playerOptions.colors.accent }
+            style: { backgroundColor: accentColor }
           },
           {
             tag: 'div',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-marker-main` },
-            style: playerOptions && playerOptions.colors && { borderColor: playerOptions.colors.accent }
+            style: { borderColor: accentColor }
           }
         ]
       }

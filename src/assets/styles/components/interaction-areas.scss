@@ -1,7 +1,6 @@
 $interaction-area-marker-size: 20px;
 $interaction-area-marker-border-size : 2px;
 $interaction-area-marker-box-shadow-extra-size: 4px;
-$video-player-interaction-area-marker-default-color : #FF620C;
 
 .cld-video-player{
 
@@ -69,7 +68,7 @@ $video-player-interaction-area-marker-default-color : #FF620C;
 
         .vp-ia-marker-main {
           background-color: white;
-          border:solid $interaction-area-marker-border-size $video-player-interaction-area-marker-default-color;
+          border:solid $interaction-area-marker-border-size;
           height: 100%;
           width: 100%;
         }
@@ -77,7 +76,6 @@ $video-player-interaction-area-marker-default-color : #FF620C;
         .vp-ia-marker-shadow {
           width: 2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
           height:2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
-          background-color: $video-player-interaction-area-marker-default-color;
           opacity: 0.24;
         }
       }
