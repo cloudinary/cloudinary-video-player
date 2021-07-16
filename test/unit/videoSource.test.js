@@ -1,5 +1,6 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import cloudinary from 'cloudinary-core';
+import { isCodecAlreadyExist } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
 const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
 describe('video source tests', () => {
@@ -294,6 +295,133 @@ describe('tests withCredentials', () => {
     let srcs = source.generateSources().map(s => s.withCredentials);
     expect(srcs[0]).toEqual(false);
   });
+});
+
+
+describe('test isCodecAlreadyExist method', () => {
+
+  describe('test has codec in raw transformation', () => {
+
+    it('should codec already exist', () => {
+      expect(isCodecAlreadyExist(null, 'vc_vp9,q_auto')).toEqual(true);
+    });
+
+    it('should codec not exist', () => {
+      expect(isCodecAlreadyExist(null, 'q_auto')).toEqual(false);
+    });
+  });
+
+
+  describe('test has codec in transformation object', () => {
+
+    it('codec exist in transformation object', () => {
+      const transformations = {
+        video_codec: 'vp9'
+      };
+
+      expect(isCodecAlreadyExist(transformations)).toEqual(true);
+    });
+
+    it('codec NOT exist in transformation object', () => {
+
+      const transformations = {
+        quality: 'auto'
+      };
+
+      expect(isCodecAlreadyExist(transformations)).toEqual(false);
+    });
+  });
+
+  describe('test if codec exist in transformations array', () => {
+
+    it('codec exist in transformation array', () => {
+      const transformations = [
+        {
+          toOptions: () => ({ transformation: ['vc_vp9,q_auto'] })
+        }
+      ];
+
+      expect(isCodecAlreadyExist(transformations)).toEqual(true);
+    });
+
+
+    it('codec NOT exist in transformation array', () => {
+      const transformations = [
+        {
+          toOptions: () => ({ transformation: ['q_auto'] })
+        }
+      ];
+
+      expect(isCodecAlreadyExist(transformations)).toEqual(false);
+    });
+
+  });
+
+
+  describe('should generated codec in source url', () => {
+
+    it('should get default code', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+    });
+
+    it('check if codec has NOT bee added to the ur twice', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        transformation: {
+          video_codec: 'vp9'
+        }
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+    });
+
+    it('check if codec has been changed', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        transformation: {
+          video_codec: 'h265'
+        }
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/sea_turtle.webm');
+    });
+
+
+    it('check if codec has been NOT add twice using raw_transformation', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        raw_transformation: 'vc_vp9'
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+    });
+
+    it('check if codec has been change using raw_transformation', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        raw_transformation: 'h265'
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/h265/sea_turtle.webm');
+    });
+
+
+  });
+
 });
 
 

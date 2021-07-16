@@ -4,12 +4,16 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX
 } from './interaction-area.const';
+import { getDefaultPlayerColor } from '../../plugins/colors';
 import { forEach, some } from '../../utils/array';
 
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
 
 export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
+  const defaultColor = getDefaultPlayerColor(playerOptions.cloudinary.chainTarget._videojsOptions);
+  const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
+
   return elementsCreator({
     tag: 'div',
     attr: { class: `${INTERACTION_AREAS_PREFIX}-item`, 'data-id': getInteractionAreaItemId(item, index) },
@@ -31,12 +35,12 @@ export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
           {
             tag: 'div',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-marker-shadow` },
-            style: playerOptions && playerOptions.colors && { backgroundColor: playerOptions.colors.accent }
+            style: { backgroundColor: accentColor }
           },
           {
             tag: 'div',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-marker-main` },
-            style: playerOptions && playerOptions.colors && { borderColor: playerOptions.colors.accent }
+            style: { borderColor: accentColor }
           }
         ]
       }
@@ -76,13 +80,12 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
 
 
 export const setInteractionAreasContainer = (videojs, newInteractionAreasContainer) => {
-  const videoContainer = videojs.el();
-  const currentInteractionAreasContainer = videoContainer.querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  const currentInteractionAreasContainer = getInteractionAreasContainer(videojs);
 
   if (currentInteractionAreasContainer) {
     currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
   } else {
-    videoContainer.append(newInteractionAreasContainer);
+    videojs.el().append(newInteractionAreasContainer);
   }
 };
 
@@ -118,11 +121,6 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
     }
   });
 
-};
-
-export const removeInteractionAreasContainer = (videojs) => {
-  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
-  interactionAreasContainer && interactionAreasContainer.remove();
 };
 
 export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
@@ -189,10 +187,17 @@ export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
   setInteractionAreasContainer(videojs, tracksContainer);
 };
 
+const getInteractionAreasContainer = (videojs) => videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+
+export const removeInteractionAreasContainer = (videojs) => {
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
+
+  interactionAreasContainer && interactionAreasContainer.remove();
+};
 
 export const setInteractionAreasContainerSize = (videojs, videoElement) => {
 
-  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
   if (!interactionAreasContainer) {
     return;

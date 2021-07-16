@@ -247,6 +247,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _setInteractionAreaLayoutMessage() {
     if (this._shouldShowAreaLayoutMessage()) {
       createInteractionAreaLayoutMessage(this.videojs, () => {
+        removeInteractionAreasContainer(this.videojs);
         if (!this._videojsOptions.autoplay) {
           this.play();
         } else {

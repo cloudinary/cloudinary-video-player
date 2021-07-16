@@ -4,7 +4,6 @@ import { normalizeOptions, isSrcEqual } from '../../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
-import { isKeyInTransformation } from 'utils/cloudinary';
 import { default as vjs } from 'video.js';
 import {
   CONTAINER_MIME_TYPES,
@@ -13,7 +12,8 @@ import {
   URL_PATTERN,
   VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
-import { formatToMimeTypeAndTransformation, normalizeFormat } from './video-source.utils';
+import { formatToMimeTypeAndTransformation, isCodecAlreadyExist, normalizeFormat } from './video-source.utils';
+import { castArray } from '../../../../utils/array';
 
 let objectId = 0;
 
@@ -68,6 +68,7 @@ class VideoSource extends BaseSource {
     this._interactionAreas = null;
     this._type = 'VideoSource';
     this.isRawUrl = isRawUrl;
+    this._rawTransformation = options.raw_transformation;
     this.withCredentials = !!withCredentials;
     this.getInitOptions = () => initOptions;
 
@@ -170,40 +171,43 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     if (this.isRawUrl) {
-      let type = this.sourceTypes().length > 1 ? null : this.sourceTypes()[0];
+      const type = this.sourceTypes().length > 1 ? null : this.sourceTypes()[0];
       return [this.generateRawSource(this.publicId(), type)];
     }
-    let isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
-    let srcs = this.sourceTypes().map((sourceType) => {
+
+    const srcs = this.sourceTypes().map((sourceType) => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
       const isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
       const opts = {};
 
       if (srcTransformation) {
-        opts.transformation = Array.isArray(srcTransformation) ? srcTransformation : [srcTransformation];
+        opts.transformation = castArray(srcTransformation);
       }
 
       assign(opts, { resource_type: 'video', format });
 
-      const hasCodecSrcTrans = (isKeyInTransformation(opts.transformation, 'video_codec') || isKeyInTransformation(opts.transformation, 'streaming_profile'));
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+
       // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !hasCodecSrcTrans) {
+      if (codecTrans && !isCodecAlreadyExist(opts.transformation, this._rawTransformation)) {
         opts.transformation.push(codecTrans);
       }
+
       if (opts.format === 'auto') {
         delete opts.format;
       }
 
-      let queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
+      const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
 
-      let src = this.config().url(this.publicId(), opts);
+      const src = this.config().url(this.publicId(), opts);
       // if src is a url that already contains query params then replace '?' with '&'
-      src += src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
+      const params = src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
 
-      return { type, src, cldSrc: this, isAdaptive: isAdaptive, withCredentials: this.withCredentials };
+      return { type, src: src + params, cldSrc: this, isAdaptive: isAdaptive, withCredentials: this.withCredentials };
     });
+
+    const isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
 
     if (isIe) {
       return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
