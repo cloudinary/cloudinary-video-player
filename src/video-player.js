@@ -22,7 +22,8 @@ import { FLUID_CLASS_NAME } from './video-player.const';
 import {
   createInteractionAreaLayoutMessage,
   getInteractionAreaItem,
-  getZoomTransformation, removeInteractionAreasContainer,
+  getZoomTransformation,
+  removeInteractionAreasContainer,
   setInteractionAreasContainer,
   setInteractionAreasContainerSize,
   shouldShowAreaLayoutMessage
@@ -161,10 +162,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        if (!this._videojsOptions.autoplay || !this._shouldShowAreaLayoutMessage()) {
-          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-          this._updateInteractionAreasTrack();
-        }
+        this._setInteractionAreaLayoutMessage();
       });
 
       this.videojs.on('sourcechanged', () => {
@@ -177,7 +175,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
 
       if (this._shouldSetResize()) {
-        this._setInteractionAreaLayoutMessage();
 
         const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
 
@@ -242,17 +239,24 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout);
   }
 
+  _removeInteractionAreaLayoutMessage() {
+    removeInteractionAreasContainer(this.videojs);
+    this._updateInteractionAreasTrack();
+    this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+    this.play();
+  }
+
   _setInteractionAreaLayoutMessage() {
-    if (this._shouldShowAreaLayoutMessage()) {
-      createInteractionAreaLayoutMessage(this.videojs, () => {
-        removeInteractionAreasContainer(this.videojs);
-        if (!this._videojsOptions.autoplay) {
-          this.play();
-        } else {
-          this._updateInteractionAreasTrack();
-          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-        }
-      });
+    if (this._isInteractionAreasEnabled() || this._setStaticInteractionAreas) {
+      if (this._shouldShowAreaLayoutMessage()) {
+        this.pause();
+        const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
+        createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage);
+
+        setTimeout(removeInteractionAreaLayoutMessage, 2500);
+      } else {
+        this._removeInteractionAreaLayoutMessage();
+      }
     }
   }
 
@@ -595,8 +599,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
       this._setInteractionAreasContainerSize();
     };
-
-    this._setInteractionAreaLayoutMessage();
   }
 
   getInteractionAreasConfig() {
