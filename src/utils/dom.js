@@ -12,7 +12,7 @@ const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);
 
   for (let key in attributes) {
-    if (attributes[key]) {
+    if (Object.prototype.hasOwnProperty.call(attributes, key)) {
       element.setAttribute(key, attributes[key]);
     }
   }
