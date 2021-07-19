@@ -91,12 +91,14 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
 
 const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
 
+
 export const updateInteractionAreasItem = (videojs, playerOptions, interactionAreasData, previousInteractionAreasData, onClick) => {
-  const interactionAreasContainer = videojs.el().querySelector(`.${INTERACTION_AREAS_CONTAINER_CLASS_NAME}`);
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
   forEach(interactionAreasData, (item, index) => {
     const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
-    const isExistItem = some(previousInteractionAreasData, i => i.id === item.id);
+    const itemId = getInteractionAreaItemId(item);
+    const isExistItem = some(previousInteractionAreasData, i => getInteractionAreaItemId(i) === itemId);
 
     if (isExistItem && itemElement) {
       styleElement(itemElement, {
@@ -114,7 +116,8 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
 
   forEach(previousInteractionAreasData, (item, index) => {
     const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
-    const shouldBeRemoved = !some(interactionAreasData, i => i.id === item.id);
+    const itemId = getInteractionAreaItemId(item);
+    const shouldBeRemoved = !some(interactionAreasData, i => getInteractionAreaItemId(i) === itemId);
 
     if (itemElement && shouldBeRemoved) {
       itemElement.remove();
