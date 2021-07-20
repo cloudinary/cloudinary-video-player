@@ -107,6 +107,7 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
     const itemId = getInteractionAreaItemId(item);
     const isExistItem = some(previousInteractionAreasData, i => getInteractionAreaItemId(i) === itemId);
 
+    // in case the element of the item is in the dom and exist in the previous data , it update the element position
     if (isExistItem && itemElement) {
       styleElement(itemElement, {
         left: `${item.left}%`,
@@ -114,6 +115,7 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
         width: `${item.width}%`,
         height: `${item.height}%`
       });
+      // if the element did not exist before , not in the dom and not in the previous data , it add a new element
     } else if (!isExistItem && !itemElement) {
       interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, index, (event) => {
         onClick({ event, item, index });
@@ -121,6 +123,7 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
     }
   });
 
+  // checking the previous data for element that should be removed if not exist in the new data object.
   forEach(previousInteractionAreasData, (item, index) => {
     const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
     const itemId = getInteractionAreaItemId(item);
