@@ -1,5 +1,6 @@
 import { elementsCreator } from '../../utils/dom';
 import {
+  INTERACTION_AREA_HAND_ICON,
   INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX
@@ -104,6 +105,10 @@ export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
         tag: 'div',
         attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message` },
         children: [
+          {
+            tag: 'img',
+            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-icon`, src: INTERACTION_AREA_HAND_ICON}
+          },
           {
             tag: 'h3',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-title` },

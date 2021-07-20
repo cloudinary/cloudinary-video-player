@@ -1,6 +1,7 @@
 $interaction-area-marker-size: 20px;
-$interaction-area-marker-border-size : 2px;
+$interaction-area-marker-border-size: 2px;
 $interaction-area-marker-box-shadow-extra-size: 4px;
+$interaction-area-layout-icon: 80px;
 
 .cld-video-player{
 
@@ -89,6 +90,15 @@ $interaction-area-marker-box-shadow-extra-size: 4px;
       height: 100%;
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.5);
+
+      &:hover .vp-ia-layout-message-button{
+        background-color: rgba(255, 255, 254, 0.28);
+      }
+
+      .vp-ia-layout-icon {
+        width: $interaction-area-layout-icon;
+        margin-bottom: 30px;
+      }
 
       .vp-ia-layout-message-title {
         font-size: 14px;
