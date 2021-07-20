@@ -91,7 +91,13 @@ export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
   return (!interactionLayoutConfig || interactionLayoutConfig.enable) && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
 };
 
-export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
+
+const onClickInteractionAreaLayoutClick = (checked, onClick) => {
+  localStorage.setItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME, JSON.parse(checked));
+  onClick();
+};
+
+export const createInteractionAreaLayoutMessage = (videojs, onClick, showItAgainCheckbox = false) => {
 
   let checked = false;
 
@@ -99,57 +105,46 @@ export const createInteractionAreaLayoutMessage = (videojs, onClick) => {
 
   const tracksContainer = elementsCreator({
     tag: 'div',
-    attr: { class: INTERACTION_AREAS_CONTAINER_CLASS_NAME },
+    attr: { class: `${INTERACTION_AREAS_CONTAINER_CLASS_NAME} ${INTERACTION_AREAS_PREFIX}-layout-message ${showItAgainCheckbox ? '' : 'clickable'}` },
+    onClick: !showItAgainCheckbox ? () => onClickInteractionAreaLayoutClick(checked, onClick) : null,
     children: [
       {
+        tag: 'img',
+        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-icon`, src: INTERACTION_AREA_HAND_ICON }
+      },
+      {
+        tag: 'h3',
+        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-title` },
+        children: 'Tap on dots to zoom for a product.'
+      },
+      {
+        tag: 'button',
+        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-button` },
+        children: 'Got it',
+        onClick: showItAgainCheckbox ? () => onClickInteractionAreaLayoutClick(checked, onClick) : null
+      },
+      showItAgainCheckbox && {
         tag: 'div',
-        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message` },
+        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-do-not-show` },
         children: [
           {
-            tag: 'img',
-            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-icon`, src: INTERACTION_AREA_HAND_ICON}
-          },
-          {
-            tag: 'h3',
-            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-title` },
-            children: 'Tap on dots to zoom for a product.'
-          },
-          {
-            tag: 'button',
-            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-button` },
-            children: 'Got it',
+            tag: 'input',
+            attr: { type: 'checkbox', class: `${INTERACTION_AREAS_PREFIX}-layout-message-checkbox`, id },
             event: {
-              name: 'click',
-              callback: () => {
-                localStorage.setItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME, JSON.parse(checked));
-                onClick();
+              name: 'input',
+              callback: (event) => {
+                checked = event.target.checked;
               }
             }
           },
           {
-            tag: 'div',
-            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-do-not-show` },
-            children: [
-              {
-                tag: 'input',
-                attr: { type: 'checkbox', class: `${INTERACTION_AREAS_PREFIX}-layout-message-checkbox`, id },
-                event: {
-                  name: 'input',
-                  callback: (event) => {
-                    checked = event.target.checked;
-                  }
-                }
-              },
-              {
-                tag: 'label',
-                attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-checkbox-title`, for: id },
-                children: 'Don׳t show it again'
-              }
-            ]
+            tag: 'label',
+            attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-checkbox-title`, for: id },
+            children: 'Don׳t show it again'
           }
         ]
       }
-    ]
+    ].filter(i => i)
   });
 
   setInteractionAreasContainer(videojs, tracksContainer);

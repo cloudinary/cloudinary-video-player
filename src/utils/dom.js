@@ -12,7 +12,7 @@ const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);
 
   for (let key in attributes) {
-    if (attributes[key]) {
+    if (Object.prototype.hasOwnProperty.call(attributes, key)) {
       element.setAttribute(key, attributes[key]);
     }
   }
@@ -35,6 +35,10 @@ const elementsCreator = (item) => {
   const children = Array.isArray(item.children) ? item.children.map(elementsCreator) : item.children;
 
   const element = createElement(item.tag, item.attr, children);
+
+  if (item.onClick) {
+    item.event = { name: 'click', callback: item.onClick };
+  }
 
   if (item.event) {
     element.addEventListener(item.event.name, item.event.callback, false);
