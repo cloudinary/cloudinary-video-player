@@ -30,7 +30,8 @@
       var playerOption = {
           bigPlayButton: false,
           interactionLayout :{
-              enable : true
+              enable : true,
+              showItAgainCheckbox: false
           }
       };
 
@@ -147,6 +148,7 @@
           cld.videoPlayer('player', {
              interactionAreaTheme : 'pulsing' / 'shadowed' (the default is 'pulsing')
              interactionLayout : {
+                showItAgainCheckbox : true / false (the default is false)
                 enable : true / false (the default is true)
              }
           });
