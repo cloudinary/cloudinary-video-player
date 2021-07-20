@@ -1,3 +1,12 @@
+1.6.2-edge.2 / 2021-07-15
+==================
+
+Fixes:
+-------------
+fix:  Do not add video codec if it is already defined.
+fix:  Interaction area point should be as video player Skin theme color
+fix:  Hover on the mute\unmute button, Video controllers move outside of the video container
+
 1.6.2-edge.1 / 2021-07-13
 ==================
 

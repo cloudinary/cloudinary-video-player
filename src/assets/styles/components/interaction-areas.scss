@@ -1,6 +1,7 @@
 $interaction-area-marker-size: 20px;
-$interaction-area-marker-border-size : 2px;
+$interaction-area-marker-border-size: 2px;
 $interaction-area-marker-box-shadow-extra-size: 4px;
+$interaction-area-layout-icon: 80px;
 
 .cld-video-player{
 
@@ -42,7 +43,26 @@ $interaction-area-marker-box-shadow-extra-size: 4px;
       align-items: center;
       justify-content: center;
 
-      &:hover{
+
+      &.theme-shadowed {
+
+        .vp-ia-marker-shadow{
+          opacity: 0.24;
+        }
+
+      }
+
+      &.theme-pulsing {
+
+        .vp-ia-marker-shadow {
+          -webkit-animation: pulsing-animation 1.3s ease-out;
+          -webkit-animation-iteration-count: infinite;
+          border: solid $interaction-area-marker-border-size;
+          opacity: 0;
+        }
+      }
+
+      &:hover {
         .vp-ia-marker-main:before {
           content: "";
           width: $interaction-area-marker-size;
@@ -76,7 +96,6 @@ $interaction-area-marker-box-shadow-extra-size: 4px;
         .vp-ia-marker-shadow {
           width: 2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
           height:2*$interaction-area-marker-border-size + $interaction-area-marker-size + $interaction-area-marker-box-shadow-extra-size;
-          opacity: 0.24;
         }
       }
     }
@@ -89,6 +108,15 @@ $interaction-area-marker-box-shadow-extra-size: 4px;
       height: 100%;
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.5);
+
+      &:hover .vp-ia-layout-message-button{
+        background-color: rgba(255, 255, 254, 0.28);
+      }
+
+      .vp-ia-layout-icon {
+        width: $interaction-area-layout-icon;
+        margin-bottom: 30px;
+      }
 
       .vp-ia-layout-message-title {
         font-size: 14px;
@@ -117,4 +145,10 @@ $interaction-area-marker-box-shadow-extra-size: 4px;
       }
     }
   }
+}
+
+@-webkit-keyframes pulsing-animation {
+  0%   { height: $interaction-area-marker-size / 2; width: $interaction-area-marker-size / 2; opacity: 0}
+  50%  { height: $interaction-area-marker-size; width: $interaction-area-marker-size; opacity: 1}
+  100% { height: 2 * $interaction-area-marker-size; width: 2 * $interaction-area-marker-size; opacity: 0}
 }
