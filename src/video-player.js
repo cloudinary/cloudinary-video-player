@@ -26,7 +26,8 @@ import {
   removeInteractionAreasContainer,
   setInteractionAreasContainer,
   setInteractionAreasContainerSize,
-  shouldShowAreaLayoutMessage
+  shouldShowAreaLayoutMessage,
+  updateInteractionAreasItem
 } from './components/interaction-area/interaction-area.utils';
 import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
@@ -636,22 +637,31 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
   }
 
-  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}) {
-    const interactionAreasItems = interactionAreasData.map((item, index) => {
-      return getInteractionAreaItem(this.playerOptions, item, (event) => {
-        interactionAreasOptions.onClick && interactionAreasOptions.onClick({
-          item,
-          index,
-          event,
-          zoom: (source, option) => {
-            this._onZoom(source, option, item);
-          }
+  _onInteractionAreasClick(interactionAreasOptions, { event, item, index }) {
+    interactionAreasOptions.onClick && interactionAreasOptions.onClick({
+      item,
+      index,
+      event,
+      zoom: (source, option) => {
+        this._onZoom(source, option, item);
+      }
+    });
+  }
+
+  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData) {
+    if (previousInteractionAreasData) {
+      updateInteractionAreasItem(this.videojs, this.playerOptions, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
+        this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
+      });
+    } else {
+      const interactionAreasItems = interactionAreasData.map((item, index) => {
+        return getInteractionAreaItem(this.playerOptions, item, index, (event) => {
+          this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
         });
       });
-    });
 
-    const interactionAreasContainer = createElement('div', { 'class': INTERACTION_AREAS_CONTAINER_CLASS_NAME }, interactionAreasItems);
-    setInteractionAreasContainer(this.videojs, interactionAreasContainer);
+      setInteractionAreasContainer(this.videojs, createElement('div', { 'class': INTERACTION_AREAS_CONTAINER_CLASS_NAME }, interactionAreasItems));
+    }
   }
 
   addCueListener(interactionAreasConfig, track) {
@@ -659,13 +669,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
-    let initSetInteractionAreasSize = true;
+    let previousTracksData = null;
 
     track.addEventListener('cuechange', () => {
-      const tracksData = JSON.parse(track.activeCues[0].text);
-      this._addInteractionAreasItems(tracksData, interactionAreasConfig);
-      initSetInteractionAreasSize && this._setInteractionAreasContainerSize();
-      initSetInteractionAreasSize = false;
+      const activeCue = track.activeCues && track.activeCues[0];
+
+      if (activeCue) {
+        const tracksData = JSON.parse(activeCue.text);
+
+        this._addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData);
+        !previousTracksData && this._setInteractionAreasContainerSize();
+        previousTracksData = tracksData;
+      } else {
+        removeInteractionAreasContainer(this.videojs);
+        previousTracksData = null;
+      }
     });
   }
 

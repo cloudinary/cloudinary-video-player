@@ -1,4 +1,4 @@
-import { elementsCreator } from '../../utils/dom';
+import { elementsCreator, styleElement } from '../../utils/dom';
 import {
   INTERACTION_AREA_HAND_ICON,
   INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME,
@@ -8,8 +8,12 @@ import {
 } from './interaction-area.const';
 import { noop } from '../../utils/type-inference';
 import { getDefaultPlayerColor } from '../../plugins/colors';
+import { forEach, some } from '../../utils/array';
 
-export const getInteractionAreaItem = (playerOptions, item, onClick) => {
+
+const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
+
+export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
   const videojsOptions = playerOptions.cloudinary.chainTarget._videojsOptions;
 
   const defaultColor = getDefaultPlayerColor(videojsOptions);
@@ -20,7 +24,7 @@ export const getInteractionAreaItem = (playerOptions, item, onClick) => {
 
   return elementsCreator({
     tag: 'div',
-    attr: { class: `${INTERACTION_AREAS_PREFIX}-item theme-${theme}` },
+    attr: { class: `${INTERACTION_AREAS_PREFIX}-item theme-${theme}`, 'data-id': getInteractionAreaItemId(item, index) },
     style: {
       left: `${item.left}%`,
       top: `${item.top}%`,
@@ -93,6 +97,45 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
   }
 };
 
+const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
+
+
+export const updateInteractionAreasItem = (videojs, playerOptions, interactionAreasData, previousInteractionAreasData, onClick) => {
+  const interactionAreasContainer = getInteractionAreasContainer(videojs);
+
+  forEach(interactionAreasData, (item, index) => {
+    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
+    const itemId = getInteractionAreaItemId(item);
+    const isExistItem = some(previousInteractionAreasData, i => getInteractionAreaItemId(i) === itemId);
+
+    // in case the element of the item is in the dom and exist in the previous data , it update the element position
+    if (isExistItem && itemElement) {
+      styleElement(itemElement, {
+        left: `${item.left}%`,
+        top: `${item.top}%`,
+        width: `${item.width}%`,
+        height: `${item.height}%`
+      });
+      // if the element did not exist before , not in the dom and not in the previous data , it add a new element
+    } else if (!isExistItem && !itemElement) {
+      interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, index, (event) => {
+        onClick({ event, item, index });
+      }));
+    }
+  });
+
+  // checking the previous data for element that should be removed if not exist in the new data object.
+  forEach(previousInteractionAreasData, (item, index) => {
+    const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
+    const itemId = getInteractionAreaItemId(item);
+    const shouldBeRemoved = !some(interactionAreasData, i => getInteractionAreaItemId(i) === itemId);
+
+    if (itemElement && shouldBeRemoved) {
+      itemElement.remove();
+    }
+  });
+
+};
 
 export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
   return (!interactionLayoutConfig || interactionLayoutConfig.enable) && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
@@ -164,7 +207,6 @@ export const removeInteractionAreasContainer = (videojs) => {
 
   interactionAreasContainer && interactionAreasContainer.remove();
 };
-
 
 export const setInteractionAreasContainerSize = (videojs, videoElement) => {
 
