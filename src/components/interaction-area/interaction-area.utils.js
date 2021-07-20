@@ -3,17 +3,23 @@ import {
   INTERACTION_AREA_HAND_ICON,
   INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
-  INTERACTION_AREAS_PREFIX
+  INTERACTION_AREAS_PREFIX,
+  INTERACTION_AREAS_THEME
 } from './interaction-area.const';
 import { getDefaultPlayerColor } from '../../plugins/colors';
 
 export const getInteractionAreaItem = (playerOptions, item, onClick) => {
-  const defaultColor = getDefaultPlayerColor(playerOptions.cloudinary.chainTarget._videojsOptions);
+  const videojsOptions = playerOptions.cloudinary.chainTarget._videojsOptions;
+
+  const defaultColor = getDefaultPlayerColor(videojsOptions);
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
+
+  // theme = 'pulsing' / 'shadowed'
+  const theme = videojsOptions.interactionAreaTheme || INTERACTION_AREAS_THEME.PULSING;
 
   return elementsCreator({
     tag: 'div',
-    attr: { class: `${INTERACTION_AREAS_PREFIX}-item` },
+    attr: { class: `${INTERACTION_AREAS_PREFIX}-item theme-${theme}` },
     style: {
       left: `${item.left}%`,
       top: `${item.top}%`,
@@ -32,7 +38,7 @@ export const getInteractionAreaItem = (playerOptions, item, onClick) => {
           {
             tag: 'div',
             attr: { class: `${INTERACTION_AREAS_PREFIX}-marker-shadow` },
-            style: { backgroundColor: accentColor }
+            style: { [theme === INTERACTION_AREAS_THEME.SHADOWED ? 'backgroundColor' : 'borderColor']: accentColor }
           },
           {
             tag: 'div',

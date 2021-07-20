@@ -11,6 +11,11 @@ const INTERACTION_AREAS_TEMPLATE = {
   CENTER: 'center'
 };
 
+export const INTERACTION_AREAS_THEME = {
+  PULSING: 'pulsing',
+  SHADOWED: 'shadowed'
+};
+
 export const TEMPLATE_INTERACTION_AREAS_VTT = {
   [INTERACTION_AREAS_TEMPLATE.PORTRAIT]: 'https://res.cloudinary.com/prod/raw/upload/v1623772481/video-player/vtts/portrait.vtt',
   [INTERACTION_AREAS_TEMPLATE.LANDSCAPE]: 'https://res.cloudinary.com/prod/raw/upload/v1623772303/video-player/vtts/landscape.vtt',
