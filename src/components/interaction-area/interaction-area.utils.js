@@ -5,6 +5,7 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX
 } from './interaction-area.const';
+import { noop } from '../../utils/type-inference';
 import { getDefaultPlayerColor } from '../../plugins/colors';
 
 export const getInteractionAreaItem = (playerOptions, item, onClick) => {
@@ -92,7 +93,7 @@ export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
 };
 
 
-const onClickInteractionAreaLayoutClick = (checked, onClick) => {
+const onClickInteractionAreaLayoutClick = (checked, onClick = noop) => {
   localStorage.setItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME, JSON.parse(checked));
   onClick();
 };
