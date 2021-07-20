@@ -100,7 +100,7 @@ $interaction-area-layout-icon: 80px;
       }
     }
 
-    .vp-ia-layout-message {
+    &.vp-ia-layout-message {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,8 +109,23 @@ $interaction-area-layout-icon: 80px;
       z-index: 2;
       background-color: rgba(0, 0, 0, 0.5);
 
-      &:hover .vp-ia-layout-message-button{
-        background-color: rgba(255, 255, 254, 0.28);
+      &.clickable {
+        cursor: pointer;
+
+        &:hover .vp-ia-layout-message-button {
+          background-color: rgba(255, 255, 254, 0.28);
+        }
+
+      }
+
+      &:not(.clickable) {
+
+        .vp-ia-layout-message-button {
+          
+          &:hover {
+            background-color: rgba(255, 255, 254, 0.28);
+          }
+        }
       }
 
       .vp-ia-layout-icon {
@@ -131,12 +146,15 @@ $interaction-area-layout-icon: 80px;
         border-radius: 4px;
         padding: 0 15px;
         margin: 8px 0 18px 0;
-        cursor: pointer;
       }
 
       .vp-ia-layout-message-do-not-show {
         display: flex;
         align-items: center;
+
+        > * {
+          cursor: pointer;
+        }
 
         .vp-ia-layout-message-checkbox-title {
           margin: 0 0 0 5px;

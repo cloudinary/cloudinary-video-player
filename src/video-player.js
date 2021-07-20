@@ -22,7 +22,8 @@ import { FLUID_CLASS_NAME } from './video-player.const';
 import {
   createInteractionAreaLayoutMessage,
   getInteractionAreaItem,
-  getZoomTransformation, removeInteractionAreasContainer,
+  getZoomTransformation,
+  removeInteractionAreasContainer,
   setInteractionAreasContainer,
   setInteractionAreasContainerSize,
   shouldShowAreaLayoutMessage
@@ -161,10 +162,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // on first play
       this.videojs.one('play', () => {
         this._firstPlayed = true;
-        if (!this._videojsOptions.autoplay || !this._shouldShowAreaLayoutMessage()) {
-          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-          this._updateInteractionAreasTrack();
-        }
+        this._setInteractionAreaLayoutMessage();
       });
 
       this.videojs.on('sourcechanged', () => {
@@ -177,7 +175,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
 
       if (this._shouldSetResize()) {
-        this._setInteractionAreaLayoutMessage();
 
         const setInteractionAreasContainerSize = throttle(this._setInteractionAreasContainerSize.bind(this), 100);
 
@@ -222,14 +219,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initSeekThumbs();
   }
 
-  _isInteractionAreasEnabled() {
+  _isInteractionAreasEnabled(enabled = false) {
+
     const interactionAreasConfig = this.getInteractionAreasConfig();
 
-    return interactionAreasConfig && interactionAreasConfig.enable;
+    return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
   }
 
   _shouldSetResize() {
-    return this._isInteractionAreasEnabled() || this._setStaticInteractionAreas;
+    return this._isInteractionAreasEnabled(this._setStaticInteractionAreas);
   }
 
   _setInteractionAreasContainerSize() {
@@ -242,17 +240,29 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout);
   }
 
+  _removeInteractionAreaLayoutMessage() {
+    removeInteractionAreasContainer(this.videojs);
+    this._updateInteractionAreasTrack();
+    this._setStaticInteractionAreas && this._setStaticInteractionAreas();
+    this.play();
+  }
+
   _setInteractionAreaLayoutMessage() {
+    if (!this._isInteractionAreasEnabled(this._setStaticInteractionAreas)) {
+      return;
+    }
+
     if (this._shouldShowAreaLayoutMessage()) {
-      createInteractionAreaLayoutMessage(this.videojs, () => {
-        removeInteractionAreasContainer(this.videojs);
-        if (!this._videojsOptions.autoplay) {
-          this.play();
-        } else {
-          this._updateInteractionAreasTrack();
-          this._setStaticInteractionAreas && this._setStaticInteractionAreas();
-        }
-      });
+      const { showItAgainCheckbox } = this.options.videojsOptions.interactionLayout;
+      this.pause();
+      const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
+      createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
+
+      if (!showItAgainCheckbox) {
+        setTimeout(removeInteractionAreaLayoutMessage, 2500);
+      }
+    } else {
+      this._removeInteractionAreaLayoutMessage();
     }
   }
 
@@ -595,8 +605,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this._addInteractionAreasItems(interactionAreas, interactionAreasOptions);
       this._setInteractionAreasContainerSize();
     };
-
-    this._setInteractionAreaLayoutMessage();
   }
 
   getInteractionAreasConfig() {

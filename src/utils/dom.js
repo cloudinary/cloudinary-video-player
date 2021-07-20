@@ -36,6 +36,10 @@ const elementsCreator = (item) => {
 
   const element = createElement(item.tag, item.attr, children);
 
+  if (item.onClick) {
+    item.event = { name: 'click', callback: item.onClick };
+  }
+
   if (item.event) {
     element.addEventListener(item.event.name, item.event.callback, false);
   }
