@@ -1,3 +1,12 @@
+1.6.2-edge.3 / 2021-07-20
+==================
+
+Changes:
+-------------------
+Improve interaction area position function
+Add pulse animation to the dots on video zoom
+Hide Interaction areas layout message after 2.5 sec
+
 1.6.2-edge.2 / 2021-07-15
 ==================
 
