@@ -254,7 +254,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     if (this._shouldShowAreaLayoutMessage()) {
-      const { showItAgainCheckbox } = this.options.videojsOptions.interactionLayout;
+      const showItAgainCheckbox = this.options.videojsOptions.interactionLayout && this.options.videojsOptions.interactionLayout.showItAgainCheckbox;
       this.pause();
       const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
       createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
