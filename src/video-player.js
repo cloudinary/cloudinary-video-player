@@ -449,7 +449,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const analyticsOpts = this.playerOptions.analytics;
 
     if (!window.ga && analyticsOpts) {
-      console.error('google analytics script has not generated');
+      console.error('Google Analytics script is missing');
       return;
     }
 
