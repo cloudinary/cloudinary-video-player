@@ -90,11 +90,18 @@ export const getZoomTransformation = (videoElement, interactionAreaItem) => {
 export const setInteractionAreasContainer = (videojs, newInteractionAreasContainer) => {
   const currentInteractionAreasContainer = getInteractionAreasContainer(videojs);
 
+  newInteractionAreasContainer.style.visibility = 'hidden';
+
   if (currentInteractionAreasContainer) {
     currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
   } else {
     videojs.el().append(newInteractionAreasContainer);
   }
+
+  // prevent css glitch
+  setTimeout(() => {
+    newInteractionAreasContainer.style.visibility = 'visible';
+  }, 200);
 };
 
 const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
