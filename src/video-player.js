@@ -656,13 +656,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData) {
+    const configs = { playerOptions: this.playerOptions, videojsOptions: this._videojsOptions };
+
     if (previousInteractionAreasData) {
-      updateInteractionAreasItem(this.videojs, this.playerOptions, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
+      updateInteractionAreasItem(this.videojs, configs, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
         this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
       });
     } else {
       const interactionAreasItems = interactionAreasData.map((item, index) => {
-        return getInteractionAreaItem(this.playerOptions, item, index, (event) => {
+        return getInteractionAreaItem(configs, item, index, (event) => {
           this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
         });
       });

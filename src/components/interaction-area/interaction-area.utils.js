@@ -17,9 +17,7 @@ import { BUTTON_THEME } from '../themeButton/themedButton.const';
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
 
-export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
-  const videojsOptions = get(playerOptions, 'cloudinary.chainTarget._videojsOptions');
-
+export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, index, onClick) => {
   const defaultColor = getDefaultPlayerColor(videojsOptions);
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
 
@@ -104,7 +102,7 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
 const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
 
 
-export const updateInteractionAreasItem = (videojs, playerOptions, interactionAreasData, previousInteractionAreasData, onClick) => {
+export const updateInteractionAreasItem = (videojs, configs, interactionAreasData, previousInteractionAreasData, onClick) => {
   const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
   forEach(interactionAreasData, (item, index) => {
@@ -122,7 +120,7 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
       });
       // if the element did not exist before , not in the dom and not in the previous data , it add a new element
     } else if (!isExistItem && !itemElement) {
-      interactionAreasContainer.append(getInteractionAreaItem(playerOptions, item, index, (event) => {
+      interactionAreasContainer.append(getInteractionAreaItem(configs, item, index, (event) => {
         onClick({ event, item, index });
       }));
     }
