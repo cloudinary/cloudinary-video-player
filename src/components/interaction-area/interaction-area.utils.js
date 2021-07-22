@@ -1,4 +1,5 @@
 import { elementsCreator, styleElement } from '../../utils/dom';
+import { get } from '../../utils/object';
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREA_HAND_ICON,
@@ -17,13 +18,13 @@ import { BUTTON_THEME } from '../themeButton/themedButton.const';
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
 
 export const getInteractionAreaItem = (playerOptions, item, index, onClick) => {
-  const videojsOptions = playerOptions.cloudinary.chainTarget._videojsOptions;
+  const videojsOptions = get(playerOptions, 'cloudinary.chainTarget._videojsOptions');
 
   const defaultColor = getDefaultPlayerColor(videojsOptions);
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
 
   // theme = 'pulsing' / 'shadowed'
-  const theme = videojsOptions.interactionAreaTheme || INTERACTION_AREAS_THEME.PULSING;
+  const theme = get(videojsOptions, 'interactionAreas.theme.template', INTERACTION_AREAS_THEME.PULSING);
 
   return elementsCreator({
     tag: 'div',
@@ -140,8 +141,10 @@ export const updateInteractionAreasItem = (videojs, playerOptions, interactionAr
 
 };
 
-export const shouldShowAreaLayoutMessage = (interactionLayoutConfig) => {
-  return (!interactionLayoutConfig || interactionLayoutConfig.enable) && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
+export const shouldShowAreaLayoutMessage = (interactionAreasConfig) => {
+  const layoutConfig = get(interactionAreasConfig, 'layout', { enable: true });
+
+  return layoutConfig.enable && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
 };
 
 
