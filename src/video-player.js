@@ -30,6 +30,7 @@ import {
   updateInteractionAreasItem
 } from './components/interaction-area/interaction-area.utils';
 import {
+  CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   TEMPLATE_INTERACTION_AREAS_VTT
 } from './components/interaction-area/interaction-area.const';
@@ -260,7 +261,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
 
       if (!showItAgainCheckbox) {
-        setTimeout(removeInteractionAreaLayoutMessage, 2500);
+        setTimeout(removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
       }
     } else {
       this._removeInteractionAreaLayoutMessage();

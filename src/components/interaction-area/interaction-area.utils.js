@@ -1,5 +1,6 @@
 import { elementsCreator, styleElement } from '../../utils/dom';
 import {
+  CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREA_HAND_ICON,
   INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
@@ -9,6 +10,8 @@ import {
 import { noop } from '../../utils/type-inference';
 import { getDefaultPlayerColor } from '../../plugins/colors';
 import { forEach, some } from '../../utils/array';
+import { themedButton } from '../themeButton/themedButton';
+import { BUTTON_THEME } from '../themeButton/themedButton.const';
 
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
@@ -167,12 +170,12 @@ export const createInteractionAreaLayoutMessage = (videojs, onClick, showItAgain
         attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-title` },
         children: 'Tap on dots to zoom for a product.'
       },
-      {
-        tag: 'button',
-        attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-button` },
-        children: 'Got it',
+      themedButton({
+        text: 'Got it',
+        theme: BUTTON_THEME.TRANSPARENT_WHITE,
+        loadingDelay: showItAgainCheckbox ? 0 : CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
         onClick: showItAgainCheckbox ? () => onClickInteractionAreaLayoutClick(checked, onClick) : null
-      },
+      }),
       showItAgainCheckbox && {
         tag: 'div',
         attr: { class: `${INTERACTION_AREAS_PREFIX}-layout-message-do-not-show` },
