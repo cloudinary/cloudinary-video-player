@@ -1,3 +1,15 @@
+1.6.2-edge.5 / 2021-07-22
+==================
+
+Fixes
+-----------------
+fix css glitch for interaction-areas-container
+video not working if google analytics script is missing
+
+Changes
+---------
+improve interaction area layout message
+
 1.6.2-edge.4 / 2021-07-21
 ==================
 
