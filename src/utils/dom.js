@@ -44,7 +44,7 @@ export const styleElement = (element, style) => {
 const elementsCreator = (item) => {
   const children = Array.isArray(item.children) ? item.children.map(elementsCreator) : item.children;
 
-  const element = createElement(item.tag, item.attr, children);
+  const element = isElement(item) ? item : createElement(item.tag, item.attr, children);
 
   if (item.onClick) {
     item.event = { name: 'click', callback: item.onClick };

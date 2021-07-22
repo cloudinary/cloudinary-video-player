@@ -1,3 +1,10 @@
+1.6.2-edge.4 / 2021-07-21
+==================
+
+Fixes
+-------
+small fix - check if interactionLayout object is defined
+
 1.6.2-edge.3 / 2021-07-20
 ==================
 

@@ -112,20 +112,10 @@ $interaction-area-layout-icon-height: 80px;
       &.clickable {
         cursor: pointer;
 
-        &:hover .vp-ia-layout-message-button {
+        &:hover .vp-theme-button {
           background-color: rgba(255, 255, 254, 0.28);
         }
 
-      }
-
-      &:not(.clickable) {
-
-        .vp-ia-layout-message-button {
-
-          &:hover {
-            background-color: rgba(255, 255, 254, 0.28);
-          }
-        }
       }
 
       .vp-ia-layout-icon {
@@ -134,17 +124,12 @@ $interaction-area-layout-icon-height: 80px;
       }
 
       .vp-ia-layout-message-title {
-        font-size: 14px;
-        line-height: 24px;
+        font-size: 24px;
+        line-height: 34px;
         text-align: center;
       }
 
-      .vp-ia-layout-message-button {
-        height: 40px;
-        font-size: 16px;
-        background-color: rgba(255, 255, 254, 0.18);
-        border-radius: 4px;
-        padding: 0 15px;
+      .vp-theme-button {
         margin: 8px 0 18px 0;
       }
 
