@@ -1,3 +1,15 @@
+1.6.2-edge.6 / 2021-07-25
+==================
+
+Fixes:
+------------
+fix:  interaction-areas layout glitching 
+fix : style hover interaction-areas layout 
+
+Changes:
+------------
+Changing video-player interaction-areas config
+
 1.6.2-edge.5 / 2021-07-22
 ==================
 
