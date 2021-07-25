@@ -29,9 +29,14 @@
 
       var playerOption = {
           bigPlayButton: false,
-          interactionLayout :{
-              enable : true,
-              showItAgainCheckbox: false
+          interactionAreas: {
+              theme:{
+                template : 'pulsing'
+              },
+              layout: {
+                  enable: true,
+                  showAgain: false
+              }
           }
       };
 
@@ -145,14 +150,17 @@
       <code class="language-javascript">
            var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-          cld.videoPlayer('player', {
-             interactionAreaTheme : 'pulsing' / 'shadowed' (the default is 'pulsing')
-             interactionLayout : {
-                showItAgainCheckbox : true / false (the default is false)
-                enable : true / false (the default is true)
-             }
+           cld.videoPlayer('player', {
+              interactionAreas: {
+                  theme:{
+                    template : 'pulsing'  // 'pulsing' / 'shadowed' (the default is 'pulsing')
+                  },
+                  layout: {
+                      enable: true / false (the default is true),
+                      showAgain: true / false (the default is false)
+                  }
+              }
           });
-
       </code>
   </pre>
 

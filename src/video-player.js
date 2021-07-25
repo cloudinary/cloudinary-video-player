@@ -35,6 +35,7 @@ import {
   TEMPLATE_INTERACTION_AREAS_VTT
 } from './components/interaction-area/interaction-area.const';
 import { throttle } from './utils/time';
+import { get } from './utils/object';
 
 
 // Register all plugins
@@ -239,7 +240,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _shouldShowAreaLayoutMessage() {
-    return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionLayout);
+    return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionAreas);
   }
 
   _removeInteractionAreaLayoutMessage() {
@@ -255,7 +256,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     if (this._shouldShowAreaLayoutMessage()) {
-      const showItAgainCheckbox = this.options.videojsOptions.interactionLayout && this.options.videojsOptions.interactionLayout.showItAgainCheckbox;
+      const showItAgainCheckbox = get(this.options, 'videojsOptions.interactionAreas.layout.showAgain', false);
       this.pause();
       const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
       createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
@@ -655,13 +656,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData) {
+    const configs = { playerOptions: this.playerOptions, videojsOptions: this._videojsOptions };
+
     if (previousInteractionAreasData) {
-      updateInteractionAreasItem(this.videojs, this.playerOptions, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
+      updateInteractionAreasItem(this.videojs, configs, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
         this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
       });
     } else {
       const interactionAreasItems = interactionAreasData.map((item, index) => {
-        return getInteractionAreaItem(this.playerOptions, item, index, (event) => {
+        return getInteractionAreaItem(configs, item, index, (event) => {
           this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
         });
       });
