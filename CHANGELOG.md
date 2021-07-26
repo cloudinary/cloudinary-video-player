@@ -1,3 +1,10 @@
+1.5.5 / 2021-07-26
+==================
+
+Fixes:
+----------
+fix : add withCredentials to player params list
+
 1.5.4 / 2021-07-04
 ==================
 
