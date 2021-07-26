@@ -29,6 +29,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'textTracks',
   'qualitySelector',
   'fetchErrorUsingGet',
+  'withCredentials',
   'seekThumbnails'
 ]);
 
