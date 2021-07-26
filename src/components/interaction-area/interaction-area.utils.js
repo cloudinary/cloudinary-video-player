@@ -140,9 +140,9 @@ export const updateInteractionAreasItem = (videojs, configs, interactionAreasDat
 };
 
 export const shouldShowAreaLayoutMessage = (interactionAreasConfig) => {
-  const layoutConfig = get(interactionAreasConfig, 'layout', { enable: true });
+  const isLayoutEnabled = get(interactionAreasConfig, 'layout.enable', true);
 
-  return layoutConfig.enable && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
+  return isLayoutEnabled && localStorage.getItem(INTERACTION_AREA_LAYOUT_LOCAL_STORAGE_NAME) !== 'true';
 };
 
 
