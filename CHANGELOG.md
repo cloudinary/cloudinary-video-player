@@ -1,3 +1,10 @@
+1.6.2-edge.7 / 2021-07-26
+==================
+
+Fixes
+-------
+Check if interaction areas layout enable fix
+
 1.6.2-edge.6 / 2021-07-25
 ==================
 
