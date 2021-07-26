@@ -2,6 +2,7 @@ import { CONTAINER_MIME_TYPES, FORMAT_MAPPINGS } from './video-source.const';
 import { codecShorthandTrans, codecToSrcTransformation, VIDEO_CODEC } from '../../common';
 import { isPlainObject, isString } from '../../../../utils/type-inference';
 import { isKeyInTransformation } from 'utils/cloudinary';
+import { some } from '../../../../utils/array';
 
 export function formatToMimeTypeAndTransformation(format) {
   const [container, codec] = format.toLowerCase().split('\/');
@@ -31,11 +32,9 @@ export function normalizeFormat(format) {
   return res;
 }
 
-const isContainCodec = (value) => {
-  return value && Object.values(VIDEO_CODEC).some((codec) => value.includes(codec));
-};
+const isContainCodec = (value) => value && some(Object.values(VIDEO_CODEC), (codec) => value.includes(codec));
 
-const hasCodecSrcTrans = (transformations) => isKeyInTransformation(transformations, 'video_codec') || isKeyInTransformation(transformations, 'streaming_profile');
+const hasCodecSrcTrans = (transformations) => some(['video_codec', 'streaming_profile'], (key) => isKeyInTransformation(transformations, key));
 
 export const isCodecAlreadyExist = (transformations, rawTransformation) => {
   if (!(transformations || rawTransformation)) {
@@ -50,13 +49,11 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
     return isContainCodec(rawTransformation);
   }
 
-  return Array.isArray(transformations) && transformations.some((transformation) => {
+  return some(transformations, (transformation) => {
     const options = transformation.toOptions();
 
     if (Array.isArray(options && options.transformation)) {
-      return options.transformation.some((item) => {
-        return isContainCodec(isPlainObject(item) ? item.video_codec : item);
-      });
+      return some(options.transformation, (item) => isContainCodec(isPlainObject(item) ? item.video_codec : item));
     }
 
     return false;
