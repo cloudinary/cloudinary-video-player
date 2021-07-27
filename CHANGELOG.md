@@ -1,3 +1,10 @@
+1.6.2-edge.8 / 2021-07-27
+==================
+
+Fixes:
+----------
+fix: console error when passing transformation array to a source
+
 1.6.2-edge.7 / 2021-07-26
 ==================
 
