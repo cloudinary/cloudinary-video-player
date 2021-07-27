@@ -11,4 +11,6 @@ export const some = (value, callback) => {
   if (Array.isArray(value) && value.length) {
     return value.some(callback);
   }
+
+  return false;
 };

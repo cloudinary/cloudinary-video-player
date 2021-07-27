@@ -420,6 +420,33 @@ describe('test isCodecAlreadyExist method', () => {
     });
 
 
+    it('check array of transformations without codec', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        transformation: [
+          { width: 400 }
+        ]
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+    });
+
+    it('check array of transformations with codec', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        transformation: [
+          { video_codec: 'h265' }
+        ]
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/sea_turtle.webm');
+    });
+
+
   });
 
 });
