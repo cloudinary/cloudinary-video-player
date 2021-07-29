@@ -17,7 +17,7 @@ import { BUTTON_THEME } from '../themeButton/themedButton.const';
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
 
-export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, index, onClick) => {
+export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, index, durationTime = 0, onClick) => {
   const defaultColor = getDefaultPlayerColor(videojsOptions);
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
 
@@ -31,7 +31,8 @@ export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, 
       left: `${item.left}%`,
       top: `${item.top}%`,
       width: `${item.width}%`,
-      height: `${item.height}%`
+      height: `${item.height}%`,
+      transitionDuration: `${durationTime}ms`
     },
     event: {
       name: 'click',
@@ -102,7 +103,7 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
 const getInteractionAreaElementById = (interactionAreasContainer, item, index) => interactionAreasContainer.querySelector(`[data-id=${getInteractionAreaItemId(item, index)}]`);
 
 
-export const updateInteractionAreasItem = (videojs, configs, interactionAreasData, previousInteractionAreasData, onClick) => {
+export const updateInteractionAreasItem = (videojs, configs, interactionAreasData, previousInteractionAreasData, durationTime, onClick) => {
   const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
   forEach(interactionAreasData, (item, index) => {
@@ -116,11 +117,12 @@ export const updateInteractionAreasItem = (videojs, configs, interactionAreasDat
         left: `${item.left}%`,
         top: `${item.top}%`,
         width: `${item.width}%`,
-        height: `${item.height}%`
+        height: `${item.height}%`,
+        transitionDuration: `${durationTime}ms`
       });
       // if the element did not exist before , not in the dom and not in the previous data , it add a new element
     } else if (!isExistItem && !itemElement) {
-      interactionAreasContainer.append(getInteractionAreaItem(configs, item, index, (event) => {
+      interactionAreasContainer.append(getInteractionAreaItem(configs, item, index, durationTime, (event) => {
         onClick({ event, item, index });
       }));
     }
