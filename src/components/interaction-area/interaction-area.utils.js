@@ -17,7 +17,7 @@ import { BUTTON_THEME } from '../themeButton/themedButton.const';
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;
 
-export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, index, durationTime = 0, onClick) => {
+export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, index, durationTime, onClick) => {
   const defaultColor = getDefaultPlayerColor(videojsOptions);
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
 

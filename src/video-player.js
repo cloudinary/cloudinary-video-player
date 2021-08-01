@@ -656,7 +656,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     });
   }
 
-  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData, durationTime) {
+  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData, durationTime = 0) {
     const configs = { playerOptions: this.playerOptions, videojsOptions: this._videojsOptions };
 
     if (previousInteractionAreasData) {
