@@ -32,6 +32,7 @@ import {
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
+  DEFAULT_INTERACTION_ARE_TRANSITION,
   TEMPLATE_INTERACTION_AREAS_VTT
 } from './components/interaction-area/interaction-area.const';
 import { throttle } from './utils/time';
@@ -684,7 +685,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const activeCue = track.activeCues && track.activeCues[0];
 
       if (activeCue) {
-        const durationTime = Math.floor((activeCue.endTime - activeCue.startTime) * 1000);
+        const durationTime = Math.max(Math.floor((activeCue.endTime - activeCue.startTime) * 1000), DEFAULT_INTERACTION_ARE_TRANSITION);
+
         const tracksData = JSON.parse(activeCue.text);
 
         this._addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData, durationTime);
