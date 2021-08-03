@@ -36,7 +36,7 @@ export const playerValidators = {
     fluid: validator.isBoolean,
     analytics: validator.isBoolean,
     hideContextMenu: validator.isBoolean,
-    playedEventPercents: validator.arrayOfNumbers,
+    playedEventPercents: validator.isArrayOfNumbers,
     showJumpControls: validator.isBoolean,
     seekThumbnails: validator.isBoolean,
     floatingWhenNotVisible: validator.isString(FLOATING_TO),
@@ -61,7 +61,7 @@ export const playerValidators = {
     },
     cloudinary: {
       autoShowRecommendations: validator.isBoolean,
-      sourceTypes: validator.arrayOfStrings,
+      sourceTypes: validator.isArrayOfStrings,
       transformation: [validator.isObject, validator.isArray],
       fontFace: validator.isString,
       posterOptions: {
@@ -89,7 +89,7 @@ export const sourceValidators = {
       default: validator.isBoolean,
       url: validator.isString
     },
-    subtitles: validator.arrayOfObjects({
+    subtitles: validator.isArrayOfObjects({
       label: validator.isString,
       language: validator.isString,
       url: validator.isString
@@ -101,7 +101,7 @@ export const sourceValidators = {
     description: validator.isString
   },
   cloudinary: {
-    sourceTypes: validator.arrayOfStrings,
+    sourceTypes: validator.isArrayOfStrings,
     transformation: [validator.isObject, validator.isArray]
   }
 };

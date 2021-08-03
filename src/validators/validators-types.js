@@ -4,12 +4,12 @@ import { isValueValid } from './validators-functions';
 const getOptionsString = (options) => isPlainObject(options) ? `:(${Object.values(options).join('/')})` : '';
 
 const arrayOfStringsValidator = () => ({
-  value: (arr) => arr.every(isString),
+  value: (arr) => Array.isArray(arr) && arr.every(isString),
   message: (key) => `'${key}' should be an array of strings`
 });
 
 const arrayOfNumbersValidator = () => ({
-  value: (arr) => arr.every(isNumber),
+  value: (arr) => Array.isArray(arr) && arr.every(isNumber),
   message: (key) => `'${key}' should be an array of numbers`
 });
 
@@ -59,7 +59,7 @@ export const validator = {
     value: Array.isArray,
     message: (key) => `'${key}' should be an array`
   }),
-  arrayOfNumbers: arrayOfNumbersValidator,
-  arrayOfStrings: arrayOfStringsValidator,
-  arrayOfObjects: arrayOfObjectsValidator
+  isArrayOfNumbers: arrayOfNumbersValidator,
+  isArrayOfStrings: arrayOfStringsValidator,
+  isArrayOfObjects: arrayOfObjectsValidator
 };
