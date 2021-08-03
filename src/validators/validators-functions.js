@@ -11,11 +11,17 @@ const getValidators = (validator) => isFunction(validator) ? validator() : valid
  * @returns boolean - using the validators to check if the value is a valid value or not
  */
 export const isValueValid = (validators, value, key) => {
-  const validatorsArray = castArray(validators);
-  const isValid = validatorsArray.some((validator) => getValidators(validator).value(value));
-  const invalidItem = validatorsArray.find((validator) => !getValidators(validator).value(value));
+  let isValid = false;
+  let invalidItem = null;
 
-  if (invalidItem) {
+  castArray(validators).forEach((validator) => {
+    const isItemValid = getValidators(validator).value(value);
+
+    isValid = isItemValid && !isValid ? isItemValid : isValid;
+    invalidItem = !isItemValid && !invalidItem ? validator : invalidItem;
+  });
+
+  if (invalidItem && !isValid) {
     const validatorItem = getValidators(invalidItem);
     console.error(`cloudinary video player: ${validatorItem.message(key)}`);
   }
