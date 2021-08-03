@@ -95,7 +95,8 @@ export const setInteractionAreasContainer = (videojs, newInteractionAreasContain
   if (currentInteractionAreasContainer) {
     currentInteractionAreasContainer.replaceWith(newInteractionAreasContainer);
   } else {
-    videojs.el().append(newInteractionAreasContainer);
+    // do not use element.append for ie11 support
+    videojs.el().appendChild(newInteractionAreasContainer);
   }
 };
 
@@ -120,7 +121,8 @@ export const updateInteractionAreasItem = (videojs, configs, interactionAreasDat
       });
       // if the element did not exist before , not in the dom and not in the previous data , it add a new element
     } else if (!isExistItem && !itemElement) {
-      interactionAreasContainer.append(getInteractionAreaItem(configs, item, index, (event) => {
+      // do not use element.append for ie11 support
+      interactionAreasContainer.appendChild(getInteractionAreaItem(configs, item, index, (event) => {
         onClick({ event, item, index });
       }));
     }
@@ -133,7 +135,8 @@ export const updateInteractionAreasItem = (videojs, configs, interactionAreasDat
     const shouldBeRemoved = !some(interactionAreasData, i => getInteractionAreaItemId(i) === itemId);
 
     if (itemElement && shouldBeRemoved) {
-      itemElement.remove();
+      // do not use element.remove for ie11 support
+      itemElement.parentNode.removeChild(itemElement);
     }
   });
 
@@ -209,7 +212,8 @@ const getInteractionAreasContainer = (videojs) => videojs.el().querySelector(`.$
 export const removeInteractionAreasContainer = (videojs) => {
   const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
-  interactionAreasContainer && interactionAreasContainer.remove();
+  // do not use element.remove for ie11 support
+  interactionAreasContainer && interactionAreasContainer.parentNode.removeChild(interactionAreasContainer);
 };
 
 export const setInteractionAreasContainerSize = (videojs, videoElement) => {
