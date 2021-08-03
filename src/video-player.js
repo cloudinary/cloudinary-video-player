@@ -32,6 +32,7 @@ import {
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
+  DEFAULT_INTERACTION_ARE_TRANSITION,
   TEMPLATE_INTERACTION_AREAS_VTT
 } from './components/interaction-area/interaction-area.const';
 import { throttle } from './utils/time';
@@ -655,16 +656,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     });
   }
 
-  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData) {
+  _addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData, durationTime = 0) {
     const configs = { playerOptions: this.playerOptions, videojsOptions: this._videojsOptions };
 
     if (previousInteractionAreasData) {
-      updateInteractionAreasItem(this.videojs, configs, interactionAreasData, previousInteractionAreasData, ({ event, item, index }) => {
+      updateInteractionAreasItem(this.videojs, configs, interactionAreasData, previousInteractionAreasData, durationTime, ({ event, item, index }) => {
         this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
       });
     } else {
       const interactionAreasItems = interactionAreasData.map((item, index) => {
-        return getInteractionAreaItem(configs, item, index, (event) => {
+        return getInteractionAreaItem(configs, item, index, durationTime, (event) => {
           this._onInteractionAreasClick(interactionAreasOptions, { event, item, index });
         });
       });
@@ -684,9 +685,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const activeCue = track.activeCues && track.activeCues[0];
 
       if (activeCue) {
+        const durationTime = Math.max(Math.floor((activeCue.endTime - activeCue.startTime) * 1000), DEFAULT_INTERACTION_ARE_TRANSITION);
+
         const tracksData = JSON.parse(activeCue.text);
 
-        this._addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData);
+        this._addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData, durationTime);
         !previousTracksData && this._setInteractionAreasContainerSize();
         previousTracksData = tracksData;
       } else {
