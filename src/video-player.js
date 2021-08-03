@@ -101,15 +101,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     // Make sure to add 'video-js' class before creating videojs instance
     this.videoElement.classList.add('video-js');
 
-    this.videojs = videojs(this.videoElement, this._videojsOptions);
-
-    this._isPlayerConfigValid = isValidConfig(this.options, playerValidators);
-
-    if (!this._isPlayerConfigValid) {
-      this.videojs.error('invalid player configuration');
-      return;
-    }
-
     // Handle WebFont loading
     Utils.fontFace(this.videoElement, this.playerOptions);
 
@@ -119,6 +110,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     // Dash plugin - available in full (not light) build only
     if (plugins.dashPlugin) {
       plugins.dashPlugin();
+    }
+
+    this.videojs = videojs(this.videoElement, this._videojsOptions);
+
+    this._isPlayerConfigValid = isValidConfig(this.options, playerValidators);
+
+    if (!this._isPlayerConfigValid) {
+      this.videojs.error('invalid player configuration');
+      return;
     }
 
     if (this._videojsOptions.muted) {
