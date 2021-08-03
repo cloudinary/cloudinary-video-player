@@ -3,15 +3,17 @@ import { castArray } from '../utils/array';
 
 const getValidators = (validator) => isFunction(validator) ? validator() : validator;
 
+/**
+ * check if a value is valid or not
+ * @param  {object} validators -  a config object
+ * @param  {any} value
+ * @param  {key} string
+ * @returns boolean - using the validators to check if the value is a valid value or not
+ */
 export const isValueValid = (validators, value, key) => {
-  let invalidItem = null;
-
-  const isValid = castArray(validators).some((validator) => {
-    const validatorItem = getValidators(validator);
-    const isValid = validatorItem.value(value);
-    invalidItem = isValid ? null : validatorItem;
-    return isValid;
-  });
+  const validatorsArray = castArray(validators);
+  const isValid = validatorsArray.some((validator) => getValidators(validator).value(value));
+  const invalidItem = validatorsArray.find((validator) => !getValidators(validator).value(value));
 
   if (invalidItem) {
     const validatorItem = getValidators(invalidItem);
@@ -21,6 +23,12 @@ export const isValueValid = (validators, value, key) => {
   return isValid;
 };
 
+/**
+ * check if a configuration object is valid or not
+ * @param  {object} config -  a config object
+ * @param  {object} validators
+ * @returns boolean - true is the configuration object is valid and false if it is not
+ */
 export const isValidConfig = (config, validators) => {
   if (isPlainObject(validators)) {
     for (let key in config) {
