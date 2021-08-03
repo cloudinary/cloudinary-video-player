@@ -25,5 +25,6 @@ export const TEMPLATE_INTERACTION_AREAS_VTT = {
 
 export const INTERACTION_AREA_HAND_ICON = 'https://res.cloudinary.com/prod/image/upload/v1626764643/video-player/interaction-area-hand.svg';
 
-
 export const CLOSE_INTERACTION_AREA_LAYOUT_DELAY = 4500;
+
+export const DEFAULT_INTERACTION_ARE_TRANSITION = 250;

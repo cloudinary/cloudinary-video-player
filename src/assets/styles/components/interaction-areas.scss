@@ -42,7 +42,8 @@ $interaction-area-layout-icon-height: 60px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
+      transition: top, left, width, height;
+      transition-timing-function: linear;
 
       &.theme-shadowed {
 
