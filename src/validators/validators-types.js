@@ -51,8 +51,12 @@ export const validator = {
     value: isFunction,
     message: (key) => `'${key}' should be a function`
   }),
-  isObject: () => ({
+  isPlainObject: () => ({
     value: isPlainObject,
+    message: (key) => `'${key}' should be an object`
+  }),
+  isObject: () => ({
+    value: (value) => typeof value === 'object',
     message: (key) => `'${key}' should be an object`
   }),
   isArray: () => ({

@@ -1,29 +1,18 @@
 import { isFunction, isPlainObject } from '../utils/type-inference';
-import { castArray } from '../utils/array';
-
-const getValidators = (validator) => isFunction(validator) ? validator() : validator;
 
 /**
  * check if a value is valid or not
- * @param  {object} validators -  a config object
+ * @param  {object | function} validator -  a config object
  * @param  {any} value
  * @param  {key} string
  * @returns boolean - using the validators to check if the value is a valid value or not
  */
-export const isValueValid = (validators, value, key) => {
-  let isValid = false;
-  let invalidItem = null;
+export const isValueValid = (validator, value, configPropertyName) => {
+  const validatorItem = isFunction(validator) ? validator() : validator;
+  const isValid = validatorItem.value(value);
 
-  castArray(validators).forEach((validator) => {
-    const isItemValid = getValidators(validator).value(value);
-
-    isValid = isItemValid && !isValid ? isItemValid : isValid;
-    invalidItem = !isItemValid && !invalidItem ? validator : invalidItem;
-  });
-
-  if (invalidItem && !isValid) {
-    const validatorItem = getValidators(invalidItem);
-    console.error(`cloudinary video player: ${validatorItem.message(key)}`);
+  if (!isValid) {
+    console.error(`cloudinary video player: ${validatorItem.message(configPropertyName)}`);
   }
 
   return isValid;

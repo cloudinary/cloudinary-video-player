@@ -144,7 +144,7 @@ describe('test isValidConfig method', () => {
 
   describe('should be an object', () => {
     const validators = {
-      test: validator.isObject
+      test: validator.isPlainObject
     };
 
     it('is valid object', () => {

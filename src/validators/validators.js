@@ -13,13 +13,13 @@ export const playerValidators = {
     showLogo: validator.isBoolean,
     logoImageUrl: validator.isString,
     logoOnclickUrl: validator.isString,
-    videoJS: validator.isObject,
+    videoJS: validator.isPlainObject,
     maxTries: validator.isNumber,
     muted: validator.isBoolean,
     playsinline: validator.isBoolean,
     videoTimeout: validator.isNumber,
     preload: validator.isString,
-    sourceTransformation: validator.isObject,
+    sourceTransformation: validator.isPlainObject,
     allowUsageReport: validator.isBoolean,
     interactionAreas: {
       theme: {
@@ -62,11 +62,11 @@ export const playerValidators = {
     cloudinary: {
       autoShowRecommendations: validator.isBoolean,
       sourceTypes: validator.isArrayOfStrings,
-      transformation: [validator.isObject, validator.isArray],
+      transformation: validator.isObject,
       fontFace: validator.isString,
       posterOptions: {
         publicId: validator.isString,
-        transformation: [validator.isObject, validator.isArray]
+        transformation: validator.isObject
       }
     }
   }
@@ -74,7 +74,7 @@ export const playerValidators = {
 
 export const sourceValidators = {
   raw_transformation: validator.isString,
-  shoppable: validator.isObject,
+  shoppable: validator.isPlainObject,
   withCredentials: validator.isBoolean,
   interactionAreas: {
     enable: validator.isBoolean,
@@ -102,6 +102,6 @@ export const sourceValidators = {
   },
   cloudinary: {
     sourceTypes: validator.isArrayOfStrings,
-    transformation: [validator.isObject, validator.isArray]
+    transformation: validator.isObject
   }
 };
