@@ -56,7 +56,7 @@ export const validator = {
     message: (key) => `'${key}' should be an object`
   }),
   isObject: () => ({
-    value: (value) => typeof value === 'object',
+    value: (value) => value && typeof value === 'object',
     message: (key) => `'${key}' should be an object`
   }),
   isArray: () => ({
