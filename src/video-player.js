@@ -233,7 +233,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _isInteractionAreasEnabled(enabled = false) {
-
     const interactionAreasConfig = this.getInteractionAreasConfig();
 
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
@@ -253,7 +252,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionAreas);
   }
 
-  _removeInteractionAreaLayoutMessage() {
+  _removeInteractionAreaLayoutMessage = () => {
     removeInteractionAreasContainer(this.videojs);
     this._updateInteractionAreasTrack();
     this._setStaticInteractionAreas && this._setStaticInteractionAreas();
@@ -268,11 +267,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this._shouldShowAreaLayoutMessage()) {
       const showItAgainCheckbox = get(this.options, 'videojsOptions.interactionAreas.layout.showAgain', false);
       this.pause();
-      const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
-      createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
+      let layoutMessageTimout = null;
+
+      createInteractionAreaLayoutMessage(this.videojs, () => {
+        clearTimeout(layoutMessageTimout);
+        this._removeInteractionAreaLayoutMessage();
+      }, showItAgainCheckbox);
 
       if (!showItAgainCheckbox) {
-        setTimeout(removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
+        layoutMessageTimout = setTimeout(this._removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
       }
     } else {
       this._removeInteractionAreaLayoutMessage();
