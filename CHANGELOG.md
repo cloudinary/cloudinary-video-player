@@ -1,3 +1,14 @@
+1.6.2-edge.9 / 2021-08-04
+==================
+
+fixes
+-----
+webpack build fix
+
+changes:
+---------
+adding a transition to interaction-area items
+
 1.6.2-edge.8 / 2021-07-27
 ==================
 
