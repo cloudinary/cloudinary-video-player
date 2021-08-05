@@ -5,7 +5,8 @@ import {
   CLOUDINARY_PARAMS,
   DEFAULT_HLS_OPTIONS,
   PLAYER_PARAMS,
-  FLUID_CLASS_NAME
+  FLUID_CLASS_NAME,
+  AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
 
@@ -56,11 +57,11 @@ export const normalizeAutoplay = (options) => {
   const autoplayMode = options.autoplayMode;
   if (autoplayMode) {
     switch (autoplayMode) {
-      case 'always':
+      case AUTO_PLAY_MODE.ALWAYS:
         options.autoplay = true;
         break;
-      case 'on-scroll':
-      case 'never':
+      case AUTO_PLAY_MODE.ON_SCROLL:
+      case AUTO_PLAY_MODE.NEVER:
       default:
         options.autoplay = false;
     }

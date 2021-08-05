@@ -4,7 +4,7 @@ export const INTERACTION_AREAS_PREFIX = 'vp-ia';
 
 export const INTERACTION_AREAS_CONTAINER_CLASS_NAME = 'interaction-areas-container';
 
-const INTERACTION_AREAS_TEMPLATE = {
+export const INTERACTION_AREAS_TEMPLATE = {
   PORTRAIT: 'portrait',
   LANDSCAPE: 'landscape',
   All: 'all',

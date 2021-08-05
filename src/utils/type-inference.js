@@ -16,6 +16,10 @@ function isInteger(data) {
   return typeof data === 'number' && (data % 1) === 0;
 }
 
+function isBoolean(data) {
+  return typeof data === 'boolean';
+}
+
 function isElement(value) {
   return value instanceof Element;
 }
@@ -28,4 +32,4 @@ function noop() {
   return null;
 }
 
-export { isPlainObject, isString, isInteger, isNumber, isElement, noop, isFunction };
+export { isPlainObject, isString, isInteger, isNumber, isElement, noop, isFunction, isBoolean };

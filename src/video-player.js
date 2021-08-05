@@ -18,7 +18,7 @@ import {
   getResolveVideoElement,
   overrideDefaultVideojsComponents
 } from './video-player.utils';
-import { FLUID_CLASS_NAME } from './video-player.const';
+import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import {
   createInteractionAreaLayoutMessage,
   getInteractionAreaItem,
@@ -37,6 +37,8 @@ import {
 } from './components/interaction-area/interaction-area.const';
 import { throttle } from './utils/time';
 import { get } from './utils/object';
+import { isValidConfig } from './validators/validators-functions';
+import { playerValidators, sourceValidators } from './validators/validators';
 
 
 // Register all plugins
@@ -112,6 +114,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
+    this._isPlayerConfigValid = isValidConfig(this.options, playerValidators);
+
+    if (!this._isPlayerConfigValid) {
+      this.videojs.error('invalid player configuration');
+      return;
+    }
+
     if (this._videojsOptions.muted) {
       this.videojs.volume(0.4);
     }
@@ -138,7 +147,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.on('error', () => {
       const error = this.videojs.error();
       if (error) {
-        const type = this.videojs.cloudinary.currentSourceType();
+        const type = this._isPlayerConfigValid && this.videojs.cloudinary.currentSourceType();
         if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
           this.videojs.error(null);
           Utils.handleCldError(this, this.playerOptions);
@@ -224,7 +233,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _isInteractionAreasEnabled(enabled = false) {
-
     const interactionAreasConfig = this.getInteractionAreasConfig();
 
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
@@ -244,7 +252,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return shouldShowAreaLayoutMessage(this.options.videojsOptions.interactionAreas);
   }
 
-  _removeInteractionAreaLayoutMessage() {
+  _removeInteractionAreaLayoutMessage = () => {
     removeInteractionAreasContainer(this.videojs);
     this._updateInteractionAreasTrack();
     this._setStaticInteractionAreas && this._setStaticInteractionAreas();
@@ -259,11 +267,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this._shouldShowAreaLayoutMessage()) {
       const showItAgainCheckbox = get(this.options, 'videojsOptions.interactionAreas.layout.showAgain', false);
       this.pause();
-      const removeInteractionAreaLayoutMessage = this._removeInteractionAreaLayoutMessage.bind(this);
-      createInteractionAreaLayoutMessage(this.videojs, removeInteractionAreaLayoutMessage, showItAgainCheckbox);
+      let layoutMessageTimout = null;
+
+      createInteractionAreaLayoutMessage(this.videojs, () => {
+        clearTimeout(layoutMessageTimout);
+        this._removeInteractionAreaLayoutMessage();
+      }, showItAgainCheckbox);
 
       if (!showItAgainCheckbox) {
-        setTimeout(removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
+        layoutMessageTimout = setTimeout(this._removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
       }
     } else {
       this._removeInteractionAreaLayoutMessage();
@@ -277,7 +289,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _updateInteractionAreasTrack() {
     this._currentTrack && this.videojs.removeRemoteTextTrack(this._currentTrack);
 
-    if (!this._isInteractionAreasEnabled()) {
+    if (!this._isInteractionAreasEnabled() || this._isZoomed) {
       return;
     }
 
@@ -535,7 +547,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initFloatingPlayer() {
-    if (this.playerOptions.floatingWhenNotVisible) {
+    if (this.playerOptions.floatingWhenNotVisible !== FLOATING_TO.NONE) {
       this.videojs.floatingPlayer({ 'floatTo': this.playerOptions.floatingWhenNotVisible });
     }
   }
@@ -712,6 +724,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    if (!this._isPlayerConfigValid) {
+      return;
+    }
+
+    const isSourceConfigValid = isValidConfig(options, sourceValidators);
+
+    if (!isSourceConfigValid) {
+      this.videojs.error('invalid source configuration');
+      return;
+    }
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
