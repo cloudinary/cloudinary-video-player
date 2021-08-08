@@ -71,7 +71,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   function addInteractionAreas(interactionAreas, interactionAreasOptions) {
     setStaticInteractionAreas = () => {
       addInteractionAreasItems(interactionAreas, interactionAreasOptions);
-      _setInteractionAreasContainerSize();
+      setContainerSize();
     };
   }
 
@@ -80,7 +80,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     return cldSrc && cldSrc.getInteractionAreas();
   }
 
-  function _removeInteractionAreaLayoutMessage() {
+  function removeLayoutMessage() {
     removeInteractionAreasContainer(player.videojs);
     updateTrack();
     setStaticInteractionAreas && setStaticInteractionAreas();
@@ -99,14 +99,14 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
       createInteractionAreaLayoutMessage(player.videojs, () => {
         clearTimeout(layoutMessageTimout);
-        _removeInteractionAreaLayoutMessage();
+        removeLayoutMessage();
       }, showItAgainCheckbox);
 
       if (!showItAgainCheckbox) {
-        layoutMessageTimout = setTimeout(_removeInteractionAreaLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
+        layoutMessageTimout = setTimeout(removeLayoutMessage, CLOSE_INTERACTION_AREA_LAYOUT_DELAY);
       }
     } else {
-      _removeInteractionAreaLayoutMessage();
+      removeLayoutMessage();
     }
   }
 
@@ -123,14 +123,14 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
     if (shouldSetResize()) {
 
-      const setInteractionAreasContainerSize = throttle(_setInteractionAreasContainerSize, 100);
+      const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
 
       player.videojs.on('fullscreenchange', () => {
         // waiting for fullscreen will end
         setTimeout(setInteractionAreasContainerSize, 100);
       });
 
-      const resizeDestroy = addEventListener(window, 'resize', _setInteractionAreasContainerSize, false);
+      const resizeDestroy = addEventListener(window, 'resize', setContainerSize, false);
 
       player.videojs.on('dispose', resizeDestroy);
     }
@@ -193,7 +193,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     }
   }
 
-  function _setInteractionAreasContainerSize() {
+  function setContainerSize() {
     if (shouldSetResize()) {
       setInteractionAreasContainerSize(player.videojs, player.videoElement);
     }
@@ -215,7 +215,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
         const tracksData = JSON.parse(activeCue.text);
 
         addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData, durationTime);
-        !previousTracksData && _setInteractionAreasContainerSize();
+        !previousTracksData && setContainerSize();
         previousTracksData = tracksData;
       } else {
         removeInteractionAreasContainer(player.videojs);
