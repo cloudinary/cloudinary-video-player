@@ -226,8 +226,6 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   return {
     init,
-    setLayoutMessage,
-    updateTrack,
     addInteractionAreas
   };
 
