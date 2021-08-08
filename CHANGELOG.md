@@ -1,3 +1,11 @@
+1.6.2-edge.10 / 2021-08-08
+==================
+
+Changes
+---------
+- Add validators for video player configs 
+- interaction areas have not been supported in the light version
+
 1.6.2-edge.9 / 2021-08-04
 ==================
 
