@@ -17,7 +17,9 @@ import {
   overrideDefaultVideojsComponents
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
 import { interactionAreaService } from './components/interaction-area/interaction-area.service';
+// #endif
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 
@@ -113,7 +115,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
     };
 
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.interactionArea = interactionAreaService(this, this.playerOptions, this._videojsOptions);
+    // #endif
 
     this._setCssClasses();
     this._initPlugins(loaded);
