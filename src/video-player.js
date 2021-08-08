@@ -152,17 +152,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
 
-      // on first play
-      this.videojs.one('play', () => {
-        this._firstPlayed = true;
-        this.interactionArea.setLayoutMessage();
-      });
-
-      this.videojs.on('sourcechanged', () => {
-        this._firstPlayed && this.interactionArea.updateTrack();
-      });
-
-      this.interactionArea.setListeners();
+      this.interactionArea.init();
     });
 
     if (this.adsEnabled && Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {

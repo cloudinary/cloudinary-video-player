@@ -23,6 +23,7 @@ import { addMetadataTrack } from '../../video-player.utils';
 
 export const interactionAreaService = (player, playerOptions, videojsOptions) => {
 
+  let firstPlayed = false;
   let isZoomed = false;
   let setStaticInteractionAreas = null;
   let currentTrack = null;
@@ -109,7 +110,17 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     }
   }
 
-  function setListeners() {
+  function init() {
+
+    player.videojs.one('play', () => {
+      firstPlayed = true;
+      setLayoutMessage();
+    });
+
+    player.videojs.on('sourcechanged', () => {
+      firstPlayed && updateTrack();
+    });
+
     if (shouldSetResize()) {
 
       const setInteractionAreasContainerSize = throttle(_setInteractionAreasContainerSize, 100);
@@ -214,7 +225,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   return {
-    setListeners,
+    init,
     setLayoutMessage,
     updateTrack,
     addInteractionAreas
