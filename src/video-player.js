@@ -156,7 +156,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
 
+      // #if (!process.env.WEBPACK_BUILD_LIGHT)
       this.interactionArea.init();
+      // #endif
     });
 
     if (this.adsEnabled && Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
