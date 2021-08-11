@@ -41,7 +41,12 @@ function optimization(mode) {
           ecma: 6,
           compress: {
             drop_debugger: true,
-            drop_console: true
+            pure_funcs: [
+              'console.log',
+              'console.dir',
+              'console.warn',
+              'console.debug'
+            ]
           },
           output: {
             comments: false,
