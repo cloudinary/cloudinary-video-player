@@ -1,3 +1,10 @@
+1.6.2-edge.11 / 2021-08-11
+==================
+
+Changes
+---------
+Webpack should not remove console.error
+
 1.6.2-edge.10 / 2021-08-08
 ==================
 
