@@ -1,6 +1,9 @@
 import { ADS_IN_PLAYLIST, AUTO_PLAY_MODE, FLOATING_TO } from '../video-player.const';
-import { INTERACTION_AREAS_THEME } from '../components/interaction-area/interaction-area.const';
-import { validator } from './validators-types';
+import {
+  INTERACTION_AREAS_TEMPLATE,
+  INTERACTION_AREAS_THEME
+} from '../components/interaction-area/interaction-area.const';
+import { multiValidators, validator } from './validators-types';
 
 export const playerValidators = {
   videojsOptions: {
@@ -78,7 +81,7 @@ export const sourceValidators = {
   withCredentials: validator.isBoolean,
   interactionAreas: {
     enable: validator.isBoolean,
-    template: validator.isString,
+    template: multiValidators(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),
     vttUrl: validator.isString,
     onClick: validator.isFunction
   },

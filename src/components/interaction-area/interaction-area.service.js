@@ -25,35 +25,35 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   let firstPlayed = false;
   let isZoomed = false;
-  let setStaticInteractionAreas = null;
   let currentTrack = null;
   let unZoom = noop;
 
-  const shouldSetResize = () => isInteractionAreasEnabled(setStaticInteractionAreas);
+  const shouldSetResize = () => isInteractionAreasEnabled();
   const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionAreas);
 
   function isInteractionAreasEnabled(enabled = false) {
     const interactionAreasConfig = getInteractionAreasConfig();
-
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
   }
 
   function updateTrack() {
     currentTrack && player.videojs.removeRemoteTextTrack(currentTrack);
 
-    if (!isInteractionAreasEnabled()) {
-      return;
-    }
-
+    const isEnabled = isInteractionAreasEnabled();
     const interactionAreasConfig = getInteractionAreasConfig();
 
-    const vttUrl = interactionAreasConfig.vttUrl || TEMPLATE_INTERACTION_AREAS_VTT[interactionAreasConfig.template];
+    if (!isEnabled || isZoomed) {
+      return null;
+    } else if (Array.isArray(interactionAreasConfig.template)) {
+      addInteractionAreasItems(interactionAreasConfig.template);
+      setContainerSize();
+    } else {
+      const vttUrl = interactionAreasConfig.vttUrl || TEMPLATE_INTERACTION_AREAS_VTT[interactionAreasConfig.template];
 
-    currentTrack && player.videojs.removeRemoteTextTrack(currentTrack);
-
-    if (!isZoomed && interactionAreasConfig.enable && vttUrl) {
-      currentTrack = addMetadataTrack(player.videojs, vttUrl);
-      addCueListener(interactionAreasConfig, currentTrack);
+      if (vttUrl) {
+        currentTrack = addMetadataTrack(player.videojs, vttUrl);
+        addCueListener(currentTrack);
+      }
     }
   }
 
@@ -68,13 +68,6 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     setInteractionAreasContainer(player.videojs, tracksContainer);
   }
 
-  function addInteractionAreas(interactionAreas, interactionAreasOptions) {
-    setStaticInteractionAreas = () => {
-      addInteractionAreasItems(interactionAreas, interactionAreasOptions);
-      setContainerSize();
-    };
-  }
-
   function getInteractionAreasConfig() {
     const { cldSrc } = player.videojs.currentSource();
     return cldSrc && cldSrc.getInteractionAreas();
@@ -83,12 +76,11 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   function removeLayoutMessage() {
     removeInteractionAreasContainer(player.videojs);
     updateTrack();
-    setStaticInteractionAreas && setStaticInteractionAreas();
     player.play();
   }
 
   function setLayoutMessage() {
-    if (!isInteractionAreasEnabled(setStaticInteractionAreas)) {
+    if (!isInteractionAreasEnabled()) {
       return;
     }
 
@@ -158,14 +150,15 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     unZoom = () => {
       if (isZoomed) {
         isZoomed = false;
-        setStaticInteractionAreas && setStaticInteractionAreas();
         player.source(newSource, currentSrcOptions).play();
       }
     };
   }
 
-  function onInteractionAreasClick(interactionAreasOptions, { event, item, index }) {
-    interactionAreasOptions.onClick && interactionAreasOptions.onClick({
+  function onInteractionAreasClick({ event, item, index }) {
+    const interactionAreasConfig = getInteractionAreasConfig();
+
+    interactionAreasConfig.onClick && interactionAreasConfig.onClick({
       item,
       index,
       event,
@@ -175,17 +168,15 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     });
   }
 
-  function addInteractionAreasItems(interactionAreasData, interactionAreasOptions = {}, previousInteractionAreasData, durationTime = 0) {
+  function addInteractionAreasItems(interactionAreasData, previousInteractionAreasData, durationTime = 0) {
     const configs = { playerOptions: playerOptions, videojsOptions: videojsOptions };
 
     if (previousInteractionAreasData) {
-      updateInteractionAreasItem(player.videojs, configs, interactionAreasData, previousInteractionAreasData, durationTime, ({ event, item, index }) => {
-        onInteractionAreasClick(interactionAreasOptions, { event, item, index });
-      });
+      updateInteractionAreasItem(player.videojs, configs, interactionAreasData, previousInteractionAreasData, durationTime, onInteractionAreasClick);
     } else {
       const interactionAreasItems = interactionAreasData.map((item, index) => {
         return getInteractionAreaItem(configs, item, index, durationTime, (event) => {
-          onInteractionAreasClick(interactionAreasOptions, { event, item, index });
+          onInteractionAreasClick({ event, item, index });
         });
       });
 
@@ -199,7 +190,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     }
   }
 
-  function addCueListener(interactionAreasConfig, track) {
+  function addCueListener(track) {
     if (!track) {
       return;
     }
@@ -214,7 +205,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
         const tracksData = JSON.parse(activeCue.text);
 
-        addInteractionAreasItems(tracksData, interactionAreasConfig, previousTracksData, durationTime);
+        addInteractionAreasItems(tracksData, previousTracksData, durationTime);
         !previousTracksData && setContainerSize();
         previousTracksData = tracksData;
       } else {
@@ -225,8 +216,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   return {
-    init,
-    addInteractionAreas
+    init
   };
 
 };
