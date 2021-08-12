@@ -14,3 +14,9 @@ export const some = (value, callback) => {
 
   return false;
 };
+
+export const map = (value, callback) => {
+  if (Array.isArray(value) && value.length) {
+    return value.map(callback);
+  }
+};

@@ -1,6 +1,6 @@
 import { isBoolean, isFunction, isNumber, isPlainObject, isString } from '../utils/type-inference';
 import { getValidatorItem, isValueValid } from './validators-functions';
-import { some } from '../utils/array';
+import { some, map } from '../utils/array';
 
 const getOptionsString = (options) => isPlainObject(options) ? `:(${Object.values(options).join('/')})` : '';
 
@@ -35,14 +35,10 @@ const arrayOfObjectsValidator = (options) => ({
   message: () => 'invalid array'
 });
 
-export const multiValidators = (...validators) => {
+const orValidator = (...validators) => {
   return () => ({
-    value: (value) => {
-      return some(validators, validator => getValidatorItem(validator).value(value));
-    },
-    message: (key) => {
-      return validators.map((validator) => getValidatorItem(validator).message(key)).join(' or ');
-    }
+    value: (value) => some(validators, (validator) => getValidatorItem(validator).value(value)),
+    message: (configPropertyName) => map(validators, (validator) => getValidatorItem(validator).message(configPropertyName)).join(' or ')
   });
 };
 
@@ -77,5 +73,6 @@ export const validator = {
   }),
   isArrayOfNumbers: arrayOfNumbersValidator,
   isArrayOfStrings: arrayOfStringsValidator,
-  isArrayOfObjects: arrayOfObjectsValidator
+  isArrayOfObjects: arrayOfObjectsValidator,
+  or: orValidator
 };

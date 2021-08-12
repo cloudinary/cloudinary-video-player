@@ -3,7 +3,7 @@ import {
   INTERACTION_AREAS_TEMPLATE,
   INTERACTION_AREAS_THEME
 } from '../components/interaction-area/interaction-area.const';
-import { multiValidators, validator } from './validators-types';
+import { validator } from './validators-types';
 
 export const playerValidators = {
   videojsOptions: {
@@ -81,7 +81,7 @@ export const sourceValidators = {
   withCredentials: validator.isBoolean,
   interactionAreas: {
     enable: validator.isBoolean,
-    template: multiValidators(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),
+    template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),
     vttUrl: validator.isString,
     onClick: validator.isFunction
   },
