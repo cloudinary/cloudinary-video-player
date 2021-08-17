@@ -28,7 +28,6 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   let currentTrack = null;
   let unZoom = noop;
 
-  const shouldSetResize = () => isInteractionAreasEnabled();
   const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionAreas);
 
   function isInteractionAreasEnabled(enabled = false) {
@@ -36,7 +35,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
   }
 
-  function updateTrack() {
+  function setAreasPositionListener() {
     currentTrack && player.videojs.removeRemoteTextTrack(currentTrack);
 
     const isEnabled = isInteractionAreasEnabled();
@@ -44,7 +43,9 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
     if (!isEnabled || isZoomed) {
       return null;
-    } else if (Array.isArray(interactionAreasConfig.template)) {
+    }
+
+    if (Array.isArray(interactionAreasConfig.template)) {
       addInteractionAreasItems(interactionAreasConfig.template);
       setContainerSize();
     } else {
@@ -75,7 +76,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   function removeLayoutMessage() {
     removeInteractionAreasContainer(player.videojs);
-    updateTrack();
+    setAreasPositionListener();
     player.play();
   }
 
@@ -110,10 +111,10 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     });
 
     player.videojs.on('sourcechanged', () => {
-      firstPlayed && updateTrack();
+      firstPlayed && setAreasPositionListener();
     });
 
-    if (shouldSetResize()) {
+    if (isInteractionAreasEnabled()) {
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
 
@@ -185,7 +186,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function setContainerSize() {
-    if (shouldSetResize()) {
+    if (isInteractionAreasEnabled()) {
       setInteractionAreasContainerSize(player.videojs, player.videoElement);
     }
   }
