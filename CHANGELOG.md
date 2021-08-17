@@ -1,3 +1,10 @@
+1.6.2-edge.12 / 2021-08-17
+==================
+
+Changes
+------------
+set manual interaction areas template using config and not a function
+
 1.6.2-edge.11 / 2021-08-11
 ==================
 
