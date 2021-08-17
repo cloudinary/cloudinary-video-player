@@ -40,36 +40,36 @@
           }
       };
 
-      var interactionAreas = [
-        {
-          left : 10 ,
-          top: 10,
-          width: 80,
-          height: 40,
-          id: 'topSource'
-        },
-        {
-          left : 10 ,
-          top: 75,
-          width: 80,
-          height : 20,
-          id: 'bottomSource'
-        }
-      ];
-
       var sources = {
          topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
-      }
+      };
 
       var player = cld.videoPlayer('manually', playerOption);
 
-      player.source('video-player/girl_in_a_dress');
-
-      player.addInteractionAreas(interactionAreas, {
+      player.source('video-player/girl_in_a_dress', {
+        interactionAreas:{
+          enable: true,
+          template: [
+            {
+              left : 10 ,
+              top: 10,
+              width: 80,
+              height: 40,
+              id: 'topSource'
+            },
+            {
+              left : 10 ,
+              top: 75,
+              width: 80,
+              height : 20,
+              id: 'bottomSource'
+            }
+          ],
           onClick: function (event) {
             event.zoom(sources[event.item.id]);
-         }
+          }
+        }
       });
 
       var videoZoomSources = {
@@ -192,23 +192,6 @@
       <code class="language-javascript">
       var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var interactionAreas = [
-        {
-          left : 10 ,
-          top: 10,
-          width: 80,
-          height: 40,
-          id: 'topSource'
-        },
-        {
-          left : 10 ,
-          top: 75,
-          width: 80,
-          height : 20,
-          id: 'bottomSource'
-        }
-      ];
-
       var sources = {
          topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
@@ -218,13 +201,29 @@
           bigPlayButton: false
       });
 
-      player.source('video-player/girl_in_a_dress');
-
-      player.addInteractionAreas(interactionAreas, {
-          onClick: function(event) {
-            var source = sources[event.item.id];
-            event.zoom(source);
-         }
+      player.source('video-player/girl_in_a_dress',{
+          interactionAreas: {
+            enable: true,
+            template:  [
+                {
+                  left : 10 ,
+                  top: 10,
+                  width: 80,
+                  height: 40,
+                  id: 'topSource'
+                },
+                {
+                  left : 10 ,
+                  top: 75,
+                  width: 80,
+                  height : 20,
+                  id: 'bottomSource'
+                }
+             ],
+             onClick: function (event) {
+                event.zoom(sources[event.item.id]);
+            }
+          }
       });
       </code>
 

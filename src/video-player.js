@@ -492,10 +492,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     });
   }
 
-  addInteractionAreas(interactionAreas, interactionAreasOptions) {
-    this.interactionArea && this.interactionArea.addInteractionAreas(interactionAreas, interactionAreasOptions);
-  }
-
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
   }

@@ -1,5 +1,8 @@
 import { isFunction, isPlainObject } from '../utils/type-inference';
 
+
+export const getValidatorItem = (validator) => isFunction(validator) ? validator() : validator;
+
 /**
  * check if a value is valid or not
  * @param  {object | function} validator -  a config object
@@ -8,7 +11,7 @@ import { isFunction, isPlainObject } from '../utils/type-inference';
  * @returns boolean - using the validators to check if the value is a valid value or not
  */
 export const isValueValid = (validator, value, configPropertyName) => {
-  const validatorItem = isFunction(validator) ? validator() : validator;
+  const validatorItem = getValidatorItem(validator);
   const isValid = validatorItem.value(value);
 
   if (!isValid) {

@@ -190,4 +190,35 @@ describe('test isValidConfig method', () => {
   });
 
 
+  describe('or validator', () => {
+    const validators = {
+      test: validator.or(validator.isNumber, validator.isString)
+    };
+
+    it('could be a number', () => {
+      const isValid = isValidConfig({
+        test: 1
+      }, validators);
+
+      expect(isValid).toBe(true);
+    });
+
+    it('could be a string', () => {
+      const isValid = isValidConfig({
+        test: 'a'
+      }, validators);
+
+      expect(isValid).toBe(true);
+    });
+
+    it('is invalid or', () => {
+      const isValid = isValidConfig({
+        test: true
+      }, validators);
+
+      expect(isValid).toBe(false);
+    });
+  });
+
+
 });
