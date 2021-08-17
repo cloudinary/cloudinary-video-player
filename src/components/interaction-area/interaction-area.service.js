@@ -105,16 +105,16 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   function init() {
 
-    player.videojs.one('play', () => {
-      firstPlayed = true;
-      setLayoutMessage();
-    });
-
-    player.videojs.on('sourcechanged', () => {
-      firstPlayed && setAreasPositionListener();
-    });
-
     if (isInteractionAreasEnabled()) {
+
+      player.videojs.one('play', () => {
+        firstPlayed = true;
+        setLayoutMessage();
+      });
+
+      player.videojs.on('sourcechanged', () => {
+        firstPlayed && setAreasPositionListener();
+      });
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
 
