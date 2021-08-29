@@ -368,7 +368,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (!this.isVideoReady()) {
       if (this.nbCalls < maxNumberOfCalls) {
         this.nbCalls++;
-        this.reTryId = this.videojs.setTimeout(this.reTryVideo, timeout);
+        this.reTryId = this.videojs.setTimeout(() => this.reTryVideo(maxNumberOfCalls, timeout), timeout);
       } else {
         let e = new Error('Video is not ready please try later');
         this.videojs.trigger('error', e);
