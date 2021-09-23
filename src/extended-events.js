@@ -86,6 +86,8 @@ class ExtendedEvents extends EventEmitter {
 
         if (Math.abs(_seekStart - _seekEnd) > 1) {
           _seeking = true;
+
+          // should empty  _timesTracked array on seek, needed for 'timeplayed' event
           resetPerVideoState();
           _emit('seek', { seekStart: _seekStart, seekEnd: _seekEnd });
         }
