@@ -86,6 +86,7 @@ class ExtendedEvents extends EventEmitter {
 
         if (Math.abs(_seekStart - _seekEnd) > 1) {
           _seeking = true;
+          resetPerVideoState();
           _emit('seek', { seekStart: _seekStart, seekEnd: _seekEnd });
         }
       }
