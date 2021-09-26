@@ -1,3 +1,10 @@
+1.6.2-edge.13 / 2021-09-26
+==================
+
+Fixes
+------
+playedEventTimes event was fired once 
+
 1.6.2-edge.12 / 2021-08-17
 ==================
 
