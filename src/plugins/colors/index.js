@@ -1,5 +1,6 @@
 import { assign } from 'utils/assign';
 import { playerClassPrefix } from 'utils/css-prefix';
+import { isLight } from '../../video-player.utils';
 
 const playerColors = `
   .PLAYER-CLASS-PREFIX {
@@ -233,11 +234,15 @@ const defaults = {
   }
 };
 
+export const getDefaultPlayerColor = (options) => {
+  return isLight(options) ? defaults.colorsLight : defaults.colorsDark;
+};
+
 class Colors {
   constructor(player, opts = {}) {
     this.player = player;
 
-    const skinDefaults = this.player.options_.skin === 'light' ? defaults.colorsLight : defaults.colorsDark;
+    const skinDefaults = getDefaultPlayerColor(this.player.options_);
 
     opts.colors = assign({}, skinDefaults, opts.colors);
 

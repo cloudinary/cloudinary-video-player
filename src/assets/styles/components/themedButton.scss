@@ -1,0 +1,48 @@
+$border-radius : 4px;
+
+.cld-video-player {
+
+  .vp-theme-button {
+    position: relative;
+    height: 40px;
+    font-size: 16px;
+    border-radius: $border-radius;
+    padding: 0 20px;
+    overflow: hidden;
+
+    &.theme-transparent-white {
+      background-color: rgba(255, 255, 254, 0.18);
+
+      &:hover {
+        background-color: rgba(255, 255, 254, 0.28);
+      }
+
+      .vp-loading-bar {
+        background-color: rgba(255, 255, 254, 0.22);
+      }
+
+    }
+
+    .vp-loading-bar {
+      position: absolute;
+      top:0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      transition: width;
+      animation-name: loading;
+    }
+
+    &:hover{
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+
+@keyframes loading {
+  from { width: 0; }
+  to   { width: 100%; }
+}

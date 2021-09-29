@@ -12,7 +12,7 @@ const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);
 
   for (let key in attributes) {
-    if (attributes[key]) {
+    if (Object.prototype.hasOwnProperty.call(attributes, key)) {
       element.setAttribute(key, attributes[key]);
     }
   }
@@ -31,5 +31,44 @@ const appendChild = (child, element) => {
   }
 };
 
+export const styleElement = (element, style) => {
+  for (let key in style) {
+    if (Object.prototype.hasOwnProperty.call(style, key)) {
+      element.style[key] = style[key];
+    }
+  }
 
-export { wrap, createElement };
+  return element;
+};
+
+const elementsCreator = (item) => {
+  const children = Array.isArray(item.children) ? item.children.map(elementsCreator) : item.children;
+
+  const element = isElement(item) ? item : createElement(item.tag, item.attr, children);
+
+  if (item.onClick) {
+    item.event = { name: 'click', callback: item.onClick };
+  }
+
+  if (item.event) {
+    element.addEventListener(item.event.name, item.event.callback, false);
+  }
+
+  if (item.style) {
+    styleElement(element, item.style);
+  }
+
+  return element;
+};
+
+
+const addEventListener = (element, name, cb) => {
+  element.addEventListener(name, cb, false);
+
+  return () => {
+    element.removeEventListener(name, cb, false);
+  };
+};
+
+
+export { wrap, createElement, elementsCreator, addEventListener };

@@ -1,4 +1,5 @@
 import contextMenuContent from '../plugins/context-menu/contextMenuContent';
+import { FLOATING_TO, PRELOAD } from '../video-player.const';
 
 export default {
   logoOnclickUrl: 'https://cloudinary.com/',
@@ -9,7 +10,7 @@ export default {
   controlBar: {
     'pictureInPictureToggle': false
   },
-  preload: false,
+  preload: PRELOAD.AUTO,
   loop: false,
   muted: false,
   posterOptions: {},
@@ -17,7 +18,7 @@ export default {
   contextMenu: {
     content: contextMenuContent
   },
-  floatingWhenNotVisible: false,
+  floatingWhenNotVisible: FLOATING_TO.NONE,
   hideContextMenu: false,
   analytics: false,
   playedEventPercents: [25, 50, 75, 100]

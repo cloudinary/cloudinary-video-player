@@ -4,7 +4,7 @@ import dashjs from 'dashjs';
 import setupAudioTracks from './setup-audio-tracks';
 import setupTextTracks from './setup-text-tracks';
 import document from 'global/document';
-import {assign} from '../../utils/assign';
+import { assign } from '../../utils/assign';
 
 /**
  * videojs-contrib-dash

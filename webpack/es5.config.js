@@ -10,7 +10,9 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
-  lightFilenamePart = argv.mode === 'development' ? lightFilenamePart : lightFilenamePart + '.min';
+  const isDevelopment = argv.mode === 'development';
+  const mode = isDevelopment ? 'development' : 'production';
+  lightFilenamePart = isDevelopment ? lightFilenamePart : lightFilenamePart + '.min';
 
   return merge(webpackCommon, {
     bail: false,
@@ -20,8 +22,8 @@ module.exports = (env, argv) => {
       filename: `[name]${lightFilenamePart}.js`,
       chunkFilename: `[id]-[chunkhash]${lightFilenamePart}.js`
     },
-    optimization: optimization(argv.mode),
-    plugins: plugins(argv.mode)
+    optimization: optimization(mode),
+    plugins: plugins(mode)
   });
 };
 
@@ -39,7 +41,12 @@ function optimization(mode) {
           ecma: 6,
           compress: {
             drop_debugger: true,
-            drop_console: true
+            pure_funcs: [
+              'console.log',
+              'console.dir',
+              'console.warn',
+              'console.debug'
+            ]
           },
           output: {
             comments: false,

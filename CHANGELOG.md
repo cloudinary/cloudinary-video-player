@@ -1,40 +1,124 @@
-1.5.5 / 2021-07-26
+1.6.2-edge.12 / 2021-08-17
+==================
+
+Changes
+------------
+set manual interaction areas template using config and not a function
+
+1.6.2-edge.11 / 2021-08-11
+==================
+
+Changes
+---------
+Webpack should not remove console.error
+
+1.6.2-edge.10 / 2021-08-08
+==================
+
+Changes
+---------
+- Add validators for video player configs 
+- interaction areas have not been supported in the light version
+
+1.6.2-edge.9 / 2021-08-04
+==================
+
+fixes
+-----
+webpack build fix
+
+changes:
+---------
+adding a transition to interaction-area items
+
+1.6.2-edge.8 / 2021-07-27
 ==================
 
 Fixes:
 ----------
-fix : add withCredentials to player params list
+fix: console error when passing transformation array to a source
 
-1.5.4 / 2021-07-04
-==================
-
-New functionality and features
----------------------------
-Add interaction areas (#254)
-Add handling non existent texttracks (#252)
-
-Fixes
------------------
-fix fluid poster CSS (#247)
-fix handleCldError not returning statusCode (#248)
-fix retry timeout not clearing on play (#240)
-fix: workaround safari hls h265 problem
-fix: add a source if there is no codec
-fix: videos in dash not playing
-fix: IE11 fixes
-fix: option { controlBar: false } generates errors
-
-Other Changes
--------------------
-Update dependencies (#236)
-Minor refactor for code syntax (linting + let/const)
-
-1.6.1-edge.7 / 2021-07-01
+1.6.2-edge.7 / 2021-07-26
 ==================
 
 Fixes
 -------
-Revert fix source copy of ie
+Check if interaction areas layout enable fix
+
+1.6.2-edge.6 / 2021-07-25
+==================
+
+Fixes:
+------------
+fix:  interaction-areas layout glitching 
+fix : style hover interaction-areas layout 
+
+Changes:
+------------
+Changing video-player interaction-areas config
+
+1.6.2-edge.5 / 2021-07-22
+==================
+
+Fixes
+-----------------
+fix css glitch for interaction-areas-container
+video not working if google analytics script is missing
+
+Changes
+---------
+improve interaction area layout message
+
+1.6.2-edge.4 / 2021-07-21
+==================
+
+Fixes
+-------
+small fix - check if interactionLayout object is defined
+
+1.6.2-edge.3 / 2021-07-20
+==================
+
+Changes:
+-------------------
+Improve interaction area position function
+Add pulse animation to the dots on video zoom
+Hide Interaction areas layout message after 2.5 sec
+
+1.6.2-edge.2 / 2021-07-15
+==================
+
+Fixes:
+-------------
+fix:  Do not add video codec if it is already defined.
+fix:  Interaction area point should be as video player Skin theme color
+fix:  Hover on the mute\unmute button, Video controllers move outside of the video container
+
+1.6.2-edge.1 / 2021-07-13
+==================
+
+Fixes:
+--------------
+fix: in some cases interaction area dots get stuck 
+fix: layout message disappears when video on autoplay mode
+fix: after zoom out in full screen the interaction areas move (set manually) 
+fix: interaction area dots flickering 
+
+Other Changes
+--------------
+update dependencies
+
+1.6.2-edge.0 / 2021-07-05
+==================
+
+Fixes:
+--------
+fix: source copy, ie11 fix
+fix: interaction areas size in full screen are not on the right size
+
+Other Changes
+--------------
+interaction areas new look
 
 1.6.1-edge.6 / 2021-06-30
 ==================
