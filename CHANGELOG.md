@@ -1,3 +1,31 @@
+1.5.6 / 2021-09-29
+==================
+
+Fixes
+--------
+fix: playedEventTimes event was fired once
+fix console error when passing transformation array to a source
+fix: Video not working if google analytics script is missing
+fix: Do not add video codec if it is already defined.
+fix: Interaction area point should be as video player Skin theme color
+fix: Hover on the mute\unmute button, Video controllers move outside of the video container
+fix: Do not add video codec if it is already defined.
+fix: in some cases interaction area dots get stuck
+fix: layout message disappears when video on autoplay mode
+fix: after zoom out in full screen the interaction areas move (set manually)
+fix: interaction area dots flickering
+fix: source copy, ie11 fix
+fix: interaction areas size in full screen are not on the right size
+
+Changes
+----------
+- Set manual interaction areas template using config and not a function
+- Add validators for video player configs
+- Interaction areas have not been supported in the light version
+- Improve interaction area position function
+
+
+
 1.6.2-edge.12 / 2021-08-17
 ==================
 
