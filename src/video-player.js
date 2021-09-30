@@ -94,7 +94,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
-    // to do should be change be isValidConfig
+    // to do, should be change by isValidConfig
     this._isPlayerConfigValid = true;
 
     isValidConfig(this.options, playerValidators);
