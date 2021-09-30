@@ -94,7 +94,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
-    this._isPlayerConfigValid = isValidConfig(this.options, playerValidators);
+    // to do should be change be isValidConfig
+    this._isPlayerConfigValid = true;
+
+    isValidConfig(this.options, playerValidators);
 
     if (!this._isPlayerConfigValid) {
       this.videojs.error('invalid player configuration');
