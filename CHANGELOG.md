@@ -1,3 +1,10 @@
+1.5.7 / 2021-09-30
+==================
+
+Fixes
+------- 
+Validators only display console warring, do not mark player as invalid
+
 1.6.2-edge.13 / 2021-09-26
 ==================
 

@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "Cloudinary Video Player",
   "bundlewatch": {
     "files": [
