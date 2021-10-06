@@ -77,8 +77,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   function removeLayoutMessage() {
     removeInteractionAreasContainer(player.videojs);
     setAreasPositionListener();
-    const autoplay = player.videojs.autoplay();
-    autoplay && player.play();
+    player.play();
   }
 
   function setLayoutMessage() {
