@@ -1,3 +1,10 @@
+1.6.3-edge.0 / 2021-10-06
+==================
+
+Fixes:
+-------
+Should not autoplay after interactions area layout removed if config as autoplay false
+
 1.6.2-edge.13 / 2021-09-26
 ==================
 
