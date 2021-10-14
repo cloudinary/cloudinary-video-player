@@ -1,3 +1,10 @@
+1.6.3-edge.2 / 2021-10-14
+==================
+
+Fixes
+-----
+Mark VideoJs font-family as !important
+
 1.6.3-edge.1 / 2021-10-06
 ==================
 
