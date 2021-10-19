@@ -11,6 +11,13 @@ $interaction-area-layout-icon-height: 60px;
     }
   }
 
+  &.interaction-areas {
+
+    .vjs-big-play-button {
+      display: none !important;
+    }
+  }
+
   .interaction-areas-container {
     position: absolute;
     width: 100%;
