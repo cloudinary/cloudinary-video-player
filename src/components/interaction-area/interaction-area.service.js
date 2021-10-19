@@ -107,6 +107,8 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
     if (isInteractionAreasEnabled()) {
 
+      player.videojs.el().classList.add('interaction-areas');
+
       player.videojs.one('play', () => {
         firstPlayed = true;
         setLayoutMessage();
