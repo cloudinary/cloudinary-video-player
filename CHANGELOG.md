@@ -1,3 +1,10 @@
+1.6.3-edge.3 / 2021-10-20
+==================
+
+Fixes
+--------
+- Hide bigPlayButton and when using interaction-areas
+
 1.6.3-edge.2 / 2021-10-14
 ==================
 
