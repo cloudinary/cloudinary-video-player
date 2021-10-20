@@ -1,3 +1,12 @@
+1.5.8 / 2021-10-20
+==================
+
+Fixes
+------- 
+- fix : Webpack build support  ie11
+- fix : Mark VideoJs font-family as !important
+- fix : Hide bigPlayButton when using interaction-areas
+
 1.5.7 / 2021-09-30
 ==================
 
