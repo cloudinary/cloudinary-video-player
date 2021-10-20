@@ -38,7 +38,7 @@ function optimization(mode) {
       new OptimizeCssAssetsPlugin({}),
       new TerserPlugin({
         terserOptions: {
-          ecma: 6,
+          ecma: 5,
           compress: {
             drop_debugger: true,
             pure_funcs: [
