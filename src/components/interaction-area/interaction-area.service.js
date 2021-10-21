@@ -28,7 +28,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   let currentTrack = null;
   let unZoom = noop;
 
-  const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionAreas);
+  const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionDesign);
 
   function isInteractionAreasEnabled(enabled = false) {
     const interactionAreasConfig = getInteractionAreasConfig();
@@ -87,7 +87,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
     if (shouldLayoutMessage()) {
       let layoutMessageTimout = null;
-      const showItAgainCheckbox = get(videojsOptions, 'interactionAreas.layout.showAgain', false);
+      const showItAgainCheckbox = get(videojsOptions, 'interactionDesign.layout.showAgain', false);
       player.pause();
 
       createInteractionAreaLayoutMessage(player.videojs, () => {
