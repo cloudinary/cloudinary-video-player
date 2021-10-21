@@ -1,3 +1,10 @@
+1.6.4-edge.0 / 2021-10-21
+==================
+
+Changes
+----------
+- Rename player interactionAreas config property to interactionDesign 
+
 1.6.3-edge.4 / 2021-10-20
 ==================
 
