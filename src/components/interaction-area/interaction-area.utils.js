@@ -22,7 +22,7 @@ export const getInteractionAreaItem = ({ playerOptions, videojsOptions }, item, 
   const accentColor = playerOptions && playerOptions.colors ? playerOptions.colors.accent : defaultColor.accent;
 
   // theme = 'pulsing' / 'shadowed'
-  const theme = get(videojsOptions, 'interactionDesign.theme.template', INTERACTION_AREAS_THEME.PULSING);
+  const theme = get(videojsOptions, 'interactionDisplay.theme.template', INTERACTION_AREAS_THEME.PULSING);
 
   return elementsCreator({
     tag: 'div',
