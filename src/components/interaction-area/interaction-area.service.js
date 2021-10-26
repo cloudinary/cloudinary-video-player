@@ -23,7 +23,6 @@ import { addMetadataTrack } from '../../video-player.utils';
 
 export const interactionAreaService = (player, playerOptions, videojsOptions) => {
 
-  let firstPlayed = false;
   let isZoomed = false;
   let currentTrack = null;
   let unZoom = noop;
@@ -110,12 +109,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
       player.videojs.el().classList.add('interaction-areas');
 
       player.videojs.one('play', () => {
-        firstPlayed = true;
         setLayoutMessage();
-      });
-
-      player.videojs.on('sourcechanged', () => {
-        firstPlayed && setAreasPositionListener();
       });
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
@@ -132,6 +126,10 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
     player.videojs.on('ended', () => {
       unZoom();
+    });
+
+    player.videojs.on('error', () => {
+      player.pause();
     });
   }
 
@@ -154,6 +152,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
       if (isZoomed) {
         isZoomed = false;
         player.source(newSource, currentSrcOptions).play();
+        setAreasPositionListener();
       }
     };
   }
