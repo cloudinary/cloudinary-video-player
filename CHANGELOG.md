@@ -1,3 +1,10 @@
+1.6.4-edge.2 / 2021-10-27
+==================
+
+Fixes
+---------
+Fix: Be able to go back if zoom into a video with an error.
+
 1.6.4-edge.1 / 2021-10-21
 ==================
 
