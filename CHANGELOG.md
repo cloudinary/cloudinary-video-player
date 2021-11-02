@@ -1,3 +1,15 @@
+1.5.9 / 2021-11-02
+==================
+
+Fixes:
+--------
+Fix: Be able to go back if zoom into a video with an error.
+Fix: ie11 support fix
+
+Changes:
+----------
+Rename player interactionAreas config property to interactionDisplay
+
 1.5.8 / 2021-10-20
 ==================
 
