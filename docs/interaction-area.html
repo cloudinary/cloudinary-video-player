@@ -29,7 +29,7 @@
 
       var playerOption = {
           bigPlayButton: false,
-          interactionAreas: {
+          interactionDisplay: {
               theme:{
                 template : 'pulsing'
               },
@@ -151,7 +151,7 @@
            var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
            cld.videoPlayer('player', {
-              interactionAreas: {
+              interactionDisplay: {
                   theme:{
                     template : 'pulsing'  // 'pulsing' / 'shadowed' (the default is 'pulsing')
                   },
