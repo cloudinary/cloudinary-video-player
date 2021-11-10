@@ -22,7 +22,7 @@ import { interactionAreaService } from './components/interaction-area/interactio
 // #endif
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
-
+import { get } from './utils/object';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -141,6 +141,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         } else {
           this.videojs.clearTimeout(this.reTryId);
         }
+      }
+    });
+
+    this.videojs.tech().on('retryplaylist', () => {
+      const mediaRequestsErrored = get(this.videojs, 'hls.stats.mediaRequestsErrored', 0);
+      if (mediaRequestsErrored > 0) {
+        Utils.handleCldError(this, this.playerOptions);
       }
     });
 
