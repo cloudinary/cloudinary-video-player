@@ -25,10 +25,10 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'benco' });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       player = cld.videoPlayer('player', {
-        publicId: '360/Golden-Gate-Bridge',
+        publicId: 'video-player/Golden-Gate-Bridge',
         sourceTypes: ['mp4'],
         transformation: {
           width: 950,
@@ -77,7 +77,7 @@
         var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         player = cld.videoPlayer('player', {
-          publicId: '360/Golden-Gate-Bridge',
+          publicId: 'video-player/Golden-Gate-Bridge',
           sourceTypes: ['mp4'],
           transformation: {
             width: 950,
