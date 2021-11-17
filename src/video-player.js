@@ -144,7 +144,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     });
 
-    this.videojs.tech().on('retryplaylist', () => {
+    this.videojs.tech_.on('retryplaylist', () => {
       const mediaRequestsErrored = get(this.videojs, 'hls.stats.mediaRequestsErrored', 0);
       if (mediaRequestsErrored > 0) {
         Utils.handleCldError(this, this.playerOptions);
