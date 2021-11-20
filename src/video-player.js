@@ -70,7 +70,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this._playlistWidget = null;
     this.nbCalls = 0;
-    this._firstPlayed = false;
 
     this.videoElement = getResolveVideoElement(elem);
 
