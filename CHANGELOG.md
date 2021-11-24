@@ -1,3 +1,10 @@
+1.7.0-edge.1 / 2021-11-24
+==================
+
+Fixes
+--------
+Fix: Fire error event if has any HLS mediaRequestsErrored
+
 1.7.0-edge.0 / 2021-11-15
 ==================
 
