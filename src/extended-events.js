@@ -11,12 +11,12 @@ const EVENT_DEFAULTS = {
 };
 
 const DEFAULT_EVENTS = [
-  'percentsplayed',
-  'pausenoseek',
-  'seek',
-  'mute',
-  'unmute',
-  'qualitychanged'
+  PLAYER_EVENT.PERCENTS_PLAYED,
+  PLAYER_EVENT.PAUSE_NO_SEEK,
+  PLAYER_EVENT.SEEK,
+  PLAYER_EVENT.MUTE,
+  PLAYER_EVENT.UNMUTE,
+  PLAYER_EVENT.QUALITY_CHANGED
 ];
 
 const DEFAULT_OPTIONS = {
@@ -44,10 +44,10 @@ class ExtendedEvents extends EventEmitter {
     const volumechange = (event) => {
       if (this.player.muted() && _muteData.lastState !== 'muted') {
         _muteData.lastState = 'muted';
-        this.emit('mute', event);
+        this.emit(PLAYER_EVENT.MUTE, event);
       } else if (!this.player.muted() && _muteData.lastState !== 'unmuted') {
         _muteData.lastState = 'unmuted';
-        this.emit('unmute', event);
+        this.emit(PLAYER_EVENT.UNMUTE, event);
       }
     };
 
@@ -64,7 +64,7 @@ class ExtendedEvents extends EventEmitter {
         this.events.percentsplayed.percents.forEach((percent) => {
           if (playedAtPercentage(currentTime, duration, percent) && _percentsTracked.indexOf(percent) === -1) {
             _percentsTracked.push(percent);
-            _emit('percentsplayed', { percent });
+            _emit(PLAYER_EVENT.PERCENTS_PLAYED, { percent });
           }
         });
       }
@@ -76,7 +76,7 @@ class ExtendedEvents extends EventEmitter {
         times.forEach((time) => {
           if (playedAtTime(currentTime, time) && _timesTracked.indexOf(time) === -1) {
             _timesTracked.push(time);
-            _emit('timeplayed', { time });
+            _emit(PLAYER_EVENT.TIME_PLAYED, { time });
           }
         });
       }
@@ -90,7 +90,7 @@ class ExtendedEvents extends EventEmitter {
 
           // should empty  _timesTracked array on seek, needed for 'timeplayed' event
           resetPerVideoState();
-          _emit('seek', { seekStart: _seekStart, seekEnd: _seekEnd });
+          _emit(PLAYER_EVENT.SEEK, { seekStart: _seekStart, seekEnd: _seekEnd });
         }
       }
     };
@@ -100,7 +100,7 @@ class ExtendedEvents extends EventEmitter {
       const duration = Math.round(this.player.duration());
 
       if (currentTime !== duration && !_seeking) {
-        this.emit('pausenoseek', event);
+        this.emit(PLAYER_EVENT.PAUSE_NO_SEEK, event);
       }
     };
 
@@ -144,7 +144,7 @@ class ExtendedEvents extends EventEmitter {
                 from: previousResolution,
                 to: currentRes
               };
-              ee.emit('qualitychanged', event, data);
+              ee.emit(PLAYER_EVENT.QUALITY_CHANGED, event, data);
             }
             previousResolution = currentRes;
           }

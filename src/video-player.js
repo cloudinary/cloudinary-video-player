@@ -137,7 +137,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           this.videojs.error(null);
           Utils.handleCldError(this, this.playerOptions);
         } else {
-          this.videojs.clearTimeout(this.reTryId);
+          this._clearTimeOut();
         }
       }
     });
@@ -151,7 +151,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     });
 
     this.videojs.on(PLAYER_EVENT.PLAY, this._clearTimeOut);
-
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearTimeOut);
 
     this.videojs.ready(() => {
@@ -482,7 +481,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     }
 
-    events.push(...['seek', 'mute', 'unmute', 'qualitychanged']);
+    events.push(...[PLAYER_EVENT.SEEK, PLAYER_EVENT.MUTE, PLAYER_EVENT.UNMUTE, PLAYER_EVENT.QUALITY_CHANGED]);
 
     const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
@@ -593,7 +592,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs.fluid(bool);
-    this.videojs.trigger('fluid', bool);
+    this.videojs.trigger(PLAYER_EVENT.FLUID, bool);
     return this;
   }
 

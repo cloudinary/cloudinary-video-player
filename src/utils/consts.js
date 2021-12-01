@@ -4,6 +4,8 @@ export const PLAYER_EVENT = {
   PAUSE: 'pause',
   SEEK: 'seek',
   SEEKING: 'seeking',
+  MUTE: 'mute',
+  UNMUTE: 'unmute',
   PAUSE_NO_SEEK: 'pausenoseek',
   ERROR: 'error',
   TIME_UPDATE: 'timeupdate',
@@ -32,7 +34,8 @@ export const PLAYER_EVENT = {
   PERCENTS_PLAYED: 'percentsplayed',
   TIME_PLAYED: 'timeplayed',
   PLAYER_LOAD: 'playerload',
-  DISPOSE: 'dispose'
+  DISPOSE: 'dispose',
+  QUALITY_CHANGED: 'qualitychanged'
 };
 
 export const SOURCE_TYPE = {
