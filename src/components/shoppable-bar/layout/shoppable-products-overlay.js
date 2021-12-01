@@ -7,6 +7,7 @@ import {
   SHOPPABLE_PANEL_VISIBLE_CLASS,
   SHOPPABLE_PRODUCTS_OVERLAY_CLASS
 } from '../shoppable-widget.const';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 const Component = videojs.getComponent('Component');
 
@@ -17,16 +18,14 @@ class ShoppableProductsOverlay extends Component {
     this.options_ = options;
     this.player_ = player;
 
-    this.player_.on('showProductsOverlay', () => {
-      this.renderProducts();
-    });
+    this.player_.on(PLAYER_EVENT.SHOW_PRODUCTS_OVERLAY, this.renderProducts);
 
     this.dispose = () => {
       this.layout_.dispose();
     };
   }
 
-  renderProducts() {
+  renderProducts = () => {
     // Close products side-panel
     this.player_.removeClass(SHOPPABLE_PANEL_VISIBLE_CLASS);
     this.player_.addClass(SHOPPABLE_PANEL_HIDDEN_CLASS);
@@ -65,11 +64,11 @@ class ShoppableProductsOverlay extends Component {
     });
 
     // Remove
-    this.player_.one('seeking', (e) => this.clearLayout(e));
-    this.player_.one('play', (e) => this.clearLayout(e));
+    this.player_.one(PLAYER_EVENT.SEEKING, this.clearLayout);
+    this.player_.one(PLAYER_EVENT.PLAY, this.clearLayout);
   }
 
-  clearLayout() {
+  clearLayout = () => {
     this.layout_.innerHTML = '';
     this.player_.removeClass(SHOPPABLE_PRODUCTS_OVERLAY_CLASS);
   }

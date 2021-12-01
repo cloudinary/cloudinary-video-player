@@ -10,6 +10,7 @@ import {
   SHOPPABLE_WIDGET_OPTIONS_DEFAULTS,
   SHOPPABLE_WIDGET_RESPONSIVE_CLASS
 } from './shoppable-widget.const';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 
 class ShoppableWidget {
@@ -19,7 +20,7 @@ class ShoppableWidget {
     this.player_ = player;
 
     if (this.options_.showPostPlayOverlay) {
-      this.player_.on('ended', () => {
+      this.player_.on(PLAYER_EVENT.ENDED, () => {
         this.player_.addChild(new ShoppablePostWidget(this.player_, this.options_));
         // Handle responsive images.
         this.player_.player_.cloudinary.cloudinaryConfig().responsive({
@@ -52,11 +53,11 @@ class ShoppableWidget {
   _setListeners() {
     const resizeHandler = this._resizeHandler.bind(this);
 
-    this.player_.on('resize', resizeHandler);
+    this.player_.on(PLAYER_EVENT.RESIZE, resizeHandler);
     window.addEventListener('resize', resizeHandler);
 
     this.dispose = () => {
-      this.player_.off('resize', resizeHandler);
+      this.player_.off(PLAYER_EVENT.RESIZE, resizeHandler);
       window.removeEventListener('resize', resizeHandler);
       this.layout_.dispose();
     };
@@ -97,7 +98,7 @@ class ShoppableWidget {
 
   render() {
     this.layout_ = new ShoppableBarLayout(this.player_, this.options_);
-    this.player_.on('loadeddata', () => {
+    this.player_.on(PLAYER_EVENT.LOADED_DATA, () => {
       // Handle responsive images.
       this.player_.player_.cloudinary.cloudinaryConfig().responsive({
         responsive_class: SHOPPABLE_WIDGET_RESPONSIVE_CLASS

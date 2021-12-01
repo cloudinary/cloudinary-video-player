@@ -1,20 +1,21 @@
 import videojs from 'video.js';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeEventsParam, default as ExtendedEvents } from 'extended-events';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 const DEFAULT_EVENTS = [
-  'play',
-  'pause',
-  'ended',
-  'volumechange',
-  'resize',
-  'error',
-  'fullscreenchange',
-  'start',
-  'videoload',
-  'percentsplayed',
-  'seek',
-  'playerload'
+  PLAYER_EVENT.PLAY,
+  PLAYER_EVENT.PAUSE,
+  PLAYER_EVENT.ENDED,
+  PLAYER_EVENT.VOLUME_CHANGE,
+  PLAYER_EVENT.RESIZE,
+  PLAYER_EVENT.ERROR,
+  PLAYER_EVENT.FULL_SCREEN_CHANGE,
+  PLAYER_EVENT.START,
+  PLAYER_EVENT.VIDEO_LOAD,
+  PLAYER_EVENT.PERCENTS_PLAYED,
+  PLAYER_EVENT.SEEK,
+  PLAYER_EVENT.PLAYER_LOAD
 ];
 
 const EVENT_DEFAULTS = {
@@ -37,7 +38,7 @@ class AnalyticsPlugin {
     this.options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
     this.events = normalizeEventsParam(this.options.events, EVENT_DEFAULTS);
 
-    const extendedEvents = sliceProperties(this.events, 'percentsplayed', 'timeplayed', 'pause', 'seek');
+    const extendedEvents = sliceProperties(this.events, PLAYER_EVENT.PERCENTS_PLAYED, PLAYER_EVENT.TIME_PLAYED, PLAYER_EVENT.PAUSE, PLAYER_EVENT.SEEK);
 
     if (extendedEvents.pause) {
       delete extendedEvents.pause;
@@ -153,54 +154,54 @@ class AnalyticsPlugin {
     }
 
     if (this.events.play) {
-      this.player.on('play', play.bind(this));
+      this.player.on(PLAYER_EVENT.PLAY, play.bind(this));
     }
 
     if (this.events.ended) {
-      this.player.on('ended', ended.bind(this));
+      this.player.on(PLAYER_EVENT.ENDED, ended.bind(this));
     }
 
     if (this.events.volumechange) {
-      this.player.on('volumechange', volumechange.bind(this));
+      this.player.on(PLAYER_EVENT.VOLUME_CHANGE, volumechange.bind(this));
     }
 
     if (this.events.resize) {
-      this.player.on('resize', resize.bind(this));
+      this.player.on(PLAYER_EVENT.RESIZE, resize.bind(this));
     }
 
     if (this.events.error) {
-      this.player.on('error', error.bind(this));
+      this.player.on(PLAYER_EVENT.ERROR, error.bind(this));
     }
 
     if (this.events.start) {
-      this.player.on('playing', start.bind(this));
+      this.player.on(PLAYER_EVENT.PLAYING, start.bind(this));
     }
 
     if (this.events.fullscreenchange) {
-      this.player.on('fullscreenchange', fullscreenchange.bind(this));
+      this.player.on(PLAYER_EVENT.FULL_SCREEN_CHANGE, fullscreenchange.bind(this));
     }
 
     if (this.events.percentsplayed) {
-      this._extendedEvents.on('percentsplayed', percentsPlayed.bind(this));
+      this._extendedEvents.on(PLAYER_EVENT.PERCENTS_PLAYED, percentsPlayed.bind(this));
     }
 
     if (this.events.timeplayed) {
-      this._extendedEvents.on('timeplayed', timePlayed.bind(this));
+      this._extendedEvents.on(PLAYER_EVENT.TIME_PLAYED, timePlayed.bind(this));
     }
 
     if (this.events.pause) {
-      this._extendedEvents.on('pausenoseek', pause.bind(this));
+      this._extendedEvents.on(PLAYER_EVENT.PAUSE_NO_SEEK, pause.bind(this));
     }
 
     if (this.events.seek) {
-      this._extendedEvents.on('seek', seek.bind(this));
+      this._extendedEvents.on(PLAYER_EVENT.SEEK, seek.bind(this));
     }
 
     if (this.events.playerload) {
       playerLoad();
     }
 
-    this.player.on('loadedmetadata', this.loadedmetadata.bind(this));
+    this.player.on(PLAYER_EVENT.LOADED_METADATA, this.loadedmetadata.bind(this));
   }
 
   track({ action, label, value = null, nonInteraction = false }) {

@@ -3,6 +3,7 @@ import PlaylistLayoutHorizontal from './layout/playlist-layout-horizontal';
 import PlaylistLayoutVertical from './layout/playlist-layout-vertical';
 import PlaylistLayoutCustom from './layout/playlist-layout-custom';
 import { PLAYLIST_DEFAULTS_OPTIONS } from './playlist.const';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 
 const modifyOptions = (player, opt) => {
@@ -43,7 +44,7 @@ class PlaylistWidget {
       this.options_.fluid = fluid;
     };
 
-    player.on('fluid', fluidHandler);
+    player.on(PLAYER_EVENT.FLUID, fluidHandler);
 
     this.options = (options) => {
       if (!options) {
@@ -58,7 +59,7 @@ class PlaylistWidget {
 
     this.dispose = () => {
       this.layout_.dispose();
-      player.off('fluid', fluidHandler);
+      player.off(PLAYER_EVENT.FLUID, fluidHandler);
     };
   }
 
