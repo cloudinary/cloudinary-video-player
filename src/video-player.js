@@ -23,6 +23,7 @@ import { interactionAreaService } from './components/interaction-area/interactio
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get } from './utils/object';
+import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -37,13 +38,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   static all(selector, ...args) {
     const nodeList = document.querySelectorAll(selector);
-    const players = [];
-
-    for (let i = 0; i < nodeList.length; i++) {
-      players.push(new VideoPlayer(nodeList[i], ...args));
-    }
-
-    return players;
+    return [...nodeList].map((node) => new VideoPlayer(node, ...args));
   }
 
   static allowUsageReport(bool) {
@@ -128,13 +123,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setVideoJsListeners(ready);
   }
 
+  _clearTimeOut = () => {
+    this.videojs.clearTimeout(this.reTryId);
+  };
+
   _setVideoJsListeners(ready) {
 
-    this.videojs.on('error', () => {
+    this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
         const type = this._isPlayerConfigValid && this.videojs.cloudinary.currentSourceType();
-        if (error.code === 4 && (type === 'VideoSource' || type === 'AudioSource')) {
+        if (error.code === 4 && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
           this.videojs.error(null);
           Utils.handleCldError(this, this.playerOptions);
         } else {
@@ -143,21 +142,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     });
 
-    this.videojs.tech_.on('retryplaylist', () => {
+    this.videojs.tech_.on(PLAYER_EVENT.RETRY_PLAYLIST, () => {
       const mediaRequestsErrored = get(this.videojs, 'hls.stats.mediaRequestsErrored', 0);
       if (mediaRequestsErrored > 0) {
-        this.videojs.clearTimeout(this.reTryId);
+        this._clearTimeOut();
         Utils.handleCldError(this, this.playerOptions);
       }
     });
 
-    this.videojs.on('play', () => {
-      this.videojs.clearTimeout(this.reTryId);
-    });
+    this.videojs.on(PLAYER_EVENT.PLAY, this._clearTimeOut);
 
-    this.videojs.on('canplaythrough', () => {
-      this.videojs.clearTimeout(this.reTryId);
-    });
+    this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearTimeOut);
 
     this.videojs.ready(() => {
       this._onReady();
@@ -173,12 +168,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.adsEnabled && Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
       if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
-        this.videojs.one('sourcechanged', () => {
+        this.videojs.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
           this.videojs.ima.playAd();
         });
 
       } else {
-        this.videojs.on('sourcechanged', () => {
+        this.videojs.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
           this.videojs.ima.playAd();
         });
       }
@@ -274,11 +269,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initSeekThumbs() {
     if (this.playerOptions.seekThumbnails) {
 
-      this.videojs.on('cldsourcechanged', (e, { source }) => {
-        // Bail if...
-
-        if (source.getType() === 'AudioSource' || // it's an audio player
-            (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+      this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+        if (source.getType() === SOURCE_TYPE.AUDIO ||
+          (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
         ) {
           return;
         }
@@ -295,21 +288,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformations.flags = transformations.flags || [];
         transformations.flags.push('sprite');
 
-        // build VTT url
-        const vttSrc = cloudinaryConfig.video_url(publicId + '.vtt', { transformation: transformations });
+        const vttSrc = cloudinaryConfig.video_url(`${publicId}.vtt`, { transformation: transformations });
 
         // vttThumbnails must be called differently on init and on source update.
-        if (isFunction(this.videojs.vttThumbnails)) {
-          this.videojs.vttThumbnails({ src: vttSrc });
-        } else {
-          this.videojs.vttThumbnails.src(vttSrc);
-        }
+        isFunction(this.videojs.vttThumbnails)
+          ? this.videojs.vttThumbnails({ src: vttSrc })
+          : this.videojs.vttThumbnails.src(vttSrc);
       });
     }
   }
 
   _initColors () {
-    this.videojs.colors(this.playerOptions.colors ? { 'colors': this.playerOptions.colors } : {});
+    this.videojs.colors(this.playerOptions.colors ? { colors: this.playerOptions.colors } : {});
   }
 
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
@@ -319,12 +309,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.httpSourceSelector({ default: 'auto' });
       }
 
-      this.videojs.on('loadedmetadata', () => {
+      this.videojs.on(PLAYER_EVENT.LOADED_METADATA, () => {
         qualitySelector.init(this.videojs);
       });
 
       // Show only if more then one option available
-      this.videojs.on('loadeddata', () => {
+      this.videojs.on(PLAYER_EVENT.LOADED_DATA, () => {
         qualitySelector.setVisibility(this.videojs);
       });
     }
@@ -332,7 +322,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   // #endif
 
   _initTextTracks () {
-    this.videojs.on('refreshTextTracks', (e, tracks) => {
+    this.videojs.on(PLAYER_EVENT.REFRESH_TEXT_TRACKS, (e, tracks) => {
       this.setTextTracks(tracks);
     });
   }
@@ -397,7 +387,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initPlaylistWidget () {
-    this.videojs.on('playlistcreated', () => {
+    this.videojs.on(PLAYER_EVENT.PLAYLIST_CREATED, () => {
 
       if (this._playlistWidget) {
         this._playlistWidget.dispose();
@@ -408,9 +398,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         if (this.playerOptions.fluid) {
           plwOptions.fluid = true;
         }
+
         if (this.playerOptions.cloudinary.fontFace) {
           plwOptions.fontFace = this.playerOptions.cloudinary.fontFace;
         }
+
         this._playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
       }
     });
@@ -448,7 +440,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _initFloatingPlayer() {
     if (this.playerOptions.floatingWhenNotVisible !== FLOATING_TO.NONE) {
-      this.videojs.floatingPlayer({ 'floatTo': this.playerOptions.floatingWhenNotVisible });
+      this.videojs.floatingPlayer({ floatTo: this.playerOptions.floatingWhenNotVisible });
     }
   }
 
@@ -478,14 +470,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const events = [];
     if (this.playerOptions.playedEventPercents) {
       events.push({
-        type: 'percentsplayed',
+        type: PLAYER_EVENT.PERCENTS_PLAYED,
         percents: this.playerOptions.playedEventPercents
       });
     }
 
     if (this.playerOptions.playedEventTimes) {
       events.push({
-        type: 'timeplayed',
+        type: PLAYER_EVENT.TIME_PLAYED,
         times: this.playerOptions.playedEventTimes
       });
     }

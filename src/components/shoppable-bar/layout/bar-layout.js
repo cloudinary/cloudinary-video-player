@@ -11,6 +11,7 @@ import {
   SHOPPABLE_PANEL_HIDDEN_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS
 } from '../shoppable-widget.const';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 class ShoppableBarLayout extends Component {
   constructor(player, options) {
@@ -71,7 +72,7 @@ class ShoppableBarLayout extends Component {
     }
 
     // On play start
-    this.player_.on('play', () => {
+    this.player_.on(PLAYER_EVENT.PLAY, () => {
       if (this.player_.currentTime() < 0.01) {
 
         // Open shoppable on-play

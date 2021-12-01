@@ -2,6 +2,7 @@ import videojs from 'video.js';
 import EventEmitter from 'events';
 import { assign } from 'utils/assign';
 import { isPlainObject } from 'utils/type-inference';
+import { PLAYER_EVENT } from './utils/consts';
 
 const EVENT_DEFAULTS = {
   percentsplayed: {
@@ -172,25 +173,25 @@ class ExtendedEvents extends EventEmitter {
     this.events = normalizeEventsParam(options.events, EVENT_DEFAULTS);
     resetState();
 
-    this.player.on('play', replay.bind(this));
-    this.player.on('ended', ended.bind(this));
+    this.player.on(PLAYER_EVENT.PLAY, replay.bind(this));
+    this.player.on(PLAYER_EVENT.ENDED, ended.bind(this));
     if (this.events.percentsplayed || this.events.timeplayed ||
       this.events.seek || this.events.totaltimeplayed) {
 
-      this.player.on('timeupdate', timeupdate.bind(this));
+      this.player.on(PLAYER_EVENT.TIME_UPDATE, timeupdate.bind(this));
     }
 
     if (this.events.mute || this.events.unmute) {
-      this.player.on('volumechange', volumechange.bind(this));
+      this.player.on(PLAYER_EVENT.VOLUME_CHANGE, volumechange.bind(this));
     }
 
     if (this.events.pausenoseek) {
-      this.player.on('pause', pause.bind(this));
-      this.player.on('play', play.bind(this));
+      this.player.on(PLAYER_EVENT.PAUSE, pause.bind(this));
+      this.player.on(PLAYER_EVENT.PLAY, play.bind(this));
     }
 
-    this.player.on('loadedmetadata', loadedmetadata.bind(this));
-    this.player.on('loadeddata', adaptiveEvents.bind(this));
+    this.player.on(PLAYER_EVENT.LOADED_METADATA, loadedmetadata.bind(this));
+    this.player.on(PLAYER_EVENT.LOADED_DATA, adaptiveEvents.bind(this));
 
   }
 }

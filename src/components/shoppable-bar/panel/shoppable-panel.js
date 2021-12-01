@@ -12,6 +12,7 @@ import {
   SHOPPABLE_PANEL_VISIBLE_CLASS,
   SHOPPABLE_PRODUCTS_OVERLAY_CLASS
 } from '../shoppable-widget.const';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 const Component = videojs.getComponent('Component');
 
@@ -24,13 +25,14 @@ class ShoppablePanel extends Component {
     const itemChangeHandler = () => {
       this.render();
     };
-    player.on('shoppableitemchanged', itemChangeHandler);
+
+    player.on(PLAYER_EVENT.SHOPPABLE_ITEM_CHANGED, itemChangeHandler);
 
     this.render();
 
     this.dispose = () => {
       super.dispose();
-      player.off('shoppableitemchanged', itemChangeHandler);
+      player.off(PLAYER_EVENT.SHOPPABLE_ITEM_CHANGED, itemChangeHandler);
     };
   }
 
@@ -149,7 +151,7 @@ class ShoppablePanel extends Component {
       });
 
       if (typeof item.conf.startTime !== 'undefined' && typeof item.conf.endTime !== 'undefined') {
-        this.player_.on('timeupdate', () => {
+        this.player_.on(PLAYER_EVENT.TIME_UPDATE, () => {
           const time = this.player_.currentTime();
           if (time >= item.conf.startTime && time < item.conf.endTime) {
             shoppablePanelItem.el_.classList.add('active');

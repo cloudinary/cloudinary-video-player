@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import './upcoming-video-overlay.scss';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
@@ -9,6 +10,9 @@ const ClickableComponent = videojs.getComponent('ClickableComponent');
 
 class UpcomingVideoOverlay extends ClickableComponent {
 
+  static DISABLE_TRANSITION_CLASS = 'disable-transition';
+  static VJS_UPCOMING_VIDEO_SHOW = 'vjs-upcoming-video-show';
+
   constructor(player, ...args) {
     super(player, ...args);
 
@@ -16,22 +20,22 @@ class UpcomingVideoOverlay extends ClickableComponent {
   }
 
   _setEvents(player) {
-    player.on('upcomingvideoshow', this._show.bind(this));
-    player.on('upcomingvideohide', this._hide.bind(this));
-    player.on('playlistitemchanged', this._onPlaylistItemChange.bind(this));
+    player.on(PLAYER_EVENT.UP_COMING_VIDEO_SHOW, this._show);
+    player.on(PLAYER_EVENT.UP_COMING_VIDEO_HIDE, this._hide);
+    player.on(PLAYER_EVENT.PLAYLIST_ITEM_CHANGED, this._onPlaylistItemChange);
   }
 
-  _hide() {
-    this.removeClass('vjs-upcoming-video-show');
+  _hide = () => {
+    this.removeClass(UpcomingVideoOverlay.VJS_UPCOMING_VIDEO_SHOW);
   }
 
   _disableTransition(block) {
-    this.addClass('disable-transition');
+    this.addClass(UpcomingVideoOverlay.DISABLE_TRANSITION_CLASS);
     block();
-    this.removeClass('disable-transition');
+    this.removeClass(UpcomingVideoOverlay.DISABLE_TRANSITION_CLASS);
   }
 
-  _onPlaylistItemChange(_, event) {
+  _onPlaylistItemChange = (_, event) => {
     this._hide();
     this._disableTransition(() => {
       if (event.next) {
@@ -40,17 +44,16 @@ class UpcomingVideoOverlay extends ClickableComponent {
     });
   }
 
-  _show() {
-    const videoShowClass = 'vjs-upcoming-video-show';
+  _show = () => {
     const ima = this.player().ima;
     const adsManager = ima === 'object' && ima.getAdsManager();
 
     if (adsManager) {
       if (!adsManager.getCurrentAd() || adsManager.getCurrentAd().isLinear()) {
-        this.addClass(videoShowClass);
+        this.addClass(UpcomingVideoOverlay.VJS_UPCOMING_VIDEO_SHOW);
       }
     } else {
-      this.addClass(videoShowClass);
+      this.addClass(UpcomingVideoOverlay.VJS_UPCOMING_VIDEO_SHOW);
     }
   }
 

@@ -1,6 +1,7 @@
 import videojs from 'video.js';
 import 'assets/styles/components/playlist.scss';
 import PlaylistPanelItem from './playlist-panel-item';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 
 const Component = videojs.getComponent('Component');
@@ -14,13 +15,13 @@ class PlaylistPanel extends Component {
       this.render();
     };
 
-    player.on('playlistitemchanged', itemChangeHandler);
+    player.on(PLAYER_EVENT.PLAYLIST_ITEM_CHANGED, itemChangeHandler);
 
     this.render();
 
     this.dispose = () => {
       super.dispose();
-      player.off('playlistitemchanged', itemChangeHandler);
+      player.off(PLAYER_EVENT.PLAYLIST_ITEM_CHANGED, itemChangeHandler);
     };
   }
 
@@ -32,9 +33,9 @@ class PlaylistPanel extends Component {
   }
 
   removeAll() {
-    const childrens = this.children();
-    for (let i = childrens.length - 1; i >= 0; --i) {
-      this.removeChild(childrens[i]);
+    const children = this.children();
+    for (let i = children.length - 1; i >= 0; --i) {
+      this.removeChild(children[i]);
     }
   }
 

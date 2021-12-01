@@ -5,6 +5,7 @@ import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { AUDIO_SUFFIX_REMOVAL_PATTERN, DEFAULT_AUDIO_PARAMS, DEFAULT_POSTER_PARAMS } from './audio-source.const';
+import { SOURCE_TYPE } from '../../../../utils/consts';
 
 
 class AudioSource extends VideoSource {
@@ -19,7 +20,7 @@ class AudioSource extends VideoSource {
 
     super(publicId, options);
     this._poster = null;
-    this._type = 'AudioSource';
+    this._type = SOURCE_TYPE.AUDIO;
     this.poster(poster);
   }
 
@@ -63,11 +64,7 @@ class AudioSource extends VideoSource {
         }
 
         assign(opts, { resource_type: 'video', format });
-        let queryString = '';
-
-        if (this.queryParams()) {
-          queryString = objectToQuerystring(this.queryParams());
-        }
+        const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
 
         const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
         const type = 'video/mp4';

@@ -19,6 +19,7 @@ import { throttle } from '../../utils/time';
 import { get } from '../../utils/object';
 import { noop } from '../../utils/type-inference';
 import { addMetadataTrack } from '../../video-player.utils';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 
 export const interactionAreaService = (player, playerOptions, videojsOptions) => {
@@ -108,27 +109,27 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
       player.videojs.el().classList.add('interaction-areas');
 
-      player.videojs.one('play', () => {
+      player.videojs.one(PLAYER_EVENT.PLAY, () => {
         setLayoutMessage();
       });
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
 
-      player.videojs.on('fullscreenchange', () => {
+      player.videojs.on(PLAYER_EVENT.FULL_SCREEN_CHANGE, () => {
         // waiting for fullscreen will end
         setTimeout(setInteractionAreasContainerSize, 100);
       });
 
       const resizeDestroy = addEventListener(window, 'resize', setContainerSize, false);
 
-      player.videojs.on('dispose', resizeDestroy);
+      player.videojs.on(PLAYER_EVENT.DISPOSE, resizeDestroy);
     }
 
-    player.videojs.on('ended', () => {
+    player.videojs.on(PLAYER_EVENT.ENDED, () => {
       unZoom();
     });
 
-    player.videojs.on('error', () => {
+    player.videojs.on(PLAYER_EVENT.ERROR, () => {
       player.pause();
     });
   }
