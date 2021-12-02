@@ -9,7 +9,13 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
-require('css.escape');
+
+/*
+* Used to escape element identifiers that begin with certain
+* characters such as digits.
+* https://www.w3.org/International/questions/qa-escapes#css_identifiers
+*/
+import cssEscape from 'css.escape';
 
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
@@ -34,7 +40,7 @@ export const getResolveVideoElement = (elem) => {
     }
 
     try {
-      elem = document.querySelector(`#${CSS.escape(id)}`) || videojs.getPlayer(id);
+      elem = document.querySelector(`#${cssEscape(id)}`) || videojs.getPlayer(id);
     } catch (e) {
       elem = null;
     }
