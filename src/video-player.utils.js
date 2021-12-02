@@ -33,7 +33,7 @@ export const getResolveVideoElement = (elem) => {
     }
 
     try {
-      elem = document.querySelector(`#${id}`) || videojs.getPlayer(id);
+      elem = document.querySelector(`#${CSS.escape(id)}`) || videojs.getPlayer(id);
     } catch (e) {
       elem = null;
     }
