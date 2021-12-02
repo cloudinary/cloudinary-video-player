@@ -9,6 +9,7 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
+require('css.escape');
 
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
@@ -33,7 +34,7 @@ export const getResolveVideoElement = (elem) => {
     }
 
     try {
-      elem = document.querySelector(`#${id}`) || videojs.getPlayer(id);
+      elem = document.querySelector(`#${CSS.escape(id)}`) || videojs.getPlayer(id);
     } catch (e) {
       elem = null;
     }
