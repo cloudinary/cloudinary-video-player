@@ -136,10 +136,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         /*
          error codes :
-           4 - media error, media source not supported
            3 - media playback was aborted due to a corruption problem
+           4 - media error, media source not supported
          */
-        if ([4, 3].includes(error.code) && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
+        if ([3, 4].includes(error.code) && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
           this.videojs.error(null);
           Utils.handleCldError(this, this.playerOptions);
         } else {
