@@ -133,7 +133,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const error = this.videojs.error();
       if (error) {
         const type = this._isPlayerConfigValid && this.videojs.cloudinary.currentSourceType();
-        if (error.code === 4 && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
+
+        /*
+         error codes :
+           3 - media playback was aborted due to a corruption problem
+           4 - media error, media source not supported
+         */
+        const isCorrupted = error.code === 3 && videojs.browser.IS_SAFARI;
+
+        if ([isCorrupted, error.code === 4].includes(true) && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
           this.videojs.error(null);
           Utils.handleCldError(this, this.playerOptions);
         } else {
