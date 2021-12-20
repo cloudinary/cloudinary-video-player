@@ -192,7 +192,8 @@ class Html5DashJS {
     // map videojs seek
     this.player.on(this.tech_, 'seeking', () => {
       // handle seek the same way as in dash.js
-      this.mediaPlayer_.seek((this.tech_.currentTime() - 8).toFixed(2));
+      const currentTime = this.tech_.currentTime() - 8;
+      this.mediaPlayer_.seek(+(currentTime > 0 ? currentTime : 0).toFixed(2));
     });
   }
 
