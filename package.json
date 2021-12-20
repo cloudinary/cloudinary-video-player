@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.7.0-edge.1",
+  "version": "1.7.0-edge.3",
   "description": "Cloudinary Video Player",
   "bundlewatch": {
     "files": [
