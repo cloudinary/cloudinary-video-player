@@ -1,3 +1,10 @@
+1.7.0-edge.4 / 2021-12-21
+==================
+
+Fixes
+----------
+Fix: Dash seek may pass invalid currentTime value.
+
 1.7.0-edge.3 / 2021-12-20
 ==================
 
