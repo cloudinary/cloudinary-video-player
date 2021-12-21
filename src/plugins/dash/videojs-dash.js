@@ -191,9 +191,7 @@ class Html5DashJS {
     this.tech_.triggerReady();
     // map videojs seek
     this.player.on(this.tech_, 'seeking', () => {
-      // handle seek the same way as in dash.js
-      const currentTime = Math.max(this.tech_.currentTime() - 8, 0).toFixed(2);
-      this.mediaPlayer_.seek(+currentTime);
+      this.mediaPlayer_.seek(this.tech_.currentTime());
     });
   }
 
