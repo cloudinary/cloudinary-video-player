@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $interaction-area-marker-size: 20px;
 $interaction-area-marker-border-size: 2px;
 $interaction-area-marker-box-shadow-extra-size: 4px;
@@ -159,7 +161,7 @@ $interaction-area-layout-icon-height: 60px;
 }
 
 @-webkit-keyframes pulsing-animation {
-  0%   { height: $interaction-area-marker-size / 2; width: $interaction-area-marker-size / 2; opacity: 0}
+  0%   { height: math.div($interaction-area-marker-size, 2); width: math.div($interaction-area-marker-size, 2); opacity: 0}
   50%  { height: $interaction-area-marker-size; width: $interaction-area-marker-size; opacity: 1}
   100% { height: 2 * $interaction-area-marker-size; width: 2 * $interaction-area-marker-size; opacity: 0}
 }
