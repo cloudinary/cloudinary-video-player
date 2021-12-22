@@ -13500,7 +13500,7 @@ verror@1.10.0:
     videojs-vtt.js "^0.14.1"
     xhr "2.4.0"
 
-video.js@^7.14.0:
+video.js@^7.17.0:
   version "7.17.0"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.17.0.tgz#35918cc03748a5680f5d5f1da410e06eeea7786e"
   integrity sha512-8RbLu9+Pdpep9OTPncUHIvZXFgn/7hKdPnSTE/lGSnlFSucXtTUBp41R7NDwncscMLQ0WgazUbmFlvr4MNWMbA==

@@ -44,7 +44,7 @@
     "dashjs": "^3.2.2",
     "fetch-ponyfill": "^7.1.0",
     "promise-polyfill": "^8.2.0",
-    "video.js": "^7.14.0",
+    "video.js": "^7.17.0",
     "videojs-contextmenu": "^2.0.2",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-contrib-quality-levels": "^2.1.0",
