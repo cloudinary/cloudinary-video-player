@@ -36,7 +36,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
 export const DEFAULT_HLS_OPTIONS = {
   html5: {
     handlePartialData: false,
-    hls: {
+    vhs: {
       overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
     }
   }
