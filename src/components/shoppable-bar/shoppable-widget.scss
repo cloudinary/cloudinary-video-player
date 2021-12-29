@@ -312,6 +312,12 @@ $width: 20%;
     display: none !important;
   }
 }
+.cld-spbl-products-overlay {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
 .cld-spbl-product-hotspot {
   pointer-events: all;
   position: absolute;
