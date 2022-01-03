@@ -14,6 +14,7 @@ import {
 } from './video-source.const';
 import { formatToMimeTypeAndTransformation, isCodecAlreadyExist, normalizeFormat } from './video-source.utils';
 import { castArray } from '../../../../utils/array';
+import { SOURCE_TYPE } from '../../../../utils/consts';
 
 let objectId = 0;
 
@@ -66,7 +67,7 @@ class VideoSource extends BaseSource {
     this._info = null;
     this._sourceTransformation = null;
     this._interactionAreas = null;
-    this._type = 'VideoSource';
+    this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = isRawUrl;
     this._rawTransformation = options.raw_transformation;
     this.withCredentials = !!withCredentials;

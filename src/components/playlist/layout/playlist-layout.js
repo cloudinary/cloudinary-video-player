@@ -4,6 +4,7 @@ import {
   skinClassPrefix,
   playerClassPrefix
 } from '../../../utils/css-prefix';
+import { PLAYER_EVENT } from '../../../utils/consts';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
@@ -43,14 +44,14 @@ class PlaylistLayout extends Component {
       wrapVideoWithLayout();
     }
 
-    player.on('fluid', fluidHandler);
+    player.on(PLAYER_EVENT.FLUID, fluidHandler);
 
-    this.addChild('PlaylistPanel', this.options_);
+    this.addChild(PLAYER_EVENT.PLAYLIST_PANEL, this.options_);
 
     this.dispose = () => {
       this.removeLayout();
       super.dispose();
-      player.off('fluid', fluidHandler);
+      player.off(PLAYER_EVENT.FLUID, fluidHandler);
     };
   }
 

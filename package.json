@@ -10,7 +10,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "112kb"
+        "maxSize": "115kb"
       }
     ]
   },
@@ -63,6 +63,7 @@
     "bundlewatch": "^0.3.2",
     "cloudinary-core": "^2.11.4",
     "copy-webpack-plugin": "4",
+    "css.escape": "^1.5.1",
     "css-loader": "^5.2.6",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.2.1",

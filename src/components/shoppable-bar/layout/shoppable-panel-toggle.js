@@ -7,6 +7,7 @@ import {
   ICON_CART_CLASS,
   SHOPPABLE_ANIMATION_CLASS
 } from '../shoppable-widget.const';
+import { PLAYER_EVENT } from '../../../utils/consts';
 const dom = videojs.dom || videojs;
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
@@ -46,7 +47,7 @@ class ShoppablePanelToggle extends ClickableComponent {
     });
     el.appendChild(icon);
 
-    this.player_.on('productBarMin', () => {
+    this.player_.on(PLAYER_EVENT.PRODUCT_BAR_MIN, () => {
       setTimeout(() => {
         icon.classList.add(SHOPPABLE_ANIMATION_CLASS);
         setTimeout(() => {
