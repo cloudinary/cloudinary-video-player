@@ -1,3 +1,13 @@
+1.7.0 / 2022-01-03
+==================
+
+Fixes
+-----------
+Fix: Fire error event if has any HLS mediaRequestsErrored
+Fix: Escape video tag id
+Fix: support error code 3 on Safari
+Fix: Dash seek may pass invalid currentTime value.
+
 1.5.9 / 2021-11-02
 ==================
 
