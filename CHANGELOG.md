@@ -1,3 +1,16 @@
+1.7.1-edge.0 / 2022-01-11
+==================
+
+Changes:
+-----------
+Update Videojs to 7.17.0
+
+Fixes:
+--------
+Fix: Icons in playlist mode were missing
+Fix: The hotspot is out of the frame  in shoppable video
+Fix: change hls to vhs in documentation code
+
 1.7.0-edge.5 / 2021-12-21
 ==================
 
