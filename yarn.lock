@@ -3403,10 +3403,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dashjs@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/dashjs/-/dashjs-4.2.0.tgz#fd6e6152c4e41edc45cb9b75677e8eef5daec77d"
-  integrity sha512-bDXsBKTniuyI8NomZOuxdtbmfiGRxQiiK4Nx/GG5ysLXKVnVRHAXCqI0j2/dPx2BgZHlOmbE9LeDwyS1yHKTLQ==
+dashjs@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/dashjs/-/dashjs-4.2.1.tgz#2ba3e9868d50274c3fd1450b68bfc705b66f2451"
+  integrity sha512-Qx7Lo4jnVg3UjjVXZenePj3bxs3eoYmfgEucrZ3E/gMUHwBi3/9nPuBqGJEOX5WwMleayABqMsFGZcFR4iwx/w==
   dependencies:
     codem-isoboxer "0.3.6"
     es6-promise "^4.2.8"

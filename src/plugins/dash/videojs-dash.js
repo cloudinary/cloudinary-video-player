@@ -87,6 +87,24 @@ class Html5DashJS {
     // - mediaKeyMessageError (only fires under 'might not work' circumstances)
     // eslint-disable-next-line complexity
     this.retriggerError_ = (event) => {
+
+      if (event.type === 'error') {
+        // Initialize errors for ref https://cdn.dashjs.org/latest/jsdoc/core_errors_Errors.js.html
+        // Map to general init error
+        if (event.error.code >= 10 && event.error.code <= 35) {
+          this.player.error({ code: 4, dashjsErrorCode: event.error.code, message: event.error.message });
+        } else if (event.error.code < 10) { 
+          // Network errors
+          this.player.error({ code: event.error.code, dashjsErrorCode: event.error.code, message: event.error.message });
+        } else if (event.error.code >= 100 && event.error.code <= 114) { 
+          // Protection Errors  
+          // https://cdn.dashjs.org/latest/jsdoc/streaming_protection_errors_ProtectionErrors.js.html
+          this.player.error({ code: 5, dashjsErrorCode: event.error.code, message: event.error.message });
+        } else {
+          this.player.error({ code: event.error.code, message: event.error.message });
+        }
+      }
+
       if (event.error === 'capability' && event.event === 'mediasource') {
         // No support for MSE
         this.player.error({
