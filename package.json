@@ -10,7 +10,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "115kb"
+        "maxSize": "116kb"
       }
     ]
   },
@@ -41,7 +41,7 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
-    "dashjs": "^3.2.2",
+    "dashjs": "^4.2.1",
     "fetch-ponyfill": "^7.1.0",
     "promise-polyfill": "^8.2.0",
     "video.js": "^7.17.0",
@@ -63,8 +63,8 @@
     "bundlewatch": "^0.3.2",
     "cloudinary-core": "^2.11.4",
     "copy-webpack-plugin": "4",
-    "css.escape": "^1.5.1",
     "css-loader": "^5.2.6",
+    "css.escape": "^1.5.1",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.2.1",
     "eslint-plugin-jest": "^21.27.2",
