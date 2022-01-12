@@ -1,14 +1,12 @@
 import videojs from 'video.js';
-import { createElement } from '../../../utils/dom';
+import { createElement } from 'utils/dom';
 
 const MenuItem = videojs.getComponent('MenuItem');
 
 class ContextMenuItem extends MenuItem {
   handleClick() {
-    if (!this.options_.disabled) {
-      super.handleClick();
-      this.options_.listener();
-    }
+    super.handleClick();
+    this.options_.listener();
   }
 
   createEl() {
@@ -19,7 +17,6 @@ class ContextMenuItem extends MenuItem {
 
     const el = createElement('li', {
       class: 'vjs-menu-item',
-      disabled: this.options_.disabled || false,
       tabIndex: -1
     }, label);
 

@@ -1,12 +1,9 @@
 import videojs from 'video.js';
 import ContextMenuItem from './context-menu-item';
-import { setPosition } from '../../../utils/positioning';
-import { isFunction } from '../../../utils/type-inference';
+import { setPosition } from 'utils/positioning';
+import { isFunction } from 'utils/type-inference';
 
 const Menu = videojs.getComponent('Menu');
-
-// support VJS5 & VJS6 at the same time
-const dom = videojs.dom || videojs;
 
 class ContextMenu extends Menu {
 
@@ -33,7 +30,6 @@ class ContextMenu extends Menu {
       this.addItem(new ContextMenuItem(player, {
         label: c.label,
         class: c.class,
-        disabled: c.disabled,
         listener: videojs.bind(player, function() {
           fn(this);
           window.setTimeout(() => {
@@ -51,7 +47,7 @@ class ContextMenu extends Menu {
   createEl() {
     const el = super.createEl();
 
-    dom.addClass(el, 'vjs-context-menu-ui');
+    videojs.dom.addClass(el, 'vjs-context-menu-ui');
 
     if (this.options_.position) {
       const { left, top } = this.options_.position;

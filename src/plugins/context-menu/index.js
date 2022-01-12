@@ -5,7 +5,7 @@ import ContextMenu from './components/context-menu';
 import { getPointerPosition } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
-import { isFunction } from '../../utils/type-inference';
+import { isFunction } from 'utils/type-inference';
 
 const defaults = {
   showNativeOnRecurringEvent: false
@@ -31,7 +31,7 @@ class ContextMenuPlugin {
     };
 
     const getMenuPosition = (e) => {
-    // Calc menu size
+      // Calc menu size
       const menuEl = this.menu.el();
 
       // Must append to element to get bounding rect
@@ -115,8 +115,8 @@ class ContextMenuPlugin {
       };
 
       this.menu.on('dispose', () => {
-      // Begin canceling contextmenu events again, so subsequent events will
-      // cause the custom menu to be displayed again.
+        // Begin canceling contextmenu events again, so subsequent events will
+        // cause the custom menu to be displayed again.
         this.player.contextmenu.options.cancel = true;
         this.player.removeChild(this.menu);
         videojs.off(document, ['click', 'tap'], clickHandler);

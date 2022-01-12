@@ -7,7 +7,6 @@ const contextMenuContent = (player) => {
 
   const aboutMenuItem = {
     class: 'player-version',
-    disabled: true,
     label: 'Cloudinary Player v' + VERSION
   };
 
