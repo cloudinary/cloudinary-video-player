@@ -6,7 +6,9 @@ const contextMenuContent = (player) => {
   const isFullscreen = player.isFullscreen();
 
   const aboutMenuItem = {
-    label: '<span class="player-version">Cloudinary Player v' + VERSION + '</span>'
+    class: 'player-version',
+    disabled: true,
+    label: 'Cloudinary Player v' + VERSION
   };
 
   if (!player.controls()) {

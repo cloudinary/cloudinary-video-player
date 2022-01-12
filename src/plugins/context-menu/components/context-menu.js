@@ -32,6 +32,8 @@ class ContextMenu extends Menu {
 
       this.addItem(new ContextMenuItem(player, {
         label: c.label,
+        class: c.class,
+        disabled: c.disabled,
         listener: videojs.bind(player, function() {
           fn(this);
           window.setTimeout(() => {
