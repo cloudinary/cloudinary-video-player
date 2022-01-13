@@ -60,7 +60,7 @@ function handleTouchEnd(e) {
 
   const wait = this.contextmenu.options.wait;
 
-  if (e.type === 'touchend' && Number(new Date()) - current.time >= wait) {
+  if (e.type === 'touchend' && new Date().getTime() - current.time >= wait) {
     sendAbstractedEvent(this, e);
   }
 
@@ -111,7 +111,7 @@ function handleTouchStart(e) {
   this.contextmenu.current = {
     screenX: touch.screenX,
     screenY: touch.screenY,
-    time: Number(new Date())
+    time: new Date().getTime()
   };
 }
 
