@@ -1,6 +1,7 @@
 export const PLAYER_EVENT = {
   PLAY: 'play',
   PLAYING: 'playing',
+  FIRST_PLAY: 'firstplay',
   PAUSE: 'pause',
   SEEK: 'seek',
   SEEKING: 'seeking',

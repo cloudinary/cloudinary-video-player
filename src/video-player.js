@@ -158,7 +158,26 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     });
 
+
+    // 'playsinline' on ios hide the native controls and do not auto fullscreen when start playing
+    if (videojs.browser.IS_IOS && this.videojs.playsinline()) {
+
+      let isFirstPlay = false;
+
+      if (this.videojs.autoplay()) {
+        this.videojs.one(PLAYER_EVENT.FIRST_PLAY, () => {
+          isFirstPlay = true;
+        });
+      }
+
+      this.videojs.on(PLAYER_EVENT.PLAY, () => {
+        !isFirstPlay && this.videojs.requestFullscreen();
+        isFirstPlay = false;
+      });
+    }
+
     this.videojs.on(PLAYER_EVENT.PLAY, this._clearTimeOut);
+
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearTimeOut);
 
     this.videojs.ready(() => {
