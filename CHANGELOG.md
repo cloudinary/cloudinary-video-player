@@ -1,3 +1,11 @@
+1.7.1-edge.2 / 2022-01-17
+==================
+
+Fixes
+---------
+Fix: Replace context-menu plugin
+Fix: Set playsinline as default for ios devices 
+
 1.7.1-edge.1 / 2022-01-11
 ==================
 
