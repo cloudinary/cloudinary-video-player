@@ -112,8 +112,6 @@ function FloatingPlayer(player, iniOpts = {}) {
     if (this.player.ima && this.player.ima.adsActive) {
       const imaIframe = self.player.ima.adContainerDiv.querySelector('iframe');
 
-      console.log(_isFloated)
-
       imaIframe.width = `${_isFloated ? _floater.clientWidth : el.clientWidth}`;
       imaIframe.height = `${_isFloated ? _floater.clientHeight : el.clientHeight}`;
     }
