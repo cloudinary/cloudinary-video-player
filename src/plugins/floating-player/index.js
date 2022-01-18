@@ -109,11 +109,14 @@ function FloatingPlayer(player, iniOpts = {}) {
   };
 
   const setAdSize = () => {
-    if (this.player.ima && this.player.ima.adsActive) {
-      const imaIframe = self.player.ima.adContainerDiv.querySelector('iframe');
+    const { ima } = this.player;
+    if (ima && ima.adsActive) {
+      const adsManager = ima.getAdsManager();
 
-      imaIframe.width = `${_isFloated ? _floater.clientWidth : el.clientWidth}`;
-      imaIframe.height = `${_isFloated ? _floater.clientHeight : el.clientHeight}`;
+      adsManager.resize(
+        _isFloated ? _floater.clientWidth : el.clientWidth,
+        _isFloated ? _floater.clientHeight : el.clientHeight
+      );
     }
   };
 
