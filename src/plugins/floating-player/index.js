@@ -109,10 +109,14 @@ function FloatingPlayer(player, iniOpts = {}) {
   };
 
   const setAdSize = () => {
-    const imaIframe = self.player.ima.adContainerDiv.querySelector('iframe');
+    if (this.player.ima && this.player.ima.adsActive) {
+      const imaIframe = self.player.ima.adContainerDiv.querySelector('iframe');
 
-    imaIframe.width = `${_floater.clientWidth}`;
-    imaIframe.height = `${_floater.clientHeight}`;
+      console.log(_isFloated)
+
+      imaIframe.width = `${_isFloated ? _floater.clientWidth : el.clientWidth}`;
+      imaIframe.height = `${_isFloated ? _floater.clientHeight : el.clientHeight}`;
+    }
   };
 
   const float = () => {
@@ -125,20 +129,18 @@ function FloatingPlayer(player, iniOpts = {}) {
       positionFloater();
     }
 
+    _isFloated = true;
+
     setTimeout(() => {
       _floater.classList.add(FLOATING_CLASS_NAME);
-
-      if (this.player.ima && this.player.ima.adsActive) {
-        setAdSize();
-      }
+      setAdSize();
     });
-
-    _isFloated = true;
   };
 
   const unFloat = () => {
     _floater.classList.remove(FLOATING_CLASS_NAME);
     _isFloated = false;
+    setAdSize();
   };
 
   const disable = () => {
