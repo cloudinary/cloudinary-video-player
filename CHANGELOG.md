@@ -1,3 +1,10 @@
+1.7.1-edge.3 / 2022-01-19
+==================
+
+Fixes
+---------
+Fix: Ad is frozen when using floatingWhenNotVisible
+
 1.7.1-edge.2 / 2022-01-17
 ==================
 
