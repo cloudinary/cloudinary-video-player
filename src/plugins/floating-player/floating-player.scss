@@ -21,18 +21,15 @@
 
     .cld-video-player-floater-close {
       position: absolute;
-      right: -4px;
       bottom: 100%;
       background: #fff;
       border-bottom: none;
       margin-bottom: 4px;
-      padding: 4px 2px 2px 2px;
+      right: -4px;
+      padding: 4px 6px 2px;
       display: block;
       box-shadow: 0 0 4px rgba(#000, .05);
       cursor: pointer;
-      color: #313131;
-      font-size: 20px;
-
       // Hide bottom shadow
       &::after {
         content: '';
@@ -43,7 +40,6 @@
         height: 4px;
         background: #fff;
       }
-
     }
 
     .vjs-time-control,
