@@ -1,6 +1,5 @@
 import dashjs from 'dashjs';
 import videojs from 'video.js';
-import { find } from 'utils/find';
 
 /**
  * Setup audio tracks. Take the tracks from dash and add the tracks to videojs. Listen for when
@@ -22,7 +21,9 @@ function handlePlaybackMetadataLoaded(player, tech) {
   }
 
   function findDashAudioTrack(subDashAudioTracks, videojsAudioTrack) {
-    return find(subDashAudioTracks, (track) => generateIdFromTrackIndex(track.index) === videojsAudioTrack.id);
+    return subDashAudioTracks.find(({ index }) =>
+      generateIdFromTrackIndex(index) === videojsAudioTrack.id
+    );
   }
 
   // Safari creates a single native `AudioTrack` (not `videojs.AudioTrack`) when loading. Clear all

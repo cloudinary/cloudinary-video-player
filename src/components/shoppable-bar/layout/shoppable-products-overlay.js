@@ -74,7 +74,12 @@ class ShoppableProductsOverlay extends Component {
   }
 
   createEl() {
-    this.layout_ = dom.createEl('div', { className: 'cld-spbl-products-overlay' });
+    const dimensions = this.player_.currentDimensions();
+
+    this.layout_ = dom.createEl('div', {
+      className: 'cld-spbl-products-overlay',
+      style: `padding-top: ${dimensions.height / dimensions.width * 100}%;`
+    });
 
     return this.layout_;
   }
