@@ -1,3 +1,21 @@
+1.8.0 / 2022-01-31
+==================
+
+Changes:
+----------
+Update Dash.js to version 4.2.1
+Update Videojs to 7.17.0
+
+Fixes
+-------
+Fix: Ad is frozen when using floatingWhenNotVisible
+Fix: Replace context-menu plugin
+Fix: Set playsinline as default for ios devices
+Fix: Icons in playlist mode were missing
+Fix: The hotspot is out of the frame in shoppable video
+Fix: change hls to vhs in documentation code
+
+
 1.7.0 / 2022-01-03
 ==================
 
