@@ -31,7 +31,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'fetchErrorUsingGet',
   'withCredentials',
   'seekThumbnails',
-  'integrationParam'
+  'queryParams'
 ]);
 
 export const DEFAULT_HLS_OPTIONS = {
