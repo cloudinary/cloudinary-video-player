@@ -35,6 +35,7 @@ export const playerValidators = {
     }
   },
   playerOptions: {
+    queryParams: validator.isPlainObject,
     publicId: validator.isString,
     fluid: validator.isBoolean,
     analytics: validator.isBoolean,
