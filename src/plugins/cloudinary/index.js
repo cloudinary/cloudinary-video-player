@@ -91,7 +91,10 @@ class CloudinaryContext extends mixin(Playlistable) {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
-      options.queryParams = options.usageReport ? { _s: `vp-${VERSION}` } : {};
+      options.queryParams = Object.assign({},
+        options.usageReport ? { _s: `vp-${VERSION}` } : {},
+        options.integrationParam ? { _i: options.integrationParam } : {}
+      );
 
       if (options.sourceTypes.indexOf('audio') > -1) {
         builtSrc = new AudioSource(publicId, options);
