@@ -188,7 +188,6 @@ class VideoSource extends BaseSource {
       assign(opts, { resource_type: 'video', format });
 
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
-      // console.log(codecTrans)
 
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !isCodecAlreadyExist(opts.transformation, this._rawTransformation)) {

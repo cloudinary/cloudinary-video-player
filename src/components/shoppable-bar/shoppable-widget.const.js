@@ -23,8 +23,6 @@ export const SHOPPABLE_HOVER_ACTIONS = {
   OVERLAY: 'overlay'
 };
 
-export const SHOPPABL_DEFAULT_IMAGE_WIDTH = 132;
-
 export const SHOPPABLE_PANEL_VISIBLE_CLASS = 'shoppable-panel-visible';
 
 export const SHOPPABLE_PANEL_HIDDEN_CLASS = 'shoppable-panel-hidden';

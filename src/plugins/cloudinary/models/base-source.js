@@ -2,36 +2,86 @@ import { getCloudinaryUrl, isRawUrl, mergeTransformations, normalizeOptions } fr
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { objectToQuerystring } from 'utils/querystring';
 
-
 class BaseSource {
-  _transformation = null;
 
-  constructor(initPublicId, initOptions = {}) {
+  constructor(publicId, options = {}) {
+    ({ publicId, options } = normalizeOptions(publicId, options));
 
-    const { publicId, options } = normalizeOptions(initPublicId, initOptions);
-    const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
-    const { transformation } = sliceAndUnsetProperties(options, 'transformation');
-    const { queryParams } = sliceAndUnsetProperties(options, 'queryParams');
+    let _publicId = null;
+    let _cloudinaryConfig = null;
+    let _transformation = null;
+    let _resourceConfig = null;
+    let _queryParams = null;
 
-    if (!cloudinaryConfig) {
-      throw new Error('Source is missing "cloudinaryConfig".');
-    }
+    this.publicId = (publicId) => {
+      if (!publicId) {
+        return _publicId;
+      }
 
-    this.publicId = () => publicId;
-    this.cloudinaryConfig = () => cloudinaryConfig;
-    this.resourceConfig = () => options;
-    this.queryParams = () => queryParams;
+      _publicId = publicId;
+
+      return this;
+    };
+
+    this.cloudinaryConfig = (config) => {
+      if (!config) {
+        return _cloudinaryConfig;
+      }
+
+      _cloudinaryConfig = config;
+
+      return this;
+    };
+
+    this.resourceConfig = (config) => {
+      if (!config) {
+        return _resourceConfig;
+      }
+
+      _resourceConfig = config;
+
+      return this;
+    };
+
+    this.transformation = (trans) => {
+      if (!trans) {
+        return _transformation;
+      }
+
+      _transformation = trans;
+
+      return this;
+    };
+
+    this.queryParams = (params) => {
+      if (!params) {
+        return _queryParams;
+      }
+
+      _queryParams = params;
+
+      return this;
+    };
+
     this.getType = () => this._type;
-    this.transformation(transformation);
-  }
 
-  transformation(transformation) {
-    if (transformation) {
-      this._transformation = transformation;
+    const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
+    if (!cloudinaryConfig) {
+      throw new Error('Source is missing \'cloudinaryConfig\'.');
     }
+    this.cloudinaryConfig(cloudinaryConfig);
 
-    return this._transformation;
+    const { transformation } = sliceAndUnsetProperties(options, 'transformation');
+    this.transformation(transformation);
+
+    const { queryParams } = sliceAndUnsetProperties(options, 'queryParams');
+    this.queryParams(queryParams);
+
+    this.resourceConfig(options);
+
+    this.publicId(publicId);
   }
+
 
   config() {
     const coreConfig = this.cloudinaryConfig();

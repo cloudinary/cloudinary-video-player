@@ -48,9 +48,7 @@ const isSrcEqual = (source1, source2) => {
   return src1 === src2;
 };
 
-export const extendCloudinaryConfig = (cloudinaryConfig, newConfig) => {
-  return Object.assign({}, cloudinaryConfig, newConfig);
-};
+export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign({}, currentConfig, newConfig);
 
 export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
 

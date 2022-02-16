@@ -127,12 +127,14 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
-    this.transformation = (transformation) => {
-      if (transformation) {
-        _transformation = transformation;
+    this.transformation = (trans) => {
+      if (!trans) {
+        return _transformation;
       }
 
-      return _transformation;
+      _transformation = trans;
+
+      return _chainTarget;
     };
 
     this.sourceTypes = (types) => {

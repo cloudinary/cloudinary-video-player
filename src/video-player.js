@@ -567,7 +567,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       const playlistWidget = this.playlistWidget();
 
-      if (this.playlistWidget()) {
+      if (playlistWidget) {
         playlistWidget.setSkin();
       }
     }
