@@ -286,7 +286,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const publicId = source.publicId();
 
-        const transformations = source.transformation();
+        const transformations = source.transformation().toOptions();
 
         if (transformations && transformations.streaming_profile) {
           delete transformations.streaming_profile;

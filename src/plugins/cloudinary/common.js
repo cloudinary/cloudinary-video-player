@@ -57,9 +57,7 @@ const mergeTransformations = (transformation1, transformation2) => {
     transformation1 = transformation1.toOptions();
   }
 
-  const newTransformation = getTransformationsInstance(transformation1);
-
-  return newTransformation.fromOptions(transformation2);
+  return getTransformationsInstance(transformation1).fromOptions(transformation2);
 };
 
 export function getTransformationsInstance(obj) {
