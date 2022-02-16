@@ -8,8 +8,7 @@ import {
   normalizeOptions,
   mergeTransformations,
   codecShorthandTrans,
-  extendCloudinaryConfig,
-  getTransformationsInstance
+  extendCloudinaryConfig
 } from './common';
 import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source/video-source';
@@ -133,7 +132,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         return _transformation;
       }
 
-      _transformation = getTransformationsInstance(trans);
+      _transformation = trans;
 
       return _chainTarget;
     };
@@ -282,7 +281,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
       }
 
-      opts.transformation = getTransformationsInstance(opts.transformation || {});
+      opts.transformation = opts.transformation || {};
 
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
@@ -290,10 +289,11 @@ class CloudinaryContext extends mixin(Playlistable) {
       if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
-        opts.transformation
-          .width(roundUp100(playerEl.clientWidth))
-          .height(roundUp100(playerEl.clientHeight))
-          .crop('limit');
+        Object.assign(opts.transformation, {
+          width: roundUp100(playerEl.clientWidth),
+          height: roundUp100(playerEl.clientHeight),
+          crop: 'limit'
+        });
       }
 
       return opts;

@@ -6,8 +6,7 @@
 
 import { VideoJsPlayerOptions } from 'video.js';
 import { LegacyITransforamtionOptions } from '@cloudinary/url-gen/types/types';
-
-type Configuration = any;
+import Configuration from '@cloudinary/url-gen/config/interfaces/Config/ICloudinaryConfigurations';
 
 interface CloudinaryNew {
     /**
@@ -33,6 +32,7 @@ interface CloudinaryNew {
 }
 
 type CloudinaryVideoPlayerConfig = (config: Configuration) => CloudinaryNew;
+
 type Transformation = LegacyITransforamtionOptions;
 
 interface CloudinaryLegacy {
@@ -49,7 +49,7 @@ declare global {
     }
 }
 
-export declare const CloudinaryVideoPlayerConfig : CloudinaryVideoPlayerConfig;
+export declare const cloudinaryVideoPlayerConfig : CloudinaryVideoPlayerConfig;
 
 export interface PosterOptions {
     /**
@@ -205,7 +205,6 @@ export interface AdsOptions {
     locale?: string,
     prerollTimeout?: number
     postrollTimeout?: number
-
 }
 
 export class BaseSource {

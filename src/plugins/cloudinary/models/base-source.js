@@ -1,93 +1,37 @@
-import {
-  getCloudinaryUrl,
-  getTransformationsInstance,
-  isRawUrl,
-  mergeTransformations,
-  normalizeOptions
-} from '../common';
+import { getCloudinaryUrl, isRawUrl, mergeTransformations, normalizeOptions } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { objectToQuerystring } from 'utils/querystring';
 
+
 class BaseSource {
+  _transformation = null;
 
-  constructor(publicId, options = {}) {
-    ({ publicId, options } = normalizeOptions(publicId, options));
+  constructor(initPublicId, initOptions = {}) {
 
-    let _publicId = null;
-    let _cloudinaryConfig = null;
-    let _transformation = null;
-    let _resourceConfig = null;
-    let _queryParams = null;
-
-    this.publicId = (publicId) => {
-      if (!publicId) {
-        return _publicId;
-      }
-
-      _publicId = publicId;
-
-      return this;
-    };
-
-    this.cloudinaryConfig = (config) => {
-      if (!config) {
-        return _cloudinaryConfig;
-      }
-
-      _cloudinaryConfig = config;
-
-      return this;
-    };
-
-    this.resourceConfig = (config) => {
-      if (!config) {
-        return _resourceConfig;
-      }
-
-      _resourceConfig = config;
-
-      return this;
-    };
-
-    this.transformation = (trans) => {
-      if (!trans) {
-        return _transformation;
-      }
-
-      _transformation = getTransformationsInstance(trans);
-
-      return this;
-    };
-
-    this.queryParams = (params) => {
-      if (!params) {
-        return _queryParams;
-      }
-
-      _queryParams = params;
-
-      return this;
-    };
-
-    this.getType = () => this._type;
-
+    const { publicId, options } = normalizeOptions(initPublicId, initOptions);
     const { cloudinaryConfig } = sliceAndUnsetProperties(options, 'cloudinaryConfig');
-    if (!cloudinaryConfig) {
-      throw new Error('Source is missing \'cloudinaryConfig\'.');
-    }
-    this.cloudinaryConfig(cloudinaryConfig);
-
     const { transformation } = sliceAndUnsetProperties(options, 'transformation');
-    this.transformation(transformation);
-
     const { queryParams } = sliceAndUnsetProperties(options, 'queryParams');
-    this.queryParams(queryParams);
 
-    this.resourceConfig(options);
+    if (!cloudinaryConfig) {
+      throw new Error('Source is missing "cloudinaryConfig".');
+    }
 
-    this.publicId(publicId);
+    this.publicId = () => publicId;
+    this.cloudinaryConfig = () => cloudinaryConfig;
+    this.resourceConfig = () => options;
+    this.queryParams = () => queryParams;
+    this.getType = () => this._type;
+    this.transformation(transformation);
   }
 
+  transformation(transformation) {
+    if (transformation) {
+      this._transformation = transformation;
+    }
+
+    return this._transformation;
+  }
 
   config() {
     const coreConfig = this.cloudinaryConfig();
@@ -110,8 +54,7 @@ class BaseSource {
   }
 
   url({ transformation } = {}) {
-    const newTransformation = transformation || this.transformation();
-    const url = this.config().url(this.publicId(), { transformation: newTransformation });
+    const url = this.config().url(this.publicId(), { transformation: transformation || this.transformation() });
 
     const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
     return `${url}${queryString}`;

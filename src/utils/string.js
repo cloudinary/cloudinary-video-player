@@ -3,6 +3,10 @@ function camelize(str) {
   return str.replace(/[_.-](\w|$)/g, (_, x) => x.toUpperCase());
 }
 
+function toSnakeCase(str) {
+  return str.split(/(?=[A-Z])/).join('_').toLowerCase();
+}
+
 function startsWith(str, searchStr, position) {
   if (String.prototype.startsWith) {
     return str.startsWith(searchStr, position);
@@ -12,4 +16,4 @@ function startsWith(str, searchStr, position) {
   }
 }
 
-export { camelize, startsWith };
+export { camelize, startsWith, toSnakeCase };

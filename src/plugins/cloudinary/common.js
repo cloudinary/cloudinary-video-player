@@ -4,6 +4,7 @@ import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
+import { toSnakeCase } from '../../utils/string';
 
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
@@ -48,7 +49,25 @@ const isSrcEqual = (source1, source2) => {
   return src1 === src2;
 };
 
-export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign({}, currentConfig, newConfig);
+const objectKeysToSnakeCase = (obj) => {
+  return Object.keys(obj).reduce((acc, key) => {
+    acc[toSnakeCase(key)] = obj[key];
+
+    return acc;
+  }, {});
+};
+
+export const getCloudinaryConfigAsLegacy = (config) => {
+  const cloud = config.cloud ? objectKeysToSnakeCase(config.cloud) : config;
+  const url = config.url ? objectKeysToSnakeCase(config.url) : {};
+
+  return {
+    ...cloud,
+    ...url
+  };
+};
+
+export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign(currentConfig, newConfig);
 
 export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
 
@@ -57,20 +76,8 @@ const mergeTransformations = (transformation1, transformation2) => {
     transformation1 = transformation1.toOptions();
   }
 
-  return getTransformationsInstance(transformation1).fromOptions(transformation2);
+  return new Transformation(transformation1).fromOptions(transformation2);
 };
-
-export function getTransformationsInstance(obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(e => getTransformationsInstance(Transformation, e));
-  }
-
-  if (obj instanceof Transformation) {
-    return obj;
-  } else {
-    return new Transformation(obj);
-  }
-}
 
 const ERROR_CODE = {
   NO_SUPPORTED_MEDIA: 6,
