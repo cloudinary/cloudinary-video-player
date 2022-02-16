@@ -4,33 +4,52 @@
 // Definitions by: [YOUR_NAME_HERE] <[YOUR_URL_HERE]>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-import {VideoJsPlayerOptions} from "video.js";
-import {Configuration, Transformation, Cloudinary} from "cloudinary-core"
+import { VideoJsPlayerOptions } from 'video.js';
+import { LegacyITransforamtionOptions } from '@cloudinary/url-gen/types/types';
 
-declare module 'cloudinary-core' {
-    interface Cloudinary {
-        /**
-         *
-         * @param elem
-         *          The video element for the player
-         * @param options
-         *        Video player options
-         * @param ready
-         *        Is the player ready to play
-         */
-        videoPlayer(elem: string, options?: Options, ready?: boolean): VideoPlayer;
-        /**
-         * create video players from a css class class selector
-         * @param {string} selector
-         *        Class name
-         * @param ...args
-         *        arguments to pass to the video player constructor
-         * @return {Array.VideoPlayer}
-         *         An array of video player objects
-         */
-        videoPlayers(selector: string, ...args: any): VideoPlayer[];
+type Configuration = any;
+
+interface CloudinaryNew {
+    /**
+     *
+     * @param elem
+     *          The video element for the player
+     * @param options
+     *        Video player options
+     * @param ready
+     *        Is the player ready to play
+     */
+    videoPlayer(elem: string, options?: Options, ready?: boolean): VideoPlayer;
+    /**
+     * create video players from a css class class selector
+     * @param {string} selector
+     *        Class name
+     * @param ...args
+     *        arguments to pass to the video player constructor
+     * @return {Array.VideoPlayer}
+     *         An array of video player objects
+     */
+    videoPlayers(selector: string, ...args: any): VideoPlayer[]
+}
+
+type CloudinaryVideoPlayerConfig = (config: Configuration) => CloudinaryNew;
+type Transformation = LegacyITransforamtionOptions;
+
+interface CloudinaryLegacy {
+  new : CloudinaryVideoPlayerConfig
+}
+
+interface GlobalCloudinary {
+  Cloudinary : CloudinaryLegacy
+}
+
+declare global {
+    interface Window {
+        cloudinary: GlobalCloudinary
     }
 }
+
+export declare const CloudinaryVideoPlayerConfig : CloudinaryVideoPlayerConfig;
 
 export interface PosterOptions {
     /**
@@ -42,7 +61,6 @@ export interface PosterOptions {
      */
     transformation: Transformation[]
 }
-
 
 /** @typedef {Object} json
  * @property {Object} ads
@@ -297,7 +315,7 @@ export default class VideoPlayer {
      *        The cloudinary core configurations
      * @return {Object} VideoPlayer class
      */
-    cloudinaryConfig(config: Configuration.Options): VideoPlayer;
+    cloudinaryConfig(config: Configuration): VideoPlayer;
 
     /**
      * @return {String} The current video publicId

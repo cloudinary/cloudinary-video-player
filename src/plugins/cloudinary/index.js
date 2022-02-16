@@ -1,11 +1,15 @@
-import cloudinary from 'cloudinary-core';
 import { default as vjs } from 'video.js';
 import { mixin } from 'utils/mixin';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { getCloudinaryInstanceOf, isKeyInTransformation } from 'utils/cloudinary';
+import { isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
-import { normalizeOptions, mergeTransformation, mergeCloudinaryConfig, codecShorthandTrans } from './common';
+import {
+  normalizeOptions,
+  mergeTransformations,
+  codecShorthandTrans,
+  extendCloudinaryConfig
+} from './common';
 import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
@@ -23,6 +27,7 @@ export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 
 class CloudinaryContext extends mixin(Playlistable) {
+
   constructor(player, options = {}) {
     super(player, options);
 
@@ -86,8 +91,8 @@ class CloudinaryContext extends mixin(Playlistable) {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
 
-      options.cloudinaryConfig = mergeCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
-      options.transformation = mergeTransformation(this.transformation(), options.transformation || {});
+      options.cloudinaryConfig = extendCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
+      options.transformation = mergeTransformations(this.transformation(), options.transformation || {});
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
@@ -117,19 +122,17 @@ class CloudinaryContext extends mixin(Playlistable) {
         return _cloudinaryConfig;
       }
 
-      _cloudinaryConfig = getCloudinaryInstanceOf(cloudinary.Cloudinary, config);
+      _cloudinaryConfig = config;
 
       return _chainTarget;
     };
 
-    this.transformation = (trans) => {
-      if (!trans) {
-        return _transformation;
+    this.transformation = (transformation) => {
+      if (transformation) {
+        _transformation = transformation;
       }
 
-      _transformation = getCloudinaryInstanceOf(cloudinary.Transformation, trans);
-
-      return _chainTarget;
+      return _transformation;
     };
 
     this.sourceTypes = (types) => {
@@ -275,19 +278,18 @@ class CloudinaryContext extends mixin(Playlistable) {
           opts.transformation.crop = 'scale';
         }
       }
-
-      opts.transformation = getCloudinaryInstanceOf(cloudinary.Transformation, opts.transformation || {});
-
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
       const playerEl = this.player.el();
+
       if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
-        opts.transformation
-          .width(roundUp100(playerEl.clientWidth))
-          .height(roundUp100(playerEl.clientHeight))
-          .crop('limit');
+        opts.transformation = mergeTransformations(opts.transformation, {
+          crop: 'limit',
+          width: roundUp100(playerEl.clientWidth),
+          height: roundUp100(playerEl.clientHeight)
+        });
       }
 
       return opts;

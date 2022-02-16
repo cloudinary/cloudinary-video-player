@@ -1,7 +1,7 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
-import cloudinary from 'cloudinary-core';
 import { isCodecAlreadyExist } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
-const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+import '../../src/';
+const cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
 describe('video source tests', () => {
   it('Test transformation input object', () => {

@@ -1,18 +1,28 @@
 import 'assets/styles/main.scss';
-import cloudinary from 'cloudinary-core';
 import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
+export const cloudinaryVideoPlayerConfig = (config) => {
 
-cloudinary.VideoPlayer = VideoPlayer;
+  const getMergedConfig = (options) => assign(options, { cloudinaryConfig: config });
 
-const proto = cloudinary.Cloudinary.prototype;
+  function videoPlayer(id, options = {}, ready = null) {
+    return new VideoPlayer(id, getMergedConfig(options), ready);
+  }
 
-proto.videoPlayer = function(id, options = {}, ready = null) {
-  assign(options, { cloudinaryConfig: this });
-  return new VideoPlayer(id, options, ready);
+  function videoPlayers(selector, options = {}, ready = null) {
+    return VideoPlayer.all(selector, getMergedConfig(options), ready);
+  }
+
+  return {
+    videoPlayer,
+    videoPlayers
+  };
 };
 
-proto.videoPlayers = function(selector, options = {}, ready = null) {
-  assign(options, { cloudinaryConfig: this });
-  return VideoPlayer.all(selector, options, ready);
+window.cloudinary = {
+  ...(window.cloudinary || {}),
+  Cloudinary: {
+    new: cloudinaryVideoPlayerConfig
+  }
 };
+

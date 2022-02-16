@@ -3,9 +3,9 @@
  */
 
 import VideoPlayer, {Options} from './video-player';
-import {Cloudinary} from 'cloudinary-core';
 
-let player: VideoPlayer = new VideoPlayer('player', {}, false);
+const player: VideoPlayer = new VideoPlayer('player', {}, false);
+
 player.source('test', {
     sourceTypes: ['mp4/h264']
 })
@@ -13,19 +13,12 @@ player.play();
 player.currentPublicId();
 player.pause()
 
+const player2 = new VideoPlayer('player2' , { bigPlayButton: false }, false)
 
+const cloudinaryApi = window.cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
 
-let player2 = new VideoPlayer('player2' , {
-    bigPlayButton: false,
-}, false)
-
-const cloudinaryApi = Cloudinary.new({cloud_name: 'demo', secure: true});
-let pl = cloudinaryApi.videoPlayer('test',{bigPlayButton: true, controls: false});
-
-
-
+const pl = cloudinaryApi.videoPlayer('test',{bigPlayButton: true, controls: false});
 
 interface VideoPlayerWithVideoJs extends VideoPlayer {
     videojs: Options;
-
 }

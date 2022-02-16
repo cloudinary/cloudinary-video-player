@@ -7,8 +7,7 @@ import {
   CLD_SPBL_PANEL_CLASS,
   CLD_SPBL_TOGGLE_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,
-  SHOPPABLE_WIDGET_OPTIONS_DEFAULTS,
-  SHOPPABLE_WIDGET_RESPONSIVE_CLASS
+  SHOPPABLE_WIDGET_OPTIONS_DEFAULTS
 } from './shoppable-widget.const';
 import { PLAYER_EVENT } from '../../utils/consts';
 
@@ -22,10 +21,6 @@ class ShoppableWidget {
     if (this.options_.showPostPlayOverlay) {
       this.player_.on(PLAYER_EVENT.ENDED, () => {
         this.player_.addChild(new ShoppablePostWidget(this.player_, this.options_));
-        // Handle responsive images.
-        this.player_.player_.cloudinary.cloudinaryConfig().responsive({
-          responsive_class: SHOPPABLE_WIDGET_RESPONSIVE_CLASS
-        });
       });
     }
 
@@ -92,18 +87,13 @@ class ShoppableWidget {
     }
   }
 
+
   init() {
     this.render();
   }
 
   render() {
     this.layout_ = new ShoppableBarLayout(this.player_, this.options_);
-    this.player_.on(PLAYER_EVENT.LOADED_DATA, () => {
-      // Handle responsive images.
-      this.player_.player_.cloudinary.cloudinaryConfig().responsive({
-        responsive_class: SHOPPABLE_WIDGET_RESPONSIVE_CLASS
-      });
-    });
   }
 
 }

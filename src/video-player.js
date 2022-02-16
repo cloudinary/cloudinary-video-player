@@ -24,6 +24,7 @@ import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
+import { extendCloudinaryConfig } from './plugins/cloudinary/common';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -283,10 +284,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           return;
         }
 
-        const cloudinaryConfig = source.cloudinaryConfig();
         const publicId = source.publicId();
 
-        const transformations = source.transformation().toOptions();
+        const transformations = source.transformation();
 
         if (transformations && transformations.streaming_profile) {
           delete transformations.streaming_profile;
@@ -295,8 +295,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformations.flags = transformations.flags || [];
         transformations.flags.push('sprite');
 
-        const vttSrc = cloudinaryConfig.video_url(`${publicId}.vtt`, { transformation: transformations });
-
+        const vttSrc = source.config().url(`${publicId}.vtt`, { transformation: transformations });
         // vttThumbnails must be called differently on init and on source update.
         isFunction(this.videojs.vttThumbnails)
           ? this.videojs.vttThumbnails({ src: vttSrc })
@@ -351,7 +350,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const opts = this.playerOptions.cloudinary;
     opts.chainTarget = this;
     if (opts.secure !== false) {
-      this.playerOptions.cloudinary.cloudinaryConfig.config('secure', true);
+      extendCloudinaryConfig(this.playerOptions.cloudinary.cloudinaryConfig, { 'secure': true });
     }
 
     this.videojs.cloudinary(this.playerOptions.cloudinary);
@@ -626,8 +625,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this;
   }
 
-  transformation(trans) {
-    return this.videojs.cloudinary.transformation(trans);
+  transformation(transformation) {
+    return this.videojs.cloudinary.transformation(transformation);
   }
 
   sourceTypes(types) {

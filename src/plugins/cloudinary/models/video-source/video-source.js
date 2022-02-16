@@ -1,6 +1,6 @@
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
-import { normalizeOptions, isSrcEqual } from '../../common';
+import { normalizeOptions, isSrcEqual, isRawUrl } from '../../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -9,7 +9,6 @@ import {
   CONTAINER_MIME_TYPES,
   DEFAULT_POSTER_PARAMS,
   DEFAULT_VIDEO_PARAMS,
-  URL_PATTERN,
   VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
 import { formatToMimeTypeAndTransformation, isCodecAlreadyExist, normalizeFormat } from './video-source.utils';
@@ -24,10 +23,10 @@ class VideoSource extends BaseSource {
 
   constructor(_publicId, initOptions = {}) {
 
-    const isRawUrl = URL_PATTERN.test(_publicId);
+    const _isRawUrl = isRawUrl(_publicId);
     let { publicId, options } = normalizeOptions(_publicId, initOptions);
 
-    if (!isRawUrl) {
+    if (!_isRawUrl) {
       publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
     }
 
@@ -68,7 +67,7 @@ class VideoSource extends BaseSource {
     this._sourceTransformation = null;
     this._interactionAreas = null;
     this._type = SOURCE_TYPE.VIDEO;
-    this.isRawUrl = isRawUrl;
+    this.isRawUrl = _isRawUrl;
     this._rawTransformation = options.raw_transformation;
     this.withCredentials = !!withCredentials;
     this.getInitOptions = () => initOptions;
@@ -189,6 +188,7 @@ class VideoSource extends BaseSource {
       assign(opts, { resource_type: 'video', format });
 
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+      // console.log(codecTrans)
 
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !isCodecAlreadyExist(opts.transformation, this._rawTransformation)) {
