@@ -1,9 +1,9 @@
 import { assign } from 'utils/assign';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
-import { castArray } from '../../utils/array';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
+import Transformation from '@cloudinary/url-gen/backwards/transformation';
 
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
@@ -53,12 +53,26 @@ export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assig
 export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
 
 const mergeTransformations = (transformation1, transformation2) => {
-  if (Array.isArray(transformation1)) {
-    return transformation1.concat(castArray(transformation2));
+  if (transformation1.constructor.name === 'Transformation' && transformation1.toOptions) {
+    transformation1 = transformation1.toOptions();
   }
 
-  return Object.assign({}, transformation1, transformation2);
+  const newTransformation = getTransformationsInstance(transformation1);
+
+  return newTransformation.fromOptions(transformation2);
 };
+
+export function getTransformationsInstance(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(e => getTransformationsInstance(Transformation, e));
+  }
+
+  if (obj instanceof Transformation) {
+    return obj;
+  } else {
+    return new Transformation(obj);
+  }
+}
 
 const ERROR_CODE = {
   NO_SUPPORTED_MEDIA: 6,

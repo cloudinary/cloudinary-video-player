@@ -1,4 +1,10 @@
-import { getCloudinaryUrl, isRawUrl, mergeTransformations, normalizeOptions } from '../common';
+import {
+  getCloudinaryUrl,
+  getTransformationsInstance,
+  isRawUrl,
+  mergeTransformations,
+  normalizeOptions
+} from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { objectToQuerystring } from 'utils/querystring';
 
@@ -48,7 +54,7 @@ class BaseSource {
         return _transformation;
       }
 
-      _transformation = trans;
+      _transformation = getTransformationsInstance(trans);
 
       return this;
     };
@@ -93,7 +99,8 @@ class BaseSource {
           return publicId;
         }
 
-        const transformation = mergeTransformations(this.resourceConfig(), initTransformation);
+        const transformation = mergeTransformations(this.resourceConfig(), initTransformation).toOptions();
+
         return getCloudinaryUrl(publicId, {
           ...coreConfig,
           ...transformation

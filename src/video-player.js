@@ -625,8 +625,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this;
   }
 
-  transformation(transformation) {
-    return this.videojs.cloudinary.transformation(transformation);
+  transformation(trans) {
+    return this.videojs.cloudinary.transformation(trans);
   }
 
   sourceTypes(types) {
