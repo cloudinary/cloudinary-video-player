@@ -18,7 +18,8 @@ const player2 = new VideoPlayer('player2' , { bigPlayButton: false }, false)
 const pl = window.cloudinary.videoPlayer('test',{
     cloud_name: 'demo' ,
     secure: true ,
-    bigPlayButton: true, controls: false
+    bigPlayButton: true,
+    controls: false
 });
 
 interface VideoPlayerWithVideoJs extends VideoPlayer {
