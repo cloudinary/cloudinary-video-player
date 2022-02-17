@@ -3,7 +3,7 @@ import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
-import Transformation from '@cloudinary/url-gen/backwards/transformation';
+import Transformation from '@cloudinary/url-gen/backwards/transformation.cjs';
 
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {

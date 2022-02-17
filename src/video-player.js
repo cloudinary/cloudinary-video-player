@@ -347,10 +347,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initCloudinary() {
-    const opts = this.playerOptions.cloudinary;
-    opts.chainTarget = this;
-    if (opts.secure !== false) {
-      extendCloudinaryConfig(this.playerOptions.cloudinary.cloudinaryConfig, { 'secure': true });
+    const { cloudinaryConfig } = this.playerOptions.cloudinary;
+    cloudinaryConfig.chainTarget = this;
+
+    if (cloudinaryConfig.secure !== false) {
+      extendCloudinaryConfig(cloudinaryConfig, { secure: true });
     }
 
     this.videojs.cloudinary(this.playerOptions.cloudinary);

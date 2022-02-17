@@ -1,6 +1,6 @@
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
-import { normalizeOptions, isSrcEqual, isRawUrl } from '../../common';
+import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -191,7 +191,7 @@ class VideoSource extends BaseSource {
 
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !isCodecAlreadyExist(opts.transformation, this._rawTransformation)) {
-        opts.transformation.push(codecTrans);
+        opts.transformation = mergeTransformations(opts.transformation, codecTrans);
       }
 
       if (opts.format === 'auto') {

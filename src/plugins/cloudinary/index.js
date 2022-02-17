@@ -289,7 +289,7 @@ class CloudinaryContext extends mixin(Playlistable) {
       if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
-        Object.assign(opts.transformation, {
+        opts.transformation = mergeTransformations(opts.transformation, {
           width: roundUp100(playerEl.clientWidth),
           height: roundUp100(playerEl.clientHeight),
           crop: 'limit'
