@@ -15,7 +15,7 @@ const getConfig = (cloudinaryConfig, playerOptions = {}) => {
   return assign(playerOptions, { cloudinaryConfig: cloudinaryConfig || playerOptions });
 };
 
-export const cloudinaryVideoPlayerConfig = (config) => ({
+const cloudinaryVideoPlayerConfig = (config) => ({
   videoPlayer: (id, playerOptions, ready) => videoPlayer(id, playerOptions, ready, config),
   videoPlayers: (selector, playerOptions, ready) => videoPlayers(selector, playerOptions, ready, config)
 });
