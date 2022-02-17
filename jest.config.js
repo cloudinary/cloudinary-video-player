@@ -186,11 +186,8 @@ module.exports = {
   watchman: false,
   moduleNameMapper: {
     '\\.(css|less|scss)$': '<rootDir>/test/mocks/styleMock.js'
-  }
-
-/*
+  },
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest'
   }
-*/
 };
