@@ -2,6 +2,7 @@
   "name": "cloudinary-video-player",
   "version": "1.7.1-edge.3",
   "description": "Cloudinary Video Player",
+  "type": "module",
   "bundlewatch": {
     "files": [
       {

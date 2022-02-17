@@ -1,5 +1,4 @@
 {
-    "module": "commonjs",
     "compilerOptions": {
         "module": "commonjs",
         "noImplicitAny": true,
