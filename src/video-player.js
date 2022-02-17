@@ -278,7 +278,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this.playerOptions.seekThumbnails) {
 
       this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-        if (source.getType() === SOURCE_TYPE.AUDIO ||
+        if (!source || source.getType() === SOURCE_TYPE.AUDIO ||
           (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
         ) {
           return;
@@ -286,7 +286,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const publicId = source.publicId();
 
-        const transformations = source.transformation().toOptions();
+        const transformations = source.transformation();
 
         if (transformations && transformations.streaming_profile) {
           delete transformations.streaming_profile;
