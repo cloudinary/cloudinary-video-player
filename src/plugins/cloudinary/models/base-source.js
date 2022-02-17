@@ -43,7 +43,7 @@ class BaseSource {
           return publicId;
         }
 
-        const transformation = mergeTransformations(this.resourceConfig(), initTransformation).toOptions();
+        const transformation = mergeTransformations(this.resourceConfig(), initTransformation);
 
         return getCloudinaryUrl(publicId, {
           ...coreConfig,

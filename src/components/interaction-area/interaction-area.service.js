@@ -138,7 +138,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     const currentSource = player.videojs.currentSource();
     const { cldSrc } = currentSource;
     const currentSrcOptions = cldSrc.getInitOptions();
-    const option = newOption || { transformation: currentSrcOptions.transformation.toOptions() };
+    const option = newOption || { transformation: currentSrcOptions.transformation };
     const transformation = !src && getZoomTransformation(player.videoElement, item);
     const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
 

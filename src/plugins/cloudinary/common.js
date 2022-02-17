@@ -71,12 +71,12 @@ export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assig
 
 export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
 
-const mergeTransformations = (transformation1, transformation2) => {
-  if (transformation1.constructor.name === 'Transformation' && transformation1.toOptions) {
-    transformation1 = transformation1.toOptions();
-  }
+const isTransformationInstance = (transformation) => transformation.constructor.name === 'Transformation' && transformation.toOptions;
 
-  return new Transformation(transformation1).fromOptions(transformation2);
+const mergeTransformations = (initTransformation1, transformation2) => {
+  const transformation1 = isTransformationInstance(initTransformation1) ? initTransformation1.toOptions() : initTransformation1;
+
+  return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
 const ERROR_CODE = {
