@@ -1,7 +1,7 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import { isCodecAlreadyExist } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
 import '../../src/';
-const cld = window.cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+const cld = { cloud_name: 'demo' };
 
 describe('video source tests', () => {
   it('Test transformation input object', () => {
@@ -34,9 +34,9 @@ describe('video source tests', () => {
     expect(srcs[0]).toContain('sp_hd');
   });
   it('Test transformation input cloudinary transformation', () => {
-    let tr = cloudinary.Transformation.new({
+    let tr = {
       fetch_format: 'auto'
-    });
+    };
     let sourceDef = {
       cloudinaryConfig: cld,
       transformation: tr

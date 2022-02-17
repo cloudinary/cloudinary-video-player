@@ -8,6 +8,12 @@ import { VideoJsPlayerOptions } from 'video.js';
 import { LegacyITransforamtionOptions } from '@cloudinary/url-gen/types/types';
 import Configuration from '@cloudinary/url-gen/config/interfaces/Config/ICloudinaryConfigurations';
 
+type PlayerOptions = LegacyITransforamtionOptions & Options;
+
+type VideoPlayerFunction = (elem: string, playerOptions?: PlayerOptions, ready?: boolean) => VideoPlayer;
+
+type videoMultiPlayersFunction = (selector: string, ...args: any) => VideoPlayer[];
+
 interface CloudinaryNew {
     /**
      *
@@ -18,7 +24,7 @@ interface CloudinaryNew {
      * @param ready
      *        Is the player ready to play
      */
-    videoPlayer(elem: string, options?: Options, ready?: boolean): VideoPlayer;
+    videoPlayer: VideoPlayerFunction;
     /**
      * create video players from a css class class selector
      * @param {string} selector
@@ -28,19 +34,19 @@ interface CloudinaryNew {
      * @return {Array.VideoPlayer}
      *         An array of video player objects
      */
-    videoPlayers(selector: string, ...args: any): VideoPlayer[]
+    videoPlayers: videoMultiPlayersFunction;
 }
-
-type CloudinaryVideoPlayerConfig = (config: Configuration) => CloudinaryNew;
 
 type Transformation = LegacyITransforamtionOptions;
 
 interface CloudinaryLegacy {
-  new : CloudinaryVideoPlayerConfig
+  new : (config: any) => CloudinaryNew;
 }
 
 interface GlobalCloudinary {
-  Cloudinary : CloudinaryLegacy
+  Cloudinary: CloudinaryLegacy;
+  videoPlayer: VideoPlayerFunction;
+  videoPlayers: videoMultiPlayersFunction;
 }
 
 declare global {
@@ -48,8 +54,6 @@ declare global {
         cloudinary: GlobalCloudinary
     }
 }
-
-export declare const cloudinaryVideoPlayerConfig : CloudinaryVideoPlayerConfig;
 
 export interface PosterOptions {
     /**

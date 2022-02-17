@@ -1,31 +1,29 @@
 import 'assets/styles/main.scss';
 import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
-import { getCloudinaryConfigAsLegacy } from './plugins/cloudinary/common';
 
 
-export const cloudinaryVideoPlayerConfig = (config) => {
+function videoPlayer(id, playerOptions, ready = null, cloudinaryConfig) {
+  return new VideoPlayer(id, getConfig(cloudinaryConfig, playerOptions), ready);
+}
 
-  const cloudinaryConfig = getCloudinaryConfigAsLegacy(config);
+function videoPlayers(selector, playerOptions, ready = null, cldConfig) {
+  return VideoPlayer.all(selector, getConfig(cldConfig, playerOptions), ready);
+}
 
-  const getMergedConfig = (options) => assign(options, { cloudinaryConfig });
-
-  function videoPlayer(id, options = {}, ready = null) {
-    return new VideoPlayer(id, getMergedConfig(options), ready);
-  }
-
-  function videoPlayers(selector, options = {}, ready = null) {
-    return VideoPlayer.all(selector, getMergedConfig(options), ready);
-  }
-
-  return {
-    videoPlayer,
-    videoPlayers
-  };
+const getConfig = (cloudinaryConfig, playerOptions = {}) => {
+  return assign(playerOptions, { cloudinaryConfig: cloudinaryConfig || playerOptions });
 };
+
+export const cloudinaryVideoPlayerConfig = (config) => ({
+  videoPlayer: (id, playerOptions, ready) => videoPlayer(id, playerOptions, ready, config),
+  videoPlayers: (selector, playerOptions, ready) => videoPlayers(selector, playerOptions, ready, config)
+});
 
 window.cloudinary = {
   ...(window.cloudinary || {}),
+  videoPlayer,
+  videoPlayers,
   Cloudinary: {
     new: cloudinaryVideoPlayerConfig
   }

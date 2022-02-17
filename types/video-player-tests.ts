@@ -15,16 +15,11 @@ player.pause()
 
 const player2 = new VideoPlayer('player2' , { bigPlayButton: false }, false)
 
-const cloudinaryApi = window.cloudinary.Cloudinary.new({
-    cloud: {
-        cloudName: 'demo'
-    },
-    url: {
-        secure: true
-    }
+const pl = window.cloudinary.videoPlayer('test',{
+    cloud_name: 'demo' ,
+    secure: true ,
+    bigPlayButton: true, controls: false
 });
-
-const pl = cloudinaryApi.videoPlayer('test',{bigPlayButton: true, controls: false});
 
 interface VideoPlayerWithVideoJs extends VideoPlayer {
     videojs: Options;
