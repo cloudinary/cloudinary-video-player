@@ -3,27 +3,27 @@ import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
 
 
-function videoPlayer(id, playerOptions, ready = null, cloudinaryConfig) {
-  return new VideoPlayer(id, getConfig(cloudinaryConfig, playerOptions), ready);
+function videoPlayer(id, playerOptions, ready = null) {
+  return new VideoPlayer(id, playerOptions, ready);
 }
 
-function videoPlayers(selector, playerOptions, ready = null, cldConfig) {
-  return VideoPlayer.all(selector, getConfig(cldConfig, playerOptions), ready);
+function videoPlayers(selector, playerOptions, ready = null) {
+  return VideoPlayer.all(selector, playerOptions, ready);
 }
 
-const getConfig = (cloudinaryConfig, playerOptions = {}) => {
+const getConfig = (playerOptions = {}, cloudinaryConfig) => {
   return assign(playerOptions, { cloudinaryConfig: cloudinaryConfig || playerOptions });
 };
 
 const cloudinaryVideoPlayerConfig = (config) => ({
-  videoPlayer: (id, playerOptions, ready) => videoPlayer(id, playerOptions, ready, config),
-  videoPlayers: (selector, playerOptions, ready) => videoPlayers(selector, playerOptions, ready, config)
+  videoPlayer: (id, playerOptions, ready) => videoPlayer(id, getConfig(playerOptions, config), ready),
+  videoPlayers: (selector, playerOptions, ready) => videoPlayers(selector, getConfig(playerOptions, config), ready)
 });
 
 window.cloudinary = {
   ...(window.cloudinary || {}),
-  videoPlayer,
-  videoPlayers,
+  videoPlayer: (id, playerOptions, ready) => videoPlayer(id, getConfig(playerOptions), ready),
+  videoPlayers: (selector, playerOptions, ready) => videoPlayers(selector, getConfig(playerOptions), ready),
   Cloudinary: {
     new: cloudinaryVideoPlayerConfig
   }
