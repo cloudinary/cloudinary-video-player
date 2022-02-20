@@ -10,7 +10,7 @@ This README includes basic information for installation and getting started. Vie
 1. Install the files using:
 
    ```shell
-   npm cloudinary-video-player
+   npm install cloudinary-video-player
    ```
 1. Include the javascript file in your HTML. For Example:
 
