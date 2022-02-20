@@ -18,24 +18,26 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-
-    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
+    var player, adpPlayer;
+
     window.addEventListener('load', function(){
+      const config = {
+        cloud_name: 'demo',
+        secure: true
+      };
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
-
-      player = cld.videoPlayer('player');
+      player = cloudinary.videoPlayer('player', config);
 
       player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
 
-      adpPlayer = cld.videoPlayer('adpPlayer');
+      adpPlayer = cloudinary.videoPlayer('adpPlayer',config);
+
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
     }, false);
   </script>

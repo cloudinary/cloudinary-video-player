@@ -31,13 +31,13 @@
   <script type="text/javascript">
     window.addEventListener('load', function () {
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      player1 = cld.videoPlayer('player-image-poster', {
+      player1 = cloudinary.videoPlayer('player-image-poster', {
+        cloud_name: 'demo',
         publicId: 'snow_horses'
       });
 
-      player2 = cld.videoPlayer('player-frame-0', {
+      player2 = cloudinary.videoPlayer('player-frame-0', {
+        cloud_name: 'demo',
         publicId: 'snow_horses',
         posterOptions: {
           transformation: {
@@ -46,7 +46,8 @@
         }
       });
 
-      player3 = cld.videoPlayer('player-poster-options', {
+      player3 = cloudinary.videoPlayer('player-poster-options', {
+        cloud_name: 'demo',
         publicId: 'snow_horses'
       });
 

@@ -18,8 +18,6 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-
-    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
   -->
 
@@ -112,11 +110,11 @@
 
       // Cloudinary Video Player related code
       // ====================================
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
       // Initialize player with only the controlBar's 'playToggle' and our
       // custom components set.
-      var player = cld.videoPlayer('player', {
+      var player = cloudinary.videoPlayer('player', {
+        cloud_name: 'demo',
         videojs: {
           controlBar: { children: ['PreviousButton', 'playToggle', 'NextButton'] }
         }
