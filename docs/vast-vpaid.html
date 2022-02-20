@@ -101,10 +101,9 @@
       </code>
       <code class="language-javascript">
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
         // Initialize player
-        var player = cld.videoPlayer('player', {
+        var player = cloudinary.videoPlayer('player', {
+          cloud_name: 'demo' ,
           plugins: {
             vastClient: {
               adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",

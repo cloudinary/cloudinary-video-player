@@ -102,9 +102,8 @@
           &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true });
 
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo', secure: true });
 
         player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
 

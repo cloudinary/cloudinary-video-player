@@ -108,8 +108,6 @@
       </code>
       <code  class="language-javascript">
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
         // Set video sources
         var source1 = {
           publicId: 'surf_competition',
@@ -142,7 +140,7 @@
         });
 
         // Initialize player
-        var player = cld.videoPlayer('player', { autoShowRecommendations: true });
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo', autoShowRecommendations: true });
 
         player.source(source1);
       </code>

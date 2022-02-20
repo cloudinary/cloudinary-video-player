@@ -72,10 +72,9 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         // Define source
         var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };

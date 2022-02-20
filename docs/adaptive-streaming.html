@@ -261,9 +261,10 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
-        var playerHls = cld.videoPlayer('example-player-hls');
-        var playerDash = cld.videoPlayer('example-player-dash');
+        const config =  {cloud_name: 'demo'};
+
+        var playerHls = cloudinary.videoPlayer('example-player-hls', config);
+        var playerDash = cloudinary.videoPlayer('example-player-dash' , config);
 
         playerHls.source(
           'sea_turtle',
@@ -273,6 +274,7 @@
             info: {title: 'HLS'}
           }
         );
+
         playerDash.source(
           'sea_turtle',
           {
@@ -285,6 +287,7 @@
         playerHls.on('qualitychanged', (data) => {
           console.log('HLS player', data);
         });
+
         playerDash.on('qualitychanged', (data) => {
           console.log('Dash player', data);
         });

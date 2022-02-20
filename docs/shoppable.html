@@ -27,7 +27,7 @@
 
   <script type="text/javascript">
     window.addEventListener('load', function () {
-      
+
       player = cloudinary.videoPlayer('player',{
         cloud_name: 'demo'
       });
@@ -191,10 +191,9 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         // Define source
         var source = {

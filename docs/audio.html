@@ -99,10 +99,9 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         // Define source
         var source = { publicId: 'dog', 'sourceTypes': ['audio'] };
@@ -110,7 +109,7 @@
         // Play source
         player.source(source);
 
-        var player_t = cld.videoPlayer('player-t');
+        var player_t = cloudinary.videoPlayer('player-t', { cloud_name: 'demo' });
 
         // Define source with transformations
         var sourceTransformation = {

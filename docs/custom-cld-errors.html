@@ -97,9 +97,9 @@
         &lt;div class="error-container"&gt;&lt;/div&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo_err' });
 
-        player = cld.videoPlayer('player', {
+        player = cloudinary.videoPlayer('player', {
+          cloud_name: 'demo_err',
           publicId: 'snow_horses',
         });
 

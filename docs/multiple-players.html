@@ -105,10 +105,9 @@
       </code>
       <code class="language-javascript">
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: &apos;demo&apos; });
-
         // Initialize players
-        var players = cld.videoPlayers(&apos;.cld-video-player&apos;, {
+        var players = cloudinary.videoPlayers(&apos;.cld-video-player&apos;, {
+          cloud_name: &apos;demo&apos;,
           autoplay: true,
           controls: true,
           transformation: { width: 500, crop: &apos;limit&apos; }

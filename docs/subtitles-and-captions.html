@@ -177,10 +177,9 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         player.source(
           'video-player/stubhub',
@@ -209,7 +208,7 @@
         );
 
         // Playlist
-        var playlist = cld.videoPlayer('playlist');
+        var playlist = cloudinary.videoPlayer('playlist', { cloud_name: 'demo' });
 
         var source1 = {
           publicId: 'video-player/stubhub',

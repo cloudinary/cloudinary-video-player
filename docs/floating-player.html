@@ -77,9 +77,8 @@
     <pre>
       <code class="language-javascript">
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player', {
+      var player = cloudinary.videoPlayer('player', {
+        cloud_name: 'demo',
         floatingWhenNotVisible: 'right' // or 'left'
       });
 

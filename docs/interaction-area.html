@@ -147,9 +147,9 @@
 
   <pre>
       <code class="language-javascript">
-           var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-           cld.videoPlayer('player', {
+           cloudinary.videoPlayer('player', {
+              cloud_name: 'demo'
               interactionDisplay: {
                   theme:{
                     template : 'pulsing'  // 'pulsing' / 'shadowed' (the default is 'pulsing')
@@ -189,14 +189,14 @@
       </code>
 
       <code class="language-javascript">
-      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
       var sources = {
          topSource : 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
          bottomSource: 'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
       }
 
-      var player = cld.videoPlayer('player',{
+      var player = cloudinary.videoPlayer('player',{
+          cloud_name: 'demo',
           bigPlayButton: false
       });
 
@@ -256,9 +256,9 @@
       </code>
 
       <code class="language-javascript">
-      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player',{
+      var player = cloudinary.videoPlayer('player',{
+          cloud_name: 'demo',
           bigPlayButton: false
       });
 
@@ -317,9 +317,9 @@
       </code>
 
       <code class="language-javascript">
-      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player',{
+      var player = cloudinary.videoPlayer('player',{
+          cloud_name: 'demo',
           bigPlayButton: false
       });
 
@@ -366,9 +366,9 @@
       </code>
 
       <code class="language-javascript">
-      var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
 
-      var player = cld.videoPlayer('player', {
+      var player = cloudinary.videoPlayer('player', {
+          cloud_name: 'demo',
           bigPlayButton: false
       });
 

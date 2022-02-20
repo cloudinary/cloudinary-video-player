@@ -28,6 +28,7 @@
         publicId: 'video-player/Golden-Gate-Bridge',
         sourceTypes: ['mp4']
       });
+
       player.videojs.vr({projection: '360'});
     }, false);
   </script>
@@ -67,9 +68,9 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        player = cld.videoPlayer('player', {
+        player = cloudinary.videoPlayer('player', {
+          cloud_name: 'demo',
           publicId: 'video-player/Golden-Gate-Bridge',
           sourceTypes: ['mp4'],
           transformation: {

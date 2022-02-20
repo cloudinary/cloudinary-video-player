@@ -41,6 +41,9 @@ The Cloudinary video player offers standard and light package variations, availa
 - `cld-video-player.light.js` - Non minified version which does not include any optional modules.
 - `cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
 
+
+## Getting started
+
 Create a video tag containing `cld-video-player` class and a supported skin class:
 ```html
 <video
