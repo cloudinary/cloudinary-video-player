@@ -2,6 +2,9 @@ import 'assets/styles/main.scss';
 import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
 
+if (window.cloudinary && window.cloudinary.Cloudinary) {
+  console.error('For version greater then 2.0.0, cloudinary-core is not needed for using the Cloudinary Video Player.');
+}
 
 const getConfig = (playerOptions = {}, cloudinaryConfig) => assign(playerOptions, { cloudinaryConfig: cloudinaryConfig || playerOptions });
 
