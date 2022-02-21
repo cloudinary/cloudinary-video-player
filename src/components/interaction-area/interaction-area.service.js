@@ -30,9 +30,9 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionDisplay);
 
-  const getIsSyncOffsetTime = (isAutoZoom) => {
+  const getIsSyncOffsetTime = () => {
     const interactionAreasConfig = getInteractionAreasConfig();
-    return (interactionAreasConfig && interactionAreasConfig.syncOffsetTime !== undefined) ? interactionAreasConfig.syncOffsetTime : isAutoZoom;
+    return (interactionAreasConfig && interactionAreasConfig.syncOffsetTime !== undefined) ? interactionAreasConfig.syncOffsetTime : false;
   };
 
   function isInteractionAreasEnabled(enabled = false) {
@@ -140,14 +140,13 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function onZoom(src, newOption, item) {
-    const isAutoZoom = !src;
     const currentSource = player.videojs.currentSource();
     const originalCurrentTime = player.currentTime();
-    const isSyncOffsetTime = getIsSyncOffsetTime(isAutoZoom);
+    const isSyncOffsetTime = getIsSyncOffsetTime();
     const { cldSrc } = currentSource;
     const currentSrcOptions = cldSrc.getInitOptions();
     const option = newOption || { transformation: currentSrcOptions.transformation.toOptions() };
-    const transformation = isAutoZoom && getZoomTransformation(player.videoElement, item);
+    const transformation = !src && getZoomTransformation(player.videoElement, item);
     const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
 
     const newSource = cldSrc.isRawUrl ? currentSource.src : { publicId: cldSrc.publicId() };
