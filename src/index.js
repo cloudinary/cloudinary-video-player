@@ -3,7 +3,7 @@ import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
 
 if (window.cloudinary && window.cloudinary.Cloudinary) {
-  console.error('For version 2.0.0 and above, cloudinary-core is not needed for using the Cloudinary Video Player');
+  console.warn('For version 2.0.0 and above, cloudinary-core is not needed for using the Cloudinary Video Player');
 }
 
 const getConfig = (playerOptions = {}, cloudinaryConfig) => assign(playerOptions, { cloudinaryConfig: cloudinaryConfig || playerOptions });
