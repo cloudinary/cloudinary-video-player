@@ -30,6 +30,11 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionDisplay);
 
+  const getIsSyncOffsetTime = (isAutoZoom) => {
+    const interactionAreasConfig = getInteractionAreasConfig();
+    return (interactionAreasConfig && interactionAreasConfig.syncOffsetTime !== undefined) ? interactionAreasConfig.syncOffsetTime : isAutoZoom;
+  };
+
   function isInteractionAreasEnabled(enabled = false) {
     const interactionAreasConfig = getInteractionAreasConfig();
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
@@ -135,15 +140,19 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function onZoom(src, newOption, item) {
+    const isAutoZoom = !src;
     const currentSource = player.videojs.currentSource();
+    const originalCurrentTime = player.currentTime();
+    const isSyncOffsetTime = getIsSyncOffsetTime(isAutoZoom);
     const { cldSrc } = currentSource;
     const currentSrcOptions = cldSrc.getInitOptions();
     const option = newOption || { transformation: currentSrcOptions.transformation.toOptions() };
-    const transformation = !src && getZoomTransformation(player.videoElement, item);
+    const transformation = isAutoZoom && getZoomTransformation(player.videoElement, item);
     const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
 
     const newSource = cldSrc.isRawUrl ? currentSource.src : { publicId: cldSrc.publicId() };
     player.source(transformation ? { publicId: cldSrc.publicId() } : src, sourceOptions).play();
+    isSyncOffsetTime && player.currentTime(originalCurrentTime);
 
     isZoomed = true;
 
@@ -152,7 +161,10 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     unZoom = () => {
       if (isZoomed) {
         isZoomed = false;
+        const currentZoomedTime = player.currentTime();
+        const duration = player.duration();
         player.source(newSource, currentSrcOptions).play();
+        isSyncOffsetTime && currentZoomedTime < duration && player.currentTime(currentZoomedTime);
         setAreasPositionListener();
       }
     };
