@@ -17,10 +17,13 @@ const cloudinaryVideoPlayerConfig = (config) => ({
   videoPlayers: getVideoPlayers(config)
 });
 
+export const videoPlayer = getVideoPlayer();
+export const videoPlayers = getVideoPlayers();
+
 window.cloudinary = {
   ...(window.cloudinary || {}),
-  videoPlayer: getVideoPlayer(),
-  videoPlayers: getVideoPlayers(),
+  videoPlayer,
+  videoPlayers,
   Cloudinary: {
     new: cloudinaryVideoPlayerConfig
   }
