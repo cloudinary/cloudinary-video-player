@@ -23,8 +23,6 @@ export const SHOPPABLE_HOVER_ACTIONS = {
   OVERLAY: 'overlay'
 };
 
-export const SHOPPABLE_WIDGET_RESPONSIVE_CLASS = 'cld-vp-responsive';
-
 export const SHOPPABLE_PANEL_VISIBLE_CLASS = 'shoppable-panel-visible';
 
 export const SHOPPABLE_PANEL_HIDDEN_CLASS = 'shoppable-panel-hidden';

@@ -50,8 +50,6 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
   }
 
   return some(transformations, (transformation) => {
-    const options = transformation.toOptions();
-
-    return some(options && options.transformation, (item) => isContainCodec(isPlainObject(item) ? item.video_codec : item));
+    return some(transformation, (item) => isContainCodec(isPlainObject(item) ? item.video_codec : item));
   });
 };

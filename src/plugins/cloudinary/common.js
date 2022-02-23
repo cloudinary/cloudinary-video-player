@@ -1,7 +1,10 @@
-import cloudinary from 'cloudinary-core';
 import { assign } from 'utils/assign';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
+import { URL_PATTERN } from './models/video-source/video-source.const';
+import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
+import Transformation from '@cloudinary/url-gen/backwards/transformation.cjs';
+
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isPlainObject(publicId)) {
@@ -20,6 +23,8 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
 
   return { publicId, options };
 };
+
+export const isRawUrl = (publicId) => URL_PATTERN.test(publicId);
 
 const isSrcEqual = (source1, source2) => {
   let src1 = source1;
@@ -43,28 +48,16 @@ const isSrcEqual = (source1, source2) => {
   return src1 === src2;
 };
 
-const mergeCloudinaryConfig = (config1, config2) => {
-  if (config1.constructor.name === 'Cloudinary' && config1.config) {
-    config1 = config1.config();
-  }
+export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign(currentConfig, newConfig);
 
-  const newConfig = new cloudinary.Cloudinary(config1);
+export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
 
-  if (config2.constructor.name === 'Cloudinary' && config2.config) {
-    config2 = config1.config();
-  }
+const isTransformationInstance = (transformation) => transformation.constructor.name === 'Transformation' && transformation.toOptions;
 
-  return newConfig.config(config2);
-};
+const mergeTransformations = (initTransformation1, transformation2) => {
+  const transformation1 = isTransformationInstance(initTransformation1) ? initTransformation1.toOptions() : initTransformation1;
 
-const mergeTransformation = (transformation1, transformation2) => {
-  if (transformation1.constructor.name === 'Transformation' && transformation1.toOptions) {
-    transformation1 = transformation1.toOptions();
-  }
-
-  const newTransformation = new cloudinary.Transformation(transformation1);
-
-  return newTransformation.fromOptions(transformation2);
+  return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
 const ERROR_CODE = {
@@ -206,8 +199,7 @@ const codecToSrcTransformation = (codec) => {
 export {
   normalizeOptions,
   isSrcEqual,
-  mergeCloudinaryConfig,
-  mergeTransformation,
+  mergeTransformations,
   cloudinaryErrorsConverter,
   codecShorthandTrans,
   h264avcToString,

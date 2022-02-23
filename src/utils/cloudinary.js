@@ -16,7 +16,6 @@ const getGoodSrcs = (srcs, parsedUris) => {
   });
 };
 
-
 const getParsedUris = (res) => {
   return res.reduce((acc, r) => {
     if (r.status >= 200 && r.status < 399 && r.url !== '') {
@@ -32,7 +31,7 @@ const setError = (that, res) => {
   that.videojs.error(cloudinaryErrorsConverter({
     errorMsg: res.headers.get('x-cld-error') || '',
     publicId: that.currentPublicId(),
-    cloudName: that.cloudinaryConfig().config().cloud_name,
+    cloudName: that.cloudinaryConfig().cloud_name,
     error: res,
     statusCode: res.status
   }));
@@ -111,17 +110,6 @@ function parseUri(str) {
   return uri;
 }
 
-function getCloudinaryInstanceOf(Klass, obj) {
-  if (Array.isArray(obj)) {
-    return obj.map(e => getCloudinaryInstanceOf(Klass, e));
-  }
-  if (obj instanceof Klass) {
-    return obj;
-  } else {
-    return new Klass(obj);
-  }
-}
-
 /**
  * Check if key exist in transformation
  * @param transformation
@@ -158,7 +146,6 @@ const filterAndAddTextTracks = (tracks, videojs) => {
 };
 
 export {
-  getCloudinaryInstanceOf,
   handleCldError,
   isKeyInTransformation,
   filterAndAddTextTracks

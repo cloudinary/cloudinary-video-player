@@ -7,9 +7,11 @@ import ImageSource from '../../../plugins/cloudinary/models/image-source';
 import {
   CLD_SPBL_IMAGE,
   CLD_SPBL_ITEM,
-  SHOPPABLE_CLICK_ACTIONS, SHOPPABLE_HOVER_ACTIONS,
-  SHOPPABLE_WIDGET_RESPONSIVE_CLASS
+  SHOPPABLE_CLICK_ACTIONS,
+  SHOPPABLE_HOVER_ACTIONS
 } from '../shoppable-widget.const';
+
+const widthTransformation = { width: 132 };
 
 class ShoppablePanelItem extends ClickableComponent {
 
@@ -51,8 +53,8 @@ class ShoppablePanelItem extends ClickableComponent {
     }
 
     const img = super.createEl('img',
-      { className: `${CLD_SPBL_IMAGE} ${SHOPPABLE_WIDGET_RESPONSIVE_CLASS}` },
-      { 'data-src': this.options_.item.url() }
+      { className: CLD_SPBL_IMAGE },
+      { src: this.options_.item.url(widthTransformation) }
     );
 
     el.appendChild(img);
@@ -82,8 +84,8 @@ const addOnHover = (el, conf, cldConf) => {
     });
 
     const hoverImg = dom.createEl('img',
-      { className: `${CLD_SPBL_IMAGE} cld-spbl-hover-img ${SHOPPABLE_WIDGET_RESPONSIVE_CLASS}` },
-      { 'data-src': switchImgSource.url() }
+      { className: `${CLD_SPBL_IMAGE} cld-spbl-hover-img` },
+      { src: switchImgSource.url(widthTransformation) }
     );
 
     el.appendChild(hoverImg);

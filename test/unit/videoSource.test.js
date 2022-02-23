@@ -1,7 +1,7 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
-import cloudinary from 'cloudinary-core';
 import { isCodecAlreadyExist } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
-const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+import '../../src/';
+const cld = { cloud_name: 'demo' };
 
 describe('video source tests', () => {
   it('Test transformation input object', () => {
@@ -34,9 +34,9 @@ describe('video source tests', () => {
     expect(srcs[0]).toContain('sp_hd');
   });
   it('Test transformation input cloudinary transformation', () => {
-    let tr = cloudinary.Transformation.new({
+    let tr = {
       fetch_format: 'auto'
-    });
+    };
     let sourceDef = {
       cloudinaryConfig: cld,
       transformation: tr
@@ -336,9 +336,7 @@ describe('test isCodecAlreadyExist method', () => {
 
     it('codec exist in transformation array', () => {
       const transformations = [
-        {
-          toOptions: () => ({ transformation: ['vc_vp9,q_auto'] })
-        }
+        ['vc_vp9,q_auto']
       ];
 
       expect(isCodecAlreadyExist(transformations)).toEqual(true);
@@ -346,11 +344,7 @@ describe('test isCodecAlreadyExist method', () => {
 
 
     it('codec NOT exist in transformation array', () => {
-      const transformations = [
-        {
-          toOptions: () => ({ transformation: ['q_auto'] })
-        }
-      ];
+      const transformations = [{ transformation: ['q_auto'] }];
 
       expect(isCodecAlreadyExist(transformations)).toEqual(false);
     });
@@ -430,7 +424,7 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/vc_vp9/sea_turtle.webm');
     });
 
     it('check array of transformations with codec', () => {

@@ -32,21 +32,6 @@ module.exports = {
     library: 'cloudinaryVideoPlayer'
   },
 
-  externals: {
-    'cloudinary-core': {
-      commonjs: 'cloudinary-core',
-      commonjs2: 'cloudinary-core',
-      amd: 'cloudinary-core',
-      root: 'cloudinary'
-    },
-    lodash: {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: '_',
-      root: '_'
-    }
-  },
-
   resolve: {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
@@ -132,9 +117,6 @@ module.exports = {
   },
 
   plugins: [
-    // new ProvidePlugin({
-    //   'window.videojs': 'video.js'
-    // }),
     new DefinePlugin({ VERSION })
   ]
 };

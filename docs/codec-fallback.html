@@ -18,10 +18,7 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-
-    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.20/src/ua-parser.min.js"></script>
@@ -29,34 +26,44 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
+
     window.addEventListener('load', function(){
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
       var uap = new UAParser(navigator.userAgent);
 
-      player = cld.videoPlayer('player', {
+      player = cloudinary.videoPlayer('player', {
+        cloud_name: 'demo',
         publicId: 'product-gallery-tutorial_hlk0na',
         info: { title: 'Video too big cached' },
       });
+
       player.videojs.on('playing', function() {
         document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
       });
-      playerWebm = cld.videoPlayer('player-webm', {
+
+      playerWebm = cloudinary.videoPlayer('player-webm', {
+        cloud_name: 'demo',
         publicId: 'product-gallery-tutorial_hlk0na',
         info: { title: 'Video too big cached' },
         sourceTypes: ['webm']
       });
+
       playerWebm.videojs.on('playing', function() {
         document.getElementById('cached-info-webm').innerHTML = uap.getBrowser().name + ' is playing ' + playerWebm.videojs.currentSrc();
       });
-      playerTooBig = cld.videoPlayer('player-too-big', {
+
+      playerTooBig = cloudinary.videoPlayer('player-too-big', {
+        cloud_name: 'demo',
         publicId: 'Image_Performance',
         info: { title: 'Video too big to transcode' },
       });
-      playerSmall = cld.videoPlayer('player-small', {
+
+      playerSmall = cloudinary.videoPlayer('player-small', {
+        cloud_name: 'demo',
         publicId: 'what_is_cloudinary_sd',
         info: { title: 'Small video' },
       });
+
       playerSmall.videojs.on('playing', function() {
         document.getElementById('small-info').innerHTML = uap.getBrowser().name + ' is playing ' + playerSmall.videojs.currentSrc();
       });
@@ -140,10 +147,9 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cld.videoPlayer('player');
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         // Define source
         var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };

@@ -24,6 +24,7 @@ import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
+import { extendCloudinaryConfig } from './plugins/cloudinary/common';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -277,16 +278,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this.playerOptions.seekThumbnails) {
 
       this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-        if (source.getType() === SOURCE_TYPE.AUDIO ||
+        if (!source || source.getType() === SOURCE_TYPE.AUDIO ||
           (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
         ) {
           return;
         }
 
-        const cloudinaryConfig = source.cloudinaryConfig();
         const publicId = source.publicId();
 
-        const transformations = source.transformation().toOptions();
+        const transformations = source.transformation();
 
         if (transformations && transformations.streaming_profile) {
           delete transformations.streaming_profile;
@@ -295,8 +295,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformations.flags = transformations.flags || [];
         transformations.flags.push('sprite');
 
-        const vttSrc = cloudinaryConfig.video_url(`${publicId}.vtt`, { transformation: transformations });
-
+        const vttSrc = source.config().url(`${publicId}.vtt`, { transformation: transformations });
         // vttThumbnails must be called differently on init and on source update.
         isFunction(this.videojs.vttThumbnails)
           ? this.videojs.vttThumbnails({ src: vttSrc })
@@ -348,10 +347,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initCloudinary() {
-    const opts = this.playerOptions.cloudinary;
-    opts.chainTarget = this;
-    if (opts.secure !== false) {
-      this.playerOptions.cloudinary.cloudinaryConfig.config('secure', true);
+    const { cloudinaryConfig } = this.playerOptions.cloudinary;
+    cloudinaryConfig.chainTarget = this;
+
+    if (cloudinaryConfig.secure !== false) {
+      extendCloudinaryConfig(cloudinaryConfig, { secure: true });
     }
 
     this.videojs.cloudinary(this.playerOptions.cloudinary);
@@ -568,7 +568,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       const playlistWidget = this.playlistWidget();
 
-      if (this.playlistWidget()) {
+      if (playlistWidget) {
         playlistWidget.setSkin();
       }
     }
