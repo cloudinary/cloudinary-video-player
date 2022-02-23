@@ -18,10 +18,7 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-
-    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
@@ -29,9 +26,9 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player-1');
+      var player = cloudinary.videoPlayer('player-1', {
+        cloud_name: 'demo',
+      });
 
       player.source({
         publicId: 'snow_horses',
@@ -43,7 +40,8 @@
         ],
       });
 
-      cld.videoPlayer('player-2', {
+      cloudinary.videoPlayer('player-2', {
+        cloud_name: 'demo',
         transformation: [
           { width: 400, crop: 'limit' },
           { effect: 'blur:500' },
@@ -51,7 +49,9 @@
         ],
       });
 
-      cld.videoPlayer('player-3');
+      cloudinary.videoPlayer('player-3', {
+        cloud_name: 'demo'
+      });
 
     }, false);
   </script>
@@ -139,9 +139,7 @@
       </code>
       <code class="language-javascript">
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-        var player = cld.videoPlayer('player-1');
+        var player = cloudinary.videoPlayer('player-1', { cloud_name: 'demo' }));
 
         player.source({
           publicId: 'snow_horses',
@@ -153,7 +151,8 @@
           ],
         });
 
-        var player2 = cld.videoPlayer('player-2', {
+        var player2 = cloudinary.videoPlayer('player-2', {
+          cloud_name: 'demo',
           transformation: [
             { width: 400, crop: 'limit' },
             { effect: 'blur:500' },
@@ -161,7 +160,7 @@
           ],
         });
 
-        var player3 = cld.videoPlayer('player-3');
+        var player3 = cloudinary.videoPlayer('player-3', { cloud_name: 'demo' });
 
       </code>
     </pre>
