@@ -1,3 +1,11 @@
+1.9.0-edge.0 / 2022-02-23
+==================
+
+Changes
+---------
+- No need to get cloudinary-core-shrinkwrap script anymore
+- Addin syncOffsetTime for interaction area - sync video playing time on zoom
+
 1.8.1-edge.0 / 2022-02-08
 ==================
 
