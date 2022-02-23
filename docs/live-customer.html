@@ -19,7 +19,10 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
@@ -27,9 +30,8 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var demoplayer = cloudinary.videoPlayer('jordin-video-en', {
-        cloud_name: "canada-goose",
-        secure: true,
+      var cld = cloudinary.Cloudinary.new({ cloud_name: "canada-goose", secure: true });
+      var demoplayer = cld.videoPlayer('jordin-video-en', {
         publicId: 'videos/parkas/CG_FW19LITO_PARKAS_HERO_1920x1080_English',
         fluid: true,
         loop: false,
@@ -42,10 +44,7 @@
           loadingSpinner: true
         }
       });
-
-      var herowomen = cloudinary.videoPlayer('hero-womens', {
-        cloud_name: "canada-goose",
-        secure: true,
+      var herowomen = cld.videoPlayer('hero-womens', {
         publicId: 'videos/parkas/CG_FW19_Parkas_Aldridge_960x718',
         fluid: true,
         loop: true,
@@ -58,10 +57,7 @@
           loadingSpinner: false
         }
       });
-
-      var heromen = cloudinary.videoPlayer('hero-mens', {
-        cloud_name: "canada-goose",
-        secure: true,
+      var heromen = cld.videoPlayer('hero-mens', {
         publicId: 'videos/parkas/CG_FW19_Parkas_Erickson_960x718',
         fluid: true,
         loop: true,

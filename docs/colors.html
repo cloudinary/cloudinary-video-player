@@ -18,6 +18,8 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
   -->
@@ -27,8 +29,9 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      players = cloudinary.videoPlayers('.cld-video-player', {
-        cloud_name: 'demo',
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      players = cld.videoPlayers('.cld-video-player', {
         autoplay: true,
         controls: true,
         transformation: { width: 700, crop: 'limit' },
@@ -113,9 +116,10 @@
 
       </code>
       <code class="language-javascript">
+        var cld = cloudinary.Cloudinary.new({ cloud_name: &apos;demo&apos; });
+
         // Initialize players
-        var players = cloudinary.videoPlayers('.cld-video-player', {
-          cloud_name: &apos;demo&apos;,
+        var players = cld.videoPlayers('.cld-video-player', {
           autoplay: true,
           controls: true,
           transformation: { width: 700, crop: 'limit' },

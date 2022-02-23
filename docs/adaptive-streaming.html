@@ -20,8 +20,9 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
+    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.3/dash.all.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js"></script>
 
@@ -32,22 +33,21 @@
 
   <script>
     window.addEventListener('load', function () {
-      var cldConfig = { cloud_name: 'demo', secure: true};
-
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true});
       var uap = new UAParser(navigator.userAgent);
-      playerHls = cloudinary.videoPlayer('example-player-hls', cldConfig);
-      playerHlsH265 = cloudinary.videoPlayer('example-player-hls-h265', cldConfig);
-      playerDash = cloudinary.videoPlayer('example-player-dash', cldConfig);
-      playerDashVp9 = cloudinary.videoPlayer('example-player-dash-vp9', cldConfig);
-      playerHlsNoCodec = cloudinary.videoPlayer('example-player-hls-no-codec', cldConfig);
-      playerDashNoCodec = cloudinary.videoPlayer('example-player-dash-no-codec', cldConfig);
-      playerHlsIos = cloudinary.videoPlayer('example-player-hls-ios', Object.assign(cldConfig, {
+      playerHls = cld.videoPlayer('example-player-hls');
+      playerHlsH265 = cld.videoPlayer('example-player-hls-h265');
+      playerDash = cld.videoPlayer('example-player-dash');
+      playerDashVp9 = cld.videoPlayer('example-player-dash-vp9');
+      playerHlsNoCodec = cld.videoPlayer('example-player-hls-no-codec');
+      playerDashNoCodec = cld.videoPlayer('example-player-dash-no-codec');
+      playerHlsIos = cld.videoPlayer('example-player-hls-ios', {
         html5: {
           vhs: {
             overrideNative: true
           }
         }
-      }));
+      });
 
       playerHls.source(
               'sea_turtle',
@@ -261,10 +261,9 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-        const config =  {cloud_name: 'demo'};
-
-        var playerHls = cloudinary.videoPlayer('example-player-hls', config);
-        var playerDash = cloudinary.videoPlayer('example-player-dash' , config);
+        var cld = cloudinary.Cloudinary.new({cloud_name: 'demo'});
+        var playerHls = cld.videoPlayer('example-player-hls');
+        var playerDash = cld.videoPlayer('example-player-dash');
 
         playerHls.source(
           'sea_turtle',
@@ -274,7 +273,6 @@
             info: {title: 'HLS'}
           }
         );
-
         playerDash.source(
           'sea_turtle',
           {
@@ -287,7 +285,6 @@
         playerHls.on('qualitychanged', (data) => {
           console.log('HLS player', data);
         });
-
         playerDash.on('qualitychanged', (data) => {
           console.log('Dash player', data);
         });

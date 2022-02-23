@@ -18,7 +18,10 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
@@ -26,13 +29,15 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      var player = cld.videoPlayer('player');
 
       var source = { publicId: 'dog', 'sourceTypes': ['audio'] };
 
       player.source(source);
 
-      var player_t = cloudinary.videoPlayer('player-t', { cloud_name: 'demo' });
+      var player_t = cld.videoPlayer('player-t');
 
       var sourceTransformation = {
         publicId: 'dog',
@@ -99,9 +104,10 @@
         &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        var player = cld.videoPlayer('player');
 
         // Define source
         var source = { publicId: 'dog', 'sourceTypes': ['audio'] };
@@ -109,7 +115,7 @@
         // Play source
         player.source(source);
 
-        var player_t = cloudinary.videoPlayer('player-t', { cloud_name: 'demo' });
+        var player_t = cld.videoPlayer('player-t');
 
         // Define source with transformations
         var sourceTransformation = {

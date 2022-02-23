@@ -18,6 +18,8 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
   -->
@@ -27,9 +29,9 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo'
-      });
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      var player = cld.videoPlayer('player');
 
       player.source(
         'video-player/stubhub',
@@ -58,9 +60,7 @@
       );
 
       // Playlist
-      var playlist = cloudinary.videoPlayer('playlist', {
-        cloud_name: 'demo'
-      });
+      var playlist = cld.videoPlayer('playlist');
 
       var source1 = {
         publicId: 'video-player/stubhub',
@@ -177,9 +177,10 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        var player = cld.videoPlayer('player');
 
         player.source(
           'video-player/stubhub',
@@ -208,7 +209,7 @@
         );
 
         // Playlist
-        var playlist = cloudinary.videoPlayer('playlist', { cloud_name: 'demo' });
+        var playlist = cld.videoPlayer('playlist');
 
         var source1 = {
           publicId: 'video-player/stubhub',

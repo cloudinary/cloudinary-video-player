@@ -31,13 +31,13 @@
   <script type="text/javascript">
     window.addEventListener('load', function () {
 
-      player1 = cloudinary.videoPlayer('player-image-poster', {
-        cloud_name: 'demo',
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      player1 = cld.videoPlayer('player-image-poster', {
         publicId: 'snow_horses'
       });
 
-      player2 = cloudinary.videoPlayer('player-frame-0', {
-        cloud_name: 'demo',
+      player2 = cld.videoPlayer('player-frame-0', {
         publicId: 'snow_horses',
         posterOptions: {
           transformation: {
@@ -46,8 +46,7 @@
         }
       });
 
-      player3 = cloudinary.videoPlayer('player-poster-options', {
-        cloud_name: 'demo',
+      player3 = cld.videoPlayer('player-poster-options', {
         publicId: 'snow_horses'
       });
 
@@ -129,14 +128,13 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
-        player1 = cloudinary.videoPlayer('player-image-poster', {
-          cloud_name: 'demo',
+        player1 = cld.videoPlayer('player-image-poster', {
           publicId: 'snow_horses'
         });
 
-        player2 = cloudinary.videoPlayer('player-frame-0', {
-          cloud_name: 'demo',
+        player2 = cld.videoPlayer('player-frame-0', {
           publicId: 'snow_horses',
           posterOptions: {
             transformation: {
@@ -145,8 +143,7 @@
           }
         });
 
-        player3 = cloudinary.videoPlayer('player-poster-options', {
-          cloud_name: 'demo',
+        player3 = cld.videoPlayer('player-poster-options', {
           publicId: 'snow_horses'
         });
       </code>

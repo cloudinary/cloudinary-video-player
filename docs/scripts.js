@@ -139,6 +139,7 @@ var loadStyle = function (source, ver) {
   }
 
   function initPlayerExamples() {
+    loadScript('https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js');
     loadStyle('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.css', ver);
     loadScript('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.js', ver);
 

@@ -18,6 +18,8 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
+
+    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
   -->
@@ -27,26 +29,25 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-
     window.addEventListener('load', function(){
 
-      player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo',
+      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
+
+      player = cld.videoPlayer('player', {
         publicId: 'product-gallery-tutorial_hlk0na',
       });
-
-      playerNoAuto = cloudinary.videoPlayer('player-no-auto', {
-        cloud_name: 'demo',
+      playerNoAuto = cld.videoPlayer('player-no-auto', {
         publicId: 'product-gallery-tutorial_hlk0na',
       });
-
-      playerAutoProg = cloudinary.videoPlayer('player-auto-prog', {
-        cloud_name: 'demo',
+      playerAutoProg = cld.videoPlayer('player-auto-prog', {
         publicId: 'product-gallery-tutorial_hlk0na',
       });
-
       playerAutoProg.play()
-
+/*
+      player.videojs.on('playing', function() {
+        document.getElementById('cached-info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
+      });
+*/
     }, false);
 
   </script>
@@ -119,9 +120,10 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
+        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
 
         // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        var player = cld.videoPlayer('player');
 
         // Define source
         var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
