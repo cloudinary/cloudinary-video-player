@@ -4,6 +4,7 @@ import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
 import Transformation from '@cloudinary/url-gen/backwards/transformation.cjs';
+import { omit } from '../../utils/object';
 
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
@@ -50,7 +51,7 @@ const isSrcEqual = (source1, source2) => {
 
 export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign(currentConfig, newConfig);
 
-export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, transformation);
+export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, omit(transformation, ['chainTarget']));
 
 const isTransformationInstance = (transformation) => transformation.constructor.name === 'Transformation' && transformation.toOptions;
 

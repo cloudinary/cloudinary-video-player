@@ -24,3 +24,28 @@ export const get = (value, path, defaultValue) => {
 
   return defaultValue;
 };
+
+
+export const pick = (obj, keys) => {
+  return keys.reduce((acc, key) => {
+    const value = obj[key];
+
+    if (value !== undefined) {
+      acc[key] = value;
+    }
+
+    return acc;
+  }, {});
+};
+
+export const omit = (obj, keys) => {
+  return Object.keys(obj).reduce((acc, key) => {
+    const value = obj[key];
+
+    if (!keys.includes(key)) {
+      acc[key] = value;
+    }
+
+    return acc;
+  }, {});
+};
