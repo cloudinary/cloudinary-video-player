@@ -108,6 +108,12 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     }
   }
 
+  function handleAds() {
+    player.on('adsready', () => {
+      player.videojs.ima.addEventListener(window.google.ima.AdEvent.Type.ALL_ADS_COMPLETED, setLayoutMessage);
+    });
+  }
+
   function init() {
 
     if (isInteractionAreasEnabled()) {
@@ -115,7 +121,11 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
       player.videojs.el().classList.add('interaction-areas');
 
       player.videojs.one(PLAYER_EVENT.PLAY, () => {
-        setLayoutMessage();
+        if (typeof player.videojs.ima === 'object') {
+          handleAds();
+        } else {
+          setLayoutMessage();
+        }
       });
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
