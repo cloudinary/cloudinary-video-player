@@ -1,3 +1,11 @@
+1.9.0-edge.1 / 2022-03-06
+==================
+
+Fixes:
+--------
+- Fix: Video player with interactionArea + Ad issue
+- new SDK changes bug fixes
+
 1.9.0-edge.0 / 2022-02-23
 ==================
 
