@@ -25,7 +25,7 @@ module.exports = merge(webpackCommon, {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
-    sourceMapFilename: '[name].map',
+    sourceMapFilename: '[file].map',
     chunkFilename: '[id]-chunk.js',
     publicPath: '/'
   },
