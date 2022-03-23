@@ -1,3 +1,11 @@
+1.9.0-edge.2 / 2022-03-23
+==================
+
+Changes
+----------
+- Update webpack-dev-server version to 4.7.4
+- Update webpack-bundle-analyzer to 4.5.0
+
 1.9.0-edge.1 / 2022-03-06
 ==================
 
