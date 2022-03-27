@@ -34,7 +34,7 @@ class Html5DashJS {
     tech.isReady_ = false;
 
     if (Html5DashJS.updateSourceData) {
-      videojs.log.warn('updateSourceData has been deprecated.' +
+      console.warn('updateSourceData has been deprecated.' +
         ' Please switch to using hook("updatesource", callback).');
       source = Html5DashJS.updateSourceData(source);
     }
@@ -55,13 +55,13 @@ class Html5DashJS {
 
     // Log MedaPlayer messages through video.js
     if (Html5DashJS.useVideoJSDebug) {
-      videojs.log.warn('useVideoJSDebug has been deprecated.' +
+      console.warn('useVideoJSDebug has been deprecated.' +
         ' Please switch to using hook("beforeinitialize", callback).');
       Html5DashJS.useVideoJSDebug(this.mediaPlayer_);
     }
 
     if (Html5DashJS.beforeInitialize) {
-      videojs.log.warn('beforeInitialize has been deprecated.' +
+      console.warn('beforeInitialize has been deprecated.' +
         ' Please switch to using hook("beforeinitialize", callback).');
       Html5DashJS.beforeInitialize(this.player, this.mediaPlayer_);
     }
@@ -93,11 +93,11 @@ class Html5DashJS {
         // Map to general init error
         if (event.error.code >= 10 && event.error.code <= 35) {
           this.player.error({ code: 4, dashjsErrorCode: event.error.code, message: event.error.message });
-        } else if (event.error.code < 10) { 
+        } else if (event.error.code < 10) {
           // Network errors
           this.player.error({ code: event.error.code, dashjsErrorCode: event.error.code, message: event.error.message });
-        } else if (event.error.code >= 100 && event.error.code <= 114) { 
-          // Protection Errors  
+        } else if (event.error.code >= 100 && event.error.code <= 114) {
+          // Protection Errors
           // https://cdn.dashjs.org/latest/jsdoc/streaming_protection_errors_ProtectionErrors.js.html
           this.player.error({ code: 5, dashjsErrorCode: event.error.code, message: event.error.message });
         } else {
@@ -234,7 +234,7 @@ class Html5DashJS {
         // eslint-disable-next-line no-prototype-builtins
         if (this.mediaPlayer_.hasOwnProperty(dashOptionsKey)) {
           // Providing a key without `set` prefix is now deprecated.
-          videojs.log.warn('Using dash options in videojs-contrib-dash without the set prefix ' +
+          console.warn('Using dash options in videojs-contrib-dash without the set prefix ' +
             `has been deprecated. Change '${key}' to '${dashOptionsKey}'`);
 
           // Set key so it will still work
@@ -243,7 +243,7 @@ class Html5DashJS {
 
         // eslint-disable-next-line no-prototype-builtins
         if (!this.mediaPlayer_.hasOwnProperty(key)) {
-          videojs.log.warn(
+          console.warn(
             `Warning: dash configuration option unrecognized: ${key}`
           );
 
@@ -272,7 +272,7 @@ class Html5DashJS {
     // Setup audio tracks
     // eslint-disable-next-line no-useless-call
     setupAudioTracks.call(null, this.player, tech);
-    
+
     // Setup text tracks
     // eslint-disable-next-line no-useless-call
     setupTextTracks.call(null, this.player, tech, options);
@@ -395,7 +395,7 @@ const canHandleKeySystems = function(source) {
   source = JSON.parse(JSON.stringify(source));
 
   if (Html5DashJS.updateSourceData) {
-    videojs.log.warn('updateSourceData has been deprecated.' +
+    console.warn('updateSourceData has been deprecated.' +
       ' Please switch to using hook("updatesource", callback).');
     source = Html5DashJS.updateSourceData(source);
   }
