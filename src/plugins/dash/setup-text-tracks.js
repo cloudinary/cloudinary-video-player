@@ -1,5 +1,4 @@
 import dashjs from 'dashjs';
-import videojs from 'video.js';
 import window from 'global/window';
 
 function find(l, f) {
