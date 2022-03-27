@@ -156,7 +156,7 @@ export default function setupTextTracks(player, tech, options) {
 
   // We're relying on the user to disable native captions. Show an error if they didn't do so.
   if (tech.featuresNativeTextTracks) {
-    videojs.log.error('You must pass {html: {nativeCaptions: false}} in the videojs constructor ' +
+    console.error('You must pass {html: {nativeCaptions: false}} in the videojs constructor ' +
       'to use text tracks in videojs-contrib-dash');
     return;
   }
