@@ -44,7 +44,7 @@
         autoAdvance: true,
         repeat: true,
         presentUpcoming: false
-      }).then(function(player) {
+      }).then(function() {
         var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
           return source.publicId()
@@ -74,6 +74,8 @@
       class="cld-video-player"
       width="500">
     </video>
+
+    <div id="playlist-data"></div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_playlists_recommendations#create_a_playlist_for_a_specified_tag">Playlist by tag documentation</a>
@@ -112,7 +114,7 @@
           repeat: true,
           presentUpcoming: false
         }).then(function(player) {
-          var divElem = document.querySelector("div#playlist-data");
+          var divElem = document.querySelector("#playlist-data");
           var list = player.playlist().list().map(function(source) {
             return source.publicId()
           }).join(', ');
