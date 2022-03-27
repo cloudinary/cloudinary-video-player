@@ -1,3 +1,10 @@
+1.9.0-edge.3 / 2022-03-27
+==================
+
+Changes
+-----------
+Remove the use vidoejs.log and replace it with a native console.log function
+
 1.9.0-edge.2 / 2022-03-23
 ==================
 
