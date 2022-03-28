@@ -30,8 +30,25 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'qualitySelector',
   'fetchErrorUsingGet',
   'withCredentials',
-  'seekThumbnails'
+  'seekThumbnails',
+  'queryParams'
 ]);
+
+export const CLOUDINARY_CONFIG_PARAM = [
+  'cloud_name',
+  'secure',
+  'private_cdn',
+  'secure_distribution',
+  'cdn_subdomain',
+  'secure_cdn_subdomain',
+  'cname',
+  'shorten',
+  'sign_url',
+  'api_secret',
+  'url_suffix',
+  'use_root_path',
+  'auth_token'
+];
 
 export const DEFAULT_HLS_OPTIONS = {
   html5: {

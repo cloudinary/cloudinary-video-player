@@ -4,12 +4,14 @@ import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
 import { assign } from 'utils/assign';
+import { extendCloudinaryConfig, getCloudinaryUrl } from '../plugins/cloudinary/common';
 
 const { fetch } = fetchPF({ Promise });
 
 const LIST_BY_TAG_PARAMS = { format: 'json', resource_type: 'video', type: 'list' };
 
 const Playlistable = (superclass) => class extends superclass {
+
   constructor(player, options = {}) {
     super();
 
@@ -74,7 +76,7 @@ const Playlistable = (superclass) => class extends superclass {
   }
 
   sourcesByTag(tag, options = {}) {
-    const url = this.cloudinaryConfig().url(tag, LIST_BY_TAG_PARAMS);
+    const url = getCloudinaryUrl(tag, extendCloudinaryConfig(this.cloudinaryConfig(), LIST_BY_TAG_PARAMS));
 
     return fetch(url)
       .then((result) => result.json())

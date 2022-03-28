@@ -17,6 +17,7 @@ module.exports = (env, argv) => {
   return merge(webpackCommon, {
     bail: false,
     mode: 'production',
+    stats: 'errors-only',
     output: {
       path: path.resolve(__dirname, '../dist'),
       filename: `[name]${lightFilenamePart}.js`,

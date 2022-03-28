@@ -18,20 +18,17 @@
     Real-world usage would look like this:
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-
-    <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.js"></script>
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', function(){
+    window.addEventListener('load', function() {
 
-      var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-      var player = cld.videoPlayer('player', {})
+      var player = cloudinary.videoPlayer('player', {
+        cloud_name: 'demo'
+      })
 
       var sorter = function(a, b) {
         if (a.publicId < b.publicId) return 1;
@@ -47,7 +44,7 @@
         autoAdvance: true,
         repeat: true,
         presentUpcoming: false
-      }).then(function(player) {
+      }).then(function() {
         var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
           return source.publicId()
@@ -78,6 +75,8 @@
       width="500">
     </video>
 
+    <div id="playlist-data"></div>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_playlists_recommendations#create_a_playlist_for_a_specified_tag">Playlist by tag documentation</a>
     </p>
@@ -98,9 +97,7 @@
       </code>
       <code class="language-javascript">
 
-        var cld = cloudinary.Cloudinary.new({ cloud_name: 'demo' });
-
-        var player = cld.videoPlayer('player', {})
+        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' })
 
         var sorter = function(a, b) {
           if (a.publicId < b.publicId) return 1;
@@ -117,7 +114,7 @@
           repeat: true,
           presentUpcoming: false
         }).then(function(player) {
-          var divElem = document.querySelector("div#playlist-data");
+          var divElem = document.querySelector("#playlist-data");
           var list = player.playlist().list().map(function(source) {
             return source.publicId()
           }).join(', ');

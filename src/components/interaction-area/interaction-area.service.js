@@ -30,6 +30,11 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   const shouldLayoutMessage = () => shouldShowAreaLayoutMessage(videojsOptions.interactionDisplay);
 
+  const getIsSyncOffsetTime = () => {
+    const interactionAreasConfig = getInteractionAreasConfig();
+    return (interactionAreasConfig && interactionAreasConfig.syncOffsetTime !== undefined) ? interactionAreasConfig.syncOffsetTime : false;
+  };
+
   function isInteractionAreasEnabled(enabled = false) {
     const interactionAreasConfig = getInteractionAreasConfig();
     return enabled || (interactionAreasConfig && interactionAreasConfig.enable);
@@ -103,6 +108,12 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     }
   }
 
+  function handleAds() {
+    player.on('adsready', () => {
+      player.videojs.ima.addEventListener(window.google.ima.AdEvent.Type.ALL_ADS_COMPLETED, setLayoutMessage);
+    });
+  }
+
   function init() {
 
     if (isInteractionAreasEnabled()) {
@@ -110,7 +121,11 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
       player.videojs.el().classList.add('interaction-areas');
 
       player.videojs.one(PLAYER_EVENT.PLAY, () => {
-        setLayoutMessage();
+        if (typeof player.videojs.ima === 'object') {
+          handleAds();
+        } else {
+          setLayoutMessage();
+        }
       });
 
       const setInteractionAreasContainerSize = throttle(setContainerSize, 100);
@@ -136,14 +151,17 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
 
   function onZoom(src, newOption, item) {
     const currentSource = player.videojs.currentSource();
+    const originalCurrentTime = player.currentTime();
+    const isSyncOffsetTime = getIsSyncOffsetTime();
     const { cldSrc } = currentSource;
     const currentSrcOptions = cldSrc.getInitOptions();
-    const option = newOption || { transformation: currentSrcOptions.transformation.toOptions() };
+    const option = newOption || { transformation: currentSrcOptions.transformation };
     const transformation = !src && getZoomTransformation(player.videoElement, item);
     const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
 
     const newSource = cldSrc.isRawUrl ? currentSource.src : { publicId: cldSrc.publicId() };
     player.source(transformation ? { publicId: cldSrc.publicId() } : src, sourceOptions).play();
+    isSyncOffsetTime && player.currentTime(originalCurrentTime);
 
     isZoomed = true;
 
@@ -152,7 +170,10 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     unZoom = () => {
       if (isZoomed) {
         isZoomed = false;
+        const currentZoomedTime = player.currentTime();
+        const duration = player.duration();
         player.source(newSource, currentSrcOptions).play();
+        isSyncOffsetTime && currentZoomedTime < duration && player.currentTime(currentZoomedTime);
         setAreasPositionListener();
       }
     };
