@@ -1,3 +1,18 @@
+1.9.0 / 2022-03-28
+==================
+
+Fixes
+----------
+- Fix: Video player with interactionArea + Ad issue
+
+Changes
+----------
+- Using new SDK , no need to get cloudinary-core-shrinkwrap script anymore
+- Update webpack-dev-server version to 4.7.4
+- Update webpack-bundle-analyzer to 4.5.0
+- Addin syncOffsetTime for interaction area - sync video playing time on zoom
+- Remove the use vidoejs.log and replace it with a native console.log function
+
 1.8.0 / 2022-01-31
 ==================
 
