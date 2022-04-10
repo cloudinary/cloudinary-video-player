@@ -6,11 +6,11 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "469.3kb"
+        "maxSize": "472.3kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "159kb"
+        "maxSize": "162kb"
       }
     ]
   },
@@ -41,6 +41,7 @@
   "main": "./dist/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "@cloudinary/url-gen": "^1.3.0",
     "dashjs": "^4.2.1",
     "fetch-ponyfill": "^7.1.0",
