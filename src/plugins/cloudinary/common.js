@@ -2,7 +2,7 @@ import { assign } from 'utils/assign';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
-import { createCloudinaryLegacyURL } from '@cloudinary/url-gen';
+import { createCloudinaryLegacyURL } from '@cloudinary/url-gen/backwards/createCloudinaryLegacyURL.cjs';
 import Transformation from '@cloudinary/url-gen/backwards/transformation.cjs';
 import { omit } from '../../utils/object';
 
