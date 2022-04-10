@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import 'assets/styles/main.scss';
 import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
