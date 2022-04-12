@@ -113,7 +113,7 @@
           autoAdvance: true,
           repeat: true,
           presentUpcoming: false
-        }).then(function(player) {
+        }).then(function() {
           var divElem = document.querySelector("#playlist-data");
           var list = player.playlist().list().map(function(source) {
             return source.publicId()
