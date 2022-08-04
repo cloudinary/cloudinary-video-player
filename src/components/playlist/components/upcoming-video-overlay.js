@@ -96,7 +96,7 @@ class UpcomingVideoOverlayContent extends Component {
   createEl() {
     // Content wraps image and bar
     return super.createEl('div', {
-      className: 'aspect-ratio-content'
+      className: 'upcoming-video-overlay aspect-ratio-content'
     });
   }
 }
