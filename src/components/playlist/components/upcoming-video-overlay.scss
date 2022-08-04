@@ -17,8 +17,9 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
   max-width: $upcoming-video-max-width;
   border: 1px solid #E8E8E9;
 
-  .aspect-ratio-content {
+  .upcoming-video-overlay {
     background-size: cover;
+    cursor: pointer;
 
     .vjs-upcoming-video-bar {
       display: flex;
