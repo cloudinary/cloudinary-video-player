@@ -42,7 +42,7 @@
   "style": "./dist/cld-video-player.min.css",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "@cloudinary/url-gen": "^1.3.0",
+    "@cloudinary/url-gen": "^1.8.6",
     "dashjs": "^4.2.1",
     "fetch-ponyfill": "^7.1.0",
     "promise-polyfill": "^8.2.0",
