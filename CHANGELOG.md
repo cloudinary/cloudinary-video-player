@@ -1,3 +1,14 @@
+1.9.2 / 2022-08-29
+==================
+
+Changes
+----------
+Update Cloudinary sdk to version 1.8.6
+
+Fixes
+------------
+- Fix: Playlist clicking on Next video icon, the player skips a video
+
 1.9.1 / 2022-04-10
 ==================
 
