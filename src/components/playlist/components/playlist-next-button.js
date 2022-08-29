@@ -8,6 +8,7 @@ class PlaylistNextButton extends PlaylistButton {
   }
 
   handleClick(event) {
+    event.stopPropagation();
     super.handleClick(event);
     this.player().cloudinary.playlist().playNext();
   }
