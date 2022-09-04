@@ -22,6 +22,16 @@ const tracks = [
   }
 ];
 
+global.fetch = jest.fn((url, options) => {
+  return new Promise((resolve) => {
+    if (url === tracks[2].src) {
+      resolve({ status: 404 });
+    } else {
+      resolve({ status: 200 });
+    }
+  });
+});
+
 import { filterAndAddTextTracks } from '../../src/utils/cloudinary';
 
 describe('video source tests', () => {
