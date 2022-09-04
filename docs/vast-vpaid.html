@@ -50,8 +50,8 @@
         autoAdvance: 5,
         repeat: true,
         presentUpcoming: false
-      }).then(function(player) {
-        var divElem = document.querySelector("div#playlist-data");
+      }).then(function() {
+        var divElem = document.querySelector("#playlist-data");
         var list = player.playlist().list().map(function(source) {
           return source.publicId()
         }).join(', ');
@@ -80,6 +80,8 @@
       class="cld-video-player"
       width="500"
     ></video>
+
+    <p id="playlist-data"></p>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_ads_monetization">Ads and monetization documentation</a>
@@ -128,8 +130,8 @@
           sorter: sorter,
           autoAdvance: 0,
           repeat: true
-        }).then(function(player) {
-          var divElem = document.querySelector("div#playlist-data");
+        }).then(function() {
+          var divElem = document.querySelector("#playlist-data");
           var list = player.playlist().list().map(function(source) {
             return source.publicId()
           }).join(', ');
