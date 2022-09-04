@@ -1,12 +1,9 @@
 import Playlist from 'components/playlist/playlist';
-import Promise from 'promise-polyfill';
-import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
 import { assign } from 'utils/assign';
 import { extendCloudinaryConfig, getCloudinaryUrl } from '../plugins/cloudinary/common';
 
-const { fetch } = fetchPF({ Promise });
 
 const LIST_BY_TAG_PARAMS = { format: 'json', resource_type: 'video', type: 'list' };
 

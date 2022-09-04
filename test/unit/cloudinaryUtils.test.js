@@ -21,21 +21,7 @@ const tracks = [
     srclang: 'se'
   }
 ];
-jest.mock('fetch-ponyfill/build/fetch-browser', () => (() => {
-  return {
-    fetch: jest.fn((url, options) => {
-      return new Promise((resolve) => {
-        if (url === tracks[2].src) {
-          resolve({ status: 404 });
-        } else {
-          resolve({ status: 200 });
-        }
-      });
-    }),
-    default: jest.fn()
-  };
-}));
-import { fetch } from 'fetch-ponyfill/build/fetch-browser';
+
 import { filterAndAddTextTracks } from '../../src/utils/cloudinary';
 
 describe('video source tests', () => {

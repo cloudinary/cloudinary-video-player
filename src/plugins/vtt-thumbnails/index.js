@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import Promise from 'promise-polyfill';
 
 import './vtt-thumbnails.scss';
 
