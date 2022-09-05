@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "prepare": "shx cp env.example.js env.js",
+    "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
     "start": "webpack-dev-server --config webpack/dev.config.js",
     "start:light": "WEBPACK_BUILD_LIGHT=1 webpack-dev-server --config webpack/dev.config.js",
     "clean": "rm -rf dist",
@@ -93,5 +93,6 @@
     "webpack-dev-server": "^4.7.4",
     "webpack-merge": "^5.8.0",
     "webworkify-webpack2": "^1.1.9"
-  }
+  },
+  "snyk": true
 }
