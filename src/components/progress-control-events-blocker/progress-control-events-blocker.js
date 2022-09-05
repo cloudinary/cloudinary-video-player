@@ -15,3 +15,5 @@ class ProgressControlEventsBlocker extends Component {
 }
 
 videojs.registerComponent('progressControlEventsBlocker', ProgressControlEventsBlocker);
+
+export default ProgressControlEventsBlocker;
