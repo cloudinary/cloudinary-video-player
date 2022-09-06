@@ -12,6 +12,7 @@ import qualitySelector from './components/qualitySelector/qualitySelector.js';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { isFunction, isString, isPlainObject } from './utils/type-inference';
 import {
+  disablePoster,
   extractOptions,
   getResolveVideoElement,
   overrideDefaultVideojsComponents
@@ -122,6 +123,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
+
+    disablePoster(this.videojs);
   }
 
   _clearTimeOut = () => {

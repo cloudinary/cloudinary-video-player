@@ -9,6 +9,7 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
+import { PLAYER_EVENT } from '/utils/consts';
 
 /*
 * Used to escape element identifiers that begin with certain
@@ -16,6 +17,7 @@ import { isString } from './utils/type-inference';
 * https://www.w3.org/International/questions/qa-escapes#css_identifiers
 */
 import cssEscape from 'css.escape';
+
 
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
@@ -126,5 +128,22 @@ export const overrideDefaultVideojsComponents = () => {
 
     // Position the 'logo-button' button right next to 'fullscreenToggle'
     children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton', 'fullscreenToggle');
+  }
+};
+
+export const disablePoster = (videojs) => {
+  const { enable, backgroundColor = 'black' } = videojs.cloudinary.posterOptions();
+
+  if (enable === false) {
+    videojs.ready(() => {
+      videojs.posterImage.hide();
+      videojs.el().classList.add('poster-disabled');
+    });
+
+    videojs.el().style.backgroundColor = backgroundColor;
+
+    videojs.on(PLAYER_EVENT.PLAY, () => {
+      videojs.el().style.backgroundColor = '';
+    });
   }
 };

@@ -78,6 +78,14 @@ $icon-font-path: '../fonts' !default;
     outline: none;
   }
 
+  &.poster-disabled:not(.vjs-has-started)  {
+    background-color: transparent;
+
+    video {
+      visibility: hidden;
+    }
+  }
+
   &.cld-fluid {
     width: 100%;
     max-width: 100%;
