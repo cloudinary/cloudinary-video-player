@@ -18,7 +18,6 @@ import { PLAYER_EVENT } from '/utils/consts';
 */
 import cssEscape from 'css.escape';
 
-
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
     kind: 'metadata',
