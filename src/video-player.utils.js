@@ -132,15 +132,15 @@ export const overrideDefaultVideojsComponents = () => {
 };
 
 export const disablePoster = (videojs) => {
-  const { enable, backgroundColor = 'black' } = videojs.cloudinary.posterOptions();
+  const { posterColor } = videojs.cloudinary.posterOptions();
 
-  if (enable === false) {
+  if (posterColor) {
     videojs.ready(() => {
       videojs.posterImage.hide();
       videojs.el().classList.add('poster-disabled');
     });
 
-    videojs.el().style.backgroundColor = backgroundColor;
+    videojs.el().style.backgroundColor = posterColor;
 
     videojs.on(PLAYER_EVENT.PLAY, () => {
       videojs.el().style.backgroundColor = '';
