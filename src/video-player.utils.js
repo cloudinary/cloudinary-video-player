@@ -9,7 +9,7 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
-import { PLAYER_EVENT } from '/utils/consts';
+import { PLAYER_EVENT } from './utils/consts';
 
 /*
 * Used to escape element identifiers that begin with certain
