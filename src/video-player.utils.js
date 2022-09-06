@@ -141,7 +141,7 @@ export const disablePoster = (videojs) => {
 
     videojs.el().style.backgroundColor = posterColor;
 
-    videojs.on(PLAYER_EVENT.PLAY, () => {
+    videojs.one(PLAYER_EVENT.PLAY, () => {
       videojs.el().style.backgroundColor = '';
     });
   }
