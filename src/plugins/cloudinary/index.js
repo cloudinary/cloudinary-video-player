@@ -119,10 +119,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     this.disablePoster = (posterColor) => {
-      this.player.ready(() => {
-        this.player.el().classList.add('poster-disabled');
-      });
-
+      this.player.el().classList.add('poster-disabled');
       this.player.el().style.backgroundColor = posterColor;
 
       this.player.one(PLAYER_EVENT.PLAY, () => {
