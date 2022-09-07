@@ -15,6 +15,7 @@ import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
 import { isFunction } from '../../utils/type-inference';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -115,6 +116,18 @@ class CloudinaryContext extends mixin(Playlistable) {
       _posterOptions = options;
 
       return _chainTarget;
+    };
+
+    this.disablePoster = (posterColor) => {
+      this.player.ready(() => {
+        this.player.el().classList.add('poster-disabled');
+      });
+
+      this.player.el().style.backgroundColor = posterColor;
+
+      this.player.one(PLAYER_EVENT.PLAY, () => {
+        this.player.el().style.backgroundColor = '';
+      });
     };
 
     this.cloudinaryConfig = (config) => {
@@ -237,7 +250,10 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     const refresh = () => {
       const src = this.source();
-      if (src.poster()) {
+      const { posterColor } = this.player.cloudinary.posterOptions();
+      if (posterColor) {
+        this.disablePoster(posterColor);
+      } else if (src.poster()) {
         this.player.poster(src.poster().url());
       }
 

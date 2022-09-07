@@ -9,7 +9,6 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import { isString } from './utils/type-inference';
-import { PLAYER_EVENT } from './utils/consts';
 
 /*
 * Used to escape element identifiers that begin with certain
@@ -127,22 +126,5 @@ export const overrideDefaultVideojsComponents = () => {
 
     // Position the 'logo-button' button right next to 'fullscreenToggle'
     children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton', 'fullscreenToggle');
-  }
-};
-
-export const disablePoster = (videojs) => {
-  const { posterColor } = videojs.cloudinary.posterOptions();
-
-  if (posterColor) {
-    videojs.ready(() => {
-      videojs.posterImage.hide();
-      videojs.el().classList.add('poster-disabled');
-    });
-
-    videojs.el().style.backgroundColor = posterColor;
-
-    videojs.one(PLAYER_EVENT.PLAY, () => {
-      videojs.el().style.backgroundColor = '';
-    });
   }
 };
