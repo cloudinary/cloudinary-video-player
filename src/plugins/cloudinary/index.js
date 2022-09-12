@@ -118,6 +118,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     this.disablePoster = (posterColor) => {
+      // https://docs.videojs.com/player.js.html#line3816
       this.player.poster(' ');
       this.player.posterImage.el().style.backgroundColor = posterColor;
     };
