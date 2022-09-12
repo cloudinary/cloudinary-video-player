@@ -1,3 +1,11 @@
+1.9.3-edge.0 / 2022-09-12
+==================
+
+Changes
+---------
+- Add an option to disable the poster and set a poster backgound color instead
+- Post IE clean up
+
 1.9.2-edge.1 / 2022-08-29
 ==================
 
