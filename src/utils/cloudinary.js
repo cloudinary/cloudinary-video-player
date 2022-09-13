@@ -1,9 +1,5 @@
-import Promise from 'promise-polyfill';
-import fetchPF from 'fetch-ponyfill/build/fetch-browser';
 import { cloudinaryErrorsConverter, ERROR_CODE } from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
-
-const { fetch } = fetchPF({ Promise });
 
 const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };

@@ -117,6 +117,12 @@ class CloudinaryContext extends mixin(Playlistable) {
       return _chainTarget;
     };
 
+    this.disablePoster = (posterColor) => {
+      // https://docs.videojs.com/player.js.html#line3816
+      this.player.poster(' ');
+      this.player.posterImage.el().style.backgroundColor = posterColor;
+    };
+
     this.cloudinaryConfig = (config) => {
       if (!config) {
         return _cloudinaryConfig;
@@ -237,7 +243,10 @@ class CloudinaryContext extends mixin(Playlistable) {
 
     const refresh = () => {
       const src = this.source();
-      if (src.poster()) {
+      const { posterColor } = this.player.cloudinary.posterOptions();
+      if (posterColor) {
+        this.disablePoster(posterColor);
+      } else if (src.poster()) {
         this.player.poster(src.poster().url());
       }
 

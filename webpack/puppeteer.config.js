@@ -5,6 +5,5 @@ module.exports = merge(webpackDev, {
   devServer: {
     open: false,
     hot: false,
-    inline: false
   }
 });

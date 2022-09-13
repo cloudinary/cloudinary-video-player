@@ -456,10 +456,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.addClass(Utils.playerClassPrefix(this.videojs));
 
     Utils.setSkinClassPrefix(this.videojs, Utils.skinClassPrefix(this.videojs));
-
-    if (videojs.browser.IE_VERSION === 11) {
-      this.videojs.addClass('cld-ie11');
-    }
   }
 
   _onReady() {

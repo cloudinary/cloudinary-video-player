@@ -1,16 +1,5 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "esmodules": true,
-          "ie": "11"
-        },
-        "modules": "cjs"
-      }
-    ]
-  ],
+  "presets": [["@babel/preset-env", {}]],
   "env": {
     "test": {
       "plugins": ["@babel/plugin-transform-runtime"]
