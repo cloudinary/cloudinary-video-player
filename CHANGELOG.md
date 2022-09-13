@@ -1,3 +1,11 @@
+1.9.3 / 2022-09-13
+==================
+
+Changes
+-----------
+- Add an option to disable the poster and set a poster background color instead
+- Post IE clean up
+
 1.9.2 / 2022-08-29
 ==================
 
