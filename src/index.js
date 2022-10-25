@@ -3,6 +3,7 @@ import VideoPlayer from './video-player';
 import { assign } from 'utils/assign';
 import { omit, pick } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
+import { trackVideoPlayer } from './components/cld-analytics/cld-analytics';
 
 if (window.cloudinary && window.cloudinary.Cloudinary) {
   console.warn('For version 1.9.0 and above, cloudinary-core is not needed for using the Cloudinary Video Player');
@@ -28,6 +29,7 @@ window.cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
+  trackVideoPlayer,
   Cloudinary: {
     new: cloudinaryVideoPlayerConfig
   }
