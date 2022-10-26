@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Cookies from 'js-cookie';
 import { sendBeaconRequest } from './send-beacon-request';
 
-const CLD_ANALYTICS_ENDPOINT_URL = 'https://video-analytics-api.cloudinary.net';
+const CLD_ANALYTICS_ENDPOINT_URL = 'https://video-analytics-api.cloudinary.com/video-analytics';
 const CLD_ANALYTICS_USER_ID_COOKIE_KEY = 'cld-analytics-user-id';
 
 const getUniqueUserId = () => {

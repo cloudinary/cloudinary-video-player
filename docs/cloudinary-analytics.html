@@ -31,12 +31,12 @@
 
       cloudinary.trackVideoPlayer(document.querySelector('video'), {
         cloudName: 'demo',
-        publicId: 'marmots',
+        videoPublicId: 'marmots',
       });
 
       var source = { publicId: 'marmots', info: { title: 'marmots', subtitle: 'marmots subtitle', description: 'lorem ipsum marmots' } };
 
-      player.source(source).play();
+      player.source(source);
     }, false);
   </script>
 
