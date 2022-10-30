@@ -47,7 +47,7 @@ const getPlayedTimeSeconds = (watchedFrames) => {
   }, 0));
 };
 
-export const trackVideoPlayer = (videoElement, metadata) => {
+export const trackVideoPlayer = (videoElement, metadataProps) => {
   const collectedEvents = [];
 
   window.addEventListener('beforeunload', () => {
@@ -55,6 +55,8 @@ export const trackVideoPlayer = (videoElement, metadata) => {
     const playedTimeSeconds = getPlayedTimeSeconds(aggregatedEvents.watchedFrames);
 
     if (playedTimeSeconds) {
+      // video public id is registered later in videojs so we need to postpone public id fetching
+      const metadata = typeof metadataProps === 'function' ? metadataProps() : metadataProps;
       sendBeaconRequest(CLD_ANALYTICS_ENDPOINT_URL, {
         ...metadata,
         userId: getUniqueUserId(),

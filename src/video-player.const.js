@@ -18,6 +18,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'playedEventPercents',
   'playedEventTimes',
   'analytics',
+  'cloudinaryAnalytics',
   'fluid',
   'ima',
   'playlistWidget',

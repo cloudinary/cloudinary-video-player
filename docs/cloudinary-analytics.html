@@ -27,11 +27,8 @@
 
       player = cloudinary.videoPlayer('player', {
         cloud_name: 'demo',
-      });
-
-      cloudinary.trackVideoPlayer(document.querySelector('video'), {
-        cloudName: 'demo',
-        videoPublicId: 'marmots',
+        analytics: true,
+        cloudinaryAnalytics: true,
       });
 
       var source = { publicId: 'marmots', info: { title: 'marmots', subtitle: 'marmots subtitle', description: 'lorem ipsum marmots' } };
@@ -85,11 +82,7 @@
           // Initialize player
           var player = cloudinary.videoPlayer('player', {
             cloud_name: 'demo',
-          });
-
-          cloudinary.trackVideoPlayer(document.querySelector('#player'), {
-            cloudName: 'demo',
-            publicId: 'marmots',
+            cloudinaryAnalytics: true,
           });
 
           var source = { publicId: 'marmots', info: { title: 'marmots', subtitle: 'marmots subtitle', description: 'lorem ipsum marmots' } };

@@ -198,6 +198,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPerSrcBehaviors();
     this._initCloudinary();
     this._initAnalytics();
+    this._initCloudinaryAnalytics();
     this._initFloatingPlayer();
     this._initColors();
     this._initTextTracks();
@@ -368,6 +369,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (analyticsOpts) {
       const opts = typeof analyticsOpts === 'object' ? analyticsOpts : {};
       this.videojs.analytics(opts);
+    }
+  }
+
+  _initCloudinaryAnalytics() {
+    const cloudinaryAnalyticsOpts = this.playerOptions.cloudinaryAnalytics;
+
+    if (cloudinaryAnalyticsOpts) {
+      this.videojs.videoElement = this.videoElement;
+      this.videojs.cloudinaryAnalytics();
     }
   }
 
