@@ -10,7 +10,7 @@ export const sendBeaconRequest = (url, data) => {
     return fetch(url, {
       method: 'POST',
       mode: 'no-cors',
-      body: JSON.stringify(data),
+      body: params,
       keepalive: true
     });
   }
