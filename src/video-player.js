@@ -576,7 +576,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
-    this._initQualitySelector();
     return this.videojs.cloudinary.playlistByTag(tag, options);
   }
 
