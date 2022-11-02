@@ -311,15 +311,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   _initQualitySelector() {
     if (this._videojsOptions.controlBar && this.playerOptions.qualitySelector !== false) {
-      if (videojs.browser.IE_VERSION === null) {
-        this.videojs.httpSourceSelector({ default: 'auto' });
-      }
+      this.videojs.httpSourceSelector({ default: 'auto' });
 
       this.videojs.on(PLAYER_EVENT.LOADED_METADATA, () => {
         qualitySelector.init(this.videojs);
       });
 
-      // Show only if more then one option available
+      // Show only if more than one option available
       this.videojs.on(PLAYER_EVENT.LOADED_DATA, () => {
         qualitySelector.setVisibility(this.videojs);
       });
@@ -573,6 +571,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
+    this._initQualitySelector();
     return this.videojs.cloudinary.playlist(sources, options);
   }
 
