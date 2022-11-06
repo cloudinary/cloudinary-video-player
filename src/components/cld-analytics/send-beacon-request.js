@@ -1,10 +1,8 @@
 export const sendBeaconRequest = (url, data) => {
-  const params = new FormData();
-
-  // eslint-disable-next-line guard-for-in
-  for (const key in data) {
-    params.append(key, data[key]);
-  }
+  const params = Object.keys(data).reduce((formData, key) => {
+    formData.append(key, data[key]);
+    return formData;
+  }, new FormData());
 
   if (typeof window.navigator.sendBeacon !== 'function') {
     return fetch(url, {

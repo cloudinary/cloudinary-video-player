@@ -1,49 +1,58 @@
-// eslint-disable
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from 'js-cookie';
 import { sendBeaconRequest } from './send-beacon-request';
+import { VIDEO_EVENT } from './events.consts';
 
 const CLD_ANALYTICS_ENDPOINT_URL = 'https://video-analytics-api.cloudinary.com/video-analytics';
-const CLD_ANALYTICS_USER_ID_COOKIE_KEY = 'cld-analytics-user-id';
+const CLD_ANALYTICS_USER_ID_KEY = 'cld-analytics-user-id';
 
 const getUniqueUserId = () => {
-  const cookieUserId = Cookies.get(CLD_ANALYTICS_USER_ID_COOKIE_KEY);
+  const storageUserId = window.localStorage.getItem(CLD_ANALYTICS_USER_ID_KEY);
 
-  if (cookieUserId) {
-    return cookieUserId;
+  if (storageUserId) {
+    return storageUserId;
   }
 
   const userId = uuidv4();
-  const expirationDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1));
-  Cookies.set(CLD_ANALYTICS_USER_ID_COOKIE_KEY, userId, { expires: expirationDate });
+  window.localStorage.setItem(CLD_ANALYTICS_USER_ID_KEY, userId);
   return userId;
 };
 
+// prepare events list for aggregation, for example
+// if video is being played and user wants to leave the page - add "pause" event to correctly calculate played time
+const prepareEvents = (collectedEvents, videoCurrentTime) => {
+  const events = [...collectedEvents];
+  const lastPlayItemIndex = events.findIndex((event) => event.type === VIDEO_EVENT.PLAY);
+  const lastPauseItemIndex = events.findIndex((event) => event.type === VIDEO_EVENT.PAUSE);
+
+  if (lastPlayItemIndex > lastPauseItemIndex) {
+    events.push({
+      type: VIDEO_EVENT.PAUSE,
+      time: videoCurrentTime
+    });
+  }
+
+  return events;
+};
+
 const aggregateEvents = (eventsList) => {
-  const events = eventsList.reduce((acc, event) => {
+  return eventsList.reduce((acc, event) => {
     const lastItem = acc.watchedFrames[acc.watchedFrames.length - 1];
-    if (event.type === 'PLAY') {
+
+    if (event.type === VIDEO_EVENT.PLAY) {
       acc.watchedFrames.push([event.time]);
-    } else if (lastItem && lastItem.length === 1 && event.type === 'PAUSE') {
-      acc.watchedFrames[acc.watchedFrames.length - 1].push(event.time);
+    } else if (lastItem && lastItem.length === 1 && event.type === VIDEO_EVENT.PAUSE) {
+      lastItem.push(event.time);
     }
 
     return acc;
   }, {
     watchedFrames: []
   });
-
-  // filter out partial events
-  if (events.watchedFrames.length && events.watchedFrames[events.watchedFrames.length - 1].length === 1) {
-    events.watchedFrames.pop();
-  }
-
-  return events;
 };
 
 const getPlayedTimeSeconds = (watchedFrames) => {
-  return Math.round(watchedFrames.reduce((acc, frames) => {
-    return acc + (frames[1] - frames[0]);
+  return Math.round(watchedFrames.reduce((acc, [playTime, pauseTime]) => {
+    return acc + (pauseTime - playTime);
   }, 0));
 };
 
@@ -51,31 +60,30 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
   const collectedEvents = [];
 
   window.addEventListener('beforeunload', () => {
-    const aggregatedEvents = aggregateEvents(collectedEvents);
+    const videoCurrentTime = videoElement.currentTime;
+    const events = prepareEvents(collectedEvents, videoCurrentTime);
+    const aggregatedEvents = aggregateEvents(events);
     const playedTimeSeconds = getPlayedTimeSeconds(aggregatedEvents.watchedFrames);
 
-    if (playedTimeSeconds) {
-      // video public id is registered later in videojs so we need to postpone public id fetching
-      const metadata = typeof metadataProps === 'function' ? metadataProps() : metadataProps;
-      sendBeaconRequest(CLD_ANALYTICS_ENDPOINT_URL, {
-        ...metadata,
-        userId: getUniqueUserId(),
-        playedTimeSeconds
-      });
-    }
+    // video public id is registered later in videojs so we need to postpone public id fetching
+    const metadata = typeof metadataProps === 'function' ? metadataProps() : metadataProps;
+    sendBeaconRequest(CLD_ANALYTICS_ENDPOINT_URL, {
+      ...metadata,
+      userId: getUniqueUserId(),
+      playedTimeSeconds
+    });
   });
 
-  // register events
   videoElement.addEventListener('play', (event) => {
     collectedEvents.push({
-      type: 'PLAY',
+      type: VIDEO_EVENT.PLAY,
       time: event.target.currentTime
     });
   });
 
   videoElement.addEventListener('pause', (event) => {
     collectedEvents.push({
-      type: 'PAUSE',
+      type: VIDEO_EVENT.PAUSE,
       time: event.target.currentTime
     });
   });
