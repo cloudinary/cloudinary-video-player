@@ -12,6 +12,7 @@ import colors from './colors';
 import contextMenu from './context-menu';
 import cloudinary from './cloudinary';
 import analytics from './analytics';
+import cloudinaryAnalytics from './cloudinary-analytics';
 import vttThumbnails from './vtt-thumbnails';
 
 const plugins = {
@@ -21,6 +22,7 @@ const plugins = {
   contextMenu,
   cloudinary,
   analytics,
+  cloudinaryAnalytics,
   vttThumbnails,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
