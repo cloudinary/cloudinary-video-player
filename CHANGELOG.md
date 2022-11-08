@@ -1,3 +1,10 @@
+1.9.4-edge.1 / 2022-11-08
+==================
+
+Changes
+------------
+Adding Cloudinary analytics option
+
 1.9.4-edge.0 / 2022-11-02
 ==================
 
