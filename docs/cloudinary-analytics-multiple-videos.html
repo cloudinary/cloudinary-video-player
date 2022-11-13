@@ -24,12 +24,19 @@
   <script type="text/javascript" src="./scripts.js"></script>
   <script type="text/javascript">
     window.addEventListener('load', function(){
-      const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true});
-      const player = cld.videoPlayer('player', { cloudinaryAnalytics: true });
+      const player = cloudinary.videoPlayer('player', { 
+         cloud_name: 'demo',
+         secure: true,
+         cloudinaryAnalytics: true 
+      });
 
       player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
 
-      const  adpPlayer = cld.videoPlayer('adpPlayer', { cloudinaryAnalytics: true });
+      const adpPlayer = cloudinary.videoPlayer('adpPlayer', { 
+         cloud_name: 'demo',
+         secure: true,
+         cloudinaryAnalytics: true 
+      });
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
     }, false);
   </script>
@@ -82,13 +89,20 @@
         &lt;script type="text/javascript"&gt;
 
           // Initialize player
-          const cld = cloudinary.Cloudinary.new({ cloud_name: 'demo', secure: true});
-          const player = cld.videoPlayer('player', { cloudinaryAnalytics: true });
-
-          player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
-
-          const  adpPlayer = cld.videoPlayer('adpPlayer', { cloudinaryAnalytics: true });
-          adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
+          const player = cloudinary.videoPlayer('player', { 
+            cloud_name: 'demo',
+            secure: true,
+            cloudinaryAnalytics: true 
+         });
+   
+         player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
+   
+         const adpPlayer = cloudinary.videoPlayer('adpPlayer', { 
+            cloud_name: 'demo',
+            secure: true,
+            cloudinaryAnalytics: true 
+         });
+         adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
         &lt;/script&gt;
       </code>
