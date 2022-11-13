@@ -19,15 +19,15 @@ const getUniqueUserId = () => {
 
 // prepare events list for aggregation, for example
 // if video is being played and user wants to leave the page - add "pause" event to correctly calculate played time
-const prepareEvents = (collectedEvents, videoCurrentTime) => {
+const prepareEvents = (collectedEvents) => {
   const events = [...collectedEvents];
-  const lastPlayItemIndex = events.findIndex((event) => event.type === VIDEO_EVENT.PLAY);
-  const lastPauseItemIndex = events.findIndex((event) => event.type === VIDEO_EVENT.PAUSE);
+  const lastPlayItemIndex = events.findLastIndex((event) => event.type === VIDEO_EVENT.PLAY);
+  const lastPauseItemIndex = events.findLastIndex((event) => event.type === VIDEO_EVENT.PAUSE);
 
   if (lastPlayItemIndex > lastPauseItemIndex) {
     events.push({
       type: VIDEO_EVENT.PAUSE,
-      time: videoCurrentTime
+      time: Date.now()
     });
   }
 
@@ -52,7 +52,7 @@ const aggregateEvents = (eventsList) => {
 
 const getPlayedTimeSeconds = (watchedFrames) => {
   return Math.round(watchedFrames.reduce((acc, [playTime, pauseTime]) => {
-    return acc + (pauseTime - playTime);
+    return acc + ((pauseTime - playTime) / 1000);
   }, 0));
 };
 
@@ -74,17 +74,25 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
     });
   });
 
-  videoElement.addEventListener('play', (event) => {
+  videoElement.addEventListener('play', () => {
     collectedEvents.push({
       type: VIDEO_EVENT.PLAY,
-      time: event.target.currentTime
+      time: Date.now()
     });
   });
 
-  videoElement.addEventListener('pause', (event) => {
+  videoElement.addEventListener('pause', () => {
     collectedEvents.push({
       type: VIDEO_EVENT.PAUSE,
-      time: event.target.currentTime
+      time: Date.now()
+    });
+  });
+
+  videoElement.addEventListener('emptied', () => {
+    // simulate "pause" event when source is changed
+    collectedEvents.push({
+      type: VIDEO_EVENT.PAUSE,
+      time: Date.now()
     });
   });
 };
