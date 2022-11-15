@@ -23,5 +23,6 @@ export default {
   floatingWhenNotVisible: FLOATING_TO.NONE,
   hideContextMenu: false,
   analytics: false,
+  cloudinaryAnalytics: false,
   playedEventPercents: [25, 50, 75, 100]
 };
