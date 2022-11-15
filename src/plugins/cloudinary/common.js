@@ -58,6 +58,13 @@ const isTransformationInstance = (transformation) => transformation.constructor.
 const mergeTransformations = (initTransformation1, transformation2) => {
   const transformation1 = isTransformationInstance(initTransformation1) ? initTransformation1.toOptions() : initTransformation1;
 
+  if (Array.isArray(transformation2)) {
+    // Parse transformation array members (i.e. transform keys to snake_case)
+    transformation2 = transformation2.map((tr) => {
+      return new Transformation(tr).toOptions();
+    });
+  }
+
   return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
