@@ -1,3 +1,14 @@
+1.9.4 / 2022-11-15
+==================
+
+Fixes
+-----------
+Fix:  Support HLS when using playlist
+
+Changes
+-------------
+Add analytics
+
 1.9.3 / 2022-09-13
 ==================
 
