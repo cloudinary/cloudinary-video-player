@@ -1,9 +1,8 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const { merge } = require('webpack-merge');
-const minified = require('./minified.config');
+const buildConf = require('./build.config');
 
-
-module.exports = merge(minified, {
+module.exports = merge(buildConf, {
   plugins: [
     new BundleAnalyzerPlugin()
   ]

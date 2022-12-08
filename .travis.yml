@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - "14"
-  - "12"
 install: yarn install
 before_script: npm run build-all
 script: yarn run test:unit
