@@ -1,4 +1,4 @@
-import dashjs from 'dashjs';
+/* global dashjs */
 import window from 'global/window';
 
 function find(l, f) {
