@@ -3,7 +3,7 @@ import videojs from 'video.js';
 export default async function dashPlugin() {
 
   // ToDo: consider going back to public `videojs-contrib-dash` now that it is being maintained again
-  await import(/* webpackChunkName: "dashjs" */ 'plugins/dash/videojs-dash');
+  await import(/* webpackChunkName: "dash" */ './videojs-dash');
 
   const djs = window.dashjs;
 

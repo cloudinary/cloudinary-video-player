@@ -2,28 +2,22 @@
   "name": "cloudinary-video-player",
   "version": "1.9.4-edge.2",
   "description": "Cloudinary Video Player",
-  "bundlewatch": {
-    "files": [
-      {
-        "path": "./dist/cld-video-player.min.js",
-        "maxSize": "472.3kb"
-      },
-      {
-        "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "162kb"
-      }
-    ]
-  },
+  "author": "Cloudinary",
+  "license": "MIT",
+  "main": "./dist/cld-video-player.min.js",
+  "module": "./lib/cld-video-player.min.js",
+  "style": "./dist/cld-video-player.min.css",
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist lib",
     "start": "webpack serve --config webpack/dev.config.js",
     "start:light": "WEBPACK_BUILD_LIGHT=1 webpack serve --config webpack/dev.config.js",
-    "build": "WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js",
-    "build-dev": "webpack --config webpack/build.config.js --mode=development",
+    "build": "WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
+    "build-dev": "webpack --config webpack/build.config.js  --progress --color --mode=development",
+    "build-es": "WEBPACK_BUILD_MIN=1 webpack --config webpack/es6.config.js --progress --color",
     "build-light": "WEBPACK_BUILD_LIGHT=1 WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
     "build-light-dev": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/build.config.js --progress --color --mode=development",
-    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light && npm run build-light-dev",
+    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light && npm run build-light-dev && npm run build-es",
     "analyze": "webpack --config webpack/analyzer.config.js",
     "analyze:light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/analyzer.config.js",
     "postbuild-all": "bundlewatch",
@@ -36,10 +30,18 @@
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
     "snyk-protect": "snyk protect"
   },
-  "author": "Cloudinary",
-  "license": "MIT",
-  "main": "./dist/cld-video-player.js",
-  "style": "./dist/cld-video-player.min.css",
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./dist/cld-video-player.min.js",
+        "maxSize": "256kb"
+      },
+      {
+        "path": "./dist/cld-video-player.light.min.js",
+        "maxSize": "128kb"
+      }
+    ]
+  },
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.7",
     "dashjs": "^4.5.1",

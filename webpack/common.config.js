@@ -17,7 +17,7 @@ if (!calculatedVersion) {
   console.log('No tag specified: ', tag);
 }
 
-module.exports = {
+const webpackConfig = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
@@ -25,11 +25,21 @@ module.exports = {
   },
 
   output: {
-    publicPath: 'auto',
-    path: path.resolve(__dirname, '../dist'),
     filename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
-    libraryTarget: 'umd',
-    library: 'cloudinaryVideoPlayer'
+    chunkFilename: '[name].js',
+    path: path.resolve(__dirname, '../dist'),
+    library: {
+      name: 'cloudinary-video-player',
+      type: 'umd'
+    }
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        defaultVendors: false
+      }
+    }
   },
 
   devtool: 'source-map',
@@ -117,3 +127,5 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
   ]
 };
+
+module.exports = webpackConfig;
