@@ -1,4 +1,4 @@
-import * as djs from 'dashjs';
+/* global dashjs */
 import 'videojs-per-source-behaviors';
 import 'videojs-contrib-quality-levels';
 import '../../plugins/videojs-http-source-selector/plugin';
@@ -10,8 +10,8 @@ const qualitySelector = {
 
   init: (player) => {
     // Handle DASH sources, HLS are handled internally.
-    if (player && player.qualityLevels && player.dash && player.dash.mediaPlayer) {
-      const MediaPlayer = djs.default.MediaPlayer;
+    if (window.dashjs && player && player.qualityLevels && player.dash && player.dash.mediaPlayer) {
+      const MediaPlayer = dashjs.MediaPlayer;
 
       player.dash.qualityLevels = player.qualityLevels();
       player.dash.mediaPlayer.getAutoSwitchQualityFor = (type) => {

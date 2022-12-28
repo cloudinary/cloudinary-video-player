@@ -50,7 +50,7 @@
       }));
 
       playerHls.source(
-              'sea_turtle',
+        'sea_turtle',
         {
           sourceTypes: ['hls'],
           transformation: {streaming_profile: 'hd'},
@@ -61,7 +61,7 @@
         'sea_turtle',
         {
           sourceTypes: ['hls/h265'],
-          transformation: {streaming_profile: 'h265_full_hd'},
+          transformation: {streaming_profile: 'full_hd_h265'},
           info: {title: 'HLS 265'}
         }
       );
@@ -77,7 +77,7 @@
         'sea_turtle',
         {
           sourceTypes: ['dash/vp9'],
-          transformation: {streaming_profile: 'vp9_full_hd'},
+          transformation: {streaming_profile: 'full_hd_vp9'},
           info: {title: 'MPEG-DASH vp9'}
         }
       );
@@ -96,12 +96,12 @@
         }
       );
       playerHlsIos.source(
-              'sea_turtle',
-              {
-                sourceTypes: ['hls'],
-                transformation: {streaming_profile: 'hd'},
-                info: {title: 'HLS'}
-              }
+      'sea_turtle',
+      {
+        sourceTypes: ['hls'],
+        transformation: {streaming_profile: 'hd'},
+        info: {title: 'HLS'}
+      }
       );
 
       playerHls.on('qualitychanged', function(data) {

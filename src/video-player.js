@@ -82,11 +82,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     // Handle play button options
     Utils.playButton(this.videoElement, this._videojsOptions);
 
-    // Dash plugin - available in full (not light) build only
-    if (plugins.dashPlugin) {
-      plugins.dashPlugin();
-    }
-
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
     // to do, should be change by isValidConfig
@@ -203,6 +198,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initColors();
     this._initTextTracks();
     this._initSeekThumbs();
+  }
+
+  async _initLazyPlugins(options) {
+    await this._initDash(options);
+  }
+
+  async _initDash(options) {
+    const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
+    if (plugins.dashPlugin && isDashRequired) {
+      await plugins.dashPlugin();
+    }
   }
 
   _isFullScreen() {
@@ -559,6 +565,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const maxTries = this.videojs.options_.maxTries || 3;
     const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
+
+    // Lazy loaded plugins
+    this._initLazyPlugins(options).then(() => {
+      return this.videojs.cloudinary.source(publicId, options);
+    });
+
     return this.videojs.cloudinary.source(publicId, options);
   }
 

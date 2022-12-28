@@ -1,36 +1,48 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ProvidePlugin = require('webpack/lib/ProvidePlugin');
+const { lightFilenamePart, minFilenamePart } = require('./build-utils');
+
 const ver = require('./versioning');
 
 const tag = ver.extractTag();
 const calculatedVersion = JSON.stringify(ver.getNextVersion(tag));
 const packageVersion = JSON.stringify(require('../package.json').version);
 
-const VERSION = (process.env.deploy === 'true') ? calculatedVersion || packageVersion : packageVersion;
+const VERSION =
+  process.env.deploy === 'true' ? calculatedVersion || packageVersion : packageVersion;
 console.log('Current version: ' + VERSION);
 
 if (!calculatedVersion) {
   console.log('No tag specified: ', tag);
 }
 
-module.exports = {
+const webpackConfig = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
     'cld-video-player': './index.js'
   },
 
-  performance: {
-    maxEntrypointSize: 800000,
-    maxAssetSize: 800000
+  output: {
+    filename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
+    chunkFilename: '[name].js',
+    path: path.resolve(__dirname, '../dist'),
+    library: {
+      name: 'cloudinary-video-player',
+      type: 'umd'
+    }
   },
 
-  output: {
-    libraryTarget: 'umd',
-    library: 'cloudinaryVideoPlayer'
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        defaultVendors: false
+      }
+    }
   },
+
+  devtool: 'source-map',
 
   resolve: {
     extensions: ['.js', '.scss'],
@@ -40,8 +52,10 @@ module.exports = {
         ? path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js')
         : path.resolve(__dirname, '../node_modules/video.js'),
       'video.root.js': path.resolve(__dirname, '../node_modules/video.js'),
-      'webworkify': 'webworkify-webpack2',
-      'videojs-contrib-ads': path.resolve(__dirname, '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.min.js'),
+      'videojs-contrib-ads': path.resolve(
+        __dirname,
+        '../node_modules/videojs-contrib-ads/dist/videojs-contrib-ads.min.js'
+      ),
       'videojs-ima': path.resolve(__dirname, '../node_modules/videojs-ima/dist/videojs-ima.min.js')
     }
   },
@@ -65,11 +79,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
         test: /\.(jpg|png|gif)$/,
@@ -101,22 +111,21 @@ module.exports = {
       },
       {
         test: path.resolve(__dirname, '../node_modules/video.js'),
-        use: [
-          {
-            loader: 'expose-loader',
-            options: 'videojs'
+        loader: 'expose-loader',
+        options: {
+          exposes: {
+            globalName: 'videojs',
+            override: true
           }
-        ]
+        }
       }
     ]
   },
 
-  node: {
-    fs: 'empty',
-    net: 'empty'
-  },
-
   plugins: [
-    new DefinePlugin({ VERSION })
+    new DefinePlugin({ VERSION }),
+    new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
   ]
 };
+
+module.exports = webpackConfig;

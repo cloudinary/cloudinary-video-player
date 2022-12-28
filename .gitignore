@@ -11,6 +11,7 @@ yarn-error.log
 # project
 env.js
 dist/
+lib/
 .DS_Store
 
 \.history/

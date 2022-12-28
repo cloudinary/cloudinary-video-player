@@ -1,3 +1,9 @@
-const lightFilenamePart = process.env.WEBPACK_BUILD_LIGHT ? '.light' : '';
+const isMin = !!process.env.WEBPACK_BUILD_MIN;
 
-module.exports = { lightFilenamePart };
+const isLight = !!process.env.WEBPACK_BUILD_LIGHT;
+
+const minFilenamePart = isMin ? '.min' : '';
+
+const lightFilenamePart = isLight ? '.light' : '';
+
+module.exports = { isMin, isLight, minFilenamePart, lightFilenamePart };
