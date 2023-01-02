@@ -26,7 +26,7 @@ const webpackConfig = {
 
   output: {
     filename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
-    chunkFilename: '[name].js',
+    chunkFilename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
     path: path.resolve(__dirname, '../dist'),
     publicPath: 'auto',
     library: {
