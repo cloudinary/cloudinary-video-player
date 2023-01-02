@@ -104,7 +104,7 @@ var loadStyle = function (source, ver) {
     if (light) current = current + '&light=' + light;
 
     // Create and append the options
-    versions.forEach(function (version){
+    versions.forEach(function (version) {
       var option = document.createElement('option');
       option.text = version.label;
 
