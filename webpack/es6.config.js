@@ -9,6 +9,7 @@ module.exports = merge(webpackCommon, {
 
   output: {
     path: path.resolve(__dirname, '../lib'),
+    publicPath: '',
     library: {
       type: 'module'
     }

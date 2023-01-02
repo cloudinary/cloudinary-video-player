@@ -28,6 +28,7 @@ const webpackConfig = {
     filename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
     chunkFilename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
+    publicPath: 'auto',
     library: {
       name: 'cloudinary-video-player',
       type: 'umd'
