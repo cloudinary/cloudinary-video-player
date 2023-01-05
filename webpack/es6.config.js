@@ -9,6 +9,7 @@ module.exports = merge(webpackCommon, {
 
   output: {
     path: path.resolve(__dirname, '../lib'),
+    chunkFilename: '[name]/index.js',
     publicPath: '',
     library: {
       type: 'module'

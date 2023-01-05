@@ -7,6 +7,10 @@
   "main": "./dist/cld-video-player.min.js",
   "module": "./lib/cld-video-player.min.js",
   "style": "./dist/cld-video-player.min.css",
+  "exports": {
+    ".": "./lib/cld-video-player.min.js",
+    "./*": "./lib/*"
+  },
   "scripts": {
     "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
     "clean": "rm -rf dist lib",
