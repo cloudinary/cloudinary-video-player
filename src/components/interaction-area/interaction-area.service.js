@@ -15,7 +15,7 @@ import {
   updateInteractionAreasItem
 } from './interaction-area.utils';
 import { addEventListener, createElement } from '../../utils/dom';
-import { throttle } from '../../utils/time';
+import { throttle } from '../../utils/throttle';
 import { get } from '../../utils/object';
 import { noop } from '../../utils/type-inference';
 import { addMetadataTrack } from '../../video-player.utils';
