@@ -11,6 +11,7 @@ import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { isFunction, isString, isPlainObject } from './utils/type-inference';
+import { throttle } from './utils/throttle';
 import {
   extractOptions,
   getResolveVideoElement,
@@ -125,6 +126,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _setVideoJsListeners(ready) {
 
+    // Prevent flash of error message while lazy-loading plugins.
+    videojs.hook('beforeerror', (player, err) => {
+      if (err && err.code === 3 && this.loadingLazyPlugins) {
+        err = null;
+      }
+      return err;
+    });
+
+
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
@@ -201,7 +211,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   async _initLazyPlugins(options) {
+    this.loadingLazyPlugins = true;
+
     await this._initDash(options);
+
+    throttle(() => {
+      this.loadingLazyPlugins = false;
+    });
   }
 
   async _initDash(options) {
