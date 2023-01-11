@@ -11,7 +11,6 @@ import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { isFunction, isString, isPlainObject } from './utils/type-inference';
-import { throttle } from './utils/throttle';
 import {
   extractOptions,
   getResolveVideoElement,
@@ -215,9 +214,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     await this._initDash(options);
 
-    throttle(() => {
-      this.loadingLazyPlugins = false;
-    });
+    this.loadingLazyPlugins = false;
   }
 
   async _initDash(options) {

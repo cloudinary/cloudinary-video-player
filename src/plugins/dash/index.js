@@ -18,4 +18,6 @@ export default async function dashPlugin() {
 
   // Triggered on 'beforeinitialize'
   videojs.Html5DashJS.hook('beforeinitialize', dashInit);
+
+  return Promise.resolve();
 }
