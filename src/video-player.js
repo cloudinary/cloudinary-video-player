@@ -125,6 +125,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _setVideoJsListeners(ready) {
 
+    // Prevent flash of error message while lazy-loading plugins.
+    videojs.hook('beforeerror', (player, err) => {
+      if (err && err.code === 3 && this.loadingLazyPlugins) {
+        err = null;
+      }
+      return err;
+    });
+
+
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
@@ -201,7 +210,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   async _initLazyPlugins(options) {
+    this.loadingLazyPlugins = true;
+
     await this._initDash(options);
+
+    this.loadingLazyPlugins = false;
   }
 
   async _initDash(options) {
