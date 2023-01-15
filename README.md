@@ -7,17 +7,18 @@ This README includes basic information for installation and getting started. Vie
 ## Installation
 
 ### NPM
-1. Install the files using:
+1. Install using:
 
    ```shell
    npm install cloudinary-video-player
    ```
-1. Include the javascript file in your HTML. For Example:
+1. Import the package:
 
-   ```html
-   <link href="node_modules/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
-   
-   <script src="node_modules/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+   ```js
+   import cloudinary from 'cloudinary-video-player';
+   // Also possible:
+   // import { videoPlayer } from 'cloudinary-video-player';
+   import 'cloudinary-video-player/cld-video-player.min.css';
    ```
 
 ### CDN
@@ -51,7 +52,7 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
   controls
   autoplay
   data-cld-public-id="dog"
-  class="cld-video-player cld-video-player-skin-dark">
+  class="cld-video-player cld-fluid">
 </video>
 ```
 
@@ -73,5 +74,5 @@ cloudinary.videoPlayer('example-player', {
 In order to run this project locally:
 1. [Install yarn](https://yarnpkg.com/lang/en/docs/install/)
 1. Clone this repository
-1. `yarn install`
-1. `yarn start`
+1. `npm install`
+1. `npm start`
