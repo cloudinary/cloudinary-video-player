@@ -24,12 +24,16 @@ const cloudinaryVideoPlayerConfig = (config) => ({
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
 
-window.cloudinary = {
+const cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
   Cloudinary: {
+    // Backwards compatibility with SDK v1
     new: cloudinaryVideoPlayerConfig
   }
 };
 
+window.cloudinary = cloudinary;
+
+export default cloudinary;

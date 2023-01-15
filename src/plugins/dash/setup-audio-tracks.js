@@ -1,4 +1,4 @@
-import dashjs from 'dashjs';
+/* global dashjs */
 import videojs from 'video.js';
 
 /**

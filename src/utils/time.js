@@ -47,31 +47,4 @@ const parseTime = function (hms) {
   return sum;
 };
 
-const debounce = (func, wait) => {
-
-  let _timeout = null;
-
-  return (...args) => {
-    clearTimeout(_timeout);
-
-    _timeout = setTimeout(() => {
-      func.apply(this, args);
-    }, wait);
-  };
-
-};
-
-const throttle = (func, wait) => {
-  let last = 0;
-
-  return (...args) => {
-    const now = new Date();
-
-    if (now - last >= wait) {
-      func.apply(this, args);
-      last = now;
-    }
-  };
-};
-
-export { parseISO8601, parseTime, debounce, throttle };
+export { parseISO8601, parseTime };

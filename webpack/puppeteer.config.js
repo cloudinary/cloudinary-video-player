@@ -1,9 +1,8 @@
 const { merge } = require('webpack-merge');
-const webpackDev = require('./dev.config');
-module.exports = merge(webpackDev, {
-  watch: false,
+const devConf = require('./dev.config');
+
+module.exports = merge(devConf, {
   devServer: {
-    open: false,
-    hot: false,
+    open: false
   }
 });
