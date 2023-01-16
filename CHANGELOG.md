@@ -1,3 +1,25 @@
+1.9.5-edge.0 / 2023-01-15
+==================
+
+
+
+1.9.5 / 2023-01-15
+==================
+
+Fixes
+-----------
+- CLD analytics events (#362)
+
+Changes
+-------------
+- New bundler (Webpack 5)
+- Lazy loaded Dash plugin
+- Export ESM tree-shakable module
+- Webpack major upgrade from 4 to 5 (latest)
+- DashJS upgrade to latest v4.5.2
+- VideoJS upgrade to latest v7.20.3
+
+
 1.9.4 / 2022-11-15
 ==================
 
