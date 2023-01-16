@@ -72,7 +72,6 @@ cloudinary.videoPlayer('example-player', {
 
 ## Development
 In order to run this project locally:
-1. [Install yarn](https://yarnpkg.com/lang/en/docs/install/)
 1. Clone this repository
 1. `npm install`
 1. `npm start`
