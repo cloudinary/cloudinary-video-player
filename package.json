@@ -8,7 +8,7 @@
   "module": "./lib/cld-video-player.min.js",
   "style": "./dist/cld-video-player.min.css",
   "exports": {
-    ".": "./lib/cld-video-player.min.js",
+    ".": "./lib/cld-video-player.js",
     "./*": "./lib/*"
   },
   "scripts": {
