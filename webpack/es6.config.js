@@ -14,7 +14,6 @@ module.exports = merge(webpackCommon, {
 
   output: {
     filename: '[name].js',
-
     path: path.resolve(__dirname, '../lib'),
     chunkFilename: '[name]/index.js',
     publicPath: '',
