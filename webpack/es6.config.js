@@ -9,13 +9,13 @@ module.exports = merge(webpackCommon, {
 
   entry: {
     'cld-video-player': './index.all.js',
-    'videoPlayer/index': './index.es.js'
+    'videoPlayer': './index.es.js'
   },
 
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '../lib'),
-    chunkFilename: '[name]/index.js',
+    chunkFilename: '[name].js',
     publicPath: '',
     library: {
       type: 'module'
