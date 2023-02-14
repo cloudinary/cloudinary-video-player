@@ -1,3 +1,11 @@
+1.9.6-edge.2 / 2023-02-14
+==================
+
+Changes
+-------------
+- Export chunks to files instead of sub-folders
+
+
 1.9.6-edge.1 / 2023-02-13
 ==================
 
