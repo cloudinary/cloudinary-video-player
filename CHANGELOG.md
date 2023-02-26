@@ -1,3 +1,12 @@
+1.9.7 / 2023-02-26
+==================
+
+Changes
+-------------
+- Update VideoJS to v7.21.2
+- Makes tree-shaking optional
+- Export chunks to files instead of sub-folders
+
 
 1.9.6 / 2023-02-26
 ==================
