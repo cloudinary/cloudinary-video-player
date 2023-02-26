@@ -1,264 +1,132 @@
-1.9.6-edge.2 / 2023-02-14
-==================
 
-Changes
--------------
-- Export chunks to files instead of sub-folders
-
-
-1.9.6-edge.1 / 2023-02-13
-==================
-
-Changes
--------------
-- Makes tree-shaking optional
-
-1.9.6-edge.0 / 2023-02-02
+1.9.6 / 2023-02-26
 ==================
 
 
-
-1.9.4-edge.8 / 2023-01-15
-==================
-
-
-
-1.9.4-edge.7 / 2023-01-12
-==================
-
-
-
-1.9.4-edge.6 / 2023-01-05
-==================
-
-
-
-1.9.4-edge.5 / 2023-01-02
-==================
-
-
-
-1.9.4-edge.4 / 2023-01-02
-==================
-
-
-
-1.9.4-edge.3 / 2022-12-28
-==================
-
-
-
-1.9.4-edge.2 / 2022-11-13
+1.9.5 / 2023-01-15
 ==================
 
 Fixes
-------------
-Fix: cld analytics events 
-
-1.9.4-edge.1 / 2022-11-08
-==================
+-----------
+- CLD analytics events (#362)
 
 Changes
-------------
-Adding Cloudinary analytics option
+-------------
+- New bundler (Webpack 5)
+- Lazy loaded Dash plugin
+- Export ESM tree-shakable module
+- Webpack major upgrade from 4 to 5 (latest)
+- DashJS upgrade to latest v4.5.2
+- VideoJS upgrade to latest v7.20.3
 
-1.9.4-edge.0 / 2022-11-02
+
+1.9.4 / 2022-11-15
 ==================
 
 Fixes
-----------
-Fix: HLS and playlist issues
-
-1.9.3-edge.0 / 2022-09-12
-==================
+-----------
+Fix:  Support HLS when using playlist
 
 Changes
----------
-- Add an option to disable the poster and set a poster backgound color instead
-- Post IE clean up
+-------------
+Add analytics
 
-1.9.2-edge.1 / 2022-08-29
+1.9.3 / 2022-09-13
 ==================
 
 Changes
 -----------
-- Update Cloudinary sdk to version 1.8.6
+- Add an option to disable the poster and set a poster background color instead
+- Post IE clean up
 
-1.9.2-edge.0 / 2022-08-04
+1.9.2 / 2022-08-29
 ==================
 
-Fixes
--------
-Fix: Playlist next bug fix
+Changes
+----------
+Update Cloudinary sdk to version 1.8.6
 
-1.9.1-edge.0 / 2022-04-10
+Fixes
+------------
+- Fix: Playlist clicking on Next video icon, the player skips a video
+
+1.9.1 / 2022-04-10
 ==================
 
 Fixes
 ------
 Fix: ie11 support fix
 
-1.9.0-edge.3 / 2022-03-27
+1.9.0 / 2022-03-28
 ==================
 
-Changes
------------
-Remove the use vidoejs.log and replace it with a native console.log function
-
-1.9.0-edge.2 / 2022-03-23
-==================
+Fixes
+----------
+- Fix: Video player with interactionArea + Ad issue
 
 Changes
 ----------
+- Using new SDK , no need to get cloudinary-core-shrinkwrap script anymore
 - Update webpack-dev-server version to 4.7.4
 - Update webpack-bundle-analyzer to 4.5.0
-
-1.9.0-edge.1 / 2022-03-06
-==================
-
-Fixes:
---------
-- Fix: Video player with interactionArea + Ad issue
-- new SDK changes bug fixes
-
-1.9.0-edge.0 / 2022-02-23
-==================
-
-Changes
----------
-- No need to get cloudinary-core-shrinkwrap script anymore
 - Addin syncOffsetTime for interaction area - sync video playing time on zoom
+- Remove the use vidoejs.log and replace it with a native console.log function
 
-1.8.1-edge.0 / 2022-02-08
-==================
-
--
-
-1.7.1-edge.3 / 2022-01-19
-==================
-
-Fixes
----------
-Fix: Ad is frozen when using floatingWhenNotVisible
-
-1.7.1-edge.2 / 2022-01-17
-==================
-
-Fixes
----------
-Fix: Replace context-menu plugin
-Fix: Set playsinline as default for ios devices 
-
-1.7.1-edge.1 / 2022-01-11
-==================
-
-Changes
-------------
-Update Dash.js to version 4.2.1
-
-1.7.1-edge.0 / 2022-01-11
+1.8.0 / 2022-01-31
 ==================
 
 Changes:
------------
+----------
+Update Dash.js to version 4.2.1
 Update Videojs to 7.17.0
 
-Fixes:
---------
+Fixes
+-------
+Fix: Ad is frozen when using floatingWhenNotVisible
+Fix: Replace context-menu plugin
+Fix: Set playsinline as default for ios devices
 Fix: Icons in playlist mode were missing
-Fix: The hotspot is out of the frame  in shoppable video
+Fix: The hotspot is out of the frame in shoppable video
 Fix: change hls to vhs in documentation code
 
-1.7.0-edge.5 / 2021-12-21
+
+1.7.0 / 2022-01-03
 ==================
 
 Fixes
--------
-Fix: Dash seek may pass invalid currentTime value - take 2
-
-1.7.0-edge.4 / 2021-12-21
-==================
-
-Fixes
-----------
+-----------
+Fix: Fire error event if has any HLS mediaRequestsErrored
+Fix: Escape video tag id
+Fix: support error code 3 on Safari
 Fix: Dash seek may pass invalid currentTime value.
 
-1.7.0-edge.3 / 2021-12-20
-==================
-
-Fixes
--------------
- Fix:  support error code 3 on Safari 
-
-1.7.0-edge.1 / 2021-11-24
-==================
-
-Fixes
---------
-Fix: Fire error event if has any HLS mediaRequestsErrored
-
-1.7.0-edge.0 / 2021-11-15
+1.5.9 / 2021-11-02
 ==================
 
 Fixes:
------
-Fix some documentation mistakes
-
-1.6.4-edge.2 / 2021-10-27
-==================
-
-Fixes
----------
+--------
 Fix: Be able to go back if zoom into a video with an error.
+Fix: ie11 support fix
 
-1.6.4-edge.1 / 2021-10-21
-==================
-
-Changes
------------
+Changes:
+----------
 Rename player interactionAreas config property to interactionDisplay
 
-1.6.4-edge.0 / 2021-10-21
-==================
-
-Changes
-----------
-- Rename player interactionAreas config property to interactionDesign 
-
-1.6.3-edge.4 / 2021-10-20
+1.5.8 / 2021-10-20
 ==================
 
 Fixes
--------
-change webpack build for ie11 support
+------- 
+- fix : Webpack build support  ie11
+- fix : Mark VideoJs font-family as !important
+- fix : Hide bigPlayButton when using interaction-areas
 
-1.6.3-edge.3 / 2021-10-20
+1.5.7 / 2021-09-30
 ==================
 
 Fixes
---------
-- Hide bigPlayButton and when using interaction-areas
-
-1.6.3-edge.2 / 2021-10-14
-==================
-
-Fixes
------
-Mark VideoJs font-family as !important
-
-1.6.3-edge.1 / 2021-10-06
-==================
-
-Fixes
---------
-Undo 1.6.3-edge.0 changes
-
-1.6.3-edge.0 / 2021-10-06
-==================
-
-Fixes:
--------
-Should not autoplay after interactions area layout removed if config as autoplay false
+------- 
+Validators only display console warring, do not mark player as invalid
 
 1.6.2-edge.13 / 2021-09-26
 ==================
