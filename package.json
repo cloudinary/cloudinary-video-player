@@ -5,10 +5,10 @@
   "author": "Cloudinary",
   "license": "MIT",
   "main": "./dist/cld-video-player.min.js",
-  "module": "./lib/cld-video-player.min.js",
+  "module": "./lib/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "exports": {
-    ".": "./lib/cld-video-player.min.js",
+    ".": "./lib/cld-video-player.js",
     "./*": "./lib/*"
   },
   "scripts": {
@@ -50,7 +50,7 @@
     "@cloudinary/url-gen": "^1.8.7",
     "dashjs": "^4.5.2",
     "uuid": "^9.0.0",
-    "video.js": "^7.20.3",
+    "video.js": "^7.21.2",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-contrib-quality-levels": "^2.2.0",
