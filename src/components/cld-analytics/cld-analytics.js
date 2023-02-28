@@ -19,7 +19,7 @@ const getUniqueUserId = () => {
 
 // prepare events list for aggregation, for example
 // if video is being played and user wants to leave the page - add "pause" event to correctly calculate played time
-const prepareEvents = (collectedEvents, videoCurrentTime) => {
+const prepareEvents = (collectedEvents) => {
   const events = [...collectedEvents];
   const lastPlayItemIndex = events.findLastIndex((event) => event.type === VIDEO_EVENT.PLAY);
   const lastPauseItemIndex = events.findLastIndex((event) => event.type === VIDEO_EVENT.PAUSE);
@@ -80,7 +80,6 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
   videoElement.addEventListener('play', () => {
     collectedEvents.push({
       type: VIDEO_EVENT.PLAY,
-      videoCurrentTime: videoElement.currentTime,
       time: Date.now()
     });
   });
@@ -88,7 +87,6 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
   videoElement.addEventListener('pause', () => {
     collectedEvents.push({
       type: VIDEO_EVENT.PAUSE,
-      videoCurrentTime: videoElement.currentTime,
       time: Date.now()
     });
   });
@@ -97,7 +95,6 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
     // simulate "pause" event when source is changed
     collectedEvents.push({
       type: VIDEO_EVENT.PAUSE,
-      videoCurrentTime: videoElement.currentTime,
       time: Date.now()
     });
   });
