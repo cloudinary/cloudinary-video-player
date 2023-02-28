@@ -27,7 +27,6 @@ const prepareEvents = (collectedEvents) => {
   if (lastPlayItemIndex > lastPauseItemIndex) {
     events.push({
       type: VIDEO_EVENT.PAUSE,
-      videoCurrentTime,
       time: Date.now()
     });
   }
