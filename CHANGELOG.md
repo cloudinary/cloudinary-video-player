@@ -1,3 +1,12 @@
+1.9.8-edge.1 / 2023-03-09
+==================
+
+Changes
+-------------
+- Make cld analytics opt-out
+- Send video duration to cld analytics endpoint
+
+
 1.9.8-edge.0 / 2023-02-26
 ==================
 
