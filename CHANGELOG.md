@@ -1,3 +1,9 @@
+1.9.8 / 2023-03-13
+==================
+
+- Make Cloudinary analytics opt-out
+- Send video duration to via Cloudinary analytics
+
 1.9.7 / 2023-02-26
 ==================
 
