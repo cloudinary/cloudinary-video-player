@@ -1,16 +1,11 @@
-1.9.8-edge.1 / 2023-03-09
+1.9.7 / 2023-02-26
 ==================
 
 Changes
 -------------
-- Make cld analytics opt-out
-- Send video duration to cld analytics endpoint
-
-
-1.9.8-edge.0 / 2023-02-26
-==================
-
-
+- Update VideoJS to v7.21.2
+- Makes tree-shaking optional
+- Export chunks to files instead of sub-folders
 
 
 1.9.6 / 2023-02-26
