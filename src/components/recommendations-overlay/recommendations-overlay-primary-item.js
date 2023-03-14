@@ -55,12 +55,15 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
     });
 
     this.title = dom.createEl('h2');
+    this.title.setAttribute('aria-hidden', 'true');
     this.title.innerHTML = '';
 
     this.subtitle = dom.createEl('h3');
+    this.subtitle.setAttribute('aria-hidden', 'true');
     this.subtitle.innerHTML = '';
 
     this.description = dom.createEl('p');
+    this.description.setAttribute('aria-hidden', 'true');
     this.description.innerHTML = '';
 
     this.content = dom.createEl('div', {
