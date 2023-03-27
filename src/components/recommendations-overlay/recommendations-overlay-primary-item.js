@@ -28,14 +28,25 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
 
   setTitle(text) {
     componentUtils.setText(this.title, text);
+    this.setAriaCheck(this.title, !!text);
   }
 
   setSubtitle(text) {
     componentUtils.setText(this.subtitle, text);
+    this.setAriaCheck(this.subtitle, !!text);
   }
 
   setDescription(text) {
     componentUtils.setText(this.description, text);
+    this.setAriaCheck(this.description, !!text);
+  }
+
+  setAriaCheck(element, active = true) {
+    if (active) {
+      element.removeAttribute('aria-hidden');
+    } else {
+      element.setAttribute('aria-hidden', 'true');
+    }
   }
 
   clearItem() {
@@ -55,12 +66,15 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
     });
 
     this.title = dom.createEl('h2');
+    this.setAriaCheck(this.title, false);
     this.title.innerHTML = '';
 
     this.subtitle = dom.createEl('h3');
+    this.setAriaCheck(this.subtitle, false);
     this.subtitle.innerHTML = '';
 
     this.description = dom.createEl('p');
+    this.setAriaCheck(this.description, false);
     this.description.innerHTML = '';
 
     this.content = dom.createEl('div', {
