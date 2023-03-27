@@ -1,3 +1,10 @@
+1.9.9 / 2023-03-27
+==================
+
+Changes
+-------------
+- Video Player Accessibility issue (empty elements in DOM)
+
 1.9.8 / 2023-03-13
 ==================
 
