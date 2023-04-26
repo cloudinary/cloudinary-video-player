@@ -20,7 +20,8 @@ class LogoButton extends ClickableComponent {
       class: 'vjs-control vjs-cloudinary-button vjs-button',
       href: opts.logoOnclickUrl,
       target: '_blank',
-      style: `display: ${display}; background-image: url(${bgIcon})`
+      style: `display: ${display}; background-image: url(${bgIcon})`,
+      'aria-label': 'Logo link'
     });
   }
 }
