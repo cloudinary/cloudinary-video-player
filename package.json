@@ -50,11 +50,11 @@
     "@cloudinary/url-gen": "^1.8.7",
     "dashjs": "^4.5.2",
     "uuid": "^9.0.0",
-    "video.js": "^7.21.2",
+    "video.js": "^7.21.4",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-contrib-quality-levels": "^2.2.0",
-    "videojs-ima": "^1.9.1",
+    "videojs-ima": "^2.1.0",
     "videojs-per-source-behaviors": "^2.1.0",
     "webfontloader": "^1.6.28"
   },
