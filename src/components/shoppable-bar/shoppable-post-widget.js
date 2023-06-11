@@ -69,8 +69,6 @@ class ShoppablePostWidget {
 
     // Background - poster + blur effect
     const bgSrc = this.player_.cloudinary.currentPoster();
-    console.log(bgSrc);
-    console.log(bgSrc.transformation());
 
     bgSrc.transformation([
       bgSrc.transformation().toOptions ? bgSrc.transformation().toOptions() : {},
