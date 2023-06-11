@@ -1,3 +1,9 @@
+1.9.10-edge.2 / 2023-06-11
+==================
+
+- Fix: Source syntax issue
+- Fix: Shoppable Video - product carousel overlay display error
+
 1.9.9 / 2023-03-27
 ==================
 
