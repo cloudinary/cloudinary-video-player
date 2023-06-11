@@ -24,7 +24,7 @@ import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
-import { extendCloudinaryConfig } from './plugins/cloudinary/common';
+import { extendCloudinaryConfig, normalizeOptions } from './plugins/cloudinary/common';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -545,6 +545,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
+    ({ publicId, options } = normalizeOptions(publicId, options));
+
     if (!this._isPlayerConfigValid) {
       return;
     }
@@ -570,9 +572,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.setTextTracks(options.textTracks);
+
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
+
     clearTimeout(this.reTryId);
     this.nbCalls = 0;
     const maxTries = this.videojs.options_.maxTries || 3;
