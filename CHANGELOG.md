@@ -1,30 +1,25 @@
-1.9.10-edge.3 / 2023-06-12
+
+1.9.10 / 2023-06-18
 ==================
 
-
-
-1.9.10-edge.1 / 2023-04-26
-==================
-
-Changes:
+Changes
+-------------
+- Fix: Source syntax issue
+- Fix: Shoppable Video - product carousel overlay display error
 - Add aria-label to logo link
 
-1.9.10-edge.0 / 2023-03-27
-==================
-
-
-
-1.9.9-edge.1 / 2023-03-27
+1.9.9 / 2023-03-27
 ==================
 
 Changes
 -------------
 - Video Player Accessibility issue (empty elements in DOM)
 
-1.9.9-edge.0 / 2023-03-13
+1.9.8 / 2023-03-13
 ==================
 
-
+- Make Cloudinary analytics opt-out
+- Send video duration to via Cloudinary analytics
 
 1.9.7 / 2023-02-26
 ==================
