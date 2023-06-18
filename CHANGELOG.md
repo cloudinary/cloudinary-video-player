@@ -1,8 +1,12 @@
-1.9.10-edge.2 / 2023-06-11
+
+1.9.10 / 2023-06-18
 ==================
 
+Changes
+-------------
 - Fix: Source syntax issue
 - Fix: Shoppable Video - product carousel overlay display error
+- Add aria-label to logo link
 
 1.9.9 / 2023-03-27
 ==================
