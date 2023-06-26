@@ -7,6 +7,14 @@
   "main": "./dist/cld-video-player.min.js",
   "module": "./lib/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
+  "types": "./types/video-player.d.ts",
+  "files": [
+    "dist",
+    "lib",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
   "exports": {
     ".": "./lib/cld-video-player.js",
     "./*": "./lib/*"
@@ -34,6 +42,15 @@
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
     "snyk-protect": "snyk protect"
   },
+  "keywords": [
+    "dash",
+    "hls",
+    "html5",
+    "player",
+    "video",
+    "videojs",
+    "cloudinary"
+  ],
   "bundlewatch": {
     "files": [
       {
