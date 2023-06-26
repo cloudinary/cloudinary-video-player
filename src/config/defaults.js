@@ -12,6 +12,7 @@ export default {
   controlBar: {
     'pictureInPictureToggle': false
   },
+  seekThumbnails: true,
   preload: PRELOAD.AUTO,
   loop: false,
   muted: false,
