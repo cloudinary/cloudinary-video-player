@@ -11,6 +11,7 @@
   // border: 3px solid var(--color-base);
   border-radius: 3px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(12px);
 }
 
 .vjs-vtt-time-display {
