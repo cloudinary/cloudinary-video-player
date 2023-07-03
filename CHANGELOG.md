@@ -1,3 +1,10 @@
+1.9.11-edge.2 / 2023-07-03
+==================
+
+* Fix: seek-thumbnail compatibility with other plugins
+* Add files & types to package.json
+
+
 1.9.10 / 2023-06-18
 ==================
 
