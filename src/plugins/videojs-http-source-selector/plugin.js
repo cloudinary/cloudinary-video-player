@@ -46,9 +46,13 @@ const onPlayerReady = (player) => {
     } else {
       console.log('player.videojs_http_source_selector_initialized == false');
       player.videojs_http_source_selector_initialized = true;
-      const controlBar = player.controlBar,
-        fullscreenToggle = controlBar.getChild('fullscreenToggle').el();
-      controlBar.el().insertBefore(controlBar.addChild('SourceMenuButton').el(), fullscreenToggle);
+      const controlBar = player.controlBar;
+      const fullscreenToggle = controlBar.getChild('fullscreenToggle');
+      if (fullscreenToggle) {
+        controlBar.el().insertBefore(controlBar.addChild('SourceMenuButton').el(), fullscreenToggle.el());
+      } else {
+        controlBar.el().appendChild(controlBar.addChild('SourceMenuButton').el());
+      }
     }
   });
 };
