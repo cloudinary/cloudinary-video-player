@@ -102,18 +102,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.fluid(this.playerOptions.fluid);
     }
 
-    /* global google */
-    const loaded = {
-      contribAdsLoaded: isFunction(this.videojs.ads),
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
-    };
-
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.interactionArea = interactionAreaService(this, this.playerOptions, this._videojsOptions);
     // #endif
 
     this._setCssClasses();
-    this._initPlugins(loaded);
+    this._initPlugins();
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
@@ -193,9 +187,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   }
 
-  _initPlugins (loaded) {
+  _initPlugins () {
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.adsEnabled = this._initIma(loaded);
+    this.adsEnabled = this._initIma();
     // #endif
     this._initAutoplay();
     this._initContextMenu();
@@ -228,7 +222,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.player().isFullscreen();
   }
 
-  _initIma (loaded) {
+  _initIma () {
+    /* global google */
+    const loaded = {
+      contribAdsLoaded: isFunction(this.videojs.ads),
+      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
+    };
+
     if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
       if (this.playerOptions.ads) {
         if (!loaded.contribAdsLoaded) {
