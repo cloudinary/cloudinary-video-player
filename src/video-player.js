@@ -172,24 +172,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // #endif
     });
 
-    if (this.adsEnabled && Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
-      if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
-        this.videojs.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
-          this.videojs.ima.playAd();
-        });
-
-      } else {
-        this.videojs.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
-          this.videojs.ima.playAd();
-        });
-      }
-    }
-
   }
 
   _initPlugins () {
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.adsEnabled = this._initIma();
+    this._initIma();
     // #endif
     this._initAutoplay();
     this._initContextMenu();
@@ -223,49 +210,65 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initIma () {
-    /* global google */
-    const loaded = {
-      contribAdsLoaded: isFunction(this.videojs.ads),
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
-    };
+    if (this.playerOptions.ads) {
+      import(/* webpackChunkName: "ima" */ './plugins/ima').then(() => {
 
-    if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-      if (this.playerOptions.ads) {
-        if (!loaded.contribAdsLoaded) {
-          console.log('contribAds is not loaded');
+        /* global google */
+        const loaded = {
+          contribAdsLoaded: isFunction(this.videojs.ads),
+          imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
+        };
+
+        if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
+          if (this.playerOptions.ads) {
+            if (!loaded.contribAdsLoaded) {
+              console.log('contribAds is not loaded');
+            }
+            if (!loaded.imaAdsLoaded) {
+              console.log('imaSdk is not loaded');
+            }
+          }
+
+          return false;
         }
-        if (!loaded.imaAdsLoaded) {
-          console.log('imaSdk is not loaded');
+
+        if (!this.playerOptions.ads) {
+          this.playerOptions.ads = {};
         }
-      }
 
-      return false;
+        const opts = this.playerOptions.ads;
+
+        if (Object.keys(opts).length === 0) {
+          return false;
+        }
+
+        this.videojs.ima({
+          id: this.el().id,
+          adTagUrl: opts.adTagUrl,
+          disableFlashAds: true,
+          prerollTimeout: opts.prerollTimeout || 5000,
+          postrollTimeout: opts.postrollTimeout || 5000,
+          showCountdown: (opts.showCountdown !== false),
+          adLabel: opts.adLabel || 'Advertisement',
+          locale: opts.locale || 'en',
+          autoPlayAdBreaks: (opts.autoPlayAdBreaks !== false),
+          debug: true
+        });
+
+        if (Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
+          if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
+            this.videojs.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
+              this.videojs.ima.playAd();
+            });
+
+          } else {
+            this.videojs.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
+              this.videojs.ima.playAd();
+            });
+          }
+        }
+      });
     }
-
-    if (!this.playerOptions.ads) {
-      this.playerOptions.ads = {};
-    }
-
-    const opts = this.playerOptions.ads;
-
-    if (Object.keys(opts).length === 0) {
-      return false;
-    }
-
-    this.videojs.ima({
-      id: this.el().id,
-      adTagUrl: opts.adTagUrl,
-      disableFlashAds: true,
-      prerollTimeout: opts.prerollTimeout || 5000,
-      postrollTimeout: opts.postrollTimeout || 5000,
-      showCountdown: (opts.showCountdown !== false),
-      adLabel: opts.adLabel || 'Advertisement',
-      locale: opts.locale || 'en',
-      autoPlayAdBreaks: (opts.autoPlayAdBreaks !== false),
-      debug: true
-    });
-
-    return true;
   }
 
   setTextTracks (conf) {
