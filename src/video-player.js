@@ -211,63 +211,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _initIma () {
     if (this.playerOptions.ads) {
-      import(/* webpackChunkName: "ima" */ './plugins/ima').then(() => {
-
-        /* global google */
-        const loaded = {
-          contribAdsLoaded: isFunction(this.videojs.ads),
-          imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
-        };
-
-        if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-          if (this.playerOptions.ads) {
-            if (!loaded.contribAdsLoaded) {
-              console.log('contribAds is not loaded');
-            }
-            if (!loaded.imaAdsLoaded) {
-              console.log('imaSdk is not loaded');
-            }
-          }
-
-          return false;
-        }
-
-        if (!this.playerOptions.ads) {
-          this.playerOptions.ads = {};
-        }
-
-        const opts = this.playerOptions.ads;
-
-        if (Object.keys(opts).length === 0) {
-          return false;
-        }
-
-        this.videojs.ima({
-          id: this.el().id,
-          adTagUrl: opts.adTagUrl,
-          disableFlashAds: true,
-          prerollTimeout: opts.prerollTimeout || 5000,
-          postrollTimeout: opts.postrollTimeout || 5000,
-          showCountdown: (opts.showCountdown !== false),
-          adLabel: opts.adLabel || 'Advertisement',
-          locale: opts.locale || 'en',
-          autoPlayAdBreaks: (opts.autoPlayAdBreaks !== false),
-          debug: true
-        });
-
-        if (Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
-          if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
-            this.videojs.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
-              this.videojs.ima.playAd();
-            });
-
-          } else {
-            this.videojs.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
-              this.videojs.ima.playAd();
-            });
-          }
-        }
-      });
+      plugins.imaPlugin(this.videojs, this.playerOptions);
     }
   }
 

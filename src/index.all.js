@@ -6,4 +6,4 @@
 
 export * from './index.js';
 export * from './plugins/dash/videojs-dash.js';
-export * from './plugins/ima/index.js';
+export * from './plugins/ima/ima.js';
