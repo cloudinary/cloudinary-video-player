@@ -210,7 +210,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initIma () {
-    if (this.playerOptions.ads) {
+    if (this.playerOptions.ads && Object.keys(this.playerOptions.ads).length !== 0) {
       plugins.imaPlugin(this.videojs, this.playerOptions);
     }
   }

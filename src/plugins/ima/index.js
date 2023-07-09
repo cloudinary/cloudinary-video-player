@@ -1,47 +1,34 @@
+/* global google */
 import { isFunction } from 'utils/type-inference';
 import { PLAYER_EVENT } from 'utils/consts';
 
 export default function imaPlugin(player, playerOptions) {
   import(/* webpackChunkName: "ima" */ './ima').then(() => {
-    /* global google */
     const loaded = {
       contribAdsLoaded: isFunction(player.ads),
       imaAdsLoaded: typeof google === 'object' && typeof google.ima === 'object'
     };
 
-    if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-      if (playerOptions.ads) {
-        if (!loaded.contribAdsLoaded) {
-          console.log('contribAds is not loaded');
-        }
-        if (!loaded.imaAdsLoaded) {
-          console.log('imaSdk is not loaded');
-        }
+    if (playerOptions.ads && (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded)) {
+      if (!loaded.contribAdsLoaded) {
+        console.log('contribAds is not loaded');
       }
-
-      return false;
-    }
-
-    if (!playerOptions.ads) {
-      playerOptions.ads = {};
-    }
-
-    const opts = playerOptions.ads;
-
-    if (Object.keys(opts).length === 0) {
+      if (!loaded.imaAdsLoaded) {
+        console.log('imaSdk is not loaded');
+      }
       return false;
     }
 
     player.ima({
       id: player.el().id,
-      adTagUrl: opts.adTagUrl,
+      adTagUrl: playerOptions.ads.adTagUrl,
       disableFlashAds: true,
-      prerollTimeout: opts.prerollTimeout || 5000,
-      postrollTimeout: opts.postrollTimeout || 5000,
-      showCountdown: opts.showCountdown !== false,
-      adLabel: opts.adLabel || 'Advertisement',
-      locale: opts.locale || 'en',
-      autoPlayAdBreaks: opts.autoPlayAdBreaks !== false,
+      prerollTimeout: playerOptions.ads.prerollTimeout || 5000,
+      postrollTimeout: playerOptions.ads.postrollTimeout || 5000,
+      showCountdown: playerOptions.ads.showCountdown !== false,
+      adLabel: playerOptions.ads.adLabel || 'Advertisement',
+      locale: playerOptions.ads.locale || 'en',
+      autoPlayAdBreaks: playerOptions.ads.autoPlayAdBreaks !== false,
       debug: true
     });
 
