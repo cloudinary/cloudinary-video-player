@@ -14,6 +14,7 @@ export default {
   },
   seekThumbnails: true,
   preload: PRELOAD.AUTO,
+  textTrackSettings: false,
   loop: false,
   muted: false,
   posterOptions: {},
