@@ -8,8 +8,7 @@ class SourceMenuButton extends MenuButton {
   constructor(player, options) {
     super(player, options);
 
-    // eslint-disable-next-line prefer-rest-params
-    MenuButton.apply(this, arguments);
+    // MenuButton.apply(this, [player, options]);
 
     const qualityLevels = this.player().qualityLevels();
 
@@ -28,7 +27,9 @@ class SourceMenuButton extends MenuButton {
     }
 
     // Bind update to qualityLevels changes
-    this.player().qualityLevels().on(['addqualitylevel'], videojs.bind(this, this.update));
+    this.player().qualityLevels().on('addqualitylevel', (e) => {
+      this.update(e);
+    });
   }
 
   createEl() {
@@ -38,11 +39,7 @@ class SourceMenuButton extends MenuButton {
   }
 
   buildCSSClass() {
-    return MenuButton.prototype.buildCSSClass.call(this) + ' vjs-icon-cog';
-  }
-
-  update() {
-    return MenuButton.prototype.update.call(this);
+    return `vjs-icon-cog ${super.buildCSSClass()}`;
   }
 
   createItems() {
