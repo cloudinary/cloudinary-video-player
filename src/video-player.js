@@ -306,16 +306,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const publicId = source.publicId();
 
-        const transformations = source.transformation();
+        const transformation = Utils.assign({}, source.transformation());
 
-        if (transformations && transformations.streaming_profile) {
-          delete transformations.streaming_profile;
+        if (transformation && transformation.streaming_profile) {
+          delete transformation.streaming_profile;
         }
 
-        transformations.flags = transformations.flags || [];
-        transformations.flags.push('sprite');
+        transformation.flags = transformation.flags || [];
+        transformation.flags.push('sprite');
 
-        const vttSrc = source.config().url(`${publicId}.vtt`, { transformation: transformations });
+        const vttSrc = source.config().url(`${publicId}.vtt`, { transformation });
         // vttThumbnails must be called differently on init and on source update.
         isFunction(this.videojs.vttThumbnails)
           ? this.videojs.vttThumbnails({ src: vttSrc })
