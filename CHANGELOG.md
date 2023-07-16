@@ -1,3 +1,10 @@
+1.9.12-edge.0 / 2023-07-16
+==================
+
+Now lazy loading IMA (advertising module)
+Fix: subtitles & captions keyboard accessibility
+
+
 1.9.11-edge.3 / 2023-07-03
 ==================
 
