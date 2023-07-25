@@ -1,3 +1,13 @@
+1.9.12-edge.2 / 2023-07-25
+==================
+
+* fix: IMA should not be lazy-loaded
+
+1.9.12-edge.1 / 2023-07-16
+==================
+
+Lazy load videojs-contrib-ads
+
 1.9.12-edge.0 / 2023-07-16
 ==================
 

@@ -1,5 +1,4 @@
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
-import 'videojs-contrib-ads';
 import dashPlugin from './dash';
 import imaPlugin from './ima';
 import interactive from './interactive-plugin';
