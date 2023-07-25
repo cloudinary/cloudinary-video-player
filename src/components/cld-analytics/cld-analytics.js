@@ -68,6 +68,12 @@ export const trackVideoPlayer = (videoElement, metadataProps) => {
 
     // video public id is registered later in videojs, so we need to postpone public id fetching
     const metadata = typeof metadataProps === 'function' ? metadataProps() : metadataProps;
+
+    // temporary solution to prevent sending invalid data
+    if ([undefined, 'undefined', null, ''].includes(metadata.cloudName)) {
+      return;
+    }
+
     sendBeaconRequest(CLD_ANALYTICS_ENDPOINT_URL, {
       ...metadata,
       userId: getUniqueUserId(),
