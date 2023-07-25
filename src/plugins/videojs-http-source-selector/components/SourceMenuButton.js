@@ -26,8 +26,8 @@ class SourceMenuButton extends MenuButton {
     }
 
     // Bind update to qualityLevels changes
-    this.player().qualityLevels().on('addqualitylevel', (e) => {
-      this.update(e);
+    this.player().qualityLevels().on('addqualitylevel', (event) => {
+      this.update(event);
     });
   }
 
