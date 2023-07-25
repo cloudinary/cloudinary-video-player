@@ -8,7 +8,6 @@ class SourceMenuButton extends MenuButton {
   constructor(player, options) {
     super(player, options);
 
-    // MenuButton.apply(this, [player, options]);
 
     const qualityLevels = this.player().qualityLevels();
 
