@@ -1,39 +1,15 @@
-1.9.12-edge.2 / 2023-07-25
+1.9.12 / 2023-07-25
 ==================
 
-* fix: IMA should not be lazy-loaded
+* Fix: subtitles & captions keyboard accessibility
+* Refactored ads plugin  (advertising module)
 
-1.9.12-edge.1 / 2023-07-16
+1.9.11 / 2023-07-16
 ==================
 
-Lazy load videojs-contrib-ads
-
-1.9.12-edge.0 / 2023-07-16
-==================
-
-Now lazy loading IMA (advertising module)
-Fix: subtitles & captions keyboard accessibility
-
-
-1.9.11-edge.3 / 2023-07-03
-==================
-
-* Fix: seek-thumbnail compatibility with other plugins
 * Add files & types to package.json
-
-
-1.9.11-edge.1 / 2023-06-26
-==================
-
-Changes
--------------
-- Turn seek-thumbnail on by default
-
-1.9.11-edge.0 / 2023-06-18
-==================
-
-
-
+* Turn seek-thumbnail on by default
+* Fix: seek-thumbnail compatibility with other plugins
 
 1.9.10 / 2023-06-18
 ==================
