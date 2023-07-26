@@ -1,3 +1,11 @@
+1.9.13-edge.0 / 2023-07-26
+==================
+
+* Upgrade VideoJS to v8
+* Update videojs-vr
+* Fix: seek-thumbnails error with raw-urls
+* Fix: components example page post videojs `extend` deprecation
+
 1.9.12 / 2023-07-25
 ==================
 
