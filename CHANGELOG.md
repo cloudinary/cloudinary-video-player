@@ -1,3 +1,9 @@
+1.9.12 / 2023-07-26
+==================
+
+* Fix: subtitles & captions keyboard accessibility
+* Refactored ads plugin  (advertising module)
+
 1.9.12 / 2023-07-25
 ==================
 
