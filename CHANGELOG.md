@@ -1,11 +1,15 @@
+1.9.12 / 2023-07-25
+==================
+
+* Fix: subtitles & captions keyboard accessibility
+* Refactored ads plugin  (advertising module)
+
 1.9.11 / 2023-07-16
 ==================
 
 * Add files & types to package.json
 * Turn seek-thumbnail on by default
 * Fix: seek-thumbnail compatibility with other plugins
-
-
 
 1.9.10 / 2023-06-18
 ==================

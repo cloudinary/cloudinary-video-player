@@ -102,18 +102,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.fluid(this.playerOptions.fluid);
     }
 
-    /* global google */
-    const loaded = {
-      contribAdsLoaded: isFunction(this.videojs.ads),
-      imaAdsLoaded: (typeof google === 'object' && typeof google.ima === 'object')
-    };
-
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this.interactionArea = interactionAreaService(this, this.playerOptions, this._videojsOptions);
     // #endif
 
     this._setCssClasses();
-    this._initPlugins(loaded);
+    this._initPlugins();
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
@@ -178,24 +172,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // #endif
     });
 
-    if (this.adsEnabled && Object.keys(this.playerOptions.ads).length > 0 && typeof this.videojs.ima === 'object') {
-      if (this.playerOptions.ads.adsInPlaylist === 'first-video') {
-        this.videojs.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
-          this.videojs.ima.playAd();
-        });
-
-      } else {
-        this.videojs.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
-          this.videojs.ima.playAd();
-        });
-      }
-    }
-
   }
 
-  _initPlugins (loaded) {
+  _initPlugins () {
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.adsEnabled = this._initIma(loaded);
+    this._initIma();
     // #endif
     this._initAutoplay();
     this._initContextMenu();
@@ -228,44 +209,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.player().isFullscreen();
   }
 
-  _initIma (loaded) {
-    if (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded) {
-      if (this.playerOptions.ads) {
-        if (!loaded.contribAdsLoaded) {
-          console.log('contribAds is not loaded');
-        }
-        if (!loaded.imaAdsLoaded) {
-          console.log('imaSdk is not loaded');
-        }
-      }
-
-      return false;
+  _initIma () {
+    if (this.playerOptions.ads && Object.keys(this.playerOptions.ads).length !== 0) {
+      plugins.imaPlugin(this.videojs, this.playerOptions);
     }
-
-    if (!this.playerOptions.ads) {
-      this.playerOptions.ads = {};
-    }
-
-    const opts = this.playerOptions.ads;
-
-    if (Object.keys(opts).length === 0) {
-      return false;
-    }
-
-    this.videojs.ima({
-      id: this.el().id,
-      adTagUrl: opts.adTagUrl,
-      disableFlashAds: true,
-      prerollTimeout: opts.prerollTimeout || 5000,
-      postrollTimeout: opts.postrollTimeout || 5000,
-      showCountdown: (opts.showCountdown !== false),
-      adLabel: opts.adLabel || 'Advertisement',
-      locale: opts.locale || 'en',
-      autoPlayAdBreaks: (opts.autoPlayAdBreaks !== false),
-      debug: true
-    });
-
-    return true;
   }
 
   setTextTracks (conf) {
