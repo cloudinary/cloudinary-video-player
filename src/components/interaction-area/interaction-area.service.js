@@ -25,6 +25,7 @@ import { PLAYER_EVENT } from '../../utils/consts';
 export const interactionAreaService = (player, playerOptions, videojsOptions) => {
 
   let isZoomed = false;
+  let currentSource = null;
   let currentTrack = null;
   let unZoom = noop;
 
@@ -75,7 +76,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function getInteractionAreasConfig() {
-    const { cldSrc } = player.videojs.currentSource();
+    const { cldSrc } = currentSource;
     return cldSrc && cldSrc.getInteractionAreas();
   }
 
@@ -115,6 +116,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function init() {
+    currentSource = currentSource || player.videojs.currentSource();
 
     if (isInteractionAreasEnabled()) {
 
@@ -150,7 +152,6 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
   }
 
   function onZoom(src, newOption, item) {
-    const currentSource = player.videojs.currentSource();
     const originalCurrentTime = player.currentTime();
     const isSyncOffsetTime = getIsSyncOffsetTime();
     const { cldSrc } = currentSource;
