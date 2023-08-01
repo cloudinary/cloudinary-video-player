@@ -260,6 +260,16 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-progress-holder {
       height: 0.25em;
+      &::after {
+        // Make the interactive area bigger than the visible bar.
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: -0.4rem;
+        bottom: -0.4rem;
+      }
     }
     .vjs-progress-control:hover {
       .vjs-progress-holder {
@@ -268,6 +278,9 @@ $icon-font-path: '../fonts' !default;
       }
       .vjs-time-tooltip {
         font-size: 0.8em;
+      }
+      .vjs-progress-holder::after {
+        top: -1.4rem;
       }
     }
 
