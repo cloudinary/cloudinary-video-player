@@ -190,7 +190,8 @@ const VttThumbnailsPlugin = (function () {
 
     let mouseDisplay = this.player.$('.vjs-mouse-display');
     this.progressBar = this.player.$('.vjs-progress-control');
-    let thumbHolder = document.createElement('div');
+    let thumbHolder = this.player.$('.vjs-vtt-thumbnail-display') || document.createElement('div');
+    thumbHolder.innerHTML = '';
     thumbHolder.setAttribute('class', 'vjs-vtt-thumbnail-display');
     this.progressBar.appendChild(thumbHolder);
     this.thumbnailHolder = thumbHolder;
