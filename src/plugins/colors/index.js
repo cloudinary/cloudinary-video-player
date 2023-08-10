@@ -133,7 +133,7 @@ const darkOnlyColors = `
   }
 
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-histogram-display {
-    color: rgba(--base-color, 0.4);
+    color: rgba(--text-color, 0.3);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-title-bar {

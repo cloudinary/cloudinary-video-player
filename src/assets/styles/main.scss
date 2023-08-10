@@ -256,6 +256,21 @@ $icon-font-path: '../fonts' !default;
       height: 1.0em;
       padding: 0.7em 0.2em 0 0.2em;
       bottom: 3.0em;
+
+      &::before {
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 600%;
+        background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
+        filter: invert(1); // invert inherited currentColor
+        opacity: 0.2;
+        z-index: 0;
+      }
     }
 
     .vjs-progress-holder {
