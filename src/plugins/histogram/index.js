@@ -61,7 +61,6 @@ const HistogramPlugin = (function () {
   function HistogramPlugin(player, options) {
     this.player = player;
     this.options = options;
-    this.listenForDurationChange();
     this.initializeHistogram();
     this.registeredEvents = {};
     return this;
@@ -86,16 +85,9 @@ const HistogramPlugin = (function () {
     delete this.lastStyle;
   };
 
-  HistogramPlugin.prototype.listenForDurationChange = function listenForDurationChange() {
-    this.player.on('durationchange', function () {
-      // ToDo
-    });
-  };
-
   /**
    * Bootstrap the plugin.
    */
-
   HistogramPlugin.prototype.initializeHistogram = function initializeHistogram() {
     const _this2 = this;
 
