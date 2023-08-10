@@ -32,13 +32,11 @@ const onPlayerReady = function onPlayerReady(player, options) {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const histogram = function histogram(options) {
-  const _this = this;
-
-  this.ready(function () {
-    onPlayerReady(_this, videojs.mergeOptions(defaults, options));
+function histogram(options) {
+  this.ready(() => {
+    onPlayerReady(this, videojs.mergeOptions(defaults, options));
   });
-};
+}
 
 /**
  * Histogram class.
@@ -89,47 +87,18 @@ const HistogramPlugin = (function () {
    * Bootstrap the plugin.
    */
   HistogramPlugin.prototype.initializeHistogram = function initializeHistogram() {
-    const _this2 = this;
-
     if (!this.options.src) {
       return;
     }
 
-    this.getHistogramFile(this.options.src).then(function (res) {
-      _this2.setupHistogramElement();
-      if (_this2.histogramHolder) {
-        _this2.createHistogram(res);
+    fetch(this.options.src).then((res) => {
+      return res.json();
+    }).then((res) => {
+      this.setupHistogramElement();
+      if (this.histogramHolder) {
+        this.createHistogram(res);
       }
     });
-  };
-
-  /**
-   * Grabs the contents of the VTT file.
-   *
-   * @param url
-   * @returns {Promise}
-   */
-
-  HistogramPlugin.prototype.getHistogramFile = function getHistogramFile(url) {
-    const _this3 = this;
-
-    return new Promise(function (resolve) {
-      const req = new XMLHttpRequest();
-      req.data = {
-        resolve: resolve
-      };
-      req.addEventListener('load', _this3.histogramDataLoaded);
-      req.open('GET', url);
-      req.send();
-    });
-  };
-
-  /**
-   * Callback for loaded Histogram file.
-   */
-
-  HistogramPlugin.prototype.histogramDataLoaded = function histogramDataLoaded() {
-    this.data.resolve(JSON.parse(this.responseText));
   };
 
   HistogramPlugin.prototype.setupHistogramElement = function setupHistogramElement() {
