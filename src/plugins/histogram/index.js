@@ -33,7 +33,7 @@ const onPlayerReady = function onPlayerReady(player, options) {
  *           An object of options left to the plugin author to define.
  */
 const histogram = function histogram(options) {
-  let _this = this;
+  const _this = this;
 
   this.ready(function () {
     onPlayerReady(_this, videojs.mergeOptions(defaults, options));
@@ -97,7 +97,7 @@ const HistogramPlugin = (function () {
    */
 
   HistogramPlugin.prototype.initializeHistogram = function initializeHistogram() {
-    let _this2 = this;
+    const _this2 = this;
 
     if (!this.options.src) {
       return;
@@ -119,10 +119,10 @@ const HistogramPlugin = (function () {
    */
 
   HistogramPlugin.prototype.getHistogramFile = function getHistogramFile(url) {
-    let _this3 = this;
+    const _this3 = this;
 
     return new Promise(function (resolve) {
-      let req = new XMLHttpRequest();
+      const req = new XMLHttpRequest();
       req.data = {
         resolve: resolve
       };
@@ -141,12 +141,12 @@ const HistogramPlugin = (function () {
   };
 
   HistogramPlugin.prototype.setupHistogramElement = function setupHistogramElement() {
-    let mouseDisplay = this.player.$('.vjs-mouse-display');
+    const mouseDisplay = this.player.$('.vjs-mouse-display');
     this.progressBar = this.player.$('.vjs-progress-control');
     if (!this.progressBar) {
       return;
     }
-    let histogramHolder = this.player.$('.vjs-histogram-display') || document.createElement('div');
+    const histogramHolder = this.player.$('.vjs-histogram-display') || document.createElement('div');
     histogramHolder.setAttribute('class', 'vjs-histogram-display');
     this.progressBar.appendChild(histogramHolder);
     this.histogramHolder = histogramHolder;
