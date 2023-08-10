@@ -161,7 +161,6 @@ const HistogramPlugin = (function () {
     // Create a smooth line path
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('fill', 'lightblue');
-    // path.setAttribute('stroke', 'blue');
 
     // Generate the smooth line path data
     let d = `M ${points[0].x},${points[0].y}`;
@@ -190,12 +189,9 @@ const HistogramPlugin = (function () {
     svg.setAttribute('preserveAspectRatio', 'none');
     svg.setAttribute('width', svgWidth);
     svg.setAttribute('height', svgHeight);
+    svg.innerHTML = '';
 
     const path = this.createPath(data, svgWidth, svgHeight);
-
-    while (svg.firstChild) {
-      svg.removeChild(svg.firstChild);
-    }
     svg.appendChild(path);
 
     this.histogramHolder.appendChild(svg);
