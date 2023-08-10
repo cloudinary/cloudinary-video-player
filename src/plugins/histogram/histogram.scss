@@ -5,9 +5,10 @@
   bottom: 1em;
   z-index: 0;
   pointer-events: none;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
   .vjs-progress-control:hover & {
-    display: block;
+    opacity: 1;
   }
   svg {
     width: 100%;
