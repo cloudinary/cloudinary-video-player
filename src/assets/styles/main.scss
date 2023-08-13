@@ -252,15 +252,15 @@ $icon-font-path: '../fonts' !default;
       position: absolute;
       left: 0px;
       width: 100%;
-      height: 1.0em;
-      margin-bottom: -0.5em;
-      padding: 0;
+      height: 1.2em;
       bottom: 100%;
+      transform: translateY(50%);
     }
 
     .vjs-progress-holder {
       margin: 0;
       height: 0.15em;
+      z-index: 1;
       &::after {
         // Make the interactive area bigger than the visible bar.
         content: '';
@@ -281,6 +281,7 @@ $icon-font-path: '../fonts' !default;
         font-size: 0.8em;
       }
       .vjs-progress-holder::after {
+        // Make it even bigger on hover, delay mouse-out.
         top: -1.4rem;
       }
     }
