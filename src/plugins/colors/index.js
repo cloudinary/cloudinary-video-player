@@ -137,7 +137,7 @@ const darkOnlyColors = `
   }
 
   .PLAYER-CLASS-PREFIX .vjs-title-bar {
-    background-image: linear-gradient(--base-color, rgba(255, 255, 255, 0) 100%);
+    background-image: linear-gradient(rgba(--base-color, 0.4), rgba(255, 255, 255, 0) 100%);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
