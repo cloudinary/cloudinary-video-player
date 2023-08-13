@@ -252,14 +252,15 @@ $icon-font-path: '../fonts' !default;
       position: absolute;
       left: 0px;
       width: 100%;
-      background-color: inherit;
       height: 1.0em;
-      padding: 0.7em 0.2em 0 0.2em;
-      bottom: 3.0em;
+      margin-bottom: -0.5em;
+      padding: 0;
+      bottom: 100%;
     }
 
     .vjs-progress-holder {
-      height: 0.25em;
+      margin: 0;
+      height: 0.15em;
       &::after {
         // Make the interactive area bigger than the visible bar.
         content: '';

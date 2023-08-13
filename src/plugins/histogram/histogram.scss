@@ -1,15 +1,14 @@
 .vjs-progress-control {
-  &:has(.vjs-histogram-display)::before {
+  &::before {
     content: '';
     pointer-events: none;
     position: absolute;
-    bottom: 100%;
+    bottom: 50%;
     left: 0;
     right: 0;
     width: 100%;
     height: 600%;
     background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
-    filter: invert(1); // invert inherited currentColor
     opacity: 0.4;
     z-index: 0;
   }
@@ -18,7 +17,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 1em;
+  bottom: 50%;
   z-index: 0;
   pointer-events: none;
   opacity: 0;
