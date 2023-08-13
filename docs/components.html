@@ -50,23 +50,21 @@
       var ClickableComponent = vjs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
-      var PlaylistButton = vjs.extend(ClickableComponent, {
-        constructor: function(player, options) {
+      class PlaylistButton extends ClickableComponent {
+        constructor(player, options) {
+          super(player, options);
+
           var type = options.type;
           if (!type && type !== 'previous' && type !== 'next') {
             throw new Error("Playlist must be either 'previous' or 'next'");
           }
-
-          this.type = type;
-
-          // It is important to invoke the superclass before anything else,
-          // to get all the features of components out of the box!
-          ClickableComponent.apply(this, arguments);
-        },
+        }
 
         // The `createEl` function of a component creates its DOM element.
-        createEl: function() {
-          var typeCssClass = 'vjs-playlist-' + this.type + '-control';
+        createEl() {
+          const type = this.options_.type;
+
+          var typeCssClass = 'vjs-playlist-' + type + '-control';
 
           return vjs.createEl('button', {
 
@@ -74,35 +72,35 @@
             // is a convention used in Video.js.
             className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
           });
-        },
-      });
+        }
+      };
 
       // Create the NextButton component
-      var NextButton = vjs.extend(PlaylistButton, {
-        constructor: function(player, options) {
-          PlaylistButton.apply(this, [player, { type: 'next' }]);
-        },
+      class NextButton extends PlaylistButton {
+        constructor(player, options) {
+          super(player, Object.assign({}, { type: 'next' }, options));
+        }
 
-        handleClick: function() {
+        handleClick() {
           PlaylistButton.prototype.handleClick.call(this);
 
           // Since the component has a VideoJS Player object, we use the internal
           // Cloudinary plugin to reach to the playlist object.
           this.player().cloudinary.playlist().playNext();
         }
-      });
+      }
 
       // Create the PreviousButton component
-      var PreviousButton = vjs.extend(PlaylistButton, {
-        constructor: function(player, options) {
-          PlaylistButton.apply(this, [player, { type: 'previous' }]);
-        },
+      class PreviousButton extends PlaylistButton {
+        constructor (player, options) {
+          super(player, Object.assign({}, { type: 'previous' }, options));
+        }
 
-        handleClick: function() {
+        handleClick() {
           PlaylistButton.prototype.handleClick.call(this);
           this.player().cloudinary.playlist().playPrevious();
         }
-      });
+      };
 
       // Register the component with Video.js, so it can be used in players.
       vjs.registerComponent('NextButton', NextButton);
@@ -148,6 +146,7 @@
       width="500">
     </video>
 
+
     <p class="mt-4">
       <a href="https://github.com/videojs/video.js/blob/master/docs/guides/components.md">Read more about VideoJS components</a>
     </p>
@@ -185,12 +184,7 @@
         width="500"&gt;
        &lt;/video&gt;
 
-      &lt;div id="source-data"&gt;
-        &lt;span id="public-id-placeholder"&gt;&lt;/span&gt;&lt;br&gt;
-        &lt;span id="source-url-placeholder"&gt;&lt;/span&gt;
-      &lt;/div&gt;
-
-        </code>
+      </code>
 
       <code class="language-javascript">
 
@@ -198,66 +192,65 @@
       // ===============================================
 
       // Get the ClickableComponent base class from Video.js
-      var ClickableComponent = videojs.default.getComponent('ClickableComponent');
+      let vjs =  videojs.default ? videojs.default : videojs;
+      var ClickableComponent = vjs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
-      var PlaylistButton = videojs.default.extend(ClickableComponent, {
-        constructor: function(player, options) {
+      class PlaylistButton extends ClickableComponent {
+        constructor(player, options) {
+          super(player, options);
+
           var type = options.type;
-          if (!type && type != 'previous' && type != 'next') {
+          if (!type && type !== 'previous' && type !== 'next') {
             throw new Error("Playlist must be either 'previous' or 'next'");
           }
-
-          this.type = type;
-
-          // It is important to invoke the superclass before anything else,
-          // to get all the features of components out of the box!
-          ClickableComponent.apply(this, arguments);
-        },
+        }
 
         // The `createEl` function of a component creates its DOM element.
-        createEl: function() {
-          var typeCssClass = 'vjs-playlist-' + this.type + '-control';
+        createEl() {
+          const type = this.options_.type;
 
-          return videojs.default.createEl('button', {
+          var typeCssClass = 'vjs-playlist-' + type + '-control';
+
+          return vjs.createEl('button', {
 
             // Prefixing classes of elements within a player with "vjs-"
             // is a convention used in Video.js.
             className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
           });
-        },
-      });
+        }
+      };
 
       // Create the NextButton component
-      var NextButton = videojs.default.extend(PlaylistButton, {
-        constructor: function(player, options) {
-          PlaylistButton.apply(this, [player, { type: 'next' }]);
-        },
+      class NextButton extends PlaylistButton {
+        constructor(player, options) {
+          super(player, Object.assign({}, { type: 'next' }, options));
+        }
 
-        handleClick: function() {
+        handleClick() {
           PlaylistButton.prototype.handleClick.call(this);
 
           // Since the component has a VideoJS Player object, we use the internal
           // Cloudinary plugin to reach to the playlist object.
           this.player().cloudinary.playlist().playNext();
         }
-      });
+      }
 
       // Create the PreviousButton component
-      var PreviousButton = videojs.default.extend(PlaylistButton, {
-        constructor: function(player, options) {
-          PlaylistButton.apply(this, [player, { type: 'previous' }]);
-        },
+      class PreviousButton extends PlaylistButton {
+        constructor (player, options) {
+          super(player, Object.assign({}, { type: 'previous' }, options));
+        }
 
-        handleClick: function() {
+        handleClick() {
           PlaylistButton.prototype.handleClick.call(this);
           this.player().cloudinary.playlist().playPrevious();
         }
-      });
+      };
 
       // Register the component with Video.js, so it can be used in players.
-      videojs.default.registerComponent('NextButton', NextButton);
-      videojs.default.registerComponent('PreviousButton', PreviousButton);
+      vjs.registerComponent('NextButton', NextButton);
+      vjs.registerComponent('PreviousButton', PreviousButton);
 
       // Cloudinary Video Player related code
       // ====================================
@@ -265,7 +258,8 @@
       // Initialize player with only the controlBar's 'playToggle' and our
       // custom components set.
       var player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo'
+        cloud_name: 'demo',
+        seekThumbnails: false,
         videojs: {
           controlBar: { children: ['PreviousButton', 'playToggle', 'NextButton'] }
         }

@@ -18,7 +18,6 @@ class PlaylistLayout extends Component {
     const layoutOptions = { ...OPTIONS_DEFAULT, ...options };
     super(player, layoutOptions);
     this.player_ = player;
-    this.setCls();
 
     const fluidHandler = (e, fluid) => {
       this.options_.fluid = fluid;
@@ -48,6 +47,8 @@ class PlaylistLayout extends Component {
 
     this.addChild(PLAYER_EVENT.PLAYLIST_PANEL, this.options_);
 
+    this.setCls();
+
     this.dispose = () => {
       this.removeLayout();
       super.dispose();
@@ -69,7 +70,7 @@ class PlaylistLayout extends Component {
   }
 
   setCls() {
-    this.removeClass(skinClassPrefix(this));
+    this.removeClass(skinClassPrefix(this.player()));
     this.getCls().forEach((cls) => {
       this.addClass(cls);
     });

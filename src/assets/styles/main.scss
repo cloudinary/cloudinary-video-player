@@ -126,6 +126,7 @@ $icon-font-path: '../fonts' !default;
     width: 1.5em;
     height: auto;
     border: 0;
+    margin: 0;
     border-radius: 50%;
 
     left: 50%;
@@ -272,7 +273,7 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-play-progress {
       &::before {
-        top: -0.25em;
+        content: "\f111";
       }
     }
 

@@ -24,7 +24,7 @@ import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
-import { extendCloudinaryConfig, normalizeOptions } from './plugins/cloudinary/common';
+import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -245,8 +245,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this.playerOptions.seekThumbnails) {
 
       this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-        if (!source || source.getType() === SOURCE_TYPE.AUDIO ||
-          (this.videojs && this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360) video
+        if (
+          !source ||
+          source.getType() === SOURCE_TYPE.AUDIO || // Is Audio
+          isRawUrl(source.publicId()) || // Is a raw url
+          (this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360)
         ) {
           return;
         }
@@ -262,7 +265,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformation.flags = transformation.flags || [];
         transformation.flags.push('sprite');
 
-        const vttSrc = source.config().url(`${publicId}.vtt`, { transformation });
+        const vttSrc = source.config()
+          .url(`${publicId}.vtt`, { transformation })
+          .replace(/\.json$/, ''); // Handle playlist by tag
+
         // vttThumbnails must be called differently on init and on source update.
         isFunction(this.videojs.vttThumbnails)
           ? this.videojs.vttThumbnails({ src: vttSrc })
