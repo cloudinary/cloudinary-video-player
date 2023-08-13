@@ -13,6 +13,7 @@ import cloudinary from './cloudinary';
 import analytics from './analytics';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import vttThumbnails from './vtt-thumbnails';
+import histogram from './histogram';
 
 const plugins = {
   autoplayOnScroll,
@@ -23,6 +24,7 @@ const plugins = {
   analytics,
   cloudinaryAnalytics,
   vttThumbnails,
+  histogram,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin,

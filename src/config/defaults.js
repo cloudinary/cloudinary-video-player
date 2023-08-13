@@ -13,6 +13,7 @@ export default {
     'pictureInPictureToggle': false
   },
   seekThumbnails: true,
+  showHistogram: false,
   preload: PRELOAD.AUTO,
   textTrackSettings: false,
   loop: false,
