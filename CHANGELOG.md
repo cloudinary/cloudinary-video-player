@@ -1,3 +1,8 @@
+1.9.14-edge.2 / 2023-08-14
+==================
+
+* Rename histogram to aiHighlightsGraph
+
 1.9.14-edge.1 / 2023-08-13
 ==================
 
