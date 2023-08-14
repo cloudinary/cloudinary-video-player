@@ -48,7 +48,7 @@ const playerColors = `
     color: --base-color;
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-histogram-display {
+  .PLAYER-CLASS-PREFIX .vjs-highlights-graph-display {
     color: rgba(--text-color, 0.3);
   }
 

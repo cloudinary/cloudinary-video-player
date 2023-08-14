@@ -187,7 +187,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initFloatingPlayer();
     this._initColors();
     this._initTextTracks();
-    this._initHistogram();
+    this._initHighlightsGraph();
     this._initSeekThumbs();
   }
 
@@ -278,8 +278,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _initHistogram() {
-    if (this.playerOptions.showHistogram) {
+  _initHighlightsGraph() {
+    if (this.playerOptions.aiHighlightsGraph) {
       this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
         if (
           !source ||
@@ -300,14 +300,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformation.flags = transformation.flags || [];
         transformation.flags.push('getinfo');
 
-        const histogramSrc = source.config()
+        const aiHighlightsGraphSrc = source.config()
           .url(`${publicId}`, { transformation })
           .replace(/\.json$/, ''); // Handle playlist by tag
 
         // Plugin is called differently on init and on source update.
-        isFunction(this.videojs.histogram)
-          ? this.videojs.histogram({ src: histogramSrc })
-          : this.videojs.histogram.src(histogramSrc);
+        isFunction(this.videojs.aiHighlightsGraph)
+          ? this.videojs.aiHighlightsGraph({ src: aiHighlightsGraphSrc })
+          : this.videojs.aiHighlightsGraph.src(aiHighlightsGraphSrc);
       });
     }
   }
