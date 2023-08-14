@@ -44,7 +44,7 @@ export const playerValidators = {
     playedEventPercents: validator.isArrayOfNumbers,
     showJumpControls: validator.isBoolean,
     seekThumbnails: validator.isBoolean,
-    showHistogram: validator.isBoolean,
+    aiHighlightsGraph: validator.isBoolean,
     floatingWhenNotVisible: validator.isString(FLOATING_TO),
     playedEventTimes: validator.isArray,
     playlistWidget: {
