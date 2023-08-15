@@ -86,6 +86,9 @@ $icon-font-path: '../fonts' !default;
       // Work-around for poster having slightly wrong proportions in fluid players.
       background: #000;
       background-size: cover;
+      img {
+        object-fit: cover;
+      }
     }
   }
 
