@@ -1,6 +1,13 @@
 1.9.14 / 2023-08-16
 ==================
 
+* Add AI highlights graph (histogram) plugin
+* fix: poster image black-bars post videojs v8 upgrade
+
+
+1.9.14 / 2023-08-16
+==================
+
 * fix: poster image black-bars
 * Add AI highlights graph (histogram) plugin
 
