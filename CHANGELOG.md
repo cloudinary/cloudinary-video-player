@@ -1,16 +1,7 @@
-1.9.14-edge.3 / 2023-08-15
+1.9.14 / 2023-08-16
 ==================
 
 * fix: poster image black-bars
-
-1.9.14-edge.2 / 2023-08-14
-==================
-
-* Rename histogram to aiHighlightsGraph
-
-1.9.14-edge.1 / 2023-08-13
-==================
-
 * Add AI highlights graph (histogram) plugin
 
 1.9.13 / 2023-08-13
