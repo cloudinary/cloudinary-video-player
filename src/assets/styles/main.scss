@@ -86,6 +86,9 @@ $icon-font-path: '../fonts' !default;
       // Work-around for poster having slightly wrong proportions in fluid players.
       background: #000;
       background-size: cover;
+      img {
+        object-fit: cover;
+      }
     }
   }
 
@@ -252,14 +255,25 @@ $icon-font-path: '../fonts' !default;
       position: absolute;
       left: 0px;
       width: 100%;
-      background-color: inherit;
-      height: 1.0em;
-      padding: 0.7em 0.2em 0 0.2em;
-      bottom: 3.0em;
+      height: 1.2em;
+      bottom: 100%;
+      transform: translateY(50%);
     }
 
     .vjs-progress-holder {
-      height: 0.25em;
+      margin: 0;
+      height: 0.15em;
+      z-index: 1;
+      &::after {
+        // Make the interactive area bigger than the visible bar.
+        content: '';
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: -0.4rem;
+        bottom: -0.4rem;
+      }
     }
     .vjs-progress-control:hover {
       .vjs-progress-holder {
@@ -268,6 +282,10 @@ $icon-font-path: '../fonts' !default;
       }
       .vjs-time-tooltip {
         font-size: 0.8em;
+      }
+      .vjs-progress-holder::after {
+        // Make it even bigger on hover, delay mouse-out.
+        top: -1.4rem;
       }
     }
 

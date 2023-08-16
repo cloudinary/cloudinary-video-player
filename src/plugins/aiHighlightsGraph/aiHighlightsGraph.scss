@@ -1,0 +1,35 @@
+.vjs-progress-control {
+  &::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 600%;
+    background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
+    opacity: 0.4;
+    z-index: 0;
+  }
+}
+.vjs-highlights-graph-display {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  .vjs-progress-control:hover & {
+    opacity: 0.8;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  path {
+    fill: currentColor;
+  }
+}

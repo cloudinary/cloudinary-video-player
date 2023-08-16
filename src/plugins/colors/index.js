@@ -44,6 +44,14 @@ const playerColors = `
     border-color: transparent transparent --accent-color transparent;
   }
 
+  .PLAYER-CLASS-PREFIX .vjs-progress-control:before {
+    color: --base-color;
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-highlights-graph-display {
+    color: rgba(--text-color, 0.3);
+  }
+
   .PLAYER-CLASS-PREFIX .vjs-title-bar {
     color: --text-color;
   }
@@ -129,11 +137,11 @@ const darkOnlyColors = `
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-big-play-button,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-menu-button
   .vjs-menu-content {
-    background-color: rgba(--base-color, 0.6);
+    background-color: rgba(--base-color, 0.4);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-title-bar {
-    background-image: linear-gradient(--base-color, rgba(255, 255, 255, 0) 100%);
+    background-image: linear-gradient(rgba(--base-color, 0.4), rgba(255, 255, 255, 0) 100%);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {

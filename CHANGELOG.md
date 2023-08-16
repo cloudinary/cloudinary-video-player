@@ -1,3 +1,9 @@
+1.9.14 / 2023-08-16
+==================
+
+* fix: poster image black-bars
+* Add AI highlights graph (histogram) plugin
+
 1.9.13 / 2023-08-13
 ==================
 

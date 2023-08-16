@@ -22,7 +22,7 @@ import { interactionAreaService } from './components/interaction-area/interactio
 // #endif
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
-import { get } from './utils/object';
+import { get, pick } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
 
@@ -187,6 +187,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initFloatingPlayer();
     this._initColors();
     this._initTextTracks();
+    this._initHighlightsGraph();
     this._initSeekThumbs();
   }
 
@@ -273,6 +274,40 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         isFunction(this.videojs.vttThumbnails)
           ? this.videojs.vttThumbnails({ src: vttSrc })
           : this.videojs.vttThumbnails.src(vttSrc);
+      });
+    }
+  }
+
+  _initHighlightsGraph() {
+    if (this.playerOptions.aiHighlightsGraph) {
+      this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+        if (
+          !source ||
+          source.getType() === SOURCE_TYPE.AUDIO || // Is Audio
+          isRawUrl(source.publicId()) // Is a raw url
+        ) {
+          return;
+        }
+
+        const publicId = source.publicId();
+
+        // Keep video-length related transformations and remove the rest
+        const inputTransformations = pick(source.transformation(), ['start_offset', 'end_offset', 'duration']);
+
+        const transformation = Utils.assign({}, inputTransformations);
+
+        transformation.effect = 'preview';
+        transformation.flags = transformation.flags || [];
+        transformation.flags.push('getinfo');
+
+        const aiHighlightsGraphSrc = source.config()
+          .url(`${publicId}`, { transformation })
+          .replace(/\.json$/, ''); // Handle playlist by tag
+
+        // Plugin is called differently on init and on source update.
+        isFunction(this.videojs.aiHighlightsGraph)
+          ? this.videojs.aiHighlightsGraph({ src: aiHighlightsGraphSrc })
+          : this.videojs.aiHighlightsGraph.src(aiHighlightsGraphSrc);
       });
     }
   }
