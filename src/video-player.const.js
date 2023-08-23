@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { camelize } from './utils/string';
 
 export const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
@@ -50,7 +51,8 @@ export const CLOUDINARY_CONFIG_PARAM = [
   'url_suffix',
   'use_root_path',
   'auth_token'
-];
+  // Support camelCase as well
+].map((param) => ([param, camelize(param)])).flat();
 
 export const DEFAULT_HLS_OPTIONS = {
   html5: {

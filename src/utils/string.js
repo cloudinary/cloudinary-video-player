@@ -1,4 +1,3 @@
-
 function camelize(str) {
   return str.replace(/[_.-](\w|$)/g, (_, x) => x.toUpperCase());
 }
@@ -12,4 +11,10 @@ function startsWith(str, searchStr, position) {
   }
 }
 
-export { camelize, startsWith };
+function camelToSnake(camelCaseString) {
+  return camelCaseString.replace(/[A-Z]/g, function (match) {
+    return '_' + match.toLowerCase();
+  });
+}
+
+export { camelize, startsWith, camelToSnake };
