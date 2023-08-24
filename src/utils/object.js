@@ -53,10 +53,10 @@ export const omit = (obj, keys) => {
 export const convertKeysToSnakeCase = (obj) => {
   let snakeCaseObj = {};
 
-  Object.keys(obj).forEach((key) => {
+  for (const key of Object.keys(obj)) {
     const snakeCaseKey = snakeCase(key);
     snakeCaseObj[snakeCaseKey] = obj[key];
-  });
+  }
 
   return snakeCaseObj;
 };
