@@ -1,3 +1,8 @@
+1.9.15-edge.1 / 2023-08-24
+==================
+
+* Support camelCase cloud config (i.e. cloudName)
+
 1.9.15-edge.0 / 2023-08-16
 ==================
 
