@@ -1,4 +1,4 @@
-import { camelToSnake } from './string';
+import snakeCase from 'lodash/snakeCase';
 
 /**
  * a nested value from an object
@@ -54,7 +54,7 @@ export const convertKeysToSnakeCase = (obj) => {
   let snakeCaseObj = {};
 
   Object.keys(obj).forEach((key) => {
-    const snakeCaseKey = camelToSnake(key);
+    const snakeCaseKey = snakeCase(key);
     snakeCaseObj[snakeCaseKey] = obj[key];
   });
 

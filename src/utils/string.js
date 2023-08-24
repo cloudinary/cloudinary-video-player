@@ -11,10 +11,4 @@ function startsWith(str, searchStr, position) {
   }
 }
 
-function camelToSnake(camelCaseString) {
-  return camelCaseString.replace(/[A-Z]/g, function (match) {
-    return '_' + match.toLowerCase();
-  });
-}
-
-export { camelize, startsWith, camelToSnake };
+export { camelize, startsWith };
