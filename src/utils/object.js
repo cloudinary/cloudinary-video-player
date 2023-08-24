@@ -1,3 +1,4 @@
+import snakeCase from 'lodash/snakeCase';
 
 /**
  * a nested value from an object
@@ -25,7 +26,6 @@ export const get = (value, path, defaultValue) => {
   return defaultValue;
 };
 
-
 export const pick = (obj, keys) => {
   return keys.reduce((acc, key) => {
     const value = obj[key];
@@ -48,4 +48,15 @@ export const omit = (obj, keys) => {
 
     return acc;
   }, {});
+};
+
+export const convertKeysToSnakeCase = (obj) => {
+  let snakeCaseObj = {};
+
+  for (const key of Object.keys(obj)) {
+    const snakeCaseKey = snakeCase(key);
+    snakeCaseObj[snakeCaseKey] = obj[key];
+  }
+
+  return snakeCaseObj;
 };
