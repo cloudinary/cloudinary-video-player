@@ -23,8 +23,11 @@ import { interactionAreaService } from './components/interaction-area/interactio
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
+import { flatten } from './utils/json';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
+
+const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -111,6 +114,28 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
+    this._sendAnalytics(this.playerOptions);
+  }
+
+  _sendAnalytics(options) {
+    try {
+      const name = 'video_player_init';
+      const opts = {
+        ...options,
+        cloudinary: {
+          ...options.cloudinary,
+          cloudinaryConfig: {
+            ...(options.cloudinaryConfig || {})
+          }
+        }
+      };
+      delete opts.cloudinary.chainTarget;
+      delete opts.cloudinary.cloudinaryConfig.chainTarget;
+
+      const qs = flatten(opts);
+      fetch(`${INTERNAL_ANALYTICS_URL}/${name}?${qs}&vp_version=${VERSION}`);
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
   }
 
   _clearTimeOut = () => {
