@@ -10,7 +10,6 @@ export const flatten = function (data) {
     } else if (Array.isArray(cur)) {
       // Variables declared with var are not local to the loop
       // Variables declared with let are local to the statement.
-      // eslint-disable-next-line no-var
       for (let i = 0, l = cur.length; i < l; i++) {
         recurse(cur[i], prop ? toCamelCase(`${prop} ${i}`) : `${i}`);
       }
@@ -20,7 +19,6 @@ export const flatten = function (data) {
       }
     } else {
       let isEmpty = true;
-      // eslint-disable-next-line guard-for-in
       for (let p in cur) {
         if (Object.hasOwn(cur, p)) {
           isEmpty = false;
