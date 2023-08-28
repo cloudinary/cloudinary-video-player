@@ -23,7 +23,6 @@ import { interactionAreaService } from './components/interaction-area/interactio
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
-import { flatten } from './utils/json';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
