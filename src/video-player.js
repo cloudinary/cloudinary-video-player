@@ -123,9 +123,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _sendAnalytics(options) {
-    const opts = analyticsGetPlayerOptions(options);
-    const qs = flatten(opts);
-    fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
+    try {
+      const opts = analyticsGetPlayerOptions(options);
+      const qs = flatten(opts);
+      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
   }
 
   _clearTimeOut = () => {
