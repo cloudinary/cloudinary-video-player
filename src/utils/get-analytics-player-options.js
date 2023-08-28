@@ -30,7 +30,6 @@ const getPlaylistWidgetOptions = (playlistWidgetOptions = {}) => ({
   playlistWidgetTotal: playlistWidgetOptions.total || null
 });
 
-// eslint-disable-next-line complexity
 export const getAnalyticsFromPlayerOptions = (playerOptions) => {
   return {
     showJumpControls: playerOptions.showJumpControls || null,
