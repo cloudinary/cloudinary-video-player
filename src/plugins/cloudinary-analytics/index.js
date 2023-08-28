@@ -1,19 +1,24 @@
-import { trackVideoPlayer } from '../../components/cld-analytics/cld-analytics';
+import connectCloudinaryAnalytics from 'cloudinary-video-analytics';
+import { PLAYER_EVENT } from '../../utils/consts';
 
 class CloudinaryAnalytics {
   constructor(player) {
     this.player = player;
+    this.cloudinaryAnalytics = connectCloudinaryAnalytics(this.player.videoElement);
   }
 
-  getMetadata = () => {
-    return {
-      cloudName: this.player.cloudinary.cloudinaryConfig().cloud_name,
-      videoPublicId: this.player.cloudinary.currentPublicId()
-    };
-  }
+  getMetadata = () => ({
+    cloudName: this.player.cloudinary.cloudinaryConfig().cloud_name,
+    publicId: this.player.cloudinary.currentPublicId()
+  })
 
   init() {
-    trackVideoPlayer(this.player.videoElement, this.getMetadata);
+    this.player.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
+      const metadata = this.getMetadata();
+      if (metadata.cloudName && metadata.publicId) {
+        this.cloudinaryAnalytics.startManuallyNewVideoTracking(metadata);
+      }
+    });
   }
 }
 
