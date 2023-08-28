@@ -1,3 +1,11 @@
+1.9.15-edge.2 / 2023-08-28
+==================
+
+Changes:
+------------
+ME-7047 Make cloudinary player use our video analytics package
+ME-7008 Collect video player usage
+
 1.9.15-edge.1 / 2023-08-24
 ==================
 
