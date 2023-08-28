@@ -25,7 +25,7 @@ import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
 import { flatten } from './utils/json';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
-import { analyticsGetPlayerOptions } from './utils/analytics-get-player-options';
+import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
@@ -124,8 +124,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _sendAnalytics(options) {
     try {
-      const opts = analyticsGetPlayerOptions(options);
-      const qs = flatten(opts);
+      const opts = getAnalyticsFromPlayerOptions(options);
+      const qs = new URLSearchParams(opts).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
