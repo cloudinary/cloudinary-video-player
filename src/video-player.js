@@ -123,8 +123,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _sendAnalytics(options) {
     try {
-      const opts = getAnalyticsFromPlayerOptions(options);
-      const qs = new URLSearchParams(opts).toString();
+      const analyticsData = getAnalyticsFromPlayerOptions(options);
+      const qs = new URLSearchParams(analyticsData).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
