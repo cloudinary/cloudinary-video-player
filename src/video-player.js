@@ -61,6 +61,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     };
   }
 
+  get playerOptions() {
+    return this.options.playerOptions;
+  }
+
   constructor(elem, initOptions, ready) {
     super();
 
@@ -514,10 +518,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   cloudinaryConfig(config) {
     return this.videojs.cloudinary.cloudinaryConfig(config);
-  }
-
-  get playerOptions() {
-    return this.options.playerOptions;
   }
 
   currentPublicId() {
