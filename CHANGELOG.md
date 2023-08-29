@@ -1,3 +1,10 @@
+1.9.15-edge.3 / 2023-08-29
+==================
+
+Changes:
+--------
+* Bump cloudinary-video-analytics package version to 1.2.1
+
 1.9.15-edge.2 / 2023-08-28
 ==================
 
