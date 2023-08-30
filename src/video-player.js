@@ -24,7 +24,10 @@ import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
+import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
+
+const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -115,6 +118,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
+    this._sendAnalytics(this.playerOptions);
+  }
+
+  _sendAnalytics(options) {
+    try {
+      const analyticsData = getAnalyticsFromPlayerOptions(options);
+      const qs = new URLSearchParams(analyticsData).toString();
+      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
   }
 
   _clearTimeOut = () => {
