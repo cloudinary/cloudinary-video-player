@@ -1,27 +1,9 @@
-1.9.15-edge.3 / 2023-08-29
-==================
-
-Changes:
---------
-* Bump cloudinary-video-analytics package version to 1.2.1
-
-1.9.15-edge.2 / 2023-08-28
-==================
-
-Changes:
-------------
-ME-7047 Make cloudinary player use our video analytics package
-ME-7008 Collect video player usage
-
-1.9.15-edge.1 / 2023-08-24
+1.9.15 / 2023-08-29
 ==================
 
 * Support camelCase cloud config (i.e. cloudName)
-
-1.9.15-edge.0 / 2023-08-16
-==================
-
-
+* Use cloudinary-video-analytics
+* Collect video player usage
 
 1.9.14 / 2023-08-16
 ==================
