@@ -1,5 +1,5 @@
 // Dependencies
-$icon-font-path: '../fonts' !default;
+$icon-font-path: '../icon-font' !default;
 
 // Video.js overrides
 @import 'variables';
@@ -104,7 +104,7 @@ $icon-font-path: '../fonts' !default;
   }
 
   .vjs-time-divider {
-    min-width: 1em;
+    min-width: 0;
     display: block;
   }
 
@@ -255,14 +255,12 @@ $icon-font-path: '../fonts' !default;
       position: absolute;
       left: 0px;
       width: 100%;
-      height: 1.2em;
+      height: 3px;
       bottom: 100%;
-      transform: translateY(50%);
     }
 
     .vjs-progress-holder {
       margin: 0;
-      height: 0.15em;
       z-index: 1;
       &::after {
         // Make the interactive area bigger than the visible bar.
@@ -277,7 +275,7 @@ $icon-font-path: '../fonts' !default;
     }
     .vjs-progress-control:hover {
       .vjs-progress-holder {
-        font-size: 1.2em;
+        font-size: inherit;
         transition: none;
       }
       .vjs-time-tooltip {
@@ -291,10 +289,9 @@ $icon-font-path: '../fonts' !default;
 
     .vjs-play-progress {
       &::before {
-        content: "\f111";
+        display: none;
       }
     }
-
 
     .vjs-progress-control-events-blocker {
       background-color: transparent;
