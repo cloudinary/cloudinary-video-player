@@ -1,6 +1,6 @@
 import WebFont from 'webfontloader';
 
-const FONT_FAMILY = 'Fira Sans';
+const FONT_FAMILY = 'Inter';
 
 const fontFace = (elem, options) => {
   let fontFace = options.cloudinary.fontFace;

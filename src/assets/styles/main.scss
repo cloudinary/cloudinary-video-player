@@ -20,7 +20,7 @@ $icon-font-path: '../icon-font' !default;
   line-height: 1.5em;
 }
 .video-js .vjs-control {
-  width: 3em;
+  width: 2.8em;
 }
 
 .video-js {
@@ -40,10 +40,6 @@ $icon-font-path: '../icon-font' !default;
 .vjs-volume-bar {
   &:focus {
     outline: none;
-  }
-
-  &:hover {
-    opacity: 0.95;
   }
 }
 
@@ -109,7 +105,7 @@ $icon-font-path: '../icon-font' !default;
     width: auto;
     font-variant-numeric: tabular-nums;
     > * {
-      font-size: 14px;
+      font-size: 13px;
     }
   }
 
@@ -272,6 +268,7 @@ $icon-font-path: '../icon-font' !default;
     .vjs-progress-holder {
       margin: 0;
       z-index: 1;
+      height: 100%;
       &::after {
         // Make the interactive area bigger than the visible bar.
         content: '';
