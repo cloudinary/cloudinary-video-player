@@ -122,9 +122,9 @@ export const overrideDefaultVideojsComponents = () => {
     children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
     // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
-    children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'JumpBackButton', 'playToggle', 'JumpForwardButton', 'playlistNextButton');
+    children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'JumpBackButton', 'JumpForwardButton', 'playlistNextButton');
 
-    // Position the 'logo-button' button right next to 'fullscreenToggle'
-    children.splice(children.indexOf('fullscreenToggle'), 1, 'logoButton', 'fullscreenToggle');
+    // Position the 'logo-button' button last
+    children.push('logoButton');
   }
 };

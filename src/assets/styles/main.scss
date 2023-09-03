@@ -23,7 +23,6 @@ $icon-font-path: '../icon-font' !default;
   width: 3em;
 }
 
-
 .video-js {
   overflow: hidden;
 }
@@ -39,7 +38,6 @@ $icon-font-path: '../icon-font' !default;
 .vjs-big-play-button,
 .vjs-icon-close,
 .vjs-volume-bar {
-
   &:focus {
     outline: none;
   }
@@ -47,6 +45,14 @@ $icon-font-path: '../icon-font' !default;
   &:hover {
     opacity: 0.95;
   }
+}
+
+.vjs-control::before,
+.vjs-icon-placeholder::before,
+.vjs-playback-rate-value,
+.vjs-time-divider,
+.vjs-duration {
+  opacity: 0.8;
 }
 
 .vjs-cloudinary-button:focus {
@@ -73,7 +79,6 @@ $icon-font-path: '../icon-font' !default;
 .cld-video-player {
   font-family: $text-font-family;
 
-
   &:focus {
     outline: none;
   }
@@ -99,8 +104,13 @@ $icon-font-path: '../icon-font' !default;
   font-weight: 300;
 
   .vjs-time-control {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0.15em;
+    padding-right: 0.15em;
+    width: auto;
+    font-variant-numeric: tabular-nums;
+    > * {
+      font-size: 14px;
+    }
   }
 
   .vjs-time-divider {
@@ -304,6 +314,10 @@ $icon-font-path: '../icon-font' !default;
       vertical-align: top;
       display: inline-block;
       margin-bottom: -0.3em;
+    }
+
+    > .vjs-icon-placeholder:before {
+      content: "\f10b" !important;
     }
   }
 
