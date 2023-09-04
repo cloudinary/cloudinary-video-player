@@ -45,10 +45,17 @@ $icon-font-path: '../icon-font' !default;
 
 .vjs-control::before,
 .vjs-icon-placeholder::before,
-.vjs-playback-rate-value,
 .vjs-time-divider,
-.vjs-duration {
+.vjs-duration,
+.vjs-playback-rate-value {
   opacity: 0.8;
+}
+.vjs-control:hover::before,
+.vjs-icon-placeholder:hover::before,
+.vjs-time-divider:hover,
+.vjs-duration:hover,
+.vjs-playback-rate:hover .vjs-playback-rate-value {
+  opacity: 1;
 }
 
 .vjs-cloudinary-button:focus {
@@ -304,6 +311,11 @@ $icon-font-path: '../icon-font' !default;
       background-color: transparent;
       @extend .vjs-progress-control
     }
+  }
+
+  .vjs-playback-rate-value {
+    font-size: 1.3em;
+    line-height: 2.3em;
   }
 
   .vjs-subs-caps-button {
