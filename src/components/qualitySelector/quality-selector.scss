@@ -1,15 +1,14 @@
 .cld-video-player {
-
   .vjs-http-source-selector {
-
-    .vjs-icon-placeholder {
-      font-family: VideoJS;
-      font-weight: 400;
-      font-style: normal;
-      &:before {
-        content: "\f114";
+    > .vjs-button {
+      > .vjs-icon-placeholder {
+        font-family: VideoJS;
+        font-weight: 400;
+        font-style: normal;
+        &:before {
+          content: "\f114";
+        }
       }
     }
-
   }
 }

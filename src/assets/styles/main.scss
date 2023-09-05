@@ -241,27 +241,31 @@ $icon-font-path: '../icon-font' !default;
     opacity: 0;
   }
 
+  .vjs-progress-control.vjs-control {
+    &::before {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 5rem;
+      background: linear-gradient(to bottom, transparent 0%, currentColor 100%);
+      opacity: 0.4;
+      z-index: 0;
+    }
+  }
+
   .vjs-control-bar {
     z-index: 2;
 
     .vjs-volume-panel {
       margin-right: 1em;
-    }
 
-   .vjs-menu-button-inline:hover,
-   .vjs-menu-button-inline:focus,
-   .vjs-menu-button-inline.vjs-slider-active,
-   .vjs-no-flex .vjs-menu-button-inline {
-      // This width is currently specific to the inline volume bar.
-      width: 10em;
-    }
-
-    .vjs-menu-button-inline:before {
-      width: 1.6em;
-    }
-
-    .vjs-menu-button-inline .vjs-menu {
-      left: 3em;
+      &.vjs-volume-panel-horizontal.vjs-hover {
+        width: 8em;
+      }
     }
 
     .vjs-progress-control {
