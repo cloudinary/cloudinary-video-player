@@ -11,7 +11,7 @@ class JumpBackButton extends ClickableComponent {
 
   createEl() {
     return videojs.dom.createEl('button', {
-      className: 'vjs-control vjs-icon-skip-10-min vjs-button'
+      className: 'vjs-control vjs-icon-skip-10-min vjs-icon-replay-10 vjs-button'
     });
   }
 }

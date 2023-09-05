@@ -1,0 +1,96 @@
+// https://github.com/sass/sass/issues/659#issuecomment-64819075
+@function char($character-code) {
+  @if function-exists("selector-append") {
+    @return unquote("\"\\#{$character-code}\"");
+  }
+
+  @return str-slice("\x", 1, 1) + $character-code;
+}
+
+$icon-font-family: VideoJS;
+
+@font-face {
+  font-family: $icon-font-family;
+  src: url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAABXgAAsAAAAAI6wAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADsAAABUIIslek9TLzIAAAFEAAAAPgAAAFZRiV3yY21hcAAAAYQAAAESAAAEAmOc+Z5nbHlmAAACmAAAD7wAABgMlkC3X2hlYWQAABJUAAAAKgAAADYoS6dJaGhlYQAAEoAAAAAbAAAAJA4DBzFobXR4AAASnAAAAA8AAADEUAAAAGxvY2EAABKsAAAAZAAAAGSHBo1qbWF4cAAAExAAAAAfAAAAIAFCAI9uYW1lAAATMAAAASUAAAIK1cf1oHBvc3QAABRYAAABhQAAAoSykZBveJxjYGRgYOBiMGCwY2BycfMJYeDLSSzJY5BiYGGAAJA8MpsxJzM9kYEDxgPKsYBpDiBmg4gCACY7BUgAeJxjYGS7zTiBgZWBgaWQ5RkDA8MvCM0cwxDOeI6BgYmBlZkBKwhIc01hcPjI+NGAHcRdyA4RZgQRADS6CyIAAHic7dPXcYNAGEXhg4RyzjnnTCkqyQX5yZ1RgbyX6zLMzLdn2AGhmR+AApAP7kEM0Q8ROr7DbpTt56lm+zFf2TWx9tPk8wlrpDWcx9maC9fG4ReLlChTCffVqNOgSYs2Hbr06DNgyIgxE6bMmLNgyYo1G7bs2HPgyIkzF67cwvMfPHmRhAcU+T/qWnLvv7NEM7BsKjlDzZumm8amOaUF0+TToqGWDLVsqBVDrZreiLRmqHXTv0sbhto01Jahtg21Y6hdQ+0Zat9QB4Y6NNSRoY4NdWKoU0OdGercUBeGujTUlaGuDXVjqFtD3Rnq3lAPhno01JOhng31YqhXQ70Z6t30FacPQ30a6stQEyP5Beu3dn8AAHicnVgLVBRXmq6/qqsaaEAa+qEBmq5u6AYaGuhnlDeILwwgBNBBfAUFREcmWVQSH61RRsUBc7QZkkkmo5OY+Dom2Y3ugUnC5swjk4lodkajMSrZrHsczXs0UaHu7H+rG8QYc2amq6vq3rp/3fvf//ufxQCDP/4Mf4ZhGQbUwKq4d6FNsUg6xDAcHRNahBYci2VcDBPKxpiUkaAUovQG0OuM3jzweqKsdrBaOJN8c8mPHPKwRiZlr8EAKfD3dnYMTs7OnjzY0QmZd9q97ata9qdnZKTvb1n19Z0mmwkVePxCpiGn7nn39sB33wg0GboL3E8B34ncK3FHolqUzwGwkdNsNb3yncNXFbrhq4xC3t983J+BEZk0ZhrSW6wWq1an1+EOtBqlgIfe45UPt8tqSfKqQStMAKubbjAJvKC0Uhq3w+vJB483y+NFGYpq/pXKn6zY0VhWkZtbqOCUKtOa2ChdWKQQlpI68noXLOMBDlsL9a6Rm+TpVr6z9W3PzJKZqglhMZqwmIRI8p9kBxnklzYX5se/GOdyV5X3NxiS9Gl5U9bYLVn2By3e9K629qoO8il5awLP84ef0xdaZ66HH7febmt9O3WSSXWY55RKISQyDGaQZdAGA4yMs+IQ4sxTnEUZakiF1WSHYhEpIJ2Kg6STGZVfm0wXE6QMBZ0MaFAgsAyc0EY62WS70WwLV6VrzUY7+ysUcdtwDbSxnD7OMDvLbl9QZjHE65lRPaJynohyto5K2cBp6HRaqjFUjSwgy9iq9iTJ/AWEuOyXTxQW5j52ctvZedW2tDQbaXe5MmtrR2rAQZkflVLjs/1/7C97Nvdw/MblK1a3g6Z9tXR+fsUjM6vSpINpCaPMBTE3CkZGYMKZaOSIiVG7Ra2oBreoNqvBrBbdKazaqRaHUHFPU/X1D1/1B9s2PylQLMKbn5yWO2CTtKjeqFcF4+bmGRWjlucW6UwoRbpAsC2vNhSYSktfHPHJHc5HF1HcoI9oC9ccvobLDNBV6ILy9GM2GcJEMFrUXDNqLhMKFrOJYpOEVgi8CLLC8oAC1mr0Io/wIWg6J+qpF9g3oaGyYssTqx+BaK7L+dnz5HP2snQKHq93ukeiyQW8TWAzpf/FEYheSy5UlVNa8jn3JdsUk26bQ6xrfn07h1hLpceWbdzSXVoKN+X7rFJ8DOdICCWCc1TTqDyCtqhiJlCNilFTSbhF3uk2J+Gpx/YQXzD8J3aWdIy9VFoqiaWlQ7SDbgitFFSlpaUDeI7qkRF1M4axMcXUuk2RoFVrDOAUHXngVrvsAGa3Wet0O7UawQYmCz7zZINDp+Xv9xy9QXJJMv4VOvkubW71+1ttCUMJaWl4sbEq2peb8kP+dPLUlBFfytRkvHP0Ln2TNJQ0i5JDKr3Ours7phci8p3ApDDpP8C5We1ELrNBRNbUGsEselFG38tjK/57AiuQM8iiYMShu+hGfH7Uof5+SpCQ1jp0R3+Mim/GYYI2GoOrqIMnRUdNT63oHvLLP7AptMPXAifn7qEKP4AaSxtstd8/Nu9qYS0TifMloJVnMF6GSbKzrDuKSdIKTBSj94JXjzbg1YMbjV4fCTH2gCuNsWLfGQkc9r3Y5zJ33TzeCFsg8QoZhMwrFWRr/YXN5+vJB5VPFzXVDv7XtKcrW9+b17zUlafaFfFwRkSOa/m0StXOiE0nQLkHLeBVQ5eJ/JrYyT7xM2iv/whukpCP6qXwLlWBq3F6jeIvjqKILlVNyfCppcU41Qk4U/VM0SM1J1YxYz7wKv8NWpgOsaLagpaLJwISOraH3Y6HNnJnN5a6iJb8tO7Shkt1oCt1gZEM0dNVCjmwpu4ie1Sac7EuOOen/FWUeyjOiU4AZwpFs/yxIlFykvL5UM2e+BFM3LQJKuHVueQg9sZ8Z7lQLuMUi0jRkGMxi0GmQCnPorRyaqv6ON/78GsssCPllDUvGS4hPy0hkxST63bWVW0Qym83Vb7KskEe+WJYUwJXSMb8n9WztdK3m2AbLiXHCUEUVjBZdOfoUTwuK6CaopaijlKt1ejBDmZsUe11oD9BF2OAwDhfkFpqkD5VKtkJhnJbbmNOTuPjjTlK6avRXq6t3MBqhOyG1Q3Z2Q1suSEOvLGOWHDFG2VSpJgUS07EBXrGOPLupInZDVOmUPoxbIQI9LFWJhP1i2YdSqvXDq58VB19HuSDSIOVV680AMYXlEwkTADO4XFZTIJGx96ITayK/8POw5yC5Q/v/J2pLDEedLG2IvOfdr4mACsc7XzHPN0S+7OylSufW7Fi6KzK/sDDX2/W2KzajM1fVMWlh589NyE5vuqLjomWRGvslq9r4lMjzsHllc+uxP+o7pyRfZT+++2cQ+viC+7yILJH4Xz3upbha5wviEmLHD+ZGM09uZdRTrT89yRXwcSJ890n+bojz8DcMuL/bH5339nvk9oJLf90UsfdxWPev8JljCYSTKgkeeAwALK8o+MkXfxkxw7IvNO+D8uNQc3EC+UeCcmpeya4H/ds9agV5DR+R96JP7CTGGUoWIMe4r4ivtBMrpPrzaAiN5ohHMKbyY37i3ck9C5CUOHLo/wY5XxCTfUV3RKmJ04MAqFyRsSq2Ks0ax7x9bBXJR1Nezhfj+IGJjBgG8LMsWCInCanh0ZzTP6McEzO8TBtVDswkdbJWaMJEzuL2xxQXoe8UVcAMh/phLbHm5Zl5+ZmL2u6Thv+jPQXW1ZdX9XyIhUlNvlOSCWdSJhKaf7WvDQnNzdnaXP7OLz+htT2jKD9PYU8RDEmWrF4rU4jo3a6WEuiDfN1molpRYcHLRGdqFt0s3vIb2Bq/d4s0MCarevOkUv7HYfJWniZzIUPM4qKMsgJeEF4nfyG9NfvJRvItf0gnlt3WHJIt/tfKs4AU0bxmy8wwRifJrzFxGNGZsX8hEky2Vm3U8MYkRUbumjqpp0OAxsVyYLa7HbKMcXqVJs5X9et/uU+mAqnYCr53ZWUrZXkMsTO6bZ13epraem7STqX/HYJzPi/rVu3Le+71X2FckxpOyohFmIruvEh+eRW33I4BjsXEB1cJbqFkB7k6T3hvCwLB+P5HnloxdEjKBPeJKC/0jnH+pTB90gfTFuwLwu00L513Yfk4kvOIyMPwiYyDDzZCHuy58zJhv8orK0thHh6Jd/euCGcJ32kr34fWUeuvgSmD9cdkeYf/e3RgaNzi9j6orl8baF0pKC2toCtKqw9IP15LO7uCfLLgFJvNikEVuuMYkSnUh96L3iKsrojzv3k4rl1W2EtaDP31kOJ9BAcILXwkb242E7egxeF83VHENaL+0EHmykBSZBuIXR2SLQXv/UCMx47HmNzBMXuOwAhklF5bDZGGLRKr9mEDBoZxDaSZZ8ZhaYgANatruTuCogllyu2iWNA+RBENm88OCNvImgQj6B1V5DLlBo1LJPSX+nGh0GezozH7l55/GPg9ckyunBu/VZ4HLRZ++phmqQCn4ydD3bL2D1JkQADvZJvr1+XZUZhRpltoS+Q6eOgE+6FbixvOEarkaBXk+NeNqLmHu+Q42kdFIiFQQewff3aPqcbIz96kpTkpxYs/sviBU8lp6BTQdfpdvatXS+87nL2r12/XfoGn2DG2bJ4wa7klJTkXQsWt/ilQ/gqG4az9Dtdd/K3Ar4AWwLVeZq6wQD7hLSVvYaZKz1ouL2blqO0gAJDPcPs1g88+wQN07T+CtByY7GdY8KotwwFatT0UCM4SlGt5HRkQzNshq7ekbnN3IFe7P21F57pVVTB5mayAa71jtQ2cy/jI6mw+SodGdO/Y1gfaDHDS2WmBPOGeHDSTFx7p0LQOmn+oJXdKrYD8tMG5DraF4y3BzBz8PMF0g1WJecSt1kqyaW11VlOf4oVBbx82/p2FLm/MO+TPb1y4TA0hEXuaOEw/CtKD7YeZ1Z17dLlMhqQ6peh2P7S07s/yS8YlzugPMKwjmBiUtBq1JThFGRXVPsVOhjowap7QDrIn5G0/GnpEBW8P1At3/1+JJW9KCfZeE3CU6HtgYHbqT2Kg7RCZq/RCYZr2GqKhl9+PxBvOrG+VGHHGkADYybwncvJQrJwOeyVL7AXu7yIF7l1Z2Bsjnwlw2hkqzcJqJ8c3QathVwep4PPf64mB5KshAz+/e+njuwWrpObM2a8Qc5Koey3kPxh34kx3RB8mDdzuJdU+cuJGnRyrenyOHS0iwZpogW5WoyOysBIa87jnDhygRyDhdD4MFvZ0Li/QdFNjs+pya/WqshxFgBmsprU6Y35h04pukdE7hI4Zi5Zsnvx4pEL0jtsdPOaEqfBKX0A3fBlZuYuY+aDCZ+M2uIeVGea0QlKnVbDRoLCbLTSDwCoI4FbLuj0dkDb1Cn0Fnmreo9XUHqEPcULYfYvzpD/Pky++ths+/iV5v0JYpwttXX31LKisrR2qPt9yBsdOxetXJTUXM83LSmJjNtMpM+Pr3xKsYNdv5hX6V9tU1i4tK6quaX+fw+zJHa8sUw7+bH8sDF5+1De1MPrqZuwc270tnkK9BHZgS8lGgPr9fCZFfpX5jUdaS0TX57x6NRMDQ9KxXV4iLwWYSzOLIOTn5nzgH1w/tq1U1jjBw/U1q+qTeeVZO6IdNvgwqKSDcrBJ/iYWbiWhlWYTVZPfrCYcbvkIobTatCW6Lc7jzUgBJSWYDZZvHmsWwYM6x1O0FuwF51oVEQLvkHy/PurWrJjPJrlue1vNq35n67mYxvrbBUPGUJCBFZQO98/8PMD21tyZ0WGJOk9jryaSY+oFYNYxy6GfbB4kPO9T54fNNZP/7N18vYvex59Z8OURes7ipt+aQw3JkwU9JrcH/383AtPHvy8NtfcNi/BUfRo9cwssmBaSx2s++v7OAGuz9Bvm3gBxUlmEuYbecw85t+YjcxmqndOD3UPgUP2w0rBaskAi1eHm7SDUq3hdYHPlR43btpqFvS6BKDkmKnpR4e8rvFDWt0PDvHOfPRNarOgQh9l5eLimuyzXblpjiRrtEaprJ46vcrd5E4F9lBlS6gyc0kBbHggWhUVloilZHKCNx44VuCs+lgwxi4MDugg2eA1ABZpisDAgkkx3zcgPnBrw+eFHx88EfHVF6yuC/7ISixw4RMSEl2Tp5bOmdebkRWiAGA5xdtczeyiBhdP/Mq3lTEqo6ZgennVT5rKZ4eE8KHC9Nnz65obq6v/hZG6BljKhWvJk6QDpFsw9p0Kc+pwjIaTaTyUi+VAiYyCorFRLgndtIzHylWkZbSH6ptovYs46MDn0I86ZKIfwhtikkuwNBx5Xqlii9m0lGkaUIWmJQy/Mp07njxGCgPJJXIDL4pDPdK7x00WGhNUIbyiPdUMl6M0Cbae4eo7VMjx/wM+8F56eJxjYGRgYADiiNr05fH8Nl8ZuNkZQOChmJ4aMs3OCBbnYGACUQDZ4gZGAAB4nGNgZGBgZwABEPn/PzsjAyMDKjAEAC2TAkgAeJxjYGBgYB/iGACBZAFRAAAAAAAADgBoAH4A9AEIATIBeAGmAdgCLgJWArIC+AMkA4oDtAPQBAgEWASoBNIFAAVSBbgGAAYmBmgGpAbuB0YHggfMCCQIagiACJYIwgkeCT4JXgmACaQJ6go4Cm4K3AuqDAZ4nGNgZGBgMGRoZmBnAAEmIOYCQgaG/2A+AwAa4QHSAHicXZBNaoNAGIZfE5PQCKFQ2lUps2oXBfOzzAESyDKBQJdGR2NQR3QSSE/QE/QEPUUPUHqsvsrXjTMw83zPvPMNCuAWP3DQDAejdm1GjzwS7pMmwi75XngAD4/CQ/oX4TFe4Qt7uMMbOzjuDc0EmXCP/C7cJ38Iu+RP4QEe8CU8pP8WHmOPX2EPz87TPo202ey2OjlnQSXV/6arOjWFmvszMWtd6CqwOlKHq6ovycLaWMWVydXKFFZnmVFlZU46tP7R2nI5ncbi/dDkfDtFBA2DDXbYkhKc+V0Bqs5Zt9JM1HQGBRTm/EezTmZNKtpcAMs9Yu6AK9caF76zoLWIWcfMGOSkVduvSWechqZsz040Ib2PY3urxBJTzriT95lipz+TN1fmAAAAeJxtkety0zAQhX3S2LET0jYt0HKHljsIHDp9IEVex5rKktGlKW+P4sQMnen+0H5nJY12j5JRsotF8nAsMcIBxkiRYYIcBaaY4RHmOMQRjrHACU7xGE/wFGc4xzM8xwu8xCu8xhu8xTtc4BLv8QEf8Qmf8QVf8Q3fwfADP1FiiV/JuFP8z2y7MCGtUJR2PDia3RoVWmJt8DTdszKbAVtZDScauW6O66CUE5ZIM9Ke7NH/hTvpJ66TWpMtXFh56RW5XPDOS6PdqKly0URB1s0qs9HK8Erq9byWithQOLmnImha3C+Zuk5dwy0dCLPO3O8QMduNdLhLzASvpKbTvew72k+dCa4FqcxSR9xvU3Qk3yV2XexhWQ50VRa1sRtuK3Y9HWhZ/sOrMuWhkqbQdOeZ9NTOO0u30gTXq4lrQl0rGgvu/HknhQ922xEbsLfx7KGNaGcqlHGU11zQypibPE51Q9G0id9IH+9lPrQrZYtoelTk/KJvhlUU/0T2vseHrU+Sv9BXv7QAAAA=) format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// https://sass-lang.com/documentation/values/maps
+$icons: (
+    play: 'f101',
+    play-circle: 'f102',
+    pause: 'f103',
+    volume-mute: 'f104',
+    volume-low: 'f105',
+    volume-mid: 'f106',
+    volume-high: 'f107',
+    fullscreen-enter: 'f108',
+    fullscreen-exit: 'f109',
+    spinner: 'f10a',
+    subtitles: 'f10b',
+    captions: 'f10c',
+    hd: 'f10d',
+    chapters: 'f10e',
+    downloading: 'f10f',
+    file-download: 'f110',
+    file-download-done: 'f111',
+    file-download-off: 'f112',
+    share: 'f113',
+    cog: 'f114',
+    square: 'f115',
+    circle: 'f116',
+    circle-outline: 'f117',
+    circle-inner-circle: 'f118',
+    cancel: 'f119',
+    repeat: 'f11a',
+    replay: 'f11b',
+    replay-5: 'f11c',
+    replay-10: 'f11d',
+    replay-30: 'f11e',
+    forward-5: 'f11f',
+    forward-10: 'f120',
+    forward-30: 'f121',
+    audio: 'f122',
+    next-item: 'f123',
+    previous-item: 'f124',
+    shuffle: 'f125',
+    cast: 'f126',
+    picture-in-picture-enter: 'f127',
+    picture-in-picture-exit: 'f128',
+    close: 'f129',
+    facebook: 'f12a',
+    linkedin: 'f12b',
+    twitter: 'f12c',
+    tumblr: 'f12d',
+    pinterest: 'f12e',
+    audio-description: 'f12f',
+    cart: 'f130',
+);
+
+// NOTE: This is as complex as we want to get with SCSS functionality.
+//
+// Now that we have a map of icons above, we can iterate over that map and create an icon class
+// for each icon in that list. The iterator below produces CSS classes like this:
+//
+// .vjs-icon-play {
+//   font-family: VideoJS;
+//   font-weight: normal;
+//   font-style: normal;
+// }
+// .vjs-icon-play:before { content: "\f101"; }
+//
+// We can then use @extend in the codebase when we need to add an icon to a class. @extend builds up
+// the selectors for you so you can avoid duplication. This is generally a bad idea, but since each
+// icon should only be extended one or two other places, we'll roll with it.
+@each $name, $content in $icons {
+  .vjs-icon-#{$name} {
+    font-family: $icon-font-family;
+    font-weight: normal;
+    font-style: normal;
+
+    &:before {
+      content: char($content);
+    }
+  }
+}
