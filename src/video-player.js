@@ -118,16 +118,26 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
-    this._sendAnalytics(this.playerOptions);
   }
 
-  _sendAnalytics(options) {
+  _sendInternalAnalytics(additionalOptions = {}) {
+    if (this._internalAnalyticsSent) {
+      return;
+    }
+
     try {
+      const cloudName = this.cloudinaryConfig().cloud_name;
+      const options = Utils.assign({}, this.playerOptions, additionalOptions);
       const analyticsData = getAnalyticsFromPlayerOptions(options);
-      const qs = new URLSearchParams(analyticsData).toString();
-      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
+      const analyticsParams = new URLSearchParams(analyticsData).toString();
+      const baseParams = new URLSearchParams({
+        vpVersion: VERSION,
+        cloudName
+      }).toString();
+      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${analyticsParams}&${baseParams}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
+    this._internalAnalyticsSent = true;
   }
 
   _clearTimeOut = () => {
@@ -559,6 +569,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
+    this._sendInternalAnalytics({ source: options });
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
@@ -612,6 +624,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   playlist(sources, options = {}) {
     this._initQualitySelector();
+    this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlist(sources, options);
   }
 
