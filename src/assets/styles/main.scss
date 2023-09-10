@@ -351,11 +351,15 @@ $icon-font-path: '../icon-font' !default;
         padding-left: 2em;
         &.vjs-selected {
           &:before {
-            content: "▸";
+            font-family: VideoJS;
+            font-weight: 400;
+            font-style: normal;
+
+            content: "\f131";
             display: block;
             position: absolute;
             width: 1em;
-            margin-left: -1em;
+            margin-left: -1.3em;
             font-size: 1.2em;
             line-height: 1.6;
           }
