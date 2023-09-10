@@ -174,5 +174,9 @@
   }, {
     "name": "cart",
     "svg": "action/svg/production/ic_shopping_cart_48px.svg"
+  }, {
+    "name": "check",
+    "svg": "check.svg",
+    "root-dir": "./custom-icons/cld/"
   }]
 }
