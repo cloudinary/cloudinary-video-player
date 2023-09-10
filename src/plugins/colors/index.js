@@ -26,9 +26,12 @@ const playerColors = `
     background: rgba(--text-color, 0.3);
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-volume-level,
-  .PLAYER-CLASS-PREFIX .vjs-play-progress {
+  .PLAYER-CLASS-PREFIX .vjs-volume-level {
     background: --text-color;
+  }
+
+  .PLAYER-CLASS-PREFIX .vjs-play-progress {
+    background: --accent-color;
   }
 
   .PLAYER-CLASS-PREFIX .vjs-volume-vertical {
