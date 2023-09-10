@@ -250,9 +250,8 @@ $icon-font-path: '../icon-font' !default;
 
     .vjs-volume-panel {
       margin-right: 0.5em;
-
-      &.vjs-volume-panel-horizontal.vjs-hover {
-        width: 8em;
+      &.vjs-volume-panel-horizontal {
+        max-width: 8em;
       }
     }
 
