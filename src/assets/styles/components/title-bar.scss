@@ -1,33 +1,5 @@
 
-.video-js .vjs-title-bar {
-  display: none;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 7.2em;
-  text-align: left;
-  padding: 16px 21px;
-  pointer-events: none;
-
-  .vjs-title-bar-title {
-    width: 100%;
-    font-size: 1.2em;
-    font-weight: 500;
-    line-height: 1.2em;
-    margin-bottom: 0.55em;
-  }
-
-  .vjs-title-bar-subtitle {
-    width: 100%;
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1em;
-  }
-}
-
-// Video has started playing
-.vjs-has-started .vjs-title-bar {
+.cld-video-player .vjs-title-bar {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +7,33 @@
   visibility: visible;
   opacity: 1;
 
-  transition: visibility 0.1s, opacity 0.1s; // Var needed because of comma
+  transition: opacity 0.1s;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2em;
+  padding: clamp(1.3em, 4cqw, 2em);
+  pointer-events: none;
+  container-type: inline-size;
+
+  .vjs-title-bar-title {
+    width: 100%;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    margin-bottom: clamp(0.2em, 1.5cqw, 0.5em);;
+    font-size: 1.8em;
+    font-size: clamp(1.3em, 4cqw, 1.8em);
+  }
+
+  .vjs-title-bar-subtitle {
+    width: 100%;
+    font-weight: 100;
+    line-height: 1;
+    font-size: 1em;
+    font-size: clamp(0.8em, 3cqw, 1.1em);
+  }
 }
 
 // Video has started playing AND user is inactive
@@ -44,7 +42,7 @@
   visibility: visible;
   opacity: 0;
 
-  transition: visibility 1.0s, opacity 1.0s;
+  transition: opacity 1.0s;
 }
 
 .vjs-controls-disabled .vjs-title-bar,
@@ -59,9 +57,4 @@
 .vjs-audio.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-title-bar {
   opacity: 1;
   visibility: visible;
-}
-
-// IE 8 + 9 Support
-.vjs-has-started.vjs-no-flex .vjs-title-bar {
-  display: table;
 }

@@ -8,82 +8,55 @@ $icon-font-path: '../icon-font' !default;
 @import '~video.root.js/dist/video-js.min.css';
 @import 'mixins/skin';
 @import 'icons';
-@import 'ads-label';
 @import 'videojs-ima';
 @import 'components/interaction-areas.scss';
-@import 'components/themedButton';
-
-
-// control bar control size
-.video-js .vjs-control:before {
-  font-size: 2.0em;
-  line-height: 1.5em;
-}
-.video-js .vjs-control {
-  width: 2.8em;
-}
-
-.video-js {
-  overflow: hidden;
-}
-
-.video-js .vjs-control,
-.vjs-icon-close,
-.vjs-volume-bar{
-  z-index: 1;
-}
-
-// focus and hover states
-.video-js .vjs-control,
-.vjs-big-play-button,
-.vjs-icon-close,
-.vjs-volume-bar {
-  &:focus {
-    outline: none;
-  }
-}
-
-.vjs-control::before,
-.vjs-icon-placeholder::before,
-.vjs-time-divider,
-.vjs-duration,
-.vjs-playback-rate-value {
-  opacity: 0.8;
-}
-.vjs-control:hover::before,
-.vjs-icon-placeholder:hover::before,
-.vjs-time-divider:hover,
-.vjs-duration:hover,
-.vjs-playback-rate:hover .vjs-playback-rate-value {
-  opacity: 1;
-}
-
-.vjs-cloudinary-button:focus {
-  opacity: 0.8;
-}
-
-.vjs-big-play-button:focus {
-  .cld-video-player.cld-video-player-skin-dark & {
-    background-color: rgba(40, 40, 40, 0.8);
-  }
-
-  .cld-video-player.cld-video-player-skin-light & {
-    background-color: rgba(223, 234, 252, 0.8);
-  }
-}
-
-// light skin focus glow effect
-.cld-video-player-skin-light {
-  .vjs-control:focus {
-    text-shadow: 0 0 1em #0E2F5A;
-  }
-}
+@import 'components/loading-button.scss';
 
 .cld-video-player {
+  // container-type: inline-size;
   font-family: $text-font-family;
+  overflow: hidden;
+
+  // The base font size controls the size of everything, not just text.
+  // All dimensions use em-based sizes so that the scale along with the font size.
+  font-size: 12px;
+  font-weight: 300;
 
   &:focus {
     outline: none;
+  }
+
+  .vjs-control,
+  .vjs-icon-close,
+  .vjs-volume-bar {
+    z-index: 1;
+  }
+
+  // focus and hover states
+  .vjs-control,
+  .vjs-big-play-button,
+  .vjs-icon-close,
+  .vjs-volume-bar {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .vjs-control::before,
+  .vjs-icon-placeholder::before,
+  .vjs-time-divider,
+  .vjs-duration,
+  .vjs-playback-rate-value,
+  .vjs-cloudinary-button:focus {
+    opacity: 0.8;
+  }
+  .vjs-control:hover::before,
+  .vjs-icon-placeholder:hover::before,
+  .vjs-time-divider:hover,
+  .vjs-duration:hover,
+  .vjs-playback-rate:hover .vjs-playback-rate-value {
+    opacity: 1;
+    text-shadow: none;
   }
 
   &.cld-fluid {
@@ -100,19 +73,13 @@ $icon-font-path: '../icon-font' !default;
     }
   }
 
-  // The base font size controls the size of everything, not just text.
-  // All dimensions use em-based sizes so that the scale along with the font size.
-  // Try increasing it to 15px and see what happens.
-  font-size: 12px;
-  font-weight: 300;
-
   .vjs-time-control {
     padding-left: 0.15em;
     padding-right: 0.15em;
     width: auto;
     font-variant-numeric: tabular-nums;
     > * {
-      font-size: 13px;
+      font-size: 90%;
     }
   }
 
@@ -133,11 +100,17 @@ $icon-font-path: '../icon-font' !default;
     display: block;
   }
 
-  .vjs-big-play-button {
+  .vjs-time-tooltip,
+  .vjs-mouse-display:after,
+  .vjs-play-progress:after {
+    padding: 0.4em 0.6em;
+    top: -2.6em;
+  }
 
+  .vjs-big-play-button {
     // The font size is what makes the big play button...big.
     // All width/height values use ems, which are a multiple of the font size.
-    // If the .video-js font-size is 10px, then 3em equals 30px.*/
+    // If the .cld-video-player font-size is 10px, then 3em equals 30px.*/
     font-size: 5em;
     width: 1.5em;
     height: auto;
@@ -168,7 +141,7 @@ $icon-font-path: '../icon-font' !default;
       overflow: hidden;
 
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         top: 50%;
         left: 100%;
@@ -183,7 +156,7 @@ $icon-font-path: '../icon-font' !default;
         border-top: 200px solid transparent;
         border-bottom: 200px solid transparent;
         margin-left: -300px;
-        margin-top:-200px;
+        margin-top: -200px;
       }
     }
   }
@@ -212,19 +185,19 @@ $icon-font-path: '../icon-font' !default;
     }
 
     .vjs-modal-dialog-content {
-        font-size: 20px;
-        font-weight: 500;
-        text-align: left;
-        padding: 0 10%;
-        display: flex;
-        align-items: center;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: left;
+      padding: 0 10%;
+      display: flex;
+      align-items: center;
 
       &:before {
-        content: "";
+        content: '';
         width: 34px;
         height: 34px;
         margin-right: 10px;
-        background: url("../icons/info-circle.svg");
+        background: url('../icons/info-circle.svg');
         transform: translateY(-1px);
         flex-shrink: 0;
       }
@@ -257,11 +230,28 @@ $icon-font-path: '../icon-font' !default;
     }
   }
 
+  .vjs-control {
+    width: 2.5em;
+  }
+
+  .vjs-control::before,
+  .vjs-icon-placeholder:before {
+    font-size: 1.8em;
+    line-height: 1.7;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
   .vjs-control-bar {
     z-index: 2;
+    backdrop-filter: blur(10px);
+    font-size: 120%;
+    // responsive controls sizes, based on container width
+    // font-size: clamp(100%, 2cqw, 150%);
 
     .vjs-volume-panel {
-      margin-right: 1em;
+      margin-right: 0.5em;
 
       &.vjs-volume-panel-horizontal.vjs-hover {
         width: 8em;
@@ -269,6 +259,7 @@ $icon-font-path: '../icon-font' !default;
     }
 
     .vjs-progress-control {
+      backdrop-filter: blur(10px);
       position: absolute;
       left: 0px;
       width: 100%;
@@ -292,6 +283,7 @@ $icon-font-path: '../icon-font' !default;
       }
     }
     .vjs-progress-control:hover {
+      z-index: 2;
       .vjs-progress-holder {
         font-size: inherit;
         transition: none;
@@ -305,6 +297,9 @@ $icon-font-path: '../icon-font' !default;
       }
     }
 
+    .vjs-load-progress div {
+      background: none;
+    }
     .vjs-play-progress {
       &::before {
         display: none;
@@ -313,7 +308,7 @@ $icon-font-path: '../icon-font' !default;
 
     .vjs-progress-control-events-blocker {
       background-color: transparent;
-      @extend .vjs-progress-control
+      @extend .vjs-progress-control;
     }
   }
 
@@ -330,7 +325,7 @@ $icon-font-path: '../icon-font' !default;
     }
 
     > .vjs-icon-placeholder:before {
-      content: "\f10b" !important;
+      content: '\f10b' !important;
     }
   }
 
@@ -341,15 +336,32 @@ $icon-font-path: '../icon-font' !default;
       overflow: visible;
       padding: 0.2em 0;
     }
+    .vjs-selected {
+      background: none;
+      color: var(--color-text);
+    }
     .vjs-menu-item {
       text-align: left;
       white-space: nowrap;
       text-transform: capitalize;
-      font-size: 1em;
+      font-size: 0.9em;
       padding: 0 1em;
       line-height: 2em;
-      &.vjs-selected {
-        font-weight: bold;
+    }
+    &:has(.vjs-selected) {
+      .vjs-menu-item {
+        padding-left: 2em;
+        &.vjs-selected {
+          &:before {
+            content: "▸";
+            display: block;
+            position: absolute;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.2em;
+            line-height: 1.6;
+          }
+        }
       }
     }
   }

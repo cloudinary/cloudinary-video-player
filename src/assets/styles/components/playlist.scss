@@ -148,7 +148,7 @@
         text-shadow: 1px 1px 1px rgba(#000, .3);
 
         @media only screen and (max-width: 768px) {
-            background: #272727;
+            background: var(--color-base);;
         }
     }
 }
