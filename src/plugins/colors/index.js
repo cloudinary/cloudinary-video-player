@@ -28,7 +28,7 @@ const playerColors = `
 
   .PLAYER-CLASS-PREFIX .vjs-volume-level,
   .PLAYER-CLASS-PREFIX .vjs-play-progress {
-    background: --accent-color;
+    background: --text-color;
   }
 
   .PLAYER-CLASS-PREFIX .vjs-volume-vertical {
