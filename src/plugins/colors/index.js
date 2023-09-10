@@ -14,8 +14,8 @@ const playerColors = `
   .PLAYER-CLASS-PREFIX .vjs-time-tooltip,
   .PLAYER-CLASS-PREFIX .vjs-mouse-display:after,
   .PLAYER-CLASS-PREFIX .vjs-play-progress:after {
-    color: --base-color;
-    background-color: --text-color;
+    color: --text-color;
+    background-color: --base-color;
   }
 
   .PLAYER-CLASS-PREFIX .vjs-slider {

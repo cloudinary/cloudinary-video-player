@@ -100,9 +100,7 @@ $icon-font-path: '../icon-font' !default;
     display: block;
   }
 
-  .vjs-time-tooltip,
-  .vjs-mouse-display:after,
-  .vjs-play-progress:after {
+  .vjs-time-tooltip {
     padding: 0.4em 0.6em;
     top: -2.6em;
   }
@@ -288,7 +286,7 @@ $icon-font-path: '../icon-font' !default;
         font-size: inherit;
         transition: none;
       }
-      .vjs-time-tooltip {
+      .vjs-progress-holder .vjs-time-tooltip {
         font-size: 0.8em;
       }
       .vjs-progress-holder::after {
