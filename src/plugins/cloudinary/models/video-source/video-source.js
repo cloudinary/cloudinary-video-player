@@ -1,10 +1,9 @@
-import BaseSource from '../base-source';
-import ImageSource from '../image-source';
-import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
+import { default as vjs } from 'video.js';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
-import { default as vjs } from 'video.js';
+import { castArray } from 'utils/array';
+import { SOURCE_TYPE } from 'utils/consts';
 import {
   CONTAINER_MIME_TYPES,
   DEFAULT_POSTER_PARAMS,
@@ -12,8 +11,9 @@ import {
   VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
 import { formatToMimeTypeAndTransformation, isCodecAlreadyExist, normalizeFormat } from './video-source.utils';
-import { castArray } from '../../../../utils/array';
-import { SOURCE_TYPE } from '../../../../utils/consts';
+import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
+import BaseSource from '../base-source';
+import ImageSource from '../image-source';
 
 let objectId = 0;
 

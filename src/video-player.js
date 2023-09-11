@@ -135,16 +135,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   };
 
   _setVideoJsListeners(ready) {
-
-    // Prevent flash of error message while lazy-loading plugins.
-    videojs.hook('beforeerror', (player, err) => {
-      if (err && err.code === 3 && this.loadingLazyPlugins) {
-        err = null;
-      }
-      return err;
-    });
-
-
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
@@ -206,21 +196,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initTextTracks();
     this._initHighlightsGraph();
     this._initSeekThumbs();
-  }
-
-  async _initLazyPlugins(options) {
-    this.loadingLazyPlugins = true;
-
-    await this._initDash(options);
-
-    this.loadingLazyPlugins = false;
-  }
-
-  async _initDash(options) {
-    const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
-    if (plugins.dashPlugin && isDashRequired) {
-      await plugins.dashPlugin();
-    }
   }
 
   _isFullScreen() {
@@ -583,11 +558,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const maxTries = this.videojs.options_.maxTries || 3;
     const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
-
-    // Lazy loaded plugins
-    this._initLazyPlugins(options).then(() => {
-      return this.videojs.cloudinary.source(publicId, options);
-    });
 
     return this.videojs.cloudinary.source(publicId, options);
   }
