@@ -27,7 +27,7 @@
   <script type="text/javascript">
     window.addEventListener('load', function(){
 
-      var player = cloudinary.videoPlayer('player', {
+      const player = cloudinary.videoPlayer('player', {
         cloud_name: 'demo',
         publicId: 'snow_horses',
         info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
@@ -74,10 +74,10 @@
       <code class="language-javascript">
 
         // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        const player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         // Define source
-        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
+        const source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
 
         // Play source
         player.source(source);
