@@ -1,27 +1,14 @@
-1.9.16-edge.4 / 2023-09-10
+1.9.16 / 2023-09-12
 ==================
 
+* Video player face-lift - redesigned themes, icons, volume-bar.
 
-
-1.9.16-edge.3 / 2023-09-10
+1.9.15 / 2023-08-30
 ==================
 
-* Face-lift - volume-bar redesign
-
-1.9.16-edge.2 / 2023-09-10
-==================
-
-* Video player face-lift - styles
-
-1.9.16-edge.1 / 2023-09-05
-==================
-
-* Video player face-lift - icons
-
-1.9.16-edge.0 / 2023-08-30
-==================
-
-
+* Support camelCase cloud config (i.e. cloudName)
+* Use cloudinary-video-analytics
+* Collect video player usage
 
 1.9.15 / 2023-08-29
 ==================
