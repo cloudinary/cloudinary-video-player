@@ -1,3 +1,8 @@
+1.9.17-edge.1 / 2023-09-12
+==================
+
+* fix: duplicate requests for video summarization and thumbnails info
+
 1.9.16 / 2023-09-12
 ==================
 
