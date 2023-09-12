@@ -37,10 +37,6 @@ class SourceMenuButton extends MenuButton {
     });
   }
 
-  buildCSSClass() {
-    return `vjs-icon-cog ${super.buildCSSClass()}`;
-  }
-
   createItems() {
     const menuItems = [];
     const levels = this.player().qualityLevels();

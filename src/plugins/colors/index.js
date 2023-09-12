@@ -14,20 +14,22 @@ const playerColors = `
   .PLAYER-CLASS-PREFIX .vjs-time-tooltip,
   .PLAYER-CLASS-PREFIX .vjs-mouse-display:after,
   .PLAYER-CLASS-PREFIX .vjs-play-progress:after {
-    color: --base-color;
-    background-color: --text-color;
+    color: --text-color;
+    background-color: --base-color;
   }
 
   .PLAYER-CLASS-PREFIX .vjs-slider {
-    background-color: rgba(--accent-color, 0.3);
+    background-color: rgba(--text-color, 0.2);
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-load-progress,
-  .PLAYER-CLASS-PREFIX .vjs-load-progress div {
-    background: rgba(--accent-color, 0.2);
+  .PLAYER-CLASS-PREFIX .vjs-load-progress {
+    background: rgba(--text-color, 0.3);
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-volume-level,
+  .PLAYER-CLASS-PREFIX .vjs-volume-level {
+    background: --text-color;
+  }
+
   .PLAYER-CLASS-PREFIX .vjs-play-progress {
     background: --accent-color;
   }
@@ -54,6 +56,7 @@ const playerColors = `
 
   .PLAYER-CLASS-PREFIX .vjs-title-bar {
     color: --text-color;
+    background-image: linear-gradient(rgba(--base-color, 0.4), rgba(255, 255, 255, 0) 100%);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay {
@@ -73,10 +76,11 @@ const playerColors = `
     border: 1px solid --accent-color !important;
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:active,
-  .PLAYER-CLASS-PREFIX .vjs-context-menu-ui .vjs-menu-content .vjs-menu-item:hover {
+  .PLAYER-CLASS-PREFIX .vjs-menu-content .vjs-menu-item:active,
+  .PLAYER-CLASS-PREFIX .vjs-menu-content .vjs-menu-item:focus,
+  .PLAYER-CLASS-PREFIX .vjs-menu-content .vjs-menu-item:hover {
     color: --text-color;
-    background-color: --accent-color;
+    background-color: rgba(--text-color, 0.2);
   }
 
   .PLAYER-CLASS-PREFIX.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
@@ -89,10 +93,6 @@ const playerColors = `
 
   .PLAYER-CLASS-PREFIX .cld-plw-item-info-wrap {
     color: --text-color;
-  }
-
-  .PLAYER-CLASS-PREFIX .cld-plw-panel-item {
-    border-color: --text-color;
   }
 
   .PLAYER-CLASS-PREFIX .cld-video-player-floater-close polygon {
@@ -131,17 +131,11 @@ const playerColors = `
 `;
 
 const darkOnlyColors = `
-
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .base-color-bg,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-control-bar,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-big-play-button,
-  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-menu-button
-  .vjs-menu-content {
-    background-color: rgba(--base-color, 0.4);
-  }
-
-  .PLAYER-CLASS-PREFIX .vjs-title-bar {
-    background-image: linear-gradient(rgba(--base-color, 0.4), rgba(255, 255, 255, 0) 100%);
+  .PLAYER-CLASS-PREFIX.cld-video-player-skin-dark .vjs-menu-button .vjs-menu-content {
+    background-color: rgba(--base-color, 0.6);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
@@ -166,24 +160,11 @@ const darkOnlyColors = `
 `;
 
 const lightOnlyColors = `
-  .PLAYER-CLASS-PREFIX .vjs-title-bar {
-    flex-direction: row;
-    justify-content: left;
-    height: 3.6em;
-    background: --base-color;
-  }
-
-  .PLAYER-CLASS-PREFIX .vjs-title-bar div {
-    width: auto;
-    padding: 0 inherit;
-    margin: 0;
-  }
-
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .base-color-bg,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-control-bar,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-big-play-button,
   .PLAYER-CLASS-PREFIX.cld-video-player-skin-light .vjs-menu-button .vjs-menu-content {
-    background-color: --base-color;
+    background-color: rgba(--base-color, 0.8);
   }
 
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
@@ -232,13 +213,13 @@ const lightOnlyColors = `
 const defaults = {
   colorsDark: {
     'base': '#000000',
-    'accent': '#FF620C',
+    'accent': '#0D9AFF',
     'text': '#FFFFFF'
   },
   colorsLight: {
     'base': '#FFFFFF',
-    'accent': '#0078FF',
-    'text': '#0E2F5A'
+    'accent': '#0D9AFF',
+    'text': '#000000'
   }
 };
 
