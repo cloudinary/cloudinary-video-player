@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { v4 as uuidv4 } from 'uuid';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -120,11 +121,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setVideoJsListeners(ready);
   }
 
-  _sendInternalAnalytics(additionalOptions = {}) {
-    if (this._internalAnalyticsSent) {
-      return;
+  getVPInstanceId() {
+    if (!this.vpInstanceId) {
+      this.vpInstanceId = uuidv4();
     }
 
+    return this.vpInstanceId;
+  }
+
+  _sendInternalAnalytics(additionalOptions = {}) {
     try {
       const cloudName = this.cloudinaryConfig().cloud_name;
       const options = Utils.assign({}, this.playerOptions, additionalOptions);
@@ -132,12 +137,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
+        vpInstanceId: this.getVPInstanceId(),
         cloudName
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${analyticsParams}&${baseParams}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
-    this._internalAnalyticsSent = true;
   }
 
   _clearTimeOut = () => {
@@ -629,6 +634,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
+    this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlistByTag(tag, options);
   }
 
