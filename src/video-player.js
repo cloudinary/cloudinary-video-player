@@ -140,7 +140,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         vpInstanceId: this.getVPInstanceId(),
         cloudName
       }).toString();
-      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source_change?${analyticsParams}&${baseParams}`);
+      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
   }
