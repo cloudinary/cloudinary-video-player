@@ -51,7 +51,7 @@ interface GlobalCloudinary {
 
 declare global {
     interface Window {
-        cloudinary: GlobalCloudinary
+        cloudinary?: GlobalCloudinary
     }
 }
 

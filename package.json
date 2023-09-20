@@ -55,21 +55,21 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "256kb"
+        "maxSize": "276kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "128kb"
+        "maxSize": "135kb"
       }
     ]
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.10.2",
-    "cloudinary-video-analytics": "^1.2.1",
+    "cloudinary-video-analytics": "1.2.1",
     "dashjs": "^4.7.1",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
-    "video.js": "8.3.0",
+    "video.js": "8.5.2",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-contrib-quality-levels": "^4.0.0",
