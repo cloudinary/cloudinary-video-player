@@ -338,6 +338,7 @@ $icon-font-path: '../icon-font' !default;
       color: var(--color-text);
     }
     .vjs-menu-item {
+      justify-content: left;
       text-align: left;
       white-space: nowrap;
       text-transform: capitalize;
