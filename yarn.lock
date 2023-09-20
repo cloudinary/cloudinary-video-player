@@ -2932,10 +2932,10 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-cloudinary-video-analytics@^1.2.1:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/cloudinary-video-analytics/-/cloudinary-video-analytics-1.3.0.tgz#bb4f725d343ba70716bd0593ec1912c4470829b5"
-  integrity sha512-Or2UG7Ym7wdg93t3MfGYh3HVj4iInMfRLHbcbNSlSowNQ33khC0l+JPUl/lTiJi67gfSRuygaf9WiEhCMnpGlA==
+cloudinary-video-analytics@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/cloudinary-video-analytics/-/cloudinary-video-analytics-1.2.1.tgz#a0515d577dc4a3ad41db07e5be07af467f183f75"
+  integrity sha512-/JTWQrI7MlRCAeSIBre4aC/A0LWUAMSZtjDRT6VVJMxwNrZGQMoDdLOrcN3wprlQG7a0WvEn4On9HMSKmQp85Q==
   dependencies:
     uuid "9.0.0"
 
