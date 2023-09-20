@@ -1,3 +1,8 @@
+1.9.17-edge.3 / 2023-09-20
+==================
+
+* Light theme logo changed from blue to black
+
 1.9.17-edge.2 / 2023-09-18
 ==================
 
