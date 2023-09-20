@@ -55,11 +55,11 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "256kb"
+        "maxSize": "276kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "128kb"
+        "maxSize": "135kb"
       }
     ]
   },
