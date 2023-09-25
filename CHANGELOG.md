@@ -1,3 +1,10 @@
+1.9.17-edge.6 / 2023-09-25
+==================
+
+Changes:
+------------
+* Update cloudinary video analytics package & send custom props about video player type
+
 1.9.17-edge.5 / 2023-09-20
 ==================
 
