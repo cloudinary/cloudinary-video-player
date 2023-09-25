@@ -1,4 +1,4 @@
-import connectCloudinaryAnalytics from 'cloudinary-video-analytics';
+import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 class CloudinaryAnalytics {
@@ -16,7 +16,10 @@ class CloudinaryAnalytics {
     this.player.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
       const metadata = this.getMetadata();
       if (metadata.cloudName && metadata.publicId) {
-        this.cloudinaryAnalytics.startManuallyNewVideoTracking(metadata);
+        this.cloudinaryAnalytics.startManuallyNewVideoTracking(metadata, {
+          videoPlayer: 'cloudinary video player',
+          videoPlayerVersion: VERSION
+        });
       }
     });
   }
