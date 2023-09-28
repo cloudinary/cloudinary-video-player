@@ -20,7 +20,7 @@
     "./*": "./lib/*"
   },
   "scripts": {
-    "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
+    "prepare": "npm run snyk-protect && shx cp env.example.js env.js",
     "clean": "rm -rf dist lib",
     "start": "webpack serve --config webpack/dev.config.js",
     "start:light": "WEBPACK_BUILD_LIGHT=1 webpack serve --config webpack/dev.config.js",
