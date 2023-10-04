@@ -60,7 +60,6 @@ const HighlightsGraphPlugin = (function () {
     this.player = player;
     this.options = options;
     this.initializeHighlightsGraph();
-    this.registeredEvents = {};
     return this;
   }
 
@@ -102,7 +101,6 @@ const HighlightsGraphPlugin = (function () {
   };
 
   HighlightsGraphPlugin.prototype.setupHighlightsGraphElement = function setupHighlightsGraphElement() {
-    const mouseDisplay = this.player.$('.vjs-mouse-display');
     this.progressBar = this.player.$('.vjs-progress-control');
     if (!this.progressBar) {
       return;
@@ -111,9 +109,6 @@ const HighlightsGraphPlugin = (function () {
     graphHolder.setAttribute('class', 'vjs-highlights-graph-display');
     this.progressBar.appendChild(graphHolder);
     this.graphHolder = graphHolder;
-    if (mouseDisplay) {
-      mouseDisplay.classList.add('vjs-hidden');
-    }
   };
 
   /**

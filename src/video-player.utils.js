@@ -114,7 +114,6 @@ export const overrideDefaultVideojsComponents = () => {
   children.push('recommendationsOverlay');
 
   const ControlBar = videojs.getComponent('ControlBar');
-
   if (ControlBar) {
     children = ControlBar.prototype.options_.children;
     // Add space instead of the progress control (which we deattached from the controlBar, and absolutely positioned it above it)
@@ -127,4 +126,10 @@ export const overrideDefaultVideojsComponents = () => {
     // Position the 'logo-button' button last
     children.push('logoButton');
   }
+
+  const SeekBar = videojs.getComponent('SeekBar');
+  if (SeekBar && !SeekBar.prototype.options_.children.includes('mouseTimeDisplay')) {
+    SeekBar.prototype.options_.children.splice(1, 0, 'mouseTimeDisplay');
+  }
+
 };

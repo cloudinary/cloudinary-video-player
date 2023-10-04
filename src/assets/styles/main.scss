@@ -301,6 +301,9 @@ $icon-font-path: '../icon-font' !default;
       &::before {
         display: none;
       }
+      .vjs-time-tooltip {
+        display: none;
+      }
     }
 
     .vjs-progress-control-events-blocker {
