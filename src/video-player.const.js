@@ -33,6 +33,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'withCredentials',
   'seekThumbnails',
   'aiHighlightsGraph',
+  'chapters',
   'queryParams'
 ]);
 

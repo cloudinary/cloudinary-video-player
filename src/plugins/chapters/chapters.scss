@@ -1,0 +1,32 @@
+.cld-video-player {
+  .vjs-control-bar-chapter-wrapper {
+    display: flex;
+    align-items: center;
+    container-type: inline-size;
+  }
+  .vjs-control-bar-chapter-display {
+    line-height: 1.5;
+    font-size: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5em;
+    &:not(:empty)::before {
+      content: '•';
+      padding-right: 0.5em;
+    }
+    @container (max-width: 150px) {
+      display: none;
+    }
+  }
+
+  .vjs-chapter-marker {
+    position: absolute;
+    background: var(--color-base);
+    width: 4px;
+    top: 0;
+    bottom: 0;
+    opacity: 0.5;
+    z-index: 1;
+  }
+}

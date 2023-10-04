@@ -10,7 +10,8 @@ export default {
   skin: 'dark',
   controls: false,
   controlBar: {
-    'pictureInPictureToggle': false
+    pictureInPictureToggle: false,
+    chaptersButton: false
   },
   seekThumbnails: true,
   aiHighlightsGraph: false,
