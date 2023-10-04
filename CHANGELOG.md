@@ -42,6 +42,11 @@ Changes:
 
 * Video player face-lift - redesigned themes, icons, volume-bar.
 
+1.9.16 / 2023-09-12
+==================
+
+* Video player face-lift - redesigned themes, icons, volume-bar.
+
 1.9.15 / 2023-08-30
 ==================
 
