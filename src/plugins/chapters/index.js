@@ -62,7 +62,7 @@ const ChaptersPlugin = (function () {
   function ChaptersPlugin(player, options) {
     this.player = player;
     this.options = options;
-    this.initializeChapters();
+    this.player.on('loadedmetadata', this.initializeChapters.bind(this));
     return this;
   }
 
@@ -92,13 +92,25 @@ const ChaptersPlugin = (function () {
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
       textTrack.addEventListener('load', () => {
         this.chaptersTrack = textTrack.track;
-
         this.setupProgressBarMarkers();
         this.setupProgressBarChapter();
         this.setupControlBarChapter();
       });
     } else {
-      // ToDo: Parse chapters object
+      const textTrack = this.player.addTextTrack('chapters');
+      const end = this.player.duration();
+      const cues = Object.entries(this.options).map((entry, index, obj) => {
+        const cue = new VTTCue(
+          parseFloat(entry[0]),
+          parseFloat(obj[index + 1] ? obj[index + 1][0] : end),
+          entry[1]
+        );
+        textTrack.addCue(cue);
+      });
+      this.chaptersTrack = textTrack;
+      this.setupProgressBarMarkers();
+      this.setupProgressBarChapter();
+      this.setupControlBarChapter();
     }
   };
 
@@ -125,22 +137,20 @@ const ChaptersPlugin = (function () {
    * Setup the progress bar markers.
    */
   ChaptersPlugin.prototype.setupProgressBarMarkers = function setupProgressBarMarkers() {
-    this.player.on('loadedmetadata', () => {
-      const total = this.player.duration();
-      const { seekBar } = this.player.controlBar.progressControl;
-      this.chaptersTrack.cues_.forEach(marker => {
-        if (marker.startTime !== 0) {
-          const markerTime = marker.startTime;
-          const left = (markerTime / total) * 100 + '%';
+    const total = this.player.duration();
+    const { seekBar } = this.player.controlBar.progressControl;
+    this.chaptersTrack.cues_.forEach(marker => {
+      if (marker.startTime !== 0) {
+        const markerTime = marker.startTime;
+        const left = (markerTime / total) * 100 + '%';
 
-          const markerEl = videojs.dom.createEl('div', undefined, {
-            class: 'vjs-chapter-marker',
-            style: `left: ${left}`
-          });
+        const markerEl = videojs.dom.createEl('div', undefined, {
+          class: 'vjs-chapter-marker',
+          style: `left: ${left}`
+        });
 
-          seekBar.el().append(markerEl);
-        }
-      });
+        seekBar.el().append(markerEl);
+      }
     });
   };
 
@@ -148,37 +158,35 @@ const ChaptersPlugin = (function () {
    * Setup the progrees bar on-hover chapter display.
    */
   ChaptersPlugin.prototype.setupProgressBarChapter = function setupProgressBarChapter() {
-    this.player.on('loadedmetadata', () => {
-      const chapterEl = videojs.dom.createEl('div', undefined, {
-        class: 'vjs-chapter-display',
-        style: `width: ${this.player.$('.vjs-vtt-thumbnail-display').style.width || '160px'}`
-      });
-
-      const timeTooltip = this.player.getDescendant([
-        'controlBar',
-        'progressControl',
-        'seekBar',
-        'mouseTimeDisplay',
-        'timeTooltip'
-      ]);
-
-      timeTooltip.el().parentElement.prepend(chapterEl);
-
-      const getChapterFromPoint = point => {
-        const total = this.player.duration();
-        const seekBarTime = point * total;
-        const chapter = this.chaptersTrack.cues_.find(marker => {
-          return marker.startTime <= seekBarTime && marker.endTime >= seekBarTime;
-        });
-        return chapter ? chapter.text : '';
-      };
-
-      timeTooltip.update = function (seekBarRect, seekBarPoint, content) {
-        const originalUpdateFn = Object.getPrototypeOf(this).update;
-        originalUpdateFn.call(this, seekBarRect, seekBarPoint, content);
-        chapterEl.innerHTML = getChapterFromPoint(seekBarPoint);
-      };
+    const chapterEl = videojs.dom.createEl('div', undefined, {
+      class: 'vjs-chapter-display',
+      style: `width: ${this.player.$('.vjs-vtt-thumbnail-display').style.width || '160px'}`
     });
+
+    const timeTooltip = this.player.getDescendant([
+      'controlBar',
+      'progressControl',
+      'seekBar',
+      'mouseTimeDisplay',
+      'timeTooltip'
+    ]);
+
+    timeTooltip.el().parentElement.prepend(chapterEl);
+
+    const getChapterFromPoint = point => {
+      const total = this.player.duration();
+      const seekBarTime = point * total;
+      const chapter = this.chaptersTrack.cues_.find(marker => {
+        return marker.startTime <= seekBarTime && marker.endTime >= seekBarTime;
+      });
+      return chapter ? chapter.text : '';
+    };
+
+    timeTooltip.update = function (seekBarRect, seekBarPoint, content) {
+      const originalUpdateFn = Object.getPrototypeOf(this).update;
+      originalUpdateFn.call(this, seekBarRect, seekBarPoint, content);
+      chapterEl.innerHTML = getChapterFromPoint(seekBarPoint);
+    };
   };
 
   return ChaptersPlugin;
