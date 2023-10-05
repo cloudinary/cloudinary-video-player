@@ -42,8 +42,8 @@
     bottom: 2.8em;
     position: absolute;
     text-shadow: 0 0 4px color-mix(in srgb, var(--color-base) 40%, transparent);
-  }
-  &.vjs-chapters .vjs-vtt-thumbnail-display {
-    bottom: 4em;
+    &:not(:empty) ~ .vjs-vtt-thumbnail-display {
+      bottom: 4em;
+    }
   }
 }

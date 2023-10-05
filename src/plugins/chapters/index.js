@@ -162,7 +162,7 @@ const ChaptersPlugin = (function () {
         'timeTooltip'
       ]);
 
-      timeTooltip.el().parentElement.appendChild(chapterEl);
+      timeTooltip.el().parentElement.prepend(chapterEl);
 
       const getChapterFromPoint = point => {
         const total = this.player.duration();
