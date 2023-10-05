@@ -178,7 +178,7 @@ const ChaptersPlugin = (function () {
       const chapter = this.chaptersTrack.cues_.find(marker => {
         return seekBarTime >= marker.startTime  &&  seekBarTime  <= marker.endTime;
       });
-      return chapter ? chapter.text : '';
+      return chapter?.text ?? '';
     };
 
     timeTooltip.update = function (seekBarRect, seekBarPoint, content) {
