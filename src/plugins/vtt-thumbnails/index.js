@@ -122,12 +122,13 @@ const VttThumbnailsPlugin = (function () {
 
     const updateThumbnailStyle = this.updateThumbnailStyle.bind(this);
 
-    this.player.getDescendant([
+     const mouseTimeDisplay = this.player.getDescendant([
       'controlBar',
       'progressControl',
       'seekBar',
       'mouseTimeDisplay'
-    ]).update = function (seekBarRect, seekBarPoint) {
+    ]);
+    mouseTimeDisplay.update = function (seekBarRect, seekBarPoint) {
       const time = seekBarPoint * this.player_.duration();
       const width = seekBarRect.width;
 
