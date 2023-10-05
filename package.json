@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.9.16",
+  "version": "1.9.17-edge.8",
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "./*": "./lib/*"
   },
   "scripts": {
-    "prepare": "yarn run snyk-protect && shx cp env.example.js env.js",
+    "prepare": "npm run snyk-protect && shx cp env.example.js env.js",
     "clean": "rm -rf dist lib",
     "start": "webpack serve --config webpack/dev.config.js",
     "start:light": "WEBPACK_BUILD_LIGHT=1 webpack serve --config webpack/dev.config.js",
@@ -55,21 +55,21 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "256kb"
+        "maxSize": "276kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "128kb"
+        "maxSize": "135kb"
       }
     ]
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.10.2",
-    "cloudinary-video-analytics": "^1.2.1",
+    "cloudinary-video-analytics": "1.4.1",
     "dashjs": "^4.7.1",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
-    "video.js": "8.3.0",
+    "video.js": "8.5.2",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-contrib-quality-levels": "^4.0.0",
@@ -91,14 +91,14 @@
     "css-minimizer-webpack-plugin": "^4.2.2",
     "css.escape": "^1.5.1",
     "eslint": "^5.16.0",
-    "eslint-loader": "^2.2.1",
+    "eslint-loader": "^3.0.4",
     "eslint-plugin-jest": "^21.27.2",
     "expose-loader": "^4.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
-    "jest-puppeteer": "^4.4.0",
+    "jest-puppeteer": "^5.0.4",
     "jest-webpack": "^0.5.1",
     "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^2.7.1",

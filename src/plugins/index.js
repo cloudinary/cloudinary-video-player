@@ -13,7 +13,7 @@ import cloudinary from './cloudinary';
 import analytics from './analytics';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import vttThumbnails from './vtt-thumbnails';
-import aiHighlightsGraph from './aiHighlightsGraph';
+import aiHighlightsGraph from './ai-highlights-graph';
 
 const plugins = {
   autoplayOnScroll,

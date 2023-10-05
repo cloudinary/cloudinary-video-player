@@ -1,3 +1,47 @@
+1.9.17-edge.8 / 2023-10-04
+==================
+
+refactor: ai-highlights-graph filename
+
+1.9.17-edge.7 / 2023-09-28
+==================
+
+* Replace `yarn` with `npm`
+
+1.9.17-edge.6 / 2023-09-25
+==================
+
+Changes:
+------------
+* Update cloudinary video analytics package & send custom props about video player type
+
+1.9.17-edge.5 / 2023-09-20
+==================
+
+
+
+1.9.17-edge.4 / 2023-09-20
+==================
+
+* Update VideoJS to 8.5.2
+
+1.9.17-edge.3 / 2023-09-20
+==================
+
+* Light theme logo changed from blue to black
+
+1.9.17-edge.2 / 2023-09-18
+==================
+
+Changes:
+------------
+* init event -> source change event
+
+1.9.17-edge.1 / 2023-09-12
+==================
+
+* fix: duplicate requests for video summarization and thumbnails info
+
 1.9.16 / 2023-09-12
 ==================
 

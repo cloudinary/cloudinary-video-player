@@ -4,17 +4,18 @@ import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
+import { isFunction } from 'utils/type-inference';
+import Playlistable from 'mixins/playlistable';
+import plugins from 'plugins';
 import {
   normalizeOptions,
   mergeTransformations,
   codecShorthandTrans,
   extendCloudinaryConfig
 } from './common';
-import Playlistable from 'mixins/playlistable';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
-import { isFunction } from '../../utils/type-inference';
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -79,9 +80,16 @@ class CloudinaryContext extends mixin(Playlistable) {
       }
 
       _source = src;
-      if (!options.skipRefresh) {
+
+      const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
+      if (plugins.dashPlugin && isDashRequired) {
+        plugins.dashPlugin().then(() => {
+          refresh();
+        });
+      } else if (!options.skipRefresh) {
         refresh();
       }
+
       this.player.trigger('cldsourcechanged', { source: src });
 
       return _chainTarget;

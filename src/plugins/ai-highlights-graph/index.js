@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 
-import './aiHighlightsGraph.scss';
+import './ai-highlights-graph.scss';
 
 // Default options for the plugin.
 let defaults = {};

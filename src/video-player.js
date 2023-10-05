@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import { v4 as uuidv4 } from 'uuid';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -118,14 +119,27 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
-    this._sendAnalytics(this.playerOptions);
   }
 
-  _sendAnalytics(options) {
+  getVPInstanceId() {
+    if (!this.vpInstanceId) {
+      this.vpInstanceId = uuidv4();
+    }
+
+    return this.vpInstanceId;
+  }
+
+  _sendInternalAnalytics(additionalOptions = {}) {
     try {
+      const options = Utils.assign({}, this.playerOptions, additionalOptions);
       const analyticsData = getAnalyticsFromPlayerOptions(options);
-      const qs = new URLSearchParams(analyticsData).toString();
-      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_init?${qs}&vp_version=${VERSION}`);
+      const analyticsParams = new URLSearchParams(analyticsData).toString();
+      const baseParams = new URLSearchParams({
+        vpVersion: VERSION,
+        vpInstanceId: this.getVPInstanceId(),
+        cloudName: options.cloudinary.cloudinaryConfig.cloud_name
+      }).toString();
+      fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
       // eslint-disable-next-line no-empty
     } catch (e) {}
   }
@@ -135,16 +149,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   };
 
   _setVideoJsListeners(ready) {
-
-    // Prevent flash of error message while lazy-loading plugins.
-    videojs.hook('beforeerror', (player, err) => {
-      if (err && err.code === 3 && this.loadingLazyPlugins) {
-        err = null;
-      }
-      return err;
-    });
-
-
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
@@ -206,21 +210,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initTextTracks();
     this._initHighlightsGraph();
     this._initSeekThumbs();
-  }
-
-  async _initLazyPlugins(options) {
-    this.loadingLazyPlugins = true;
-
-    await this._initDash(options);
-
-    this.loadingLazyPlugins = false;
-  }
-
-  async _initDash(options) {
-    const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
-    if (plugins.dashPlugin && isDashRequired) {
-      await plugins.dashPlugin();
-    }
   }
 
   _isFullScreen() {
@@ -559,6 +548,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
+    this._sendInternalAnalytics({ source: options });
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
@@ -584,11 +575,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideo(maxTries, videoReadyTimeout);
 
-    // Lazy loaded plugins
-    this._initLazyPlugins(options).then(() => {
-      return this.videojs.cloudinary.source(publicId, options);
-    });
-
     return this.videojs.cloudinary.source(publicId, options);
   }
 
@@ -612,10 +598,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   playlist(sources, options = {}) {
     this._initQualitySelector();
+    this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlist(sources, options);
   }
 
   playlistByTag(tag, options = {}) {
+    this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlistByTag(tag, options);
   }
 
