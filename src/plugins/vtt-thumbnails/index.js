@@ -41,7 +41,7 @@ const onPlayerReady = function onPlayerReady(player, options) {
  */
 const vttThumbnails = function vttThumbnails(options) {
   this.ready(() => {
-    onPlayerReady(this, videojs.mergeOptions(defaults, options));
+    onPlayerReady(this, videojs.obj.merge(defaults, options));
   });
 };
 

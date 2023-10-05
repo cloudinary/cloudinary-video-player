@@ -51,7 +51,7 @@ class PlaylistWidget {
         return this.options_;
       }
 
-      this.options_ = videojs.mergeOptions(this.options_, options);
+      this.options_ = videojs.obj.merge(this.options_, options);
       player.trigger('playlistwidgetoption', this.options_.playlistWidget);
       return this.options_;
 

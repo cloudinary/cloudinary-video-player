@@ -76,7 +76,7 @@ class PlaylistPanel extends Component {
     this.removeAll();
 
     items.forEach((source, index) => {
-      const playlistItem = new PlaylistPanelItem(this.player(), videojs.mergeOptions(this.options_, {
+      const playlistItem = new PlaylistPanelItem(this.player(), videojs.obj.merge(this.options_, {
         item: source,
         next: index === 1,
         current: index === 0

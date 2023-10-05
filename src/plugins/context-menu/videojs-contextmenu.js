@@ -153,7 +153,7 @@ function handleContextMenu(e) {
  *           it registers.
  */
 function contextmenu(options) {
-  this.contextmenu.options = videojs.mergeOptions(defaults, options);
+  this.contextmenu.options = videojs.obj.merge(defaults, options);
 
   this.on('contextmenu', handleContextMenu);
   this.on(['touchcancel', 'touchend'], handleTouchEnd);

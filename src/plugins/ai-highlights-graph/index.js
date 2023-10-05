@@ -34,7 +34,7 @@ const onPlayerReady = function onPlayerReady(player, options) {
  */
 function aiHighlightsGraph(options) {
   this.ready(() => {
-    onPlayerReady(this, videojs.mergeOptions(defaults, options));
+    onPlayerReady(this, videojs.obj.merge(defaults, options));
   });
 }
 

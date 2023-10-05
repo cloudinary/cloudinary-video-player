@@ -40,7 +40,7 @@ const onPlayerReady = function onPlayerReady(player, options) {
  */
 const chapters = function chapters(options) {
   this.ready(function () {
-    onPlayerReady(this, videojs.mergeOptions(defaults, options));
+    onPlayerReady(this, videojs.obj.merge(defaults, options));
   });
 };
 
