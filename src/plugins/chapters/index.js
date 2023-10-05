@@ -1,5 +1,3 @@
-// Todo: eslint
-/* eslint-disable */
 import videojs from 'video.js';
 
 import './chapters.scss';
@@ -48,6 +46,7 @@ const chapters = function chapters(options) {
  * Chapters
  */
 const ChaptersPlugin = (function () {
+
   /**
    * Plugin class constructor, called by videojs on
    * ready event.
@@ -85,7 +84,7 @@ const ChaptersPlugin = (function () {
    */
   ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
     if (this.options.url) {
-      var chaptersTrack = {
+      const chaptersTrack = {
         kind: 'chapters',
         src: this.options.url
       };
@@ -99,10 +98,10 @@ const ChaptersPlugin = (function () {
     } else {
       const textTrack = this.player.addTextTrack('chapters');
       const end = this.player.duration();
-      const cues = Object.entries(this.options).map((entry, index, obj) => {
+      Object.entries(this.options).forEach((entry, index, arr) => {
         const cue = new VTTCue(
           parseFloat(entry[0]),
-          parseFloat(obj[index + 1] ? obj[index + 1][0] : end),
+          parseFloat(arr[index + 1] ? arr[index + 1][0] : end),
           entry[1]
         );
         textTrack.addCue(cue);
@@ -190,6 +189,6 @@ const ChaptersPlugin = (function () {
   };
 
   return ChaptersPlugin;
-})();
+}());
 
 export default chapters;
