@@ -1,6 +1,5 @@
 /* global dashjs */
 import 'videojs-per-source-behaviors';
-import 'videojs-contrib-quality-levels';
 import '../../plugins/videojs-http-source-selector/plugin';
 import { findIndex } from '../../utils/find';
 
