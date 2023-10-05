@@ -84,6 +84,7 @@ const ChaptersPlugin = (function () {
    */
   ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
     if (this.options.url) {
+      // Fetch chapters VTT from URL
       const chaptersTrack = {
         kind: 'chapters',
         src: this.options.url
@@ -91,11 +92,10 @@ const ChaptersPlugin = (function () {
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
       textTrack.addEventListener('load', () => {
         this.chaptersTrack = textTrack.track;
-        this.setupProgressBarMarkers();
-        this.setupProgressBarChapter();
-        this.setupControlBarChapter();
+        this.setupChaptersDisplays();
       });
     } else {
+      // Setup chapters from options
       const textTrack = this.player.addTextTrack('chapters');
       const end = this.player.duration();
       Object.entries(this.options).forEach((entry, index, arr) => {
@@ -107,10 +107,17 @@ const ChaptersPlugin = (function () {
         textTrack.addCue(cue);
       });
       this.chaptersTrack = textTrack;
-      this.setupProgressBarMarkers();
-      this.setupProgressBarChapter();
-      this.setupControlBarChapter();
+      this.setupChaptersDisplays();
     }
+  };
+
+  /**
+   * Setup chapter displays.
+   */
+  ChaptersPlugin.prototype.setupChaptersDisplays = function initializeChapters() {
+    this.setupProgressBarMarkers();
+    this.setupProgressBarChapter();
+    this.setupControlBarChapter();
   };
 
   /**
