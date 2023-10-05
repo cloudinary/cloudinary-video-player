@@ -122,7 +122,7 @@ const VttThumbnailsPlugin = (function () {
 
     const updateThumbnailStyle = this.updateThumbnailStyle.bind(this);
 
-     const mouseTimeDisplay = this.player.getDescendant([
+    const mouseTimeDisplay = this.player.getDescendant([
       'controlBar',
       'progressControl',
       'seekBar',
@@ -135,6 +135,7 @@ const VttThumbnailsPlugin = (function () {
       updateThumbnailStyle(time);
 
       this.getChild('timeTooltip').updateTime(seekBarRect, seekBarPoint, time, () => {
+        // Make sure the thumbnail doesn't exit the player
         if ((seekBarRect.width * seekBarPoint) < halfThumbnailWidth) {
           this.el_.style.left = halfThumbnailWidth;
         } else if ((seekBarRect.width * seekBarPoint) + halfThumbnailWidth > width) {
