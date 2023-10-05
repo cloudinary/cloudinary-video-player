@@ -176,7 +176,7 @@ const ChaptersPlugin = (function () {
       const total = this.player.duration();
       const seekBarTime = point * total;
       const chapter = this.chaptersTrack.cues_.find(marker => {
-        return marker.startTime <= seekBarTime && marker.endTime >= seekBarTime;
+        return seekBarTime >= marker.startTime  &&  seekBarTime  <= marker.endTime;
       });
       return chapter ? chapter.text : '';
     };
