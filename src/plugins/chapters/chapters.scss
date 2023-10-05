@@ -21,6 +21,7 @@
   }
 
   .vjs-chapter-marker {
+    pointer-events: none;
     position: absolute;
     background: var(--color-base);
     width: 4px;
@@ -28,5 +29,21 @@
     bottom: 0;
     opacity: 0.5;
     z-index: 1;
+  }
+
+  .vjs-chapter-display {
+    pointer-events: none;
+    line-height: 1.5;
+    font-size: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform: translateX(-50%);
+    bottom: 2.8em;
+    position: absolute;
+    text-shadow: 0 0 4px color-mix(in srgb, var(--color-base) 40%, transparent);
+  }
+  &.vjs-chapters .vjs-vtt-thumbnail-display {
+    bottom: 4em;
   }
 }

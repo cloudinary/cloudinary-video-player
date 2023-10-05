@@ -48,7 +48,6 @@ const chapters = function chapters(options) {
  * Chapters
  */
 const ChaptersPlugin = (function () {
-
   /**
    * Plugin class constructor, called by videojs on
    * ready event.
@@ -88,20 +87,18 @@ const ChaptersPlugin = (function () {
     if (this.options.url) {
       var chaptersTrack = {
         kind: 'chapters',
-        src: this.options.url,
+        src: this.options.url
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
       textTrack.addEventListener('load', () => {
         this.chaptersTrack = textTrack.track;
 
         this.setupProgressBarMarkers();
-        // ToDO: this.setupProgressBarChapter();
+        this.setupProgressBarChapter();
         this.setupControlBarChapter();
       });
-
-    }
-    else {
-      // Parse chapters object
+    } else {
+      // ToDo: Parse chapters object
     }
   };
 
@@ -109,7 +106,8 @@ const ChaptersPlugin = (function () {
    * Setup the controlbar chapter display.
    */
   ChaptersPlugin.prototype.setupControlBarChapter = function setupControlBarChapter() {
-    const controlBarChapterHolder = this.player.$('.vjs-control-bar-chapter-display') || document.createElement('div');
+    const controlBarChapterHolder =
+      this.player.$('.vjs-control-bar-chapter-display') || document.createElement('div');
     controlBarChapterHolder.setAttribute('class', 'vjs-control-bar-chapter-display');
 
     const wrapper = this.player.$('.vjs-control-bar .vjs-spacer');
@@ -118,25 +116,26 @@ const ChaptersPlugin = (function () {
     wrapper.appendChild(controlBarChapterHolder);
 
     this.chaptersTrack.addEventListener('cuechange', () => {
-      controlBarChapterHolder.innerHTML = this.chaptersTrack.activeCues_.length > 0 ? this.chaptersTrack.activeCues_[0].text : '';
+      controlBarChapterHolder.innerHTML =
+        this.chaptersTrack.activeCues_.length > 0 ? this.chaptersTrack.activeCues_[0].text : '';
     });
   };
 
   /**
-   * Setup the controlbar chapter display.
+   * Setup the progress bar markers.
    */
   ChaptersPlugin.prototype.setupProgressBarMarkers = function setupProgressBarMarkers() {
     this.player.on('loadedmetadata', () => {
       const total = this.player.duration();
       const { seekBar } = this.player.controlBar.progressControl;
-      this.chaptersTrack.cues_.forEach((marker) => {
+      this.chaptersTrack.cues_.forEach(marker => {
         if (marker.startTime !== 0) {
           const markerTime = marker.startTime;
           const left = (markerTime / total) * 100 + '%';
 
           const markerEl = videojs.dom.createEl('div', undefined, {
             class: 'vjs-chapter-marker',
-            style: `left: ${left}`,
+            style: `left: ${left}`
           });
 
           seekBar.el().append(markerEl);
@@ -145,7 +144,44 @@ const ChaptersPlugin = (function () {
     });
   };
 
+  /**
+   * Setup the progrees bar on-hover chapter display.
+   */
+  ChaptersPlugin.prototype.setupProgressBarChapter = function setupProgressBarChapter() {
+    this.player.on('loadedmetadata', () => {
+      const chapterEl = videojs.dom.createEl('div', undefined, {
+        class: 'vjs-chapter-display',
+        style: `width: ${this.player.$('.vjs-vtt-thumbnail-display').style.width || '160px'}`
+      });
+
+      const timeTooltip = this.player.getDescendant([
+        'controlBar',
+        'progressControl',
+        'seekBar',
+        'mouseTimeDisplay',
+        'timeTooltip'
+      ]);
+
+      timeTooltip.el().parentElement.appendChild(chapterEl);
+
+      const getChapterFromPoint = point => {
+        const total = this.player.duration();
+        const seekBarTime = point * total;
+        const chapter = this.chaptersTrack.cues_.find(marker => {
+          return marker.startTime <= seekBarTime && marker.endTime >= seekBarTime;
+        });
+        return chapter ? chapter.text : '';
+      };
+
+      timeTooltip.update = function (seekBarRect, seekBarPoint, content) {
+        const originalUpdateFn = Object.getPrototypeOf(this).update;
+        originalUpdateFn.call(this, seekBarRect, seekBarPoint, content);
+        chapterEl.innerHTML = getChapterFromPoint(seekBarPoint);
+      };
+    });
+  };
+
   return ChaptersPlugin;
-}());
+})();
 
 export default chapters;

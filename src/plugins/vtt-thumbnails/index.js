@@ -110,7 +110,10 @@ const VttThumbnailsPlugin = (function () {
 
   VttThumbnailsPlugin.prototype.setupThumbnailElement = function setupThumbnailElement() {
     const mouseDisplay = this.player.$('.vjs-progress-holder .vjs-mouse-display');
-    this.thumbnailHolder = this.player.$('.vjs-vtt-thumbnail-display') || document.createElement('div');
+    this.thumbnailHolder = this.player.$('.vjs-vtt-thumbnail-display') || videojs.dom.createEl('div', undefined, {
+      class: 'vjs-vtt-thumbnail-display',
+      style: `width: ${this.vttData[0].css.width}`
+    });
     this.thumbnailHolder.innerHTML = '';
     this.thumbnailHolder.setAttribute('class', 'vjs-vtt-thumbnail-display');
     mouseDisplay.appendChild(this.thumbnailHolder);
@@ -139,7 +142,7 @@ const VttThumbnailsPlugin = (function () {
           this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
         }
       });
-      this.getChild('timeTooltip').write(videojs.formatTime(time));
+      this.getChild('timeTooltip').write(videojs.time.formatTime(time));
     };
   };
 
