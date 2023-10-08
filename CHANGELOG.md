@@ -1,12 +1,19 @@
-1.9.18-edge.2 / 2023-10-08
+1.9.18 / 2023-10-08
 ==================
 
 fix: custom logo
 
-1.9.18-edge.1 / 2023-10-05
+1.9.17 / 2023-10-05
 ==================
 
-- Setting edge branch
+- fix: duplicate requests for video summarization and thumbnails info
+- fix: init event -> source change event
+- feat: Light theme logo changed from blue to black
+- chore: Update VideoJS to 8.5.2
+- feat: Update cloudinary video analytics package & send custom props about video player type
+- feat: Replace yarn with npm
+- refactor: ai-highlights-graph filename
+
 
 1.9.17-edge.8 / 2023-10-04
 ==================
