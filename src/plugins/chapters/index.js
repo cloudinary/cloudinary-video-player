@@ -166,7 +166,7 @@ const ChaptersPlugin = (function () {
   ChaptersPlugin.prototype.setupProgressBarChapter = function setupProgressBarChapter() {
     const chapterEl = videojs.dom.createEl('div', undefined, {
       class: 'vjs-chapter-display',
-      style: `width: ${this.player.$('.vjs-vtt-thumbnail-display').style.width || '160px'}`
+      style: `width: ${this.player.$('.vjs-vtt-thumbnail-display') ? this.player.$('.vjs-vtt-thumbnail-display').style.width : '160px'}`
     });
 
     const timeTooltip = this.player.getDescendant([
