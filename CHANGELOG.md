@@ -1,3 +1,8 @@
+1.9.18 / 2023-10-08
+==================
+
+fix: custom logo
+
 1.9.17 / 2023-10-05
 ==================
 
@@ -8,7 +13,6 @@
 - feat: Update cloudinary video analytics package & send custom props about video player type
 - feat: Replace yarn with npm
 - refactor: ai-highlights-graph filename
-
 
 
 1.9.17-edge.8 / 2023-10-04
