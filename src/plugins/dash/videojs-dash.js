@@ -299,7 +299,7 @@ class Html5DashJS {
 
     for (let i = 0; i < keySystemOptions.length; i++) {
       const keySystem = keySystemOptions[i];
-      const options = videojs.mergeOptions({}, keySystem.options);
+      const options = videojs.obj.merge({}, keySystem.options);
 
       if (options.licenseUrl) {
         options.serverURL = options.licenseUrl;

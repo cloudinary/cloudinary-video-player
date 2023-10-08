@@ -30,7 +30,7 @@ class ExtendedEvents extends EventEmitter {
   constructor(player, initOptions = {}) {
     super();
     this.player = player;
-    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
+    const options = videojs.obj.merge(DEFAULT_OPTIONS, initOptions);
 
     let _muteData = { lastState: undefined };
     let _seekStart = 0;
