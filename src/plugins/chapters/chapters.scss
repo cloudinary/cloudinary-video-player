@@ -39,11 +39,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transform: translateX(-50%);
-    bottom: 2.8em;
+    bottom: 2.7em;
     position: absolute;
     text-shadow: 0 0 4px color-mix(in srgb, var(--color-base) 40%, transparent);
     &:not(:empty) ~ .vjs-vtt-thumbnail-display {
       bottom: 4em;
     }
+  }
+
+  .vjs-time-tooltip {
+    right: auto !important;
+    translate: -50%;
   }
 }

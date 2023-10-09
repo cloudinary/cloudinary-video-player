@@ -71,7 +71,6 @@
     "uuid": "^9.0.0",
     "video.js": "8.5.2",
     "videojs-contrib-ads": "^6.9.0",
-    "videojs-contrib-dash": "^5.1.1",
     "videojs-ima": "^2.1.0",
     "webfontloader": "^1.6.28"
   },

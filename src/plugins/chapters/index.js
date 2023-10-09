@@ -166,14 +166,16 @@ const ChaptersPlugin = (function () {
   ChaptersPlugin.prototype.setupProgressBarChapter = function setupProgressBarChapter() {
     const chapterEl = videojs.dom.createEl('div', undefined, {
       class: 'vjs-chapter-display',
-      style: `width: ${this.player.$('.vjs-vtt-thumbnail-display').style.width || '160px'}`
+      style: `max-width: ${this.player.$('.vjs-vtt-thumbnail-display') ? this.player.$('.vjs-vtt-thumbnail-display').style.width : '160px'}`
     });
 
-    const timeTooltip = this.player.getDescendant([
+    const mouseTimeDisplay = this.player.getDescendant([
       'controlBar',
       'progressControl',
       'seekBar',
-      'mouseTimeDisplay',
+      'mouseTimeDisplay'
+    ]);
+    const timeTooltip = mouseTimeDisplay.getDescendant([
       'timeTooltip'
     ]);
 
@@ -193,6 +195,27 @@ const ChaptersPlugin = (function () {
       originalUpdateFn.call(this, seekBarRect, seekBarPoint, content);
       chapterEl.innerHTML = getChapterFromPoint(seekBarPoint);
     };
+
+    // Handle case of no seek-thumbnails
+    if (typeof this.player.vttThumbnails !== 'object') {
+      mouseTimeDisplay.update = function (seekBarRect, seekBarPoint) {
+        const time = seekBarPoint * this.player_.duration();
+        const width = seekBarRect.width;
+        const size = chapterEl.clientWidth / 2;
+
+        timeTooltip.updateTime(seekBarRect, seekBarPoint, time, () => {
+          // Make sure it doesn't exit the player
+          if ((seekBarRect.width * seekBarPoint) < size) {
+            this.el_.style.left = size;
+          } else if ((seekBarRect.width * seekBarPoint) + size > width) {
+            this.el_.style.left = (seekBarRect.width * seekBarPoint) - size;
+          } else {
+            this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
+          }
+        });
+        timeTooltip.write(videojs.time.formatTime(time));
+      };
+    }
   };
 
   return ChaptersPlugin;
