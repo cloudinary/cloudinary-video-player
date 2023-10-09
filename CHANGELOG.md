@@ -1,3 +1,9 @@
+1.9.19-edge.2 / 2023-10-09
+==================
+
+* fix: mpd-parser error (videojs-contrib-dash)
+* fix: chapters - handle case of no seek-thumbnails
+
 1.9.19-edge.1 / 2023-10-08
 ==================
 
