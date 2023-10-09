@@ -145,10 +145,6 @@ const VttThumbnailsPlugin = (function () {
         }
       });
       this.getChild('timeTooltip').write(videojs.time.formatTime(time));
-
-      this.getChild('timeTooltip').update = function() {
-        this.el_.style.transform = 'translateX(-50%)';
-      };
     };
   };
 
