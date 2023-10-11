@@ -1,3 +1,5 @@
+import 'videojs-per-source-behaviors';
+
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import dashPlugin from './dash';
 import imaPlugin from './ima';
