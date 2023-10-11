@@ -59,7 +59,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "135kb"
+        "maxSize": "140kb"
       }
     ]
   },
@@ -70,8 +70,9 @@
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
     "video.js": "8.5.2",
-    "videojs-contrib-ads": "^6.9.0",
+    "videojs-contrib-ads": "^7.3.2",
     "videojs-ima": "^2.1.0",
+    "videojs-per-source-behaviors": "^3.0.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
