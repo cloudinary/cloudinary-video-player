@@ -87,7 +87,8 @@ const ChaptersPlugin = (function () {
       // Fetch chapters VTT from URL
       const chaptersTrack = {
         kind: 'chapters',
-        src: this.options.url
+        src: this.options.url,
+        default: true
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
       textTrack.addEventListener('load', () => {
@@ -96,7 +97,10 @@ const ChaptersPlugin = (function () {
       });
     } else {
       // Setup chapters from options
-      const textTrack = this.player.addTextTrack('chapters');
+      const textTrack = this.player.addRemoteTextTrack({
+        kind: 'chapters',
+        default: true
+      });
       const end = this.player.duration();
       Object.entries(this.options).forEach((entry, index, arr) => {
         const cue = new VTTCue(
@@ -104,10 +108,11 @@ const ChaptersPlugin = (function () {
           parseFloat(arr[index + 1] ? arr[index + 1][0] : end),
           entry[1]
         );
-        textTrack.addCue(cue);
+        textTrack.track.addCue(cue);
       });
-      this.chaptersTrack = textTrack;
+      this.chaptersTrack = textTrack.track;
       this.setupChaptersDisplays();
+      this.player.controlBar.chaptersButton.update();
     }
   };
 
