@@ -139,7 +139,7 @@ const VttThumbnailsPlugin = (function () {
         if ((seekBarRect.width * seekBarPoint) < halfThumbnailWidth) {
           this.el_.style.left = `${halfThumbnailWidth}px`;
         } else if ((seekBarRect.width * seekBarPoint) + halfThumbnailWidth > width) {
-          this.el_.style.left = `${(seekBarRect.width * seekBarPoint) - halfThumbnailWidth}px`;
+          this.el_.style.left = `${seekBarRect.width - halfThumbnailWidth}px`;
         } else {
           this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
         }

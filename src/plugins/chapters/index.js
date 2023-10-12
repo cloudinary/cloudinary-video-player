@@ -112,7 +112,9 @@ const ChaptersPlugin = (function () {
       });
       this.chaptersTrack = textTrack.track;
       this.setupChaptersDisplays();
-      this.player.controlBar.chaptersButton.update();
+      if (this.player.controlBar.chaptersButton) {
+        this.player.controlBar.chaptersButton.update();
+      }
     }
   };
 
@@ -213,7 +215,7 @@ const ChaptersPlugin = (function () {
           if ((seekBarRect.width * seekBarPoint) < size) {
             this.el_.style.left = `${size}px`;
           } else if ((seekBarRect.width * seekBarPoint) + size > width) {
-            this.el_.style.left = `${(seekBarRect.width * seekBarPoint) - size}px`;
+            this.el_.style.left = `${seekBarRect.width - size}px`;
           } else {
             this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
           }
