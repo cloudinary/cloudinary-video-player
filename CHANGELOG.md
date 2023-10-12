@@ -1,3 +1,9 @@
+1.9.19-edge.5 / 2023-10-12
+==================
+
+* fix: chapters button
+* fix: chapters via source
+
 1.9.19-edge.4 / 2023-10-12
 ==================
 
