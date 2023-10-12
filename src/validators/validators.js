@@ -82,6 +82,7 @@ export const sourceValidators = {
   raw_transformation: validator.isString,
   shoppable: validator.isPlainObject,
   withCredentials: validator.isBoolean,
+  chapters: validator.isPlainObject,
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),

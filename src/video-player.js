@@ -320,15 +320,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initChapters() {
-    if (this.playerOptions.chapters) {
-      this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-        if (!source) {
-          return;
-        }
-
-        this.videojs.chapters(this.playerOptions.chapters);
-      });
-    }
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      if (source._chapters) {
+        this.videojs.chapters(source._chapters);
+      }
+    });
   }
 
   _initColors () {
