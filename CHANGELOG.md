@@ -1,3 +1,10 @@
+1.9.19-edge.4 / 2023-10-12
+==================
+
+Changes:
+----------
+* fix cld analytics to be called on cld video event changed
+
 1.9.19-edge.3 / 2023-10-11
 ==================
 
