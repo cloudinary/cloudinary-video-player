@@ -137,9 +137,9 @@ const VttThumbnailsPlugin = (function () {
       this.getChild('timeTooltip').updateTime(seekBarRect, seekBarPoint, time, () => {
         // Make sure the thumbnail doesn't exit the player
         if ((seekBarRect.width * seekBarPoint) < halfThumbnailWidth) {
-          this.el_.style.left = halfThumbnailWidth;
+          this.el_.style.left = `${halfThumbnailWidth}px`;
         } else if ((seekBarRect.width * seekBarPoint) + halfThumbnailWidth > width) {
-          this.el_.style.left = (seekBarRect.width * seekBarPoint) - halfThumbnailWidth;
+          this.el_.style.left = `${(seekBarRect.width * seekBarPoint) - halfThumbnailWidth}px`;
         } else {
           this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
         }

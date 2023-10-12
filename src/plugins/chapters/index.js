@@ -206,9 +206,9 @@ const ChaptersPlugin = (function () {
         timeTooltip.updateTime(seekBarRect, seekBarPoint, time, () => {
           // Make sure it doesn't exit the player
           if ((seekBarRect.width * seekBarPoint) < size) {
-            this.el_.style.left = size;
+            this.el_.style.left = `${size}px`;
           } else if ((seekBarRect.width * seekBarPoint) + size > width) {
-            this.el_.style.left = (seekBarRect.width * seekBarPoint) - size;
+            this.el_.style.left = `${(seekBarRect.width * seekBarPoint) - size}px`;
           } else {
             this.el_.style.left = `${seekBarRect.width * seekBarPoint}px`;
           }
