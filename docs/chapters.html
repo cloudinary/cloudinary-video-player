@@ -36,16 +36,18 @@
         },
       });
 
-      const playerConf = cloudinary.videoPlayer('player-config', {
-        cloud_name: 'demo',
-        publicId: 'snow_horses',
+      const playerSourceConf = cloudinary.videoPlayer('player-config', {
+        cloud_name: 'demo'
+      });
+
+      playerSourceConf.source('snow_horses', {
         info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
         chapters: {
           0: 'Opening credits',
           3: 'A dangerous quest',
           8: 'The attack'
         },
-      });
+      })
 
     }, false);
   </script>
@@ -72,7 +74,7 @@
     ></video>
 
     <br><br>
-    <h4 class="mb-4">From a config object</h4>
+    <h4 class="mb-4">From a config object on <code>source()</code></h4>
 
     <video
       id="player-config"
@@ -120,16 +122,18 @@
           },
         });
 
-        const playerConf = cloudinary.videoPlayer('player-config', {
-          cloud_name: 'demo',
-          publicId: 'snow_horses',
+        const playerSourceConf = cloudinary.videoPlayer('player-config', {
+          cloud_name: 'demo'
+        });
+
+        playerSourceConf.source('snow_horses', {
           info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
           chapters: {
             0: 'Opening credits',
             3: 'A dangerous quest',
             8: 'The attack'
           },
-        });
+        })
       </code>
     </pre>
   </div>
