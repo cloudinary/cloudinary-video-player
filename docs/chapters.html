@@ -37,7 +37,11 @@
       });
 
       const playerSourceConf = cloudinary.videoPlayer('player-config', {
-        cloud_name: 'demo'
+        cloud_name: 'demo',
+        controlBar: {
+          pictureInPictureToggle: false,
+          chaptersButton: true
+        },
       });
 
       playerSourceConf.source('snow_horses', {
@@ -123,7 +127,11 @@
         });
 
         const playerSourceConf = cloudinary.videoPlayer('player-config', {
-          cloud_name: 'demo'
+          cloud_name: 'demo',
+          controlBar: {
+            pictureInPictureToggle: false,
+            chaptersButton: true
+          },
         });
 
         playerSourceConf.source('snow_horses', {
