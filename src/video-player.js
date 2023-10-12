@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import { v4 as uuidv4 } from 'uuid';
+import isEmpty from 'lodash/isEmpty';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -321,7 +322,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _initChapters() {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      if (source._chapters) {
+      if (!isEmpty(source._chapters)) {
         this.videojs.chapters(source._chapters);
       }
     });

@@ -30,7 +30,6 @@
       const playerVTT = cloudinary.videoPlayer('player-vtt', {
         cloud_name: 'demo',
         publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
         chapters: {
           url: 'https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt'
         },
@@ -45,7 +44,6 @@
       });
 
       playerSourceConf.source('snow_horses', {
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
         chapters: {
           0: 'Opening credits',
           3: 'A dangerous quest',
