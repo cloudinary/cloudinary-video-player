@@ -61,14 +61,14 @@ const ChaptersPlugin = (function () {
   function ChaptersPlugin(player, options) {
     this.player = player;
     this.options = options;
-    this.player.on('loadedmetadata', this.initializeChapters.bind(this));
+    this.player.one('loadedmetadata', this.initializeChapters.bind(this));
     return this;
   }
 
-  ChaptersPlugin.prototype.src = function src(source) {
+  ChaptersPlugin.prototype.src = function src(options) {
     this.resetPlugin();
-    this.options.src = source;
-    this.initializeChapters();
+    this.options = options;
+    this.player.one('loadedmetadata', this.initializeChapters.bind(this));
   };
 
   ChaptersPlugin.prototype.detach = function detach() {
@@ -76,7 +76,13 @@ const ChaptersPlugin = (function () {
   };
 
   ChaptersPlugin.prototype.resetPlugin = function resetPlugin() {
-    delete this.chaptersTrack;
+    if (this.chaptersTrack) {
+      this.player.$('.vjs-control-bar-chapter-display').remove();
+      this.player.$('.vjs-chapter-display').remove();
+      this.player.$$('.vjs-chapter-marker').forEach((el) => el.remove());
+      this.player.removeRemoteTextTrack(this.chaptersTrack);
+      delete this.chaptersTrack;
+    }
   };
 
   /**
