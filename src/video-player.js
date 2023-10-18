@@ -1,5 +1,6 @@
 import videojs from 'video.js';
 import { v4 as uuidv4 } from 'uuid';
+import isEmpty from 'lodash/isEmpty';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -210,6 +211,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initTextTracks();
     this._initHighlightsGraph();
     this._initSeekThumbs();
+    this._initChapters();
   }
 
   _isFullScreen() {
@@ -316,6 +318,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           : this.videojs.aiHighlightsGraph.src(aiHighlightsGraphSrc);
       });
     }
+  }
+
+  _initChapters() {
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      if (!isEmpty(source._chapters) && this.videojs.chapters) {
+        isFunction(this.videojs.chapters)
+          ? this.videojs.chapters(source._chapters)
+          : this.videojs.chapters.src(source._chapters);
+      }
+    });
   }
 
   _initColors () {

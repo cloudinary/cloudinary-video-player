@@ -1,3 +1,5 @@
+import 'videojs-per-source-behaviors';
+
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import dashPlugin from './dash';
 import imaPlugin from './ima';
@@ -14,6 +16,7 @@ import analytics from './analytics';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import vttThumbnails from './vtt-thumbnails';
 import aiHighlightsGraph from './ai-highlights-graph';
+import chapters from './chapters';
 
 const plugins = {
   autoplayOnScroll,
@@ -25,6 +28,7 @@ const plugins = {
   cloudinaryAnalytics,
   vttThumbnails,
   aiHighlightsGraph,
+  chapters,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin,

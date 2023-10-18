@@ -3,6 +3,7 @@ import { isFunction } from 'utils/type-inference';
 import { PLAYER_EVENT } from 'utils/consts';
 import 'videojs-contrib-ads';
 import './ima';
+import './videojs-ima.scss';
 
 export default function imaPlugin(player, playerOptions) {
 
@@ -31,7 +32,7 @@ export default function imaPlugin(player, playerOptions) {
     adLabel: playerOptions.ads.adLabel || 'Advertisement',
     locale: playerOptions.ads.locale || 'en',
     autoPlayAdBreaks: playerOptions.ads.autoPlayAdBreaks !== false,
-    debug: true
+    debug: playerOptions.ads.denug
   });
 
   if (Object.keys(playerOptions.ads).length > 0 && typeof player.ima === 'object') {

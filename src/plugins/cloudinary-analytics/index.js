@@ -16,19 +16,22 @@ class CloudinaryAnalytics {
     publicId: this.player.cloudinary.currentPublicId()
   })
 
+  sourceChanged = () => {
+    const metadata = this.getMetadata();
+    if (metadata.cloudName && metadata.publicId) {
+      this.currentVideMetadata = metadata;
+      this.cloudinaryAnalytics.startManualTracking(metadata, {
+        videoPlayerType: 'cloudinary video player',
+        videoPlayerVersion: VERSION
+      });
+    } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
+      this.cloudinaryAnalytics.stopManualTracking();
+    }
+  };
+
   init() {
-    this.player.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
-      const metadata = this.getMetadata();
-      if (metadata.cloudName && metadata.publicId) {
-        this.currentVideMetadata = metadata;
-        this.cloudinaryAnalytics.startManualTracking(metadata, {
-          videoPlayerType: 'cloudinary video player',
-          videoPlayerVersion: VERSION
-        });
-      } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
-        this.cloudinaryAnalytics.stopManualTracking();
-      }
-    });
+    this.player.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this.sourceChanged);
+    this.player.on(PLAYER_EVENT.SOURCE_CHANGED, this.sourceChanged);
   }
 }
 

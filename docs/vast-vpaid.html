@@ -19,12 +19,9 @@
 
     <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
     <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-contrib-ads/dist/videojs.ads.css" />
 
   <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
 
@@ -37,20 +34,13 @@
         cloud_name: 'demo',
         ads: {
           adTagUrl: adTagUrl,
+          debug: true
         }
       });
 
-      var sorter = function(a, b) {
-        if (a.publicId < b.publicId) return 1;
-        if (a.publicId > b.publicId) return -1;
-        return 0;
-      };
-
       player.playlistByTag('video_race', {
-        sorter: sorter,
-        autoAdvance: 5,
+        autoAdvance: true,
         repeat: true,
-        presentUpcoming: false
       }).then(function() {
         var divElem = document.querySelector("#playlist-data");
         var list = player.playlist().list().map(function(source) {

@@ -35,7 +35,7 @@ class AnalyticsPlugin {
 
   constructor(player, initOptions = {}) {
     this.player = player;
-    this.options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
+    this.options = videojs.obj.merge(DEFAULT_OPTIONS, initOptions);
     this.events = normalizeEventsParam(this.options.events, EVENT_DEFAULTS);
 
     const extendedEvents = sliceProperties(this.events, PLAYER_EVENT.PERCENTS_PLAYED, PLAYER_EVENT.TIME_PLAYED, PLAYER_EVENT.PAUSE, PLAYER_EVENT.SEEK);

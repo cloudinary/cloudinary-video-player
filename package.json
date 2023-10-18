@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "1.9.18",
+  "version": "1.9.19-edge.7",
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
@@ -55,11 +55,11 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "276kb"
+        "maxSize": "280kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "135kb"
+        "maxSize": "140kb"
       }
     ]
   },
@@ -70,9 +70,7 @@
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
     "video.js": "8.5.2",
-    "videojs-contrib-ads": "^6.9.0",
-    "videojs-contrib-dash": "^5.1.1",
-    "videojs-contrib-quality-levels": "^4.0.0",
+    "videojs-contrib-ads": "^7.3.2",
     "videojs-ima": "^2.1.0",
     "videojs-per-source-behaviors": "^3.0.0",
     "webfontloader": "^1.6.28"

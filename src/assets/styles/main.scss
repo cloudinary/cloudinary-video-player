@@ -8,7 +8,6 @@ $icon-font-path: '../icon-font' !default;
 @import '~video.root.js/dist/video-js.min.css';
 @import 'mixins/skin';
 @import 'icons';
-@import 'videojs-ima';
 @import 'components/interaction-areas.scss';
 @import 'components/loading-button.scss';
 
@@ -103,6 +102,7 @@ $icon-font-path: '../icon-font' !default;
   .vjs-time-tooltip {
     padding: 0.4em 0.6em;
     top: -2.6em;
+    font-size: 0.8em;
   }
 
   .vjs-big-play-button {
@@ -299,6 +299,9 @@ $icon-font-path: '../icon-font' !default;
     }
     .vjs-play-progress {
       &::before {
+        display: none;
+      }
+      .vjs-time-tooltip {
         display: none;
       }
     }

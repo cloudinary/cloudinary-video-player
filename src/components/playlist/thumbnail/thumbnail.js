@@ -19,7 +19,7 @@ const DEFAULT_OPTIONS = {
 class Thumbnail extends ClickableComponent {
 
   constructor(player, initOptions) {
-    const options = videojs.mergeOptions(DEFAULT_OPTIONS, initOptions);
+    const options = videojs.obj.merge(DEFAULT_OPTIONS, initOptions);
     super(player, options);
   }
 

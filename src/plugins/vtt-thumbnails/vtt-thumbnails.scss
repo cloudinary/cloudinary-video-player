@@ -2,9 +2,7 @@
   .vjs-vtt-thumbnail-display {
     position: absolute;
     left: 0;
-    bottom: 15px;
     z-index: 1;
-    opacity: 0;
     transition: opacity 0.2s;
     bottom: 3em;
     pointer-events: none;
@@ -12,6 +10,7 @@
     border-radius: 2px;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(12px);
+    transform: translateX(-50%);
   }
 
   .vjs-vtt-time-display {
@@ -29,7 +28,8 @@
     border-radius: 4px;
   }
 
-  &.vjs-vtt-thumbnails .vjs-time-tooltip {
-    display: none !important;
+  .vjs-time-tooltip {
+    right: auto !important;
+    translate: -50%;
   }
 }

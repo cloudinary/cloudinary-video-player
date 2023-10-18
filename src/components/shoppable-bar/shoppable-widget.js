@@ -15,7 +15,7 @@ import { PLAYER_EVENT } from '../../utils/consts';
 class ShoppableWidget {
 
   constructor(player, initOptions = {}) {
-    this.options_ = videojs.mergeOptions(SHOPPABLE_WIDGET_OPTIONS_DEFAULTS, initOptions);
+    this.options_ = videojs.obj.merge(SHOPPABLE_WIDGET_OPTIONS_DEFAULTS, initOptions);
     this.player_ = player;
 
     if (this.options_.showPostPlayOverlay) {

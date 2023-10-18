@@ -1,3 +1,42 @@
+1.9.19-edge.7 / 2023-10-18
+==================
+
+* fix: chapters in playlists
+
+1.9.19-edge.6 / 2023-10-12
+==================
+
+* fix: chapters button
+
+1.9.19-edge.5 / 2023-10-12
+==================
+
+* fix: chapters button
+* fix: chapters via source
+
+1.9.19-edge.4 / 2023-10-12
+==================
+
+Changes:
+----------
+* fix cld analytics to be called on cld video event changed
+
+1.9.19-edge.3 / 2023-10-11
+==================
+
+fix: ads
+
+1.9.19-edge.2 / 2023-10-09
+==================
+
+* fix: mpd-parser error (videojs-contrib-dash)
+* fix: chapters - handle case of no seek-thumbnails
+
+1.9.19-edge.1 / 2023-10-08
+==================
+
+* feat: chapters plugin
+
 1.9.18 / 2023-10-08
 ==================
 

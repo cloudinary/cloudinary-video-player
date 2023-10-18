@@ -158,7 +158,7 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     const currentSrcOptions = cldSrc.getInitOptions();
     const option = newOption || { transformation: currentSrcOptions.transformation };
     const transformation = !src && getZoomTransformation(player.videoElement, item);
-    const sourceOptions = transformation ? videojs.mergeOptions({ transformation }, option) : option;
+    const sourceOptions = transformation ? videojs.obj.merge({ transformation }, option) : option;
 
     const newSource = cldSrc.isRawUrl ? currentSource.src : { publicId: cldSrc.publicId() };
     player.source(transformation ? { publicId: cldSrc.publicId() } : src, sourceOptions).play();
