@@ -2,55 +2,13 @@
 ==================
 
 * feat: Chapters plugin
-
-1.9.19-edge.7 / 2023-10-18
-==================
-
-* fix: chapters in playlists
-
-1.9.19-edge.6 / 2023-10-12
-==================
-
-* fix: chapters button
-
-1.9.19-edge.5 / 2023-10-12
-==================
-
-* fix: chapters button
-* fix: chapters via source
-
-1.9.19-edge.4 / 2023-10-12
-==================
-
-Changes:
-----------
 * fix cld analytics to be called on cld video event changed
-
-1.9.19-edge.3 / 2023-10-11
-==================
-
-fix: ads
-
-1.9.19-edge.2 / 2023-10-09
-==================
-
-* fix: mpd-parser error (videojs-contrib-dash)
-* fix: chapters - handle case of no seek-thumbnails
-
-1.9.19-edge.1 / 2023-10-08
-==================
-
-* feat: chapters plugin
-
-1.9.18 / 2023-10-08
-==================
-
-* fix: custom logo
 
 1.9.18 / 2023-10-08
 ==================
 
 fix: custom logo
+fix: yarn to npm
 
 1.9.17 / 2023-10-05
 ==================
@@ -60,7 +18,6 @@ fix: custom logo
 - feat: Light theme logo changed from blue to black
 - chore: Update VideoJS to 8.5.2
 - feat: Update cloudinary video analytics package & send custom props about video player type
-- feat: Replace yarn with npm
 - refactor: ai-highlights-graph filename
 
 
