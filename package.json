@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.10.2",
-    "cloudinary-video-analytics": "1.4.1",
+    "cloudinary-video-analytics": "1.4.3",
     "dashjs": "^4.7.1",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
