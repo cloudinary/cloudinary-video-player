@@ -1,4 +1,4 @@
-import { default as vjs } from 'video.js';
+import videojs from 'video.js';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -10,7 +10,11 @@ import {
   DEFAULT_VIDEO_PARAMS,
   VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
-import { formatToMimeTypeAndTransformation, isCodecAlreadyExist, normalizeFormat } from './video-source.utils';
+import {
+  formatToMimeTypeAndTransformation,
+  isCodecAlreadyExist,
+  normalizeFormat
+} from './video-source.utils';
 import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
@@ -20,9 +24,7 @@ let objectId = 0;
 const generateId = () => objectId++;
 
 class VideoSource extends BaseSource {
-
   constructor(_publicId, initOptions = {}) {
-
     const _isRawUrl = isRawUrl(_publicId);
     let { publicId, options } = normalizeOptions(_publicId, initOptions);
 
@@ -106,7 +108,7 @@ class VideoSource extends BaseSource {
     return this;
   }
 
-  sourceTypes (types) {
+  sourceTypes(types) {
     if (!types) {
       return this._sourceTypes;
     }
@@ -155,7 +157,7 @@ class VideoSource extends BaseSource {
     return this;
   }
 
-  poster (publicId, options = {}) {
+  poster(publicId, options = {}) {
     if (!publicId) {
       return this._poster;
     }
@@ -180,7 +182,7 @@ class VideoSource extends BaseSource {
 
   contains(source) {
     const sources = this.generateSources();
-    return sources.some((_source) => isSrcEqual(_source, source));
+    return sources.some(_source => isSrcEqual(_source, source));
   }
 
   generateSources() {
@@ -189,10 +191,10 @@ class VideoSource extends BaseSource {
       return [this.generateRawSource(this.publicId(), type)];
     }
 
-    const srcs = this.sourceTypes().map((sourceType) => {
+    const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
-      const isAdaptive = (['mpd', 'm3u8'].indexOf(format) !== -1);
+      const isAdaptive = ['mpd', 'm3u8'].indexOf(format) !== -1;
       const opts = {};
 
       if (srcTransformation) {
@@ -218,14 +220,16 @@ class VideoSource extends BaseSource {
       // if src is a url that already contains query params then replace '?' with '&'
       const params = src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
 
-      return { type, src: src + params, cldSrc: this, isAdaptive: isAdaptive, withCredentials: this.withCredentials };
+      return {
+        type,
+        src: src + params,
+        cldSrc: this,
+        isAdaptive: isAdaptive,
+        withCredentials: this.withCredentials
+      };
     });
 
-    const isIe = typeof navigator !== 'undefined' && (/MSIE/.test(navigator.userAgent) || /Trident\//.test(navigator.appVersion));
-
-    if (isIe) {
-      return srcs.filter(s => s.type !== 'video/mp4; codec="hev1.1.6.L93.B0"');
-    } else if (vjs.browser.IS_ANY_SAFARI) {
+    if (videojs.browser.IS_ANY_SAFARI) {
       // filter out dash on safari
       return srcs.filter(s => s.type.indexOf('application/dash+xml') === -1);
     } else {
