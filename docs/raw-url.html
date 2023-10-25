@@ -34,7 +34,7 @@
 
       player = cloudinary.videoPlayer('player', config);
 
-      player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
+      player.source('https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4');
 
       adpPlayer = cloudinary.videoPlayer('adpPlayer',config);
 
@@ -66,13 +66,13 @@
     <h3 class="mb-4">Video with raw URL adaptive</h3>
 
     <video
-            id="adpPlayer"
-            playsinline
-            controls
-            muted
-            autoplay
-            class="cld-video-player"
-            width="500">
+      id="adpPlayer"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500">
     </video>
 
     <p class="mt-4">
@@ -92,23 +92,25 @@
         &lt;/video&gt;
 
          &lt;video
-              id="adpPlayer"
-              playsinline
-              controls
-              muted
-              autoplay
-              class="cld-video-player"
-              width="500">
+          id="adpPlayer"
+          playsinline
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          width="500">
           &lt;/video&gt;
       </code>
       <code class="language-javascript">
 
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo', secure: true });
+        player = cloudinary.videoPlayer('player', config);
 
-        player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
+        player.source('https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4');
 
-        var adpPlayer = cld.videoPlayer('adpPlayer');
+        adpPlayer = cloudinary.videoPlayer('adpPlayer',config);
+
         adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
+
       </code>
     </pre>
   </div>
