@@ -212,6 +212,9 @@ class VideoSource extends BaseSource {
 
       if (opts.format === 'auto') {
         delete opts.format;
+        opts.transformation = mergeTransformations(opts.transformation, {
+          fetch_format: 'auto:video'
+        });
       }
 
       const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';

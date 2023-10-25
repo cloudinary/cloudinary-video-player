@@ -204,6 +204,21 @@ const codecToSrcTransformation = codec => {
   }
 };
 
+const setupCloudinaryMiddleware = () => {
+  // Allow 'auto' as a source type
+  videojs.use('video/auto', () => {
+    return {
+      async setSource(srcObj, next) {
+        const headers = await fetch(srcObj.src, { method: 'HEAD' }).then(r => r.headers);
+
+        return next(null, {
+          src: srcObj.src,
+          type: headers.get('content-type')
+        });
+      }
+    };
+  });
+};
 
 export {
   normalizeOptions,
@@ -213,5 +228,6 @@ export {
   codecShorthandTrans,
   h264avcToString,
   codecToSrcTransformation,
+  setupCloudinaryMiddleware,
   ERROR_CODE
 };

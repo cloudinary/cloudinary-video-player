@@ -11,7 +11,8 @@ import {
   normalizeOptions,
   mergeTransformations,
   codecShorthandTrans,
-  extendCloudinaryConfig
+  extendCloudinaryConfig,
+  setupCloudinaryMiddleware
 } from './common';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
@@ -31,6 +32,8 @@ class CloudinaryContext extends mixin(Playlistable) {
 
   constructor(player, options = {}) {
     super(player, options);
+
+    setupCloudinaryMiddleware();
 
     this.player = player;
     options = assign({}, DEFAULT_PARAMS, options);
