@@ -29,7 +29,8 @@
     window.addEventListener('load', function(){
       const config = {
         cloud_name: 'demo',
-        secure: true
+        secure: true,
+        posterOptions: { posterColor: '#000' }
       };
 
       player = cloudinary.videoPlayer('player', config);
