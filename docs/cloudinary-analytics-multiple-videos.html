@@ -24,19 +24,20 @@
   <script type="text/javascript" src="./scripts.js"></script>
   <script type="text/javascript">
     window.addEventListener('load', function(){
-      const player = cloudinary.videoPlayer('player', { 
+      const player = cloudinary.videoPlayer('player', {
          cloud_name: 'demo',
          secure: true,
-         cloudinaryAnalytics: true 
+         cloudinaryAnalytics: true
       });
 
-      player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
+      player.source('https://res.cloudinary.com/demo/video/upload/elephants.mp4');
 
-      const adpPlayer = cloudinary.videoPlayer('adpPlayer', { 
+      const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
          cloud_name: 'demo',
          secure: true,
-         cloudinaryAnalytics: true 
+         cloudinaryAnalytics: true
       });
+
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
     }, false);
   </script>
@@ -49,25 +50,28 @@
         <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Cloudinary analytics</h3>
+    <h3 class="mb-4">Cloudinary analytics with multiple videos</h3>
 
     <video
-            id="player"
-            playsinline
-            controls
-            muted
-            class="cld-video-player"
-            width="500"
+      id="player"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
     ></video>
 
+    <br><br><br>
+
     <video
-            id="adpPlayer"
-            playsinline
-            controls
-            muted
-            loop
-            class="cld-video-player"
-            width="500"
+      id="adpPlayer"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
     ></video>
 
     <h3 class="mt-4">Example Code:</h3>
@@ -79,30 +83,31 @@
           id="player"
           controls
           muted
+          autoplay
           class="cld-video-player"
           width="500"&gt;
         &lt;/video&gt;
 
       </code>
       <code class="language-javascript">
-        &lt;!-- Actual code --&gt;
         &lt;script type="text/javascript"&gt;
 
           // Initialize player
-          const player = cloudinary.videoPlayer('player', { 
+          const player = cloudinary.videoPlayer('player', {
             cloud_name: 'demo',
             secure: true,
-            cloudinaryAnalytics: true 
-         });
-   
-         player.source('https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_2MB.mp4');
-   
-         const adpPlayer = cloudinary.videoPlayer('adpPlayer', { 
+            cloudinaryAnalytics: true
+          });
+
+          player.source('https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4');
+
+          const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
             cloud_name: 'demo',
             secure: true,
-            cloudinaryAnalytics: true 
-         });
-         adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
+            cloudinaryAnalytics: true
+          });
+
+          adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
         &lt;/script&gt;
       </code>

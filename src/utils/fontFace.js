@@ -5,7 +5,7 @@ const FONT_FAMILY = 'Inter';
 const fontFace = (elem, options) => {
   let fontFace = options.cloudinary.fontFace;
 
-  // Default font-face is "Fira sans"
+  // Default font-face is "Inter"
   if (typeof fontFace === 'undefined') {
     fontFace = FONT_FAMILY;
   }

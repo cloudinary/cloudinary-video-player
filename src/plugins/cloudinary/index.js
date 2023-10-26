@@ -1,4 +1,4 @@
-import { default as vjs } from 'video.js';
+import videojs from 'video.js';
 import { mixin } from 'utils/mixin';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
@@ -11,7 +11,8 @@ import {
   normalizeOptions,
   mergeTransformations,
   codecShorthandTrans,
-  extendCloudinaryConfig
+  extendCloudinaryConfig,
+  setupCloudinaryMiddleware
 } from './common';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
@@ -31,6 +32,8 @@ class CloudinaryContext extends mixin(Playlistable) {
 
   constructor(player, options = {}) {
     super(player, options);
+
+    setupCloudinaryMiddleware();
 
     this.player = player;
     options = assign({}, DEFAULT_PARAMS, options);
@@ -265,7 +268,7 @@ class CloudinaryContext extends mixin(Playlistable) {
             const parts = src.type.split('; ');
             let typeStr = `video/mp4; ${parts[1] || ''}`;
             const canPlay = testCanPlayTypeAndTypeSupported(typeStr);
-            if (vjs.browser.IS_ANY_SAFARI) {
+            if (videojs.browser.IS_ANY_SAFARI) {
               // work around safari saying it cant play h265
               src.type = `${parts[0]}; ${codecShorthandTrans('h264')}`;
             }

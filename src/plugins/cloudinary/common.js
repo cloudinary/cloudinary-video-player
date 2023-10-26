@@ -1,3 +1,4 @@
+import videojs from 'video.js';
 import { assign } from 'utils/assign';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
@@ -5,7 +6,6 @@ import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen/backwards/createCloudinaryLegacyURL';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import { omit } from '../../utils/object';
-
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isPlainObject(publicId)) {
@@ -25,7 +25,7 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
   return { publicId, options };
 };
 
-export const isRawUrl = (publicId) => URL_PATTERN.test(publicId);
+export const isRawUrl = publicId => URL_PATTERN.test(publicId);
 
 const isSrcEqual = (source1, source2) => {
   let src1 = source1;
@@ -49,14 +49,19 @@ const isSrcEqual = (source1, source2) => {
   return src1 === src2;
 };
 
-export const extendCloudinaryConfig = (currentConfig, newConfig) => Object.assign(currentConfig, newConfig);
+export const extendCloudinaryConfig = (currentConfig, newConfig) =>
+  Object.assign(currentConfig, newConfig);
 
-export const getCloudinaryUrl = (publicId, transformation) => createCloudinaryLegacyURL(publicId, omit(transformation, ['chainTarget']));
+export const getCloudinaryUrl = (publicId, transformation) =>
+  createCloudinaryLegacyURL(publicId, omit(transformation, ['chainTarget']));
 
-const isTransformationInstance = (transformation) => transformation.constructor.name === 'Transformation' && transformation.toOptions;
+const isTransformationInstance = transformation =>
+  transformation.constructor.name === 'Transformation' && transformation.toOptions;
 
 const mergeTransformations = (initTransformation1, transformation2) => {
-  const transformation1 = isTransformationInstance(initTransformation1) ? initTransformation1.toOptions() : initTransformation1;
+  const transformation1 = isTransformationInstance(initTransformation1)
+    ? initTransformation1.toOptions()
+    : initTransformation1;
 
   return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
@@ -72,7 +77,11 @@ const ERROR_CODE = {
 
 const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }) => {
   const msg = 'Video cannot be played';
-  let error = { code: ERROR_CODE.CUSTOM, message: `${msg}${errorMsg ? '- ' + errorMsg : ''}`, statusCode: statusCode };
+  let error = {
+    code: ERROR_CODE.CUSTOM,
+    message: `${msg}${errorMsg ? '- ' + errorMsg : ''}`,
+    statusCode: statusCode
+  };
   let err = errorMsg.toLowerCase();
   if (err.startsWith('unknown customer')) {
     error.code = ERROR_CODE.UNKNOWN_CUSTOMER;
@@ -93,7 +102,7 @@ const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }
   return error;
 };
 
-const codecShorthandTrans = (short) => {
+const codecShorthandTrans = short => {
   const transTable = {
     h265: 'hev1.1.6.L93.B0',
     vp9: 'vp09.00.50.08',
@@ -103,35 +112,33 @@ const codecShorthandTrans = (short) => {
 };
 
 const ISOAVC_MAP = {
-  'avc1': 'h264',
-  'avc2': 'h264',
-  'svc1': 'Scalable Video Coding',
-  'mvc1': 'Multiview Video Coding',
-  'mvc2': 'Multiview Video Coding'
+  avc1: 'h264',
+  avc2: 'h264',
+  svc1: 'Scalable Video Coding',
+  mvc1: 'Multiview Video Coding',
+  mvc2: 'Multiview Video Coding'
 };
 
-
 const PROFILE = {
-  '0': 'No', //  0             - *** when profile=RCDO and level=0 - "RCDO"  - RCDO bitstream MUST obey to all the constraints of the Baseline profile
-  '42': 'baseline', // 66 in-decimal
+  0: 'No', //  0             - *** when profile=RCDO and level=0 - "RCDO"  - RCDO bitstream MUST obey to all the constraints of the Baseline profile
+  42: 'baseline', // 66 in-decimal
   '4d': 'main', // 77 in-decimal
-  '58': 'extended', // 88 in-decimal
-  '64': 'high', // 100 in-decimal
+  58: 'extended', // 88 in-decimal
+  64: 'high', // 100 in-decimal
   '6e': 'high 10', // 110 in-decimal
   '7a': 'high 4:2:2', // 122 in-decimal
-  'f4': 'high 4:4:4', // 244 in-decimal
+  f4: 'high 4:4:4', // 244 in-decimal
   '2c': 'CAVLC 4:4:4', // 44 in-decimal
 
   // profiles for SVC - Scalable Video Coding extension to H.264
-  '53': 'Scalable Baseline', // 83 in-decimal
-  '56': 'Scalable High', // 86 in-decimal
+  53: 'Scalable Baseline', // 83 in-decimal
+  56: 'Scalable High', // 86 in-decimal
 
   // profiles for MVC - Multiview Video Coding extension to H.264
-  '80': 'Stereo High', // 128 in-decimal
-  '76': 'Multiview High', // 118 in-decimal
+  80: 'Stereo High', // 128 in-decimal
+  76: 'Multiview High', // 118 in-decimal
   '8a': 'Multiview Depth High' // 138 in-decimal
 };
-
 
 function avcotiToStr(s) {
   let REGEX = /([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})/i;
@@ -154,11 +161,12 @@ function avcotiToStr(s) {
   return `${profile_idc}:${level_idc}`;
 }
 
-
-const h264avcToString = (s) => {
+const h264avcToString = s => {
   let REGEX = /(avc1|avc2|svc1|mvc1|mvc2)\.([0-9a-f]{6})/i;
   if (REGEX.test('avc1.42001e') === false) {
-    throw new Error('Codec string is not formatted according to H.264/AVC standards for example avc1.42001e (maybe an iOS friendly version...)');
+    throw new Error(
+      'Codec string is not formatted according to H.264/AVC standards for example avc1.42001e (maybe an iOS friendly version...)'
+    );
   }
   let matches = s.match(REGEX);
   if (matches !== null) {
@@ -179,7 +187,7 @@ export const VIDEO_CODEC = {
   H264: 'h264'
 };
 
-const codecToSrcTransformation = (codec) => {
+const codecToSrcTransformation = codec => {
   if (!codec) {
     return {};
   }
@@ -196,6 +204,21 @@ const codecToSrcTransformation = (codec) => {
   }
 };
 
+const setupCloudinaryMiddleware = () => {
+  // Allow 'auto' as a source type
+  videojs.use('video/auto', () => {
+    return {
+      async setSource(srcObj, next) {
+        const { headers } = await fetch(srcObj.src, { method: 'HEAD' });
+
+        return next(null, {
+          src: srcObj.src,
+          type: headers.get('content-type')
+        });
+      }
+    };
+  });
+};
 
 export {
   normalizeOptions,
@@ -205,5 +228,6 @@ export {
   codecShorthandTrans,
   h264avcToString,
   codecToSrcTransformation,
+  setupCloudinaryMiddleware,
   ERROR_CODE
 };
