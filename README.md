@@ -23,12 +23,12 @@ This README includes basic information for installation and getting started. Vie
 
 ### CDN
 
-Cloudinary Video Player can also be included directly from the [Unpkg CDN](https://unpkg.com/#/):
+Cloudinary Video Player can also be included directly from the [jsDelivr CDN](https://www.jsdelivr.com/):
 
 ```html
-<link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
 
-<script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
 ```
 
 ### Packages

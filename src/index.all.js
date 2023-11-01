@@ -3,7 +3,12 @@
 
 // Usage:
 // import { videoPlayer, videoPlayers } from 'cloudinary-video-player';
+// Or:
+// import cloudinary from 'cloudinary-video-player';
+
+import cloudinary from './index.js';
 
 export * from './index.js';
 export * from './plugins/dash/videojs-dash.js';
-export * from './plugins/ima/ima.js';
+
+export default cloudinary;
