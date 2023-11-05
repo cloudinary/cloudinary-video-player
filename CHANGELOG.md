@@ -1,6 +1,11 @@
 1.10.2 / 2023-11-05
 ==================
 
+
+
+1.10.2 / 2023-11-05
+==================
+
 * fix: ES build default export
 * Scrollable subtitles - popup menus
 * feat: f_auto by default
