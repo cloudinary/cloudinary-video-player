@@ -4,6 +4,7 @@ import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { castArray } from 'utils/array';
 import { SOURCE_TYPE } from 'utils/consts';
+import { isKeyPresent } from 'utils/object';
 import {
   CONTAINER_MIME_TYPES,
   DEFAULT_POSTER_PARAMS,
@@ -215,6 +216,14 @@ class VideoSource extends BaseSource {
         opts.transformation = mergeTransformations(opts.transformation, {
           fetch_format: 'auto:video'
         });
+      }
+
+      if (isAdaptive) {
+        if (!isKeyPresent(opts.transformation, 'streaming_profile')) {
+          opts.transformation = mergeTransformations(opts.transformation, {
+            streaming_profile: 'auto'
+          });
+        }
       }
 
       const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
