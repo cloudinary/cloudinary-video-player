@@ -132,17 +132,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _sendInternalAnalytics(additionalOptions = {}) {
     try {
-      const options = Utils.assign({}, this.playerOptions, additionalOptions);
+      const options = Utils.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
       const analyticsData = getAnalyticsFromPlayerOptions(options);
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
         vpInstanceId: this.getVPInstanceId(),
+        // #if (process.env.WEBPACK_BUILD_LIGHT)
+        vpLightBuild: true,
+        // #endif
         cloudName: options.cloudinary.cloudinaryConfig.cloud_name
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
-      // eslint-disable-next-line no-empty
-    } catch (e) {}
+    } catch (e) {
+      // consider reporting this failure
+    }
   }
 
   _clearTimeOut = () => {
