@@ -133,11 +133,13 @@ const isKeyInTransformation = (transformation, key) => {
 
 const filterAndAddTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
-    fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
-      if (r.status >= 200 && r.status <= 399) {
-        videojs.addRemoteTextTrack(track, true);
-      }
-    });
+    if (track.src) {
+      fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
+        if (r.status >= 200 && r.status <= 399) {
+          videojs.addRemoteTextTrack(track, true);
+        }
+      });
+    }
   });
 };
 

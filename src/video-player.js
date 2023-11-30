@@ -216,7 +216,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initHighlightsGraph();
     this._initSeekThumbs();
     this._initChapters();
-    this._initPacedTranscript();
   }
 
   _isFullScreen() {
@@ -241,7 +240,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const tracks = Object.keys(conf);
       const allTracks = [];
       for (const track of tracks) {
-        if (Array.isArray(conf[track])) {
+        if (track === 'pacedTranscript') {
+          const transcriptConf = conf[track];
+          if (!isEmpty(transcriptConf) && this.videojs.pacedTranscript) {
+            this.videojs.pacedTranscript(transcriptConf);
+          }
+        } else if (Array.isArray(conf[track])) {
           const trks = conf[track];
           for (let i = 0; i < trks.length; i++) {
             allTracks.push(VideoPlayer.buildTextTrackObj(track, trks[i]));
@@ -325,16 +329,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _initPacedTranscript() {
-    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      if (isRawUrl(source.publicId()) && !source._pacedTranscript.transcriptPath) {
-        return;
-      } else if (!isEmpty(source._pacedTranscript) && this.videojs.pacedTranscript) {
-        this.videojs.pacedTranscript(source._pacedTranscript);
-      }
-    });
-  }
-
   _initChapters() {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
       if (!isEmpty(source._chapters) && this.videojs.chapters) {
@@ -367,8 +361,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   // #endif
 
   _initTextTracks () {
-    this.videojs.on(PLAYER_EVENT.REFRESH_TEXT_TRACKS, (e, tracks) => {
-      this.setTextTracks(tracks);
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      this.setTextTracks(source._textTracks);
     });
   }
 
@@ -589,8 +583,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (VideoPlayer.allowUsageReport()) {
       options.usageReport = true;
     }
-
-    this.setTextTracks(options.textTracks);
 
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
