@@ -21,7 +21,7 @@ const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
 });
 
 const getSourceOptions = (sourceOptions = {}) => ({
-  chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters',
+  chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
