@@ -4,7 +4,6 @@ import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { castArray } from 'utils/array';
 import { SOURCE_TYPE } from 'utils/consts';
-import { isKeyPresent } from 'utils/object';
 import {
   CONTAINER_MIME_TYPES,
   DEFAULT_POSTER_PARAMS,
@@ -219,7 +218,8 @@ class VideoSource extends BaseSource {
       }
 
       if (isAdaptive) {
-        if (!isKeyPresent(opts.transformation, 'streaming_profile')) {
+        // Search for streaming_profile anywhere in the transformation
+        if (!JSON.stringify(opts.transformation).includes('"streaming_profile":')) {
           opts.transformation = mergeTransformations(opts.transformation, {
             streaming_profile: 'auto'
           });

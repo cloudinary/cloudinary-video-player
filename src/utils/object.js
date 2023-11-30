@@ -60,30 +60,3 @@ export const convertKeysToSnakeCase = (obj) => {
 
   return snakeCaseObj;
 };
-
-// Given an array of objects, look for existance of a specific key
-export const isKeyPresent = (objArr, key) => {
-  if (!objArr || (typeof objArr !== 'object' && !Array.isArray(objArr))) {
-    return false;
-  } else if (Object.prototype.hasOwnProperty.call(objArr, key)) {
-    return true;
-  } else if (Array.isArray(objArr)) {
-    for (let i = 0; i < objArr.length; i++) {
-      const result = isKeyPresent(objArr[i], key);
-      if (result) {
-        return result;
-      }
-    }
-  } else {
-    for (const k in objArr) {
-      if (Object.hasOwn(objArr, k)) {
-        const result = isKeyPresent(objArr[k], key);
-        if (result) {
-          return result;
-        }
-      }
-    }
-  }
-
-  return false;
-};
