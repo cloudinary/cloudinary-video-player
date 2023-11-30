@@ -1,8 +1,6 @@
 import defaults from 'config/defaults';
 import isEmpty from 'lodash/isEmpty';
 
-const stringify = (obj) => new URLSearchParams(obj).toString();
-
 const hasConfig = (obj) => isEmpty(obj) ? null : true;
 
 const filterDefaultsAndNulls = (obj) => Object.entries(obj).reduce((filtered, [key, value]) => {
@@ -80,8 +78,8 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   width: playerOptions.width,
   withCredentials: playerOptions.withCredentials,
 
-  colors: playerOptions.colors && stringify(playerOptions.colors),
-  controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) ? stringify(playerOptions.controlBar) : null,
+  colors: playerOptions.colors && JSON.stringify(playerOptions.colors),
+  controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),
 
   ...getCloudinaryOptions(playerOptions.cloudinary),
   ...getSourceOptions(playerOptions.source),
