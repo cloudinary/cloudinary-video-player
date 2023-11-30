@@ -9,7 +9,7 @@ function pacedTranscript(config) {
       source.publicId(),
       extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' }),
     ) + '.transcript',
-    wordsPerCaption: config.wordsPerCaption || 5 // Number of words per caption
+    maxWords: config.maxWords || 5 // Number of words per caption
   };
 
   // Load the transcription file
@@ -36,18 +36,18 @@ function pacedTranscript(config) {
 
   // Generate captions from the transcription data
   const parseTranscript = transcriptionData => {
-    const wordsPerCaption = options.wordsPerCaption;
+    const maxWords = options.maxWords;
     const captions = [];
 
     transcriptionData.forEach(segment => {
       const words = segment.words;
 
-      for (let i = 0; i < words.length; i += wordsPerCaption) {
+      for (let i = 0; i < words.length; i += maxWords) {
         const startTime = words[i].start_time;
-        const endTime = words[Math.min(i + wordsPerCaption - 1, words.length - 1)].end_time;
+        const endTime = words[Math.min(i + maxWords - 1, words.length - 1)].end_time;
 
         const captionText = words
-          .slice(i, i + wordsPerCaption)
+          .slice(i, i + maxWords)
           .map(word => word.word)
           .join(' ');
 

@@ -85,7 +85,7 @@ export const sourceValidators = {
   chapters: validator.isPlainObject,
   pacedTranscript: {
     transcriptPath: validator.isString,
-    wordsPerCaption: validator.isNumber
+    maxWords: validator.isNumber
   },
   interactionAreas: {
     enable: validator.isBoolean,
