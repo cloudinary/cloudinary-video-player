@@ -1,3 +1,8 @@
+1.10.3-edge.2 / 2023-11-30
+==================
+
+fix: default streaming_profile for ABR streams from none to auto
+
 1.10.3-edge.1 / 2023-11-30
 ==================
 
