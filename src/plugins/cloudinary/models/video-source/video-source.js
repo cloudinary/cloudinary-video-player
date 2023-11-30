@@ -219,7 +219,7 @@ class VideoSource extends BaseSource {
 
       if (isAdaptive) {
         // Search for streaming_profile anywhere in the transformation
-        if (!JSON.stringify(opts.transformation).includes('"streaming_profile":')) {
+        if (!JSON.stringify(opts.transformation || {}).includes('"streaming_profile":')) {
           opts.transformation = mergeTransformations(opts.transformation, {
             streaming_profile: 'auto'
           });
