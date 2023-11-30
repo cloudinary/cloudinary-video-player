@@ -1,48 +1,88 @@
+import defaults from 'config/defaults';
+import isEmpty from 'lodash/isEmpty';
+
+const hasConfig = (obj) => isEmpty(obj) ? null : true;
+
+const filterDefaultsAndNulls = (obj) => Object.entries(obj).reduce((filtered, [key, value]) => {
+  if (value !== defaults[key] && value !== undefined && value !== null) {
+    filtered[key] = value;
+  }
+  return filtered;
+}, {});
+
 const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
-  sourceTypes: cloudinaryOptions.sourceTypes || null,
-  autoShowRecommendations: cloudinaryOptions.autoShowRecommendations || null,
-  fontFace: cloudinaryOptions.fontFace || null,
-  posterOptionsPublicId: !!(cloudinaryOptions.posterOptions && cloudinaryOptions.posterOptions.publicId)
+  sourceTypes: cloudinaryOptions.sourceTypes,
+  autoShowRecommendations: cloudinaryOptions.autoShowRecommendations,
+  fontFace: cloudinaryOptions.fontFace,
+  posterOptions: hasConfig(cloudinaryOptions.posterOptions),
+  posterOptionsPublicId: cloudinaryOptions.posterOptions && hasConfig(cloudinaryOptions.posterOptions.publicId)
 });
 
 const getSourceOptions = (sourceOptions = {}) => ({
-  shoppable: !!sourceOptions.shoppable,
-  shoppableProductsLength: sourceOptions.shoppable && Array.isArray(sourceOptions.shoppable.products) ? sourceOptions.shoppable.products.length : 0,
+  chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
+  recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
+  shoppable: hasConfig(sourceOptions.shoppable),
+  shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
   ...(sourceOptions.info ? {
-    sourceInfoTitle: sourceOptions.info.title || null,
-    sourceInfoSubtitle: sourceOptions.info.subtitle || null,
-    sourceInfoDescription: sourceOptions.info.description || null
-  } : {})
+    sourceInfoTitle: sourceOptions.info.title,
+    sourceInfoSubtitle: sourceOptions.info.subtitle,
+    sourceInfoDescription: sourceOptions.info.description
+  } : {}),
+  textTracks: hasConfig(sourceOptions.textTracks)
 });
 
 const getAdsOptions = (adsOptions = {}) => ({
-  adsAdTagUrl: adsOptions.adTagUrl || null,
-  adsShowCountdown: adsOptions.showCountdown || null,
-  adsAdLabel: adsOptions.adLabel || null,
-  adsLocale: adsOptions.locale || null,
-  adsPrerollTimeout: adsOptions.prerollTimeout || null,
-  adsPostrollTimeout: adsOptions.postrollTimeout || null,
-  adsAdsInPlaylist: adsOptions.adsInPlaylist || null
+  adsAdTagUrl: adsOptions.adTagUrl,
+  adsShowCountdown: adsOptions.showCountdown,
+  adsAdLabel: adsOptions.adLabel,
+  adsLocale: adsOptions.locale,
+  adsPrerollTimeout: adsOptions.prerollTimeout,
+  adsPostrollTimeout: adsOptions.postrollTimeout,
+  adsAdsInPlaylist: adsOptions.adsInPlaylist
 });
 
 const getPlaylistWidgetOptions = (playlistWidgetOptions = {}) => ({
-  playlistWidgetDirection: playlistWidgetOptions.direction || null,
-  playlistWidgetTotal: playlistWidgetOptions.total || null
+  playlistWidgetDirection: playlistWidgetOptions.direction,
+  playlistWidgetTotal: playlistWidgetOptions.total
 });
 
-export const getAnalyticsFromPlayerOptions = (playerOptions) => {
-  return {
-    showJumpControls: playerOptions.showJumpControls || null,
-    seekThumbnails: playerOptions.seekThumbnails || null,
-    aiHighlightsGraph: playerOptions.aiHighlightsGraph || null,
-    floatingWhenNotVisible: playerOptions.floatingWhenNotVisible || null,
-    hideContextMenu: playerOptions.hideContextMenu || null,
-    analytics: playerOptions.analytics || null,
-    cloudinaryAnalytics: playerOptions.cloudinaryAnalytics || null,
-    playedEventPercents: playerOptions.playedEventPercents || null,
-    ...getCloudinaryOptions(playerOptions.cloudinary),
-    ...getSourceOptions(playerOptions.source),
-    ...getAdsOptions(playerOptions.ads),
-    ...getPlaylistWidgetOptions(playerOptions.playlistWidget)
-  };
-};
+export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAndNulls({
+  aiHighlightsGraph: playerOptions.aiHighlightsGraph,
+  analytics: playerOptions.analytics,
+  autoplay: playerOptions.autoplay,
+  autoplayMode: playerOptions.autoplayMode,
+  bigPlayButton: playerOptions.bigPlayButton,
+  className: playerOptions.class,
+  cloudinaryAnalytics: playerOptions.cloudinaryAnalytics,
+  controls: playerOptions.controls,
+  floatingWhenNotVisible: playerOptions.floatingWhenNotVisible,
+  fluid: playerOptions.fluid,
+  height: playerOptions.height,
+  hideContextMenu: playerOptions.hideContextMenu,
+  logoImageUrl: playerOptions.logoImageUrl,
+  logoOnclickUrl: playerOptions.logoOnclickUrl,
+  loop: playerOptions.loop,
+  maxTries: playerOptions.maxTries,
+  muted: playerOptions.muted,
+  playbackRates: playerOptions.playbackRates,
+  playedEventPercents: playerOptions.playedEventPercents,
+  playedEventTimes: playerOptions.playedEventTimes,
+  playsinline: playerOptions.playsinline,
+  preload: playerOptions.preload,
+  videoTimeout: playerOptions.videoTimeout,
+  seekThumbnails: playerOptions.seekThumbnails,
+  showJumpControls: playerOptions.showJumpControls,
+  showLogo: playerOptions.showLogo,
+  skin: playerOptions.skin,
+  videoJS: hasConfig(playerOptions.videoJS),
+  width: playerOptions.width,
+  withCredentials: playerOptions.withCredentials,
+
+  colors: playerOptions.colors && JSON.stringify(playerOptions.colors),
+  controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),
+
+  ...getCloudinaryOptions(playerOptions.cloudinary),
+  ...getSourceOptions(playerOptions.source),
+  ...getAdsOptions(playerOptions.ads),
+  ...getPlaylistWidgetOptions(playerOptions.playlistWidget)
+});
