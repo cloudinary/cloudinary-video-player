@@ -83,6 +83,10 @@ export const sourceValidators = {
   shoppable: validator.isPlainObject,
   withCredentials: validator.isBoolean,
   chapters: validator.isPlainObject,
+  pacedTranscript: {
+    transcriptPath: validator.isString,
+    wordsPerCaption: validator.isNumber
+  },
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),

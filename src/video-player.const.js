@@ -34,6 +34,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'seekThumbnails',
   'aiHighlightsGraph',
   'chapters',
+  'pacedTranscript',
   'queryParams'
 ]);
 

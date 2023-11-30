@@ -47,7 +47,8 @@ class VideoSource extends BaseSource {
       textTracks,
       withCredentials,
       interactionAreas,
-      chapters
+      chapters,
+      pacedTranscript
     } = sliceAndUnsetProperties(
       options,
       'poster',
@@ -58,7 +59,8 @@ class VideoSource extends BaseSource {
       'textTracks',
       'withCredentials',
       'interactionAreas',
-      'chapters'
+      'chapters',
+      'pacedTranscript'
     );
 
     super(publicId, options);
@@ -71,6 +73,7 @@ class VideoSource extends BaseSource {
     this._sourceTransformation = null;
     this._interactionAreas = null;
     this._chapters = null;
+    this._pacedTranscript = null;
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
     this._rawTransformation = options.raw_transformation;
@@ -83,6 +86,7 @@ class VideoSource extends BaseSource {
     this.info(info);
     this.interactionAreas(interactionAreas);
     this.chapters(chapters);
+    this.pacedTranscript(pacedTranscript);
     this.recommendations(recommendations);
     this.textTracks(textTracks);
     this.objectId = generateId();
@@ -143,6 +147,16 @@ class VideoSource extends BaseSource {
     }
 
     this._chapters = chapters;
+
+    return this;
+  }
+
+  pacedTranscript(pacedTranscript) {
+    if (!pacedTranscript) {
+      return this._pacedTranscript;
+    }
+
+    this._pacedTranscript = pacedTranscript;
 
     return this;
   }

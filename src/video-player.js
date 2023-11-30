@@ -212,6 +212,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initHighlightsGraph();
     this._initSeekThumbs();
     this._initChapters();
+    this._initPacedTranscript();
   }
 
   _isFullScreen() {
@@ -318,6 +319,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           : this.videojs.aiHighlightsGraph.src(aiHighlightsGraphSrc);
       });
     }
+  }
+
+  _initPacedTranscript() {
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      if (isRawUrl(source.publicId()) && !source._pacedTranscript.transcriptPath) {
+        return;
+      } else if (!isEmpty(source._pacedTranscript) && this.videojs.pacedTranscript) {
+        this.videojs.pacedTranscript(source._pacedTranscript);
+      }
+    });
   }
 
   _initChapters() {
