@@ -56,16 +56,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return _allowUsageReport;
   }
 
-  static buildTextTrackObj (type, conf) {
-    return {
-      kind: type,
-      label: conf.label,
-      srclang: conf.language,
-      default: !!(conf.default),
-      src: conf.url
-    };
-  }
-
   get playerOptions() {
     return this.options.playerOptions;
   }
@@ -237,24 +227,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     }
     if (conf) {
-      const tracks = Object.keys(conf);
+      const kinds = Object.keys(conf);
       const allTracks = [];
-      for (const track of tracks) {
-        if (track === 'pacedTranscript') {
-          const transcriptConf = conf[track];
-          if (!isEmpty(transcriptConf) && this.videojs.pacedTranscript) {
-            this.videojs.pacedTranscript(transcriptConf);
-          }
-        } else if (Array.isArray(conf[track])) {
-          const trks = conf[track];
-          for (let i = 0; i < trks.length; i++) {
-            allTracks.push(VideoPlayer.buildTextTrackObj(track, trks[i]));
-          }
-        } else {
-          allTracks.push(VideoPlayer.buildTextTrackObj(track, conf[track]));
+      for (const kind of kinds) {
+        const tracks = Array.isArray(conf[kind]) ? conf[kind] : [conf[kind]];
+        for (const conf of tracks) {
+          allTracks.push({
+            ...conf,
+            kind: kind,
+            label: conf.label,
+            srclang: conf.language,
+            default: !!(conf.default),
+            src: conf.url
+          });
         }
       }
-
       Utils.filterAndAddTextTracks(allTracks, this.videojs);
     }
   }

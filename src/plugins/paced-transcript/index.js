@@ -5,7 +5,11 @@ function pacedTranscript(config) {
   const source = player.cloudinary.source();
 
   const options = {
-    transcriptPath: config.transcriptPath || getCloudinaryUrl(
+    kind: config.kind || 'captions',
+    label: config.label || 'Captions',
+    default: config.default || true,
+    srclang: config.srclang || 'en',
+    src: config.src || getCloudinaryUrl(
       source.publicId(),
       extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' }),
     ) + '.transcript',
@@ -14,15 +18,16 @@ function pacedTranscript(config) {
 
   // Load the transcription file
   const initTranscript = () => {
-    fetch(options.transcriptPath)
+    fetch(options.src)
       .then(response => response.json())
       .then(data => {
         const captions = parseTranscript(data);
 
         const captionsTrack = player.addRemoteTextTrack({
-          kind: 'captions',
-          label: 'Captions',
-          default: true
+          kind: options.kind,
+          label: options.label,
+          default: options.default,
+          srclang: options.srclang
         });
 
         captions.forEach(caption => {
