@@ -8,9 +8,6 @@ import defaults from './config/defaults';
 import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import qualitySelector from './components/qualitySelector/qualitySelector.js';
-// #endif
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { isFunction, isString, isPlainObject } from './utils/type-inference';
 import {
@@ -19,15 +16,16 @@ import {
   overrideDefaultVideojsComponents
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import { interactionAreaService } from './components/interaction-area/interaction-area.service';
-// #endif
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
+import qualitySelector from './components/qualitySelector/qualitySelector.js';
+import { interactionAreaService } from './components/interaction-area/interaction-area.service';
+// #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -603,7 +601,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
+    // #endif
     this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlist(sources, options);
   }

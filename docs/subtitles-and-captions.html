@@ -115,6 +115,47 @@
 
       playlist.playlist(playlistSources, playlistOptions);
 
+      // Paced
+      const pacedPlayer = cloudinary.videoPlayer('paced', {
+        cloudName: 'demo',
+        autoplay: true,
+        muted: true
+      });
+
+      const textTracks = {
+        captions: {
+          label: 'English captions',
+          language: 'en',
+          maxWords: 4,
+          default: true,
+          // url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
+        },
+        subtitles: [
+          {
+            label: 'German subtitles',
+            language: 'de',
+            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
+          },
+          {
+            label: 'Russian subtitles',
+            language: 'ru',
+            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+          }
+        ]
+      }
+      pacedPlayer.source('lincoln', {
+        textTracks
+      });
+
+      const maxWordsInput = document.getElementById('maxWords');
+      const applyButton = document.getElementById('apply');
+      applyButton.addEventListener('click', function () {
+        textTracks.captions.maxWords = parseInt(maxWordsInput.value);
+        pacedPlayer.source('lincoln', {
+          textTracks
+        });
+      });
+
     }, false);
   </script>
 
@@ -150,6 +191,24 @@
       width="500">
     </video>
 
+    <h4 class="mt-4 mb-2">Paced Captions</h4>
+
+    <form>
+      <label for="maxWords">Max Words</label>
+      <input type="number" id="maxWords" name="maxWords" min="1" max="100" value="4" />
+      <button type="button" id="apply">Apply</button>
+    </form>
+
+    <video
+      id="paced"
+      playsinline
+      controls
+      muted
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500">
+    </video>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -174,6 +233,16 @@
           class="cld-video-player"
           crossorigin="anonymous"
           width="500"&gt;
+        &lt;/video&gt;
+
+        &lt;video
+          id="paced"
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          crossorigin="anonymous"
+          width="500">
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
@@ -262,6 +331,47 @@
         };
 
         playlist.playlist(playlistSources, playlistOptions);
+
+        // Paced
+        const pacedPlayer = cloudinary.videoPlayer('paced', {
+          cloudName: 'demo',
+          autoplay: true,
+          muted: true
+        });
+
+        const textTracks = {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            maxWords: 4,
+            default: true,
+            // url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
+          },
+          subtitles: [
+            {
+              label: 'German subtitles',
+              language: 'de',
+              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
+            },
+            {
+              label: 'Russian subtitles',
+              language: 'ru',
+              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+            }
+          ]
+        }
+        pacedPlayer.source('lincoln', {
+          textTracks
+        });
+
+        const maxWordsInput = document.getElementById('maxWords');
+        const applyButton = document.getElementById('apply');
+        applyButton.addEventListener('click', function () {
+          textTracks.captions.maxWords = parseInt(maxWordsInput.value);
+          pacedPlayer.source('lincoln', {
+            textTracks
+          });
+        });
       </code>
     </pre>
   </div>
