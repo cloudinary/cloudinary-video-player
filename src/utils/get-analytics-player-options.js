@@ -48,7 +48,7 @@ const getPlaylistWidgetOptions = (playlistWidgetOptions = {}) => ({
 
 export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAndNulls({
   aiHighlightsGraph: playerOptions.aiHighlightsGraph,
-  analytics: playerOptions.analytics,
+  analytics: hasConfig(playerOptions.analytics),
   autoplay: playerOptions.autoplay,
   autoplayMode: playerOptions.autoplayMode,
   bigPlayButton: playerOptions.bigPlayButton,
