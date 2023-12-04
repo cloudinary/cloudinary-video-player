@@ -8,9 +8,6 @@ import defaults from './config/defaults';
 import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
 import PlaylistWidget from './components/playlist/playlist-widget';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import qualitySelector from './components/qualitySelector/qualitySelector.js';
-// #endif
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import { isFunction, isString, isPlainObject } from './utils/type-inference';
 import {
@@ -19,15 +16,16 @@ import {
   overrideDefaultVideojsComponents
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import { interactionAreaService } from './components/interaction-area/interaction-area.service';
-// #endif
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
 import { get, pick } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
+// #if (!process.env.WEBPACK_BUILD_LIGHT)
+import qualitySelector from './components/qualitySelector/qualitySelector.js';
+import { interactionAreaService } from './components/interaction-area/interaction-area.service';
+// #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -54,16 +52,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     _allowUsageReport = !!bool;
     return _allowUsageReport;
-  }
-
-  static buildTextTrackObj (type, conf) {
-    return {
-      kind: type,
-      label: conf.label,
-      srclang: conf.language,
-      default: !!(conf.default),
-      src: conf.url
-    };
   }
 
   get playerOptions() {
@@ -222,13 +210,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.player().isFullscreen();
   }
 
-  _initIma () {
+  _initIma() {
     if (this.playerOptions.ads && Object.keys(this.playerOptions.ads).length !== 0) {
       plugins.imaPlugin(this.videojs, this.playerOptions);
     }
   }
 
-  setTextTracks (conf) {
+  setTextTracks(conf) {
     // remove current text tracks
     const currentTracks = this.videojs.remoteTextTracks();
     if (currentTracks) {
@@ -237,19 +225,21 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       }
     }
     if (conf) {
-      const tracks = Object.keys(conf);
+      const kinds = Object.keys(conf);
       const allTracks = [];
-      for (const track of tracks) {
-        if (Array.isArray(conf[track])) {
-          const trks = conf[track];
-          for (let i = 0; i < trks.length; i++) {
-            allTracks.push(VideoPlayer.buildTextTrackObj(track, trks[i]));
-          }
-        } else {
-          allTracks.push(VideoPlayer.buildTextTrackObj(track, conf[track]));
+      for (const kind of kinds) {
+        const tracks = Array.isArray(conf[kind]) ? conf[kind] : [conf[kind]];
+        for (const track of tracks) {
+          allTracks.push({
+            ...track,
+            kind: kind,
+            label: track.label,
+            srclang: track.language,
+            default: !!(track.default),
+            src: conf.url
+          });
         }
       }
-
       Utils.filterAndAddTextTracks(allTracks, this.videojs);
     }
   }
@@ -356,8 +346,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   // #endif
 
   _initTextTracks () {
-    this.videojs.on(PLAYER_EVENT.REFRESH_TEXT_TRACKS, (e, tracks) => {
-      this.setTextTracks(tracks);
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      this.setTextTracks(source._textTracks);
     });
   }
 
@@ -579,8 +569,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
 
-    this.setTextTracks(options.textTracks);
-
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
@@ -613,7 +601,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
+    // #endif
     this._sendInternalAnalytics();
     return this.videojs.cloudinary.playlist(sources, options);
   }

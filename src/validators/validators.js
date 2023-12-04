@@ -94,12 +94,15 @@ export const sourceValidators = {
       label: validator.isString,
       language: validator.isString,
       default: validator.isBoolean,
-      url: validator.isString
+      url: validator.isString,
+      maxWords: validator.isNumber
     },
     subtitles: validator.isArrayOfObjects({
       label: validator.isString,
       language: validator.isString,
-      url: validator.isString
+      default: validator.isBoolean,
+      url: validator.isString,
+      maxWords: validator.isNumber
     })
   },
   info: {

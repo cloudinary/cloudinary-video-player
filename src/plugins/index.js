@@ -17,6 +17,7 @@ import cloudinaryAnalytics from './cloudinary-analytics';
 import vttThumbnails from './vtt-thumbnails';
 import aiHighlightsGraph from './ai-highlights-graph';
 import chapters from './chapters';
+import pacedTranscript from './paced-transcript';
 
 const plugins = {
   autoplayOnScroll,
@@ -29,6 +30,7 @@ const plugins = {
   vttThumbnails,
   aiHighlightsGraph,
   chapters,
+  pacedTranscript,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin,

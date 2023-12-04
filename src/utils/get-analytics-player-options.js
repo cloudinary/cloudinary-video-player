@@ -28,7 +28,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceInfoSubtitle: sourceOptions.info.subtitle,
     sourceInfoDescription: sourceOptions.info.description
   } : {}),
-  textTracks: hasConfig(sourceOptions.textTracks)
+  textTracks: hasConfig(sourceOptions.textTracks),
+  pacedTextTracks: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"maxWords":')
 });
 
 const getAdsOptions = (adsOptions = {}) => ({
