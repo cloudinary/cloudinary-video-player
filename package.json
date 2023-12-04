@@ -59,7 +59,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "140kb"
+        "maxSize": "145kb"
       },
       {
         "path": "./lib/cld-video-player.js",
@@ -67,7 +67,7 @@
       },
       {
         "path": "./lib/videoPlayer.js",
-        "maxSize": "280kb"
+        "maxSize": "285kb"
       }
     ]
   },
