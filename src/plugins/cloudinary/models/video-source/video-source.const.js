@@ -11,8 +11,7 @@ export const DEFAULT_VIDEO_PARAMS = {
   recommendations: null,
   info: {},
   interactionAreas: {},
-  chapters: {},
-  pacedTranscript: {}
+  chapters: {}
 };
 
 export const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${DEFAULT_VIDEO_SOURCE_TYPES.join('|')})$$`);
