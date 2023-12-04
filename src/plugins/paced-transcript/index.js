@@ -17,26 +17,25 @@ function pacedTranscript(config) {
   };
 
   // Load the transcription file
-  const initTranscript = () => {
-    fetch(options.src)
-      .then(response => response.json())
-      .then(data => {
-        const captions = parseTranscript(data);
+  const initTranscript = async () => {
+    try {
+      const transcriptResponse = await fetch(options.src);
+      const transcriptData = await transcriptResponse.json();
+      const captions = parseTranscript(transcriptData);
 
-        const captionsTrack = player.addRemoteTextTrack({
-          kind: options.kind,
-          label: options.label,
-          default: options.default,
-          srclang: options.srclang
-        });
-
-        captions.forEach(caption => {
-          captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
-        });
-      })
-      .catch(error => {
-        console.error('Error loading transcription file:', error);
+      const captionsTrack = player.addRemoteTextTrack({
+        kind: options.kind,
+        label: options.label,
+        default: options.default,
+        srclang: options.srclang
       });
+
+      captions.forEach(caption => {
+        captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
+      });
+    } catch (error) {
+      console.error('Error loading transcription file:', error);
+    }
   };
 
   // Generate captions from the transcription data
