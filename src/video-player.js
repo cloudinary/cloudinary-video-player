@@ -210,13 +210,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.videojs.player().isFullscreen();
   }
 
-  _initIma () {
+  _initIma() {
     if (this.playerOptions.ads && Object.keys(this.playerOptions.ads).length !== 0) {
       plugins.imaPlugin(this.videojs, this.playerOptions);
     }
   }
 
-  setTextTracks (conf) {
+  setTextTracks(conf) {
     // remove current text tracks
     const currentTracks = this.videojs.remoteTextTracks();
     if (currentTracks) {
@@ -229,13 +229,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const allTracks = [];
       for (const kind of kinds) {
         const tracks = Array.isArray(conf[kind]) ? conf[kind] : [conf[kind]];
-        for (const conf of tracks) {
+        for (const track of tracks) {
           allTracks.push({
-            ...conf,
+            ...track,
             kind: kind,
-            label: conf.label,
-            srclang: conf.language,
-            default: !!(conf.default),
+            label: track.label,
+            srclang: track.language,
+            default: !!(track.default),
             src: conf.url
           });
         }
