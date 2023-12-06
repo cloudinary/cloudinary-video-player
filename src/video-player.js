@@ -236,7 +236,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
             label: track.label,
             srclang: track.language,
             default: !!(track.default),
-            src: conf.url
+            src: track.url
           });
         }
       }
