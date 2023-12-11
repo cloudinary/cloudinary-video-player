@@ -19,6 +19,8 @@ import aiHighlightsGraph from './ai-highlights-graph';
 import chapters from './chapters';
 import pacedTranscript from './paced-transcript';
 
+import styledTextTracks from './styled-text-tracks';
+
 const plugins = {
   autoplayOnScroll,
   floatingPlayer,
@@ -31,6 +33,7 @@ const plugins = {
   aiHighlightsGraph,
   chapters,
   pacedTranscript,
+  styledTextTracks,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin,

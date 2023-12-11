@@ -2,9 +2,7 @@ import WebFont from 'webfontloader';
 
 const FONT_FAMILY = 'Inter';
 
-const fontFace = (elem, options) => {
-  let fontFace = options.cloudinary.fontFace;
-
+const fontFace = (elem, fontFace) => {
   // Default font-face is "Inter"
   if (typeof fontFace === 'undefined') {
     fontFace = FONT_FAMILY;
