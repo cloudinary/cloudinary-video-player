@@ -7,7 +7,7 @@ function pacedTranscript(config) {
   const options = {
     kind: config.kind || 'captions',
     label: config.label || 'Captions',
-    default: config.default || true,
+    default: config.default,
     srclang: config.srclang || 'en',
     src: config.src || getCloudinaryUrl(
       source.publicId(),
@@ -26,8 +26,9 @@ function pacedTranscript(config) {
       const captionsTrack = player.addRemoteTextTrack({
         kind: options.kind,
         label: options.label,
+        srclang: options.srclang,
         default: options.default,
-        srclang: options.srclang
+        mode: options.default ? 'showing' : 'disabled'
       });
 
       captions.forEach(caption => {
@@ -66,7 +67,7 @@ function pacedTranscript(config) {
     return captions;
   };
 
-  player.ready(() => {
+  player.one('loadedmetadata', () => {
     initTranscript();
   });
 }
