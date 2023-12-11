@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "18"
+  - "16"
 install: npm install
 before_script: npm run build-all
 script: npm run test:unit
