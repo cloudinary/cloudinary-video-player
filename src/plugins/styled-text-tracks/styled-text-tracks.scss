@@ -1,6 +1,6 @@
 .cld-video-player {
+
   // Positions
-  // Center
   .cld-styled-text-tracks-position-center {
     inset: 0 !important;
     .vjs-text-track-cue {
@@ -8,19 +8,19 @@
       margin: auto;
     }
   }
-  // Top
+
   .cld-styled-text-tracks-position-top {
     .vjs-text-track-cue {
       top: 0 !important;
     }
   }
-  // Right
+
   .cld-styled-text-tracks-position-right {
     .vjs-text-track-cue {
       text-align: right !important;
     }
   }
-  // Left
+
   .cld-styled-text-tracks-position-left {
     .vjs-text-track-cue {
       text-align: left !important;
@@ -29,7 +29,7 @@
 
   // Themes
   .vjs-text-track-display {
-    // yellow-outlined
+
     &.cld-styled-text-tracks-theme-yellow-outlined {
       .vjs-text-track-cue {
         & > div {
@@ -42,7 +42,7 @@
         }
       }
     }
-    // 3d text
+
     &.cld-styled-text-tracks-theme-3d {
       .vjs-text-track-cue {
         & > div {
@@ -57,7 +57,7 @@
         }
       }
     }
-    // theme
+
     &.cld-styled-text-tracks-theme-player-colors {
       .vjs-text-track-cue {
         & > div {
