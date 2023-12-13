@@ -49,7 +49,15 @@
           3: 'A dangerous quest',
           8: 'The attack'
         },
-      })
+      });
+
+      const playerAutoVTT = cloudinary.videoPlayer('player-auto-vtt', {
+        cloud_name: 'demo',
+        publicId: 'snow_horses',
+        chapters: {
+          auto: true,
+        },
+      });
 
     }, false);
   </script>
@@ -88,6 +96,19 @@
       width="600"
     ></video>
 
+    <br><br>
+    <h4 class="mb-4">From an automatically taken VTT file</h4>
+
+    <video
+      id="player-auto-vtt"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="600"
+    ></video>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -106,6 +127,15 @@
 
         &lt;video
           id="player-config"
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          width="600"
+      &gt;&lt;/video&gt;
+
+        &lt;video
+          id="player-auto-vtt"
           controls
           muted
           autoplay
@@ -139,7 +169,15 @@
             3: 'A dangerous quest',
             8: 'The attack'
           },
-        })
+        });
+
+        const playerAutoVTT = cloudinary.videoPlayer('player-auto-vtt', {
+          cloud_name: 'demo',
+          publicId: 'snow_horses',
+          chapters: {
+            auto: true,
+          },
+        });
       </code>
     </pre>
   </div>

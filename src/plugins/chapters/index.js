@@ -85,15 +85,31 @@ const ChaptersPlugin = (function () {
     }
   };
 
+  ChaptersPlugin.prototype.getAutoChaptersFileUrl = function getAutoChaptersFileUrl() {
+    const cloudName = this.player.cloudinary.cloudinaryConfig().cloud_name;
+    const currentPublicId = this.player.cloudinary.currentPublicId();
+    console.log(cloudName, currentPublicId);
+
+    if (!cloudName || !currentPublicId) {
+      return null;
+    }
+
+    return `https://res.cloudinary.com/${cloudName}/video/upload/v1/${currentPublicId}-chapters.vtt`;
+  };
+
   /**
    * Bootstrap the plugin.
    */
   ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
-    if (this.options.url) {
+    const autoFlagProvided = typeof this.options.auto === 'boolean';
+    const chaptersUrlProvided = !!this.options.url;
+    const chaptersUrl = this.options.auto === true ? this.getAutoChaptersFileUrl() : this.options.url;
+
+    if (chaptersUrl) {
       // Fetch chapters VTT from URL
       const chaptersTrack = {
         kind: 'chapters',
-        src: this.options.url,
+        src: chaptersUrl,
         default: true
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
@@ -101,7 +117,7 @@ const ChaptersPlugin = (function () {
         this.chaptersTrack = textTrack.track;
         this.setupChaptersDisplays();
       });
-    } else {
+    } else if (!autoFlagProvided && !chaptersUrlProvided) {
       // Setup chapters from options
       const textTrack = this.player.addRemoteTextTrack({
         kind: 'chapters',
