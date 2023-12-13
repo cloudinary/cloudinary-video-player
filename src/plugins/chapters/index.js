@@ -88,7 +88,6 @@ const ChaptersPlugin = (function () {
   ChaptersPlugin.prototype.getAutoChaptersFileUrl = function getAutoChaptersFileUrl() {
     const cloudName = this.player.cloudinary.cloudinaryConfig().cloud_name;
     const currentPublicId = this.player.cloudinary.currentPublicId();
-    console.log(cloudName, currentPublicId);
 
     if (!cloudName || !currentPublicId) {
       return null;
@@ -101,9 +100,9 @@ const ChaptersPlugin = (function () {
    * Bootstrap the plugin.
    */
   ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
-    const autoFlagProvided = typeof this.options.auto === 'boolean';
+    const urlByNameFlagProvided = typeof this.options.byName === 'boolean';
     const chaptersUrlProvided = !!this.options.url;
-    const chaptersUrl = this.options.auto === true ? this.getAutoChaptersFileUrl() : this.options.url;
+    const chaptersUrl = this.options.byName === true ? this.getAutoChaptersFileUrl() : this.options.url;
 
     if (chaptersUrl) {
       // Fetch chapters VTT from URL
@@ -117,7 +116,7 @@ const ChaptersPlugin = (function () {
         this.chaptersTrack = textTrack.track;
         this.setupChaptersDisplays();
       });
-    } else if (!autoFlagProvided && !chaptersUrlProvided) {
+    } else if (!urlByNameFlagProvided && !chaptersUrlProvided) {
       // Setup chapters from options
       const textTrack = this.player.addRemoteTextTrack({
         kind: 'chapters',
