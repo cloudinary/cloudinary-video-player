@@ -125,6 +125,10 @@ export const overrideDefaultVideojsComponents = () => {
 
     // Position the 'logo-button' button last
     children.push('logoButton');
+
+    // Remove these button
+    children.splice(children.indexOf('skipForward'), 1);
+    children.splice(children.indexOf('skipBackward'), 1);
   }
 
   const SeekBar = videojs.getComponent('SeekBar');

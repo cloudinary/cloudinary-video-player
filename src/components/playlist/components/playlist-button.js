@@ -26,7 +26,8 @@ class PlaylistButton extends ClickableComponent {
     return videojs.dom.createEl('button', {
       // Prefixing classes of elements within a player with "vjs-"
       // is a convention used in Video.js.
-      className: `vjs-control vjs-playlist-button vjs-button ${typeCssClass}`
+      className: `vjs-control vjs-playlist-button vjs-button ${typeCssClass}`,
+      ariaLabel: `Playlist ${type} item`
     });
   }
 }
