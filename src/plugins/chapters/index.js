@@ -1,9 +1,7 @@
 import videojs from 'video.js';
 
 import './chapters.scss';
-
-// Default options for the plugin.
-let defaults = {};
+import { extendCloudinaryConfig, getCloudinaryUrl } from '../cloudinary/common';
 
 /**
  * Function to invoke when the player is ready.
@@ -38,7 +36,7 @@ const onPlayerReady = function onPlayerReady(player, options) {
  */
 const chapters = function chapters(options) {
   this.ready(function () {
-    onPlayerReady(this, videojs.obj.merge(defaults, options));
+    onPlayerReady(this, options);
   });
 };
 
@@ -85,24 +83,24 @@ const ChaptersPlugin = (function () {
     }
   };
 
-  ChaptersPlugin.prototype.getAutoChaptersFileUrl = function getAutoChaptersFileUrl() {
-    const cloudName = this.player.cloudinary.cloudinaryConfig().cloud_name;
+  ChaptersPlugin.prototype.getChaptersFileUrlByName = function getChaptersFileUrlByName() {
     const currentPublicId = this.player.cloudinary.currentPublicId();
 
-    if (!cloudName || !currentPublicId) {
+    if (!currentPublicId) {
       return null;
     }
 
-    return `https://res.cloudinary.com/${cloudName}/video/upload/v1/${currentPublicId}-chapters.vtt`;
+    return getCloudinaryUrl(
+      `${currentPublicId}-chapters.vtt`,
+      extendCloudinaryConfig(this.player.cloudinary.cloudinaryConfig(), { resource_type: 'raw', version: '1' }),
+    );
   };
 
   /**
    * Bootstrap the plugin.
    */
   ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
-    const urlByNameFlagProvided = typeof this.options.byName === 'boolean';
-    const chaptersUrlProvided = !!this.options.url;
-    const chaptersUrl = this.options.byName === true ? this.getAutoChaptersFileUrl() : this.options.url;
+    const chaptersUrl = this.options === true ? this.getChaptersFileUrlByName() : this.options.url;
 
     if (chaptersUrl) {
       // Fetch chapters VTT from URL
@@ -116,7 +114,7 @@ const ChaptersPlugin = (function () {
         this.chaptersTrack = textTrack.track;
         this.setupChaptersDisplays();
       });
-    } else if (!urlByNameFlagProvided && !chaptersUrlProvided) {
+    } else if (Object.entries(this.options).length) {
       // Setup chapters from options
       const textTrack = this.player.addRemoteTextTrack({
         kind: 'chapters',
