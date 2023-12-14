@@ -31,9 +31,12 @@ function pacedTranscript(config) {
         mode: options.default ? 'showing' : 'disabled'
       });
 
-      captions.forEach(caption => {
-        captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
-      });
+      setTimeout(() => { // required for Safari to display the captions
+        captions.forEach(caption => {
+          captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
+        });
+      }, 100);
+
     } catch (error) {
       console.error('Error loading transcription file:', error);
     }
