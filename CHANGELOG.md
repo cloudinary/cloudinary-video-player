@@ -1,3 +1,10 @@
+1.10.3-edge.7 / 2023-12-15
+==================
+
+Changes:
+-------------
+- chapters: true flag for vtt file by naming convention
+
 1.10.3-edge.6 / 2023-12-12
 ==================
 
