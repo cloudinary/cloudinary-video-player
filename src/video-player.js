@@ -317,7 +317,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initChapters() {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
       if ((!isEmpty(source._chapters) || source._chapters === true) && this.videojs.chapters) {
-        console.log('options init', source._chapters);
         isFunction(this.videojs.chapters)
           ? this.videojs.chapters(source._chapters)
           : this.videojs.chapters.src(source._chapters);
