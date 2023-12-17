@@ -1,3 +1,8 @@
+1.10.3-edge.8 / 2023-12-17
+==================
+
+fix: Safari issue with programmatically created RemoteTextTracks
+
 1.10.3-edge.7 / 2023-12-15
 ==================
 
