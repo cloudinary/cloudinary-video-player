@@ -8,7 +8,6 @@ class SourceMenuButton extends MenuButton {
   constructor(player, options) {
     super(player, options);
 
-
     const qualityLevels = this.player().qualityLevels();
 
     // Handle options: We accept an options.default value of ( high || low )
@@ -29,6 +28,8 @@ class SourceMenuButton extends MenuButton {
     this.player().qualityLevels().on('addqualitylevel', (event) => {
       this.update(event);
     });
+
+    this.menuButton_.el_.setAttribute('aria-label', 'Source Selector Button');
   }
 
   createEl() {

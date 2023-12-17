@@ -65,11 +65,15 @@ class RecommendationsOverlayPrimaryItem extends RecommendationsOverlayItem {
       className: 'vjs-recommendations-overlay-item-primary-image'
     });
 
-    this.title = dom.createEl('h2');
+    this.title = dom.createEl('h2', {
+      ariaLabel: 'Recmmendation Title'
+    });
     this.setAriaCheck(this.title, false);
     this.title.innerHTML = '';
 
-    this.subtitle = dom.createEl('h3');
+    this.subtitle = dom.createEl('h3', {
+      ariaLabel: 'Recmmendation Subtitle'
+    });
     this.setAriaCheck(this.subtitle, false);
     this.subtitle.innerHTML = '';
 
