@@ -5,9 +5,11 @@ import './styled-text-tracks.scss';
 
 const styledTextTracks = (config, player) => {
   const options = {
-    fontFace: config.fontFace,
-    position: config.position || 'bottom',
     theme: config.theme || 'default',
+    fontFace: config.fontFace,
+    fontSize: config.fontSize,
+    position: config.position || 'bottom',
+    offset: config.offset,
     style: config.style
   };
 
@@ -30,16 +32,42 @@ const styledTextTracks = (config, player) => {
     fontFace(player.textTrackDisplay.el(), options.fontFace);
   }
 
-  // Custom Styles
-  if (options.style) {
-    const style = document.createElement('style');
-    style.innerHTML = `
-      .${playerClassPrefix(player)} .vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div {
-        ${options.style}
-      }
-    `;
-    player.el_.appendChild(style);
+  const applyImportantStyle = (style, selector) => {
+    const styleEl = document.createElement('style');
+    if (Object.entries(style)) {
+      const css = Object.entries(style).reduce((acc, [key, value]) => {
+        return acc + `${key}: ${value} !important; `;
+      }, '');
+      styleEl.innerHTML = `
+      .${playerClassPrefix(player)} ${selector} {
+          ${css}
+        }
+      `;
+      player.el_.appendChild(styleEl);
+    }
+  };
+
+  // Custom offset
+  if (options.offset) {
+    applyImportantStyle(
+      options.offset,
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue');
   }
+
+  // Custom font-size
+  if (options.fontSize) {
+    applyImportantStyle(
+      { 'font-size': options.fontSize },
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div');
+  }
+
+  // Custom styles
+  if (options.style) {
+    applyImportantStyle(
+      options.style,
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div');
+  }
+
 };
 
 export default styledTextTracks;
