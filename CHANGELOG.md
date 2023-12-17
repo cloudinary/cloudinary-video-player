@@ -1,3 +1,8 @@
+1.10.4-edge.1 / 2023-12-17
+==================
+
+feat: styled text tracks (subtitles & captions)
+
 1.10.3-edge.9 / 2023-12-17
 ==================
 
