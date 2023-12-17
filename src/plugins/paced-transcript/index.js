@@ -31,11 +31,13 @@ function pacedTranscript(config) {
         mode: options.default ? 'showing' : 'disabled'
       });
 
-      setTimeout(() => { // required for Safari to display the captions
-        captions.forEach(caption => {
-          captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
-        });
-      }, 100);
+      // required for Safari to display the captions
+      // https://github.com/videojs/video.js/issues/8519
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      captions.forEach(caption => {
+        captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
+      });
 
     } catch (error) {
       console.error('Error loading transcription file:', error);
