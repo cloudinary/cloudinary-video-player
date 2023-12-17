@@ -10,7 +10,8 @@ class JumpForwardButton extends ClickableComponent {
 
   createEl() {
     return videojs.dom.createEl('button', {
-      className: 'vjs-control vjs-icon-skip-10-plus vjs-icon-forward-10 vjs-button'
+      className: 'vjs-control vjs-icon-skip-10-plus vjs-icon-forward-10 vjs-button',
+      ariaLabel: 'Jump forward 10 seconds'
     });
   }
 }

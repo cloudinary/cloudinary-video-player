@@ -82,7 +82,7 @@ export const sourceValidators = {
   raw_transformation: validator.isString,
   shoppable: validator.isPlainObject,
   withCredentials: validator.isBoolean,
-  chapters: validator.isPlainObject,
+  chapters: validator.or(validator.isBoolean, validator.isPlainObject),
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),
@@ -94,12 +94,15 @@ export const sourceValidators = {
       label: validator.isString,
       language: validator.isString,
       default: validator.isBoolean,
-      url: validator.isString
+      url: validator.isString,
+      maxWords: validator.isNumber
     },
     subtitles: validator.isArrayOfObjects({
       label: validator.isString,
       language: validator.isString,
-      url: validator.isString
+      default: validator.isBoolean,
+      url: validator.isString,
+      maxWords: validator.isNumber
     })
   },
   info: {
