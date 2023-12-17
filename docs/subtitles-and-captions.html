@@ -122,9 +122,24 @@
         muted: true
       });
 
+      const publicId = 'lincoln';
+
       const textTracks = {
+        options: {
+          // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+          // position: "", // i.e. 'top-left', 'center' etc
+          // offset: { // Object of top/right/bottom/left
+          //   top: "25%",
+          //   left: "12%"
+          // },
+          // fontFace: "", // any Google font
+          // fontSize: "", // any CSS value
+          // style: { // Styles key-value object
+          //   color: "hotpink"
+          // }
+        },
         captions: {
-          label: 'English captions',
+          label: 'English Paced',
           language: 'en',
           maxWords: 4,
           default: true,
@@ -142,15 +157,21 @@
           }
         ]
       }
-      pacedPlayer.source('lincoln', {
+      pacedPlayer.source(publicId, {
         textTracks
       });
 
       const maxWordsInput = document.getElementById('maxWords');
+      const themeSelect = document.getElementById('theme');
+      const fontSelect = document.getElementById('font');
+      const positionSelect = document.getElementById('position');
       const applyButton = document.getElementById('apply');
       applyButton.addEventListener('click', function () {
         textTracks.captions.maxWords = parseInt(maxWordsInput.value);
-        pacedPlayer.source('lincoln', {
+        textTracks.options.theme = themeSelect.value;
+        textTracks.options.fontFace = fontSelect.value;
+        textTracks.options.position = positionSelect.value;
+        pacedPlayer.source(publicId, {
           textTracks
         });
       });
@@ -160,7 +181,7 @@
 
 </head>
 <body>
-  <div class="container p-4 col-12 col-md-9 col-xl-6">
+  <div class="container p-4 col-12 col-md-9">
     <nav class="nav mb-2">
       <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
@@ -190,11 +211,37 @@
       width="500">
     </video>
 
-    <h4 class="mt-4 mb-2">Paced Captions</h4>
+    <h4 class="mt-4 mb-2">Paced & Styled Captions</h4>
 
     <form>
       <label for="maxWords">Max Words</label>
       <input type="number" id="maxWords" name="maxWords" min="1" max="100" value="4" />
+      <label for="theme">Theme</label>
+      <select id="theme" name="theme">
+        <option value="default">Default</option>
+        <option value="videojs-default">VideoJS Default</option>
+        <option value="player-colors">Player Colors</option>
+        <option value="yellow-outlined">Yellow Outlined</option>
+        <option value="3d">3D</option>
+      </select>
+      <label for="font">Font</label>
+      <select id="font" name="font">
+        <option value="Inter">Inter</option>
+        <option value="Ceviche One">Ceviche One</option>
+        <option value="Merienda">Merienda</option>
+        <option value="Ultra">Ultra</option>
+        <option value="Nabla">Nabla (Color)</option>
+      </select>
+      <label for="position">Position</label>
+      <select id="position" name="position">
+        <option value="bottom">Bottom</option>
+        <option value="bottom-left">Bottom Left</option>
+        <option value="bottom-right">Bottom Right</option>
+        <option value="top">Top</option>
+        <option value="top-left">Top Left</option>
+        <option value="top-right">Top Right</option>
+        <option value="center">Center</option>
+      </select>
       <button type="button" id="apply">Apply</button>
     </form>
 
@@ -339,6 +386,19 @@
         });
 
         const textTracks = {
+          options: {
+            // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+            // position: "", // i.e. 'top-left', 'center' etc
+            // offset: { // Object of top/right/bottom/left
+            //   top: "25%",
+            //   left: "12%"
+            // },
+            // fontFace: "", // any Google font
+            // fontSize: "", // any CSS value
+            // style: { // Styles key-value object
+            //   color: "hotpink"
+            // }
+          },
           captions: {
             label: 'English captions',
             language: 'en',
@@ -362,14 +422,6 @@
           textTracks
         });
 
-        const maxWordsInput = document.getElementById('maxWords');
-        const applyButton = document.getElementById('apply');
-        applyButton.addEventListener('click', function () {
-          textTracks.captions.maxWords = parseInt(maxWordsInput.value);
-          pacedPlayer.source('lincoln', {
-            textTracks
-          });
-        });
       </code>
     </pre>
   </div>

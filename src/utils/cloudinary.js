@@ -131,7 +131,7 @@ const isKeyInTransformation = (transformation, key) => {
   return !!transformation[key];
 };
 
-const filterAndAddTextTracks = (tracks, videojs) => {
+const addTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
     if (track.maxWords && videojs.pacedTranscript) {
       videojs.pacedTranscript(track);
@@ -148,5 +148,5 @@ const filterAndAddTextTracks = (tracks, videojs) => {
 export {
   handleCldError,
   isKeyInTransformation,
-  filterAndAddTextTracks
+  addTextTracks
 };

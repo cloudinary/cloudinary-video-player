@@ -1,0 +1,37 @@
+.cld-video-player {
+  // Default captions styles
+  // See styled-text-tracks plugin for more options
+  .vjs-text-track-display {
+    bottom: 0 !important;
+    > div {
+      margin: 3% !important;
+    }
+  }
+  .vjs-text-track-cue {
+    top: auto !important;
+    // Position when control-bar is visible
+    bottom: 3.4rem !important;
+    > div {
+      display: inline-block !important;
+      padding: 0.1em 0.3em;
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+  }
+  &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-text-track-cue {
+    // Position when control-bar is not visible
+    bottom: 1.5rem !important;
+  }
+
+  // Default caption styles, when not configured to `videojs-default` theme
+  .vjs-text-track-display:not(.cld-styled-text-tracks-theme-videojs-default) {
+    .vjs-text-track-cue {
+      font-family: inherit !important;
+      & > div {
+        font-weight: 700;
+        background-color: transparent !important;
+        text-shadow: 0 0 0.2em rgba(0, 0, 0, 0.8);
+        border-radius: 0.2em;
+      }
+    }
+  }
+}
