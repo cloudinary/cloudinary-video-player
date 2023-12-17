@@ -7,6 +7,15 @@
 * fix: default streaming_profile for ABR streams from none to auto
 * fix: add missing params to internal-analytics
 
+1.10.3 / 2023-12-17
+==================
+
+* feat: paced subtitles (transcript)
+* feat: chapters - get vtt file by naming convention
+* fix: Wave a11y errors
+* fix: default streaming_profile for ABR streams from none to auto
+* fix: add missing params to internal-analytics
+
 1.10.2 / 2023-11-05
 ==================
 
