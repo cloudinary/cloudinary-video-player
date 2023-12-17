@@ -122,8 +122,22 @@
         muted: true
       });
 
+      const publicId = 'lincoln';
+
       const textTracks = {
-        options: {},
+        options: {
+          // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+          // position: "", // i.e. 'top-left', 'center' etc
+          // offset: { // Object of top/right/bottom/left
+          //   top: "25%",
+          //   left: "12%"
+          // },
+          // fontFace: "", // any Google font
+          // fontSize: "", // any CSS value
+          // style: { // Styles key-value object
+          //   color: "hotpink"
+          // }
+        },
         captions: {
           label: 'English Paced',
           language: 'en',
@@ -143,7 +157,7 @@
           }
         ]
       }
-      pacedPlayer.source('lincoln', {
+      pacedPlayer.source(publicId, {
         textTracks
       });
 
@@ -157,7 +171,7 @@
         textTracks.options.theme = themeSelect.value;
         textTracks.options.fontFace = fontSelect.value;
         textTracks.options.position = positionSelect.value;
-        pacedPlayer.source('lincoln', {
+        pacedPlayer.source(publicId, {
           textTracks
         });
       });
@@ -373,10 +387,17 @@
 
         const textTracks = {
           options: {
-            // fontFace: '', // any Google font
-            // position: '', // i.e. 'bottom-left', 'top', 'center' etc.
-            // theme: '', // we have 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
-            // style: '' // i.e. 'color: hotpink !important;'
+            // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+            // position: "", // i.e. 'top-left', 'center' etc
+            // offset: { // Object of top/right/bottom/left
+            //   top: "25%",
+            //   left: "12%"
+            // },
+            // fontFace: "", // any Google font
+            // fontSize: "", // any CSS value
+            // style: { // Styles key-value object
+            //   color: "hotpink"
+            // }
           },
           captions: {
             label: 'English captions',
@@ -401,14 +422,6 @@
           textTracks
         });
 
-        const maxWordsInput = document.getElementById('maxWords');
-        const applyButton = document.getElementById('apply');
-        applyButton.addEventListener('click', function () {
-          textTracks.captions.maxWords = parseInt(maxWordsInput.value);
-          pacedPlayer.source('lincoln', {
-            textTracks
-          });
-        });
       </code>
     </pre>
   </div>
