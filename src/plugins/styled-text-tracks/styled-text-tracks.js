@@ -8,23 +8,23 @@ const styledTextTracks = (config, player) => {
     theme: config.theme || 'default',
     fontFace: config.fontFace,
     fontSize: config.fontSize,
-    position: config.position || 'bottom',
-    offset: config.offset,
+    gravity: config.gravity || 'bottom',
+    box: config.box,
     style: config.style
   };
 
-  // Class Names - Theme/Position
+  // Class Names - Theme/Gravity
   const classNames = player.textTrackDisplay.el().classList;
   classNames.forEach(className => {
-    // Remove previously added theme/position classes
+    // Remove previously added theme/gravity classes
     if (className.startsWith('cld-styled-text-tracks')) {
       classNames.remove(className);
     }
   });
   classNames.add('cld-styled-text-tracks');
   classNames.add(`cld-styled-text-tracks-theme-${options.theme}`);
-  options.position.split('-').forEach(position => {
-    classNames.add(`cld-styled-text-tracks-position-${position}`);
+  options.gravity.split('-').forEach(gravity => {
+    classNames.add(`cld-styled-text-tracks-gravity-${gravity}`);
   });
 
   // Font
@@ -47,27 +47,34 @@ const styledTextTracks = (config, player) => {
     }
   };
 
-  // Custom offset
-  if (options.offset) {
+  // Custom bounding box
+  if (options.box) {
+    const { x, y, width, height } = options.box;
     applyImportantStyle(
-      options.offset,
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue');
+      {
+        translate: `${x ? x : 0} ${y ? y : 0}`,
+        ...(width ? { width } : undefined),
+        ...(height ? { height } : undefined)
+      },
+      '.vjs-text-track-display.cld-styled-text-tracks'
+    );
   }
 
   // Custom font-size
   if (options.fontSize) {
     applyImportantStyle(
       { 'font-size': options.fontSize },
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div');
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div'
+    );
   }
 
   // Custom styles
   if (options.style) {
     applyImportantStyle(
       options.style,
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div');
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div'
+    );
   }
-
 };
 
 export default styledTextTracks;

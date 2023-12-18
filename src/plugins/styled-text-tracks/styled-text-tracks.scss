@@ -1,7 +1,7 @@
 .cld-video-player {
 
-  // Positions
-  .cld-styled-text-tracks-position-center {
+  // Gravity (position + alignment)
+  .cld-styled-text-tracks-gravity-center {
     inset: 0 !important;
     .vjs-text-track-cue {
       inset: 0 !important;
@@ -9,19 +9,19 @@
     }
   }
 
-  .cld-styled-text-tracks-position-top {
+  .cld-styled-text-tracks-gravity-top {
     .vjs-text-track-cue {
       top: 0 !important;
     }
   }
 
-  .cld-styled-text-tracks-position-right {
+  .cld-styled-text-tracks-gravity-right {
     .vjs-text-track-cue {
       text-align: right !important;
     }
   }
 
-  .cld-styled-text-tracks-position-left {
+  .cld-styled-text-tracks-gravity-left {
     .vjs-text-track-cue {
       text-align: left !important;
     }
