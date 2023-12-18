@@ -91,10 +91,12 @@ export const sourceValidators = {
   },
   textTracks: {
     options: {
-      fontFace: validator.isString,
-      position: validator.isString,
       theme: validator.isString,
-      style: validator.isString
+      fontFace: validator.isString,
+      fontSize: validator.isString,
+      gravity: validator.isString,
+      box: validator.isPlainObject,
+      style: validator.isPlainObject
     },
     captions: {
       label: validator.isString,
