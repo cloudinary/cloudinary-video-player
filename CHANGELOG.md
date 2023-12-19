@@ -1,3 +1,9 @@
+1.10.4 / 2023-12-19
+==================
+
+* feat: styled text tracks (subtitles & captions)
+* fix: caching of auto chapters VTT files
+
 
 1.10.4 / 2023-12-19
 ==================
