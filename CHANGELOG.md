@@ -1,3 +1,10 @@
+1.10.4-edge.3 / 2023-12-19
+==================
+
+Changes:
+--------
+- Remove caching of auto chapters VTT files
+
 1.10.4-edge.2 / 2023-12-18
 ==================
 
