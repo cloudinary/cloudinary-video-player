@@ -90,10 +90,11 @@ const ChaptersPlugin = (function () {
       return null;
     }
 
-    return getCloudinaryUrl(
+    const fullUrl = getCloudinaryUrl(
       `${currentPublicId}-chapters.vtt`,
       extendCloudinaryConfig(this.player.cloudinary.cloudinaryConfig(), { resource_type: 'raw', version: '1' }),
     );
+    return `${fullUrl}?t=${Date.now()}`;
   };
 
   /**
