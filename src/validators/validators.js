@@ -90,6 +90,14 @@ export const sourceValidators = {
     onClick: validator.isFunction
   },
   textTracks: {
+    options: {
+      theme: validator.isString,
+      fontFace: validator.isString,
+      fontSize: validator.isString,
+      gravity: validator.isString,
+      box: validator.isPlainObject,
+      style: validator.isPlainObject
+    },
     captions: {
       label: validator.isString,
       language: validator.isString,

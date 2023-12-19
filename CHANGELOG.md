@@ -1,3 +1,11 @@
+
+1.10.4 / 2023-12-19
+==================
+
+* feat: styled text tracks (subtitles & captions)
+* fix: caching of auto chapters VTT files
+
+
 1.10.3 / 2023-12-17
 ==================
 
@@ -7,14 +15,6 @@
 * fix: default streaming_profile for ABR streams from none to auto
 * fix: add missing params to internal-analytics
 
-1.10.3 / 2023-12-17
-==================
-
-* feat: paced subtitles (transcript)
-* feat: chapters - get vtt file by naming convention
-* fix: Wave a11y errors
-* fix: default streaming_profile for ABR streams from none to auto
-* fix: add missing params to internal-analytics
 
 1.10.2 / 2023-11-05
 ==================

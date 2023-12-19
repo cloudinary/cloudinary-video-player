@@ -74,7 +74,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videoElement.classList.add('video-js');
 
     // Handle WebFont loading
-    Utils.fontFace(this.videoElement, this.playerOptions);
+    Utils.fontFace(this.videoElement, this.playerOptions.cloudinary.fontFace);
 
     // Handle play button options
     Utils.playButton(this.videoElement, this._videojsOptions);
@@ -228,19 +228,25 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const kinds = Object.keys(conf);
       const allTracks = [];
       for (const kind of kinds) {
-        const tracks = Array.isArray(conf[kind]) ? conf[kind] : [conf[kind]];
-        for (const track of tracks) {
-          allTracks.push({
-            ...track,
-            kind: kind,
-            label: track.label,
-            srclang: track.language,
-            default: !!(track.default),
-            src: track.url
-          });
+        if (kind !== 'options') {
+          const tracks = Array.isArray(conf[kind]) ? conf[kind] : [conf[kind]];
+          for (const track of tracks) {
+            allTracks.push({
+              ...track,
+              kind: kind,
+              label: track.label,
+              srclang: track.language,
+              default: !!(track.default),
+              src: track.url
+            });
+          }
         }
       }
-      Utils.filterAndAddTextTracks(allTracks, this.videojs);
+      Utils.addTextTracks(allTracks, this.videojs);
+
+      if (conf.options && this.videojs.styledTextTracks) {
+        this.videojs.styledTextTracks(conf.options);
+      }
     }
   }
 
