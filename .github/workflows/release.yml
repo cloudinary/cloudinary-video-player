@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  # push:
+  #   branches:
+  #     - edge
+  #     - master
+  workflow_dispatch:
+
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build-all
+
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release --dry-run
+        # run: npx semantic-release
+
+  # send-notification:
+  #   runs-on: ubuntu-latest
+  #   needs: ['release']
+  #   if: always() && needs.release.result == 'success'
+  #   steps:
+  #     - name: Slack Notification - Deployment Success
+  #       uses: rtCamp/action-slack-notify@v2.2.0
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  #         SLACK_CHANNEL: 'widgets-releases'
+  #         SLACK_COLOR: ${{ job.status }}
+  #         SLACK_TITLE: 'Deployment succeeded'
+  #         SLACK_MESSAGE: 'Success :rocket: @cld/gallery-widget version ${{ github.event.inputs.package_version }} deployed successfully to ${{ matrix.env }}'
