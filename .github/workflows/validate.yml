@@ -53,7 +53,6 @@ jobs:
               await github.rest.issues.updateComment({
                 ...context.repo,
                 comment_id: botComment.id,
-                body: message
                 body: `${{steps.changelog.outputs.changelog}}`
               });
             } else {
