@@ -59,7 +59,7 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
 Instantiate a new cloudinary Video Player:
 ```javascript
 cloudinary.videoPlayer('player', {
-   cloud_name: 'demo'
+   cloudName: 'demo'
 });
 ```
 
