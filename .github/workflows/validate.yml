@@ -33,7 +33,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$(npx semantic-release --dry-run)" >> $GITHUB_OUTPUT
+          echo "$(npx semantic-release --dry-run --branches master,${{ github.ref_name }} --no-ci)" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Comment PR
