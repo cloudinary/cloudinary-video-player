@@ -31,9 +31,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          OUTPUT=$(npx semantic-release --dry-run)
-          echo "::set-output name=changelog::$OUTPUT"
+        run: echo "changelog=$(npx semantic-release --dry-run)" >> $GITHUB_OUTPUT
 
       - name: Comment PR
         uses: actions/github-script@v5
