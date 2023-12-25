@@ -49,18 +49,17 @@ jobs:
 
             const botComment = comments.find(comment => comment.user.login === 'github-actions[bot]');
 
-            const message = `${{ steps.changelog.outputs.changelog }}`;
-
             if (botComment) {
               await github.rest.issues.updateComment({
                 ...context.repo,
                 comment_id: botComment.id,
                 body: message
+                body: `${{steps.changelog.outputs.changelog}}`
               });
             } else {
               await github.rest.issues.createComment({
                 ...context.repo,
                 issue_number,
-                body: message
+                body: `${{steps.changelog.outputs.changelog}}`
               });
             }
