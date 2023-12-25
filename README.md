@@ -48,7 +48,7 @@ The Cloudinary video player offers standard and light package variations, availa
 Create a video tag containing `cld-video-player` class and a supported skin class:
 ```html
 <video
-  id="example-player"
+  id="player"
   controls
   autoplay
   data-cld-public-id="dog"
@@ -58,7 +58,7 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
 
 Instantiate a new cloudinary Video Player:
 ```javascript
-cloudinary.videoPlayer('example-player', {
+cloudinary.videoPlayer('player', {
    cloud_name: 'demo'
 });
 ```
