@@ -6,7 +6,11 @@ on:
   #     - edge
   #     - master
   workflow_dispatch:
-
+    inputs:
+      dry-run:
+        description: 'Dry Run'
+        required: false
+        default: 'true'
 
 jobs:
   release:
@@ -32,10 +36,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --dry-run
-        # run: npx semantic-release
+        run: npx semantic-release ${{ github.event.inputs.dry-run == 'true' && '--dry-run' || '' }}
 
-  # send-notification:
+  # notify:
   #   runs-on: ubuntu-latest
   #   needs: ['release']
   #   if: always() && needs.release.result == 'success'
