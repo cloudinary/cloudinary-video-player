@@ -32,9 +32,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          SEMANTIC_RELEASE_OUTPUT=$(npx semantic-release --dry-run --branches ${{ github.head_ref }} --no-ci)
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          echo "$(npx semantic-release --dry-run --branches master,${{ github.ref_name }} --no-ci)" >> $GITHUB_OUTPUT
+          echo "$SEMANTIC_RELEASE_OUTPUT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+          echo "$SEMANTIC_RELEASE_OUTPUT"
 
       - name: Comment PR
         uses: actions/github-script@v5
