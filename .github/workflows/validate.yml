@@ -40,10 +40,26 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const output = `${{ steps.changelog.outputs.changelog }}`
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
+            const issue_number = context.issue.number;
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo,
+              issue_number
+            });
+
+            const botComment = comments.find(comment => comment.user.login === 'github-actions[bot]');
+
+            const message = `${{ steps.changelog.outputs.changelog }}`;
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                ...context.repo,
+                comment_id: botComment.id,
+                body: message
+              });
+            } else {
+              await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number,
+                body: message
+              });
+            }
