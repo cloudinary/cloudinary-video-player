@@ -1,9 +1,7 @@
 1.10.4-edge.3 / 2023-12-19
 ==================
 
-Changes:
---------
-- Remove caching of auto chapters VTT files
+fix: Remove caching of auto chapters VTT files
 
 1.10.4-edge.2 / 2023-12-18
 ==================
@@ -28,8 +26,6 @@ fix: Safari issue with programmatically created RemoteTextTracks
 1.10.3-edge.7 / 2023-12-15
 ==================
 
-Changes:
--------------
 - chapters: true flag for vtt file by naming convention
 
 1.10.3-edge.6 / 2023-12-12
@@ -41,10 +37,8 @@ fix: pacedTranscript init
 ==================
 
 
-
 1.10.3-edge.4 / 2023-12-06
 ==================
-
 
 
 1.10.3-edge.3 / 2023-12-04
