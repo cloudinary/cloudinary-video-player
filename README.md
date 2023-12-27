@@ -1,6 +1,6 @@
 # cloudinary-video-player
 
-The Cloudinary Video Player is a JavaScript-based HTML video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
+Cloudinary Video Player is a JavaScript-based HTML video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
 
 This README includes basic information for installation and getting started. View the [documentation](https://cloudinary.com/documentation/cloudinary_video_player) for comprehensive guidance on integration and all the available features.
 
