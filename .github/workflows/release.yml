@@ -47,4 +47,4 @@ jobs:
   #         SLACK_CHANNEL: 'widgets-releases'
   #         SLACK_COLOR: ${{ job.status }}
   #         SLACK_TITLE: 'Deployment succeeded'
-  #         SLACK_MESSAGE: 'Success :rocket: @cld/gallery-widget version ${{ github.event.inputs.package_version }} deployed successfully to ${{ matrix.env }}'
+  #         SLACK_MESSAGE: 'Success :rocket: cloudinary-video-player version ${{ github.event.inputs.package_version }} deployed successfully'
