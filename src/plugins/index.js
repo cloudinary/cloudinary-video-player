@@ -22,18 +22,18 @@ import pacedTranscript from './paced-transcript';
 import styledTextTracks from './styled-text-tracks';
 
 const plugins = {
+  aiHighlightsGraph,
+  analytics,
   autoplayOnScroll,
-  floatingPlayer,
+  chapters,
+  cloudinary,
+  cloudinaryAnalytics,
   colors,
   contextMenu,
-  cloudinary,
-  analytics,
-  cloudinaryAnalytics,
-  vttThumbnails,
-  aiHighlightsGraph,
-  chapters,
+  floatingPlayer,
   pacedTranscript,
   styledTextTracks,
+  vttThumbnails,
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   interactive,
   dashPlugin,
