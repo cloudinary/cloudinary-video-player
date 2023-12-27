@@ -1,6 +1,6 @@
 # cloudinary-video-player
 
-Cloudinary Video Player is a JavaScript-based HTML5 video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
+Cloudinary Video Player is a JavaScript-based HTML video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
 
 This README includes basic information for installation and getting started. View the [documentation](https://cloudinary.com/documentation/cloudinary_video_player) for comprehensive guidance on integration and all the available features.
 
@@ -48,7 +48,7 @@ The Cloudinary video player offers standard and light package variations, availa
 Create a video tag containing `cld-video-player` class and a supported skin class:
 ```html
 <video
-  id="example-player"
+  id="player"
   controls
   autoplay
   data-cld-public-id="dog"
@@ -58,8 +58,8 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
 
 Instantiate a new cloudinary Video Player:
 ```javascript
-cloudinary.videoPlayer('example-player', {
-   cloud_name: 'demo'
+cloudinary.videoPlayer('player', {
+   cloudName: 'demo'
 });
 ```
 
