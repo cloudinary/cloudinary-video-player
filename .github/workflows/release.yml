@@ -30,7 +30,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - run: npm run build-all
         if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish tag ${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
+      - run: npm publish --tag ${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
