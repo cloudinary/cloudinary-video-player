@@ -7,17 +7,17 @@ import interactive from './interactive-plugin';
 import './videojs-http-source-selector/plugin';
 // #endif
 
+import aiHighlightsGraph from './ai-highlights-graph';
+import analytics from './analytics';
 import autoplayOnScroll from './autoplay-on-scroll';
-import floatingPlayer from './floating-player';
+import chapters from './chapters';
+import cloudinary from './cloudinary';
+import cloudinaryAnalytics from './cloudinary-analytics';
 import colors from './colors';
 import contextMenu from './context-menu';
-import cloudinary from './cloudinary';
-import analytics from './analytics';
-import cloudinaryAnalytics from './cloudinary-analytics';
-import vttThumbnails from './vtt-thumbnails';
-import aiHighlightsGraph from './ai-highlights-graph';
-import chapters from './chapters';
+import floatingPlayer from './floating-player';
 import pacedTranscript from './paced-transcript';
+import vttThumbnails from './vtt-thumbnails';
 
 import styledTextTracks from './styled-text-tracks';
 
