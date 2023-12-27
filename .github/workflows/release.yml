@@ -6,42 +6,34 @@ on:
       - edge
       - master
 
-permissions:
-  contents: read # for checkout
-
 jobs:
   release:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: google-github-actions/release-please-action@v4
+        id: release
         with:
-          fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+          release-type: node
+          target-branch: ${{ github.ref_name }}
+      # The logic below handles the npm publication:
+      - uses: actions/checkout@v4
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
+      - uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build-all
-
-      - name: Semantic Release
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm ci
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm run build-all
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm publish tag ${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
 
   # notify:
   #   runs-on: ubuntu-latest
