@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: martinbeentjes/npm-get-version-action@v1.3.1
+        id: package-version
+
       - run: |
-          CURRENT_VERSION=$(node -p "JSON.stringify(require('../package.json').version)")
-          NEW_VERSION=$(node -p "require('semver').inc('${CURRENT_VERSION}', 'prerelease', undefined, 'edge')")
+          NEW_VERSION=$(node -p "require('semver').inc('${{ steps.package-version.outputs.current-version}}', 'prerelease', undefined, 'edge')")
           echo "NEW_VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
 
       - uses: google-github-actions/release-please-action@v3
