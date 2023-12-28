@@ -1,0 +1,54 @@
+name: Release Edge 🚀
+
+on:
+  pull_request:
+    branches:
+      - 'edge'
+
+jobs:
+  release-edge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          NEW_VERSION=$(node -p "require('semver').inc('${CURRENT_VERSION}', 'prerelease', undefined, 'edge')")
+          echo "NEW_VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
+
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          release-as: $NEW_VERSION
+
+      # The logic below handles the npm publication:
+      - uses: actions/checkout@v4
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm ci
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm run build-all
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm publish --tag edge
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
+
+  # notify:
+  #   runs-on: ubuntu-latest
+  #   needs: ['release']
+  #   if: always() && needs.release.result == 'success'
+  #   steps:
+  #     - name: Slack Notification - Deployment Success
+  #       uses: rtCamp/action-slack-notify@v2.2.0
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  #         SLACK_CHANNEL: 'widgets-releases'
+  #         SLACK_COLOR: ${{ job.status }}
+  #         SLACK_TITLE: 'Deployment succeeded'
+  #         SLACK_MESSAGE: 'Success :rocket: cloudinary-video-player version ${{ github.event.inputs.package_version }} deployed successfully'
