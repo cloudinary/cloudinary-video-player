@@ -26,7 +26,7 @@ const plugins = {
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   dashPlugin,
   interactive,
-  imaPlugin
+  imaPlugin,
   // #endif
   aiHighlightsGraph,
   analytics,
@@ -39,7 +39,7 @@ const plugins = {
   floatingPlayer,
   pacedTranscript,
   styledTextTracks,
-  vttThumbnails,
+  vttThumbnails
 };
 
 export default plugins;
