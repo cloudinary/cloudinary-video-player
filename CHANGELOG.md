@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.10.5-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.3...v1.10.5-edge.4) (2023-12-28)
+
+
+### Bug Fixes
+
+* actions ([20067c3](https://github.com/cloudinary/cloudinary-video-player/commit/20067c303879e89d5b2648399dd3b2ff42ab0f8d))
+* echo ([2212fdf](https://github.com/cloudinary/cloudinary-video-player/commit/2212fdfe13c9480bc9015686f2b89e4d78f67853))
+* fetch-latest-release ([326853f](https://github.com/cloudinary/cloudinary-video-player/commit/326853f7c5ded10e57511e6b6f4a8dd8480d9e23))
+* publish ([ddfe32c](https://github.com/cloudinary/cloudinary-video-player/commit/ddfe32c2648880b7af09ffe508692f6d887c23d3))
+* release ([b1837a4](https://github.com/cloudinary/cloudinary-video-player/commit/b1837a4ec722f7e85a39a01a5828ff095b412bce))
+* test ([8786e38](https://github.com/cloudinary/cloudinary-video-player/commit/8786e381f7784e918e5b177992724d4788b9d14c))
+* test prerelease ([2d1ed4c](https://github.com/cloudinary/cloudinary-video-player/commit/2d1ed4c29719e09b765718e8d9ef01e3db223252))
+* testing release ([de955e7](https://github.com/cloudinary/cloudinary-video-player/commit/de955e784c20e091a18245b28d73d787ef9f416d))
+* Update CHANGELOG.md ([d0e1f19](https://github.com/cloudinary/cloudinary-video-player/commit/d0e1f1979fb2d71578007078cdd46b1ab79f922e))
+* Update CHANGELOG.md ([743b0d8](https://github.com/cloudinary/cloudinary-video-player/commit/743b0d8ccfdbd8e6f09d01fb31a4f89f952e13fa))
+* Update index.js ([7d6a9fa](https://github.com/cloudinary/cloudinary-video-player/commit/7d6a9faf99359b32f1df238d9ac8305db70252a6))
+* Update index.js ([805797a](https://github.com/cloudinary/cloudinary-video-player/commit/805797a9117461b129c902d1315b6f0f6891ad65))
+* version ([d56d2c0](https://github.com/cloudinary/cloudinary-video-player/commit/d56d2c00c09c33ad4b3ca7505061b47779249da1))
+* versioning ([1d63b92](https://github.com/cloudinary/cloudinary-video-player/commit/1d63b926fb179b55e8277e9c4d25786875c0a995))
+
 ## [1.10.5-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4-edge.3...v1.10.5-edge.3) (2023-12-27)
 
 
