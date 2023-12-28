@@ -15,23 +15,9 @@ jobs:
         with:
           release-type: node
 
-      # The logic below handles the npm publication:
-      - uses: actions/checkout@v4
-        # these if statements ensure that a publication only occurs when
-        # a new release is created:
+      - uses: ./.github/actions/publish
         if: ${{ steps.release.outputs.release_created }}
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm ci
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm run build-all
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.release_created }}
+        # ^^ publish only when a new release is created
 
   # notify:
   #   runs-on: ubuntu-latest

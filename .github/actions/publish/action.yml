@@ -1,0 +1,21 @@
+name: Publish
+
+inputs:
+  tag:
+    description: NPM publish with tag
+    required: false
+    default: latest
+
+# setup github action for npm publish with optional tag
+runs:
+  using: node20
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    - run: npm ci
+    - run: npm run build-all
+    - run: npm publish --tag ${{ inputs.tag }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

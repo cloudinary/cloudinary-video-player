@@ -14,17 +14,11 @@ jobs:
 
       - run: npm ci
 
-      - id: fetch-latest-release
+      - name: Get releases
+        id: fetch-latest-release
         uses: ./.github/actions/fetch-latest-release
         with:
           github_token: ${{ github.token }}
-
-      - name: "Print result"
-        run: |
-          echo "name: ${{ steps.fetch-latest-release.outputs.name }}"
-          echo "tag_name: ${{ steps.fetch-latest-release.outputs.tag_name }}"
-          echo "draft: ${{ steps.fetch-latest-release.outputs.draft }}"
-          echo "prerelease: ${{ steps.fetch-latest-release.outputs.prerelease }}"
 
       - name: Calculate edge version
         id: calculate-edge-version
@@ -32,27 +26,20 @@ jobs:
         with:
           version: ${{ steps.fetch-latest-release.outputs.tag_name }}
 
-      - run: echo ${{ steps.calculate-edge-version.outputs.next-edge }}
+      - run: Next version will be ${{ steps.calculate-edge-version.outputs.next-edge }}
 
-      - uses: google-github-actions/release-please-action@v3
+      - name: Release PR
+        uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
 
-      # The logic below handles the npm publication:
-      - uses: actions/setup-node@v4
+      - uses: ./.github/actions/publish
         with:
-          node-version: '20.x'
+          tag: edge
         if: ${{ steps.release.outputs.release_created }}
-        # these if statements ensure that a publication only occurs when
-        # a new release is created:
-      - run: npm run build-all
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish --tag edge
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.release_created }}
+        # ^^ publish only when a new release is created
 
   # notify:
   #   runs-on: ubuntu-latest
