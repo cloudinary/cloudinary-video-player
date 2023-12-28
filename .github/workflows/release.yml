@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - name: Release PR
+        uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
 
-      - uses: ./.github/actions/publish
+      - name: Publish
+        uses: ./.github/actions/publish
         if: ${{ steps.release.outputs.release_created }}
         # ^^ publish only when a new release is created
 

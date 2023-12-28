@@ -35,7 +35,8 @@ jobs:
           release-type: node
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
 
-      - uses: ./.github/actions/publish
+      - name: Publish
+        uses: ./.github/actions/publish
         with:
           tag: edge
         if: ${{ steps.release.outputs.release_created }}
