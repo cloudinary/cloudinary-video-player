@@ -10,18 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: martinbeentjes/npm-get-version-action@v1.3.1
+      - name: get-version
         id: package-version
+        uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - run: |
-          NEW_VERSION=$(node -p "require('semver').inc('${{ steps.package-version.outputs.current-version}}', 'prerelease', undefined, 'edge')")
-          echo "NEW_VERSION=$NEW_VERSION" >> "$GITHUB_ENV"
+      - name: Calculate edge version
+        id: calculate-edge-version
+        uses: ./.github/actions/calculate-edge-version
+        with:
+          version: ${{ steps.package-version.outputs.current-version }}
+
+      - run: echo ${{ steps.calculate-edge-version.outputs.next-edge }}
 
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           release-type: node
-          release-as: $NEW_VERSION
+          release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
 
       # The logic below handles the npm publication:
       - uses: actions/checkout@v4
