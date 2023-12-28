@@ -3,8 +3,6 @@
 ## [1.10.5-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4-edge.3...v1.10.5-edge.3) (2023-12-27)
 
 
-### Bug Fixes
-
 * default template ([0b04300](https://github.com/cloudinary/cloudinary-video-player/commit/0b043004539cc3040eca8bdf44afdd442309d187))
 
 1.10.4-edge.3 / 2023-12-19
