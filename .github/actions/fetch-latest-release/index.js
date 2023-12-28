@@ -14,9 +14,7 @@ const customRepo = (repoPath) => {
 
 const repoInput = core.getInput('repo_path')
 
-const [owner, repo] = repoInput
-  ? customRepo(repoInput)
-  : process.env['GITHUB_REPOSITORY'].split('/', 2)
+const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/', 2)
 
 const octokit = github.getOctokit(
   core.getInput('github_token', { required: true })
@@ -28,7 +26,7 @@ async function run() {
   core.info(`Fetching the latest release for \`${owner}/${repo}\``)
 
   try {
-    latestRelease = await octokit.repos.getLatestRelease({
+    latestRelease = await octokit.rest.repos.getLatestRelease({
       owner,
       repo,
     })
