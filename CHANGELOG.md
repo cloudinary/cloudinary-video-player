@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.10.6-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.3...v1.10.6-edge.3) (2023-12-28)
+
+
+### Bug Fixes
+
+* release ([b1837a4](https://github.com/cloudinary/cloudinary-video-player/commit/b1837a4ec722f7e85a39a01a5828ff095b412bce))
+* test prerelease ([2d1ed4c](https://github.com/cloudinary/cloudinary-video-player/commit/2d1ed4c29719e09b765718e8d9ef01e3db223252))
+* testing release ([de955e7](https://github.com/cloudinary/cloudinary-video-player/commit/de955e784c20e091a18245b28d73d787ef9f416d))
+
 ## [1.10.5-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4-edge.3...v1.10.5-edge.3) (2023-12-27)
 
 
