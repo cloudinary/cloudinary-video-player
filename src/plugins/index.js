@@ -19,6 +19,7 @@ import floatingPlayer from './floating-player';
 import pacedTranscript from './paced-transcript';
 import vttThumbnails from './vtt-thumbnails';
 
+// Lazy loaded plugins
 import styledTextTracks from './styled-text-tracks';
 
 const plugins = {
