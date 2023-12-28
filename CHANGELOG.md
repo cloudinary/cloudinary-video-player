@@ -5,7 +5,6 @@
 
 ### Bug Fixes
 
-* changelog cleanup ([8453327](https://github.com/cloudinary/cloudinary-video-player/commit/8453327ee5867d9b5f8d2b8d6d06dce31a979ca8))
 * default template ([0b04300](https://github.com/cloudinary/cloudinary-video-player/commit/0b043004539cc3040eca8bdf44afdd442309d187))
 * release ([81e061d](https://github.com/cloudinary/cloudinary-video-player/commit/81e061d2b909a36d2f02ce28e53799b1c120ec7a))
 * release-please ([03633b2](https://github.com/cloudinary/cloudinary-video-player/commit/03633b2c51b4e7c5fd1421ce00404b8ed95ce8ec))
