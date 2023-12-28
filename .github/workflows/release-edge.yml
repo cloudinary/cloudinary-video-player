@@ -12,27 +12,24 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: "call action"
-        id: last_release
-        uses: InsonusK/get-latest-release@v1.1.0
+      - id: fetch-latest-release
+        uses: thebritican/fetch-latest-release@v2.0.0
         with:
-          myToken: ${{ github.token }}
-          view_top: 1
+          github_token: ${{ github.token }}
 
       - name: "Print result"
         run: |
-          echo "id: ${{ steps.last_release.outputs.id }}"
-          echo "name: ${{ steps.last_release.outputs.name }}"
-          echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
-          echo "created_at: ${{ steps.last_release.outputs.created_at }}"
-          echo "draft: ${{ steps.last_release.outputs.draft }}"
-          echo "prerelease: ${{ steps.last_release.outputs.prerelease }}"
+          echo "id: ${{ steps.fetch-latest-release.outputs.id }}"
+          echo "name: ${{ steps.fetch-latest-release.outputs.name }}"
+          echo "tag_name: ${{ steps.fetch-latest-release.outputs.tag_name }}"
+          echo "draft: ${{ steps.fetch-latest-release.outputs.draft }}"
+          echo "prerelease: ${{ steps.fetch-latest-release.outputs.prerelease }}"
 
       - name: Calculate edge version
         id: calculate-edge-version
         uses: ./.github/actions/calculate-edge-version
         with:
-          version: ${{ steps.last_release.outputs.tag_name }}
+          version: ${{ steps.fetch-latest-release.outputs.tag_name }}
 
       - run: echo ${{ steps.calculate-edge-version.outputs.next-edge }}
 
