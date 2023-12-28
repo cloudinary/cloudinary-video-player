@@ -9,7 +9,6 @@
 * release ([81e061d](https://github.com/cloudinary/cloudinary-video-player/commit/81e061d2b909a36d2f02ce28e53799b1c120ec7a))
 * release-please ([03633b2](https://github.com/cloudinary/cloudinary-video-player/commit/03633b2c51b4e7c5fd1421ce00404b8ed95ce8ec))
 * test edge release ([23ba18b](https://github.com/cloudinary/cloudinary-video-player/commit/23ba18bfa978c2712e7fe1f70ab4d6406aeda998))
-* test releasing ([75e783f](https://github.com/cloudinary/cloudinary-video-player/commit/75e783f748abce44e228afb72c4d0fd001afec0b))
 
 1.10.4-edge.3 / 2023-12-19
 ==================
