@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const semver = require('semver');
 
 try {
-  const packageVersion = core.getInput('version', { require: true });
+  let packageVersion = core.getInput('version', { require: true });
 
   // Remove initial v if present
   if (packageVersion.charAt(0) === 'v') {
