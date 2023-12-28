@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: npm ci
+
       - id: fetch-latest-release
         uses: ./.github/actions/fetch-latest-release
         with:
@@ -45,8 +47,6 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         # these if statements ensure that a publication only occurs when
         # a new release is created:
-      - run: npm ci
-        if: ${{ steps.release.outputs.release_created }}
       - run: npm run build-all
         if: ${{ steps.release.outputs.release_created }}
       - run: npm publish --tag edge
