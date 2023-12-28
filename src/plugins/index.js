@@ -23,6 +23,11 @@ import vttThumbnails from './vtt-thumbnails';
 import styledTextTracks from './styled-text-tracks';
 
 const plugins = {
+  // #if (!process.env.WEBPACK_BUILD_LIGHT)
+  dashPlugin,
+  interactive,
+  imaPlugin,
+  // #endif
   aiHighlightsGraph,
   analytics,
   autoplayOnScroll,
@@ -34,12 +39,7 @@ const plugins = {
   floatingPlayer,
   pacedTranscript,
   styledTextTracks,
-  vttThumbnails,
-  // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  interactive,
-  dashPlugin,
-  imaPlugin
-  // #endif
+  vttThumbnails
 };
 
 export default plugins;
