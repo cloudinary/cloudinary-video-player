@@ -6,7 +6,6 @@
 ### Bug Fixes
 
 * default template ([0b04300](https://github.com/cloudinary/cloudinary-video-player/commit/0b043004539cc3040eca8bdf44afdd442309d187))
-* release ([81e061d](https://github.com/cloudinary/cloudinary-video-player/commit/81e061d2b909a36d2f02ce28e53799b1c120ec7a))
 
 1.10.4-edge.3 / 2023-12-19
 ==================
