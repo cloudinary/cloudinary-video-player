@@ -26,7 +26,7 @@ jobs:
         with:
           version: ${{ steps.fetch-latest-release.outputs.tag_name }}
 
-      - run: Next version will be ${{ steps.calculate-edge-version.outputs.next-edge }}
+      - run: echo "Next version will be ${{ steps.calculate-edge-version.outputs.next-edge }}"
 
       - name: Release PR
         uses: google-github-actions/release-please-action@v3
