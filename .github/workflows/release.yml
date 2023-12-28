@@ -3,7 +3,6 @@ name: Release 🚀
 on:
   push:
     branches:
-      - edge
       - master
 
 jobs:
@@ -15,9 +14,7 @@ jobs:
         id: release
         with:
           release-type: node
-          default-branch: ${{ github.ref_name }}
-          prerelease: ${{ github.ref_name != 'master' }}
-          versioning-strategy: ${{ github.ref_name == 'master' && 'default' || 'prerelease' }}
+
       # The logic below handles the npm publication:
       - uses: actions/checkout@v4
         # these if statements ensure that a publication only occurs when
@@ -31,7 +28,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
       - run: npm run build-all
         if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish --tag ${{ github.ref_name == 'master' && 'latest' || github.ref_name }}
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
