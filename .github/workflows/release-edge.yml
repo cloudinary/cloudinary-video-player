@@ -26,8 +26,6 @@ jobs:
         with:
           version: ${{ steps.fetch-latest-release.outputs.tag_name }}
 
-      - run: echo "Next version will be ${{ steps.calculate-edge-version.outputs.next-edge }}"
-
       - name: Release PR
         uses: google-github-actions/release-please-action@v3
         id: release
@@ -50,28 +48,23 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
 
-  notify:
-    runs-on: ubuntu-latest
-    needs: ['release']
-    if: always() && needs.release.steps.release.outputs.release_created
-    steps:
       - name: Slack Notification - Deployment Success
-        if: needs.release.result == 'success'
+        if: steps.release.outputs.release_created && success()
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
           SLACK_CHANNEL: 'rnd-fe-releases'
           SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: 'Video Player ${{ needs.release.steps.release.outputs.tag_name }} Deployed'
-          SLACK_MESSAGE: 'Success :rocket: cloudinary-video-player version ${{ needs.release.steps.release.outputs.tag_name }} deployed successfully'
+          SLACK_TITLE: 'Video Player ${{ steps.release.outputs.tag_name }} Deployed'
+          SLACK_MESSAGE: 'Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully'
           SLACK_FOOTER: 'Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=edge&min=true'
 
       - name: Slack Notification - Deployment Failure
-        if: needs.release.result == 'failure'
+        if: steps.release.outputs.release_created && failure()
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
           SLACK_CHANNEL: 'rnd-fe-releases'
           SLACK_COLOR: ${{ job.status }}
           SLACK_TITLE: 'Video Player Deployment Failed'
-          SLACK_MESSAGE: ':alert: Failed to deploy cloudinary-video-player version ${{ needs.release.steps.release.outputs.tag_name }}'
+          SLACK_MESSAGE: ':alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}'
