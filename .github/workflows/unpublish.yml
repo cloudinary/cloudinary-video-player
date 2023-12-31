@@ -1,0 +1,26 @@
+name: ⛔ Unpublish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to unpublish'
+        required: true
+
+jobs:
+  unpublish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Unpublish faulty version
+      run: npm unpublish cloudinary-video-player@${{ github.event.inputs.version }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

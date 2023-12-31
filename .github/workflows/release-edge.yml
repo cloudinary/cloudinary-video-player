@@ -1,4 +1,4 @@
-name: Release Edge 🚀
+name: 🌱 Release Edge
 
 on:
   push:
@@ -35,12 +35,19 @@ jobs:
           release-type: node
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
 
-      - name: Publish
-        uses: ./.github/actions/publish
+      # The logic below handles the npm publication:
+      - uses: actions/setup-node@v4
         with:
-          tag: edge
+          node-version: '20.x'
         if: ${{ steps.release.outputs.release_created }}
-        # ^^ publish only when a new release is created
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+      - run: npm run build-all
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm publish --tag edge
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
 
   # notify:
   #   runs-on: ubuntu-latest
