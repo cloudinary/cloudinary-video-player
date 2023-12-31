@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.5-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.6...v1.10.5-edge.7) (2023-12-31)
+
+
+### Bug Fixes
+
+* unpublish ([cb47571](https://github.com/cloudinary/cloudinary-video-player/commit/cb4757167e247452bc2e68fd5c7127eefee9c652))
+
 ## [1.10.5-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.5...v1.10.5-edge.6) (2023-12-31)
 
 
