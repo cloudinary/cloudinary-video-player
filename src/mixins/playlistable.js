@@ -4,7 +4,6 @@ import { normalizeJsonResponse } from 'utils/api';
 import { assign } from 'utils/assign';
 import { extendCloudinaryConfig, getCloudinaryUrl } from '../plugins/cloudinary/common';
 
-
 const LIST_BY_TAG_PARAMS = { format: 'json', resource_type: 'video', type: 'list' };
 
 const Playlistable = (superclass) => class extends superclass {
