@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.5-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.10...v1.10.5-edge.11) (2024-01-02)
+
+
+### Bug Fixes
+
+* purge-jsdelivr-cache ([2f8bb94](https://github.com/cloudinary/cloudinary-video-player/commit/2f8bb94c1207bb991fd4e5b0603409b76a2e7723))
+
 ## [1.10.5-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.9...v1.10.5-edge.10) (2024-01-02)
 
 
