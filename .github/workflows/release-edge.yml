@@ -48,23 +48,28 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
 
-      - name: Slack Notification - Deployment Success
-        if: steps.release.outputs.release_created && success()
-        uses: rtCamp/action-slack-notify@v2.2.0
-        env:
-          SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
-          SLACK_CHANNEL: 'rnd-fe-releases'
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: 'Video Player ${{ steps.release.outputs.tag_name }} Deployed'
-          SLACK_MESSAGE: 'Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully'
-          SLACK_FOOTER: 'Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=edge&min=true'
+      - name: Set Notification Messages
+        id: set-messages
+        if: steps.release.outputs.release_created
+        run: |
+          if [[ ${{ job.status }} == "success" ]]; then
+            echo "SLACK_TITLE=Video Player ${{ steps.release.outputs.tag_name }} Deployed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=edge&min=true" >> $GITHUB_OUTPUT
+          else
+            echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
 
-      - name: Slack Notification - Deployment Failure
-        if: steps.release.outputs.release_created && failure()
+      - name: Slack Notification
+        if: steps.release.outputs.release_created
         uses: rtCamp/action-slack-notify@v2.2.0
-        env:
-          SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
-          SLACK_CHANNEL: 'rnd-fe-releases'
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_TITLE: 'Video Player Deployment Failed'
-          SLACK_MESSAGE: ':alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}'
+        with:
+          webhook: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
+          channel: 'rnd-fe-releases'
+          color: ${{ job.status }}
+          title: ${{ steps.set-messages.outputs.SLACK_TITLE }}
+          message: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
+          footer: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
