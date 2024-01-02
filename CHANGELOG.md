@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.5-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.9...v1.10.5-edge.10) (2024-01-02)
+
+
+### Bug Fixes
+
+* slack notifications ([e44663d](https://github.com/cloudinary/cloudinary-video-player/commit/e44663ddacde7750ef7e6e37f6f5f8167f025ef8))
+
 ## [1.10.5-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.8...v1.10.5-edge.9) (2023-12-31)
 
 
