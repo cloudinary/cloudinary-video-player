@@ -53,10 +53,17 @@ jobs:
       - name: Slack Notification
         if: steps.release.outputs.release_created
         uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
+          SLACK_CHANNEL: 'rnd-fe-releases'
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
+          SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
+          SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
+
+      - uses: gacts/purge-jsdelivr-cache@v1
+        if: steps.release.outputs.release_created
         with:
-          webhook: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
-          channel: 'rnd-fe-releases'
-          color: ${{ job.status }}
-          title: ${{ steps.set-messages.outputs.SLACK_TITLE }}
-          message: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
-          footer: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
+          url: |
+            https://cdn.jsdelivr.net/npm/cloudinary-video-player
+            https://cdn.jsdelivr.net/npm/cloudinary-video-player@edge
