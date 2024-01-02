@@ -3,19 +3,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const { lightFilenamePart, minFilenamePart } = require('./build-utils');
 
-const ver = require('./versioning');
+const VERSION = JSON.stringify(process.env.npm_package_version);
 
-const tag = ver.extractTag();
-const calculatedVersion = JSON.stringify(ver.getNextVersion(tag));
-const packageVersion = JSON.stringify(require('../package.json').version);
-
-const VERSION =
-  process.env.deploy === 'true' ? calculatedVersion || packageVersion : packageVersion;
 console.log('Current version: ' + VERSION);
-
-if (!calculatedVersion) {
-  console.log('No tag specified: ', tag);
-}
 
 const webpackConfig = {
   context: path.resolve(__dirname, '../src'),

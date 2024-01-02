@@ -1,0 +1,39 @@
+name: ⛔ Deprecate
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to update'
+        required: true
+        type: choice
+        options:
+        - edge
+        - latest
+      version:
+        description: 'Version to deprecate'
+        required: true
+      tag_version:
+        description: 'Version to use instead'
+        required: true
+
+jobs:
+  deprecate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Deprecate version
+      run: npm deprecate cloudinary-video-player@${{ github.event.inputs.version }} "This version of cloudinary-video-player has been deprecated."
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Set tag version
+      run: npm dist-tag add cloudinary-video-player@${{ github.event.inputs.tag_version }} ${{ github.event.inputs.tag }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
