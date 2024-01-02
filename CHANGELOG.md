@@ -1,174 +1,34 @@
-# Changelog
 
-## [1.10.5-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.10...v1.10.5-edge.11) (2024-01-02)
-
-
-### Bug Fixes
-
-* purge-jsdelivr-cache ([2f8bb94](https://github.com/cloudinary/cloudinary-video-player/commit/2f8bb94c1207bb991fd4e5b0603409b76a2e7723))
-
-## [1.10.5-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.9...v1.10.5-edge.10) (2024-01-02)
-
-
-### Bug Fixes
-
-* slack notifications ([e44663d](https://github.com/cloudinary/cloudinary-video-player/commit/e44663ddacde7750ef7e6e37f6f5f8167f025ef8))
-
-## [1.10.5-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.8...v1.10.5-edge.9) (2023-12-31)
-
-
-### Bug Fixes
-
-* notify ([8b55411](https://github.com/cloudinary/cloudinary-video-player/commit/8b55411c4c8b833d85724453eec50966d6763c77))
-
-## [1.10.5-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.7...v1.10.5-edge.8) (2023-12-31)
-
-
-### Bug Fixes
-
-* notify ([67903db](https://github.com/cloudinary/cloudinary-video-player/commit/67903db547d255ae20cc4dcdbe8ce04f16c35702))
-
-## [1.10.5-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.6...v1.10.5-edge.7) (2023-12-31)
-
-
-### Bug Fixes
-
-* unpublish ([cb47571](https://github.com/cloudinary/cloudinary-video-player/commit/cb4757167e247452bc2e68fd5c7127eefee9c652))
-
-## [1.10.5-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.5...v1.10.5-edge.6) (2023-12-31)
-
-
-### Bug Fixes
-
-* publish ([14c42fd](https://github.com/cloudinary/cloudinary-video-player/commit/14c42fdacaefbef537306daf061111785150b383))
-
-## [1.10.5-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.4...v1.10.5-edge.5) (2023-12-31)
-
-
-### Bug Fixes
-
-* release & unpublish ([03932d5](https://github.com/cloudinary/cloudinary-video-player/commit/03932d5bc5f1e5dcf97788e67d23f3d40c8654a5))
-
-## [1.10.5-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.3...v1.10.5-edge.4) (2023-12-28)
-
-
-### Bug Fixes
-
-* actions ([20067c3](https://github.com/cloudinary/cloudinary-video-player/commit/20067c303879e89d5b2648399dd3b2ff42ab0f8d))
-* echo ([2212fdf](https://github.com/cloudinary/cloudinary-video-player/commit/2212fdfe13c9480bc9015686f2b89e4d78f67853))
-* fetch-latest-release ([326853f](https://github.com/cloudinary/cloudinary-video-player/commit/326853f7c5ded10e57511e6b6f4a8dd8480d9e23))
-* publish ([ddfe32c](https://github.com/cloudinary/cloudinary-video-player/commit/ddfe32c2648880b7af09ffe508692f6d887c23d3))
-* release ([b1837a4](https://github.com/cloudinary/cloudinary-video-player/commit/b1837a4ec722f7e85a39a01a5828ff095b412bce))
-* test ([8786e38](https://github.com/cloudinary/cloudinary-video-player/commit/8786e381f7784e918e5b177992724d4788b9d14c))
-* test prerelease ([2d1ed4c](https://github.com/cloudinary/cloudinary-video-player/commit/2d1ed4c29719e09b765718e8d9ef01e3db223252))
-* testing release ([de955e7](https://github.com/cloudinary/cloudinary-video-player/commit/de955e784c20e091a18245b28d73d787ef9f416d))
-* Update CHANGELOG.md ([d0e1f19](https://github.com/cloudinary/cloudinary-video-player/commit/d0e1f1979fb2d71578007078cdd46b1ab79f922e))
-* Update CHANGELOG.md ([743b0d8](https://github.com/cloudinary/cloudinary-video-player/commit/743b0d8ccfdbd8e6f09d01fb31a4f89f952e13fa))
-* Update index.js ([7d6a9fa](https://github.com/cloudinary/cloudinary-video-player/commit/7d6a9faf99359b32f1df238d9ac8305db70252a6))
-* Update index.js ([805797a](https://github.com/cloudinary/cloudinary-video-player/commit/805797a9117461b129c902d1315b6f0f6891ad65))
-* version ([d56d2c0](https://github.com/cloudinary/cloudinary-video-player/commit/d56d2c00c09c33ad4b3ca7505061b47779249da1))
-* versioning ([1d63b92](https://github.com/cloudinary/cloudinary-video-player/commit/1d63b926fb179b55e8277e9c4d25786875c0a995))
-
-## [1.10.5-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4-edge.3...v1.10.5-edge.3) (2023-12-27)
-
-
-* default template ([0b04300](https://github.com/cloudinary/cloudinary-video-player/commit/0b043004539cc3040eca8bdf44afdd442309d187))
-
-1.10.4-edge.3 / 2023-12-19
+1.10.4 / 2023-12-19
 ==================
 
-fix: Remove caching of auto chapters VTT files
+* feat: styled text tracks (subtitles & captions)
+* fix: caching of auto chapters VTT files
 
-1.10.4-edge.2 / 2023-12-18
+
+1.10.3 / 2023-12-17
 ==================
 
-fix: styled-subtitles to use x/y box
-
-1.10.4-edge.1 / 2023-12-17
-==================
-
-feat: styled text tracks (subtitles & captions)
-
-1.10.3-edge.9 / 2023-12-17
-==================
-
-fix: ME-6001 Wave a11y errors
-
-1.10.3-edge.8 / 2023-12-17
-==================
-
-fix: Safari issue with programmatically created RemoteTextTracks
-
-1.10.3-edge.7 / 2023-12-15
-==================
-
-- chapters: true flag for vtt file by naming convention
-
-1.10.3-edge.6 / 2023-12-12
-==================
-
-fix: pacedTranscript init
-
-1.10.3-edge.5 / 2023-12-06
-==================
+* feat: paced subtitles (transcript)
+* feat: chapters - get vtt file by naming convention
+* fix: Wave a11y errors
+* fix: default streaming_profile for ABR streams from none to auto
+* fix: add missing params to internal-analytics
 
 
-1.10.3-edge.4 / 2023-12-06
-==================
-
-
-1.10.3-edge.3 / 2023-12-04
-==================
-
-feat: paced subtitles (transcript)
-
-1.10.3-edge.2 / 2023-11-30
-==================
-
-fix: default streaming_profile for ABR streams from none to auto
-
-1.10.3-edge.1 / 2023-11-30
-==================
-
-* fix: add missing internal-analytics
-
-1.10.3-edge.0 / 2023-11-05
-==================
-
-
-
-1.10.2-edge.4 / 2023-11-01
+1.10.2 / 2023-11-05
 ==================
 
 * fix: ES build default export
-
-1.10.2-edge.3 / 2023-10-26
-==================
-
 * Scrollable subtitles - popup menus
-
-1.10.2-edge.2 / 2023-10-26
-==================
-
 * feat: f_auto by default
-
-1.10.2-edge.1 / 2023-10-24
-==================
-
 
 
 1.10.1 / 2023-10-24
 ==================
 
-Changes:
------------
-- Update Cld analytics package
-
-1.10.1 / 2023-10-19
-==================
-
-Changes:
 - Update cld analytics package
+
 
 1.10.0 / 2023-10-18
 ==================
@@ -176,11 +36,13 @@ Changes:
 * feat: Chapters plugin
 * fix cld analytics to be called on cld video event changed
 
+
 1.9.18 / 2023-10-08
 ==================
 
 fix: custom logo
 fix: yarn to npm
+
 
 1.9.17 / 2023-10-05
 ==================
@@ -191,61 +53,14 @@ fix: yarn to npm
 - chore: Update VideoJS to 8.5.2
 - feat: Update cloudinary video analytics package & send custom props about video player type
 - refactor: ai-highlights-graph filename
+- Replace `yarn` with `npm`
 
-
-1.9.17-edge.8 / 2023-10-04
-==================
-
-refactor: ai-highlights-graph filename
-
-1.9.17-edge.7 / 2023-09-28
-==================
-
-* Replace `yarn` with `npm`
-
-1.9.17-edge.6 / 2023-09-25
-==================
-
-Changes:
-------------
-* Update cloudinary video analytics package & send custom props about video player type
-
-1.9.17-edge.5 / 2023-09-20
-==================
-
-
-
-1.9.17-edge.4 / 2023-09-20
-==================
-
-* Update VideoJS to 8.5.2
-
-1.9.17-edge.3 / 2023-09-20
-==================
-
-* Light theme logo changed from blue to black
-
-1.9.17-edge.2 / 2023-09-18
-==================
-
-Changes:
-------------
-* init event -> source change event
-
-1.9.17-edge.1 / 2023-09-12
-==================
-
-* fix: duplicate requests for video summarization and thumbnails info
 
 1.9.16 / 2023-09-12
 ==================
 
 * Video player face-lift - redesigned themes, icons, volume-bar.
 
-1.9.16 / 2023-09-12
-==================
-
-* Video player face-lift - redesigned themes, icons, volume-bar.
 
 1.9.15 / 2023-08-30
 ==================
@@ -254,19 +69,6 @@ Changes:
 * Use cloudinary-video-analytics
 * Collect video player usage
 
-1.9.15 / 2023-08-29
-==================
-
-* Support camelCase cloud config (i.e. cloudName)
-* Use cloudinary-video-analytics
-* Collect video player usage
-
-1.9.14 / 2023-08-16
-==================
-
-* Add AI highlights graph (histogram) plugin
-* fix: poster image black-bars post videojs v8 upgrade
-
 
 1.9.14 / 2023-08-16
 ==================
@@ -274,13 +76,6 @@ Changes:
 * fix: poster image black-bars
 * Add AI highlights graph (histogram) plugin
 
-1.9.13 / 2023-08-13
-==================
-
-* Upgrade VideoJS to v8
-* Update videojs-vr
-* Fix: seek-thumbnails error with raw-urls
-* Fix: components example page post videojs `extend` deprecation
 
 1.9.13 / 2023-08-13
 ==================
@@ -289,6 +84,7 @@ Changes:
 * Update videojs-vr
 * Fix: seek-thumbnails error with raw-urls
 * Fix: components example page post videojs `extend` deprecation
+
 
 1.9.12 / 2023-07-26
 ==================
@@ -296,11 +92,6 @@ Changes:
 * Fix: subtitles & captions keyboard accessibility
 * Refactored ads plugin  (advertising module)
 
-1.9.12 / 2023-07-25
-==================
-
-* Fix: subtitles & captions keyboard accessibility
-* Refactored ads plugin  (advertising module)
 
 1.9.11 / 2023-07-16
 ==================
@@ -309,21 +100,20 @@ Changes:
 * Turn seek-thumbnail on by default
 * Fix: seek-thumbnail compatibility with other plugins
 
+
 1.9.10 / 2023-06-18
 ==================
 
-Changes
--------------
 - Fix: Source syntax issue
 - Fix: Shoppable Video - product carousel overlay display error
 - Add aria-label to logo link
 
+
 1.9.9 / 2023-03-27
 ==================
 
-Changes
--------------
 - Video Player Accessibility issue (empty elements in DOM)
+
 
 1.9.8 / 2023-03-13
 ==================
@@ -331,11 +121,10 @@ Changes
 - Make Cloudinary analytics opt-out
 - Send video duration to via Cloudinary analytics
 
+
 1.9.7 / 2023-02-26
 ==================
 
-Changes
--------------
 - Update VideoJS to v7.21.2
 - Makes tree-shaking optional
 - Export chunks to files instead of sub-folders
@@ -373,6 +162,7 @@ Changes
 -------------
 Add analytics
 
+
 1.9.3 / 2022-09-13
 ==================
 
@@ -380,6 +170,7 @@ Changes
 -----------
 - Add an option to disable the poster and set a poster background color instead
 - Post IE clean up
+
 
 1.9.2 / 2022-08-29
 ==================
@@ -391,6 +182,7 @@ Update Cloudinary sdk to version 1.8.6
 Fixes
 ------------
 - Fix: Playlist clicking on Next video icon, the player skips a video
+
 
 1.9.1 / 2022-04-10
 ==================
@@ -413,6 +205,7 @@ Changes
 - Update webpack-bundle-analyzer to 4.5.0
 - Addin syncOffsetTime for interaction area - sync video playing time on zoom
 - Remove the use vidoejs.log and replace it with a native console.log function
+
 
 1.8.0 / 2022-01-31
 ==================
