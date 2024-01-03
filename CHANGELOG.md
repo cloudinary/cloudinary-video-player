@@ -1,22 +1,151 @@
+# Changelog
 
-1.10.4 / 2023-12-19
+## [1.10.5-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.11...v1.10.5-edge.12) (2024-01-03)
+
+
+### Bug Fixes
+
+* github actions deploy workflows ([5185b57](https://github.com/cloudinary/cloudinary-video-player/commit/5185b5751c92aaeff0053547dc9f234fac7b2abd))
+
+## [1.10.5-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.10...v1.10.5-edge.11) (2024-01-02)
+
+
+### Bug Fixes
+
+* purge-jsdelivr-cache ([2f8bb94](https://github.com/cloudinary/cloudinary-video-player/commit/2f8bb94c1207bb991fd4e5b0603409b76a2e7723))
+
+## [1.10.5-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.9...v1.10.5-edge.10) (2024-01-02)
+
+
+### Bug Fixes
+
+* slack notifications ([e44663d](https://github.com/cloudinary/cloudinary-video-player/commit/e44663ddacde7750ef7e6e37f6f5f8167f025ef8))
+
+## [1.10.5-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.8...v1.10.5-edge.9) (2023-12-31)
+
+
+### Bug Fixes
+
+* notify ([8b55411](https://github.com/cloudinary/cloudinary-video-player/commit/8b55411c4c8b833d85724453eec50966d6763c77))
+
+## [1.10.5-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.7...v1.10.5-edge.8) (2023-12-31)
+
+
+### Bug Fixes
+
+* notify ([67903db](https://github.com/cloudinary/cloudinary-video-player/commit/67903db547d255ae20cc4dcdbe8ce04f16c35702))
+
+## [1.10.5-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.6...v1.10.5-edge.7) (2023-12-31)
+
+
+### Bug Fixes
+
+* unpublish ([cb47571](https://github.com/cloudinary/cloudinary-video-player/commit/cb4757167e247452bc2e68fd5c7127eefee9c652))
+
+## [1.10.5-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.5...v1.10.5-edge.6) (2023-12-31)
+
+
+### Bug Fixes
+
+* publish ([14c42fd](https://github.com/cloudinary/cloudinary-video-player/commit/14c42fdacaefbef537306daf061111785150b383))
+
+## [1.10.5-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.4...v1.10.5-edge.5) (2023-12-31)
+
+
+### Bug Fixes
+
+* release & unpublish ([03932d5](https://github.com/cloudinary/cloudinary-video-player/commit/03932d5bc5f1e5dcf97788e67d23f3d40c8654a5))
+
+## [1.10.5-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.3...v1.10.5-edge.4) (2023-12-28)
+
+
+### Bug Fixes
+
+* actions ([20067c3](https://github.com/cloudinary/cloudinary-video-player/commit/20067c303879e89d5b2648399dd3b2ff42ab0f8d))
+* echo ([2212fdf](https://github.com/cloudinary/cloudinary-video-player/commit/2212fdfe13c9480bc9015686f2b89e4d78f67853))
+* fetch-latest-release ([326853f](https://github.com/cloudinary/cloudinary-video-player/commit/326853f7c5ded10e57511e6b6f4a8dd8480d9e23))
+* publish ([ddfe32c](https://github.com/cloudinary/cloudinary-video-player/commit/ddfe32c2648880b7af09ffe508692f6d887c23d3))
+* release ([b1837a4](https://github.com/cloudinary/cloudinary-video-player/commit/b1837a4ec722f7e85a39a01a5828ff095b412bce))
+* test ([8786e38](https://github.com/cloudinary/cloudinary-video-player/commit/8786e381f7784e918e5b177992724d4788b9d14c))
+* test prerelease ([2d1ed4c](https://github.com/cloudinary/cloudinary-video-player/commit/2d1ed4c29719e09b765718e8d9ef01e3db223252))
+* testing release ([de955e7](https://github.com/cloudinary/cloudinary-video-player/commit/de955e784c20e091a18245b28d73d787ef9f416d))
+* Update CHANGELOG.md ([d0e1f19](https://github.com/cloudinary/cloudinary-video-player/commit/d0e1f1979fb2d71578007078cdd46b1ab79f922e))
+* Update CHANGELOG.md ([743b0d8](https://github.com/cloudinary/cloudinary-video-player/commit/743b0d8ccfdbd8e6f09d01fb31a4f89f952e13fa))
+* Update index.js ([7d6a9fa](https://github.com/cloudinary/cloudinary-video-player/commit/7d6a9faf99359b32f1df238d9ac8305db70252a6))
+* Update index.js ([805797a](https://github.com/cloudinary/cloudinary-video-player/commit/805797a9117461b129c902d1315b6f0f6891ad65))
+* version ([d56d2c0](https://github.com/cloudinary/cloudinary-video-player/commit/d56d2c00c09c33ad4b3ca7505061b47779249da1))
+* versioning ([1d63b92](https://github.com/cloudinary/cloudinary-video-player/commit/1d63b926fb179b55e8277e9c4d25786875c0a995))
+
+## [1.10.5-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4-edge.3...v1.10.5-edge.3) (2023-12-27)
+
+
+* default template ([0b04300](https://github.com/cloudinary/cloudinary-video-player/commit/0b043004539cc3040eca8bdf44afdd442309d187))
+
+1.10.4-edge.3 / 2023-12-19
 ==================
 
-* feat: styled text tracks (subtitles & captions)
-* fix: caching of auto chapters VTT files
+fix: Remove caching of auto chapters VTT files
 
 
 1.10.3 / 2023-12-17
 ==================
 
-* feat: paced subtitles (transcript)
-* feat: chapters - get vtt file by naming convention
-* fix: Wave a11y errors
-* fix: default streaming_profile for ABR streams from none to auto
-* fix: add missing params to internal-analytics
+fix: styled-subtitles to use x/y box
+
+1.10.4-edge.1 / 2023-12-17
+==================
+
+feat: styled text tracks (subtitles & captions)
+
+1.10.3-edge.9 / 2023-12-17
+==================
+
+fix: ME-6001 Wave a11y errors
+
+1.10.3-edge.8 / 2023-12-17
+==================
+
+fix: Safari issue with programmatically created RemoteTextTracks
+
+1.10.3-edge.7 / 2023-12-15
+==================
+
+- chapters: true flag for vtt file by naming convention
+
+1.10.3-edge.6 / 2023-12-12
+==================
+
+fix: pacedTranscript init
+
+1.10.3-edge.5 / 2023-12-06
+==================
 
 
-1.10.2 / 2023-11-05
+1.10.3-edge.4 / 2023-12-06
+==================
+
+
+1.10.3-edge.3 / 2023-12-04
+==================
+
+feat: paced subtitles (transcript)
+
+1.10.3-edge.2 / 2023-11-30
+==================
+
+fix: default streaming_profile for ABR streams from none to auto
+
+1.10.3-edge.1 / 2023-11-30
+==================
+
+* fix: add missing internal-analytics
+
+1.10.3-edge.0 / 2023-11-05
+==================
+
+
+
+1.10.2-edge.4 / 2023-11-01
 ==================
 
 * fix: ES build default export
