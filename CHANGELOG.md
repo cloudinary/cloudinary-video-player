@@ -86,7 +86,8 @@
 
 fix: Remove caching of auto chapters VTT files
 
-1.10.4-edge.2 / 2023-12-18
+
+1.10.3 / 2023-12-17
 ==================
 
 fix: styled-subtitles to use x/y box
@@ -148,34 +149,15 @@ fix: default streaming_profile for ABR streams from none to auto
 ==================
 
 * fix: ES build default export
-
-1.10.2-edge.3 / 2023-10-26
-==================
-
 * Scrollable subtitles - popup menus
-
-1.10.2-edge.2 / 2023-10-26
-==================
-
 * feat: f_auto by default
-
-1.10.2-edge.1 / 2023-10-24
-==================
-
 
 
 1.10.1 / 2023-10-24
 ==================
 
-Changes:
------------
-- Update Cld analytics package
-
-1.10.1 / 2023-10-19
-==================
-
-Changes:
 - Update cld analytics package
+
 
 1.10.0 / 2023-10-18
 ==================
@@ -183,11 +165,13 @@ Changes:
 * feat: Chapters plugin
 * fix cld analytics to be called on cld video event changed
 
+
 1.9.18 / 2023-10-08
 ==================
 
 fix: custom logo
 fix: yarn to npm
+
 
 1.9.17 / 2023-10-05
 ==================
@@ -198,61 +182,14 @@ fix: yarn to npm
 - chore: Update VideoJS to 8.5.2
 - feat: Update cloudinary video analytics package & send custom props about video player type
 - refactor: ai-highlights-graph filename
+- Replace `yarn` with `npm`
 
-
-1.9.17-edge.8 / 2023-10-04
-==================
-
-refactor: ai-highlights-graph filename
-
-1.9.17-edge.7 / 2023-09-28
-==================
-
-* Replace `yarn` with `npm`
-
-1.9.17-edge.6 / 2023-09-25
-==================
-
-Changes:
-------------
-* Update cloudinary video analytics package & send custom props about video player type
-
-1.9.17-edge.5 / 2023-09-20
-==================
-
-
-
-1.9.17-edge.4 / 2023-09-20
-==================
-
-* Update VideoJS to 8.5.2
-
-1.9.17-edge.3 / 2023-09-20
-==================
-
-* Light theme logo changed from blue to black
-
-1.9.17-edge.2 / 2023-09-18
-==================
-
-Changes:
-------------
-* init event -> source change event
-
-1.9.17-edge.1 / 2023-09-12
-==================
-
-* fix: duplicate requests for video summarization and thumbnails info
 
 1.9.16 / 2023-09-12
 ==================
 
 * Video player face-lift - redesigned themes, icons, volume-bar.
 
-1.9.16 / 2023-09-12
-==================
-
-* Video player face-lift - redesigned themes, icons, volume-bar.
 
 1.9.15 / 2023-08-30
 ==================
@@ -261,19 +198,6 @@ Changes:
 * Use cloudinary-video-analytics
 * Collect video player usage
 
-1.9.15 / 2023-08-29
-==================
-
-* Support camelCase cloud config (i.e. cloudName)
-* Use cloudinary-video-analytics
-* Collect video player usage
-
-1.9.14 / 2023-08-16
-==================
-
-* Add AI highlights graph (histogram) plugin
-* fix: poster image black-bars post videojs v8 upgrade
-
 
 1.9.14 / 2023-08-16
 ==================
@@ -281,13 +205,6 @@ Changes:
 * fix: poster image black-bars
 * Add AI highlights graph (histogram) plugin
 
-1.9.13 / 2023-08-13
-==================
-
-* Upgrade VideoJS to v8
-* Update videojs-vr
-* Fix: seek-thumbnails error with raw-urls
-* Fix: components example page post videojs `extend` deprecation
 
 1.9.13 / 2023-08-13
 ==================
@@ -296,6 +213,7 @@ Changes:
 * Update videojs-vr
 * Fix: seek-thumbnails error with raw-urls
 * Fix: components example page post videojs `extend` deprecation
+
 
 1.9.12 / 2023-07-26
 ==================
@@ -303,11 +221,6 @@ Changes:
 * Fix: subtitles & captions keyboard accessibility
 * Refactored ads plugin  (advertising module)
 
-1.9.12 / 2023-07-25
-==================
-
-* Fix: subtitles & captions keyboard accessibility
-* Refactored ads plugin  (advertising module)
 
 1.9.11 / 2023-07-16
 ==================
@@ -316,21 +229,20 @@ Changes:
 * Turn seek-thumbnail on by default
 * Fix: seek-thumbnail compatibility with other plugins
 
+
 1.9.10 / 2023-06-18
 ==================
 
-Changes
--------------
 - Fix: Source syntax issue
 - Fix: Shoppable Video - product carousel overlay display error
 - Add aria-label to logo link
 
+
 1.9.9 / 2023-03-27
 ==================
 
-Changes
--------------
 - Video Player Accessibility issue (empty elements in DOM)
+
 
 1.9.8 / 2023-03-13
 ==================
@@ -338,11 +250,10 @@ Changes
 - Make Cloudinary analytics opt-out
 - Send video duration to via Cloudinary analytics
 
+
 1.9.7 / 2023-02-26
 ==================
 
-Changes
--------------
 - Update VideoJS to v7.21.2
 - Makes tree-shaking optional
 - Export chunks to files instead of sub-folders
@@ -380,6 +291,7 @@ Changes
 -------------
 Add analytics
 
+
 1.9.3 / 2022-09-13
 ==================
 
@@ -387,6 +299,7 @@ Changes
 -----------
 - Add an option to disable the poster and set a poster background color instead
 - Post IE clean up
+
 
 1.9.2 / 2022-08-29
 ==================
@@ -398,6 +311,7 @@ Update Cloudinary sdk to version 1.8.6
 Fixes
 ------------
 - Fix: Playlist clicking on Next video icon, the player skips a video
+
 
 1.9.1 / 2022-04-10
 ==================
@@ -420,6 +334,7 @@ Changes
 - Update webpack-bundle-analyzer to 4.5.0
 - Addin syncOffsetTime for interaction area - sync video playing time on zoom
 - Remove the use vidoejs.log and replace it with a native console.log function
+
 
 1.8.0 / 2022-01-31
 ==================
