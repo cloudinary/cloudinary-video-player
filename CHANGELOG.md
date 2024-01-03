@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.5-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.11...v1.10.5-edge.12) (2024-01-03)
+
+
+### Bug Fixes
+
+* github actions deploy workflows ([5185b57](https://github.com/cloudinary/cloudinary-video-player/commit/5185b5751c92aaeff0053547dc9f234fac7b2abd))
+
 ## [1.10.5-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.10...v1.10.5-edge.11) (2024-01-02)
 
 
