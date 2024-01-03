@@ -1,0 +1,47 @@
+name: Fetch Latest Release
+
+runs:
+  using: node20
+  main: index.js
+
+inputs:
+  github_token:
+    description: A Github token for the repo, usually `{{ github.token }}`.
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  url:
+    description: The HTTP URL for this release
+  assets_url:
+    description: The REST API HTTP URL for this release's assets
+  upload_url:
+    description: The REST API HTTP URL for uploading to this release
+  html_url:
+    description: The REST API HTTP URL for this release
+  id:
+    description: ''
+  node_id:
+    description: The unique identifier for accessing this release in the GraphQL API
+  tag_name:
+    description: The name of the release's Git tag
+  target_commitish:
+    description: ''
+  name:
+    description: The title of the release.
+  draft:
+    description: Whether or not the release is a draft
+  author_id:
+    description: ''
+  author_node_id:
+    description: The unique identifier for accessing this release's author in the GraphQL API
+  author_url:
+    description: The REST API HTTP URL for this release's author
+  author_login:
+    description: The username used to login.
+  author_html_url:
+    description: The HTTP URL for this release's author
+  author_type:
+    description: ''
+  author_site_admin:
+    description: Whether or not this user is a site administrator.

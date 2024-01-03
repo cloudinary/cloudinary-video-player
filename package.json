@@ -34,13 +34,10 @@
     "analyze:light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/analyzer.config.js",
     "postbuild-all": "bundlewatch",
     "precommit": "eslint src",
-    "predeploy": "deploy=true npm run build-all",
-    "deploy": "deploy=true node webpack/deploy.js",
-    "postdeploy": "git push origin master --follow-tags",
-    "dry:deploy": "node webpack/deploy.js dry",
     "test": "jest --no-cache --detectOpenHandles",
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
-    "snyk-protect": "snyk protect"
+    "snyk-protect": "snyk protect",
+    "commitlint": "commitlint --edit"
   },
   "keywords": [
     "dash",
@@ -84,9 +81,13 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
     "@babel/core": "^7.19.6",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.19.4",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@types/video.js": "^7.3.52",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^24.9.0",
@@ -102,6 +103,7 @@
     "expose-loader": "^4.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.3",
     "jest": "^26.6.3",
     "jest-fetch-mock": "^3.0.3",
     "jest-puppeteer": "^5.0.4",
@@ -112,6 +114,7 @@
     "puppeteer-request-spy": "^1.4.0",
     "sass": "^1.35.1",
     "sass-loader": "^10.2.0",
+    "semver": "^7.5.4",
     "shx": "^0.3.3",
     "snyk": "^1.653.0",
     "source-map-loader": "^1.1.3",
