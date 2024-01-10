@@ -1,13 +1,10 @@
-@import '../../../assets/styles/mixins/aspect-ratio';
 
 $upcoming-video-max-width: 30em;
-// $_upcoming-video-transition: visibility 1s, opacity 1s, background 1.1s 0s step-end;
-$_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
+$_upcoming-video-transition: visibility 0.2s, opacity 0.2s;
 
 .vjs-upcoming-video {
   opacity: 0;
   transition: bottom 0.1s, $_upcoming-video-transition;
-  @include aspect-ratio(16, 9);
 
   visibility: hidden;
   position: absolute;
@@ -18,6 +15,7 @@ $_upcoming-video-transition: visibility 0.4s, opacity 0.4s;
   border: 1px solid #E8E8E9;
 
   .upcoming-video-overlay {
+    aspect-ratio: 16/9;
     background-size: cover;
     cursor: pointer;
 

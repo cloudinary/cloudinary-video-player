@@ -110,7 +110,6 @@ export const overrideDefaultVideojsComponents = () => {
 
   // Add TitleBar as default
   children.push('titleBar');
-  children.push('upcomingVideoOverlay');
   children.push('recommendationsOverlay');
 
   const ControlBar = videojs.getComponent('ControlBar');
@@ -121,7 +120,7 @@ export const overrideDefaultVideojsComponents = () => {
     children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
     // Add 'play-previous' and 'play-next' buttons around the 'play-toggle'
-    children.splice(children.indexOf('playToggle'), 1, 'playlistPreviousButton', 'playToggle', 'JumpBackButton', 'JumpForwardButton', 'playlistNextButton');
+    children.splice(children.indexOf('playToggle'), 1, 'playToggle', 'JumpBackButton', 'JumpForwardButton');
 
     // Position the 'logo-button' button last
     children.push('logoButton');
