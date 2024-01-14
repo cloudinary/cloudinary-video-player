@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.10.6-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.12...v1.10.6-edge.0) (2024-01-14)
+
+
+### Bug Fixes
+
+* babel config ([0d7b818](https://github.com/cloudinary/cloudinary-video-player/commit/0d7b818919cc9ef64c87e720c76ea110e0c78611))
+* handle styled textTracks usage monitoring ([bcf3cd0](https://github.com/cloudinary/cloudinary-video-player/commit/bcf3cd0d1de61fd6a03cc53c93a38bdabf0016b2))
+* lazy-loaded playlists ([9f89ab3](https://github.com/cloudinary/cloudinary-video-player/commit/9f89ab336420ed470646ff009ff3a1631c6578c8))
+
 ## [1.10.5-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.11...v1.10.5-edge.12) (2024-01-03)
 
 
