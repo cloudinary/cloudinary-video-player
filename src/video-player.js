@@ -7,9 +7,8 @@ import Utils from './utils';
 import defaults from './config/defaults';
 import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
-import PlaylistWidget from './components/playlist/playlist-widget';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
-import { isFunction, isString, isPlainObject } from './utils/type-inference';
+import { isFunction, isString } from './utils/type-inference';
 import {
   extractOptions,
   getResolveVideoElement,
@@ -61,7 +60,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, initOptions, ready) {
     super();
 
-    this._playlistWidget = null;
     this.nbCalls = 0;
 
     this.videoElement = getResolveVideoElement(elem);
@@ -105,7 +103,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this._setCssClasses();
     this._initPlugins();
-    this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
   }
@@ -173,6 +170,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs.on(PLAYER_EVENT.PLAY, this._clearTimeOut);
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearTimeOut);
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
 
     this.videojs.ready(() => {
       this._onReady();
@@ -426,44 +424,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return false;
   }
 
-  _initPlaylistWidget () {
-    this.videojs.on(PLAYER_EVENT.PLAYLIST_CREATED, () => {
-
-      if (this._playlistWidget) {
-        this._playlistWidget.dispose();
-      }
-      const plwOptions = this.playerOptions.playlistWidget;
-
-      if (isPlainObject(plwOptions)) {
-        if (this.playerOptions.fluid) {
-          plwOptions.fluid = true;
-        }
-
-        if (this.playerOptions.cloudinary.fontFace) {
-          plwOptions.fontFace = this.playerOptions.cloudinary.fontFace;
-        }
-
-        this._playlistWidget = new PlaylistWidget(this.videojs, plwOptions);
-      }
-    });
-  }
-
-  playlistWidget(options) {
-    if (!options && !this._playlistWidget) {
-      return false;
-    }
-
-    if (!options && this._playlistWidget) {
-      return this._playlistWidget;
-    }
-
-    if (isPlainObject(options)) {
-      this._playlistWidget.options(options);
-    }
-
-    return this._playlistWidget;
-  }
-
   _initAutoplay() {
     const autoplayMode = this.playerOptions.autoplayMode;
 
@@ -500,6 +460,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (source) {
       this.source(source, this.playerOptions);
     }
+  }
+
+  _onSourceChange() {
+    this._sendInternalAnalytics();
+    // #if (!process.env.WEBPACK_BUILD_LIGHT)
+    this._initQualitySelector();
+    // #endif
   }
 
   _setExtendedEvents() {
@@ -575,10 +542,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
 
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this._initQualitySelector();
-    // #endif
-
     clearTimeout(this.reTryId);
     this.nbCalls = 0;
     const maxTries = this.videojs.options_.maxTries || 3;
@@ -595,28 +558,32 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   skin(name) {
     if (name !== undefined && isString(name)) {
       Utils.setSkinClassPrefix(this.videojs, name);
-
-      const playlistWidget = this.playlistWidget();
-
-      if (playlistWidget) {
-        playlistWidget.setSkin();
-      }
     }
 
     return Utils.skinClassPrefix(this.videojs);
   }
 
   playlist(sources, options = {}) {
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this._initQualitySelector();
-    // #endif
-    this._sendInternalAnalytics();
-    return this.videojs.cloudinary.playlist(sources, options);
+    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+
+    this.videojs.on(PLAYER_EVENT.READY, async () => {
+      const playlistPlugin = await this.videojs.playlist(options);
+      playlistPlugin(sources, options);
+    });
+
+    return this.videojs.cloudinary.playlist ? this.videojs.cloudinary.playlist(sources, options) : this;
   }
 
   playlistByTag(tag, options = {}) {
-    this._sendInternalAnalytics();
-    return this.videojs.cloudinary.playlistByTag(tag, options);
+    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+
+    return new Promise((resolve) => {
+      this.videojs.on(PLAYER_EVENT.READY, async () => {
+        const playlistPlugin = await this.videojs.playlist(options);
+        playlistPlugin(await this.sourcesByTag(tag, options), options);
+        resolve(this);
+      });
+    });
   }
 
   sourcesByTag(tag, options = {}) {

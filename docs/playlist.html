@@ -30,7 +30,14 @@
       var source2 = { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } };
       var source3 = { publicId: 'marmots', info: { title: 'Marmots' } };
 
-      var player = cloudinary.videoPlayer('player',{
+      var playlistSources = [source1, source2, source3];
+      var playlistOptions = {
+          autoAdvance: true,
+          repeat: true,
+          presentUpcoming: 8
+      };
+
+      var playerHorizontal = cloudinary.videoPlayer('player-horizontal',{
         cloud_name: 'demo',
         playlistWidget: {
           direction: "horizontal",
@@ -38,24 +45,23 @@
         }
       });
 
-      var playlistSources = [source1, source2, source3];
-      var playlistOptions = {
-          autoAdvance: true,
-          repeat: true,
-          presentUpcoming: 8
-      };
       // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
-      player.playlist(playlistSources, playlistOptions);
+      playerHorizontal.playlist(playlistSources, playlistOptions);
+
+      var playerVertical = cloudinary.videoPlayer('player-vertical',{
+        cloud_name: 'demo',
+        playlistWidget: {
+          direction: "vertical",
+          total: 4
+        }
+      });
+
+      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
+      playerVertical.playlist(playlistSources, playlistOptions);
 
     }, false);
   </script>
 
-  <style>
-    .fluid-demo-container {
-      width: 100%;
-      max-width: 1024px;
-    }
-  </style>
 </head>
 <body>
   <div class="container p-4 col-12 col-md-9 col-xl-6">
@@ -64,17 +70,29 @@
     </nav>
 
     <h1>Cloudinary Video Player</h1>
+
     <h3 class="mb-4">Playlist</h3>
 
     <div class="d-flex flex-column justify-content-start align-items-start">
       <video
         playsinline
-        id="player"
+        id="player-horizontal"
         controls
         autoplay
-        class="cld-video-player"
-        width="500">
-      </video>
+        class="cld-video-player cld-fluid"
+      ></video>
+    </div>
+
+    <hr>
+
+    <div class="d-flex flex-column justify-content-start align-items-start">
+      <video
+        playsinline
+        id="player-vertical"
+        controls
+        autoplay
+        class="cld-video-player cld-fluid"
+      ></video>
     </div>
 
     <p class="mt-4">
