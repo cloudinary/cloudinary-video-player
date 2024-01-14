@@ -37,7 +37,7 @@
           presentUpcoming: 8
       };
 
-      var playerH = cloudinary.videoPlayer('player-h',{
+      var playerHorizontal = cloudinary.videoPlayer('player-horizontal',{
         cloud_name: 'demo',
         playlistWidget: {
           direction: "horizontal",
@@ -46,9 +46,9 @@
       });
 
       // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
-      playerH.playlist(playlistSources, playlistOptions);
+      playerHorizontal.playlist(playlistSources, playlistOptions);
 
-      var playerV = cloudinary.videoPlayer('player-v',{
+      var playerVertical = cloudinary.videoPlayer('player-vertical',{
         cloud_name: 'demo',
         playlistWidget: {
           direction: "vertical",
@@ -57,7 +57,7 @@
       });
 
       // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
-      playerV.playlist(playlistSources, playlistOptions);
+      playerVertical.playlist(playlistSources, playlistOptions);
 
     }, false);
   </script>
@@ -76,7 +76,7 @@
     <div class="d-flex flex-column justify-content-start align-items-start">
       <video
         playsinline
-        id="player-h"
+        id="player-horizontal"
         controls
         autoplay
         class="cld-video-player cld-fluid"
@@ -88,7 +88,7 @@
     <div class="d-flex flex-column justify-content-start align-items-start">
       <video
         playsinline
-        id="player-v"
+        id="player-vertical"
         controls
         autoplay
         class="cld-video-player cld-fluid"

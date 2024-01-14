@@ -1,9 +1,8 @@
 import { sliceProperties } from 'utils/slicing';
 import { normalizeJsonResponse } from 'utils/api';
-import { assign } from 'utils/assign';
 import { PLAYER_EVENT } from 'utils/consts';
 import { isPlainObject } from 'utils/type-inference';
-import { extendCloudinaryConfig, getCloudinaryUrl } from 'plugins/cloudinary/common';
+import { getCloudinaryUrl } from 'plugins/cloudinary/common';
 
 import Playlist from './ui/playlist';
 import PlaylistWidget from './ui/playlist-widget';
@@ -12,54 +11,15 @@ import './ui/panel/playlist-panel';
 const LIST_BY_TAG_PARAMS = { format: 'json', resource_type: 'video', type: 'list' };
 
 const playlist = (player, options = {}) => {
-  const _chainTarget = sliceProperties(options, 'chainTarget').chainTarget;
-  let _playlist = null;
-  let _playlistDisposer = null;
-  let _playlistWidget = null;
-
-  const disposePlaylist = () => {
-    player.removeClass('vjs-playlist');
-    const playlist = player.playlist();
-    _playlist = undefined;
-    playlist.dispose();
-    player.off('cldsourcechanged', _playlistDisposer);
-  };
-
-  const createPlaylist = (sources, options) => {
-    if (sources instanceof Playlist) {
-      _playlist = sources;
-      _playlist.resetState();
-      _playlist.currentIndex(_playlist.currentIndex());
-    } else {
-      _playlist = new Playlist(player.cloudinary, sources, options);
-      _playlist.currentIndex(0);
-    }
-
-    initPlaylistWidget();
-
-    _playlistDisposer = addSourceChangedListener();
-    player.addClass('vjs-playlist');
-  };
-
-  const addSourceChangedListener = () => {
-    const disposer = async () => {
-      if (
-        _playlist &&
-        !_playlist.currentSource().contains(player.currentSource())
-      ) {
-        player.disposePlaylist();
-      }
-    };
-
-    player.on('cldsourcechanged', disposer);
-
-    return disposer;
-  };
+  const chainTarget = sliceProperties(options, 'chainTarget').chainTarget;
+  let playlistInstance = null;
+  let playlistDisposer = null;
+  let playlistWidget = null;
 
   const initPlaylistWidget = () => {
     player.on(PLAYER_EVENT.PLAYLIST_CREATED, () => {
-      if (_playlistWidget) {
-        _playlistWidget.dispose();
+      if (playlistWidget) {
+        playlistWidget.dispose();
       }
 
       if (isPlainObject(options.playlistWidget)) {
@@ -71,57 +31,94 @@ const playlist = (player, options = {}) => {
           options.playlistWidget.fontFace = player.cloudinary.fontFace;
         }
 
-        _playlistWidget = new PlaylistWidget(player, options.playlistWidget);
+        playlistWidget = new PlaylistWidget(player, options.playlistWidget);
       }
     });
   };
 
-  player.cloudinary.sourcesByTag = (tag, options = {}) => {
+  const disposePlaylist = () => {
+    player.removeClass('vjs-playlist');
+    playlistInstance = undefined;
+    player.playlist().dispose();
+    player.off('cldsourcechanged', playlistDisposer);
+  };
+
+  const addPlaylistDisposer = () => {
+    const disposer = () => {
+      if (
+        playlistInstance &&
+        !playlistInstance.currentSource().contains(player.currentSource())
+      ) {
+        player.disposePlaylist();
+      }
+    };
+
+    player.on('cldsourcechanged', disposer);
+
+    return disposer;
+  };
+
+  const createPlaylist = (sources, options) => {
+    if (sources instanceof Playlist) {
+      playlistInstance = sources;
+      playlistInstance.resetState();
+      playlistInstance.currentIndex(playlistInstance.currentIndex());
+    } else {
+      playlistInstance = new Playlist(player.cloudinary, sources, options);
+      playlistInstance.currentIndex(0);
+    }
+
+    initPlaylistWidget();
+
+    playlistDisposer = addPlaylistDisposer();
+    player.addClass('vjs-playlist');
+  };
+
+  player.cloudinary.sourcesByTag = async (tag, options = {}) => {
     const url = getCloudinaryUrl(
       tag,
-      extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), LIST_BY_TAG_PARAMS)
+      Object.assign(player.cloudinary.cloudinaryConfig(), LIST_BY_TAG_PARAMS)
     );
 
-    return fetch(url)
-      .then(result => result.json())
-      .then(json => {
-        const resources = normalizeJsonResponse(json.resources);
+    const result = await fetch(url);
+    const json = await result.json();
 
-        if (options.sorter) {
-          resources.sort(options.sorter);
-        }
+    const resources = normalizeJsonResponse(json.resources);
 
-        const sources = resources.map(resource => {
-          let sourceParams = options.sourceParams || {};
+    if (options.sorter) {
+      resources.sort(options.sorter);
+    }
 
-          if (typeof sourceParams === 'function') {
-            sourceParams = sourceParams(resource);
-          }
+    const sources = resources.map(resource => {
+      let sourceParams = options.sourceParams || {};
 
-          const info = (resource.context && resource.context.custom) || {};
+      if (typeof sourceParams === 'function') {
+        sourceParams = sourceParams(resource);
+      }
 
-          const source = assign({ info }, sourceParams, { publicId: resource.publicId });
+      const info = (resource.context && resource.context.custom) || {};
 
-          return player.cloudinary.buildSource(source);
-        });
+      const source = Object.assign({ info }, sourceParams, { publicId: resource.publicId });
 
-        return sources;
-      });
+      return player.cloudinary.buildSource(source);
+    });
+
+    return sources;
   };
 
   return (sources, options = {}) => {
     if (sources === undefined) {
-      return _playlist;
+      return playlistInstance;
     }
 
-    if (_playlist) {
+    if (playlistInstance) {
       disposePlaylist();
     }
 
     createPlaylist(sources, options);
     player.trigger('playlistcreated');
 
-    return _chainTarget;
+    return chainTarget;
   };
 };
 
