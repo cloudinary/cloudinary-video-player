@@ -28,8 +28,18 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceInfoSubtitle: sourceOptions.info.subtitle,
     sourceInfoDescription: sourceOptions.info.description
   } : {}),
-  textTracks: hasConfig(sourceOptions.textTracks),
-  pacedTextTracks: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"maxWords":')
+  ...(sourceOptions.textTracks ? {
+    textTracks: hasConfig(sourceOptions.textTracks),
+    pacedTextTracks: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"maxWords":'),
+    ...(sourceOptions.textTracks.options ? {
+      styledTextTracksTheme: sourceOptions.textTracks.options.theme,
+      styledTextTracksFont: sourceOptions.textTracks.options.fontFace,
+      styledTextTracksFontSize: sourceOptions.textTracks.options.fontSize,
+      styledTextTracksGravity: sourceOptions.textTracks.options.gravity,
+      styledTextTracksBox: hasConfig(sourceOptions.textTracks.options.box),
+      styledTextTracksStyle: hasConfig(sourceOptions.textTracks.options.style)
+    } : {})
+  } : {})
 });
 
 const getAdsOptions = (adsOptions = {}) => ({
