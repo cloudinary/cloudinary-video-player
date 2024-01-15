@@ -20,6 +20,7 @@ import pacedTranscript from './paced-transcript';
 import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
+import playlist from './playlist';
 import styledTextTracks from './styled-text-tracks';
 
 const plugins = {
@@ -38,6 +39,7 @@ const plugins = {
   contextMenu,
   floatingPlayer,
   pacedTranscript,
+  playlist,
   styledTextTracks,
   vttThumbnails
 };

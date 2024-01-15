@@ -1,14 +1,16 @@
 import VideoSource from 'plugins/cloudinary/models/video-source/video-source';
 import { isInteger } from 'utils/type-inference';
 
-import 'components/playlist/components/upcoming-video-overlay';
-import 'components/playlist/components/playlist';
+import './components/upcoming-video-overlay';
+import './components/playlist-buttons';
 
 import {
   DEFAULT_AUTO_ADVANCE,
   DEFAULT_PRESENT_UPCOMING,
   UPCOMING_VIDEO_TRANSITION
 } from './playlist.const';
+
+import './playlist.scss';
 
 class Playlist {
 
@@ -20,6 +22,8 @@ class Playlist {
     this._recommendationsHandler = null;
     this._autoAdvance = null;
     this._presentUpcoming = null;
+
+    this.addUiComponents();
 
     this.resetState = () => {
       this.repeat(repeat);
@@ -38,6 +42,15 @@ class Playlist {
 
   player() {
     return this._context.player;
+  }
+
+  addUiComponents() {
+    const controlBar = this.player().getChild('ControlBar');
+    const children = controlBar.children();
+    controlBar.addChild('playlistPreviousButton', {}, children.findIndex(c => c.name_ === 'PlayToggle'));
+    controlBar.addChild('playlistNextButton', {}, children.findIndex(c => c.name_ === 'PlayToggle') + 1);
+
+    this.player().addChild('upcomingVideoOverlay');
   }
 
   presentUpcoming(delay) {
@@ -410,6 +423,10 @@ class Playlist {
 
     return this.playAtIndex(previousIndex);
   }
+
+  playlistByTag = (tag, options = {}) => {
+    return this.player().sourcesByTag(tag, options).then(sources => this.player().playlist(sources, options));
+  };
 }
 
 export default Playlist;

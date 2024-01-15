@@ -1,10 +1,9 @@
 import videojs from 'video.js';
+import { PLAYER_EVENT } from 'utils/consts';
 import PlaylistLayoutHorizontal from './layout/playlist-layout-horizontal';
 import PlaylistLayoutVertical from './layout/playlist-layout-vertical';
 import PlaylistLayoutCustom from './layout/playlist-layout-custom';
 import { PLAYLIST_DEFAULTS_OPTIONS } from './playlist.const';
-import { PLAYER_EVENT } from '../../utils/consts';
-
 
 const modifyOptions = (player, opt) => {
   const options = { ...PLAYLIST_DEFAULTS_OPTIONS, ...opt };
@@ -32,7 +31,6 @@ const modifyOptions = (player, opt) => {
   return options;
 };
 
-
 class PlaylistWidget {
   constructor(player, options = {}) {
     options = modifyOptions(player, options);
@@ -46,7 +44,7 @@ class PlaylistWidget {
 
     player.on(PLAYER_EVENT.FLUID, fluidHandler);
 
-    this.options = (options) => {
+    this.options = options => {
       if (!options) {
         return this.options_;
       }
@@ -54,7 +52,6 @@ class PlaylistWidget {
       this.options_ = videojs.obj.merge(this.options_, options);
       player.trigger('playlistwidgetoption', this.options_.playlistWidget);
       return this.options_;
-
     };
 
     this.dispose = () => {
@@ -115,6 +112,5 @@ class PlaylistWidget {
     return this;
   }
 }
-
 
 export default PlaylistWidget;
