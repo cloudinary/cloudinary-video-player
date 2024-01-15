@@ -1,0 +1,72 @@
+{
+  "playerOptions": [
+    "aiHighlightsGraph",
+    "bigPlayButton",
+    "colors",
+    "controlBar",
+    "controls",
+    "floatingWhenNotVisible",
+    "fluid",
+    "fontFace",
+    "hideContextMenu",
+    "interactionAreas",
+    "playbackRates",
+    "playlistWidget",
+    "posterOptions",
+    "showJumpControls",
+    "showLogo",
+    "logoImageUrl",
+    "logoOnclickUrl",
+    "seekThumbnails",
+    "videoJS",
+    "autoplay",
+    "autoplayMode",
+    "autoShowRecommendations",
+    "loop",
+    "maxTries",
+    "muted",
+    "playedEventPercents",
+    "playedEventTimes",
+    "playsinline",
+    "videoTimeout",
+    "withCredentials",
+    "chapters",
+    "preload",
+    "sourceTransformation",
+    "sourceTypes",
+    "transformation",
+    "ads",
+    "analytics",
+    "allowUsageReport",
+    "cloudinaryAnalytics"
+  ],
+  "sourceOptions": [
+    "chapters",
+    "maxTries",
+    "poster",
+    "recommendations",
+    "shoppable",
+    "sourceTypes",
+    "sourceTransformation",
+    "textTracks",
+    "transformation",
+    "videoTimeout"
+  ],
+  "playlistOptions": [
+    "autoAdvance",
+    "repeat",
+    "presentUpcoming"
+  ],
+  "playlistByTagOptions": [
+    "sourceParams",
+    "autoAdvance",
+    "repeat",
+    "presentUpcoming"
+  ],
+  "sourcesByTagOptions": [
+    "sourceParams",
+    "autoAdvance",
+    "repeat",
+    "presentUpcoming"
+  ]
+}

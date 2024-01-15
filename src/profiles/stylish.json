@@ -1,0 +1,27 @@
+{
+  "playerOptions": {
+    "fluid": true,
+    "controls": true,
+    "aiHighlightsGraph": true,
+    "bigPlayButton": false,
+    "playbackRates": [0.5, 1, 1.5, 2],
+    "fontFace": "Allerta Stencil",
+    "skin": "light",
+    "controlBar": {
+      "fullscreenToggle": false
+    },
+    "colors": {
+      "accent": "#d063e8"
+    },
+    "showJumpControls": true,
+    "hideContextMenu": true,
+    "floatingWhenNotVisible": false
+  },
+  "sourceOptions": {
+    "chapters": true,
+    "sourceTypes": ["hls"]
+  },
+  "playlistOptions": {},
+  "playlistByTagOptions": {},
+  "sourcesByTagOptions": {}
+}

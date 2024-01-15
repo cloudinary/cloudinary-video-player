@@ -27,7 +27,7 @@
     window.addEventListener('load', function() {
       const playerWithDefaultProfile = cloudinary.videoPlayer('player-default-profile', {
         cloud_name: 'demo',
-        __profileName: 'defaultProfile1',
+        __profileName: 'loopingVideo',
       }, function () {
         playerWithDefaultProfile.source('sea_turtle');
       });
@@ -53,7 +53,7 @@
     Profiles are still under development and it's not safe for use on production.<br/>
     For testing purpose you can use Profiles Feature according to the instructions below:
     <br/><br/>
-    1. Provide `__profileName` config property using one of default profiles (`defaultProfile1`, `defaultProfile2`)<br/>
+    1. Provide `__profileName` config property using one of default profiles (`loopingVideo`, `videoStream`, `stylish`)<br/>
     2. You can use your own profile JSON, create folder on your cloud named `profiles` and upload json file
     - once you have it just provide publicId with extension of your uploaded file as value of `__profileName`
   </p>
@@ -109,7 +109,7 @@
         // default profile
         cloudinary.videoPlayer('player', {
           cloud_name: 'demo',
-          __profileName: 'defaultProfile1',
+          __profileName: 'loopingVideo',
         }, function () {
           player.source('sea_turtle');
         });

@@ -1,10 +1,13 @@
 import { getCloudinaryUrl } from '../../plugins/cloudinary/common';
-import defaultProfile1 from '../../profiles/default_profile1.json';
-import defaultProfile2 from '../../profiles/default_profile2.json';
+
+import loopingVideoDefaultProfile from '../../profiles/loopingVideo.json';
+import videoStreamDefaultProfile from '../../profiles/videoStream.json';
+import stylishDefaultProfile from '../../profiles/stylish.json';
 
 const defaultProfiles = {
-  'defaultProfile1': defaultProfile1,
-  'defaultProfile2': defaultProfile2
+  loopingVideo: loopingVideoDefaultProfile,
+  videoStream: videoStreamDefaultProfile,
+  stylish: stylishDefaultProfile
 };
 async function fetchWithTimeout(resource, options = {}) {
   const { timeout = 10000 } = options;
@@ -21,12 +24,16 @@ async function fetchWithTimeout(resource, options = {}) {
   return response;
 }
 
-// initially we don't have BE ready so try to take profile from cloud
-export const getProfile = async (cloudName, profileName, timeout = 10000) => {
+export const getDefaultProfile = (cloudName, profileName) => {
   if (defaultProfiles[profileName]) {
     return defaultProfiles[profileName];
   }
 
+  throw new Error(`Default profile ${profileName} does not exist`);
+};
+
+// temporary solution, we don't have BE ready so try to take profile from cloud
+export const getCustomProfile = async (cloudName, profileName, timeout = 10000) => {
   const profileUrl = getCloudinaryUrl(
     `profiles/${profileName}`,
     {
@@ -38,8 +45,15 @@ export const getProfile = async (cloudName, profileName, timeout = 10000) => {
 
   const response = await fetchWithTimeout(profileUrl, {
     method: 'GET',
-    cache: 'default',
     timeout
   });
   return await response.json();
+};
+
+export const getProfile = async (cloudName, profileName, timeout = 10000) => {
+  if (defaultProfiles[profileName]) {
+    return getDefaultProfile(profileName);
+  }
+
+  return await getCustomProfile(cloudName, profileName, timeout);
 };

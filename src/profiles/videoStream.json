@@ -1,0 +1,24 @@
+{
+  "playerOptions": {
+    "fluid": true,
+    "controls": true,
+    "controlBar": {
+      "fullscreenToggle": false
+    },
+    "showJumpControls": true,
+    "hideContextMenu": false,
+    "floatingWhenNotVisible": false
+  },
+  "sourceOptions": {
+    "chapters": true,
+    "sourceTypes": ["hls"],
+    "transformation": [
+      {
+        "effect": ["volume:auto"]
+      }
+    ]
+  },
+  "playlistOptions": {},
+  "playlistByTagOptions": {},
+  "sourcesByTagOptions": {}
+}
