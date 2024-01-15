@@ -11,7 +11,7 @@ const webpackConfig = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
-    'cld-video-player': './index.js'
+    'cld-video-player': './index.js',
   },
 
   output: {
@@ -58,10 +58,6 @@ const webpackConfig = {
           'webpack-conditional-loader',
           'eslint-loader'
         ]
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader'
       },
       {
         test: /\.scss$/,

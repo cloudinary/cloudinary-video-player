@@ -25,6 +25,7 @@ import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cl
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 import { interactionAreaService } from './components/interaction-area/interaction-area.service';
+import { getProfile } from './components/profiles/profiles';
 // #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
@@ -61,12 +62,47 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, initOptions, ready) {
     super();
 
+    // first phase - shouldn't be exposed to people until we have BE ready
+    const profileName = initOptions.__profileName;
+
+    // create default empty profile options
+    this.profileOptions = {
+      playerOptions: {},
+      sourceOptions: {},
+      playlistOptions: {},
+      playlistByTagOptions: {},
+      sourcesByTagOptions: {}
+    };
+
+    // first phase - feature flag for testing
+    if (profileName) {
+      getProfile(initOptions.cloud_name, profileName, 10000)
+        .then((profileData) => {
+          this.profileOptions = {
+            playerOptions: profileData.playerOptions || {},
+            sourceOptions: profileData.sourceOptions || {},
+            playlistOptions: profileData.playlistOptions || {},
+            playlistByTagOptions: profileData.playlistByTagOptions || {},
+            sourcesByTagOptions: profileData.sourcesByTagOptions || {}
+          };
+          this.coreConstructor(elem, initOptions, ready);
+        })
+        .catch(() => {
+          // in case of error or timeout - ignore profile
+          this.coreConstructor(elem, initOptions, ready);
+        });
+    } else {
+      this.coreConstructor(elem, initOptions, ready);
+    }
+  }
+
+  coreConstructor(elem, initOptions, ready) {
     this._playlistWidget = null;
     this.nbCalls = 0;
 
     this.videoElement = getResolveVideoElement(elem);
-
-    this.options = extractOptions(this.videoElement, initOptions);
+    const extendedOptions = Utils.assign({}, this.profileOptions.playerOptions, initOptions);
+    this.options = extractOptions(this.videoElement, extendedOptions);
 
     this._videojsOptions = this.options.videojsOptions;
 
@@ -547,7 +583,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   source(publicId, options = {}) {
-    ({ publicId, options } = normalizeOptions(publicId, options));
+    const extendedOptions = Utils.assign({}, this.profileOptions.sourceOptions, options);
+    ({ publicId, options } = normalizeOptions(publicId, extendedOptions));
 
     if (!this._isPlayerConfigValid) {
       return;
@@ -611,16 +648,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initQualitySelector();
     // #endif
     this._sendInternalAnalytics();
-    return this.videojs.cloudinary.playlist(sources, options);
+    const extendedOptions = Utils.assign({}, this.profileOptions.playlistOptions, options);
+    return this.videojs.cloudinary.playlist(sources, extendedOptions);
   }
 
   playlistByTag(tag, options = {}) {
     this._sendInternalAnalytics();
-    return this.videojs.cloudinary.playlistByTag(tag, options);
+    const extendedOptions = Utils.assign({}, this.profileOptions.playlistByTagOptions, options);
+    return this.videojs.cloudinary.playlistByTag(tag, extendedOptions);
   }
 
   sourcesByTag(tag, options = {}) {
-    return this.videojs.cloudinary.sourcesByTag(tag, options);
+    const extendedOptions = Utils.assign({}, this.profileOptions.sourcesByTagOptions, options);
+    return this.videojs.cloudinary.sourcesByTag(tag, extendedOptions);
   }
 
   fluid(bool) {

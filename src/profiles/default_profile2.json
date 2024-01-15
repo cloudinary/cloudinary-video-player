@@ -1,0 +1,14 @@
+{
+  "playerOptions": {
+    "colors": {
+      "base": "#148788",
+      "accent": "#88144D",
+      "text": "#ffffff"
+    },
+    "logoOnclickUrl": "https://github.com/cloudinary/cloudinary-video-player"
+  },
+  "sourceOptions": {},
+  "playlistOptions": {},
+  "playlistByTagOptions": {},
+  "sourcesByTagOptions": {}
+}
