@@ -62,52 +62,39 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   constructor(elem, initOptions, ready) {
     super();
 
-    // first phase - shouldn't be exposed to people until we have BE ready
-    const profileName = initOptions.__profileName;
-
-    // create default empty profile options
-    this.profileOptions = {
-      playerOptions: {},
-      sourceOptions: {},
-      playlistOptions: {},
-      playlistByTagOptions: {},
-      sourcesByTagOptions: {}
-    };
-
-    // first phase - feature flag for testing
-    if (profileName) {
-      getProfile(initOptions.cloud_name, profileName, 10000)
-        .then((profileData) => {
-          this.profileOptions = {
-            playerOptions: profileData.playerOptions || {},
-            sourceOptions: profileData.sourceOptions || {},
-            playlistOptions: profileData.playlistOptions || {},
-            playlistByTagOptions: profileData.playlistByTagOptions || {},
-            sourcesByTagOptions: profileData.sourcesByTagOptions || {}
-          };
-          this.coreConstructor(elem, initOptions, ready);
-        })
-        .catch(() => {
-          // in case of error or timeout - ignore profile
-          this.coreConstructor(elem, initOptions, ready);
-        });
-    } else {
-      this.coreConstructor(elem, initOptions, ready);
-    }
-  }
-
-  coreConstructor(elem, initOptions, ready) {
     this._playlistWidget = null;
     this.nbCalls = 0;
-
     this.videoElement = getResolveVideoElement(elem);
-    const extendedOptions = Utils.assign({}, this.profileOptions.playerOptions, initOptions);
-    this.options = extractOptions(this.videoElement, extendedOptions);
-
-    this._videojsOptions = this.options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
     this.videoElement.classList.add('video-js');
+
+    // first phase - shouldn't be exposed to people until we have BE ready
+    const profileName = initOptions.__profileName;
+
+    if (profileName) {
+      this.initProfile(profileName, initOptions)
+        .then((profileData) => this.initPlayer(profileData.playerOptions, ready))
+        .catch((e) => this.throwInvalidProfileError(e));
+    } else {
+      this.initPlayer(initOptions, ready);
+    }
+  }
+
+  initPlayer(initOptions, ready) {
+    // create empty profile options for simple extends
+    if (!this.profileOptions) {
+      this.profileOptions = {
+        playerOptions: {},
+        sourceOptions: {},
+        playlistOptions: {},
+        playlistByTagOptions: {},
+        sourcesByTagOptions: {}
+      };
+    }
+
+    this.options = extractOptions(this.videoElement, initOptions);
+    this._videojsOptions = this.options.videojsOptions;
 
     // Handle WebFont loading
     Utils.fontFace(this.videoElement, this.playerOptions.cloudinary.fontFace);
@@ -144,6 +131,25 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlaylistWidget();
     this._initJumpButtons();
     this._setVideoJsListeners(ready);
+  }
+
+  initProfile = async function (profileName, initOptions) {
+    return getProfile(initOptions.cloud_name, profileName, 10000)
+      .then((profileData) => {
+        this.profileOptions = {
+          playerOptions: Utils.assign({}, profileData.playerOptions, initOptions),
+          sourceOptions: profileData.sourceOptions,
+          playlistOptions: profileData.playlistOptions,
+          playlistByTagOptions: profileData.playlistByTagOptions,
+          sourcesByTagOptions: profileData.sourcesByTagOptions
+        };
+        return this.profileOptions;
+      });
+  }
+
+  throwInvalidProfileError () {
+    this.videojs = videojs(this.videoElement, {});
+    this.videojs.error('Invalid profile');
   }
 
   getVPInstanceId() {

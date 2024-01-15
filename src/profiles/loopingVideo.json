@@ -3,7 +3,7 @@
     "fluid": true,
     "controls": false,
     "muted": true,
-    "floatingWhenNotVisible": false,
+    "floatingWhenNotVisible": "none",
     "hideContextMenu": false,
     "autoplay": true,
     "loop": true

@@ -7,7 +7,7 @@
     },
     "showJumpControls": true,
     "hideContextMenu": false,
-    "floatingWhenNotVisible": false
+    "floatingWhenNotVisible": "none"
   },
   "sourceOptions": {
     "chapters": true,
