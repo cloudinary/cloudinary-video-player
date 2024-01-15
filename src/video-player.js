@@ -607,7 +607,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Utils.assign({}, this.profileOptions.playlistOptions, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     this.videojs.on(PLAYER_EVENT.READY, async () => {
       const playlistPlugin = await this.videojs.playlist(options);
@@ -618,7 +618,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Utils.assign({}, this.profileOptions.playlistByTagOptions, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     return new Promise((resolve) => {
       this.videojs.on(PLAYER_EVENT.READY, async () => {
@@ -630,8 +630,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   sourcesByTag(tag, options = {}) {
-    const extendedOptions = Utils.assign({}, this.profileOptions.sourcesByTagOptions, options);
-    return this.videojs.cloudinary.sourcesByTag(tag, extendedOptions);
+    options = Utils.assign({}, this.profileOptions.sourcesByTagOptions, options);
+    return this.videojs.cloudinary.sourcesByTag(tag, options);
   }
 
   fluid(bool) {
