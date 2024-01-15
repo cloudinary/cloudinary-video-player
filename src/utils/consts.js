@@ -35,8 +35,7 @@ export const PLAYER_EVENT = {
   TIME_PLAYED: 'timeplayed',
   PLAYER_LOAD: 'playerload',
   DISPOSE: 'dispose',
-  QUALITY_CHANGED: 'qualitychanged',
-  CLD_PROFILE_LOADED: 'CLDProfileLoaded'
+  QUALITY_CHANGED: 'qualitychanged'
 };
 
 export const SOURCE_TYPE = {
