@@ -24,7 +24,6 @@ import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cl
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 import { interactionAreaService } from './components/interaction-area/interaction-area.service';
-import { getProfile } from './components/profiles/profiles';
 // #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
@@ -131,17 +130,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   initProfile = async function (profileName, initOptions) {
-    return getProfile(initOptions.cloud_name, profileName, 10000)
-      .then((profileData) => {
-        this.profileOptions = {
-          playerOptions: Utils.assign({}, profileData.playerOptions, initOptions),
-          sourceOptions: profileData.sourceOptions,
-          playlistOptions: profileData.playlistOptions,
-          playlistByTagOptions: profileData.playlistByTagOptions,
-          sourcesByTagOptions: profileData.sourcesByTagOptions
-        };
-        return this.profileOptions;
-      });
+    const { getProfile } = await import(/* webpackChunkName: "profiles/profilesComponent" */ './components/profiles/profiles');
+    const profileData = await getProfile(initOptions.cloud_name, profileName, 10000);
+    this.profileOptions = {
+      playerOptions: Utils.assign({}, profileData.playerOptions, initOptions),
+      sourceOptions: profileData.sourceOptions,
+      playlistOptions: profileData.playlistOptions,
+      playlistByTagOptions: profileData.playlistByTagOptions,
+      sourcesByTagOptions: profileData.sourcesByTagOptions
+    };
+
+    return this.profileOptions;
   }
 
   throwInvalidProfileError () {

@@ -1,15 +1,19 @@
 import { getCloudinaryUrl } from '../../plugins/cloudinary/common';
 import { fetchWithTimeout } from '../../utils/fetch-with-timeout';
 
+import loopingVideoProfile from '../../profiles/loopingVideo.json';
+import videoStreamProfile from '../../profiles/videoStream.json';
+import stylishProfile from '../../profiles/stylish.json';
+
+const defaultProfiles = {
+  loopingVideo: loopingVideoProfile,
+  videoStream: videoStreamProfile,
+  stylish: stylishProfile
+};
+
 const defaultProfilesNames = ['loopingVideo', 'videoStream', 'stylish'];
 
 export const getDefaultProfile = async (profileName) => {
-  const defaultProfiles = {
-    loopingVideo: await import(/* webpackChunkName: "profiles/loopingVideo" */ '../../profiles/loopingVideo.json'),
-    videoStream: await import(/* webpackChunkName: "profiles/videoStream" */ '../../profiles/videoStream.json'),
-    stylish: await import(/* webpackChunkName: "profiles/stylish" */ '../../profiles/stylish.json')
-  };
-
   if (!defaultProfiles[profileName]) {
     throw new Error(`Default profile ${profileName} does not exist`);
   }

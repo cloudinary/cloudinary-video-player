@@ -50,6 +50,7 @@ class CloudinaryContext {
     let _autoShowRecommendations = false;
 
     this.source = (source, options = {}) => {
+      console.log('cloudinary  source');
       options = assign({}, options);
 
       if (!source) {
