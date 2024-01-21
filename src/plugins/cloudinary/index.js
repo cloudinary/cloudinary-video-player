@@ -16,6 +16,8 @@ import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
 
+import recommendationsOverlay from 'components/recommendations-overlay';
+
 const DEFAULT_PARAMS = {
   transformation: {},
   sourceTypes: [],
@@ -27,9 +29,7 @@ export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 
 class CloudinaryContext {
-
   constructor(player, options = {}) {
-
     setupCloudinaryMiddleware();
 
     this.player = player;
@@ -74,7 +74,11 @@ class CloudinaryContext {
         if (options.recommendationOptions) {
           ({ disableAutoShow, itemBuilder } = sliceAndUnsetProperties(options.recommendationOptions, 'disableAutoShow', 'itemBuilder'));
         }
-        setRecommendations(recommendations, { disableAutoShow, itemBuilder });
+
+        recommendationsOverlay(player).then(() => {
+          setRecommendations(recommendations, { disableAutoShow, itemBuilder });
+        });
+
       } else {
         unsetRecommendations();
       }
@@ -227,7 +231,7 @@ class CloudinaryContext {
         }
       };
 
-      this.one('cldsourcechanged', _recommendations.sourceChangedHandler);
+      _recommendations.sourceChangedHandler();
 
       _recommendations.endedHandler = () => {
         if (!disableAutoShow && this.autoShowRecommendations()) {
@@ -364,7 +368,7 @@ class CloudinaryContext {
   }
 }
 
-export default function(options = {}) {
+export default function (options = {}) {
   options.chainTarget = options.chainTarget || this;
   this.cloudinary = new CloudinaryContext(this, options);
 }
