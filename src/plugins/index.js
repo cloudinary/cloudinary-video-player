@@ -3,7 +3,6 @@ import 'videojs-per-source-behaviors';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import dashPlugin from './dash';
 import imaPlugin from './ima';
-import interactive from './interactive-plugin';
 import './videojs-http-source-selector/plugin';
 // #endif
 
@@ -21,14 +20,15 @@ import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
 import playlist from './playlist';
+import shoppable from './shoppable-plugin';
 import styledTextTracks from './styled-text-tracks';
 
 const plugins = {
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   dashPlugin,
-  interactive,
   imaPlugin,
   // #endif
+
   aiHighlightsGraph,
   analytics,
   autoplayOnScroll,
@@ -39,9 +39,12 @@ const plugins = {
   contextMenu,
   floatingPlayer,
   pacedTranscript,
+  vttThumbnails,
+
+  // Lazy loaded plugins
   playlist,
-  styledTextTracks,
-  vttThumbnails
+  shoppable,
+  styledTextTracks
 };
 
 export default plugins;
