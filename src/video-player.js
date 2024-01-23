@@ -533,9 +533,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return this.videojs.cloudinary.source(publicId, options);
     }
 
-    // Interactive plugin - available in full (not light) build only
-    if (this.videojs.interactive) {
-      this.videojs.interactive(this.videojs, options);
+    if (options.shoppable && this.videojs.shoppable) {
+      this.videojs.shoppable(this.videojs, options);
     }
 
     if (VideoPlayer.allowUsageReport()) {
