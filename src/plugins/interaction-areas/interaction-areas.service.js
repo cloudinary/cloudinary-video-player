@@ -3,7 +3,7 @@ import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   DEFAULT_INTERACTION_ARE_TRANSITION,
   INTERACTION_AREAS_CONTAINER_CLASS_NAME, TEMPLATE_INTERACTION_AREAS_VTT
-} from './interaction-area.const';
+} from './interaction-areas.const';
 import {
   createInteractionAreaLayoutMessage,
   getInteractionAreaItem,
@@ -13,7 +13,7 @@ import {
   setInteractionAreasContainerSize,
   shouldShowAreaLayoutMessage,
   updateInteractionAreasItem
-} from './interaction-area.utils';
+} from './interaction-areas.utils';
 import { addEventListener, createElement } from '../../utils/dom';
 import { throttle } from '../../utils/throttle';
 import { get } from '../../utils/object';
@@ -21,8 +21,9 @@ import { noop } from '../../utils/type-inference';
 import { addMetadataTrack } from '../../video-player.utils';
 import { PLAYER_EVENT } from '../../utils/consts';
 
+import './interaction-areas.scss';
 
-export const interactionAreaService = (player, playerOptions, videojsOptions) => {
+export const interactionAreasService = (player, playerOptions, videojsOptions) => {
 
   let isZoomed = false;
   let currentSource = null;
@@ -240,8 +241,5 @@ export const interactionAreaService = (player, playerOptions, videojsOptions) =>
     });
   }
 
-  return {
-    init
-  };
-
+  init();
 };
