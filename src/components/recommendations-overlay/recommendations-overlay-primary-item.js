@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import RecommendationsOverlayItem from './recommendations-overlay-item';
-import componentUtils from '../component-utils';
+import componentUtils from 'components/component-utils';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;
