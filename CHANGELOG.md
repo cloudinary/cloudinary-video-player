@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.0...v1.10.6-edge.1) (2024-01-23)
+
+
+### Performance Improvements
+
+* lazy loaded recommendation component ([cde7922](https://github.com/cloudinary/cloudinary-video-player/commit/cde7922e37694ab944912abbf3c2f0ef1e8ff8f6))
+
 ## [1.10.6-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.5-edge.12...v1.10.6-edge.0) (2024-01-14)
 
 
