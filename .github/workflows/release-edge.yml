@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - 'edge'
-
+  workflow_dispatch:
+  
 jobs:
   release:
     runs-on: ubuntu-latest
