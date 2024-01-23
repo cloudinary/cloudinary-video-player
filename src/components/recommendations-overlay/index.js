@@ -1,4 +1,4 @@
-export default async function lazyComponent(player) {
+export default async function lazyRecommendationsOverlayComponent(player) {
   try {
     if (!player.getChild('recommendationsOverlay')) {
       await import(/* webpackChunkName: "recommendations-overlay" */ './recommendations-overlay');
