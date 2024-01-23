@@ -110,7 +110,6 @@ export const overrideDefaultVideojsComponents = () => {
 
   // Add TitleBar as default
   children.push('titleBar');
-  children.push('recommendationsOverlay');
 
   const ControlBar = videojs.getComponent('ControlBar');
   if (ControlBar) {
