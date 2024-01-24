@@ -43,6 +43,8 @@ export const playerValidators = {
     hideContextMenu: validator.isBoolean,
     playedEventPercents: validator.isArrayOfNumbers,
     showJumpControls: validator.isBoolean,
+    chaptersButton: validator.isBoolean,
+    pictureInPictureToggle: validator.isBoolean,
     seekThumbnails: validator.isBoolean,
     aiHighlightsGraph: validator.isBoolean,
     floatingWhenNotVisible: validator.isString(FLOATING_TO),

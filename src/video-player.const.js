@@ -27,6 +27,8 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'floatingWhenNotVisible',
   'ads',
   'showJumpControls',
+  'chaptersButton',
+  'pictureInPictureToggle',
   'textTracks',
   'qualitySelector',
   'fetchErrorUsingGet',
