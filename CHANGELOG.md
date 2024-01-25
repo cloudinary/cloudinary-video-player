@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.3...v1.10.6-edge.4) (2024-01-25)
+
+
+### Bug Fixes
+
+* **deps-dev:** update follow-redirects from 1.15.3 to 1.15.5 ([#516](https://github.com/cloudinary/cloudinary-video-player/issues/516)) ([8c35cec](https://github.com/cloudinary/cloudinary-video-player/commit/8c35cec3cf17148597531d6a8104db7dc1b4d6a6))
+
 ## [1.10.6-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.2...v1.10.6-edge.3) (2024-01-25)
 
 
@@ -13,6 +20,7 @@
 ### Performance Improvements
 
 * lazy load interaction-areas plugin ([03ec928](https://github.com/cloudinary/cloudinary-video-player/commit/03ec9289633acfece815e912d6f0753754786e0d))
+* lazy load shoppable plugin ([#519](https://github.com/cloudinary/cloudinary-video-player/pull/519))
 
 ## [1.10.6-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.0...v1.10.6-edge.1) (2024-01-23)
 
