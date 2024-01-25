@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.2...v1.10.6-edge.3) (2024-01-25)
+
+
+### Bug Fixes
+
+* picture in picture toggle ([#522](https://github.com/cloudinary/cloudinary-video-player/issues/522)) ([8c271cc](https://github.com/cloudinary/cloudinary-video-player/commit/8c271cc276ca0c79a87d9c845417311923148d98))
+
 ## [1.10.6-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.1...v1.10.6-edge.2) (2024-01-25)
 
 
