@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.1...v1.10.6-edge.2) (2024-01-25)
+
+
+### Performance Improvements
+
+* lazy load interaction-areas plugin ([03ec928](https://github.com/cloudinary/cloudinary-video-player/commit/03ec9289633acfece815e912d6f0753754786e0d))
+
 ## [1.10.6-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.0...v1.10.6-edge.1) (2024-01-23)
 
 
