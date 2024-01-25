@@ -33,14 +33,12 @@
         chapters: {
           url: 'https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt'
         },
+        chaptersButton: true
       });
 
       const playerSourceConf = cloudinary.videoPlayer('player-config', {
         cloud_name: 'demo',
-        controlBar: {
-          pictureInPictureToggle: false,
-          chaptersButton: true
-        },
+        chaptersButton: true
       });
 
       playerSourceConf.source('snow_horses', {
@@ -150,14 +148,12 @@
           chapters: {
             url: 'https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt'
           },
+          chaptersButton: true
         });
 
         const playerSourceConf = cloudinary.videoPlayer('player-config', {
           cloud_name: 'demo',
-          controlBar: {
-            pictureInPictureToggle: false,
-            chaptersButton: true
-          },
+          chaptersButton: true
         });
 
         playerSourceConf.source('snow_horses', {

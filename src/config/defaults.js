@@ -9,10 +9,8 @@ export default {
   playsinline: videojs.browser.IS_IOS,
   skin: 'dark',
   controls: false,
-  controlBar: {
-    pictureInPictureToggle: false,
-    chaptersButton: false
-  },
+  chaptersButton: false,
+  pictureInPictureToggle: false,
   seekThumbnails: true,
   aiHighlightsGraph: false,
   preload: PRELOAD.AUTO,

@@ -99,6 +99,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setCssClasses();
     this._initPlugins();
     this._initJumpButtons();
+    this._initPictureInPicture();
     this._setVideoJsListeners(ready);
   }
 
@@ -311,6 +312,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initChapters() {
+    if (!this.playerOptions.chaptersButton && this.videojs.controlBar) {
+      this.videojs.controlBar.removeChild('chaptersButton');
+    }
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
       if ((!isEmpty(source._chapters) || source._chapters === true) && this.videojs.chapters) {
         isFunction(this.videojs.chapters)
@@ -365,6 +369,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (!this.playerOptions.showJumpControls && this.videojs.controlBar) {
       this.videojs.controlBar.removeChild('JumpForwardButton');
       this.videojs.controlBar.removeChild('JumpBackButton');
+    }
+  }
+
+  _initPictureInPicture() {
+    if (!this.playerOptions.pictureInPictureToggle && this.videojs.controlBar) {
+      this.videojs.controlBar.removeChild('pictureInPictureToggle');
     }
   }
 

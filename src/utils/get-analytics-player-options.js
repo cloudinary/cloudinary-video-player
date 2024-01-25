@@ -83,6 +83,8 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   videoTimeout: playerOptions.videoTimeout,
   seekThumbnails: playerOptions.seekThumbnails,
   showJumpControls: playerOptions.showJumpControls,
+  chaptersButton: playerOptions.chaptersButton,
+  pictureInPictureToggle: playerOptions.pictureInPictureToggle,
   showLogo: playerOptions.showLogo,
   skin: playerOptions.skin,
   videoJS: hasConfig(playerOptions.videoJS),
