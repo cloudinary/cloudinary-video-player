@@ -23,7 +23,6 @@ import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-opti
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
-import { interactionAreaService } from './components/interaction-area/interaction-area.service';
 // #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
@@ -96,10 +95,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this.playerOptions.fluid) {
       this.fluid(this.playerOptions.fluid);
     }
-
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this.interactionArea = interactionAreaService(this, this.playerOptions, this._videojsOptions);
-    // #endif
 
     this._setCssClasses();
     this._initPlugins();
@@ -179,10 +174,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       if (ready) {
         ready(this);
       }
-
-      // #if (!process.env.WEBPACK_BUILD_LIGHT)
-      this.interactionArea.init();
-      // #endif
     });
 
   }
@@ -203,6 +194,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initHighlightsGraph();
     this._initSeekThumbs();
     this._initChapters();
+    this._initInteractionAreas();
   }
 
   _isFullScreen() {
@@ -328,6 +320,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         isFunction(this.videojs.chapters)
           ? this.videojs.chapters(source._chapters)
           : this.videojs.chapters.src(source._chapters);
+      }
+    });
+  }
+
+  _initInteractionAreas() {
+    this.videojs.on(PLAYER_EVENT.READY, async () => {
+      if (this.options.videojsOptions.interactionDisplay && this.videojs.interactionAreas) {
+        this.videojs.interactionAreas(this, this.playerOptions, this._videojsOptions);
       }
     });
   }

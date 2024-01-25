@@ -22,6 +22,7 @@ import vttThumbnails from './vtt-thumbnails';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
 import styledTextTracks from './styled-text-tracks';
+import interactionAreas from './interaction-areas';
 
 const plugins = {
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
@@ -44,7 +45,8 @@ const plugins = {
   // Lazy loaded plugins
   playlist,
   shoppable,
-  styledTextTracks
+  styledTextTracks,
+  interactionAreas
 };
 
 export default plugins;

@@ -2,7 +2,7 @@ import { ADS_IN_PLAYLIST, AUTO_PLAY_MODE, FLOATING_TO } from '../video-player.co
 import {
   INTERACTION_AREAS_TEMPLATE,
   INTERACTION_AREAS_THEME
-} from '../components/interaction-area/interaction-area.const';
+} from '../plugins/interaction-areas/interaction-areas.const';
 import { validator } from './validators-types';
 
 export const playerValidators = {
