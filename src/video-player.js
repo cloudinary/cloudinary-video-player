@@ -338,7 +338,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   // #if (!process.env.WEBPACK_BUILD_LIGHT)
   _initQualitySelector() {
-    if (this._videojsOptions.controlBar && this.playerOptions.qualitySelector !== false) {
+    if (this.videojs.controlBar && this.playerOptions.qualitySelector !== false) {
       this.videojs.httpSourceSelector({ default: 'auto' });
 
       this.videojs.on(PLAYER_EVENT.LOADED_METADATA, () => {
