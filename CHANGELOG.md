@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.4...v1.10.6-edge.5) (2024-01-30)
+
+
+### Bug Fixes
+
+* add lazy-loaded modules to default bundle ([#527](https://github.com/cloudinary/cloudinary-video-player/issues/527)) ([b6019ae](https://github.com/cloudinary/cloudinary-video-player/commit/b6019ae9885d03af80e6a90f9c06c164dd3088c6))
+
 ## [1.10.6-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.3...v1.10.6-edge.4) (2024-01-25)
 
 
