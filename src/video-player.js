@@ -258,8 +258,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const transformation = Utils.assign({}, source.transformation());
 
-        if (transformation && transformation.streaming_profile) {
+        if (transformation) {
           delete transformation.streaming_profile;
+          delete transformation.video_codec;
         }
 
         transformation.flags = transformation.flags || [];

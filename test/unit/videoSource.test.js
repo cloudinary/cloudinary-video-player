@@ -361,10 +361,24 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle');
+    });
+
+    it('with codec and sourceType', () => {
+
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        sourceTypes: ['webm'],
+        transformation: {
+          video_codec: 'vp9'
+        }
+      });
+
+      const srcs = source.generateSources();
       expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
     });
 
-    it('check if codec has NOT bee added to the ur twice', () => {
+    it('codec with no sourceType', () => {
 
       const source = new VideoSource('sea_turtle', {
         cloudinaryConfig: cld,
@@ -374,7 +388,7 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/f_auto:video/sea_turtle');
     });
 
     it('check if codec has been changed', () => {
@@ -387,11 +401,11 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/f_auto:video/sea_turtle');
     });
 
 
-    it('check if codec has been NOT add twice using raw_transformation', () => {
+    it('raw_transformation codec with no sourceType', () => {
 
       const source = new VideoSource('sea_turtle', {
         cloudinaryConfig: cld,
@@ -399,7 +413,7 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto:video/vc_vp9/sea_turtle');
     });
 
     it('check if codec has been change using raw_transformation', () => {
@@ -410,7 +424,7 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/h265/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto:video/h265/sea_turtle');
     });
 
 
@@ -424,7 +438,7 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/vc_vp9/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/f_auto:video/sea_turtle');
     });
 
     it('check array of transformations with codec', () => {
@@ -437,12 +451,8 @@ describe('test isCodecAlreadyExist method', () => {
       });
 
       const srcs = source.generateSources();
-      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/sea_turtle.webm');
+      expect(srcs[0].src).toEqual('http://res.cloudinary.com/demo/video/upload/vc_h265/f_auto:video/sea_turtle');
     });
 
-
   });
-
 });
-
-
