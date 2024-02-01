@@ -111,6 +111,7 @@ const ChaptersPlugin = (function () {
         default: true
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
+
       textTrack.addEventListener('load', () => {
         this.chaptersTrack = textTrack.track;
         this.setupChaptersDisplays();
@@ -121,6 +122,7 @@ const ChaptersPlugin = (function () {
         kind: 'chapters',
         default: true
       });
+
       const end = this.player.duration();
       Object.entries(this.options).forEach((entry, index, arr) => {
         const cue = new VTTCue(
@@ -130,6 +132,7 @@ const ChaptersPlugin = (function () {
         );
         textTrack.track.addCue(cue);
       });
+
       this.chaptersTrack = textTrack.track;
       this.setupChaptersDisplays();
       if (this.player.controlBar.chaptersButton) {
@@ -161,8 +164,9 @@ const ChaptersPlugin = (function () {
     wrapper.appendChild(controlBarChapterHolder);
 
     this.chaptersTrack.addEventListener('cuechange', () => {
+      const activeCues = Array.from(this.chaptersTrack.activeCues); // Safari needs Array.from()
       controlBarChapterHolder.innerHTML =
-        this.chaptersTrack.activeCues_.length > 0 ? this.chaptersTrack.activeCues_[0].text : '';
+        activeCues.length > 0 ? activeCues[0].text : '';
     });
   };
 
@@ -172,7 +176,8 @@ const ChaptersPlugin = (function () {
   ChaptersPlugin.prototype.setupProgressBarMarkers = function setupProgressBarMarkers() {
     const total = this.player.duration();
     const { seekBar } = this.player.controlBar.progressControl;
-    this.chaptersTrack.cues_.forEach(marker => {
+
+    Array.from(this.chaptersTrack.cues).forEach(marker => { // Safari needs Array.from()
       if (marker.startTime !== 0) {
         const markerTime = marker.startTime;
         const left = (markerTime / total) * 100 + '%';
@@ -211,7 +216,7 @@ const ChaptersPlugin = (function () {
     const getChapterFromPoint = point => {
       const total = this.player.duration();
       const seekBarTime = point * total;
-      const chapter = this.chaptersTrack.cues_.find(marker => {
+      const chapter = Array.from(this.chaptersTrack.cues).find(marker => {
         return seekBarTime >= marker.startTime && seekBarTime <= marker.endTime;
       });
       return chapter ? chapter.text : '';
