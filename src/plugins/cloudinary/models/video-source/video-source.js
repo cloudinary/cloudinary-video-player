@@ -1,4 +1,3 @@
-import videojs from 'video.js';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
@@ -241,12 +240,7 @@ class VideoSource extends BaseSource {
       };
     });
 
-    if (videojs.browser.IS_ANY_SAFARI) {
-      // filter out dash on safari
-      return srcs.filter(s => s.type.indexOf('application/dash+xml') === -1);
-    } else {
-      return srcs;
-    }
+    return srcs;
   }
 
   generateRawSource(url, type) {
