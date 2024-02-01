@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.7...v1.10.6-edge.8) (2024-02-01)
+
+
+### Bug Fixes
+
+* allow Dash ABR on Safari ([#532](https://github.com/cloudinary/cloudinary-video-player/issues/532)) ([cbf80f4](https://github.com/cloudinary/cloudinary-video-player/commit/cbf80f40f106ec3776a10861fb0e062151407491))
+
 ## [1.10.6-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.6...v1.10.6-edge.7) (2024-02-01)
 
 
