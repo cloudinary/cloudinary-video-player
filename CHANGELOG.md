@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.6...v1.10.6-edge.7) (2024-02-01)
+
+
+### Bug Fixes
+
+* chapters in Safari ([#531](https://github.com/cloudinary/cloudinary-video-player/issues/531)) ([3d77f27](https://github.com/cloudinary/cloudinary-video-player/commit/3d77f27b9bbba8fccd73058be1afeb59455e4039))
+
 ## [1.10.6-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.5...v1.10.6-edge.6) (2024-02-01)
 
 
