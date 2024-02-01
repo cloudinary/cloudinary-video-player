@@ -187,7 +187,7 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     if (this.isRawUrl) {
-      const type = this.sourceTypes().length > 1 ? null : this.sourceTypes()[0];
+      const type = this.sourceTypes()[0] === 'auto' ? null : this.sourceTypes()[0];
       return [this.generateRawSource(this.publicId(), type)];
     }
 
