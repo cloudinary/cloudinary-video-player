@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.5...v1.10.6-edge.6) (2024-02-01)
+
+
+### Bug Fixes
+
+* raw URLs from CORs restricted origin ([3b1baed](https://github.com/cloudinary/cloudinary-video-player/commit/3b1baed537172848bbd47cc05cf27655970e5da5))
+
 ## [1.10.6-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.4...v1.10.6-edge.5) (2024-01-30)
 
 
