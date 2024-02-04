@@ -1,11 +1,9 @@
 /* global google */
 import { isFunction } from 'utils/type-inference';
 import { PLAYER_EVENT } from 'utils/consts';
-import 'videojs-contrib-ads';
-import './ima';
-import './videojs-ima.scss';
 
-export default function imaPlugin(player, playerOptions) {
+export default async function imaPlugin(player, playerOptions) {
+  await import(/* webpackChunkName: "ima" */ './ima');
 
   const loaded = {
     contribAdsLoaded: isFunction(player.ads),
@@ -38,11 +36,11 @@ export default function imaPlugin(player, playerOptions) {
   if (Object.keys(playerOptions.ads).length > 0 && typeof player.ima === 'object') {
     if (playerOptions.ads.adsInPlaylist === 'first-video') {
       player.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
-        player.ima.playAd();
+        player.ima.playAdBreak();
       });
     } else {
       player.on(PLAYER_EVENT.SOURCE_CHANGED, () => {
-        player.ima.playAd();
+        player.ima.playAdBreak();
       });
     }
   }
