@@ -10,6 +10,7 @@ import cloudinary from './index.js';
 
 export * from './index.js';
 export * from './plugins/dash/videojs-dash.js';
+export * from './plugins/ima/ima.js';
 export * from './plugins/playlist/playlist.js';
 export * from './plugins/styled-text-tracks/styled-text-tracks.js';
 export * from './plugins/interaction-areas/interaction-areas.service.js';

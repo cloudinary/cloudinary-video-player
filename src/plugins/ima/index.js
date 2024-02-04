@@ -1,11 +1,9 @@
 /* global google */
 import { isFunction } from 'utils/type-inference';
 import { PLAYER_EVENT } from 'utils/consts';
-import 'videojs-contrib-ads';
-import './ima';
-import './videojs-ima.scss';
 
-export default function imaPlugin(player, playerOptions) {
+export default async function imaPlugin(player, playerOptions) {
+  await import(/* webpackChunkName: "ima" */ './ima');
 
   const loaded = {
     contribAdsLoaded: isFunction(player.ads),
