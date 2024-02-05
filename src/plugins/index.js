@@ -7,7 +7,6 @@ import './videojs-http-source-selector/plugin';
 import aiHighlightsGraph from './ai-highlights-graph';
 import analytics from './analytics';
 import autoplayOnScroll from './autoplay-on-scroll';
-import chapters from './chapters';
 import cloudinary from './cloudinary';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import colors from './colors';
@@ -17,6 +16,7 @@ import pacedTranscript from './paced-transcript';
 import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
+import chapters from './chapters';
 import dashPlugin from './dash';
 import imaPlugin from './ima';
 import playlist from './playlist';
@@ -28,7 +28,6 @@ const plugins = {
   aiHighlightsGraph,
   analytics,
   autoplayOnScroll,
-  chapters,
   cloudinary,
   cloudinaryAnalytics,
   colors,
@@ -38,6 +37,7 @@ const plugins = {
   vttThumbnails,
 
   // Lazy loaded plugins
+  chapters,
   dashPlugin,
   imaPlugin,
   playlist,
