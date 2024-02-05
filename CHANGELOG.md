@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.11...v1.10.6-edge.12) (2024-02-05)
+
+
+### Bug Fixes
+
+* profiles error ([#541](https://github.com/cloudinary/cloudinary-video-player/issues/541)) ([0463518](https://github.com/cloudinary/cloudinary-video-player/commit/0463518e06f459d22d4b5c1224f3f375cc546ee8))
+
 ## [1.10.6-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.10...v1.10.6-edge.11) (2024-02-05)
 
 
