@@ -1,7 +1,7 @@
 import VideoPlayer from './video-player';
 
 export const getProfile = async (cloudName, profile) => {
-  const defaultProfiles = await import(/* webpackChunkName: "defaultProfiles" */ './config/profiles');
+  const { defaultProfiles } = await import(/* webpackChunkName: "defaultProfiles" */ './config/profiles');
 
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
@@ -30,7 +30,7 @@ const videoPlayerProfile = async (elem, initOptions, ready) => {
   } catch (e) {
     const videoPlayer = new VideoPlayer(elem, initOptions);
     videoPlayer.videojs.error('Invalid profile');
-    return videoPlayer;
+    throw e;
   }
 };
 
