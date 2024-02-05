@@ -10,7 +10,7 @@ const defaultProfiles = {
   cldAdaptiveStream: cldAdaptiveStreamProfile
 };
 
-export const getProfile = async (cloudName, profile, timeout = 100) => {
+export const getProfile = async (cloudName, profile, timeout = 10000) => {
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
   }
