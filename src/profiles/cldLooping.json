@@ -1,0 +1,15 @@
+{
+  "playerOptions": {
+    "fluid": true,
+    "controls": false,
+    "muted": true,
+    "floatingWhenNotVisible": "none",
+    "hideContextMenu": false,
+    "autoplay": true,
+    "loop": true
+  },
+  "sourceOptions": {},
+  "playlistOptions": {},
+  "playlistByTagOptions": {},
+  "sourcesByTagOptions": {}
+}
