@@ -9,7 +9,8 @@ module.exports = merge(webpackCommon, {
 
   entry: {
     'cld-video-player': './index.all.js',
-    'videoPlayer': './index.es.js'
+    'videoPlayer': './index.es.js',
+    'videoPlayerWithProfile': './video-profile-export.es.js'
   },
 
   output: {

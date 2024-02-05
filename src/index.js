@@ -1,5 +1,6 @@
 import 'assets/styles/main.scss';
 import VideoPlayer from './video-player';
+import createVideoPlayerProfile from './video-player-profile';
 import { assign } from 'utils/assign';
 import { pick, convertKeysToSnakeCase } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
@@ -33,10 +34,14 @@ const cloudinaryVideoPlayerConfig = config => ({
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
 
+const getVideoPlayerWithProfile = config => (id, playerOptions, ready) => createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
+export const videoPlayerWithProfile = getVideoPlayerWithProfile();
+
 const cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
+  videoPlayerWithProfile,
   Cloudinary: {
     // Backwards compatibility with SDK v1
     new: cloudinaryVideoPlayerConfig

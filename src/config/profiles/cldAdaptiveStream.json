@@ -1,0 +1,21 @@
+{
+  "playerOptions": {
+    "fluid": true,
+    "controls": true,
+    "controlBar": {
+      "fullscreenToggle": false
+    },
+    "showJumpControls": true,
+    "hideContextMenu": false,
+    "floatingWhenNotVisible": "none"
+  },
+  "sourceOptions": {
+    "chapters": true,
+    "sourceTypes": ["hls"],
+    "transformation": [
+      {
+        "effect": ["volume:auto"]
+      }
+    ]
+  }
+}
