@@ -34,14 +34,14 @@ const cloudinaryVideoPlayerConfig = config => ({
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
 
-const getVideoPlayerProfile = config => (id, playerOptions, ready) => createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
-export const videoPlayerProfile = getVideoPlayerProfile();
+const getVideoPlayerWithProfile = config => (id, playerOptions, ready) => createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
+export const videoPlayerWithProfile = getVideoPlayerWithProfile();
 
 const cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
-  videoPlayerProfile,
+  videoPlayerWithProfile,
   Cloudinary: {
     // Backwards compatibility with SDK v1
     new: cloudinaryVideoPlayerConfig

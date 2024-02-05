@@ -1,9 +1,9 @@
-import cldDefaultProfile from './cldDefault.json';
-import cldLoopingProfile from './cldLooping.json';
-import cldAdaptiveStreamProfile from './cldAdaptiveStream.json';
+import cldDefault from './cldDefault.json';
+import cldLooping from './cldLooping.json';
+import cldAdaptiveStream from './cldAdaptiveStream.json';
 
 export const defaultProfiles = {
-  cldDefault: cldDefaultProfile,
-  cldLooping: cldLoopingProfile,
-  cldAdaptiveStream: cldAdaptiveStreamProfile
+  cldDefault,
+  cldLooping,
+  cldAdaptiveStream
 };

@@ -24,14 +24,14 @@
 
   <script type="text/javascript">
     window.addEventListener('load', async function() {
-      const playerWithDefaultProfile = await cloudinary.videoPlayerProfile('player-default-profile', {
+      const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
         cloud_name: 'demo',
         profile: 'cldDefault',
       });
 
       playerWithDefaultProfile.source('sea_turtle');
 
-      const playerWithCustomProfile = await cloudinary.videoPlayerProfile('player-custom-profile', {
+      const playerWithCustomProfile = await cloudinary.videoPlayerWithProfile('player-custom-profile', {
         cloud_name: 'dwaq5xqm4',
         profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json',
       });
@@ -47,16 +47,6 @@
   </nav>
   <h1>Cloudinary Video Player</h1>
   <h3 class="mb-4">Profiles</h3>
-
-  <p>
-    Profiles are still under development and it's not safe for use on production.<br/>
-    For testing purpose you can use Profiles Feature according to the instructions below:
-    <br/><br/>
-    1. Provide `__profileName` config property using one of default profiles (`loopingVideo`, `videoStream`, `stylish`)<br/>
-    2. You can use your own profile JSON, create folder on your cloud named `profiles` and upload json file
-    - once you have it just provide publicId with extension of your uploaded file as value of `__profileName`
-  </p>
-
 
   <h5>Player with default profile</h5>
   <video
@@ -106,14 +96,14 @@
       </code>
       <code class="language-javascript">
         window.addEventListener('load', async function() {
-          const playerWithDefaultProfile = await cloudinary.videoPlayerProfile('player-default-profile', {
+          const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
             cloud_name: 'demo',
             profile: 'loopingVideo',
           });
 
           playerWithDefaultProfile.source('sea_turtle');
 
-          const playerWithCustomProfile = await cloudinary.videoPlayerProfile('player-custom-profile', {
+          const playerWithCustomProfile = await cloudinary.videoPlayerWithProfile('player-custom-profile', {
             cloud_name: 'dwaq5xqm4',
             profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json',
           });

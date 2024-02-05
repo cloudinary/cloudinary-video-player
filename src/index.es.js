@@ -4,4 +4,4 @@
 // import videoPlayer from 'cloudinary-video-player/videoPlayer';
 // import dashjs from "cloudinary-video-player/dash";
 
-export { videoPlayer as default } from './index.js';
+export { videoPlayer as default, videoPlayerWithProfile } from './index.js';
