@@ -1,62 +1,37 @@
 import VideoPlayer from './video-player';
 
-class VideoPlayerProfile {
-  constructor(elem, initOptions, ready) {
-    if (!initOptions.profile) {
-      throw new Error('VideoPlayerProfile method requires "profile" property');
-    }
+export const getProfile = async (cloudName, profile) => {
+  const defaultProfiles = await import(/* webpackChunkName: "defaultProfiles" */ './config/profiles');
 
-    return this.initPlayer(initOptions)
-      .then((profileOptions) => this.getEnrichedVideoPlayer(elem, initOptions, profileOptions, ready))
-      .catch((e) => {
-        const videoPlayer = new VideoPlayer(elem, initOptions);
-        videoPlayer.videojs.error('Invalid profile');
-        throw e;
-      });
+  if (Object.keys(defaultProfiles).includes(profile)) {
+    return defaultProfiles[profile];
   }
 
-  async initPlayer(initOptions) {
-    const { getProfile } = await import(/* webpackChunkName: "profiles/profilesComponent" */ './components/profiles/profiles');
+  return await fetch(profile, { method: 'GET' }).then(res => res.json());
+};
+
+const videoPlayerProfile = async (elem, initOptions, ready) => {
+  if (!initOptions.profile) {
+    throw new Error('VideoPlayerProfile method requires "profile" property');
+  }
+
+  try {
     const profileOptions = await getProfile(initOptions.cloud_name, initOptions.profile);
-    this.profileOptions = profileOptions;
-    return profileOptions;
-  }
-
-  getEnrichedVideoPlayer(elem, initOptions, profileOptions, ready) {
     const options = Object.assign({}, profileOptions.playerOptions, initOptions);
     const videoPlayer = new VideoPlayer(elem, options, ready);
 
-    videoPlayer.source = this.createMethodWithOptions(
-      videoPlayer,
-      videoPlayer.source,
-      this.profileOptions.sourceOptions
-    );
-
-    videoPlayer.playlist = this.createMethodWithOptions(
-      videoPlayer,
-      videoPlayer.playlist,
-      this.profileOptions.playlistOptions
-    );
-
-    videoPlayer.playlistByTag = this.createMethodWithOptions(
-      videoPlayer,
-      videoPlayer.playlistByTag,
-      this.profileOptions.playlistByTagOptions
-    );
-
-    videoPlayer.sourcesByTag = this.createMethodWithOptions(
-      videoPlayer,
-      videoPlayer.sourcesByTag,
-      this.profileOptions.sourcesByTagOptions
-    );
+    const nativeVideoPlayerSourceMethod = videoPlayer.source;
+    videoPlayer.source = (id, options) => {
+      const extendedOptions = Object.assign({}, profileOptions.sourceOptions, options);
+      return nativeVideoPlayerSourceMethod.call(videoPlayer, id, extendedOptions);
+    };
 
     return videoPlayer;
+  } catch (e) {
+    const videoPlayer = new VideoPlayer(elem, initOptions);
+    videoPlayer.videojs.error('Invalid profile');
+    return videoPlayer;
   }
+};
 
-  createMethodWithOptions = (vpInstance, nativeMethod, methodProfileOptions) => (id, options = {}, ...restArgs) => {
-    const extendedOptions = Object.assign({}, methodProfileOptions, options);
-    return nativeMethod.call(vpInstance, id, extendedOptions, ...restArgs);
-  };
-}
-
-export default VideoPlayerProfile;
+export default videoPlayerProfile;

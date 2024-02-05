@@ -8,8 +8,5 @@
     "autoplay": true,
     "loop": true
   },
-  "sourceOptions": {},
-  "playlistOptions": {},
-  "playlistByTagOptions": {},
-  "sourcesByTagOptions": {}
+  "sourceOptions": {}
 }
