@@ -30,7 +30,7 @@
 
       var adTagUrl = "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpreonly&cmsid=496&vid=short_onecue&correlator=";
 
-      player = cloudinary.videoPlayer('player', {
+      player1 = cloudinary.videoPlayer('player', {
         cloud_name: 'demo',
         ads: {
           adTagUrl: adTagUrl,
@@ -38,12 +38,22 @@
         }
       });
 
-      player.playlistByTag('video_race', {
+      player1.source('elephants');
+
+      player2 = cloudinary.videoPlayer('player-playlist', {
+        cloud_name: 'demo',
+        ads: {
+          adTagUrl: adTagUrl,
+          debug: true
+        }
+      });
+
+      player2.playlistByTag('video_race', {
         autoAdvance: true,
         repeat: true,
       }).then(function() {
         var divElem = document.querySelector("#playlist-data");
-        var list = player.playlist().list().map(function(source) {
+        var list = player2.playlist().list().map(function(source) {
           return source.publicId()
         }).join(', ');
 
@@ -62,17 +72,33 @@
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">VAST and VPAID</h3>
 
-    <video
-      id="player"
-      playsinline
-      controls
-      muted
-      autoplay
-      class="cld-video-player"
-      width="500"
-    ></video>
+    <div class="video-container mb-4">
+      <h4>Single video with ads</h4>
+      <video
+        id="player"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="500"
+      ></video>
+    </div>
 
-    <p id="playlist-data"></p>
+    <div class="video-container mb-4">
+      <h4>Playlist with Ads</h4>
+
+      <video
+        id="player-playlist"
+        playsinline
+        controls
+        muted
+        autoplay
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <p id="playlist-data"></p>
+    </div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_ads_monetization">Ads and monetization documentation</a>
@@ -84,6 +110,16 @@
 
         &lt;video
           id="player"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+          width="500"&gt;
+        &lt;/video&gt;
+
+        &lt;video
+          id="player-playlist"
+          playsinline
           controls
           muted
           autoplay
@@ -94,36 +130,30 @@
       </code>
       <code class="language-javascript">
 
-        // Initialize player
-        var player = cloudinary.videoPlayer('player', {
-          cloud_name: 'demo' ,
-          plugins: {
-            vastClient: {
-              adTagUrl: "https://rtr.innovid.com/r1.5554946ab01d97.36996823;cb={random_number}",
-              adCancelTimeout: 5000,
-              adsEnabled: true,
-              playAdAlways: true
-            }
+        player1 = cloudinary.videoPlayer('player', {
+          cloud_name: 'demo',
+          ads: {
+            adTagUrl: AD_TAG_URL,
+            debug: true
           }
         });
 
-        // Pass a sorter to sort list in alphabetical order by publicId
-        var sorter = function(a, b) {
-          if (a.publicId < b.publicId) return 1;
-          if (a.publicId > b.publicId) return -1;
-          return 0;
-        };
+        player1.source('elephants');
 
-        // Fetch playlist by tag. Since this operation involves an API call
-        // the function returns a Promise when the operation completes.
-        // The return value is 'player'.
-        player.playlistByTag('demo', {
-          sorter: sorter,
-          autoAdvance: 0,
-          repeat: true
+        player2 = cloudinary.videoPlayer('player-playlist', {
+          cloud_name: 'demo',
+          ads: {
+            adTagUrl: AD_TAG_URL,
+            debug: true
+          }
+        });
+
+        player2.playlistByTag('video_race', {
+          autoAdvance: true,
+          repeat: true,
         }).then(function() {
           var divElem = document.querySelector("#playlist-data");
-          var list = player.playlist().list().map(function(source) {
+          var list = player2.playlist().list().map(function(source) {
             return source.publicId()
           }).join(', ');
 
