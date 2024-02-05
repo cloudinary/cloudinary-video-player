@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.11](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.10...v1.10.6-edge.11) (2024-02-05)
+
+
+### Features
+
+* video profiles ([#539](https://github.com/cloudinary/cloudinary-video-player/issues/539)) ([0e99c27](https://github.com/cloudinary/cloudinary-video-player/commit/0e99c27d41ed3d6667d939f6f75fedb3f04e4faf))
+
 ## [1.10.6-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.9...v1.10.6-edge.10) (2024-02-05)
 
 
