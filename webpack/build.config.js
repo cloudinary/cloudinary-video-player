@@ -1,9 +1,8 @@
 const { merge } = require('webpack-merge');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpackCommon = require('./common.config');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { isMin, getProfilesPathPattern } = require('./build-utils');
+const { isMin } = require('./build-utils');
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
@@ -14,10 +13,5 @@ module.exports = merge(webpackCommon, {
       new CssMinimizerPlugin(),
       new TerserPlugin()
     ]
-  } : undefined,
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [getProfilesPathPattern(webpackCommon.output.path)]
-    })
-  ]
+  } : undefined
 });

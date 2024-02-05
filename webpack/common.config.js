@@ -60,6 +60,10 @@ const webpackConfig = {
         ]
       },
       {
+        test: /\.json$/,
+        use: 'json-loader'
+      },
+      {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
