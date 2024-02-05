@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.10](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.9...v1.10.6-edge.10) (2024-02-05)
+
+
+### Performance Improvements
+
+* lazy load chapters plugin ([#536](https://github.com/cloudinary/cloudinary-video-player/issues/536)) ([225029b](https://github.com/cloudinary/cloudinary-video-player/commit/225029b9c4d6058d69aaca0d69f40de6e6f2e03e))
+
 ## [1.10.6-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.8...v1.10.6-edge.9) (2024-02-05)
 
 
