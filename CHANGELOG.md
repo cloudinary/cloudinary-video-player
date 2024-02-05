@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.8...v1.10.6-edge.9) (2024-02-05)
+
+
+### Performance Improvements
+
+* lazy load ads plugin ([#535](https://github.com/cloudinary/cloudinary-video-player/issues/535)) ([981804d](https://github.com/cloudinary/cloudinary-video-player/commit/981804dae2d8939f3edef3fa512ce8398edfc8d2))
+
 ## [1.10.6-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.7...v1.10.6-edge.8) (2024-02-01)
 
 
