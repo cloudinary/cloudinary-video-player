@@ -31,7 +31,7 @@ var isLocal = window.location.hostname === 'localhost' || window.location.hostna
 // true if testing in an IP page URL
 var isIpAddress = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(window.location.hostname);
 
-var isNetlify = window.location.hostname === 'cld-video-player.netlify.app';
+var isNetlify = window.location.hostname.includes('cld-video-player.netlify.app');
 
 var cdnPrefix = function (source, ver) {
   var external = source && source.startsWith('http');
