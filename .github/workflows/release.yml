@@ -14,6 +14,7 @@ jobs:
         uses: google-github-actions/release-please-action@v3
         id: release
         with:
+          token: ${{ secrets.BOT_TOKEN }}
           release-type: node
           default-branch: ${{ github.ref_name }}
 
