@@ -52,32 +52,32 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "285kb"
+        "maxSize": "240kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "150kb"
+        "maxSize": "125kb"
       },
       {
         "path": "./lib/cld-video-player.js",
-        "maxSize": "499kb"
+        "maxSize": "485kb"
       },
       {
         "path": "./lib/videoPlayer.js",
-        "maxSize": "285kb"
+        "maxSize": "240kb"
       }
     ]
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.10.2",
+    "@cloudinary/url-gen": "^1.16.1",
     "cloudinary-video-analytics": "1.4.3",
-    "dashjs": "^4.7.1",
+    "dashjs": "^4.7.3",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
-    "video.js": "8.5.2",
-    "videojs-contrib-ads": "^7.3.2",
+    "video.js": "8.10.0",
+    "videojs-contrib-ads": "^7.3.3",
     "videojs-ima": "^2.3.0",
-    "videojs-per-source-behaviors": "^3.0.0",
+    "videojs-per-source-behaviors": "^3.0.1",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
