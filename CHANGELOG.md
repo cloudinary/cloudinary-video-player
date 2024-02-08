@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.13](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.12...v1.10.6-edge.13) (2024-02-08)
+
+
+### Bug Fixes
+
+* Improved example pages with Netlify previews ([24763da](https://github.com/cloudinary/cloudinary-video-player/commit/24763dac23bbab337723412897394b2c85fcc281))
+
 ## [1.10.6-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.11...v1.10.6-edge.12) (2024-02-05)
 
 
