@@ -77,7 +77,7 @@ const ChaptersPlugin = (function () {
   /**
    * Bootstrap the plugin.
    */
-  ChaptersPlugin.prototype.initializeChapters = function initializeChapters() {
+  ChaptersPlugin.prototype.initializeChapters = async function initializeChapters() {
     const chaptersUrl = this.options === true ? this.getChaptersFileUrlByName() : this.options.url;
 
     if (chaptersUrl) {
@@ -99,6 +99,10 @@ const ChaptersPlugin = (function () {
         kind: 'chapters',
         default: true
       });
+
+      // required for Safari to display the captions
+      // https://github.com/videojs/video.js/issues/8519
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       const end = this.player.duration();
       Object.entries(this.options).forEach((entry, index, arr) => {
