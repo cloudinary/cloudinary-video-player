@@ -1,11 +1,19 @@
 # Changelog
 
+## [1.10.6-edge.14](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.13...v1.10.6-edge.14) (2024-02-12)
+
+
+### Bug Fixes
+
+* playlist by tag ([#550](https://github.com/cloudinary/cloudinary-video-player/issues/550)) ([519e737](https://github.com/cloudinary/cloudinary-video-player/commit/519e737409b6e546fabc737524ad3576a9595155))
+
 ## [1.10.6-edge.13](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.12...v1.10.6-edge.13) (2024-02-08)
 
 
 ### Bug Fixes
 
 * Improved example pages with Netlify previews ([24763da](https://github.com/cloudinary/cloudinary-video-player/commit/24763dac23bbab337723412897394b2c85fcc281))
+* Bump VideoJS to 8.10.0
 
 ## [1.10.6-edge.12](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.11...v1.10.6-edge.12) (2024-02-05)
 
