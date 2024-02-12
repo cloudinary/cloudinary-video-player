@@ -77,7 +77,7 @@ const playlist = (player, options = {}) => {
   player.cloudinary.sourcesByTag = async (tag, options = {}) => {
     const url = getCloudinaryUrl(
       tag,
-      Object.assign(player.cloudinary.cloudinaryConfig(), LIST_BY_TAG_PARAMS)
+      Object.assign({}, player.cloudinary.cloudinaryConfig(), LIST_BY_TAG_PARAMS)
     );
 
     const result = await fetch(url);
