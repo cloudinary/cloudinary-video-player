@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6-edge.14](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.13...v1.10.6-edge.14) (2024-02-12)
+
+
+### Bug Fixes
+
+* playlist by tag ([#550](https://github.com/cloudinary/cloudinary-video-player/issues/550)) ([519e737](https://github.com/cloudinary/cloudinary-video-player/commit/519e737409b6e546fabc737524ad3576a9595155))
+
 ## [1.10.6-edge.13](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.12...v1.10.6-edge.13) (2024-02-08)
 
 
