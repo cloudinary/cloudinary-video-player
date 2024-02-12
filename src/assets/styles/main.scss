@@ -242,8 +242,9 @@ $icon-font-path: '../icon-font' !default;
   }
 
   .vjs-control-bar {
-    z-index: 2;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    z-index: 2;
     font-size: 120%;
     // responsive controls sizes, based on container width
     // font-size: clamp(100%, 2cqw, 150%);
@@ -256,6 +257,7 @@ $icon-font-path: '../icon-font' !default;
     }
 
     .vjs-progress-control {
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       position: absolute;
       left: 0px;
