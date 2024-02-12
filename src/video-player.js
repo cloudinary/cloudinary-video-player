@@ -576,7 +576,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   playlist(sources, options = {}) {
     options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
-    this.videojs.on(PLAYER_EVENT.READY, async () => {
+    this.videojs.one(PLAYER_EVENT.READY, async () => {
       const playlistPlugin = await this.videojs.playlist(options);
       playlistPlugin(sources, options);
     });
@@ -588,7 +588,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     return new Promise((resolve) => {
-      this.videojs.on(PLAYER_EVENT.READY, async () => {
+      this.videojs.one(PLAYER_EVENT.READY, async () => {
         const playlistPlugin = await this.videojs.playlist(options);
         playlistPlugin(await this.sourcesByTag(tag, options), options);
         resolve(this);
