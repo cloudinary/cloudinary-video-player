@@ -1,14 +1,29 @@
 # Changelog
 
-## [1.10.7-edge.15](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.15...v1.10.7-edge.15) (2024-02-13)
-
+## [1.10.6](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.5...v1.10.6) (2024-02-13)
 
 ### Bug Fixes
 
-* update CHANGELOG.md ([#555](https://github.com/cloudinary/cloudinary-video-player/issues/555)) ([edcc655](https://github.com/cloudinary/cloudinary-video-player/commit/edcc6556e27dc6553ab295024a1d6c46c9ca035f))
+* playlist by tag ([#550](https://github.com/cloudinary/cloudinary-video-player/issues/550)) ([519e737](https://github.com/cloudinary/cloudinary-video-player/commit/519e737409b6e546fabc737524ad3576a9595155))
+* Improved example pages with Netlify previews ([24763da](https://github.com/cloudinary/cloudinary-video-player/commit/24763dac23bbab337723412897394b2c85fcc281))
+* video profiles ([#539](https://github.com/cloudinary/cloudinary-video-player/issues/539)) ([0e99c27](https://github.com/cloudinary/cloudinary-video-player/commit/0e99c27d41ed3d6667d939f6f75fedb3f04e4faf))
+* allow Dash ABR on Safari ([#532](https://github.com/cloudinary/cloudinary-video-player/issues/532)) ([cbf80f4](https://github.com/cloudinary/cloudinary-video-player/commit/cbf80f40f106ec3776a10861fb0e062151407491))
+* chapters in Safari ([#531](https://github.com/cloudinary/cloudinary-video-player/issues/531)) ([3d77f27](https://github.com/cloudinary/cloudinary-video-player/commit/3d77f27b9bbba8fccd73058be1afeb59455e4039))
+* raw URLs from CORs restricted origin ([3b1baed](https://github.com/cloudinary/cloudinary-video-player/commit/3b1baed537172848bbd47cc05cf27655970e5da5))
+* picture in picture toggle ([#522](https://github.com/cloudinary/cloudinary-video-player/issues/522)) ([8c271cc](https://github.com/cloudinary/cloudinary-video-player/commit/8c271cc276ca0c79a87d9c845417311923148d98))
+* handle styled textTracks usage monitoring ([bcf3cd0](https://github.com/cloudinary/cloudinary-video-player/commit/bcf3cd0d1de61fd6a03cc53c93a38bdabf0016b2))
+
+### Performance Improvements
+
+* Bump VideoJS to 8.10.0 ([3a9fb8](https://github.com/cloudinary/cloudinary-video-player/commit/3a9fb87902c8855a10ec9b1cf7aa672c38dce96d))
+* lazy load chapters plugin ([#536](https://github.com/cloudinary/cloudinary-video-player/issues/536)) ([225029b](https://github.com/cloudinary/cloudinary-video-player/commit/225029b9c4d6058d69aaca0d69f40de6e6f2e03e))
+* lazy load ads plugin ([#535](https://github.com/cloudinary/cloudinary-video-player/issues/535)) ([981804d](https://github.com/cloudinary/cloudinary-video-player/commit/981804dae2d8939f3edef3fa512ce8398edfc8d2))
+* lazy load interaction-areas plugin ([03ec928](https://github.com/cloudinary/cloudinary-video-player/commit/03ec9289633acfece815e912d6f0753754786e0d))
+* lazy load shoppable plugin ([#519](https://github.com/cloudinary/cloudinary-video-player/pull/519))
+* lazy loaded recommendation component ([cde7922](https://github.com/cloudinary/cloudinary-video-player/commit/cde7922e37694ab944912abbf3c2f0ef1e8ff8f6))
+* lazy-loaded playlists ([9f89ab3](https://github.com/cloudinary/cloudinary-video-player/commit/9f89ab336420ed470646ff009ff3a1631c6578c8))
 
 ## [1.10.5](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.4...v1.10.5) (2024-01-03)
-
 
 ### Bug Fixes
 
