@@ -1,11 +1,9 @@
 import videojs from 'video.js';
-import { mixin } from 'utils/mixin';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
 import { isFunction } from 'utils/type-inference';
-import Playlistable from 'mixins/playlistable';
 import plugins from 'plugins';
 import {
   normalizeOptions,
@@ -18,6 +16,8 @@ import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
 
+import recommendationsOverlay from 'components/recommendations-overlay';
+
 const DEFAULT_PARAMS = {
   transformation: {},
   sourceTypes: [],
@@ -28,11 +28,8 @@ const DEFAULT_PARAMS = {
 export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 
-class CloudinaryContext extends mixin(Playlistable) {
-
+class CloudinaryContext {
   constructor(player, options = {}) {
-    super(player, options);
-
     setupCloudinaryMiddleware();
 
     this.player = player;
@@ -77,7 +74,11 @@ class CloudinaryContext extends mixin(Playlistable) {
         if (options.recommendationOptions) {
           ({ disableAutoShow, itemBuilder } = sliceAndUnsetProperties(options.recommendationOptions, 'disableAutoShow', 'itemBuilder'));
         }
-        setRecommendations(recommendations, { disableAutoShow, itemBuilder });
+
+        recommendationsOverlay(player).then(() => {
+          setRecommendations(recommendations, { disableAutoShow, itemBuilder });
+        });
+
       } else {
         unsetRecommendations();
       }
@@ -191,7 +192,7 @@ class CloudinaryContext extends mixin(Playlistable) {
     };
 
     this.dispose = () => {
-      if (this.playlist()) {
+      if (this.playlist && this.playlist()) {
         this.disposePlaylist();
       }
       unsetRecommendations();
@@ -230,7 +231,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         }
       };
 
-      this.one('cldsourcechanged', _recommendations.sourceChangedHandler);
+      _recommendations.sourceChangedHandler();
 
       _recommendations.endedHandler = () => {
         if (!disableAutoShow && this.autoShowRecommendations()) {
@@ -286,7 +287,9 @@ class CloudinaryContext extends mixin(Playlistable) {
       this.player.src(_sources);
 
       _lastSource = src;
-      _lastPlaylist = this.playlist();
+      if (this.playlist) {
+        _lastPlaylist = this.playlist();
+      }
     };
     const testCanPlayTypeAndTypeSupported = (codec) => {
       const v = document.createElement('video');
@@ -328,7 +331,7 @@ class CloudinaryContext extends mixin(Playlistable) {
         // If plugin state doesn't have an active VideoSource
         if (!this.source()) {
           // We might have been running a playlist, reset playlist's state.
-          if (_lastPlaylist) {
+          if (this.playlist && _lastPlaylist) {
             this.playlist(_lastPlaylist);
           }
           // Rebuild last source state without calling vjs's 'src' and 'poster'
@@ -365,7 +368,7 @@ class CloudinaryContext extends mixin(Playlistable) {
   }
 }
 
-export default function(options = {}) {
+export default function (options = {}) {
   options.chainTarget = options.chainTarget || this;
   this.cloudinary = new CloudinaryContext(this, options);
 }

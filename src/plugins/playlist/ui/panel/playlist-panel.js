@@ -1,7 +1,6 @@
 import videojs from 'video.js';
-import 'assets/styles/components/playlist.scss';
 import PlaylistPanelItem from './playlist-panel-item';
-import { PLAYER_EVENT } from '../../../utils/consts';
+import { PLAYER_EVENT } from 'utils/consts';
 
 
 const Component = videojs.getComponent('Component');

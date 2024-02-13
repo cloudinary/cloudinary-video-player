@@ -17,8 +17,8 @@
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
 
-    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
   -->
 
@@ -33,14 +33,12 @@
         chapters: {
           url: 'https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt'
         },
+        chaptersButton: true
       });
 
       const playerSourceConf = cloudinary.videoPlayer('player-config', {
         cloud_name: 'demo',
-        controlBar: {
-          pictureInPictureToggle: false,
-          chaptersButton: true
-        },
+        chaptersButton: true
       });
 
       playerSourceConf.source('snow_horses', {
@@ -150,14 +148,12 @@
           chapters: {
             url: 'https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt'
           },
+          chaptersButton: true
         });
 
         const playerSourceConf = cloudinary.videoPlayer('player-config', {
           cloud_name: 'demo',
-          controlBar: {
-            pictureInPictureToggle: false,
-            chaptersButton: true
-          },
+          chaptersButton: true
         });
 
         playerSourceConf.source('snow_horses', {

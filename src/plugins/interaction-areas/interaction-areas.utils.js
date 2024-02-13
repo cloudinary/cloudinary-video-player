@@ -7,12 +7,12 @@ import {
   INTERACTION_AREAS_CONTAINER_CLASS_NAME,
   INTERACTION_AREAS_PREFIX,
   INTERACTION_AREAS_THEME
-} from './interaction-area.const';
+} from './interaction-areas.const';
 import { noop } from '../../utils/type-inference';
-import { getDefaultPlayerColor } from '../../plugins/colors';
+import { getDefaultPlayerColor } from '../colors';
 import { forEach, some } from '../../utils/array';
-import { themedButton } from '../themeButton/themedButton';
-import { BUTTON_THEME } from '../themeButton/themedButton.const';
+import { themedButton } from '../../components/themeButton/themedButton';
+import { BUTTON_THEME } from '../../components/themeButton/themedButton.const';
 
 
 const getInteractionAreaItemId = (item, index) => item.id || item.type || `id_${index}`;

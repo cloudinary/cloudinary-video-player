@@ -1,4 +1,5 @@
 export const PLAYER_EVENT = {
+  READY: 'ready',
   PLAY: 'play',
   PLAYING: 'playing',
   PAUSE: 'pause',

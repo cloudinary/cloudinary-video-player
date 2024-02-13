@@ -17,18 +17,62 @@
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
 
-    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function(){
 
-      var player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo'
-      })
+      var textTracks = {
+        surf_competition: {
+          captions: {
+            label: "English captions",
+            language: "en",
+            default: true,
+            url:
+              "https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt"
+          },
+          subtitles: [
+            {
+              label: "German subtitles",
+              language: "de",
+              url:
+                "https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt"
+            },
+            {
+              label: "Russian subtitles",
+              language: "ru",
+              url:
+                "https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt"
+            }
+          ]
+        },
+        finish_line: {
+          captions: {
+            label: "English captions",
+            language: "en",
+            default: true,
+            url: "https://res.cloudinary.com/demo/raw/upload/outdoors.vtt"
+          }
+        },
+        dirt_bike: {
+          captions: {
+            label: "English captions",
+            language: "en",
+            default: true,
+            url:
+              "https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt"
+          }
+        }
+      };
+
+      var getTextTracks = function(res) {
+        return { textTracks: textTracks[res.publicId] || textTracks["dirt_bike"] };
+      }
 
       var sorter = function(a, b) {
         if (a.publicId < b.publicId) return 1;
@@ -36,15 +80,20 @@
         return 0;
       };
 
+      var player = cloudinary.videoPlayer('player', {
+        cloud_name: 'demo'
+      })
+
       // Fetch playlist by tag. Since this operation involves an API call
       // the function returns a Promise when the operation completes.
       // The return value is 'player'.
       player.playlistByTag('video_race', {
-        sorter: sorter,
         autoAdvance: true,
         repeat: true,
-        presentUpcoming: false
-      }).then(function() {
+        presentUpcoming: false,
+        sorter: sorter, // returns sources-list sorting function
+        sourceParams: getTextTracks  // returns per-source configurations, handles captions
+      }).then(function(player) {
         var divElem = document.querySelector("div#playlist-data");
         var list = player.playlist().list().map(function(source) {
           return source.publicId()
@@ -63,7 +112,7 @@
       <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
     <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Playlist by tag</h3>
+    <h3 class="mb-4">Playlist by tag (with captions)</h3>
 
     <video
       id="player"
@@ -72,10 +121,10 @@
       autoplay
       muted
       class="cld-video-player"
-      width="500">
-    </video>
+      width="500"
+    ></video>
 
-    <div id="playlist-data"></div>
+    <div id="playlist-data" class="mt-4"></div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/video_player_playlists_recommendations#create_a_playlist_for_a_specified_tag">Playlist by tag documentation</a>
@@ -91,30 +140,20 @@
         autoplay
         muted
         class="cld-video-player"
-        width="500"&gt;
-      &lt;/video&gt;
+        width="500"
+      &gt;&lt;/video&gt;
 
       </code>
       <code class="language-javascript">
 
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' })
-
-        var sorter = function(a, b) {
-          if (a.publicId < b.publicId) return 1;
-          if (a.publicId > b.publicId) return -1;
-          return 0;
-        };
-
-        // Fetch playlist by tag. Since this operation involves an API call
-        // the function returns a Promise when the operation completes.
-        // The return value is 'player'.
         player.playlistByTag('video_race', {
-          sorter: sorter,
           autoAdvance: true,
           repeat: true,
-          presentUpcoming: false
-        }).then(function() {
-          var divElem = document.querySelector("#playlist-data");
+          presentUpcoming: false,
+          sorter: sorter, // returns sources-list sorting function
+          sourceParams: getTextTracks  // returns per-source config function, handles captions
+        }).then(function(player) {
+          var divElem = document.querySelector("div#playlist-data");
           var list = player.playlist().list().map(function(source) {
             return source.publicId()
           }).join(', ');
@@ -125,6 +164,7 @@
       </code>
     </pre>
   </div>
+
 
 </body>
 </html>

@@ -17,8 +17,8 @@
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
 
-    <link rel="stylesheet" href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css">
-    <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
 
   -->
 
@@ -36,6 +36,7 @@
         logoOnclickUrl: 'https://google.com',
         showLogo: true,
         showJumpControls: true,
+        pictureInPictureToggle: true,
         fontFace: 'Lobster',
         bigPlayButton: false,
         playbackRates: [0.5, 1, 1.5, 2]
@@ -61,6 +62,7 @@
         <li>Display 10-sec jump buttons</li>
         <li>Hide big-play-button</li>
         <li>Show playback rates control</li>
+        <li>Show PictureInPicture Toggle</li>
       </ul>
     </p>
 
@@ -92,7 +94,6 @@
         &lt;/video&gt;
       </code>
       <code class="language-javascript">
-
         var player = cloudinary.videoPlayer('player', {
           cloud_name: 'demo',
           publicId: 'snow_horses',
@@ -102,6 +103,10 @@
           logoOnclickUrl: 'https://google.com',
           showLogo: true,
           showJumpControls: true,
+          pictureInPictureToggle: true,
+          fontFace: 'Lobster',
+          bigPlayButton: false,
+          playbackRates: [0.5, 1, 1.5, 2]
         });
       </code>
     </pre>

@@ -20,6 +20,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Build
+        run: npm run build-all
+
       - name: Unit tests
         run: npm run test:unit
 
