@@ -18,7 +18,7 @@
 1.10.3 / 2023-12-17
 ==================
 
-fix: styled-subtitles to use x/y box
+* fix: styled-subtitles to use x/y box
 
 
 1.10.2 / 2023-11-05
