@@ -16,6 +16,9 @@
       display: inline-block !important;
       padding: 0.1em 0.3em;
       background-color: rgba(0, 0, 0, 0.5) !important;
+      > b {
+        color: hotpink;
+      }
     }
   }
   &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-text-track-cue {
@@ -27,7 +30,7 @@
   .vjs-text-track-display:not(.cld-styled-text-tracks-theme-videojs-default) {
     .vjs-text-track-cue {
       font-family: inherit !important;
-      & > div {
+      > div {
         font-weight: 700;
         background-color: transparent !important;
         text-shadow: 0 0 0.2em rgba(0, 0, 0, 0.8);

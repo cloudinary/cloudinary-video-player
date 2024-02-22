@@ -13,7 +13,8 @@ function pacedTranscript(config) {
       source.publicId(),
       extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' }),
     ) + '.transcript',
-    maxWords: config.maxWords || 5 // Number of words per caption
+    maxWords: config.maxWords || 5, // Number of words per caption
+    wordHighlight: config.wordHighlight
   };
 
   // Load the transcription file
@@ -46,26 +47,45 @@ function pacedTranscript(config) {
 
   // Generate captions from the transcription data
   const parseTranscript = transcriptionData => {
-    const maxWords = options.maxWords;
     const captions = [];
+
+    const wordHighlight = options.wordHighlight;
 
     transcriptionData.forEach(segment => {
       const words = segment.words;
+      const maxWords = options.maxWords || words.length;
 
       for (let i = 0; i < words.length; i += maxWords) {
-        const startTime = words[i].start_time;
-        const endTime = words[Math.min(i + maxWords - 1, words.length - 1)].end_time;
+        if (wordHighlight) {
+          // Create a caption for every word, in which the current word is highlighted
+          const slicedWords = words.slice(i, Math.min(i + maxWords, words.length));
+          slicedWords.forEach(word => {
+            const captionText = words
+              .slice(i, i + maxWords)
+              .map(w => (w === word ? `<b>${w.word}</b>` : w.word))
+              .join(' ');
 
-        const captionText = words
-          .slice(i, i + maxWords)
-          .map(word => word.word)
-          .join(' ');
+            captions.push({
+              startTime: word.start_time,
+              endTime: word.end_time,
+              text: captionText
+            });
+          });
+        } else {
+          const startTime = words[i].start_time;
+          const endTime = words[Math.min(i + maxWords - 1, words.length - 1)].end_time;
 
-        captions.push({
-          startTime: startTime,
-          endTime: endTime,
-          text: captionText
-        });
+          const captionText = words
+            .slice(i, i + maxWords)
+            .map(word => word.word)
+            .join(' ');
+
+          captions.push({
+            startTime: startTime,
+            endTime: endTime,
+            text: captionText
+          });
+        }
       }
     });
 

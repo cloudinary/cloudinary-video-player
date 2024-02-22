@@ -105,14 +105,16 @@ export const sourceValidators = {
       language: validator.isString,
       default: validator.isBoolean,
       url: validator.isString,
-      maxWords: validator.isNumber
+      maxWords: validator.isNumber,
+      wordHighlight: validator.isBoolean
     },
     subtitles: validator.isArrayOfObjects({
       label: validator.isString,
       language: validator.isString,
       default: validator.isBoolean,
       url: validator.isString,
-      maxWords: validator.isNumber
+      maxWords: validator.isNumber,
+      wordHighlight: validator.isBoolean
     })
   },
   info: {

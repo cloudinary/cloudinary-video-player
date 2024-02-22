@@ -31,6 +31,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   ...(sourceOptions.textTracks ? {
     textTracks: hasConfig(sourceOptions.textTracks),
     pacedTextTracks: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"maxWords":'),
+    wordHighlight: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"wordHighlight":'),
     ...(sourceOptions.textTracks.options ? {
       styledTextTracksTheme: sourceOptions.textTracks.options.theme,
       styledTextTracksFont: sourceOptions.textTracks.options.fontFace,
