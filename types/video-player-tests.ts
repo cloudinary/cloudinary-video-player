@@ -1,27 +1,29 @@
 /**
- * This file is used to validate the type spec. The code is not actually run.
+ * This file is used to validate the type spec. The code does not actually run.
  */
 
-import VideoPlayer, {Options} from './video-player';
+import cloudinary, { videoPlayer, videoPlayerWithProfile, VideoPlayer } from './video-player';
 
-const player: VideoPlayer = new VideoPlayer('player', {}, false);
+const player: VideoPlayer = cloudinary.videoPlayer('player', {}, () => {});
 
 player.source('test', {
-    sourceTypes: ['mp4/h264']
-})
-player.play();
-player.currentPublicId();
-player.pause()
-
-const player2 = new VideoPlayer('player2' , { bigPlayButton: false }, false)
-
-const pl = window.cloudinary.videoPlayer('test',{
-    cloud_name: 'demo' ,
-    secure: true ,
-    bigPlayButton: true,
-    controls: false
+  sourceTypes: ['mp4/h264']
 });
+player.play();
+player.pause();
 
-interface VideoPlayerWithVideoJs extends VideoPlayer {
-    videojs: Options;
-}
+const vPlayer: VideoPlayer = videoPlayer('player', {});
+
+vPlayer.source('test');
+
+async () => {
+  const profilePlayer = await videoPlayerWithProfile('player', {
+    constrols: false,
+    fontFace: 'Merienda'
+  });
+
+  profilePlayer.source({
+    publicId: 'elephants',
+    profile: 'default'
+  });
+};
