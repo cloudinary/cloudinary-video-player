@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.7-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.0...v1.10.7-edge.1) (2024-02-22)
+
+
+### Bug Fixes
+
+* type definitions ([0f1ab8a](https://github.com/cloudinary/cloudinary-video-player/commit/0f1ab8af191e598730000b0c79172f10b216a11d))
+
 ## [1.10.7-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.15...v1.10.7-edge.0) (2024-02-21)
 
 
