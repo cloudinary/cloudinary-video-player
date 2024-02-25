@@ -59,7 +59,7 @@ function pacedTranscript(config) {
         if (wordHighlight) {
           // Create a caption for every word, in which the current word is highlighted
           const slicedWords = words.slice(i, Math.min(i + maxWords, words.length));
-          slicedWords.forEach(word => {
+          slicedWords.forEach((word, idx) => {
             const captionText = words
               .slice(i, i + maxWords)
               .map(w => (w === word ? `<b>${w.word}</b>` : w.word))
@@ -70,6 +70,20 @@ function pacedTranscript(config) {
               endTime: word.end_time,
               text: captionText
             });
+
+            // if we haven't reached the end of the words array, and there's a gap between the current word end_time and the next word start_time, add a non-highlighted caption to fill the gap
+            if (words[idx + 1] && word.end_time < words[idx + 1].start_time) {
+              const captionText = words
+                .slice(i, i + maxWords)
+                .map(word => word.word)
+                .join(' ');
+
+              captions.push({
+                startTime: word.end_time,
+                endTime: words[idx + 1].start_time,
+                text: captionText
+              });
+            }
           });
         } else {
           const startTime = words[i].start_time;
