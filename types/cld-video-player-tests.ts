@@ -2,7 +2,7 @@
  * This file is used to validate the type spec. The code does not actually run.
  */
 
-import cloudinary, { videoPlayer, videoPlayerWithProfile, VideoPlayer } from './video-player';
+import cloudinary, { videoPlayer, videoPlayerWithProfile, VideoPlayer } from './cld-video-player';
 
 const player: VideoPlayer = cloudinary.videoPlayer('player', {}, () => {});
 
