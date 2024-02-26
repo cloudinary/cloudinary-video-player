@@ -5,7 +5,7 @@
 
 ### Features
 
-* kareoke style subtitles ([#563](https://github.com/cloudinary/cloudinary-video-player/issues/563)) ([99c1830](https://github.com/cloudinary/cloudinary-video-player/commit/99c18309c5ebbee5b50c41537d73abd30955b285))
+* karaoke style subtitles ([#563](https://github.com/cloudinary/cloudinary-video-player/issues/563)) ([99c1830](https://github.com/cloudinary/cloudinary-video-player/commit/99c18309c5ebbee5b50c41537d73abd30955b285))
 
 ## [1.10.7-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.1...v1.10.7-edge.2) (2024-02-26)
 
