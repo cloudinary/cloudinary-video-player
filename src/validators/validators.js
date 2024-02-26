@@ -107,7 +107,8 @@ export const sourceValidators = {
       default: validator.isBoolean,
       url: validator.isString,
       maxWords: validator.isNumber,
-      wordHighlight: validator.isBoolean
+      wordHighlight: validator.isBoolean,
+      timeOffset: validator.isNumber
     },
     subtitles: validator.isArrayOfObjects({
       label: validator.isString,
@@ -115,7 +116,8 @@ export const sourceValidators = {
       default: validator.isBoolean,
       url: validator.isString,
       maxWords: validator.isNumber,
-      wordHighlight: validator.isBoolean
+      wordHighlight: validator.isBoolean,
+      timeOffset: validator.isNumber
     })
   },
   info: {
