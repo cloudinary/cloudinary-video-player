@@ -7,6 +7,10 @@
     > div {
       margin: 3% !important;
     }
+    // Word highlight
+    &.cld-paced-text-tracks b {
+      color: var(--color-accent);
+    }
   }
   .vjs-text-track-cue {
     top: auto !important;
@@ -27,7 +31,7 @@
   .vjs-text-track-display:not(.cld-styled-text-tracks-theme-videojs-default) {
     .vjs-text-track-cue {
       font-family: inherit !important;
-      & > div {
+      > div {
         font-weight: 700;
         background-color: transparent !important;
         text-shadow: 0 0 0.2em rgba(0, 0, 0, 0.8);

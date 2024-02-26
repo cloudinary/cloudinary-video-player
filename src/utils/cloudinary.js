@@ -133,7 +133,7 @@ const isKeyInTransformation = (transformation, key) => {
 
 const addTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
-    if (track.maxWords && videojs.pacedTranscript) {
+    if ((track.maxWords || track.wordHighlight) && videojs.pacedTranscript) {
       videojs.pacedTranscript(track);
     } else if (track.src) {
       fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {

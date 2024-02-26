@@ -31,7 +31,7 @@
   .vjs-text-track-display {
 
     &.cld-styled-text-tracks-theme-yellow-outlined {
-      .vjs-text-track-cue {
+      div.vjs-text-track-cue {
         & > div {
           color: #FEF94A !important;
           text-shadow:
@@ -44,7 +44,7 @@
     }
 
     &.cld-styled-text-tracks-theme-3d {
-      .vjs-text-track-cue {
+      div.vjs-text-track-cue {
         & > div {
           $base-size: 0.03em;
           $base-color: #ff76ad;
@@ -59,7 +59,7 @@
     }
 
     &.cld-styled-text-tracks-theme-player-colors {
-      .vjs-text-track-cue {
+      div.vjs-text-track-cue {
         & > div {
           color: var(--color-text) !important;
           background-color: var(--color-accent) !important;
