@@ -7,7 +7,7 @@
   "main": "./dist/cld-video-player.min.js",
   "module": "./lib/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
-  "types": "./types/video-player.d.ts",
+  "types": "./types/cld-video-player.d.ts",
   "files": [
     "dist",
     "lib",
@@ -16,7 +16,11 @@
     "README.md"
   ],
   "exports": {
-    ".": "./lib/cld-video-player.js",
+    ".": {
+      "import": "./lib/cld-video-player.js",
+      "require": "./dist/cld-video-player.js",
+      "types": "./types/cld-video-player.d.ts"
+    },
     "./*": "./lib/*"
   },
   "scripts": {
