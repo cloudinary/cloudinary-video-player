@@ -7,6 +7,10 @@
     > div {
       margin: 3% !important;
     }
+    // Word highlight
+    &.cld-paced-text-tracks b {
+      color: var(--color-accent);
+    }
   }
   .vjs-text-track-cue {
     top: auto !important;
@@ -16,9 +20,6 @@
       display: inline-block !important;
       padding: 0.1em 0.3em;
       background-color: rgba(0, 0, 0, 0.5) !important;
-      > b {
-        color: hotpink;
-      }
     }
   }
   &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-text-track-cue {

@@ -38,7 +38,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
       styledTextTracksFontSize: sourceOptions.textTracks.options.fontSize,
       styledTextTracksGravity: sourceOptions.textTracks.options.gravity,
       styledTextTracksBox: hasConfig(sourceOptions.textTracks.options.box),
-      styledTextTracksStyle: hasConfig(sourceOptions.textTracks.options.style)
+      styledTextTracksStyle: hasConfig(sourceOptions.textTracks.options.style),
+      styledTextTracksWordHighlightStyle: hasConfig(sourceOptions.textTracks.options.wordHighlightStyle)
     } : {})
   } : {})
 });

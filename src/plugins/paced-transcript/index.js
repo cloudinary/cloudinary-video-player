@@ -17,6 +17,9 @@ function pacedTranscript(config) {
     wordHighlight: config.wordHighlight
   };
 
+  const classNames = player.textTrackDisplay.el().classList;
+  classNames.add('cld-paced-text-tracks');
+
   // Load the transcription file
   const initTranscript = async () => {
     try {
@@ -49,14 +52,12 @@ function pacedTranscript(config) {
   const parseTranscript = transcriptionData => {
     const captions = [];
 
-    const wordHighlight = options.wordHighlight;
-
     transcriptionData.forEach(segment => {
       const words = segment.words;
       const maxWords = options.maxWords || words.length;
 
       for (let i = 0; i < words.length; i += maxWords) {
-        if (wordHighlight) {
+        if (options.wordHighlight) {
           // Create a caption for every word, in which the current word is highlighted
           const slicedWords = words.slice(i, Math.min(i + maxWords, words.length));
           slicedWords.forEach((word, idx) => {

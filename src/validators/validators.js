@@ -98,7 +98,8 @@ export const sourceValidators = {
       fontSize: validator.isString,
       gravity: validator.isString,
       box: validator.isPlainObject,
-      style: validator.isPlainObject
+      style: validator.isPlainObject,
+      wordHighlightStyle: validator.isPlainObject
     },
     captions: {
       label: validator.isString,

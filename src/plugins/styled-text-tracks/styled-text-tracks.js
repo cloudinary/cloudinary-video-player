@@ -10,7 +10,8 @@ const styledTextTracks = (config, player) => {
     fontSize: config.fontSize,
     gravity: config.gravity || 'bottom',
     box: config.box,
-    style: config.style
+    style: config.style,
+    wordHighlightStyle: config.wordHighlightStyle
   };
 
   // Class Names - Theme/Gravity
@@ -73,6 +74,14 @@ const styledTextTracks = (config, player) => {
     applyImportantStyle(
       options.style,
       '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div'
+    );
+  }
+
+  // Custom styles
+  if (options.wordHighlightStyle) {
+    applyImportantStyle(
+      options.wordHighlightStyle,
+      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue b'
     );
   }
 };
