@@ -34,7 +34,7 @@ const setError = (that, res) => {
 };
 
 const setVideoSrc = (that, srcs) => {
-  console.log('Trying urls: ' + JSON.stringify(srcs));
+  console.log('Trying sources: ', srcs);
   srcs.forEach(s => {
     s.try = true;
   });
