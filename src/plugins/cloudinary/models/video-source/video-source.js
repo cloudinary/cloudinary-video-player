@@ -186,7 +186,8 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     if (this.isRawUrl) {
-      return [this.generateRawSource(this.publicId())];
+      const type = this.sourceTypes()[0] === 'auto' ? null : this.sourceTypes()[0];
+      return [this.generateRawSource(this.publicId(), type)];
     }
 
     const srcs = this.sourceTypes().map(sourceType => {
@@ -242,9 +243,11 @@ class VideoSource extends BaseSource {
     return srcs;
   }
 
-  generateRawSource(url) {
-    let type = url.split('.').pop();
-    const isAdaptive = ['mpd', 'm3u8'].indexOf(type) !== -1;
+  generateRawSource(url, type) {
+    type = type || url.split('.').pop();
+
+    const isAdaptive = ['hls', 'dash', 'mpd', 'm3u8'].indexOf(type) !== -1;
+
     if (CONTAINER_MIME_TYPES[type]) {
       type = CONTAINER_MIME_TYPES[type];
     } else {
