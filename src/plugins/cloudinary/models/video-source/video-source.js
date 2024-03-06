@@ -168,6 +168,10 @@ class VideoSource extends BaseSource {
 
     ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }));
 
+    if (!publicId && this.isRawUrl) {
+      return null;
+    }
+
     if (!publicId) {
       publicId = this.publicId();
       options = assign({}, options, DEFAULT_POSTER_PARAMS);
