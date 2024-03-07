@@ -37,13 +37,35 @@ export const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_VIDEO_EXTENSION
 // eslint-disable-next-line no-control-regex
 export const URL_PATTERN = RegExp('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\+.~#?&/=]*)');
 
-
 export const CONTAINER_MIME_TYPES = {
-  dash: ['application/dash+xml'],
-  hls: ['application/x-mpegURL'],
-  mpd: ['application/dash+xml'],
-  m3u8: ['application/x-mpegURL']
+  hls: 'application/x-mpegURL',
+  dash: 'application/dash+xml',
+
+  // See: https://docs.videojs.com/utils_mimetypes.js.html
+  opus: 'video/ogg',
+  ogv: 'video/ogg',
+  mp4: 'video/mp4',
+  mov: 'video/mp4',
+  m4v: 'video/mp4',
+  mkv: 'video/x-matroska',
+  m4a: 'audio/mp4',
+  mp3: 'audio/mpeg',
+  aac: 'audio/aac',
+  caf: 'audio/x-caf',
+  flac: 'audio/flac',
+  oga: 'audio/ogg',
+  wav: 'audio/wav',
+  m3u8: 'application/x-mpegURL',
+  mpd: 'application/dash+xml',
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  gif: 'image/gif',
+  png: 'image/png',
+  svg: 'image/svg+xml',
+  webp: 'image/webp'
 };
+
+export const ADAPTIVE_SOURCETYPES = ['hls', 'dash', 'mpd', 'm3u8'];
 
 export const FORMAT_MAPPINGS = {
   hls: 'm3u8',

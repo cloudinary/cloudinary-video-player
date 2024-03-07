@@ -158,7 +158,7 @@ describe('Raw url tests', () => {
     let source = new VideoSource(url, sourceDef);
     let srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
-    expect(srcs[0].type).toEqual(null);
+    expect(srcs[0].type).toEqual('video/mp4');
     expect(srcs[0].isAdaptive).toEqual(false);
   });
   it('Test raw url with transformations', () => {
@@ -169,7 +169,7 @@ describe('Raw url tests', () => {
     let source = new VideoSource(url, sourceDef);
     let srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
-    expect(srcs[0].type).toEqual(null);
+    expect(srcs[0].type).toEqual('video/mp4');
     expect(srcs[0].isAdaptive).toEqual(false);
   });
   it('Test raw url without extension', () => {
