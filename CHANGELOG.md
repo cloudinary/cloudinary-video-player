@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.7-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.4...v1.10.7-edge.5) (2024-03-07)
+
+
+### Bug Fixes
+
+* mimetypes ([#572](https://github.com/cloudinary/cloudinary-video-player/issues/572)) ([4fe8dfc](https://github.com/cloudinary/cloudinary-video-player/commit/4fe8dfc0d6022f05e9ffaee02bfa7f865418b91e))
+* poster image for raw URLs ([#573](https://github.com/cloudinary/cloudinary-video-player/issues/573)) ([a24d584](https://github.com/cloudinary/cloudinary-video-player/commit/a24d584852fe8c1490cdaa398a062667c37b91c4))
+
 ## [1.10.7-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.3...v1.10.7-edge.4) (2024-03-05)
 
 
