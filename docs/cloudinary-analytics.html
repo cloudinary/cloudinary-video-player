@@ -24,15 +24,21 @@
   <script type="text/javascript" src="./scripts.js"></script>
   <script type="text/javascript">
     window.addEventListener('load', function(){
-
-      player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo',
-        cloudinaryAnalytics: true,
+      const player = cloudinary.videoPlayer('player', {
+         cloud_name: 'demo',
+         secure: true,
+         cloudinaryAnalytics: true
       });
 
-      var source = { publicId: 'marmots', info: { title: 'marmots', subtitle: 'marmots subtitle', description: 'lorem ipsum marmots' } };
+      player.source('elephants');
 
-      player.source(source);
+      const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
+         cloud_name: 'demo',
+         secure: true,
+         cloudinaryAnalytics: true
+      });
+
+      adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
     }, false);
   </script>
 
@@ -51,13 +57,22 @@
       playsinline
       controls
       muted
+      autoplay
       class="cld-video-player"
-      width="500">
-    </video>
+      width="500"
+    ></video>
 
-    <p class="mt-4">
-      <a href="https://cloudinary.com/documentation/video_player_events_analytics#tracking_video_player_analytics">Analytics documentation</a>
-    </p>
+    <br><br><br>
+
+    <video
+      id="adpPlayer"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
 
     <h3 class="mt-4">Example Code:</h3>
 
@@ -68,24 +83,30 @@
           id="player"
           controls
           muted
+          autoplay
           class="cld-video-player"
           width="500"&gt;
         &lt;/video&gt;
 
       </code>
       <code class="language-javascript">
-        &lt;!-- Actual code --&gt;
         &lt;script type="text/javascript"&gt;
 
-          // Initialize player
-          var player = cloudinary.videoPlayer('player', {
+          const player = cloudinary.videoPlayer('player', {
             cloud_name: 'demo',
-            cloudinaryAnalytics: true,
+            secure: true,
+            cloudinaryAnalytics: true
           });
 
-          var source = { publicId: 'marmots', info: { title: 'marmots', subtitle: 'marmots subtitle', description: 'lorem ipsum marmots' } };
+          player.source('elephants');
 
-          player.source(source);
+          const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
+            cloud_name: 'demo',
+            secure: true,
+            cloudinaryAnalytics: true
+          });
+
+          adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
         &lt;/script&gt;
       </code>

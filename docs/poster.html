@@ -48,7 +48,12 @@
 
       player3 = cloudinary.videoPlayer('player-poster-options', {
         cloud_name: 'demo',
-        publicId: 'snow_horses'
+        publicId: 'dog'
+      });
+
+      player4 = cloudinary.videoPlayer('player-raw', {
+        cloud_name: 'demo',
+        publicId: 'https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8'
       });
 
     }, false);
@@ -78,6 +83,7 @@
 
     <div class="video-container mb-4">
       <h4>Specific frame poster</h4>
+      <h6>Default poster is middle frame</h6>
       <video
         id="player-frame-0"
         playsinline
@@ -94,6 +100,16 @@
         controls
         class="cld-video-player cld-fluid"
         data-cld-poster-options='{ "transformation": [{"width": "640", "height": "360", "crop": "pad", "effect": "grayscale" },{"overlay":"cloudinary_icon", "width":"300"},{"quality": "auto", "fetch_format": "auto"}] }'
+      ></video>
+    </div>
+
+    <div class="video-container mb-4">
+      <h4>Raw URL - default with no poster image</h4>
+      <video
+        id="player-raw"
+        playsinline
+        controls
+        class="cld-video-player cld-fluid"
       ></video>
     </div>
 
@@ -127,6 +143,14 @@
           class="cld-video-player cld-fluid"
           data-cld-poster-options='{ "transformation": [{"width": "640", "height": "360", "crop": "pad", "effect": "grayscale" },{"overlay":"cloudinary_icon", "width":"300"},{"quality": "auto", "fetch_format": "auto"}] }'&gt;
         &lt;/video&gt;
+
+        &lt;video
+          id="player-raw"
+          playsinline
+          controls
+          class="cld-video-player cld-fluid"
+        &lt;/video&gt;
+
       </code>
       <code class="language-javascript">
 
@@ -147,8 +171,14 @@
 
         player3 = cloudinary.videoPlayer('player-poster-options', {
           cloud_name: 'demo',
-          publicId: 'snow_horses'
+          publicId: 'dog'
         });
+
+        player4 = cloudinary.videoPlayer('player-raw', {
+          cloud_name: 'demo',
+          publicId: 'https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8'
+        });
+
       </code>
     </pre>
   </div>

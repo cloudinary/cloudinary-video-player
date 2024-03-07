@@ -19,7 +19,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css">
     <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
   -->
 
   <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0.7.20/src/ua-parser.min.js"></script>
@@ -30,22 +29,42 @@
 
     window.addEventListener('load', function(){
 
+      var uap = new UAParser(navigator.userAgent);
+
+      // f_auto (default) player
       player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: 'f_auto' },
       });
 
-      playerNoAuto = cloudinary.videoPlayer('player-no-auto', {
-        cloud_name: 'demo',
-        publicId: 'product-gallery-tutorial_hlk0na',
+      player.videojs.on('playing', function() {
+        document.getElementById('info').innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
       });
 
-      playerAutoProg = cloudinary.videoPlayer('player-auto-prog', {
-        cloud_name: 'demo',
+      // mp4/av1 player
+      playerAv1 = cloudinary.videoPlayer('player-av1', {
+        cloudName: 'demo',
         publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: 'mp4/av1' },
+        sourceTypes: ['mp4/av1']
       });
 
-      playerAutoProg.play()
+      playerAv1.videojs.on('playing', function() {
+        document.getElementById('info-mp4-av1').innerHTML = uap.getBrowser().name + ' is playing ' + playerAv1.videojs.currentSrc();
+      });
+
+      // webm/vp9 player
+      playerVp9 = cloudinary.videoPlayer('player-vp9', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: 'webm/vp9' },
+        sourceTypes: ['webm/vp9']
+      });
+
+      playerVp9.videojs.on('playing', function() {
+        document.getElementById('info-vp9').innerHTML = uap.getBrowser().name + ' is playing ' + playerVp9.videojs.currentSrc();
+      });
 
     }, false);
 
@@ -59,8 +78,39 @@
     </nav>
     <h1>Cloudinary Video Player</h1>
 
+    <h2>Codecs & Formats</h2>
+
+    <h3 class="mb-4">f_auto</h3>
+
     <video
       id="player"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p id="info"></p>
+
+    <h3 class="mb-4">mp4/av1</h3>
+
+    <video
+      id="player-av1"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p id="info-mp4-av1"></p>
+
+    <h3 class="mb-4">webm/vp9</h3>
+    <video
+      id="player-vp9"
       playsinline
       controls
       muted
@@ -69,38 +119,7 @@
       width="500">
     </video>
 
-    <span id="cached-info"></span>
-    <h3 class="mb-4">Autoplay inline</h3>
-
-    <br/>
-    <br/>
-
-    <video
-        id="player-no-auto"
-        playsinline
-        controls
-        muted
-        class="cld-video-player"
-        width="500">
-    </video>
-
-    <span id="cached-info-webm"></span>
-
-    <h3 class="mb-4">No autoplay</h3>
-
-    <br/>
-    <br/>
-
-    <video
-          id="player-auto-prog"
-          playsinline
-          controls
-          muted
-          class="cld-video-player"
-          width="500">
-    </video>
-
-    <h3 class="mb-4">Call play api</h3>
+    <p id="info-vp9"></p>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -120,14 +139,29 @@
       </code>
       <code class="language-javascript">
 
-        // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        // f_auto (default) player
+        player = cloudinary.videoPlayer('player', {
+          cloudName: 'demo',
+          publicId: 'product-gallery-tutorial_hlk0na',
+          info: { title: 'f_auto' },
+        });
 
-        // Define source
-        var source = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about horses' } };
+        // mp4/av1 player
+        playerAv1 = cloudinary.videoPlayer('player-av1', {
+          cloudName: 'demo',
+          publicId: 'product-gallery-tutorial_hlk0na',
+          info: { title: 'mp4/av1' },
+          sourceTypes: ['mp4/av1']
+        });
 
-        // Play source
-        player.source(source);
+        // webm/vp9 player
+        playerVp9 = cloudinary.videoPlayer('player-vp9', {
+          cloudName: 'demo',
+          publicId: 'Image_Performance',
+          info: { title: 'webm/vp9' },
+          sourceTypes: ['webm/vp9']
+        });
+
       </code>
     </pre>
   </div>
