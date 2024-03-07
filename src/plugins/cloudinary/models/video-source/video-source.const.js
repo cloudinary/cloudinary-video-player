@@ -65,6 +65,8 @@ export const CONTAINER_MIME_TYPES = {
   webp: 'image/webp'
 };
 
+export const ADAPTIVE_SOURCETYPES = ['hls', 'dash', 'mpd', 'm3u8'];
+
 export const FORMAT_MAPPINGS = {
   hls: 'm3u8',
   dash: 'mpd'

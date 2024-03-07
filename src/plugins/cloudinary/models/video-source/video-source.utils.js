@@ -11,7 +11,7 @@ export function formatToMimeTypeAndTransformation(format) {
 
   if (codec) {
     const transformation = codecToSrcTransformation(codec);
-    result = [`${CONTAINER_MIME_TYPES[container]}; codecs="${codecShorthandTrans(codec)}"`, transformation];
+    result = [`${mimetype}; codecs="${codecShorthandTrans(codec)}"`, transformation];
   }
 
   return result;
