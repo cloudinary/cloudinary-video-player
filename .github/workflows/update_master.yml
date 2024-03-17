@@ -22,6 +22,15 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          title: Update Master
-          body: This PR was created Automatically
           branch: update-master
+          title: "chore: update master"
+          body: |
+            This PR was created Automatically.
+
+            Please approve and squash-merge it.
+
+            Before merging, make sure all the changes are listed in the squash-commit footer.
+            Format must be plain conventional-commit, one per line.
+            No `*` bullets and no `----` comments are allowed.
+
+            Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
