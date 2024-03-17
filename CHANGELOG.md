@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.11.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6...v1.11.0) (2024-03-17)
+
+
+### Features
+
+* kareoke style subtitles ([#563](https://github.com/cloudinary/cloudinary-video-player/issues/563)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+
+
+### Bug Fixes
+
+* allowUsageReport ([#569](https://github.com/cloudinary/cloudinary-video-player/issues/569)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+* av1 support ([#557](https://github.com/cloudinary/cloudinary-video-player/issues/557)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+* mimetypes ([#572](https://github.com/cloudinary/cloudinary-video-player/issues/572)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+* poster image for raw URLs ([#573](https://github.com/cloudinary/cloudinary-video-player/issues/573)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+* types definitions ([#565](https://github.com/cloudinary/cloudinary-video-player/issues/565)) ([a6da706](https://github.com/cloudinary/cloudinary-video-player/commit/a6da7060ce798cd55d2162d172c68369f60bb929))
+
 ## [1.10.6](https://github.com/cloudinary/cloudinary-video-player/compare/1.10.5...v1.10.6) (2024-02-13)
 
 ### Bug Fixes
