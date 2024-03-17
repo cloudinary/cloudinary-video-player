@@ -1,4 +1,4 @@
-name: 🏹 Update Master
+name: 🏹 Update Master (PR)
 
 on:
   workflow_dispatch:
@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: master
+
+      - run: git checkout master
 
       - name: Merge edge into master
-        run: git merge -X ours --no-edit origin/edge
+        run: git merge -X ours --no-edit edge
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
