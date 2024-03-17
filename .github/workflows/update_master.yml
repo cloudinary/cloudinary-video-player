@@ -13,7 +13,10 @@ jobs:
           fetch-depth: 0
 
       - name: Merge edge into master
-        run: git merge -X ours --no-edit origin/edge
+        run: |
+          git config user.name "cloudinary-jenkins"
+          git config user.email "cloudinary-jenkins@clodinary.com"
+          git merge -X ours --no-edit origin/edge
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
