@@ -11,6 +11,8 @@ jobs:
         with:
           ref: master
 
+      - run: git fetch origin edge
+
       - name: Merge edge into master
         run: git merge -X ours --no-edit edge
 
