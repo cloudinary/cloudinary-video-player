@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
           branch: update-master
-          title: chore: update master
+          title: "chore: update master"
           body: |
             This PR was created Automatically.
 
