@@ -26,7 +26,7 @@
 
 </head>
 <body>
-  <div class="container p-4 col-12 col-md-9 col-xl-6">
+  <div class="container p-4 col-12">
     <nav class="nav mb-2">
       <a href="./index.html">&#60;&#60; Back to examples index</a>
     </nav>
@@ -37,34 +37,17 @@
       Note: Player version is managed in the sandbox dependencies panel.
     </p>
 
-    <iframe src="https://codesandbox.io/embed/vp-as-a-module-with-dashjs-2hh65l?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="VP as a module with DashJS"
-     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-   ></iframe>
+    <p class="codepen" data-height="600" data-default-tab="js,result" data-slug-hash="XWQmLgv" data-editable="true" data-user="tsi" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+      <span>See the Pen <a href="https://codepen.io/tsi/pen/XWQmLgv">
+      VP ESM</a> by Tsachi Shlidor (<a href="https://codepen.io/tsi">@tsi</a>)
+      on <a href="https://codepen.io">CodePen</a>.</span>
+    </p>
+    <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
 
-    <h3 class="mt-4">Example Code:</h3>
-    <pre>
-      <code class="language-javascript">
-
-        // Import player and styles
-        import { videoPlayer } from "cloudinary-video-player";
-        import "cloudinary-video-player/cld-video-player.min.css";
-
-        // Initialize player
-        var player = videoPlayer('player', { cloud_name: 'demo' });
-
-        // Define source
-        var source = { publicId: 'elephants' } };
-
-        // Play source
-        player.source(source);
-      </code>
-    </pre>
   </div>
 
 </body>

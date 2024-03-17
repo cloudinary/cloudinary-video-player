@@ -255,9 +255,10 @@ class CloudinaryContext {
 
     const refresh = () => {
       const src = this.source();
-      const { posterColor } = this.player.cloudinary.posterOptions();
-      if (posterColor) {
-        this.disablePoster(posterColor);
+      const posterOptions = Object.assign({}, this.player.cloudinary.posterOptions(), src.getInitOptions().poster);
+
+      if (posterOptions.posterColor) {
+        this.disablePoster(posterOptions.posterColor);
       } else if (src.poster()) {
         this.player.poster(src.poster().url());
       }
@@ -298,13 +299,12 @@ class CloudinaryContext {
 
     const posterOptionsForCurrent = () => {
       const opts = assign({}, this.posterOptions());
-      if (opts.transformation) {
-        if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
-          opts.transformation.crop = 'scale';
-        }
-      }
 
       opts.transformation = opts.transformation || {};
+
+      if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
+        opts.transformation.crop = 'scale';
+      }
 
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)

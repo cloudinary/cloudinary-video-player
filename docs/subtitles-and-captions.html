@@ -178,9 +178,42 @@
         });
       });
 
+      // Karaoke
+      const karaokePlayer = cloudinary.videoPlayer('karaoke', {
+        cloudName: 'demo',
+        autoplay: true,
+        muted: true
+      });
+
+      karaokePlayer.source('lincoln', {
+        textTracks: {
+          options: {
+            fontFace: 'Lobster',
+            fontSize: '200%',
+            gravity: 'top',
+            wordHighlightStyle: {
+              color: 'white',
+              'text-shadow': `2px 2px 0px violet,
+                4px 4px 0px indigo,
+                6px 6px 0px blue,
+                8px 8px 0px green,
+                10px 10px 0px yellow,
+                12px 12px 0px orange,
+                14px 14px 0px red`
+            }
+          },
+          captions: {
+            label: 'KARAOKE',
+            language: 'en',
+            wordHighlight: true,
+            maxWords: 5,
+            timeOffset: -0.2,
+            default: true
+          }
+        }
+      });
     }, false);
   </script>
-
 </head>
 <body>
   <div class="container p-4 col-12 col-md-9">
@@ -198,8 +231,8 @@
       autoplay
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
-      width="500">
-    </video>
+      width="500"
+    ></video>
 
     <h4 class="mt-4 mb-2">Playlist Subtitles (switch per source)</h4>
 
@@ -210,8 +243,8 @@
       muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
-      width="500">
-    </video>
+      width="500"
+    ></video>
 
     <h4 class="mt-4 mb-2">Paced & Styled Captions</h4>
 
@@ -260,8 +293,20 @@
       muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
-      width="500">
-    </video>
+      width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Karaoke player</h4>
+
+    <video
+      id="karaoke"
+      playsinline
+      controls
+      muted
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500"
+    ></video>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -291,6 +336,16 @@
 
         &lt;video
           id="paced"
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          crossorigin="anonymous"
+          width="500">
+        &lt;/video&gt;
+
+        &lt;video
+          id="karaoke"
           controls
           muted
           autoplay
@@ -393,43 +448,77 @@
           muted: true
         });
 
-        const textTracks = {
-          options: {
-            // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
-            // fontFace: "", // any Google font
-            // fontSize: "", // any CSS value
-            // gravity: "", // i.e. 'top-left', 'center' etc
-            // box: { // Object of x/y/width/height
-            //   x: "0%",
-            //   y: "0%",
-            //   width: "100%",
-            //   height: "100%"
-            // },
-            // style: { // Styles key-value object
-            //   color: "hotpink"
-            // }
-          },
-          captions: {
-            label: 'English captions',
-            language: 'en',
-            maxWords: 4,
-            default: true,
-          },
-          subtitles: [
-            {
-              label: 'German subtitles',
-              language: 'de',
-              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-            },
-            {
-              label: 'Russian subtitles',
-              language: 'ru',
-              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
-            }
-          ]
-        }
         pacedPlayer.source('lincoln', {
-          textTracks
+          textTracks: {
+            options: {
+              // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+              // fontFace: "", // any Google font
+              // fontSize: "", // any CSS value
+              // gravity: "", // i.e. 'top-left', 'center' etc
+              // box: { // Object of x/y/width/height
+              //   x: "0%",
+              //   y: "0%",
+              //   width: "100%",
+              //   height: "100%"
+              // },
+              // style: { // Styles key-value object
+              //   color: "hotpink"
+              // }
+            },
+            captions: {
+              label: 'English Paced',
+              language: 'en',
+              maxWords: 4,
+              default: true
+            },
+            subtitles: [
+              {
+                label: 'German subtitles',
+                language: 'de',
+                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
+              },
+              {
+                label: 'Russian subtitles',
+                language: 'ru',
+                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+              }
+            ]
+          }
+        });
+
+        // Karaoke
+        const karaokePlayer = cloudinary.videoPlayer('karaoke', {
+          cloudName: 'demo',
+          autoplay: true,
+          muted: true
+        });
+
+        karaokePlayer.source('lincoln', {
+          textTracks: {
+            options: {
+              fontFace: 'Lobster',
+              fontSize: '200%',
+              gravity: 'top',
+              wordHighlightStyle: {
+                color: 'white',
+                'text-shadow': `2px 2px 0px violet,
+                  4px 4px 0px indigo,
+                  6px 6px 0px blue,
+                  8px 8px 0px green,
+                  10px 10px 0px yellow,
+                  12px 12px 0px orange,
+                  14px 14px 0px red`
+              }
+            },
+            captions: {
+              label: 'KARAOKE',
+              language: 'en',
+              wordHighlight: true,
+              maxWords: 5,
+              timeOffset: -0.2,
+              default: true
+            }
+          }
         });
 
       </code>

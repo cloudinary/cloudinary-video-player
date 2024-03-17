@@ -3,10 +3,13 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "declarationDir": "./types"
     },
     "include": [
         "dist/**/*",
+        "lib/**/*",
         "types/**/*"
     ],
     "exclude": [

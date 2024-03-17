@@ -98,21 +98,26 @@ export const sourceValidators = {
       fontSize: validator.isString,
       gravity: validator.isString,
       box: validator.isPlainObject,
-      style: validator.isPlainObject
+      style: validator.isPlainObject,
+      wordHighlightStyle: validator.isPlainObject
     },
     captions: {
       label: validator.isString,
       language: validator.isString,
       default: validator.isBoolean,
       url: validator.isString,
-      maxWords: validator.isNumber
+      maxWords: validator.isNumber,
+      wordHighlight: validator.isBoolean,
+      timeOffset: validator.isNumber
     },
     subtitles: validator.isArrayOfObjects({
       label: validator.isString,
       language: validator.isString,
       default: validator.isBoolean,
       url: validator.isString,
-      maxWords: validator.isNumber
+      maxWords: validator.isNumber,
+      wordHighlight: validator.isBoolean,
+      timeOffset: validator.isNumber
     })
   },
   info: {

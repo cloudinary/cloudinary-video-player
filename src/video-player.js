@@ -34,22 +34,11 @@ Object.keys(plugins).forEach((key) => {
 
 overrideDefaultVideojsComponents();
 
-let _allowUsageReport = true;
-
 class VideoPlayer extends Utils.mixin(Eventable) {
 
   static all(selector, ...args) {
     const nodeList = document.querySelectorAll(selector);
     return [...nodeList].map((node) => new VideoPlayer(node, ...args));
-  }
-
-  static allowUsageReport(bool) {
-    if (bool === undefined) {
-      return _allowUsageReport;
-    }
-
-    _allowUsageReport = !!bool;
-    return _allowUsageReport;
   }
 
   get playerOptions() {
@@ -112,8 +101,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _sendInternalAnalytics(additionalOptions = {}) {
+    const options = Utils.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
+    if (!options.allowUsageReport) {
+      return;
+    }
     try {
-      const options = Utils.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
       const analyticsData = getAnalyticsFromPlayerOptions(options);
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
@@ -548,7 +540,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.shoppable(this.videojs, options);
     }
 
-    if (VideoPlayer.allowUsageReport()) {
+    if (this.playerOptions.allowUsageReport) {
       options.usageReport = true;
     }
 
