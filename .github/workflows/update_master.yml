@@ -1,4 +1,4 @@
-name: 🏹 Update Master (PR)
+name: 🏹 Update Master
 
 on:
   workflow_dispatch:
@@ -11,10 +11,8 @@ jobs:
         with:
           ref: master
 
-      - run: git fetch origin edge
-
       - name: Merge edge into master
-        run: git merge -X ours --no-edit edge
+        run: git merge -X ours --no-edit origin/edge
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
