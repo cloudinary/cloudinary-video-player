@@ -7,10 +7,6 @@
     > div {
       margin: 3% !important;
     }
-    // Word highlight
-    &.cld-paced-text-tracks b {
-      color: var(--color-accent);
-    }
   }
   .vjs-text-track-cue {
     top: auto !important;
@@ -25,6 +21,11 @@
   &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-text-track-cue {
     // Position when control-bar is not visible
     bottom: 1.5rem !important;
+  }
+
+  // Word highlight - default style
+  .cld-paced-text-tracks .vjs-text-track-cue b {
+    color: var(--color-accent);
   }
 
   // Default caption styles, when not configured to `videojs-default` theme

@@ -1,8 +1,9 @@
-export default async function lazyPlugin(config) {
+import styledTextTracks from './styled-text-tracks';
+
+export default async function styledTextTracksPlugin(config) {
   const player = this;
   try {
-    const { default: initPlugin } = await import(/* webpackChunkName: "styled-text-tracks" */ './styled-text-tracks');
-    player.ready(() => initPlugin(config, player));
+    player.ready(() => styledTextTracks(config, player));
   } catch (error) {
     console.error('Failed to load plugin:', error);
   }
