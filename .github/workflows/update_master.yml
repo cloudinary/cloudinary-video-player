@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: git fetch
+
       - run: git checkout master
 
       - name: Merge edge into master
