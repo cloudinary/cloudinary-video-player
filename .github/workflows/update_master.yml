@@ -1,0 +1,21 @@
+name: 🏹 Update Master
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update_master_and_create_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Merge edge into master
+        run: git merge -X ours --no-edit edge
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          title: Update Master
+          body: This PR was created Automatically
+          branch: update-master
