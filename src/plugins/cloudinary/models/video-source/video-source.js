@@ -5,6 +5,7 @@ import { castArray } from 'utils/array';
 import { SOURCE_TYPE } from 'utils/consts';
 import {
   CONTAINER_MIME_TYPES,
+  ADAPTIVE_SOURCETYPES,
   DEFAULT_POSTER_PARAMS,
   DEFAULT_VIDEO_PARAMS,
   VIDEO_SUFFIX_REMOVAL_PATTERN
@@ -168,6 +169,10 @@ class VideoSource extends BaseSource {
 
     ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }));
 
+    if (!publicId && this.isRawUrl) {
+      return null;
+    }
+
     if (!publicId) {
       publicId = this.publicId();
       options = assign({}, options, DEFAULT_POSTER_PARAMS);
@@ -193,7 +198,7 @@ class VideoSource extends BaseSource {
     const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
-      const isAdaptive = ['mpd', 'm3u8'].indexOf(format) !== -1;
+      const isAdaptive = ADAPTIVE_SOURCETYPES.includes(format);
       const opts = {};
 
       if (srcTransformation) {
@@ -244,10 +249,12 @@ class VideoSource extends BaseSource {
   }
 
   generateRawSource(url, type) {
-    const t = type || url.split('.').pop();
-    const isAdaptive = !!CONTAINER_MIME_TYPES[t];
-    if (isAdaptive) {
-      type = CONTAINER_MIME_TYPES[t][0];
+    type = type || url.split('.').pop();
+
+    const isAdaptive = ADAPTIVE_SOURCETYPES.includes(type);
+
+    if (CONTAINER_MIME_TYPES[type]) {
+      type = CONTAINER_MIME_TYPES[type];
     } else {
       type = type ? `video/${type}` : null;
     }

@@ -6,16 +6,12 @@ import { some } from '../../../../utils/array';
 
 export function formatToMimeTypeAndTransformation(format) {
   const [container, codec] = format.toLowerCase().split('\/');
-  let result = CONTAINER_MIME_TYPES[container];
-  let transformation = null;
-
-  if (!result) {
-    result = [`video/${container}`, transformation];
-  }
+  const mimetype = CONTAINER_MIME_TYPES[container] || `video/${container}`;
+  let result = [mimetype];
 
   if (codec) {
-    transformation = codecToSrcTransformation(codec);
-    result = [`${result[0]}; codecs="${codecShorthandTrans(codec)}"`, transformation];
+    const transformation = codecToSrcTransformation(codec);
+    result = [`${mimetype}; codecs="${codecShorthandTrans(codec)}"`, transformation];
   }
 
   return result;
