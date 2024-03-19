@@ -14,6 +14,9 @@ const styledTextTracks = (config, player) => {
     wordHighlightStyle: config.wordHighlightStyle
   };
 
+  const styleEl = document.createElement('style');
+  player.el_.appendChild(styleEl);
+
   // Class Names - Theme/Gravity
   const classNames = player.textTrackDisplay.el().classList;
   classNames.forEach(className => {
@@ -28,60 +31,66 @@ const styledTextTracks = (config, player) => {
     classNames.add(`cld-styled-text-tracks-gravity-${gravity}`);
   });
 
-  // Font
-  if (options.fontFace) {
-    fontFace(player.textTrackDisplay.el(), options.fontFace);
-  }
-
-  const applyImportantStyle = (style, selector) => {
-    const styleEl = document.createElement('style');
+  const applyStyle = (style, selector) => {
     if (Object.entries(style)) {
       const css = Object.entries(style).reduce((acc, [key, value]) => {
         return acc + `${key}: ${value} !important; `;
       }, '');
-      styleEl.innerHTML = `
-      .${playerClassPrefix(player)} ${selector} {
-          ${css}
-        }
-      `;
-      player.el_.appendChild(styleEl);
+      styleEl.innerHTML += `${selector} { ${css} } `;
     }
   };
+
+  const applyWrapperStyle = (style) => {
+    const selector = `
+      .${playerClassPrefix(player)} .vjs-text-track-display.cld-styled-text-tracks,
+      .${playerClassPrefix(player)} ::-webkit-media-text-track-display
+    `;
+    applyStyle(style, selector);
+  };
+
+  const applyCueStyle = (style) => {
+    const selector = `
+      .${playerClassPrefix(player)} .vjs-text-track-cue > div,
+      .${playerClassPrefix(player)} ::cue
+    `;
+    applyStyle(style, selector);
+  };
+
+  // Font
+  if (options.fontFace) {
+    fontFace(player.textTrackDisplay.el(), options.fontFace);
+    applyCueStyle({ 'font-family': options.fontFace });
+  }
 
   // Custom bounding box
   if (options.box) {
     const { x, y, width, height } = options.box;
-    applyImportantStyle(
-      {
-        translate: `${x ? x : 0} ${y ? y : 0}`,
-        ...(width ? { width } : undefined),
-        ...(height ? { height } : undefined)
-      },
-      '.vjs-text-track-display.cld-styled-text-tracks'
-    );
+    applyWrapperStyle({
+      translate: `${x ? x : 0} ${y ? y : 0}`,
+      ...(width ? { width } : undefined),
+      ...(height ? { height } : undefined)
+    });
   }
 
   // Custom font-size
   if (options.fontSize) {
-    applyImportantStyle(
-      { 'font-size': options.fontSize },
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div'
-    );
+    applyCueStyle({ 'font-size': options.fontSize });
   }
 
   // Custom styles
   if (options.style) {
-    applyImportantStyle(
-      options.style,
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue > div'
-    );
+    applyCueStyle(options.style);
   }
 
-  // Custom styles
+  // Word highlight styles
   if (options.wordHighlightStyle) {
-    applyImportantStyle(
+    applyStyle(
       options.wordHighlightStyle,
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue b'
+      `.${playerClassPrefix(player)} .cld-paced-text-tracks .vjs-text-track-cue b`
+    );
+    applyStyle(
+      options.wordHighlightStyle,
+      'video::cue(b)'
     );
   }
 };
