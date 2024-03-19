@@ -4,8 +4,8 @@
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
+  "module": "./lib/videoPlayer.js",
   "main": "./dist/cld-video-player.min.js",
-  "module": "./lib/cld-video-player.js",
   "style": "./dist/cld-video-player.min.css",
   "types": "./types/cld-video-player.d.ts",
   "files": [
