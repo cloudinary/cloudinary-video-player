@@ -28,7 +28,15 @@
   }
 
   // Themes
-  .vjs-text-track-display {
+  div.vjs-text-track-display.cld-styled-text-tracks-theme-yellow-outlined div.vjs-text-track-cue > div,
+  &:has(.cld-styled-text-tracks-theme-yellow-outlined) ::cue {
+    color: #FEF94A !important;
+    text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+  }
 
     &.cld-styled-text-tracks-theme-yellow-outlined {
       div.vjs-text-track-cue {

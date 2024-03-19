@@ -27,6 +27,11 @@
     bottom: 1.5rem !important;
   }
 
+  // Word highlight - default style
+  .cld-paced-text-tracks .vjs-text-track-cue b {
+    color: var(--color-accent);
+  }
+
   // Default caption styles, when not configured to `videojs-default` theme
   .vjs-text-track-display:not(.cld-styled-text-tracks-theme-videojs-default) {
     .vjs-text-track-cue {
