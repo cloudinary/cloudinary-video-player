@@ -13,11 +13,12 @@
     "lib",
     "types",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "!**/*.map"
   ],
   "exports": {
     ".": {
-      "import": "./lib/cld-video-player.js",
+      "import": "./lib/videoPlayer.js",
       "require": "./dist/cld-video-player.js",
       "types": "./types/cld-video-player.d.ts"
     },
