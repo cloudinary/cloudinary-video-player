@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.11.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.0...v1.11.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* styled subtitles browser compatibility ([#576](https://github.com/cloudinary/cloudinary-video-player/issues/576)) ([efbee25](https://github.com/cloudinary/cloudinary-video-player/commit/efbee2593b00e34e5dac883593ab2f4ff56e1b28))
+
 ## [1.11.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6...v1.11.0) (2024-03-17)
 
 
