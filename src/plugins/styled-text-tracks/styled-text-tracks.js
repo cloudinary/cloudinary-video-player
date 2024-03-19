@@ -93,14 +93,6 @@ const styledTextTracks = (config, player) => {
       'video::cue(b)'
     );
   }
-
-  // Custom styles
-  if (options.wordHighlightStyle) {
-    applyImportantStyle(
-      options.wordHighlightStyle,
-      '.vjs-text-track-display.cld-styled-text-tracks .vjs-text-track-cue b'
-    );
-  }
 };
 
 export default styledTextTracks;
