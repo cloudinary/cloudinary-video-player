@@ -1,36 +1,38 @@
 import { CONTAINER_MIME_TYPES, FORMAT_MAPPINGS } from './video-source.const';
-import { codecShorthandTrans, codecToSrcTransformation, VIDEO_CODEC } from '../../common';
+import { VIDEO_CODEC } from '../../common';
 import { isPlainObject, isString } from '../../../../utils/type-inference';
 import { isKeyInTransformation } from 'utils/cloudinary';
 import { some } from '../../../../utils/array';
 
 export function formatToMimeTypeAndTransformation(format) {
-  const [container, codec] = format.toLowerCase().split('\/');
+  const [container, codec] = format.toLowerCase().split('/');
   const mimetype = CONTAINER_MIME_TYPES[container] || `video/${container}`;
   let result = [mimetype];
 
   if (codec) {
-    const transformation = codecToSrcTransformation(codec);
-    result = [`${mimetype}; codecs="${codecShorthandTrans(codec)}"`, transformation];
+    const transformation = { video_codec: codec };
+    result = [mimetype, transformation];
   }
 
   return result;
 }
 
 export function normalizeFormat(format) {
-  format = format.toLowerCase().split('\/').shift();
+  format = format.toLowerCase().split('/').shift();
 
   let res = FORMAT_MAPPINGS[format];
   if (!res) {
-    res = format.split('\/').shift();
+    res = format.split('/').shift();
   }
 
   return res;
 }
 
-const isContainCodec = (value) => value && some(Object.values(VIDEO_CODEC), (codec) => value.includes(codec));
+const hasCodec = value =>
+  value && some(Object.values(VIDEO_CODEC), codec => value.includes(codec));
 
-const hasCodecSrcTrans = (transformations) => some(['video_codec', 'streaming_profile'], (key) => isKeyInTransformation(transformations, key));
+const hasCodecSrcTrans = transformations =>
+  some(['video_codec', 'streaming_profile'], key => isKeyInTransformation(transformations, key));
 
 export const isCodecAlreadyExist = (transformations, rawTransformation) => {
   if (!(transformations || rawTransformation)) {
@@ -42,10 +44,12 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
   }
 
   if (isString(rawTransformation)) {
-    return isContainCodec(rawTransformation);
+    return hasCodec(rawTransformation);
   }
 
-  return some(transformations, (transformation) => {
-    return some(transformation, (item) => isContainCodec(isPlainObject(item) ? item.video_codec : item));
+  return some(transformations, transformation => {
+    return some(transformation, item =>
+      hasCodec(isPlainObject(item) ? item.video_codec : item)
+    );
   });
 };
