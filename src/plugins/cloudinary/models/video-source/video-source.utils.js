@@ -28,7 +28,7 @@ export function normalizeFormat(format) {
   return res;
 }
 
-const isContainCodec = value =>
+const hasCodec = value =>
   value && some(Object.values(VIDEO_CODEC), codec => value.includes(codec));
 
 const hasCodecSrcTrans = transformations =>
@@ -44,12 +44,12 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
   }
 
   if (isString(rawTransformation)) {
-    return isContainCodec(rawTransformation);
+    return hasCodec(rawTransformation);
   }
 
   return some(transformations, transformation => {
     return some(transformation, item =>
-      isContainCodec(isPlainObject(item) ? item.video_codec : item)
+      hasCodec(isPlainObject(item) ? item.video_codec : item)
     );
   });
 };
