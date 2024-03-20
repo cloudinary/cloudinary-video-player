@@ -1,14 +1,11 @@
-import videojs from 'video.js';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
 import { assign } from 'utils/assign';
 import { isFunction } from 'utils/type-inference';
-import plugins from 'plugins';
 import {
   normalizeOptions,
   mergeTransformations,
-  codecShorthandTrans,
   extendCloudinaryConfig,
   setupCloudinaryMiddleware
 } from './common';
@@ -86,8 +83,8 @@ class CloudinaryContext {
       _source = src;
 
       const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
-      if (plugins.dashPlugin && isDashRequired) {
-        plugins.dashPlugin().then(() => {
+      if (isDashRequired) {
+        import(/* webpackChunkName: "dash" */ 'videojs-contrib-dash').then(() => {
           refresh();
         });
       } else if (!options.skipRefresh) {
@@ -270,10 +267,6 @@ class CloudinaryContext {
             const parts = src.type.split('; ');
             let typeStr = `video/mp4; ${parts[1] || ''}`;
             const canPlay = testCanPlayTypeAndTypeSupported(typeStr);
-            if (videojs.browser.IS_ANY_SAFARI) {
-              // work around safari saying it cant play h265
-              src.type = `${parts[0]}; ${codecShorthandTrans('h264')}`;
-            }
             if (canPlay) {
               srcs.push(src);
             }

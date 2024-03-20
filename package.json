@@ -76,11 +76,11 @@
   "dependencies": {
     "@cloudinary/url-gen": "^1.16.1",
     "cloudinary-video-analytics": "1.4.3",
-    "dashjs": "^4.7.3",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
     "video.js": "8.10.0",
     "videojs-contrib-ads": "^7.3.3",
+    "videojs-contrib-dash": "^5.1.1",
     "videojs-ima": "^2.3.0",
     "videojs-per-source-behaviors": "^3.0.1",
     "webfontloader": "^1.6.28"
@@ -93,7 +93,6 @@
     "@babel/preset-env": "^7.19.4",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
-    "@types/video.js": "^7.3.52",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.2.2",
