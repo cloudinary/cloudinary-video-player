@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.0...v2.0.0-edge.1) (2024-03-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default ES import is now only the player core plugins need to be explicitly imported
+
+### Performance Improvements
+
+* default export to be base videoPlayer ([#588](https://github.com/cloudinary/cloudinary-video-player/issues/588)) ([259cb24](https://github.com/cloudinary/cloudinary-video-player/commit/259cb24ab1226f8c9c8cd720588c8748ee8f9b6b))
+
 ## [1.11.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.5...v1.11.1-edge.0) (2024-03-17)
 
 
