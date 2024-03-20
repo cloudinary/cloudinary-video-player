@@ -2,11 +2,13 @@
 // includes all plugins.
 
 // Usage:
-// import { videoPlayer, videoPlayers } from 'cloudinary-video-player';
+// import { videoPlayer, videoPlayers } from 'cloudinary-video-player/cld-video-player';
 // Or:
-// import cloudinary from 'cloudinary-video-player';
+// import cloudinary from 'cloudinary-video-player/cld-video-player';
 
 import cloudinary from './index.js';
+
+export * from 'videojs-contrib-dash';
 
 export * from './index.js';
 export * from './plugins/chapters/chapters.js';
