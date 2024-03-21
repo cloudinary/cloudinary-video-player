@@ -3,6 +3,4 @@
 // Usage:
 // import videoPlayerWithProfile from 'cloudinary-video-player/videoPlayerWithProfile';
 
-import videoPlayerWithProfile from './index.js';
-
-export default videoPlayerWithProfile;
+export { videoPlayerWithProfile as default } from './index.js';
