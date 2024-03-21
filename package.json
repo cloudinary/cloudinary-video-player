@@ -74,12 +74,12 @@
     ]
   },
   "dependencies": {
-    "@cloudinary/url-gen": "^1.16.1",
+    "@cloudinary/url-gen": "^1.19.0",
     "cloudinary-video-analytics": "1.4.3",
     "lodash": "^4.17.21",
     "uuid": "^9.0.0",
-    "video.js": "8.10.0",
-    "videojs-contrib-ads": "^7.3.3",
+    "video.js": "^8.11.8",
+    "videojs-contrib-ads": "^7.5.0",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-ima": "^2.3.0",
     "videojs-per-source-behaviors": "^3.0.1",
