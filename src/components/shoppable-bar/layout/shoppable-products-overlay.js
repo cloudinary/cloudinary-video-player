@@ -66,12 +66,12 @@ class ShoppableProductsOverlay extends Component {
     // Remove
     this.player_.one(PLAYER_EVENT.SEEKING, this.clearLayout);
     this.player_.one(PLAYER_EVENT.PLAY, this.clearLayout);
-  }
+  };
 
   clearLayout = () => {
     this.layout_.innerHTML = '';
     this.player_.removeClass(SHOPPABLE_PRODUCTS_OVERLAY_CLASS);
-  }
+  };
 
   createEl() {
     const dimensions = this.player_.currentDimensions();
