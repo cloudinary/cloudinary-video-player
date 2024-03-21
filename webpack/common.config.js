@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const { lightFilenamePart, minFilenamePart } = require('./build-utils');
@@ -55,8 +56,7 @@ const webpackConfig = {
           {
             loader: 'babel-loader'
           },
-          'webpack-conditional-loader',
-          'eslint-loader'
+          'webpack-conditional-loader'
         ]
       },
       {
@@ -105,6 +105,7 @@ const webpackConfig = {
   },
 
   plugins: [
+    new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
     new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
   ]

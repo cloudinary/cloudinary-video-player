@@ -11,7 +11,7 @@ function pacedTranscript(config) {
     srclang: config.srclang || 'en',
     src: config.src || getCloudinaryUrl(
       source.publicId(),
-      extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' }),
+      extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
     ) + '.transcript',
     maxWords: config.maxWords,
     wordHighlight: config.wordHighlight,

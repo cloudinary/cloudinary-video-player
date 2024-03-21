@@ -27,7 +27,7 @@ class UpcomingVideoOverlay extends ClickableComponent {
 
   _hide = () => {
     this.removeClass(UpcomingVideoOverlay.VJS_UPCOMING_VIDEO_SHOW);
-  }
+  };
 
   _disableTransition(block) {
     this.addClass(UpcomingVideoOverlay.DISABLE_TRANSITION_CLASS);
@@ -42,7 +42,7 @@ class UpcomingVideoOverlay extends ClickableComponent {
         this.setItem(event.next);
       }
     });
-  }
+  };
 
   _show = () => {
     const ima = this.player().ima;
@@ -55,7 +55,7 @@ class UpcomingVideoOverlay extends ClickableComponent {
     } else {
       this.addClass(UpcomingVideoOverlay.VJS_UPCOMING_VIDEO_SHOW);
     }
-  }
+  };
 
   setTitle(source) {
     const title = this.getChild('upcomingVideoOverlayContent')

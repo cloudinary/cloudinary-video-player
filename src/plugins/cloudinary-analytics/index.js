@@ -14,7 +14,7 @@ class CloudinaryAnalytics {
   getMetadata = () => ({
     cloudName: this.player.cloudinary.cloudinaryConfig().cloud_name,
     publicId: this.player.cloudinary.currentPublicId()
-  })
+  });
 
   sourceChanged = () => {
     const metadata = this.getMetadata();
