@@ -8,8 +8,6 @@
 
 import cloudinary from './index.js';
 
-export * from 'videojs-contrib-dash';
-
 export * from './index.js';
 export * from './plugins/chapters/chapters.js';
 export * from './plugins/ima/ima.js';

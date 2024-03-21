@@ -9,9 +9,10 @@ module.exports = merge(webpackCommon, {
   mode: 'production',
 
   entry: {
-    'videoPlayer': './index.es.js', // default
-    'videoPlayerWithProfile': './video-player-profile.js',
-    'cld-video-player': './index.all.js' // all
+    'cld-video-player': './index.es.js', // default
+    'videoPlayer': './index.videoPlayer.js',
+    'videoPlayerWithProfile': './index.videoPlayerWithProfile.js',
+    'all': './index.all.js'
   },
 
   output: {
