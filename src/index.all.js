@@ -1,10 +1,9 @@
-// This file is bundled as `cld-video-player.js` to be imported as a single module that
-// includes all plugins.
+// This file is bundled as `all.js` to be imported as a single module that includes all plugins.
 
 // Usage:
-// import { videoPlayer, videoPlayers } from 'cloudinary-video-player';
+// import { videoPlayer, videoPlayers } from 'cloudinary-video-player/all';
 // Or:
-// import cloudinary from 'cloudinary-video-player';
+// import cloudinary from 'cloudinary-video-player/all';
 
 import cloudinary from './index.js';
 
