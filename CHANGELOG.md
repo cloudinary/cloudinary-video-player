@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.0-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.1...v2.0.0-edge.2) (2024-03-21)
+
+
+### Performance Improvements
+
+* cleanup codec logic ([#590](https://github.com/cloudinary/cloudinary-video-player/issues/590)) ([e31b44e](https://github.com/cloudinary/cloudinary-video-player/commit/e31b44e50cbfcb624ae589bfafe437127b754466))
+* update dependencies ([#594](https://github.com/cloudinary/cloudinary-video-player/issues/594)) ([38c5beb](https://github.com/cloudinary/cloudinary-video-player/commit/38c5beba4cbdfb8537a973159193c5854d8f69fa))
+
 ## [2.0.0-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.0...v2.0.0-edge.1) (2024-03-20)
 
 
