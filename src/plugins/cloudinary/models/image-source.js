@@ -1,6 +1,5 @@
 import BaseSource from './base-source';
 import { normalizeOptions } from '../common';
-import { assign } from 'utils/assign';
 
 const COMMON_IMAGE_FORMATS = ['jpg', 'png', 'gif', 'webp'];
 const IMAGE_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_IMAGE_FORMATS.join('|')})$$`);
@@ -16,7 +15,7 @@ class ImageSource extends BaseSource {
 
     publicId = publicId.replace(IMAGE_SUFFIX_REMOVAL_PATTERN, '');
 
-    options = assign({}, DEFAULT_IMAGE_PARAMS, options);
+    options = Object.assign({}, DEFAULT_IMAGE_PARAMS, options);
 
     super(publicId, options);
     this._type = 'ImageSource';

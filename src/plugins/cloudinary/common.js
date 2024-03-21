@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import { assign } from 'utils/assign';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
@@ -9,7 +8,7 @@ import { omit } from '../../utils/object';
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isPlainObject(publicId)) {
-    const _options = assign({}, publicId);
+    const _options = Object.assign({}, publicId);
 
     publicId = sliceAndUnsetProperties(_options, 'publicId').publicId;
 
@@ -18,7 +17,7 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
     }
 
     if (options) {
-      options = assign({}, _options, options);
+      options = Object.assign({}, _options, options);
     }
   }
 

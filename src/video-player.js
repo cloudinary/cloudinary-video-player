@@ -101,7 +101,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _sendInternalAnalytics(additionalOptions = {}) {
-    const options = Utils.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
+    const options = Object.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
     if (!options.allowUsageReport) {
       return;
     }
@@ -248,7 +248,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const publicId = source.publicId();
 
-        const transformation = Utils.assign({}, source.transformation());
+        const transformation = Object.assign({}, source.transformation());
 
         if (transformation) {
           delete transformation.streaming_profile;
@@ -286,7 +286,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         // Keep video-length related transformations and remove the rest
         const inputTransformations = pick(source.transformation(), ['start_offset', 'end_offset', 'duration']);
 
-        const transformation = Utils.assign({}, inputTransformations);
+        const transformation = Object.assign({}, inputTransformations);
 
         transformation.effect = 'preview';
         transformation.flags = transformation.flags || [];
@@ -566,7 +566,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     this.videojs.one(PLAYER_EVENT.READY, async () => {
       const playlistPlugin = await this.videojs.playlist(options);
@@ -577,7 +577,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     return new Promise((resolve) => {
       this.videojs.one(PLAYER_EVENT.READY, async () => {

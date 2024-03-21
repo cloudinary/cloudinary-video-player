@@ -82,7 +82,7 @@ export const extractOptions = (elem, options) => {
     options.fluid = true;
   }
   // Default HLS options < Default options < Markup options < Player options
-  options = Utils.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
+  options = Object.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
@@ -97,7 +97,7 @@ export const extractOptions = (elem, options) => {
   // to avoid param name conflicts:
   // VideoPlayer.new({ controls: true, videojs: { controls: false })
   if (options.videojs) {
-    Utils.assign(options, options.videojs);
+    Object.assign(options, options.videojs);
     delete options.videojs;
   }
 

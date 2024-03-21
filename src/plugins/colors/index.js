@@ -1,4 +1,3 @@
-import { assign } from 'utils/assign';
 import { playerClassPrefix } from 'utils/css-prefix';
 import { isLight } from '../../video-player.utils';
 
@@ -233,7 +232,7 @@ class Colors {
 
     const skinDefaults = getDefaultPlayerColor(this.player.options_);
 
-    opts.colors = assign({}, skinDefaults, opts.colors);
+    opts.colors = Object.assign({}, skinDefaults, opts.colors);
 
     this.init = () => {
       injectCSS(parseStyles(playerColors));

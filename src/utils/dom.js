@@ -1,4 +1,4 @@
-import { castArray } from './array';
+import castArray from 'lodash/castArray';
 import { isElement } from './type-inference';
 
 const wrap = (el, wrapper) => {

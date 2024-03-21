@@ -1,6 +1,5 @@
 import { isElementInViewport } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
 import './floating-player.scss';
 import { FLOATING_TO } from '../../video-player.const';
 
@@ -13,7 +12,7 @@ const defaults = {
 class FloatingPlayer {
 
   constructor(player, opts = {}) {
-    opts = assign({}, defaults, opts);
+    opts = Object.assign({}, defaults, opts);
     // Handle non left-right values.
     if (opts.floatTo && opts.floatTo !== FLOATING_TO.LEFT && opts.floatTo !== FLOATING_TO.RIGHT) {
       opts.floatTo = defaults.floatTo;

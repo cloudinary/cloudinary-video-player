@@ -1,8 +1,8 @@
 import { sliceProperties } from 'utils/slicing';
-import { normalizeJsonResponse } from 'utils/api';
 import { PLAYER_EVENT } from 'utils/consts';
 import { isPlainObject } from 'utils/type-inference';
 import { getCloudinaryUrl } from 'plugins/cloudinary/common';
+import { normalizeJsonResponse } from './utils/api';
 
 import Playlist from './ui/playlist';
 import PlaylistWidget from './ui/playlist-widget';

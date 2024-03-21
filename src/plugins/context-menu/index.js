@@ -4,7 +4,6 @@ import './context-menu.scss';
 import ContextMenu from './components/context-menu';
 import { getPointerPosition } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
 import { isFunction } from 'utils/type-inference';
 
 const defaults = {
@@ -18,7 +17,7 @@ class ContextMenuPlugin {
       throw new Error('"content" required');
     }
 
-    const opts = assign({}, defaults, initOpts);
+    const opts = Object.assign({}, defaults, initOpts);
 
     this.player = player;
     const _options = sliceProperties(opts, 'content', 'showNativeOnRecurringEvent');

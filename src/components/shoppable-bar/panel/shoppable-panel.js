@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import { assign } from 'utils/assign';
 import { throttle } from 'utils/throttle';
 import { parseTime } from 'utils/time';
 import ShoppablePanelItem from './shoppable-panel-item';
@@ -52,7 +51,7 @@ class ShoppablePanel extends Component {
     const cloudinaryConfig = this.player_.cloudinary.cloudinaryConfig();
     return this.options.products.map(product => {
       if (product.onHover && typeof product.onHover.args === 'object') {
-        product.onHover.args.transformation = assign({},
+        product.onHover.args.transformation = Object.assign({},
           this.options.transformation,
           product.onHover.args.transformation
         );
@@ -68,7 +67,7 @@ class ShoppablePanel extends Component {
       };
       const imageSource = new ImageSource(product.publicId, {
         cloudinaryConfig: cloudinaryConfig,
-        transformation: assign({}, this.options.transformation, product.transformation)
+        transformation: Object.assign({}, this.options.transformation, product.transformation)
       });
       return {
         imageSrc: imageSource,

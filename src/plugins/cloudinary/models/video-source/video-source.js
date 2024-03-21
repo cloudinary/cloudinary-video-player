@@ -1,7 +1,6 @@
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
-import { castArray } from 'utils/array';
+import castArray from 'lodash/castArray';
 import { SOURCE_TYPE } from 'utils/consts';
 import {
   CONTAINER_MIME_TYPES,
@@ -32,10 +31,10 @@ class VideoSource extends BaseSource {
       publicId = publicId.replace(VIDEO_SUFFIX_REMOVAL_PATTERN, '');
     }
 
-    options = assign({}, DEFAULT_VIDEO_PARAMS, options);
+    options = Object.assign({}, DEFAULT_VIDEO_PARAMS, options);
 
     if (!options.poster) {
-      options.poster = assign({ publicId }, DEFAULT_POSTER_PARAMS);
+      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
     const {
@@ -175,7 +174,7 @@ class VideoSource extends BaseSource {
 
     if (!publicId) {
       publicId = this.publicId();
-      options = assign({}, options, DEFAULT_POSTER_PARAMS);
+      options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
     }
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
@@ -205,7 +204,7 @@ class VideoSource extends BaseSource {
         opts.transformation = castArray(srcTransformation);
       }
 
-      assign(opts, { resource_type: 'video', format });
+      Object.assign(opts, { resource_type: 'video', format });
 
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
 

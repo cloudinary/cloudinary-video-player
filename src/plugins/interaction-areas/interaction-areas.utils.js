@@ -10,7 +10,6 @@ import {
 } from './interaction-areas.const';
 import { noop } from '../../utils/type-inference';
 import { getDefaultPlayerColor } from '../colors';
-import { forEach, some } from '../../utils/array';
 import { themedButton } from '../../components/themeButton/themedButton';
 import { BUTTON_THEME } from '../../components/themeButton/themedButton.const';
 
@@ -107,10 +106,10 @@ const getInteractionAreaElementById = (interactionAreasContainer, item, index) =
 export const updateInteractionAreasItem = (videojs, configs, interactionAreasData, previousInteractionAreasData, durationTime, onClick) => {
   const interactionAreasContainer = getInteractionAreasContainer(videojs);
 
-  forEach(interactionAreasData, (item, index) => {
+  interactionAreasData.forEach((item, index) => {
     const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
     const itemId = getInteractionAreaItemId(item);
-    const isExistItem = some(previousInteractionAreasData, i => getInteractionAreaItemId(i) === itemId);
+    const isExistItem = previousInteractionAreasData.some(i => getInteractionAreaItemId(i) === itemId);
 
     // in case the element of the item is in the dom and exist in the previous data , it update the element position
     if (isExistItem && itemElement) {
@@ -131,10 +130,10 @@ export const updateInteractionAreasItem = (videojs, configs, interactionAreasDat
   });
 
   // checking the previous data for element that should be removed if not exist in the new data object.
-  forEach(previousInteractionAreasData, (item, index) => {
+  previousInteractionAreasData.forEach((item, index) => {
     const itemElement = getInteractionAreaElementById(interactionAreasContainer, item, index);
     const itemId = getInteractionAreaItemId(item);
-    const shouldBeRemoved = !some(interactionAreasData, i => getInteractionAreaItemId(i) === itemId);
+    const shouldBeRemoved = !interactionAreasData.some(i => getInteractionAreaItemId(i) === itemId);
 
     if (itemElement && shouldBeRemoved) {
       // do not use element.remove for ie11 support
