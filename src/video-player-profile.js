@@ -1,8 +1,7 @@
 import VideoPlayer from './video-player';
+import { defaultProfiles } from './config/profiles';
 
 export const getProfile = async (cloudName, profile) => {
-  const { defaultProfiles } = await import(/* webpackChunkName: "defaultProfiles" */ './config/profiles');
-
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
   }

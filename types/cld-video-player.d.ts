@@ -6,19 +6,11 @@ export const videoPlayer: VideoPlayerFunction;
 export const videoPlayers: VideoMultiPlayersFunction;
 export const videoPlayerWithProfile: VideoPlayerWithProfileFunction;
 
-interface CommonCloudinary {
-  videoPlayer: VideoPlayerFunction;
-  videoPlayers: VideoMultiPlayersFunction;
-  videoPlayerWithProfile: VideoPlayerWithProfileFunction;
-}
 
-export interface Cloudinary extends CommonCloudinary {
+export interface Cloudinary {
   videoPlayer: VideoPlayerFunction;
   videoPlayers: VideoMultiPlayersFunction;
   videoPlayerWithProfile: VideoPlayerWithProfileFunction;
-  Cloudinary: {
-    new: (options?: any) => CommonCloudinary;
-  };
 }
 
 declare global {
