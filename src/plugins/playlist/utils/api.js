@@ -1,5 +1,5 @@
+import camelCase from 'lodash/camelCase';
 import { isPlainObject } from 'utils/type-inference';
-import { camelize } from 'utils/string';
 import { parseISO8601 } from './time';
 
 const TIME_FIELDS = ['created_at', 'updated_at'];
@@ -9,7 +9,7 @@ const normalizeJsonResponse = (obj) => {
 
   if (isPlainObject(obj)) {
     Object.keys(obj).reduce((agg, key) => {
-      const newKey = camelize(key);
+      const newKey = camelCase(key);
 
       if (TIME_FIELDS.indexOf(key) !== -1) {
         agg[newKey] = new Date(parseISO8601(obj[key]));
