@@ -1,5 +1,6 @@
 import { startsWith } from './string';
 import defaults from '../config/defaults';
+import { find } from './find';
 
 const CLASS_PREFIX = 'cld-video-player';
 const SKIN_CLASS_PREFIX = `${CLASS_PREFIX}-skin-`;
@@ -8,10 +9,7 @@ const playerClassPrefix = (componentInstance) => `${CLASS_PREFIX}-${componentIns
 
 const skinClass = (skin) => `${SKIN_CLASS_PREFIX}${skin}`;
 
-const skinClassPrefix = (componentInstance) => {
-  console.log(componentInstance.el().classList);
-  return componentInstance.el().classList?.find((cls) => startsWith(cls, SKIN_CLASS_PREFIX));
-}
+const skinClassPrefix = (componentInstance) => find(componentInstance.el().classList, (cls) => startsWith(cls, SKIN_CLASS_PREFIX));
 
 const setSkinClassPrefix = (componentInstance, name) => {
   const currentSkinPrefix = skinClassPrefix(componentInstance);
