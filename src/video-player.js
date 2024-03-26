@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -10,7 +12,6 @@ import defaults from './config/defaults';
 import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
-import { isFunction, isString } from './utils/type-inference';
 import {
   extractOptions,
   getResolveVideoElement,

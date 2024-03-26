@@ -1,5 +1,7 @@
 import videojs from 'video.js';
 import get from 'lodash/get';
+import throttle from 'lodash/throttle';
+import noop from 'lodash/noop';
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   DEFAULT_INTERACTION_ARE_TRANSITION,
@@ -16,8 +18,6 @@ import {
   updateInteractionAreasItem
 } from './interaction-areas.utils';
 import { addEventListener, createElement } from '../../utils/dom';
-import { throttle } from '../../utils/throttle';
-import { noop } from '../../utils/type-inference';
 import { addMetadataTrack } from '../../video-player.utils';
 import { PLAYER_EVENT } from '../../utils/consts';
 

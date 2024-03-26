@@ -1,5 +1,5 @@
 import castArray from 'lodash/castArray';
-import { isElement } from './type-inference';
+import isElement from 'lodash/isElement';
 
 const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);

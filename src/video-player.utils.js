@@ -8,7 +8,7 @@ import {
   FLUID_CLASS_NAME,
   AUTO_PLAY_MODE
 } from './video-player.const';
-import { isString } from './utils/type-inference';
+import isString from 'lodash/isString';
 
 /*
 * Used to escape element identifiers that begin with certain

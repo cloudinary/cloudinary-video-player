@@ -1,7 +1,12 @@
-import { isBoolean, isFunction, isNumber, isPlainObject, isString } from '../utils/type-inference';
+import isBoolean from 'lodash/isBoolean';
+import isFunction from 'lodash/isFunction';
+import isNumber from 'lodash/isNumber';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
+
 import { getValidatorItem, isValueValid } from './validators-functions';
 
-const getOptionsString = (options) => isPlainObject(options) ? `:(${Object.values(options).join('/')})` : '';
+const getOptionsString = (options) => isObject(options) ? `:(${Object.values(options).join('/')})` : '';
 
 const arrayOfStringsValidator = () => ({
   value: (arr) => Array.isArray(arr) && arr.every(isString),
@@ -59,7 +64,7 @@ export const validator = {
     message: (key) => `'${key}' should be a function`
   }),
   isPlainObject: () => ({
-    value: isPlainObject,
+    value: isObject,
     message: (key) => `'${key}' should be an object`
   }),
   isObject: () => ({

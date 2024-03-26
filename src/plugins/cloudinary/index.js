@@ -1,7 +1,7 @@
+import isFunction from 'lodash/isFunction';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
-import { isFunction } from 'utils/type-inference';
 import {
   normalizeOptions,
   mergeTransformations,

@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import noop from 'lodash/noop';
 import { elementsCreator, styleElement } from '../../utils/dom';
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
@@ -8,7 +9,6 @@ import {
   INTERACTION_AREAS_PREFIX,
   INTERACTION_AREAS_THEME
 } from './interaction-areas.const';
-import { noop } from '../../utils/type-inference';
 import { getDefaultPlayerColor } from '../colors';
 import { themedButton } from '../../components/themeButton/themedButton';
 import { BUTTON_THEME } from '../../components/themeButton/themedButton.const';

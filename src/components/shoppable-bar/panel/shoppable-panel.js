@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { throttle } from 'utils/throttle';
+import throttle from 'lodash/throttle';
 import { parseTime } from 'utils/time';
 import ShoppablePanelItem from './shoppable-panel-item';
 import ImageSource from '../../../plugins/cloudinary/models/image-source';

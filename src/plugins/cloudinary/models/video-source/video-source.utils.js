@@ -1,6 +1,7 @@
 import { CONTAINER_MIME_TYPES, FORMAT_MAPPINGS } from './video-source.const';
 import { VIDEO_CODEC } from '../../common';
-import { isPlainObject, isString } from '../../../../utils/type-inference';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 import { isKeyInTransformation } from 'utils/cloudinary';
 
 export function formatToMimeTypeAndTransformation(format) {
@@ -48,7 +49,7 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
 
   return transformations.some ? transformations.some(transformation => {
     return transformation.some ? transformation.some(item =>
-      hasCodec(isPlainObject(item) ? item.video_codec : item)
+      hasCodec(isObject(item) ? item.video_codec : item)
     ) : false;
   }) : false;
 };

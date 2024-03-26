@@ -1,6 +1,6 @@
+import isObject from 'lodash/isObject';
 import { sliceProperties } from 'utils/slicing';
 import { PLAYER_EVENT } from 'utils/consts';
-import { isPlainObject } from 'utils/type-inference';
 import { getCloudinaryUrl } from 'plugins/cloudinary/common';
 import { normalizeJsonResponse } from './utils/api';
 
@@ -22,7 +22,7 @@ const playlist = (player, options = {}) => {
         playlistWidget.dispose();
       }
 
-      if (isPlainObject(options.playlistWidget)) {
+      if (isObject(options.playlistWidget)) {
         if (player.fluid_) {
           options.playlistWidget.fluid = true;
         }
