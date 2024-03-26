@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import { PLAYER_EVENT } from 'utils/consts';
-import { wrap } from 'utils/dom';
+import { wrap } from '../../utils/dom';
 import {
   skinClassPrefix,
   playerClassPrefix

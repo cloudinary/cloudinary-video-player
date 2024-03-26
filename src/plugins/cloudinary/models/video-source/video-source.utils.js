@@ -46,8 +46,8 @@ export const isCodecAlreadyExist = (transformations, rawTransformation) => {
     return hasCodec(rawTransformation);
   }
 
-  return transformations.some(transformation => {
-    return transformation.some(item =>
+  return transformations.some && transformations.some(transformation => {
+    return transformation.some && transformation.some(item =>
       hasCodec(isPlainObject(item) ? item.video_codec : item)
     );
   });
