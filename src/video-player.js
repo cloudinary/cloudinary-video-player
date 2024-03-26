@@ -1,6 +1,8 @@
 import videojs from 'video.js';
 import { v4 as uuidv4 } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
+import pick from 'lodash/pick';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -17,7 +19,6 @@ import {
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidConfig } from './validators/validators-functions';
 import { playerValidators, sourceValidators } from './validators/validators';
-import { get, pick } from './utils/object';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
@@ -63,7 +64,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     Utils.fontFace(this.videoElement, this.playerOptions.cloudinary.fontFace);
 
     // Handle play button options
-    Utils.playButton(this.videoElement, this._videojsOptions);
+    if (this._videojsOptions.bigPlayButton === 'init') {
+      this.videoElement.classList.add('vjs-big-play-button-init-only');
+      this._videojsOptions.bigPlayButton = true;
+    }
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 

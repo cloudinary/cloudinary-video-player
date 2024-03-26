@@ -1,5 +1,5 @@
+import get from 'lodash/get';
 import { elementsCreator, styleElement } from '../../utils/dom';
-import { get } from '../../utils/object';
 import {
   CLOSE_INTERACTION_AREA_LAYOUT_DELAY,
   INTERACTION_AREA_HAND_ICON,

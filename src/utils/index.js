@@ -4,7 +4,6 @@ import * as string from './string';
 import * as cloudinaryUtils from './cloudinary';
 import * as mixin from './mixin';
 import * as fontFace from './fontFace';
-import * as playButton from './playButton';
 import * as cssPrefix from './css-prefix';
 import * as normalizeAttributes from './attributes-normalizer';
 
@@ -14,7 +13,6 @@ const Utils = Object.assign({},
   string,
   cloudinaryUtils,
   fontFace,
-  playButton,
   mixin,
   cssPrefix,
   normalizeAttributes

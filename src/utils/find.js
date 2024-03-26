@@ -17,4 +17,4 @@ function findElementAndIndex(list, callback) {
   return [undefined, -1];
 }
 
-export { find, findElementAndIndex };
+export { find };

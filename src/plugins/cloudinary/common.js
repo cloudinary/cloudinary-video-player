@@ -1,10 +1,10 @@
 import videojs from 'video.js';
+import omit from 'lodash/omit';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isString, isPlainObject } from 'utils/type-inference';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen/backwards/createCloudinaryLegacyURL';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
-import { omit } from '../../utils/object';
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isPlainObject(publicId)) {
