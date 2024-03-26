@@ -34,11 +34,11 @@ export const isValidConfig = (config, validators) => {
       if (Object.prototype.hasOwnProperty.call(validators, key)) {
         const configValue = config[key];
         const validatorValue = validators[key];
-        const isObject = isObject(configValue);
+        const isConfigObject = isObject(configValue);
 
-        if (isObject && !isValidConfig(configValue, validatorValue)) {
+        if (isConfigObject && !isValidConfig(configValue, validatorValue)) {
           return false;
-        } else if (!isObject && !isValueValid(validatorValue, configValue, key)) {
+        } else if (!isConfigObject && !isValueValid(validatorValue, configValue, key)) {
           return false;
         }
       }
