@@ -11,7 +11,7 @@ import {
 } from './video-source.const';
 import {
   formatToMimeTypeAndTransformation,
-  isCodecAlreadyExist,
+  hasCodec,
   normalizeFormat
 } from './video-source.utils';
 import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
@@ -209,7 +209,7 @@ class VideoSource extends BaseSource {
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
 
       // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !isCodecAlreadyExist(opts.transformation, this._rawTransformation)) {
+      if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this._rawTransformation))) {
         opts.transformation = mergeTransformations(opts.transformation, codecTrans);
       }
 

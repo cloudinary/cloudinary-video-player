@@ -1,6 +1,5 @@
 import { CONTAINER_MIME_TYPES, FORMAT_MAPPINGS } from './video-source.const';
 import { VIDEO_CODEC } from '../../common';
-import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
 import { isKeyInTransformation } from 'utils/cloudinary';
 
@@ -28,28 +27,26 @@ export function normalizeFormat(format) {
   return res;
 }
 
-const hasCodec = value =>
+const strIncludesCodec = value =>
   value && Object.values(VIDEO_CODEC).some(codec => value.includes(codec));
 
-const hasCodecSrcTrans = transformations =>
+const hasCodecTrans = transformations =>
   ['video_codec', 'streaming_profile'].some(key => isKeyInTransformation(transformations, key));
 
-export const isCodecAlreadyExist = (transformations, rawTransformation) => {
-  if (!(transformations || rawTransformation)) {
+export const hasCodec = (transformations) => {
+  if (!transformations) {
     return false;
   }
 
-  if (hasCodecSrcTrans(transformations)) {
+  if (isString(transformations)) {
+    return strIncludesCodec(transformations);
+  }
+
+  if (hasCodecTrans(transformations)) {
     return true;
   }
 
-  if (isString(rawTransformation)) {
-    return hasCodec(rawTransformation);
-  }
-
   return transformations.some ? transformations.some(transformation => {
-    return transformation.some ? transformation.some(item =>
-      hasCodec(isObject(item) ? item.video_codec : item)
-    ) : false;
+    return hasCodec(transformation);
   }) : false;
 };
