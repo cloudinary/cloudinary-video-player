@@ -1,8 +1,7 @@
+import isFunction from 'lodash/isFunction';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
-import { assign } from 'utils/assign';
-import { isFunction } from 'utils/type-inference';
 import {
   normalizeOptions,
   mergeTransformations,
@@ -30,7 +29,7 @@ class CloudinaryContext {
     setupCloudinaryMiddleware();
 
     this.player = player;
-    options = assign({}, DEFAULT_PARAMS, options);
+    options = Object.assign({}, DEFAULT_PARAMS, options);
 
     let _source = null;
     let _sources = null;
@@ -47,7 +46,7 @@ class CloudinaryContext {
     let _autoShowRecommendations = false;
 
     this.source = (source, options = {}) => {
-      options = assign({}, options);
+      options = Object.assign({}, options);
 
       if (!source) {
         return _source;
@@ -291,7 +290,7 @@ class CloudinaryContext {
     };
 
     const posterOptionsForCurrent = () => {
-      const opts = assign({}, this.posterOptions());
+      const opts = Object.assign({}, this.posterOptions());
 
       opts.transformation = opts.transformation || {};
 

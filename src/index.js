@@ -1,15 +1,15 @@
 import 'assets/styles/main.scss';
+import pick from 'lodash/pick';
 import VideoPlayer from './video-player';
 import createVideoPlayerProfile from './video-player-profile';
-import { assign } from 'utils/assign';
-import { pick, convertKeysToSnakeCase } from './utils/object';
+import { convertKeysToSnakeCase } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
 
 const getConfig = (playerOptions = {}, cloudinaryConfig) => {
   const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(playerOptions), CLOUDINARY_CONFIG_PARAM);
 
   // pick cld-configurations and assign them to cloudinaryConfig
-  return assign(playerOptions, {
+  return Object.assign(playerOptions, {
     cloudinaryConfig: cloudinaryConfig || snakeCaseCloudinaryConfig
   });
 };

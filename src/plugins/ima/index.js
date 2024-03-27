@@ -1,5 +1,5 @@
 /* global google */
-import { isFunction } from 'utils/type-inference';
+import isFunction from 'lodash/isFunction';
 import { PLAYER_EVENT } from 'utils/consts';
 
 export default async function imaPlugin(player, playerOptions) {

@@ -1,15 +1,15 @@
 import videojs from 'video.js';
-import { assign } from 'utils/assign';
+import omit from 'lodash/omit';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { isString, isPlainObject } from 'utils/type-inference';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen/backwards/createCloudinaryLegacyURL';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
-import { omit } from '../../utils/object';
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
-  if (isPlainObject(publicId)) {
-    const _options = assign({}, publicId);
+  if (isObject(publicId)) {
+    const _options = Object.assign({}, publicId);
 
     publicId = sliceAndUnsetProperties(_options, 'publicId').publicId;
 
@@ -18,7 +18,7 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
     }
 
     if (options) {
-      options = assign({}, _options, options);
+      options = Object.assign({}, _options, options);
     }
   }
 
