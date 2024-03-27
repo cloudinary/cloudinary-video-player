@@ -46,7 +46,7 @@ export const hasCodec = (transformations) => {
     return true;
   }
 
-  return transformations.some ? transformations.some(transformation => {
+  return !!transformations.some?.(transformation => {
     return hasCodec(transformation);
-  }) : false;
+  });
 };
