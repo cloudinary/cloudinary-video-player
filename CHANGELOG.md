@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.3...v2.0.0-edge.4) (2024-04-02)
+
+
+### Bug Fixes
+
+* isPlainObject ([#598](https://github.com/cloudinary/cloudinary-video-player/issues/598)) ([7d09a39](https://github.com/cloudinary/cloudinary-video-player/commit/7d09a39fe1868b4b37eb355dda3d78ce81f2dd1a))
+
 ## [2.0.0-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.2...v2.0.0-edge.3) (2024-03-27)
 
 
