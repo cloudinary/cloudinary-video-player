@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Advanced Poster Configurations</h3>
+
+      <div class="video-container mb-4">
+        <h4>Custom image poster</h4>
+        <video
+          id="player-image-poster"
+          playsinline
+          controls
+          class="cld-video-player cld-fluid"
+          data-cld-transformation='{ "effect": ["saturation:-100"] }'
+          data-cld-poster-options='{ "publicId": "sample", "effect": ["saturation:-100"] }'
+        ></video>
+      </div>
+
+      <div class="video-container mb-4">
+        <h4>Specific frame poster</h4>
+        <h6>Default poster is middle frame</h6>
+        <video id="player-frame-0" playsinline controls class="cld-video-player cld-fluid"></video>
+      </div>
+
+      <div class="video-container mb-4">
+        <h4>Poster options transformations-array</h4>
+        <video
+          id="player-poster-options"
+          playsinline
+          controls
+          class="cld-video-player cld-fluid"
+          data-cld-poster-options='{ "transformation": [{"width": "640", "height": "360", "crop": "pad", "effect": "grayscale" },{"overlay":"cloudinary_icon", "width":"300"},{"quality": "auto", "fetch_format": "auto"}] }'
+        ></video>
+      </div>
+
+      <div class="video-container mb-4">
+        <h4>Raw URL - default with no poster image</h4>
+        <video id="player-raw" playsinline controls class="cld-video-player cld-fluid"></video>
+      </div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { videoPlayer } from 'cloudinary-video-player';
+
+      const player1 = videoPlayer('player-image-poster', {
+        cloudName: 'demo',
+        publicId: 'snow_horses'
+      });
+
+      const player2 = videoPlayer('player-frame-0', {
+        cloudName: 'demo',
+        publicId: 'snow_horses',
+        posterOptions: {
+          transformation: {
+            startOffset: '0'
+          }
+        }
+      });
+
+      const player3 = videoPlayer('player-poster-options', {
+        cloudName: 'demo',
+        publicId: 'dog'
+      });
+
+      const player4 = videoPlayer('player-raw', {
+        cloudName: 'demo',
+        publicId: 'https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8'
+      });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

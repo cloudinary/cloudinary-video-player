@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style type="text/css">
+      .vjs-control.vjs-playlist-control:before {
+        font-family: FontAwesome;
+        font-size: 1.5em;
+        line-height: 2;
+      }
+
+      .vjs-playlist-control.vjs-playlist-next-control:before {
+        content: '\f050';
+      }
+      .vjs-playlist-control.vjs-playlist-previous-control:before {
+        content: '\f049';
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h2>Custom Components</h2>
+
+      <video
+        id="player"
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        autoplay
+        controls
+        muted
+        playsinline
+      ></video>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/playlist';
+
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/playlist.min.css';
+
+      // Get the ClickableComponent base class from Video.js
+      let vjs = window.videojs.default ? window.videojs.default : window.videojs;
+      const ClickableComponent = vjs.getComponent('ClickableComponent');
+
+      // Create a common class for playlist buttons
+      class PlaylistButton extends ClickableComponent {
+        constructor(player, options) {
+          super(player, options);
+
+          const type = options.type;
+          if (!type && type !== 'previous' && type !== 'next') {
+            throw new Error("Playlist must be either 'previous' or 'next'");
+          }
+        }
+
+        // The `createEl` function of a component creates its DOM element.
+        createEl() {
+          const type = this.options_.type;
+
+          const typeCssClass = 'vjs-playlist-' + type + '-control';
+
+          return vjs.createEl('button', {
+            // Prefixing classes of elements within a player with "vjs-"
+            // is a convention used in Video.js.
+            className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
+          });
+        }
+      }
+
+      // Create the NextButton component
+      class NextButton extends PlaylistButton {
+        constructor(player, options) {
+          super(player, Object.assign({}, { type: 'next' }, options));
+        }
+
+        handleClick() {
+          PlaylistButton.prototype.handleClick.call(this);
+
+          // Since the component has a VideoJS Player object, we use the internal
+          // Cloudinary plugin to reach to the playlist object.
+          this.player().cloudinary.playlist().playNext();
+        }
+      }
+
+      // Create the PreviousButton component
+      class PreviousButton extends PlaylistButton {
+        constructor(player, options) {
+          super(player, Object.assign({}, { type: 'previous' }, options));
+        }
+
+        handleClick() {
+          PlaylistButton.prototype.handleClick.call(this);
+          this.player().cloudinary.playlist().playPrevious();
+        }
+      }
+
+      // Register the component with Video.js, so it can be used in players.
+      vjs.registerComponent('NextButton', NextButton);
+      vjs.registerComponent('PreviousButton', PreviousButton);
+
+      // Cloudinary Video Player related code
+      // ====================================
+
+      // Initialize player with only the controlBar's 'playToggle' and our
+      // custom components set.
+      const player = videoPlayer('player', {
+        cloudName: 'demo',
+        seekThumbnails: false,
+        videojs: {
+          controlBar: { children: ['PreviousButton', 'playToggle', 'NextButton'] }
+        }
+      });
+
+      player.playlist([{ publicId: 'elephants' }, 'sea_turtle'], { autoAdvance: 0, repeat: true });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>
