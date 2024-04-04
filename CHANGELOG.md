@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.4...v2.0.0-edge.5) (2024-04-04)
+
+
+### Bug Fixes
+
+* esm examples ([18a1b4f](https://github.com/cloudinary/cloudinary-video-player/commit/18a1b4f4dc1c728eaeeb2eaf981bec495b9fe3d8))
+
 ## [2.0.0-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.3...v2.0.0-edge.4) (2024-04-02)
 
 
