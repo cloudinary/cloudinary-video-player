@@ -9,11 +9,7 @@
       rel="icon"
       type="image/png"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Inter"
-      media="all"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter" media="all" />
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       rel="stylesheet"
@@ -25,6 +21,25 @@
     <div class="container p-4 col-12 col-md-9 col-xl-6">
       <h1 class="mb-4">Cloudinary Video Player</h1>
       <h2 class="mb-4">ES imports examples</h2>
+
+      <video
+        id="player"
+        controls
+        muted
+        class="cld-video-player cld-video-player-skin-dark cld-fluid"
+        data-cld-source='{ "publicId": "dog", "info": { "title": "Dog", "subtitle": "Short movie about a dog" } }'
+      ></video>
+
+      <script type="module">
+
+        import { videoPlayers } from 'cloudinary-video-player';
+        import 'cloudinary-video-player/cld-video-player.min.css';
+
+        const player = videoPlayers('.cld-video-player', {
+          cloudName: 'demo'
+        });
+
+      </script>
 
       <h3 class="mt-4">Code examples:</h3>
       <ul>

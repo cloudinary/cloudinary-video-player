@@ -64,12 +64,12 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
       import { videoPlayer } from 'cloudinary-video-player';
 
-      const player1 = videoPlayer('player-image-poster', {
+      const playerImagePoster = videoPlayer('player-image-poster', {
         cloudName: 'demo',
         publicId: 'snow_horses'
       });
 
-      const player2 = videoPlayer('player-frame-0', {
+      const playerFrameZero = videoPlayer('player-frame-0', {
         cloudName: 'demo',
         publicId: 'snow_horses',
         posterOptions: {
@@ -79,12 +79,12 @@
         }
       });
 
-      const player3 = videoPlayer('player-poster-options', {
+      const playerPosterOptions = videoPlayer('player-poster-options', {
         cloudName: 'demo',
         publicId: 'dog'
       });
 
-      const player4 = videoPlayer('player-raw', {
+      const playerRaw = videoPlayer('player-raw', {
         cloudName: 'demo',
         publicId: 'https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8'
       });
