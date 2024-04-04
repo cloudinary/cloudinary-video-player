@@ -70,6 +70,10 @@
       {
         "path": "./lib/videoPlayer.js",
         "maxSize": "245kb"
+      },
+      {
+        "path": "./lib/all.js",
+        "maxSize": "280kb"
       }
     ]
   },

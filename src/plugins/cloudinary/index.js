@@ -61,8 +61,8 @@ class CloudinaryContext {
         src = this.buildSource(publicId, _options);
       }
 
-      if (src.recommendations()) {
-        const recommendations = src.recommendations();
+      const recommendations = src.recommendations();
+      if (recommendations && recommendations.length) {
 
         let itemBuilder = null;
         let disableAutoShow = false;

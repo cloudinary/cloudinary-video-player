@@ -3,7 +3,6 @@ const webpackCommon = require('./common.config');
 const path = require('path');
 
 delete webpackCommon.output; // overwrite
-delete webpackCommon.devtool; // disable
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
