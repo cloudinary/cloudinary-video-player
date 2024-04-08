@@ -33,8 +33,6 @@ export default async function imaPlugin(player, playerOptions) {
     debug: playerOptions.ads.denug
   });
 
-  debugger; // eslint-disable-line
-
   if (Object.keys(playerOptions.ads).length > 0 && typeof player.ima === 'object') {
     if (playerOptions.ads.adsInPlaylist === 'first-video') {
       player.one(PLAYER_EVENT.SOURCE_CHANGED, () => {
