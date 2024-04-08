@@ -33,7 +33,9 @@ const setError = (that, res) => {
 };
 
 const setVideoSrc = (that, srcs) => {
-  console.log('Trying sources: ', srcs);
+  if (that.options.playerOptions.debug) {
+    console.log('Trying sources: ', srcs);
+  }
   srcs.forEach(s => {
     s.try = true;
   });

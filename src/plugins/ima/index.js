@@ -12,10 +12,10 @@ export default async function imaPlugin(player, playerOptions) {
 
   if (playerOptions.ads && (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded)) {
     if (!loaded.contribAdsLoaded) {
-      console.log('contribAds is not loaded');
+      console.warn('contribAds is not loaded');
     }
     if (!loaded.imaAdsLoaded) {
-      console.log('imaSdk is not loaded');
+      console.warn('imaSdk is not loaded');
     }
     return false;
   }
@@ -32,6 +32,8 @@ export default async function imaPlugin(player, playerOptions) {
     autoPlayAdBreaks: playerOptions.ads.autoPlayAdBreaks !== false,
     debug: playerOptions.ads.denug
   });
+
+  debugger; // eslint-disable-line
 
   if (Object.keys(playerOptions.ads).length > 0 && typeof player.ima === 'object') {
     if (playerOptions.ads.adsInPlaylist === 'first-video') {

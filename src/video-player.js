@@ -18,8 +18,7 @@ import {
   overrideDefaultVideojsComponents
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
-import { isValidConfig } from './validators/validators-functions';
-import { playerValidators, sourceValidators } from './validators/validators';
+import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
@@ -72,14 +71,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
-    // to do, should be change by isValidConfig
     this._isPlayerConfigValid = true;
-
-    isValidConfig(this.options, playerValidators);
-
-    if (!this._isPlayerConfigValid) {
-      this.videojs.error('invalid player configuration');
-      return;
+    if (this.playerOptions.debug) {
+      isValidPlayerConfig(this.options).then((valid) => {
+        if (!valid) {
+          this._isPlayerConfigValid = valid;
+          this.videojs.error('invalid player configuration');
+          return;
+        }
+      });
     }
 
     if (this._videojsOptions.muted) {
@@ -390,7 +390,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initAnalytics() {
     const analyticsOpts = this.playerOptions.analytics;
 
-    if (!window.ga && analyticsOpts) {
+    if (!window.ga && analyticsOpts && this.playerOptions.debug) {
       console.error('Google Analytics script is missing');
       return;
     }
@@ -528,11 +528,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
-    const isSourceConfigValid = isValidConfig(options, sourceValidators);
-
-    if (!isSourceConfigValid) {
-      this.videojs.error('invalid source configuration');
-      return;
+    if (this.playerOptions.debug) {
+      isValidSourceConfig(options).then((valid) => {
+        if (!valid) {
+          this.videojs.error('invalid source configuration');
+        }
+      });
     }
 
     this._sendInternalAnalytics({ source: options });
