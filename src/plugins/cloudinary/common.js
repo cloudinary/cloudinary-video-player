@@ -114,7 +114,10 @@ const setupCloudinaryMiddleware = () => {
   videojs.use('video/auto', () => {
     return {
       async setSource(srcObj, next) {
-        const { headers } = await fetch(srcObj.src, { method: 'HEAD' });
+        const { headers } = await fetch(srcObj.src, {
+          method: 'HEAD',
+          credentials: srcObj.withCredentials ? 'include' : 'omit'
+        });
 
         return next(null, {
           src: srcObj.src,
