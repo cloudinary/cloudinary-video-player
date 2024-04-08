@@ -64,6 +64,10 @@ const webpackConfig = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
+        test: /\.svg/,
+        type: 'asset/inline'
+      },
+      {
         test: path.resolve(__dirname, '../node_modules/video.js'),
         loader: 'expose-loader',
         options: {
