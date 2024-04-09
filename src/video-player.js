@@ -75,7 +75,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (this.playerOptions.debug) {
       isValidPlayerConfig(this.options).then((valid) => {
         if (!valid) {
-          this._isPlayerConfigValid = valid;
+          this._isPlayerConfigValid = false;
           this.videojs.error('invalid player configuration');
           return;
         }
