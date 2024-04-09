@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.5...v2.0.0-edge.6) (2024-04-09)
+
+
+### Bug Fixes
+
+* eslintrc ([#604](https://github.com/cloudinary/cloudinary-video-player/issues/604)) ([a749b23](https://github.com/cloudinary/cloudinary-video-player/commit/a749b2376756a8cb5d0e34fc653fa76136b8e566))
+
+
+### Performance Improvements
+
+* debug mode & lazy validators (ME-15925) ([#606](https://github.com/cloudinary/cloudinary-video-player/issues/606)) ([74ffd93](https://github.com/cloudinary/cloudinary-video-player/commit/74ffd93afdb4f2cb223eb3d2e3c777cbb4d24436))
+
 ## [2.0.0-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.4...v2.0.0-edge.5) (2024-04-04)
 
 
