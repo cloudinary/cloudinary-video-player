@@ -1,8 +1,11 @@
 const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 delete webpackCommon.output; // overwrite
+
+const outputPath = path.resolve(__dirname, '../lib');
 
 module.exports = merge(webpackCommon, {
   mode: 'production',
@@ -16,13 +19,22 @@ module.exports = merge(webpackCommon, {
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../lib'),
+    path: outputPath,
     chunkFilename: '[name].js',
     publicPath: '',
     library: {
       type: 'module'
     }
   },
+
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, '../src/config/profiles'),
+        to: `${outputPath}/profiles`
+      }]
+    })
+  ],
 
   experiments: {
     outputModule: true
