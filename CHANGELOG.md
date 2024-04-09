@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.6...v2.0.0-edge.7) (2024-04-09)
+
+
+### Bug Fixes
+
+* withCredentials (ME-16117) ([#607](https://github.com/cloudinary/cloudinary-video-player/issues/607)) ([31e4cbe](https://github.com/cloudinary/cloudinary-video-player/commit/31e4cbe44ffb7cd918fe1b986e17a9e28f5f160a))
+
 ## [2.0.0-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.5...v2.0.0-edge.6) (2024-04-09)
 
 
