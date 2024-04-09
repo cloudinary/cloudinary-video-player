@@ -549,6 +549,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.usageReport = true;
     }
 
+    if (this.playerOptions.withCredentials) {
+      options.withCredentials = true;
+    }
+
     clearTimeout(this.reTryId);
     this.nbCalls = 0;
     const maxTries = this.videojs.options_.maxTries || 3;
