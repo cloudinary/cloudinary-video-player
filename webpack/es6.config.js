@@ -31,7 +31,7 @@ module.exports = merge(webpackCommon, {
     new CopyWebpackPlugin({
       patterns: [{
         from: path.resolve(__dirname, '../src/config/profiles'),
-        to: `${outputPath}/default-player-profiles`
+        to: `${outputPath}/profiles`
       }]
     })
   ],
