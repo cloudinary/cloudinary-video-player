@@ -107,6 +107,7 @@
     "css.escape": "^1.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^27.9.0",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
     "eslint-webpack-plugin": "^4.1.0",
     "expose-loader": "^5.0.0",
     "html-webpack-plugin": "^5.6.0",
