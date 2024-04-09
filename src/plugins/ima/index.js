@@ -12,10 +12,10 @@ export default async function imaPlugin(player, playerOptions) {
 
   if (playerOptions.ads && (!loaded.contribAdsLoaded || !loaded.imaAdsLoaded)) {
     if (!loaded.contribAdsLoaded) {
-      console.log('contribAds is not loaded');
+      console.warn('contribAds is not loaded');
     }
     if (!loaded.imaAdsLoaded) {
-      console.log('imaSdk is not loaded');
+      console.warn('imaSdk is not loaded');
     }
     return false;
   }
