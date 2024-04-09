@@ -6,7 +6,7 @@ module.exports = {
     es6: true,
     jest: true
   },
-  extends: ['eslint:recommended', 'plugin:you-dont-need-lodash-underscore/compatible'],
+  extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
