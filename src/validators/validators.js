@@ -39,6 +39,7 @@ export const playerValidators = {
     queryParams: validator.isPlainObject,
     publicId: validator.isString,
     fluid: validator.isBoolean,
+    withCredentials: validator.isBoolean,
     analytics: validator.isBoolean,
     cloudinaryAnalytics: validator.isBoolean,
     hideContextMenu: validator.isBoolean,
@@ -84,7 +85,6 @@ export const playerValidators = {
 export const sourceValidators = {
   raw_transformation: validator.isString,
   shoppable: validator.isPlainObject,
-  withCredentials: validator.isBoolean,
   chapters: validator.or(validator.isBoolean, validator.isPlainObject),
   interactionAreas: {
     enable: validator.isBoolean,
