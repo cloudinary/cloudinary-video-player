@@ -54,7 +54,7 @@ export const isValidConfig = (config, validators) => {
  * @returns boolean - true is the configuration object is valid and false if it is not
  */
 export const isValidPlayerConfig = async (config) => {
-  return import(/* webpackChunkName: "validators" */ './validators').then(({playerValidators}) => {
+  return import(/* webpackChunkName: "debug" */ './validators').then(({playerValidators}) => {
     return isValidConfig(config, playerValidators);
   });
 };
@@ -65,7 +65,7 @@ export const isValidPlayerConfig = async (config) => {
  * @returns boolean - true is the configuration object is valid and false if it is not
  */
 export const isValidSourceConfig = (config) => {
-  return import(/* webpackChunkName: "validators" */ './validators').then(({sourceValidators}) => {
+  return import(/* webpackChunkName: "debug" */ './validators').then(({sourceValidators}) => {
     return isValidConfig(config, sourceValidators);
   });
 };

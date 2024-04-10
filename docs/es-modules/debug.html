@@ -17,9 +17,9 @@
         <a href="/index.html">&#60;&#60; Back to examples index</a>
       </nav>
       <h1>Cloudinary Video Player</h1>
-      <h3 class="mb-4">TITLE</h3>
+      <h3 class="mb-4">Debug mode</h3>
 
-      <p>INFO</p>
+      <p>This mode adds debugging information to the video player. It will validate the configuration passed to the player and warn about any issues.</p>
 
       <video
         id="player"
@@ -39,12 +39,18 @@
 
     <script type="module">
       import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/debug';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
-      const player = videoPlayer('player', {
+      const player = cloudinary.videoPlayer('player', {
         cloudName: 'demo',
-        publicId: 'dog'
+        fluid: 'yes', // Should be a boolean
+        debug: true
       });
+
+      player.source({
+        publicId: 'dog'
+      })
     </script>
 
     <!-- Bootstrap -->
