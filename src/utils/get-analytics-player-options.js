@@ -92,6 +92,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   videoJS: hasConfig(playerOptions.videoJS),
   width: playerOptions.width,
   withCredentials: playerOptions.withCredentials,
+  debug: playerOptions.debug,
 
   colors: playerOptions.colors && JSON.stringify(playerOptions.colors),
   controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),
