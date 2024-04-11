@@ -25,7 +25,7 @@
     "./*": "./lib/*"
   },
   "scripts": {
-    "prepare": "npm run snyk-protect && shx cp env.example.js env.js",
+    "prepare": "shx cp env.example.js env.js",
     "clean": "rm -rf dist lib",
     "start": "webpack serve --config webpack/dev.config.js",
     "start:light": "WEBPACK_BUILD_LIGHT=1 webpack serve --config webpack/dev.config.js",
@@ -41,7 +41,6 @@
     "precommit": "eslint src",
     "test": "jest --no-cache --detectOpenHandles",
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
-    "snyk-protect": "snyk protect",
     "commitlint": "commitlint --edit"
   },
   "keywords": [
@@ -121,7 +120,6 @@
     "sass-loader": "^14.1.1",
     "semver": "^7.6.0",
     "shx": "^0.3.4",
-    "snyk": "^1.1286.3",
     "terser-webpack-plugin": "^5.3.10",
     "url-loader": "^4.1.1",
     "webpack": "^5.91.0",
@@ -130,6 +128,5 @@
     "webpack-conditional-loader": "^1.0.12",
     "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.10.0"
-  },
-  "snyk": true
+  }
 }
