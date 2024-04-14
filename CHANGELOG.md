@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.0-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.8...v2.0.0-edge.9) (2024-04-14)
+
+
+### Bug Fixes
+
+* debug mode analytics ([#611](https://github.com/cloudinary/cloudinary-video-player/issues/611)) ([4749352](https://github.com/cloudinary/cloudinary-video-player/commit/4749352a4a1972d536ee7449273ae8266757bf53))
+* esm example pages (ME-16168) ([#613](https://github.com/cloudinary/cloudinary-video-player/issues/613)) ([e7c601d](https://github.com/cloudinary/cloudinary-video-player/commit/e7c601d43b0416657854193e07d21b8e1691c14b))
+
 ## [2.0.0-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.7...v2.0.0-edge.8) (2024-04-10)
 
 
