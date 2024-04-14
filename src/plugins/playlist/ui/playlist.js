@@ -1,5 +1,5 @@
 import VideoSource from 'plugins/cloudinary/models/video-source/video-source';
-import { isInteger } from 'utils/type-inference';
+import isInteger from 'lodash/isInteger';
 
 import './components/upcoming-video-overlay';
 import './components/playlist-buttons';

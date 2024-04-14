@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3>Interaction Areas</h3>
+
+      <h4>Define Interaction Areas manually</h4>
+
+      <div class="video-container">
+        <video
+          id="manually"
+          width="250"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+        ></video>
+      </div>
+
+      <hr>
+
+      <h3>Interaction Areas using predefined templates</h3>
+
+      <div class="video-container">
+        <video
+          id="custom-template"
+          width="250"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+        ></video>
+      </div>
+
+      <hr>
+
+      <h3>Using your own VTT file</h3>
+
+      <div class="video-container">
+        <video
+          id="custom-vtt"
+          width="250"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+        ></video>
+      </div>
+
+      <hr>
+
+      <h3>Auto-zoom video cropping</h3>
+
+      <div class="video-container">
+        <video
+          id="auto-zoom"
+          width="250"
+          playsinline
+          controls
+          muted
+          class="cld-video-player"
+        ></video>
+      </div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import cloudinary from 'cloudinary-video-player/all';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/interaction-areas';
+      import 'cloudinary-video-player/interaction-areas.min.css';
+
+      const playerOption = {
+        cloudName: 'demo',
+        bigPlayButton: false,
+        interactionDisplay: {
+          theme: {
+            template: 'pulsing'
+          },
+          layout: {
+            enable: true,
+            showAgain: false
+          }
+        }
+      };
+
+      const sources = {
+        topSource:
+          'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        bottomSource:
+          'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      };
+
+      const player = cloudinary.videoPlayer('manually', playerOption);
+
+      player.source('video-player/girl_in_a_dress', {
+        interactionAreas: {
+          enable: true,
+          template: [
+            {
+              left: 10,
+              top: 10,
+              width: 80,
+              height: 40,
+              id: 'topSource'
+            },
+            {
+              left: 10,
+              top: 75,
+              width: 80,
+              height: 20,
+              id: 'bottomSource'
+            }
+          ],
+          onClick: function (event) {
+            event.zoom(sources[event.item.id]);
+          }
+        }
+      });
+
+      const videoZoomSources = {
+        top: 'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4',
+        middle: 'https://www2.hm.com/en_in/productpage.0687948004.html',
+        bottom:
+          'https://res.cloudinary.com/eran2903/video/upload/w_540,x_1260,y_3100,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      };
+
+      const player2 = cloudinary.videoPlayer('custom-template', playerOption);
+
+      player2.source('video-player/girl_in_a_dress', {
+        interactionAreas: {
+          enable: true,
+          template: 'portrait',
+          onClick: function (event) {
+            const src = videoZoomSources[event.item.id];
+            if (event.item.id === 'middle') {
+              if (window.confirm('Do you like this shirt ?')) {
+                window.open(src, '_blank').focus();
+              }
+            } else {
+              event.zoom(src);
+            }
+          }
+        }
+      });
+
+      const player3 = cloudinary.videoPlayer('custom-vtt', playerOption);
+
+      const videoZoomSources3 = {
+        center:
+          'https://res.cloudinary.com/eran2903/video/upload/w_880,x_800,y_200,c_crop/w_270,eo_8,q_auto:best,f_auto/production_ID_3888264_fuuo7c.mp4'
+      };
+
+      player3.source('video-player/girl_in_a_dress', {
+        interactionAreas: {
+          enable: true,
+          vttUrl:
+            'https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt',
+          onClick: function (event) {
+            event.zoom(videoZoomSources3[event.item.id]);
+          }
+        }
+      });
+
+      const player4 = cloudinary.videoPlayer('auto-zoom', playerOption);
+
+      player4.source('video-player/girl_in_a_dress', {
+        transformation: {
+          quality: 'auto'
+        },
+        interactionAreas: {
+          enable: true,
+          template: 'portrait',
+          onClick: function (event) {
+            event.zoom();
+          }
+        }
+      });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

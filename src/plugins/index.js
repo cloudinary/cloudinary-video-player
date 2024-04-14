@@ -17,7 +17,6 @@ import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
 import chapters from './chapters';
-import dashPlugin from './dash';
 import imaPlugin from './ima';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
@@ -38,7 +37,6 @@ const plugins = {
 
   // Lazy loaded plugins
   chapters,
-  dashPlugin,
   imaPlugin,
   playlist,
   shoppable,

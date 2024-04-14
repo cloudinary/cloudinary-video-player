@@ -1,7 +1,18 @@
-// This file is bundled as `videoPlayer.js` to be imported as a tree-shaken module.
+// This file is bundled as `cld-video-player.js` to be imported as a tree-shaken module.
+// It is the default export of the Cloudinary Video Player.
 
 // Usage:
-// import videoPlayer from 'cloudinary-video-player/videoPlayer';
-// import dashjs from "cloudinary-video-player/dash";
+// import cloudinary from 'cloudinary-video-player';
+// Or:
+// import { videoPlayer } from "cloudinary-video-player";
 
-export { videoPlayer as default } from './index.js';
+// Other modules can be imported like that:
+// import dash from 'cloudinary-video-player/dash';
+
+import cloudinary from './index.js';
+
+export const videoPlayer = cloudinary.videoPlayer;
+export const videoPlayers = cloudinary.videoPlayers;
+export const videoPlayerWithProfile = cloudinary.videoPlayerWithProfile;
+
+export default cloudinary;

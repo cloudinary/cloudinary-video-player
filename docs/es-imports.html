@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Cloudinary Video Player</title>
-  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
 
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+    <!-- highlight.js -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
 
-  <!--
+    <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
 
@@ -22,33 +36,22 @@
 
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
+    <script type="text/javascript" src="./scripts.js"></script>
+  </head>
+  <body>
+    <div class="container p-4 col-12">
+      <nav class="nav mb-2">
+        <a href="./index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Import as ES module</h3>
 
-</head>
-<body>
-  <div class="container p-4 col-12">
-    <nav class="nav mb-2">
-      <a href="./index.html">&#60;&#60; Back to examples index</a>
-    </nav>
-    <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Import as ES module</h3>
-
-    <p class="mt-4">
-      Note: Player version is managed in the sandbox dependencies panel.
-    </p>
-
-    <p class="codepen" data-height="600" data-default-tab="js,result" data-slug-hash="XWQmLgv" data-editable="true" data-user="tsi" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-      <span>See the Pen <a href="https://codepen.io/tsi/pen/XWQmLgv">
-      VP ESM</a> by Tsachi Shlidor (<a href="https://codepen.io/tsi">@tsi</a>)
-      on <a href="https://codepen.io">CodePen</a>.</span>
-    </p>
-    <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
-
-    <p class="mt-4">
-      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
-    </p>
-
-  </div>
-
-</body>
+      <iframe
+        src="https://stackblitz.com/edit/vitejs-vite-t4sexm?embed=1&file=main.js"
+        frameborder="0"
+        width="100%"
+        height="800"
+      ></iframe>
+    </div>
+  </body>
 </html>

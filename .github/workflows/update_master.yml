@@ -16,12 +16,23 @@ jobs:
         run: |
           git config user.name "cloudinary-jenkins"
           git config user.email "cloudinary-jenkins@clodinary.com"
-          git merge -X ours --no-edit origin/edge
+          git checkout -b update-master
+          git merge -X ours --no-edit origin/edge || true
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          title: Update Master
-          body: This PR was created Automatically
           branch: update-master
+          base: master
+          title: "chore: update master"
+          body: |
+            This PR was created Automatically.
+
+            Please approve and squash-merge it.
+
+            Before merging, make sure all the changes are listed in the squash-commit footer.
+            Format must be plain conventional-commit, one per line.
+            No `*` bullets and no `----` comments are allowed.
+
+            Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):

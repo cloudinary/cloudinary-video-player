@@ -1,87 +1,118 @@
 import videojs from 'video.js';
-import SourceMenuItem from './SourceMenuItem';
+import SourceMenuItem from './SourceMenuItem.js';
 
 const MenuButton = videojs.getComponent('MenuButton');
 
+/**
+ * A button that hides/shows sorted SourceMenuItems
+ */
 class SourceMenuButton extends MenuButton {
 
+  /**
+   * Create SourceMenuItems and sort them
+   *
+   * @param {videojs.Player} player
+   * videojs player
+   * @param {{default}} options
+   * high | low
+   */
   constructor(player, options) {
     super(player, options);
 
-    const qualityLevels = this.player().qualityLevels();
+    const qualityLevels = this.player_.qualityLevels();
 
     // Handle options: We accept an options.default value of ( high || low )
     // This determines a bias to set initial resolution selection.
     if (options && options.default) {
       if (options.default === 'low') {
-        for (let i = 0; i < qualityLevels.length; i++) {
-          qualityLevels[i].enabled = (i === 0);
+        for (const [index, qualityLevel] of qualityLevels.entries()) {
+          qualityLevel.enabled = (index === 0);
         }
       } else if (options.default === 'high') {
-        for (let i = 0; i < qualityLevels.length; i++) {
-          qualityLevels[i].enabled = (i === (qualityLevels.length - 1));
+        for (let index = 0; index < qualityLevels.length; index++) {
+          qualityLevels[index].enabled = (index === (qualityLevels.length - 1));
         }
       }
     }
 
     // Bind update to qualityLevels changes
-    this.player().qualityLevels().on('addqualitylevel', (event) => {
-      this.update(event);
-    });
-
-    this.menuButton_.el_.setAttribute('aria-label', 'Source Selector Button');
+    // Todo: switch to Function.prototype.bind
+    this.player_.qualityLevels().on(['change', 'addqualitylevel', 'removequalitylevel'], videojs.bind(this, this.update));
   }
 
+  /**
+   * Create div with videojs classes
+   *
+   * @returns {videojs.MenuButton} The sum of the two numbers.
+   */
   createEl() {
     return videojs.dom.createEl('div', {
       className: 'vjs-http-source-selector vjs-menu-button vjs-menu-button-popup vjs-control vjs-button'
     });
   }
 
+  /**
+   * Create SourceMenuItems and sort them
+   *
+   * @returns {SourceMenuItem[]} The sum of the two numbers.
+   */
+  buildCSSClass() {
+    return MenuButton.prototype.buildCSSClass.call(this);
+  }
+
+  /**
+   * Update the menu button
+   *
+   * @returns {videojs.MenuButton} The updated menu button
+   */
+  update() {
+    return MenuButton.prototype.update.call(this);
+  }
+
+  /**
+   * Create SourceMenuItems and sort them
+   *
+   * @returns {SourceMenuItem[]} Sorted array of SourceMenuItems
+   */
   createItems() {
     const menuItems = [];
-    const levels = this.player().qualityLevels();
+    const levels = this.player_.qualityLevels();
     const labels = [];
 
-    for (let i = 0; i < levels.length; i++) {
-      let index = levels.length - (i + 1);
-      let selected = (index === levels.selectedIndex);
+    for (let index = levels.length - 1; index >= 0; index--) {
+      const selected = (index === levels.selectedIndex);
 
       // Display height if height metadata is provided with the stream, else use bitrate
       let label = `${index}`;
-      let sortVal = index;
-      if (levels[index].height) {
-        label = `${levels[index].height}p`;
-        sortVal = parseInt(levels[index].height, 10);
-      } else if (levels[index].bitrate) {
-        label = `${Math.floor(levels[index].bitrate / 1e3)} kbps`;
-        sortVal = parseInt(levels[index].bitrate, 10);
+      let sortValue = index;
+      const level = levels[index];
+
+      if (level.height) {
+        label = `${level.height}p`;
+        sortValue = Number.parseInt(level.height, 10);
+      } else if (level.bitrate) {
+        label = `${Math.floor(level.bitrate / 1e3)} kbps`;
+        sortValue = Number.parseInt(level.bitrate, 10);
       }
 
       // Skip duplicate labels
-      if (labels.indexOf(label) >= 0) {
+      if (labels.includes(label)) {
         // eslint-disable-next-line no-continue
         continue;
       }
       labels.push(label);
 
-      menuItems.push(new SourceMenuItem(this.player_, { label, index, selected, sortVal }));
+      menuItems.push(new SourceMenuItem(this.player_, { label, index, selected, sortValue }));
     }
 
     // If there are multiple quality levels, offer an 'auto' option
     if (levels.length > 1) {
-      menuItems.push(new SourceMenuItem(this.player_, { label: 'Auto', index: levels.length, selected: false, sortVal: 99999 }));
+      menuItems.push(new SourceMenuItem(this.player_, { label: 'Auto', index: levels.length, selected: false, sortValue: 999999 }));
     }
 
     // Sort menu items by their label name with Auto always first
     menuItems.sort(function(a, b) {
-      if (a.options_.sortVal < b.options_.sortVal) {
-        return 1;
-      } else if (a.options_.sortVal > b.options_.sortVal) {
-        return -1;
-      } else {
-        return 0;
-      }
+      return b.options_.sortValue - a.options_.sortValue;
     });
 
     return menuItems;

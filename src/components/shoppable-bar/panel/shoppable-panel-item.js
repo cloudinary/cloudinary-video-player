@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import { elMatches } from 'utils/matches';
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 const dom = videojs.dom || videojs;
@@ -25,7 +24,7 @@ class ShoppablePanelItem extends ClickableComponent {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!elMatches(this.el_, `.dragged .${CLD_SPBL_ITEM}`)) {
+    if (!this.el_.matches(`.dragged .${CLD_SPBL_ITEM}`)) {
       // Prevent click event if dragged
       this.options_.clickHandler(event);
     }

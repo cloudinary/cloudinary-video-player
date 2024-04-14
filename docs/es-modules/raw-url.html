@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Video with raw URL</h3>
+
+      <video
+        id="player"
+        playsinline
+        controls
+        muted
+        autoplay
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <hr />
+
+      <h3 class="mb-4">Video with raw URL - ABR</h3>
+
+      <video
+        id="abrPlayer"
+        playsinline
+        controls
+        muted
+        autoplay
+        class="cld-video-player"
+        crossorigin="anonymous"
+        width="500"
+      ></video>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      const config = {
+        cloudName: 'demo',
+        secure: true,
+        posterOptions: { posterColor: '#000' }
+      };
+
+      const player = videoPlayer('player', config);
+
+      player.source('https://sample-videos.com/video321/mp4/720/big_buck_bunny_720p_10mb.mp4');
+
+      const abrPlayer = videoPlayer('abrPlayer', config);
+
+      abrPlayer.source('https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8');
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

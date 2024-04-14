@@ -1,11 +1,10 @@
 import videojs from 'video.js';
-import './videojs-contextmenu';
-import './context-menu.scss';
+import isFunction from 'lodash/isFunction';
 import ContextMenu from './components/context-menu';
 import { getPointerPosition } from 'utils/positioning';
 import { sliceProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
-import { isFunction } from 'utils/type-inference';
+import './videojs-contextmenu';
+import './context-menu.scss';
 
 const defaults = {
   showNativeOnRecurringEvent: false
@@ -18,7 +17,7 @@ class ContextMenuPlugin {
       throw new Error('"content" required');
     }
 
-    const opts = assign({}, defaults, initOpts);
+    const opts = Object.assign({}, defaults, initOpts);
 
     this.player = player;
     const _options = sliceProperties(opts, 'content', 'showNativeOnRecurringEvent');

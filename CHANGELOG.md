@@ -1,6 +1,130 @@
 # Changelog
 
-## [1.11.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.0...v1.11.1) (2024-03-19)
+## [2.0.0-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.8...v2.0.0-edge.9) (2024-04-14)
+
+
+### Bug Fixes
+
+* debug mode analytics ([#611](https://github.com/cloudinary/cloudinary-video-player/issues/611)) ([4749352](https://github.com/cloudinary/cloudinary-video-player/commit/4749352a4a1972d536ee7449273ae8266757bf53))
+* esm example pages (ME-16168) ([#613](https://github.com/cloudinary/cloudinary-video-player/issues/613)) ([e7c601d](https://github.com/cloudinary/cloudinary-video-player/commit/e7c601d43b0416657854193e07d21b8e1691c14b))
+
+## [2.0.0-edge.8](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.7...v2.0.0-edge.8) (2024-04-10)
+
+
+### Bug Fixes
+
+* esm examples ([#609](https://github.com/cloudinary/cloudinary-video-player/issues/609)) ([81c0831](https://github.com/cloudinary/cloudinary-video-player/commit/81c083166ef1b25123a1f805e8e12b9b4b290aa6))
+
+## [2.0.0-edge.7](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.6...v2.0.0-edge.7) (2024-04-09)
+
+
+### Bug Fixes
+
+* withCredentials (ME-16117) ([#607](https://github.com/cloudinary/cloudinary-video-player/issues/607)) ([31e4cbe](https://github.com/cloudinary/cloudinary-video-player/commit/31e4cbe44ffb7cd918fe1b986e17a9e28f5f160a))
+
+## [2.0.0-edge.6](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.5...v2.0.0-edge.6) (2024-04-09)
+
+
+### Bug Fixes
+
+* eslintrc ([#604](https://github.com/cloudinary/cloudinary-video-player/issues/604)) ([a749b23](https://github.com/cloudinary/cloudinary-video-player/commit/a749b2376756a8cb5d0e34fc653fa76136b8e566))
+
+
+### Performance Improvements
+
+* debug mode & lazy validators (ME-15925) ([#606](https://github.com/cloudinary/cloudinary-video-player/issues/606)) ([74ffd93](https://github.com/cloudinary/cloudinary-video-player/commit/74ffd93afdb4f2cb223eb3d2e3c777cbb4d24436))
+
+## [2.0.0-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.4...v2.0.0-edge.5) (2024-04-04)
+
+
+### Bug Fixes
+
+* esm examples ([18a1b4f](https://github.com/cloudinary/cloudinary-video-player/commit/18a1b4f4dc1c728eaeeb2eaf981bec495b9fe3d8))
+
+## [2.0.0-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.3...v2.0.0-edge.4) (2024-04-02)
+
+
+### Bug Fixes
+
+* isPlainObject ([#598](https://github.com/cloudinary/cloudinary-video-player/issues/598)) ([7d09a39](https://github.com/cloudinary/cloudinary-video-player/commit/7d09a39fe1868b4b37eb355dda3d78ce81f2dd1a))
+
+## [2.0.0-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.2...v2.0.0-edge.3) (2024-03-27)
+
+
+### Performance Improvements
+
+* utils refactor & cleanup ([#595](https://github.com/cloudinary/cloudinary-video-player/issues/595)) ([99ba911](https://github.com/cloudinary/cloudinary-video-player/commit/99ba9118811ce70186996925310b63f8744866fd))
+
+## [2.0.0-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.1...v2.0.0-edge.2) (2024-03-21)
+
+
+### Performance Improvements
+
+* cleanup codec logic ([#590](https://github.com/cloudinary/cloudinary-video-player/issues/590)) ([e31b44e](https://github.com/cloudinary/cloudinary-video-player/commit/e31b44e50cbfcb624ae589bfafe437127b754466))
+* update dependencies ([#594](https://github.com/cloudinary/cloudinary-video-player/issues/594)) ([38c5beb](https://github.com/cloudinary/cloudinary-video-player/commit/38c5beba4cbdfb8537a973159193c5854d8f69fa))
+
+## [2.0.0-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.0...v2.0.0-edge.1) (2024-03-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default ES import is now only the player core plugins need to be explicitly imported
+
+### Performance Improvements
+
+* default export to be base videoPlayer ([#588](https://github.com/cloudinary/cloudinary-video-player/issues/588)) ([259cb24](https://github.com/cloudinary/cloudinary-video-player/commit/259cb24ab1226f8c9c8cd720588c8748ee8f9b6b))
+
+## [1.11.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.5...v1.11.1-edge.0) (2024-03-17)
+
+
+### Bug Fixes
+
+* styled subtitles browser compatibility ([#576](https://github.com/cloudinary/cloudinary-video-player/issues/576)) ([ee7f1e2](https://github.com/cloudinary/cloudinary-video-player/commit/ee7f1e2fbf2dc19439240910b522cb574c325523))
+
+## [1.10.7-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.4...v1.10.7-edge.5) (2024-03-07)
+
+
+### Bug Fixes
+
+* mimetypes ([#572](https://github.com/cloudinary/cloudinary-video-player/issues/572)) ([4fe8dfc](https://github.com/cloudinary/cloudinary-video-player/commit/4fe8dfc0d6022f05e9ffaee02bfa7f865418b91e))
+* poster image for raw URLs ([#573](https://github.com/cloudinary/cloudinary-video-player/issues/573)) ([a24d584](https://github.com/cloudinary/cloudinary-video-player/commit/a24d584852fe8c1490cdaa398a062667c37b91c4))
+
+## [1.10.7-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.3...v1.10.7-edge.4) (2024-03-05)
+
+
+### Bug Fixes
+
+* allowUsageReport ([#569](https://github.com/cloudinary/cloudinary-video-player/issues/569)) ([5d332d2](https://github.com/cloudinary/cloudinary-video-player/commit/5d332d2d9acf29d293ec3a78d7f4befbe8e67bb7))
+
+## [1.10.7-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.2...v1.10.7-edge.3) (2024-02-26)
+
+
+### Features
+
+* karaoke style subtitles ([#563](https://github.com/cloudinary/cloudinary-video-player/issues/563)) ([99c1830](https://github.com/cloudinary/cloudinary-video-player/commit/99c18309c5ebbee5b50c41537d73abd30955b285))
+
+## [1.10.7-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.1...v1.10.7-edge.2) (2024-02-26)
+
+
+### Bug Fixes
+
+* types exports ([#565](https://github.com/cloudinary/cloudinary-video-player/issues/565)) ([b3e0dd5](https://github.com/cloudinary/cloudinary-video-player/commit/b3e0dd5e45fedbddd0f545082bf1fb24dfb70bcb))
+
+## [1.10.7-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.7-edge.0...v1.10.7-edge.1) (2024-02-22)
+
+
+### Bug Fixes
+
+* type definitions ([0f1ab8a](https://github.com/cloudinary/cloudinary-video-player/commit/0f1ab8af191e598730000b0c79172f10b216a11d))
+
+## [1.10.7-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.15...v1.10.7-edge.0) (2024-02-21)
+
+
+### Bug Fixes
+
+* av1 support ([#557](https://github.com/cloudinary/cloudinary-video-player/issues/557)) ([a033c91](https://github.com/cloudinary/cloudinary-video-player/commit/a033c91a9196e47aebb717c25546319258a2f852))
+
+## [1.10.6-edge.15](https://github.com/cloudinary/cloudinary-video-player/compare/v1.10.6-edge.14...v1.10.6-edge.15) (2024-02-12)
 
 
 ### Bug Fixes
