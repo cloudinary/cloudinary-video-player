@@ -53,19 +53,21 @@
       import { videoPlayerWithProfile } from 'cloudinary-video-player';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
-      const playerWithDefaultProfile = await videoPlayerWithProfile('player-default-profile', {
-        cloudName: 'demo',
-        profile: 'cldDefault'
-      });
+      (async () => {
+        const playerWithDefaultProfile = await videoPlayerWithProfile('player-default-profile', {
+          cloudName: 'demo',
+          profile: 'cldDefault'
+        });
 
-      playerWithDefaultProfile.source('sea_turtle');
+        playerWithDefaultProfile.source('sea_turtle');
 
-      const playerWithCustomProfile = await videoPlayerWithProfile('player-custom-profile', {
-        cloudName: 'dwaq5xqm4',
-        profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json'
-      });
+        const playerWithCustomProfile = await videoPlayerWithProfile('player-custom-profile', {
+          cloudName: 'dwaq5xqm4',
+          profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json'
+        });
 
-      playerWithCustomProfile.source('samples/cld-sample-video');
+        playerWithCustomProfile.source('samples/cld-sample-video');
+      })();
     </script>
 
     <!-- Bootstrap -->

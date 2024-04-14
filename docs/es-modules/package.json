@@ -3,13 +3,13 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
+    "prepare-player": "cd ../../ && npm i && npm run build-es",
+    "install-player": "npm i ../../ --no-save",
+    "prepare": "npm run prepare-player && npm run install-player",
     "update-edge": "npm i",
     "start": "vite",
     "build": "vite build",
     "preview": "vite preview"
-  },
-  "dependencies": {
-    "cloudinary-video-player": "edge"
   },
   "devDependencies": {
     "vite": "^5.2.6"
