@@ -35,14 +35,13 @@ global.fetch = jest.fn((url, options) => {
 import { addTextTracks } from '../../src/utils/cloudinary';
 
 describe('video source tests', () => {
-  it('test filter out bad vtt', async (done) => {
+  it('test filter out bad vtt', async () => {
     let vjs = jest.createMockFromModule('video.js');
     vjs.addRemoteTextTrack = jest.fn();
     jest.spyOn(vjs, 'addRemoteTextTrack');
     addTextTracks(tracks, vjs);
     setTimeout(() => {
       expect(vjs.addRemoteTextTrack).toBeCalledTimes(2);
-      done();
     }, 1000);
   });
 

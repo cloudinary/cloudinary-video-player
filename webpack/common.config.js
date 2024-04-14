@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const { lightFilenamePart, minFilenamePart } = require('./build-utils');
@@ -55,8 +56,7 @@ const webpackConfig = {
           {
             loader: 'babel-loader'
           },
-          'webpack-conditional-loader',
-          'eslint-loader'
+          'webpack-conditional-loader'
         ]
       },
       {
@@ -64,32 +64,8 @@ const webpackConfig = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(jpg|png|gif)$/,
-        use: ['url-loader']
-      },
-      {
-        test: /\.woff$/,
-        use: 'url-loader?limit=7000&mimetype=application/font-woff&name=fonts/[name].[ext]'
-      },
-      {
-        test: /\.woff2$/,
-        use: 'url-loader?limit=7000&mimetype=application/font-woff2&name=fonts/[name].[ext]'
-      },
-      {
-        test: /\.[ot]tf$/,
-        use: 'url-loader?limit=7000&mimetype=application/octet-stream&name=fonts/[name].[ext]'
-      },
-      {
-        test: /\.eot$/,
-        use: 'url-loader?limit=7000&mimetype=application/vnd.ms-fontobject&name=fonts/[name].[ext]'
-      },
-      {
-        test: /\.svg$/,
-        use: 'url-loader?limit=7000&mimetype=image/svg+xml&name=fonts/[name].[ext]'
-      },
-      {
-        test: /\.(mp4|webm)$/,
-        use: 'url-loader?limit=10000'
+        test: /\.svg/,
+        type: 'asset/inline'
       },
       {
         test: path.resolve(__dirname, '../node_modules/video.js'),
@@ -105,6 +81,7 @@ const webpackConfig = {
   },
 
   plugins: [
+    new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
     new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
   ]

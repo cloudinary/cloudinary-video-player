@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+
+      <h3 class="mb-4">Playlist</h3>
+
+      <div class="d-flex flex-column justify-content-start align-items-start">
+        <video
+          playsinline
+          id="player-horizontal"
+          controls
+          autoplay
+          class="cld-video-player cld-fluid"
+        ></video>
+      </div>
+
+      <hr />
+
+      <div class="d-flex flex-column justify-content-start align-items-start">
+        <video
+          playsinline
+          id="player-vertical"
+          controls
+          autoplay
+          class="cld-video-player cld-fluid"
+        ></video>
+      </div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/playlist';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/playlist.min.css';
+
+      const source1 = {
+        publicId: 'snow_horses',
+        info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' }
+      };
+      const source2 = {
+        publicId: 'dirt_bike',
+        info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' }
+      };
+      const source3 = { publicId: 'marmots', info: { title: 'Marmots' } };
+
+      const playlistSources = [source1, source2, source3];
+      const playlistOptions = {
+        autoAdvance: true,
+        repeat: true,
+        presentUpcoming: 8
+      };
+
+      const playerHorizontal = videoPlayer('player-horizontal', {
+        cloudName: 'demo',
+        playlistWidget: {
+          direction: 'horizontal',
+          total: 4
+        }
+      });
+
+      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
+      playerHorizontal.playlist(playlistSources, playlistOptions);
+
+      const playerVertical = videoPlayer('player-vertical', {
+        cloudName: 'demo',
+        playlistWidget: {
+          direction: 'vertical',
+          total: 4
+        }
+      });
+
+      // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
+      playerVertical.playlist(playlistSources, playlistOptions);
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

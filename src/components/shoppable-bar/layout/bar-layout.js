@@ -1,6 +1,5 @@
 
 import videojs from 'video.js';
-import { elMatches } from 'utils/matches';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');
@@ -84,7 +83,7 @@ class ShoppableBarLayout extends Component {
         if (this.options_.autoClose && this.options_.startState.indexOf('open') !== -1) {
           setTimeout(() => {
             // Keep it open while hovered
-            if (!elMatches(this.contentEl_, ':hover')) {
+            if (!this.contentEl_.matches(':hover')) {
               this.togglePanel(false);
             } else {
               this.contentEl_.addEventListener('mouseleave', () => {

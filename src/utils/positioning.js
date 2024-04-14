@@ -75,4 +75,4 @@ function setPosition(el, left, top) {
   el.style.top = `${top}px`;
 }
 
-export { getElementPosition, getPointerPosition, isElementInViewport, setPosition };
+export { getPointerPosition, isElementInViewport, setPosition };

@@ -1,5 +1,3 @@
-import { findIndex } from 'utils/find';
-
 class EventHandlerRegistry {
   constructor(emitter) {
     this._emitter = emitter;
@@ -22,7 +20,7 @@ class EventHandlerRegistry {
   }
 
   off(type, handler) {
-    const index = findIndex(this._eventHandlers, (event) =>
+    const index = this._eventHandlers?.findIndex((event) =>
       event.type === type && event.handler === handler);
 
     if (index === -1) {

@@ -1,6 +1,6 @@
 import { isValidConfig } from '../src/validators/validators-functions';
 import { validator } from '../src/validators/validators-types';
-import { noop } from '../src/utils/type-inference';
+import noop from 'lodash/noop'
 
 describe('test isValidConfig method', () => {
 

@@ -2,7 +2,6 @@ import VideoSource from '../video-source/video-source';
 import ImageSource from '../image-source';
 import { normalizeOptions } from '../../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { assign } from 'utils/assign';
 import { objectToQuerystring } from 'utils/querystring';
 import { AUDIO_SUFFIX_REMOVAL_PATTERN, DEFAULT_AUDIO_PARAMS, DEFAULT_POSTER_PARAMS } from './audio-source.const';
 import { SOURCE_TYPE } from '../../../../utils/consts';
@@ -15,7 +14,7 @@ class AudioSource extends VideoSource {
 
     publicId = publicId.replace(AUDIO_SUFFIX_REMOVAL_PATTERN, '');
 
-    options = assign({}, DEFAULT_AUDIO_PARAMS, options);
+    options = Object.assign({}, DEFAULT_AUDIO_PARAMS, options);
     const { poster } = sliceAndUnsetProperties(options, 'poster');
 
     super(publicId, options);
@@ -42,7 +41,7 @@ class AudioSource extends VideoSource {
 
     if (!publicId) {
       publicId = this.publicId();
-      options = assign({}, options, DEFAULT_POSTER_PARAMS);
+      options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
     }
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
@@ -63,7 +62,7 @@ class AudioSource extends VideoSource {
           opts.transformation = srcTransformation;
         }
 
-        assign(opts, { resource_type: 'video', format });
+        Object.assign(opts, { resource_type: 'video', format });
         const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
 
         const src = `${this.config().url(this.publicId(), opts)}${queryString}`;

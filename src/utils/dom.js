@@ -1,12 +1,5 @@
-import { castArray } from './array';
-import { isElement } from './type-inference';
-
-const wrap = (el, wrapper) => {
-  el.parentNode.insertBefore(wrapper, el);
-  wrapper.appendChild(el);
-
-  return wrapper;
-};
+import castArray from 'lodash/castArray';
+import isElement from 'lodash/isElement';
 
 const createElement = (elementName, attributes = {}, children) => {
   const element = document.createElement(elementName);
@@ -71,4 +64,4 @@ const addEventListener = (element, name, cb) => {
 };
 
 
-export { wrap, createElement, elementsCreator, addEventListener };
+export { createElement, elementsCreator, addEventListener };

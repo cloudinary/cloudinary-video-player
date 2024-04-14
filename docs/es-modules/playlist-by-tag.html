@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+
+      <h3 class="mb-4">Playlist by tag (with captions)</h3>
+
+      <video
+        id="player"
+        playsinline
+        controls
+        autoplay
+        muted
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <div id="playlist-data" class="mt-4"></div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/playlist';
+
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/playlist.min.css';
+
+      const textTracks = {
+        surf_competition: {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            default: true,
+            url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558965984/Meetup_english.vtt'
+          },
+          subtitles: [
+            {
+              label: 'German subtitles',
+              language: 'de',
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966008/Meetup_german.vtt'
+            },
+            {
+              label: 'Russian subtitles',
+              language: 'ru',
+              url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
+            }
+          ]
+        },
+        finish_line: {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            default: true,
+            url: 'https://res.cloudinary.com/demo/raw/upload/outdoors.vtt'
+          }
+        },
+        dirt_bike: {
+          captions: {
+            label: 'English captions',
+            language: 'en',
+            default: true,
+            url: 'https://res.cloudinary.com/yaronr/raw/upload/v1558966053/Meetup_russian.vtt'
+          }
+        }
+      };
+
+      const getTextTracks = function (res) {
+        return { textTracks: textTracks[res.publicId] || textTracks['dirt_bike'] };
+      };
+
+      const sorter = function (a, b) {
+        if (a.publicId < b.publicId) return 1;
+        if (a.publicId > b.publicId) return -1;
+        return 0;
+      };
+
+      const player = videoPlayer('player', {
+        cloudName: 'demo'
+      });
+
+      // Fetch playlist by tag. Since this operation involves an API call
+      // the function returns a Promise when the operation completes.
+      // The return value is 'player'.
+      player
+        .playlistByTag('video_race', {
+          autoAdvance: true,
+          repeat: true,
+          presentUpcoming: false,
+          sorter: sorter, // returns sources-list sorting function
+          sourceParams: getTextTracks // returns per-source configurations, handles captions
+        })
+        .then(function (player) {
+          const divElem = document.querySelector('div#playlist-data');
+          const list = player
+            .playlist()
+            .list()
+            .map(function (source) {
+              return source.publicId();
+            })
+            .join(', ');
+
+          divElem.innerText = 'Playlist: ' + list;
+        });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>
