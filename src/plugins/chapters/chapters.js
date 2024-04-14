@@ -69,7 +69,7 @@ const ChaptersPlugin = (function () {
 
     const fullUrl = getCloudinaryUrl(
       `${currentPublicId}-chapters.vtt`,
-      extendCloudinaryConfig(this.player.cloudinary.cloudinaryConfig(), { resource_type: 'raw', version: '1' }),
+      extendCloudinaryConfig(this.player.cloudinary.cloudinaryConfig(), { resource_type: 'raw', version: '1' })
     );
     return `${fullUrl}?t=${Date.now()}`;
   };

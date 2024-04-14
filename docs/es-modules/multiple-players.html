@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Multiple Players</h3>
+
+      <p>Using the <code>videoPlayers</code> method you can initialize multiple players at once.</p>
+
+      <h3 class="text-primary">Player 1</h3>
+      <div class="video-container mt-4 mb-4">
+        <video
+          muted
+          playsinline
+          data-cld-public-id="elephants"
+          class="cld-video-player cld-video-player-skin-dark"
+        ></video>
+      </div>
+
+      <h3 class="text-primary">Player 2</h3>
+      <div class="video-container mt-4 mb-4">
+        <video
+          muted
+          playsinline
+          data-cld-public-id="marmots"
+          class="cld-video-player cld-video-player-skin-light"
+        ></video>
+      </div>
+
+      <h3 class="text-primary">Player 3</h3>
+      <div class="video-container mt-4 mb-4">
+        <video
+          muted
+          playsinline
+          data-cld-public-id="snow_deer_short"
+          class="cld-video-player"
+        ></video>
+      </div>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayers } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      const players = videoPlayers('.cld-video-player', {
+        cloudName: 'demo',
+        autoplay: true,
+        controls: true,
+        transformation: { width: 500, crop: 'limit' }
+      });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

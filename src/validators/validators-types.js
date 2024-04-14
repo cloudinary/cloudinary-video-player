@@ -1,8 +1,12 @@
-import { isBoolean, isFunction, isNumber, isPlainObject, isString } from '../utils/type-inference';
-import { getValidatorItem, isValueValid } from './validators-functions';
-import { some, map } from '../utils/array';
+import isBoolean from 'lodash/isBoolean';
+import isFunction from 'lodash/isFunction';
+import isNumber from 'lodash/isNumber';
+import isObject from 'lodash/isObject';
+import isString from 'lodash/isString';
 
-const getOptionsString = (options) => isPlainObject(options) ? `:(${Object.values(options).join('/')})` : '';
+import { getValidatorItem, isValueValid } from './validators-functions';
+
+const getOptionsString = (options) => isObject(options) ? `:(${Object.values(options).join('/')})` : '';
 
 const arrayOfStringsValidator = () => ({
   value: (arr) => Array.isArray(arr) && arr.every(isString),
@@ -37,8 +41,8 @@ const arrayOfObjectsValidator = (options) => ({
 
 const orValidator = (...validators) => {
   return () => ({
-    value: (value) => some(validators, (validator) => getValidatorItem(validator).value(value)),
-    message: (configPropertyName) => map(validators, (validator) => getValidatorItem(validator).message(configPropertyName)).join(' or ')
+    value: (value) => validators.some((validator) => getValidatorItem(validator).value(value)),
+    message: (configPropertyName) => validators.map((validator) => getValidatorItem(validator).message(configPropertyName)).join(' or ')
   });
 };
 
@@ -60,7 +64,7 @@ export const validator = {
     message: (key) => `'${key}' should be a function`
   }),
   isPlainObject: () => ({
-    value: isPlainObject,
+    value: isObject,
     message: (key) => `'${key}' should be an object`
   }),
   isObject: () => ({

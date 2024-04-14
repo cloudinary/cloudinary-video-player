@@ -1,6 +1,10 @@
 import videojs from 'video.js';
 import { v4 as uuidv4 } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
+import pick from 'lodash/pick';
+import isFunction from 'lodash/isFunction';
+import isString from 'lodash/isString';
 import './components';
 import plugins from './plugins';
 import Utils from './utils';
@@ -8,16 +12,13 @@ import defaults from './config/defaults';
 import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
-import { isFunction, isString } from './utils/type-inference';
 import {
   extractOptions,
   getResolveVideoElement,
   overrideDefaultVideojsComponents
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
-import { isValidConfig } from './validators/validators-functions';
-import { playerValidators, sourceValidators } from './validators/validators';
-import { get, pick } from './utils/object';
+import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
@@ -63,18 +64,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     Utils.fontFace(this.videoElement, this.playerOptions.cloudinary.fontFace);
 
     // Handle play button options
-    Utils.playButton(this.videoElement, this._videojsOptions);
+    if (this._videojsOptions.bigPlayButton === 'init') {
+      this.videoElement.classList.add('vjs-big-play-button-init-only');
+      this._videojsOptions.bigPlayButton = true;
+    }
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
 
-    // to do, should be change by isValidConfig
     this._isPlayerConfigValid = true;
-
-    isValidConfig(this.options, playerValidators);
-
-    if (!this._isPlayerConfigValid) {
-      this.videojs.error('invalid player configuration');
-      return;
+    if (this.playerOptions.debug) {
+      isValidPlayerConfig(this.options).then((valid) => {
+        if (!valid) {
+          this._isPlayerConfigValid = false;
+          this.videojs.error('invalid player configuration');
+          return;
+        }
+      });
     }
 
     if (this._videojsOptions.muted) {
@@ -248,7 +253,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         const publicId = source.publicId();
 
-        const transformation = Utils.assign({}, source.transformation());
+        const transformation = Object.assign({}, source.transformation());
 
         if (transformation) {
           delete transformation.streaming_profile;
@@ -286,7 +291,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         // Keep video-length related transformations and remove the rest
         const inputTransformations = pick(source.transformation(), ['start_offset', 'end_offset', 'duration']);
 
-        const transformation = Utils.assign({}, inputTransformations);
+        const transformation = Object.assign({}, inputTransformations);
 
         transformation.effect = 'preview';
         transformation.flags = transformation.flags || [];
@@ -385,7 +390,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initAnalytics() {
     const analyticsOpts = this.playerOptions.analytics;
 
-    if (!window.ga && analyticsOpts) {
+    if (!window.ga && analyticsOpts && this.playerOptions.debug) {
       console.error('Google Analytics script is missing');
       return;
     }
@@ -523,11 +528,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
 
-    const isSourceConfigValid = isValidConfig(options, sourceValidators);
-
-    if (!isSourceConfigValid) {
-      this.videojs.error('invalid source configuration');
-      return;
+    if (this.playerOptions.debug) {
+      isValidSourceConfig(options).then((valid) => {
+        if (!valid) {
+          this.videojs.error('invalid source configuration');
+        }
+      });
     }
 
     this._sendInternalAnalytics({ source: options });
@@ -542,6 +548,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (this.playerOptions.allowUsageReport) {
       options.usageReport = true;
+    }
+
+    if (this.playerOptions.withCredentials) {
+      options.withCredentials = true;
     }
 
     clearTimeout(this.reTryId);
@@ -566,7 +576,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     this.videojs.one(PLAYER_EVENT.READY, async () => {
       const playlistPlugin = await this.videojs.playlist(options);
@@ -577,7 +587,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
-    options = Utils.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
+    options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     return new Promise((resolve) => {
       this.videojs.one(PLAYER_EVENT.READY, async () => {

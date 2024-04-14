@@ -1,4 +1,4 @@
-import { camelize } from './string';
+import camelCase from 'lodash/camelCase';
 
 const CLD_ATTR_REGEX = /^(data-cld-)(\w+)/;
 
@@ -46,7 +46,7 @@ const normalizeAttributes = (elem) => {
       let attrVal = attrs[i].value;
 
       if (attrName.match(CLD_ATTR_REGEX)) {
-        attrName = camelize(attrName.replace(CLD_ATTR_REGEX, '$2'));
+        attrName = camelCase(attrName.replace(CLD_ATTR_REGEX, '$2'));
       }
 
       // check for known booleans

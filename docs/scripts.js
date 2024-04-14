@@ -1,30 +1,5 @@
 /* eslint no-var: "off", vars-on-top: "off", curly: "off", no-extend-native: "off" */
 
-// String.startsWith() polyfill
-if (!String.prototype.startsWith) {
-  String.prototype.startsWith = function (searchString, position) {
-    position = position || 0;
-    return this.substr(position, searchString.length) === searchString;
-  };
-}
-
-// URLSearchParams.get() polyfill
-if (!window.URLSearchParams) {
-  window.URLSearchParams = window.URLSearchParams || function (searchString) {
-    var self = this;
-    self.searchString = searchString;
-    self.get = function (name) {
-      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
-
-      if (results === null) {
-        return null;
-      }
-
-      return decodeURI(results[1]) || 0;
-    };
-  };
-}
-
 // true on /localhost or /anything.local
 var isLocal = window.location.hostname === 'localhost' || window.location.hostname.substring(window.location.hostname.lastIndexOf('.', window.location.hostname.lastIndexOf('.')) + 1) === 'local';
 

@@ -1,7 +1,6 @@
 import videojs from 'video.js';
 import EventEmitter from 'events';
-import { assign } from 'utils/assign';
-import { isPlainObject } from 'utils/type-inference';
+import isObject from 'lodash/isObject';
 import { PLAYER_EVENT } from './utils/consts';
 
 const EVENT_DEFAULTS = {
@@ -203,8 +202,8 @@ const normalizeEventsParam = (events, defaults) => {
     normalized = events.reduce((agg, item) => {
       const eventDefaults = defaults[item] || {};
 
-      if (isPlainObject(item)) {
-        agg[item.type] = assign({}, eventDefaults, item);
+      if (isObject(item)) {
+        agg[item.type] = Object.assign({}, eventDefaults, item);
       } else {
         agg[item] = eventDefaults;
       }

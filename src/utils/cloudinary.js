@@ -4,19 +4,18 @@ import { find } from 'utils/find';
 const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };
 
-
 const getGoodSrcs = (srcs, parsedUris) => {
   return srcs.filter((s) => {
-    const origUrl = parseUri(s.src);
-    return parsedUris.indexOf(origUrl.host + origUrl.path) !== -1 && s.try !== true;
+    const origUrl = new URL(s.src);
+    return parsedUris.indexOf(origUrl.host + origUrl.pathname) !== -1 && s.try !== true;
   });
 };
 
 const getParsedUris = (res) => {
   return res.reduce((acc, r) => {
     if (r.status >= 200 && r.status < 399 && r.url !== '') {
-      const parsedUri = parseUri(r.url);
-      acc.push(parsedUri.host + parsedUri.path);
+      const parsedUri = new URL(r.url);
+      acc.push(parsedUri.host + parsedUri.pathname);
     }
 
     return acc;
@@ -58,7 +57,6 @@ const handleCldError = (that, options) => {
         if (goodSrcs && goodSrcs.length) {
           setVideoSrc(that, goodSrcs);
         } else {
-          console.log('No urls left to try so stopping');
           that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources', statusCode: res.status });
         }
       }
@@ -73,38 +71,6 @@ const handleCldError = (that, options) => {
     that.videojs.error({ code: ERROR_CODE.NO_SUPPORTED_MEDIA, message: 'No supported media sources' });
   }
 };
-
-// for IE 11
-function parseUri(str) {
-  const o = {
-    strictMode: false,
-    key: ['source', 'protocol', 'authority', 'userInfo', 'user', 'password', 'host', 'port', 'relative', 'path', 'directory', 'file', 'query', 'anchor'],
-    q: {
-      name: 'queryKey',
-      parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-    },
-    parser: {
-      strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-      loose: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-    }
-  };
-  const m = o.parser[o.strictMode ? 'strict' : 'loose'].exec(str);
-  const uri = {};
-  let i = 14;
-
-  while (i--) {
-    uri[o.key[i]] = m[i] || '';
-  }
-
-  uri[o.q.name] = {};
-  uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-    if ($1) {
-      uri[o.q.name][$1] = $2;
-    }
-  });
-
-  return uri;
-}
 
 /**
  * Check if key exist in transformation

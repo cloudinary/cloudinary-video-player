@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">API and Events</h3>
+
+      <div class="video-container">
+
+      <video
+        id="player"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="600"
+      ></video>
+
+      <div class="mt-4">
+        <div class="btn-group">
+          <button id="vid-seek-minus" class="btn btn-outline-primary mb-2">-10 seconds</button>
+          <button id="vid-seek-plus" class="btn btn-outline-primary border-primary mb-2">+10 seconds</button>
+        </div>
+        <div class="btn-group">
+          <button id="vid-play-prev" class="btn btn-outline-primary mb-2">Previous</button>
+          <button id="vid-play-next" class="btn btn-outline-primary mb-2">Next</button>
+          <button id="vid-play" class="btn btn-outline-primary mb-2">Play</button>
+          <button id="vid-pause" class="btn btn-outline-primary mb-2">Pause</button>
+          <button id="vid-stop" class="btn btn-outline-primary mb-2">Stop</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="btn-group">
+          <button id="vid-mute" class="btn btn-outline-primary mb-2">Mute</button>
+          <button id="vid-unmute" class="btn btn-outline-primary mb-2">Unmute</button>
+          <button id="vid-volume-minus" class="btn btn-outline-primary mb-2">Volume -10%</button>
+          <button id="vid-volume-plus" class="btn btn-outline-primary mb-2">Volume +10%</button>
+        </div>
+        <div class="btn-group">
+          <button id="vid-maximize" class="btn btn-outline-primary mb-2">Maximize</button>
+          <button id="vid-toggle-controls" class="btn btn-outline-primary mb-2">Toggle Controls</button>
+        </div>
+      </div>
+
+      <div id="vid-events" class="alert alert-secondary text-center mt-4 p-4 w-100" style="overflow: scroll; height: 150px"></div>
+
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/playlist';
+
+      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/playlist.min.css';
+
+      const player = videoPlayer('player', {
+        cloudName: 'demo'
+      });
+      player.playlist(['snow_deer', 'sea_turtle', 'snow_horses'], { autoAdvance: 0 }).play();
+
+      document.querySelector('#vid-seek-minus').addEventListener('click', function () {
+        player.currentTime(player.currentTime() - 10);
+      });
+
+      document.querySelector('#vid-seek-plus').addEventListener('click', function () {
+        player.currentTime(player.currentTime() + 10);
+      });
+
+      document.querySelector('#vid-play-prev').addEventListener('click', function () {
+        player.playPrevious();
+      });
+
+      document.querySelector('#vid-play').addEventListener('click', function () {
+        player.play();
+      });
+
+      document.querySelector('#vid-play-next').addEventListener('click', function () {
+        player.playNext();
+      });
+
+      document.querySelector('#vid-pause').addEventListener('click', function () {
+        player.pause();
+      });
+
+      document.querySelector('#vid-stop').addEventListener('click', function () {
+        player.stop();
+      });
+
+      document.querySelector('#vid-mute').addEventListener('click', function () {
+        player.mute();
+      });
+
+      document.querySelector('#vid-unmute').addEventListener('click', function () {
+        player.unmute();
+      });
+
+      document.querySelector('#vid-volume-minus').addEventListener('click', function () {
+        player.volume(player.volume() - 0.1);
+      });
+
+      document.querySelector('#vid-volume-plus').addEventListener('click', function () {
+        player.volume(player.volume() + 0.1);
+      });
+
+      document.querySelector('#vid-maximize').addEventListener('click', function () {
+        player.maximize();
+      });
+
+      document.querySelector('#vid-toggle-controls').addEventListener('click', function () {
+        player.controls(!player.controls());
+      });
+
+      // Register to some video player events
+      const eventTypes = [
+        'play',
+        'pause',
+        'volumechange',
+        'mute',
+        'unmute',
+        'fullscreenchange',
+        'seek',
+        'sourcechanged',
+        'percentsplayed',
+        'ended'
+      ];
+
+      const eventsDiv = document.querySelector('#vid-events');
+      eventTypes.forEach(function (eventType) {
+        player.on(eventType, function (event) {
+          let eventStr = eventType;
+          if (event.eventData) {
+            eventStr = eventStr + ': ' + JSON.stringify(event.eventData);
+          }
+          const text = document.createTextNode(eventStr);
+          const textDiv = document.createElement('div');
+          textDiv.appendChild(text);
+          eventsDiv.appendChild(textDiv);
+          updateEvents();
+        });
+      });
+
+      function updateEvents() {
+        const eventsDiv = document.querySelector('#vid-events');
+        eventsDiv.scrollTop = eventsDiv.scrollHeight;
+      }
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

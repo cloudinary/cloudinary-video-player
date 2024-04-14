@@ -1,4 +1,5 @@
-import { isFunction, isPlainObject } from '../utils/type-inference';
+import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 
 
 export const getValidatorItem = (validator) => isFunction(validator) ? validator() : validator;
@@ -28,16 +29,16 @@ export const isValueValid = (validator, value, configPropertyName) => {
  * @returns boolean - true is the configuration object is valid and false if it is not
  */
 export const isValidConfig = (config, validators) => {
-  if (isPlainObject(validators)) {
+  if (isObject(validators)) {
     for (let key in config) {
       if (Object.prototype.hasOwnProperty.call(validators, key)) {
         const configValue = config[key];
         const validatorValue = validators[key];
-        const isObject = isPlainObject(configValue);
+        const isConfigObject = isObject(configValue);
 
-        if (isObject && !isValidConfig(configValue, validatorValue)) {
+        if (isConfigObject && !isValidConfig(configValue, validatorValue)) {
           return false;
-        } else if (!isObject && !isValueValid(validatorValue, configValue, key)) {
+        } else if (!isConfigObject && !isValueValid(validatorValue, configValue, key)) {
           return false;
         }
       }
@@ -45,4 +46,26 @@ export const isValidConfig = (config, validators) => {
   }
 
   return true;
+};
+
+/**
+ * check if a configuration object is valid or not
+ * @param  {object} config -  a config object
+ * @returns boolean - true is the configuration object is valid and false if it is not
+ */
+export const isValidPlayerConfig = async (config) => {
+  return import(/* webpackChunkName: "debug" */ './validators').then(({playerValidators}) => {
+    return isValidConfig(config, playerValidators);
+  });
+};
+
+/**
+ * check if a configuration object is valid or not
+ * @param  {object} config -  a config object
+ * @returns boolean - true is the configuration object is valid and false if it is not
+ */
+export const isValidSourceConfig = (config) => {
+  return import(/* webpackChunkName: "debug" */ './validators').then(({sourceValidators}) => {
+    return isValidConfig(config, sourceValidators);
+  });
 };
