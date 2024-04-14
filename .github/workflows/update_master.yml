@@ -16,7 +16,7 @@ jobs:
         run: |
           git config user.name "cloudinary-jenkins"
           git config user.email "cloudinary-jenkins@clodinary.com"
-          git merge -X ours --no-edit origin/edge
+          git merge -X ours --no-edit origin/edge || true
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
