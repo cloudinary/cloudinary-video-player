@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.1...v2.0.0) (2024-04-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* player core is the default ES export
+
+### Bug Fixes
+
+* esm example pages (ME-16168) ([#613](https://github.com/cloudinary/cloudinary-video-player/issues/613)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+* withCredentials (ME-16117) ([#607](https://github.com/cloudinary/cloudinary-video-player/issues/607)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+
+
+### Performance Improvements
+
+* cleanup codec logic ([#590](https://github.com/cloudinary/cloudinary-video-player/issues/590)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+* debug mode & lazy validators (ME-15925) ([#606](https://github.com/cloudinary/cloudinary-video-player/issues/606)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+* default export to be base videoPlayer ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+* update dependencies ([#594](https://github.com/cloudinary/cloudinary-video-player/issues/594)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+* utils refactor & cleanup ([#595](https://github.com/cloudinary/cloudinary-video-player/issues/595)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+
 ## [1.11.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.0...v1.11.1) (2024-03-19)
 
 ### Bug Fixes
