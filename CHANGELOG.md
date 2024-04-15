@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.9...v2.0.1-edge.0) (2024-04-15)
+
+
+### Bug Fixes
+
+* undeprecate Cloudinary.new() (ONCALL-3380) ([#619](https://github.com/cloudinary/cloudinary-video-player/issues/619)) ([99de793](https://github.com/cloudinary/cloudinary-video-player/commit/99de7930ebd836e4eceac8a40e728c9712f7005e))
+
 ## [2.0.0-edge.9](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.8...v2.0.0-edge.9) (2024-04-14)
 
 
