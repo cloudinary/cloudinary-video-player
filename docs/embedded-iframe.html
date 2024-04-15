@@ -29,7 +29,7 @@
       const search = new URLSearchParams(window.location.search);
       const ver = search.get('ver');
 
-      const url = `https://player.cloudinary.com/embed/?public_id=race_road_car&cloud_name=demo${(ver ? `&vpv=${ver}` : '')}`
+      const url = `https://player.cloudinary.com/embed/?public_id=race_road_car&cloud_name=demo&vpv=${(ver ? ver : 'edge')}`
 
       const iframe = document.getElementById('player');
 
