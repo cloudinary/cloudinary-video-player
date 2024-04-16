@@ -26,11 +26,25 @@ export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
 export const videoPlayerWithProfile = getVideoPlayerWithProfile();
 
+const cloudinaryVideoPlayerLegacyConfig = config => {
+  console.warn(
+    'Cloudinary.new() is deprecated and will be removed. Please use cloudinary.videoPlayer() instead.'
+  );
+  return {
+    videoPlayer: getVideoPlayer(config),
+    videoPlayers: getVideoPlayers(config)
+  };
+};
+
 const cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
-  videoPlayerWithProfile
+  videoPlayerWithProfile,
+  Cloudinary: {
+    // Backwards compatibility with SDK v1
+    new: cloudinaryVideoPlayerLegacyConfig
+  }
 };
 
 window.cloudinary = cloudinary;
