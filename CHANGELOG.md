@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0...v2.0.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* undeprecate Cloudinary.new() (ONCALL-3380) ([#619](https://github.com/cloudinary/cloudinary-video-player/issues/619)) ([174ee48](https://github.com/cloudinary/cloudinary-video-player/commit/174ee4894b5f9395f4d20f048869784bda8f2197))
+
 ## [2.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.1...v2.0.0) (2024-04-14)
 
 ### ⚠ BREAKING CHANGES
