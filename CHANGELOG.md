@@ -1,7 +1,7 @@
 # Changelog
 
-## [2.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.1...v2.0.0) (2024-04-14)
 
+## [2.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.1...v2.0.0) (2024-04-14)
 
 ### ⚠ BREAKING CHANGES
 
@@ -20,6 +20,7 @@
 * default export to be base videoPlayer ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
 * update dependencies ([#594](https://github.com/cloudinary/cloudinary-video-player/issues/594)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
 * utils refactor & cleanup ([#595](https://github.com/cloudinary/cloudinary-video-player/issues/595)) ([cca439b](https://github.com/cloudinary/cloudinary-video-player/commit/cca439b838aab56a3f13264db6b1188cf5000ef8))
+
 
 ## [1.11.1](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.0...v1.11.1) (2024-03-19)
 
