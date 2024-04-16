@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [3.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0...v3.0.0) (2024-04-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* the default ES import is now only the player core plugins need to be explicitly imported
+
+### Miscellaneous Chores
+
+* update master ([#621](https://github.com/cloudinary/cloudinary-video-player/issues/621)) ([77c9e92](https://github.com/cloudinary/cloudinary-video-player/commit/77c9e9287c4884199ab45a0f1596bbd0ca5dfe58))
+
 ## [2.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v1.11.1...v2.0.0) (2024-04-14)
 
 ### ⚠ BREAKING CHANGES
