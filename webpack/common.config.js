@@ -23,7 +23,8 @@ const webpackConfig = {
     library: {
       name: 'cloudinary-video-player',
       type: 'umd'
-    }
+    },
+    chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
 
   optimization: {
