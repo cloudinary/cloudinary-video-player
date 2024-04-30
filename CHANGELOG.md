@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.1-edge.0...v2.0.2-edge.0) (2024-04-30)
+
+
+### Bug Fixes
+
+* webpack chunk loading global ([#625](https://github.com/cloudinary/cloudinary-video-player/issues/625)) ([40278a2](https://github.com/cloudinary/cloudinary-video-player/commit/40278a23f631249e9dc17f99971df470f6c36a29))
+
 ## [2.0.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0-edge.9...v2.0.1-edge.0) (2024-04-15)
 
 
