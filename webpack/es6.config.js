@@ -25,7 +25,7 @@ module.exports = merge(webpackCommon, {
     library: {
       type: 'module'
     },
-    chunkLoadingGlobal: 'myCustomFunc'
+    chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
 
   plugins: [
