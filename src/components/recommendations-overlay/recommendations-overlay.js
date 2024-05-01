@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import RecommendationsOverlayContent from './recommendations-overlay-content';
 import RecommendationsOverlayHideButton from './recommendations-overlay-hide-button';
-import './recommendations-overlay.scss';
+import './recommendations-overlay.scss?style-loader';
 
 const MAXIMUM_ITEMS = 4;
 const Component = videojs.getComponent('Component');

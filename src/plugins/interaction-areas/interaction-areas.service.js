@@ -21,7 +21,7 @@ import { addEventListener, createElement } from '../../utils/dom';
 import { addMetadataTrack } from '../../video-player.utils';
 import { PLAYER_EVENT } from '../../utils/consts';
 
-import './interaction-areas.scss';
+import './interaction-areas.scss?style-loader';
 
 export const interactionAreasService = (player, playerOptions, videojsOptions) => {
 
