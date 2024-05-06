@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.0...v2.0.2-edge.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* split chunks styles ([#627](https://github.com/cloudinary/cloudinary-video-player/issues/627)) ([a2bc622](https://github.com/cloudinary/cloudinary-video-player/commit/a2bc622fd0adeea679d859b38621bda5c1014539))
+
 ## [2.0.2-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.1-edge.0...v2.0.2-edge.0) (2024-04-30)
 
 
