@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import './thumbnail.scss';
+import './thumbnail.scss?style-loader';
 
 // Get the ClickableComponent base class from Video.js
 const ClickableComponent = videojs.getComponent('ClickableComponent');
