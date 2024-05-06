@@ -61,8 +61,27 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        oneOf: [
+          // Split chunks load styles inline
+          {
+            test: /\.s?css$/,
+            resourceQuery: '?style-loader',
+            use: [
+              'style-loader',
+              'css-loader',
+              'sass-loader'
+            ],
+          },
+          // Main bundle
+          {
+            test: /\.s?css$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              'css-loader',
+              'sass-loader'
+            ],
+          },
+        ]
       },
       {
         test: /\.svg/,

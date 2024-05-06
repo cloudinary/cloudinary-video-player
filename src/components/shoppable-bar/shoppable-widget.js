@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import ShoppableBarLayout from './layout/bar-layout';
 import ShoppablePostWidget from './shoppable-post-widget';
-import './shoppable-widget.scss';
+import './shoppable-widget.scss?style-loader';
 import {
   CLD_SPBL_INNER_BAR,
   CLD_SPBL_PANEL_CLASS,

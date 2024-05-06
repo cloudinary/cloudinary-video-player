@@ -1,3 +1,3 @@
 import 'videojs-contrib-ads';
 import 'videojs-ima';
-import 'videojs-ima/dist/videojs.ima.scss';
+import 'videojs-ima/dist/videojs.ima.scss?style-loader';

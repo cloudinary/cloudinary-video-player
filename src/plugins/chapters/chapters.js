@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 
-import './chapters.scss';
+import './chapters.scss?style-loader';
 import { extendCloudinaryConfig, getCloudinaryUrl } from '../cloudinary/common';
 
 /**

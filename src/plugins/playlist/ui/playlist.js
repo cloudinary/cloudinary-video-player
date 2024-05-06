@@ -10,7 +10,7 @@ import {
   UPCOMING_VIDEO_TRANSITION
 } from './playlist.const';
 
-import './playlist.scss';
+import './playlist.scss?style-loader';
 
 class Playlist {
 
