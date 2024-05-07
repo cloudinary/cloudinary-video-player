@@ -30,7 +30,13 @@ const webpackConfig = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        defaultVendors: false
+        defaultVendors: false,
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true
+        }
       }
     }
   },
@@ -52,7 +58,7 @@ const webpackConfig = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /\/docs\/es-modules\//],
         use: [
           {
             loader: 'babel-loader'
@@ -61,27 +67,12 @@ const webpackConfig = {
         ]
       },
       {
-        oneOf: [
-          // Split chunks load styles inline
-          {
-            test: /\.s?css$/,
-            resourceQuery: '?style-loader',
-            use: [
-              'style-loader',
-              'css-loader',
-              'sass-loader'
-            ],
-          },
-          // Main bundle
-          {
-            test: /\.s?css$/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              'css-loader',
-              'sass-loader'
-            ],
-          },
-        ]
+        test: /\.s?css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ],
       },
       {
         test: /\.svg/,
@@ -103,7 +94,9 @@ const webpackConfig = {
   plugins: [
     new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
-    new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
+    new MiniCssExtractPlugin({
+      filename: `cld-video-player${lightFilenamePart}${minFilenamePart}.css`
+    })
   ]
 };
 
