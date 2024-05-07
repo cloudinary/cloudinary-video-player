@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.1...v2.0.2-edge.2) (2024-05-07)
+
+
+### Bug Fixes
+
+* playlist chunk styles ([#629](https://github.com/cloudinary/cloudinary-video-player/issues/629)) ([c2b7131](https://github.com/cloudinary/cloudinary-video-player/commit/c2b713139ee5bc6c20db96bbb5c4add6e1b6f473))
+
 ## [2.0.2-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.0...v2.0.2-edge.1) (2024-05-06)
 
 
