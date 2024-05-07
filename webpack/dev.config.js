@@ -16,7 +16,14 @@ module.exports = merge(webpackCommon, {
       template: path.resolve(__dirname, '../docs/index.html')
     }),
     new CopyWebpackPlugin({
-      patterns: [path.resolve(__dirname, '../docs')]
+      patterns: [{
+        from: path.resolve(__dirname, '../docs'),
+        globOptions: {
+          ignore: [
+            '**/node_modules',
+          ],
+        },
+      }],
     })
   ],
 
