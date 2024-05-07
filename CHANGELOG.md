@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.2...v2.0.2-edge.3) (2024-05-07)
+
+
+### Bug Fixes
+
+* unify styles (ME-16488) ([#631](https://github.com/cloudinary/cloudinary-video-player/issues/631)) ([8e9d659](https://github.com/cloudinary/cloudinary-video-player/commit/8e9d659def741e7267c946f4505aafd5c6388348))
+
 ## [2.0.2-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.1...v2.0.2-edge.2) (2024-05-07)
 
 
