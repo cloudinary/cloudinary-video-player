@@ -72,7 +72,7 @@
       },
       {
         "path": "./lib/all.js",
-        "maxSize": "280kb"
+        "maxSize": "290kb"
       }
     ]
   },

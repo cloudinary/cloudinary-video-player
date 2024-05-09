@@ -24,7 +24,8 @@ module.exports = merge(webpackCommon, {
     publicPath: '',
     library: {
       type: 'module'
-    }
+    },
+    chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
 
   plugins: [
