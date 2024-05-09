@@ -23,13 +23,20 @@ const webpackConfig = {
     library: {
       name: 'cloudinary-video-player',
       type: 'umd'
-    }
+    },
+    chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
 
   optimization: {
     splitChunks: {
       cacheGroups: {
-        defaultVendors: false
+        defaultVendors: false,
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true
+        }
       }
     }
   },
@@ -51,7 +58,7 @@ const webpackConfig = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /\/docs\/es-modules\//],
         use: [
           {
             loader: 'babel-loader'
@@ -60,8 +67,12 @@ const webpackConfig = {
         ]
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        test: /\.s?css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ],
       },
       {
         test: /\.svg/,
@@ -83,7 +94,9 @@ const webpackConfig = {
   plugins: [
     new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
-    new MiniCssExtractPlugin({ filename: `[name]${lightFilenamePart}${minFilenamePart}.css` })
+    new MiniCssExtractPlugin({
+      filename: `cld-video-player${lightFilenamePart}${minFilenamePart}.css`
+    })
   ]
 };
 
