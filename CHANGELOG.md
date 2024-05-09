@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [2.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.1...v2.0.2) (2024-05-09)
+
+
+### Bug Fixes
+
+* ESM chunk styles ([#629](https://github.com/cloudinary/cloudinary-video-player/issues/629)) ([323492f](https://github.com/cloudinary/cloudinary-video-player/commit/323492fbcf6f0e62f40f49fbb7790794e775b98a))
+* webpack chunk loading global ([#625](https://github.com/cloudinary/cloudinary-video-player/issues/625)) ([323492f](https://github.com/cloudinary/cloudinary-video-player/commit/323492fbcf6f0e62f40f49fbb7790794e775b98a))
+
 ## [2.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.0...v2.0.1) (2024-04-16)
 
 
