@@ -6,7 +6,9 @@ type FixtureParams = {
   consoleErrors: ConsoleMessage[];
   vpExamples: VideoPlayerExamplesPage;
 };
+
 export const vpTest = test.extend<FixtureParams>({
+  
   vpExamples: [async ({ page }, use) => {
     const vpExamplePage = new VideoPlayerExamplesPage(page);
     await vpExamplePage.goto();
@@ -21,5 +23,4 @@ export const vpTest = test.extend<FixtureParams>({
     });
     await use(consoleLogs);
   }, {scope: 'test'}],
-
 });
