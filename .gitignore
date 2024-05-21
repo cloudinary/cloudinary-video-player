@@ -15,3 +15,10 @@ lib/
 .DS_Store
 
 \.history/
+
+# playwright e2e tests
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

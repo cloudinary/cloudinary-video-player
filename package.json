@@ -41,6 +41,7 @@
     "precommit": "eslint src",
     "test": "jest --no-cache --detectOpenHandles",
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
+    "test:e2e": "npx playwright test --config=test/e2e/playwright.config.ts",
     "commitlint": "commitlint --edit"
   },
   "keywords": [
@@ -127,6 +128,8 @@
     "webpack-cli": "^5.1.4",
     "webpack-conditional-loader": "^1.0.12",
     "webpack-dev-server": "^5.0.4",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^5.10.0",
+    "@playwright/test": "1.41.2",
+    "@types/node": "20.12.10"
   }
 }
