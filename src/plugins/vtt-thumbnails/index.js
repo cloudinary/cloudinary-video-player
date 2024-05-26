@@ -109,6 +109,9 @@ const VttThumbnailsPlugin = (function () {
   };
 
   VttThumbnailsPlugin.prototype.setupThumbnailElement = function setupThumbnailElement() {
+    if (!this.vttData[0]) {
+      return;
+    }
     const mouseDisplay = this.player.$('.vjs-progress-holder .vjs-mouse-display');
     this.thumbnailHolder = this.player.$('.vjs-vtt-thumbnail-display') || videojs.dom.createEl('div', undefined, {
       class: 'vjs-vtt-thumbnail-display',
