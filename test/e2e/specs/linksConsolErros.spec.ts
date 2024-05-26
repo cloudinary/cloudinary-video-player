@@ -3,7 +3,7 @@ import { vpTest } from '../fixtures/vpTest';
 import { LINKS } from '../testData/pageLinksData';
 
 for (const link of LINKS) {
-    vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples, browserName }) => {
+    vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples }) => {
         await vpExamples.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
         expect(page.url()).toContain(link.endpoint);
