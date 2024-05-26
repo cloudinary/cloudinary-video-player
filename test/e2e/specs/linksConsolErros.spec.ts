@@ -30,7 +30,7 @@ function handleCommonBrowsersErrors(linkName: string, consoleErrors: ConsoleMess
             validatePageErrors(consoleErrors, ['invalid player configuration', `cloudinary video player: \'fluid\' should be a boolean`], []);
             break;
         case 'VAST & VPAID Support':
-            validatePageErrors(consoleErrors, ['The Cross-Origin-Opener-Policy header'], ['']);
+            validatePageErrors(consoleErrors, ['The Cross-Origin-Opener-Policy header'], ["Blocked script execution in 'about:blank' because the document's frame is sandboxed and the 'allow-scripts' permission is not set"]);
             break;
         default:
             expect(consoleErrors).toHaveLength(0);
@@ -49,28 +49,35 @@ async function waitForPageToLoadWithTimeout(page: Page, timeout: number): Promis
  * Validating that the expected error is part of the console errors
  */
 function validatePageErrors(consoleErrors: ConsoleMessage[], expectedErrorMessages: string[], ignoreErrorMessages: string[]): void {
-    const relevantMessages = new Array<ConsoleMessage>();
+    /**
+     * Filters console messages to exclude ignored messages
+     */
+    const relevantMessages = consoleErrors.filter((consoleError) => !ignoreErrorMessages.some((ignoreError) => consoleError.text().includes(ignoreError)));
 
-    for (const consoleError of consoleErrors) {
-        let shouldBeIgnored = false;
-        for (const ignoreError of ignoreErrorMessages) {
-            if (consoleError.text().includes(ignoreError)) {
-                shouldBeIgnored = true;
-            }
-        }
-        if (!shouldBeIgnored) {
-            relevantMessages.push(consoleError);
-        }
-    }
-    let numberOfErrorsFound = relevantMessages.length;
+    /**
+     * Filters expected error messages that are not found in relevant console messages
+     */
+    const missingExpectedErrors = expectedErrorMessages.filter((expectedErrorMessage) => !relevantMessages.some((relevantError) => relevantError.text().includes(expectedErrorMessage)));
 
-    for (const expectedErrorMessage of expectedErrorMessages) {
-        for (const relevantError of relevantMessages) {
-            if (relevantError.text().includes(expectedErrorMessage)) {
-                numberOfErrorsFound--;
-            }
-        }
+    if (missingExpectedErrors.length > 0) {
+        vpTest.info().annotations.push({
+            type: 'The following expected console errors were not found',
+            description: JSON.stringify(missingExpectedErrors),
+        });
     }
 
-    expect(numberOfErrorsFound).toBe(0);
+    /**
+     * Filters relevant console messages that are not part of the expected error messages
+     */
+    const unexpectedErrors = relevantMessages.filter((relevantError) => !expectedErrorMessages.some((expectedErrorMessage) => relevantError.text().includes(expectedErrorMessage)));
+
+    if (unexpectedErrors.length > 0) {
+        vpTest.info().annotations.push({
+            type: 'The following unexpected console errors were found',
+            description: JSON.stringify(unexpectedErrors),
+        });
+    }
+
+    expect(missingExpectedErrors.length).toBe(0);
+    expect(unexpectedErrors.length).toBe(0);
 }
