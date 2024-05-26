@@ -1,5 +1,8 @@
 type Link = { name: string; endpoint: string };
 
+/**
+ * Array of all the examples pages names and links
+ */
 export const LINKS: Link[] = [
     { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming.html' },
     { name: 'AI Highlights Graph', endpoint: 'highlights-graph.html' },
@@ -14,4 +17,27 @@ export const LINKS: Link[] = [
     { name: 'Components', endpoint: 'components.html' },
     { name: 'Custom Errors', endpoint: 'custom-cld-errors.html' },
     { name: 'Display Configurations', endpoint: 'ui-config.html' },
+    { name: 'Debug mode', endpoint: 'debug.html' },
+    { name: 'ES Module Imports', endpoint: 'es-imports.html' },
+    { name: 'Floating Player', endpoint: 'floating-player.html' },
+    { name: 'Fluid Layouts', endpoint: 'fluid.html' },
+    { name: 'Force HLS Subtitles', endpoint: 'force-hls-subtitles-ios.html' },
+    { name: 'Highlights Graph', endpoint: 'highlights-graph.html' },
+    { name: 'Interaction Area', endpoint: 'interaction-area.html' },
+    { name: 'Multiple Players', endpoint: 'multiple-players.html' },
+    { name: 'Playlist', endpoint: 'playlist.html' },
+    { name: 'Playlist by Tag', endpoint: 'playlist-by-tag-captions.html' },
+    { name: 'Poster Options', endpoint: 'poster.html' },
+    { name: 'Profiles', endpoint: 'profiles.html' },
+    { name: 'Raw URL', endpoint: 'raw-url.html' },
+    { name: 'Recommendations', endpoint: 'recommendations.html' },
+    { name: 'Seek Thumbnails', endpoint: 'seek-thumbs.html' },
+    { name: 'Shoppable Videos', endpoint: 'shoppable.html' },
+    { name: 'Subtitles & Captions', endpoint: 'subtitles-and-captions.html' },
+    { name: 'Video Transformations', endpoint: 'transformations.html' },
+    { name: 'UI Config', endpoint: 'ui-config.html' },
+    { name: 'VAST & VPAID Support', endpoint: 'vast-vpaid.html' },
+    { name: 'VR/360 Videos', endpoint: '360.html' },
+    { name: 'Embedded (iframe) player', endpoint: 'embedded-iframe.html' },
+    { name: 'ESM Imports', endpoint: 'cld-vp-esm-pages.netlify.app' },
 ];

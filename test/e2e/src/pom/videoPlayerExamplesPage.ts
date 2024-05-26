@@ -1,5 +1,8 @@
 import { Page } from '@playwright/test';
 
+/**
+ * Video player examples page object
+ */
 export class VideoPlayerExamplesPage {
     private page: Page;
 
