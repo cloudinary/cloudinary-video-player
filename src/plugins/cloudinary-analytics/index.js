@@ -31,7 +31,6 @@ class CloudinaryAnalytics {
 
   init() {
     this.player.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this.sourceChanged);
-    this.player.on(PLAYER_EVENT.SOURCE_CHANGED, this.sourceChanged);
   }
 }
 
