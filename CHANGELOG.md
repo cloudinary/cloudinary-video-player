@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.3...v2.0.3-edge.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* bump video analytics, trigger analytics event only once ([#637](https://github.com/cloudinary/cloudinary-video-player/issues/637)) ([cbb0d07](https://github.com/cloudinary/cloudinary-video-player/commit/cbb0d072a19a5ab4104a45e0e2c166de97d804bf))
+* prevent undefined error when seek-thumbnails are unavailable ([#635](https://github.com/cloudinary/cloudinary-video-player/issues/635)) ([f07df6b](https://github.com/cloudinary/cloudinary-video-player/commit/f07df6bc6bee0a450f5284cd1ccb9be2518d2cf3))
+
 ## [2.0.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.2...v2.0.2-edge.3) (2024-05-07)
 
 
