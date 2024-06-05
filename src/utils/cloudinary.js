@@ -101,14 +101,14 @@ const isKeyInTransformation = (transformation, key) => {
 
 const addTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
-    if ((track.maxWords || track.wordHighlight) && videojs.pacedTranscript) {
-      videojs.pacedTranscript(track);
-    } else if (track.src) {
+    if (track.src) {
       fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
         if (r.status >= 200 && r.status <= 399) {
           videojs.addRemoteTextTrack(track, true);
         }
       });
+    } else if (videojs.pacedTranscript) {
+      videojs.pacedTranscript(track);
     }
   });
 };
