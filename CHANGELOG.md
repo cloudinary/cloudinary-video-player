@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.0...v2.0.3-edge.1) (2024-06-06)
+
+
+### Bug Fixes
+
+* handle live streams ([#641](https://github.com/cloudinary/cloudinary-video-player/issues/641)) ([db48830](https://github.com/cloudinary/cloudinary-video-player/commit/db488308d7038993d0416bbe42fa603b0ba1c90d))
+* text track with no src should fall-back to transcript ([#640](https://github.com/cloudinary/cloudinary-video-player/issues/640)) ([35e54d9](https://github.com/cloudinary/cloudinary-video-player/commit/35e54d973a87a05bc9cc2a829feb02dc80f195c0))
+
 ## [2.0.3-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.3...v2.0.3-edge.0) (2024-05-28)
 
 
