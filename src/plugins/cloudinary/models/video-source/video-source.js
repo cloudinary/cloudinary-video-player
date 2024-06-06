@@ -72,6 +72,7 @@ class VideoSource extends BaseSource {
     this._chapters = null;
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
+    this.isLiveStream = options.type === 'live';
     this._rawTransformation = options.raw_transformation;
     this.withCredentials = !!withCredentials;
     this.getInitOptions = () => initOptions;
@@ -172,6 +173,10 @@ class VideoSource extends BaseSource {
       return null;
     }
 
+    if (this.isLiveStream) {
+      return null;
+    }
+
     if (!publicId) {
       publicId = this.publicId();
       options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
@@ -222,7 +227,8 @@ class VideoSource extends BaseSource {
 
       if (isAdaptive) {
         // Search for streaming_profile anywhere in the transformation
-        if (!JSON.stringify(opts.transformation || {}).includes('"streaming_profile":')) {
+        const hasStreamingProfile = JSON.stringify(opts.transformation || {}).includes('"streaming_profile":');
+        if (!hasStreamingProfile && !this.isLiveStream) {
           opts.transformation = mergeTransformations(opts.transformation, {
             streaming_profile: 'auto'
           });
