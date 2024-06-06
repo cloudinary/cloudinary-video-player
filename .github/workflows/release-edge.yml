@@ -3,7 +3,7 @@ name: 🌱 Release Edge
 on:
   push:
     branches:
-      - 'edge'
+      - 'master'
   workflow_dispatch:
 
 jobs:
