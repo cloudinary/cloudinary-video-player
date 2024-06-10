@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [2.0.4-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.1...v2.0.4-edge.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* bump video analytics, trigger analytics event only once ([#637](https://github.com/cloudinary/cloudinary-video-player/issues/637)) ([1b04cc8](https://github.com/cloudinary/cloudinary-video-player/commit/1b04cc8063aa719d86253bf6f5ff886ec4b1292a))
+* handle live streams ([#641](https://github.com/cloudinary/cloudinary-video-player/issues/641)) ([1b04cc8](https://github.com/cloudinary/cloudinary-video-player/commit/1b04cc8063aa719d86253bf6f5ff886ec4b1292a))
+* handle live streams ([#641](https://github.com/cloudinary/cloudinary-video-player/issues/641)) ([1b04cc8](https://github.com/cloudinary/cloudinary-video-player/commit/1b04cc8063aa719d86253bf6f5ff886ec4b1292a))
+* prevent undefined error when seek-thumbnails are unavailable ([#635](https://github.com/cloudinary/cloudinary-video-player/issues/635)) ([1b04cc8](https://github.com/cloudinary/cloudinary-video-player/commit/1b04cc8063aa719d86253bf6f5ff886ec4b1292a))
+* text track with no src should fall-back to transcript ([#640](https://github.com/cloudinary/cloudinary-video-player/issues/640)) ([1b04cc8](https://github.com/cloudinary/cloudinary-video-player/commit/1b04cc8063aa719d86253bf6f5ff886ec4b1292a))
+
 ## [2.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.1...v2.0.2) (2024-05-09)
 
 
