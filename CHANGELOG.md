@@ -89,8 +89,7 @@
 * GA deploy workflows ([#507](https://github.com/cloudinary/cloudinary-video-player/issues/507)) ([5f2dd5a](https://github.com/cloudinary/cloudinary-video-player/commit/5f2dd5ae3b320e0350adf8f6c0c38be92ac16839))
 
 
-1.10.4 / 2023-12-19
-==================
+## 1.10.4 / 2023-12-19
 
 * feat: styled text tracks (subtitles & captions)
 * fix: caching of auto chapters VTT files
