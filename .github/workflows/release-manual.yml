@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
           release-as: ${{ github.event.inputs.release-as }}
-          default-branch: ${{ github.ref_name }}
+          default-branch: ${{ github.event.inputs.release-type == 'latest' && 'master' || 'edge'}}
 
       # The logic below handles the npm publication:
       - uses: actions/setup-node@v4
