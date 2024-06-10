@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { connectCloudinaryAnalytics } from '../../../../cloudinary-video-analytics';
+import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 class CloudinaryAnalytics {
