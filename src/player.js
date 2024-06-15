@@ -2,6 +2,10 @@ import VideoPlayer from './video-player';
 import { defaultProfiles } from './config/profiles';
 
 export const getProfile = async (cloudName, profile) => {
+  if (typeof profile !== 'string') {
+    return {};
+  }
+
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
   }
@@ -9,11 +13,7 @@ export const getProfile = async (cloudName, profile) => {
   return await fetch(profile, { method: 'GET' }).then(res => res.json());
 };
 
-const videoPlayerProfile = async (elem, initOptions, ready) => {
-  if (!initOptions.profile) {
-    throw new Error('VideoPlayerProfile method requires "profile" property');
-  }
-
+const player = async (elem, initOptions, ready) => {
   try {
     const profileOptions = await getProfile(initOptions.cloud_name, initOptions.profile);
     const options = Object.assign({}, profileOptions.playerOptions, initOptions);
@@ -33,4 +33,4 @@ const videoPlayerProfile = async (elem, initOptions, ready) => {
   }
 };
 
-export default videoPlayerProfile;
+export default player;
