@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.4-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.1...v2.0.4-edge.0) (2024-06-16)
+
+
+### Bug Fixes
+
+* use videojs events & re-trigger to analytics package with custom… ([#639](https://github.com/cloudinary/cloudinary-video-player/issues/639)) ([5dc594b](https://github.com/cloudinary/cloudinary-video-player/commit/5dc594b40487f1b04e09a9f40eeb94f0260e3714))
+
+
 ## [2.0.3-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.0...v2.0.3-edge.1) (2024-06-06)
 
 
