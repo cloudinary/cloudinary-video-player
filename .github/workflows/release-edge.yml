@@ -34,6 +34,7 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
+          prerelease: true
           default-branch: ${{ github.ref_name }}
 
       # The logic below handles the npm publication:
