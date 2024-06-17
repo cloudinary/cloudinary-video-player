@@ -10,6 +10,7 @@ export const PLAYER_EVENT = {
   PAUSE_NO_SEEK: 'pausenoseek',
   ERROR: 'error',
   TIME_UPDATE: 'timeupdate',
+  EMPTIED: 'emptied',
   RETRY_PLAYLIST: 'retryplaylist',
   CAN_PLAY_THROUGH: 'canplaythrough',
   CLD_SOURCE_CHANGED: 'cldsourcechanged',
