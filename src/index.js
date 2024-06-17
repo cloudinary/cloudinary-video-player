@@ -14,8 +14,12 @@ const getConfig = (playerOptions = {}, cloudinaryConfig) => {
   });
 };
 
-const getVideoPlayer = config => (id, playerOptions, ready) =>
-  new VideoPlayer(id, getConfig(playerOptions, config), ready);
+const getVideoPlayer = config => (id, playerOptions, ready) => {
+  if (playerOptions?.profile) {
+    return createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
+  }
+  return new VideoPlayer(id, getConfig(playerOptions, config), ready);
+};
 
 const getVideoPlayers = config => (selector, playerOptions, ready) =>
   VideoPlayer.all(selector, getConfig(playerOptions, config), ready);
