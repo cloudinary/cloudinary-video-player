@@ -245,6 +245,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         if (
           !source ||
           source.getType() === SOURCE_TYPE.AUDIO || // Is Audio
+          source.resourceConfig().type === 'live' || // Is live stream
           isRawUrl(source.publicId()) || // Is a raw url
           (this.videojs.activePlugins_ && this.videojs.activePlugins_.vr) // It's a VR (i.e. 360)
         ) {

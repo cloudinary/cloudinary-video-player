@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.4-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.1...v2.0.4-edge.0) (2024-06-16)
+
+
+### Bug Fixes
+
+* use videojs events & re-trigger to analytics package with custom… ([#639](https://github.com/cloudinary/cloudinary-video-player/issues/639)) ([5dc594b](https://github.com/cloudinary/cloudinary-video-player/commit/5dc594b40487f1b04e09a9f40eeb94f0260e3714))
+
+
+## [2.0.3-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.0...v2.0.3-edge.1) (2024-06-06)
+
+
+### Bug Fixes
+
+* handle live streams ([#641](https://github.com/cloudinary/cloudinary-video-player/issues/641)) ([db48830](https://github.com/cloudinary/cloudinary-video-player/commit/db488308d7038993d0416bbe42fa603b0ba1c90d))
+* text track with no src should fall-back to transcript ([#640](https://github.com/cloudinary/cloudinary-video-player/issues/640)) ([35e54d9](https://github.com/cloudinary/cloudinary-video-player/commit/35e54d973a87a05bc9cc2a829feb02dc80f195c0))
+
+## [2.0.3-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.3...v2.0.3-edge.0) (2024-05-28)
+
+
+### Bug Fixes
+
+* bump video analytics, trigger analytics event only once ([#637](https://github.com/cloudinary/cloudinary-video-player/issues/637)) ([cbb0d07](https://github.com/cloudinary/cloudinary-video-player/commit/cbb0d072a19a5ab4104a45e0e2c166de97d804bf))
+* prevent undefined error when seek-thumbnails are unavailable ([#635](https://github.com/cloudinary/cloudinary-video-player/issues/635)) ([f07df6b](https://github.com/cloudinary/cloudinary-video-player/commit/f07df6bc6bee0a450f5284cd1ccb9be2518d2cf3))
+
 ## [2.0.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.2-edge.2...v2.0.2-edge.3) (2024-05-07)
 
 

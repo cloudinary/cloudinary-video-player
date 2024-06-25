@@ -1,10 +1,19 @@
-name: 🌱 Release Edge
+name: 🔧 Release (Manual)
 
 on:
-  push:
-    branches:
-      - 'edge'
   workflow_dispatch:
+    inputs:
+      release-as:
+        description: 'Release Version'
+        required: true
+      release-type:
+        description: 'Release Type'
+        type: choice
+        required: true
+        default: 'edge'
+        options:
+          - edge
+          - latest
 
 jobs:
   release:
@@ -12,20 +21,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.release-type == 'latest' && 'master' || 'edge'}}
 
       - run: npm ci
-
-      - name: Get releases
-        id: fetch-latest-release
-        uses: ./.github/actions/fetch-latest-release
-        with:
-          github_token: ${{ github.token }}
-
-      - name: Calculate edge version
-        id: calculate-edge-version
-        uses: ./.github/actions/calculate-edge-version
-        with:
-          version: ${{ steps.fetch-latest-release.outputs.tag_name }}
 
       - name: Release PR
         uses: google-github-actions/release-please-action@v3
@@ -33,9 +32,9 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
-          release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
-          prerelease: true
-          default-branch: ${{ github.ref_name }}
+          release-as: ${{ github.event.inputs.release-as }}
+          prerelease: ${{ github.event.inputs.release-type == 'edge'}}
+          default-branch: ${{ github.event.inputs.release-type == 'latest' && 'master' || 'edge'}}
 
       # The logic below handles the npm publication:
       - uses: actions/setup-node@v4
@@ -47,7 +46,7 @@ jobs:
         # a new release is created:
       - run: npm run build-all
         if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish --tag edge
+      - run: npm publish --tag ${{ github.event.inputs.release-type }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
         if: ${{ steps.release.outputs.release_created }}
@@ -59,7 +58,7 @@ jobs:
           if [[ ${{ job.status }} == "success" ]]; then
             echo "SLACK_TITLE=Video Player ${{ steps.release.outputs.tag_name }} Deployed" >> $GITHUB_OUTPUT
             echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully" >> $GITHUB_OUTPUT
-            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=edge&min=true" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=${{ github.event.inputs.release-type }}&min=true" >> $GITHUB_OUTPUT
           else
             echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
             echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
@@ -82,4 +81,5 @@ jobs:
         if: steps.release.outputs.release_created
         with:
           url: |
+            https://cdn.jsdelivr.net/npm/cloudinary-video-player
             https://cdn.jsdelivr.net/npm/cloudinary-video-player@edge
