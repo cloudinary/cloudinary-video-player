@@ -1,7 +1,7 @@
 type Link = { name: string; endpoint: string };
 
 /**
- * Array of all the examples pages names and links
+ * Array of all the examples pages names and links.
  */
 export const LINKS: Link[] = [
     { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming.html' },
