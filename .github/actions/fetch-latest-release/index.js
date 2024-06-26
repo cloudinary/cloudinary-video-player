@@ -3,6 +3,8 @@ const github = require('@actions/github');
 const process = require('process');
 
 async function findMostRecentRelease(owner, repo) {
+  const octokit = github.getOctokit(core.getInput('github_token', { required: true }));
+
   const releases = await octokit.rest.repos.listReleases({
     owner: owner,
     repo: repo
@@ -22,8 +24,6 @@ async function findMostRecentRelease(owner, repo) {
 
 async function fetchLatestRelease() {
   const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/', 2);
-
-  const octokit = github.getOctokit(core.getInput('github_token', { required: true }));
 
   core.info(`Fetching the latest release for \`${owner}/${repo}\``);
 
