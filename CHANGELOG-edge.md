@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.5-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.0...v2.0.5-edge.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* fetchLatestRelease ([42207bb](https://github.com/cloudinary/cloudinary-video-player/commit/42207bb8f1310b84dcf02fca57b316d4150b119f))
+* fetchLatestRelease ([831959a](https://github.com/cloudinary/cloudinary-video-player/commit/831959a199ae181460d0cc0c8ca24e73da15e60b))
+* fetchLatestRelease ([861f614](https://github.com/cloudinary/cloudinary-video-player/commit/861f614b89cfd838fe3f6adf97284b938e0de426))
+* fetchLatestRelease ([4e6e721](https://github.com/cloudinary/cloudinary-video-player/commit/4e6e7210ca26761ee71c154a62f54bca6d97553f))
+* separate edge/master changelogs ([#663](https://github.com/cloudinary/cloudinary-video-player/issues/663)) ([e2cfc09](https://github.com/cloudinary/cloudinary-video-player/commit/e2cfc09573d44712bca8bd46fcea224cd45ff91e))
+
 ## [2.0.5-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.4-edge.0...v2.0.5-edge.0) (2024-06-26)
 
 
