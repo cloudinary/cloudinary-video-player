@@ -42,7 +42,7 @@ function handleCommonBrowsersErrors(linkName: string, consoleErrors: ConsoleMess
             validatePageErrors(consoleErrors, ['The Cross-Origin-Opener-Policy header'], ["Blocked script execution in 'about:blank' because the document's frame is sandboxed and the 'allow-scripts' permission is not set"]);
             break;
         default:
-            expect(consoleErrors).toHaveLength(0);
+            expect(consoleErrors, `The following unexpected console errors were found: ${JSON.stringify(consoleErrors)}`).toHaveLength(0);
     }
 }
 
@@ -51,8 +51,7 @@ function handleCommonBrowsersErrors(linkName: string, consoleErrors: ConsoleMess
  * Needed for console logs to appear. and in pages that loading video 'waitForLoadState('networkidle')' entering a long loop.
  */
 async function waitForPageToLoadWithTimeout(page: Page, timeout: number): Promise<unknown> {
-    // return Promise.race([page.waitForLoadState('networkidle'), new Promise((r) => setTimeout(r, timeout))]);
-    return new Promise((r) => setTimeout(r, timeout));
+    return Promise.race([page.waitForLoadState('networkidle'), new Promise((r) => setTimeout(r, timeout))]);
 }
 
 /**
