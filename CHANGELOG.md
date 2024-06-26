@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.5-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.4-edge.0...v2.0.5-edge.0) (2024-06-26)
+
+
+### Bug Fixes
+
+* remove polyfill ([#665](https://github.com/cloudinary/cloudinary-video-player/issues/665)) ([3e89bc1](https://github.com/cloudinary/cloudinary-video-player/commit/3e89bc12127e9e338709cf751bca96a5d727e3c8))
+
 ## [2.0.4-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3-edge.1...v2.0.4-edge.0) (2024-06-16)
 
 
