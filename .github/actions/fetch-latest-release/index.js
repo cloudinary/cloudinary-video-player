@@ -2,6 +2,24 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const process = require('process');
 
+async function findMostRecentRelease(owner, repo) {
+  const releases = await octokit.rest.repos.listReleases({
+    owner: owner,
+    repo: repo
+  });
+
+  // Filter out draft releases
+  const nonDraftReleases = releases.data.filter(release => !release.draft);
+
+  // Sort releases by creation date (you can also sort by published date if preferred)
+  const sortedReleases = nonDraftReleases.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  // Get the most recent release, including prereleases but excluding drafts
+  const latestRelease = sortedReleases[0];
+
+  return latestRelease;
+}
+
 async function fetchLatestRelease() {
   const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/', 2);
 
@@ -12,7 +30,7 @@ async function fetchLatestRelease() {
   let latestRelease;
 
   try {
-    latestRelease = await octokit.rest.repos.getLatestRelease({
+    latestRelease = await findMostRecentRelease({
       owner,
       repo
     });
