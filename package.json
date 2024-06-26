@@ -38,7 +38,7 @@
     "analyze": "webpack --config webpack/analyzer.config.js",
     "analyze:light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/analyzer.config.js",
     "postbuild-all": "bundlewatch",
-    "precommit": "eslint src test/e2e",
+    "precommit": "eslint src",
     "test": "jest --no-cache --detectOpenHandles",
     "test:unit": "UNIT=TRUE jest --no-cache --env jsdom --testMatch='<rootDir>/test/unit/*.test.js'",
     "test:e2e": "npx playwright test --config=test/e2e/playwright.config.ts",

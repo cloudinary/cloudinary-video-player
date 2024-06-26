@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
 
 /**
- * Video player examples page object
+ * Video player examples main page object
  */
-export class VideoPlayerExamplesPage {
+export class MainPage {
     private page: Page;
 
     constructor(page: Page) {

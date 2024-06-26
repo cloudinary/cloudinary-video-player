@@ -68,25 +68,12 @@ function validatePageErrors(consoleErrors: ConsoleMessage[], expectedErrorMessag
      */
     const missingExpectedErrors = expectedErrorMessages.filter((expectedErrorMessage) => !relevantMessages.some((relevantError) => relevantError.text().includes(expectedErrorMessage)));
 
-    if (missingExpectedErrors.length > 0) {
-        vpTest.info().annotations.push({
-            type: 'The following expected console errors were not found',
-            description: JSON.stringify(missingExpectedErrors),
-        });
-    }
+    expect(missingExpectedErrors.length, `The following expected console errors were not found: ${JSON.stringify(missingExpectedErrors)}`).toBe(0);
 
     /**
      * Filters relevant console messages that are not part of the expected error messages
      */
     const unexpectedErrors = relevantMessages.filter((relevantError) => !expectedErrorMessages.some((expectedErrorMessage) => relevantError.text().includes(expectedErrorMessage)));
 
-    if (unexpectedErrors.length > 0) {
-        vpTest.info().annotations.push({
-            type: 'The following unexpected console errors were found',
-            description: JSON.stringify(unexpectedErrors),
-        });
-    }
-
-    expect(missingExpectedErrors.length).toBe(0);
-    expect(unexpectedErrors.length).toBe(0);
+    expect(unexpectedErrors.length, `The following unexpected console errors were found: ${JSON.stringify(unexpectedErrors)}`).toBe(0);
 }

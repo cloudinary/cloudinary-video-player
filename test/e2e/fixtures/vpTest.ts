@@ -1,12 +1,12 @@
 import { ConsoleMessage, test } from '@playwright/test';
-import { VideoPlayerExamplesPage } from '../src/pom/videoPlayerExamplesPage';
+import { MainPage } from '../src/pom/mainPage';
 
 /**
  * Fixture parameters.
  */
 type FixtureParams = {
     consoleErrors: ConsoleMessage[];
-    vpExamples: VideoPlayerExamplesPage;
+    vpExamples: MainPage;
 };
 
 /**
@@ -18,7 +18,7 @@ export const vpTest = test.extend<FixtureParams>({
      */
     vpExamples: [
         async ({ page }, use) => {
-            const vpExamplePage = new VideoPlayerExamplesPage(page);
+            const vpExamplePage = new MainPage(page);
             await vpExamplePage.goto();
             await use(vpExamplePage);
         },
