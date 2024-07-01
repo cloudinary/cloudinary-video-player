@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.5-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.1...v2.0.5-edge.2) (2024-07-01)
+
+
+### Bug Fixes
+
+* security issue braces ([#668](https://github.com/cloudinary/cloudinary-video-player/issues/668)) ([a0c5496](https://github.com/cloudinary/cloudinary-video-player/commit/a0c5496abef60804cb762b5c58399cd1f0e07711))
+
 ## [2.0.5-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.0...v2.0.5-edge.1) (2024-06-26)
 
 
