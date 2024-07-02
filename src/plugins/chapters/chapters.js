@@ -146,7 +146,7 @@ const ChaptersPlugin = (function () {
 
     this.chaptersTrack.addEventListener('cuechange', () => {
       const activeCues = Array.from(this.chaptersTrack.activeCues); // Safari needs Array.from()
-      controlBarChapterHolder.innerHTML =
+      controlBarChapterHolder.innerText =
         activeCues.length > 0 ? activeCues[0].text : '';
     });
   };
@@ -206,7 +206,7 @@ const ChaptersPlugin = (function () {
     timeTooltip.update = function (seekBarRect, seekBarPoint, content) {
       const originalUpdateFn = Object.getPrototypeOf(this).update;
       originalUpdateFn.call(this, seekBarRect, seekBarPoint, content);
-      chapterEl.innerHTML = getChapterFromPoint(seekBarPoint);
+      chapterEl.innerText = getChapterFromPoint(seekBarPoint);
     };
 
     // Handle case of no seek-thumbnails
