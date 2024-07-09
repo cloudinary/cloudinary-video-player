@@ -27,6 +27,4 @@ jobs:
         run: npm run test:unit
 
       - name: E2E tests
-        run: google-chrome --version
-        shell: bash
-
+        run: npm run test:e2e
