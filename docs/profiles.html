@@ -32,8 +32,8 @@
       playerWithDefaultProfile.source('sea_turtle');
 
       const playerWithCustomProfile = await cloudinary.videoPlayerWithProfile('player-custom-profile', {
-        cloud_name: 'dwaq5xqm4',
-        profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json',
+        cloud_name: 'prod',
+        profile: 'https://res.cloudinary.com/prod/raw/upload/v1/video-player/example-profiles/example-profile.json',
       });
 
       playerWithCustomProfile.source('samples/cld-sample-video');
