@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.0.5-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.1...v2.0.5-edge.2) (2024-07-09)
+
+
+### Bug Fixes
+
+* chapters innerHTML to innerText ([#671](https://github.com/cloudinary/cloudinary-video-player/issues/671)) ([124663f](https://github.com/cloudinary/cloudinary-video-player/commit/124663f943f5e1060819ca1658032da2aebd4afe))
+* custom profile docs example ([#673](https://github.com/cloudinary/cloudinary-video-player/issues/673)) ([3c728c1](https://github.com/cloudinary/cloudinary-video-player/commit/3c728c17711541d04b83e427b4bc6b01f80d6823))
+* remove braces override ([#670](https://github.com/cloudinary/cloudinary-video-player/issues/670)) ([658d18b](https://github.com/cloudinary/cloudinary-video-player/commit/658d18b6a3e9ca305562233fe848e8b0be405a03))
+* security issue braces ([#668](https://github.com/cloudinary/cloudinary-video-player/issues/668)) ([a0c5496](https://github.com/cloudinary/cloudinary-video-player/commit/a0c5496abef60804cb762b5c58399cd1f0e07711))
+
 ## [2.0.5-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.0...v2.0.5-edge.1) (2024-06-26)
 
 
