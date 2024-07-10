@@ -16,6 +16,12 @@ runs:
         registry-url: 'https://registry.npmjs.org'
 
 
+    - name: Get npm cache directory
+      id: npm-cache-dir
+      shell: bash
+      run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+
+
     - name: Synchronize Node Modules cache
       id: node-modules
       uses: actions/cache@v3
