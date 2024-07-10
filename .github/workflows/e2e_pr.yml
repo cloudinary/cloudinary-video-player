@@ -13,8 +13,8 @@ jobs:
     steps:
       -  uses: actions/checkout@v4
 
-      - name: Node setup
-        uses: ./.github/actions/node-setup
+#      - name: Node setup
+#        uses: ./.github/actions/node-setup
 
       - name: Fast Install
         uses: npm install
