@@ -11,13 +11,14 @@ jobs:
     name: install
     runs-on: ubuntu-latest
     steps:
-      -  uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-#      - name: Node setup
-#        uses: ./.github/actions/node-setup
+      - name: Node setup
+        uses: ./.github/actions/node-setup
 
       - name: Fast Install
-        uses: npm install
+        run: npm install
 
       - name: E2E tests
         run: npm run test:e2e
