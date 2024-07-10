@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_CLOUDINARY_JENKINS_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Node setup
         uses: ./.github/actions/node-setup
