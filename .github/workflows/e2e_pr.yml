@@ -3,24 +3,24 @@ name: Video Player PR
 on:
   workflow_dispatch:
 
-
 env:
   CI: true
 
 jobs:
-
   e2e:
     name: install
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Node setup
         uses: ./.github/actions/node-setup
 
-      - name: Fast Install
-        uses: npm install
+      - name: NPM Install
+        run: npm install
 
       - name: E2E tests
         run: npm run test:e2e
