@@ -3,12 +3,10 @@ name: Video Player PR
 on:
   workflow_dispatch:
 
-
 env:
   CI: true
 
 jobs:
-
   e2e:
     name: install
     runs-on: ubuntu-latest
