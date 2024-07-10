@@ -11,8 +11,7 @@ jobs:
     name: install
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      -  uses: actions/checkout@v4
 
       - name: Node setup
         uses: ./.github/actions/node-setup
