@@ -19,7 +19,7 @@ jobs:
       - name: Node setup
         uses: ./.github/actions/node-setup
 
-      - name: Fast Install
+      - name: NPM Install
         run: npm install
 
       - name: E2E tests
