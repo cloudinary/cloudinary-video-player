@@ -24,7 +24,7 @@ jobs:
 
       - name: E2E tests
         run: npm run test:e2e
-        with:
+        env:
             PLAYWRIGHT_HTML_OUTPUT_DIR='./docs/report/${{ github.event.number }}/${{ github.run_number }}'
 
       - name: Upload report to artifact
