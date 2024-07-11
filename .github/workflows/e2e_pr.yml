@@ -25,7 +25,7 @@ jobs:
       - name: E2E tests
         run: npm run test:e2e
         env:
-            PLAYWRIGHT_HTML_OUTPUT_DIR='./docs/report/${{ github.event.number }}/${{ github.run_number }}'
+            PLAYWRIGHT_HTML_OUTPUT_DIR='./docs/report/${{ github.event.pull_request.number }}/${{ github.run_number }}'
 
       - name: Upload report to artifact
         uses: actions/upload-artifact@v4
