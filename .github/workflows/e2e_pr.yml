@@ -24,8 +24,12 @@ jobs:
 
       - name: E2E tests
         run: npm run test:e2e
-        env:
-            PLAYWRIGHT_HTML_OUTPUT_DIR='./docs/report/${{ github.event.pull_request.number }}/${{ github.run_number }}'
+
+      - name: Create report folder
+        run: md ./docs/report/${{ github.event.pull_request.number }}/${{ github.run_number }}
+
+      - name: Move HTML report to the created folder
+        run: mv playwright-report ./docs/report/${{ github.event.pull_request.number }}/${{ github.run_number }}
 
       - name: Upload report to artifact
         uses: actions/upload-artifact@v4
@@ -42,4 +46,4 @@ jobs:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           state: 'success'
           sha: ${{ github.event.pull_request.head.sha }}
-          target_url: https://deploy-preview-${{ github.event.number }}--cld-video-player.netlify.app/docs/report/${{ github.event.number }}/${{ github.run_number }}
+          target_url: https://deploy-preview-${{ github.event.pull_request.number }}--cld-video-player.netlify.app/docs/report/${{ github.event.pull_request.number }}/${{ github.run_number }}
