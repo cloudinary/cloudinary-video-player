@@ -1,4 +1,4 @@
-name: 🏹 Update Master (PR)
+name: 🏹 Create update-master PR
 
 on:
   workflow_dispatch:
@@ -7,22 +7,11 @@ jobs:
   update_master_and_create_pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
+          ref: master
           fetch-depth: 0
-          
-      - name: Fetch all branches
-        run: |
-          git fetch --all
-          
-      - name: Create update branch
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git checkout -b update-master origin/master || git checkout -b update-master
-          git reset --hard origin/edge
-          git push -f origin update-master
-          
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
