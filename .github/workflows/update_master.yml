@@ -1,4 +1,4 @@
-name: 🏹 Update Master (PR)
+name: 🏹 Create update-master PR
 
 on:
   workflow_dispatch:
@@ -11,13 +11,6 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-
-      - name: Merge edge into master
-        run: |
-          git config user.name "cloudinary-jenkins"
-          git config user.email "cloudinary-jenkins@clodinary.com"
-          git checkout -b update-master
-          git merge -X ours --no-edit origin/edge || true
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
