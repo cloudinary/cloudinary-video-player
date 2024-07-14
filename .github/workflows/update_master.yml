@@ -19,6 +19,20 @@ jobs:
           git checkout -b update-master
           git merge -X ours --no-edit origin/edge || true
 
+      - name: Auto-resolve conflicts
+        run: |
+          if git status | grep -q 'You have unmerged paths'; then
+            git status | grep 'both modified:' | awk '{print $3}' | xargs git checkout --ours
+            git add .
+            git commit -m "Auto-resolve conflicts"
+          fi
+          
+      - name: Push changes
+        run: |
+          git push origin update-master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
