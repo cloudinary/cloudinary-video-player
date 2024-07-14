@@ -7,6 +7,11 @@ jobs:
   update_master_and_create_pr:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: update-master
+          fetch-depth: 0
+          
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
