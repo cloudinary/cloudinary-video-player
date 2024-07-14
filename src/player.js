@@ -6,19 +6,15 @@ export const getProfile = async (cloudName, profile) => {
     return defaultProfiles[profile];
   }
 
+  console.warn('Custom profiles loading mechanism will be changed soon');
   return await fetch(profile, { method: 'GET' }).then(res => res.json());
 };
 
-const videoPlayerProfile = async (elem, initOptions, ready) => {
-  console.warn('videoPlayerProfile method is DEPRECATED and will be removed soon, please use new `player` method instead');
-
-  if (!initOptions.profile) {
-    throw new Error('VideoPlayerProfile method requires "profile" property');
-  }
-
+const player = async (elem, initOptions, ready) => {
+  const { profile, ...filteredInitOptions } = initOptions;
   try {
-    const profileOptions = await getProfile(initOptions.cloud_name, initOptions.profile);
-    const options = Object.assign({}, profileOptions.playerOptions, initOptions);
+    const profileOptions = profile ? await getProfile(filteredInitOptions.cloud_name, profile) : {};
+    const options = Object.assign({}, profileOptions.playerOptions, filteredInitOptions);
     const videoPlayer = new VideoPlayer(elem, options, ready);
 
     const nativeVideoPlayerSourceMethod = videoPlayer.source;
@@ -29,10 +25,10 @@ const videoPlayerProfile = async (elem, initOptions, ready) => {
 
     return videoPlayer;
   } catch (e) {
-    const videoPlayer = new VideoPlayer(elem, initOptions);
+    const videoPlayer = new VideoPlayer(elem, filteredInitOptions);
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }
 };
 
-export default videoPlayerProfile;
+export default player;

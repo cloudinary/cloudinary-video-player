@@ -2,6 +2,7 @@ import 'assets/styles/main.scss';
 import pick from 'lodash/pick';
 import VideoPlayer from './video-player';
 import createVideoPlayerProfile from './video-player-profile';
+import createPlayer from './player';
 import { convertKeysToSnakeCase } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
 
@@ -22,9 +23,13 @@ const getVideoPlayers = config => (selector, playerOptions, ready) =>
 
 const getVideoPlayerWithProfile = config => (id, playerOptions, ready) => createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
 
+const getPlayer = config => (id, playerOptions, ready) => createPlayer(id, getConfig(playerOptions, config), ready);
+
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
 export const videoPlayerWithProfile = getVideoPlayerWithProfile();
+
+export const player = getPlayer();
 
 const cloudinaryVideoPlayerLegacyConfig = config => {
   console.warn(
@@ -41,6 +46,7 @@ const cloudinary = {
   videoPlayer,
   videoPlayers,
   videoPlayerWithProfile,
+  player,
   Cloudinary: {
     // Backwards compatibility with SDK v1
     new: cloudinaryVideoPlayerLegacyConfig
