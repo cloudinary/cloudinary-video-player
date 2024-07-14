@@ -3,4 +3,4 @@
 // Usage:
 // import player from 'cloudinary-video-player/player';
 
-export { player as default } from './player.js';
+export { player as default } from './index.js';
