@@ -7,31 +7,21 @@ jobs:
   update_master_and_create_pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
         with:
-          ref: master
           fetch-depth: 0
-
-      - name: Merge edge into master
-        run: |
-          git config user.name "cloudinary-jenkins"
-          git config user.email "cloudinary-jenkins@clodinary.com"
-          git checkout -b update-master
-          git merge -X ours --no-edit origin/edge || true
-
-      - name: Auto-resolve conflicts
-        run: |
-          if git status | grep -q 'You have unmerged paths'; then
-            git status | grep 'both modified:' | awk '{print $3}' | xargs git checkout --ours
-            git add .
-            git commit -m "Auto-resolve conflicts"
-          fi
           
-      - name: Push changes
+      - name: Fetch all branches
         run: |
-          git push origin update-master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git fetch --all
+          
+      - name: Create update branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout -b update-master origin/master || git checkout -b update-master
+          git reset --hard origin/edge
+          git push -f origin update-master
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
