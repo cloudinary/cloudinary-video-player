@@ -12,13 +12,6 @@ jobs:
           ref: edge
           fetch-depth: 0
 
-      - name: Push update branch
-        run: |
-          git config user.name "cloudinary-jenkins"
-          git config user.email "cloudinary-jenkins@cloudinary.com"
-          git checkout -b update-master-from-edge
-          git push -u origin update-master-from-edge
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
