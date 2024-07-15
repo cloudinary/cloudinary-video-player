@@ -9,31 +9,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: edge
-          fetch-depth: 0
-
+          ref: master
+      - name: Reset promotion branch
+        run: |
+          git fetch origin edge:edge
+          git reset --hard edge
       - name: Create Pull Request
-        uses: actions/github-script@v6
+        uses: peter-evans/create-pull-request@v6
         with:
-          github-token: ${{ secrets.BOT_TOKEN }}
-          script: |
-            const { data: pullRequest } = await github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "chore: update master",
-              head: "edge",
-              base: "master",
-              body: `
-                This PR was created automatically to update master from edge.
-
-                Please approve and squash-merge it.
-
-                IMPORTANT:
-                Before merging, make sure all the changes are listed in the squash-commit footer.
-                Format must be plain conventional-commit, one per line.
-                No \`*\` bullets and no \`----\` comments are allowed.
-
-                Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
-              `,
-            });
-            console.log(`Created pull request: ${pullRequest.html_url}`);
+          branch: update-master-from-edge
+          title: "chore: update master"
+          body: |
+            This PR was created Automatically.
+            Please approve and squash-merge it.
+            IMPORTANT:
+            Before merging, make sure all the changes are listed in the squash-commit footer.
+            Format must be plain conventional-commit, one per line.
+            No `*` bullets and no `----` comments are allowed.
+            Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
