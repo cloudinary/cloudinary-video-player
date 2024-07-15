@@ -13,20 +13,27 @@ jobs:
           fetch-depth: 0
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.BOT_TOKEN }}
-          branch: update-master-from-edge
-          base: master
-          title: "chore: update master"
-          body: |
-            This PR was created Automatically.
+          github-token: ${{ secrets.BOT_TOKEN }}
+          script: |
+            const { data: pullRequest } = await github.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "chore: update master",
+              head: "edge",
+              base: "master",
+              body: `
+                This PR was created automatically to update master from edge.
 
-            Please approve and squash-merge it.
+                Please approve and squash-merge it.
 
-            IMPORTANT:
-            Before merging, make sure all the changes are listed in the squash-commit footer.
-            Format must be plain conventional-commit, one per line.
-            No `*` bullets and no `----` comments are allowed.
+                IMPORTANT:
+                Before merging, make sure all the changes are listed in the squash-commit footer.
+                Format must be plain conventional-commit, one per line.
+                No \`*\` bullets and no \`----\` comments are allowed.
 
-            Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
+                Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
+              `,
+            });
+            console.log(`Created pull request: ${pullRequest.html_url}`);
