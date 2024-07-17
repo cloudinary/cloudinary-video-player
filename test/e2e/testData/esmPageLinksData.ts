@@ -4,7 +4,7 @@ import { ExampleLinkType } from '../types/exampleLinkType';
  * Array of all the examples pages names and links on ESM import page.
  */
 export const ESM_LINKS: ExampleLinkType[] = [
-    //{ name: 'Adaptive Streaming', endpoint: 'adaptive-streaming' },
+    { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming' },
     { name: 'Analytics', endpoint: 'analytics' },
     { name: 'API and Events', endpoint: 'api' },
     { name: 'Audio Player', endpoint: 'audio' },

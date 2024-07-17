@@ -10,7 +10,7 @@ const ESM_URL = 'https://cld-vp-esm-pages.netlify.app/';
  */
 for (const link of ESM_LINKS) {
     vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples }) => {
-        vpTest.skip(link.name === 'Profiles', 'Waiting for https://github.com/cloudinary/cloudinary-video-player/pull/683');
+        vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
         /**
          * Navigate to ESM Imports examples page
          */
