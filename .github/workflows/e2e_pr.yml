@@ -30,6 +30,9 @@ jobs:
         run: |
           google-chrome --version
 
+      - name: Set Chrome Path for Playwright
+        run: echo "PLAYWRIGHT_CHROMIUM_PATH=$(which google-chrome)" >> $GITHUB_ENV
+
       - name: NPM Install
         run: npm install
 
