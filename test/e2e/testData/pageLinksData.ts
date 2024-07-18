@@ -1,10 +1,10 @@
-type Link = { name: string; endpoint: string };
+import { ExampleLinkType } from '../types/exampleLinkType';
 
 /**
  * Array of all the examples pages names and links.
  */
-export const LINKS: Link[] = [
-    //{ name: 'Adaptive Streaming', endpoint: 'adaptive-streaming.html' },
+export const LINKS: ExampleLinkType[] = [
+    { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming.html' },
     { name: 'AI Highlights Graph', endpoint: 'highlights-graph.html' },
     { name: 'Analytics', endpoint: 'analytics.html' },
     { name: 'API and Events', endpoint: 'api.html' },
