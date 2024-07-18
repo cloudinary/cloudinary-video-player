@@ -19,13 +19,6 @@ jobs:
       - name: Node setup
         uses: ./.github/actions/node-setup
 
-      - name: Install Google Chrome
-        run: |
-         sudo apt-get update
-         sudo apt-get install -y wget
-         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-         sudo apt install -y ./google-chrome-stable_current_amd64.deb
-
       - name: Install multimedia codecs
         run: |
           sudo apt-get update
@@ -38,12 +31,11 @@ jobs:
           sudo apt-get install -y gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly
           sudo apt-get install -y libde265-0
 
+      - name: Install Playwright dependencies
+        run: npx playwright install-deps
+
       - name: Install Playwright chrome
         run: npx playwright install chrome
-
-      - name: Check Chrome version
-        run: |
-          google-chrome --version
 
       - name: NPM Install
         run: npm install
