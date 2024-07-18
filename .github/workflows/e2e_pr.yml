@@ -19,12 +19,16 @@ jobs:
       - name: Node setup
         uses: ./.github/actions/node-setup
 
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Use Chrome
+      - name: Install Google Chrome
         run: |
-          chrome --version
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
+      - name: Check Chrome version
+        run: |
+          google-chrome --version
 
       - name: NPM Install
         run: npm install
