@@ -6,15 +6,14 @@ export const getProfile = async (cloudName, profile) => {
     return defaultProfiles[profile];
   }
 
-  console.warn('Custom profiles loading mechanism will be changed soon');
-  return await fetch(profile, { method: 'GET' }).then(res => res.json());
+  throw new Error('Custom profiles will be supported soon, please use one of default profiles: "cldDefault", "cldLooping" or "cldAdaptiveStream"');
 };
 
 const player = async (elem, initOptions, ready) => {
-  const { profile, ...filteredInitOptions } = initOptions;
+  const { profile, ...otherInitOptions } = initOptions;
   try {
-    const profileOptions = profile ? await getProfile(filteredInitOptions.cloud_name, profile) : {};
-    const options = Object.assign({}, profileOptions.playerOptions, filteredInitOptions);
+    const profileOptions = profile ? await getProfile(otherInitOptions.cloud_name, profile) : {};
+    const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions);
     const videoPlayer = new VideoPlayer(elem, options, ready);
 
     const nativeVideoPlayerSourceMethod = videoPlayer.source;
@@ -25,7 +24,7 @@ const player = async (elem, initOptions, ready) => {
 
     return videoPlayer;
   } catch (e) {
-    const videoPlayer = new VideoPlayer(elem, filteredInitOptions);
+    const videoPlayer = new VideoPlayer(elem, otherInitOptions);
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }
