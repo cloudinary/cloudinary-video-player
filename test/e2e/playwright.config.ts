@@ -33,8 +33,10 @@ export default defineConfig({
         {
             name: 'Google Chrome',
             use: {
+                launchOptions: {
+                    executablePath: '/usr/bin/google-chrome',
+                },
                 ...devices['Desktop Chrome'],
-                channel: 'chrome',
             },
         },
     ],
