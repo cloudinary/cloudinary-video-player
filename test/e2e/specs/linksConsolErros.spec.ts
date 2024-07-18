@@ -9,7 +9,7 @@ import { validatePageErrors } from '../src/helpers/validatePageErrors';
  */
 for (const link of LINKS) {
     vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples }) => {
-        vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
+        //vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
         await vpExamples.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
         expect(page.url()).toContain(link.endpoint);
