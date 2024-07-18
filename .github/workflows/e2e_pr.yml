@@ -19,6 +19,13 @@ jobs:
       - name: Node setup
         uses: ./.github/actions/node-setup
 
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Use Chrome
+        run: |
+          chrome --version
+
       - name: NPM Install
         run: npm install
 
