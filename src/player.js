@@ -1,6 +1,6 @@
 import VideoPlayer from './video-player';
 import { defaultProfiles } from './config/profiles';
-import { isRawUrl } from './utils/isRawUrl';
+import { isRawUrl } from './plugins/cloudinary/common';
 
 export const getProfile = async (cloudName, profile) => {
   if (Object.keys(defaultProfiles).includes(profile)) {
