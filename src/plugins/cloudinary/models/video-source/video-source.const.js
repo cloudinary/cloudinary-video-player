@@ -34,9 +34,6 @@ const COMMON_VIDEO_EXTENSIONS = [
 
 export const VIDEO_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_VIDEO_EXTENSIONS.join('|')})$$`);
 
-// eslint-disable-next-line no-control-regex
-export const URL_PATTERN = RegExp('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\+.~#?&/=]*)');
-
 export const CONTAINER_MIME_TYPES = {
   hls: 'application/x-mpegURL',
   dash: 'application/dash+xml',

@@ -1,9 +1,14 @@
 import VideoPlayer from './video-player';
 import { defaultProfiles } from './config/profiles';
+import { isRawUrl } from './utils/isRawUrl';
 
 export const getProfile = async (cloudName, profile) => {
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
+  }
+
+  if (isRawUrl(profile)) {
+    return await fetch(profile, { method: 'GET' }).then(res => res.json());
   }
 
   throw new Error('Custom profiles will be supported soon, please use one of default profiles: "cldDefault", "cldLooping" or "cldAdaptiveStream"');
