@@ -407,7 +407,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (cloudinaryAnalyticsOptionEnabled) {
       this.videojs.videoElement = this.videoElement;
-      this.videojs.cloudinaryAnalytics();
+      this.videojs.cloudinaryAnalytics(this.playerOptions.cloudinaryAnalyticsCustomData);
     }
   }
 

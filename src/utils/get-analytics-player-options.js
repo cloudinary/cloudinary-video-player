@@ -67,6 +67,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   bigPlayButton: playerOptions.bigPlayButton,
   className: playerOptions.class,
   cloudinaryAnalytics: playerOptions.cloudinaryAnalytics,
+  cloudinaryAnalyticsCustomData: hasConfig(playerOptions.cloudinaryAnalyticsCustomData),
   controls: playerOptions.controls,
   floatingWhenNotVisible: playerOptions.floatingWhenNotVisible,
   fluid: playerOptions.fluid,

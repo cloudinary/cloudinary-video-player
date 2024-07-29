@@ -42,6 +42,7 @@ export const playerValidators = {
     withCredentials: validator.isBoolean,
     analytics: validator.isBoolean,
     cloudinaryAnalytics: validator.isBoolean,
+    cloudinaryAnalyticsCustomData: validator.isPlainObject,
     hideContextMenu: validator.isBoolean,
     playedEventPercents: validator.isArrayOfNumbers,
     showJumpControls: validator.isBoolean,
