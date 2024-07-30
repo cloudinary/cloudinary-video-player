@@ -13,7 +13,7 @@ class CloudinaryAnalytics {
       cloudName: null,
       publicId: null
     };
-    this.options = options;
+    this.analyticsOptions = options;
   }
 
   getMetadata = () => ({
@@ -28,7 +28,7 @@ class CloudinaryAnalytics {
       this.cloudinaryAnalytics.startManualTracking(metadata, {
         videoPlayerType: 'cloudinary video player',
         videoPlayerVersion: VERSION,
-        providedData: this.options.cloudinaryAnalyticsCustomData
+        ...(this.analyticsOptions?.customData ? { providedData: this.analyticsOptions?.customData } : {}),
       });
     } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
       this.cloudinaryAnalytics.stopManualTracking();

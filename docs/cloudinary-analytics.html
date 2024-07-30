@@ -41,13 +41,14 @@
       const playerCustomDataPlainObject = await cloudinary.player('player-custom-data-plain-object', {
         cloud_name: 'demo',
         secure: true,
-        cloudinaryAnalytics: true,
-        cloudinaryAnalyticsCustomData: {
-          customData1: 'my-value',
-          customData2: '11111',
-          customData3: 'custom-data-3-value',
-          customData4: 'Hello world',
-          customData5: 'false',
+        cloudinaryAnalytics: {
+          customData: {
+            customData1: 'my-value',
+            customData2: '11111',
+            customData3: 'custom-data-3-value',
+            customData4: 'Hello world',
+            customData5: 'false',
+          },
         },
       });
       playerCustomDataPlainObject.source('elephants');
@@ -55,11 +56,12 @@
       const playerCustomDataFunction = await cloudinary.player('player-custom-data-function', {
         cloud_name: 'demo',
         secure: true,
-        cloudinaryAnalytics: true,
-        cloudinaryAnalyticsCustomData: () => ({
-          customData1: 'my-value',
-          customData2: '11111',
-        }),
+        cloudinaryAnalytics: {
+          customData: () => ({
+            customData1: 'my-value',
+            customData2: '11111',
+          }),
+        },
       });
       playerCustomDataFunction.source('elephants');
     }, false);
@@ -167,13 +169,14 @@
             const playerCustomDataPlainObject = await cloudinary.player('player-custom-data-plain-object', {
               cloud_name: 'demo',
               secure: true,
-              cloudinaryAnalytics: true,
-              cloudinaryAnalyticsCustomData: {
-                customData1: 'my-value',
-                customData2: '11111',
-                customData3: 'custom-data-3-value',
-                customData4: 'Hello world',
-                customData5: 'false',
+              cloudinaryAnalytics: {
+                customData: {
+                  customData1: 'my-value',
+                  customData2: '11111',
+                  customData3: 'custom-data-3-value',
+                  customData4: 'Hello world',
+                  customData5: 'false',
+                },
               },
             });
 
@@ -216,11 +219,12 @@
             const playerCustomDataFunction = await cloudinary.player('player-custom-data-function', {
               cloud_name: 'demo',
               secure: true,
-              cloudinaryAnalytics: true,
-              cloudinaryAnalyticsCustomData: () => ({
-                customData1: 'my-value',
-                customData2: '11111',
-              }),
+              cloudinaryAnalytics: {
+                customData: () => ({
+                  customData1: 'my-value',
+                  customData2: '11111',
+                }),
+              },
             });
 
             playerCustomDataFunction.source('elephants');

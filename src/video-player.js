@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
 import './components';
 import plugins from './plugins';
@@ -403,11 +404,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initCloudinaryAnalytics() {
-    const cloudinaryAnalyticsOptionEnabled = this.playerOptions.cloudinaryAnalytics;
+    const cloudinaryAnalyticsOptionEnabled = !!this.playerOptions.cloudinaryAnalytics;
 
     if (cloudinaryAnalyticsOptionEnabled) {
       this.videojs.videoElement = this.videoElement;
-      this.videojs.cloudinaryAnalytics(this.playerOptions.cloudinaryAnalyticsCustomData);
+      const options = isObject(this.playerOptions.cloudinaryAnalytics) ? this.playerOptions.cloudinaryAnalytics : {};
+      this.videojs.cloudinaryAnalytics(options);
     }
   }
 

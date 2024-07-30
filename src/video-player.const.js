@@ -20,7 +20,6 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'playedEventTimes',
   'analytics',
   'cloudinaryAnalytics',
-  'cloudinaryAnalyticsCustomData',
   'allowUsageReport',
   'fluid',
   'ima',
