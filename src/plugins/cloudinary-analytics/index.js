@@ -3,7 +3,7 @@ import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 class CloudinaryAnalytics {
-  constructor(player) {
+  constructor(player, options) {
     this.player = player;
     this.shouldUseCustomEvents = videojs.browser.IS_IOS;
     this.cloudinaryAnalytics = connectCloudinaryAnalytics(this.player.videoElement, {
@@ -13,6 +13,7 @@ class CloudinaryAnalytics {
       cloudName: null,
       publicId: null
     };
+    this.analyticsOptions = options;
   }
 
   getMetadata = () => ({
@@ -26,7 +27,8 @@ class CloudinaryAnalytics {
       this.currentVideMetadata = metadata;
       this.cloudinaryAnalytics.startManualTracking(metadata, {
         videoPlayerType: 'cloudinary video player',
-        videoPlayerVersion: VERSION
+        videoPlayerVersion: VERSION,
+        ...(this.analyticsOptions?.customData ? { providedData: this.analyticsOptions?.customData } : {}),
       });
     } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
       this.cloudinaryAnalytics.stopManualTracking();

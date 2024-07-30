@@ -1,5 +1,6 @@
 import defaults from 'config/defaults';
 import isEmpty from 'lodash/isEmpty';
+import isObject from 'lodash/isObject';
 
 const hasConfig = (obj) => isEmpty(obj) ? null : true;
 
@@ -66,7 +67,8 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   autoplayMode: playerOptions.autoplayMode,
   bigPlayButton: playerOptions.bigPlayButton,
   className: playerOptions.class,
-  cloudinaryAnalytics: playerOptions.cloudinaryAnalytics,
+  cloudinaryAnalytics: !!playerOptions.cloudinaryAnalytics,
+  cloudinaryAnalyticsOptions: isObject(playerOptions.cloudinaryAnalytics),
   controls: playerOptions.controls,
   floatingWhenNotVisible: playerOptions.floatingWhenNotVisible,
   fluid: playerOptions.fluid,
