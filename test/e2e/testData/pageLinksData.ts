@@ -5,7 +5,7 @@ import { ExampleLinkType } from '../types/exampleLinkType';
  */
 export const LINKS: ExampleLinkType[] = [
     { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming.html' },
-    { name: 'AI Highlights Graph', endpoint: 'highlights-graph.html' },
+    /* { name: 'AI Highlights Graph', endpoint: 'highlights-graph.html' },
     { name: 'Analytics', endpoint: 'analytics.html' },
     { name: 'API and Events', endpoint: 'api.html' },
     { name: 'Audio Player', endpoint: 'audio.html' },
@@ -39,5 +39,5 @@ export const LINKS: ExampleLinkType[] = [
     { name: 'VAST & VPAID Support', endpoint: 'vast-vpaid.html' },
     { name: 'VR/360 Videos', endpoint: '360.html' },
     { name: 'Embedded (iframe) player', endpoint: 'embedded-iframe.html' },
-    { name: 'ESM Imports', endpoint: 'cld-vp-esm-pages.netlify.app' },
+    { name: 'ESM Imports', endpoint: 'cld-vp-esm-pages.netlify.app' },*/
 ];
