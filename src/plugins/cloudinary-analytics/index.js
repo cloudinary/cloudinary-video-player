@@ -26,9 +26,9 @@ class CloudinaryAnalytics {
     if (metadata.cloudName && metadata.publicId) {
       this.currentVideMetadata = metadata;
       this.cloudinaryAnalytics.startManualTracking(metadata, {
+        ...(typeof this.analyticsOptions === 'object' ? this.analyticsOptions : {}),
         videoPlayerType: 'cloudinary video player',
         videoPlayerVersion: VERSION,
-        ...(this.analyticsOptions?.customData ? { providedData: this.analyticsOptions?.customData } : {}),
       });
     } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
       this.cloudinaryAnalytics.stopManualTracking();
