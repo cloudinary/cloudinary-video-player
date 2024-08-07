@@ -51,21 +51,21 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       const player = videoPlayer('player', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: true
       });
       player.source('elephants');
 
       const adpPlayer = videoPlayer('adpPlayer', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: true
       });
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
       const playerCustomDataPlainObject = videoPlayer('player-custom-data-plain-object', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: {
@@ -80,7 +80,7 @@
       playerCustomDataPlainObject.source('elephants');
 
       const playerCustomDataFunction = videoPlayer('player-custom-data-function', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: () => ({

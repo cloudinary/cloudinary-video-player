@@ -25,21 +25,21 @@
   <script type="text/javascript">
     window.addEventListener('load', () => {
       const player = cloudinary.videoPlayer('player', {
-         cloud_name: 'demo',
+         cloudName: 'demo',
          secure: true,
          cloudinaryAnalytics: true
       });
       player.source('elephants');
 
       const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: true
       });
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
       const playerCustomDataPlainObject = cloudinary.videoPlayer('player-custom-data-plain-object', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: {
@@ -54,7 +54,7 @@
       playerCustomDataPlainObject.source('elephants');
 
       const playerCustomDataFunction = cloudinary.videoPlayer('player-custom-data-function', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: () => ({
@@ -117,7 +117,7 @@
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
           const player = cloudinary.videoPlayer('player', {
-               cloud_name: 'demo',
+               cloudName: 'demo',
                secure: true,
                cloudinaryAnalytics: true
             });
@@ -125,7 +125,7 @@
             player.source('elephants');
 
             const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
-              cloud_name: 'demo',
+              cloudName: 'demo',
               secure: true,
               cloudinaryAnalytics: true
             });
@@ -165,7 +165,7 @@
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
           const playerCustomDataPlainObject = cloudinary.videoPlayer('player-custom-data-plain-object', {
-            cloud_name: 'demo',
+            cloudName: 'demo',
             secure: true,
             cloudinaryAnalytics: {
               customData: {
@@ -213,7 +213,7 @@
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
           const playerCustomDataFunction = cloudinary.videoPlayer('player-custom-data-function', {
-            cloud_name: 'demo',
+            cloudName: 'demo',
             secure: true,
             cloudinaryAnalytics: {
               customData: () => ({

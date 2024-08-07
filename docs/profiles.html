@@ -23,9 +23,9 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', async function() {
+    window.addEventListener('load', async () => {
       const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
-        cloud_name: 'demo',
+        cloudName: 'demo',
         profile: 'cldDefault',
       });
 
@@ -70,7 +70,7 @@
       <code class="language-javascript">
         window.addEventListener('load', async function() {
           const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
-            cloud_name: 'demo',
+            cloudName: 'demo',
             profile: 'cldDefault',
           });
 
