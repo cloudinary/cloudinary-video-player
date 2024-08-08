@@ -35,13 +35,27 @@ jobs:
 
       - name: Publish report to dedicated repo
         run: |
-          UNIQUE_FOLDER="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number }}"
-          mkdir -p $UNIQUE_FOLDER
-          cd $UNIQUE_FOLDER
-          git clone git@github.com:cloudinary/cloudinary-video-player-reports.git .
-          cp -r ../report-directory/* $UNIQUE_FOLDER/ 
+          # Define the unique folder name using run ID and PR number (if available)
+          UNIQUE_FOLDER_NAME="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number || 'no-pr' }}"
+          
+          # Create a separate directory in the system's temporary directory
+          TMP_DIR=$(mktemp -d)
+          REPORT_DIR="$TMP_DIR/$UNIQUE_FOLDER_NAME"
+          mkdir -p $REPORT_DIR
+          
+          # Clone the dedicated repo into the new directory
+          git clone git@github.com:cloudinary/cloudinary-video-player.git $REPORT_DIR
+
+          # Copy the report files to the cloned repo
+          cp -r playwright-report/* $REPORT_DIR/
+          
+          # Navigate to the cloned repo directory
+          cd $REPORT_DIR
+          
+          # Commit and push the report
           git add .
-          git commit -m "Update report"
+          git commit -m "Update report for run ${{ github.run_id }} and PR ${{ github.event.pull_request.number || 'no-pr' }}"
           git push origin test_branch
+
 
 
