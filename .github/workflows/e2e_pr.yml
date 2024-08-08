@@ -38,7 +38,7 @@ jobs:
           UNIQUE_FOLDER="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number }}"
           mkdir -p $UNIQUE_FOLDER
           cd $UNIQUE_FOLDER
-          git clone https://github.com/your-username/your-dedicated-repo.git .
+          git clone git@github.com:cloudinary/cloudinary-video-player-reports.git .
           cp -r ../report-directory/* $UNIQUE_FOLDER/ 
           git add .
           git commit -m "Update report"
