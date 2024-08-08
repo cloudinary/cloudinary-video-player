@@ -9,7 +9,7 @@ env:
 jobs:
   e2e:
     name: install
-    runs-on: ubuntu-latest
+    runs-on: large-github-runner
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,8 +34,6 @@ jobs:
          retention-days: 30
 
       - name: Publish report to dedicated repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"  
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
