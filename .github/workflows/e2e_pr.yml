@@ -54,6 +54,8 @@ jobs:
           
           # Navigate to the cloned repo directory
           cd $REPORT_DIR
+
+          git checkout -B test_branch origin/test_branch
           
           # Commit and push the report
           git add .
