@@ -23,23 +23,23 @@
 
   <script type="text/javascript" src="./scripts.js"></script>
   <script type="text/javascript">
-    window.addEventListener('load', async () => {
-      const player = await cloudinary.player('player', {
-         cloud_name: 'demo',
+    window.addEventListener('load', () => {
+      const player = cloudinary.videoPlayer('player', {
+         cloudName: 'demo',
          secure: true,
          cloudinaryAnalytics: true
       });
       player.source('elephants');
 
-      const adpPlayer = await cloudinary.player('adpPlayer', {
-        cloud_name: 'demo',
+      const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: true
       });
       adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
 
-      const playerCustomDataPlainObject = await cloudinary.player('player-custom-data-plain-object', {
-        cloud_name: 'demo',
+      const playerCustomDataPlainObject = cloudinary.videoPlayer('player-custom-data-plain-object', {
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: {
@@ -53,13 +53,13 @@
       });
       playerCustomDataPlainObject.source('elephants');
 
-      const playerCustomDataFunction = await cloudinary.player('player-custom-data-function', {
-        cloud_name: 'demo',
+      const playerCustomDataFunction = cloudinary.videoPlayer('player-custom-data-function', {
+        cloudName: 'demo',
         secure: true,
         cloudinaryAnalytics: {
           customData: () => ({
             customData1: 'my-value',
-            customData2: '11111',
+            customData3: '11111',
           }),
         },
       });
@@ -116,28 +116,27 @@
       </code>
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
-          (async () => {
-            const player = await cloudinary.player('player', {
-              cloud_name: 'demo',
-              secure: true,
-              cloudinaryAnalytics: true
+          const player = cloudinary.videoPlayer('player', {
+               cloudName: 'demo',
+               secure: true,
+               cloudinaryAnalytics: true
             });
 
             player.source('elephants');
 
-            const adpPlayer = await cloudinary.player('adpPlayer', {
-              cloud_name: 'demo',
+            const adpPlayer = cloudinary.videoPlayer('adpPlayer', {
+              cloudName: 'demo',
               secure: true,
               cloudinaryAnalytics: true
             });
 
             adpPlayer.source('https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd');
-          })();
         &lt;/script&gt;
       </code>
     </pre>
 
     <h3 class="mb-4">Cloudinary analytics with custom data - plain object</h3>
+    <p>Only those 5 params are supported & value needs to be string - otherwise it will be filtered out.</p>
     <video
       id="player-custom-data-plain-object"
       playsinline
@@ -165,23 +164,21 @@
       </code>
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
-          (async () => {
-            const playerCustomDataPlainObject = await cloudinary.player('player-custom-data-plain-object', {
-              cloud_name: 'demo',
-              secure: true,
-              cloudinaryAnalytics: {
-                customData: {
-                  customData1: 'my-value',
-                  customData2: '11111',
-                  customData3: 'custom-data-3-value',
-                  customData4: 'Hello world',
-                  customData5: 'false',
-                },
+          const playerCustomDataPlainObject = cloudinary.videoPlayer('player-custom-data-plain-object', {
+            cloudName: 'demo',
+            secure: true,
+            cloudinaryAnalytics: {
+              customData: {
+                customData1: 'my-value',
+                customData2: '11111',
+                customData3: 'custom-data-3-value',
+                customData4: 'Hello world',
+                customData5: 'false',
               },
-            });
+            },
+          });
 
-            playerCustomDataPlainObject.source('elephants');
-          })();
+          playerCustomDataPlainObject.source('elephants');
         &lt;/script&gt;
       </code>
     </pre>
@@ -215,20 +212,18 @@
       </code>
       <code class="language-javascript">
         &lt;script type="text/javascript"&gt;
-          (async () => {
-            const playerCustomDataFunction = await cloudinary.player('player-custom-data-function', {
-              cloud_name: 'demo',
-              secure: true,
-              cloudinaryAnalytics: {
-                customData: () => ({
-                  customData1: 'my-value',
-                  customData2: '11111',
-                }),
-              },
-            });
+          const playerCustomDataFunction = cloudinary.videoPlayer('player-custom-data-function', {
+            cloudName: 'demo',
+            secure: true,
+            cloudinaryAnalytics: {
+              customData: () => ({
+                customData1: 'my-value',
+                customData3: '11111',
+              }),
+            },
+          });
 
-            playerCustomDataFunction.source('elephants');
-          })();
+          playerCustomDataFunction.source('elephants');
         &lt;/script&gt;
       </code>
     </pre>

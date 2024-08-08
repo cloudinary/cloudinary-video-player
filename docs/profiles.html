@@ -23,9 +23,9 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', async function() {
-      const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
-        cloud_name: 'demo',
+    window.addEventListener('load', async () => {
+      const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
+        cloudName: 'demo',
         profile: 'cldDefault',
       });
 
@@ -69,8 +69,8 @@
       </code>
       <code class="language-javascript">
         window.addEventListener('load', async function() {
-          const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
-            cloud_name: 'demo',
+          const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
+            cloudName: 'demo',
             profile: 'cldDefault',
           });
 
