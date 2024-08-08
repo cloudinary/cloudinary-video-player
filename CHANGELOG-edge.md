@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.6-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.2...v2.0.6-edge.0) (2024-08-08)
+
+
+### Features
+
+* custom data video analytics param ([#687](https://github.com/cloudinary/cloudinary-video-player/issues/687)) ([3f5f828](https://github.com/cloudinary/cloudinary-video-player/commit/3f5f828bdf9506da303978bf095e6572ece766e1))
+* new 'player' method with support async loading & profiles ([#678](https://github.com/cloudinary/cloudinary-video-player/issues/678)) ([95098c0](https://github.com/cloudinary/cloudinary-video-player/commit/95098c0a43a34c6f616cf05a6218f41959aa1496))
+
+
+### Bug Fixes
+
+* docs for profiles & analytics, analytics options ([#689](https://github.com/cloudinary/cloudinary-video-player/issues/689)) ([e771770](https://github.com/cloudinary/cloudinary-video-player/commit/e771770eebb2f571616c2e4fae6b94a807f61b3b))
+* profiles docs link ([#683](https://github.com/cloudinary/cloudinary-video-player/issues/683)) ([945366f](https://github.com/cloudinary/cloudinary-video-player/commit/945366fb6d72de73337a22b783ce86c416dd256c))
+* update dependencies ([#688](https://github.com/cloudinary/cloudinary-video-player/issues/688)) ([2105a81](https://github.com/cloudinary/cloudinary-video-player/commit/2105a81b77350c88f935cb0ad2b08ab3077eae1a))
+
 ## [2.0.5-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.1...v2.0.5-edge.2) (2024-07-09)
 
 
