@@ -5,6 +5,7 @@ on:
 
 env:
   CI: true
+  SSH_PRIVATE_KEY: ${{ secrets.JENKINS_USER_SSH_PRIVATE_KEY }}
 
 jobs:
   e2e:
@@ -32,6 +33,12 @@ jobs:
          name: playwright-report
          path: playwright-report/
          retention-days: 30
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+          ssh-auth-sock: /home/runner/_work/ssh-agent.sock
 
       - name: Publish report to dedicated repo
         run: |
