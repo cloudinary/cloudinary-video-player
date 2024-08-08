@@ -44,7 +44,7 @@ jobs:
           mkdir -p $REPORT_DIR
           
           # Clone the dedicated repo into the new directory
-          git clone git@github.com:cloudinary/cloudinary-video-player.git $REPORT_DIR
+          git clone https://github.com/cloudinary/cloudinary-video-player-reports.git $REPORT_DIR
 
           # Copy the report files to the cloned repo
           cp -r playwright-report/* $REPORT_DIR/
