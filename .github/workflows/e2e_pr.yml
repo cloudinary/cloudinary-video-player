@@ -46,7 +46,7 @@ jobs:
           destination-repository-name: 'cloudinary-video-player-reports'
           user-email: ''
           target-branch: main
-          target-directory: 'playwright-report_${{ github.event.number }}/${{ github.run_id }}'
+          target-directory: 'playwright-report_${{ github.run_id }}'
 
       - name: Write URL in summary
-        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_${{ github.event.number }}/${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
