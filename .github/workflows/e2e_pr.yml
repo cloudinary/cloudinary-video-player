@@ -6,7 +6,6 @@ on:
 
 env:
   CI: true
-  SSH_PRIVATE_KEY: ${{ secrets.JENKINS_USER_SSH_PRIVATE_KEY }}
 
 jobs:
   e2e:
@@ -51,5 +50,5 @@ jobs:
           target-branch: main
           target-directory: 'playwright-report_${{ github.run_id }}'
 
-      - name: Write URL in summary
+      - name: Write URL in summary  
         run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
