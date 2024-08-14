@@ -43,7 +43,7 @@ jobs:
           destination-github-username: 'cloudinary'
           destination-repository-name: 'cloudinary-video-player-reports'
           user-email: ''
-          target-branch: master
+          target-branch: main
           target-directory: 'playwright-report_${{ github.run_id }}'
 
 
