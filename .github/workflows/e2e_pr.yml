@@ -41,10 +41,9 @@ jobs:
           ssh-auth-sock: /home/runner/_work/ssh-agent.sock
 
       - name: Publish report to dedicated repo
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
         run: |
-          git config --global user.name "github-actions[bot]"  
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
           # Define the unique folder name using run ID and PR number (if available)
           UNIQUE_FOLDER_NAME="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number || 'no-pr' }}"
           
