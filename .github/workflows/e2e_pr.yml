@@ -34,39 +34,52 @@ jobs:
          path: playwright-report/
          retention-days: 30
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
         with:
-          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
-          ssh-auth-sock: /home/runner/_work/ssh-agent.sock
+          source-directory: 'playwright-report'
+          destination-github-username: 'cloudinary'
+          destination-repository-name: 'cloudinary-video-player-reports'
+          user-email: ''
+          target-branch: master
+          target-directory: 'playwright-report_${{ github.run_id }}'
 
-      - name: Publish report to dedicated repo
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-        run: |
-          # Define the unique folder name using run ID and PR number (if available)
-          UNIQUE_FOLDER_NAME="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number || 'no-pr' }}"
-          
-          # Create a separate directory in the system's temporary directory
-          TMP_DIR=$(mktemp -d)
-          REPORT_DIR="$TMP_DIR/$UNIQUE_FOLDER_NAME"
-          mkdir -p $REPORT_DIR
-          
-          # Clone the dedicated repo into the new directory
-          git clone git@github.com:cloudinary/cloudinary-video-player-reports.git $REPORT_DIR
 
-          # Copy the report files to the cloned repo
-          cp -r playwright-report/* $REPORT_DIR/
-          
-          # Navigate to the cloned repo directory
-          cd $REPORT_DIR
+      # - name: Setup SSH
+      #   uses: webfactory/ssh-agent@v0.8.0
+      #   with:
+      #     ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+      #     ssh-auth-sock: /home/runner/_work/ssh-agent.sock
 
-          git checkout -B test_branch origin/test_branch
+      # - name: Publish report to dedicated repo
+      #   with:
+      #     token: ${{ secrets.BOT_TOKEN }}
+      #   run: |
+      #     # Define the unique folder name using run ID and PR number (if available)
+      #     UNIQUE_FOLDER_NAME="report-${{ github.run_id }}-pr-${{ github.event.pull_request.number || 'no-pr' }}"
           
-          # Commit and push the report
-          git add .
-          git commit -m "Update report for run ${{ github.run_id }} and PR ${{ github.event.pull_request.number || 'no-pr' }}"
-          git push origin test_branch
+      #     # Create a separate directory in the system's temporary directory
+      #     TMP_DIR=$(mktemp -d)
+      #     REPORT_DIR="$TMP_DIR/$UNIQUE_FOLDER_NAME"
+      #     mkdir -p $REPORT_DIR
+          
+      #     # Clone the dedicated repo into the new directory
+      #     git clone git@github.com:cloudinary/cloudinary-video-player-reports.git $REPORT_DIR
+
+      #     # Copy the report files to the cloned repo
+      #     cp -r playwright-report/* $REPORT_DIR/
+          
+      #     # Navigate to the cloned repo directory
+      #     cd $REPORT_DIR
+
+      #     git checkout -B test_branch origin/test_branch
+          
+      #     # Commit and push the report
+      #     git add .
+      #     git commit -m "Update report for run ${{ github.run_id }} and PR ${{ github.event.pull_request.number || 'no-pr' }}"
+      #     git push origin test_branch
 
 
 
