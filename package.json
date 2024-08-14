@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "2.0.5-edge.2",
+  "version": "2.0.6-edge.0",
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.20.0",
-    "cloudinary-video-analytics": "1.7.0",
+    "cloudinary-video-analytics": "1.7.1",
     "lodash": "^4.17.21",
     "uuid": "^10.0.0",
     "video.js": "^8.17.1",

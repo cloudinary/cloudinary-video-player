@@ -38,11 +38,11 @@
     </div>
 
     <script type="module">
-      import { videoPlayerWithProfile } from 'cloudinary-video-player';
+      import { player } from 'cloudinary-video-player';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       (async () => {
-        const playerWithDefaultProfile = await videoPlayerWithProfile('player-default-profile', {
+        const playerWithDefaultProfile = await player('player-default-profile', {
           cloudName: 'demo',
           profile: 'cldDefault'
         });

@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import isPlainObject from 'lodash/isPlainObject';
 import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';
 
@@ -26,9 +27,9 @@ class CloudinaryAnalytics {
     if (metadata.cloudName && metadata.publicId) {
       this.currentVideMetadata = metadata;
       this.cloudinaryAnalytics.startManualTracking(metadata, {
+        ...(isPlainObject(this.analyticsOptions) ? this.analyticsOptions : {}),
         videoPlayerType: 'cloudinary video player',
         videoPlayerVersion: VERSION,
-        ...(this.analyticsOptions?.customData ? { providedData: this.analyticsOptions?.customData } : {}),
       });
     } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
       this.cloudinaryAnalytics.stopManualTracking();
