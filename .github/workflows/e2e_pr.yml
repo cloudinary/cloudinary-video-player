@@ -52,4 +52,4 @@ jobs:
           target-directory: 'playwright-report_${{ github.run_id }}'
 
       - name: Write URL in summary
-        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
