@@ -1,7 +1,7 @@
 import 'assets/styles/main.scss';
 import pick from 'lodash/pick';
 import VideoPlayer from './video-player';
-import createVideoPlayerProfile from './video-player-profile';
+import createPlayer from './player';
 import { convertKeysToSnakeCase } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
 
@@ -20,11 +20,22 @@ const getVideoPlayer = config => (id, playerOptions, ready) =>
 const getVideoPlayers = config => (selector, playerOptions, ready) =>
   VideoPlayer.all(selector, getConfig(playerOptions, config), ready);
 
-const getVideoPlayerWithProfile = config => (id, playerOptions, ready) => createVideoPlayerProfile(id, getConfig(playerOptions, config), ready);
+const getPlayer = config => (id, playerOptions, ready) => createPlayer(id, getConfig(playerOptions, config), ready);
+const getPlayers = config => (selector, playerOptions, ready) => {
+  const nodeList = document.querySelectorAll(selector);
+  const playerConfig = getConfig(playerOptions, config);
+  return [...nodeList].map((node) => createPlayer(node, playerConfig, ready));
+};
 
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
-export const videoPlayerWithProfile = getVideoPlayerWithProfile();
+export const videoPlayerWithProfile = (id, playerOptions, ready) => {
+  console.warn('videoPlayerWithProfile method is DEPRECATED and will be removed soon, please use new `player` method instead');
+  return getPlayer()(id, playerOptions, ready);
+};
+
+export const player = getPlayer();
+export const players = getPlayers();
 
 const cloudinaryVideoPlayerLegacyConfig = config => {
   console.warn(
@@ -41,6 +52,8 @@ const cloudinary = {
   videoPlayer,
   videoPlayers,
   videoPlayerWithProfile,
+  player,
+  players,
   Cloudinary: {
     // Backwards compatibility with SDK v1
     new: cloudinaryVideoPlayerLegacyConfig

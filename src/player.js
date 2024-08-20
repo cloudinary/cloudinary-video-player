@@ -1,22 +1,24 @@
 import VideoPlayer from './video-player';
 import { defaultProfiles } from './config/profiles';
+import { isRawUrl } from './plugins/cloudinary/common';
 
 export const getProfile = async (cloudName, profile) => {
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
   }
 
-  return await fetch(profile, { method: 'GET' }).then(res => res.json());
-};
-
-const videoPlayerProfile = async (elem, initOptions, ready) => {
-  if (!initOptions.profile) {
-    throw new Error('VideoPlayerProfile method requires "profile" property');
+  if (isRawUrl(profile)) {
+    return await fetch(profile, { method: 'GET' }).then(res => res.json());
   }
 
+  throw new Error('Custom profiles will be supported soon, please use one of default profiles: "cldDefault", "cldLooping" or "cldAdaptiveStream"');
+};
+
+const player = async (elem, initOptions, ready) => {
+  const { profile, ...otherInitOptions } = initOptions;
   try {
-    const profileOptions = await getProfile(initOptions.cloud_name, initOptions.profile);
-    const options = Object.assign({}, profileOptions.playerOptions, initOptions);
+    const profileOptions = profile ? await getProfile(otherInitOptions.cloud_name, profile) : {};
+    const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions);
     const videoPlayer = new VideoPlayer(elem, options, ready);
 
     const nativeVideoPlayerSourceMethod = videoPlayer.source;
@@ -27,10 +29,10 @@ const videoPlayerProfile = async (elem, initOptions, ready) => {
 
     return videoPlayer;
   } catch (e) {
-    const videoPlayer = new VideoPlayer(elem, initOptions);
+    const videoPlayer = new VideoPlayer(elem, otherInitOptions);
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }
 };
 
-export default videoPlayerProfile;
+export default player;

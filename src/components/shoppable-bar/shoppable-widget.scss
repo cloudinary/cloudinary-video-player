@@ -69,6 +69,16 @@ $width: 20%;
 }
 .cld-spbl-toggle-icon {
 
+  // Animate
+  display: block;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  &.animate,
+  .shoppable-panel-hidden &:hover {
+    animation-name: tada;
+    animation-iteration-count: infinite;
+  }
+
   // Custom toggle icon
   &.cld-spbl-toggle-custom-icon {
     position: absolute;
@@ -88,17 +98,6 @@ $width: 20%;
       background-image: none !important;
     }
   }
-
-  // Animate
-  display: block;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  &.animate,
-  .shoppable-panel-hidden &:hover {
-    animation-name: tada;
-    animation-iteration-count: infinite;
-  }
-
 }
 .cld-spbl-panel {
   position: absolute;

@@ -22,8 +22,15 @@ jobs:
           body: |
             This PR was created Automatically.
             Please approve and squash-merge it.
-            IMPORTANT:
+            
+            ### IMPORTANT:
             Before merging, make sure all the changes are listed in the squash-commit footer.
             Format must be plain conventional-commit, one per line.
             No `*` bullets and no `----` comments are allowed.
-            Commit footer format for release-please (see https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features):
+            Commit footer format for release-please changelog ([docs](https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features)):
+            ```
+            fix: av1 support (#557)
+            fix: types definitions (#565)
+            feat: kareoke style subtitles (#563)
+            fix: allowUsageReport (#569)
+            ```
