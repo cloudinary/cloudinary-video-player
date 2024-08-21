@@ -30,18 +30,6 @@
         muted
       ></video>
 
-      <br /><br />
-      <h5>Player with custom (blur) profile</h5>
-      <video
-        id="player-custom-profile"
-        class="cld-video-player"
-        width="500"
-        playsinline
-        controls
-        autoplay
-        muted
-      ></video>
-
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
           >Full documentation</a
@@ -50,23 +38,16 @@
     </div>
 
     <script type="module">
-      import { videoPlayerWithProfile } from 'cloudinary-video-player';
+      import { player } from 'cloudinary-video-player';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       (async () => {
-        const playerWithDefaultProfile = await videoPlayerWithProfile('player-default-profile', {
+        const playerWithDefaultProfile = await player('player-default-profile', {
           cloudName: 'demo',
           profile: 'cldDefault'
         });
 
         playerWithDefaultProfile.source('sea_turtle');
-
-        const playerWithCustomProfile = await videoPlayerWithProfile('player-custom-profile', {
-          cloudName: 'dwaq5xqm4',
-          profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json'
-        });
-
-        playerWithCustomProfile.source('samples/cld-sample-video');
       })();
     </script>
 

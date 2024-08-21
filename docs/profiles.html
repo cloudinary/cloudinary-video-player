@@ -23,20 +23,13 @@
   <script type="text/javascript" src="./scripts.js"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', async function() {
-      const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
-        cloud_name: 'demo',
+    window.addEventListener('load', async () => {
+      const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
+        cloudName: 'demo',
         profile: 'cldDefault',
       });
 
       playerWithDefaultProfile.source('sea_turtle');
-
-      const playerWithCustomProfile = await cloudinary.videoPlayerWithProfile('player-custom-profile', {
-        cloud_name: 'prod',
-        profile: 'https://res.cloudinary.com/prod/raw/upload/v1/video-player/example-profiles/example-profile.json',
-      });
-
-      playerWithCustomProfile.source('samples/cld-sample-video');
     }, false);
   </script>
 </head>
@@ -59,18 +52,6 @@
     width="500">
   </video>
 
-  <br/><br/>
-  <h5>Player with custom (blur) profile</h5>
-  <video
-    id="player-custom-profile"
-    playsinline
-    controls
-    autoplay
-    muted
-    class="cld-video-player"
-    width="500">
-  </video>
-
   <h3 class="mt-4">Example Code:</h3>
 
   <pre>
@@ -85,31 +66,15 @@
         width="500"&gt;
       &lt;/video&gt;
 
-      &lt;video
-        id="player-custom-profile"
-        controls
-        autoplay
-        muted
-        class="cld-video-player"
-        width="500"&gt;
-      &lt;/video&gt;
-
       </code>
       <code class="language-javascript">
         window.addEventListener('load', async function() {
-          const playerWithDefaultProfile = await cloudinary.videoPlayerWithProfile('player-default-profile', {
-            cloud_name: 'demo',
+          const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
+            cloudName: 'demo',
             profile: 'cldDefault',
           });
 
           playerWithDefaultProfile.source('sea_turtle');
-
-          const playerWithCustomProfile = await cloudinary.videoPlayerWithProfile('player-custom-profile', {
-            cloud_name: 'dwaq5xqm4',
-            profile: 'https://res.cloudinary.com/dwaq5xqm4/raw/upload/v1/profiles/default_profile.json',
-          });
-
-          playerWithCustomProfile.source('samples/cld-sample-video');
         }, false);
       </code>
     </pre>
