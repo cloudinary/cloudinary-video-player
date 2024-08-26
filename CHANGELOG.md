@@ -1,6 +1,19 @@
 # Changelog
 
 
+## [2.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5...v2.1.0) (2024-08-21)
+
+
+### Features
+
+* custom data video analytics param ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+* new 'player' method with support async loading & profiles ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+
+
+### Bug Fixes
+
+* update dependencies ([#688](https://github.com/cloudinary/cloudinary-video-player/issues/688)) ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+
 ## [2.0.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.4...v2.0.5) (2024-07-15)
 
 
