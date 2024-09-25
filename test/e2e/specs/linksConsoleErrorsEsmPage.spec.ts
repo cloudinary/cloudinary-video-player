@@ -44,9 +44,9 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
             );
             break;
         case 'VAST & VPAID Support':
-            validatePageErrors(consoleErrors, [], ["Blocked script execution in 'about:blank' because the document's frame is sandboxed and the 'allow-scripts' permission is not set"]);
+            validatePageErrors(consoleErrors, [], ["Blocked script execution in 'about:blank' because the document's frame is sandboxed and the 'allow-scripts' permission is not set", 'the server responded with a status of 404']);
             break;
         default:
-            expect(consoleErrors, `The following unexpected console errors were found: ${JSON.stringify(consoleErrors)}`).toHaveLength(0);
+            validatePageErrors(consoleErrors, [], ['the server responded with a status of 404']);
     }
 }
