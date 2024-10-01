@@ -31,6 +31,15 @@
 
       playerWithDefaultProfile.source('sea_turtle');
     }, false);
+
+    window.addEventListener('load', async function() {
+      const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
+        cloudName: 'demo',
+        profile: 'myCustomProfile',
+      });
+
+      playerWithCustomProfile.source('sea_turtle');
+    }, false);
   </script>
 </head>
 <body>
@@ -75,6 +84,44 @@
           });
 
           playerWithDefaultProfile.source('sea_turtle');
+        }, false);
+      </code>
+    </pre>
+
+  <h5>Player with custom profile</h5>
+  <video
+    id="player-custom-profile"
+    playsinline
+    controls
+    autoplay
+    muted
+    class="cld-video-player"
+    width="500">
+  </video>
+
+  <h3 class="mt-4">Example Code:</h3>
+
+  <pre>
+    <code class="language-html">
+
+      &lt;video
+        id="player-custom-profile"
+        controls
+        autoplay
+        muted
+        class="cld-video-player"
+        width="500"&gt;
+      &lt;/video&gt;
+
+      </code>
+      <code class="language-javascript">
+        window.addEventListener('load', async function() {
+          const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
+            cloudName: 'demo',
+            profile: 'myCustomProfile',
+          });
+
+          playerWithCustomProfile.source('sea_turtle');
         }, false);
       </code>
     </pre>
