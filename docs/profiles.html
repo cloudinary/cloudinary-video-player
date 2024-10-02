@@ -34,7 +34,7 @@
 
     window.addEventListener('load', async function() {
       const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
-        cloudName: 'demo',
+        cloudName: 'prod',
         profile: 'myCustomProfile',
       });
 
@@ -117,7 +117,7 @@
       <code class="language-javascript">
         window.addEventListener('load', async function() {
           const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
-            cloudName: 'demo',
+            cloudName: 'prod',
             profile: 'myCustomProfile',
           });
 
