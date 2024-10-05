@@ -40,6 +40,20 @@
 
       playerWithCustomProfile.source('samples/cld-sample-video');
     }, false);
+
+    window.addEventListener('load', async function() {
+      const playerWithCustomProfileAndOverrides = await cloudinary.player('player-custom-profile-overrides', {
+        cloudName: 'prod',
+        profile: 'myCustomProfile',
+        colors: {
+          base: "#1532a8"
+        },
+        seekThumbnails: false,
+        aiHighlightsGraph: true,
+      });
+
+      playerWithCustomProfileAndOverrides.source('samples/cld-sample-video');
+    }, false);
   </script>
 </head>
 <body>
@@ -122,6 +136,49 @@
           });
 
           playerWithCustomProfile.source('samples/cld-sample-video');
+        }, false);
+      </code>
+    </pre>
+
+  <h5>Player with custom profile and overrides</h5>
+  <video
+    id="player-custom-profile-overrides"
+    playsinline
+    controls
+    autoplay
+    muted
+    class="cld-video-player"
+    width="500">
+  </video>
+
+  <h3 class="mt-4">Example Code:</h3>
+
+  <pre>
+    <code class="language-html">
+
+      &lt;video
+        id="player-custom-profile-overrides"
+        controls
+        autoplay
+        muted
+        class="cld-video-player"
+        width="500"&gt;
+      &lt;/video&gt;
+
+      </code>
+      <code class="language-javascript">
+        window.addEventListener('load', async function() {
+          const playerWithCustomProfileAndOverrides = await cloudinary.player('player-custom-profile-overrides', {
+            cloudName: 'prod',
+            profile: 'myCustomProfile',
+            colors: {
+              base: "#1532a8"
+            },
+            seekThumbnails: false,
+            aiHighlightsGraph: true,
+          });
+
+          playerWithCustomProfileAndOverrides.source('samples/cld-sample-video');
         }, false);
       </code>
     </pre>

@@ -10,7 +10,7 @@ export const getProfile = async (profile, initOptions) => {
 
   const urlPrefix = unsigned_url_prefix(
     null,
-    initOptions.cloudName || initOptions.cloud_name,
+    initOptions.cloudName ?? initOptions.cloud_name,
     initOptions.private_cdn,
     initOptions.cdn_subdomain,
     initOptions.secure_cdn_subdomain,
@@ -19,8 +19,8 @@ export const getProfile = async (profile, initOptions) => {
     initOptions.secure_distribution,
   );
 
-  const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile}.json`;
-  return await fetch(profileUrl, { method: 'GET' }).then(res => res.json());
+  const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
+  return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
 };
 
 const player = async (elem, initOptions, ready) => {
