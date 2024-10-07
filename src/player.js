@@ -1,23 +1,32 @@
 import VideoPlayer from './video-player';
 import { defaultProfiles } from './config/profiles';
 import { isRawUrl } from './plugins/cloudinary/common';
+import { unsigned_url_prefix } from '@cloudinary/url-gen/backwards/utils/unsigned_url_prefix';
 
-export const getProfile = async (cloudName, profile) => {
+export const getProfile = async (profile, initOptions) => {
   if (Object.keys(defaultProfiles).includes(profile)) {
     return defaultProfiles[profile];
   }
 
-  if (isRawUrl(profile)) {
-    return await fetch(profile, { method: 'GET' }).then(res => res.json());
-  }
+  const urlPrefix = unsigned_url_prefix(
+    null,
+    initOptions.cloudName ?? initOptions.cloud_name,
+    initOptions.private_cdn,
+    initOptions.cdn_subdomain,
+    initOptions.secure_cdn_subdomain,
+    initOptions.cname,
+    initOptions.secure,
+    initOptions.secure_distribution,
+  );
 
-  throw new Error('Custom profiles will be supported soon, please use one of default profiles: "cldDefault", "cldLooping" or "cldAdaptiveStream"');
+  const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
+  return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
 };
 
 const player = async (elem, initOptions, ready) => {
   const { profile, ...otherInitOptions } = initOptions;
   try {
-    const profileOptions = profile ? await getProfile(otherInitOptions.cloud_name, profile) : {};
+    const profileOptions = profile ? await getProfile(profile, otherInitOptions) : {};
     const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions);
     const videoPlayer = new VideoPlayer(elem, options, ready);
 

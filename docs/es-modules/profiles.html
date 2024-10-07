@@ -30,9 +30,31 @@
         muted
       ></video>
 
+      <h5>Player with custom profile</h5>
+      <video
+        id="player-custom-profile"
+        class="cld-video-player"
+        width="500"
+        playsinline
+        controls
+        autoplay
+        muted
+      ></video>
+
+      <h5>Player with custom profile and overrides</h5>
+      <video
+        id="player-custom-profile-overrides"
+        class="cld-video-player"
+        width="500"
+        playsinline
+        controls
+        autoplay
+        muted
+      ></video>
+
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
-          >Full documentation</a
+        >Full documentation</a
         >
       </p>
     </div>
@@ -48,6 +70,29 @@
         });
 
         playerWithDefaultProfile.source('sea_turtle');
+      })();
+
+      (async () => {
+        const playerWithCustomProfile = await player('player-custom-profile', {
+          cloudName: 'prod',
+          profile: 'myCustomProfile'
+        });
+
+        playerWithCustomProfile.source('samples/cld-sample-video');
+      })();
+
+      (async () => {
+        const playerWithCustomProfileAndOverrides = await cloudinary.player('player-custom-profile-overrides', {
+          cloudName: 'prod',
+          profile: 'myCustomProfile',
+          colors: {
+            base: "#1532a8"
+          },
+          seekThumbnails: false,
+          aiHighlightsGraph: true,
+        });
+
+        playerWithCustomProfileAndOverrides.source('samples/cld-sample-video');
       })();
     </script>
 
