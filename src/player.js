@@ -15,7 +15,7 @@ export const getProfile = async (profile, initOptions) => {
     initOptions.cdn_subdomain,
     initOptions.secure_cdn_subdomain,
     initOptions.cname,
-    initOptions.secure,
+    initOptions.secure ?? true,
     initOptions.secure_distribution,
   );
 
