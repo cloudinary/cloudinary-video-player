@@ -112,7 +112,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
     try {
-      const internalAnalyticsMetadata = options._internalAnalyticsMetadata || {};
+      const internalAnalyticsMetadata = options._internalAnalyticsMetadata ?? {};
       const analyticsData = getAnalyticsFromPlayerOptions(options);
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
