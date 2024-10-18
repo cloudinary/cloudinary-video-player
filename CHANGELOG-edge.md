@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.0...v2.1.1-edge.1) (2024-10-18)
+
+
+### Features
+
+* add internal analytics about new method & profiles ([#699](https://github.com/cloudinary/cloudinary-video-player/issues/699)) ([a1c8c1e](https://github.com/cloudinary/cloudinary-video-player/commit/a1c8c1eb4ffd8362ce4cc7ab5ed47276cc5651ee))
+
 ## [2.1.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.6-edge.0...v2.1.1-edge.0) (2024-10-07)
 
 
