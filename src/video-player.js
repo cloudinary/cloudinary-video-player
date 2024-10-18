@@ -112,6 +112,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
     try {
+      const internalAnalyticsMetadata = options._internalAnalyticsMetadata ?? {};
       const analyticsData = getAnalyticsFromPlayerOptions(options);
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
@@ -120,7 +121,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         // #if (process.env.WEBPACK_BUILD_LIGHT)
         vpLightBuild: true,
         // #endif
-        cloudName: options.cloudinary.cloudinaryConfig.cloud_name
+        cloudName: options.cloudinary.cloudinaryConfig.cloud_name,
+        ...internalAnalyticsMetadata,
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
     } catch (e) {
