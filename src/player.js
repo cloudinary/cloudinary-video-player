@@ -1,13 +1,22 @@
 import VideoPlayer from './video-player';
-import { defaultProfiles } from './config/profiles';
+import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl } from './plugins/cloudinary/common';
 import { unsigned_url_prefix } from '@cloudinary/url-gen/backwards/utils/unsigned_url_prefix';
 
-const isDefaultProfile = (profile) => Object.keys(defaultProfiles).includes(profile);
+const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
+const getDefaultProfileConfig = (profileName) => {
+  const profile = defaultProfiles.find(({ name }) => profileName === name);
+
+  if (!profile) {
+    throw new Error(`Default profile with name ${profileName} doest not exist`);
+  }
+
+  return profile.config;
+};
 
 export const getProfile = async (profile, initOptions) => {
   if (isDefaultProfile(profile)) {
-    return defaultProfiles[profile];
+    return getDefaultProfileConfig(profile);
   }
 
   const urlPrefix = unsigned_url_prefix(

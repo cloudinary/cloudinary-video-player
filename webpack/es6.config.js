@@ -1,7 +1,6 @@
 const { merge } = require('webpack-merge');
 const webpackCommon = require('./common.config');
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 delete webpackCommon.output; // overwrite
 
@@ -27,15 +26,6 @@ module.exports = merge(webpackCommon, {
     },
     chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
-
-  plugins: [
-    new CopyWebpackPlugin({
-      patterns: [{
-        from: path.resolve(__dirname, '../src/config/profiles'),
-        to: `${outputPath}/profiles`
-      }]
-    })
-  ],
 
   experiments: {
     outputModule: true

@@ -80,6 +80,7 @@
   "dependencies": {
     "@cloudinary/url-gen": "^1.20.0",
     "cloudinary-video-analytics": "1.7.1",
+    "cloudinary-video-player-profiles": "1.1.0",
     "lodash": "^4.17.21",
     "uuid": "^10.0.0",
     "video.js": "^8.17.1",
