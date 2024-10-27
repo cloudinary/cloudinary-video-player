@@ -8,7 +8,7 @@ const getDefaultProfileConfig = (profileName) => {
   const profile = defaultProfiles.find(({ name }) => profileName === name);
 
   if (!profile) {
-    throw new Error(`Default profile with name ${profileName} doest not exist`);
+    throw new Error(`Default profile with name ${profileName} does not exist`);
   }
 
   return profile.config;
