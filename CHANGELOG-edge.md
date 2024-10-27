@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.1...v2.1.1-edge.2) (2024-10-27)
+
+
+### Bug Fixes
+
+* use cld player profiles package for default profiles ([#701](https://github.com/cloudinary/cloudinary-video-player/issues/701)) ([1083b94](https://github.com/cloudinary/cloudinary-video-player/commit/1083b94ac96f4e075d8d820a894703eb644bec7a))
+
 ## [2.1.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.0...v2.1.1-edge.1) (2024-10-18)
 
 
