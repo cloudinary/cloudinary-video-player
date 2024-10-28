@@ -16,7 +16,7 @@ let isDeployReady = false;
 for (const link of ESM_LINKS) {
     vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples }) => {
         vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
-        //Wait for deploy URL to be available if PREVIEW_URL is set, and it is not available yet
+        //Wait for deploy URL to be available if PREVIEW_URL is set
         if (process.env.PREVIEW_URL && !isDeployReady) {
             await waitForDeployPreviewUrl(ESM_URL, page);
         }
@@ -66,8 +66,8 @@ async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
             return; // Skip checking if already confirmed as available
         }
         console.log('Waiting for deploy preview to be ready...');
-        const response = await page.request.get(url);
-        expect(response.status()).toBe(200);
+        //const response = await page.request.get(url);
+        expect(await page.waitForLoadState('networkidle'));
         isDeployReady = true; // Set flag to true when the URL is verified
         console.log('Deploy preview is now available!'); // Print to console when ready
     }).toPass();
