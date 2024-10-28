@@ -81,7 +81,7 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
             }
         } catch (error) {
             attempts++;
-           (`Attempt ${attempts} failed. Retrying in ${delay / 1000} seconds`);
+            `Attempt ${attempts} failed. Retrying in ${delay / 1000} seconds`;
             await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
         }
     }
