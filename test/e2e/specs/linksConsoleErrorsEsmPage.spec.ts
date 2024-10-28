@@ -32,10 +32,6 @@ for (const link of ESM_LINKS) {
  * Testing number of links in page.
  */
 vpTest('ESM page Link count test', async ({ page }) => {
-    //Wait for deploy URL to be available if PREVIEW_URL is set, and it is not available yet
-    if (process.env.PREVIEW_URL && !isDeployReady) {
-        await waitForDeployPreviewUrl(ESM_URL, page);
-    }
     await page.goto(ESM_URL);
     const expectedNumberOfLinks = 32;
     const numberOfLinks = await page.getByRole('link').count();
