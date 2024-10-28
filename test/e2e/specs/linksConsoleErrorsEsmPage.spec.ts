@@ -16,8 +16,8 @@ let isDeployReady = false;
 for (const link of ESM_LINKS) {
     vpTest(`Test console errors on link ${link.name}`, async ({ page, consoleErrors, vpExamples }) => {
         vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
-        //Wait for deploy URL to be available if PREVIEW_URL is set
-        if (process.env.PREVIEW_URL) {
+        //Wait for deploy URL to be available if PREVIEW_URL is set, and it is not available yet
+        if (process.env.PREVIEW_URL && !isDeployReady) {
             await waitForDeployPreviewUrl(ESM_URL, page);
         }
         await page.goto(ESM_URL);
@@ -32,8 +32,8 @@ for (const link of ESM_LINKS) {
  * Testing number of links in page.
  */
 vpTest('ESM page Link count test', async ({ page }) => {
-    //Wait for deploy URL to be available if PREVIEW_URL is set
-    if (process.env.PREVIEW_URL) {
+    //Wait for deploy URL to be available if PREVIEW_URL is set, and it is not available yet
+    if (process.env.PREVIEW_URL && !isDeployReady) {
         await waitForDeployPreviewUrl(ESM_URL, page);
     }
     await page.goto(ESM_URL);
@@ -66,6 +66,7 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
 async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
     await expect(async () => {
         if (isDeployReady) {
+            console.log('Deploy preview is already available, skipping check.');
             return; // Skip checking if already confirmed as available
         }
         const response = await page.request.get(url);
