@@ -78,12 +78,11 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
                 console.log('Deploy preview is available!');
                 return; // URL is reachable, exit function
             }
-            console.error(`Received non-OK response: ${response.status}`);
         } catch (error) {
             console.error(`Attempt ${attempts + 1} failed: ${error.message}`);
         }
         attempts++;
-        console.log(`Retrying in ${delay / 1000} seconds...`);
+        console.log(`Retrying in ${delay / 1000} seconds.`);
         await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
     }
 }
