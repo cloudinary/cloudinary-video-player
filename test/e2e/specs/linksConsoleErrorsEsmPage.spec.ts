@@ -72,5 +72,6 @@ async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
         const response = await page.request.get(url);
         expect(response.status()).toBe(200);
         isDeployReady = true; // Set flag to true when the URL is verified
+        console.log('Deploy preview is now available!'); // Print to console when ready
     }).toPass();
 }
