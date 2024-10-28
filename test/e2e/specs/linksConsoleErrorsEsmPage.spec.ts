@@ -68,7 +68,6 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
     while (attempts < maxAttempts) {
         try {
             const response = await fetch(url);
-
             if (response.ok) {
                 console.log('Deploy preview is available!');
                 return; // URL is reachable, exit function
@@ -77,7 +76,6 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
             console.error(`Attempt ${attempts + 1} failed: ${error.message}`);
         }
         attempts++;
-        console.log(`Retrying in ${delay / 1000} seconds.`);
         await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
     }
 }
