@@ -65,6 +65,7 @@ async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
             console.log('Deploy preview is already available, skipping check.');
             return; // Skip checking if already confirmed as available
         }
+        console.log('Waiting for deploy preview to be ready...');
         const response = await page.request.get(url);
         expect(response.status()).toBe(200);
         isDeployReady = true; // Set flag to true when the URL is verified
