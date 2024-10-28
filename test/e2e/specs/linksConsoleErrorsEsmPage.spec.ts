@@ -73,11 +73,11 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
         // Use fetch to check if the URL is available
         const response = await fetch(url);
         if (response.ok) {
-            attempts++;
             return; // URL is reachable, exit function
         } else {
             console.log(`Received status: ${response.status}`);
-            attempts++;
         }
+        attempts++;
+        await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
     }
 }
