@@ -34,11 +34,6 @@ for (const link of ESM_LINKS) {
  * Testing number of links in page.
  */
 vpTest('ESM page Link count test', async ({ page }) => {
-    /**
-     * Navigate to ESM Imports examples page.
-     * ON PR level it will use the preview deploy URL and locally it will use the latest EDGE.
-     */
-    const ESM_URL = process.env.PREVIEW_URL || EDGE_ESM_URL;
     await page.goto(ESM_URL);
     const expectedNumberOfLinks = 32;
     const numberOfLinks = await page.getByRole('link').count();
