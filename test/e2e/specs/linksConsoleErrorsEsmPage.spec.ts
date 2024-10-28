@@ -66,7 +66,6 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
 async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
     await expect(async () => {
         if (isDeployReady) {
-            console.log('Deploy preview is already available, skipping check');
             return; // Skip checking if already confirmed as available
         }
         const response = await page.request.get(url);
