@@ -69,7 +69,6 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
 async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, delay: number = 5000): Promise<void> {
     console.log(`Waiting for deploy preview at ${url}`);
     let attempts = 0;
-
     while (attempts < maxAttempts) {
         try {
             // Use fetch to check if the URL is available
@@ -78,11 +77,11 @@ async function waitForDeployPreviewUrl(url: string, maxAttempts: number = 10, de
             if (response.ok) {
                 return; // URL is reachable, exit function
             } else {
-                throw new Error(`Received status: ${response.status}`);
+                console.log(`Received status: ${response.status}`);
             }
         } catch (error) {
             attempts++;
-            console.log(`Attempt ${attempts} failed. Retrying in ${delay / 1000} seconds`);
+           (`Attempt ${attempts} failed. Retrying in ${delay / 1000} seconds`);
             await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
         }
     }
