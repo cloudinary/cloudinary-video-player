@@ -62,8 +62,9 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
  */
 async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
     await expect(async () => {
-        await page.goto(url);
-        //Checking if the link is visible, so we will know that page was loaded
-        expect(this.page.getByRole('link', { name: 'Analytics', exact: true }).toBeVisible());
+        console.log('Waiting for deploy preview to be ready...');
+        const response = await page.request.get(url);
+        expect(response.status()).toBe(200);
+        console.log('Deploy preview is now available!'); // Print to console when ready
     }).toPass();
 }
