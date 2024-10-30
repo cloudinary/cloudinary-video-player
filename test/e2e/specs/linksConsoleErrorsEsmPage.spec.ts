@@ -3,7 +3,7 @@ import { vpTest } from '../fixtures/vpTest';
 import { ESM_LINKS } from '../testData/esmPageLinksData';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { validatePageErrors } from '../src/helpers/validatePageErrors';
-import { link } from 'node:fs';
+import { ExampleLinkType } from '../types/exampleLinkType';
 
 const EDGE_ESM_URL = 'https://cld-vp-esm-pages.netlify.app/';
 // On PR level it will use the preview deploy URL and locally it will use the latest EDGE.
@@ -19,7 +19,7 @@ for (const link of ESM_LINKS) {
         vpTest.skip(link.name === 'Adaptive Streaming', 'Flaky on CI');
         //Wait for deploy URL to be available if PREVIEW_URL is set, and it is not available yet
         if (process.env.PREVIEW_URL && !PREVIEW_URL_LOADED) {
-            await waitForDeployPreviewUrl(ESM_URL, page);
+            await waitForDeployPreviewUrl(link, page);
         }
         await page.goto(ESM_URL);
         await vpExamples.clickLinkByName(link.name);
@@ -61,7 +61,7 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
 /**
  * Waits for a deploy preview URL to become available by making repeated requests and check that link is visible.
  */
-async function waitForDeployPreviewUrl(url: string, page: Page): Promise<void> {
+async function waitForDeployPreviewUrl(link: ExampleLinkType, page: Page): Promise<void> {
     console.log('Waiting for deploy preview to be ready...');
     await expect(async () => {
         await page.goto(process.env.PREVIEW_URL);
