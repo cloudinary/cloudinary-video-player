@@ -19,7 +19,7 @@ export const vpTest = test.extend<FixtureParams>({
     vpExamples: [
         async ({ page }, use) => {
             const vpExamplePage = new MainPage(page);
-            await vpExamplePage.goto();
+            // await vpExamplePage.goto();
             await use(vpExamplePage);
         },
         { auto: true },

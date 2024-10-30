@@ -29,6 +29,14 @@ for (const link of ESM_LINKS) {
             }).toPass({ intervals: [1_000], timeout: 90000 });
         }
 
+        await expect(async () => {
+            console.log('Navigate to esm page');
+            await page.goto(ESM_URL);
+            const linkLocator = page.getByRole('link', { name: link.name, exact: true });
+            console.log('wait for link to be visible: ', linkLocator.isVisible());
+            await expect(linkLocator).toBeVisible({ timeout: 1000 });
+        }).toPass({ intervals: [1_000], timeout: 90000 });
+
         await page.goto(ESM_URL);
         await vpExamples.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
