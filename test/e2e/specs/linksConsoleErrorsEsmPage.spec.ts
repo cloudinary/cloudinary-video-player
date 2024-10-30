@@ -1,4 +1,4 @@
-import { ConsoleMessage, expect, Page } from '@playwright/test';
+import { ConsoleMessage, expect } from '@playwright/test';
 import { vpTest } from '../fixtures/vpTest';
 import { ESM_LINKS } from '../testData/esmPageLinksData';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
