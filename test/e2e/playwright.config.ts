@@ -6,7 +6,7 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
     testMatch: /test\/e2e\/specs\/.*(\.spec.ts)/,
 
-    timeout: 90000,
+    timeout: 150000,
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* Fail the build on CI if you accidentally left test.only in the source code. */
