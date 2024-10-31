@@ -107,6 +107,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _sendInternalAnalytics(additionalOptions = {}) {
+    console.log('_sendInternalAnalytics');
     const options = Object.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
     if (!options.allowUsageReport) {
       return;
@@ -475,8 +476,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _onSourceChange() {
-    this._sendInternalAnalytics();
+  _onSourceChange(e, { sourceOptions }) {
+    this._sendInternalAnalytics({ ...(sourceOptions ?? { source: sourceOptions }) });
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
@@ -540,8 +541,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-
-    this._sendInternalAnalytics({ source: options });
 
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
