@@ -12,6 +12,7 @@ export const CLOUDINARY_PARAMS = [
 ];
 
 export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
+  '_internalAnalyticsMetadata',
   'debug',
   'publicId',
   'source',

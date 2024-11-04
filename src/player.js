@@ -1,24 +1,49 @@
 import VideoPlayer from './video-player';
-import { defaultProfiles } from './config/profiles';
+import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl } from './plugins/cloudinary/common';
+import { unsigned_url_prefix } from '@cloudinary/url-gen/backwards/utils/unsigned_url_prefix';
 
-export const getProfile = async (cloudName, profile) => {
-  if (Object.keys(defaultProfiles).includes(profile)) {
-    return defaultProfiles[profile];
+const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
+const getDefaultProfileConfig = (profileName) => {
+  const profile = defaultProfiles.find(({ name }) => profileName === name);
+
+  if (!profile) {
+    throw new Error(`Default profile with name ${profileName} does not exist`);
   }
 
-  if (isRawUrl(profile)) {
-    return await fetch(profile, { method: 'GET' }).then(res => res.json());
+  return profile.config;
+};
+
+export const getProfile = async (profile, initOptions) => {
+  if (isDefaultProfile(profile)) {
+    return getDefaultProfileConfig(profile);
   }
 
-  throw new Error('Custom profiles will be supported soon, please use one of default profiles: "cldDefault", "cldLooping" or "cldAdaptiveStream"');
+  const urlPrefix = unsigned_url_prefix(
+    null,
+    initOptions.cloudName ?? initOptions.cloud_name,
+    initOptions.private_cdn,
+    initOptions.cdn_subdomain,
+    initOptions.secure_cdn_subdomain,
+    initOptions.cname,
+    initOptions.secure ?? true,
+    initOptions.secure_distribution,
+  );
+
+  const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
+  return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
 };
 
 const player = async (elem, initOptions, ready) => {
   const { profile, ...otherInitOptions } = initOptions;
   try {
-    const profileOptions = profile ? await getProfile(otherInitOptions.cloud_name, profile) : {};
-    const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions);
+    const profileOptions = profile ? await getProfile(profile, otherInitOptions) : {};
+    const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions, {
+      _internalAnalyticsMetadata: {
+        newPlayerMethod: true,
+        profile: isDefaultProfile(profile) ? profile : !!profile,
+      },
+    });
     const videoPlayer = new VideoPlayer(elem, options, ready);
 
     const nativeVideoPlayerSourceMethod = videoPlayer.source;

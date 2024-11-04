@@ -13,7 +13,8 @@ import cloudinary from './index.js';
 
 export const videoPlayer = cloudinary.videoPlayer;
 export const videoPlayers = cloudinary.videoPlayers;
-export const videoPlayerWithProfile = cloudinary.videoPlayerWithProfile;
+
+export const player = cloudinary.player;
 
 export const player = cloudinary.player;
 
