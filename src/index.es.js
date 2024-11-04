@@ -16,6 +16,4 @@ export const videoPlayers = cloudinary.videoPlayers;
 
 export const player = cloudinary.player;
 
-export const player = cloudinary.player;
-
 export default cloudinary;
