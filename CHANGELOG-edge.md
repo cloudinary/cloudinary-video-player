@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.1.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.1...v2.1.1-edge.2) (2024-10-27)
+
+
+### Bug Fixes
+
+* use cld player profiles package for default profiles ([#701](https://github.com/cloudinary/cloudinary-video-player/issues/701)) ([1083b94](https://github.com/cloudinary/cloudinary-video-player/commit/1083b94ac96f4e075d8d820a894703eb644bec7a))
+
+## [2.1.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.0...v2.1.1-edge.1) (2024-10-18)
+
+
+### Features
+
+* add internal analytics about new method & profiles ([#699](https://github.com/cloudinary/cloudinary-video-player/issues/699)) ([a1c8c1e](https://github.com/cloudinary/cloudinary-video-player/commit/a1c8c1eb4ffd8362ce4cc7ab5ed47276cc5651ee))
+
+## [2.1.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.6-edge.0...v2.1.1-edge.0) (2024-10-07)
+
+
+### Features
+
+* add url template for video player profiles ([#696](https://github.com/cloudinary/cloudinary-video-player/issues/696)) ([d60cb4f](https://github.com/cloudinary/cloudinary-video-player/commit/d60cb4f4fc9d8b0ff2a6f0e21621c6c84063c898))
+
+
+### Bug Fixes
+
+* default secure option for new method ([#698](https://github.com/cloudinary/cloudinary-video-player/issues/698)) ([0d95b76](https://github.com/cloudinary/cloudinary-video-player/commit/0d95b76381b2130a01755feab87bb2766ead9d59))
+
 ## [2.0.6-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5-edge.2...v2.0.6-edge.0) (2024-08-08)
 
 

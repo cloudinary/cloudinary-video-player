@@ -29,10 +29,6 @@ const getPlayers = config => (selector, playerOptions, ready) => {
 
 export const videoPlayer = getVideoPlayer();
 export const videoPlayers = getVideoPlayers();
-export const videoPlayerWithProfile = (id, playerOptions, ready) => {
-  console.warn('videoPlayerWithProfile method is DEPRECATED and will be removed soon, please use new `player` method instead');
-  return getPlayer()(id, playerOptions, ready);
-};
 
 export const player = getPlayer();
 export const players = getPlayers();
@@ -51,7 +47,6 @@ const cloudinary = {
   ...(window.cloudinary || {}),
   videoPlayer,
   videoPlayers,
-  videoPlayerWithProfile,
   player,
   players,
   Cloudinary: {
