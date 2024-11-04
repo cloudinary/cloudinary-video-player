@@ -62,7 +62,6 @@ function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleM
  * Waits for a deploy preview URL to become available by making repeated requests and check that link is visible.
  */
 async function waitForDeployPreviewUrl(link: ExampleLinkType, page: Page): Promise<void> {
-    console.log('Waiting for deploy preview to be ready...');
     await expect(async () => {
         await page.goto(process.env.PREVIEW_URL);
         const linkLocator = page.getByRole('link', { name: link.name, exact: true });
