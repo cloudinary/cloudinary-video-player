@@ -26,8 +26,17 @@ jobs:
       - name: NPM Install
         run: npm install
 
+      - name: Extract PR Number
+        id: extract_pr_number
+        run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
+
+      - name: Set Deploy Preview URL
+        run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
+
       - name: E2E tests
         run: npm run test:e2e
+        env:
+          PREVIEW_URL: ${{ env.PREVIEW_URL }}
 
       - name: Upload report to artifact
         uses: actions/upload-artifact@v4
