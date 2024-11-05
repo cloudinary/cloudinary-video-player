@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.0...v2.1.1) (2024-11-05)
+
+
+### Bug Fixes
+
+* edge to master ([#730](https://github.com/cloudinary/cloudinary-video-player/issues/730)) ([5807863](https://github.com/cloudinary/cloudinary-video-player/commit/580786313f64ddb0eab4eab081b93c05773eba4e))
+
 ## [2.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5...v2.1.0) (2024-08-21)
 
 
