@@ -90,7 +90,7 @@ class CloudinaryContext {
         refresh();
       }
 
-      this.player.trigger('cldsourcechanged', { source: src });
+      this.player.trigger('cldsourcechanged', { source: src, sourceOptions: options });
 
       return _chainTarget;
     };
