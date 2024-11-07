@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.2...v2.1.2-edge.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* one event for internal analytics ([#728](https://github.com/cloudinary/cloudinary-video-player/issues/728)) ([7552998](https://github.com/cloudinary/cloudinary-video-player/commit/7552998726656d83ba228460b4dc687ae9d0c94d))
+
 ## [2.1.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.1...v2.1.1-edge.2) (2024-10-27)
 
 
