@@ -10,7 +10,7 @@ vpTest(`Test if video on main page is playing`, async ({ page, vpExamples }) => 
     await test.step('Click on play button to play video', async () => {
         //making sure the page is loaded
         await waitForPageToLoadWithTimeout(page, 5000);
-        return vpExamples.videoMainPage.playVideo();
+        return vpExamples.videoMainPage.clickPlay();
     });
     await test.step('Validating that the video is playing (in case isPause is false)', async () => {
         expect(await vpExamples.videoMainPage.isPaused()).toEqual(false);

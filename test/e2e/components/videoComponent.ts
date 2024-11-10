@@ -15,7 +15,7 @@ export class VideoComponent {
     /**
      * Click the play button if necessary in case video is not autoplay
      */
-    public async playVideo(): Promise<void> {
+    public async clickPlay(): Promise<void> {
         const videoPlayButtonLocator = this.page.locator(`${this.videoSelector}/following-sibling::button[contains(@class, "vjs-big-play-button")]`);
         // Click the play button to start the video
         return videoPlayButtonLocator.click();
