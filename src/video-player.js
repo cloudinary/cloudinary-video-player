@@ -475,8 +475,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _onSourceChange() {
-    this._sendInternalAnalytics();
+  _onSourceChange(e, { sourceOptions }) {
+    this._sendInternalAnalytics({ ...(sourceOptions ?? { source: sourceOptions }) });
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
@@ -540,8 +540,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-
-    this._sendInternalAnalytics({ source: options });
 
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
