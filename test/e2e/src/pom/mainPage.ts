@@ -1,13 +1,17 @@
 import { Page } from '@playwright/test';
+import { VideoComponent } from '../../components/videoComponent';
+const MAIN_PAGE_VIDEO_SELECTOR = '//*[@id="player_html5_api"]';
 
 /**
  * Video player examples main page object
  */
 export class MainPage {
     private page: Page;
+    public videoMainPage: VideoComponent;
 
     constructor(page: Page) {
         this.page = page;
+        this.videoMainPage = new VideoComponent(page, MAIN_PAGE_VIDEO_SELECTOR);
     }
 
     /**
