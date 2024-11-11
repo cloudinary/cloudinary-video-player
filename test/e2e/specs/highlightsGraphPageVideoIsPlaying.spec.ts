@@ -1,11 +1,11 @@
 import { vpTest } from '../fixtures/vpTest';
 import { expect, test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
-import { ExampleLinkType } from '../types/exampleLinkType';
 import { HighlightsGraphPage } from '../src/pom/highlightsGraphPage';
+import { ExampleLinkName, getLinkByName } from '../testData/pageLinksData';
 
 // Link to AI Highlights Graph page
-const link: ExampleLinkType = { name: 'AI Highlights Graph', endpoint: 'highlights-graph.html' };
+const link = getLinkByName(ExampleLinkName.AIHighlightsGraph);
 /**
  * Testing if video on highlights graph page is playing by checking that is pause return false.
  */
