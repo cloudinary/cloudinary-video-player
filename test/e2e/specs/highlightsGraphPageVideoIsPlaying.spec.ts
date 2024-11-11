@@ -12,7 +12,6 @@ const link: ExampleLinkType = { name: 'AI Highlights Graph', endpoint: 'highligh
 vpTest(`Test if video on highlights graph page is playing as expected`, async ({ page, vpExamples }) => {
     await test.step('Navigate to highlights graph page by clicking on link', async () => {
         await vpExamples.clickLinkByName(link.name);
-        //making sure the page is loaded
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that the video is playing (in case isPause is false)', async () => {
