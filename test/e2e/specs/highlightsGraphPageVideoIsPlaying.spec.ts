@@ -16,7 +16,7 @@ vpTest(`Test if video on highlights graph page is playing as expected`, async ({
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that the video is playing (in case isPause is false)', async () => {
-        const highlightGrapghPage = new HighlightsGraphPage(page);
-        expect(await highlightGrapghPage.videoHighlightsGraphPage.isPaused()).toEqual(false);
+        const highlightGraphPage = new HighlightsGraphPage(page);
+        expect(await highlightGraphPage.videoHighlightsGraphPage.isPaused()).toEqual(false);
     });
 });
