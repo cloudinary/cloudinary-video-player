@@ -1,4 +1,6 @@
+import { ExampleLinkName } from '../testData/pageLinksData';
+
 /**
  * Example links type
  */
-export type ExampleLinkType = { name: string; endpoint: string };
+export type ExampleLinkType = { name: ExampleLinkName; endpoint: string };

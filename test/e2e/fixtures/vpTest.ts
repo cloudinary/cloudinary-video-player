@@ -1,5 +1,6 @@
 import { ConsoleMessage, test } from '@playwright/test';
 import { MainPage } from '../src/pom/mainPage';
+import PageManager from '../src/pom/PageManager';
 
 /**
  * Fixture parameters.
@@ -7,12 +8,23 @@ import { MainPage } from '../src/pom/mainPage';
 type FixtureParams = {
     consoleErrors: ConsoleMessage[];
     vpExamples: MainPage;
+    pomPages: PageManager;
 };
 
 /**
  * Extend Playwright test with custom fixtures.
  */
 export const vpTest = test.extend<FixtureParams>({
+    /**
+     * Page Manager
+     */
+    pomPages: [
+        async ({ page }, use) => {
+            const pomPages = new PageManager(page);
+            await use(pomPages);
+        },
+        { scope: 'test' },
+    ],
     /**
      * Fixture for the video player examples page object.
      */
