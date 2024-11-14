@@ -4,6 +4,7 @@ import { ESM_LINKS } from '../testData/esmPageLinksData';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { validatePageErrors } from '../src/helpers/validatePageErrors';
 import { ExampleLinkType } from '../types/exampleLinkType';
+import { ExampleLinkName } from '../testData/pagesName';
 
 const EDGE_ESM_URL = 'https://cld-vp-esm-pages.netlify.app/';
 // On PR level it will use the preview deploy URL and locally it will use the latest EDGE.
@@ -41,16 +42,16 @@ vpTest('ESM page Link count test', async ({ page }) => {
 /**
  * Helper function to handle common browser errors.
  */
-function handleCommonEsmBrowsersErrors(linkName: string, consoleErrors: ConsoleMessage[]) {
+function handleCommonEsmBrowsersErrors(linkName: ExampleLinkName, consoleErrors: ConsoleMessage[]) {
     switch (linkName) {
-        case 'Custom Errors':
+        case ExampleLinkName.CustomErrors:
             validatePageErrors(
                 consoleErrors,
                 ['(CODE:999 undefined) My custom error message'],
                 ['No compatible source was found for this media', 'Video cannot be played Public ID snow_horses not found', 'the server responded with a status of 404', 'Cannot read properties of undefined']
             );
             break;
-        case 'VAST & VPAID Support':
+        case ExampleLinkName.VASTAndVPAIDSupport:
             validatePageErrors(consoleErrors, [], ["Blocked script execution in 'about:blank' because the document's frame is sandboxed and the 'allow-scripts' permission is not set", 'the server responded with a status of 404']);
             break;
         default:
