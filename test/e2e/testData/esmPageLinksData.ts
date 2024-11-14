@@ -1,5 +1,5 @@
 import { ExampleLinkType } from '../types/exampleLinkType';
-import { ExampleLinkName } from './pagesName';
+import { ExampleLinkName } from './ExampleLinkNames';
 
 /**
  * Array of all the examples pages names and links on ESM import page.

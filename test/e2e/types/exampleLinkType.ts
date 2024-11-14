@@ -1,4 +1,4 @@
-import { ExampleLinkName } from '../testData/pagesName';
+import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 /**
  * Example links type

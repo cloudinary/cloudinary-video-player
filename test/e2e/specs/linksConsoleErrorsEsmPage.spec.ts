@@ -4,7 +4,7 @@ import { ESM_LINKS } from '../testData/esmPageLinksData';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { validatePageErrors } from '../src/helpers/validatePageErrors';
 import { ExampleLinkType } from '../types/exampleLinkType';
-import { ExampleLinkName } from '../testData/pagesName';
+import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 const EDGE_ESM_URL = 'https://cld-vp-esm-pages.netlify.app/';
 // On PR level it will use the preview deploy URL and locally it will use the latest EDGE.

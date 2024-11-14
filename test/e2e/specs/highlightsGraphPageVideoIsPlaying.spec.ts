@@ -2,7 +2,7 @@ import { vpTest } from '../fixtures/vpTest';
 import { expect, test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
-import { ExampleLinkName } from '../testData/pagesName';
+import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 // Link to AI Highlights Graph page
 const link = getLinkByName(ExampleLinkName.AIHighlightsGraph);
