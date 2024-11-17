@@ -1,39 +1,47 @@
 import { ExampleLinkType } from '../types/exampleLinkType';
+import { ExampleLinkName } from './ExampleLinkNames';
 
 /**
  * Array of all the examples pages names and links on ESM import page.
  */
 export const ESM_LINKS: ExampleLinkType[] = [
-    { name: 'Adaptive Streaming', endpoint: 'adaptive-streaming' },
-    { name: 'Analytics', endpoint: 'analytics' },
-    { name: 'API and Events', endpoint: 'api' },
-    { name: 'Audio Player', endpoint: 'audio' },
-    { name: 'Autoplay on Scroll', endpoint: 'autoplay-on-scroll' },
-    { name: 'Chapters', endpoint: 'chapters' },
-    { name: 'Cloudinary Analytics', endpoint: 'cloudinary-analytics' },
-    { name: 'Codecs and formats', endpoint: 'codec-formats' },
-    { name: 'Colors API', endpoint: 'colors' },
-    { name: 'Components', endpoint: 'components' },
-    { name: 'Custom Errors', endpoint: 'custom-cld-errors' },
-    { name: 'Display Configurations', endpoint: 'ui-config' },
-    { name: 'Debug', endpoint: 'debug' },
-    { name: 'Floating Player', endpoint: 'floating-player' },
-    { name: 'Fluid Layouts', endpoint: 'fluid' },
-    { name: 'Force HLS Subtitles', endpoint: 'force-hls-subtitles' },
-    { name: 'Highlights Graph', endpoint: 'highlights-graph' },
-    { name: 'Interaction Area', endpoint: 'interaction-area' },
-    { name: 'Multiple Players', endpoint: 'multiple-players' },
-    { name: 'Playlist', endpoint: 'playlist' },
-    { name: 'Playlist by Tag', endpoint: 'playlist-by-tag' },
-    { name: 'Poster Options', endpoint: 'poster' },
-    { name: 'Profiles', endpoint: 'profiles' },
-    { name: 'Raw URL', endpoint: 'raw-url' },
-    { name: 'Recommendations', endpoint: 'recommendations' },
-    { name: 'Seek Thumbnails', endpoint: 'seek-thumbs' },
-    { name: 'Shoppable Videos', endpoint: 'shoppable' },
-    { name: 'Subtitles & Captions', endpoint: 'subtitles-and-captions' },
-    { name: 'Video Transformations', endpoint: 'transformations' },
-    { name: 'UI Config', endpoint: 'ui-config' },
-    { name: 'VAST & VPAID Support', endpoint: 'vast-vpaid' },
-    { name: 'VR/360 Videos', endpoint: '360' },
+    { name: ExampleLinkName.AdaptiveStreaming, endpoint: 'adaptive-streaming' },
+    { name: ExampleLinkName.Analytics, endpoint: 'analytics' },
+    { name: ExampleLinkName.APIAndEvents, endpoint: 'api' },
+    { name: ExampleLinkName.AudioPlayer, endpoint: 'audio' },
+    { name: ExampleLinkName.AutoplayOnScroll, endpoint: 'autoplay-on-scroll' },
+    { name: ExampleLinkName.Chapters, endpoint: 'chapters' },
+    { name: ExampleLinkName.CloudinaryAnalytics, endpoint: 'cloudinary-analytics' },
+    { name: ExampleLinkName.CodecsAndFormats, endpoint: 'codec-formats' },
+    { name: ExampleLinkName.ColorsAPI, endpoint: 'colors' },
+    { name: ExampleLinkName.Components, endpoint: 'components' },
+    { name: ExampleLinkName.CustomErrors, endpoint: 'custom-cld-errors' },
+    { name: ExampleLinkName.DisplayConfigurations, endpoint: 'ui-config' },
+    { name: ExampleLinkName.ESMDebugMode, endpoint: 'debug' },
+    { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player' },
+    { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid' },
+    { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles' },
+    { name: ExampleLinkName.HighlightsGraph, endpoint: 'highlights-graph' },
+    { name: ExampleLinkName.InteractionArea, endpoint: 'interaction-area' },
+    { name: ExampleLinkName.MultiplePlayers, endpoint: 'multiple-players' },
+    { name: ExampleLinkName.Playlist, endpoint: 'playlist' },
+    { name: ExampleLinkName.PlaylistByTag, endpoint: 'playlist-by-tag' },
+    { name: ExampleLinkName.PosterOptions, endpoint: 'poster' },
+    { name: ExampleLinkName.Profiles, endpoint: 'profiles' },
+    { name: ExampleLinkName.RawURL, endpoint: 'raw-url' },
+    { name: ExampleLinkName.Recommendations, endpoint: 'recommendations' },
+    { name: ExampleLinkName.SeekThumbnails, endpoint: 'seek-thumbs' },
+    { name: ExampleLinkName.ShoppableVideos, endpoint: 'shoppable' },
+    { name: ExampleLinkName.SubtitlesAndCaptions, endpoint: 'subtitles-and-captions' },
+    { name: ExampleLinkName.VideoTransformations, endpoint: 'transformations' },
+    { name: ExampleLinkName.UIConfig, endpoint: 'ui-config' },
+    { name: ExampleLinkName.VASTAndVPAIDSupport, endpoint: 'vast-vpaid' },
+    { name: ExampleLinkName.VR360Videos, endpoint: '360' },
 ];
+
+/**
+ * Retrieves an example link object from the `ESM_LINKS` array based on a given name.
+ */
+export function getEsmLinkByName(name: ExampleLinkName): ExampleLinkType {
+    return ESM_LINKS.find((link) => link.name === name);
+}
