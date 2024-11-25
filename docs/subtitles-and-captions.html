@@ -117,9 +117,7 @@
 
       // Paced
       const pacedPlayer = cloudinary.videoPlayer('paced', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+        cloudName: 'demo'
       });
 
       const publicId = 'lincoln';
@@ -180,9 +178,7 @@
 
       // Karaoke
       const karaokePlayer = cloudinary.videoPlayer('karaoke', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+        cloudName: 'demo'
       });
 
       karaokePlayer.source('lincoln', {
@@ -212,6 +208,22 @@
           }
         }
       });
+
+      // Transcript from URL
+      const urlTranscriptPlayer = cloudinary.videoPlayer('url-transcript', {
+        cloudName: 'demo'
+      });
+
+      urlTranscriptPlayer.source('elephants', {
+        textTracks: {
+          captions: {
+            label: "Lincoln's Transcript",
+            url: 'https://res.cloudinary.com/demo/raw/upload/lincoln.transcript',
+            wordHighlight: true,
+            maxWords: 8
+          }
+        }
+      });
     }, false);
   </script>
 </head>
@@ -227,8 +239,6 @@
       id="player"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -240,7 +250,6 @@
       id="playlist"
       playsinline
       controls
-      muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -290,7 +299,6 @@
       id="paced"
       playsinline
       controls
-      muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -302,7 +310,17 @@
       id="karaoke"
       playsinline
       controls
-      muted
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Transcript from URL</h4>
+
+    <video
+      id="url-transcript"
+      playsinline
+      controls
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -318,45 +336,16 @@
         &lt;video
           id="player"
           controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
-
-        &lt;video
-          id="playlist"
-          controls
-          muted
           class="cld-video-player"
           crossorigin="anonymous"
           width="500"&gt;
         &lt;/video&gt;
 
-        &lt;video
-          id="paced"
-          controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
-
-        &lt;video
-          id="karaoke"
-          controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
+        &lt;!-- ... a few more &lt;video&gt; tags --&gt;
       </code>
       <code class="language-javascript">
 
-        // Initialize player
+        // Initialize players
         var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
 
         player.source(
@@ -443,9 +432,7 @@
 
         // Paced
         const pacedPlayer = cloudinary.videoPlayer('paced', {
-          cloudName: 'demo',
-          autoplay: true,
-          muted: true
+          cloudName: 'demo'
         });
 
         pacedPlayer.source('lincoln', {
@@ -488,9 +475,7 @@
 
         // Karaoke
         const karaokePlayer = cloudinary.videoPlayer('karaoke', {
-          cloudName: 'demo',
-          autoplay: true,
-          muted: true
+          cloudName: 'demo'
         });
 
         karaokePlayer.source('lincoln', {
@@ -517,6 +502,22 @@
               maxWords: 5,
               timeOffset: -0.2,
               default: true
+            }
+          }
+        });
+
+        // Transcript from URL
+        const urlTranscriptPlayer = cloudinary.videoPlayer('url-transcript', {
+          cloudName: 'demo'
+        });
+  
+        urlTranscriptPlayer.source('elephants', {
+          textTracks: {
+            captions: {
+              label: "Lincoln's Transcript",
+              url: 'https://res.cloudinary.com/demo/raw/upload/lincoln.transcript',
+              wordHighlight: true,
+              maxWords: 8
             }
           }
         });

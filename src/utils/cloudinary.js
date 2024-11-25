@@ -101,13 +101,13 @@ const isKeyInTransformation = (transformation, key) => {
 
 const addTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
-    if (track.src) {
+    if (track.src && track.src.endsWith('.vtt')) {
       fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
         if (r.status >= 200 && r.status <= 399) {
           videojs.addRemoteTextTrack(track, true);
         }
       });
-    } else if (videojs.pacedTranscript) {
+    } else if (videojs.pacedTranscript && (!track.src || track.src.endsWith('.transcript'))) {
       videojs.pacedTranscript(track);
     }
   });
