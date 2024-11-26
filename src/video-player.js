@@ -476,7 +476,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _onSourceChange(e, { sourceOptions }) {
-    this._sendInternalAnalytics({ ...(sourceOptions && { source: sourceOptions }) });
+    this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
