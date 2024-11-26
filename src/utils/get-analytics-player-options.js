@@ -100,7 +100,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),
 
   ...getCloudinaryOptions(playerOptions.cloudinary),
-  ...getSourceOptions(playerOptions.source),
+  ...getSourceOptions(playerOptions.sourceOptions),
   ...getAdsOptions(playerOptions.ads),
   ...getPlaylistWidgetOptions(playerOptions.playlistWidget)
 });
