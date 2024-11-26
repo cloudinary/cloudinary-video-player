@@ -19,6 +19,7 @@ const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
   posterOptionsPublicId: cloudinaryOptions.posterOptions && hasConfig(cloudinaryOptions.posterOptions.publicId)
 });
 
+  };
 const getSourceOptions = (sourceOptions = {}) => ({
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
