@@ -19,6 +19,19 @@ const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
   posterOptionsPublicId: cloudinaryOptions.posterOptions && hasConfig(cloudinaryOptions.posterOptions.publicId)
 });
 
+const getTranscriptOptions = (textTracks = {}) => {
+  const tracksArr = [textTracks.captions, ...textTracks.subtitles];
+  return {
+    textTracks: hasConfig(textTracks),
+    pacedTextTracks: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"maxWords":') || null,
+    wordHighlight: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"wordHighlight":') || null,
+    transcriptAutoLoaded: tracksArr.some((track) => !track.url) || null,
+    transcriptFromURl: tracksArr.some((track) => track.url?.endsWith('.transcript')) || null,
+    transcriptLanguages: tracksArr.filter((track) =>  !track.url).map((track) => track.language || '').join(',') || null,
+    vttFromUrl: tracksArr.some((track) => track.url?.endsWith('.vtt')) || null
+  };
+};
+
 const getSourceOptions = (sourceOptions = {}) => ({
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
@@ -30,9 +43,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceInfoDescription: sourceOptions.info.description
   } : {}),
   ...(sourceOptions.textTracks ? {
-    textTracks: hasConfig(sourceOptions.textTracks),
-    pacedTextTracks: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"maxWords":'),
-    wordHighlight: hasConfig(sourceOptions.textTracks) && JSON.stringify(sourceOptions.textTracks || {}).includes('"wordHighlight":'),
+    ...(hasConfig(sourceOptions.textTracks) && getTranscriptOptions(sourceOptions.textTracks)),
     ...(sourceOptions.textTracks.options ? {
       styledTextTracksTheme: sourceOptions.textTracks.options.theme,
       styledTextTracksFont: sourceOptions.textTracks.options.fontFace,
