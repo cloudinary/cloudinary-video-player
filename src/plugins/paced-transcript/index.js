@@ -3,16 +3,18 @@ import { getCloudinaryUrl, extendCloudinaryConfig } from 'plugins/cloudinary/com
 function pacedTranscript(config) {
   const player = this;
   const source = player.cloudinary.source();
+  const baseUrl = getCloudinaryUrl(
+    source.publicId(),
+    extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
+  );
 
   const options = {
     kind: config.kind || 'captions',
     label: config.label || 'Captions',
     default: config.default,
     srclang: config.srclang || 'en',
-    src: config.src || getCloudinaryUrl(
-      source.publicId(),
-      extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
-    ) + '.transcript',
+    src: config.src || baseUrl + (config.srclang ? '.' + config.srclang : '') + '.transcript',
+    fallbackSrc: config.src || baseUrl + '.transcript',
     maxWords: config.maxWords,
     wordHighlight: config.wordHighlight,
     timeOffset: config.timeOffset || 0
@@ -23,30 +25,35 @@ function pacedTranscript(config) {
 
   // Load the transcription file
   const initTranscript = async () => {
+    let transcriptResponse;
     try {
-      const transcriptResponse = await fetch(options.src);
-      const transcriptData = await transcriptResponse.json();
-      const captions = parseTranscript(transcriptData);
-
-      const captionsTrack = player.addRemoteTextTrack({
-        kind: options.kind,
-        label: options.label,
-        srclang: options.srclang,
-        default: options.default,
-        mode: options.default ? 'showing' : 'disabled'
-      });
-
-      // required for Safari to display the captions
-      // https://github.com/videojs/video.js/issues/8519
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      captions.forEach(caption => {
-        captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
-      });
-
+      transcriptResponse = await fetch(options.src);
+      if (!transcriptResponse.ok) {
+        throw new Error(`loading transcription from ${options.src} failed, trying fallback URL`);
+      }
     } catch (error) {
-      console.error('Error loading transcription file:', error);
+      console.error(error);
+      transcriptResponse = await fetch(options.fallbackSrc);
     }
+    if (!transcriptResponse.ok) return;
+    const transcriptData = await transcriptResponse.json();
+    const captions = parseTranscript(transcriptData);
+
+    const captionsTrack = player.addRemoteTextTrack({
+      kind: options.kind,
+      label: options.label,
+      srclang: options.srclang,
+      default: options.default,
+      mode: options.default ? 'showing' : 'disabled'
+    });
+
+    // required for Safari to display the captions
+    // https://github.com/videojs/video.js/issues/8519
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    captions.forEach(caption => {
+      captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
+    });
   };
 
   // Generate captions from the transcription data
