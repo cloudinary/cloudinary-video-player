@@ -1,20 +1,29 @@
 import { getCloudinaryUrl, extendCloudinaryConfig } from 'plugins/cloudinary/common';
 
+const fallbackFetch = async (url, fallback) => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed fetching from ${url} with status code ${response.status}`);
+    }
+    return response;
+  } catch (error) {
+    console.error(error);
+    if (fallback) {
+      return fallbackFetch(fallback);
+    }
+  }
+};
+
 function pacedTranscript(config) {
   const player = this;
-  const source = player.cloudinary.source();
-  const baseUrl = getCloudinaryUrl(
-    source.publicId(),
-    extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
-  );
 
   const options = {
     kind: config.kind || 'captions',
     label: config.label || 'Captions',
     default: config.default,
-    srclang: config.srclang || 'en',
-    src: config.src || baseUrl + (config.srclang ? '.' + config.srclang : '') + '.transcript',
-    fallbackSrc: config.src || baseUrl + '.transcript',
+    srclang: config.srclang,
+    src: config.src,
     maxWords: config.maxWords,
     wordHighlight: config.wordHighlight,
     timeOffset: config.timeOffset || 0
@@ -25,15 +34,23 @@ function pacedTranscript(config) {
 
   // Load the transcription file
   const initTranscript = async () => {
+
     let transcriptResponse;
-    try {
-      transcriptResponse = await fetch(options.src);
-      if (!transcriptResponse.ok) {
-        throw new Error(`loading transcription from ${options.src} failed, trying fallback URL`);
+    if (options.src) {
+      // Fetch from src, if explicitly provided
+      transcriptResponse = await fallbackFetch(options.src);
+    } else {
+      // If not, and provided language, try fetching translated transcript, fallback to base transcript
+      const source = player.cloudinary.source();
+      const basePath = getCloudinaryUrl(
+        source.publicId(),
+        extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
+      );
+      if (options.srclang) {
+        transcriptResponse = await fallbackFetch(`${basePath}.${options.srclang}.transcript`, `${basePath}.transcript`);
+      } else {
+        transcriptResponse = await fallbackFetch(`${basePath}.transcript`);
       }
-    } catch (error) {
-      console.error(error);
-      transcriptResponse = await fetch(options.fallbackSrc);
     }
     if (!transcriptResponse.ok) return;
     const transcriptData = await transcriptResponse.json();
