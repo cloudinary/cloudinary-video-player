@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.1...v2.1.2-edge.2) (2024-11-26)
+
+
+### Features
+
+* allow transcript from url ([#737](https://github.com/cloudinary/cloudinary-video-player/issues/737)) ([6cd4bc8](https://github.com/cloudinary/cloudinary-video-player/commit/6cd4bc8c925862220803e2806bdd0d58d39e1604))
+
 ## [2.1.2-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.0...v2.1.2-edge.1) (2024-11-26)
 
 
