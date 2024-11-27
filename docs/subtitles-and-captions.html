@@ -140,7 +140,6 @@
         },
         captions: {
           label: 'English Paced',
-          language: 'en',
           maxWords: 4,
           default: true,
         },
@@ -200,7 +199,6 @@
           },
           captions: {
             label: 'KARAOKE',
-            language: 'en',
             wordHighlight: true,
             maxWords: 5,
             timeOffset: -0.2,
@@ -454,7 +452,6 @@
             },
             captions: {
               label: 'English Paced',
-              language: 'en',
               maxWords: 4,
               default: true
             },
@@ -497,7 +494,6 @@
             },
             captions: {
               label: 'KARAOKE',
-              language: 'en',
               wordHighlight: true,
               maxWords: 5,
               timeOffset: -0.2,
@@ -510,7 +506,7 @@
         const urlTranscriptPlayer = cloudinary.videoPlayer('url-transcript', {
           cloudName: 'demo'
         });
-  
+
         urlTranscriptPlayer.source('elephants', {
           textTracks: {
             captions: {
