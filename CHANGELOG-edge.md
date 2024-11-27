@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.2...v2.1.2-edge.3) (2024-11-27)
+
+
+### Features
+
+* auto-fetch transcripts from language ([#741](https://github.com/cloudinary/cloudinary-video-player/issues/741)) ([ac1fc1d](https://github.com/cloudinary/cloudinary-video-player/commit/ac1fc1d89fbe1890ace818111d05b40e5478e120))
+
 ## [2.1.2-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.1...v2.1.2-edge.2) (2024-11-26)
 
 
