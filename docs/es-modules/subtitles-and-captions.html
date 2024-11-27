@@ -202,13 +202,11 @@
       playlist.playlist(playlistSources, playlistOptions);
 
       // Paced
-      const pacedPlayer = videoPlayer('paced', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+      const pacedPlayer = cloudinary.videoPlayer('paced', {
+        cloudName: 'prod'
       });
 
-      const publicId = 'lincoln';
+      const publicId = 'video/examples/cloudinary-marketing';
 
       const textTracks = {
         options: {
@@ -228,23 +226,10 @@
         },
         captions: {
           label: 'English Paced',
-          language: 'en',
           maxWords: 4,
-          default: true
-        },
-        subtitles: [
-          {
-            label: 'German subtitles',
-            language: 'de',
-            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-          },
-          {
-            label: 'Russian subtitles',
-            language: 'ru',
-            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
-          }
-        ]
-      };
+          default: true,
+        }
+      }
       pacedPlayer.source(publicId, {
         textTracks
       });
@@ -265,13 +250,11 @@
       });
 
       // Karaoke
-      const karaokePlayer = videoPlayer('karaoke', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+      const karaokePlayer = cloudinary.videoPlayer('karaoke', {
+        cloudName: 'prod'
       });
 
-      karaokePlayer.source('lincoln', {
+      karaokePlayer.source('video/examples/cld-imagine_1080p', {
         textTracks: {
           options: {
             fontFace: 'Lobster',
@@ -290,12 +273,47 @@
           },
           captions: {
             label: 'KARAOKE',
-            language: 'en',
             wordHighlight: true,
-            maxWords: 5,
-            timeOffset: -0.2,
+            maxWords: 8,
+            url: 'https://res.cloudinary.com/prod/raw/upload/v1/video/examples/cld-imagine_1080p.transcript',
             default: true
           }
+        }
+      });
+
+      // Auto-translated transcript
+      const translatedTranscriptPlayer = cloudinary.videoPlayer('translated-transcript', {
+        cloudName: 'prod'
+      });
+
+      translatedTranscriptPlayer.source('video/examples/cloudinary-marketing-pm', {
+        textTracks: {
+          captions: {
+            label: "Original",
+            default: true,
+          },
+          subtitles: [
+            {
+              label: "English",
+              language: "en-US",
+            },
+            {
+              label: "Polish",
+              language: "pl-PL",
+            },
+            {
+              label: "Hebrew",
+              language: "he-IL",
+            },
+            {
+              label: "Italian",
+              language: "it-IT",
+            },
+            {
+              label: "Ukrainian",
+              language: "uk-UA",
+            }
+          ]
         }
       });
     </script>
