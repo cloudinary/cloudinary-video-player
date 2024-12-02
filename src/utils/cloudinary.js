@@ -107,6 +107,8 @@ const addTextTracks = (tracks, videojs) => {
           videojs.addRemoteTextTrack(track, true);
         }
       });
+    } else if (track.src && track.src.endsWith('.srt')) {
+      videojs.srtTextTracks(track);
     } else if (videojs.pacedTranscript && (!track.src || track.src.endsWith('.transcript'))) {
       videojs.pacedTranscript(track);
     }
