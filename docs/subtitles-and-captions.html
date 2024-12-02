@@ -34,9 +34,10 @@
       player.source(
         'video/examples/big_buck_bunny_trailer_720p',
         {
+          info: { title: 'SRT & VTT from URL' },
           textTracks: {
             options: {
-              theme: "videojs-default", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+              theme: "videojs-default"
             },
             captions: {
               label: 'VTT from URL',
@@ -349,29 +350,26 @@
 
         // Initialize players
         var player = cloudinary.videoPlayer('player', {
-          cloud_name: 'demo'
+          cloud_name: 'prod'
         });
 
         player.source(
-          'video-player/stubhub',
+          'video/examples/big_buck_bunny_trailer_720p',
           {
+            info: { title: 'SRT & VTT from URL' },
             textTracks: {
+              options: {
+                theme: "videojs-default"
+              },
               captions: {
-                label: 'English captions',
-                language: 'en',
+                label: 'VTT from URL',
                 default: true,
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
+                url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.vtt'
               },
               subtitles: [
                 {
-                  label: 'German subtitles',
-                  language: 'de',
-                  url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-                },
-                {
-                  label: 'Russian subtitles',
-                  language: 'ru',
-                  url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+                  label: 'SRT from URL',
+                  url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.srt'
                 }
               ]
             }
