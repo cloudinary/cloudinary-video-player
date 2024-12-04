@@ -127,8 +127,8 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
       import 'cloudinary-video-player/playlist';
 
-      const player = cloudinary.videoPlayer('player', {
-        cloud_name: 'prod'
+      const player = videoPlayer('player', {
+        cloudName: 'prod'
       });
 
       player.source(
@@ -213,7 +213,7 @@
       playlist.playlist(playlistSources, playlistOptions);
 
       // Paced
-      const pacedPlayer = cloudinary.videoPlayer('paced', {
+      const pacedPlayer = videoPlayer('paced', {
         cloudName: 'prod'
       });
 
@@ -261,7 +261,7 @@
       });
 
       // Karaoke
-      const karaokePlayer = cloudinary.videoPlayer('karaoke', {
+      const karaokePlayer = videoPlayer('karaoke', {
         cloudName: 'prod'
       });
 
@@ -293,7 +293,7 @@
       });
 
       // Auto-translated transcript
-      const translatedTranscriptPlayer = cloudinary.videoPlayer('translated-transcript', {
+      const translatedTranscriptPlayer = videoPlayer('translated-transcript', {
         cloudName: 'prod'
       });
 
