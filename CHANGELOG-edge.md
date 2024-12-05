@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.1.2-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.3...v2.1.2-edge.4) (2024-12-05)
+
+
+### Features
+
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([3461a76](https://github.com/cloudinary/cloudinary-video-player/commit/3461a7675839c91008d15c9b575d9fbeea61c899))
+
+
+### Bug Fixes
+
+* videojs 8 deprecation warning for videojs.bind ([#744](https://github.com/cloudinary/cloudinary-video-player/issues/744)) ([7787c36](https://github.com/cloudinary/cloudinary-video-player/commit/7787c36f5079ba0a819a0a1a715d34192ba17fd0))
+
 ## [2.1.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.2...v2.1.2-edge.3) (2024-11-27)
 
 
