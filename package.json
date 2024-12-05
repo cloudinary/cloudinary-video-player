@@ -18,9 +18,9 @@
   ],
   "exports": {
     ".": {
+      "types": "./types/cld-video-player.d.ts",
       "import": "./lib/cld-video-player.js",
-      "require": "./dist/cld-video-player.js",
-      "types": "./types/cld-video-player.d.ts"
+      "require": "./dist/cld-video-player.js"
     },
     "./*": "./lib/*"
   },
@@ -131,7 +131,7 @@
     "shx": "^0.3.4",
     "terser-webpack-plugin": "^5.3.10",
     "url-loader": "^4.1.1",
-    "webpack": "^5.97.0",
+    "webpack": "^5.93.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-conditional-loader": "^1.0.12",
