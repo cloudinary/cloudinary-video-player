@@ -104,6 +104,17 @@
         width="500"
       ></video>
 
+      <h4 class="mt-4 mb-2">Translated Transcript</h4>
+
+      <video
+        id="translated-transcript"
+        playsinline
+        controls
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        width="500"
+      ></video>
+
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
           >Full documentation</a
@@ -117,31 +128,31 @@
       import 'cloudinary-video-player/playlist';
 
       const player = videoPlayer('player', {
-        cloudName: 'demo'
+        cloudName: 'prod'
       });
 
-      player.source('video-player/stubhub', {
-        textTracks: {
-          captions: {
-            label: 'English captions',
-            language: 'en',
-            default: true,
-            url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
-          },
-          subtitles: [
-            {
-              label: 'German subtitles',
-              language: 'de',
-              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
+      player.source(
+        'video/examples/big_buck_bunny_trailer_720p',
+        {
+          info: { title: 'SRT & VTT from URL' },
+          textTracks: {
+            options: {
+              theme: "videojs-default"
             },
-            {
-              label: 'Russian subtitles',
-              language: 'ru',
-              url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
-            }
-          ]
+            captions: {
+              label: 'VTT from URL',
+              default: true,
+              url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.vtt'
+            },
+            subtitles: [
+              {
+                label: 'SRT from URL',
+                url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.srt'
+              }
+            ]
+          }
         }
-      });
+      );
 
       // Playlist
       const playlist = videoPlayer('playlist', {
@@ -202,7 +213,7 @@
       playlist.playlist(playlistSources, playlistOptions);
 
       // Paced
-      const pacedPlayer = cloudinary.videoPlayer('paced', {
+      const pacedPlayer = videoPlayer('paced', {
         cloudName: 'prod'
       });
 
@@ -250,7 +261,7 @@
       });
 
       // Karaoke
-      const karaokePlayer = cloudinary.videoPlayer('karaoke', {
+      const karaokePlayer = videoPlayer('karaoke', {
         cloudName: 'prod'
       });
 
@@ -282,7 +293,7 @@
       });
 
       // Auto-translated transcript
-      const translatedTranscriptPlayer = cloudinary.videoPlayer('translated-transcript', {
+      const translatedTranscriptPlayer = videoPlayer('translated-transcript', {
         cloudName: 'prod'
       });
 

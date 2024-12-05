@@ -20,6 +20,7 @@ import chapters from './chapters';
 import imaPlugin from './ima';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
+import srtTextTracks from './srt-text-tracks';
 import styledTextTracks from './styled-text-tracks';
 import interactionAreas from './interaction-areas';
 
@@ -40,6 +41,7 @@ const plugins = {
   imaPlugin,
   playlist,
   shoppable,
+  srtTextTracks,
   styledTextTracks,
   interactionAreas
 };

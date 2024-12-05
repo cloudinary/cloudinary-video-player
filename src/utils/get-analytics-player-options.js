@@ -23,12 +23,15 @@ const getTranscriptOptions = (textTracks = {}) => {
   const tracksArr = [textTracks.captions, ...textTracks.subtitles];
   return {
     textTracks: hasConfig(textTracks),
+    textTracksLength: tracksArr.length,
+    textTracksOptions: hasConfig(textTracks.options) || Object.keys(textTracks.options).join(','),
     pacedTextTracks: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"maxWords":') || null,
     wordHighlight: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"wordHighlight":') || null,
+    transcriptLanguages: tracksArr.filter((track) =>  !track.url).map((track) => track.language || '').join(',') || null,
     transcriptAutoLoaded: tracksArr.some((track) => !track.url) || null,
     transcriptFromURl: tracksArr.some((track) => track.url?.endsWith('.transcript')) || null,
-    transcriptLanguages: tracksArr.filter((track) =>  !track.url).map((track) => track.language || '').join(',') || null,
-    vttFromUrl: tracksArr.some((track) => track.url?.endsWith('.vtt')) || null
+    vttFromUrl: tracksArr.some((track) => track.url?.endsWith('.vtt')) || null,
+    srtFromUrl: tracksArr.some((track) => track.url?.endsWith('.srt')) || null
   };
 };
 

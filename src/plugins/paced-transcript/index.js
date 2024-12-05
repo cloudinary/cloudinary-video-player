@@ -52,7 +52,7 @@ function pacedTranscript(config) {
         transcriptResponse = await fallbackFetch(`${basePath}.transcript`);
       }
     }
-    if (!transcriptResponse.ok) return;
+    if (!transcriptResponse?.ok) return;
     const transcriptData = await transcriptResponse.json();
     const captions = parseTranscript(transcriptData);
 
