@@ -1,5 +1,5 @@
-@import '../../assets/styles/mixins/aspect-ratio';
-@import '../../assets/styles/mixins/mixins.scss';
+@use '../../assets/styles/mixins/aspect-ratio';
+@use '../../assets/styles/mixins/mixins.scss';
 
 .vjs-recommendations-overlay {
   display: flex;
@@ -27,7 +27,7 @@
     position: relative;
     width: 85%;
 
-    @include aspect-ratio(16, 9);
+    @include aspect-ratio.aspect-ratio(16, 9);
 
     .aspect-ratio-content {
       display: flex;
@@ -60,7 +60,7 @@
           min-width: 0; // for use with flex and white-space: nowrap
 
           h2 {
-            @include ellipsis;
+            @include mixins.ellipsis;
             padding: 0 0 0 0;
             font-size: 18px;
             margin: 0 0 1em 0;
@@ -68,7 +68,7 @@
           }
 
           h3 {
-            @include ellipsis;
+            @include mixins.ellipsis;
             padding: 0 0 0 0;
             font-size: 20px;
             margin: 0 0 1.3em 0;

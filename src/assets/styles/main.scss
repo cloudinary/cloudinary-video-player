@@ -2,18 +2,19 @@
 $icon-font-path: '../icon-font' !default;
 
 // Video.js overrides
-@import 'variables';
+@use "sass:meta";
+@use 'variables';
 
 // Import Video.js style
 @import '~video.root.js/dist/video-js.min.css';
-@import 'mixins/skin';
-@import 'icons';
-@import 'components/loading-button.scss';
-@import 'components/text-tracks.scss';
+@include meta.load-css('mixins/skin');
+@include meta.load-css('icons');
+@include meta.load-css('components/loading-button.scss');
+@include meta.load-css('components/text-tracks.scss');
 
 .cld-video-player {
   // container-type: inline-size;
-  font-family: $text-font-family;
+  font-family: variables.$text-font-family;
   overflow: hidden;
 
   // The base font size controls the size of everything, not just text.

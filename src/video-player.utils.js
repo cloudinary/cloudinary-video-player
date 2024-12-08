@@ -41,7 +41,7 @@ export const getResolveVideoElement = (elem) => {
 
     try {
       elem = document.querySelector(`#${cssEscape(id)}`) || videojs.getPlayer(id);
-    } catch (e) {
+    } catch (err) { // eslint-disable-line no-unused-vars
       elem = null;
     }
 

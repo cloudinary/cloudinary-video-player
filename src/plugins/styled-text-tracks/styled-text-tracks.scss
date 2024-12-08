@@ -1,3 +1,4 @@
+@use "sass:color";
 .cld-video-player {
 
   // Gravity (position + alignment)
@@ -42,12 +43,12 @@
   &:has(.cld-styled-text-tracks-theme-3d) ::cue {
     $base-size: 0.03em;
     $base-color: #ff76ad;
-    color: lighten($base-color, 40%) !important;
+    color: color.adjust($base-color, $lightness: 40%) !important;
     text-shadow:
-      #{1*$base-size} #{1*$base-size} 0 darken($base-color, 10%),
-      #{2*$base-size} #{2*$base-size} 0 darken($base-color, 20%),
-      #{3*$base-size} #{3*$base-size} 0 darken($base-color, 30%),
-      #{4*$base-size} #{4*$base-size} 0 darken($base-color, 40%);
+      #{1*$base-size} #{1*$base-size} 0 color.adjust($base-color, $lightness: -10%),
+      #{2*$base-size} #{2*$base-size} 0 color.adjust($base-color, $lightness: -20%),
+      #{3*$base-size} #{3*$base-size} 0 color.adjust($base-color, $lightness: -30%),
+      #{4*$base-size} #{4*$base-size} 0 color.adjust($base-color, $lightness: -40%);
   }
 
   div.vjs-text-track-display.cld-styled-text-tracks-theme-player-colors div.vjs-text-track-cue > div,

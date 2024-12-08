@@ -125,8 +125,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ...internalAnalyticsMetadata,
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
-    } catch (e) {
-      // consider reporting this failure
+    } catch (err) {
+      console.warn(err);
     }
   }
 
