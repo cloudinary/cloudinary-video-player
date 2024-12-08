@@ -27,10 +27,6 @@ function srtTextTracks(config, player) {
       mode: config.default ? 'showing' : 'disabled'
     });
 
-    // required for Safari to display the captions
-    // https://github.com/videojs/video.js/issues/8519
-    await new Promise(resolve => setTimeout(resolve, 100));
-
     // Add the WebVTT data to the track
     webvttCues.forEach(cue => {
       if (cue) {
@@ -47,7 +43,7 @@ function srtTextTracks(config, player) {
 // SRT parser
 const srt2webvtt = data => {
   const SRTParser = new srtParser2();
-  
+
   const cues = SRTParser.fromSrt(data);
 
   return cues.map(cue => ({
