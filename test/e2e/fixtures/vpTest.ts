@@ -21,20 +21,10 @@ export const vpTest = test.extend<FixtureParams>({
     pomPages: [
         async ({ page }, use) => {
             const pomPages = new PageManager(page);
+            await pomPages.mainPage.goto();
             await use(pomPages);
         },
-        { scope: 'test' },
-    ],
-    /**
-     * Fixture for the video player examples page object.
-     */
-    vpExamples: [
-        async ({ page }, use) => {
-            const vpExamplePage = new MainPage(page);
-            await vpExamplePage.goto();
-            await use(vpExamplePage);
-        },
-        { auto: true },
+        { scope: 'test', auto: true },
     ],
 
     /**
