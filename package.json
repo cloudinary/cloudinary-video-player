@@ -84,7 +84,7 @@
     "lodash": "^4.17.21",
     "srt-parser-2": "^1.2.3",
     "uuid": "^11.0.3",
-    "video.js": "^8.20.0",
+    "video.js": "^8.21.0",
     "videojs-contrib-ads": "^7.5.2",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-ima": "^2.3.0",
