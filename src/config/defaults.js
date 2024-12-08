@@ -29,6 +29,6 @@ export default {
   allowUsageReport: true,
   playedEventPercents: [25, 50, 75, 100],
   html5: {
-    nativeTextTracks: !videojs?.browser?.IS_SAFARI
+    nativeTextTracks: false
   }
 };
