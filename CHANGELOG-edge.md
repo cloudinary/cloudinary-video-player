@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.2-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.4...v2.1.2-edge.5) (2024-12-08)
+
+
+### Bug Fixes
+
+* programatic text-tracks in Safari ([#747](https://github.com/cloudinary/cloudinary-video-player/issues/747)) ([f549240](https://github.com/cloudinary/cloudinary-video-player/commit/f54924008f98e154ff228b927ee4da52035ed11c))
+
 ## [2.1.2-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.3...v2.1.2-edge.4) (2024-12-05)
 
 

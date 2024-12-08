@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "2.1.2-edge.4",
+  "version": "2.1.2-edge.5",
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
@@ -61,7 +61,7 @@
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
-        "maxSize": "131kb"
+        "maxSize": "135kb"
       },
       {
         "path": "./lib/cld-video-player.js",
