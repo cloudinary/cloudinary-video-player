@@ -29,14 +29,6 @@ export const vpTest = test.extend<FixtureParams>({
     /**
      * Fixture for the video player examples page object.
      */
-    /*  vpExamples: [
-        async ({ page }, use) => {
-            const vpExamplePage = new MainPage(page);
-            await vpExamplePage.goto();
-            await use(vpExamplePage);
-        },
-        { auto: true },
-    ],*/
 
     /**
      * Fixture for capturing console errors.
