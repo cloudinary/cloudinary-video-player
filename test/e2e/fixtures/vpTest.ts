@@ -26,9 +26,6 @@ export const vpTest = test.extend<FixtureParams>({
         },
         { scope: 'test', auto: true },
     ],
-    /**
-     * Fixture for the video player examples page object.
-     */
 
     /**
      * Fixture for capturing console errors.
