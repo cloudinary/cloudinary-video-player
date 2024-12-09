@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 import { HighlightsGraphPage } from './highlightsGraphPage';
 import { BasePage } from './BasePage';
+import { MainPage } from './mainPage';
 
 /**
  * Page manager,
@@ -24,6 +25,13 @@ export class PageManager {
             this.pageMap.set(pageName, new page(this.page));
         }
         return this.pageMap.get(pageName) as T;
+    }
+
+    /**
+     * Returns main page object
+     */
+    public get mainPage(): MainPage {
+        return this.getPage(MainPage);
     }
 
     /**
