@@ -1,7 +1,7 @@
 # Changelog
 
 
-## [2.2.0-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.5...v2.2.0-edge.5) (2024-12-09)
+## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
 
 
 ### Features
