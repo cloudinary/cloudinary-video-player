@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0-edge.5...v2.2.1-edge.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746)) ([1ac07ea](https://github.com/cloudinary/cloudinary-video-player/commit/1ac07eaecb92c3bacb9bafb68d90c983156ff314))
+
 ## [2.1.2-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.4...v2.1.2-edge.5) (2024-12-08)
 
 
