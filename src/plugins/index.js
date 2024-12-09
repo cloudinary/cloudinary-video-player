@@ -19,10 +19,10 @@ import vttThumbnails from './vtt-thumbnails';
 // Lazy loaded plugins
 import chapters from './chapters';
 import imaPlugin from './ima';
+import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
 import styledTextTracks from './styled-text-tracks';
-import interactionAreas from './interaction-areas';
 
 const plugins = {
   aiHighlightsGraph,
