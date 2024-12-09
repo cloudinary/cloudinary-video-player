@@ -1,6 +1,23 @@
 # Changelog
 
 
+## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
+
+
+### Features
+
+* allow fetching transcript from url ([#737](https://github.com/cloudinary/cloudinary-video-player/issues/737)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* auto-fetch transcripts from language ([#741](https://github.com/cloudinary/cloudinary-video-player/issues/741)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([4b69cc0](https://github.com/cloudinary/cloudinary-video-player/commit/4b69cc072becbcc1ee9de0200997846dad8e82ca))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([a0a2598](https://github.com/cloudinary/cloudinary-video-player/commit/a0a2598b81c12621663c18c73aa18acc7ae93e0e))
+
+
+### Bug Fixes
+
+* programatic text-tracks in Safari ([#747](https://github.com/cloudinary/cloudinary-video-player/issues/747)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* videojs 8 deprecation warning for videojs.bind ([#744](https://github.com/cloudinary/cloudinary-video-player/issues/744)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+
 ## [2.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.0...v2.1.1) (2024-11-05)
 
 ### Features
