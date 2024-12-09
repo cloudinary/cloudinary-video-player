@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { HighlightsGraphPage } from './highlightsGraphPage';
 import { BasePage } from './BasePage';
 import { MainPage } from './mainPage';
+import { AnalyticsPage } from './analyticsPage';
 
 /**
  * Page manager,
@@ -39,6 +40,13 @@ export class PageManager {
      */
     public get highlightGraphPage(): HighlightsGraphPage {
         return this.getPage(HighlightsGraphPage);
+    }
+
+    /**
+     * Returns Analytics page object
+     */
+    public get analyticsPage(): AnalyticsPage {
+        return this.getPage(AnalyticsPage);
     }
 }
 export default PageManager;
