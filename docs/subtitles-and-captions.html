@@ -28,29 +28,26 @@
     window.addEventListener('load', function(){
 
       var player = cloudinary.videoPlayer('player', {
-        cloud_name: 'demo'
+        cloud_name: 'prod'
       });
 
       player.source(
-        'video-player/stubhub',
+        'video/examples/big_buck_bunny_trailer_720p',
         {
+          info: { title: 'SRT & VTT from URL' },
           textTracks: {
+            options: {
+              theme: "videojs-default"
+            },
             captions: {
-              label: 'English captions',
-              language: 'en',
+              label: 'VTT from URL',
               default: true,
-              url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
+              url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.vtt'
             },
             subtitles: [
               {
-                label: 'German subtitles',
-                language: 'de',
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-              },
-              {
-                label: 'Russian subtitles',
-                language: 'ru',
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+                label: 'SRT from URL',
+                url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.srt'
               }
             ]
           }
@@ -117,12 +114,10 @@
 
       // Paced
       const pacedPlayer = cloudinary.videoPlayer('paced', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+        cloudName: 'prod'
       });
 
-      const publicId = 'lincoln';
+      const publicId = 'video/examples/cloudinary-marketing';
 
       const textTracks = {
         options: {
@@ -142,22 +137,9 @@
         },
         captions: {
           label: 'English Paced',
-          language: 'en',
           maxWords: 4,
           default: true,
-        },
-        subtitles: [
-          {
-            label: 'German subtitles',
-            language: 'de',
-            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-          },
-          {
-            label: 'Russian subtitles',
-            language: 'ru',
-            url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
-          }
-        ]
+        }
       }
       pacedPlayer.source(publicId, {
         textTracks
@@ -180,12 +162,10 @@
 
       // Karaoke
       const karaokePlayer = cloudinary.videoPlayer('karaoke', {
-        cloudName: 'demo',
-        autoplay: true,
-        muted: true
+        cloudName: 'prod'
       });
 
-      karaokePlayer.source('lincoln', {
+      karaokePlayer.source('video/examples/cld-imagine_1080p', {
         textTracks: {
           options: {
             fontFace: 'Lobster',
@@ -204,12 +184,47 @@
           },
           captions: {
             label: 'KARAOKE',
-            language: 'en',
             wordHighlight: true,
-            maxWords: 5,
-            timeOffset: -0.2,
+            maxWords: 8,
+            url: 'https://res.cloudinary.com/prod/raw/upload/v1/video/examples/cld-imagine_1080p.transcript',
             default: true
           }
+        }
+      });
+
+      // Auto-translated transcript
+      const translatedTranscriptPlayer = cloudinary.videoPlayer('translated-transcript', {
+        cloudName: 'prod'
+      });
+
+      translatedTranscriptPlayer.source('video/examples/cloudinary-marketing-pm', {
+        textTracks: {
+          captions: {
+            label: "Original",
+            default: true,
+          },
+          subtitles: [
+            {
+              label: "English",
+              language: "en-US",
+            },
+            {
+              label: "Polish",
+              language: "pl-PL",
+            },
+            {
+              label: "Hebrew",
+              language: "he-IL",
+            },
+            {
+              label: "Italian",
+              language: "it-IT",
+            },
+            {
+              label: "Ukrainian",
+              language: "uk-UA",
+            }
+          ]
         }
       });
     }, false);
@@ -227,8 +242,6 @@
       id="player"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -240,7 +253,6 @@
       id="playlist"
       playsinline
       controls
-      muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -290,19 +302,28 @@
       id="paced"
       playsinline
       controls
-      muted
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
     ></video>
 
-    <h4 class="mt-4 mb-2">Karaoke player</h4>
+    <h4 class="mt-4 mb-2">Karaoke player (transcript URL)</h4>
 
     <video
       id="karaoke"
       playsinline
       controls
-      muted
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Translated Transcript</h4>
+
+    <video
+      id="translated-transcript"
+      playsinline
+      controls
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
@@ -318,67 +339,37 @@
         &lt;video
           id="player"
           controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
-
-        &lt;video
-          id="playlist"
-          controls
-          muted
           class="cld-video-player"
           crossorigin="anonymous"
           width="500"&gt;
         &lt;/video&gt;
 
-        &lt;video
-          id="paced"
-          controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
-
-        &lt;video
-          id="karaoke"
-          controls
-          muted
-          autoplay
-          class="cld-video-player"
-          crossorigin="anonymous"
-          width="500">
-        &lt;/video&gt;
+        &lt;!-- ... a few more &lt;video&gt; tags --&gt;
       </code>
       <code class="language-javascript">
 
-        // Initialize player
-        var player = cloudinary.videoPlayer('player', { cloud_name: 'demo' });
+        // Initialize players
+        var player = cloudinary.videoPlayer('player', {
+          cloud_name: 'prod'
+        });
 
         player.source(
-          'video-player/stubhub',
+          'video/examples/big_buck_bunny_trailer_720p',
           {
+            info: { title: 'SRT & VTT from URL' },
             textTracks: {
+              options: {
+                theme: "videojs-default"
+              },
               captions: {
-                label: 'English captions',
-                language: 'en',
+                label: 'VTT from URL',
                 default: true,
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt'
+                url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.vtt'
               },
               subtitles: [
                 {
-                  label: 'German subtitles',
-                  language: 'de',
-                  url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-                },
-                {
-                  label: 'Russian subtitles',
-                  language: 'ru',
-                  url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
+                  label: 'SRT from URL',
+                  url: 'https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.srt'
                 }
               ]
             }
@@ -386,7 +377,9 @@
         );
 
         // Playlist
-        var playlist = cloudinary.videoPlayer('playlist', { cloud_name: 'demo' });
+        var playlist = cloudinary.videoPlayer('playlist', {
+          cloud_name: 'demo'
+        });
 
         var source1 = {
           publicId: 'video-player/stubhub',
@@ -443,57 +436,43 @@
 
         // Paced
         const pacedPlayer = cloudinary.videoPlayer('paced', {
-          cloudName: 'demo',
-          autoplay: true,
-          muted: true
+          cloudName: 'prod'
         });
 
-        pacedPlayer.source('lincoln', {
-          textTracks: {
-            options: {
-              // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
-              // fontFace: "", // any Google font
-              // fontSize: "", // any CSS value
-              // gravity: "", // i.e. 'top-left', 'center' etc
-              // box: { // Object of x/y/width/height
-              //   x: "0%",
-              //   y: "0%",
-              //   width: "100%",
-              //   height: "100%"
-              // },
-              // style: { // Styles key-value object
-              //   color: "hotpink"
-              // }
-            },
-            captions: {
-              label: 'English Paced',
-              language: 'en',
-              maxWords: 4,
-              default: true
-            },
-            subtitles: [
-              {
-                label: 'German subtitles',
-                language: 'de',
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt'
-              },
-              {
-                label: 'Russian subtitles',
-                language: 'ru',
-                url: 'https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt'
-              }
-            ]
+        const publicId = 'video/examples/cloudinary-marketing';
+
+        const textTracks = {
+          options: {
+            // theme: "", // one of 'default', 'videojs-default', 'yellow-outlined', 'player-colors' & '3d'
+            // fontFace: "", // any Google font
+            // fontSize: "", // any CSS value
+            // gravity: "", // i.e. 'top-left', 'center' etc
+            // box: { // Object of x/y/width/height
+            //   x: "0%",
+            //   y: "0%",
+            //   width: "100%",
+            //   height: "100%"
+            // },
+            // style: { // Styles key-value object
+            //   color: "hotpink"
+            // }
+          },
+          captions: {
+            label: 'English Paced',
+            maxWords: 4,
+            default: true,
           }
+        }
+        pacedPlayer.source(publicId, {
+          textTracks
         });
 
         // Karaoke
         const karaokePlayer = cloudinary.videoPlayer('karaoke', {
-          cloudName: 'demo',
-          autoplay: true,
-          muted: true
+          cloudName: 'prod'
         });
 
-        karaokePlayer.source('lincoln', {
+        karaokePlayer.source('video/examples/cld-imagine_1080p', {
           textTracks: {
             options: {
               fontFace: 'Lobster',
@@ -512,14 +491,50 @@
             },
             captions: {
               label: 'KARAOKE',
-              language: 'en',
               wordHighlight: true,
-              maxWords: 5,
-              timeOffset: -0.2,
+              maxWords: 8,
+              url: 'https://res.cloudinary.com/prod/raw/upload/v1/video/examples/cld-imagine_1080p.transcript',
               default: true
             }
           }
         });
+
+        // Auto-translated transcript
+        const translatedTranscriptPlayer = cloudinary.videoPlayer('translated-transcript', {
+          cloudName: 'prod'
+        });
+
+        translatedTranscriptPlayer.source('video/examples/cloudinary-marketing-pm', {
+          textTracks: {
+            captions: {
+              label: "Original",
+              default: true,
+            },
+            subtitles: [
+              {
+                label: "English",
+                language: "en-US",
+              },
+              {
+                label: "Polish",
+                language: "pl-PL",
+              },
+              {
+                label: "Hebrew",
+                language: "he-IL",
+              },
+              {
+                label: "Italian",
+                language: "it-IT",
+              },
+              {
+                label: "Ukrainian",
+                language: "uk-UA",
+              }
+            ]
+          }
+        });
+
 
       </code>
     </pre>

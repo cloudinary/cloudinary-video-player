@@ -1,5 +1,52 @@
 # Changelog
 
+## [2.1.2-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.4...v2.1.2-edge.5) (2024-12-08)
+
+
+### Bug Fixes
+
+* programatic text-tracks in Safari ([#747](https://github.com/cloudinary/cloudinary-video-player/issues/747)) ([f549240](https://github.com/cloudinary/cloudinary-video-player/commit/f54924008f98e154ff228b927ee4da52035ed11c))
+
+## [2.1.2-edge.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.3...v2.1.2-edge.4) (2024-12-05)
+
+
+### Features
+
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([3461a76](https://github.com/cloudinary/cloudinary-video-player/commit/3461a7675839c91008d15c9b575d9fbeea61c899))
+
+
+### Bug Fixes
+
+* videojs 8 deprecation warning for videojs.bind ([#744](https://github.com/cloudinary/cloudinary-video-player/issues/744)) ([7787c36](https://github.com/cloudinary/cloudinary-video-player/commit/7787c36f5079ba0a819a0a1a715d34192ba17fd0))
+
+## [2.1.2-edge.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.2...v2.1.2-edge.3) (2024-11-27)
+
+
+### Features
+
+* auto-fetch transcripts from language ([#741](https://github.com/cloudinary/cloudinary-video-player/issues/741)) ([ac1fc1d](https://github.com/cloudinary/cloudinary-video-player/commit/ac1fc1d89fbe1890ace818111d05b40e5478e120))
+
+## [2.1.2-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.1...v2.1.2-edge.2) (2024-11-26)
+
+
+### Features
+
+* allow transcript from url ([#737](https://github.com/cloudinary/cloudinary-video-player/issues/737)) ([6cd4bc8](https://github.com/cloudinary/cloudinary-video-player/commit/6cd4bc8c925862220803e2806bdd0d58d39e1604))
+
+## [2.1.2-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.0...v2.1.2-edge.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* source analytics ([#738](https://github.com/cloudinary/cloudinary-video-player/issues/738)) ([6c6f126](https://github.com/cloudinary/cloudinary-video-player/commit/6c6f12682d09a55bdfc86742854fd08df35111a2))
+
+## [2.1.2-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.2...v2.1.2-edge.0) (2024-11-07)
+
+
+### Bug Fixes
+
+* one event for internal analytics ([#728](https://github.com/cloudinary/cloudinary-video-player/issues/728)) ([7552998](https://github.com/cloudinary/cloudinary-video-player/commit/7552998726656d83ba228460b4dc687ae9d0c94d))
+
 ## [2.1.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.1-edge.1...v2.1.1-edge.2) (2024-10-27)
 
 

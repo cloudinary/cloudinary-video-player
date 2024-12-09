@@ -1,5 +1,6 @@
 import { ConsoleMessage, test } from '@playwright/test';
 import { MainPage } from '../src/pom/mainPage';
+import PageManager from '../src/pom/PageManager';
 
 /**
  * Fixture parameters.
@@ -7,6 +8,7 @@ import { MainPage } from '../src/pom/mainPage';
 type FixtureParams = {
     consoleErrors: ConsoleMessage[];
     vpExamples: MainPage;
+    pomPages: PageManager;
 };
 
 /**
@@ -14,15 +16,15 @@ type FixtureParams = {
  */
 export const vpTest = test.extend<FixtureParams>({
     /**
-     * Fixture for the video player examples page object.
+     * Page Manager
      */
-    vpExamples: [
+    pomPages: [
         async ({ page }, use) => {
-            const vpExamplePage = new MainPage(page);
-            await vpExamplePage.goto();
-            await use(vpExamplePage);
+            const pomPages = new PageManager(page);
+            await pomPages.mainPage.goto();
+            await use(pomPages);
         },
-        { auto: true },
+        { scope: 'test', auto: true },
     ],
 
     /**
