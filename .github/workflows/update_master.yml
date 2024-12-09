@@ -24,13 +24,12 @@ jobs:
             Please approve and squash-merge it.
             
             ### IMPORTANT:
-            Before merging, make sure all the changes are listed in the squash-commit footer.
-            Format must be plain conventional-commit, one per line.
-            No `*` bullets and no `----` comments are allowed.
-            Commit footer format for release-please changelog ([docs](https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features)):
+            Before merging, make sure:
+            1. Commit message is a conventional-commit with `fix:` or `feat:`, otherwise no version bump will be triggered.
+            2. All the changes are listed in the squash-commit footer.
+               Format must be plain conventional-commit, one per line.
+               No `*` bullets and no `----` comments are allowed ([docs](https://github.com/googleapis/release-please/tree/main?tab=readme-ov-file#what-if-my-pr-contains-multiple-fixes-or-features)):
             ```
             fix: av1 support (#557)
-            fix: types definitions (#565)
             feat: kareoke style subtitles (#563)
-            fix: allowUsageReport (#569)
             ```
