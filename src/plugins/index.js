@@ -13,6 +13,7 @@ import colors from './colors';
 import contextMenu from './context-menu';
 import floatingPlayer from './floating-player';
 import pacedTranscript from './paced-transcript';
+import srtTextTracks from './srt-text-tracks';
 import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
@@ -20,7 +21,6 @@ import chapters from './chapters';
 import imaPlugin from './ima';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
-import srtTextTracks from './srt-text-tracks';
 import styledTextTracks from './styled-text-tracks';
 import interactionAreas from './interaction-areas';
 
