@@ -3,6 +3,7 @@ import { HighlightsGraphPage } from './highlightsGraphPage';
 import { BasePage } from './BasePage';
 import { MainPage } from './mainPage';
 import { AnalyticsPage } from './analyticsPage';
+import { ApiAndEventsPage } from './apiAndEventsPage';
 
 /**
  * Page manager,
@@ -47,6 +48,13 @@ export class PageManager {
      */
     public get analyticsPage(): AnalyticsPage {
         return this.getPage(AnalyticsPage);
+    }
+
+    /**
+     * Returns API and Events page object
+     */
+    public get apiAndEventsPage(): ApiAndEventsPage {
+        return this.getPage(ApiAndEventsPage);
     }
 }
 export default PageManager;
