@@ -15,6 +15,6 @@ vpTest(`Test if video on analytics page is playing as expected`, async ({ page, 
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that the video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.analyticsPage.videoAnalyticsPage.isPaused()).toEqual(false);
+        expect(await pomPages.analyticsPage.analyticsVideoComponent.isPaused()).toEqual(false);
     });
 });
