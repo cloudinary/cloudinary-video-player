@@ -4,6 +4,7 @@ import { BasePage } from './BasePage';
 import { MainPage } from './mainPage';
 import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
+import { AudioPlayerPage } from './audioPlayerPage';
 
 /**
  * Page manager,
@@ -55,6 +56,13 @@ export class PageManager {
      */
     public get apiAndEventsPage(): ApiAndEventsPage {
         return this.getPage(ApiAndEventsPage);
+    }
+
+    /**
+     * Returns audio player page object
+     */
+    public get audioPlayerPage(): AudioPlayerPage {
+        return this.getPage(AudioPlayerPage);
     }
 }
 export default PageManager;
