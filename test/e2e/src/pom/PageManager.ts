@@ -5,6 +5,7 @@ import { MainPage } from './mainPage';
 import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
 import { AudioPlayerPage } from './audioPlayerPage';
+import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
 
 /**
  * Page manager,
@@ -63,6 +64,13 @@ export class PageManager {
      */
     public get audioPlayerPage(): AudioPlayerPage {
         return this.getPage(AudioPlayerPage);
+    }
+
+    /**
+     * Returns autoplay on scroll page object
+     */
+    public get autoplayOnScrollPage(): AutoplayOnScrollPage {
+        return this.getPage(AutoplayOnScrollPage);
     }
 }
 export default PageManager;
