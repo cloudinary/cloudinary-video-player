@@ -15,15 +15,15 @@ vpTest(`Test if 2 videos on audio player page are playing as expected`, async ({
     await waitForPageToLoadWithTimeout(page, 5000);
   });
   await test.step('Click on play button of first video player to play video', async () => {
-    return pomPages.audioPlayerPage.audioPlayerFirstVideoComponent.clickPlay();
+    return pomPages.audioPlayerPage.audioPlayerVideoComponent.clickPlay();
   });
   await test.step('Validating that the first video is playing (in case isPause is false)', async () => {
-    expect(await pomPages.audioPlayerPage.audioPlayerFirstVideoComponent.isPaused()).toEqual(false);
+    expect(await pomPages.audioPlayerPage.audioPlayerVideoComponent.isPaused()).toEqual(false);
   });
   await test.step('Click on play button of second video player to play video', async () => {
-    return pomPages.audioPlayerPage.audioPlayerSecondVideoComponent.clickPlay();
+    return pomPages.audioPlayerPage.audioPlayerWithTransformationVideoComponent.clickPlay();
   });
   await test.step('Validating that the second video is playing (in case isPause is false)', async () => {
-    expect(await pomPages.audioPlayerPage.audioPlayerSecondVideoComponent.isPaused()).toEqual(false);
+    expect(await pomPages.audioPlayerPage.audioPlayerWithTransformationVideoComponent.isPaused()).toEqual(false);
   });
 });
