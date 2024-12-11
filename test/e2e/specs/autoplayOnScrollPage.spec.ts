@@ -23,6 +23,8 @@ vpTest(`Test if video on autoplay on scroll page is playing as expected`, async 
     await pomPages.autoplayOnScrollPage.scrollToVideoElement();
   });
   await test.step('Validating that the video is auto playing after scrolling (in case isPause is false)', async () => {
-    expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(false);
-  });
+    await expect(async () => {
+      expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(false);
+    }).toPass({ intervals: [2], timeout: 1000 });
+  })
 });

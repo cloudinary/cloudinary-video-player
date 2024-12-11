@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { VideoComponent } from '../../components/videoComponent';
 import { BasePage } from './BasePage';
 const AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR = '//*[@id="player_html5_api"]';
@@ -13,14 +13,12 @@ export class AutoplayOnScrollPage extends BasePage {
     super(page);
     this.autoplayOnScrollVideoComponent = new VideoComponent(page, AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR);
   }
+
   /**
    * Scrolls the page until the video element is visible using scrollIntoViewIfNeeded method.
    * This action ensures the autoplay behavior is triggered when the video comes into view.
-   * It waits briefly after scrolling to give the video enough time to load and trigger autoplay.
    */
   async scrollToVideoElement() {
-    await this.page.locator(AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR).scrollIntoViewIfNeeded();
-    // Wait briefly to give time for the autoplay to apply
-    await this.page.waitForTimeout(1000);
+      await this.page.locator(AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR).scrollIntoViewIfNeeded();
   }
 }
