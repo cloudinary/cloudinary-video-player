@@ -13,12 +13,4 @@ export class AutoplayOnScrollPage extends BasePage {
     super(page);
     this.autoplayOnScrollVideoComponent = new VideoComponent(page, AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR);
   }
-
-  /**
-   * Scrolls the page until the video element is visible using scrollIntoViewIfNeeded method.
-   * This action ensures the autoplay behavior is triggered when the video comes into view.
-   */
-  async scrollToVideoElement() {
-      await this.page.locator(AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR).scrollIntoViewIfNeeded();
-  }
 }
