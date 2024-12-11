@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { VideoComponent } from '../../components/videoComponent';
 import { BasePage } from './BasePage';
 const AUTOPLAY_ON_SCROLL_PAGE_VIDEO_SELECTOR = '//*[@id="player_html5_api"]';
