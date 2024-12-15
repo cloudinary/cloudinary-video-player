@@ -4,8 +4,7 @@ import { BaseComponent } from './BaseComponent';
 /**
  * Video component
  */
-export class VideoComponent extends BaseComponent{
-
+export class VideoComponent extends BaseComponent {
     constructor(page: Page, videoSelector: string) {
         super({ page, selector: videoSelector });
     }

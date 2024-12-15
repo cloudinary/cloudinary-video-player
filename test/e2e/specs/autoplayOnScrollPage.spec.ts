@@ -12,19 +12,19 @@ const link = getLinkByName(ExampleLinkName.AutoplayOnScroll);
  * Then, scroll until video element is visible and make sure video is playing by checking that is pause return false.
  */
 vpTest(`Test if video on autoplay on scroll page is playing as expected`, async ({ page, pomPages }) => {
-  await test.step('Navigate to autoplay on scroll page by clicking on link', async () => {
-    await pomPages.mainPage.clickLinkByName(link.name);
-    await waitForPageToLoadWithTimeout(page, 5000);
-  });
-  await test.step('Validating that the video is not playing before scrolling (in case isPause is true)', async () => {
-    expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(true);
-  });
-  await test.step('Scroll until the video element is visible', async () => {
-    await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.locator.scrollIntoViewIfNeeded();
-  });
-  await test.step('Validating that the video is auto playing after scrolling (in case isPause is false)', async () => {
-    await expect(async () => {
-      expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(false);
-    }).toPass({ intervals: [500], timeout: 3000 });
-  })
+    await test.step('Navigate to autoplay on scroll page by clicking on link', async () => {
+        await pomPages.mainPage.clickLinkByName(link.name);
+        await waitForPageToLoadWithTimeout(page, 5000);
+    });
+    await test.step('Validating that the video is not playing before scrolling (in case isPause is true)', async () => {
+        expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(true);
+    });
+    await test.step('Scroll until the video element is visible', async () => {
+        await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.locator.scrollIntoViewIfNeeded();
+    });
+    await test.step('Validating that the video is auto playing after scrolling (in case isPause is false)', async () => {
+        await expect(async () => {
+            expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(false);
+        }).toPass({ intervals: [500], timeout: 3000 });
+    });
 });
