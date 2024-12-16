@@ -20,9 +20,14 @@
     ".": {
       "types": "./types/cld-video-player.d.ts",
       "import": "./lib/cld-video-player.js",
-      "require": "./dist/cld-video-player.js"
+      "require": "./dist/cld-video-player.min.js"
     },
-    "./*": "./lib/*"
+    "./*": "./lib/*",
+    "./light": {
+      "import": "./lib/light/index.js",
+      "require": "./dist/cld-video-player.light.min.js"
+    },
+    "./light/*": "./lib/light/*"
   },
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
@@ -34,7 +39,8 @@
     "build-es": "WEBPACK_BUILD_MIN=1 webpack --config webpack/es6.config.js --progress --color",
     "build-light": "WEBPACK_BUILD_LIGHT=1 WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
     "build-light-dev": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/build.config.js --progress --color --mode=development",
-    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light && npm run build-light-dev && npm run build-es",
+    "build-light-es": "WEBPACK_BUILD_LIGHT=1 WEBPACK_BUILD_MIN=1 webpack --config webpack/es-light.config.js --progress --color",
+    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light && npm run build-light-dev && npm run build-light-es && npm run build-es",
     "analyze": "webpack --config webpack/analyzer.config.js",
     "analyze:light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/analyzer.config.js",
     "postbuild-all": "bundlewatch",
@@ -74,6 +80,10 @@
       {
         "path": "./lib/all.js",
         "maxSize": "288kb"
+      },
+      {
+        "path": "./lib/light/index.js",
+        "maxSize": "135kb"
       }
     ]
   },
