@@ -39,6 +39,6 @@ export enum ExampleLinkName {
     VR360Videos = 'VR/360 Videos',
     EmbeddedIframePlayer = 'Embedded (iframe) player',
     ESMImports = 'ESM Imports',
-    AllBuild = 'All Build',
-    LightBuild = 'Light Build',
+    AllBuild = '/all Build',
+    LightBuild = '/light Build',
 }
