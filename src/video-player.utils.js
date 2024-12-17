@@ -128,11 +128,4 @@ export const overrideDefaultVideojsComponents = () => {
     children.splice(children.indexOf('skipForward'), 1);
     children.splice(children.indexOf('skipBackward'), 1);
   }
-
-  const SeekBar = videojs.getComponent('SeekBar');
-  if (SeekBar && !SeekBar.prototype.options_.children.includes('mouseTimeDisplay')) {
-    // videojs isn't adding th timeDisplay on mobile, we want it for the chapters display
-    SeekBar.prototype.options_.children.splice(1, 0, 'mouseTimeDisplay');
-  }
-
 };
