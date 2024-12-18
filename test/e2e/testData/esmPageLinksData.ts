@@ -37,6 +37,8 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.UIConfig, endpoint: 'ui-config' },
     { name: ExampleLinkName.VASTAndVPAIDSupport, endpoint: 'vast-vpaid' },
     { name: ExampleLinkName.VR360Videos, endpoint: '360' },
+    { name: ExampleLinkName.AllBuild, endpoint: 'all' },
+    { name: ExampleLinkName.LightBuild, endpoint: 'light' },
 ];
 
 /**

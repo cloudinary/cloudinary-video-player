@@ -28,7 +28,6 @@ module.exports = merge(webpackCommon, {
   ],
 
   devServer: {
-    host: env.devServer.host || 'localhost',
     port: env.devServer.port || 3000,
     open: [isLight ? 'index.html?light=true' : 'index.html'],
     headers: {

@@ -20,11 +20,11 @@ const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
 });
 
 const getTranscriptOptions = (textTracks = {}) => {
-  const tracksArr = [textTracks.captions, ...textTracks.subtitles];
+  const tracksArr = [textTracks.captions, ...(textTracks.subtitles || [])];
   return {
     textTracks: hasConfig(textTracks),
     textTracksLength: tracksArr.length,
-    textTracksOptions: hasConfig(textTracks.options) || Object.keys(textTracks.options).join(','),
+    textTracksOptions: hasConfig(textTracks.options) && Object.keys(textTracks.options).join(','),
     pacedTextTracks: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"maxWords":') || null,
     wordHighlight: hasConfig(textTracks) && JSON.stringify(textTracks || {}).includes('"wordHighlight":') || null,
     transcriptLanguages: tracksArr.filter((track) =>  !track.url).map((track) => track.language || '').join(',') || null,
