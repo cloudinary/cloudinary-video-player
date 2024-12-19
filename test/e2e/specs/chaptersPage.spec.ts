@@ -4,11 +4,8 @@ import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWi
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
-// Link to chapters page
 const link = getLinkByName(ExampleLinkName.Chapters);
-/**
- * Testing if videos on chapters are playing by checking that is pause return false.
- */
+
 vpTest(`Test if 3 videos on chapters page are playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to chapters page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
