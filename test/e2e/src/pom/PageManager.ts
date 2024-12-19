@@ -7,6 +7,7 @@ import { ApiAndEventsPage } from './apiAndEventsPage';
 import { AudioPlayerPage } from './audioPlayerPage';
 import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
 import { ChaptersPage } from './chaptersPage';
+import { CldAnalyticsPage } from './cldAnalyticsPage';
 
 /**
  * Page manager,
@@ -79,6 +80,13 @@ export class PageManager {
      */
     public get chaptersPage(): ChaptersPage {
         return this.getPage(ChaptersPage);
+    }
+
+    /**
+     * Returns Cloudinary analytics page object
+     */
+    public get cldAnalyticsPage(): CldAnalyticsPage {
+        return this.getPage(CldAnalyticsPage);
     }
 }
 export default PageManager;
