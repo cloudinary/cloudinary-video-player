@@ -9,7 +9,7 @@ const link = getLinkByName(ExampleLinkName.Chapters);
 /**
  * Testing if videos on chapters are playing by checking that is pause return false.
  */
-vpTest.only(`Test if 3 videos on chapters page are playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if 3 videos on chapters page are playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to chapters page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
