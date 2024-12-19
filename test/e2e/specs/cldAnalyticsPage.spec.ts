@@ -12,17 +12,17 @@ vpTest(`Test if 4 videos on Cloudinary analytics page are playing as expected`, 
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that the first video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.isPaused()).toEqual(false);
+        expect(await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.validateVideoPaused(false));
     });
     await test.step('Validating that the second video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.cldAnalyticsPage.cldAnalyticsAdpVideoComponent.isPaused()).toEqual(false);
+        expect(await pomPages.cldAnalyticsPage.cldAnalyticsAdpVideoComponent.validateVideoPaused(false));
     });
     await test.step('Scroll until the third video element is visible', async () => {
         await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that the third video is playing (in case isPause is false)', async () => {
         await expect(async () => {
-            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.isPaused()).toEqual(false);
+            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.validateVideoPaused(false));
         }).toPass({ intervals: [500], timeout: 3000 });
     });
     await test.step('Scroll until the fourth video element is visible', async () => {
@@ -30,7 +30,7 @@ vpTest(`Test if 4 videos on Cloudinary analytics page are playing as expected`, 
     });
     await test.step('Validating that the fourth video is playing (in case isPause is false)', async () => {
         await expect(async () => {
-            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.isPaused()).toEqual(false);
+            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.validateVideoPaused(false));
         }).toPass({ intervals: [500], timeout: 3000 });
     });
 });
