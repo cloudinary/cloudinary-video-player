@@ -20,10 +20,12 @@ vpTest(`Test if 3 videos on chapters page are playing as expected`, async ({ pag
     await test.step('Validating that the second video is playing (in case isPause is false)', async () => {
         expect(await pomPages.chaptersPage.chaptersConfigObjectVideoComponent.isPaused()).toEqual(false);
     });
-    await test.step('Click on play button of third video player to play video', async () => {
-        return pomPages.chaptersPage.chapterAutoVttFileVideoComponent.clickPlay();
+    await test.step('Scroll until the third video element is visible', async () => {
+        await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that the third video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.isPaused()).toEqual(false);
+        await expect(async () => {
+            expect(await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.isPaused()).toEqual(false);
+        }).toPass({ intervals: [500], timeout: 3000 });
     });
 });
