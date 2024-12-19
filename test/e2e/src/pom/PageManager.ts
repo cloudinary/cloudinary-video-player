@@ -6,6 +6,7 @@ import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
 import { AudioPlayerPage } from './audioPlayerPage';
 import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
+import { ChaptersPage } from './chaptersPage';
 
 /**
  * Page manager,
@@ -71,6 +72,13 @@ export class PageManager {
      */
     public get autoplayOnScrollPage(): AutoplayOnScrollPage {
         return this.getPage(AutoplayOnScrollPage);
+    }
+
+    /**
+     * Returns chapters page object
+     */
+    public get chaptersPage(): ChaptersPage {
+        return this.getPage(ChaptersPage);
     }
 }
 export default PageManager;
