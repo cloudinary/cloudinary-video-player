@@ -8,6 +8,7 @@ import { AudioPlayerPage } from './audioPlayerPage';
 import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
 import { ChaptersPage } from './chaptersPage';
 import { CldAnalyticsPage } from './cldAnalyticsPage';
+import { CodecsAndFormats } from './codecsAndFormats';
 
 /**
  * Page manager,
@@ -87,6 +88,13 @@ export class PageManager {
      */
     public get cldAnalyticsPage(): CldAnalyticsPage {
         return this.getPage(CldAnalyticsPage);
+    }
+
+    /**
+     * Returns codecs and formats page object
+     */
+    public get codecsAndFormatsPage(): CodecsAndFormats {
+        return this.getPage(CodecsAndFormats);
     }
 }
 export default PageManager;
