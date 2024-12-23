@@ -9,6 +9,7 @@ import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
 import { ChaptersPage } from './chaptersPage';
 import { CldAnalyticsPage } from './cldAnalyticsPage';
 import { CodecsAndFormats } from './codecsAndFormats';
+import { ColorsApiPage } from './colorsApiPage';
 
 /**
  * Page manager,
@@ -95,6 +96,10 @@ export class PageManager {
      */
     public get codecsAndFormatsPage(): CodecsAndFormats {
         return this.getPage(CodecsAndFormats);
+    }
+
+    public get colorsApiPage(): ColorsApiPage {
+        return this.getPage(ColorsApiPage);
     }
 }
 export default PageManager;
