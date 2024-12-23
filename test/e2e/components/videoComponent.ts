@@ -29,4 +29,15 @@ export class VideoComponent extends BaseComponent {
             return video.paused;
         }, this.props.selector);
     }
+
+    /**
+     * Validates whether the video is paused or playing.
+     * expectedPaused - True if the video is expected to be paused, otherwise false.
+     */
+    public async validateVideoPaused(expectedPaused: boolean): Promise<void> {
+        const isPaused = await this.isPaused();
+        if (isPaused !== expectedPaused) {
+            throw new Error(`Video paused state mismatch. Expected: ${expectedPaused}, Actual: ${isPaused}`);
+        }
+    }
 }
