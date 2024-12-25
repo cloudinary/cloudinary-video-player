@@ -6,12 +6,12 @@ import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 const link = getLinkByName(ExampleLinkName.DisplayConfigurations);
 
-vpTest(`Test if video on display configuration page is playing as expected`, async ({ page, pomPages }) => {
-    await test.step('Navigate to display configuration page by clicking on link', async () => {
+vpTest(`Test if video on display configurations page is playing as expected`, async ({ page, pomPages }) => {
+    await test.step('Navigate to display configurations page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that display configuration video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.displayConfigurationPage.displayConfigurationPageVideoComponent.validateVideoPaused(false));
+        expect(await pomPages.displayConfigurationsPage.displayConfigurationsPageVideoComponent.validateVideoPaused(false));
     });
 });

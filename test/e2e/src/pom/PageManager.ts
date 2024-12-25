@@ -11,7 +11,7 @@ import { CldAnalyticsPage } from './cldAnalyticsPage';
 import { CodecsAndFormats } from './codecsAndFormats';
 import { ColorsApiPage } from './colorsApiPage';
 import { ComponentsPage } from './componentsPage';
-import { DisplayConfigurationPage } from './displayConfigurationPage';
+import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 
 /**
  * Page manager,
@@ -108,8 +108,8 @@ export class PageManager {
         return this.getPage(ComponentsPage);
     }
 
-    public get displayConfigurationPage(): DisplayConfigurationPage {
-        return this.getPage(DisplayConfigurationPage);
+    public get displayConfigurationsPage(): DisplayConfigurationsPage {
+        return this.getPage(DisplayConfigurationsPage);
     }
 }
 export default PageManager;
