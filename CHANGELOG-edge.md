@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.0...v2.2.1-edge.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* seek-thumbs positioning ([#766](https://github.com/cloudinary/cloudinary-video-player/issues/766)) ([5a16f74](https://github.com/cloudinary/cloudinary-video-player/commit/5a16f74b66e84f7aab9000a5adc752e843a43280))
+
 ## [2.2.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0-edge.5...v2.2.1-edge.0) (2024-12-09)
 
 

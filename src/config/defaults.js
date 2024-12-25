@@ -30,5 +30,6 @@ export default {
   playedEventPercents: [25, 50, 75, 100],
   html5: {
     nativeTextTracks: false
-  }
+  },
+  disableSeekWhileScrubbingOnMobile: true
 };
