@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import PlaylistPanelItem from './playlist-panel-item';
 import { PLAYER_EVENT } from 'utils/consts';
 

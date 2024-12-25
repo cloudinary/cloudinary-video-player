@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import throttle from 'lodash/throttle';
 import { parseTime } from 'utils/time';
 import ShoppablePanelItem from './shoppable-panel-item';

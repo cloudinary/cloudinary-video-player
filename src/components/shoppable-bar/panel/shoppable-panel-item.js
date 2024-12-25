@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 
 const ClickableComponent = videojs.getComponent('ClickableComponent');
 const dom = videojs.dom || videojs;

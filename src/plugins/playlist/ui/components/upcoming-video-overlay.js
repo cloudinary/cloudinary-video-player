@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import './upcoming-video-overlay.scss';
 import { PLAYER_EVENT } from 'utils/consts';
 

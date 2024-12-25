@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import RecommendationsOverlayContent from './recommendations-overlay-content';
 import RecommendationsOverlayHideButton from './recommendations-overlay-hide-button';
 import './recommendations-overlay.scss';

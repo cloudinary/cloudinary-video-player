@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import RecommendationsOverlaySecondaryItem from './recommendations-overlay-secondary-item';
 
 const Component = videojs.getComponent('Component');

@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 
 import SourceMenuButton from './components/SourceMenuButton.js';
 import SourceMenuItem from './components/SourceMenuItem.js';

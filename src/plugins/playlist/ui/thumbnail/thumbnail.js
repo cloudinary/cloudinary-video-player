@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import './thumbnail.scss';
 
 // Get the ClickableComponent base class from Video.js

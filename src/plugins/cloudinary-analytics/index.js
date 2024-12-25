@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import isPlainObject from 'lodash/isPlainObject';
 import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';

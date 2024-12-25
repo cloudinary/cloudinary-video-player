@@ -1,5 +1,5 @@
 
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');

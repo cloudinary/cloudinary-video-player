@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import Utils from './utils';
 import defaults from './config/defaults';
 import {

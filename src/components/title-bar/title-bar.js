@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import 'assets/styles/components/title-bar.scss';
 import componentUtils from '../component-utils';
 

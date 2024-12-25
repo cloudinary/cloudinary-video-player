@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import {
   CLD_SPBL_TOGGLE_CLASS,
   CLD_SPBL_TOGGLE_CUSTOM_ICON_CLASS,

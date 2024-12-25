@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import EventEmitter from 'events';
 import isObject from 'lodash/isObject';
 import { PLAYER_EVENT } from './utils/consts';

@@ -22,12 +22,7 @@
       "import": "./lib/cld-video-player.js",
       "require": "./dist/cld-video-player.min.js"
     },
-    "./*": "./lib/*",
-    "./light": {
-      "import": "./lib/light/index.js",
-      "require": "./dist/cld-video-player.light.min.js"
-    },
-    "./light/*": "./lib/light/*"
+    "./*": "./lib/*"
   },
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
@@ -63,7 +58,7 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
@@ -71,18 +66,18 @@
       },
       {
         "path": "./lib/cld-video-player.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./lib/videoPlayer.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./lib/all.js",
-        "maxSize": "288kb"
+        "maxSize": "291kb"
       },
       {
-        "path": "./lib/light/index.js",
+        "path": "./lib/light.js",
         "maxSize": "135kb"
       }
     ]

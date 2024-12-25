@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import RecommendationsOverlayItem from './recommendations-overlay-item';
 
 // support VJS5 & VJS6 at the same time

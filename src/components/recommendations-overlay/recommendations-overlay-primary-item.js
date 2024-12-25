@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import RecommendationsOverlayItem from './recommendations-overlay-item';
 import componentUtils from 'components/component-utils';
 

@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import ShoppableBarLayout from './layout/bar-layout';
 import ShoppablePostWidget from './shoppable-post-widget';
 import './shoppable-widget.scss';

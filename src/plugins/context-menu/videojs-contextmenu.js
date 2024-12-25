@@ -1,7 +1,7 @@
 /**
  * @module plugin
  */
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 
 const defaults = {
   cancel: true,

@@ -7,11 +7,7 @@ delete webpackConfig.entry; // overwrite
 module.exports = merge(webpackConfig, {
 
   entry: {
-    'index': './index.es.js'
-  },
-
-  output: {
-    path: path.resolve(__dirname, '../lib/light'),
+    'light': './index.es.js'
   }
 
 });

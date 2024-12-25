@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import { PLAYER_EVENT } from 'utils/consts';
 import { wrap } from '../../utils/dom';
 import {

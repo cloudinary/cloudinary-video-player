@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import contextMenuContent from '../plugins/context-menu/contextMenuContent';
 import { FLOATING_TO, PRELOAD } from '../video-player.const';
 

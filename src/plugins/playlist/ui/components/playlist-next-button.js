@@ -1,5 +1,5 @@
 import PlaylistButton from './playlist-button';
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 
 class PlaylistNextButton extends PlaylistButton {
 

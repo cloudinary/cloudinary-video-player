@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import { sliceProperties } from 'utils/slicing';
 import { normalizeEventsParam, default as ExtendedEvents } from 'extended-events';
 import { PLAYER_EVENT } from '../../utils/consts';

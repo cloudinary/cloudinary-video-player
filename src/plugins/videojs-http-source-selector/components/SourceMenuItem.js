@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 const MenuItem = videojs.getComponent('MenuItem');
 const Component = videojs.getComponent('Component');
 

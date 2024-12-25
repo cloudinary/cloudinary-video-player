@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import omit from 'lodash/omit';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import isObject from 'lodash/isObject';

@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import get from 'lodash/get';
 import throttle from 'lodash/throttle';
 import noop from 'lodash/noop';

@@ -1,4 +1,4 @@
-import videojs from 'video.js';
+import videojs from 'utils/videojs';
 import isFunction from 'lodash/isFunction';
 import ContextMenuItem from './context-menu-item';
 import { setPosition } from 'utils/positioning';
