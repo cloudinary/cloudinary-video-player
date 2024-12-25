@@ -10,6 +10,7 @@ import { ChaptersPage } from './chaptersPage';
 import { CldAnalyticsPage } from './cldAnalyticsPage';
 import { CodecsAndFormats } from './codecsAndFormats';
 import { ColorsApiPage } from './colorsApiPage';
+import { ComponentsPage } from './componentsPage';
 
 /**
  * Page manager,
@@ -100,6 +101,10 @@ export class PageManager {
 
     public get colorsApiPage(): ColorsApiPage {
         return this.getPage(ColorsApiPage);
+    }
+
+    public get componentsPage(): ComponentsPage {
+        return this.getPage(ComponentsPage);
     }
 }
 export default PageManager;
