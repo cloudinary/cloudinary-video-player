@@ -6,6 +6,12 @@ import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
 import { AudioPlayerPage } from './audioPlayerPage';
 import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
+import { ChaptersPage } from './chaptersPage';
+import { CldAnalyticsPage } from './cldAnalyticsPage';
+import { CodecsAndFormats } from './codecsAndFormats';
+import { ColorsApiPage } from './colorsApiPage';
+import { ComponentsPage } from './componentsPage';
+import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 
 /**
  * Page manager,
@@ -71,6 +77,39 @@ export class PageManager {
      */
     public get autoplayOnScrollPage(): AutoplayOnScrollPage {
         return this.getPage(AutoplayOnScrollPage);
+    }
+
+    /**
+     * Returns chapters page object
+     */
+    public get chaptersPage(): ChaptersPage {
+        return this.getPage(ChaptersPage);
+    }
+
+    /**
+     * Returns Cloudinary analytics page object
+     */
+    public get cldAnalyticsPage(): CldAnalyticsPage {
+        return this.getPage(CldAnalyticsPage);
+    }
+
+    /**
+     * Returns codecs and formats page object
+     */
+    public get codecsAndFormatsPage(): CodecsAndFormats {
+        return this.getPage(CodecsAndFormats);
+    }
+
+    public get colorsApiPage(): ColorsApiPage {
+        return this.getPage(ColorsApiPage);
+    }
+
+    public get componentsPage(): ComponentsPage {
+        return this.getPage(ComponentsPage);
+    }
+
+    public get displayConfigurationsPage(): DisplayConfigurationsPage {
+        return this.getPage(DisplayConfigurationsPage);
     }
 }
 export default PageManager;
