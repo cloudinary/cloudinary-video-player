@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.1...v2.2.1-edge.2) (2024-12-26)
+
+
+### Features
+
+* light esm build ([#765](https://github.com/cloudinary/cloudinary-video-player/issues/765)) ([0049fb9](https://github.com/cloudinary/cloudinary-video-player/commit/0049fb90cf9702cfb82b48c6911bedd319835dc8))
+
 ## [2.2.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.0...v2.2.1-edge.1) (2024-12-18)
 
 
