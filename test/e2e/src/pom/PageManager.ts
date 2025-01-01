@@ -12,6 +12,7 @@ import { CodecsAndFormats } from './codecsAndFormats';
 import { ColorsApiPage } from './colorsApiPage';
 import { ComponentsPage } from './componentsPage';
 import { DisplayConfigurationsPage } from './displayConfigurationsPage';
+import { FloatingPlayerPage } from './floatingPlayerPage';
 
 /**
  * Page manager,
@@ -110,6 +111,10 @@ export class PageManager {
 
     public get displayConfigurationsPage(): DisplayConfigurationsPage {
         return this.getPage(DisplayConfigurationsPage);
+    }
+
+    public get floatingPlayerPage(): FloatingPlayerPage {
+        return this.getPage(FloatingPlayerPage);
     }
 }
 export default PageManager;
