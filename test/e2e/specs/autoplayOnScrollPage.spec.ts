@@ -16,15 +16,15 @@ vpTest(`Test if video on autoplay on scroll page is playing as expected`, async 
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Validating that the video is not playing before scrolling (in case isPause is true)', async () => {
-        expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(true);
+    await test.step('Validating that the video is not playing before scrolling', async () => {
+        await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.validateVideoIsPlaying(false);
     });
     await test.step('Scroll until the video element is visible', async () => {
         await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.locator.scrollIntoViewIfNeeded();
     });
-    await test.step('Validating that the video is auto playing after scrolling (in case isPause is false)', async () => {
+    await test.step('Validating that the video is auto playing after scrolling', async () => {
         await expect(async () => {
-            expect(await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.isPaused()).toEqual(false);
+            await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.validateVideoIsPlaying(true);
         }).toPass({ intervals: [500], timeout: 3000 });
     });
 });

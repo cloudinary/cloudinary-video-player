@@ -11,18 +11,18 @@ vpTest(`Test if 3 videos on codecs and formats page are playing as expected`, as
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Validating that the first video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.codecsAndFormatsPage.codecsAndFormatsFAutoVideoComponent.validateVideoPaused(false));
+    await test.step('Validating that f_auto video is playing', async () => {
+        await pomPages.codecsAndFormatsPage.codecsAndFormatsFAutoVideoComponent.validateVideoIsPlaying(true);
     });
-    await test.step('Validating that the second video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.codecsAndFormatsPage.codecsAndFormatsAv1VideoComponent.validateVideoPaused(false));
+    await test.step('Validating that AV1 video is playing', async () => {
+        await pomPages.codecsAndFormatsPage.codecsAndFormatsAv1VideoComponent.validateVideoIsPlaying(true);
     });
-    await test.step('Scroll until the third video element is visible', async () => {
+    await test.step('Scroll until VP9 video element is visible', async () => {
         await pomPages.codecsAndFormatsPage.codecsAndFormatsVp9VideoComponent.locator.scrollIntoViewIfNeeded();
     });
-    await test.step('Validating that the third video is playing (in case isPause is false)', async () => {
+    await test.step('Validating that VP9 video is playing', async () => {
         await expect(async () => {
-            expect(await pomPages.codecsAndFormatsPage.codecsAndFormatsVp9VideoComponent.validateVideoPaused(false));
+            await pomPages.codecsAndFormatsPage.codecsAndFormatsVp9VideoComponent.validateVideoIsPlaying(true);
         }).toPass({ intervals: [500], timeout: 3000 });
     });
 });

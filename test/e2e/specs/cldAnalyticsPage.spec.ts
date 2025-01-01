@@ -11,26 +11,26 @@ vpTest(`Test if 4 videos on Cloudinary analytics page are playing as expected`, 
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Validating that the first video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.validateVideoPaused(false));
+    await test.step('Validating that Cloudinary analytics video is playing', async () => {
+        await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.validateVideoIsPlaying(true);
     });
-    await test.step('Validating that the second video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.cldAnalyticsPage.cldAnalyticsAdpVideoComponent.validateVideoPaused(false));
+    await test.step('Validating that Cloudinary analytics ADP video is playing', async () => {
+        await pomPages.cldAnalyticsPage.cldAnalyticsAdpVideoComponent.validateVideoIsPlaying(true);
     });
-    await test.step('Scroll until the third video element is visible', async () => {
+    await test.step('Scroll until Cloudinary analytics custom data object video element is visible', async () => {
         await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.locator.scrollIntoViewIfNeeded();
     });
-    await test.step('Validating that the third video is playing (in case isPause is false)', async () => {
+    await test.step('Validating that Cloudinary analytics custom data object video is playing', async () => {
         await expect(async () => {
-            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.validateVideoPaused(false));
+            await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.validateVideoIsPlaying(true);
         }).toPass({ intervals: [500], timeout: 3000 });
     });
-    await test.step('Scroll until the fourth video element is visible', async () => {
+    await test.step('Scroll until Cloudinary analytics custom data function video element is visible', async () => {
         await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.locator.scrollIntoViewIfNeeded();
     });
-    await test.step('Validating that the fourth video is playing (in case isPause is false)', async () => {
+    await test.step('Validating that Cloudinary analytics custom data function video is playing', async () => {
         await expect(async () => {
-            expect(await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.validateVideoPaused(false));
+            await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.validateVideoIsPlaying(true);
         }).toPass({ intervals: [500], timeout: 3000 });
     });
 });

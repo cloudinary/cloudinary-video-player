@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
@@ -14,7 +14,7 @@ vpTest(`Test if video on highlights graph page is playing as expected`, async ({
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Validating that the video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.highlightGraphPage.videoHighlightsGraphPage.isPaused()).toEqual(false);
+    await test.step('Validating that the video is playing', async () => {
+        await pomPages.highlightGraphPage.videoHighlightsGraphPage.validateVideoIsPlaying(true);
     });
 });

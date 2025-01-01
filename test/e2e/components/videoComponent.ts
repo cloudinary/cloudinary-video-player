@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { BaseComponent } from './BaseComponent';
 
 /**
@@ -31,13 +31,12 @@ export class VideoComponent extends BaseComponent {
     }
 
     /**
-     * Validates whether the video is paused or playing.
-     * expectedPaused - True if the video is expected to be paused, otherwise false.
+     * Validates whether the video is currently playing.
+     * This method uses the `isPaused` function to determine the current state of the video.
+     * expectedPlaying - A boolean indicating the expected playback state of the video.
+     * Pass `true` if the video is expected to be playing, or `false` if it is expected to be paused.
      */
-    public async validateVideoPaused(expectedPaused: boolean): Promise<void> {
-        const isPaused = await this.isPaused();
-        if (isPaused !== expectedPaused) {
-            throw new Error(`Video paused state mismatch. Expected: ${expectedPaused}, Actual: ${isPaused}`);
-        }
+    public async validateVideoIsPlaying(expectedPlaying: boolean): Promise<void> {
+        expect(await this.isPaused()).not.toEqual(expectedPlaying);
     }
 }
