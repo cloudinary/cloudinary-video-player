@@ -14,10 +14,10 @@ vpTest(`Test if 2 videos on audio player page are playing as expected`, async ({
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Click on play button of audio player to play video', async () => {
+    await test.step('Click on play button of video player to play video', async () => {
         return pomPages.audioPlayerPage.audioPlayerVideoComponent.clickPlay();
     });
-    await test.step('Validating that the first audio player is playing', async () => {
+    await test.step('Validating that the first video player is playing', async () => {
         await pomPages.audioPlayerPage.audioPlayerVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Click on play button of audio player with transformation to play video', async () => {
