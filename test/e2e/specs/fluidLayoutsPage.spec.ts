@@ -6,7 +6,7 @@ import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 const link = getLinkByName(ExampleLinkName.FluidLayouts);
 
-vpTest.only(`Test if video on fluid layouts page is playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if video on fluid layouts page is playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to fluid layouts page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
