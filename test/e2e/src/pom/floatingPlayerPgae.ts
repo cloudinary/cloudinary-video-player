@@ -4,7 +4,7 @@ import { BasePage } from './BasePage';
 const FLOATING_PLAYER_PAGE_VIDEO_SELECTOR = '//*[@id="player_html5_api"]';
 
 /**
- * Video player examples floating player page object
+ * Video player examples Floating player page object
  */
 export class FloatingPlayerPage extends BasePage {
     public floatingPlayerVideoComponent: VideoComponent;
