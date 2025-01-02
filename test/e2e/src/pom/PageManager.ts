@@ -14,6 +14,7 @@ import { ComponentsPage } from './componentsPage';
 import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 import { FloatingPlayerPage } from './floatingPlayerPgae';
 import { FluidLayoutsPage } from './fluidLayoutsPage';
+import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
 
 /**
  * Page manager,
@@ -120,6 +121,10 @@ export class PageManager {
 
     public get fluidLayoutsPage(): FluidLayoutsPage {
         return this.getPage(FluidLayoutsPage);
+    }
+
+    public get forceHlsSubtitlesPage(): ForceHlsSubtitlesPage {
+        return this.getPage(ForceHlsSubtitlesPage);
     }
 }
 export default PageManager;
