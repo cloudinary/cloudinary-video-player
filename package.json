@@ -110,7 +110,7 @@
     "@babel/preset-env": "^7.26.0",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
-    "@playwright/test": "1.41.2",
+    "@playwright/test": "1.49.1",
     "@types/node": "22.10.1",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
