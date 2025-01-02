@@ -13,6 +13,7 @@ import { ColorsApiPage } from './colorsApiPage';
 import { ComponentsPage } from './componentsPage';
 import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 import { FloatingPlayerPage } from './floatingPlayerPgae';
+import { FluidLayoutsPage } from './fluidLayoutsPage';
 
 /**
  * Page manager,
@@ -115,6 +116,10 @@ export class PageManager {
 
     public get floatingPlayerPage(): FloatingPlayerPage {
         return this.getPage(FloatingPlayerPage);
+    }
+
+    public get fluidLayoutsPage(): FluidLayoutsPage {
+        return this.getPage(FluidLayoutsPage);
     }
 }
 export default PageManager;
