@@ -15,6 +15,7 @@ import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 import { FloatingPlayerPage } from './floatingPlayerPgae';
 import { FluidLayoutsPage } from './fluidLayoutsPage';
 import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
+import { MultiplePlayersPage } from './multiplePlayersPage';
 
 /**
  * Page manager,
@@ -125,6 +126,10 @@ export class PageManager {
 
     public get forceHlsSubtitlesPage(): ForceHlsSubtitlesPage {
         return this.getPage(ForceHlsSubtitlesPage);
+    }
+
+    public get multiplePlayersPage(): MultiplePlayersPage {
+        return this.getPage(MultiplePlayersPage);
     }
 }
 export default PageManager;
