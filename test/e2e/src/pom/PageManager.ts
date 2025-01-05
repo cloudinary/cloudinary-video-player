@@ -16,6 +16,7 @@ import { FloatingPlayerPage } from './floatingPlayerPgae';
 import { FluidLayoutsPage } from './fluidLayoutsPage';
 import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
 import { MultiplePlayersPage } from './multiplePlayersPage';
+import { PlaylistPage } from './playlistPage';
 
 /**
  * Page manager,
@@ -130,6 +131,10 @@ export class PageManager {
 
     public get multiplePlayersPage(): MultiplePlayersPage {
         return this.getPage(MultiplePlayersPage);
+    }
+
+    public get playlistPage(): PlaylistPage {
+        return this.getPage(PlaylistPage);
     }
 }
 export default PageManager;
