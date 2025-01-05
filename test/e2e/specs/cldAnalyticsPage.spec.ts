@@ -12,7 +12,9 @@ vpTest(`Test if 4 videos on Cloudinary analytics page are playing as expected`, 
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Validating that Cloudinary analytics video is playing', async () => {
-        await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.validateVideoIsPlaying(true);
+        await expect(async () => {
+            await pomPages.cldAnalyticsPage.cldAnalyticsVideoComponent.validateVideoIsPlaying(true);
+        }).toPass({ intervals: [500], timeout: 3000 });
     });
     await test.step('Validating that Cloudinary analytics ADP video is playing', async () => {
         await pomPages.cldAnalyticsPage.cldAnalyticsAdpVideoComponent.validateVideoIsPlaying(true);
