@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
@@ -21,8 +21,6 @@ vpTest(`Test if 3 videos on chapters page are playing as expected`, async ({ pag
         await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that chapters auto vtt file video is playing', async () => {
-        await expect(async () => {
-            await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.validateVideoIsPlaying(true);
-        }).toPass({ intervals: [500], timeout: 3000 });
+        await pomPages.chaptersPage.chapterAutoVttFileVideoComponent.validateVideoIsPlaying(true);
     });
 });
