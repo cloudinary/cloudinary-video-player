@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
@@ -21,16 +21,12 @@ vpTest(`Test if 4 videos on Cloudinary analytics page are playing as expected`, 
         await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that Cloudinary analytics custom data object video is playing', async () => {
-        await expect(async () => {
-            await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.validateVideoIsPlaying(true);
-        }).toPass({ intervals: [500], timeout: 3000 });
+        await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataObjectVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Scroll until Cloudinary analytics custom data function video element is visible', async () => {
         await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that Cloudinary analytics custom data function video is playing', async () => {
-        await expect(async () => {
-            await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.validateVideoIsPlaying(true);
-        }).toPass({ intervals: [500], timeout: 3000 });
+        await pomPages.cldAnalyticsPage.cldAnalyticsCustomDataFunctionVideoComponent.validateVideoIsPlaying(true);
     });
 });

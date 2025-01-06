@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
@@ -23,8 +23,6 @@ vpTest(`Test if video on autoplay on scroll page is playing as expected`, async 
         await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that the video is auto playing after scrolling', async () => {
-        await expect(async () => {
-            await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.validateVideoIsPlaying(true);
-        }).toPass({ intervals: [500], timeout: 3000 });
+        await pomPages.autoplayOnScrollPage.autoplayOnScrollVideoComponent.validateVideoIsPlaying(true);
     });
 });

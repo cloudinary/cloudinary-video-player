@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 import { getLinkByName } from '../testData/pageLinksData';
 import { ExampleLinkName } from '../testData/ExampleLinkNames';
@@ -21,8 +21,6 @@ vpTest(`Test if 3 videos on multiple players page are playing as expected`, asyn
         await pomPages.colorsApiPage.colorsApiLightSkinVideoComponent.locator.scrollIntoViewIfNeeded();
     });
     await test.step('Validating that player 3 video is playing', async () => {
-        await expect(async () => {
-            await pomPages.multiplePlayersPage.multiplePlayersPlayer3VideoComponent.validateVideoIsPlaying(true);
-        }).toPass({ intervals: [500], timeout: 3000 });
+        await pomPages.multiplePlayersPage.multiplePlayersPlayer3VideoComponent.validateVideoIsPlaying(true);
     });
 });
