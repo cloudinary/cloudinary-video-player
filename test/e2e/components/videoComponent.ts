@@ -37,6 +37,8 @@ export class VideoComponent extends BaseComponent {
      * Pass `true` if the video is expected to be playing, or `false` if it is expected to be paused.
      */
     public async validateVideoIsPlaying(expectedPlaying: boolean): Promise<void> {
-        expect(await this.isPaused()).not.toEqual(expectedPlaying);
+        await expect(async () => {
+            expect(await this.isPaused()).not.toEqual(expectedPlaying);
+        }).toPass({ intervals: [500], timeout: 3000 });
     }
 }
