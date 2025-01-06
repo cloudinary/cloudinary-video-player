@@ -17,6 +17,7 @@ import { FluidLayoutsPage } from './fluidLayoutsPage';
 import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
 import { MultiplePlayersPage } from './multiplePlayersPage';
 import { PlaylistPage } from './playlistPage';
+import { PlaylistByTagPage } from './playlistByTagPage';
 
 /**
  * Page manager,
@@ -135,6 +136,10 @@ export class PageManager {
 
     public get playlistPage(): PlaylistPage {
         return this.getPage(PlaylistPage);
+    }
+
+    public get playlistByTagPage(): PlaylistByTagPage {
+        return this.getPage(PlaylistByTagPage);
     }
 }
 export default PageManager;
