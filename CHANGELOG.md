@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0...v2.3.0) (2025-01-07)
+
+
+### Features
+
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([e0e803e](https://github.com/cloudinary/cloudinary-video-player/commit/e0e803e22442b6f69386691dd750b7be09ffd36b))
+
 ## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
 
 
