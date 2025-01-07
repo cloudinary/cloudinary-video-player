@@ -7,12 +7,12 @@
 ### Features
 
 * support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([e0e803e](https://github.com/cloudinary/cloudinary-video-player/commit/e0e803e22442b6f69386691dd750b7be09ffd36b))
-* feat: light esm build ([#765](https://github.com/cloudinary/cloudinary-video-player/issues/765))
+* light esm build ([#765](https://github.com/cloudinary/cloudinary-video-player/issues/765))
 
 
 ### Bug Fixes
 
-* fix: update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746))
+* update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746))
 
 
 ## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
