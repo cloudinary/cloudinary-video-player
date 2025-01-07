@@ -20,6 +20,7 @@ import { PlaylistPage } from './playlistPage';
 import { PlaylistByTagPage } from './playlistByTagPage';
 import { PosterOptionsPage } from './posterOptionsPage';
 import { ProfilesPage } from './profilesPage';
+import { RawUrlPage } from './rawUrlPage';
 
 /**
  * Page manager,
@@ -150,6 +151,10 @@ export class PageManager {
 
     public get profilesPage(): ProfilesPage {
         return this.getPage(ProfilesPage);
+    }
+
+    public get rawUrlPage(): RawUrlPage {
+        return this.getPage(RawUrlPage);
     }
 }
 export default PageManager;
