@@ -27,10 +27,6 @@
       const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
         cloudName: 'demo',
         profile: 'cld-default',
-    window.addEventListener('load', async () => {
-      const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
-        cloudName: 'demo',
-        profile: 'cld-default',
       });
 
       playerWithDefaultProfile.source('sea_turtle');
