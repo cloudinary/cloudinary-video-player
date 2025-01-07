@@ -12,7 +12,7 @@
 
 ### Bug Fixes
 
-fix: update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746))
+* fix: update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746))
 
 
 ## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
