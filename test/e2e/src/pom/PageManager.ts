@@ -4,6 +4,22 @@ import { BasePage } from './BasePage';
 import { MainPage } from './mainPage';
 import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
+import { AudioPlayerPage } from './audioPlayerPage';
+import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
+import { ChaptersPage } from './chaptersPage';
+import { CldAnalyticsPage } from './cldAnalyticsPage';
+import { CodecsAndFormats } from './codecsAndFormats';
+import { ColorsApiPage } from './colorsApiPage';
+import { ComponentsPage } from './componentsPage';
+import { DisplayConfigurationsPage } from './displayConfigurationsPage';
+import { FloatingPlayerPage } from './floatingPlayerPgae';
+import { FluidLayoutsPage } from './fluidLayoutsPage';
+import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
+import { MultiplePlayersPage } from './multiplePlayersPage';
+import { PlaylistPage } from './playlistPage';
+import { PlaylistByTagPage } from './playlistByTagPage';
+import { PosterOptionsPage } from './posterOptionsPage';
+import { ProfilesPage } from './profilesPage';
 
 /**
  * Page manager,
@@ -55,6 +71,85 @@ export class PageManager {
      */
     public get apiAndEventsPage(): ApiAndEventsPage {
         return this.getPage(ApiAndEventsPage);
+    }
+
+    /**
+     * Returns audio player page object
+     */
+    public get audioPlayerPage(): AudioPlayerPage {
+        return this.getPage(AudioPlayerPage);
+    }
+
+    /**
+     * Returns autoplay on scroll page object
+     */
+    public get autoplayOnScrollPage(): AutoplayOnScrollPage {
+        return this.getPage(AutoplayOnScrollPage);
+    }
+
+    /**
+     * Returns chapters page object
+     */
+    public get chaptersPage(): ChaptersPage {
+        return this.getPage(ChaptersPage);
+    }
+
+    /**
+     * Returns Cloudinary analytics page object
+     */
+    public get cldAnalyticsPage(): CldAnalyticsPage {
+        return this.getPage(CldAnalyticsPage);
+    }
+
+    /**
+     * Returns codecs and formats page object
+     */
+    public get codecsAndFormatsPage(): CodecsAndFormats {
+        return this.getPage(CodecsAndFormats);
+    }
+
+    public get colorsApiPage(): ColorsApiPage {
+        return this.getPage(ColorsApiPage);
+    }
+
+    public get componentsPage(): ComponentsPage {
+        return this.getPage(ComponentsPage);
+    }
+
+    public get displayConfigurationsPage(): DisplayConfigurationsPage {
+        return this.getPage(DisplayConfigurationsPage);
+    }
+
+    public get floatingPlayerPage(): FloatingPlayerPage {
+        return this.getPage(FloatingPlayerPage);
+    }
+
+    public get fluidLayoutsPage(): FluidLayoutsPage {
+        return this.getPage(FluidLayoutsPage);
+    }
+
+    public get forceHlsSubtitlesPage(): ForceHlsSubtitlesPage {
+        return this.getPage(ForceHlsSubtitlesPage);
+    }
+
+    public get multiplePlayersPage(): MultiplePlayersPage {
+        return this.getPage(MultiplePlayersPage);
+    }
+
+    public get playlistPage(): PlaylistPage {
+        return this.getPage(PlaylistPage);
+    }
+
+    public get playlistByTagPage(): PlaylistByTagPage {
+        return this.getPage(PlaylistByTagPage);
+    }
+
+    public get posterOptionsPage(): PosterOptionsPage {
+        return this.getPage(PosterOptionsPage);
+    }
+
+    public get profilesPage(): ProfilesPage {
+        return this.getPage(ProfilesPage);
     }
 }
 export default PageManager;

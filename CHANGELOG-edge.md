@@ -1,5 +1,26 @@
 # Changelog
 
+## [2.2.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.1...v2.2.1-edge.2) (2024-12-26)
+
+
+### Features
+
+* light esm build ([#765](https://github.com/cloudinary/cloudinary-video-player/issues/765)) ([0049fb9](https://github.com/cloudinary/cloudinary-video-player/commit/0049fb90cf9702cfb82b48c6911bedd319835dc8))
+
+## [2.2.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.0...v2.2.1-edge.1) (2024-12-18)
+
+
+### Bug Fixes
+
+* seek-thumbs positioning ([#766](https://github.com/cloudinary/cloudinary-video-player/issues/766)) ([5a16f74](https://github.com/cloudinary/cloudinary-video-player/commit/5a16f74b66e84f7aab9000a5adc752e843a43280))
+
+## [2.2.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0-edge.5...v2.2.1-edge.0) (2024-12-09)
+
+
+### Bug Fixes
+
+* update dependencies ([#746](https://github.com/cloudinary/cloudinary-video-player/issues/746)) ([1ac07ea](https://github.com/cloudinary/cloudinary-video-player/commit/1ac07eaecb92c3bacb9bafb68d90c983156ff314))
+
 ## [2.1.2-edge.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2-edge.4...v2.1.2-edge.5) (2024-12-08)
 
 

@@ -15,7 +15,7 @@ function coerce(string) {
   // Complex object
   try {
     val = JSON.parse(string);
-  } catch (e) {
+  } catch (err) { // eslint-disable-line no-unused-vars
     // Continue execution in case str is not parsable
   }
   if (val) {

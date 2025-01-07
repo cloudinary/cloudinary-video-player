@@ -27,10 +27,6 @@
       const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
         cloudName: 'demo',
         profile: 'cld-default',
-    window.addEventListener('load', async () => {
-      const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
-        cloudName: 'demo',
-        profile: 'cld-default',
       });
 
       playerWithDefaultProfile.source('sea_turtle');
@@ -40,29 +36,9 @@
       const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
         cloudName: 'prod',
         profile: 'myCustomProfile',
-    }, false);
-
-    window.addEventListener('load', async function() {
-      const playerWithCustomProfile = await cloudinary.player('player-custom-profile', {
-        cloudName: 'prod',
-        profile: 'myCustomProfile',
       });
 
       playerWithCustomProfile.source('samples/cld-sample-video');
-    }, false);
-
-    window.addEventListener('load', async function() {
-      const playerWithCustomProfileAndOverrides = await cloudinary.player('player-custom-profile-overrides', {
-        cloudName: 'prod',
-        profile: 'myCustomProfile',
-        colors: {
-          base: "#1532a8"
-        },
-        seekThumbnails: false,
-        aiHighlightsGraph: true,
-      });
-
-      playerWithCustomProfileAndOverrides.source('samples/cld-sample-video');
     }, false);
 
     window.addEventListener('load', async function() {
@@ -99,34 +75,6 @@
     width="500">
   </video>
 
-  <h3 class="mt-4">Example Code:</h3>
-
-  <pre>
-    <code class="language-html">
-
-      &lt;video
-        id="player-default-profile"
-        controls
-        autoplay
-        muted
-        class="cld-video-player"
-        width="500"&gt;
-      &lt;/video&gt;
-
-      </code>
-      <code class="language-javascript">
-        window.addEventListener('load', async function() {
-          const playerWithDefaultProfile = await cloudinary.player('player-default-profile', {
-            cloudName: 'demo',
-            profile: 'cld-default',
-          });
-
-          playerWithDefaultProfile.source('sea_turtle');
-        }, false);
-      </code>
-    </pre>
-
-  <h5>Player with custom profile</h5>
   <h3 class="mt-4">Example Code:</h3>
 
   <pre>

@@ -1,22 +1,19 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
+import { BaseComponent } from './BaseComponent';
 
 /**
  * Video component
  */
-export class VideoComponent {
-    private page: Page;
-    private readonly videoSelector: string;
-
+export class VideoComponent extends BaseComponent {
     constructor(page: Page, videoSelector: string) {
-        this.page = page;
-        this.videoSelector = videoSelector;
+        super({ page, selector: videoSelector });
     }
 
     /**
      * Click the play button if necessary in case video is not autoplay
      */
     public async clickPlay(): Promise<void> {
-        const videoPlayButtonLocator = this.page.locator(`${this.videoSelector}/following-sibling::button[contains(@class, "vjs-big-play-button")]`);
+        const videoPlayButtonLocator = this.props.page.locator(`${this.props.selector}/following-sibling::button[contains(@class, "vjs-big-play-button")]`);
         // Click the play button to start the video
         return videoPlayButtonLocator.click();
     }
@@ -25,11 +22,23 @@ export class VideoComponent {
      * Checks if video element is paused
      */
     public async isPaused(): Promise<boolean> {
-        return this.page.evaluate((selector: string) => {
+        return this.props.page.evaluate((selector: string) => {
             console.log('Evaluating selector in browser context:', selector); // Logs selector in browser context
             const xpathResult = document.evaluate(selector, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
             const video = xpathResult.singleNodeValue as HTMLVideoElement | null;
             return video.paused;
-        }, this.videoSelector);
+        }, this.props.selector);
+    }
+
+    /**
+     * Validates whether the video is currently playing.
+     * This method uses the `isPaused` function to determine the current state of the video.
+     * expectedPlaying - A boolean indicating the expected playback state of the video.
+     * Pass `true` if the video is expected to be playing, or `false` if it is expected to be paused.
+     */
+    public async validateVideoIsPlaying(expectedPlaying: boolean): Promise<void> {
+        await expect(async () => {
+            expect(await this.isPaused()).not.toEqual(expectedPlaying);
+        }).toPass({ intervals: [500], timeout: 3000 });
     }
 }

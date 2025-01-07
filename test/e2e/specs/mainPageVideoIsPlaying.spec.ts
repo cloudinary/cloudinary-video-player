@@ -1,5 +1,5 @@
 import { vpTest } from '../fixtures/vpTest';
-import { expect, test } from '@playwright/test';
+import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../src/helpers/waitForPageToLoadWithTimeout';
 
 /**
@@ -12,7 +12,7 @@ vpTest(`Test if video on main page can play as expected`, async ({ page, pomPage
         await waitForPageToLoadWithTimeout(page, 5000);
         return pomPages.mainPage.videoMainPage.clickPlay();
     });
-    await test.step('Validating that the video is playing (in case isPause is false)', async () => {
-        expect(await pomPages.mainPage.videoMainPage.isPaused()).toEqual(false);
+    await test.step('Validating that the video is playing', async () => {
+        await pomPages.mainPage.videoMainPage.validateVideoIsPlaying(true);
     });
 });
