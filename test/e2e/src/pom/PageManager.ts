@@ -19,6 +19,7 @@ import { MultiplePlayersPage } from './multiplePlayersPage';
 import { PlaylistPage } from './playlistPage';
 import { PlaylistByTagPage } from './playlistByTagPage';
 import { PosterOptionsPage } from './posterOptionsPage';
+import { ProfilesPage } from './profilesPage';
 
 /**
  * Page manager,
@@ -145,6 +146,10 @@ export class PageManager {
 
     public get posterOptionsPage(): PosterOptionsPage {
         return this.getPage(PosterOptionsPage);
+    }
+
+    public get profilesPage(): ProfilesPage {
+        return this.getPage(ProfilesPage);
     }
 }
 export default PageManager;
