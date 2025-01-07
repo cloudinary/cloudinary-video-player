@@ -1,6 +1,57 @@
 # Changelog
 
 
+## [2.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.2...v2.2.0) (2024-12-09)
+
+
+### Features
+
+* allow fetching transcript from url ([#737](https://github.com/cloudinary/cloudinary-video-player/issues/737)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* auto-fetch transcripts from language ([#741](https://github.com/cloudinary/cloudinary-video-player/issues/741)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([4b69cc0](https://github.com/cloudinary/cloudinary-video-player/commit/4b69cc072becbcc1ee9de0200997846dad8e82ca))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* support srt subtitle format ([#743](https://github.com/cloudinary/cloudinary-video-player/issues/743)) ([a0a2598](https://github.com/cloudinary/cloudinary-video-player/commit/a0a2598b81c12621663c18c73aa18acc7ae93e0e))
+
+
+### Bug Fixes
+
+* programatic text-tracks in Safari ([#747](https://github.com/cloudinary/cloudinary-video-player/issues/747)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+* videojs 8 deprecation warning for videojs.bind ([#744](https://github.com/cloudinary/cloudinary-video-player/issues/744)) ([62b2f52](https://github.com/cloudinary/cloudinary-video-player/commit/62b2f5279c748fc654c8d2087b6fa5655d58e6a7))
+
+## [2.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.1.0...v2.1.1) (2024-11-05)
+
+### Features
+
+* add internal analytics about new method & profiles ([#699](https://github.com/cloudinary/cloudinary-video-player/issues/699)) ([a1c8c1e](https://github.com/cloudinary/cloudinary-video-player/commit/a1c8c1eb4ffd8362ce4cc7ab5ed47276cc5651ee))
+* add url template for video player profiles ([#696](https://github.com/cloudinary/cloudinary-video-player/issues/696)) ([d60cb4f](https://github.com/cloudinary/cloudinary-video-player/commit/d60cb4f4fc9d8b0ff2a6f0e21621c6c84063c898))
+
+### Bug Fixes
+
+* use cld player profiles package for default profiles ([#701](https://github.com/cloudinary/cloudinary-video-player/issues/701)) ([1083b94](https://github.com/cloudinary/cloudinary-video-player/commit/1083b94ac96f4e075d8d820a894703eb644bec7a))
+
+## [2.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.5...v2.1.0) (2024-08-21)
+
+
+### Features
+
+* custom data video analytics param ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+* new 'player' method with support async loading & profiles ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+
+
+### Bug Fixes
+
+* update dependencies ([#688](https://github.com/cloudinary/cloudinary-video-player/issues/688)) ([2aba293](https://github.com/cloudinary/cloudinary-video-player/commit/2aba293436035f2fedfcb51c3063913f1261d564))
+
+## [2.0.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.4...v2.0.5) (2024-07-15)
+
+
+### Bug Fixes
+
+* chapters innerHTML to innerText ([#671](https://github.com/cloudinary/cloudinary-video-player/issues/671)) ([d9b6251](https://github.com/cloudinary/cloudinary-video-player/commit/d9b62513c7abe9eba3458c5193f178ebc6250543))
+* custom profile docs example ([#673](https://github.com/cloudinary/cloudinary-video-player/issues/673)) ([d9b6251](https://github.com/cloudinary/cloudinary-video-player/commit/d9b62513c7abe9eba3458c5193f178ebc6250543))
+* remove IE polyfill ([#665](https://github.com/cloudinary/cloudinary-video-player/issues/665)) ([d9b6251](https://github.com/cloudinary/cloudinary-video-player/commit/d9b62513c7abe9eba3458c5193f178ebc6250543))
+* use videojs events & re-trigger to analytics package with custom… ([#639](https://github.com/cloudinary/cloudinary-video-player/issues/639)) ([d9b6251](https://github.com/cloudinary/cloudinary-video-player/commit/d9b62513c7abe9eba3458c5193f178ebc6250543))
+
 ## [2.0.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.0.3...v2.0.4) (2024-06-17)
 
 
