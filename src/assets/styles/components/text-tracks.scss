@@ -7,6 +7,10 @@
     > div {
       margin: 3% !important;
     }
+    // Word highlight
+    &.cld-paced-text-tracks b {
+      color: var(--color-accent);
+    }
   }
   .vjs-text-track-cue {
     top: auto !important;

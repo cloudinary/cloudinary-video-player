@@ -1,0 +1,85 @@
+name: 🔧 Release (Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-as:
+        description: 'Release Version'
+        required: true
+      release-type:
+        description: 'Release Type'
+        type: choice
+        required: true
+        default: 'edge'
+        options:
+          - edge
+          - latest
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.release-type == 'latest' && 'master' || 'edge'}}
+
+      - run: npm ci
+
+      - name: Release PR
+        uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          release-type: node
+          release-as: ${{ github.event.inputs.release-as }}
+          prerelease: ${{ github.event.inputs.release-type == 'edge'}}
+          default-branch: ${{ github.event.inputs.release-type == 'latest' && 'master' || 'edge'}}
+
+      # The logic below handles the npm publication:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+        if: ${{ steps.release.outputs.release_created }}
+        # these if statements ensure that a publication only occurs when
+        # a new release is created:
+      - run: npm run build-all
+        if: ${{ steps.release.outputs.release_created }}
+      - run: npm publish --tag ${{ github.event.inputs.release-type }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Set Notification Messages
+        id: set-messages
+        if: steps.release.outputs.release_created
+        run: |
+          if [[ ${{ job.status }} == "success" ]]; then
+            echo "SLACK_TITLE=Video Player ${{ steps.release.outputs.tag_name }} Deployed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=${{ github.event.inputs.release-type }}&min=true" >> $GITHUB_OUTPUT
+          else
+            echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Slack Notification
+        if: steps.release.outputs.release_created
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
+          SLACK_CHANNEL: 'rnd-fe-releases'
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
+          SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
+          SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
+
+      - uses: gacts/purge-jsdelivr-cache@v1
+        if: steps.release.outputs.release_created
+        with:
+          url: |
+            https://cdn.jsdelivr.net/npm/cloudinary-video-player
+            https://cdn.jsdelivr.net/npm/cloudinary-video-player@edge
