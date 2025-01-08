@@ -21,6 +21,9 @@ import { PlaylistByTagPage } from './playlistByTagPage';
 import { PosterOptionsPage } from './posterOptionsPage';
 import { ProfilesPage } from './profilesPage';
 import { RawUrlPage } from './rawUrlPage';
+import { RecommendationsPage } from './recommendationsPage';
+import { SeekThumbnailsPage } from './seekThumbnailsPage';
+import { ShoppableVideosPage } from './shoppableVideosPage';
 
 /**
  * Page manager,
@@ -155,6 +158,18 @@ export class PageManager {
 
     public get rawUrlPage(): RawUrlPage {
         return this.getPage(RawUrlPage);
+    }
+
+    public get recommendationsPage(): RecommendationsPage {
+        return this.getPage(RecommendationsPage);
+    }
+
+    public get seekThumbnailsPage(): SeekThumbnailsPage {
+        return this.getPage(SeekThumbnailsPage);
+    }
+
+    public get shoppableVideosPage(): ShoppableVideosPage {
+        return this.getPage(ShoppableVideosPage);
     }
 }
 export default PageManager;
