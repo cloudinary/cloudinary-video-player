@@ -12,33 +12,33 @@ vpTest(`Test if 5 videos on subtitles and captions page are playing as expected`
         await waitForPageToLoadWithTimeout(page, 5000);
     });
     await test.step('Click on play button of srt and vtt video to play video', async () => {
-        return pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsSrtAndVttVideoComponent.clickPlay();
+        return pomPages.subtitlesAndCaptionsVideosPage.srtAndVttVideoComponent.clickPlay();
     });
     await test.step('Validating that srt and vtt video is playing', async () => {
-        await pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsSrtAndVttVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.subtitlesAndCaptionsVideosPage.srtAndVttVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Click on play button of playlist subtitles video to play video', async () => {
-        return pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsPlaylistSubtitlesVideoComponent.clickPlay();
+        return pomPages.subtitlesAndCaptionsVideosPage.playlistSubtitlesVideoComponent.clickPlay();
     });
     await test.step('Validating that playlist subtitles video is playing', async () => {
-        await pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsPlaylistSubtitlesVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.subtitlesAndCaptionsVideosPage.playlistSubtitlesVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Click on play button of paced and styled captions video to play video', async () => {
-        return pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsPacedStyledVideoComponent.clickPlay();
+        return pomPages.subtitlesAndCaptionsVideosPage.pacedStyledVideoComponent.clickPlay();
     });
     await test.step('Validating that paced and styled captions video is playing', async () => {
-        await pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsPacedStyledVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.subtitlesAndCaptionsVideosPage.pacedStyledVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Click on play button of karaoke video to play video', async () => {
-        return pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsKaraokeVideoComponent.clickPlay();
+        return pomPages.subtitlesAndCaptionsVideosPage.karaokeVideoComponent.clickPlay();
     });
     await test.step('Validating that karaoke video is playing', async () => {
-        await pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsKaraokeVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.subtitlesAndCaptionsVideosPage.karaokeVideoComponent.validateVideoIsPlaying(true);
     });
     await test.step('Click on play button of translated transcript video to play video', async () => {
-        return pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsTranslatedTranscriptVideoComponent.clickPlay();
+        return pomPages.subtitlesAndCaptionsVideosPage.translatedTranscriptVideoComponent.clickPlay();
     });
     await test.step('Validating that translated transcript video is playing', async () => {
-        await pomPages.subtitlesAndCaptionsVideosPage.subtitlesAndCaptionsTranslatedTranscriptVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.subtitlesAndCaptionsVideosPage.translatedTranscriptVideoComponent.validateVideoIsPlaying(true);
     });
 });
