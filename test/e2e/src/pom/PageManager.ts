@@ -24,6 +24,7 @@ import { RawUrlPage } from './rawUrlPage';
 import { RecommendationsPage } from './recommendationsPage';
 import { SeekThumbnailsPage } from './seekThumbnailsPage';
 import { ShoppableVideosPage } from './shoppableVideosPage';
+import { SubtitlesAndCaptionsPage } from './subtitlesAndCaptionsPage';
 
 /**
  * Page manager,
@@ -170,6 +171,10 @@ export class PageManager {
 
     public get shoppableVideosPage(): ShoppableVideosPage {
         return this.getPage(ShoppableVideosPage);
+    }
+
+    public get subtitlesAndCaptionsVideosPage(): SubtitlesAndCaptionsPage {
+        return this.getPage(SubtitlesAndCaptionsPage);
     }
 }
 export default PageManager;
