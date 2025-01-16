@@ -98,7 +98,6 @@ const VttThumbnailsPlugin = (function () {
       return;
     }
 
-    debugger; // eslint-disable-line
     fetch(this.options.src, {
       credentials: this.player.cloudinary.source?.().withCredentials ? 'include' : 'omit'
     })
