@@ -19,6 +19,6 @@ vpTest(`Test if 2 videos on vast and vpaid page are playing as expected`, async 
         await pomPages.vastAndVpaidPage.singleVideoWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
     });
     await test.step('Validating that playlist with ads video is playing', async () => {
-        await pomPages.vastAndVpaidPage.playlistWithAdsVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.vastAndVpaidPage.playlistWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
     });
 });
