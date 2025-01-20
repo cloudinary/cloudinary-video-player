@@ -27,6 +27,7 @@ import { ShoppableVideosPage } from './shoppableVideosPage';
 import { SubtitlesAndCaptionsPage } from './subtitlesAndCaptionsPage';
 import { VideoTransformationsPage } from './videoTransformationsPage';
 import { VastAndVpaidPage } from './vastAndVpaidPage';
+import { Vr360VideosPage } from './vr360VideosPage';
 
 /**
  * Page manager,
@@ -185,6 +186,10 @@ export class PageManager {
 
     public get vastAndVpaidPage(): VastAndVpaidPage {
         return this.getPage(VastAndVpaidPage);
+    }
+
+    public get vr360VideosPage(): Vr360VideosPage {
+        return this.getPage(Vr360VideosPage);
     }
 }
 export default PageManager;
