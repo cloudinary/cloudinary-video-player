@@ -90,7 +90,9 @@ const HighlightsGraphPlugin = (function () {
       return;
     }
 
-    fetch(this.options.src).then((res) => {
+    fetch(this.options.src, {
+      credentials: this.player.cloudinary.source?.().withCredentials ? 'include' : 'omit'
+    }).then((res) => {
       return res.json();
     }).then((res) => {
       this.setupHighlightsGraphElement();
