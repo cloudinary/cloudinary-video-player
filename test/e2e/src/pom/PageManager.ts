@@ -26,6 +26,7 @@ import { SeekThumbnailsPage } from './seekThumbnailsPage';
 import { ShoppableVideosPage } from './shoppableVideosPage';
 import { SubtitlesAndCaptionsPage } from './subtitlesAndCaptionsPage';
 import { VideoTransformationsPage } from './videoTransformationsPage';
+import { VastAndVpaidPage } from './vastAndVpaidPage';
 
 /**
  * Page manager,
@@ -180,6 +181,10 @@ export class PageManager {
 
     public get videoTransformationsPage(): VideoTransformationsPage {
         return this.getPage(VideoTransformationsPage);
+    }
+
+    public get vastAndVpaidPage(): VastAndVpaidPage {
+        return this.getPage(VastAndVpaidPage);
     }
 }
 export default PageManager;
