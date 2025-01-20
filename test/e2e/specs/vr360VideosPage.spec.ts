@@ -14,7 +14,6 @@ vpTest(`Test if video on VR 360 videos page is playing as expected`, async ({ pa
     await test.step('Click on play button of 360 video play video', async () => {
         return pomPages.vr360VideosPage.vr360VideoComponent.clickPlay();
     });
-    //Sending timeout to wait until video will start as it is heavy video
     await test.step('Validating that 360 video is playing', async () => {
         await pomPages.vr360VideosPage.vr360VideoComponent.validateVideoIsPlaying(true, 6000);
     });
