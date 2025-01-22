@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1-edge.0...v2.3.1-edge.1) (2025-01-22)
+
+
+### Bug Fixes
+
+* error with f_auto AV1 ([#799](https://github.com/cloudinary/cloudinary-video-player/issues/799)) ([b172e18](https://github.com/cloudinary/cloudinary-video-player/commit/b172e18e1af802d6de0898354a0abb90c0ad087a))
+
 ## [2.3.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.2...v2.3.1-edge.0) (2025-01-22)
 
 
