@@ -47,7 +47,6 @@ jobs:
          retention-days: 30
 
       - name: Pushes to reports repository
-        if: always()
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
@@ -59,5 +58,6 @@ jobs:
           target-branch: main
           target-directory: 'playwright-report_${{ github.run_id }}'
 
-      - name: Write URL in summary  
+      - name: Write URL in summary
+        if: always()
         run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
