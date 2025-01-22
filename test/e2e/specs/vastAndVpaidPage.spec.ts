@@ -6,7 +6,7 @@ import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 const link = getLinkByName(ExampleLinkName.VASTAndVPAIDSupport);
 
-vpTest(`Test if 2 videos on vast and vpaid page are playing as expected`, async ({ page, pomPages }) => {
+vpTest.only(`Test if 2 videos on vast and vpaid page are playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to vast and vpaid page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
@@ -16,7 +16,7 @@ vpTest(`Test if 2 videos on vast and vpaid page are playing as expected`, async 
     });
     //Sending timeout of 12 seconds to wait until the ad finishes (10 sec) and the video will start
     await test.step('Validating that single video with ads is playing', async () => {
-        await pomPages.vastAndVpaidPage.singleVideoWithAdsVideoComponent.validateVideoIsPlaying(true);
+        await pomPages.vastAndVpaidPage.singleVideoWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
     });
     await test.step('Validating that playlist with ads video is playing', async () => {
         await pomPages.vastAndVpaidPage.playlistWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
