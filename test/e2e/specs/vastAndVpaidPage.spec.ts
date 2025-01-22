@@ -6,7 +6,7 @@ import { ExampleLinkName } from '../testData/ExampleLinkNames';
 
 const link = getLinkByName(ExampleLinkName.VASTAndVPAIDSupport);
 
-vpTest.only(`Test if 2 videos on vast and vpaid page are playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if 2 videos on vast and vpaid page are playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to vast and vpaid page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
