@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.2...v2.3.1-edge.0) (2025-01-22)
+
+
+### Bug Fixes
+
+* seek-thumbs vtt is being called without credentials ([#794](https://github.com/cloudinary/cloudinary-video-player/issues/794)) ([b82d143](https://github.com/cloudinary/cloudinary-video-player/commit/b82d14345c8939dded35cda4a666c48002e83a67))
+
 ## [2.2.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.1...v2.2.1-edge.2) (2024-12-26)
 
 
