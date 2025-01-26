@@ -6,7 +6,6 @@
 ### Bug Fixes
 
 * improve release flow ([96f7baa](https://github.com/cloudinary/cloudinary-video-player/commit/96f7baa2f86c8b696c4182a88a2e26d1674cdd39))
-* improve release flow ([a4a43ff](https://github.com/cloudinary/cloudinary-video-player/commit/a4a43ff19c753661024f294eb063cd7458a0a256))
 
 ## [2.2.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.1...v2.2.1-edge.2) (2024-12-26)
 
