@@ -103,6 +103,7 @@ const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }
 };
 
 export const VIDEO_CODEC = {
+  AV1: 'av1',
   VP9: 'vp9',
   HEV1: 'hev1',
   H265: 'h265',
@@ -119,9 +120,11 @@ const setupCloudinaryMiddleware = () => {
           credentials: srcObj.withCredentials ? 'include' : 'omit'
         });
 
+        const mimetype = headers.get('content-type').split(';')[0];
+
         return next(null, {
           src: srcObj.src,
-          type: headers.get('content-type')
+          type: mimetype
         });
       }
     };

@@ -20,6 +20,14 @@ import { PlaylistPage } from './playlistPage';
 import { PlaylistByTagPage } from './playlistByTagPage';
 import { PosterOptionsPage } from './posterOptionsPage';
 import { ProfilesPage } from './profilesPage';
+import { RawUrlPage } from './rawUrlPage';
+import { RecommendationsPage } from './recommendationsPage';
+import { SeekThumbnailsPage } from './seekThumbnailsPage';
+import { ShoppableVideosPage } from './shoppableVideosPage';
+import { SubtitlesAndCaptionsPage } from './subtitlesAndCaptionsPage';
+import { VideoTransformationsPage } from './videoTransformationsPage';
+import { VastAndVpaidPage } from './vastAndVpaidPage';
+import { Vr360VideosPage } from './vr360VideosPage';
 
 /**
  * Page manager,
@@ -150,6 +158,38 @@ export class PageManager {
 
     public get profilesPage(): ProfilesPage {
         return this.getPage(ProfilesPage);
+    }
+
+    public get rawUrlPage(): RawUrlPage {
+        return this.getPage(RawUrlPage);
+    }
+
+    public get recommendationsPage(): RecommendationsPage {
+        return this.getPage(RecommendationsPage);
+    }
+
+    public get seekThumbnailsPage(): SeekThumbnailsPage {
+        return this.getPage(SeekThumbnailsPage);
+    }
+
+    public get shoppableVideosPage(): ShoppableVideosPage {
+        return this.getPage(ShoppableVideosPage);
+    }
+
+    public get subtitlesAndCaptionsVideosPage(): SubtitlesAndCaptionsPage {
+        return this.getPage(SubtitlesAndCaptionsPage);
+    }
+
+    public get videoTransformationsPage(): VideoTransformationsPage {
+        return this.getPage(VideoTransformationsPage);
+    }
+
+    public get vastAndVpaidPage(): VastAndVpaidPage {
+        return this.getPage(VastAndVpaidPage);
+    }
+
+    public get vr360VideosPage(): Vr360VideosPage {
+        return this.getPage(Vr360VideosPage);
     }
 }
 export default PageManager;

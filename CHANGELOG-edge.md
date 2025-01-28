@@ -1,11 +1,18 @@
 # Changelog
 
-## [2.3.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.0...v2.3.1-edge.2) (2025-01-26)
+## [2.3.1-edge.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1-edge.0...v2.3.1-edge.1) (2025-01-22)
 
 
 ### Bug Fixes
 
-* improve release flow ([96f7baa](https://github.com/cloudinary/cloudinary-video-player/commit/96f7baa2f86c8b696c4182a88a2e26d1674cdd39))
+* error with f_auto AV1 ([#799](https://github.com/cloudinary/cloudinary-video-player/issues/799)) ([b172e18](https://github.com/cloudinary/cloudinary-video-player/commit/b172e18e1af802d6de0898354a0abb90c0ad087a))
+
+## [2.3.1-edge.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.2...v2.3.1-edge.0) (2025-01-22)
+
+
+### Bug Fixes
+
+* seek-thumbs vtt is being called without credentials ([#794](https://github.com/cloudinary/cloudinary-video-player/issues/794)) ([b82d143](https://github.com/cloudinary/cloudinary-video-player/commit/b82d14345c8939dded35cda4a666c48002e83a67))
 
 ## [2.2.1-edge.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.1-edge.1...v2.2.1-edge.2) (2024-12-26)
 
