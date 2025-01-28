@@ -36,6 +36,7 @@ jobs:
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
           prerelease: true
           default-branch: master
+          release-search-depth: 20
           changelog-path: CHANGELOG-edge.md
 
       # The logic below handles the npm publication:
