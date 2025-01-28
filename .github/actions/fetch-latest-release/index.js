@@ -22,7 +22,7 @@ async function fetchLatestRelease() {
     // filter out draft releases and conditially filter out prereleases
     const filteredReleases = releases.data.filter(release => !release.draft && (ignorePrereleases ? !release.prerelease : true));
 
-    const sortedReleases = nonDraftReleases.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const sortedReleases = filteredReleases.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     latestRelease = sortedReleases[0];
   } catch (error) {
