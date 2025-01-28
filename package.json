@@ -90,7 +90,7 @@
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
     "cloudinary-video-analytics": "1.7.1",
-    "cloudinary-video-player-profiles": "1.1.0",
+    "cloudinary-video-player-profiles": "1.2.0",
     "lodash": "^4.17.21",
     "srt-parser-2": "^1.2.3",
     "uuid": "^11.0.3",
