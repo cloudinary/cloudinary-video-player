@@ -5,10 +5,14 @@ runs:
   main: index.js
 
 inputs:
-  github_token:
+  github-token:
     description: A Github token for the repo, usually `{{ github.token }}`.
     required: false
     default: ${{ github.token }}
+  ignore-prereleases:
+    description: 'Ignore pre-releases'
+    required: false
+    default: 'false'
 
 outputs:
   url:
