@@ -5,11 +5,13 @@ const process = require('process');
 async function fetchLatestRelease() {
   const [owner, repo] = process.env['GITHUB_REPOSITORY'].split('/', 2);
 
-  const octokit = github.getOctokit(core.getInput('github_token', { required: true }));
+  const octokit = github.getOctokit(core.getInput('github-token', { required: true }));
 
   core.info(`Fetching the latest release for \`${owner}/${repo}\``);
 
   let latestRelease;
+
+  const ignorePrereleases = core.getInput('ignore-prereleases') === 'true';
 
   try {
     const releases = await octokit.rest.repos.listReleases({
@@ -17,9 +19,10 @@ async function fetchLatestRelease() {
       repo: repo
     });
 
-    const nonDraftReleases = releases.data.filter(release => !release.draft);
+    // filter out draft releases and conditially filter out prereleases
+    const filteredReleases = releases.data.filter(release => !release.draft && (ignorePrereleases ? !release.prerelease : true));
 
-    const sortedReleases = nonDraftReleases.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    const sortedReleases = filteredReleases.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     latestRelease = sortedReleases[0];
   } catch (error) {

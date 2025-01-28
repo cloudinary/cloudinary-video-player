@@ -36,6 +36,7 @@ jobs:
           release-as: ${{ steps.calculate-edge-version.outputs.next-edge }}
           prerelease: true
           default-branch: master
+          release-search-depth: 20
           changelog-path: CHANGELOG-edge.md
 
       # The logic below handles the npm publication:
@@ -43,9 +44,9 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
-        if: ${{ steps.release.outputs.release_created }}
         # these if statements ensure that a publication only occurs when
         # a new release is created:
+        if: ${{ steps.release.outputs.release_created }}
       - run: npm run build-all
         if: ${{ steps.release.outputs.release_created }}
       - run: npm publish --tag edge
