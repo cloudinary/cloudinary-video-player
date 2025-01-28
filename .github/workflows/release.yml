@@ -17,7 +17,7 @@ jobs:
         uses: ./.github/actions/fetch-latest-release
         with:
           github-token: ${{ github.token }}
-          ignore-prerelease: true
+          ignore-prereleases: true
 
       - name: Release PR
         uses: google-github-actions/release-please-action@v3
