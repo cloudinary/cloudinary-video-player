@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [2.3.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1-edge.2...v2.3.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* improve release flow ([13d31be](https://github.com/cloudinary/cloudinary-video-player/commit/13d31be833a1cc12b6f9b45ab2eb67bb114ae2a8))
+* improve release flow ([da7f05b](https://github.com/cloudinary/cloudinary-video-player/commit/da7f05be80231388e88852d7fc8f938b09458cdf))
+* improve release flow ([226ce13](https://github.com/cloudinary/cloudinary-video-player/commit/226ce13899e7a5489bb634ddd8127f21a35d8e38))
+
+
+### Miscellaneous Chores
+
+* release 2.3.1 ([d9fee33](https://github.com/cloudinary/cloudinary-video-player/commit/d9fee334f23043ff0bdd91203e4238e2cd51f0fc))
+
 ## [2.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0...v2.3.0) (2025-01-07)
 
 
