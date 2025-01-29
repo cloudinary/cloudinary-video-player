@@ -1,7 +1,0 @@
-name: Calculate edge version
-inputs:
-  version:
-    required: true
-runs:
-  using: node20
-  main: index.js

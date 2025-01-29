@@ -1,6 +1,9 @@
 name: 🚀 Release
 
 on:
+  push:
+    branches:
+      - 'master'
   workflow_dispatch:
 
 jobs:
@@ -19,7 +22,6 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
           default-branch: master
-          release-search-depth: 20
 
       # The logic below handles the npm publication:
       - uses: actions/setup-node@v4
