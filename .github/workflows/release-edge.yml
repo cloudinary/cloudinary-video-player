@@ -36,13 +36,12 @@ jobs:
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Bump version
-        run: npm version ${{ steps.calculate-edge-version.outputs.next-edge }} --allow-same-version
+        run: npm version ${{ steps.calculate-edge-version.outputs.next-edge }}
 
       - name: Commit and push version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git commit -am "chore(edge): bump version to ${{ steps.calculate-edge-version.outputs.next-edge }}"
           git push origin master
 
       - run: npm run build-all
