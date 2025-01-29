@@ -12,13 +12,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Get releases
-        id: fetch-latest-release
-        uses: ./.github/actions/fetch-latest-release
-        with:
-          github-token: ${{ github.token }}
-          ignore-prereleases: true
-
       - name: Release PR
         uses: google-github-actions/release-please-action@v3
         id: release
@@ -27,7 +20,6 @@ jobs:
           release-type: node
           default-branch: master
           release-search-depth: 20
-          last-release-sha: ${{ steps.fetch-latest-release.outputs.target_commitish }}
 
       # The logic below handles the npm publication:
       - uses: actions/setup-node@v4
