@@ -6,14 +6,14 @@
 
 ### Bug Fixes
 
-* improve release flow ([13d31be](https://github.com/cloudinary/cloudinary-video-player/commit/13d31be833a1cc12b6f9b45ab2eb67bb114ae2a8))
-* improve release flow ([da7f05b](https://github.com/cloudinary/cloudinary-video-player/commit/da7f05be80231388e88852d7fc8f938b09458cdf))
-* improve release flow ([226ce13](https://github.com/cloudinary/cloudinary-video-player/commit/226ce13899e7a5489bb634ddd8127f21a35d8e38))
+* error with f_auto AV1 ([#799](https://github.com/cloudinary/cloudinary-video-player/issues/799)) ([b172e18](https://github.com/cloudinary/cloudinary-video-player/commit/b172e18e1af802d6de0898354a0abb90c0ad087a))
+* seek-thumbs vtt is being called without credentials ([#794](https://github.com/cloudinary/cloudinary-video-player/issues/794)) ([b82d143](https://github.com/cloudinary/cloudinary-video-player/commit/b82d14345c8939dded35cda4a666c48002e83a67))
 
 
 ### Miscellaneous Chores
 
-* release 2.3.1 ([d9fee33](https://github.com/cloudinary/cloudinary-video-player/commit/d9fee334f23043ff0bdd91203e4238e2cd51f0fc))
+* improve release flow ([13d31be](https://github.com/cloudinary/cloudinary-video-player/commit/13d31be833a1cc12b6f9b45ab2eb67bb114ae2a8))
+
 
 ## [2.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.2.0...v2.3.0) (2025-01-07)
 
