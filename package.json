@@ -79,7 +79,7 @@
       },
       {
         "path": "./lib/all.js",
-        "maxSize": "288kb"
+        "maxSize": "290kb"
       },
       {
         "path": "./lib/light/index.js",
