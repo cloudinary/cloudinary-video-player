@@ -43,6 +43,7 @@ jobs:
           git fetch origin
           if git rev-parse --verify origin/${{ steps.get_next_version.outputs.version }}-edge; then
             git checkout ${{ steps.get_next_version.outputs.version }}-edge
+            git merge master
           else
             git checkout -b ${{ steps.get_next_version.outputs.version }}-edge
           fi
