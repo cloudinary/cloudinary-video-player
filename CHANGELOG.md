@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.3.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1...v2.3.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* add live streaming profile ([#803](https://github.com/cloudinary/cloudinary-video-player/issues/803)) ([110e11a](https://github.com/cloudinary/cloudinary-video-player/commit/110e11a2a27d18af9caa7c5701ef91ca866588f1))
+
 ## [2.3.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1-edge.2...v2.3.1) (2025-01-29)
 
 
