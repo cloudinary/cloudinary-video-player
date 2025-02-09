@@ -29,21 +29,21 @@ export default defineConfig({
     /* Configure projects for major browsers */
     projects: [
         {
-            name: 'setup esm deploy url',
-            testMatch: /test\/Setup\/global\.setup\.ts/,
+            name: 'Setup esm deploy url',
+            testMatch: 'test/Setup/global.setup.ts',
         },
         {
-            name: 'Google Chrome ESM',
-            testMatch: /test\/e2e\/specs\/ESM\/.*(\.spec.ts)/,
+            name: 'ESM',
+            testMatch: 'test/e2e/specs/ESM/**/*.spec.ts',
             use: {
                 ...devices['Desktop Chrome'],
                 channel: 'chrome',
             },
-            dependencies: ['setup esm deploy url'],
+            dependencies: ['Setup esm deploy url'],
         },
         {
-            name: 'Google Chrome Non ESM',
-            testMatch: /test\/e2e\/specs\/NonESM\/.*(\.spec.ts)/,
+            name: 'Non ESM',
+            testMatch: 'test/e2e/specs/NonESM/**/*.spec.ts',
             use: {
                 ...devices['Desktop Chrome'],
                 channel: 'chrome',
