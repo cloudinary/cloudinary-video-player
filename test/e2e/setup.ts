@@ -1,18 +1,15 @@
 import { ExampleLinkType } from './types/exampleLinkType';
-import { chromium, expect, Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 import { ExampleLinkName } from './testData/ExampleLinkNames';
 import { ESM_URL } from './testData/esmUrl';
 
-async function globalSetup() {
+async function globalSetup(page: Page) {
     if (process.env.PREVIEW_URL) {
-        const browser = await chromium.launch();
-        const page = await browser.newPage();
         const link: ExampleLinkType = {
             name: ExampleLinkName.AdaptiveStreaming,
             endpoint: 'adaptive-streaming',
         };
         await waitForDeployPreviewUrl(link, page);
-        await browser.close();
     }
 }
 
