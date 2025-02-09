@@ -21,6 +21,6 @@ async function waitForDeployPreviewUrl(link: ExampleLinkType, page: Page): Promi
         await page.goto(ESM_URL);
         const linkLocator = page.getByRole('link', { name: link.name, exact: true });
         await expect(linkLocator).toBeVisible({ timeout: 10000 });
-    }).toPass({ intervals: [1_000], timeout: 120000 });
+    }).toPass({ intervals: [1_000], timeout: 150000 });
 }
 export default globalSetup;
