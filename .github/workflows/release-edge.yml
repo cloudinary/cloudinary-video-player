@@ -45,7 +45,7 @@ jobs:
             git checkout ${{ steps.get_next_version.outputs.version }}-edge
             git merge master -X ours --no-edit
           else
-            git checkout -b ${{ steps.get_next_version.outputs.version }}-edge
+            git checkout master -b ${{ steps.get_next_version.outputs.version }}-edge
           fi
 
       - name: Bump version
