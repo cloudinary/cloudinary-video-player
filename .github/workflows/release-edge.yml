@@ -63,7 +63,8 @@ jobs:
 
       - run: npm run build-all
 
-      - run: npm publish --tag edge
+      - name: Publish ${{ steps.bump_version.outputs.new_version }}
+        run: npm publish --tag edge
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
