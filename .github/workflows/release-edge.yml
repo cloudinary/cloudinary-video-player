@@ -43,7 +43,7 @@ jobs:
           git fetch origin
           if git rev-parse --verify origin/${{ steps.get_next_version.outputs.version }}-edge; then
             git checkout ${{ steps.get_next_version.outputs.version }}-edge
-            git merge master --allow-unrelated-histories
+            git merge master -X ours --no-edit
           else
             git checkout -b ${{ steps.get_next_version.outputs.version }}-edge
           fi
@@ -63,7 +63,8 @@ jobs:
 
       - run: npm run build-all
 
-      - run: npm publish --tag edge
+      - name: Publish ${{ steps.bump_version.outputs.new_version }}
+        run: npm publish --tag edge
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

@@ -4,8 +4,6 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-    testMatch: /test\/e2e\/specs\/.*(\.spec.ts)/,
-
     timeout: 150000,
     /* Run tests in files in parallel */
     fullyParallel: true,
@@ -31,7 +29,21 @@ export default defineConfig({
     /* Configure projects for major browsers */
     projects: [
         {
-            name: 'Google Chrome',
+            name: 'Setup esm deploy url',
+            testMatch: 'test/Setup/global.setup.ts',
+        },
+        {
+            name: 'ESM',
+            testMatch: 'test/e2e/specs/ESM/**/*.spec.ts',
+            use: {
+                ...devices['Desktop Chrome'],
+                channel: 'chrome',
+            },
+            dependencies: ['Setup esm deploy url'],
+        },
+        {
+            name: 'Non ESM',
+            testMatch: 'test/e2e/specs/NonESM/**/*.spec.ts',
             use: {
                 ...devices['Desktop Chrome'],
                 channel: 'chrome',
