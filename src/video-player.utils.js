@@ -108,8 +108,9 @@ export const overrideDefaultVideojsComponents = () => {
   const Player = videojs.getComponent('Player');
   let children = Player.prototype.options_.children;
 
-  // Add TitleBar as default
-  children.push('titleBar');
+  if (children.indexOf('titleBar') === -1) {
+    children.push('titleBar');
+  }
 
   const ControlBar = videojs.getComponent('ControlBar');
   if (ControlBar) {
