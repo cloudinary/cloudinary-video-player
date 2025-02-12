@@ -255,6 +255,11 @@ $icon-font-path: '../icon-font' !default;
       &.vjs-volume-panel-horizontal {
         max-width: 8em;
       }
+
+      .vjs-slider {
+        background-color: color-mix(in srgb, var(--color-text) 10%, transparent);
+        box-shadow: 0 0 1px 1px color-mix(in srgb, var(--color-text) 80%, transparent) inset;
+      }
     }
 
     .vjs-progress-control {

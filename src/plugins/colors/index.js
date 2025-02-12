@@ -17,10 +17,6 @@ const playerColors = `
     background-color: --base-color;
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-slider {
-    background-color: rgba(--text-color, 0.2);
-  }
-
   .PLAYER-CLASS-PREFIX .vjs-load-progress {
     background: rgba(--text-color, 0.3);
   }
