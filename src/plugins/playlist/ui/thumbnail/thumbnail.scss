@@ -22,15 +22,13 @@
     bottom: 0;
     left: 0;
     background: linear-gradient(to top, var(--color-base), transparent 80%);
-    opacity: 0.6;
+    opacity: 0.9;
   }
 
   &.cld-plw-panel-item-active {
     border: 1px solid var(--color-accent);
     box-sizing: border-box;
-    .cld-plw-item-info-wrap {
-      color: var(--color-accent);
-    }
+    box-shadow: 0 0 3em -0.5em var(--color-accent) inset;
   }
 }
 
