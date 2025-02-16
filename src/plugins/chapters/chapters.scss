@@ -41,7 +41,9 @@
     transform: translateX(-50%);
     bottom: 2.7em;
     position: absolute;
-    text-shadow: 0 0 4px color-mix(in srgb, var(--color-base) 40%, transparent);
+    padding: 0 0.3em;
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--color-base),  0 0 1px var(--color-base),  0 0 1px var(--color-base);
     &:not(:empty) ~ .vjs-vtt-thumbnail-display {
       bottom: 4em;
     }

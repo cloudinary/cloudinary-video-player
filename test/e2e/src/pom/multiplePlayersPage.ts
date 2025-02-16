@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
 import { VideoComponent } from '../../components/videoComponent';
 import { BasePage } from './BasePage';
-const MULTIPLE_PLAYERS_PAGE_PLAYER_1_VIDEO_SELECTOR = '//*[@id="vjs_video_3_html5_api"]';
-const MULTIPLE_PLAYERS_PAGE_PLAYER_2_VIDEO_SELECTOR = '//*[@id="vjs_video_627_html5_api"]';
-const MULTIPLE_PLAYERS_PAGE_PLAYER_3_VIDEO_SELECTOR = '//*[@id="vjs_video_1229_html5_api"]';
+const MULTIPLE_PLAYERS_PAGE_PLAYER_1_VIDEO_SELECTOR = '//*[@id="player-1_html5_api"]';
+const MULTIPLE_PLAYERS_PAGE_PLAYER_2_VIDEO_SELECTOR = '//*[@id="player-2_html5_api"]';
+const MULTIPLE_PLAYERS_PAGE_PLAYER_3_VIDEO_SELECTOR = '//*[@id="player-3_html5_api"]';
 
 /**
  * Video player examples colors API page object

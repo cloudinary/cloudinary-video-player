@@ -16,6 +16,9 @@
   padding: clamp(1.3em, 4cqw, 2em);
   pointer-events: none;
   container-type: inline-size;
+  text-shadow: 0 0 0.5em var(--color-base);
+  color: var(--color-text);
+  background-image: linear-gradient(color-mix(in srgb, var(--color-base) 70%, transparent), transparent 100%);
 
   .vjs-title-bar-title {
     width: 100%;
