@@ -7,7 +7,6 @@ $icon-font-path: '../icon-font' !default;
 
 // Import Video.js style
 @import '~video.root.js/dist/video-js.min.css';
-@include meta.load-css('mixins/skin');
 @include meta.load-css('icons');
 @include meta.load-css('components/loading-button.scss');
 @include meta.load-css('components/text-tracks.scss');
@@ -34,11 +33,12 @@ $icon-font-path: '../icon-font' !default;
 
   // focus and hover states
   .vjs-control,
-  .vjs-big-play-button,
   .vjs-icon-close,
   .vjs-volume-bar {
-    &:focus {
+    &:focus,
+    &:focus:before {
       outline: none;
+      text-shadow: 0 0 1em var(--color-text);
     }
   }
 
