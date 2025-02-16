@@ -66,7 +66,7 @@ cloudinary.videoPlayer('player', {
 ## Documentation
 - [Documentation](https://cloudinary.com/documentation/cloudinary_video_player)
 - [API Reference](https://cloudinary.com/documentation/video_player_api_reference)
-- [Demo](https://demo.cloudinary.com/video-player/)
+- [Demos](https://cloudinary.com/demos?filter=videos)
 - [Code Examples](https://cloudinary.github.io/cloudinary-video-player/)
 - [Video Player Studio](https://studio.cloudinary.com/) 
 
