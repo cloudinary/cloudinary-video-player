@@ -53,11 +53,6 @@ const playerColors = `
     color: rgba(--text-color, 0.3);
   }
 
-  .PLAYER-CLASS-PREFIX .vjs-title-bar {
-    color: --text-color;
-    background-image: linear-gradient(rgba(--base-color, 0.4), rgba(255, 255, 255, 0) 100%);
-  }
-
   .PLAYER-CLASS-PREFIX .vjs-recommendations-overlay {
     color: --text-color;
     background-color: rgba(--base-color, 0.4);

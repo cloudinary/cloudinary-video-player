@@ -77,7 +77,7 @@
   box-sizing: border-box;
 
   .cld-video-player-skin-dark & {
-    text-shadow: 1px 1px 1px rgba(#000, 0.3);
+    text-shadow: 0 0 1px var(--color-base);
 
     @media only screen and (max-width: 768px) {
       background: var(--color-base);
