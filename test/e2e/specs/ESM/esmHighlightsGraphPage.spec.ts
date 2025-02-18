@@ -6,9 +6,12 @@ import { waitForPageToLoadWithTimeout } from '../../src/helpers/waitForPageToLoa
 import { ESM_URL } from '../../testData/esmUrl';
 
 const link = getEsmLinkByName(ExampleLinkName.HighlightsGraph);
-vpTest(`Test if video on ESM highlights graph page is playing as expected`, async ({ page, pomPages }) => {
-    await test.step('Navigate to ESM highlights graph page by clicking on link', async () => {
+
+vpTest.only(`Test if video on ESM highlights graph page is playing as expected`, async ({ page, pomPages }) => {
+    await test.step('Navigate to ESM', async () => {
         await page.goto(ESM_URL);
+    });
+    await test.step('Navigate to highlights graph page by clicking on link', async () => {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
