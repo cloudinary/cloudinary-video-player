@@ -1,5 +1,5 @@
 import { vpTest } from '../../fixtures/vpTest';
-import { testVideoIsPlaying } from '../commonSpecs/mainPageVideoPlaying';
+import { testMainPageVideoIsPlaying } from '../commonSpecs/mainPageVideoPlaying';
 import { ESM_URL } from '../../testData/esmUrl';
 
 /**
@@ -8,5 +8,5 @@ import { ESM_URL } from '../../testData/esmUrl';
  */
 vpTest(`Test if video on ESM main page can play as expected`, async ({ page, pomPages }) => {
     await page.goto(ESM_URL);
-    await testVideoIsPlaying(page, pomPages.mainPage.videoMainPage);
+    await testMainPageVideoIsPlaying(page, pomPages.mainPage.videoMainPage);
 });
