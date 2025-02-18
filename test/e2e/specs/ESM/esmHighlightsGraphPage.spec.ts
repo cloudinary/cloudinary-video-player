@@ -7,7 +7,7 @@ import { ESM_URL } from '../../testData/esmUrl';
 
 const link = getEsmLinkByName(ExampleLinkName.HighlightsGraph);
 
-vpTest.only(`Test if video on ESM highlights graph page is playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if video on ESM highlights graph page is playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to ESM', async () => {
         await page.goto(ESM_URL);
     });
