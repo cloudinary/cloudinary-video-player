@@ -1,6 +1,15 @@
 # Changelog
 
 
+## [2.3.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.2...v2.3.3) (2025-02-16)
+
+
+### Bug Fixes
+
+* Contrast (Minimum) (WCAG SC 1.4.3) ([#817](https://github.com/cloudinary/cloudinary-video-player/issues/817)) ([97e36f5](https://github.com/cloudinary/cloudinary-video-player/commit/97e36f5234bf71f5b16162eae00dcc1adcf1928b))
+* Focus Visible (WCAG 2.4.7) ([#814](https://github.com/cloudinary/cloudinary-video-player/issues/814)) ([229fdfb](https://github.com/cloudinary/cloudinary-video-player/commit/229fdfb7eadbeaff9d294d714a46123c7c238082))
+* Non-text contrast (WCAG 1.4.11) ([#816](https://github.com/cloudinary/cloudinary-video-player/issues/816)) ([d78b672](https://github.com/cloudinary/cloudinary-video-player/commit/d78b67286657ac05b2bd0025c6fe7d92b45e6080))
+
 ## [2.3.2](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.1...v2.3.2) (2025-01-30)
 
 
