@@ -22,7 +22,7 @@ import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
-import { extendCloudinaryConfig, normalizeOptions, isRawUrl } from './plugins/cloudinary/common';
+import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
@@ -55,6 +55,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videoElement = getResolveVideoElement(elem);
 
     this.options = extractOptions(this.videoElement, initOptions);
+    this.isLiveStream = this.options.videojsOptions.type === 'live';
 
     this._videojsOptions = this.options.videojsOptions;
 
@@ -134,6 +135,28 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.clearTimeout(this.reTryId);
   };
 
+  _setRetryForLiveStream(delaySeconds = 10) {
+    const tempVideo = document.createElement('video');
+    tempVideo.setAttribute('crossorigin', 'anonymous');
+    const liveStreamUrl = this.currentSourceUrl();
+
+    const retryLiveStreamLoad = () => {
+      setTimeout(() => {
+        tempVideo.src = liveStreamUrl;
+        tempVideo.load();
+      }, delaySeconds * 1000);
+    };
+
+    tempVideo.onprogress = () => {
+      tempVideo.onerror = null;
+      tempVideo.oncanplaythrough = null;
+      this.source(liveStreamUrl);
+    };
+    tempVideo.onerror = retryLiveStreamLoad;
+
+    retryLiveStreamLoad();
+  }
+
   _setVideoJsListeners(ready) {
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
@@ -142,14 +165,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
         /*
          error codes :
-           3 - media playback was aborted due to a corruption problem
-           4 - media error, media source not supported
+         3 - media playback was aborted due to a corruption problem
+         4 - media error, media source not supported
          */
         const isCorrupted = error.code === 3 && videojs.browser.IS_SAFARI;
 
         if ([isCorrupted, error.code === 4].includes(true) && [SOURCE_TYPE.AUDIO, SOURCE_TYPE.VIDEO].includes(type)) {
-          this.videojs.error(null);
-          Utils.handleCldError(this, this.playerOptions);
+          if (this.isLiveStream) {
+            this.videojs.error({
+              code: ERROR_CODE.CUSTOM,
+              message: 'Live Stream not started',
+            });
+            this._setRetryForLiveStream();
+          } else {
+            this.videojs.error(null);
+            Utils.handleCldError(this, this.playerOptions);
+          }
         } else {
           this._clearTimeOut();
         }
@@ -175,7 +206,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         ready(this);
       }
     });
-
   }
 
   _initPlugins () {
