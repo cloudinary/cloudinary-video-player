@@ -6,7 +6,7 @@ import { testAudioPlayerPageVideosArePlaying } from '../commonSpecs/audioPlayerP
 
 const link = getEsmLinkByName(ExampleLinkName.AudioPlayer);
 
-vpTest(`est if 2 videos on ESM audio player page are playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if 2 videos on ESM audio player page are playing as expected`, async ({ page, pomPages }) => {
     await page.goto(ESM_URL);
     await testAudioPlayerPageVideosArePlaying(page, pomPages, link);
 });
