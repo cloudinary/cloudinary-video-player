@@ -23,11 +23,14 @@ import { isValidPlayerConfig, isValidSourceConfig } from './validators/validator
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
+import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
 // #if (!process.env.WEBPACK_BUILD_LIGHT)
 import qualitySelector from './components/qualitySelector/qualitySelector.js';
 // #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
+
+const RETRY_DEFAULT_TIMEOUT = 5 * 1000;
 
 // Register all plugins
 Object.keys(plugins).forEach((key) => {
@@ -49,8 +52,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   constructor(elem, initOptions, ready) {
     super();
-
-    this.nbCalls = 0;
 
     this.videoElement = getResolveVideoElement(elem);
 
@@ -131,33 +132,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _clearTimeOut = () => {
+  _clearReTryVideoTimeout = () => {
     this.videojs.clearTimeout(this.reTryId);
   };
 
-  _setRetryForLiveStream(delaySeconds = 10) {
-    const tempVideo = document.createElement('video');
-    tempVideo.setAttribute('crossorigin', 'anonymous');
-    const liveStreamUrl = this.currentSourceUrl();
-
-    const retryLiveStreamLoad = () => {
-      setTimeout(() => {
-        tempVideo.src = liveStreamUrl;
-        tempVideo.load();
-      }, delaySeconds * 1000);
-    };
-
-    tempVideo.onprogress = () => {
-      tempVideo.onerror = null;
-      tempVideo.oncanplaythrough = null;
-      this.source(liveStreamUrl);
-    };
-    tempVideo.onerror = retryLiveStreamLoad;
-
-    retryLiveStreamLoad();
-  }
-
   _setVideoJsListeners(ready) {
+
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
       if (error) {
@@ -176,13 +156,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
               code: ERROR_CODE.CUSTOM,
               message: 'Live Stream not started',
             });
-            this._setRetryForLiveStream();
+            this.reloadVideoUntilAvailable();
           } else {
             this.videojs.error(null);
             Utils.handleCldError(this, this.playerOptions);
           }
         } else {
-          this._clearTimeOut();
+          this._clearReTryVideoTimeout();
         }
       }
     });
@@ -190,13 +170,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.tech_.on(PLAYER_EVENT.RETRY_PLAYLIST, () => {
       const mediaRequestsErrored = get(this.videojs, 'hls.stats.mediaRequestsErrored', 0);
       if (mediaRequestsErrored > 0) {
-        this._clearTimeOut();
+        this._clearReTryVideoTimeout();
         Utils.handleCldError(this, this.playerOptions);
       }
     });
 
-    this.videojs.on(PLAYER_EVENT.PLAY, this._clearTimeOut);
-    this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearTimeOut);
+    this.videojs.on(PLAYER_EVENT.PLAY, this._clearReTryVideoTimeout);
+    this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._clearReTryVideoTimeout);
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
 
     this.videojs.ready(() => {
@@ -445,8 +425,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  reTryVideo(maxNumberOfCalls, timeout) {
-    if (!this.isVideoReady()) {
+  reTryVideo(maxNumberOfCalls = Number.POSITIVE_INFINITY, timeout = RETRY_DEFAULT_TIMEOUT) {
+    if (typeof this.nbCalls !== 'number') {
+      this.nbCalls = 0;
+    }
+
+    if (!isVideoInReadyState(this.videojs.readyState())) {
       if (this.nbCalls < maxNumberOfCalls) {
         this.nbCalls++;
         this.reTryId = this.videojs.setTimeout(() => this.reTryVideo(maxNumberOfCalls, timeout), timeout);
@@ -454,17 +438,26 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         let e = new Error('Video is not ready please try later');
         this.videojs.trigger('error', e);
       }
+    } else {
+      this.nbCalls = 0;
     }
   }
 
-  isVideoReady() {
-    const s = this.videojs.readyState();
-    if (s >= (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4)) {
-      this.nbCalls = 0;
-      return true;
+  reloadVideoUntilAvailable(maxNumberOfCalls = Number.POSITIVE_INFINITY, timeout = RETRY_DEFAULT_TIMEOUT) {
+    if (typeof this.reloadVideoRetries !== 'number') {
+      this.reloadVideoRetries = 0;
     }
 
-    return false;
+    if (this.reloadVideoRetries < maxNumberOfCalls) {
+      this.videojs.setTimeout(() => {
+        const videoUrl = this.currentSourceUrl();
+        checkIfVideoIsAvailable(videoUrl, this.isLiveStream ? 'live' : 'default')
+          .then(() => this.source(videoUrl))
+          .catch(() => this.reloadVideoUntilAvailable(maxNumberOfCalls, timeout));
+      }, timeout);
+    } else {
+      this.videojs.trigger('error', new Error('Sorry, we could not load your video'));
+    }
   }
 
   _initAutoplay() {
@@ -587,7 +580,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.withCredentials = true;
     }
 
-    clearTimeout(this.reTryId);
+    this._clearReTryVideoTimeout();
     this.nbCalls = 0;
     const maxTries = this.videojs.options_.maxTries || 3;
     const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
