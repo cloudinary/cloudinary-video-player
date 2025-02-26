@@ -176,10 +176,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs.on(PLAYER_EVENT.PLAY, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._resetReTryVideoState);
-    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (...args) => {
-      this._onSourceChange(...args);
-      this.isLiveStream = args[1].source.resourceConfig().type === 'live';
-    });
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
 
     this.videojs.ready(() => {
       this._onReady();
@@ -506,11 +503,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _onSourceChange(e, { sourceOptions }) {
+  _onSourceChange(e, { source, sourceOptions }) {
     this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
+    this.isLiveStream = source.resourceConfig().type === 'live';
   }
 
   _setExtendedEvents() {
