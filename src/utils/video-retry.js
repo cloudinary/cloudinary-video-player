@@ -16,6 +16,6 @@ const checkIfVideoIsAvailable = (videoUrl, videoType = 'default') => {
 
 const isVideoInReadyState = (readyState) => {
   return readyState >= (/iPad|iPhone|iPod/.test(navigator.userAgent) ? 1 : 4);
-}
+};
 
 export { checkIfVideoIsAvailable, isVideoInReadyState };

@@ -56,7 +56,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videoElement = getResolveVideoElement(elem);
 
     this.options = extractOptions(this.videoElement, initOptions);
-    this.isLiveStream = this.options.videojsOptions.type === 'live';
 
     this._videojsOptions = this.options.videojsOptions;
 
@@ -134,7 +133,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _resetReTryVideoState = () => {
     this.reTryVideoStateRetriesCount = 0;
-    this.videojs.clearTimeout(this.reTryVideStateTimeoutId);
+    this.videojs.clearTimeout(this.reTryVideoStateTimeoutId);
   };
 
   _setVideoJsListeners(ready) {
@@ -177,7 +176,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     this.videojs.on(PLAYER_EVENT.PLAY, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._resetReTryVideoState);
-    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (...args) => {
+      this._onSourceChange(...args);
+      this.isLiveStream = args[1].source.resourceConfig().type === 'live';
+    });
 
     this.videojs.ready(() => {
       this._onReady();
@@ -433,7 +435,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (!isVideoInReadyState(this.videojs.readyState())) {
       if (this.reTryVideoStateRetriesCount < maxNumberOfCalls) {
         this.reTryVideoStateRetriesCount++;
-        this.reTryVideStateTimeoutId = this.videojs.setTimeout(() => this.reTryVideoStateUntilAvailable(maxNumberOfCalls, timeout), timeout);
+        this.reTryVideoStateTimeoutId = this.videojs.setTimeout(() => this.reTryVideoStateUntilAvailable(maxNumberOfCalls, timeout), timeout);
       } else {
         let e = new Error('Video is not ready please try later');
         this.videojs.trigger('error', e);
@@ -443,13 +445,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
+  _resetReloadVideo = () => {
+    this.reloadVideoRetriesCount = 0;
+    this.videojs.clearTimeout(this.reloadVideoTimeoutId);
+  };
+
   reloadVideoUntilAvailable(maxNumberOfCalls = Number.POSITIVE_INFINITY, timeout = RETRY_DEFAULT_TIMEOUT) {
     if (typeof this.reloadVideoRetriesCount !== 'number') {
       this.reloadVideoRetriesCount = 0;
     }
 
     if (this.reloadVideoRetriesCount < maxNumberOfCalls) {
-      this.videojs.setTimeout(() => {
+      this.reloadVideoRetriesCount++;
+      this.reloadVideoTimeoutId = this.videojs.setTimeout(() => {
         const videoUrl = this.currentSourceUrl();
         checkIfVideoIsAvailable(videoUrl, this.isLiveStream ? 'live' : 'default')
           .then(() => this.source(videoUrl))
@@ -580,7 +588,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       options.withCredentials = true;
     }
 
+    this._resetReloadVideo();
     this._resetReTryVideoState();
+
     const maxTries = this.videojs.options_.maxTries || 3;
     const videoReadyTimeout = this.videojs.options_.videoTimeout || 55000;
     this.reTryVideoStateUntilAvailable(maxTries, videoReadyTimeout);
