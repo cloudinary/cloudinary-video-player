@@ -39,7 +39,8 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'seekThumbnails',
   'aiHighlightsGraph',
   'chapters',
-  'queryParams'
+  'queryParams',
+  'type'
 ]);
 
 export const CLOUDINARY_CONFIG_PARAM = [

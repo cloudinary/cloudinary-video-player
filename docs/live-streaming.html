@@ -26,32 +26,11 @@
 
   <script type="text/javascript">
     window.addEventListener('load', () => {
-      let videoPlayerInstance = null;
-
-      document.querySelector('#init_video_player').addEventListener('click', () => {
-        const videoTagWrapper = document.getElementById('video_live_streaming_wrapper');
-
-        if (videoPlayerInstance) {
-          videoPlayerInstance.dispose();
-          videoPlayerInstance = null;
-          videoTagWrapper.innerHTML = '';
-        }
-
-        const videoElement = document.createElement("video");
-        videoElement.id = 'player';
-        videoElement.width = 500;
-        videoElement.classList.add('cld-video-player');
-        videoTagWrapper.appendChild(videoElement);
-
-        const cloudName = document.getElementById('cloud_name').value;
-        const liveStreamingUrl = document.getElementById('live_streaming_url').value;
-        videoPlayerInstance = cloudinary.videoPlayer('player', {
-          cloudName,
-          publicId: liveStreamingUrl,
-          type: 'live',
-          controls: true,
-          sourceTypes: ['hls'],
-        });
+      cloudinary.videoPlayer('player', {
+        cloudName: 'demo',
+        publicId: 'https://res.cloudinary.com/demo/video/live/sea_turtle',
+        type: 'live',
+        sourceTypes: ['hls'],
       });
     }, false);
   </script>
@@ -65,19 +44,7 @@
     <h1>Cloudinary Video Player</h1>
     <h3 class="mb-4">Live Streaming</h3>
 
-    <p>Provide your cloud name and active live streaming url to see output directly inside Video Player</p>
-
-    <div>
-      <div>
-        <label for="cloud_name">Cloud name</label> <input type="text" id="cloud_name" />
-      </div>
-      <div>
-        <label for="live_streaming_url">Live Streaming URL</label> <input type="text" id="live_streaming_url" />
-      </div>
-      <button class="mb-4" type="button" id="init_video_player">Initiate Video Player</button>
-    </div>
-
-    <div id="video_live_streaming_wrapper"></div>
+    <video id="player" controls muted width="500" class="cld-video-player"></video>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -89,12 +56,10 @@
         &lt;video id="player" class="cld-video-player"&gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-
         const player = cloudinary.videoPlayer('player', {
           cloudName: 'YOUR_CLOUD_NAME',
           publicId: 'LIVE_STREAMING_URL',
           type: 'live',
-          controls: true,
           sourceTypes: ['hls'],
         });
       </code>
