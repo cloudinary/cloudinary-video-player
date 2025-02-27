@@ -2,29 +2,27 @@
   // Default captions styles
   // See styled-text-tracks plugin for more options
   .vjs-text-track-display {
-    margin: auto;
-    bottom: 0 !important;
-    > div {
-      margin: 3% !important;
-    }
+    // When control-bar is shown
+    bottom: 5em;
+    z-index: 2;
     // Word highlight
     &.cld-paced-text-tracks b {
       color: var(--color-accent);
     }
   }
+  &.vjs-controls-disabled .vjs-text-track-display,
+  &.vjs-user-inactive.vjs-playing .vjs-text-track-display {
+    // When control-bar is hidden/disabled
+    bottom: 1em;
+  }
+
   .vjs-text-track-cue {
-    top: auto !important;
-    // Position when control-bar is visible
-    bottom: 3.4rem !important;
+    max-width: 100%;
     > div {
       display: inline-block !important;
       padding: 0.1em 0.3em;
       background-color: rgba(0, 0, 0, 0.5) !important;
     }
-  }
-  &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-text-track-cue {
-    // Position when control-bar is not visible
-    bottom: 1.5rem !important;
   }
 
   // Word highlight - default style
