@@ -3,7 +3,6 @@ import Utils from './utils';
 import defaults from './config/defaults';
 import {
   CLOUDINARY_PARAMS,
-  DEFAULT_HLS_OPTIONS,
   PLAYER_PARAMS,
   FLUID_CLASS_NAME,
   AUTO_PLAY_MODE
@@ -81,8 +80,8 @@ export const extractOptions = (elem, options) => {
   if (videojs.dom.hasClass(elem, FLUID_CLASS_NAME) || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
-  // Default HLS options < Default options < Markup options < Player options
-  options = Object.assign({}, DEFAULT_HLS_OPTIONS, defaults, elemOptions, options);
+  // Default options < Markup options < Player options
+  options = videojs.obj.merge({}, defaults, elemOptions, options);
 
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
