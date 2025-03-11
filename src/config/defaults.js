@@ -32,7 +32,7 @@ export default {
     handlePartialData: false,
     nativeTextTracks: false,
     vhs: {
-      overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
+      overrideNative: videojs?.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
     }
   },
   disableSeekWhileScrubbingOnMobile: true
