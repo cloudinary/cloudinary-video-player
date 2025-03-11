@@ -29,7 +29,11 @@ export default {
   allowUsageReport: true,
   playedEventPercents: [25, 50, 75, 100],
   html5: {
-    nativeTextTracks: false
+    handlePartialData: false,
+    nativeTextTracks: false,
+    vhs: {
+      overrideNative: videojs?.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
+    }
   },
   disableSeekWhileScrubbingOnMobile: true
 };

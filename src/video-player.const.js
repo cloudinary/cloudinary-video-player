@@ -1,5 +1,3 @@
-import videojs from 'video.js';
-
 export const CLOUDINARY_PARAMS = [
   'cloudinaryConfig',
   'transformation',
@@ -58,15 +56,6 @@ export const CLOUDINARY_CONFIG_PARAM = [
   'use_root_path',
   'auth_token'
 ];
-
-export const DEFAULT_HLS_OPTIONS = {
-  html5: {
-    handlePartialData: false,
-    vhs: {
-      overrideNative: videojs && videojs.browser ? !videojs.browser.IS_IOS && !videojs.browser.IS_SAFARI : true
-    }
-  }
-};
 
 export const FLUID_CLASS_NAME = 'cld-fluid';
 
