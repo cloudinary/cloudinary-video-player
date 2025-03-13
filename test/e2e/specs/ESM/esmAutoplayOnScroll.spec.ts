@@ -6,7 +6,7 @@ import { testAutoplayOnScrollPageVideoIsPlaying } from '../commonSpecs/autoplayO
 
 const link = getEsmLinkByName(ExampleLinkName.AutoplayOnScroll);
 
-vpTest(`Test if video on ESM autoplay on scroll page is playing as expected\``, async ({ page, pomPages }) => {
+vpTest(`Test if video on ESM autoplay on scroll page is playing as expected`, async ({ page, pomPages }) => {
     await page.goto(ESM_URL);
     await testAutoplayOnScrollPageVideoIsPlaying(page, pomPages, link);
 });
