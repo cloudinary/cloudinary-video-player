@@ -1,6 +1,15 @@
 # Changelog
 
 
+## [2.3.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.3...v2.3.4) (2025-03-13)
+
+
+### Bug Fixes
+
+* add live stream error screen & auto refresh ([#819](https://github.com/cloudinary/cloudinary-video-player/issues/819)) ([9fc9f7a](https://github.com/cloudinary/cloudinary-video-player/commit/9fc9f7a5251529203e5b8ecbd0e88d61b6110578))
+* default config merge with user config ([#827](https://github.com/cloudinary/cloudinary-video-player/issues/827)) ([19da7aa](https://github.com/cloudinary/cloudinary-video-player/commit/19da7aa26c708689030455dbdd38dbd9514e0849))
+* live stream captions display ([#826](https://github.com/cloudinary/cloudinary-video-player/issues/826)) ([0b72dbb](https://github.com/cloudinary/cloudinary-video-player/commit/0b72dbb77542bd59a095184e24d6b462efae66c1))
+
 ## [2.3.3](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.2...v2.3.3) (2025-02-16)
 
 
