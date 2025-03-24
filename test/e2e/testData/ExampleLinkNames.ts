@@ -16,7 +16,6 @@ export enum ExampleLinkName {
     CustomErrors = 'Custom Errors',
     DisplayConfigurations = 'Display Configurations',
     DebugMode = 'Debug mode',
-    ESMDebugMode = 'Debug',
     ESModuleImports = 'ES Module Imports',
     FloatingPlayer = 'Floating Player',
     FluidLayouts = 'Fluid Layouts',

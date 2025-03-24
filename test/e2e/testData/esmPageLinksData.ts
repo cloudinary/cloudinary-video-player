@@ -18,7 +18,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.Components, endpoint: 'components' },
     { name: ExampleLinkName.CustomErrors, endpoint: 'custom-cld-errors' },
     { name: ExampleLinkName.DisplayConfigurations, endpoint: 'ui-config' },
-    { name: ExampleLinkName.ESMDebugMode, endpoint: 'debug' },
+    { name: ExampleLinkName.DebugMode, endpoint: 'debug' },
     { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player' },
     { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid' },
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles' },
