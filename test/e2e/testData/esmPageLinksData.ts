@@ -6,6 +6,7 @@ import { ExampleLinkName } from './ExampleLinkNames';
  */
 export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.AdaptiveStreaming, endpoint: 'adaptive-streaming' },
+    { name: ExampleLinkName.AIHighlightsGraph, endpoint: 'ai-highlights-graph' },
     { name: ExampleLinkName.Analytics, endpoint: 'analytics' },
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio' },
@@ -21,7 +22,6 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player' },
     { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid' },
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles' },
-    { name: ExampleLinkName.HighlightsGraph, endpoint: 'highlights-graph' },
     { name: ExampleLinkName.InteractionArea, endpoint: 'interaction-area' },
     { name: ExampleLinkName.MultiplePlayers, endpoint: 'multiple-players' },
     { name: ExampleLinkName.Playlist, endpoint: 'playlist' },
@@ -34,7 +34,6 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.ShoppableVideos, endpoint: 'shoppable' },
     { name: ExampleLinkName.SubtitlesAndCaptions, endpoint: 'subtitles-and-captions' },
     { name: ExampleLinkName.VideoTransformations, endpoint: 'transformations' },
-    { name: ExampleLinkName.UIConfig, endpoint: 'ui-config' },
     { name: ExampleLinkName.VASTAndVPAIDSupport, endpoint: 'vast-vpaid' },
     { name: ExampleLinkName.VR360Videos, endpoint: '360' },
     { name: ExampleLinkName.AllBuild, endpoint: 'all' },
