@@ -6,7 +6,7 @@ import { ExampleLinkName } from './ExampleLinkNames';
  */
 export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.AdaptiveStreaming, endpoint: 'adaptive-streaming' },
-    { name: ExampleLinkName.AIHighlightsGraph, endpoint: 'ai-highlights-graph' },
+    { name: ExampleLinkName.AIHighlightsGraph, endpoint: 'highlights-graph' },
     { name: ExampleLinkName.Analytics, endpoint: 'analytics' },
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio' },
