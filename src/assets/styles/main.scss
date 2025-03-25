@@ -215,7 +215,7 @@ $icon-font-path: '../icon-font' !default;
     opacity: 0;
   }
 
-  &::before {
+  &.vjs-controls-enabled::before {
     content: '';
     pointer-events: none;
     position: absolute;
@@ -230,8 +230,8 @@ $icon-font-path: '../icon-font' !default;
     font-size: 120%;
     display: none;
   }
-  &.vjs-audio-only-mode::before,
-  &.vjs-has-started::before {
+  &.vjs-has-started::before,
+  &.vjs-audio-only-mode::before {
     display: flex;
     transition: opacity 0.1s;
   }
