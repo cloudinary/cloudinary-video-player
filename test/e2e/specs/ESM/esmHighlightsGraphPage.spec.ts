@@ -5,7 +5,7 @@ import { test } from '@playwright/test';
 import { waitForPageToLoadWithTimeout } from '../../src/helpers/waitForPageToLoadWithTimeout';
 import { ESM_URL } from '../../testData/esmUrl';
 
-const link = getEsmLinkByName(ExampleLinkName.HighlightsGraph);
+const link = getEsmLinkByName(ExampleLinkName.AIHighlightsGraph);
 
 vpTest(`Test if video on ESM highlights graph page is playing as expected`, async ({ page, pomPages }) => {
     await test.step('Navigate to ESM', async () => {
