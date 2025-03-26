@@ -39,6 +39,12 @@ $icon-font-path: '../icon-font' !default;
     &:focus:before {
       outline: none;
       text-shadow: 0 0 1em var(--color-text);
+      text-shadow: 
+        0 0 0.1em var(--color-accent),
+        0 0 0.2em var(--color-accent),
+        0 0 0.3em var(--color-accent),
+        0 0 0.8em var(--color-text),
+        0 0 1em var(--color-text);
     }
   }
 
