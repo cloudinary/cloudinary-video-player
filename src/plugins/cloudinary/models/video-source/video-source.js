@@ -77,7 +77,7 @@ class VideoSource extends BaseSource {
     this.withCredentials = !!withCredentials;
     this.getInitOptions = () => initOptions;
 
-    this.poster(poster, options);
+    this.poster(poster, { type: options.type });
     this.sourceTypes(sourceTypes);
     this.sourceTransformation(sourceTransformation);
     this.info(info);
