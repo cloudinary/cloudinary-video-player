@@ -1,6 +1,17 @@
 # Changelog
 
 
+## [2.3.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.4...v2.3.5) (2025-03-30)
+
+
+### Bug Fixes
+
+* controlbar shadow when controls: false ([#830](https://github.com/cloudinary/cloudinary-video-player/issues/830)) ([8f88dd6](https://github.com/cloudinary/cloudinary-video-player/commit/8f88dd639919c7a3c2701ce0b6c2af0a2076ec9b))
+* improve example pages, remove duplicates ([#831](https://github.com/cloudinary/cloudinary-video-player/issues/831)) ([4d4fc3b](https://github.com/cloudinary/cloudinary-video-player/commit/4d4fc3be5d96bfcbe06605f3b9a1d3cbd79fc751))
+* improve focus accent ([aa0b798](https://github.com/cloudinary/cloudinary-video-player/commit/aa0b79834423fb68a9d00e86ae14077df88f7f9c))
+* private video poster image ([#833](https://github.com/cloudinary/cloudinary-video-player/issues/833)) ([aa0b798](https://github.com/cloudinary/cloudinary-video-player/commit/aa0b79834423fb68a9d00e86ae14077df88f7f9c))
+* private video poster image ([#836](https://github.com/cloudinary/cloudinary-video-player/issues/836)) ([d51ffd8](https://github.com/cloudinary/cloudinary-video-player/commit/d51ffd8423b179401c6b1aba7f34bde49ae808f8))
+
 ## [2.3.4](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.3...v2.3.4) (2025-03-13)
 
 
