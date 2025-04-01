@@ -53,6 +53,7 @@ const visualSearch = (options, player) => {
   };
 
   const clearUI = () => {
+    isSearchActive = false;
     searchResults.clearMarkers();
     player.$('.vjs-visual-search-wrapper')?.remove();
   };
