@@ -198,6 +198,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initAnalytics();
     this._initCloudinaryAnalytics();
     this._initFloatingPlayer();
+    this._initVisualSearch();
     this._initColors();
     this._initTextTracks();
     this._initHighlightsGraph();
@@ -339,6 +340,19 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.on(PLAYER_EVENT.READY, async () => {
       if (this.options.videojsOptions.interactionDisplay && this.videojs.interactionAreas) {
         this.videojs.interactionAreas(this, this.playerOptions, this._videojsOptions);
+      }
+    });
+  }
+
+  _initVisualSearch() {
+    // Listen for source changes to apply visual search based on source config
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      if (source._visualSearch && this.videojs.visualSearch) {
+        isFunction(this.videojs.visualSearch)
+          ? this.videojs.visualSearch(source._visualSearch)
+          : this.videojs.visualSearch.createSearchUI(source._visualSearch);
+      } else if (!source._visualSearch && this.videojs.visualSearch?.clearUI) {
+        this.videojs.visualSearch.clearUI();
       }
     });
   }
