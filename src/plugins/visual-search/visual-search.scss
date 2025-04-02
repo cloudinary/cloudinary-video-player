@@ -62,8 +62,22 @@
       opacity: 1;
     }
 
-    .vjs-icon-search:before {
+    > span:before {
       font-size: 1.8em;
+    }
+
+    .vjs-visual-search-spinner {
+      display: none;
+      animation: vjs-visual-search-spin 1s linear infinite;
+    }
+
+    &.vjs-visual-search-loading {
+      .vjs-icon-search {
+        display: none;
+      }
+      .vjs-visual-search-spinner {
+        display: block;
+      }
     }
   }
 
@@ -145,5 +159,14 @@
 .vjs-visual-search-results-active {
   .vjs-progress-control {
     height: 0.75em !important;
+  }
+}
+
+@keyframes vjs-visual-search-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

@@ -14,13 +14,15 @@ const visualSearch = (options, player) => {
   const searchResults = SearchResults(player);
 
   const performSearch = async query => {
+    const searchButton = player.$('.vjs-visual-search-button');
+    searchButton.classList.add('vjs-visual-search-loading');
+
     try {
       let results;
       if (options.useMockData) {
         results = generateMockResults(query, player.duration(), options.mockResultCount || 5);
         searchResults.displayResults(results);
       } else {
-
         const source = player.cloudinary.source();
         const publicId = source.publicId();
         const transformation = Object.assign({}, source.transformation());
@@ -52,6 +54,8 @@ const visualSearch = (options, player) => {
       }
     } catch (error) {
       console.error('Error performing visual search:', error);
+    } finally {
+      searchButton.classList.remove('vjs-visual-search-loading');
     }
   };
 

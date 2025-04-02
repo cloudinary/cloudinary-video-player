@@ -6,11 +6,15 @@ export const SearchButton = (onClick) => {
     title: 'Search video content'
   });
   
-  // Add search icon
-  const iconElement = videojs.dom.createEl('span', {
+  const searchIcon = videojs.dom.createEl('span', {
     className: 'vjs-icon-search'
   });
-  button.appendChild(iconElement);
+  button.appendChild(searchIcon);
+  
+  const spinnerIcon = videojs.dom.createEl('span', {
+    className: 'vjs-icon-spinner vjs-visual-search-spinner'
+  });
+  button.appendChild(spinnerIcon);
   
   button.addEventListener('click', onClick);
   
