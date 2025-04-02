@@ -160,6 +160,10 @@
   .vjs-progress-control {
     height: 0.75em !important;
   }
+  .vjs-vtt-thumbnail-display,
+  .vjs-chapter-display {
+    translate: 0 -0.75em;
+  }
 }
 
 @keyframes vjs-visual-search-spin {
