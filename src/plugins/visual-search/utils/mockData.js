@@ -39,16 +39,13 @@ const generateMockResults = (query, videoDuration, resultCount = 5) => {
     
     // Create a mock result object
     results.push({
-      id: `result-${i + 1}`,
-      startTime: parseFloat(startTime.toFixed(2)),
-      endTime: parseFloat(endTime.toFixed(2)),
-      confidence: parseFloat(getRandomNumber(0.6, 0.98).toFixed(2)),
-      text: `"${query}" match at ${Math.floor(startTime / 60)}:${Math.floor(startTime % 60).toString().padStart(2, '0')}`
+      start_time: parseFloat(startTime.toFixed(2)),
+      end_time: parseFloat(endTime.toFixed(2))
     });
   }
   
   // Sort results by start time
-  return results.sort((a, b) => a.startTime - b.startTime);
+  return results.sort((a, b) => a.start_time - b.end_time);
 };
 
 export { generateMockResults }; 

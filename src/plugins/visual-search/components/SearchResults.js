@@ -17,18 +17,17 @@ export const SearchResults = (player) => {
     
     // Add markers for each result
     results.forEach(result => {
-      const { startTime, endTime } = result;
+      const { start_time, end_time } = result;
       const markerEl = videojs.dom.createEl('div', {
         className: 'vjs-visual-search-marker',
-        style: `left: ${(startTime / total) * 100}%; width: ${((endTime - startTime) / total) * 100}%`
+        style: `left: ${(start_time / total) * 100}%; width: ${((end_time - start_time) / total) * 100}%`
       });
       
       seekBar.el().appendChild(markerEl);
       
       // Add click handler to jump to this time
       markerEl.addEventListener('click', () => {
-        player.currentTime(startTime);
-        player.play();
+        player.currentTime(start_time);
       });
     });
     

@@ -1,9 +1,10 @@
 import videojs from 'video.js';
-import './visual-search.scss';
 import { SearchButton } from './components/SearchButton';
 import { SearchInput } from './components/SearchInput';
 import { SearchResults } from './components/SearchResults';
 import { generateMockResults } from './utils/mockData';
+
+import './visual-search.scss';
 
 const visualSearch = (options, player) => {
   player.addClass('vjs-visual-search');
@@ -15,19 +16,22 @@ const visualSearch = (options, player) => {
   const performSearch = async query => {
     try {
       let results;
-
       if (options.useMockData) {
         results = generateMockResults(query, player.duration(), options.mockResultCount || 5);
         searchResults.displayResults(results);
       } else {
 
-        // ToDo: construct these search URLs using getCloudinaryUrl
-        // https://res.cloudinary.com/demo/video/upload/fl_getinfo:search_text_woman/marketing-video-2025
-        // Or fl_getingo:search_b64_<base_64_query>
+        const source = player.cloudinary.source();
+        const publicId = source.publicId();
+        const transformation = Object.assign({}, source.transformation());
 
-        const url = 'search endpoint';
+        transformation.flags = transformation.flags || [];
+        transformation.flags.push(`getinfo:search_text_${query}`);
 
-        const response = await fetch(url, {
+        const visualSearchSrc = source.config()
+          .url(`${publicId}`, { transformation });
+
+        const response = await fetch(visualSearchSrc, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -39,8 +43,7 @@ const visualSearch = (options, player) => {
         }
 
         results = await response.json();
-        searchResults.displayResults(results);
-
+        searchResults.displayResults(results.timestamps);
       }
 
       if (results && !player.hasStarted()) {
