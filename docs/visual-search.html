@@ -1,23 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player - Visual Search</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
 
-<head>
-  <meta charset="utf-8">
-  <title>Cloudinary Video Player - Visual Search</title>
-  <link
-    href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
-    rel="icon" type="image/png">
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
-  <!-- Bootstrap -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- highlight.js -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+      hljs.initHighlightingOnLoad();
+    </script>
 
-  <!-- highlight.js -->
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-
-  <!--
+    <!--
     We're loading scripts & style dynamically for development/testing.
     Real-world usage would look like this:
 
@@ -26,96 +36,109 @@
 
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
+    <script type="text/javascript" src="./scripts.js"></script>
 
-  <script type="text/javascript">
-    window.addEventListener('load', function () {
-      // Initialize player with visual search plugin
-      const player = cloudinary.videoPlayer('player', {
-        cloudName: 'demo'
-      });
+    <script type="text/javascript">
+      window.addEventListener(
+        'load',
+        function () {
+          // Initialize player with visual search plugin
+          const player = cloudinary.videoPlayer('player', {
+            cloudName: 'demo'
+          });
 
-      // Load source with visual search enabled
-      player.source('elephants', {
-        visualSearch: {
-          useMockData: true
-        }
-      });
+          player.source({
+            publicId: 'marketing-video-2025',
+            info: { title: 'Visual search', subtitle: 'Real results from indexed video' },
+            chapters: {
+              0: 'Opening credits',
+              3: 'A dangerous quest',
+              8: 'The attack'
+            },
+            visualSearch: true
+          });
 
-      var source1 = {
-        publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' }, visualSearch: {
-          useMockData: true
-        }
-      };
-      var source2 = {
-        publicId: 'dirt_bike', visualSearch: {
-          useMockData: true
-        }
-      };
-      var source3 = { publicId: 'marmots', info: { title: 'Marmots' } };
+          // Playlist with mixed content
+          var source1 = {
+            publicId: 'marmots',
+            info: { title: 'Visual search mocked', subtitle: 'Random results from mocked data' },
+            visualSearch: {
+              useMockData: true
+            }
+          };
+          var source2 = {
+            publicId: 'marketing-video-2025',
+            info: { title: 'Visual search', subtitle: 'Real results from indexed video' },
+            visualSearch: true
+          };
+          var source3 = { publicId: 'elephants', info: { title: 'Visual search disabled' } };
+          var source4 = { publicId: 'snow_horses', info: { title: 'Visual search disabled' } };
 
-      var playlistSources = [source1, source2, source3];
-      var playlistOptions = {
-        autoAdvance: true,
-        repeat: true,
-        presentUpcoming: 8
-      };
+          var playlistSources = [source1, source2, source3, source4];
+          var playlistOptions = {
+            autoAdvance: true,
+            repeat: true,
+            presentUpcoming: 8
+          };
 
-      var playerPlaylist = cloudinary.videoPlayer('player-playlist', {
-        cloudName: 'demo',
-        playlistWidget: {
-          direction: "horizontal",
-          total: 3
-        }
-      });
+          var playerPlaylist = cloudinary.videoPlayer('player-playlist', {
+            cloudName: 'demo',
+            playlistWidget: {
+              direction: 'horizontal',
+              total: 4
+            }
+          });
 
-      playerPlaylist.playlist(playlistSources, playlistOptions);
+          playerPlaylist.playlist(playlistSources, playlistOptions);
+        },
+        false
+      );
+    </script>
+  </head>
 
-    }, false);
-  </script>
-</head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="./index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Visual Search Plugin</h3>
 
-<body>
-  <div class="container p-4 col-12 col-md-9 col-xl-6">
-    <nav class="nav mb-2">
-      <a href="./index.html">&#60;&#60; Back to examples index</a>
-    </nav>
-    <h1>Cloudinary Video Player</h1>
-    <h3 class="mb-4">Visual Search Plugin</h3>
+      <video id="player" playsinline controls class="cld-video-player cld-fluid"></video>
 
-    <video id="player" playsinline controls class="cld-video-player cld-fluid"></video>
+      <hr />
 
-    <h3 class="mb-4">Playlist with mixed content</h3>
+      <h3 class="mb-4">Playlist with mixed content</h3>
 
-    <video id="player-playlist" playsinline controls class="cld-video-player cld-fluid"></video>
+      <video id="player-playlist" playsinline controls class="cld-video-player cld-fluid"></video>
 
-    <p class="mt-4">
-      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
-    </p>
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
 
-    <h3 class="mt-4">Example Code:</h3>
-    <pre>
+      <h3 class="mt-4">Example Code:</h3>
+      <pre>
       <code class="language-html">
-&lt;video
-  id="player"
-  playsinline
-  controls
-  class="cld-video-player cld-video-player-skin-dark"
-  width="500"
-&gt;&lt;/video&gt;
+    &lt;video
+      id="player"
+      playsinline
+      controls
+      class="cld-video-player cld-fluid"
+      width="500"
+    &gt;&lt;/video&gt;
       </code>
       <code class="language-javascript">
-// Initialize player with visual search plugin
-const player = cloudinary.videoPlayer('player', {
-  cloudName: 'demo',
-  publicId: 'elephants',
-  visualSearch: true
-});
+    // Initialize player with visual search plugin
+    const player = cloudinary.videoPlayer('player', {
+      cloudName: 'demo',
+      publicId: 'elephants',
+      visualSearch: true
+    });
 
       </code>
     </pre>
-  </div>
-
-</body>
-
+    </div>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -27,7 +27,7 @@
         muted
         playsinline
       ></video>
-      
+
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
           >Full documentation</a
@@ -37,17 +37,24 @@
 
     <script type="module">
       import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/visual-search';
+
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       const player = videoPlayer('player', {
         cloudName: 'demo'
       });
-      
+
       // Load source with visual search enabled
-      player.source('elephants', {
-        visualSearch: {
-          useMockData: true
-        }
+      player.source({
+        publicId: 'marketing-video-2025',
+        info: { title: 'Visual search', subtitle: 'Real results from indexed video' },
+        chapters: {
+          0: 'Opening credits',
+          3: 'A dangerous quest',
+          8: 'The attack'
+        },
+        visualSearch: true
       });
     </script>
 
