@@ -2,7 +2,6 @@ import videojs from 'video.js';
 import { SearchButton } from './components/SearchButton';
 import { SearchInput } from './components/SearchInput';
 import { SearchResults } from './components/SearchResults';
-import { generateMockResults } from './utils/mockData';
 
 import './visual-search.scss';
 
@@ -18,35 +17,28 @@ const visualSearch = (options, player) => {
     searchButton.classList.add('vjs-visual-search-loading');
 
     try {
-      let results;
-      if (options.useMockData) {
-        results = generateMockResults(query, player.duration(), options.mockResultCount || 5);
-        searchResults.displayResults(results);
-      } else {
-        const source = player.cloudinary.source();
-        const publicId = source.publicId();
-        const transformation = Object.assign({}, source.transformation());
+      const source = player.cloudinary.source();
+      const publicId = source.publicId();
+      const transformation = Object.assign({}, source.transformation());
 
-        transformation.flags = transformation.flags || [];
-        transformation.flags.push(`getinfo:search_text_${query}`);
+      transformation.flags = transformation.flags || [];
+      transformation.flags.push(`getinfo:search_b64_${btoa(query)}`);
 
-        const visualSearchSrc = source.config()
-          .url(`${publicId}`, { transformation });
+      const visualSearchSrc = source.config().url(`${publicId}`, { transformation });
 
-        const response = await fetch(visualSearchSrc, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`Search request failed with status: ${response.status}`);
+      const response = await fetch(visualSearchSrc, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
         }
+      });
 
-        results = await response.json();
-        searchResults.displayResults(results.timestamps);
+      if (!response.ok) {
+        throw new Error(`Search request failed with status: ${response.status}`);
       }
+
+      const results = await response.json();
+      searchResults.displayResults(results.timestamps);
 
       if (results && !player.hasStarted()) {
         // Make sure the progress bar is visible

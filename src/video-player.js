@@ -332,6 +332,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         isFunction(this.videojs.chapters)
           ? this.videojs.chapters(source._chapters)
           : this.videojs.chapters.src(source._chapters);
+      } else if (this.videojs.chapters?.resetPlugin) {
+        this.videojs.chapters.resetPlugin();
       }
     });
   }
