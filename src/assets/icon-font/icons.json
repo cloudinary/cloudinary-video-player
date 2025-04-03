@@ -148,25 +148,8 @@
     "name": "close",
     "svg": "navigation/svg/production/ic_close_48px.svg"
   }, {
-    "name": "facebook",
-    "svg": "facebook.svg",
-    "root-dir": "./custom-icons/fontawesome/"
-  }, {
-    "name": "linkedin",
-    "svg": "linkedin.svg",
-    "root-dir": "./custom-icons/fontawesome/"
-  }, {
-    "name": "twitter",
-    "svg": "twitter.svg",
-    "root-dir": "./custom-icons/fontawesome/"
-  }, {
-    "name": "tumblr",
-    "svg": "tumblr.svg",
-    "root-dir": "./custom-icons/fontawesome/"
-  }, {
-    "name": "pinterest",
-    "svg": "pinterest.svg",
-    "root-dir": "./custom-icons/fontawesome/"
+    "name": "search",
+    "svg": "action/svg/production/ic_search_48px.svg"
   }, {
     "name": "audio-description",
     "svg": "audio-description.svg",

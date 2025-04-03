@@ -86,6 +86,7 @@ export const sourceValidators = {
   raw_transformation: validator.isString,
   shoppable: validator.isPlainObject,
   chapters: validator.or(validator.isBoolean, validator.isPlainObject),
+  visualSearch: validator.or(validator.isBoolean),
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),

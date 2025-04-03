@@ -46,7 +46,8 @@ class VideoSource extends BaseSource {
       textTracks,
       withCredentials,
       interactionAreas,
-      chapters
+      chapters,
+      visualSearch
     } = sliceAndUnsetProperties(
       options,
       'poster',
@@ -57,7 +58,8 @@ class VideoSource extends BaseSource {
       'textTracks',
       'withCredentials',
       'interactionAreas',
-      'chapters'
+      'chapters',
+      'visualSearch'
     );
 
     super(publicId, options);
@@ -70,6 +72,7 @@ class VideoSource extends BaseSource {
     this._sourceTransformation = null;
     this._interactionAreas = null;
     this._chapters = null;
+    this._visualSearch = null;
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
     this.isLiveStream = options.type === 'live';
@@ -83,6 +86,7 @@ class VideoSource extends BaseSource {
     this.info(info);
     this.interactionAreas(interactionAreas);
     this.chapters(chapters);
+    this.visualSearch(visualSearch);
     this.recommendations(recommendations);
     this.textTracks(textTracks);
     this.objectId = generateId();
@@ -143,6 +147,16 @@ class VideoSource extends BaseSource {
     }
 
     this._chapters = chapters;
+
+    return this;
+  }
+
+  visualSearch(visualSearch) {
+    if (!visualSearch) {
+      return this._visualSearch;
+    }
+
+    this._visualSearch = visualSearch;
 
     return this;
   }
