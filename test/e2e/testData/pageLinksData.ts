@@ -39,6 +39,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.VR360Videos, endpoint: '360.html' },
     { name: ExampleLinkName.EmbeddedIframePlayer, endpoint: 'embedded-iframe.html' },
     { name: ExampleLinkName.ESMImports, endpoint: 'cld-vp-esm-pages.netlify.app' },
+    { name: ExampleLinkName.VisualSearch, endpoint: 'visual-search.html' },
 ];
 
 /**
