@@ -14,7 +14,7 @@ const visualSearch = (options, player) => {
 
   const performSearch = async query => {
     const searchButton = player.$('.vjs-visual-search-button');
-    searchButton.classList.add('vjs-visual-search-loading');
+    searchButton.classList.add('vjs-waiting');
 
     try {
       const source = player.cloudinary.source();
@@ -47,7 +47,7 @@ const visualSearch = (options, player) => {
     } catch (error) {
       console.error('Error performing visual search:', error);
     } finally {
-      searchButton.classList.remove('vjs-visual-search-loading');
+      searchButton.classList.remove('vjs-waiting');
     }
   };
 

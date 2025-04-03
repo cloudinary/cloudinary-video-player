@@ -12,7 +12,7 @@ export const SearchButton = (onClick) => {
   button.appendChild(searchIcon);
   
   const spinnerIcon = videojs.dom.createEl('span', {
-    className: 'vjs-icon-spinner vjs-visual-search-spinner'
+    className: 'vjs-loading-spinner'
   });
   button.appendChild(spinnerIcon);
   

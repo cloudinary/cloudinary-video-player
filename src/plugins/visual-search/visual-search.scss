@@ -66,17 +66,23 @@
       font-size: 1.8em;
     }
 
-    .vjs-visual-search-spinner {
+    .vjs-loading-spinner {
       display: none;
-      animation: vjs-visual-search-spin 1s linear infinite;
+      width: 2.15em;
+      height: 2.15em;
+      position: absolute;
+      top: 0.3em;
+      left: 0.3em;
+      border-width: 0.4em;
+      transform: none;
     }
 
-    &.vjs-visual-search-loading {
-      .vjs-icon-search {
+    &.vjs-waiting {
+      > .vjs-icon-search {
         display: none;
       }
-      .vjs-visual-search-spinner {
-        display: block;
+      > .vjs-loading-spinner {
+        display: flex;
       }
     }
   }
