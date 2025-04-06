@@ -7,13 +7,17 @@ export const SearchInput = (onSearch, onClose) => {
   
   const input = videojs.dom.createEl('input', {
     className: 'vjs-visual-search-input',
-    type: 'text'
+    type: 'text',
+    ariaLabel: 'Search input',
+    tabIndex: -1
   });
   
   const closeButton = videojs.dom.createEl('button', {
-    className: 'vjs-visual-search-close',
+    className: 'vjs-control vjs-button vjs-visual-search-close',
     type: 'button',
-    title: 'Close search'
+    title: 'Close search',
+    ariaLabel: 'Close search',
+    tabIndex: -1
   });
   
   // Add close icon
@@ -44,6 +48,7 @@ export const SearchInput = (onSearch, onClose) => {
   
   return {
     element: form,
-    input
+    input,
+    closeButton
   };
 };
