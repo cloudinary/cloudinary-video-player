@@ -14,8 +14,8 @@ vpTest(`Test if video on visual search page is playing as expected`, async ({ pa
 
     // Wait for both video elements to be ready
     await test.step('Wait for video elements to be ready', async () => {
-        await page.waitForSelector('#player_html5_api', { state: 'visible' });
-        await page.waitForSelector('#player-playlist_html5_api', { state: 'visible' });
+        await pomPages.visualSearchPage.visualSearchVideoComponent.locator.scrollIntoViewIfNeeded();
+        await pomPages.visualSearchPage.visualSearchPlaylistVideoComponent.locator.scrollIntoViewIfNeeded();
     });
 
     await test.step('Click play button on visual search video', async () => {
