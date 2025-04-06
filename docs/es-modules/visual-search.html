@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Visual Search</h3>
+
+      <video
+        id="player"
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        controls
+        muted
+        playsinline
+      ></video>
+
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player"
+          >Full documentation</a
+        >
+      </p>
+    </div>
+
+    <script type="module">
+      import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/visual-search';
+
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      const player = videoPlayer('player', {
+        cloudName: 'demo'
+      });
+
+      // Load source with visual search enabled
+      player.source({
+        publicId: 'marketing-video-2025',
+        info: { title: 'Visual search', subtitle: 'Real results from indexed video' },
+        chapters: {
+          0: 'Opening credits',
+          3: 'A dangerous quest',
+          8: 'The attack'
+        },
+        visualSearch: true
+      });
+    </script>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

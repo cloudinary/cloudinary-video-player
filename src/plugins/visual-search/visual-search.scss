@@ -1,0 +1,179 @@
+.vjs-visual-search {
+  .vjs-visual-search-wrapper {
+    position: absolute;
+    top: 1.5em;
+    right: 1.5em;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border-radius: 1.5em;
+    overflow: hidden;
+    background-color: transparent;
+    pointer-events: auto;
+
+    &.vjs-visual-search-active {
+      background-color: color-mix(in srgb, var(--color-base) 60%, transparent);
+      backdrop-filter: blur(10px);
+
+      .vjs-visual-search-form {
+        width: 13.75em;
+        margin-right: 0.25em;
+        opacity: 1;
+      }
+
+      .vjs-visual-search-button {
+        background-color: transparent;
+        text-shadow: none;
+
+        &:hover {
+          text-shadow: 0 0 0.5em var(--color-accent);
+        }
+      }
+    }
+
+    &:hover:not(.vjs-visual-search-active) {
+      .vjs-visual-search-button {
+        background-color: color-mix(in srgb, var(--color-base) 25%, transparent);
+      }
+    }
+
+    + .vjs-title-bar-title {
+      padding-right: 2em;
+    }
+  }
+
+  .vjs-visual-search-button {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    width: 2.75em;
+    height: 2.75em;
+    padding: 0.1em;
+    opacity: 0.9;
+    border-radius: 50%;
+    transition: all 0.25s ease;
+    z-index: 2;
+    flex-shrink: 0;
+    text-shadow: 0 0 1em var(--color-base);
+
+    &:hover {
+      opacity: 1;
+    }
+
+    > span:before {
+      font-size: 1.8em;
+    }
+
+    .vjs-loading-spinner {
+      display: none;
+      width: 2.15em;
+      height: 2.15em;
+      position: absolute;
+      top: 0.3em;
+      left: 0.3em;
+      border-width: 0.4em;
+      transform: none;
+    }
+
+    &.vjs-waiting {
+      > .vjs-icon-search {
+        display: none;
+      }
+      > .vjs-loading-spinner {
+        display: flex;
+      }
+    }
+  }
+
+  .vjs-visual-search-form {
+    display: flex;
+    align-items: center;
+    width: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .vjs-visual-search-input {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 0.938em;
+    padding: 0;
+    width: 100%;
+    height: 2.25em;
+    outline: none;
+
+    &::placeholder {
+      color: color-mix(in srgb, white 70%, transparent);
+    }
+  }
+
+  .vjs-visual-search-close {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    width: 2em;
+    height: 2em;
+    padding: 0.25em;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+    text-shadow: 0 0 0.25em var(--color-base);
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .vjs-icon-close:before {
+      font-size: 1em;
+    }
+  }
+
+  .vjs-visual-search-results-wrapper {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 0.75em;
+    z-index: 1;
+    $bg1: color-mix(in srgb, var(--color-accent) 15%, transparent);
+    $bg2: color-mix(in srgb, var(--color-base) 20%, transparent);
+    background: 
+      linear-gradient(to right, $bg1, $bg1),
+      linear-gradient(to right, $bg2, $bg2);
+  }
+
+  .vjs-visual-search-marker {
+    position: absolute;
+    height: 100%;
+    background-color: var(--color-accent);
+    opacity: 0.7;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+// Push seek-thumbs/chapters/time up when search results are active
+.vjs-visual-search-results-active {
+  .vjs-mouse-display {
+    translate: 0 -0.75em;
+  }
+}
+
+@keyframes vjs-visual-search-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

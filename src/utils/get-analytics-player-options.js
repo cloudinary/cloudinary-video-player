@@ -37,6 +37,7 @@ const getTranscriptOptions = (textTracks = {}) => {
 
 const getSourceOptions = (sourceOptions = {}) => ({
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
+  visualSearch: hasConfig(sourceOptions.visualSearch),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
