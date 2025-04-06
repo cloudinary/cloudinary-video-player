@@ -193,7 +193,7 @@ const ChaptersPlugin = (function () {
     const getChapterFromPoint = point => {
       const total = this.player.duration();
       const seekBarTime = point * total;
-      const chapter = Array.from(this.chaptersTrack.cues).find(marker => {
+      const chapter = Array.from(this.chaptersTrack?.cues || []).find(marker => {
         return seekBarTime >= marker.startTime && seekBarTime <= marker.endTime;
       });
       return chapter ? chapter.text : '';

@@ -38,7 +38,8 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'aiHighlightsGraph',
   'chapters',
   'queryParams',
-  'type'
+  'type',
+  'visualSearch'
 ]);
 
 export const CLOUDINARY_CONFIG_PARAM = [

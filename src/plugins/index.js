@@ -19,6 +19,7 @@ import imaPlugin from './ima';
 import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
+import visualSearch from './visual-search';
 
 const plugins = {
   aiHighlightsGraph,
@@ -39,7 +40,8 @@ const plugins = {
   shoppable,
   srtTextTracks,
   styledTextTracks,
-  interactionAreas
+  interactionAreas,
+  visualSearch
 };
 
 export default plugins;
