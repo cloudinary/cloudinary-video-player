@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.4.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.5...v2.4.0) (2025-04-07)
+
+
+### Features
+
+* visual search plugin ([#841](https://github.com/cloudinary/cloudinary-video-player/issues/841)) ([55d5001](https://github.com/cloudinary/cloudinary-video-player/commit/55d5001218c066aebcb3b3b3c515ca847a006af8))
+
 ## [2.3.5](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.4...v2.3.5) (2025-03-30)
 
 
