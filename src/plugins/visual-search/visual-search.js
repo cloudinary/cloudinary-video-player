@@ -74,6 +74,8 @@ const visualSearch = (options, player) => {
       if (!isSearchActive) {
         isSearchActive = true;
         searchContainer.classList.add('vjs-visual-search-active');
+        searchInput.input.tabIndex = 0;
+        searchInput.closeButton.tabIndex = 0;
         searchInput.input.focus();
       } else {
         const query = searchInput.input.value.trim();
@@ -88,6 +90,8 @@ const visualSearch = (options, player) => {
         isSearchActive = false;
         searchContainer.classList.remove('vjs-visual-search-active');
         searchInput.input.value = '';
+        searchInput.input.tabIndex = -1;
+        searchInput.closeButton.tabIndex = -1;
 
         searchResults.clearMarkers();
       }
