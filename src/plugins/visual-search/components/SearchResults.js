@@ -27,16 +27,17 @@ export const SearchResults = player => {
       const { start_time, end_time } = result;
       const position = (start_time / total) * 100;
       const width = ((end_time - start_time) / total) * 100;
+      const time = `${Math.floor(start_time / 60)}:${Math.floor(start_time % 60)
+        .toString()
+        .padStart(2, '0')}`;
 
       const markerEl = videojs.dom.createEl('div', {
         className: 'vjs-control vjs-visual-search-marker',
         style: `left: ${position}%; width: ${width}%`,
         tabIndex: 0,
         role: 'button',
-        title: `Jump to ${Math.floor(start_time / 60)}:${Math.floor(start_time % 60)
-          .toString()
-          .padStart(2, '0')}`,
-        ariaLabel: `Search result at ${Math.floor(start_time / 60)} minutes ${Math.floor(start_time % 60)} seconds`
+        title: `Search result at ${time}`,
+        ariaLabel: `Search result at ${time}`
       });
 
       wrapperEl.appendChild(markerEl);
