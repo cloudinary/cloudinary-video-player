@@ -2,8 +2,9 @@ import videojs from 'video.js';
 
 export const SearchButton = (onClick) => {
   const button = videojs.dom.createEl('button', {
-    className: 'vjs-visual-search-button',
-    title: 'Search video content'
+    className: 'vjs-control vjs-button vjs-visual-search-button',
+    title: 'Search video content',
+    ariaLabel: 'Search video content'
   });
   
   const searchIcon = videojs.dom.createEl('span', {
