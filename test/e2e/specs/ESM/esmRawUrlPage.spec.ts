@@ -6,7 +6,7 @@ import { ESM_URL } from '../../testData/esmUrl';
 
 const link = getEsmLinkByName(ExampleLinkName.RawURL);
 
-vpTest.only(`Test if 2 videos on ESM raw URL page are playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if 2 videos on ESM raw URL page are playing as expected`, async ({ page, pomPages }) => {
     await page.goto(ESM_URL);
     await testRawUrlPageVideoIsPlaying(page, pomPages, link);
 });
