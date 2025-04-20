@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.4.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.4.0...v2.4.1) (2025-04-20)
+
+
+### Bug Fixes
+
+* update quality selector check icon ([#853](https://github.com/cloudinary/cloudinary-video-player/issues/853)) ([935e1ae](https://github.com/cloudinary/cloudinary-video-player/commit/935e1aeaf8fed73929586f6bc8cf09430f9e8f1f))
+
 ## [2.4.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.3.5...v2.4.0) (2025-04-07)
 
 
