@@ -63,7 +63,7 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./dist/cld-video-player.light.min.js",
@@ -71,11 +71,11 @@
       },
       {
         "path": "./lib/cld-video-player.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./lib/videoPlayer.js",
-        "maxSize": "258kb"
+        "maxSize": "260kb"
       },
       {
         "path": "./lib/all.js",
@@ -94,7 +94,7 @@
     "lodash": "^4.17.21",
     "srt-parser-2": "^1.2.3",
     "uuid": "^11.0.3",
-    "video.js": "^8.21.0",
+    "video.js": "^8.23.3",
     "videojs-contrib-ads": "^7.5.2",
     "videojs-contrib-dash": "^5.1.1",
     "videojs-ima": "^2.3.0",
