@@ -419,8 +419,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initAnalytics() {
     const analyticsOpts = this.playerOptions.analytics;
 
-    if (!window.ga && analyticsOpts && this.playerOptions.debug) {
-      console.error('Google Analytics script is missing');
+    if (!window.gtag && analyticsOpts) {
+      console.error('Google Analytics script (gtag) is missing.');
       return;
     }
 
