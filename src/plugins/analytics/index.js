@@ -28,7 +28,7 @@ const DEFAULT_OPTIONS = {
   events: DEFAULT_EVENTS,
   category: 'Video',
   defaultLabel: (player) =>
-    (player.cloudinary && player.cloudinary.currentPublicId()) || player.currentSource().src
+    (player.cloudinary?.currentPublicId()) || player.currentSource().src
 };
 
 class AnalyticsPlugin {
@@ -206,14 +206,12 @@ class AnalyticsPlugin {
 
   track({ action, label, value = null, nonInteraction = false }) {
     const eventData = {
-      eventCategory: this.options.category,
-      eventAction: action,
-      eventLabel: label || this.options.defaultLabel(this.player),
-      eventValue: value || Math.round(this.player.currentTime()),
-      nonInteraction: nonInteraction
+      event_category: this.options.category,
+      event_label: label || this.options.defaultLabel(this.player),
+      value: value || Math.round(this.player.currentTime()),
+      non_interaction: nonInteraction
     };
-
-    window.ga('send', 'event', eventData);
+    window.gtag('event', action, eventData);
   }
 
   videoload() {
