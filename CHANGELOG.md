@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.5.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.4.1...v2.5.0) (2025-04-29)
+
+
+### Features
+
+* migrate analytics plugin to GA4 ([#857](https://github.com/cloudinary/cloudinary-video-player/issues/857)) ([58cf3a7](https://github.com/cloudinary/cloudinary-video-player/commit/58cf3a7f14ab9cbf4bc1b44035fe956482ffd230))
+
 ## [2.4.1](https://github.com/cloudinary/cloudinary-video-player/compare/v2.4.0...v2.4.1) (2025-04-20)
 
 
