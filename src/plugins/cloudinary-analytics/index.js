@@ -1,4 +1,3 @@
-import videojs from 'video.js';
 import isPlainObject from 'lodash/isPlainObject';
 import { connectCloudinaryAnalytics } from 'cloudinary-video-analytics';
 import { PLAYER_EVENT } from '../../utils/consts';
@@ -6,11 +5,10 @@ import { PLAYER_EVENT } from '../../utils/consts';
 class CloudinaryAnalytics {
   constructor(player, options) {
     this.player = player;
-    this.shouldUseCustomEvents = videojs.browser.IS_IOS;
     this.cloudinaryAnalytics = connectCloudinaryAnalytics(this.player.videoElement, {
-      customEvents: this.shouldUseCustomEvents,
+      playerAdapter: this.getCloudinaryVideoPlayerAdapter(),
     });
-    this.currentVideMetadata = {
+    this.currentVideoMetadata = {
       cloudName: null,
       publicId: null
     };
@@ -22,45 +20,65 @@ class CloudinaryAnalytics {
     publicId: this.player.cloudinary.currentPublicId()
   });
 
-  sourceChanged = () => {
+  sourceChanged = (e, { source }) => {
     const metadata = this.getMetadata();
+
     if (metadata.cloudName && metadata.publicId) {
-      this.currentVideMetadata = metadata;
-      this.cloudinaryAnalytics.startManualTracking(metadata, {
+      const isLiveStream = source.resourceConfig().type === 'live';
+      this.currentVideoMetadata = metadata;
+      this.cloudinaryAnalytics.startManualTracking({
+        ...metadata,
+        ...(isLiveStream ? { type: 'live' } : {}),
+      }, {
         ...(isPlainObject(this.analyticsOptions) ? this.analyticsOptions : {}),
         videoPlayerType: 'cloudinary video player',
         videoPlayerVersion: VERSION,
       });
-    } else if (this.currentVideMetadata.cloudName !== metadata.cloudName || this.currentVideMetadata.publicId !== metadata.publicId) {
+    } else if (this.currentVideoMetadata.cloudName !== metadata.cloudName || this.currentVideoMetadata.publicId !== metadata.publicId) {
       this.cloudinaryAnalytics.stopManualTracking();
     }
   };
 
-  dispatchCustomEventOnVideoPlayer = (name, detail = {}) => {
-    const ev = new CustomEvent(`cld-custom-${name}`, {
-      detail,
-    });
-    this.player.videoElement.dispatchEvent(ev);
-  };
+  getCloudinaryVideoPlayerAdapter = () => {
+    const createCldVPEventListener = (eventName, callback) => {
+      this.player.on(eventName, callback);
+      return () => {
+        this.player.off(eventName, callback);
+      };
+    };
 
-  connectCustomEvents = () => {
-    this.player.on(PLAYER_EVENT.PLAY, () => this.dispatchCustomEventOnVideoPlayer('play'));
-    this.player.on(PLAYER_EVENT.PAUSE, () => this.dispatchCustomEventOnVideoPlayer('pause'));
-    this.player.on(PLAYER_EVENT.EMPTIED, () => this.dispatchCustomEventOnVideoPlayer('emptied'));
-    this.player.on(PLAYER_EVENT.LOADED_METADATA, () => {
-      const videoDuration = this.player.videoElement.duration || null;
-      this.dispatchCustomEventOnVideoPlayer('loadedmetadata', {
-        videoDuration,
-      });
-    });
+    return {
+      onCanPlay: (callback) => createCldVPEventListener('canplay', callback),
+      onCanPlayThrough: (callback) => createCldVPEventListener('canplaythrough', callback),
+      onComplete: (callback) => createCldVPEventListener('complete', callback),
+      onDurationChange: (callback) => createCldVPEventListener('durationchange', callback),
+      onEmptied: (callback) => createCldVPEventListener('emptied', callback),
+      onEnded: (callback) => createCldVPEventListener('ended', callback),
+      onError: (callback) => createCldVPEventListener('error', callback),
+      onLoadedData: (callback) => createCldVPEventListener('loadeddata', callback),
+      onLoadedMetadata: (callback) => createCldVPEventListener('loadedmetadata', callback),
+      onLoadStart: (callback) => createCldVPEventListener('loadstart', callback),
+      onPause: (callback) => createCldVPEventListener('pause', callback),
+      onPlay: (callback) => createCldVPEventListener('play', callback),
+      onPlaying: (callback) => createCldVPEventListener('playing', callback),
+      onProgress: (callback) => createCldVPEventListener('progress', callback),
+      onRateChange: (callback) => createCldVPEventListener('ratechange', callback),
+      onSeeked: (callback) => createCldVPEventListener('seeked', callback),
+      onSeeking: (callback) => createCldVPEventListener('seeking', callback),
+      onStalled: (callback) => createCldVPEventListener('stalled', callback),
+      onSuspend: (callback) => createCldVPEventListener('suspend', callback),
+      onTimeUpdate: (callback) => createCldVPEventListener('timeupdate', callback),
+      onVolumeChange: (callback) => createCldVPEventListener('volumechange', callback),
+      onWaiting: (callback) => createCldVPEventListener('waiting', callback),
+
+      getCurrentSrc: () => this.player.videoElement.currentSrc,
+      getCurrentTime: () => this.player.currentTime(),
+      getReadyState: () => this.player.videoElement.readyState,
+      getDuration: () => this.player.duration(),
+    };
   };
 
   init() {
-    // only for iOS there is problem with reporting events because videojs re-triggers events and stops native ones
-    if (this.shouldUseCustomEvents) {
-      this.connectCustomEvents();
-    }
-
     this.player.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this.sourceChanged);
   }
 }
