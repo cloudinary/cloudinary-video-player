@@ -40,7 +40,7 @@ class CloudinaryAnalytics {
   };
 
   getCloudinaryVideoPlayerAdapter = () => {
-    const createCldVPEventListener = (callback, eventName) => {
+    const createCldVPEventListener = (eventName, callback) => {
       this.player.on(eventName, callback);
       return () => {
         this.player.off(eventName, callback);
