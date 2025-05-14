@@ -20,6 +20,7 @@ import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
 import visualSearch from './visual-search';
+import adaptiveStreaming from './adaptive-streaming';
 
 const plugins = {
   aiHighlightsGraph,
@@ -41,7 +42,8 @@ const plugins = {
   srtTextTracks,
   styledTextTracks,
   interactionAreas,
-  visualSearch
+  visualSearch,
+  adaptiveStreaming
 };
 
 export default plugins;

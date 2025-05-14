@@ -81,11 +81,28 @@ class CloudinaryContext {
 
       _source = src;
 
-      const isDashRequired = options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'));
-      if (isDashRequired) {
-        import(/* webpackChunkName: "dash" */ 'videojs-contrib-dash').then(() => {
-          refresh();
-        });
+      const isDash = 
+        (options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'))) ||
+        (typeof source === 'string' && source.endsWith('.mpd'));
+      const isHls = 
+        (options.sourceTypes && options.sourceTypes.some(s => s.includes('hls'))) ||
+        (typeof source === 'string' && source.endsWith('.m3u8'));
+      const isAdaptiveStreamingRequired = isDash || isHls;
+      
+      if (isAdaptiveStreamingRequired && !this.player.adaptiveStreamingLoaded) {
+        import(/* webpackChunkName: "adaptive-streaming" */ '../adaptive-streaming')
+          .then(() => {
+            this.player.adaptiveStreaming(player, {
+              isDash,
+              preset: options.adaptiveStreamingPreset || 'auto'
+            }).then(() => {
+              refresh();
+            });
+          })
+          .catch(err => {
+            console.error('Failed to load adaptive streaming plugin:', err);
+            refresh();
+          });
       } else if (!options.skipRefresh) {
         refresh();
       }

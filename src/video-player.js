@@ -24,9 +24,6 @@ import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import qualitySelector from './components/qualitySelector/qualitySelector.js';
-// #endif
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -363,23 +360,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videojs.colors(this.playerOptions.colors ? { colors: this.playerOptions.colors } : {});
   }
 
-  // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  _initQualitySelector() {
-    if (this.videojs.controlBar && this.playerOptions.qualitySelector !== false) {
-      this.videojs.httpSourceSelector({ default: 'auto' });
-
-      this.videojs.on(PLAYER_EVENT.LOADED_METADATA, () => {
-        qualitySelector.init(this.videojs);
-      });
-
-      // Show only if more than one option available
-      this.videojs.on(PLAYER_EVENT.LOADED_DATA, () => {
-        qualitySelector.setVisibility(this.videojs);
-      });
-    }
-  }
-  // #endif
-
   _initTextTracks () {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
       this.setTextTracks(source._textTracks);
@@ -521,9 +501,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _onSourceChange(e, { source, sourceOptions }) {
     this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this._initQualitySelector();
-    // #endif
     this.isLiveStream = source.resourceConfig().type === 'live';
   }
 
