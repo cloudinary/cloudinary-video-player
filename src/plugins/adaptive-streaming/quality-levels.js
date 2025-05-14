@@ -14,11 +14,37 @@ const qualityLevels = (player, options) => {
       bandwidth: level.bitrate, // documentation bug (bitrate: )
       frameRate: 0,
       enabled: enableRendition => {
-        console.log(
-          'NOT SUPPORTED - request QualityLevels to enable/disable rendition to =',
-          enableRendition
-        );
-        return true;
+        var tech = player.tech({ IWillNotUseThisInPlugins: true });
+        if (
+          typeof tech.sourceHandler_ != 'undefined' &&
+          typeof tech.sourceHandler_.hls != 'undefined' &&
+          tech.sourceHandler_.hls != null
+        ) {
+          const hls = tech.sourceHandler_.hls;
+          // Find the level index that matches this rendition
+          const levelIndex = hls.levels.findIndex(l => 
+            (Array.isArray(l.url) && l.url.length > 1 ? l.url[l.urlId] : l.url) === levelUrl
+          );
+          
+          if (levelIndex >= 0) {
+            if (enableRendition) {
+              console.log('Setting HLS quality level to:', levelIndex, 'for rendition:', levelUrl);
+              hls.currentLevel = levelIndex;
+            } else if (hls.autoLevelEnabled) {
+              // If disabling and auto level is enabled, don't do anything
+              console.log('Ignoring disable request for rendition when auto level is enabled');
+            } else {
+              // If disabling the current rendition, switch to auto level
+              if (hls.currentLevel === levelIndex) {
+                console.log('Switching to auto level selection');
+                hls.currentLevel = -1; // -1 means auto level
+              }
+            }
+          } else {
+            console.warn('Could not find matching level for rendition:', levelUrl);
+          }
+        }
+        return enableRendition;
       }
     };
     return rendition;
@@ -32,11 +58,49 @@ const qualityLevels = (player, options) => {
       bandwidth: level.bandwidth,
       frameRate: level.frameRate,
       enabled: enableRendition => {
-        console.log(
-          'NOT SUPPORTED - request QualityLevels to enable/disable rendition to =',
-          enableRendition
-        );
-        return true;
+        var dash = player.dash;
+        if (
+          typeof dash != 'undefined' &&
+          dash != null &&
+          typeof dash.mediaPlayer != 'undefined' &&
+          dash.mediaPlayer != null
+        ) {
+          if (enableRendition) {
+            console.log('Setting DASH quality level to:', level.id);
+            // Disable auto bitrate switching first
+            dash.mediaPlayer.updateSettings({
+              streaming: {
+                abr: {
+                  autoSwitchBitrate: { video: false }
+                }
+              }
+            });
+            // Set quality for the specific stream (usually 0 for video)
+            dash.mediaPlayer.setQualityFor('video', parseInt(level.id, 10));
+          } else {
+            const settings = dash.mediaPlayer.getSettings();
+            const isAutoSwitchEnabled = settings?.streaming?.abr?.autoSwitchBitrate?.video;
+            
+            if (isAutoSwitchEnabled) {
+              // If disabling and auto switch is enabled, don't do anything
+              console.log('Ignoring disable request for rendition when auto quality is enabled');
+            } else {
+              // If disabling the current rendition, switch to auto quality
+              const currentQuality = dash.mediaPlayer.getQualityFor('video');
+              if (currentQuality === parseInt(level.id, 10)) {
+                console.log('Switching to auto quality selection');
+                dash.mediaPlayer.updateSettings({
+                  streaming: {
+                    abr: {
+                      autoSwitchBitrate: { video: true }
+                    }
+                  }
+                });
+              }
+            }
+          }
+        }
+        return enableRendition;
       }
     };
     return rendition;
@@ -79,7 +143,6 @@ const qualityLevels = (player, options) => {
   // TODO: populate audio levels
   const populateLevels = (levels, abrType) => {
     let qualityLevels = player.qualityLevels;
-    debugger; // eslint-disable-line no-debugger
     if (typeof qualityLevels === 'function') {
       qualityLevels = player.qualityLevels();
       console.warn('populate levels = ', levels);
@@ -185,6 +248,66 @@ const qualityLevels = (player, options) => {
       player.trigger({ type: 'qualitychanged', eventData: data }); // Generate custom 'qualitychanged' event on videojs
     }
     previousResolution = currentRes;
+    
+    // Add detailed logging of current rendition
+    logCurrentRendition();
+  };
+
+  const logCurrentRendition = () => {
+    let tech = player.tech({ IWillNotUseThisInPlugins: true });
+    if (
+      typeof tech.sourceHandler_ != 'undefined' &&
+      typeof tech.sourceHandler_.hls != 'undefined' &&
+      tech.sourceHandler_.hls != null
+    ) {
+      // HLS playback
+      const hls = tech.sourceHandler_.hls;
+      const currentLevel = hls.currentLevel;
+      
+      if (currentLevel >= 0 && currentLevel < hls.levels.length) {
+        const level = hls.levels[currentLevel];
+        console.log('%c Current HLS Rendition', 'background: #3498db; color: white; padding: 2px 4px; border-radius: 2px;', {
+          index: currentLevel,
+          resolution: `${level.width}x${level.height}`,
+          bitrate: `${Math.round(level.bitrate / 1000)} kbps`,
+          url: Array.isArray(level.url) ? level.url[level.urlId] : level.url,
+          details: level
+        });
+      } else if (currentLevel === -1) {
+        console.log('%c HLS Auto Level Mode', 'background: #2ecc71; color: white; padding: 2px 4px; border-radius: 2px;', {
+          currentLevel: hls.currentLevel,
+          levels: hls.levels.length
+        });
+      }
+    } else {
+      // Check for DASH playback
+      var dash = player.dash;
+      if (
+        typeof dash != 'undefined' &&
+        dash != null &&
+        typeof dash.mediaPlayer != 'undefined' &&
+        dash.mediaPlayer != null
+      ) {
+        const currentQuality = dash.mediaPlayer.getQualityFor('video');
+        const renditions = getRenditionsDash();
+        const settings = dash.mediaPlayer.getSettings();
+        const isAutoMode = settings?.streaming?.abr?.autoSwitchBitrate?.video;
+        
+        if (currentQuality >= 0 && currentQuality < renditions.length) {
+          const rendition = renditions[currentQuality];
+          console.log('%c Current DASH Rendition', 'background: #9b59b6; color: white; padding: 2px 4px; border-radius: 2px;', {
+            index: currentQuality,
+            resolution: `${rendition.width}x${rendition.height}`,
+            bandwidth: `${Math.round(rendition.bandwidth / 1000)} kbps`,
+            frameRate: rendition.frameRate,
+            autoMode: isAutoMode,
+            details: rendition
+          });
+        } else if (isAutoMode) {
+          console.log('%c DASH Auto Quality Mode', 'background: #2ecc71; color: white; padding: 2px 4px; border-radius: 2px;');
+        }
+      }
+    }
   };
 
   const logAudioTrackInfo = () => {
