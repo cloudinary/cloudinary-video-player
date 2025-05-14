@@ -79,7 +79,7 @@
       },
       {
         "path": "./lib/all.js",
-        "maxSize": "290kb"
+        "maxSize": "291kb"
       },
       {
         "path": "./lib/light/index.js",
@@ -89,9 +89,8 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
-    "cloudinary-video-analytics": "1.7.1",
-    "cloudinary-video-player-profiles": "1.2.0",
-    "hls.js": "^1.6.2",
+    "cloudinary-video-analytics": "1.8.2",
+    "cloudinary-video-player-profiles": "1.3.0",
     "lodash": "^4.17.21",
     "srt-parser-2": "^1.2.3",
     "uuid": "^11.0.3",
