@@ -47,9 +47,7 @@ const webpackConfig = {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
     alias: {
-      'video.js': process.env.WEBPACK_BUILD_LIGHT
-        ? path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js')
-        : path.resolve(__dirname, '../node_modules/video.js'),
+      'video.js': path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js'),
       'video.root.js': path.resolve(__dirname, '../node_modules/video.js')
     }
   },
