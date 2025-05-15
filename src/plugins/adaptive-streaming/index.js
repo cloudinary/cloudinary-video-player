@@ -1,15 +1,14 @@
-import 'hls.js';
-import 'videojs-contrib-quality-levels';
-import 'videojs-contrib-quality-menu';
-import './videojs-contrib-hlsjs';
-import { qualityLevels } from './quality-levels';
+export default async function lazyAdaptiveStreamingPlugin(options) {
+  const player = this;
 
-export default async function adaptiveStreamingPlugin(player, options) {
-  if (options.isDash) {
-    await import(/* webpackChunkName: "dash" */ 'videojs-contrib-dash');
+  try {
+    if (options.isDash) {
+      await import(/* webpackChunkName: "dash" */ 'videojs-contrib-dash');
+    }
+    await import(/* webpackChunkName: "adaptive-streaming" */ './adaptive-streaming');
+    const { default: abrPlugin } = await import(/* webpackChunkName: "adaptive-streaming" */ './adaptive-streaming');
+    abrPlugin(player, options);
+  } catch (error) {
+    console.error('Failed to load plugin:', error);
   }
-
-  player.on('loadstart', () => qualityLevels(player, options).init());
-  player.qualityMenu();
-  player.adaptiveStreamingLoaded = true;
 }
