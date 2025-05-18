@@ -30,15 +30,6 @@ const qualityLevels = (player, options) => {
             if (enableRendition) {
               console.log('Setting HLS quality level to:', levelIndex, 'for rendition:', levelUrl);
               hls.currentLevel = levelIndex;
-            } else if (hls.autoLevelEnabled) {
-              // If disabling and auto level is enabled, don't do anything
-              console.log('Ignoring disable request for rendition when auto level is enabled');
-            } else {
-              // If disabling the current rendition, switch to auto level
-              if (hls.currentLevel === levelIndex) {
-                console.log('Switching to auto level selection');
-                hls.currentLevel = -1; // -1 means auto level
-              }
             }
           } else {
             console.warn('Could not find matching level for rendition:', levelUrl);
@@ -66,7 +57,7 @@ const qualityLevels = (player, options) => {
           dash.mediaPlayer != null
         ) {
           if (enableRendition) {
-            console.log('Setting DASH quality level to:', level.id);
+            console.log('Setting DASH quality level to:', level.id, level);
             // Disable auto bitrate switching first
             dash.mediaPlayer.updateSettings({
               streaming: {
@@ -75,29 +66,7 @@ const qualityLevels = (player, options) => {
                 }
               }
             });
-            // Set quality for the specific stream (usually 0 for video)
             dash.mediaPlayer.setQualityFor('video', parseInt(level.id, 10));
-          } else {
-            const settings = dash.mediaPlayer.getSettings();
-            const isAutoSwitchEnabled = settings?.streaming?.abr?.autoSwitchBitrate?.video;
-            
-            if (isAutoSwitchEnabled) {
-              // If disabling and auto switch is enabled, don't do anything
-              console.log('Ignoring disable request for rendition when auto quality is enabled');
-            } else {
-              // If disabling the current rendition, switch to auto quality
-              const currentQuality = dash.mediaPlayer.getQualityFor('video');
-              if (currentQuality === parseInt(level.id, 10)) {
-                console.log('Switching to auto quality selection');
-                dash.mediaPlayer.updateSettings({
-                  streaming: {
-                    abr: {
-                      autoSwitchBitrate: { video: true }
-                    }
-                  }
-                });
-              }
-            }
           }
         }
         return enableRendition;
@@ -152,7 +121,6 @@ const qualityLevels = (player, options) => {
             let level = levels[l];
             let rendition = levelToRenditionHls(level);
             qualityLevels.addQualityLevel(rendition);
-            //console.log("adding rendition = ", rendition)
           }
           break;
         case 'dash':
@@ -161,7 +129,6 @@ const qualityLevels = (player, options) => {
             let level = levels[l];
             let rendition = levelToRenditionDash(level);
             qualityLevels.addQualityLevel(rendition);
-            //console.log("adding rendition = ", rendition)
           }
           break;
         default:
@@ -238,7 +205,6 @@ const qualityLevels = (player, options) => {
       }
     }
 
-    console.log('DEBUG ql=', qualityLevels, 'cl=', currentLevel, 'level=', level);
     let currentRes = { width: level.width, height: level.height };
     if (previousResolution !== currentRes) {
       let data = {

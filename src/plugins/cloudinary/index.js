@@ -94,7 +94,8 @@ class CloudinaryContext {
           .then(() => {
             this.player.adaptiveStreaming({
               isDash,
-              preset: options.adaptiveStreamingPreset || 'auto'
+              abrProfile: options.abrProfile || 'default',
+              debug: options.debug
             }).then(() => {
               refresh();
             });
