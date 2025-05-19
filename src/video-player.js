@@ -556,6 +556,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     if (this.playerOptions.debug) {
+      options.debug = true;
+
       isValidSourceConfig(options).then((valid) => {
         if (!valid) {
           this.videojs.error('invalid source configuration');

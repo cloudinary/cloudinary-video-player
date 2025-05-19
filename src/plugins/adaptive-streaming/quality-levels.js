@@ -2,8 +2,6 @@ import videojs from 'video.js';
 import Hls from 'hls.js';
 
 const qualityLevels = (player, options) => {
-  console.log('qualityLevels', player, options);
-
   const levelToRenditionHls = level => {
     let levelUrl =
       Array.isArray(level.url) && level.url.length > 1 ? level.url[level.urlId] : level.url;
@@ -11,7 +9,7 @@ const qualityLevels = (player, options) => {
       id: levelUrl,
       width: level.width,
       height: level.height,
-      bandwidth: level.bitrate, // documentation bug (bitrate: )
+      bandwidth: level.bitrate, // bitrate => bandwidth
       frameRate: 0,
       enabled: enableRendition => {
         var tech = player.tech({ IWillNotUseThisInPlugins: true });
@@ -28,7 +26,6 @@ const qualityLevels = (player, options) => {
           
           if (levelIndex >= 0) {
             if (enableRendition) {
-              console.log('Setting HLS quality level to:', levelIndex, 'for rendition:', levelUrl);
               hls.currentLevel = levelIndex;
             }
           } else {
@@ -57,7 +54,6 @@ const qualityLevels = (player, options) => {
           dash.mediaPlayer != null
         ) {
           if (enableRendition) {
-            console.log('Setting DASH quality level to:', level.id, level);
             // Disable auto bitrate switching first
             dash.mediaPlayer.updateSettings({
               streaming: {
@@ -88,33 +84,18 @@ const qualityLevels = (player, options) => {
       if (dashAdapter && streamInfo) {
         const periodIdx = streamInfo.index;
         var adaptation = dashAdapter.getAdaptationForType(periodIdx, 'video', streamInfo);
-        //console.log("adaptation = ", adaptation.Representation_asArray)
       }
       return adaptation.Representation_asArray;
     }
     return [];
   };
 
-  // const sortHLSLevels = (levels)=>{
-  //     const videoRangeOrder = { "HLG": 1, "PQ": 2, "SDR": 3 };
-
-  //     return [...levels].sort((a, b) => {  // Creates a new sorted array
-  //         if (b.bitrate !== a.bitrate) return b.bitrate - a.bitrate;
-  //         if (b.width !== a.width) return b.width - a.width;
-  //         if (b.height !== a.height) return b.height - a.height;
-  //         const rangeA = videoRangeOrder[a.attrs["VIDEO-RANGE"]] || 4;
-  //         const rangeB = videoRangeOrder[b.attrs["VIDEO-RANGE"]] || 4;
-  //         return rangeA - rangeB;  // Lower number = higher priority
-  //     });
-  // }
-
-  // update the QualityLevels list of renditions
-  // TODO: populate audio levels
+  // Update the QualityLevels list of renditions
   const populateLevels = (levels, abrType) => {
     let qualityLevels = player.qualityLevels;
     if (typeof qualityLevels === 'function') {
       qualityLevels = player.qualityLevels();
-      console.warn('populate levels = ', levels);
+      debugLog('QualityLevels', qualityLevels);
       switch (abrType) {
         case 'hls':
           for (let l = 0; l < levels.length; l++) {
@@ -141,7 +122,7 @@ const qualityLevels = (player, options) => {
 
   let previousResolution = null; // for qualitychanged event data
 
-  // update the selected rendition
+  // Update the selected rendition
   const populateQualityLevelsChange = currentLevel => {
     let qualityLevels = player.qualityLevels;
     if (typeof qualityLevels === 'function') {
@@ -163,7 +144,7 @@ const qualityLevels = (player, options) => {
     }
   };
 
-  // custom 'qualitychanged' event
+  // Custom 'qualitychanged' event
   const populateQualityChangedEvent = currentLevel => {
     if (currentLevel < 0) {
       return;
@@ -171,11 +152,11 @@ const qualityLevels = (player, options) => {
 
     let qualityLevels = player.qualityLevels;
     let level = null;
-    // using using videojs-contrib-quality-levels
+    // Using videojs-contrib-quality-levels
     if (typeof qualityLevels === 'function') {
       qualityLevels = player.qualityLevels();
       level = qualityLevels.levels_[currentLevel];
-      console.log('custom qualitychanged using videojs-contrib-quality-levels');
+      debugLog('Custom qualitychanged', 'using videojs-contrib-quality-levels');
     } else {
       // hls.js directly
       var tech = player.tech({ IWillNotUseThisInPlugins: true });
@@ -186,10 +167,10 @@ const qualityLevels = (player, options) => {
       ) {
         const hls = tech.sourceHandler_.hls;
         level = hls.levels[currentLevel];
-        console.log('level = ', level);
-        console.log('custom qualitychanged using hls.js directly');
-        if (currentLevel !== hls.currentLevel)
-          console.log('ERROR - new level differs from hls.js !!!');
+        debugLog('Custom qualitychanged', 'using hls.js directly');
+        if (currentLevel !== hls.currentLevel) {
+          debugLog('ERROR - new level differs from hls.js');
+        }
       } else {
         // dash.js directly
         var dash = player.dash;
@@ -201,6 +182,7 @@ const qualityLevels = (player, options) => {
         ) {
           let renditions = getRenditionsDash();
           level = renditions[currentLevel];
+          debugLog('Custom qualitychanged', 'using dash.js directly');
         }
       }
     }
@@ -211,68 +193,24 @@ const qualityLevels = (player, options) => {
         from: previousResolution,
         to: currentRes
       };
-      player.trigger({ type: 'qualitychanged', eventData: data }); // Generate custom 'qualitychanged' event on videojs
+      // Trigger custom 'qualitychanged' event on videojs
+      player.trigger({ type: 'qualitychanged', eventData: data }); 
     }
     previousResolution = currentRes;
     
     // Add detailed logging of current rendition
-    logCurrentRendition();
+    debugLog('Current Rendition', {
+      index: currentLevel,
+      resolution: `${level.width}x${level.height}`,
+      bitrate: `${Math.round(level.bitrate / 1000)} kbps`,
+      url: Array.isArray(level.url) ? level.url[level.urlId] : level.url,
+      details: level
+    });
   };
 
-  const logCurrentRendition = () => {
-    let tech = player.tech({ IWillNotUseThisInPlugins: true });
-    if (
-      typeof tech.sourceHandler_ != 'undefined' &&
-      typeof tech.sourceHandler_.hls != 'undefined' &&
-      tech.sourceHandler_.hls != null
-    ) {
-      // HLS playback
-      const hls = tech.sourceHandler_.hls;
-      const currentLevel = hls.currentLevel;
-      
-      if (currentLevel >= 0 && currentLevel < hls.levels.length) {
-        const level = hls.levels[currentLevel];
-        console.log('%c Current HLS Rendition', 'background: #3498db; color: white; padding: 2px 4px; border-radius: 2px;', {
-          index: currentLevel,
-          resolution: `${level.width}x${level.height}`,
-          bitrate: `${Math.round(level.bitrate / 1000)} kbps`,
-          url: Array.isArray(level.url) ? level.url[level.urlId] : level.url,
-          details: level
-        });
-      } else if (currentLevel === -1) {
-        console.log('%c HLS Auto Level Mode', 'background: #2ecc71; color: white; padding: 2px 4px; border-radius: 2px;', {
-          currentLevel: hls.currentLevel,
-          levels: hls.levels.length
-        });
-      }
-    } else {
-      // Check for DASH playback
-      var dash = player.dash;
-      if (
-        typeof dash != 'undefined' &&
-        dash != null &&
-        typeof dash.mediaPlayer != 'undefined' &&
-        dash.mediaPlayer != null
-      ) {
-        const currentQuality = dash.mediaPlayer.getQualityFor('video');
-        const renditions = getRenditionsDash();
-        const settings = dash.mediaPlayer.getSettings();
-        const isAutoMode = settings?.streaming?.abr?.autoSwitchBitrate?.video;
-        
-        if (currentQuality >= 0 && currentQuality < renditions.length) {
-          const rendition = renditions[currentQuality];
-          console.log('%c Current DASH Rendition', 'background: #9b59b6; color: white; padding: 2px 4px; border-radius: 2px;', {
-            index: currentQuality,
-            resolution: `${rendition.width}x${rendition.height}`,
-            bandwidth: `${Math.round(rendition.bandwidth / 1000)} kbps`,
-            frameRate: rendition.frameRate,
-            autoMode: isAutoMode,
-            details: rendition
-          });
-        } else if (isAutoMode) {
-          console.log('%c DASH Auto Quality Mode', 'background: #2ecc71; color: white; padding: 2px 4px; border-radius: 2px;');
-        }
-      }
+  const debugLog = (label, data) => {
+    if (options.debug) {
+      console.log(`%c ${label}`, 'background: #3498db; color: white; padding: 2px 4px; border-radius: 2px;', data);
     }
   };
 
@@ -289,14 +227,15 @@ const qualityLevels = (player, options) => {
 
       for (let i = 0; i < len; i++) {
         if (audioTrackId === i) {
-          console.log(`audio track [${i}] ${hls.audioTracks[i].name} - enabled`);
+          debugLog(`audio track [${i}] ${hls.audioTracks[i].name} - enabled`, hls.audioTracks[i]);
         } else {
-          console.log(`audio track [${i}] ${hls.audioTracks[i].name} - disabled`);
+          debugLog(`audio track [${i}] ${hls.audioTracks[i].name} - disabled`, hls.audioTracks[i]);
         }
       }
     }
   };
 
+  // Audio track handling
   const addAudioTrackVideojs = track => {
     var vjsTrack = new videojs.AudioTrack({
       id: `${track.type}-id_${track.id}-groupId_${track.groupId}-${track.name}`,
@@ -339,7 +278,6 @@ const qualityLevels = (player, options) => {
           var track = audioTrackList[i];
           if (track.enabled) {
             hls.audioTrack = i;
-            //console.log("Player video js to hls track = ", track.label, "idx=", i);
             return;
           }
         }
@@ -347,11 +285,8 @@ const qualityLevels = (player, options) => {
     });
   };
 
-  // map hls.js events to QualityLevels
-  // note: should run before setting source
+  // Map hls.js events to QualityLevels
   const initQualityLevels = () => {
-    console.warn('DEBUG - initQualityLevels()');
-
     var tech = player.tech({ IWillNotUseThisInPlugins: true });
     if (typeof tech == 'undefined') {
       console.warn('ERROR - tech not found!');
@@ -365,38 +300,29 @@ const qualityLevels = (player, options) => {
     ) {
       const hls = tech.sourceHandler_.hls;
       hls.on(Hls.Events.MANIFEST_LOADED, (eventName, data) => {
-        console.warn('hls event = ', eventName, 'Data =', data);
-        //console.log("hls levels = ", hls.levels);
-        // event data returns the manifest levels as in main manifest
-        // we want to get the levels according to the order in hls.levels
-        //populateLevels(data.levels, "hls")
+        debugLog(`HLS event: ${eventName}`, data);
         populateLevels(hls.levels, 'hls');
       });
 
       hls.on(Hls.Events.LEVEL_SWITCHED, (eventName, data) => {
-        console.log('hls event = ', eventName, 'Data =', data);
-        //console.log("hls current level=", hls.currentLevel)
-        //console.log("hls next level=", hls.nextLevel)
+        debugLog(`HLS event: ${eventName}`, data);
         populateQualityLevelsChange(data.level);
         populateQualityChangedEvent(data.level);
       });
 
       hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (eventName, data) => {
-        console.log('No of audio tracks found: ' + data.audioTracks.length);
+        debugLog(`HLS event: ${eventName}`, data);
         initAudioTrackInfo();
       });
 
       hls.on(Hls.Events.AUDIO_TRACK_SWITCHED, (eventName, data) => {
-        console.log('hls event = ', eventName, 'Data =', data);
+        debugLog(`HLS event: ${eventName}`, data);
         logAudioTrackInfo();
       });
 
-      console.log('HLS config = ', hls.config);
-
       hls.on(Hls.Events.ERROR, (eventName, data) => {
-        console.log('hls event = ', eventName, 'Data =', data);
+        debugLog(`HLS event: ${eventName}`, data);
         if (data.fatal) {
-          console.log('triggering error');
           player.trigger({ type: 'error', eventData: data });
         }
       });
@@ -409,14 +335,10 @@ const qualityLevels = (player, options) => {
         typeof dash.mediaPlayer != 'undefined' &&
         dash.mediaPlayer != null
       ) {
-        //console.log("populate DASH = ", dash)
-
         let renditions = getRenditionsDash();
         populateLevels(renditions, 'dash');
 
         dash.mediaPlayer.on('qualityChangeRendered', evt => {
-          //console.log("DASH qualityChangeRendered evt =", evt)
-          //console.log("DASH level=", evt.newQuality)
           populateQualityLevelsChange(evt.newQuality);
           populateQualityChangedEvent(evt.newQuality);
         });
