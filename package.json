@@ -90,7 +90,7 @@
     "video.js": "^8.23.3",
     "videojs-contrib-ads": "^7.5.2",
     "videojs-contrib-dash": "^5.1.1",
-    "videojs-contrib-quality-levels": "^3.0.0",
+    "videojs-contrib-quality-levels": "^4.1.0",
     "videojs-contrib-quality-menu": "^1.0.4",
     "videojs-ima": "^2.3.0",
     "videojs-per-source-behaviors": "^3.0.1",
