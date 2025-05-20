@@ -187,6 +187,11 @@ const qualityLevels = (player, options) => {
       }
     }
 
+    if (!level) {
+      debugLog('Warning: Level is undefined in populateQualityChangedEvent', { currentLevel });
+      return;
+    }
+
     let currentRes = { width: level.width, height: level.height };
     if (previousResolution !== currentRes) {
       let data = {
@@ -194,10 +199,10 @@ const qualityLevels = (player, options) => {
         to: currentRes
       };
       // Trigger custom 'qualitychanged' event on videojs
-      player.trigger({ type: 'qualitychanged', eventData: data }); 
+      player.trigger({ type: 'qualitychanged', eventData: data });
     }
     previousResolution = currentRes;
-    
+
     // Add detailed logging of current rendition
     debugLog('Current Rendition', {
       index: currentLevel,
@@ -210,7 +215,11 @@ const qualityLevels = (player, options) => {
 
   const debugLog = (label, data) => {
     if (options.debug) {
-      console.log(`%c ${label}`, 'background: #3498db; color: white; padding: 2px 4px; border-radius: 2px;', data);
+      console.log(
+        `%c ${label}`,
+        'background: #3498db; color: white; padding: 2px 4px; border-radius: 2px;',
+        data
+      );
     }
   };
 

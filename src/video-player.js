@@ -112,7 +112,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     try {
       const internalAnalyticsMetadata = options._internalAnalyticsMetadata ?? {};
       const analyticsData = getAnalyticsFromPlayerOptions(options);
-      debugger; // eslint-disable-line no-debugger
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
