@@ -1,4 +1,4 @@
-export const hlsjsPresets = {
+export const abrStrategies = {
   fastStart: {
     capLevelToPlayerSize: true,
     ignoreDevicePixelRatio: true,

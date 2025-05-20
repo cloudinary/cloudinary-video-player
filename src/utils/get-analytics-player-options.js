@@ -36,10 +36,12 @@ const getTranscriptOptions = (textTracks = {}) => {
 
 const getSourceOptions = (sourceOptions = {}) => ({
   sourceTypes: sourceOptions.sourceTypes,
-  abrProfile: sourceOptions.abrProfile,
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   visualSearch: hasConfig(sourceOptions.visualSearch),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
+  ...(sourceOptions.abr ? {
+    abrStrategy: sourceOptions?.abr?.strategy,
+  } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
   ...(sourceOptions.info ? {

@@ -29,7 +29,9 @@ export default {
   cloudinaryAnalytics: true,
   allowUsageReport: true,
   playedEventPercents: [25, 50, 75, 100],
-  abrProfile: 'default',
+  abr: {
+    strategy: 'default',
+  },
   html5: {
     handlePartialData: false,
     nativeTextTracks: false

@@ -112,6 +112,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     try {
       const internalAnalyticsMetadata = options._internalAnalyticsMetadata ?? {};
       const analyticsData = getAnalyticsFromPlayerOptions(options);
+      debugger; // eslint-disable-line no-debugger
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
@@ -564,9 +565,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-
+    
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
+    }
+
+    if (this.playerOptions.abr) {
+      options.abr = this.playerOptions.abr;
     }
 
     if (options.shoppable && this.videojs.shoppable) {
