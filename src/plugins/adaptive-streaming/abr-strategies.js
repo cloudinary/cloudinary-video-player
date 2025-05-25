@@ -25,3 +25,5 @@ export const abrStrategies = {
     enableWorker: false
   }
 }; 
+
+export const hdrSupported = window.matchMedia && window.matchMedia('(dynamic-range: high)').matches;
