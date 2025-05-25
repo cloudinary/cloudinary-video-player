@@ -19,17 +19,12 @@ const qualityLevels = (player, options) => {
           tech.sourceHandler_.hls != null
         ) {
           const hls = tech.sourceHandler_.hls;
-          // Find the level index that matches this rendition
-          const levelIndex = hls.levels.findIndex(l => 
-            (Array.isArray(l.url) && l.url.length > 1 ? l.url[l.urlId] : l.url) === levelUrl
+          const levelIndex = hls.levels.findIndex(
+            l => (Array.isArray(l.url) && l.url.length > 1 ? l.url[l.urlId] : l.url) === levelUrl
           );
-          
-          if (levelIndex >= 0) {
-            if (enableRendition) {
-              hls.currentLevel = levelIndex;
-            }
-          } else {
-            console.warn('Could not find matching level for rendition:', levelUrl);
+
+          if (levelIndex >= 0 && enableRendition) {
+            hls.currentLevel = levelIndex;
           }
         }
         return enableRendition;
@@ -38,38 +33,32 @@ const qualityLevels = (player, options) => {
     return rendition;
   };
 
-  const levelToRenditionDash = level => {
-    let rendition = {
-      id: level.id,
-      width: level.width,
-      height: level.height,
-      bandwidth: level.bandwidth,
-      frameRate: level.frameRate,
-      enabled: enableRendition => {
-        var dash = player.dash;
-        if (
-          typeof dash != 'undefined' &&
-          dash != null &&
-          typeof dash.mediaPlayer != 'undefined' &&
-          dash.mediaPlayer != null
-        ) {
-          if (enableRendition) {
-            // Disable auto bitrate switching first
-            dash.mediaPlayer.updateSettings({
-              streaming: {
-                abr: {
-                  autoSwitchBitrate: { video: false }
-                }
-              }
-            });
-            dash.mediaPlayer.setQualityFor('video', parseInt(level.id, 10));
+  const levelToRenditionDash = level => ({
+    id: level.id,
+    width: level.width,
+    height: level.height,
+    bandwidth: level.bandwidth,
+    enabled: enableRendition => {
+      const dash = player.dash;
+      if (dash && dash.mediaPlayer) {
+        if (enableRendition) {
+          dash.mediaPlayer.updateSettings({
+            streaming: { abr: { autoSwitchBitrate: { video: false, audio: false } } }
+          });
+          // Find the correct quality index by resolution
+          const targetQualityIndex = findDashQualityIndex(level.width, level.height);
+          if (targetQualityIndex >= 0) {
+            dash.mediaPlayer.setQualityFor('video', targetQualityIndex);
+            // Set audio quality if mapping exists
+            if (dash.audioMapper && dash.audioMapper[targetQualityIndex] !== undefined) {
+              dash.mediaPlayer.setQualityFor('audio', dash.audioMapper[targetQualityIndex]);
+            }
           }
         }
-        return enableRendition;
       }
-    };
-    return rendition;
-  };
+      return enableRendition;
+    }
+  });
 
   const getRenditionsDash = () => {
     var dash = player.dash;
@@ -90,6 +79,19 @@ const qualityLevels = (player, options) => {
     return [];
   };
 
+  // Helper function to find DASH quality index by resolution
+  const findDashQualityIndex = (targetWidth, targetHeight) => {
+    var dash = player.dash;
+    if (dash && dash.mediaPlayer) {
+      const availableQualities = dash.mediaPlayer.getBitrateInfoListFor('video');
+      const targetQuality = availableQualities.find(q => 
+        q.width === targetWidth && q.height === targetHeight
+      );
+      return targetQuality ? targetQuality.qualityIndex : -1;
+    }
+    return -1;
+  };
+
   // Update the QualityLevels list of renditions
   const populateLevels = (levels, abrType) => {
     let qualityLevels = player.qualityLevels;
@@ -104,14 +106,23 @@ const qualityLevels = (player, options) => {
             qualityLevels.addQualityLevel(rendition);
           }
           break;
-        case 'dash':
-          // TODO: support HDR
+        case 'dash': {
+          // Set up audio mapping for DASH
+          const dash = player.dash;
+          if (!dash) break;
+          const videoRates = levels;
+          const audioRates = dash.mediaPlayer.getBitrateInfoListFor('audio') || [];
+          const normalizeFactor = videoRates.length > 0 ? videoRates[videoRates.length - 1].bandwidth : 1;
+          dash.audioMapper = videoRates.map((rate) =>
+            Math.round((rate.bandwidth / normalizeFactor) * (audioRates.length - 1))
+          );
           for (let l = 0; l < levels.length; l++) {
             let level = levels[l];
             let rendition = levelToRenditionDash(level);
             qualityLevels.addQualityLevel(rendition);
           }
           break;
+        }
         default:
           return;
       }
@@ -187,6 +198,7 @@ const qualityLevels = (player, options) => {
       }
     }
 
+    // Add null check for level
     if (!level) {
       debugLog('Warning: Level is undefined in populateQualityChangedEvent', { currentLevel });
       return;
@@ -346,10 +358,19 @@ const qualityLevels = (player, options) => {
       ) {
         let renditions = getRenditionsDash();
         populateLevels(renditions, 'dash');
-
+        
         dash.mediaPlayer.on('qualityChangeRendered', evt => {
-          populateQualityLevelsChange(evt.newQuality);
-          populateQualityChangedEvent(evt.newQuality);
+          const currentVideoQuality = dash.mediaPlayer.getQualityFor('video');
+          const availableQualities = dash.mediaPlayer.getBitrateInfoListFor('video');
+          const currentQualityInfo = availableQualities[currentVideoQuality];
+          const renditionIndex = findDashQualityIndex(currentQualityInfo.width, currentQualityInfo.height);
+          if (renditionIndex >= 0) {
+            debugLog(`DASH event: ${evt.type}`, evt, renditions[renditionIndex]);
+            populateQualityLevelsChange(renditionIndex);
+            populateQualityChangedEvent(renditionIndex);
+          } else {
+            console.warn('Could not find matching rendition for DASH quality change');
+          }
         });
       }
     }
