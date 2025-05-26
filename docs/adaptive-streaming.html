@@ -21,10 +21,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css">
     <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/2.9.3/dash.all.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js"></script>
-
   -->
 
   <script type="text/javascript" src="./scripts.js"></script>
@@ -32,29 +28,25 @@
 
   <script>
     window.addEventListener('load', function () {
-      var cldConfig = { cloud_name: 'demo', secure: true};
+      var cldConfig = { 
+        cloud_name: 'demo', 
+        secure: true,
+        debug: true
+      };
 
       var uap = new UAParser(navigator.userAgent);
       playerHls = cloudinary.videoPlayer('example-player-hls', cldConfig);
       playerHlsH265 = cloudinary.videoPlayer('example-player-hls-h265', cldConfig);
       playerDash = cloudinary.videoPlayer('example-player-dash', cldConfig);
       playerDashVp9 = cloudinary.videoPlayer('example-player-dash-vp9', cldConfig);
-      playerHlsNoCodec = cloudinary.videoPlayer('example-player-hls-no-codec', cldConfig);
-      playerDashNoCodec = cloudinary.videoPlayer('example-player-dash-no-codec', cldConfig);
-      playerHlsIos = cloudinary.videoPlayer('example-player-hls-ios', Object.assign(cldConfig, {
-        html5: {
-          vhs: {
-            overrideNative: true
-          }
-        }
-      }));
+      playerFastStart = cloudinary.videoPlayer('example-player-fast-start', cldConfig);
+      playerHighQuality = cloudinary.videoPlayer('example-player-high-quality', cldConfig);
 
       playerHls.source(
         'sea_turtle',
         {
           sourceTypes: ['hls'],
-          transformation: {streaming_profile: 'hd'},
-          info: {title: 'HLS'}
+          info: {title: 'HLS /w sp_auto'}
         }
       );
       playerHlsH265.source(
@@ -81,55 +73,37 @@
           info: {title: 'MPEG-DASH vp9'}
         }
       );
-      playerHlsNoCodec.source(
+
+      playerFastStart.source(
         'sea_turtle',
         {
           sourceTypes: ['hls'],
-          info: {title: 'HLS'}
+          info: {title: 'HLS /w fastStart'},
+          abr: {
+            strategy: 'fastStart'
+          }
         }
-      );
-      playerDashNoCodec.source(
-        'sea_turtle',
-        {
-          sourceTypes: ['dash'],
-          info: {title: 'MPEG-DASH'}
-        }
-      );
-      playerHlsIos.source(
-      'sea_turtle',
-      {
-        sourceTypes: ['hls'],
-        transformation: {streaming_profile: 'hd'},
-        info: {title: 'HLS'}
-      }
       );
 
-      playerHls.on('qualitychanged', function(data) {
-        console.log('HLS player', data);
-      });
-      playerHls.videojs.on('playing', function() {
-        document.getElementById('info-hls').innerHTML = uap.getBrowser().name + ' is playing ' + playerHls.videojs.currentSrc();
-      });
-      playerHls.on('error', function() {
-        console.log(playerHls.videojs.error());
-      })
-      playerHlsH265.videojs.on('playing', function() {
-        document.getElementById('info-hls-h265').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsH265.videojs.currentSrc();
-      });
-      playerDash.on('qualitychanged', function(data) {
-        console.log('Dash player', data);
-      });
-      playerDash.videojs.on('playing', function() {
-        document.getElementById('info-dash').innerHTML = uap.getBrowser().name + ' is playing ' + playerDash.videojs.currentSrc();
-      });
-      playerDashVp9.videojs.on('playing', function() {
-        document.getElementById('info-dash-vp9').innerHTML = uap.getBrowser().name + ' is playing ' + playerDashVp9.videojs.currentSrc();
-      });
-      playerHlsNoCodec.videojs.on('playing', function() {
-        document.getElementById('info-hls-no-codec').innerHTML = uap.getBrowser().name + ' is playing ' + playerHlsNoCodec.videojs.currentSrc();
-      });
-      playerDashNoCodec.videojs.on('playing', function() {
-        document.getElementById('info-dash-no-codec').innerHTML = uap.getBrowser().name + ' is playing ' + playerDashNoCodec.videojs.currentSrc();
+      playerHighQuality.source(
+        'sea_turtle',
+        {
+          sourceTypes: ['hls'],
+          info: {title: 'HLS /w fastStart'},
+          abr: {
+            strategy: 'highQuality'
+          }
+        }
+      );
+
+      [playerHls, playerHlsH265, playerDash, playerDashVp9, playerFastStart, playerHighQuality].forEach(player => {
+        player.on('qualitychanged', function(data) {
+          console.log(player.options.videojsOptions.id + ' qualitychanged', data);
+        });
+        player.on('playing', function(data) {
+          const info = player.videoElement.parentElement.parentElement.querySelector('.info');
+          info.innerHTML = uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
+        });
       });
     }, false);
   </script>
@@ -155,7 +129,7 @@
         width="500"
         class="cld-video-player"
       ></video>
-      <span id="info-hls"></span>
+      <p id="info-hls" class="info"></p>
     </div>
 
     <div class="video-container mb-4">
@@ -167,7 +141,7 @@
         width="500"
         class="cld-video-player">
       </video>
-      <span id="info-hls-h265"></span>
+      <p id="info-hls-h265" class="info"></p>
     </div>
 
     <div class="video-container mb-4">
@@ -180,7 +154,7 @@
         width="500"
         class="cld-video-player">
       </video>
-      <span id="info-dash"></span>
+      <p id="info-dash" class="info"></p>
     </div>
 
     <div class="video-container mb-4">
@@ -193,46 +167,33 @@
         width="500"
         class="cld-video-player">
       </video>
-      <span id="info-dash-vp9"></span>
+      <p id="info-dash-vp9" class="info"></p>
     </div>
 
     <div class="video-container mb-4">
-      <h4>HLS no codec</h4>
+      <h4>HLS with fastStart</h4>
       <video
-        id="example-player-hls-no-codec"
+        id="example-player-fast-start"
         playsinline
         controls
         muted
         width="500"
         class="cld-video-player">
       </video>
-      <span id="info-hls-no-codec"></span>
+      <p id="info-fast-start" class="info"></p>
     </div>
 
     <div class="video-container mb-4">
-      <h4>DASH no codec</h4>
+      <h4>HLS with highQuality</h4>
       <video
-        id="example-player-dash-no-codec"
+        id="example-player-high-quality"
         playsinline
         controls
         muted
         width="500"
         class="cld-video-player">
       </video>
-      <span id="info-dash-no-codec"></span>
-    </div>
-
-    <div class="video-container mb-4">
-      <h4>HLS 264 safari ios native override</h4>
-      <video
-          id="example-player-hls-ios"
-          playsinline
-          controls
-          muted
-          width="500"
-          class="cld-video-player">
-      </video>
-      <span id="info-hls-ios"></span>
+      <p id="info-high-quality" class="info"></p>
     </div>
 
     <p class="mt-4">
@@ -270,7 +231,6 @@
           'sea_turtle',
           {
             sourceTypes: ['hls'],
-            transformation: {streaming_profile: 'hd'},
             info: {title: 'HLS'}
           }
         );
@@ -279,18 +239,9 @@
           'sea_turtle',
           {
             sourceTypes: ['dash'],
-            transformation: {streaming_profile: 'hd'},
             info: {title: 'MPEG-DASH'}
           }
         );
-
-        playerHls.on('qualitychanged', (data) => {
-          console.log('HLS player', data);
-        });
-
-        playerDash.on('qualitychanged', (data) => {
-          console.log('Dash player', data);
-        });
       </code>
     </pre>
   </div>
