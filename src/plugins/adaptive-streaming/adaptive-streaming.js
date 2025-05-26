@@ -10,7 +10,6 @@ export default async function adaptiveStreamingPlugin(player, options) {
     ...abrStrategies[options.strategy],
     videoPreference: hdrSupported ? { preferHDR: true } : undefined
   };
-  console.log('>>>>>>>>>>>>>>>> config: ', config);
   player.tech_.options_.hlsjsConfig = config;
   player.on('loadstart', () => qualityLevels(player, options).init());
   player.qualityMenu();
