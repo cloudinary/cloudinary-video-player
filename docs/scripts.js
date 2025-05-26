@@ -55,18 +55,13 @@ var loadStyle = function (source, ver) {
   var search = new URLSearchParams(window.location.search);
   var ver = search.get('ver');
   var min = search.get('min');
-  var light = search.get('light');
 
   var versions = [
     { label: 'Select Player Version:' },
     { value: 'ver=latest', label: 'Stable (Latest)' },
     { value: 'ver=latest&min=true', label: 'Stable, Minified' },
-    { value: 'ver=latest&light=true', label: 'Stable, Light' },
-    { value: 'ver=latest&min=true&light=true', label: 'Stable, Light, Minified' },
     { value: 'ver=edge', label: 'Edge (Next Stable)' },
     { value: 'ver=edge&min=true', label: 'Edge, Minified' },
-    { value: 'ver=edge&light=true', label: 'Edge, Light' },
-    { value: 'ver=edge&min=true&light=true', label: 'Edge, Light, Minified' }
   ];
 
   initPlayerExamples();
@@ -87,7 +82,6 @@ var loadStyle = function (source, ver) {
     // Current flavor
     var current = 'ver=' + (ver || !isLocal && 'edge');
     if (min) current = current + '&min=' + min;
-    if (light) current = current + '&light=' + light;
 
     // Create and append the options
     versions.forEach(function (version) {
@@ -118,21 +112,20 @@ var loadStyle = function (source, ver) {
         var url = a.href + '?';
         if (ver) url = url + 'ver=' + ver + '&';
         if (min) url = url + 'min=' + min + '&';
-        if (light) url = url + 'light=' + light;
         a.setAttribute('href', url);
       }
     });
   }
 
   function initPlayerExamples() {
-    loadStyle('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.css', ver);
-    loadScript('/cld-video-player' + (light ? '.light' : '') + (min ? '.min' : '') + '.js', ver);
+    loadStyle('/cld-video-player' + (min ? '.min' : '') + '.css', ver);
+    loadScript('/cld-video-player' + (min ? '.min' : '') + '.js', ver);
 
     window.addEventListener('load', function () {
 
       createVersionSelector();
 
-      if (ver || min || light) {
+      if (ver || min) {
         updatePageAnchors();
       }
     }, false);

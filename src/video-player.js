@@ -116,9 +116,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
         vpInstanceId: this.getVPInstanceId(),
-        // #if (process.env.WEBPACK_BUILD_LIGHT)
-        vpLightBuild: true,
-        // #endif
         cloudName: options.cloudinary.cloudinaryConfig.cloud_name,
         ...internalAnalyticsMetadata,
       }).toString();
@@ -185,9 +182,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initPlugins () {
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initIma();
-    // #endif
     this._initAutoplay();
     this._initContextMenu();
     this._initPerSrcBehaviors();

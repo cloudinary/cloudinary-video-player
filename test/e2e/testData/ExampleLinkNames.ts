@@ -37,6 +37,5 @@ export enum ExampleLinkName {
     EmbeddedIframePlayer = 'Embedded (iframe) player',
     ESMImports = 'ESM Imports',
     AllBuild = '/all build',
-    LightBuild = '/light build',
     VisualSearch = 'Visual Search',
 }

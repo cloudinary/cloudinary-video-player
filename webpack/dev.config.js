@@ -3,7 +3,6 @@ const webpackCommon = require('./common.config');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { isLight } = require('./build-utils');
 
 const env = require('../env');
 
@@ -29,7 +28,7 @@ module.exports = merge(webpackCommon, {
 
   devServer: {
     port: env.devServer.port || 3000,
-    open: [isLight ? 'index.html?light=true' : 'index.html'],
+    open: ['index.html'],
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*'

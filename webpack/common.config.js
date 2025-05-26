@@ -2,7 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const { lightFilenamePart, minFilenamePart } = require('./build-utils');
+const { minFilenamePart } = require('./build-utils');
 
 const VERSION = JSON.stringify(process.env.npm_package_version);
 
@@ -16,8 +16,8 @@ const webpackConfig = {
   },
 
   output: {
-    filename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
-    chunkFilename: `[name]${lightFilenamePart}${minFilenamePart}.js`,
+    filename: `[name]${minFilenamePart}.js`,
+    chunkFilename: `[name]${minFilenamePart}.js`,
     path: path.resolve(__dirname, '../dist'),
     publicPath: 'auto',
     library: {
@@ -93,7 +93,7 @@ const webpackConfig = {
     new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
     new MiniCssExtractPlugin({
-      filename: `cld-video-player${lightFilenamePart}${minFilenamePart}.css`
+      filename: `cld-video-player${minFilenamePart}.css`
     })
   ]
 };

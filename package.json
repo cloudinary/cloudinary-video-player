@@ -23,26 +23,18 @@
       "require": "./dist/cld-video-player.min.js"
     },
     "./*": "./lib/*",
-    "./light": {
-      "import": "./lib/light/index.js",
-      "require": "./dist/cld-video-player.light.min.js"
-    },
-    "./light/*": "./lib/light/*"
+    "./light/*": "./lib/*"
   },
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
     "clean": "rm -rf dist lib",
     "start": "webpack serve --config webpack/dev.config.js",
-    "start:light": "WEBPACK_BUILD_LIGHT=1 webpack serve --config webpack/dev.config.js",
     "build": "WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
     "build-dev": "webpack --config webpack/build.config.js  --progress --color --mode=development",
     "build-es": "WEBPACK_BUILD_MIN=1 webpack --config webpack/es6.config.js --progress --color",
-    "build-light": "WEBPACK_BUILD_LIGHT=1 WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
-    "build-light-dev": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/build.config.js --progress --color --mode=development",
-    "build-light-es": "WEBPACK_BUILD_LIGHT=1 WEBPACK_BUILD_MIN=1 webpack --config webpack/es-light.config.js --progress --color",
-    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-light && npm run build-light-dev && npm run build-light-es && npm run build-es",
+    "build-light": "node webpack/copy-light-bundle.js",
+    "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-es && npm run build-light",
     "analyze": "webpack --config webpack/analyzer.config.js",
-    "analyze:light": "WEBPACK_BUILD_LIGHT=1 webpack --config webpack/analyzer.config.js",
     "postbuild-all": "bundlewatch",
     "precommit": "eslint src",
     "test": "jest --no-cache --detectOpenHandles",
