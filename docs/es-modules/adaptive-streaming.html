@@ -111,19 +111,19 @@
       import 'cloudinary-video-player/adaptive-streaming';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
-      var cldConfig = { 
+      const cldConfig = { 
         cloud_name: 'demo', 
         secure: true,
         debug: true
       };
 
-      var uap = new UAParser(navigator.userAgent);
-      playerHls = cloudinary.videoPlayer('example-player-hls', cldConfig);
-      playerHlsH265 = cloudinary.videoPlayer('example-player-hls-h265', cldConfig);
-      playerDash = cloudinary.videoPlayer('example-player-dash', cldConfig);
-      playerDashVp9 = cloudinary.videoPlayer('example-player-dash-vp9', cldConfig);
-      playerFastStart = cloudinary.videoPlayer('example-player-fast-start', cldConfig);
-      playerHighQuality = cloudinary.videoPlayer('example-player-high-quality', cldConfig);
+      const uap = new UAParser(navigator.userAgent);
+      const playerHls = cloudinary.videoPlayer('example-player-hls', cldConfig);
+      const playerHlsH265 = cloudinary.videoPlayer('example-player-hls-h265', cldConfig);
+      const playerDash = cloudinary.videoPlayer('example-player-dash', cldConfig);
+      const playerDashVp9 = cloudinary.videoPlayer('example-player-dash-vp9', cldConfig);
+      const playerFastStart = cloudinary.videoPlayer('example-player-fast-start', cldConfig);
+      const playerHighQuality = cloudinary.videoPlayer('example-player-high-quality', cldConfig);
       
       playerHls.source(
         'sea_turtle',
