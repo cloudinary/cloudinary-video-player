@@ -130,5 +130,8 @@ export const sourceValidators = {
   cloudinary: {
     sourceTypes: validator.isArrayOfStrings,
     transformation: validator.isObject
+  },
+  abr: {
+    strategy: validator.isString
   }
 };
