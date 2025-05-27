@@ -92,8 +92,42 @@ const qualityLevels = (player, options) => {
     return -1;
   };
 
+  // Clean up quality levels and reset state for new source
+  const cleanupQualityLevels = () => {
+    let qualityLevels = player.qualityLevels;
+    if (typeof qualityLevels === 'function') {
+      qualityLevels = player.qualityLevels();
+      // Clear all existing quality levels
+      qualityLevels.dispose();
+      debugLog('Quality levels cleaned up for new source');
+    }
+    
+    // Clean up audio tracks from previous source
+    const audioTrackList = player.audioTracks();
+    if (audioTrackList && audioTrackList.length > 0) {
+      // Remove all existing audio tracks
+      for (let i = audioTrackList.length - 1; i >= 0; i--) {
+        audioTrackList.removeTrack(audioTrackList[i]);
+      }
+      debugLog('Audio tracks cleaned up for new source');
+    }
+    
+    // Clean up DASH-specific state
+    const dash = player.dash;
+    if (dash && dash.audioMapper) {
+      delete dash.audioMapper;
+      debugLog('DASH audio mapper cleaned up for new source');
+    }
+    
+    // Reset previous resolution for qualitychanged events
+    previousResolution = null;
+  };
+
   // Update the QualityLevels list of renditions
   const populateLevels = (levels, abrType) => {
+    // Clean up existing quality levels before adding new ones
+    cleanupQualityLevels();
+    
     let qualityLevels = player.qualityLevels;
     if (typeof qualityLevels === 'function') {
       qualityLevels = player.qualityLevels();
