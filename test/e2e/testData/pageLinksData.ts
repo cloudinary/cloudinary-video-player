@@ -19,7 +19,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.CustomErrors, endpoint: 'custom-cld-errors.html' },
     { name: ExampleLinkName.DisplayConfigurations, endpoint: 'ui-config.html' },
     { name: ExampleLinkName.DebugMode, endpoint: 'debug.html' },
-    { name: ExampleLinkName.ESModuleImports, endpoint: 'es-imports.html' },
+    // { name: ExampleLinkName.ESModuleImports, endpoint: 'es-imports.html' },
     { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player.html' },
     { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid.html' },
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles-ios.html' },
