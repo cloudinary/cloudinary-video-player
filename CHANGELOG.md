@@ -1,6 +1,19 @@
 # Changelog
 
 
+## [2.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.5.0...v2.6.0) (2025-05-14)
+
+
+### Features
+
+* bump video player profile package ([#860](https://github.com/cloudinary/cloudinary-video-player/issues/860)) ([fc63d32](https://github.com/cloudinary/cloudinary-video-player/commit/fc63d32970762dc39e26587010b727b52645e6ea))
+* live streams analytics ([#862](https://github.com/cloudinary/cloudinary-video-player/issues/862)) ([bcb3eca](https://github.com/cloudinary/cloudinary-video-player/commit/bcb3eca45abeb4878a002c518e634609e69a5cb1))
+
+
+### Bug Fixes
+
+* add visual-search to /all bundle ([96ac989](https://github.com/cloudinary/cloudinary-video-player/commit/96ac9898899ccfb302c51787402544b35ca79117))
+
 ## [2.5.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.4.1...v2.5.0) (2025-04-29)
 
 
