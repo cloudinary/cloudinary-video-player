@@ -16,7 +16,6 @@ export enum ExampleLinkName {
     CustomErrors = 'Custom Errors',
     DisplayConfigurations = 'Display Configurations',
     DebugMode = 'Debug mode',
-    ESModuleImports = 'ES Module Imports',
     FloatingPlayer = 'Floating Player',
     FluidLayouts = 'Fluid Layouts',
     ForceHLSSubtitles = 'Force HLS Subtitles',
@@ -37,6 +36,5 @@ export enum ExampleLinkName {
     EmbeddedIframePlayer = 'Embedded (iframe) player',
     ESMImports = 'ESM Imports',
     AllBuild = '/all build',
-    LightBuild = '/light build',
     VisualSearch = 'Visual Search',
 }

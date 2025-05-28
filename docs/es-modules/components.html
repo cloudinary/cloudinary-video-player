@@ -63,7 +63,7 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       // Get the ClickableComponent base class from Video.js
-      let vjs = window.videojs.default;
+      let vjs = window.videojs.default || window.videojs;
       const ClickableComponent = vjs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
