@@ -8,7 +8,7 @@ export const abrStrategies = {
     enableWorker: false,
     startLevel: 0
   },
-  default: {
+  balanced: {
     capLevelToPlayerSize: true,
     ignoreDevicePixelRatio: true,
     maxDevicePixelRatio: 2,
@@ -25,5 +25,7 @@ export const abrStrategies = {
     enableWorker: false
   }
 }; 
+
+export const ADAPTIVE_STREAMING_STRATEGY = Object.keys(abrStrategies);
 
 export const hdrSupported = window.matchMedia && window.matchMedia('(dynamic-range: high)').matches;

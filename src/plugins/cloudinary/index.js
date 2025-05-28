@@ -93,7 +93,7 @@ class CloudinaryContext {
         import(/* webpackChunkName: "adaptive-streaming" */ '../adaptive-streaming')
           .then(() => {
             this.player.adaptiveStreaming({
-              ...options.abr,
+              ...options.adaptiveStreaming,
               isDash,
               debug: options.debug
             }).then(() => {

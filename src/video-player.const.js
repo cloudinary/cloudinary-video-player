@@ -40,7 +40,7 @@ export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
   'queryParams',
   'type',
   'visualSearch',
-  'abr'
+  'adaptiveStreaming'
 ]);
 
 export const CLOUDINARY_CONFIG_PARAM = [

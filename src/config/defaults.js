@@ -29,8 +29,8 @@ export default {
   cloudinaryAnalytics: true,
   allowUsageReport: true,
   playedEventPercents: [25, 50, 75, 100],
-  abr: {
-    strategy: 'default',
+  adaptiveStreaming: {
+    strategy: 'balanced',
   },
   html5: {
     handlePartialData: false,

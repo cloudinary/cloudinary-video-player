@@ -39,8 +39,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   visualSearch: hasConfig(sourceOptions.visualSearch),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
-  ...(sourceOptions.abr ? {
-    abrStrategy: sourceOptions?.abr?.strategy,
+  ...(sourceOptions.adaptiveStreaming ? {
+    abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,
   } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,

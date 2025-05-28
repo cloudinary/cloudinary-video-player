@@ -564,8 +564,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return this.videojs.cloudinary.source(publicId, options);
     }
 
-    if (this.playerOptions.abr) {
-      options.abr = this.playerOptions.abr;
+    if (this.playerOptions.adaptiveStreaming) {
+      options.adaptiveStreaming = this.playerOptions.adaptiveStreaming;
     }
 
     if (options.shoppable && this.videojs.shoppable) {
