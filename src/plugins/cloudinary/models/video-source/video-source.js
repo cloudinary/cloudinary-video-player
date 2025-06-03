@@ -47,7 +47,7 @@ class VideoSource extends BaseSource {
 
     // Set extracted parameters using their respective methods
     SOURCE_PARAMS.forEach(param => {
-      if (options[param] !== undefined && this[param]) {
+      if (options[param] !== undefined && typeof this[param] === 'function') {
         this[param](options[param]);
       }
     });
