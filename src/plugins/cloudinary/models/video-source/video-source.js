@@ -1,7 +1,7 @@
-import { sliceAndUnsetProperties } from 'utils/slicing';
 import { objectToQuerystring } from 'utils/querystring';
 import castArray from 'lodash/castArray';
 import { SOURCE_TYPE } from 'utils/consts';
+import { SOURCE_PARAMS } from 'video-player.const';
 import {
   CONTAINER_MIME_TYPES,
   ADAPTIVE_SOURCETYPES,
@@ -37,58 +37,21 @@ class VideoSource extends BaseSource {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    const {
-      poster,
-      sourceTypes,
-      sourceTransformation,
-      info,
-      recommendations,
-      textTracks,
-      withCredentials,
-      interactionAreas,
-      chapters,
-      visualSearch
-    } = sliceAndUnsetProperties(
-      options,
-      'poster',
-      'sourceTypes',
-      'sourceTransformation',
-      'info',
-      'recommendations',
-      'textTracks',
-      'withCredentials',
-      'interactionAreas',
-      'chapters',
-      'visualSearch'
-    );
-
     super(publicId, options);
 
-    this._sourceTypes = null;
-    this._recommendations = null;
-    this._textTracks = null;
-    this._poster = null;
-    this._info = null;
-    this._sourceTransformation = null;
-    this._interactionAreas = null;
-    this._chapters = null;
-    this._visualSearch = null;
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
     this.isLiveStream = options.type === 'live';
-    this._rawTransformation = options.raw_transformation;
-    this.withCredentials = !!withCredentials;
+    this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
 
-    this.poster(poster, { type: options.type });
-    this.sourceTypes(sourceTypes);
-    this.sourceTransformation(sourceTransformation);
-    this.info(info);
-    this.interactionAreas(interactionAreas);
-    this.chapters(chapters);
-    this.visualSearch(visualSearch);
-    this.recommendations(recommendations);
-    this.textTracks(textTracks);
+    // Set extracted parameters using their respective methods
+    SOURCE_PARAMS.forEach(param => {
+      if (options[param] !== undefined && this[param]) {
+        this[param](options[param]);
+      }
+    });
+    
     this.objectId = generateId();
   }
 
@@ -171,7 +134,9 @@ class VideoSource extends BaseSource {
     return this;
   }
 
-  poster(publicId, options = {}) {
+  poster(publicId) {
+    let options = { type: this.getInitOptions().type };
+
     if (!publicId) {
       return this._poster;
     }
@@ -228,7 +193,7 @@ class VideoSource extends BaseSource {
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
 
       // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this._rawTransformation))) {
+      if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this.raw_transformation()))) {
         opts.transformation = mergeTransformations(opts.transformation, codecTrans);
       }
 
@@ -283,6 +248,96 @@ class VideoSource extends BaseSource {
 
   getInteractionAreas() {
     return this._interactionAreas;
+  }
+
+  // Methods for additional SOURCE_PARAMS
+  adaptiveStreaming(value) {
+    if (value === undefined) {
+      return this._adaptiveStreaming;
+    }
+    this._adaptiveStreaming = value;
+    return this;
+  }
+
+  allowUsageReport(value) {
+    if (value === undefined) {
+      return this._allowUsageReport;
+    }
+    this._allowUsageReport = value;
+    return this;
+  }
+
+  autoShowRecommendations(value) {
+    if (value === undefined) {
+      return this._autoShowRecommendations;
+    }
+    this._autoShowRecommendations = value;
+    return this;
+  }
+
+  queryParams(params) {
+    if (params === undefined) {
+      return this._queryParams;
+    }
+    this._queryParams = params;
+    return this;
+  }
+
+  raw_transformation(value) {
+    if (value === undefined) {
+      return this._raw_transformation;
+    }
+    this._raw_transformation = value;
+    return this;
+  }
+
+  shoppable(value) {
+    if (value === undefined) {
+      return this._shoppable;
+    }
+    this._shoppable = value;
+    return this;
+  }
+
+  // Additional setter methods for remaining SOURCE_PARAMS
+  source(value) {
+    if (value === undefined) {
+      return this._source;
+    }
+    this._source = value;
+    return this;
+  }
+
+  transformation(value) {
+    if (value === undefined) {
+      return this._transformation;
+    }
+    this._transformation = value;
+    return this;
+  }
+
+  cloudinaryConfig(value) {
+    if (value === undefined) {
+      return this._cloudinaryConfig;
+    }
+    this._cloudinaryConfig = value;
+    return this;
+  }
+
+  type(value) {
+    if (value === undefined) {
+      return this._typeValue;
+    }
+    this._typeValue = value;
+    return this;
+  }
+
+  posterOptions(value) {
+    if (value === undefined) {
+      return this._posterOptions;
+    }
+    this._posterOptions = value;
+    return this;
   }
 }
 

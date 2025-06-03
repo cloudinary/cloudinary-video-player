@@ -122,7 +122,7 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();
       options.poster = options.poster || posterOptionsForCurrent();
-      options.queryParams = Object.assign(options.queryParams || {}, options.usageReport ? { _s: `vp-${VERSION}` } : {});
+      options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
       if (options.sourceTypes.indexOf('audio') > -1) {
         builtSrc = new AudioSource(publicId, options);
