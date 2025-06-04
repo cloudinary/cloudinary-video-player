@@ -31,6 +31,7 @@ const plugins = {
   contextMenu,
   floatingPlayer,
   pacedTranscript,
+  styledTextTracks,
   vttThumbnails,
 
   // Lazy loaded plugins
@@ -40,7 +41,6 @@ const plugins = {
   playlist,
   shoppable,
   srtTextTracks,
-  styledTextTracks,
   interactionAreas,
   visualSearch,
   adaptiveStreaming
