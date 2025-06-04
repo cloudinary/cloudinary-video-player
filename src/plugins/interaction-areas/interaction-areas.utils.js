@@ -9,7 +9,7 @@ import {
   INTERACTION_AREAS_PREFIX,
   INTERACTION_AREAS_THEME
 } from './interaction-areas.const';
-import { getDefaultPlayerColor } from '../colors';
+import { getDefaultPlayerColor } from '../colors/colors';
 import { themedButton } from '../../components/themeButton/themedButton';
 import { BUTTON_THEME } from '../../components/themeButton/themedButton.const';
 

@@ -353,7 +353,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initColors () {
-    this.videojs.colors(this.playerOptions.colors ? { colors: this.playerOptions.colors } : {});
+    if (this.playerOptions.colors) {
+      this.videojs.colors({ colors: this.playerOptions.colors });
+    }
   }
 
   _initTextTracks () {
