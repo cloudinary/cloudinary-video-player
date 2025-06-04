@@ -45,93 +45,49 @@ class VideoSource extends BaseSource {
     this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
 
-    // Set extracted parameters using their respective methods
-    SOURCE_PARAMS.forEach(param => {
-      if (options[param] !== undefined && typeof this[param] === 'function') {
-        this[param](options[param]);
+    // Get properties that need simple getter/setter methods (exclude special cases)
+    const EXCLUDED_PROPERTIES = [
+      'poster',           // Has complex logic
+      'withCredentials',  // Direct property
+      'publicId',         // BaseSource method
+      'cloudinaryConfig', // BaseSource method
+      'transformation',   // BaseSource method
+      'queryParams'       // BaseSource method
+    ];
+    const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
+
+    // Create simple getter/setter methods
+    this._createGetterSetters(SIMPLE_PROPERTIES);
+
+    // Set initial values from options
+    SIMPLE_PROPERTIES.forEach(prop => {
+      if (options[prop] !== undefined) {
+        this[prop](options[prop]);
       }
     });
     
     this.objectId = generateId();
   }
 
-  textTracks(textTracks) {
-    if (textTracks === undefined) {
-      return this._textTracks;
-    }
-
-    this._textTracks = textTracks;
-
-    return this;
-  }
-
-  recommendations(recommends) {
-    if (recommends === undefined) {
-      return this._recommendations;
-    }
-
-    this._recommendations = recommends;
-
-    return this;
-  }
-
-  sourceTypes(types) {
-    if (!types) {
-      return this._sourceTypes;
-    }
-    this._sourceTypes = types;
-
-    return this;
-  }
-
-  info(info) {
-    if (!info) {
-      return this._info;
-    }
-
-    this._info = info;
-
-    return this;
-  }
-
-  interactionAreas(interactionAreas) {
-    if (!interactionAreas) {
-      return this._interactionAreas;
-    }
-
-    this._interactionAreas = interactionAreas;
-
-    return this;
-  }
-
-  chapters(chapters) {
-    if (!chapters) {
-      return this._chapters;
-    }
-
-    this._chapters = chapters;
-
-    return this;
-  }
-
-  visualSearch(visualSearch) {
-    if (!visualSearch) {
-      return this._visualSearch;
-    }
-
-    this._visualSearch = visualSearch;
-
-    return this;
-  }
-
-  sourceTransformation(trans) {
-    if (!trans) {
-      return this._sourceTransformation;
-    }
-
-    this._sourceTransformation = trans;
-
-    return this;
+  // Helper method to create simple getter/setter methods
+  _createGetterSetters(properties) {
+    properties.forEach(prop => {
+      const privateKey = `_${prop}`;
+      this[prop] = function(value) {
+        if (value === undefined) {
+          // Provide sensible defaults for specific properties
+          if (prop === 'sourceTypes' && this[privateKey] === undefined) {
+            return ['auto'];
+          }
+          if (prop === 'sourceTransformation' && this[privateKey] === undefined) {
+            return {};
+          }
+          return this[privateKey];
+        }
+        this[privateKey] = value;
+        return this;
+      };
+    });
   }
 
   poster(publicId) {
@@ -244,100 +200,6 @@ class VideoSource extends BaseSource {
     }
 
     return { type, src: url, cldSrc: this, isAdaptive, withCredentials: this.withCredentials };
-  }
-
-  getInteractionAreas() {
-    return this._interactionAreas;
-  }
-
-  // Methods for additional SOURCE_PARAMS
-  adaptiveStreaming(value) {
-    if (value === undefined) {
-      return this._adaptiveStreaming;
-    }
-    this._adaptiveStreaming = value;
-    return this;
-  }
-
-  allowUsageReport(value) {
-    if (value === undefined) {
-      return this._allowUsageReport;
-    }
-    this._allowUsageReport = value;
-    return this;
-  }
-
-  autoShowRecommendations(value) {
-    if (value === undefined) {
-      return this._autoShowRecommendations;
-    }
-    this._autoShowRecommendations = value;
-    return this;
-  }
-
-  queryParams(params) {
-    if (params === undefined) {
-      return this._queryParams;
-    }
-    this._queryParams = params;
-    return this;
-  }
-
-  raw_transformation(value) {
-    if (value === undefined) {
-      return this._raw_transformation;
-    }
-    this._raw_transformation = value;
-    return this;
-  }
-
-  shoppable(value) {
-    if (value === undefined) {
-      return this._shoppable;
-    }
-    this._shoppable = value;
-    return this;
-  }
-
-  // Additional setter methods for remaining SOURCE_PARAMS
-  source(value) {
-    if (value === undefined) {
-      return this._source;
-    }
-    this._source = value;
-    return this;
-  }
-
-  transformation(value) {
-    if (value === undefined) {
-      return this._transformation;
-    }
-    this._transformation = value;
-    return this;
-  }
-
-  cloudinaryConfig(value) {
-    if (value === undefined) {
-      return this._cloudinaryConfig;
-    }
-    this._cloudinaryConfig = value;
-    return this;
-  }
-
-  type(value) {
-    if (value === undefined) {
-      return this._typeValue;
-    }
-    this._typeValue = value;
-    return this;
-  }
-
-  posterOptions(value) {
-    if (value === undefined) {
-      return this._posterOptions;
-    }
-    this._posterOptions = value;
-    return this;
   }
 }
 
