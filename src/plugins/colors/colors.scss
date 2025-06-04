@@ -1,0 +1,195 @@
+// Utility function for creating opacity with color-mix
+@function opacity($color, $percentage) {
+  @return color-mix(in srgb, #{$color} #{$percentage}, transparent);
+}
+
+.cld-video-player {
+  color: var(--color-text);
+}
+
+.cld-video-player .vjs-time-tooltip,
+.cld-video-player .vjs-mouse-display:after,
+.cld-video-player .vjs-play-progress:after {
+  color: var(--color-text);
+  background-color: var(--color-base);
+}
+
+.cld-video-player .vjs-load-progress {
+  background: opacity(var(--color-text), 30%);
+}
+
+.cld-video-player .vjs-volume-level {
+  background: var(--color-text);
+}
+
+.cld-video-player .vjs-play-progress {
+  background: var(--color-accent);
+}
+
+.cld-video-player .vjs-volume-vertical {
+  background-color: opacity(var(--color-base), 70%);
+}
+
+.cld-video-player .vjs-volume-panel-horizontal .vjs-control:before {
+  border-color: transparent transparent opacity(var(--color-accent), 40%) transparent;
+}
+
+.cld-video-player .vjs-volume-panel-horizontal .vjs-volume-level:before {
+  border-color: transparent transparent var(--color-accent) transparent;
+}
+
+.cld-video-player .vjs-progress-control:before {
+  color: var(--color-base);
+}
+
+.cld-video-player .vjs-highlights-graph-display {
+  color: opacity(var(--color-text), 30%);
+}
+
+.cld-video-player .vjs-recommendations-overlay {
+  color: var(--color-text);
+  background-color: opacity(var(--color-base), 40%);
+}
+
+.cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item {
+  box-shadow: 0 0.5em 1.2em 0px var(--color-base);
+  color: var(--color-text);
+  border: 1px solid var(--color-text) !important;
+  position: relative;
+}
+
+.cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item:active,
+.cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item:hover {
+  border: 1px solid var(--color-accent) !important;
+}
+
+.cld-video-player .vjs-menu-content .vjs-menu-item:active,
+.cld-video-player .vjs-menu-content .vjs-menu-item:focus,
+.cld-video-player .vjs-menu-content .vjs-menu-item:hover {
+  color: var(--color-text);
+  background-color: opacity(var(--color-text), 20%);
+}
+
+.cld-video-player.vjs-ad-playing .vjs-progress-control .vjs-play-progress {
+  background: var(--color-base);
+}
+
+.cld-video-player.cld-plw-layout {
+  background-color: var(--color-base);
+}
+
+.cld-video-player .cld-plw-item-info-wrap {
+  color: var(--color-text);
+}
+
+.cld-video-player .cld-video-player-floater-close polygon {
+  fill: var(--color-base);
+}
+
+.cld-video-player .cld-spbl-product-hotspot:after {
+  background: var(--color-base);
+  box-shadow: 0 0 0 4px var(--color-accent), 0 0 0 8px opacity(var(--color-text), 24%);
+}
+
+.cld-video-player .cld-spbl-product-tooltip {
+  color: var(--color-base);
+  background: var(--color-text);
+}
+
+.cld-video-player .base-color-semi-bg {
+  background: opacity(var(--color-base), 70%);
+}
+
+.cld-video-player .text-color-semi-bg {
+  background: opacity(var(--color-text), 70%);
+}
+
+.cld-video-player .text-color-text {
+  color: var(--color-text);
+}
+
+.cld-video-player .base-color-text {
+  color: var(--color-base);
+}
+
+.cld-video-player .accent-color-text {
+  color: var(--color-accent);
+}
+
+/* Dark theme specific styles */
+.cld-video-player.cld-video-player-skin-dark .base-color-bg,
+.cld-video-player.cld-video-player-skin-dark .vjs-control-bar,
+.cld-video-player.cld-video-player-skin-dark .vjs-big-play-button,
+.cld-video-player.cld-video-player-skin-dark .vjs-menu-button .vjs-menu-content {
+  background-color: opacity(var(--color-base), 60%);
+}
+
+.cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
+  background-color: opacity(var(--color-base), 60%);
+}
+
+.cld-video-player .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 80%);
+}
+
+.cld-video-player .vjs-upcoming-video {
+  border: 1px solid opacity(var(--color-text), 50%);
+}
+
+.cld-video-player .vjs-upcoming-video .vjs-upcoming-video-bar {
+  background-color: opacity(var(--color-base), 60%);
+}
+
+.cld-video-player .vjs-context-menu-ui .vjs-menu-content {
+  background-color: opacity(var(--color-base), 60%);
+}
+
+/* Light theme specific styles */
+.cld-video-player.cld-video-player-skin-light .base-color-bg,
+.cld-video-player.cld-video-player-skin-light .vjs-control-bar,
+.cld-video-player.cld-video-player-skin-light .vjs-big-play-button,
+.cld-video-player.cld-video-player-skin-light .vjs-menu-button .vjs-menu-content {
+  background-color: opacity(var(--color-base), 80%);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary .vjs-recommendations-overlay-item-primary-content {
+  background-color: var(--color-base);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:active .vjs-recommendations-overlay-item-primary-content,
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-primary:hover .vjs-recommendations-overlay-item-primary-content {
+  color: var(--color-base);
+  background-color: opacity(var(--color-accent), 80%);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:active div,
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary:hover div {
+  color: var(--color-base);
+  background-color: opacity(var(--color-accent), 80%);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-recommendations-overlay .vjs-recommendations-overlay-item.vjs-recommendations-overlay-item-secondary div {
+  background: var(--color-base);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-upcoming-video {
+  border: 1px solid var(--color-text);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-upcoming-video .vjs-upcoming-video-bar {
+  background-color: var(--color-base);
+}
+
+.cld-video-player.cld-video-player-skin-light .vjs-context-menu-ui .vjs-menu-content {
+  background-color: var(--color-base);
+}
+
+.cld-video-player.cld-video-player-skin-light .cld-plw-item-info-wrap {
+  color: var(--color-text);
+}
+
+@media only screen and (max-width: 768px) {
+  .cld-video-player.cld-video-player-skin-light.cld-plw-vertical .cld-plw-item-info-wrap {
+    color: var(--color-accent);
+  }
+} 

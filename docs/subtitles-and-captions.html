@@ -28,7 +28,8 @@
     window.addEventListener('load', function(){
 
       var player = cloudinary.videoPlayer('player', {
-        cloud_name: 'prod'
+        cloud_name: 'prod',
+        muted: true
       });
 
       player.source(

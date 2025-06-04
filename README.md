@@ -12,35 +12,32 @@ This README includes basic information for installation and getting started. Vie
    ```shell
    npm install cloudinary-video-player
    ```
-1. Import the package:
+2. Import the package:
 
    ```js
    import cloudinary from 'cloudinary-video-player';
-   // Also possible:
-   // import { videoPlayer } from 'cloudinary-video-player';
+   import 'cloudinary-video-player/cld-video-player.min.css';
+   // import required plugins like that:
+   // import 'cloudinary-video-player/chapters';
+   // import 'cloudinary-video-player/playlist';
+   ```
+
+* Note - import `/all` to get all available plugins in a single import:
+
+   ```js
+   import cloudinary from 'cloudinary-video-player/all';
    import 'cloudinary-video-player/cld-video-player.min.css';
    ```
 
 ### CDN
 
-Cloudinary Video Player can also be included directly from the [jsDelivr CDN](https://www.jsdelivr.com/):
+Cloudinary Video Player can also be included directly from the [jsDelivr CDN](https://www.jsdelivr.com/), optional plugins will be lazy-loaded on demand:
 
 ```html
 <link href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
 ```
-
-### Packages
-
-The Cloudinary video player offers standard and light package variations, available in either minified or non-minified formats.
-* Standard package: Includes all functionality described in this video player [documentation](https://cloudinary.com/documentation/cloudinary_video_player).  
-* Light package: Excludes the following optional functionality: Adaptive bitrate streaming (HLS and MPEG-DASH), Video ads, Shoppable videos (alpha)  
-
-- `cld-video-player.js` - Non minified version which includes all optional modules.
-- `cld-video-player.min.js` - Minified version which includes all optional modules.
-- `cld-video-player.light.js` - Non minified version which does not include any optional modules.
-- `cld-video-player.light.min.js` - Minified version which does not include any optional modules. (for smaller bundle size)
 
 
 ## Getting started
@@ -59,7 +56,8 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
 Instantiate a new cloudinary Video Player:
 ```javascript
 cloudinary.videoPlayer('player', {
-   cloudName: 'demo'
+   cloudName: 'demo',
+   publicId: 'cld-sample-video'
 });
 ```
 

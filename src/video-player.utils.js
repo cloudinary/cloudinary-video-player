@@ -2,8 +2,8 @@ import videojs from 'video.js';
 import Utils from './utils';
 import defaults from './config/defaults';
 import {
-  CLOUDINARY_PARAMS,
   PLAYER_PARAMS,
+  SOURCE_PARAMS,
   FLUID_CLASS_NAME,
   AUTO_PLAY_MODE
 } from './video-player.const';
@@ -90,7 +90,7 @@ export const extractOptions = (elem, options) => {
   const playerOptions = Utils.sliceAndUnsetProperties(options, ...PLAYER_PARAMS);
 
   // Cloudinary plugin specific options
-  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions, ...CLOUDINARY_PARAMS);
+  playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions, ...SOURCE_PARAMS);
 
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
   // to avoid param name conflicts:

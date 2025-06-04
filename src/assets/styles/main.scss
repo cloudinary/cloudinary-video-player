@@ -12,6 +12,18 @@ $icon-font-path: '../icon-font' !default;
 @include meta.load-css('components/text-tracks.scss');
 
 .cld-video-player {
+  // Default color custom properties - can be overridden by colors plugin
+  // Default to dark theme
+  --color-accent: #0D9AFF;
+  --color-base: #000000;
+  --color-text: #FFFFFF;
+
+  // Light theme defaults
+  &.cld-video-player-skin-light {
+    --color-base: #FFFFFF;
+    --color-text: #000000;
+  }
+
   // container-type: inline-size;
   font-family: variables.$text-font-family;
   overflow: hidden;

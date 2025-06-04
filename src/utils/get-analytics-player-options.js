@@ -12,7 +12,6 @@ const filterDefaultsAndNulls = (obj) => Object.entries(obj).reduce((filtered, [k
 }, {});
 
 const getCloudinaryOptions = (cloudinaryOptions = {}) => ({
-  sourceTypes: cloudinaryOptions.sourceTypes,
   autoShowRecommendations: cloudinaryOptions.autoShowRecommendations,
   fontFace: cloudinaryOptions.fontFace,
   posterOptions: hasConfig(cloudinaryOptions.posterOptions),
@@ -36,9 +35,13 @@ const getTranscriptOptions = (textTracks = {}) => {
 };
 
 const getSourceOptions = (sourceOptions = {}) => ({
+  sourceTypes: sourceOptions.sourceTypes,
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   visualSearch: hasConfig(sourceOptions.visualSearch),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
+  ...(sourceOptions.adaptiveStreaming ? {
+    abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,
+  } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
   ...(sourceOptions.info ? {

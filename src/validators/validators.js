@@ -3,6 +3,7 @@ import {
   INTERACTION_AREAS_TEMPLATE,
   INTERACTION_AREAS_THEME
 } from '../plugins/interaction-areas/interaction-areas.const';
+import { ADAPTIVE_STREAMING_STRATEGY } from '../plugins/adaptive-streaming/abr-strategies';
 import { validator } from './validators-types';
 
 export const playerValidators = {
@@ -130,5 +131,8 @@ export const sourceValidators = {
   cloudinary: {
     sourceTypes: validator.isArrayOfStrings,
     transformation: validator.isObject
+  },
+  adaptiveStreaming: {
+    strategy: validator.isString(ADAPTIVE_STREAMING_STRATEGY)
   }
 };
