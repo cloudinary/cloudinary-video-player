@@ -24,6 +24,7 @@ import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
+import { SOURCE_PARAMS } from './video-player.const';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -487,10 +488,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setExtendedEvents();
 
     // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
-    const source = this.playerOptions.source || this.playerOptions.publicId;
+    // Source parameters are set to playerOptions.cloudinary
+    const source = this.playerOptions.cloudinary.source || this.playerOptions.cloudinary.publicId;
 
     if (source) {
-      this.source(source, this.playerOptions);
+      const sourceOptions = Object.assign({}, this.playerOptions.cloudinary);
+      
+      this.source(source, sourceOptions);
     }
   }
 
@@ -564,20 +568,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return this.videojs.cloudinary.source(publicId, options);
     }
 
-    if (this.playerOptions.adaptiveStreaming) {
-      options.adaptiveStreaming = this.playerOptions.adaptiveStreaming;
-    }
+    // Inherit source parameters from player options (source options take precedence)
+    const inherited = pick(this.playerOptions, SOURCE_PARAMS);
+    options = { ...inherited, ...options };
 
     if (options.shoppable && this.videojs.shoppable) {
       this.videojs.shoppable(this.videojs, options);
-    }
-
-    if (this.playerOptions.allowUsageReport) {
-      options.usageReport = true;
-    }
-
-    if (this.playerOptions.withCredentials) {
-      options.withCredentials = true;
     }
 
     this._resetReloadVideo();

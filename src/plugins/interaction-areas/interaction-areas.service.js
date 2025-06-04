@@ -78,7 +78,7 @@ export const interactionAreasService = (player, playerOptions, videojsOptions) =
 
   function getInteractionAreasConfig() {
     const { cldSrc } = currentSource;
-    return cldSrc && cldSrc.getInteractionAreas();
+    return cldSrc && cldSrc.interactionAreas();
   }
 
   function removeLayoutMessage() {
