@@ -26,15 +26,15 @@ const colorsPlugin = (player, opts = {}) => {
   const playerEl = player.el();
   
   if (opts.colors.base) {
-    playerEl.style.setProperty('--cld-color-base', opts.colors.base);
+    playerEl.style.setProperty('--color-base', opts.colors.base);
   }
   
   if (opts.colors.accent) {
-    playerEl.style.setProperty('--cld-color-accent', opts.colors.accent);
+    playerEl.style.setProperty('--color-accent', opts.colors.accent);
   }
   
   if (opts.colors.text) {
-    playerEl.style.setProperty('--cld-color-text', opts.colors.text);
+    playerEl.style.setProperty('--color-text', opts.colors.text);
   }
 
   // Return an object with methods to update colors if needed
@@ -43,15 +43,15 @@ const colorsPlugin = (player, opts = {}) => {
       const updatedColors = Object.assign({}, opts.colors, newColors);
       
       if (updatedColors.base) {
-        playerEl.style.setProperty('--cld-color-base', updatedColors.base);
+        playerEl.style.setProperty('--color-base', updatedColors.base);
       }
       
       if (updatedColors.accent) {
-        playerEl.style.setProperty('--cld-color-accent', updatedColors.accent);
+        playerEl.style.setProperty('--color-accent', updatedColors.accent);
       }
       
       if (updatedColors.text) {
-        playerEl.style.setProperty('--cld-color-text', updatedColors.text);
+        playerEl.style.setProperty('--color-text', updatedColors.text);
       }
       
       opts.colors = updatedColors;
