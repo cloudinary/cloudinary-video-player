@@ -1,61 +1,70 @@
-export const CLOUDINARY_PARAMS = [
-  'cloudinaryConfig',
-  'transformation',
-  'sourceTypes',
-  'sourceTransformation',
-  'posterOptions',
+// Parameters that can be passed to source configuration (inherited by source method)
+export const SOURCE_PARAMS = [
+  'adaptiveStreaming',
+  'allowUsageReport',
   'autoShowRecommendations',
-  'fontFace',
-  'secure'
+  'chapters',
+  'cloudinaryConfig',
+  'info',
+  'interactionAreas',
+  'poster',
+  'posterOptions',
+  'publicId',
+  'queryParams',
+  'raw_transformation',
+  'recommendations',
+  'shoppable',
+  'source',
+  'sourceTransformation',
+  'sourceTypes',
+  'textTracks',
+  'transformation',
+  'type',
+  'visualSearch',
+  'withCredentials'
 ];
 
-export const PLAYER_PARAMS = CLOUDINARY_PARAMS.concat([
+// All parameters that can be passed to player constructor
+export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   '_internalAnalyticsMetadata',
-  'debug',
-  'publicId',
-  'source',
+  'ads',
+  'aiHighlightsGraph',
+  'analytics',
   'autoplayMode',
+  'chaptersButton',
+  'cloudinaryAnalytics',
+  'colors',
+  'debug',
+  'fetchErrorUsingGet',
+  'floatingWhenNotVisible',
+  'fluid',
+  'fontFace',
+  'hideContextMenu',
+  'ima',
+  'pictureInPictureToggle',
   'playedEventPercents',
   'playedEventTimes',
-  'analytics',
-  'cloudinaryAnalytics',
-  'allowUsageReport',
-  'fluid',
-  'ima',
   'playlistWidget',
-  'hideContextMenu',
-  'colors',
-  'floatingWhenNotVisible',
-  'ads',
-  'showJumpControls',
-  'chaptersButton',
-  'pictureInPictureToggle',
-  'textTracks',
   'qualitySelector',
-  'fetchErrorUsingGet',
-  'withCredentials',
   'seekThumbnails',
-  'aiHighlightsGraph',
-  'chapters',
-  'queryParams',
-  'type',
-  'visualSearch'
+  'showJumpControls'
 ]);
 
+// We support both camelCase and snake_case for cloudinary SDK params
 export const CLOUDINARY_CONFIG_PARAM = [
-  'cloud_name',
-  'secure',
-  'private_cdn',
-  'secure_distribution',
+  'api_secret',
+  'auth_token',
   'cdn_subdomain',
-  'secure_cdn_subdomain',
+  'cloud_name', 
   'cname',
+  'private_cdn',
+  'secure',
+  'secure_cdn_subdomain',
+  'secure_distribution',
   'shorten',
   'sign_url',
-  'api_secret',
   'url_suffix',
-  'use_root_path',
-  'auth_token'
+  'use_root_path'
 ];
 
 export const FLUID_CLASS_NAME = 'cld-fluid';

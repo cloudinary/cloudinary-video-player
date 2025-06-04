@@ -24,9 +24,7 @@ import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import qualitySelector from './components/qualitySelector/qualitySelector.js';
-// #endif
+import { SOURCE_PARAMS } from './video-player.const';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -119,9 +117,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
         vpInstanceId: this.getVPInstanceId(),
-        // #if (process.env.WEBPACK_BUILD_LIGHT)
-        vpLightBuild: true,
-        // #endif
         cloudName: options.cloudinary.cloudinaryConfig.cloud_name,
         ...internalAnalyticsMetadata,
       }).toString();
@@ -188,9 +183,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initPlugins () {
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initIma();
-    // #endif
     this._initAutoplay();
     this._initContextMenu();
     this._initPerSrcBehaviors();
@@ -360,25 +353,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initColors () {
-    this.videojs.colors(this.playerOptions.colors ? { colors: this.playerOptions.colors } : {});
-  }
-
-  // #if (!process.env.WEBPACK_BUILD_LIGHT)
-  _initQualitySelector() {
-    if (this.videojs.controlBar && this.playerOptions.qualitySelector !== false) {
-      this.videojs.httpSourceSelector({ default: 'auto' });
-
-      this.videojs.on(PLAYER_EVENT.LOADED_METADATA, () => {
-        qualitySelector.init(this.videojs);
-      });
-
-      // Show only if more than one option available
-      this.videojs.on(PLAYER_EVENT.LOADED_DATA, () => {
-        qualitySelector.setVisibility(this.videojs);
-      });
+    if (this.playerOptions.colors) {
+      this.videojs.colors({ colors: this.playerOptions.colors });
     }
   }
-  // #endif
 
   _initTextTracks () {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
@@ -512,18 +490,18 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setExtendedEvents();
 
     // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
-    const source = this.playerOptions.source || this.playerOptions.publicId;
+    // Source parameters are set to playerOptions.cloudinary
+    const source = this.playerOptions.cloudinary.source || this.playerOptions.cloudinary.publicId;
 
     if (source) {
-      this.source(source, this.playerOptions);
+      const sourceOptions = Object.assign({}, this.playerOptions.cloudinary);
+      
+      this.source(source, sourceOptions);
     }
   }
 
   _onSourceChange(e, { source, sourceOptions }) {
     this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
-    // #if (!process.env.WEBPACK_BUILD_LIGHT)
-    this._initQualitySelector();
-    // #endif
     this.isLiveStream = source.resourceConfig().type === 'live';
   }
 
@@ -579,27 +557,25 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     if (this.playerOptions.debug) {
+      options.debug = true;
+
       isValidSourceConfig(options).then((valid) => {
         if (!valid) {
           this.videojs.error('invalid source configuration');
         }
       });
     }
-
+    
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
 
+    // Inherit source parameters from player options (source options take precedence)
+    const inherited = pick(this.playerOptions, SOURCE_PARAMS);
+    options = { ...inherited, ...options };
+
     if (options.shoppable && this.videojs.shoppable) {
       this.videojs.shoppable(this.videojs, options);
-    }
-
-    if (this.playerOptions.allowUsageReport) {
-      options.usageReport = true;
-    }
-
-    if (this.playerOptions.withCredentials) {
-      options.withCredentials = true;
     }
 
     this._resetReloadVideo();
