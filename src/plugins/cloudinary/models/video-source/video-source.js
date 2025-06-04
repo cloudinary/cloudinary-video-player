@@ -66,6 +66,9 @@ class VideoSource extends BaseSource {
       }
     });
     
+    // Initialize poster
+    this.poster(options.poster);
+    
     this.objectId = generateId();
   }
 
