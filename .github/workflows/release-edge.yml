@@ -93,7 +93,7 @@ jobs:
           SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
           SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
 
-      - uses: gacts/purge-jsdelivr-cache@v1
+      - name: Purge jsDelivr Cache
+        uses: ./.github/actions/purge-jsdelivr
         with:
-          url: |
-            https://cdn.jsdelivr.net/npm/cloudinary-video-player@edge
+          package: cloudinary-video-player@edge

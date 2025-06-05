@@ -1,0 +1,26 @@
+name: Purge jsDelivr Cache
+description: Purges jsDelivr cache for a list of files
+inputs:
+  package:
+    description: Package name and version (e.g. cloudinary-video-player@1.0.0 or cloudinary-video-player@edge)
+    required: true
+  delay-ms:
+    description: Delay between purge requests in milliseconds
+    required: false
+    default: "300"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Purge jsDelivr cache
+      shell: bash
+      run: |
+        echo "Purging jsDelivr cache for ${{ inputs.package }}"
+        DELAY=${{ inputs.delay-ms }}
+
+        find dist -type f | while read file; do
+          PURGE_URL="https://purge.jsdelivr.net/npm/${{ inputs.package }}/$file"
+          echo "Purging: $PURGE_URL"
+          curl --retry 3 --retry-delay 2 --fail -s "$PURGE_URL"
+          sleep $(echo "$DELAY / 1000" | bc -l)
+        done
