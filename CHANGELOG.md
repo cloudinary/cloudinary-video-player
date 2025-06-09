@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [3.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.6.0...v3.0.0) (2025-06-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove light version
+
+### Features
+
+* adaptive-streaming startegies ([847f649](https://github.com/cloudinary/cloudinary-video-player/commit/847f64997b6c8527858e16c45f718fcf9da2ff46))
+* enable player-source config inheritance ([847f649](https://github.com/cloudinary/cloudinary-video-player/commit/847f64997b6c8527858e16c45f718fcf9da2ff46))
+* hdr support for HLS streams ([847f649](https://github.com/cloudinary/cloudinary-video-player/commit/847f64997b6c8527858e16c45f718fcf9da2ff46))
+* new lazy-loaded ABR engine ([#867](https://github.com/cloudinary/cloudinary-video-player/issues/867)) ([847f649](https://github.com/cloudinary/cloudinary-video-player/commit/847f64997b6c8527858e16c45f718fcf9da2ff46))
+
 ## [2.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.5.0...v2.6.0) (2025-05-14)
 
 
