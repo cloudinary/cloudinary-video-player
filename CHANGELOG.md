@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [3.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.0...v3.0.1) (2025-06-09)
+
+
+### Bug Fixes
+
+* cld errors return videojs errors ([#872](https://github.com/cloudinary/cloudinary-video-player/issues/872)) ([c3f6413](https://github.com/cloudinary/cloudinary-video-player/commit/c3f6413688fd5f84b46c8a626536ea674bf1b202))
+* make sure we have source on cldsourcechanged ([#871](https://github.com/cloudinary/cloudinary-video-player/issues/871)) ([dd71bfe](https://github.com/cloudinary/cloudinary-video-player/commit/dd71bfe80d9daf0af82daaccf8af074eb8061069))
+
 ## [3.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v2.6.0...v3.0.0) (2025-06-05)
 
 
