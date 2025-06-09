@@ -269,6 +269,10 @@ class CloudinaryContext {
 
     const refresh = () => {
       const src = this.source();
+      if (!src) {
+        return;
+      }
+
       const posterOptions = Object.assign({}, this.player.cloudinary.posterOptions(), src.getInitOptions().poster);
 
       if (posterOptions.posterColor) {
