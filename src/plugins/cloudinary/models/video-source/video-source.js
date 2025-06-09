@@ -52,7 +52,8 @@ class VideoSource extends BaseSource {
       'publicId',         // BaseSource method
       'cloudinaryConfig', // BaseSource method
       'transformation',   // BaseSource method
-      'queryParams'       // BaseSource method
+      'queryParams',      // BaseSource method
+      'type'              // BaseSource handles getType()
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
