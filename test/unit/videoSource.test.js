@@ -1,5 +1,6 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import { hasCodec } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
+import { SOURCE_TYPE } from '../../src/utils/consts';
 import '../../src/';
 const cld = { cloud_name: 'demo' };
 
@@ -297,6 +298,15 @@ describe('tests withCredentials', () => {
   });
 });
 
+describe('getType method tests', () => {
+  it('should return VIDEO source type', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    expect(source.getType()).toEqual(SOURCE_TYPE.VIDEO);
+  });
+});
 
 describe('test hasCodec method', () => {
 
