@@ -321,7 +321,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.controlBar.removeChild('chaptersButton');
     }
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      if ((!isEmpty(source._chapters) || source._chapters === true) && this.videojs.chapters) {
+      if ((!isEmpty(source?._chapters) || source?._chapters === true) && this.videojs.chapters) {
         isFunction(this.videojs.chapters)
           ? this.videojs.chapters(source._chapters)
           : this.videojs.chapters.src(source._chapters);
@@ -342,11 +342,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initVisualSearch() {
     // Listen for source changes to apply visual search based on source config
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      if (source._visualSearch && this.videojs.visualSearch) {
+      if (source?._visualSearch && this.videojs.visualSearch) {
         isFunction(this.videojs.visualSearch)
           ? this.videojs.visualSearch(source._visualSearch)
           : this.videojs.visualSearch.createSearchUI(source._visualSearch);
-      } else if (!source._visualSearch && this.videojs.visualSearch?.clearUI) {
+      } else if (!source?._visualSearch && this.videojs.visualSearch?.clearUI) {
         this.videojs.visualSearch.clearUI();
       }
     });
@@ -360,7 +360,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _initTextTracks () {
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      this.setTextTracks(source._textTracks);
+      if (source?._textTracks) {
+        this.setTextTracks(source._textTracks);
+      }
     });
   }
 
@@ -502,7 +504,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _onSourceChange(e, { source, sourceOptions }) {
     this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
-    this.isLiveStream = source.resourceConfig().type === 'live';
+    this.isLiveStream = source?.resourceConfig()?.type === 'live';
   }
 
   _setExtendedEvents() {

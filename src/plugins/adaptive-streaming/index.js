@@ -2,10 +2,9 @@ export default async function lazyAdaptiveStreamingPlugin(options) {
   const player = this;
 
   try {
-    if (options.isDash) {
+    if (options.isDash && !window.dashjs) {
       await import(/* webpackChunkName: "dash" */ 'videojs-contrib-dash');
     }
-    await import(/* webpackChunkName: "adaptive-streaming" */ './adaptive-streaming');
     const { default: abrPlugin } = await import(/* webpackChunkName: "adaptive-streaming" */ './adaptive-streaming');
     abrPlugin(player, options);
   } catch (error) {

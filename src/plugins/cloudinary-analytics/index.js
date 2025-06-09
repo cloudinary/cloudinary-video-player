@@ -24,7 +24,7 @@ class CloudinaryAnalytics {
     const metadata = this.getMetadata();
 
     if (metadata.cloudName && metadata.publicId) {
-      const isLiveStream = source.resourceConfig().type === 'live';
+      const isLiveStream = source?.resourceConfig().type === 'live';
       this.currentVideoMetadata = metadata;
       this.cloudinaryAnalytics.startManualTracking({
         ...metadata,
