@@ -291,13 +291,13 @@ const qualityLevels = (player, options) => {
   };
 
   // Audio track handling
-  const addAudioTrackVideojs = track => {
-    var vjsTrack = new videojs.AudioTrack({
+  const addAudioTrackVideojs = (track, hls) => {
+    const vjsTrack = new videojs.AudioTrack({
       id: `${track.type}-id_${track.id}-groupId_${track.groupId}-${track.name}`,
       kind: 'translation',
       label: track.name,
       language: track.lang,
-      enabled: track.enabled,
+      enabled: hls.audioTrack === hls.audioTracks.indexOf(track),
       default: track.default
     });
 
@@ -315,7 +315,7 @@ const qualityLevels = (player, options) => {
       const hls = tech.sourceHandler_.hls;
       const len = hls.audioTracks.length;
       for (let i = 0; i < len; i++) {
-        addAudioTrackVideojs(hls.audioTracks[i]);
+        addAudioTrackVideojs(hls.audioTracks[i], hls);
       }
     }
 
@@ -354,11 +354,20 @@ const qualityLevels = (player, options) => {
       tech.sourceHandler_.hls != null
     ) {
       const hls = tech.sourceHandler_.hls;
-      hls.on(Hls.Events.MANIFEST_LOADED, (eventName, data) => {
+      
+      const manifestLoadedHandler = (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
         populateLevels(hls.levels, 'hls');
         initAudioTrackInfo();
-      });
+        hls.off(Hls.Events.MANIFEST_LOADED, manifestLoadedHandler);
+      };
+
+      // If manifest is already loaded, populate levels immediately.
+      if (hls.levels && hls.levels.length > 0) {
+        manifestLoadedHandler('MANUAL_MANIFEST_LOADED', {});
+      } else {
+        hls.on(Hls.Events.MANIFEST_LOADED, manifestLoadedHandler);
+      }
 
       hls.on(Hls.Events.LEVEL_SWITCHED, (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
