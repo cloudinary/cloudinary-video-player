@@ -366,10 +366,6 @@ const qualityLevels = (player, options) => {
         populateQualityChangedEvent(data.level);
       });
 
-      hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (eventName, data) => {
-        debugLog(`HLS event: ${eventName}`, data);
-      });
-
       hls.on(Hls.Events.AUDIO_TRACK_SWITCHED, (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
         logAudioTrackInfo();
