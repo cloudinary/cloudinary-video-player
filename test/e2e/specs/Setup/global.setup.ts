@@ -1,9 +1,13 @@
 import { ExampleLinkType } from '../../types/exampleLinkType';
-import { expect, Page } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 import { ExampleLinkName } from '../../testData/ExampleLinkNames';
 import { ESM_URL } from '../../testData/esmUrl';
 
-async function globalSetup(page: Page) {
+
+/**
+ * Ensures the esm deploy is ready by checking the 'Adaptive Streaming' link is visible at ESM_URL.
+ */
+test('global setup', async ({ page }) => {
     if (ESM_URL) {
         const link: ExampleLinkType = {
             name: ExampleLinkName.AdaptiveStreaming,
@@ -11,7 +15,7 @@ async function globalSetup(page: Page) {
         };
         await waitForDeployPreviewUrl(link, page);
     }
-}
+});
 
 /**
  * Waits for a deploy preview URL to become available by making repeated requests and check that link is visible.
@@ -23,4 +27,4 @@ async function waitForDeployPreviewUrl(link: ExampleLinkType, page: Page): Promi
         await expect(linkLocator).toBeVisible({ timeout: 10000 });
     }).toPass({ intervals: [1_000], timeout: 120000 });
 }
-export default globalSetup;
+
