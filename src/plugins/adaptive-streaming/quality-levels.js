@@ -290,14 +290,69 @@ const qualityLevels = (player, options) => {
     }
   };
 
+  // Helper to synchronise Video.js AudioTrackList with hls.js active track
+  const updateVjsAudioTracksEnabled = activeIndex => {
+    const list = player.audioTracks();
+    if (!list) return;
+    for (let i = 0; i < list.length; i++) {
+      list[i].enabled = i === activeIndex;
+    }
+    // Sync complete – log for debug
+    logAudioTrackInfo();
+  };
+
+  // Flush buffered audio by performing a tiny seek outside current range
+  const flushBufferedAudio = () => {
+    try {
+      const cur = player.currentTime();
+      const delta = 0.5; // 500 ms gap to escape current buffer
+      const target = Math.min(cur + delta, player.duration() - 0.1);
+      player.currentTime(target);
+      player.currentTime(cur);
+    } catch (e) {
+      debugLog('Error while flushing buffered audio', e);
+    }
+  };
+
+  // Force hls.js to switch track and immediately start loading fragments for it
+  const selectAudioTrack = index => {
+    var tech = player.tech({ IWillNotUseThisInPlugins: true });
+    if (
+      typeof tech.sourceHandler_ != 'undefined' &&
+      typeof tech.sourceHandler_.hls != 'undefined' &&
+      tech.sourceHandler_.hls != null
+    ) {
+      const hls = tech.sourceHandler_.hls;
+      if (hls.audioTrack === index) {
+        return;
+      }
+      hls.audioTrack = index;
+      // Quickly restart loading to fill the buffer of the new audio group
+      if (hls.media) {
+        try {
+          hls.stopLoad();
+          hls.startLoad(0);
+        } catch (e) {
+          debugLog('Error while reloading after audioTrack switch', e);
+        }
+      }
+
+      logAudioTrackInfo();
+      // will flush once switch is confirmed (AUDIO_TRACK_SWITCHED)
+      hls.once(Hls.Events.AUDIO_TRACK_SWITCHED, () => {
+        flushBufferedAudio();
+      });
+    }
+  };
+
   // Audio track handling
-  const addAudioTrackVideojs = track => {
-    var vjsTrack = new videojs.AudioTrack({
+  const addAudioTrackVideojs = (track, hls) => {
+    const vjsTrack = new videojs.AudioTrack({
       id: `${track.type}-id_${track.id}-groupId_${track.groupId}-${track.name}`,
       kind: 'translation',
       label: track.name,
       language: track.lang,
-      enabled: track.enabled,
+      enabled: hls.audioTrack === hls.audioTracks.indexOf(track),
       default: track.default
     });
 
@@ -315,7 +370,7 @@ const qualityLevels = (player, options) => {
       const hls = tech.sourceHandler_.hls;
       const len = hls.audioTracks.length;
       for (let i = 0; i < len; i++) {
-        addAudioTrackVideojs(hls.audioTracks[i]);
+        addAudioTrackVideojs(hls.audioTracks[i], hls);
       }
     }
 
@@ -328,11 +383,10 @@ const qualityLevels = (player, options) => {
         typeof tech.sourceHandler_.hls != 'undefined' &&
         tech.sourceHandler_.hls != null
       ) {
-        const hls = tech.sourceHandler_.hls;
         for (var i = 0; i < audioTrackList.length; i++) {
           var track = audioTrackList[i];
           if (track.enabled) {
-            hls.audioTrack = i;
+            selectAudioTrack(i);
             return;
           }
         }
@@ -354,10 +408,20 @@ const qualityLevels = (player, options) => {
       tech.sourceHandler_.hls != null
     ) {
       const hls = tech.sourceHandler_.hls;
-      hls.on(Hls.Events.MANIFEST_LOADED, (eventName, data) => {
+      
+      const manifestLoadedHandler = (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
         populateLevels(hls.levels, 'hls');
-      });
+        initAudioTrackInfo();
+        hls.off(Hls.Events.MANIFEST_LOADED, manifestLoadedHandler);
+      };
+
+      // If manifest is already loaded, populate levels immediately.
+      if (hls.levels && hls.levels.length > 0) {
+        manifestLoadedHandler('MANUAL_MANIFEST_LOADED', {});
+      } else {
+        hls.on(Hls.Events.MANIFEST_LOADED, manifestLoadedHandler);
+      }
 
       hls.on(Hls.Events.LEVEL_SWITCHED, (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
@@ -365,14 +429,14 @@ const qualityLevels = (player, options) => {
         populateQualityChangedEvent(data.level);
       });
 
-      hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, (eventName, data) => {
-        debugLog(`HLS event: ${eventName}`, data);
-        initAudioTrackInfo();
-      });
-
       hls.on(Hls.Events.AUDIO_TRACK_SWITCHED, (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
-        logAudioTrackInfo();
+        // Make sure Video.js AudioTracks reflect the newly-selected HLS track
+        if (typeof data.id !== 'undefined') {
+          updateVjsAudioTracksEnabled(data.id);
+        }
+        // Ensure buffer flushed when switch originates from hls.js (e.g. default track)
+        flushBufferedAudio();
       });
 
       hls.on(Hls.Events.ERROR, (eventName, data) => {
