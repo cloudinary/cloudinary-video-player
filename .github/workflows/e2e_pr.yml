@@ -1,4 +1,4 @@
-name: Video Player PR
+name: Playwright Tests
 
 on:
   workflow_dispatch:
