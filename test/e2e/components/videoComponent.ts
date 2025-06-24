@@ -48,7 +48,10 @@ export class VideoComponent extends BaseComponent {
      */
     public async validateVideoIsPlaying(expectedPlaying: boolean, timeout: number = 6000): Promise<void> {
         await expect(async () => {
-            expect(await this.isPaused()).not.toEqual(expectedPlaying);
+            const isPaused = await this.isPaused();
+            
+            console.log('isPaused', isPaused);
+            expect(isPaused).not.toEqual(expectedPlaying);
         }).toPass({ intervals: [500], timeout });
     }
 }
