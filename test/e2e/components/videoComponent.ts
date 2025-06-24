@@ -34,7 +34,7 @@ export class VideoComponent extends BaseComponent {
               if (!video) {
                 throw new Error(`Video element with id "${selector}" not found`);
               }              
-              return video.paused && !video.ended && video.currentTime > 0;
+              return video.paused && !video.ended;
             
         }, this.props.selector);
     }
