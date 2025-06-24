@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.1...v3.0.2) (2025-06-22)
+
+
+### Bug Fixes
+
+* multi-audio tracks ([#874](https://github.com/cloudinary/cloudinary-video-player/issues/874)) ([d8b20b4](https://github.com/cloudinary/cloudinary-video-player/commit/d8b20b4018c8ead75991c86d6411786750f2f8ce))
+
 ## [3.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.0...v3.0.1) (2025-06-09)
 
 
