@@ -23,10 +23,19 @@ export class VideoComponent extends BaseComponent {
      */
     public async isPaused(): Promise<boolean> {
         return this.props.page.evaluate((selector: string) => {
-            console.log('Evaluating selector in browser context:', selector); // Logs selector in browser context
-            const xpathResult = document.evaluate(selector, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-            const video = xpathResult.singleNodeValue as HTMLVideoElement | null;
-            return video.paused;
+            const video = document.evaluate(
+                selector, 
+                document, 
+                null, 
+                XPathResult.FIRST_ORDERED_NODE_TYPE, 
+                null
+              ).singleNodeValue as HTMLVideoElement | null;
+              
+              if (!video) {
+                throw new Error(`Video element with id "${selector}" not found`);
+              }              
+              return video.paused && !video.ended && video.currentTime > 0;
+            
         }, this.props.selector);
     }
 
