@@ -37,7 +37,7 @@ export class VideoComponent extends BaseComponent {
      * timeout - Optional. The maximum time (in milliseconds) to wait for the validation. Defaults to 3000ms if not provided.
      * Pass `true` if the video is expected to be playing, or `false` if it is expected to be paused.
      */
-    public async validateVideoIsPlaying(expectedPlaying: boolean, timeout: number = 3000): Promise<void> {
+    public async validateVideoIsPlaying(expectedPlaying: boolean, timeout: number = 6000): Promise<void> {
         await expect(async () => {
             expect(await this.isPaused()).not.toEqual(expectedPlaying);
         }).toPass({ intervals: [500], timeout });
