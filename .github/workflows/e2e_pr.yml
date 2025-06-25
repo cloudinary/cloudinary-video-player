@@ -1,4 +1,4 @@
-name: Video Player PR
+name: Playwright Tests
 
 on:
   workflow_dispatch:
@@ -32,6 +32,9 @@ jobs:
 
       - name: Set Deploy Preview URL
         run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
 
       - name: E2E tests
         run: npm run test:e2e

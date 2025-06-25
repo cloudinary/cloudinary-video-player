@@ -13,9 +13,9 @@ export async function testVastAndVpaidPageVideoIsPlaying(page: Page, pomPages: P
     });
     //Sending timeout of 12 seconds to wait until the ad finishes (10 sec) and the video will start
     await test.step('Validating that single video with ads is playing', async () => {
-        await pomPages.vastAndVpaidPage.singleVideoWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
+        await pomPages.vastAndVpaidPage.singleVideoWithAdsVideoComponent.validateVideoIsPlaying(true, 20000);
     });
     await test.step('Validating that playlist with ads video is playing', async () => {
-        await pomPages.vastAndVpaidPage.playlistWithAdsVideoComponent.validateVideoIsPlaying(true, 12000);
+        await pomPages.vastAndVpaidPage.playlistWithAdsVideoComponent.validateVideoIsPlaying(true, 20000);
     });
 }

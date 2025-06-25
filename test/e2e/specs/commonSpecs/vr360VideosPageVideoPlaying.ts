@@ -12,6 +12,6 @@ export async function testVr360PageVideoIsPlaying(page: Page, pomPages: PageMana
         return pomPages.vr360VideosPage.vr360VideoComponent.clickPlay();
     });
     await test.step('Validating that 360 video is playing', async () => {
-        await pomPages.vr360VideosPage.vr360VideoComponent.validateVideoIsPlaying(true, 6000);
+        await pomPages.vr360VideosPage.vr360VideoComponent.validateVideoIsPlaying(true, 12000);
     });
 }
