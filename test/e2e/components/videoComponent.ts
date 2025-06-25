@@ -34,7 +34,7 @@ export class VideoComponent extends BaseComponent {
               if (!video) {
                 throw new Error(`Video element with id "${selector}" not found`);
               }              
-              return video.paused && !video.ended;
+              return video.paused;
             
         }, this.props.selector);
     }
@@ -49,8 +49,6 @@ export class VideoComponent extends BaseComponent {
     public async validateVideoIsPlaying(expectedPlaying: boolean, timeout: number = 6000): Promise<void> {
         await expect(async () => {
             const isPaused = await this.isPaused();
-            
-            console.log('isPaused', isPaused);
             expect(isPaused).not.toEqual(expectedPlaying);
         }).toPass({ intervals: [500], timeout });
     }
