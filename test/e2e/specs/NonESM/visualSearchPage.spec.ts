@@ -18,19 +18,19 @@ vpTest(`Test if video on visual search page is playing as expected`, async ({ pa
         await pomPages.visualSearchPage.visualSearchPlaylistVideoComponent.locator.scrollIntoViewIfNeeded();
     });
 
-    await test.step('Click play button on visual search video', async () => {
+    await test.step('Click play button on visual search plugin video', async () => {
         await pomPages.visualSearchPage.visualSearchVideoComponent.clickPlay();
     });
 
-    await test.step('Validating that visual search video is playing', async () => {
+    await test.step('Validating that visual search plugin video is playing', async () => {
         await pomPages.visualSearchPage.visualSearchVideoComponent.validateVideoIsPlaying(true);
     });
 
-    await test.step('Click play button on playlist video', async () => {
+    await test.step('Click play button on mixed content video', async () => {
         await pomPages.visualSearchPage.visualSearchPlaylistVideoComponent.clickPlay();
     });
 
-    await test.step('Validating that visual search playlist video is playing', async () => {
+    await test.step('Validating that visual mixed content video is playing', async () => {
         await pomPages.visualSearchPage.visualSearchPlaylistVideoComponent.validateVideoIsPlaying(true);
     });
 });

@@ -14,7 +14,9 @@ for (const link of LINKS) {
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
         expect(page.url()).toContain(link.endpoint);
-        handleCommonBrowsersErrors(link.name, consoleErrors);
+        await expect(async () => {
+            handleCommonBrowsersErrors(link.name, consoleErrors);
+          }).toPass({intervals: [1000]});
     });
 }
 

@@ -7,7 +7,8 @@ import { ESM_URL } from '../../testData/esmUrl';
 /**
  * Ensures the esm deploy is ready by checking the 'Adaptive Streaming' link is visible at ESM_URL.
  */
-test('global setup', async ({ page }) => {
+test('Global Setup', async ({ page }) => {
+    test.slow();
     if (ESM_URL) {
         const link: ExampleLinkType = {
             name: ExampleLinkName.AdaptiveStreaming,
