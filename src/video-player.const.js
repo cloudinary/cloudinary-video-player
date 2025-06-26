@@ -1,7 +1,6 @@
 // Parameters that can be passed to source configuration (inherited by source method)
 export const SOURCE_PARAMS = [
   'adaptiveStreaming',
-  'allowUsageReport',
   'autoShowRecommendations',
   'chapters',
   'cloudinaryConfig',
@@ -10,8 +9,7 @@ export const SOURCE_PARAMS = [
   'poster',
   'posterOptions',
   'publicId',
-  'queryParams',
-  'raw_transformation',
+  'rawTransformation',
   'recommendations',
   'shoppable',
   'source',
@@ -29,6 +27,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   '_internalAnalyticsMetadata',
   'ads',
   'aiHighlightsGraph',
+  'allowUsageReport',
   'analytics',
   'autoplayMode',
   'chaptersButton',
@@ -46,6 +45,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'playedEventTimes',
   'playlistWidget',
   'qualitySelector',
+  'queryParams',
   'seekThumbnails',
   'showJumpControls'
 ]);
