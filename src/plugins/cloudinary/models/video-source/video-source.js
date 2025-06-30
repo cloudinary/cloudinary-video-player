@@ -153,7 +153,7 @@ class VideoSource extends BaseSource {
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
 
       // If user's transformation include video_codec then don't add another video codec to transformation
-      if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this.raw_transformation()))) {
+      if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this.rawTransformation()))) {
         opts.transformation = mergeTransformations(opts.transformation, codecTrans);
       }
 
