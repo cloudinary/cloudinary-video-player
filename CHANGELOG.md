@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.0.3](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.2...v3.0.3) (2025-06-30)
+
+
+### Bug Fixes
+
+* internal analytics ([#878](https://github.com/cloudinary/cloudinary-video-player/issues/878)) ([0cbf5e7](https://github.com/cloudinary/cloudinary-video-player/commit/0cbf5e7527ed995109026691f94b1bc5e34ebd44))
+
 ## [3.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.1...v3.0.2) (2025-06-22)
 
 
