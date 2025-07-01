@@ -442,7 +442,10 @@ const qualityLevels = (player, options) => {
       hls.on(Hls.Events.ERROR, (eventName, data) => {
         debugLog(`HLS event: ${eventName}`, data);
         if (data.fatal) {
-          player.trigger({ type: 'error', eventData: data });
+          player.error({
+            code: 4, // MEDIA_ERR_SRC_NOT_SUPPORTED will trigger Utils.handleCldError
+            ...data
+          });
         }
       });
     } else {
