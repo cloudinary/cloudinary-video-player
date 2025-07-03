@@ -45,7 +45,8 @@ class TitleBar extends Component {
     if (!config?.cloud_name || !publicId) return;
     
     const urlPrefix = getCloudinaryUrlPrefix(config);
-    const metadataUrl = `${urlPrefix}/_applet_/video_service/video_metadata/upload/${publicId}.json`;
+    const deliveryType = source.getInitOptions().type;
+    const metadataUrl = `${urlPrefix}/_applet_/video_service/video_metadata/${deliveryType}/${publicId}.json`;
     
     fetch(metadataUrl)
       .then(response => {
