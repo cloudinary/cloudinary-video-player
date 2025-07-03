@@ -213,7 +213,8 @@ class VideoSource extends BaseSource {
       return this;
     }
 
-    const info = this.getInitOptions().info;
+    const info = this._info || this.getInitOptions().info;
+    
     return {
       title: this.title() || info?.title || '',
       subtitle: this.description() || info?.subtitle || '',

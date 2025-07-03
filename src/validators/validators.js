@@ -88,8 +88,8 @@ export const sourceValidators = {
   shoppable: validator.isPlainObject,
   chapters: validator.or(validator.isBoolean, validator.isPlainObject),
   visualSearch: validator.or(validator.isBoolean),
-  title: validator.isString,
-  description: validator.isString,
+  title: validator.or(validator.isString, validator.isBoolean),
+  description: validator.or(validator.isString, validator.isBoolean),
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),

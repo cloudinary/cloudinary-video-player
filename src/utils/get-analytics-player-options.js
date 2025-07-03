@@ -46,8 +46,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
   ...(sourceOptions.title || sourceOptions.description || sourceOptions.info ? {
     sourceInfo: hasConfig(sourceOptions.info),
-    sourceTitle: sourceOptions.title || sourceOptions.info?.title,
-    sourceDescription: sourceOptions.info?.subtitle ||sourceOptions.info?.description
+    sourceTitle: (typeof sourceOptions.title === 'string' ? sourceOptions.title : sourceOptions.info?.title),
+    sourceDescription: (typeof sourceOptions.description === 'string' ? sourceOptions.description : sourceOptions.info?.subtitle || sourceOptions.info?.description)
   } : {}),
   ...(sourceOptions.textTracks ? {
     ...(hasConfig(sourceOptions.textTracks) && getTranscriptOptions(sourceOptions.textTracks)),
