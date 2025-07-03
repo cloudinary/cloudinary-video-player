@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [3.0.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.4...v3.0.5) (2025-07-03)
+
+
+### Bug Fixes
+
+* secure_distribution not passed correctly when fetching profiles ([#883](https://github.com/cloudinary/cloudinary-video-player/issues/883)) ([0a61e34](https://github.com/cloudinary/cloudinary-video-player/commit/0a61e343eae02ade42a76c5e9cc273694430f0f2))
+
+## [3.0.4](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.3...v3.0.4) (2025-07-01)
+
+
+### Bug Fixes
+
+* errors display when using HLS ([#880](https://github.com/cloudinary/cloudinary-video-player/issues/880)) ([ab7db75](https://github.com/cloudinary/cloudinary-video-player/commit/ab7db75f9e4ab84234a6dda57af1f08688edc70d))
+
 ## [3.0.3](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.2...v3.0.3) (2025-06-30)
 
 
