@@ -18,7 +18,7 @@ runs:
         echo "Purging jsDelivr cache for ${{ inputs.package }}"
         DELAY=${{ inputs.delay-ms }}
 
-        find dist -type f | while read file; do
+        find dist -type f ! -name "*.map" | while read file; do
           PURGE_URL="https://purge.jsdelivr.net/npm/${{ inputs.package }}/$file"
           echo "Purging: $PURGE_URL"
           curl --retry 3 --retry-delay 2 --fail -s "$PURGE_URL"
