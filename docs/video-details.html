@@ -35,9 +35,9 @@
       });
 
       player2.source({
-        publicId: 'sea_turtle',
+        publicId: 'snow_horses',
         title: true,
-        description: 'Custom description for sea turtle video'
+        description: 'Hard-coded description for snow horses video'
       });
 
       // Example 3: Mixed with legacy format
@@ -46,7 +46,7 @@
       });
 
       player3.source({
-        publicId: 'elephants',
+        publicId: 'snow_horses',
         title: true,
         info: { subtitle: 'Fallback description from legacy format' }
       });
@@ -139,11 +139,6 @@
         });
       </code>
     </pre>
-
-    <div class="alert alert-info mt-4">
-      <strong>Note:</strong> Auto-fetch retrieves metadata from <code>https://res.cloudinary.com/CLOUDNAME/_applet_/video_service/video_metadata/upload/PUBLICID.json</code>. 
-      The title bar will initially be empty and populate once the metadata is fetched.
-    </div>
   </div>
 
 </body>
