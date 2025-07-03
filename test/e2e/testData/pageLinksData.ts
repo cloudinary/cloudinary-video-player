@@ -39,6 +39,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.EmbeddedIframePlayer, endpoint: 'embedded-iframe.html' },
     { name: ExampleLinkName.ESMImports, endpoint: 'cld-vp-esm-pages.netlify.app' },
     { name: ExampleLinkName.VisualSearch, endpoint: 'visual-search.html' },
+    { name: ExampleLinkName.VideoDetails, endpoint: 'video-details.html' },
 ];
 
 /**

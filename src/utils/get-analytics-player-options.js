@@ -44,10 +44,10 @@ const getSourceOptions = (sourceOptions = {}) => ({
   } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
-  ...(sourceOptions.info ? {
-    sourceInfoTitle: sourceOptions.info.title,
-    sourceInfoSubtitle: sourceOptions.info.subtitle,
-    sourceInfoDescription: sourceOptions.info.description
+  ...(sourceOptions.title || sourceOptions.description || sourceOptions.info ? {
+    sourceInfo: hasConfig(sourceOptions.info),
+    sourceTitle: (typeof sourceOptions.title === 'string' ? sourceOptions.title : sourceOptions.info?.title),
+    sourceDescription: (typeof sourceOptions.description === 'string' ? sourceOptions.description : sourceOptions.info?.subtitle || sourceOptions.info?.description)
   } : {}),
   ...(sourceOptions.textTracks ? {
     ...(hasConfig(sourceOptions.textTracks) && getTranscriptOptions(sourceOptions.textTracks)),

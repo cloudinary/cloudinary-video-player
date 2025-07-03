@@ -53,7 +53,8 @@ class VideoSource extends BaseSource {
       'cloudinaryConfig', // BaseSource method
       'transformation',   // BaseSource method
       'queryParams',      // BaseSource method
-      'type'              // BaseSource handles getType()
+      'type',             // BaseSource handles getType()
+      'info'              // Custom override method
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
@@ -204,6 +205,21 @@ class VideoSource extends BaseSource {
     }
 
     return { type, src: url, cldSrc: this, isAdaptive, withCredentials: this.withCredentials };
+  }
+
+  info(value) {
+    if (value !== undefined) {
+      this._info = value;
+      return this;
+    }
+
+    const info = this._info || this.getInitOptions().info;
+    
+    return {
+      title: this.title() || info?.title || '',
+      subtitle: this.description() || info?.subtitle || '',
+      description: this.description() || info?.subtitle || '',
+    };
   }
 }
 
