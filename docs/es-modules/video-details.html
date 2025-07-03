@@ -17,26 +17,39 @@
         <a href="/index.html">&#60;&#60; Back to examples index</a>
       </nav>
       <h1>Cloudinary Video Player</h1>
-      <h3 class="mb-4">Display Configurations</h3>
-      <p>This page demonstrates:</p>
-      <ul>
-        <li>Custom Logo</li>
-        <li>Custom Font</li>
-        <li>Hide Context Menu</li>
-        <li>Display 10-sec jump buttons</li>
-        <li>Hide big-play-button</li>
-        <li>Show playback rates control</li>
-        <li>Show PictureInPicture Toggle</li>
-      </ul>
+      <h3 class="mb-4">Video Details</h3>
 
+      <h4>Auto-fetch Both Title & Description</h4>
       <video
-        id="player"
+        id="player1"
         class="cld-video-player cld-fluid"
         crossorigin="anonymous"
         controls
         muted
-        autoplay
         playsinline
+        autoplay
+      ></video>
+
+      <h4 class="mt-4">Auto-fetch Title, Custom Description</h4>
+      <video
+        id="player2"
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        controls
+        muted
+        playsinline
+        autoplay
+      ></video>
+
+      <h4 class="mt-4">Mixed with Legacy Format</h4>
+      <video
+        id="player3"
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        controls
+        muted
+        playsinline
+        autoplay
       ></video>
 
       <p class="mt-4">
@@ -47,23 +60,40 @@
     </div>
 
     <script type="module">
-      import 'cloudinary-video-player/cld-video-player.min.css';
       import { videoPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/cld-video-player.min.css';
 
-      const player = videoPlayer('player', {
-        cloudName: 'demo',
+      // Example 1: Auto-fetch both title and description
+      const player1 = videoPlayer('player1', {
+        cloudName: 'demo'
+      });
+
+      player1.source({
         publicId: 'snow_horses',
-        title: 'Snow Horses', 
-        description: 'A movie about horses',
-        hideContextMenu: true,
-        logoImageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png',
-        logoOnclickUrl: 'https://google.com',
-        showLogo: true,
-        showJumpControls: true,
-        pictureInPictureToggle: true,
-        fontFace: 'Lobster',
-        bigPlayButton: false,
-        playbackRates: [0.5, 1, 1.5, 2]
+        title: true,
+        description: true
+      });
+
+      // Example 2: Auto-fetch title only, custom description
+      const player2 = videoPlayer('player2', {
+        cloudName: 'demo'
+      });
+
+      player2.source({
+        publicId: 'snow_horses',
+        title: true,
+        description: 'Hard-coded description for snow horses video'
+      });
+
+      // Example 3: Mixed with legacy format
+      const player3 = videoPlayer('player3', {
+        cloudName: 'demo'
+      });
+
+      player3.source({
+        publicId: 'snow_horses',
+        title: true,
+        info: { subtitle: 'Fallback description from legacy format' }
       });
     </script>
 
@@ -75,4 +105,4 @@
       crossorigin="anonymous"
     />
   </body>
-</html>
+</html> 

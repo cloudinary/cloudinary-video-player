@@ -1,7 +1,6 @@
 import VideoPlayer from './video-player';
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
-import { isRawUrl } from './plugins/cloudinary/common';
-import { unsigned_url_prefix } from '@cloudinary/url-gen/backwards/utils/unsigned_url_prefix';
+import { isRawUrl, getCloudinaryUrlPrefix } from './plugins/cloudinary/common';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
 const getDefaultProfileConfig = (profileName) => {
@@ -19,16 +18,7 @@ export const getProfile = async (profile, initOptions) => {
     return getDefaultProfileConfig(profile);
   }
 
-  const urlPrefix = unsigned_url_prefix(
-    null,
-    initOptions.cloudinaryConfig.cloud_name,
-    initOptions.cloudinaryConfig.private_cdn,
-    initOptions.cloudinaryConfig.cdn_subdomain,
-    initOptions.cloudinaryConfig.secure_cdn_subdomain,
-    initOptions.cloudinaryConfig.cname,
-    initOptions.cloudinaryConfig.secure ?? true,
-    initOptions.cloudinaryConfig.secure_distribution,
-  );
+  const urlPrefix = getCloudinaryUrlPrefix(initOptions.cloudinaryConfig);
 
   const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
   return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
