@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.0.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.4...v3.0.5) (2025-07-03)
+
+
+### Bug Fixes
+
+* secure_distribution not passed correctly when fetching profiles ([#883](https://github.com/cloudinary/cloudinary-video-player/issues/883)) ([0a61e34](https://github.com/cloudinary/cloudinary-video-player/commit/0a61e343eae02ade42a76c5e9cc273694430f0f2))
+
 ## [3.0.4](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.3...v3.0.4) (2025-07-01)
 
 
