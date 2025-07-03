@@ -21,13 +21,13 @@ export const getProfile = async (profile, initOptions) => {
 
   const urlPrefix = unsigned_url_prefix(
     null,
-    initOptions.cloudName ?? initOptions.cloud_name,
-    initOptions.private_cdn,
-    initOptions.cdn_subdomain,
-    initOptions.secure_cdn_subdomain,
-    initOptions.cname,
-    initOptions.secure ?? true,
-    initOptions.secure_distribution,
+    initOptions.cloudinaryConfig.cloud_name,
+    initOptions.cloudinaryConfig.private_cdn,
+    initOptions.cloudinaryConfig.cdn_subdomain,
+    initOptions.cloudinaryConfig.secure_cdn_subdomain,
+    initOptions.cloudinaryConfig.cname,
+    initOptions.cloudinaryConfig.secure ?? true,
+    initOptions.cloudinaryConfig.secure_distribution,
   );
 
   const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
