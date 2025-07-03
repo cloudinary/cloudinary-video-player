@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.5...v3.1.0) (2025-07-03)
+
+
+### Features
+
+* fetch auto title & description ([#882](https://github.com/cloudinary/cloudinary-video-player/issues/882)) ([6769344](https://github.com/cloudinary/cloudinary-video-player/commit/6769344668a54686b4414a713d9f09381eec0f54))
+
 ## [3.0.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.4...v3.0.5) (2025-07-03)
 
 
