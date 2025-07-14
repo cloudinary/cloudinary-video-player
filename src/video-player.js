@@ -61,7 +61,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.videoElement.classList.add('video-js');
 
     // Handle WebFont loading
-    Utils.fontFace(this.videoElement, this.playerOptions.cloudinary.fontFace);
+    Utils.fontFace(this.videoElement, this.playerOptions.fontFace);
 
     // Handle play button options
     if (this._videojsOptions.bigPlayButton === 'init') {
