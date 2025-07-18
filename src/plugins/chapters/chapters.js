@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 
 import './chapters.scss';
-import { extendCloudinaryConfig, getCloudinaryUrl } from '../cloudinary/common';
+import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 
 /**
  * Chapters plugin.
@@ -67,10 +67,9 @@ const ChaptersPlugin = (function () {
       return null;
     }
 
-    const fullUrl = getCloudinaryUrl(
-      `${currentPublicId}-chapters.vtt`,
-      extendCloudinaryConfig(this.player.cloudinary.cloudinaryConfig(), { resource_type: 'raw', version: '1' })
-    );
+    const { type: deliveryType } = this.player.cloudinary.source().resourceConfig();
+    const urlPrefix = getCloudinaryUrlPrefix(this.player.cloudinary.cloudinaryConfig());
+    const fullUrl = `${urlPrefix}/_applet_/chapters/${deliveryType}/${currentPublicId}.vtt`;
     return `${fullUrl}?t=${Date.now()}`;
   };
 
