@@ -28,7 +28,7 @@ const player = async (elem, initOptions, ready) => {
   const { profile, ...otherInitOptions } = initOptions;
   try {
     const profileOptions = profile ? await getProfile(profile, otherInitOptions) : {};
-    const options = Object.assign({}, profileOptions.playerOptions, otherInitOptions, {
+    const options = Object.assign({}, profileOptions.playerOptions, profileOptions.sourceOptions, otherInitOptions, {
       _internalAnalyticsMetadata: {
         newPlayerMethod: true,
         profile: isDefaultProfile(profile) ? profile : !!profile,
