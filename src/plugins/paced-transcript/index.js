@@ -1,4 +1,5 @@
-import { getCloudinaryUrl, extendCloudinaryConfig } from 'plugins/cloudinary/common';
+import { getCloudinaryUrlPrefix } from '../cloudinary/common';
+import { utf8ToBase64 } from '../../utils/utf8Base64';
 
 const fallbackFetch = async (url, fallback) => {
   try {
@@ -32,6 +33,9 @@ function pacedTranscript(config) {
   const classNames = player.textTrackDisplay.el().classList;
   classNames.add('cld-paced-text-tracks');
 
+  const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
+    `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
+
   // Load the transcription file
   const initTranscript = async () => {
 
@@ -42,14 +46,16 @@ function pacedTranscript(config) {
     } else {
       // If not, and provided language, try fetching translated transcript, fallback to base transcript
       const source = player.cloudinary.source();
-      const basePath = getCloudinaryUrl(
-        source.publicId(),
-        extendCloudinaryConfig(player.cloudinary.cloudinaryConfig(), { resource_type: 'raw' })
-      );
+      const sourcePublicId = source.publicId();
+      const sourceDeliveryType = source.resourceConfig().type;
+      const urlPrefix = getCloudinaryUrlPrefix(player.cloudinary.cloudinaryConfig());
+      const transcriptionFileUrl = getTranscriptionFileUrl(urlPrefix, sourceDeliveryType, sourcePublicId);
+
       if (options.srclang) {
-        transcriptResponse = await fallbackFetch(`${basePath}.${options.srclang}.transcript`, `${basePath}.transcript`);
+        const transcriptionTranslationFileUrl = getTranscriptionFileUrl(urlPrefix, sourceDeliveryType, sourcePublicId, options.srclang);
+        transcriptResponse = await fallbackFetch(transcriptionTranslationFileUrl, transcriptionFileUrl);
       } else {
-        transcriptResponse = await fallbackFetch(`${basePath}.transcript`);
+        transcriptResponse = await fallbackFetch(transcriptionFileUrl);
       }
     }
     if (!transcriptResponse?.ok) return;
