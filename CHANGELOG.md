@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.0...v3.1.1) (2025-07-21)
+
+
+### Bug Fixes
+
+* merge profile config with source config ([#887](https://github.com/cloudinary/cloudinary-video-player/issues/887)) ([05a6fe4](https://github.com/cloudinary/cloudinary-video-player/commit/05a6fe48be8edade4cfdbe0f06442b8bf7268900))
+
 ## [3.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.0.5...v3.1.0) (2025-07-14)
 
 
