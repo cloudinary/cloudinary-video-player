@@ -1,4 +1,5 @@
 import { getCloudinaryUrlPrefix } from '../cloudinary/common';
+import { utf8ToBase64 } from '../../utils/utf8Base64';
 
 const fallbackFetch = async (url, fallback) => {
   try {
@@ -33,7 +34,7 @@ function pacedTranscript(config) {
   classNames.add('cld-paced-text-tracks');
 
   const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
-    `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${publicId}.transcript`;
+    `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
 
   // Load the transcription file
   const initTranscript = async () => {
