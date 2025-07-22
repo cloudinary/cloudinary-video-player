@@ -69,7 +69,7 @@ const ChaptersPlugin = (function () {
 
     const { type: deliveryType } = this.player.cloudinary.source().resourceConfig();
     const urlPrefix = getCloudinaryUrlPrefix(this.player.cloudinary.cloudinaryConfig());
-    const fullUrl = `${urlPrefix}/_applet_/chapters/${deliveryType}/${currentPublicId}.vtt`;
+    const fullUrl = `${urlPrefix}/_applet_/video_service/chapters/${deliveryType}/${currentPublicId}.vtt`;
     return `${fullUrl}?t=${Date.now()}`;
   };
 

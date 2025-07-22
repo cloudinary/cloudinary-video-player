@@ -33,7 +33,7 @@ function pacedTranscript(config) {
   classNames.add('cld-paced-text-tracks');
 
   const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) => {
-    `${urlPrefix}/_applet_/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${publicId}.transcript`;
+    `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${publicId}.transcript`;
   };
 
   // Load the transcription file
