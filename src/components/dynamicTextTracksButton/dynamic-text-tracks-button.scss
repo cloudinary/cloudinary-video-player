@@ -1,0 +1,31 @@
+// Player Cloudinary button
+.vjs-control-bar a.vjs-control.vjs-cloudinary-button {
+  background-image: url("../../assets/icons/cloudinary_icon_for_black_bg.svg");
+  background-size: 25px;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: inherit;
+
+  .cld-video-player-skin-light & {
+    background-image: url("../../assets/icons/cloudinary_icon_for_white_bg.svg");
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:last-child {
+    margin-right: 0.4em;
+    margin-left: 0.8em;
+    &::before {
+      content: '';
+      position: absolute;
+      left: -0.25em;
+      top: 0.3em;
+      bottom: 0.3em;
+      border-left: 1px solid currentColor;
+      opacity: 0.25;
+    }
+  }
+
+}
