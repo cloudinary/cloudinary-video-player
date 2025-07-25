@@ -1,31 +1,126 @@
-// Player Cloudinary button
-.vjs-control-bar a.vjs-control.vjs-cloudinary-button {
-  background-image: url("../../assets/icons/cloudinary_icon_for_black_bg.svg");
-  background-size: 25px;
-  background-position: center;
-  background-repeat: no-repeat;
+.cld-video-player {
+  position: relative;
+}
+
+.vjs-searchable-language-dropdown.vjs-control.vjs-button {
+  font-size: 1.8em;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
   color: inherit;
+  width: 36px;
 
-  .cld-video-player-skin-light & {
-    background-image: url("../../assets/icons/cloudinary_icon_for_white_bg.svg");
-  }
-
-  &:hover {
+  .vjs-lang-toggle {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+    line-height: 1;
     cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 9999;
   }
 
-  &:last-child {
-    margin-right: 0.4em;
-    margin-left: 0.8em;
-    &::before {
-      content: '';
-      position: absolute;
-      left: -0.25em;
-      top: 0.3em;
-      bottom: 0.3em;
-      border-left: 1px solid currentColor;
-      opacity: 0.25;
-    }
+  &:hover,
+  &:focus-within {
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
+  &.vjs-icon-placeholder button::after {
+    font-family: "VideoJS";
+    content: "\f10b";
+    font-style: normal;
+    font-weight: normal;
+    text-transform: none;
+    speak: none;
+    line-height: 1;
+  }
+}
+
+.vjs-lang-popover {
+  position: absolute;
+  background: #1c1c1c;
+  border: 1px solid #444;
+  color: white;
+  width: 220px;
+  padding: 10px;
+  z-index: 10000;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.vjs-lang-search {
+  width: 100%;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+  border: 1px solid #555;
+  border-radius: 3px;
+  background: #111;
+  color: white;
+  font-size: 13px;
+}
+
+.vjs-lang-header {
+  font-weight: bold;
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 4px;
+}
+
+.vjs-lang-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.vjs-lang-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.2s;
+  color: white;
+}
+
+.vjs-lang-item:hover {
+  background: #333;
+}
+
+.vjs-lang-item.vjs-lang-loaded {
+  opacity: 0.5;
+}
+
+.vjs-lang-item.vjs-lang-error {
+  color: #f66;
+}
+
+.vjs-lang-item.vjs-lang-loading {
+  color: #ffc107;
+}
+
+.vjs-lang-selected {
+  background: #6c8bd5 !important;
+  font-weight: bold;
+}
+
+.vjs-lang-icon {
+  padding-left: 8px;
+}
+
+.vjs-lang-empty {
+  padding: 6px 8px;
+  font-style: italic;
+  color: #888;
 }

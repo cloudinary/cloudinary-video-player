@@ -1,5 +1,6 @@
 /* eslint-disable  */
 import videojs from 'video.js';
+import './dynamic-text-tracks-button.scss';
 
 const Component = videojs.getComponent('Component');
 
@@ -7,29 +8,21 @@ class SearchableLanguageDropdown extends Component {
   constructor(player, options = {}) {
     super(player, options);
 
+    this.player = player;
     this.languages = options.languages || [];
     this.onSelect = options.onSelect || (() => {});
     this.open = false;
+    this.dropdownEl = null;
 
     this.el().addEventListener('click', (e) => this.handleToggle(e));
-    document.addEventListener('click', (e) => {
-      if (!this.el().contains(e.target)) this.hideDropdown();
-    });
   }
 
   createEl() {
     return videojs.dom.createEl('div', {
-      className: 'vjs-searchable-language-dropdown vjs-control vjs-button',
+      className: 'vjs-searchable-language-dropdown vjs-control vjs-button vjs-icon-placeholder',
       innerHTML: `
-      <button class="vjs-lang-toggle" aria-label="Select Language" title="Select Language">
-        🌐
-      </button>
-      <div class="vjs-lang-popover hidden">
-        <input type="text" placeholder="Search..." class="vjs-lang-search">
-        <div class="vjs-lang-header">Languages</div>
-        <ul class="vjs-lang-list"></ul>
-      </div>
-    `
+        <button class="vjs-lang-toggle" aria-label="Select Language" title="Select Language"></button>
+      `
     });
   }
 
@@ -41,12 +34,29 @@ class SearchableLanguageDropdown extends Component {
     }
   }
 
-  showDropdown() {
-    this.open = true;
-    const popover = this.el().querySelector('.vjs-lang-popover');
-    popover.classList.remove('hidden');
+  createDropdown() {
+    this.dropdownEl = document.createElement('div');
+    this.dropdownEl.className = 'vjs-lang-popover';
+    this.dropdownEl.innerHTML = `
+      <input type="text" placeholder="Search..." class="vjs-lang-search">
+      <div class="vjs-lang-header">Languages</div>
+      <ul class="vjs-lang-list"></ul>
+    `;
+    const container = this.player.el_ || document.body;
+    container.appendChild(this.dropdownEl);
+  }
 
-    const input = popover.querySelector('.vjs-lang-search');
+  showDropdown() {
+    if (!this.dropdownEl) this.createDropdown();
+
+    this.open = true;
+    this.dropdownEl.style.position = 'absolute';
+    this.dropdownEl.style.right = 0;
+    this.dropdownEl.style.bottom = '43px';
+    this.dropdownEl.style.zIndex = 9999;
+    this.dropdownEl.style.display = 'block';
+
+    const input = this.dropdownEl.querySelector('.vjs-lang-search');
     input.value = '';
     input.focus();
     input.addEventListener('input', () => {
@@ -58,11 +68,13 @@ class SearchableLanguageDropdown extends Component {
 
   hideDropdown() {
     this.open = false;
-    this.el().querySelector('.vjs-lang-popover').classList.add('hidden');
+    if (this.dropdownEl) {
+      this.dropdownEl.style.display = 'none';
+    }
   }
 
   renderList(query = '') {
-    const ul = this.el().querySelector('.vjs-lang-list');
+    const ul = this.dropdownEl.querySelector('.vjs-lang-list');
     ul.innerHTML = '';
 
     const filtered = this.languages.filter(l =>
@@ -78,20 +90,31 @@ class SearchableLanguageDropdown extends Component {
     }
 
     filtered.forEach(lang => {
-      const iconMap = {
+      const status = lang.status || 'idle';
+      const icon = {
         idle: '',
         loading: '⏳',
         loaded: '✅',
         error: '❌'
-      };
-      const icon = iconMap[lang.status || 'idle'] || '';
+      }[status] || '';
+
       const li = document.createElement('li');
-      li.className = `vjs-lang-item vjs-lang-${lang.status || 'idle'} ${lang.selected ? 'vjs-lang-selected' : ''}`;
-      li.innerHTML = `<span>${lang.label}</span><span class="vjs-lang-icon">${icon}</span>`;
+      li.className = `vjs-lang-item vjs-lang-${status}`;
+      li.innerHTML = `
+        <span>${lang.label}</span>
+        <span class="vjs-lang-icon">${icon}</span>
+      `;
+
+      if (lang.selected) {
+        li.classList.add('vjs-lang-selected');
+      }
+
       li.addEventListener('click', (e) => {
         e.stopPropagation();
         this.onSelect(lang);
+        // Keep dropdown open
       });
+
       ul.appendChild(li);
     });
   }
@@ -99,7 +122,7 @@ class SearchableLanguageDropdown extends Component {
   updateLanguages(languages) {
     this.languages = languages;
     if (this.open) {
-      const q = this.el().querySelector('.vjs-lang-search').value.toLowerCase();
+      const q = this.dropdownEl.querySelector('.vjs-lang-search').value.toLowerCase();
       this.renderList(q);
     }
   }

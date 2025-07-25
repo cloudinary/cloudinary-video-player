@@ -28,8 +28,6 @@ const DynamicTextTracks = (function () {
   }
 
   DynamicTextTracksPlugin.prototype.initialize = async function() {
-    const player = this;
-
     const languages = languagesList.map(({ code, name }) => ({
       code,
       label: name,
@@ -44,7 +42,6 @@ const DynamicTextTracks = (function () {
     };
 
     const setStatus = (code, status) => {
-      console.log('xxx', code, status);
       const lang = languages.find(l => l.code === code);
       if (lang) lang.status = status;
       updateDropdown();
@@ -52,7 +49,7 @@ const DynamicTextTracks = (function () {
 
     const addTextTrack = (lang, src, transcriptData) => {
       setStatus(lang.code, 'loaded');
-      const captions = parseTranscript(JSON.parse(transcriptData));
+      const data = parseTranscript(JSON.parse(transcriptData));
 
       const tracks = this.player.textTracks();
       for (let i = 0; i < tracks.length; i++) {
@@ -65,17 +62,13 @@ const DynamicTextTracks = (function () {
       const captionsTrack = this.player.addRemoteTextTrack({
         kind: 'subtitles',
         label: lang.label,
-        srclang: src,
+        srclang: lang.code,
         default: false,
         mode: 'showing',
       });
 
-      captions.forEach(caption => {
+      data.forEach(caption => {
         captionsTrack.track.addCue(new VTTCue(caption.startTime, caption.endTime, caption.text));
-      });
-
-      languages.forEach(l => {
-        l.selected = l.code === lang.code;
       });
     };
 
@@ -94,11 +87,32 @@ const DynamicTextTracks = (function () {
     };
 
     const selectLanguage = (lang) => {
-      if (lang.status === 'loaded') {
-        const tracks = player.textTracks();
+      if (lang.selected) {
+        languages.forEach(l => l.selected = false);
+        const tracks = this.player.textTracks();
         for (let i = 0; i < tracks.length; i++) {
-          tracks[i].mode = (tracks[i].language === lang.code) ? 'showing' : 'disabled';
+          if (tracks[i].kind === 'subtitles') {
+            tracks[i].mode = 'disabled';
+          }
         }
+        updateDropdown();
+        return;
+      }
+
+      languages.forEach(l => {
+        l.selected = l.code === lang.code;
+      });
+
+      if (lang.status === 'loaded') {
+        languages.forEach(l => l.selected = (l.code === lang.code));
+        const tracks = this.player.textTracks();
+        for (let i = 0; i < tracks.length; i++) {
+          const track = tracks[i];
+          if (track.kind === 'subtitles') {
+            track.mode = (track.language === lang.code || track.srclang === lang.code) ? 'showing' : 'disabled';
+          }
+        }
+        updateDropdown();
         return;
       }
 
