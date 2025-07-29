@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [3.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.1...v3.2.0) (2025-07-29)
+
+
+### Features
+
+* chapters/transcription template urls (applets) ([#888](https://github.com/cloudinary/cloudinary-video-player/issues/888)) ([cf63bf5](https://github.com/cloudinary/cloudinary-video-player/commit/cf63bf56610515fdcf2cd0f890dca99fc1053301))
+* schema json exported in build files ([#891](https://github.com/cloudinary/cloudinary-video-player/issues/891)) ([d7526b8](https://github.com/cloudinary/cloudinary-video-player/commit/d7526b8c238ad3f4fcda4a442cf3793ce5e35d30))
+
 ## [3.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.0...v3.1.1) (2025-07-21)
 
 
