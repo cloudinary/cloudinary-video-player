@@ -1,0 +1,523 @@
+{
+  "$id": "cloudinary_video_player_schema",
+  "title": "Cloudinary Video Player Schema",
+  "type": "object",
+  "properties": {
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "controls": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplayMode": {
+      "type": "string",
+      "enum": ["always", "on-scroll", "never"],
+      "default": "never"
+    },
+    "bigPlayButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "playbackRates": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "default": []
+    },
+    "showLogo": {
+      "type": "boolean",
+      "default": true
+    },
+    "logoImageUrl": {
+      "type": "string",
+      "default": "https://cloudinary.com/images/logo.png"
+    },
+    "logoOnclickUrl": {
+      "type": "string",
+      "default": "https://cloudinary.com"
+    },
+    "videoJS": {
+      "type": "object",
+      "default": {}
+    },
+    "maxTries": {
+      "type": "number",
+      "default": 3
+    },
+    "muted": {
+      "type": "boolean",
+      "default": false
+    },
+    "playsinline": {
+      "type": "boolean",
+      "default": false
+    },
+    "videoTimeout": {
+      "type": "number",
+      "default": 55000
+    },
+    "preload": {
+      "type": "string",
+      "enum": ["auto", "metadata", "none"],
+      "default": "auto"
+    },
+    "sourceTransformation": {
+      "type": "object",
+      "default": {}
+    },
+    "allowUsageReport": {
+      "type": "boolean",
+      "default": true
+    },
+    "debug": {
+      "type": "boolean",
+      "default": false
+    },
+    "queryParams": {
+      "type": "object",
+      "default": {}
+    },
+    "fluid": {
+      "type": "boolean",
+      "default": true
+    },
+    "withCredentials": {
+      "type": "boolean",
+      "default": false
+    },
+    "analytics": {
+      "type": "boolean",
+      "default": false
+    },
+    "cloudinaryAnalytics": {
+      "oneOf": [
+        {
+          "type": "boolean",
+          "default": true
+        },
+        {
+          "type": "object",
+          "properties": {
+            "customData1": { "type": "string" },
+            "customData2": { "type": "string" },
+            "customData3": { "type": "string" },
+            "customData4": { "type": "string" },
+            "customData5": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "default": true
+    },
+    "hideContextMenu": {
+      "type": "boolean",
+      "default": false
+    },
+    "playedEventPercents": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "default": [25, 50, 75, 100]
+    },
+    "showJumpControls": {
+      "type": "boolean",
+      "default": false
+    },
+    "chaptersButton": {
+      "type": "boolean",
+      "default": false
+    },
+    "pictureInPictureToggle": {
+      "type": "boolean",
+      "default": false
+    },
+    "seekThumbnails": {
+      "type": "boolean",
+      "default": true
+    },
+    "aiHighlightsGraph": {
+      "type": "boolean",
+      "default": false
+    },
+    "floatingWhenNotVisible": {
+      "type": "string",
+      "enum": ["left", "right", "none"],
+      "default": "none"
+    },
+    "playedEventTimes": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "default": []
+    },
+    "playlistWidget": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "default": "horizontal"
+        },
+        "total": {
+          "type": "number",
+          "default": 0
+        }
+      },
+      "default": {
+        "direction": "horizontal",
+        "total": 0
+      }
+    },
+    "colors": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "string",
+          "default": "#000000"
+        },
+        "accent": {
+          "type": "string",
+          "default": "#FF620C"
+        },
+        "text": {
+          "type": "string",
+          "default": "#FFFFFF"
+        }
+      },
+      "default": {
+        "base": "#000000",
+        "accent": "#FF620C",
+        "text": "#FFFFFF"
+      }
+    },
+    "ads": {
+      "type": "object",
+      "properties": {
+        "adTagUrl": {
+          "type": "string",
+          "default": ""
+        },
+        "showCountdown": {
+          "type": "boolean",
+          "default": true
+        },
+        "adLabel": {
+          "type": "string",
+          "default": "Advertisement"
+        },
+        "locale": {
+          "type": "string",
+          "default": "en"
+        },
+        "prerollTimeout": {
+          "type": "number",
+          "default": 5000
+        },
+        "postrollTimeout": {
+          "type": "number",
+          "default": 5000
+        },
+        "adsInPlaylist": {
+          "type": "string",
+          "enum": ["first-video", "every-video"],
+          "default": "first-video"
+        }
+      },
+      "default": {
+        "adTagUrl": "",
+        "showCountdown": true,
+        "adLabel": "Advertisement",
+        "locale": "en",
+        "prerollTimeout": 5000,
+        "postrollTimeout": 5000,
+        "adsInPlaylist": "first-video"
+      }
+    },
+    "autoShowRecommendations": {
+      "type": "boolean",
+      "default": false
+    },
+    "fontFace": {
+      "type": "string",
+      "default": "Fira Sans"
+    },
+    "posterOptions": {
+      "type": "object",
+      "properties": {
+        "transformation": {
+          "type": "object",
+          "default": {}
+        }
+      },
+      "default": {
+        "transformation": {
+          "start_offset": 0
+        }
+      }
+    },
+    "sourceTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": ["auto"]
+    },
+    "transformation": {
+      "oneOf": [
+        {
+          "type": "string",
+          "default": ""
+        },
+        {
+          "type": "array",
+          "default": []
+        },
+        {
+          "type": "object",
+          "default": {}
+        }
+      ],
+      "default": []
+    },
+    "shoppable": {
+      "type": "object",
+      "default": {}
+    },
+    "chapters": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "boolean"
+        }
+      ],
+      "default": false
+    },
+    "visualSearch": {
+      "type": "boolean",
+      "default": false
+    },
+    "interactionAreas": {
+      "type": "object",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "default": false
+        },
+        "template": {
+          "type": "string",
+          "enum": ["portrait", "landscape", "all", "center"],
+          "default": "portrait"
+        },
+        "vttUrl": {
+          "type": "string",
+          "default": ""
+        },
+        "theme": {
+          "type": "object",
+          "properties": {
+            "template": {
+              "type": "string",
+              "enum": ["pulsing", "shadowed"],
+              "default": "pulsing"
+            }
+          },
+          "default": {
+            "template": "pulsing"
+          }
+        },
+        "layout": {
+          "type": "object",
+          "properties": {
+            "enable": {
+              "type": "boolean",
+              "default": false
+            },
+            "showAgain": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          "default": {
+            "enable": false,
+            "showAgain": false
+          }
+        }
+      },
+      "default": {
+        "enable": false,
+        "template": "portrait",
+        "vttUrl": "",
+        "theme": {
+          "template": "pulsing"
+        },
+        "layout": {
+          "enable": false,
+          "showAgain": false
+        }
+      }
+    },
+    "textTracks": {
+      "type": "object",
+      "properties": {
+        "options": {
+          "type": "object",
+          "properties": {
+            "theme": {
+              "type": "string",
+              "default": "default"
+            },
+            "fontFace": {
+              "type": "string",
+              "default": "Fira Sans"
+            },
+            "fontSize": {
+              "type": "string",
+              "default": "medium"
+            },
+            "gravity": {
+              "type": "string",
+              "default": "bottom"
+            },
+            "box": {
+              "type": "object",
+              "default": {}
+            },
+            "style": {
+              "type": "object",
+              "default": {}
+            },
+            "wordHighlightStyle": {
+              "type": "object",
+              "default": {}
+            }
+          },
+          "default": {
+            "theme": "default",
+            "fontFace": "Fira Sans",
+            "fontSize": "medium",
+            "gravity": "bottom",
+            "box": {},
+            "style": {},
+            "wordHighlightStyle": {}
+          }
+        },
+        "captions": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string",
+              "default": "English"
+            },
+            "language": {
+              "type": "string",
+              "default": "en"
+            },
+            "default": {
+              "type": "boolean",
+              "default": true
+            },
+            "url": {
+              "type": "string",
+              "default": ""
+            },
+            "maxWords": {
+              "type": "number",
+              "default": 0
+            },
+            "wordHighlight": {
+              "type": "boolean",
+              "default": true
+            },
+            "timeOffset": {
+              "type": "number",
+              "default": 0
+            }
+          },
+          "default": {
+            "label": "English",
+            "language": "en",
+            "default": true,
+            "url": "",
+            "maxWords": 0,
+            "wordHighlight": true,
+            "timeOffset": 0
+          }
+        },
+        "subtitles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "default": ""
+              },
+              "language": {
+                "type": "string",
+                "default": ""
+              },
+              "default": {
+                "type": "boolean",
+                "default": true
+              },
+              "url": {
+                "type": "string",
+                "default": ""
+              }
+            }
+          },
+          "default": [
+            {
+              "label": "English",
+              "default": true,
+              "language": "en"
+            }
+          ]
+        }
+      }
+          },
+      "title": {
+        "oneOf": [
+          {
+            "type": "string",
+            "default": ""
+          },
+          {
+            "type": "boolean",
+            "default": false
+          }
+        ]
+      },
+      "description": {
+        "oneOf": [
+          {
+            "type": "string",
+            "default": ""
+          },
+          {
+            "type": "boolean",
+            "default": false
+          }
+        ]
+      },
+      "adaptiveStreaming": {
+      "type": "string",
+      "enum": ["fastStart", "balanced", "highQuality"],
+      "default": "balanced"
+    }
+  },
+  "additionalProperties": true
+}

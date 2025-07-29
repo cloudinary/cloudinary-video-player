@@ -4,6 +4,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const BannerPlugin = require('webpack/lib/BannerPlugin');
 const { isMin } = require('./build-utils');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 const VERSION = JSON.stringify(process.env.npm_package_version);
 
@@ -34,6 +36,12 @@ module.exports = merge(webpackCommon, {
  */`,
       entryOnly: false,
       raw: true
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{
+        from: path.resolve(__dirname, '../src/config/configSchema.json'),
+        to: `${webpackCommon.output.path}/schema.json`
+      }]
     })
   ]
 });
