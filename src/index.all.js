@@ -10,6 +10,7 @@ import cloudinary from './index.js';
 export * from './index.js';
 export * from './plugins/adaptive-streaming/adaptive-streaming.js';
 export * from './plugins/chapters/chapters.js';
+export * from './plugins/dynamic-text-tracks/index.js';
 export * from './plugins/colors/colors.js';
 export * from './plugins/ima/ima.js';
 export * from './plugins/playlist/playlist.js';

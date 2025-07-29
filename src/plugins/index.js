@@ -10,6 +10,7 @@ import floatingPlayer from './floating-player';
 import pacedTranscript from './paced-transcript';
 import styledTextTracks from './styled-text-tracks';
 import vttThumbnails from './vtt-thumbnails';
+import dynamicTextTracksPlugin from './dynamic-text-tracks';
 
 // Lazy loaded plugins
 import chapters from './chapters';
@@ -33,6 +34,7 @@ const plugins = {
   pacedTranscript,
   styledTextTracks,
   vttThumbnails,
+  dynamicTextTracks: dynamicTextTracksPlugin,
 
   // Lazy loaded plugins
   chapters,

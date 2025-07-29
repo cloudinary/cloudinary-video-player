@@ -197,6 +197,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initHighlightsGraph();
     this._initSeekThumbs();
     this._initChapters();
+    this._initDynamicTextTracks();
     this._initInteractionAreas();
   }
 
@@ -218,6 +219,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
       }
     }
+
+    if (conf === 'auto') {
+      this.customTextTracks();
+      return;
+    }
+
     if (conf) {
       const kinds = Object.keys(conf);
       const allTracks = [];
@@ -242,6 +249,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.styledTextTracks(conf.options);
       }
     }
+  }
+
+  customTextTracks() {
+    console.log('customTextTracks');
   }
 
   _initSeekThumbs() {
@@ -329,6 +340,16 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         this.videojs.chapters.resetPlugin();
       }
     });
+  }
+
+  _initDynamicTextTracks() {
+    if (!this.playerOptions.textTracks !== true && this.videojs.controlBar) {
+      this.videojs.controlBar.removeChild('chaptersButton');
+    }
+
+    if (this.videojs.dynamicTextTracks) {
+      this.videojs.dynamicTextTracks();
+    }
   }
 
   _initInteractionAreas() {
@@ -497,7 +518,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (source) {
       const sourceOptions = Object.assign({}, this.playerOptions.cloudinary);
-      
+
       this.source(source, sourceOptions);
     }
   }
@@ -567,7 +588,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-    
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }
