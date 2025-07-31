@@ -14,6 +14,7 @@ export default {
   seekThumbnails: true,
   aiHighlightsGraph: false,
   visualSearch: false,
+  download: false,
   preload: PRELOAD.AUTO,
   textTrackSettings: false,
   loop: false,

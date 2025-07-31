@@ -29,6 +29,7 @@ import { VideoTransformationsPage } from './videoTransformationsPage';
 import { VastAndVpaidPage } from './vastAndVpaidPage';
 import { Vr360VideosPage } from './vr360VideosPage';
 import { VisualSearchPage } from './visualSearchPage';
+import { SharePluginPage } from './sharePluginPage';
 
 /**
  * Page manager,
@@ -171,6 +172,10 @@ export class PageManager {
 
     public get seekThumbnailsPage(): SeekThumbnailsPage {
         return this.getPage(SeekThumbnailsPage);
+    }
+
+    public get sharePluginPage(): SharePluginPage {
+        return this.getPage(SharePluginPage);
     }
 
     public get shoppableVideosPage(): ShoppableVideosPage {

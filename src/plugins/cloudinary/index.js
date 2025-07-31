@@ -80,6 +80,7 @@ class CloudinaryContext {
       }
 
       _source = src;
+      _transformation = src.transformation();
 
       const isDash = 
         (options.sourceTypes && options.sourceTypes.some(s => s.includes('dash'))) ||

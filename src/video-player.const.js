@@ -5,6 +5,7 @@ export const SOURCE_PARAMS = [
   'chapters',
   'cloudinaryConfig',
   'description',
+  'download',
   'info',
   'interactionAreas',
   'poster',
