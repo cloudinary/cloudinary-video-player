@@ -8,10 +8,10 @@ export async function testSharePluginPageVideoIsPlaying(page: Page, pomPages: Pa
         await pomPages.mainPage.clickLinkByName(link.name);
         await waitForPageToLoadWithTimeout(page, 5000);
     });
-    await test.step('Validating that player 1 video is playing', async () => {
+    await test.step('Validating that share & download player 1 is playing', async () => {
         await pomPages.sharePluginPage.sharePluginPlayer1VideoComponent.validateVideoIsPlaying(true);
     });
-    await test.step('Validating that player 2 video is playing', async () => {
+    await test.step('Validating that share & download player 2 is playing', async () => {
         await pomPages.sharePluginPage.sharePluginPlayer2VideoComponent.validateVideoIsPlaying(true);
     });
 }
