@@ -1,4 +1,5 @@
 import './components/download-button';
+import './share.scss';
 import { getCloudinaryUrl } from 'plugins/cloudinary/common';
 import omit from 'lodash/omit';
 
@@ -83,12 +84,66 @@ const SharePlugin = function (options = {}, playerInstance) {
       return;
     }
 
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = '';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const MAX_ATTEMPTS = 30; // 30 tries / 3s interval
+    const INTERVAL_MS = 3000;
+
+    const triggerDownload = () => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+
+    const btn = player.controlBar?.getChild('ShareDownloadButton');
+    const setPreparingState = (isPreparing) => {
+      if (!btn) {
+        return;
+      }
+      const el = btn.el();
+      const btnTitle = el.getAttribute('title');
+      if (isPreparing) {
+        el.classList.add('vjs-waiting');
+        el.setAttribute('title', 'Download is being prepared');
+      } else {
+        el.classList.remove('vjs-waiting');
+        el.setAttribute('title', btnTitle);
+      }
+    };
+
+    const pollForAvailability = (attempt = 0) => {
+      fetch(url, { method: 'HEAD' })
+        .then((res) => {
+          if (res.ok) {
+            // Ready – restore icon and start download.
+            setPreparingState(false);
+            triggerDownload();
+          } else if (attempt < MAX_ATTEMPTS) {
+            if (attempt === 0) {
+              // First time we detect the asset is not ready → show spinner
+              setPreparingState(true);
+            }
+            setTimeout(() => pollForAvailability(attempt + 1), INTERVAL_MS);
+          } else {
+            console.warn(`Share plugin: Download not ready after ${MAX_ATTEMPTS * INTERVAL_MS / 1000} seconds.`);
+            setPreparingState(false);
+          }
+        })
+        .catch(() => {
+          if (attempt < MAX_ATTEMPTS) {
+            if (attempt === 0) {
+              setPreparingState(true);
+            }
+            setTimeout(() => pollForAvailability(attempt + 1), INTERVAL_MS);
+          } else {
+            setPreparingState(false);
+          }
+        });
+    };
+
+    // Kick things off (first HEAD request is attempt 0)
+    pollForAvailability();
   };
 
   if (options.download) {
