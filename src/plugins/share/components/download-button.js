@@ -18,7 +18,8 @@ class ShareDownloadButton extends ClickableComponent {
   createEl() {
     return videojs.dom.createEl('button', {
       className: 'vjs-control vjs-icon-file-download vjs-share-download-button vjs-button',
-      ariaLabel: 'Download video'
+      ariaLabel: 'Download video',
+      title: 'Download video'
     });
   }
 }
