@@ -104,6 +104,17 @@ const SharePlugin = function (options = {}, playerInstance) {
 
     const fetchDownload = async (attempt = 0) => {
       const response = await fetch(url, { method: 'HEAD' });
+
+      if (RETRY_STATUS_CODES.includes(response.status) && attempt < MAX_ATTEMPTS) {
+        if (attempt === 0) {
+          setPreparingState(true);
+        }
+        await wait(INTERVAL_MS);
+        return fetchDownload(attempt + 1);
+      }
+
+      setPreparingState(false);
+      triggerDownload();
     };
 
     fetchDownload();
