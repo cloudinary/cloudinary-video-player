@@ -36,10 +36,8 @@ const SharePlugin = function (options = {}, playerInstance) {
       return null;
     }
 
-    // Strip format / codec related keys (root level and in nested transformation arrays)
+    // Strip format / codec related transformation arrays
     const STRIP_KEYS = ['format', 'video_codec', 'streaming_profile'];
-
-    // Recursively strip keys anywhere in the object/array tree
     const stripKeysDeep = (value) => {
       if (Array.isArray(value)) {
         return value.map(stripKeysDeep);
@@ -86,6 +84,7 @@ const SharePlugin = function (options = {}, playerInstance) {
 
     const MAX_ATTEMPTS = 60; // 60 tries / 10s interval
     const INTERVAL_MS = 10000;
+    const RETRY_STATUS_CODES = [423];
 
     const triggerDownload = () => {
       const a = document.createElement('a');
@@ -98,45 +97,16 @@ const SharePlugin = function (options = {}, playerInstance) {
 
     const btn = player.controlBar?.getChild('ShareDownloadButton');
     const setPreparingState = (isPreparing) => {
-      if (!btn) {
-        return;
-      }
-      const el = btn.el();
       btn?.setPreparing?.(isPreparing);
     };
 
-    const pollForAvailability = (attempt = 0) => {
-      fetch(url, { method: 'HEAD' })
-        .then((res) => {
-          if (res.ok) {
-            // Ready – restore icon and start download.
-            setPreparingState(false);
-            triggerDownload();
-          } else if (attempt < MAX_ATTEMPTS) {
-            if (attempt === 0) {
-              // First time we detect the asset is not ready → show spinner
-              setPreparingState(true);
-            }
-            setTimeout(() => pollForAvailability(attempt + 1), INTERVAL_MS);
-          } else {
-            console.warn(`Share plugin: Download not ready after ${MAX_ATTEMPTS * INTERVAL_MS / 1000} seconds.`);
-            setPreparingState(false);
-          }
-        })
-        .catch(() => {
-          if (attempt < MAX_ATTEMPTS) {
-            if (attempt === 0) {
-              setPreparingState(true);
-            }
-            setTimeout(() => pollForAvailability(attempt + 1), INTERVAL_MS);
-          } else {
-            setPreparingState(false);
-          }
-        });
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    const fetchDownload = async (attempt = 0) => {
+      const response = await fetch(url, { method: 'HEAD' });
     };
 
-    // Kick things off (first HEAD request is attempt 0)
-    pollForAvailability();
+    fetchDownload();
   };
 
   if (options.download) {

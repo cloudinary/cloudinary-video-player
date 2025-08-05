@@ -1,12 +1,6 @@
 .vjs-share-download-button {
   position: relative;
 
-  // Icon span size tweak (matches other control icons)
-  > .vjs-icon-file-download:before {
-    font-size: 1.8em;
-  }
-
-  // Spinner styling (mirrors visual-search button)
   > .vjs-loading-spinner {
     display: none;
     width: 1.4em;
