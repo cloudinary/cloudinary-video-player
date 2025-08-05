@@ -84,8 +84,8 @@ const SharePlugin = function (options = {}, playerInstance) {
       return;
     }
 
-    const MAX_ATTEMPTS = 30; // 30 tries / 3s interval
-    const INTERVAL_MS = 3000;
+    const MAX_ATTEMPTS = 60; // 60 tries / 10s interval
+    const INTERVAL_MS = 10000;
 
     const triggerDownload = () => {
       const a = document.createElement('a');
@@ -102,14 +102,7 @@ const SharePlugin = function (options = {}, playerInstance) {
         return;
       }
       const el = btn.el();
-      const btnTitle = el.getAttribute('title');
-      if (isPreparing) {
-        el.classList.add('vjs-waiting');
-        el.setAttribute('title', 'Download is being prepared');
-      } else {
-        el.classList.remove('vjs-waiting');
-        el.setAttribute('title', btnTitle);
-      }
+      btn?.setPreparing?.(isPreparing);
     };
 
     const pollForAvailability = (attempt = 0) => {

@@ -34,6 +34,21 @@ class ShareDownloadButton extends ClickableComponent {
 
     return button;
   }
+
+  /**
+   * Toggles the "preparing download" visual state (spinner + title).
+   * @param {boolean} isPreparing
+   */
+  setPreparing(isPreparing) {
+    const el = this.el();
+    if (isPreparing) {
+      el.classList.add('vjs-waiting');
+      el.setAttribute('title', 'Download is being prepared');
+    } else {
+      el.classList.remove('vjs-waiting');
+      el.setAttribute('title', 'Download video');
+    }
+  }
 }
 
 videojs.registerComponent('ShareDownloadButton', ShareDownloadButton);
