@@ -73,7 +73,9 @@ const getAdsOptions = (adsOptions = {}) => ({
   adsAdsInPlaylist: adsOptions.adsInPlaylist
 });
 
-const getPlaylistWidgetOptions = (playlistWidgetOptions = {}) => ({
+const getPlaylistOptions = (playlistWidgetOptions = {}) => ({
+  playlist: playlistWidgetOptions.playlist,
+  playlistByTag: playlistWidgetOptions.playlistByTag,
   playlistWidgetDirection: playlistWidgetOptions.direction,
   playlistWidgetTotal: playlistWidgetOptions.total
 });
@@ -121,5 +123,5 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   ...getCloudinaryOptions(playerOptions.cloudinary),
   ...getSourceOptions(playerOptions.sourceOptions),
   ...getAdsOptions(playerOptions.ads),
-  ...getPlaylistWidgetOptions(playerOptions.playlistWidget)
+  ...getPlaylistOptions(playerOptions.playlistWidget)
 });

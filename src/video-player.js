@@ -603,6 +603,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
+    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || {}), playlist: true };
+
     options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     this.videojs.one(PLAYER_EVENT.READY, async () => {
@@ -614,6 +616,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
+    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || {}), playlistByTag: true };
+
     options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
     return new Promise((resolve) => {
