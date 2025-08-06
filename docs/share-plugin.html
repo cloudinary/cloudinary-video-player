@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player – Share and Download</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Load player scripts/styles dynamically (see docs/scripts.js) -->
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+
+      // 1. Progressive MP4 – download enabled via PLAYER config
+      const player1 = cloudinary.videoPlayer('player1', {
+        cloudName: 'demo',
+        transformation: {
+          effect: 'saturation:-100'
+        },
+        download: true, // enables download button for all sources
+        publicId: 'snow_horses',
+      });
+
+      // 2. HLS / Adaptive – download enabled via SOURCE config
+      const player2 = cloudinary.videoPlayer('player2', {
+        cloudName: 'demo'
+      });
+
+      player2.source({
+        publicId: 'snow_horses',
+        sourceTypes: ['hls'],
+        transformation: [
+          { streaming_profile: 'full_hd' },
+          { angle: 180 }
+        ],
+        download: true, // download button only for this source
+      });
+
+    }, false);
+  </script>
+
+</head>
+<body>
+  <div class="container p-4 col-12 col-md-9 col-xl-8">
+    <nav class="nav mb-2">
+      <a href="./index.html">&#60;&#60; Back to examples index</a>
+    </nav>
+    <h1>Cloudinary Video Player</h1>
+    <h3 class="mb-4">Share and Download</h3>
+
+    <p class="font-weight-bold">1. Progressive MP4 (download via player config)</p>
+    <video
+      id="player1"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <hr class="my-4" />
+
+    <p class="font-weight-bold">2. HLS / Adaptive (download via source config)</p>
+    <video
+      id="player2"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p class="mt-4">
+      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
+    </p>
+
+    <h3 class="mt-4">Example Code:</h3>
+    <pre>
+      <code class="language-html">
+
+        &lt;video
+          id="player1"
+          playsinline
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          width="500"&gt;
+        &lt;/video&gt;
+
+        &lt;video
+          id="player2"
+          playsinline
+          controls
+          muted
+          autoplay
+          class="cld-video-player"
+          width="500"&gt;
+        &lt;/video&gt;
+
+      </code>
+      <code class="language-javascript">
+        // Player with download enabled for all sources
+        const player1 = cloudinary.videoPlayer('player1', {
+          cloudName: 'demo',
+          download: true,
+          publicId: 'snow_horses'
+        });
+
+        // Player with download enabled for a specific source
+        const player2 = cloudinary.videoPlayer('player2', {
+          cloudName: 'demo'
+        });
+
+        player2.source({
+          publicId: 'snow_horses',
+          sourceTypes: ['hls/h265'],
+          transformation: [
+            { streaming_profile: 'full_hd_h265' },
+            { angle: 180 }
+          ],
+          download: true
+        });
+      </code>
+    </pre>
+  </div>
+
+</body>
+</html>

@@ -20,6 +20,7 @@ import playlist from './playlist';
 import shoppable from './shoppable-plugin';
 import srtTextTracks from './srt-text-tracks';
 import visualSearch from './visual-search';
+import share from './share';
 import adaptiveStreaming from './adaptive-streaming';
 
 const plugins = {
@@ -43,6 +44,7 @@ const plugins = {
   srtTextTracks,
   interactionAreas,
   visualSearch,
+  share,
   adaptiveStreaming
 };
 
