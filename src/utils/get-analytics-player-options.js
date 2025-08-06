@@ -38,6 +38,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   sourceTypes: sourceOptions.sourceTypes,
   chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
   visualSearch: hasConfig(sourceOptions.visualSearch),
+  download: hasConfig(sourceOptions.download),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   ...(sourceOptions.adaptiveStreaming ? {
     abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,

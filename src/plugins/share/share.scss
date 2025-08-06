@@ -1,0 +1,23 @@
+.vjs-share-download-button {
+  position: relative;
+
+  > .vjs-loading-spinner {
+    display: none;
+    width: 1.4em;
+    height: 1.4em;
+    border-width: 0.2em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+
+  &.vjs-waiting {
+    > .vjs-icon-file-download {
+      display: none;
+    }
+    > .vjs-loading-spinner {
+      display: flex;
+    }
+  }
+}
