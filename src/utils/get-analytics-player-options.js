@@ -36,10 +36,15 @@ const getTranscriptOptions = (textTracks = {}) => {
 
 const getSourceOptions = (sourceOptions = {}) => ({
   sourceTypes: sourceOptions.sourceTypes,
-  chapters: sourceOptions.chapters && (sourceOptions.chapters.url ? 'url' : 'inline-chapters'),
-  visualSearch: hasConfig(sourceOptions.visualSearch),
+  chapters: (() => {
+    if (sourceOptions.chapters === true) return 'auto';
+    if (sourceOptions.chapters && sourceOptions.chapters.url) return 'url';
+    if (sourceOptions.chapters) return 'inline-chapters';
+    return undefined;
+  })(),
+  visualSearch: sourceOptions.visualSearch,
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
-  ...(sourceOptions.adaptiveStreaming ? {
+  ...(hasConfig(sourceOptions.adaptiveStreaming) ? {
     abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,
   } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
