@@ -603,7 +603,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlist(sources, options = {}) {
-    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || {}), playlist: true };
+    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || { show: false }), playlist: true };
 
     options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
@@ -616,7 +616,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   playlistByTag(tag, options = {}) {
-    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || {}), playlistByTag: true };
+    this.playerOptions.playlistWidget = { ...(this.playerOptions.playlistWidget || { show: false}), playlistByTag: true };
 
     options = Object.assign({}, options, { playlistWidget: this.playerOptions.playlistWidget });
 
