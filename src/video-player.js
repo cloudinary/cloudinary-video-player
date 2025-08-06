@@ -191,6 +191,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initCloudinaryAnalytics();
     this._initFloatingPlayer();
     this._initVisualSearch();
+    this._initShare();
     this._initColors();
     this._initTextTracks();
     this._initHighlightsGraph();
@@ -347,6 +348,29 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           : this.videojs.visualSearch.createSearchUI(source._visualSearch);
       } else if (!source?._visualSearch && this.videojs.visualSearch?.clearUI) {
         this.videojs.visualSearch.clearUI();
+      }
+    });
+  }
+
+  _initShare() {
+    // Listen for source changes to apply Share plugin based on source config
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      if (!this.videojs.share) {
+        return;
+      }
+
+      // First time: initialise plugin if necessary
+      if (source?._download && isFunction(this.videojs.share)) {
+        this.videojs.share({ download: true });
+      }
+
+      if (!isFunction(this.videojs.share)) {
+        // Plugin already initialised – update UI accordingly
+        if (source?._download) {
+          this.videojs.share.addDownloadButton?.();
+        } else {
+          this.videojs.share.removeDownloadButton?.();
+        }
       }
     });
   }

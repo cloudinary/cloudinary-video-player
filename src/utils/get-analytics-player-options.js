@@ -24,6 +24,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
     return undefined;
   })(),
   visualSearch: sourceOptions.visualSearch,
+  download: hasConfig(sourceOptions.download),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   ...(hasConfig(sourceOptions.adaptiveStreaming) ? {
     abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,
