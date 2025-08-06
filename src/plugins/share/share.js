@@ -72,6 +72,14 @@ const SharePlugin = function (options = {}, playerInstance) {
       });
     }
 
+    // For audio sources, set the format to mp3
+    if (player.cloudinary.source()?.getType() === 'AudioSource') {
+      Object.assign(baseOptions, {
+        format: 'mp3',
+        video_codec: undefined,
+      });
+    }
+
     return getCloudinaryUrl(player.cloudinary.currentPublicId(), baseOptions);
   };
 
