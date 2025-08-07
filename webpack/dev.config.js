@@ -11,6 +11,7 @@ const VERSION = JSON.stringify(process.env.npm_package_version);
 
 module.exports = merge(webpackCommon, {
   mode: 'development',
+  devtool: 'source-map',
 
   plugins: [
     new BannerPlugin({
