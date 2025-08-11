@@ -13,8 +13,7 @@
     "lib",
     "types",
     "LICENSE",
-    "README.md",
-    "!**/*.map"
+    "README.md"
   ],
   "exports": {
     ".": {
