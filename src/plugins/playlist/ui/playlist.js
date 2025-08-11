@@ -240,7 +240,13 @@ class Playlist {
       current.recommendations(this._defaultRecommendationsResolver(current));
     }
 
-    this._context.source(current, { recommendationOptions: { disableAutoShow: true, itemBuilder } });
+    // Extract source options for analytics
+    const sourceOptions = current.getInitOptions ? current.getInitOptions() : {};
+    
+    this._context.source(current, { 
+      ...sourceOptions,
+      recommendationOptions: { disableAutoShow: true, itemBuilder } 
+    });
 
     const eventData = { playlist: this, current, next: this.next() };
 
