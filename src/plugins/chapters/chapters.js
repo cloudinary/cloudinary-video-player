@@ -70,8 +70,7 @@ const ChaptersPlugin = (function () {
 
     const { type: deliveryType } = this.player.cloudinary.source().resourceConfig();
     const urlPrefix = getCloudinaryUrlPrefix(this.player.cloudinary.cloudinaryConfig());
-    const fullUrl = `${urlPrefix}/_applet_/video_service/chapters/${deliveryType}/${utf8ToBase64(currentPublicId)}.vtt`;
-    return `${fullUrl}?t=${Date.now()}`;
+    return `${urlPrefix}/_applet_/video_service/chapters/${deliveryType}/${utf8ToBase64(currentPublicId)}.vtt`;
   };
 
   /**
