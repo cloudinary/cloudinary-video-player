@@ -36,21 +36,10 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceTitle: (typeof sourceOptions.title === 'string' ? sourceOptions.title : sourceOptions.info?.title),
     sourceDescription: (typeof sourceOptions.description === 'string' ? sourceOptions.description : sourceOptions.info?.subtitle || sourceOptions.info?.description)
   } : {}),
-  ...(sourceOptions.textTracks ? {
-    ...(hasConfig(sourceOptions.textTracks) && getTranscriptOptions(sourceOptions.textTracks)),
-    ...(sourceOptions.textTracks.options ? {
-      styledTextTracksTheme: sourceOptions.textTracks.options.theme,
-      styledTextTracksFont: sourceOptions.textTracks.options.fontFace,
-      styledTextTracksFontSize: sourceOptions.textTracks.options.fontSize,
-      styledTextTracksGravity: sourceOptions.textTracks.options.gravity,
-      styledTextTracksBox: hasConfig(sourceOptions.textTracks.options.box),
-      styledTextTracksStyle: hasConfig(sourceOptions.textTracks.options.style),
-      styledTextTracksWordHighlightStyle: hasConfig(sourceOptions.textTracks.options.wordHighlightStyle)
-    } : {})
-  } : {})
+  ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {})
 });
 
-const getTranscriptOptions = (textTracks = {}) => {
+const getTextTracksOptions = (textTracks = {}) => {
   const tracksArr = [textTracks.captions, ...(textTracks.subtitles || [])];
   return {
     textTracks: hasConfig(textTracks),
@@ -62,7 +51,16 @@ const getTranscriptOptions = (textTracks = {}) => {
     transcriptAutoLoaded: tracksArr.some((track) => !track.url) || null,
     transcriptFromURl: tracksArr.some((track) => track.url?.endsWith('.transcript')) || null,
     vttFromUrl: tracksArr.some((track) => track.url?.endsWith('.vtt')) || null,
-    srtFromUrl: tracksArr.some((track) => track.url?.endsWith('.srt')) || null
+    srtFromUrl: tracksArr.some((track) => track.url?.endsWith('.srt')) || null,
+    ...(textTracks.options ? {
+      styledTextTracksTheme: textTracks.options.theme,
+      styledTextTracksFont: textTracks.options.fontFace,
+      styledTextTracksFontSize: textTracks.options.fontSize,
+      styledTextTracksGravity: textTracks.options.gravity,
+      styledTextTracksBox: hasConfig(textTracks.options.box),
+      styledTextTracksStyle: hasConfig(textTracks.options.style),
+      styledTextTracksWordHighlightStyle: hasConfig(textTracks.options.wordHighlightStyle)
+    } : {})
   };
 };
 
