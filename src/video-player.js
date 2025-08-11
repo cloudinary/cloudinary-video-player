@@ -24,7 +24,6 @@ import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
-import { SOURCE_PARAMS } from './video-player.const';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -117,7 +116,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       const baseParams = new URLSearchParams({
         vpVersion: VERSION,
         vpInstanceId: this.getVPInstanceId(),
-        cloudName: options.cloudinary.cloudinaryConfig.cloud_name,
+        cloudName: options.cloudinary.cloud_name,
         ...internalAnalyticsMetadata,
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
@@ -410,14 +409,20 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initCloudinary() {
-    const { cloudinaryConfig } = this.playerOptions.cloudinary;
+    const cloudinaryConfig = this.playerOptions.cloudinary;
     cloudinaryConfig.chainTarget = this;
 
     if (cloudinaryConfig.secure !== false) {
       extendCloudinaryConfig(cloudinaryConfig, { secure: true });
     }
 
-    this.videojs.cloudinary(this.playerOptions.cloudinary);
+    // Merge cloudinary config with source config for the plugin
+    const cloudinaryOptions = {
+      cloudinaryConfig,
+      ...this.playerOptions.sourceOptions
+    };
+
+    this.videojs.cloudinary(cloudinaryOptions);
   }
 
   _initAnalytics() {
@@ -516,11 +521,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._setExtendedEvents();
 
     // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
-    // Source parameters are set to playerOptions.cloudinary
-    const source = this.playerOptions.cloudinary.source || this.playerOptions.cloudinary.publicId;
+    // Source parameters are set to playerOptions.sourceOptions
+    const source = this.playerOptions.sourceOptions.source || this.playerOptions.sourceOptions.publicId;
 
     if (source) {
-      const sourceOptions = Object.assign({}, this.playerOptions.cloudinary);
+      const sourceOptions = Object.assign({}, this.playerOptions.sourceOptions);
       
       this.source(source, sourceOptions);
     }
@@ -597,10 +602,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     // Inherit source parameters from player options (source options take precedence)
-    const inherited = pick(this.playerOptions, SOURCE_PARAMS);
-    const inheritedNested = this.playerOptions.cloudinary ? pick(this.playerOptions.cloudinary, SOURCE_PARAMS) : {};
-    
-    options = { ...inherited, ...inheritedNested, ...options };
+    const inherited = this.playerOptions.sourceOptions || {};
+    options = { ...inherited, ...options };
 
     if (options.shoppable && this.videojs.shoppable) {
       this.videojs.shoppable(this.videojs, options);

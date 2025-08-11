@@ -16,6 +16,7 @@ export * from './plugins/playlist/playlist.js';
 export * from './plugins/interaction-areas/interaction-areas.service.js';
 export * from './plugins/visual-search/visual-search.js';
 export * from './plugins/srt-text-tracks/srt-text-tracks.js';
+export * from './plugins/share/share.js';
 export * from './components/shoppable-bar/shoppable-widget.js';
 export * from './components/recommendations-overlay/recommendations-overlay.js';
 
