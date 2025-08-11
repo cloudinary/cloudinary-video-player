@@ -27,7 +27,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   download: hasConfig(sourceOptions.download),
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   ...(hasConfig(sourceOptions.adaptiveStreaming) ? {
-    abrStrategy: sourceOptions?.adaptiveStreaming?.strategy,
+    abrStrategy: sourceOptions?.adaptiveStreaming?.strategy === defaults.adaptiveStreaming.strategy ? undefined : sourceOptions?.adaptiveStreaming?.strategy,
   } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
   shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
