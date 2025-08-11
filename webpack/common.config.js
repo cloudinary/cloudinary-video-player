@@ -41,8 +41,6 @@ const webpackConfig = {
     }
   },
 
-  devtool: 'source-map',
-
   resolve: {
     extensions: ['.js', '.scss'],
     modules: [path.resolve(__dirname, '../src'), 'node_modules'],
