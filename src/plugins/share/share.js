@@ -54,13 +54,15 @@ const SharePlugin = function (options = {}, playerInstance) {
 
     const transformations = stripKeysDeep(player.cloudinary.transformation() || {});
 
+    const filename = player.cloudinary.currentPublicId()?.split('/')?.pop();
+
     const baseOptions = {
       ...player.cloudinary.cloudinaryConfig(),
       ...transformations,
       resource_type: 'video',
       format: 'mp4',
       video_codec: 'h264',
-      flags: `streaming_attachment:${player.cloudinary.currentPublicId()}`,
+      flags: `streaming_attachment:${filename}`,
     };
 
     // For ABR - download a limited-size video
@@ -114,9 +116,6 @@ const SharePlugin = function (options = {}, playerInstance) {
       const response = await fetch(url, { method: 'HEAD' });
 
       if (RETRY_STATUS_CODES.includes(response.status) && attempt < MAX_ATTEMPTS) {
-        if (attempt === 0) {
-          setPreparingState(true);
-        }
         await wait(INTERVAL_MS);
         return fetchDownload(attempt + 1);
       }
@@ -125,6 +124,7 @@ const SharePlugin = function (options = {}, playerInstance) {
       triggerDownload();
     };
 
+    setPreparingState(true);
     fetchDownload();
   };
 
