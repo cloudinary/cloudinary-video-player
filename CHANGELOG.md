@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.2.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.0...v3.2.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* filename generated for download button ([#900](https://github.com/cloudinary/cloudinary-video-player/issues/900)) ([a8d0347](https://github.com/cloudinary/cloudinary-video-player/commit/a8d0347783b48e352529edbdf5a066d9e8f8aa41))
+
 ## [3.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.1...v3.2.0) (2025-08-11)
 
 
