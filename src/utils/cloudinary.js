@@ -1,7 +1,7 @@
 import { cloudinaryErrorsConverter, ERROR_CODE } from '../plugins/cloudinary/common';
 import { find } from 'utils/find';
 
-const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
+export const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };
 
 const getGoodSrcs = (srcs, parsedUris) => {
@@ -100,24 +100,7 @@ const isKeyInTransformation = (transformation, key) => {
   return !!transformation[key];
 };
 
-const addTextTracks = (tracks, videojs) => {
-  tracks.forEach(track => {
-    if (track.src && track.src.endsWith('.vtt')) {
-      fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
-        if (r.status >= 200 && r.status <= 399) {
-          videojs.addRemoteTextTrack(track, true);
-        }
-      });
-    } else if (track.src && track.src.endsWith('.srt')) {
-      videojs.srtTextTracks(track);
-    } else if (videojs.pacedTranscript && (!track.src || track.src.endsWith('.transcript'))) {
-      videojs.pacedTranscript(track);
-    }
-  });
-};
-
 export {
   handleCldError,
   isKeyInTransformation,
-  addTextTracks
 };
