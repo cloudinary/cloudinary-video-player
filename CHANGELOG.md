@@ -1,6 +1,27 @@
 # Changelog
 
 
+## [3.2.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.0...v3.2.1) (2025-08-12)
+
+
+### Bug Fixes
+
+* filename generated for download button ([#900](https://github.com/cloudinary/cloudinary-video-player/issues/900)) ([a8d0347](https://github.com/cloudinary/cloudinary-video-player/commit/a8d0347783b48e352529edbdf5a066d9e8f8aa41))
+
+## [3.2.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.1...v3.2.0) (2025-08-11)
+
+
+### Features
+
+* chapters/transcription template urls (applets) ([#888](https://github.com/cloudinary/cloudinary-video-player/issues/888)) ([cf63bf5](https://github.com/cloudinary/cloudinary-video-player/commit/cf63bf56610515fdcf2cd0f890dca99fc1053301))
+* schema json exported in build files ([#891](https://github.com/cloudinary/cloudinary-video-player/issues/891)) ([d7526b8](https://github.com/cloudinary/cloudinary-video-player/commit/d7526b8c238ad3f4fcda4a442cf3793ce5e35d30))
+* **VIDEO-19871:** control-bar download button ([#893](https://github.com/cloudinary/cloudinary-video-player/issues/893)) ([d088057](https://github.com/cloudinary/cloudinary-video-player/commit/d08805780e7b111f9edb47398bc7ce5404e65820))
+
+
+### Bug Fixes
+
+* **VIDEO-19824:** errors for missing source-maps ([#897](https://github.com/cloudinary/cloudinary-video-player/issues/897)) ([5079ae2](https://github.com/cloudinary/cloudinary-video-player/commit/5079ae2bbea1be2fa2a594f9973e170a1b9723e3))
+
 ## [3.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.1.0...v3.1.1) (2025-07-21)
 
 

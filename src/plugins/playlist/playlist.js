@@ -1,4 +1,3 @@
-import isPlainObject from 'lodash/isPlainObject';
 import { sliceProperties } from 'utils/slicing';
 import { PLAYER_EVENT } from 'utils/consts';
 import { getCloudinaryUrl } from 'plugins/cloudinary/common';
@@ -22,7 +21,7 @@ const playlist = (player, options = {}) => {
         playlistWidget.dispose();
       }
 
-      if (isPlainObject(options.playlistWidget)) {
+      if (options.playlistWidget?.show != false) {
         if (player.fluid_) {
           options.playlistWidget.fluid = true;
         }

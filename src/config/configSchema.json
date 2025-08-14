@@ -139,6 +139,10 @@
       "type": "boolean",
       "default": false
     },
+    "download": {
+      "type": "boolean",
+      "default": false
+    },
     "seekThumbnails": {
       "type": "boolean",
       "default": true

@@ -88,6 +88,7 @@ export const sourceValidators = {
   shoppable: validator.isPlainObject,
   chapters: validator.or(validator.isBoolean, validator.isPlainObject),
   visualSearch: validator.or(validator.isBoolean),
+  download: validator.isBoolean,
   title: validator.or(validator.isString, validator.isBoolean),
   description: validator.or(validator.isString, validator.isBoolean),
   interactionAreas: {
