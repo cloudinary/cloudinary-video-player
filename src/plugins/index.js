@@ -32,7 +32,6 @@ const plugins = {
   floatingPlayer,
   styledTextTracks,
   vttThumbnails,
-  textTracksManager,
 
   // Lazy loaded plugins
   chapters,
@@ -43,7 +42,8 @@ const plugins = {
   interactionAreas,
   visualSearch,
   share,
-  adaptiveStreaming
+  adaptiveStreaming,
+  textTracksManager,
 };
 
 export default plugins;
