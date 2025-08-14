@@ -211,13 +211,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   setTextTracks(conf) {
-    // remove current text tracks
-    const currentTracks = this.videojs.remoteTextTracks();
-    if (currentTracks) {
-      for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
-        this.videojs.removeRemoteTextTrack(currentTracks.tracks_[i]);
-      }
-    }
+    this.textTracksManager.removeAllTextTracks();
+
     if (conf) {
       const kinds = Object.keys(conf);
       const allTracks = [];
@@ -236,7 +231,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           }
         }
       }
-      Utils.addTextTracks(allTracks, this.videojs);
+
+      this.textTracksManager.addTextTracks(allTracks);
 
       if (conf.options && this.videojs.styledTextTracks) {
         this.videojs.styledTextTracks(conf.options);
@@ -382,6 +378,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initTextTracks () {
+    this.textTracksManager = this.videojs.textTracksManager();
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
       if (source?._textTracks) {
         this.setTextTracks(source._textTracks);
@@ -526,7 +523,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
     if (source) {
       const sourceOptions = Object.assign({}, this.playerOptions.sourceOptions);
-      
       this.source(source, sourceOptions);
     }
   }
@@ -596,7 +592,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-    
+
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
     }

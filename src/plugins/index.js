@@ -7,7 +7,6 @@ import cloudinary from './cloudinary';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import contextMenu from './context-menu';
 import floatingPlayer from './floating-player';
-import pacedTranscript from './paced-transcript';
 import styledTextTracks from './styled-text-tracks';
 import vttThumbnails from './vtt-thumbnails';
 
@@ -18,10 +17,10 @@ import imaPlugin from './ima';
 import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
-import srtTextTracks from './srt-text-tracks';
 import visualSearch from './visual-search';
 import share from './share';
 import adaptiveStreaming from './adaptive-streaming';
+import textTracksManager from './text-tracks-manager';
 
 const plugins = {
   aiHighlightsGraph,
@@ -31,7 +30,6 @@ const plugins = {
   cloudinaryAnalytics,
   contextMenu,
   floatingPlayer,
-  pacedTranscript,
   styledTextTracks,
   vttThumbnails,
 
@@ -41,11 +39,11 @@ const plugins = {
   imaPlugin,
   playlist,
   shoppable,
-  srtTextTracks,
   interactionAreas,
   visualSearch,
   share,
-  adaptiveStreaming
+  adaptiveStreaming,
+  textTracksManager,
 };
 
 export default plugins;
