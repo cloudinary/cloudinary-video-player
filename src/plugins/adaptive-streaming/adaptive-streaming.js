@@ -10,6 +10,14 @@ export default async function adaptiveStreamingPlugin(player, options) {
     ...abrStrategies[options.strategy],
     videoPreference: hdrSupported ? { preferHDR: true } : undefined
   };
+
+  // Add xhrSetup configuration for withCredentials support
+  if (options.withCredentials) {
+    config.xhrSetup = function(xhr) {
+      xhr.withCredentials = true;
+    };
+  }
+
   player.tech_.options_.hlsjsConfig = config;
   player.on('loadstart', () => qualityLevels(player, options).init());
   player.qualityMenu();
