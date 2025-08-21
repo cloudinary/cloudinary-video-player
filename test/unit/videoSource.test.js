@@ -296,6 +296,15 @@ describe('tests withCredentials', () => {
     let srcs = source.generateSources().map(s => s.withCredentials);
     expect(srcs[0]).toEqual(false);
   });
+  it('test withCredentials for hls sources', () => {
+    let sourceDef = {
+      cloudinaryConfig: cld,
+      withCredentials: true
+    };
+    let source = new VideoSource('sea_turtle', sourceDef);
+    source.sourceTypes(['hls']);
+    expect(source.withCredentials).toEqual(true);
+  });
 });
 
 describe('getType method tests', () => {

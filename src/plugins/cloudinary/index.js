@@ -96,7 +96,8 @@ class CloudinaryContext {
             this.player.adaptiveStreaming({
               ...options.adaptiveStreaming,
               isDash,
-              debug: options.debug
+              debug: options.debug,
+              withCredentials: options.withCredentials
             }).then(() => {
               refresh();
             });
