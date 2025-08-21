@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [3.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.1...v3.3.0) (2025-08-21)
+
+
+### Features
+
+* subtitles on demand ([#898](https://github.com/cloudinary/cloudinary-video-player/issues/898)) ([e674123](https://github.com/cloudinary/cloudinary-video-player/commit/e67412393a41970001132ec827c0b25d7f772ce3))
+
+
+### Bug Fixes
+
+* **VIDEO-19984:** withCredentials support for new hls package ([#903](https://github.com/cloudinary/cloudinary-video-player/issues/903)) ([6a7419e](https://github.com/cloudinary/cloudinary-video-player/commit/6a7419ead2c7fa1b84dc1ecc4a9fc311f4054bca))
+
 ## [3.2.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.0...v3.2.1) (2025-08-12)
 
 
