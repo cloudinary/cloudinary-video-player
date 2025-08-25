@@ -1,6 +1,5 @@
 export const fetchFileContent = async (
   url,
-  fallbackUrl,
   config = {}
 ) => {
   const {
@@ -15,7 +14,7 @@ export const fetchFileContent = async (
 
   let attempts = 0;
 
-  const attemptFetch = async (currentUrl) => {
+  const attemptFetch = async () => {
     if (signal?.aborted) {
       throw new DOMException('Aborted', 'AbortError');
     }
@@ -23,13 +22,13 @@ export const fetchFileContent = async (
     attempts++;
     onAttempt?.(attempts);
 
-    const response = await fetch(currentUrl, { signal });
+    const response = await fetch(url, { signal });
 
     if (response.status === 202 && polling) {
       if (attempts < maxAttempts) {
         return new Promise((resolve, reject) => {
           const timeoutId = setTimeout(() => {
-            attemptFetch(url).then(resolve).catch(reject);
+            attemptFetch().then(resolve).catch(reject);
           }, interval);
 
           signal?.addEventListener('abort', () => {
@@ -43,10 +42,7 @@ export const fetchFileContent = async (
     }
 
     if (!response.ok) {
-      if (fallbackUrl) {
-        return attemptFetch(fallbackUrl);
-      }
-      throw new Error(`Failed fetching from ${currentUrl} with status code ${response.status}`);
+      throw new Error(`Failed fetching from ${url} with status code ${response.status}`);
     }
 
     const text = await response.text();
@@ -55,7 +51,7 @@ export const fetchFileContent = async (
   };
 
   try {
-    return await attemptFetch(url);
+    return await attemptFetch();
   } catch (error) {
     if (error.name === 'AbortError') {
       console.warn('Polling aborted');
