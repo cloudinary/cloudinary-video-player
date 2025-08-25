@@ -85,9 +85,9 @@ function textTracksManager() {
       });
     };
 
-    const createUrlFallbacks = () => {
-      if (src) return [src, undefined];
-      if (type !== 'transcript') return [];
+    const createSourceUrl = () => {
+      if (src) return src;
+      if (type !== 'transcript') return undefined;
 
       const source = player.cloudinary.source();
       const publicId = source.publicId();
@@ -96,15 +96,15 @@ function textTracksManager() {
       const baseUrl = getTranscriptionFileUrl(urlPrefix, deliveryType, publicId);
       const localizedUrl = srclang ? getTranscriptionFileUrl(urlPrefix, deliveryType, publicId, srclang) : null;
 
-      return localizedUrl ? [localizedUrl, baseUrl] : [baseUrl, undefined];
+      return localizedUrl ? localizedUrl : baseUrl;
     };
 
     createTextTrackData(track, async (signal) => {
       updateTextTrackStatusToPending(track);
 
-      const urls = createUrlFallbacks();
+      const sourceUrl = createSourceUrl();
       const response = await fetchFileContent(
-        ...urls,
+        sourceUrl,
         {
           signal,
           polling: type === 'transcript' && !src,
