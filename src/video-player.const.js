@@ -50,7 +50,8 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'qualitySelector',
   'queryParams',
   'seekThumbnails',
-  'showJumpControls'
+  'showJumpControls',
+  'sources',
 ]);
 
 // We support both camelCase and snake_case for cloudinary SDK params
@@ -58,7 +59,7 @@ export const CLOUDINARY_CONFIG_PARAM = [
   'api_secret',
   'auth_token',
   'cdn_subdomain',
-  'cloud_name', 
+  'cloud_name',
   'cname',
   'private_cdn',
   'secure',

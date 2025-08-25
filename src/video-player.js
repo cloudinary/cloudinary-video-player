@@ -198,6 +198,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initSeekThumbs();
     this._initChapters();
     this._initInteractionAreas();
+    this._initSourceSwitcher();
   }
 
   _isFullScreen() {
@@ -443,6 +444,22 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.videoElement = this.videoElement;
       const options = isObject(this.playerOptions.cloudinaryAnalytics) ? this.playerOptions.cloudinaryAnalytics : {};
       this.videojs.cloudinaryAnalytics(options);
+    }
+  }
+
+  _initSourceSwitcher() {
+    const isSourcesList = !!this.playerOptions.sources?.length;
+
+    if (!isSourcesList && this.videojs.controlBar) {
+      this.videojs.controlBar.removeChild('sourceSwitcherButton');
+    }
+
+    if (isSourcesList) {
+      this.videojs.sourceSwitcher({
+        sources: this.playerOptions.sources,
+        sourcesInitialSelectedIndex: 0,
+        onSourceChange: ({ publicId, ...newSourceOptions }) => this.source(publicId, newSourceOptions),
+      });
     }
   }
 
