@@ -27,13 +27,12 @@
     window.addEventListener('load', function() {
       cloudinary.videoPlayer('player-multiple-sources', {
         cloudName: 'demo',
-        sources: [
-          { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' } },
-          { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } },
+        videoSources: [
           {
-            publicId: 'marmots',
-            label: 'Custom video name',
-            info: { title: 'Marmots' },
+            publicId: 'snow_horses'
+          },
+          {
+            publicId: 'dirt_bike',
             textTracks: {
               captions: {
                 label: 'Original',
@@ -49,7 +48,12 @@
                   language: 'pl-PL',
                 },
               ]
-            }
+            },
+          },
+          {
+            publicId: 'marmots',
+            label: 'Custom video name',
+            download: true,
           },
         ],
       });
@@ -101,13 +105,12 @@
       <code class="language-javascript">
       cloudinary.videoPlayer('player-multiple-sources', {
         cloudName: 'demo',
-        sources: [
-          { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' } },
-          { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } },
+        videoSources: [
           {
-            publicId: 'marmots',
-            label: 'Custom video name',
-            info: { title: 'Marmots' },
+            publicId: 'snow_horses'
+          },
+          {
+            publicId: 'dirt_bike',
             textTracks: {
               captions: {
                 label: 'Original',
@@ -123,7 +126,12 @@
                   language: 'pl-PL',
                 },
               ]
-            }
+            },
+          },
+          {
+            publicId: 'marmots',
+            label: 'Custom video name',
+            download: true,
           },
         ],
       });

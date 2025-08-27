@@ -37,7 +37,7 @@ export const playerValidators = {
   },
   playerOptions: {
     debug: validator.isBoolean,
-    sources: validator.isArray,
+    videoSources: validator.isArray,
     queryParams: validator.isPlainObject,
     publicId: validator.isString,
     fluid: validator.isBoolean,

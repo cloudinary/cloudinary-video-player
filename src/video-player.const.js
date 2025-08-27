@@ -51,7 +51,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'queryParams',
   'seekThumbnails',
   'showJumpControls',
-  'sources',
+  'videoSources',
 ]);
 
 // We support both camelCase and snake_case for cloudinary SDK params

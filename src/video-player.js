@@ -448,15 +448,15 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initSourceSwitcher() {
-    const isSourcesList = !!this.playerOptions.sources?.length;
+    const isSourcesListAvailable = !!this.playerOptions.videoSources?.length;
 
-    if (!isSourcesList && this.videojs.controlBar) {
+    if (!isSourcesListAvailable && this.videojs.controlBar) {
       this.videojs.controlBar.removeChild('sourceSwitcherButton');
     }
 
-    if (isSourcesList) {
+    if (isSourcesListAvailable) {
       this.videojs.sourceSwitcher({
-        sources: this.playerOptions.sources,
+        sources: this.playerOptions.videoSources,
         sourcesInitialSelectedIndex: 0,
         onSourceChange: ({ publicId, ...newSourceOptions }) => this.source(publicId, newSourceOptions),
       });
