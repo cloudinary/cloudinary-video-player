@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import 'assets/styles/components/title-bar.scss';
 import componentUtils from '../component-utils';
-import { utf8Base64Encode } from '../../utils/utf8Base64';
+import { utf8ToBase64 } from '../../utils/utf8Base64';
 import { getCloudinaryUrlPrefix } from 'plugins/cloudinary/common';
 
 // support VJS5 & VJS6 at the same time
@@ -47,7 +47,7 @@ class TitleBar extends Component {
     
     const urlPrefix = getCloudinaryUrlPrefix(config);
     const deliveryType = source.getInitOptions().type || 'upload';
-    const metadataUrl = `${urlPrefix}/_applet_/video_service/video_metadata/${deliveryType}/${utf8Base64Encode(publicId)}.json`;
+    const metadataUrl = `${urlPrefix}/_applet_/video_service/video_metadata/${deliveryType}/${utf8ToBase64(publicId)}.json`;
     
     fetch(metadataUrl, {
       headers: {
