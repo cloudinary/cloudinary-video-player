@@ -37,6 +37,7 @@ export enum ExampleLinkName {
     ESMImports = 'ESM Imports',
     AllBuild = '/all build',
     ShareAndDownload = 'Share & Download',
+    SourceSwitcher = 'Source switcher',
     VisualSearch = 'Visual Search',
     VideoDetails = 'Video Details',
 }
