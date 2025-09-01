@@ -22,7 +22,8 @@ export const SOURCE_PARAMS = [
   'transformation',
   'type',
   'visualSearch',
-  'withCredentials'
+  'withCredentials',
+  'videoSources'
 ];
 
 // All parameters that can be passed to player constructor
@@ -51,7 +52,6 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'queryParams',
   'seekThumbnails',
   'showJumpControls',
-  'videoSources',
 ]);
 
 // We support both camelCase and snake_case for cloudinary SDK params

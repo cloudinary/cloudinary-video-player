@@ -14,11 +14,9 @@ class SourceSwitcherButton extends MenuButton {
     this._items = options.items || [];
     this._selectedIndex = Number.isInteger(options.defaultIndex) ? options.defaultIndex : undefined;
 
-    // callbacks (prefer onSelected, but support legacy onSelect)
     const onSelected = typeof options.onSelected === 'function' ? options.onSelected : null;
-    const onSelectLegacy = typeof options.onSelect === 'function' ? options.onSelect : null;
 
-    this._onSelected = onSelected || onSelectLegacy || null;
+    this._onSelected = onSelected || null;
     this._setEnabled(Array.isArray(this._items) && this._items.length > 0);
   }
 

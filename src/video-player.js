@@ -448,17 +448,36 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initSourceSwitcher() {
-    const isSourcesListAvailable = Array.isArray(this.playerOptions.videoSources) ? !!this.playerOptions.videoSources.length : false;
+    this.sourceSwitcher = this.videojs.sourceSwitcher();
 
-    if (!isSourcesListAvailable && this.videojs.controlBar) {
-      this.videojs.controlBar.removeChild('sourceSwitcherButton');
-    }
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      const videoSources = source.videoSources();
+      const isSourcesListAvailable = Array.isArray(videoSources) ? !!videoSources.length : false;
 
-    if (isSourcesListAvailable) {
-      this.videojs.sourceSwitcher({
-        sources: this.playerOptions.videoSources,
-        sourcesInitialSelectedIndex: 0,
-        onSourceChange: ({ publicId, ...newSourceOptions }) => this.source(publicId, newSourceOptions),
+      if (this.videojs.controlBar) {
+        const method = isSourcesListAvailable ? 'show' : 'hide';
+        this.videojs.controlBar.getChild('sourceSwitcherButton')[method]();
+      }
+
+      if (isSourcesListAvailable) {
+        const selectedIndex = videoSources.findIndex(({ publicId }) => publicId === source.publicId());
+        this.sourceSwitcher.reInit({
+          sources: videoSources,
+          selectedIndex: selectedIndex === -1 ? 0 : selectedIndex,
+          onSourceChange: ({ publicId, ...newSourceOptions }) => this.source(publicId, {
+            ...newSourceOptions,
+            videoSources,
+          }),
+        });
+      }
+    });
+
+    if (Array.isArray(this.playerOptions.sourceOptions?.videoSources) && this.playerOptions.sourceOptions?.videoSources.length) {
+      // eslint-disable-next-line no-unused-vars
+      const { publicId, label, ...videoSourceData } = this.playerOptions.sourceOptions.videoSources[0];
+      this.source(publicId, {
+        ...videoSourceData,
+        videoSources: this.playerOptions.sourceOptions.videoSources,
       });
     }
   }

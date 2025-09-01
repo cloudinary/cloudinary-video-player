@@ -1,8 +1,9 @@
 import videojs from 'video.js';
 
-function sourceSwitcher(options) {
+function sourceSwitcher() {
   const player = this;
-  player.ready(() => {
+
+  const reInit = (options) => {
     const button = player
       .getChild('controlBar')
       .getChild('sourceSwitcherButton');
@@ -16,14 +17,19 @@ function sourceSwitcher(options) {
       value: source.publicId,
       label: source.label || source.publicId,
     }));
+
     button.setItems(items, false);
+    // clear callback before selecting initial element
+    button.setOnSelected(() => {});
+    button.setSelected(options.selectedIndex);
     button.setOnSelected(({ index }) => {
       options.onSourceChange(options.sources[index]);
     });
+  };
 
-    // initial set
-    button.setSelected(options.sourcesInitialSelectedIndex);
-  });
+  return {
+    reInit,
+  };
 }
 
 export default sourceSwitcher;
