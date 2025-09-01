@@ -456,7 +456,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
       if (this.videojs.controlBar) {
         const method = isSourcesListAvailable ? 'show' : 'hide';
-        this.videojs.controlBar.getChild('sourceSwitcherButton')[method]();
+        const element = this.videojs.controlBar.getChild('sourceSwitcherButton');
+
+        if (element && typeof element?.[method] === 'function') {
+          element[method]();
+        }
       }
 
       if (isSourcesListAvailable) {
