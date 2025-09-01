@@ -36,7 +36,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceTitle: (typeof sourceOptions.title === 'string' ? sourceOptions.title : sourceOptions.info?.title),
     sourceDescription: (typeof sourceOptions.description === 'string' ? sourceOptions.description : sourceOptions.info?.subtitle || sourceOptions.info?.description)
   } : {}),
-  ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {})
+  ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {}),
+  videoSources: !!sourceOptions.videoSources,
 });
 
 const getTextTracksOptions = (textTracks = {}) => {
@@ -117,7 +118,6 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   withCredentials: playerOptions.withCredentials,
   debug: playerOptions.debug,
   type: playerOptions.type,
-  videoSources: !!playerOptions.videoSources,
 
   colors: playerOptions.colors && JSON.stringify(playerOptions.colors),
   controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),

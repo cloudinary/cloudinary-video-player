@@ -37,7 +37,6 @@ export const playerValidators = {
   },
   playerOptions: {
     debug: validator.isBoolean,
-    videoSources: validator.isArray,
     queryParams: validator.isPlainObject,
     publicId: validator.isString,
     fluid: validator.isBoolean,
@@ -138,5 +137,6 @@ export const sourceValidators = {
   },
   adaptiveStreaming: {
     strategy: validator.isString(ADAPTIVE_STREAMING_STRATEGY)
-  }
+  },
+  videoSources: validator.isArray,
 };

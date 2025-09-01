@@ -62,19 +62,9 @@ class SourceSwitcherButton extends MenuButton {
     });
   }
 
-  setItems(items, keepSelection = true) {
+  setItems(items) {
     this._items = items;
-
-    if (!keepSelection) {
-      this._selectedIndex = this._items.length ? 0 : undefined;
-    } else if (
-      !Number.isInteger(this._selectedIndex) ||
-      this._selectedIndex < 0 ||
-      this._selectedIndex >= this._items.length
-    ) {
-      // keepSelection requested but previous index is invalid now
-      this._selectedIndex = this._items.length ? 0 : undefined;
-    }
+    this._selectedIndex = this._items.length ? 0 : undefined;
 
     this._setEnabled(this._items.length > 0);
     this._rebuildMenu();

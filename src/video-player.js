@@ -451,7 +451,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this.sourceSwitcher = this.videojs.sourceSwitcher();
 
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      const videoSources = source.videoSources();
+      const videoSources = source.videoSources?.();
       const isSourcesListAvailable = Array.isArray(videoSources) ? !!videoSources.length : false;
 
       if (this.videojs.controlBar) {

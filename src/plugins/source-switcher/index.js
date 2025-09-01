@@ -18,7 +18,7 @@ function sourceSwitcher() {
       label: source.label || source.publicId,
     }));
 
-    button.setItems(items, false);
+    button.setItems(items);
     // clear callback before selecting initial element
     button.setOnSelected(() => {});
     button.setSelected(options.selectedIndex);
