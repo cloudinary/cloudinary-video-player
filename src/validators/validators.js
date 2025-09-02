@@ -137,5 +137,6 @@ export const sourceValidators = {
   },
   adaptiveStreaming: {
     strategy: validator.isString(ADAPTIVE_STREAMING_STRATEGY)
-  }
+  },
+  videoSources: validator.isArray,
 };
