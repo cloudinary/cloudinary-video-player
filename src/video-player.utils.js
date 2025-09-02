@@ -92,7 +92,7 @@ export const extractOptions = (elem, options) => {
 
   // Cloudinary SDK config (cloud_name, secure, etc.)
   playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions, ...CLOUDINARY_CONFIG_PARAM);
-  
+
   // Merge with cloudinaryConfig from src/index.js (e.g., secureDistribution -> secure_distribution)
   if (playerOptions.cloudinaryConfig) {
     Object.assign(playerOptions.cloudinary, playerOptions.cloudinaryConfig);
@@ -124,12 +124,15 @@ export const overrideDefaultVideojsComponents = () => {
   const ControlBar = videojs.getComponent('ControlBar');
   if (ControlBar) {
     children = ControlBar.prototype.options_.children;
+
     // Add space instead of the progress control (which we detached from the controlBar, and absolutely positioned it above it)
     // Also add a blank div underneath the progress control to stop bubbling up pointer events.
     children.splice(children.indexOf('progressControl'), 0, 'spacer', 'progressControlEventsBlocker');
 
     // Add skip buttons around the 'play-toggle'
     children.splice(children.indexOf('playToggle'), 1, 'playToggle', 'JumpBackButton', 'JumpForwardButton');
+
+    children.splice(children.indexOf('chaptersButton'), 1, 'sourceSwitcherButton', 'chaptersButton');
 
     // Position the 'logo-button' button last
     children.push('logoButton');

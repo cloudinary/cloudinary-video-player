@@ -492,35 +492,58 @@
           ]
         }
       }
-          },
-      "title": {
-        "oneOf": [
-          {
-            "type": "string",
-            "default": ""
-          },
-          {
-            "type": "boolean",
-            "default": false
-          }
-        ]
-      },
-      "description": {
-        "oneOf": [
-          {
-            "type": "string",
-            "default": ""
-          },
-          {
-            "type": "boolean",
-            "default": false
-          }
-        ]
-      },
-      "adaptiveStreaming": {
+    },
+    "title": {
+      "oneOf": [
+        {
+          "type": "string",
+          "default": ""
+        },
+        {
+          "type": "boolean",
+          "default": false
+        }
+      ]
+    },
+    "description": {
+      "oneOf": [
+        {
+          "type": "string",
+          "default": ""
+        },
+        {
+          "type": "boolean",
+          "default": false
+        }
+      ]
+    },
+    "adaptiveStreaming": {
       "type": "string",
       "enum": ["fastStart", "balanced", "highQuality"],
       "default": "balanced"
+    },
+    "videoSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "default": ""
+          },
+          "publicId": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "additionalProperties": true
+      },
+      "default": [
+        {
+          "publicId": "video-public-id",
+          "label": "Example video label"
+        }
+      ]
     }
   },
   "additionalProperties": true

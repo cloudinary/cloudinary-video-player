@@ -7,6 +7,7 @@ import cloudinary from './cloudinary';
 import cloudinaryAnalytics from './cloudinary-analytics';
 import contextMenu from './context-menu';
 import floatingPlayer from './floating-player';
+import sourceSwitcher from './source-switcher';
 import styledTextTracks from './styled-text-tracks';
 import vttThumbnails from './vtt-thumbnails';
 
@@ -30,6 +31,7 @@ const plugins = {
   cloudinaryAnalytics,
   contextMenu,
   floatingPlayer,
+  sourceSwitcher,
   styledTextTracks,
   vttThumbnails,
 
