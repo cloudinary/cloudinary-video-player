@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [3.4.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.3.0...v3.4.0) (2025-09-02)
+
+
+### Features
+
+* source switcher ([#904](https://github.com/cloudinary/cloudinary-video-player/issues/904)) ([c77e1f8](https://github.com/cloudinary/cloudinary-video-player/commit/c77e1f8e3ee43d7c18dc7ecbaf27ad0f76a62987))
+
+
+### Bug Fixes
+
+* remove text tracks fallback ([#905](https://github.com/cloudinary/cloudinary-video-player/issues/905)) ([755e72b](https://github.com/cloudinary/cloudinary-video-player/commit/755e72b4ade15d24f4012737e74c55c25464a8a7))
+
 ## [3.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.1...v3.3.0) (2025-08-21)
 
 
