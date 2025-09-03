@@ -114,6 +114,7 @@ function textTracksManager() {
           onSuccess: () => updateTextTrackStatusToSuccess(track),
           onError: (error) => {
             updateTextTrackStatusToError(track, error);
+            console.warn(`[${track.label}] Text track could not be loaded`);
           },
 
         }
