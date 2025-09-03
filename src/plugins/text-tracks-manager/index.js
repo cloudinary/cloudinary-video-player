@@ -3,7 +3,7 @@ import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { transcriptParser } from './parsers/transcriptParser';
 import { srtParser } from './parsers/srtParser';
 import { vttParser } from './parsers/vttParser';
-import { addNotificationCue, addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
+import { addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
 
 const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
   `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
@@ -114,13 +114,8 @@ function textTracksManager() {
           onSuccess: () => updateTextTrackStatusToSuccess(track),
           onError: (error) => {
             updateTextTrackStatusToError(track, error);
-            addNotificationCue(player.duration(), track, 'Text track could not be loaded');
           },
-          onAttempt: type === 'transcript' ? (count) => {
-            if (count === 2) {
-              addNotificationCue(player.duration(), track, 'Loading text track...');
-            }
-          } : undefined,
+
         }
       );
 
