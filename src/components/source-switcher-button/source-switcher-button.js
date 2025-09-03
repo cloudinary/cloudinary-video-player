@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import SourceMenuItem from './source-switcher-menu-item';
 import './source-switcher-button.scss';
 
 const MenuButton = videojs.getComponent('MenuButton');
@@ -10,38 +11,24 @@ class SourceSwitcherButton extends MenuButton {
 
     this.controlText(options.tooltip || 'Sources');
     this._emptyLabel = options.emptyLabel || 'No sources';
-
     this._items = Array.isArray(options.items) ? options.items : [];
-    this._selectedIndex =
-      Number.isInteger(options.defaultIndex) ? options.defaultIndex : undefined;
-
+    this._selectedIndex = Number.isInteger(options.defaultIndex)
+      ? options.defaultIndex
+      : undefined;
     this._onSelected = typeof options.onSelected === 'function' ? options.onSelected : null;
 
-    this._lastActivation = 0;
-    this._notifying = false;
-
-    // Detect touch capability once (Video.js flag + browser heuristics)
-    this._isTouch =
-      (videojs.browser && videojs.browser.TOUCH_ENABLED) ||
-      (typeof window !== 'undefined' &&
-        ('ontouchstart' in window ||
-          (navigator && (navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0))));
-
-    this.emitTapEvents();
     this._setEnabled(this._items.length > 0);
   }
 
   buildCSSClass() {
     const empty = !Array.isArray(this._items) || this._items.length === 0;
-    return `vjs-source-switcher-button${
-      empty ? ' vjs-source-switcher-disabled' : ''
-    } ${super.buildCSSClass()}`;
+    return `vjs-source-switcher-button${empty ? ' vjs-source-switcher-disabled' : ''} ${super.buildCSSClass()}`;
   }
 
   createItems() {
     if (!Array.isArray(this._items) || this._items.length === 0) {
       const empty = new MenuItem(this.player_, {
-        label: this._emptyLabel || 'No sources',
+        label: this._emptyLabel,
         selectable: false
       });
       empty.addClass('vjs-source-switcher-empty');
@@ -50,45 +37,19 @@ class SourceSwitcherButton extends MenuButton {
     }
 
     return this._items.map(({ label, value }, index) => {
-      const item = new MenuItem(this.player_, {
+      return new SourceMenuItem(this.player_, {
         label,
-        selectable: true,
-        selected: index === this._selectedIndex
+        value,
+        index,
+        selected: index === this._selectedIndex,
+        onSelect: (payload) => this._handleItemSelect(payload)
       });
-
-      item.value = value;
-      item._ssIndex = index;
-
-      item.emitTapEvents();
-
-      // Single activation handler, guarded against duplicates
-      const activate = (e) => {
-        // Basic de-dupe: catch tap->click cascades & rapid taps
-        const now = Date.now();
-        if (now - this._lastActivation < 250) return;
-        this._lastActivation = now;
-
-        if (e && e.preventDefault) e.preventDefault();
-        if (e && e.stopPropagation) e.stopPropagation();
-
-        this.setSelected(index);
-      };
-
-      // IMPORTANT: attach only one kind of event handler to avoid double-firing
-      if (this._isTouch) {
-        item.on('tap', activate);
-      } else {
-        item.on('click', activate);
-      }
-
-      // Accessibility: activate via keyboard (Enter/Space)
-      item.on('keydown', (e) => {
-        const key = e && (e.which || e.keyCode);
-        if (key === 13 || key === 32) activate(e);
-      });
-
-      return item;
     });
+  }
+
+  _handleItemSelect({ index }) {
+    if (this._selectedIndex === index) return;
+    this.setSelected(index);
   }
 
   setItems(items) {
@@ -100,19 +61,11 @@ class SourceSwitcherButton extends MenuButton {
   }
 
   setSelected(index) {
-    if (
-      !Array.isArray(this._items) ||
-      index == null ||
-      index < 0 ||
-      index >= this._items.length
-    ) {
-      return;
-    }
+    if (!Array.isArray(this._items) || index == null || index < 0 || index >= this._items.length) return;
 
-    // No-op if selecting the currently selected item
-    if (this._selectedIndex === index) return;
     this._selectedIndex = index;
 
+    // reflect in UI if menu exists
     if (this.menu && typeof this.menu.children === 'function') {
       this.menu.children().forEach((child) => {
         if (child instanceof MenuItem) {
@@ -121,18 +74,8 @@ class SourceSwitcherButton extends MenuButton {
       });
     }
 
-    const { label, value } = this._items[index];
-    const payload = { index, value, label };
-
-    if (!this._notifying) {
-      this._notifying = true;
-      try {
-        if (this._onSelected) this._onSelected(payload, this.player_);
-        this.player_.trigger('sourceswitcher:change', payload);
-      } finally {
-        this._notifying = false;
-      }
-    }
+    const { value } = this._items[index];
+    if (this._onSelected) this._onSelected({ index, value }, this.player_);
   }
 
   setOnSelected(fn) {
@@ -141,15 +84,9 @@ class SourceSwitcherButton extends MenuButton {
 
   _rebuildMenu() {
     if (!this.menu) return;
-
-    // Remove existing children
-    const children = this.menu.children ? this.menu.children().slice() : [];
-    children.forEach((c) => this.menu.removeChild(c));
-
-    // Add new items
+    this.menu.children().slice().forEach((c) => this.menu.removeChild(c));
     this.createItems().forEach((i) => this.menu.addItem(i));
 
-    // Toggle disabled class based on emptiness
     const el = this.el && this.el();
     if (el) {
       const empty = this._items.length === 0;
