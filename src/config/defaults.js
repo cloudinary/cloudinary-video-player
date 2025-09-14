@@ -27,5 +27,9 @@ export default {
   analytics: false,
   cloudinaryAnalytics: true,
   allowUsageReport: true,
-  playedEventPercents: [25, 50, 75, 100]
+  playedEventPercents: [25, 50, 75, 100],
+  html5: {
+    nativeTextTracks: false
+  },
+  disableSeekWhileScrubbingOnMobile: true
 };

@@ -1,9 +1,5 @@
 import 'videojs-per-source-behaviors';
 
-// #if (!process.env.WEBPACK_BUILD_LIGHT)
-import './videojs-http-source-selector/plugin';
-// #endif
-
 import aiHighlightsGraph from './ai-highlights-graph';
 import analytics from './analytics';
 import autoplayOnScroll from './autoplay-on-scroll';
@@ -13,15 +9,16 @@ import colors from './colors';
 import contextMenu from './context-menu';
 import floatingPlayer from './floating-player';
 import pacedTranscript from './paced-transcript';
+import srtTextTracks from './srt-text-tracks';
+import styledTextTracks from './styled-text-tracks';
 import vttThumbnails from './vtt-thumbnails';
 
 // Lazy loaded plugins
 import chapters from './chapters';
 import imaPlugin from './ima';
+import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
-import styledTextTracks from './styled-text-tracks';
-import interactionAreas from './interaction-areas';
 
 const plugins = {
   aiHighlightsGraph,
@@ -40,6 +37,7 @@ const plugins = {
   imaPlugin,
   playlist,
   shoppable,
+  srtTextTracks,
   styledTextTracks,
   interactionAreas
 };

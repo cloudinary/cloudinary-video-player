@@ -44,8 +44,9 @@ const setVideoSrc = (that, srcs) => {
 };
 
 const handleCldError = (that, options) => {
-  const opts = options.fetchErrorUsingGet ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
   const srcs = that.videojs.cloudinary.getCurrentSources();
+  const opts = options.fetchErrorUsingGet ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
+  opts.credentials = options.withCredentials ? 'include' : 'omit';
 
   if (srcs.length > 0) {
     Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
@@ -101,13 +102,15 @@ const isKeyInTransformation = (transformation, key) => {
 
 const addTextTracks = (tracks, videojs) => {
   tracks.forEach(track => {
-    if (track.src) {
+    if (track.src && track.src.endsWith('.vtt')) {
       fetch(track.src, GET_ERROR_DEFAULT_REQUEST).then(r => {
         if (r.status >= 200 && r.status <= 399) {
           videojs.addRemoteTextTrack(track, true);
         }
       });
-    } else if (videojs.pacedTranscript) {
+    } else if (track.src && track.src.endsWith('.srt')) {
+      videojs.srtTextTracks(track);
+    } else if (videojs.pacedTranscript && (!track.src || track.src.endsWith('.transcript'))) {
       videojs.pacedTranscript(track);
     }
   });

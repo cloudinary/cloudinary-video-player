@@ -4,6 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import pick from 'lodash/pick';
 import isFunction from 'lodash/isFunction';
+import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
 import './components';
 import plugins from './plugins';
@@ -111,6 +112,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       return;
     }
     try {
+      const internalAnalyticsMetadata = options._internalAnalyticsMetadata ?? {};
       const analyticsData = getAnalyticsFromPlayerOptions(options);
       const analyticsParams = new URLSearchParams(analyticsData).toString();
       const baseParams = new URLSearchParams({
@@ -119,11 +121,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         // #if (process.env.WEBPACK_BUILD_LIGHT)
         vpLightBuild: true,
         // #endif
-        cloudName: options.cloudinary.cloudinaryConfig.cloud_name
+        cloudName: options.cloudinary.cloudinaryConfig.cloud_name,
+        ...internalAnalyticsMetadata,
       }).toString();
       fetch(`${INTERNAL_ANALYTICS_URL}/video_player_source?${analyticsParams}&${baseParams}`);
-    } catch (e) {
-      // consider reporting this failure
+    } catch (err) {
+      console.warn(err);
     }
   }
 
@@ -403,11 +406,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initCloudinaryAnalytics() {
-    const cloudinaryAnalyticsOptionEnabled = this.playerOptions.cloudinaryAnalytics;
+    const cloudinaryAnalyticsOptionEnabled = !!this.playerOptions.cloudinaryAnalytics;
 
     if (cloudinaryAnalyticsOptionEnabled) {
       this.videojs.videoElement = this.videoElement;
-      this.videojs.cloudinaryAnalytics();
+      const options = isObject(this.playerOptions.cloudinaryAnalytics) ? this.playerOptions.cloudinaryAnalytics : {};
+      this.videojs.cloudinaryAnalytics(options);
     }
   }
 
@@ -471,8 +475,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
-  _onSourceChange() {
-    this._sendInternalAnalytics();
+  _onSourceChange(e, { sourceOptions }) {
+    this._sendInternalAnalytics({ ...(sourceOptions && { sourceOptions }) });
     // #if (!process.env.WEBPACK_BUILD_LIGHT)
     this._initQualitySelector();
     // #endif
@@ -536,8 +540,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         }
       });
     }
-
-    this._sendInternalAnalytics({ source: options });
 
     if (publicId instanceof VideoSource) {
       return this.videojs.cloudinary.source(publicId, options);
