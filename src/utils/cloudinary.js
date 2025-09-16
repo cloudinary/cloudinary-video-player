@@ -46,7 +46,7 @@ const setVideoSrc = (that, srcs) => {
 const handleCldError = (that, options) => {
   const srcs = that.videojs.cloudinary.getCurrentSources();
   const opts = options.fetchErrorUsingGet ? ERROR_WITH_GET_REQUEST : GET_ERROR_DEFAULT_REQUEST;
-  opts.credentials = options.withCredentials ? 'include' : 'omit';
+  opts.credentials = options.sourceOptions.withCredentials ? 'include' : 'omit';
 
   if (srcs.length > 0) {
     Promise.all(srcs.map((s) => fetch(s.src, opts))).then((res) => {
