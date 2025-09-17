@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [3.4.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.1...v3.4.2) (2025-09-17)
+
+
+### Bug Fixes
+
+* retry on hls not using withCredentials ([#912](https://github.com/cloudinary/cloudinary-video-player/issues/912)) ([9cb213c](https://github.com/cloudinary/cloudinary-video-player/commit/9cb213ca98e555191bd7f9848ef06f77e0bff644))
+* **VIDEO-19962:** base64 encode public id for video metadata ([#906](https://github.com/cloudinary/cloudinary-video-player/issues/906)) ([bbae229](https://github.com/cloudinary/cloudinary-video-player/commit/bbae2291a684bd15ee077b1196d8cca531d0e18b))
+
 ## [3.4.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.0...v3.4.1) (2025-09-03)
 
 
