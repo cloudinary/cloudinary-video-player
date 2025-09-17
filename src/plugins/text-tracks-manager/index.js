@@ -3,7 +3,7 @@ import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { transcriptParser } from './parsers/transcriptParser';
 import { srtParser } from './parsers/srtParser';
 import { vttParser } from './parsers/vttParser';
-import { addNotificationCue, addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
+import { addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
 
 const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
   `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
@@ -85,9 +85,9 @@ function textTracksManager() {
       });
     };
 
-    const createUrlFallbacks = () => {
-      if (src) return [src, undefined];
-      if (type !== 'transcript') return [];
+    const createSourceUrl = () => {
+      if (src) return src;
+      if (type !== 'transcript') return undefined;
 
       const source = player.cloudinary.source();
       const publicId = source.publicId();
@@ -96,15 +96,15 @@ function textTracksManager() {
       const baseUrl = getTranscriptionFileUrl(urlPrefix, deliveryType, publicId);
       const localizedUrl = srclang ? getTranscriptionFileUrl(urlPrefix, deliveryType, publicId, srclang) : null;
 
-      return localizedUrl ? [localizedUrl, baseUrl] : [baseUrl, undefined];
+      return localizedUrl ? localizedUrl : baseUrl;
     };
 
     createTextTrackData(track, async (signal) => {
       updateTextTrackStatusToPending(track);
 
-      const urls = createUrlFallbacks();
+      const sourceUrl = createSourceUrl();
       const response = await fetchFileContent(
-        ...urls,
+        sourceUrl,
         {
           signal,
           polling: type === 'transcript' && !src,
@@ -114,13 +114,9 @@ function textTracksManager() {
           onSuccess: () => updateTextTrackStatusToSuccess(track),
           onError: (error) => {
             updateTextTrackStatusToError(track, error);
-            addNotificationCue(player.duration(), track, 'Text track could not be loaded');
+            console.warn(`[${track.label}] Text track could not be loaded`);
           },
-          onAttempt: type === 'transcript' ? (count) => {
-            if (count === 2) {
-              addNotificationCue(player.duration(), track, 'Loading text track...');
-            }
-          } : undefined,
+
         }
       );
 

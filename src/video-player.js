@@ -198,6 +198,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initSeekThumbs();
     this._initChapters();
     this._initInteractionAreas();
+    this._initSourceSwitcher();
   }
 
   _isFullScreen() {
@@ -443,6 +444,45 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       this.videojs.videoElement = this.videoElement;
       const options = isObject(this.playerOptions.cloudinaryAnalytics) ? this.playerOptions.cloudinaryAnalytics : {};
       this.videojs.cloudinaryAnalytics(options);
+    }
+  }
+
+  _initSourceSwitcher() {
+    this.sourceSwitcher = this.videojs.sourceSwitcher();
+
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
+      const videoSources = source.videoSources?.();
+      const isSourcesListAvailable = Array.isArray(videoSources) ? !!videoSources.length : false;
+
+      if (this.videojs.controlBar) {
+        const method = isSourcesListAvailable ? 'show' : 'hide';
+        const element = this.videojs.controlBar.getChild('sourceSwitcherButton');
+
+        if (element && typeof element?.[method] === 'function') {
+          element[method]();
+        }
+      }
+
+      if (isSourcesListAvailable) {
+        const selectedIndex = videoSources.findIndex(({ publicId }) => publicId === source.publicId());
+        this.sourceSwitcher.reInit({
+          sources: videoSources,
+          selectedIndex: selectedIndex === -1 ? 0 : selectedIndex,
+          onSourceChange: ({ publicId, ...newSourceOptions }) => this.source(publicId, {
+            ...newSourceOptions,
+            videoSources,
+          }),
+        });
+      }
+    });
+
+    if (Array.isArray(this.playerOptions.sourceOptions?.videoSources) && this.playerOptions.sourceOptions?.videoSources.length) {
+      // eslint-disable-next-line no-unused-vars
+      const { publicId, label, ...videoSourceData } = this.playerOptions.sourceOptions.videoSources[0];
+      this.source(publicId, {
+        ...videoSourceData,
+        videoSources: this.playerOptions.sourceOptions.videoSources,
+      });
     }
   }
 

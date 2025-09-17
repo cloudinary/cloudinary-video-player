@@ -1,6 +1,27 @@
 # Changelog
 
 
+## [3.4.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.0...v3.4.1) (2025-09-03)
+
+
+### Bug Fixes
+
+* remove text tracks notifications ([#910](https://github.com/cloudinary/cloudinary-video-player/issues/910)) ([ae94a3b](https://github.com/cloudinary/cloudinary-video-player/commit/ae94a3bb90b45339381c6f47c41f2339426ea40d))
+* source switcher on mobile, tap ([#908](https://github.com/cloudinary/cloudinary-video-player/issues/908)) ([91e4b2a](https://github.com/cloudinary/cloudinary-video-player/commit/91e4b2adedfe853dfbe9b7b39cd5b5bf7c775c10))
+* **VIDEO-20021:** subtitles defined in HLS manifest ([#909](https://github.com/cloudinary/cloudinary-video-player/issues/909)) ([b7b8ec9](https://github.com/cloudinary/cloudinary-video-player/commit/b7b8ec9cee048b0a13e730a436586a617beffe47))
+
+## [3.4.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.3.0...v3.4.0) (2025-09-02)
+
+
+### Features
+
+* source switcher ([#904](https://github.com/cloudinary/cloudinary-video-player/issues/904)) ([c77e1f8](https://github.com/cloudinary/cloudinary-video-player/commit/c77e1f8e3ee43d7c18dc7ecbaf27ad0f76a62987))
+
+
+### Bug Fixes
+
+* remove text tracks fallback ([#905](https://github.com/cloudinary/cloudinary-video-player/issues/905)) ([755e72b](https://github.com/cloudinary/cloudinary-video-player/commit/755e72b4ade15d24f4012737e74c55c25464a8a7))
+
 ## [3.3.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.2.1...v3.3.0) (2025-08-21)
 
 
