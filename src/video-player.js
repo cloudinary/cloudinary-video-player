@@ -36,6 +36,7 @@ Object.keys(plugins).forEach((key) => {
 
 overrideDefaultVideojsComponents();
 
+
 class VideoPlayer extends Utils.mixin(Eventable) {
 
   static all(selector, ...args) {
@@ -93,6 +94,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlugins();
     this._initJumpButtons();
     this._initPictureInPicture();
+    this._initMobileTouchHandler();
     this._setVideoJsListeners(ready);
   }
 
@@ -403,6 +405,202 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initPictureInPicture() {
     if (!this.playerOptions.pictureInPictureToggle && this.videojs.controlBar) {
       this.videojs.controlBar.removeChild('pictureInPictureToggle');
+    }
+  }
+
+  _initMobileTouchHandler() {
+    // Check if this is a mobile device
+    this._isMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID || 
+                     /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (!this._isMobile) {
+      return;
+    }
+
+    if (this._mobileTouchHandlerSetup) {
+      return;
+    }
+
+    // Initialize mobile interaction tracking
+    this._mobileInteractionActive = false;
+
+    const setupTouchHandler = () => {
+      const playerElement = this.videojs.el();
+
+      if (!playerElement) {
+        setTimeout(setupTouchHandler, 100);
+        return;
+      }
+
+      // Add touch event listener for mobile devices
+      const handleMobileTouch = (event) => {
+        // Only handle touch events on the player container, not on controls
+        const target = event.target;
+        const isControlElement = target.closest('.vjs-control-bar') || 
+                                target.closest('.vjs-menu') ||
+                                target.matches('.vjs-control, .vjs-button');
+
+        if (isControlElement) {
+          return;
+        }
+
+        // Check if video has started (show big play button for both playing and paused states)
+        const hasStarted = this.videojs.hasStarted();
+        
+        if (hasStarted) {
+          // Show the touch overlay and mark interaction as active
+          this.videojs.addClass('cld-mobile-touch-active');
+          this._mobileInteractionActive = true;
+          
+          // Update mobile touch state based on current playback
+          this._updateMobileTouchState();
+          
+          // Remove the overlay after timeout
+          this.videojs.clearTimeout(this._mobileTouchTimeout);
+          this._mobileTouchTimeout = this.videojs.setTimeout(() => {
+            // First remove the visibility class to start fade-out
+            this.videojs.removeClass('cld-mobile-touch-active');
+            
+            // Wait for CSS transition to complete before removing pause icon class
+            setTimeout(() => {
+              this.videojs.removeClass('cld-mobile-touch-playing');
+              this._removeMobileBigPlayButtonHandler();
+              this._mobileInteractionActive = false; // End mobile interaction session
+            }, 250); // Wait slightly longer than the 0.2s CSS transition
+          }, 3000);
+        }
+      };
+
+      playerElement.addEventListener('touchend', handleMobileTouch, { passive: true });
+      
+      // Listen to play/pause events to update mobile touch state (only during active mobile interactions)
+      this.videojs.on('play', () => {
+        if (this._isMobile && this._mobileInteractionActive) {
+          this._updateMobileTouchState();
+        }
+      });
+
+      this.videojs.on('pause', () => {
+        if (this._isMobile && this._mobileInteractionActive) {
+          this._updateMobileTouchState();
+        }
+      });
+
+      // Mark as setup complete
+      this._mobileTouchHandlerSetup = true;
+      
+      // Clean up on dispose
+      this.videojs.on('dispose', () => {
+        playerElement.removeEventListener('touchend', handleMobileTouch);
+        this.videojs.clearTimeout(this._mobileTouchTimeout);
+        this._removeMobileBigPlayButtonHandler();
+        this._mobileTouchHandlerSetup = false;
+        this._mobileInteractionActive = false;
+      });
+    };
+
+    // Initialize when VideoJS is ready
+    if (this.videojs && this.videojs.isReady_) {
+      setupTouchHandler();
+    } else if (this.videojs) {
+      this.videojs.ready(setupTouchHandler);
+    } else {
+      setTimeout(() => this._initMobileTouchHandler(), 200);
+    }
+  }
+
+  _updateMobileTouchState() {
+    const isPlaying = !this.videojs.paused();
+    
+    if (isPlaying) {
+      this.videojs.addClass('cld-mobile-touch-playing');
+      this._setupMobileBigPlayButtonHandler(true);
+    } else {
+      this.videojs.removeClass('cld-mobile-touch-playing');
+      this._removeMobileBigPlayButtonHandler();
+    }
+  }
+
+  _setupMobileBigPlayButtonHandler(isPlaying) {
+    if (!isPlaying) {
+      return; // Use default play behavior when paused
+    }
+
+    // Remove any existing handler first
+    this._removeMobileBigPlayButtonHandler();
+
+    // Find the big play button
+    const bigPlayButton = this.videojs.el().querySelector('.vjs-big-play-button');
+    if (!bigPlayButton) {
+      return;
+    }
+
+    // Create custom pause handler that completely overrides default behavior
+    this._mobilePauseHandler = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      
+      // Pause the video
+      if (!this.videojs.paused()) {
+        this.videojs.pause();
+        
+        // Immediately update the mobile touch state
+        setTimeout(() => {
+          this._updateMobileTouchState();
+          
+          // Force show the button briefly to give visual feedback
+          if (this.videojs.hasClass('cld-mobile-touch-active')) {
+            this.videojs.clearTimeout(this._mobileTouchTimeout);
+            this._mobileTouchTimeout = this.videojs.setTimeout(() => {
+              this.videojs.removeClass('cld-mobile-touch-active');
+            }, 2000);
+          }
+        }, 50);
+      }
+      
+      return false;
+    };
+
+    // Add multiple event listeners to ensure we catch the click
+    bigPlayButton.addEventListener('click', this._mobilePauseHandler, { capture: true });
+    bigPlayButton.addEventListener('touchend', this._mobilePauseHandler, { capture: true });
+    bigPlayButton.addEventListener('mousedown', this._mobilePauseHandler, { capture: true });
+    
+    // Also disable the VideoJS component's click handling temporarily
+    const bigPlayButtonComponent = this.videojs.getChild('bigPlayButton');
+    if (bigPlayButtonComponent) {
+      this._originalHandleClick = bigPlayButtonComponent.handleClick;
+      bigPlayButtonComponent.handleClick = () => {
+        // Override with our pause behavior
+        this._mobilePauseHandler({ 
+          preventDefault: () => {}, 
+          stopPropagation: () => {}, 
+          stopImmediatePropagation: () => {} 
+        });
+      };
+    }
+    
+    // Store reference to the button for cleanup
+    this._mobilePauseButton = bigPlayButton;
+  }
+
+  _removeMobileBigPlayButtonHandler() {
+    if (this._mobilePauseHandler && this._mobilePauseButton) {
+      // Remove all event listeners
+      this._mobilePauseButton.removeEventListener('click', this._mobilePauseHandler, { capture: true });
+      this._mobilePauseButton.removeEventListener('touchend', this._mobilePauseHandler, { capture: true });
+      this._mobilePauseButton.removeEventListener('mousedown', this._mobilePauseHandler, { capture: true });
+      
+      // Restore original VideoJS component behavior
+      const bigPlayButtonComponent = this.videojs.getChild('bigPlayButton');
+      if (bigPlayButtonComponent && this._originalHandleClick) {
+        bigPlayButtonComponent.handleClick = this._originalHandleClick;
+        this._originalHandleClick = null;
+      }
+      
+      this._mobilePauseHandler = null;
+      this._mobilePauseButton = null;
     }
   }
 
