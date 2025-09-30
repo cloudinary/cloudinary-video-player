@@ -1,0 +1,22 @@
+.video-js {
+  &.cld-mobile-touch-active .vjs-big-play-button {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &.cld-mobile-touch-playing .vjs-big-play-button .vjs-icon-placeholder:before {
+    content: '';
+    position: absolute;
+    border: none;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate(-5.5px, 0);
+    width: 4px;
+    height: 22px;
+    background: currentColor;
+    border-radius: 2px;
+    box-shadow: 7px 0 0 0 currentColor;
+  }
+}

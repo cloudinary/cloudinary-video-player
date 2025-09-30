@@ -93,6 +93,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlugins();
     this._initJumpButtons();
     this._initPictureInPicture();
+    this._initMobileTouchControls();
     this._setVideoJsListeners(ready);
   }
 
@@ -404,6 +405,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     if (!this.playerOptions.pictureInPictureToggle && this.videojs.controlBar) {
       this.videojs.controlBar.removeChild('pictureInPictureToggle');
     }
+  }
+
+  _initMobileTouchControls() {
+    this.videojs?.mobileTouchControls?.();
   }
 
   _initCloudinary() {
