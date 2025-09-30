@@ -408,14 +408,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initMobileTouchControls() {
-    // Initialize mobile touch controls plugin
-    // This plugin handles mobile-specific functionality:
-    // - Shows big play button when tapping video layer
-    // - Displays pause icon when video is playing
-    // - Enables pause functionality via big play button
-    if (this.videojs && this.videojs.mobileTouchControls) {
-      this.videojs.mobileTouchControls();
-    }
+    this.videojs?.mobileTouchControls?.();
   }
 
   _initCloudinary() {
