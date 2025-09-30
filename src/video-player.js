@@ -455,19 +455,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
           // Update mobile touch state based on current playback
           this._updateMobileTouchState();
           
-          // Remove the overlay after timeout
-          this.videojs.clearTimeout(this._mobileTouchTimeout);
-          this._mobileTouchTimeout = this.videojs.setTimeout(() => {
-            // First remove the visibility class to start fade-out
-            this.videojs.removeClass('cld-mobile-touch-active');
-            
-            // Wait for CSS transition to complete before removing pause icon class
-            setTimeout(() => {
-              this.videojs.removeClass('cld-mobile-touch-playing');
-              this._removeMobileBigPlayButtonHandler();
-              this._mobileInteractionActive = false; // End mobile interaction session
-            }, 250); // Wait slightly longer than the 0.2s CSS transition
-          }, 3000);
+          // Set up listener for VideoJS user activity events to sync with controls
+          this._setupMobileInactivityHandler();
         }
       };
 
@@ -492,8 +481,14 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       // Clean up on dispose
       this.videojs.on('dispose', () => {
         playerElement.removeEventListener('touchend', handleMobileTouch);
-        this.videojs.clearTimeout(this._mobileTouchTimeout);
         this._removeMobileBigPlayButtonHandler();
+        
+        // Clean up inactivity handler
+        if (this._mobileInactivityHandler) {
+          this.videojs.off('userinactive', this._mobileInactivityHandler);
+          this._mobileInactivityHandler = null;
+        }
+        
         this._mobileTouchHandlerSetup = false;
         this._mobileInteractionActive = false;
       });
@@ -509,23 +504,48 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
   }
 
+  _setupMobileInactivityHandler() {
+    // Remove any existing inactivity handler
+    if (this._mobileInactivityHandler) {
+      this.videojs.off('userinactive', this._mobileInactivityHandler);
+    }
+    
+    // Create handler that syncs with VideoJS control bar timing
+    this._mobileInactivityHandler = () => {
+      // Start fade-out when VideoJS controls fade out
+      this.videojs.removeClass('cld-mobile-touch-active');
+      
+      // Wait for CSS transition to complete before cleanup
+      setTimeout(() => {
+        this.videojs.removeClass('cld-mobile-touch-playing');
+        this._removeMobileBigPlayButtonHandler();
+        this._mobileInteractionActive = false; // End mobile interaction session
+        
+        // Remove the inactivity handler since this touch session is done
+        if (this._mobileInactivityHandler) {
+          this.videojs.off('userinactive', this._mobileInactivityHandler);
+          this._mobileInactivityHandler = null;
+        }
+      }, 250); // Wait slightly longer than the 0.2s CSS transition
+    };
+    
+    // Listen for VideoJS user inactivity (when controls fade out)
+    this.videojs.one('userinactive', this._mobileInactivityHandler);
+  }
+
   _updateMobileTouchState() {
     const isPlaying = !this.videojs.paused();
     
     if (isPlaying) {
       this.videojs.addClass('cld-mobile-touch-playing');
-      this._setupMobileBigPlayButtonHandler(true);
+      this._setupMobileBigPlayButtonHandler();
     } else {
       this.videojs.removeClass('cld-mobile-touch-playing');
       this._removeMobileBigPlayButtonHandler();
     }
   }
 
-  _setupMobileBigPlayButtonHandler(isPlaying) {
-    if (!isPlaying) {
-      return; // Use default play behavior when paused
-    }
-
+  _setupMobileBigPlayButtonHandler() {
     // Remove any existing handler first
     this._removeMobileBigPlayButtonHandler();
 

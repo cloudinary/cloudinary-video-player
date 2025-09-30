@@ -226,8 +226,8 @@ $icon-font-path: '../icon-font' !default;
   &.vjs-using-native-controls .vjs-big-play-button,
   &.vjs-error .vjs-big-play-button {
     transition:
-      visibility 0.2s,
-      opacity 0.2s;
+      visibility 0.25s,
+      opacity 0.25s;
     display: block;
     visibility: hidden;
     opacity: 0;
@@ -235,39 +235,30 @@ $icon-font-path: '../icon-font' !default;
 
   // Mobile touch interaction - show big play button when tapped (must come after hiding rules above)
   &.cld-mobile-touch-active .vjs-big-play-button {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    display: block;
+    opacity: 1;
+    visibility: visible;
   }
 
-  // Mobile touch - ONLY style the pause icon during mobile touch interactions
+  // Mobile touch pause icon - only shown during mobile interactions
   &.cld-mobile-touch-playing .vjs-big-play-button .vjs-icon-placeholder:before {
-    // Reset the CSS triangle properties completely
-    border: none !important;
-    border-left: none !important;
-    border-top: none !important; 
-    border-bottom: none !important;
-    margin: 0 !important;
+    // Reset default triangle and create pause icon
+    content: '';
+    position: absolute;
+    border: none;
+    margin: 0;
     
-    // Create perfectly centered pause icon with CSS
-    content: '' !important;
-    position: absolute !important;
+    // Center the pause icon (11px total width: 4px + 3px + 4px)
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate(-5.5px, 0);
     
-    // Perfect mathematical centering for both lines
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) translate(-5.5px, 0) !important; // Center the 11px total width (4px + 3px + 4px)
-    
-    // Identical pause lines - clean and proportioned
-    width: 4px !important;
-    height: 22px !important;
-    background: currentColor !important;
-    border-radius: 2px !important;
-    
-    // Create identical second line with perfect 3px spacing
-    box-shadow: 7px 0 0 0 currentColor !important; // 4px line + 3px gap = 7px offset
-    
-    display: block !important;
+    // Two vertical lines for pause icon
+    width: 4px;
+    height: 22px;
+    background: currentColor;
+    border-radius: 2px;
+    box-shadow: 7px 0 0 0 currentColor; // Second line with 3px gap
   }
 
   &.vjs-controls-enabled::before {
