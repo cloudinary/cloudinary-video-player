@@ -193,7 +193,6 @@ $icon-font-path: '../icon-font' !default;
     visibility: visible;
   }
 
-
   &.vjs-error .vjs-error-display {
     background: #90a0b3;
 
@@ -226,39 +225,11 @@ $icon-font-path: '../icon-font' !default;
   &.vjs-using-native-controls .vjs-big-play-button,
   &.vjs-error .vjs-big-play-button {
     transition:
-      visibility 0.25s,
-      opacity 0.25s;
+      visibility 0.2s,
+      opacity 0.2s;
     display: block;
     visibility: hidden;
     opacity: 0;
-  }
-
-  // Mobile touch interaction - show big play button when tapped (must come after hiding rules above)
-  &.cld-mobile-touch-active .vjs-big-play-button {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  // Mobile touch pause icon - only shown during mobile interactions
-  &.cld-mobile-touch-playing .vjs-big-play-button .vjs-icon-placeholder:before {
-    // Reset default triangle and create pause icon
-    content: '';
-    position: absolute;
-    border: none;
-    margin: 0;
-    
-    // Center the pause icon (11px total width: 4px + 3px + 4px)
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translate(-5.5px, 0);
-    
-    // Two vertical lines for pause icon
-    width: 4px;
-    height: 22px;
-    background: currentColor;
-    border-radius: 2px;
-    box-shadow: 7px 0 0 0 currentColor; // Second line with 3px gap
   }
 
   &.vjs-controls-enabled::before {
