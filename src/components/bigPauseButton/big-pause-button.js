@@ -9,10 +9,8 @@ class BigPauseButton extends BigPlayButton {
     super(player, options);
     this.controlText('Pause');
     
-    // Only show on mobile
-    this.isMobile = videojs.browser.IS_IOS || 
-                    videojs.browser.IS_ANDROID || 
-                    /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    // Only show on mobile devices (use VideoJS's built-in detection)
+    this.isMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
     
     if (!this.isMobile) {
       this.hide();
