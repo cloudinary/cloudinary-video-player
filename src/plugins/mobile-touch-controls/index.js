@@ -180,9 +180,12 @@ const mobileTouchControls = (options, player) => {
       
       // Wait for CSS transition to complete before cleanup
       setTimeout(() => {
-        player.removeClass('cld-mobile-touch-playing');
-        removePauseHandler();
-        isInteractionActive = false; // End mobile interaction session
+        // Only clean up if controls are still hidden (not re-activated)
+        if (!player.hasClass('cld-mobile-touch-active')) {
+          player.removeClass('cld-mobile-touch-playing');
+          removePauseHandler();
+          isInteractionActive = false; // End mobile interaction session
+        }
         
         // Remove the inactivity handler since this touch session is done
         if (inactivityHandler) {
@@ -200,6 +203,14 @@ const mobileTouchControls = (options, player) => {
    * Handle mobile touch interaction
    */
   const handleMobileTouchInteraction = () => {
+    // If interaction is already active, just refresh the inactivity timer
+    // Don't update the touch state (which would change the icon)
+    if (isInteractionActive) {
+      player.addClass('cld-mobile-touch-active');
+      setupInactivityHandler();
+      return;
+    }
+    
     // Show the touch overlay and mark interaction as active
     player.addClass('cld-mobile-touch-active');
     isInteractionActive = true;
