@@ -8,12 +8,6 @@ class BigPauseButton extends BigPlayButton {
     super(player, options);
     this.controlText('Pause');
     
-    this.isMobile = videojs.browser.IS_IOS || videojs.browser.IS_ANDROID;
-    if (!this.isMobile) {
-      this.hide();
-      return;
-    }
-
     this.boundHandler = this.handlePlayPause.bind(this);
     this.player().on('play', this.boundHandler);
     this.player().on('pause', this.boundHandler);
@@ -29,7 +23,6 @@ class BigPauseButton extends BigPlayButton {
   }
 
   handlePlayPause() {
-    if (!this.isMobile) return;
     (!this.player().paused() && this.player().hasStarted()) ? this.show() : this.hide();
   }
 

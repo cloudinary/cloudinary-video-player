@@ -408,8 +408,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initBigPauseButton() {
-    // Add BigPauseButton component to player (mobile-only, auto-detects in component)
-    this.videojs.addChild('BigPauseButton');
+    if (videojs.browser.IS_IOS || videojs.browser.IS_ANDROID) {
+      this.videojs.addChild('BigPauseButton');
+    }
   }
 
   _initCloudinary() {
