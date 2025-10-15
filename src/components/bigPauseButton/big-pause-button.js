@@ -6,12 +6,11 @@ const BigPlayButton = videojs.getComponent('BigPlayButton');
 class BigPauseButton extends BigPlayButton {
   constructor(player, options) {
     super(player, options);
-    this.controlText('Pause');
-    
-    this.boundHandler = this.handlePlayPause.bind(this);
-    this.player().on('play', this.boundHandler);
-    this.player().on('pause', this.boundHandler);
-    this.handlePlayPause();
+    this.boundUpdate = this.handleUpdate.bind(this);
+    const p = this.player();
+    p.on('play', this.boundUpdate);
+    p.on('pause', this.boundUpdate);
+    this.handleUpdate();
   }
 
   buildCSSClass() {
@@ -19,17 +18,23 @@ class BigPauseButton extends BigPlayButton {
   }
 
   handleClick() {
-    if (!this.player().paused()) this.player().pause();
+    const p = this.player();
+    p.paused() ? p.play() : p.pause();
   }
 
-  handlePlayPause() {
-    (!this.player().paused() && this.player().hasStarted()) ? this.show() : this.hide();
+  handleUpdate() {
+    const p = this.player();
+    const paused = p.paused();
+    (!paused && p.hasStarted()) ? this.show() : this.hide();
+    this[paused ? 'removeClass' : 'addClass']('vjs-playing');
+    this.controlText(paused ? 'Play' : 'Pause');
   }
 
   dispose() {
-    if (this.boundHandler) {
-      this.player().off('play', this.boundHandler);
-      this.player().off('pause', this.boundHandler);
+    if (this.boundUpdate) {
+      const p = this.player();
+      p.off('play', this.boundUpdate);
+      p.off('pause', this.boundUpdate);
     }
     super.dispose();
   }
