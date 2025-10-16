@@ -474,4 +474,70 @@ describe('test hasCodec method', () => {
     });
 
   });
+
+  describe('resourceType parameter tests', () => {
+    it('should use image resourceType when specified', () => {
+      const source = new VideoSource('sample', {
+        cloudinaryConfig: cld,
+        resourceType: 'image',
+        transformation: [
+          { effect: 'ai:model_veo-animate;details_(prompt_!flying bee!)' },
+          { format: 'auto:video' }
+        ]
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toContain('/image/upload/');
+      expect(srcs[0].src).toContain('e_ai:model_veo-animate');
+    });
+
+    it('should default to video resourceType when not specified', () => {
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld
+      });
+
+      const srcs = source.generateSources();
+      expect(srcs[0].src).toContain('/video/upload/');
+    });
+    
+    it('should use image resourceType for poster', () => {
+      const source = new VideoSource('sample', {
+        cloudinaryConfig: cld,
+        resourceType: 'image',
+        transformation: [
+          { effect: 'ai:model_veo-animate' }
+        ]
+      });
+
+      const posterUrl = source.poster().url();
+      expect(posterUrl).toContain('/image/upload/');
+      expect(posterUrl).toContain('sample.jpg');
+    });
+
+    it('should use video resourceType for poster by default', () => {
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld
+      });
+
+      const posterUrl = source.poster().url();
+      expect(posterUrl).toContain('/video/upload/');
+    });
+
+    it('should use image resourceType for seek thumbnails', () => {
+      const source = new VideoSource('sample', {
+        cloudinaryConfig: cld,
+        resourceType: 'image',
+        transformation: [
+          { effect: 'ai:model_veo-animate' }
+        ]
+      });
+
+      const vttUrl = source.config().url('sample.vtt', {
+        transformation: { flags: ['sprite'] },
+        resource_type: source.resourceType()
+      });
+      expect(vttUrl).toContain('/image/upload/');
+      expect(vttUrl).toContain('fl_sprite');
+    });
+  });
 });

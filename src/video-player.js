@@ -268,7 +268,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         transformation.flags.push('sprite');
 
         const vttSrc = source.config()
-          .url(`${publicId}.vtt`, { transformation })
+          .url(`${publicId}.vtt`, {
+            transformation,
+            resource_type: source.resourceType ? source.resourceType() : undefined
+          })
           .replace(/\.json$/, ''); // Handle playlist by tag
 
         // vttThumbnails must be called differently on init and on source update.
