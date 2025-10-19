@@ -37,6 +37,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
     sourceDescription: (typeof sourceOptions.description === 'string' ? sourceOptions.description : sourceOptions.info?.subtitle || sourceOptions.info?.description)
   } : {}),
   ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {}),
+  interactionAreas: hasConfig(sourceOptions.interactionAreas),
   videoSources: !!sourceOptions.videoSources,
 });
 
