@@ -270,7 +270,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
         const vttSrc = source.config()
           .url(`${publicId}.vtt`, {
             transformation,
-            resource_type: source.resourceType ? source.resourceType() : undefined
+            resource_type: source.resourceType() || 'video'
           })
           .replace(/\.json$/, ''); // Handle playlist by tag
 

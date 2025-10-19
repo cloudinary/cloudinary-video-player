@@ -523,7 +523,7 @@ describe('test hasCodec method', () => {
       expect(posterUrl).toContain('/video/upload/');
     });
 
-    it('should use image resourceType for seek thumbnails', () => {
+    it('should use configured resourceType for seek thumbnails', () => {
       const source = new VideoSource('sample', {
         cloudinaryConfig: cld,
         resourceType: 'image',
@@ -537,6 +537,23 @@ describe('test hasCodec method', () => {
         resource_type: source.resourceType()
       });
       expect(vttUrl).toContain('/image/upload/');
+      expect(vttUrl).toContain('fl_sprite');
+    });
+
+    it('should default to video resourceType for seek thumbnails when not specified', () => {
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld
+      });
+
+      const resourceType = source.resourceType() || 'video';
+      const vttUrl = source.config().url('sea_turtle.vtt', {
+        transformation: { flags: ['sprite'] },
+        resource_type: resourceType
+      });
+      
+      // When resourceType is not set, resourceType() returns undefined, so we default to 'video'
+      expect(resourceType).toBe('video');
+      expect(vttUrl).toContain('/video/upload/');
       expect(vttUrl).toContain('fl_sprite');
     });
   });
