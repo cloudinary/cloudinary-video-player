@@ -33,10 +33,12 @@ class VideoSource extends BaseSource {
 
     options = Object.assign({}, DEFAULT_VIDEO_PARAMS, options);
 
+    if (options.resourceType) {
+      options.resource_type = options.resourceType;
+    }
+
     if (!options.poster) {
-      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS, {
-        resource_type: options.resourceType || 'video'
-      });
+      options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
     super(publicId, options);
@@ -121,12 +123,13 @@ class VideoSource extends BaseSource {
 
     if (!publicId) {
       publicId = this.publicId();
-      options = Object.assign({}, options, DEFAULT_POSTER_PARAMS, {
-        resource_type: this.resourceType() || 'video'
-      });
+      options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
     }
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
+    
+    options.resource_type = this.resourceType() || options.resource_type;
+    
     this._poster = new ImageSource(publicId, options);
 
     return this;
@@ -153,10 +156,7 @@ class VideoSource extends BaseSource {
         opts.transformation = castArray(srcTransformation);
       }
 
-      Object.assign(opts, {
-        resource_type: this.resourceType() || 'video',
-        format
-      });
+      Object.assign(opts, { format });
 
       const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
 
