@@ -85,6 +85,7 @@ export const playerValidators = {
 
 export const sourceValidators = {
   raw_transformation: validator.isString,
+  resourceType: validator.isString,
   shoppable: validator.isPlainObject,
   chapters: validator.or(validator.isBoolean, validator.isPlainObject),
   visualSearch: validator.or(validator.isBoolean),
