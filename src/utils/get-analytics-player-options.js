@@ -30,7 +30,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
     abrStrategy: sourceOptions?.adaptiveStreaming?.strategy === defaults.adaptiveStreaming.strategy ? undefined : sourceOptions?.adaptiveStreaming?.strategy,
   } : {}),
   shoppable: hasConfig(sourceOptions.shoppable),
-  shoppableProductsLength: sourceOptions.shoppable && sourceOptions.shoppable.products && sourceOptions.shoppable.products.length,
+  shoppableProductsLength: hasConfig(sourceOptions.shoppable) && sourceOptions.shoppable.products.length,
   ...(sourceOptions.title || sourceOptions.description || sourceOptions.info ? {
     sourceInfo: hasConfig(sourceOptions.info),
     sourceTitle: (typeof sourceOptions.title === 'string' ? sourceOptions.title : sourceOptions.info?.title),
