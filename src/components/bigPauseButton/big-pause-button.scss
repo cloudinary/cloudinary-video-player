@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../../assets/styles/icons';
+
 .cld-video-player {
   &.cld-fluid .vjs-big-pause-button {
     max-width: 15%;
@@ -20,14 +23,14 @@
       margin: 0;
       width: auto;
       height: auto;
-      font-size: 0.6em;
       font-size: clamp(0.35em, 50cqw, 0.8em);
     }
   }
 
   &.vjs-playing .vjs-big-pause-button .vjs-icon-placeholder:before,
   .vjs-big-pause-button.vjs-playing .vjs-icon-placeholder:before {
-    content: '\f103';
+    font-family: icons.$icon-font-family;
+    content: icons.char(map.get(icons.$icons, pause));
   }
 
   &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-big-pause-button {
