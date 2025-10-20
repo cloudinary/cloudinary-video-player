@@ -7,9 +7,9 @@ class BigPauseButton extends BigPlayButton {
   constructor(player, options) {
     super(player, options);
     this.boundUpdate = this.handleUpdate.bind(this);
-    const p = this.player();
-    p.on('play', this.boundUpdate);
-    p.on('pause', this.boundUpdate);
+    const playerInstance = this.player();
+    playerInstance.on('play', this.boundUpdate);
+    playerInstance.on('pause', this.boundUpdate);
     this.handleUpdate();
   }
 
@@ -18,23 +18,26 @@ class BigPauseButton extends BigPlayButton {
   }
 
   handleClick() {
-    const p = this.player();
-    p.paused() ? p.play() : p.pause();
+    const player = this.player();
+    player.paused() ? player.play() : player.pause();
   }
 
   handleUpdate() {
-    const p = this.player();
-    const paused = p.paused();
-    (!paused && p.hasStarted()) ? this.show() : this.hide();
+    const player = this.player();
+    if (!player) {
+      return;
+    }
+    const paused = player.paused();
+    (!paused && player.hasStarted()) ? this.show() : this.hide();
     this[paused ? 'removeClass' : 'addClass']('vjs-playing');
     this.controlText(paused ? 'Play' : 'Pause');
   }
 
   dispose() {
     if (this.boundUpdate) {
-      const p = this.player();
-      p.off('play', this.boundUpdate);
-      p.off('pause', this.boundUpdate);
+      const player = this.player();
+      player.off('play', this.boundUpdate);
+      player.off('pause', this.boundUpdate);
     }
     super.dispose();
   }
