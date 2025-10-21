@@ -17,6 +17,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   autoShowRecommendations: sourceOptions.autoShowRecommendations,
   fontFace: sourceOptions.fontFace,
   sourceTypes: sourceOptions.sourceTypes,
+  resourceType: sourceOptions.resourceType,
   chapters: (() => {
     if (sourceOptions.chapters === true) return 'auto';
     if (sourceOptions.chapters && sourceOptions.chapters.url) return 'url';

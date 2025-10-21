@@ -274,6 +274,10 @@
       },
       "default": ["auto"]
     },
+    "resourceType": {
+      "type": "string",
+      "default": "video"
+    },
     "transformation": {
       "oneOf": [
         {
