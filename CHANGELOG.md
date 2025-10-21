@@ -1,6 +1,18 @@
 # Changelog
 
 
+## [3.5.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.2...v3.5.0) (2025-10-21)
+
+
+### Features
+
+* **VIDEO-20042:** image to video (resourceType: 'image') ([#916](https://github.com/cloudinary/cloudinary-video-player/issues/916)) ([68abf29](https://github.com/cloudinary/cloudinary-video-player/commit/68abf29d6b545681112cbbfcfa1a8cc92e6a23e9))
+
+
+### Bug Fixes
+
+* internal analytics ([#917](https://github.com/cloudinary/cloudinary-video-player/issues/917)) ([83e36cc](https://github.com/cloudinary/cloudinary-video-player/commit/83e36ccc9488512b7b30db44ae73fe347c5d53e9))
+
 ## [3.4.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.1...v3.4.2) (2025-09-17)
 
 
