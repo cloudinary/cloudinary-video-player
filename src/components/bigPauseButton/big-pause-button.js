@@ -19,7 +19,7 @@ class BigPauseButton extends BigPlayButton {
 
   handleClick() {
     const player = this.player();
-    player.paused() ? player.play() : player.pause();
+    !player.paused() && player.pause();
   }
 
   handleUpdate() {
@@ -30,7 +30,7 @@ class BigPauseButton extends BigPlayButton {
     const paused = player.paused();
     (!paused && player.hasStarted()) ? this.show() : this.hide();
     this[paused ? 'removeClass' : 'addClass']('vjs-playing');
-    this.controlText(paused ? 'Play' : 'Pause');
+    this.controlText('Pause');
   }
 
   dispose() {

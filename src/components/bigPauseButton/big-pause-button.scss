@@ -7,6 +7,7 @@
   }
 
   .vjs-big-pause-button .vjs-icon-placeholder {
+    @extend .vjs-icon-pause;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,11 +28,6 @@
     }
   }
 
-  &.vjs-playing .vjs-big-pause-button .vjs-icon-placeholder:before,
-  .vjs-big-pause-button.vjs-playing .vjs-icon-placeholder:before {
-    font-family: icons.$icon-font-family;
-    content: icons.char(map.get(icons.$icons, pause));
-  }
 
   &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-big-pause-button {
     transition: visibility 1s, opacity 1s;
