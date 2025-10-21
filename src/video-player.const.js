@@ -13,6 +13,7 @@ export const SOURCE_PARAMS = [
   'publicId',
   'rawTransformation',
   'recommendations',
+  'resourceType',
   'shoppable',
   'source',
   'sourceTransformation',
