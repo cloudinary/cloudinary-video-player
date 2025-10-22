@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '../../assets/styles/icons';
+
+.cld-video-player {
+  &.cld-fluid .vjs-big-pause-button {
+    max-width: 15%;
+  }
+
+  .vjs-big-pause-button .vjs-icon-placeholder {
+    @extend .vjs-icon-pause;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    container-type: inline-size;
+
+    &:before {
+      position: static;
+      border: none;
+      margin: 0;
+      width: auto;
+      height: auto;
+      font-size: clamp(0.35em, 50cqw, 0.8em);
+    }
+  }
+
+
+  &.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-big-pause-button {
+    transition: visibility 1s, opacity 1s;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.vjs-has-started.vjs-user-active.vjs-playing .vjs-big-pause-button,
+  &.vjs-has-started.vjs-playing .vjs-big-pause-button {
+    transition: visibility 0.1s, opacity 0.1s;
+    visibility: visible;
+    opacity: 1;
+  }
+}
