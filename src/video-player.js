@@ -107,7 +107,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _sendInternalAnalytics(additionalOptions = {}) {
     const options = Object.assign({}, this.playerOptions, this.options.videojsOptions, additionalOptions);
-    if (!options.allowUsageReport) {
+    if (!options.sourceOptions?.allowUsageReport) {
       return;
     }
     try {

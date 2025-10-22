@@ -1,6 +1,7 @@
 // Parameters that can be passed to source configuration (inherited by source method)
 export const SOURCE_PARAMS = [
   'adaptiveStreaming',
+  'allowUsageReport',
   'autoShowRecommendations',
   'chapters',
   'cloudinaryConfig',
@@ -32,7 +33,6 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   '_internalAnalyticsMetadata',
   'ads',
   'aiHighlightsGraph',
-  'allowUsageReport',
   'analytics',
   'autoplayMode',
   'chaptersButton',
