@@ -3,6 +3,7 @@ import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl, getCloudinaryUrlPrefix } from './plugins/cloudinary/common';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
+
 const getDefaultProfileConfig = (profileName) => {
   const profile = defaultProfiles.find(({ name }) => profileName === name);
 
@@ -13,38 +14,42 @@ const getDefaultProfileConfig = (profileName) => {
   return profile.config;
 };
 
-export const getProfile = async (profile, initOptions) => {
-  if (isDefaultProfile(profile)) {
-    return getDefaultProfileConfig(profile);
+export const fetchConfig = async (initOptions) => {
+  const profileName = initOptions.profile;
+
+  if (profileName && isDefaultProfile(profileName)) {
+    return getDefaultProfileConfig(profileName);
   }
 
   const urlPrefix = getCloudinaryUrlPrefix(initOptions.cloudinaryConfig);
 
-  const profileUrl = isRawUrl(profile) ? profile : `${urlPrefix}/_applet_/video_service/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
+  let profileUrl;
+  // if (!profileName && initOptions.publicId) {
+  //   profileUrl = `${urlPrefix}/${initOptions.publicId}/config.json`;
+  // } else 
+  if (isRawUrl(profileName)) {
+    profileUrl = profileName;
+  } else if (profileName) {
+    profileUrl = `${urlPrefix}/_applet_/video_service/video_player_profiles/${profileName.replaceAll(' ', '+')}.json`;
+  } else {
+    return {};
+  }
+  
   return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
 };
 
 const player = async (elem, initOptions, ready) => {
-  const { profile, ...otherInitOptions } = initOptions;
   try {
-    const profileOptions = profile ? await getProfile(profile, otherInitOptions) : {};
-    const options = Object.assign({}, profileOptions.playerOptions, profileOptions.sourceOptions, otherInitOptions, {
+    const profileOptions = await fetchConfig(initOptions);
+    const options = Object.assign({}, profileOptions.playerOptions, profileOptions.sourceOptions, initOptions, {
       _internalAnalyticsMetadata: {
         newPlayerMethod: true,
-        profile: isDefaultProfile(profile) ? profile : !!profile,
+        profile: isDefaultProfile(initOptions.profile) ? initOptions.profile : !!initOptions.profile,
       },
     });
-    const videoPlayer = new VideoPlayer(elem, options, ready);
-
-    const nativeVideoPlayerSourceMethod = videoPlayer.source;
-    videoPlayer.source = (id, options) => {
-      const extendedOptions = Object.assign({}, profileOptions.sourceOptions, options);
-      return nativeVideoPlayerSourceMethod.call(videoPlayer, id, extendedOptions);
-    };
-
-    return videoPlayer;
+    return new VideoPlayer(elem, options, ready);
   } catch (e) {
-    const videoPlayer = new VideoPlayer(elem, otherInitOptions);
+    const videoPlayer = new VideoPlayer(elem, initOptions);
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }

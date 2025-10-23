@@ -14,13 +14,19 @@ const getConfig = (playerOptions = {}, cloudinaryConfig) => {
   });
 };
 
-const getVideoPlayer = config => (id, playerOptions, ready) =>
-  new VideoPlayer(id, getConfig(playerOptions, config), ready);
+const getVideoPlayer = config => (id, playerOptions, ready) => {
+  const options = getConfig(playerOptions, config);
+  if (options.profile) {
+    return createPlayer(id, options, ready);
+  }
+  return new VideoPlayer(id, options, ready);
+};
 
 const getVideoPlayers = config => (selector, playerOptions, ready) =>
   VideoPlayer.all(selector, getConfig(playerOptions, config), ready);
 
 const getPlayer = config => (id, playerOptions, ready) => createPlayer(id, getConfig(playerOptions, config), ready);
+
 const getPlayers = config => (selector, playerOptions, ready) => {
   const nodeList = document.querySelectorAll(selector);
   const playerConfig = getConfig(playerOptions, config);

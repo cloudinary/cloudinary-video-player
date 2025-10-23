@@ -1,7 +1,9 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import { hasCodec } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
 import { SOURCE_TYPE } from '../../src/utils/consts';
+import { extractOptions } from '../../src/video-player.utils';
 import '../../src/';
+
 const cld = { cloud_name: 'demo' };
 
 describe('video source tests', () => {
@@ -556,5 +558,33 @@ describe('test hasCodec method', () => {
       expect(vttUrl).toContain('/video/upload/');
       expect(vttUrl).toContain('fl_sprite');
     });
+  });
+});
+
+describe('sourceOptions extraction and inheritance', () => {
+  it('should extract SOURCE_PARAMS into playerOptions.sourceOptions', () => {
+    let elem = document.createElement('video');
+    let options = {
+      cloudName: 'demo',
+      transformation: { width: 640, crop: 'scale' },
+      allowUsageReport: true
+    };
+    let { playerOptions } = extractOptions(elem, options);
+
+    expect(playerOptions.sourceOptions.transformation).toEqual({ width: 640, crop: 'scale' });
+    expect(playerOptions.sourceOptions.allowUsageReport).toBe(true);
+  });
+
+  it('should separate SOURCE_PARAMS from PLAYER_PARAMS', () => {
+    let elem = document.createElement('video');
+    let options = {
+      cloudName: 'demo',
+      transformation: { width: 640 },
+      colors: { base: '#FF0000' }
+    };
+    let { playerOptions } = extractOptions(elem, options);
+
+    expect(playerOptions.sourceOptions.transformation).toEqual({ width: 640 });
+    expect(playerOptions.colors).toEqual({ base: '#FF0000' });
   });
 });
