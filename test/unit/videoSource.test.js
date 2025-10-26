@@ -1,7 +1,7 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
 import { hasCodec } from '../../src/plugins/cloudinary/models/video-source/video-source.utils';
 import { SOURCE_TYPE } from '../../src/utils/consts';
-import { extractOptions } from '../../src/video-player.utils';
+import { extractOptions, splitOptions } from '../../src/video-player.utils';
 import '../../src/';
 
 const cld = { cloud_name: 'demo' };
@@ -569,7 +569,8 @@ describe('sourceOptions extraction and inheritance', () => {
       transformation: { width: 640, crop: 'scale' },
       allowUsageReport: true
     };
-    let { playerOptions } = extractOptions(elem, options);
+    let flatOptions = extractOptions(elem, options);
+    let { playerOptions } = splitOptions(flatOptions);
 
     expect(playerOptions.sourceOptions.transformation).toEqual({ width: 640, crop: 'scale' });
     expect(playerOptions.sourceOptions.allowUsageReport).toBe(true);
@@ -582,7 +583,8 @@ describe('sourceOptions extraction and inheritance', () => {
       transformation: { width: 640 },
       colors: { base: '#FF0000' }
     };
-    let { playerOptions } = extractOptions(elem, options);
+    let flatOptions = extractOptions(elem, options);
+    let { playerOptions } = splitOptions(flatOptions);
 
     expect(playerOptions.sourceOptions.transformation).toEqual({ width: 640 });
     expect(playerOptions.colors).toEqual({ base: '#FF0000' });
