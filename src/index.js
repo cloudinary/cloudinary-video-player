@@ -4,33 +4,47 @@ import VideoPlayer from './video-player';
 import createPlayer from './player';
 import { convertKeysToSnakeCase } from './utils/object';
 import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
+import { getResolveVideoElement, extractOptions } from './video-player.utils';
 
-const getConfig = (playerOptions = {}, cloudinaryConfig) => {
+const getConfig = (elem, playerOptions = {}, cloudinaryConfig) => {
   const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(playerOptions), CLOUDINARY_CONFIG_PARAM);
-
-  // pick cld-configurations and assign them to cloudinaryConfig
-  return Object.assign(playerOptions, {
+  const config = Object.assign(playerOptions, {
     cloudinaryConfig: cloudinaryConfig || snakeCaseCloudinaryConfig
   });
+  
+  const videoElement = getResolveVideoElement(elem);
+  const options = extractOptions(videoElement, config);
+  
+  return { videoElement, options };
 };
 
 const getVideoPlayer = config => (id, playerOptions, ready) => {
-  const options = getConfig(playerOptions, config);
+  const { videoElement, options } = getConfig(id, playerOptions, config);
   if (options.profile) {
-    return createPlayer(id, options, ready);
+    return createPlayer(videoElement, options, ready);
   }
-  return new VideoPlayer(id, options, ready);
+  return new VideoPlayer(videoElement, options, ready);
 };
 
-const getVideoPlayers = config => (selector, playerOptions, ready) =>
-  VideoPlayer.all(selector, getConfig(playerOptions, config), ready);
+const getVideoPlayers = config => (selector, playerOptions, ready) => {
+  const nodeList = document.querySelectorAll(selector);
+  return [...nodeList].map((node) => {
+    const { videoElement, options } = getConfig(node, playerOptions, config);
+    return new VideoPlayer(videoElement, options, ready);
+  });
+};
 
-const getPlayer = config => (id, playerOptions, ready) => createPlayer(id, getConfig(playerOptions, config), ready);
+const getPlayer = config => (id, playerOptions, ready) => {
+  const { videoElement, options } = getConfig(id, playerOptions, config);
+  return createPlayer(videoElement, options, ready);
+};
 
 const getPlayers = config => (selector, playerOptions, ready) => {
   const nodeList = document.querySelectorAll(selector);
-  const playerConfig = getConfig(playerOptions, config);
-  return [...nodeList].map((node) => createPlayer(node, playerConfig, ready));
+  return [...nodeList].map((node) => {
+    const { videoElement, options } = getConfig(node, playerOptions, config);
+    return createPlayer(videoElement, options, ready);
+  });
 };
 
 export const videoPlayer = getVideoPlayer();

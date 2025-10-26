@@ -14,42 +14,46 @@ const getDefaultProfileConfig = (profileName) => {
   return profile.config;
 };
 
-export const fetchConfig = async (initOptions) => {
-  const profileName = initOptions.profile;
+export const fetchConfig = async (options) => {
+  const profileName = options.profile;
+  const publicId = options.publicId;
+  const cloudinaryConfig = options.cloudinaryConfig;
 
   if (profileName && isDefaultProfile(profileName)) {
     return getDefaultProfileConfig(profileName);
   }
 
-  const urlPrefix = getCloudinaryUrlPrefix(initOptions.cloudinaryConfig);
+  const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service/video_player_profiles';
 
   let profileUrl;
-  // if (!profileName && initOptions.publicId) {
-  //   profileUrl = `${urlPrefix}/${initOptions.publicId}/config.json`;
-  // } else 
-  if (isRawUrl(profileName)) {
-    profileUrl = profileName;
-  } else if (profileName) {
-    profileUrl = `${urlPrefix}/_applet_/video_service/video_player_profiles/${profileName.replaceAll(' ', '+')}.json`;
+  if (profileName) {
+    profileUrl = isRawUrl(profileName) 
+      ? profileName 
+      : `${urlPrefix}/${profileName.replaceAll(' ', '+')}.json`;
+  } else if (publicId) {
+    profileUrl = `${urlPrefix}/${publicId}/config.json`;
   } else {
     return {};
   }
   
-  return fetch(profileUrl, { method: 'GET' }).then(res => res.json());
+  return fetch(profileUrl, { method: 'GET' }).then(res => {
+    if (!res.ok) {
+      // fail silently
+      return {};
+    }
+    return res.json();
+  });
 };
 
-const player = async (elem, initOptions, ready) => {
+const player = async (elem, options, ready) => {
   try {
-    const profileOptions = await fetchConfig(initOptions);
-    const options = Object.assign({}, profileOptions.playerOptions, profileOptions.sourceOptions, initOptions, {
-      _internalAnalyticsMetadata: {
-        newPlayerMethod: true,
-        profile: isDefaultProfile(initOptions.profile) ? initOptions.profile : !!initOptions.profile,
-      },
-    });
-    return new VideoPlayer(elem, options, ready);
+    const profileOptions = await fetchConfig(options);
+    
+    const mergedOptions = Object.assign({}, profileOptions.playerOptions, options);
+    
+    return new VideoPlayer(elem, mergedOptions, ready);
   } catch (e) {
-    const videoPlayer = new VideoPlayer(elem, initOptions);
+    const videoPlayer = new VideoPlayer(elem, options);
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }
