@@ -1,65 +1,51 @@
 import 'assets/styles/main.scss';
-import pick from 'lodash/pick';
 import VideoPlayer from './video-player';
 import createPlayer from './player';
-import { convertKeysToSnakeCase } from './utils/object';
-import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
 import { getResolveVideoElement, extractOptions } from './video-player.utils';
 
-const getConfig = (elem, playerOptions = {}, cloudinaryConfig) => {
-  const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(playerOptions), CLOUDINARY_CONFIG_PARAM);
-  const config = Object.assign(playerOptions, {
-    cloudinaryConfig: cloudinaryConfig || snakeCaseCloudinaryConfig
-  });
-  
+const getConfig = (elem, playerOptions = {}) => {
   const videoElement = getResolveVideoElement(elem);
-  const options = extractOptions(videoElement, config);
+  const options = extractOptions(videoElement, playerOptions);
   
   return { videoElement, options };
 };
 
-const getVideoPlayer = config => (id, playerOptions, ready) => {
-  const { videoElement, options } = getConfig(id, playerOptions, config);
+export const videoPlayer = (id, playerOptions, ready) => {
+  const { videoElement, options } = getConfig(id, playerOptions);
   if (options.profile) {
     return createPlayer(videoElement, options, ready);
   }
   return new VideoPlayer(videoElement, options, ready);
 };
 
-const getVideoPlayers = config => (selector, playerOptions, ready) => {
+export const videoPlayers = (selector, playerOptions, ready) => {
   const nodeList = document.querySelectorAll(selector);
   return [...nodeList].map((node) => {
-    const { videoElement, options } = getConfig(node, playerOptions, config);
+    const { videoElement, options } = getConfig(node, playerOptions);
     return new VideoPlayer(videoElement, options, ready);
   });
 };
 
-const getPlayer = config => (id, playerOptions, ready) => {
-  const { videoElement, options } = getConfig(id, playerOptions, config);
+export const player = (id, playerOptions, ready) => {
+  const { videoElement, options } = getConfig(id, playerOptions);
   return createPlayer(videoElement, options, ready);
 };
 
-const getPlayers = config => (selector, playerOptions, ready) => {
+export const players = (selector, playerOptions, ready) => {
   const nodeList = document.querySelectorAll(selector);
   return [...nodeList].map((node) => {
-    const { videoElement, options } = getConfig(node, playerOptions, config);
+    const { videoElement, options } = getConfig(node, playerOptions);
     return createPlayer(videoElement, options, ready);
   });
 };
 
-export const videoPlayer = getVideoPlayer();
-export const videoPlayers = getVideoPlayers();
-
-export const player = getPlayer();
-export const players = getPlayers();
-
-const cloudinaryVideoPlayerLegacyConfig = config => {
+const cloudinaryVideoPlayerLegacyConfig = () => {
   console.warn(
     'Cloudinary.new() is deprecated and will be removed. Please use cloudinary.videoPlayer() instead.'
   );
   return {
-    videoPlayer: getVideoPlayer(config),
-    videoPlayers: getVideoPlayers(config)
+    videoPlayer,
+    videoPlayers
   };
 };
 

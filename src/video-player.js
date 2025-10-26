@@ -46,11 +46,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.options.playerOptions;
   }
 
-  constructor(elem, initOptions, ready) {
+  constructor(elem, options, ready) {
     super();
 
     this.videoElement = elem;
-    this.options = splitOptions(initOptions);
+    this.options = splitOptions(options);
     this._videojsOptions = this.options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance
