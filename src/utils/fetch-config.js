@@ -27,18 +27,21 @@ const fetchConfig = async (options) => {
   // And:
   // `${urlPrefix}/profile/${profile.replaceAll(' ', '+')}.json`;
 
-  let profileUrl;
+  let configUrl;
   if (profile) {
-    profileUrl = isRawUrl(profile) 
+    configUrl = isRawUrl(profile) 
       ? profile 
       : `${urlPrefix}/${profile.replaceAll(' ', '+')}.json`;
   } else if (publicId) {
-    profileUrl = `${urlPrefix}/video/${type}/${publicId}.json`;
+    configUrl = `${urlPrefix}/video/${type}/${publicId}.json`;
+    // TODO: remove when endpoints are ready
+    console.log('This will fetch:', configUrl);
+    return {};
   } else {
     return {};
   }
   
-  return fetch(profileUrl, { method: 'GET' }).then(res => {
+  return fetch(configUrl, { method: 'GET' }).then(res => {
     if (!res.ok) {
       // fail silently
       return {};
@@ -49,6 +52,18 @@ const fetchConfig = async (options) => {
 
 export const fetchAndMergeConfig = async (options) => {
   const profileOptions = await fetchConfig(options);
-  return Object.assign({}, profileOptions.playerOptions, profileOptions.sourceOptions, options);
+  const profileAnalytics = {
+    _internalAnalyticsMetadata: {
+      newPlayerMethod: true,
+      profile: options.profile ? (isDefaultProfile(options.profile) ? options.profile : true) : undefined
+    }
+  };
+  return Object.assign(
+    {}, 
+    profileOptions.playerOptions || {}, 
+    profileOptions.sourceOptions || {}, 
+    options,
+    profileAnalytics
+  );
 };
 

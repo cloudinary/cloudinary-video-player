@@ -28,7 +28,6 @@ export const player = async (id, playerOptions, ready) => {
   
   try {
     const mergedOptions = await fetchAndMergeConfig(options);
-    
     return new VideoPlayer(videoElement, mergedOptions, ready);
   } catch (e) {
     const videoPlayer = new VideoPlayer(videoElement, options);
