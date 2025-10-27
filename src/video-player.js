@@ -209,6 +209,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   setTextTracks(conf) {
+    if (!this.textTracksManager) {
+      return;
+    }
+
     this.textTracksManager.removeAllTextTracks();
 
     if (conf) {
@@ -376,9 +380,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initTextTracks () {
-    this.textTracksManager = this.videojs.textTracksManager();
-    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, (e, { source }) => {
-      if (source?._textTracks) {
+    this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, async (e, { source }) => {
+      if (source?._textTracks && this.videojs.textTracksManager) {
+        if (!this.textTracksManager) {
+          this.textTracksManager = await this.videojs.textTracksManager();
+        }
         this.setTextTracks(source._textTracks);
       }
     });
