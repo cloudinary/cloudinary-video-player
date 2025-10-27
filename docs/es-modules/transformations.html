@@ -54,13 +54,13 @@
 
     <script type="module">
       import 'cloudinary-video-player/cld-video-player.min.css';
-      import { videoPlayer } from 'cloudinary-video-player';
+      import player from 'cloudinary-video-player/player';
 
-      const player = videoPlayer('player-1', {
+      const myPlayer = player('player-1', {
         cloudName: 'demo'
       });
 
-      player.source({
+      myPlayer.source({
         publicId: 'snow_horses',
         info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
         transformation: [
@@ -70,7 +70,7 @@
         ]
       });
 
-      videoPlayer('player-2', {
+      player('player-2', {
         cloudName: 'demo',
         transformation: [
           { width: 400, crop: 'limit' },
@@ -79,7 +79,7 @@
         ]
       });
 
-      videoPlayer('player-3', {
+      player('player-3', {
         cloudName: 'demo'
       });
     </script>
