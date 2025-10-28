@@ -56,32 +56,34 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
       import player from 'cloudinary-video-player/player';
 
-      const myPlayer = player('player-1', {
-        cloudName: 'demo'
-      });
+      (async () => {
+        const myPlayer = await player('player-1', {
+          cloudName: 'demo'
+        });
 
-      myPlayer.source({
-        publicId: 'snow_horses',
-        info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
-        transformation: [
-          { width: 400, crop: 'limit' },
-          { effect: 'blur:500' },
-          { effect: 'saturation:-100' }
-        ]
-      });
+        myPlayer.source({
+          publicId: 'snow_horses',
+          info: { title: 'Snow Horses', subtitle: 'A movie about horses' },
+          transformation: [
+            { width: 400, crop: 'limit' },
+            { effect: 'blur:500' },
+            { effect: 'saturation:-100' }
+          ]
+        });
 
-      player('player-2', {
-        cloudName: 'demo',
-        transformation: [
-          { width: 400, crop: 'limit' },
-          { effect: 'blur:500' },
-          { effect: 'saturation:-100' }
-        ]
-      });
+        player('player-2', {
+          cloudName: 'demo',
+          transformation: [
+            { width: 400, crop: 'limit' },
+            { effect: 'blur:500' },
+            { effect: 'saturation:-100' }
+          ]
+        });
 
-      player('player-3', {
-        cloudName: 'demo'
-      });
+        player('player-3', {
+          cloudName: 'demo'
+        });
+      })();
     </script>
 
     <!-- Bootstrap -->
