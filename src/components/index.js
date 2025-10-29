@@ -4,6 +4,7 @@ import LogoButton from './logoButton/logo-button';
 import ProgressControlEventsBlocker from './progress-control-events-blocker/progress-control-events-blocker';
 import TitleBar from './title-bar/title-bar';
 import SourceSwitcherButton from './source-switcher-button/source-switcher-button';
+import BigPauseButton from './bigPauseButton/big-pause-button';
 
 export {
   JumpForwardButton,
@@ -11,5 +12,6 @@ export {
   LogoButton,
   ProgressControlEventsBlocker,
   TitleBar,
-  SourceSwitcherButton
+  SourceSwitcherButton,
+  BigPauseButton
 };
