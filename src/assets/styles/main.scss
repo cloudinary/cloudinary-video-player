@@ -232,7 +232,7 @@ $icon-font-path: '../icon-font' !default;
     opacity: 0;
   }
 
-  &.vjs-controls-enabled::before {
+  &.vjs-has-started.vjs-controls-enabled:has(.vjs-control-bar)::before {
     content: '';
     pointer-events: none;
     position: absolute;
@@ -245,13 +245,9 @@ $icon-font-path: '../icon-font' !default;
     opacity: 0.4;
     z-index: 1;
     font-size: 120%;
-    display: none;
-  }
-  &.vjs-has-started::before,
-  &.vjs-audio-only-mode::before {
-    display: flex;
     transition: opacity 0.1s;
   }
+
   &.vjs-has-started.vjs-user-inactive.vjs-playing::before {
     opacity: 0;
     transition: opacity 1s;
