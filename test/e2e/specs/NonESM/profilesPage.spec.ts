@@ -5,6 +5,6 @@ import { testProfilesPageVideoIsPlaying } from '../commonSpecs/profilesPageVideo
 
 const link = getLinkByName(ExampleLinkName.Profiles);
 
-vpTest(`Test if 3 videos on profiles page are playing as expected`, async ({ page, pomPages }) => {
+vpTest(`Test if 5 videos on profiles page are playing as expected`, async ({ page, pomPages }) => {
     await testProfilesPageVideoIsPlaying(page, pomPages, link);
 });

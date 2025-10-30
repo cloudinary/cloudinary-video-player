@@ -1,4 +1,5 @@
 import videojs from 'video.js';
+import pick from 'lodash/pick';
 import Utils from './utils';
 import defaults from './config/defaults';
 import {
@@ -9,6 +10,7 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import isString from 'lodash/isString';
+import { convertKeysToSnakeCase } from './utils/object';
 
 /*
 * Used to escape element identifiers that begin with certain
@@ -81,27 +83,40 @@ export const extractOptions = (elem, options) => {
   if (videojs.dom.hasClass(elem, FLUID_CLASS_NAME) || videojs.dom.hasClass(elem, 'vjs-fluid')) {
     options.fluid = true;
   }
+  
+  // Extract cloudinaryConfig from playerOptions if not explicitly provided
+  if (!options.cloudinaryConfig) {
+    const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
+    if (Object.keys(snakeCaseCloudinaryConfig).length > 0) {
+      options.cloudinaryConfig = snakeCaseCloudinaryConfig;
+    }
+  }
+  
   // Default options < Markup options < Player options
-  options = videojs.obj.merge({}, defaults, elemOptions, options);
+  return videojs.obj.merge({}, defaults, elemOptions, options);
+};
 
+export const splitOptions = (flatOptions) => {
+  const options = Object.assign({}, flatOptions);
+  
   // In case of 'autoplay on scroll', we need to make sure normal HTML5 autoplay is off
   normalizeAutoplay(options);
-
+  
   // VideoPlayer specific options
   const playerOptions = Utils.sliceAndUnsetProperties(options, ...PLAYER_PARAMS);
-
+  
   // Cloudinary SDK config (cloud_name, secure, etc.)
   playerOptions.cloudinary = Utils.sliceAndUnsetProperties(playerOptions, ...CLOUDINARY_CONFIG_PARAM);
-
+  
   // Merge with cloudinaryConfig from src/index.js (e.g., secureDistribution -> secure_distribution)
   if (playerOptions.cloudinaryConfig) {
     Object.assign(playerOptions.cloudinary, playerOptions.cloudinaryConfig);
     delete playerOptions.cloudinaryConfig;
   }
-
+  
   // Source-level config (visualSearch, chapters, etc.)
   playerOptions.sourceOptions = Utils.sliceAndUnsetProperties(playerOptions, ...SOURCE_PARAMS);
-
+  
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order
   // to avoid param name conflicts:
   // VideoPlayer.new({ controls: true, videojs: { controls: false })
@@ -109,7 +124,7 @@ export const extractOptions = (elem, options) => {
     Object.assign(options, options.videojs);
     delete options.videojs;
   }
-
+  
   return { playerOptions, videojsOptions: options };
 };
 

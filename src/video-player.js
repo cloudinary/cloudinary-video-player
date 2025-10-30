@@ -14,9 +14,8 @@ import Eventable from './mixins/eventable';
 import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import {
-  extractOptions,
-  getResolveVideoElement,
-  overrideDefaultVideojsComponents
+  overrideDefaultVideojsComponents,
+  splitOptions
 } from './video-player.utils';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
@@ -47,13 +46,11 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     return this.options.playerOptions;
   }
 
-  constructor(elem, initOptions, ready) {
+  constructor(elem, options, ready) {
     super();
 
-    this.videoElement = getResolveVideoElement(elem);
-
-    this.options = extractOptions(this.videoElement, initOptions);
-
+    this.videoElement = elem;
+    this.options = splitOptions(options);
     this._videojsOptions = this.options.videojsOptions;
 
     // Make sure to add 'video-js' class before creating videojs instance

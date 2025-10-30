@@ -49,6 +49,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'playedEventPercents',
   'playedEventTimes',
   'playlistWidget',
+  'profile',
   'qualitySelector',
   'queryParams',
   'seekThumbnails',
