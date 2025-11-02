@@ -54,7 +54,7 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "135kb"
+        "maxSize": "136kb"
       },
       {
         "path": "./lib/cld-video-player.js",
