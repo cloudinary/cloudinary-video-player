@@ -130,6 +130,8 @@ class VideoSource extends BaseSource {
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
 
+    options.resource_type = this.resourceType() || options.resource_type;
+
     if (publicId === true) {
       const urlPrefix = getCloudinaryUrlPrefix(options.cloudinaryConfig);
       const deliveryType = this.getInitOptions().type || 'upload';
