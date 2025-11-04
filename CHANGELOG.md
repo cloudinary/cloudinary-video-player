@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [3.5.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.0...v3.5.1) (2025-10-30)
+
+
+### Bug Fixes
+
+* add big pause button for mobile browsers ([ba1f966](https://github.com/cloudinary/cloudinary-video-player/commit/ba1f966f22026a6cc38c93bc9a25d3b5fb026bf7))
+* **VIDEO-20091:** hide shadow when controlBar is hidden ([#924](https://github.com/cloudinary/cloudinary-video-player/issues/924)) ([12b7166](https://github.com/cloudinary/cloudinary-video-player/commit/12b71669b72ce16438254214cde09c848448d01c))
+
 ## [3.5.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.4.2...v3.5.0) (2025-10-21)
 
 
