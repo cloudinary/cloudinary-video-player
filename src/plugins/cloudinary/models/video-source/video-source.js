@@ -141,7 +141,7 @@ class VideoSource extends BaseSource {
       const transformation = this.getInitOptions().posterOptions?.transformation;
       if (transformation) {
         const transformationString = new Transformation(transformation).toString();
-        appletUrl += `?${transformationString}`;
+        appletUrl += `?tx=${transformationString}`;
       }
 
       this._poster = new ImageSource(appletUrl, {
