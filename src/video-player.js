@@ -93,6 +93,7 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initPlugins();
     this._initJumpButtons();
     this._initPictureInPicture();
+    this._initBigPauseButton();
     this._setVideoJsListeners(ready);
   }
 
@@ -403,6 +404,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _initPictureInPicture() {
     if (!this.playerOptions.pictureInPictureToggle && this.videojs.controlBar) {
       this.videojs.controlBar.removeChild('pictureInPictureToggle');
+    }
+  }
+
+  _initBigPauseButton() {
+    if (videojs.browser.IS_IOS || videojs.browser.IS_ANDROID) {
+      this.videojs.addChild('BigPauseButton');
     }
   }
 
