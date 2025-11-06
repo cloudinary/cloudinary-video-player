@@ -2,7 +2,6 @@ import { utf8ToBase64 } from '../../utils/utf8Base64';
 import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { transcriptParser } from './parsers/transcriptParser';
 import { srtParser } from './parsers/srtParser';
-import { vttParser } from './parsers/vttParser';
 import { addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
 
 const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
@@ -54,6 +53,25 @@ function textTracksManager() {
   const updateTextTrackStatusToError = (textTrack, error) => updateTextTrackData(textTrack, { status: 'error', error });
   const updateTextTrackStatusToApplied = (textTrack) => updateTextTrackData(textTrack, { status: 'applied' });
 
+  const addNativeVttTrack = (config) => {
+    const {
+      kind = 'subtitles',
+      label = 'Subtitles',
+      default: isDefault,
+      srclang,
+      src,
+    } = config;
+
+    player.addRemoteTextTrack({
+      kind,
+      label,
+      srclang,
+      src,
+      default: isDefault,
+      mode: isDefault ? 'showing' : 'disabled',
+    });
+  };
+
   const addTextTrack = (type, config) => {
     const {
       kind = type === 'transcript' ? 'captions' : 'subtitles',
@@ -77,7 +95,6 @@ function textTracksManager() {
 
     const createParser = () => {
       if (type === 'srt') return srtParser;
-      if (type === 'vtt') return vttParser;
       return (text) => transcriptParser(text, {
         maxWords: config.maxWords,
         wordHighlight: config.wordHighlight,
@@ -134,7 +151,7 @@ function textTracksManager() {
   const addTextTracks = (textTracks) => {
     textTracks.forEach(textTrackConfig => {
       if (textTrackConfig.src && textTrackConfig.src.endsWith('.vtt')) {
-        addTextTrack('vtt', textTrackConfig);
+        addNativeVttTrack(textTrackConfig);
       } else if (textTrackConfig.src && textTrackConfig.src.endsWith('.srt')) {
         addTextTrack('srt', textTrackConfig);
       } else if (!textTrackConfig.src || textTrackConfig.src.endsWith('.transcript')) {
