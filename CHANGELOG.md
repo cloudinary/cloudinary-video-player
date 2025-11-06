@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [3.5.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.1...v3.5.2) (2025-11-06)
+
+
+### Bug Fixes
+
+* **VIDEO-20122:** Parsing VTT with cue attributes like 'align' & 'line' ([#927](https://github.com/cloudinary/cloudinary-video-player/issues/927)) ([7795bf6](https://github.com/cloudinary/cloudinary-video-player/commit/7795bf6e784f81cf2d824d54d6f9fbd5b82fd602))
+
 ## [3.5.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.0...v3.5.1) (2025-10-30)
 
 
