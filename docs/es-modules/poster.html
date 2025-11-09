@@ -53,6 +53,12 @@
         <video id="player-raw" playsinline controls class="cld-video-player cld-fluid"></video>
       </div>
 
+      <div class="video-container mb-4">
+        <h4>Applet poster (poster: true)</h4>
+        <h6>Uses applet service URL for poster</h6>
+        <video id="player-applet-poster" playsinline controls class="cld-video-player cld-fluid"></video>
+      </div>
+
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
           >Full documentation</a
@@ -88,6 +94,12 @@
       const playerRaw = videoPlayer('player-raw', {
         cloudName: 'demo',
         publicId: 'https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8'
+      });
+
+      const playerAppletPoster = videoPlayer('player-applet-poster', {
+        cloudName: 'demo',
+        publicId: 'snow_horses',
+        poster: true
       });
     </script>
 

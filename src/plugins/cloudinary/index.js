@@ -122,8 +122,14 @@ class CloudinaryContext {
       options.cloudinaryConfig = extendCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
       options.transformation = mergeTransformations(this.transformation(), options.transformation || {});
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
-      options.sourceTypes = options.sourceTypes || this.sourceTypes();
-      options.poster = options.poster || posterOptionsForCurrent();
+      options.sourceTypes = options.sourceTypes || this.sourceTypes();      
+
+      
+      const defaultPosterOptions = posterOptionsForCurrent();
+      const userPosterOptions = options.posterOptions || {};
+      options.poster = options.poster || defaultPosterOptions;
+      options.posterOptions = Object.assign({}, defaultPosterOptions, userPosterOptions);
+      
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
       if (options.sourceTypes.indexOf('audio') > -1) {
