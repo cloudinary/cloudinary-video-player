@@ -161,5 +161,9 @@
     "name": "check",
     "svg": "check.svg",
     "root-dir": "./custom-icons/cld/"
+  }, {
+    "name": "source-switcher",
+    "svg": "source-switcher.svg",
+    "root-dir": "./custom-icons/cld/"
   }]
 }

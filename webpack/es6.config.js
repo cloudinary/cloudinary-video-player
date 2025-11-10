@@ -11,7 +11,7 @@ module.exports = merge(webpackCommon, {
   mode: 'production',
 
   entry: {
-    'cld-video-player': './index.es.js', // default
+    'cld-video-player': './index.js', // default
     'videoPlayer': './index.videoPlayer.js',
     'player': './index.player.js',
     'all': './index.all.js'

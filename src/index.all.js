@@ -7,17 +7,17 @@
 
 import cloudinary from './index.js';
 
-export * from './index.js';
-export * from './plugins/adaptive-streaming/adaptive-streaming.js';
-export * from './plugins/chapters/chapters.js';
-export * from './plugins/colors/colors.js';
-export * from './plugins/ima/ima.js';
-export * from './plugins/playlist/playlist.js';
-export * from './plugins/interaction-areas/interaction-areas.service.js';
-export * from './plugins/visual-search/visual-search.js';
-export * from './plugins/text-tracks-manager/index.js';
-export * from './plugins/share/share.js';
-export * from './components/shoppable-bar/shoppable-widget.js';
-export * from './components/recommendations-overlay/recommendations-overlay.js';
+// Import plugin implementations so webpack bundles them in /all.js
+import './plugins/adaptive-streaming/adaptive-streaming.js';
+import './plugins/chapters/chapters.js';
+import './plugins/colors/colors.js';
+import './plugins/ima/ima.js';
+import './plugins/playlist/playlist.js';
+import './plugins/interaction-areas/interaction-areas.service.js';
+import './plugins/visual-search/visual-search.js';
+import './plugins/share/share.js';
+import './components/shoppable-bar/shoppable-widget.js';
+import './components/recommendations-overlay/recommendations-overlay.js';
 
+export * from './index.js';
 export default cloudinary;
