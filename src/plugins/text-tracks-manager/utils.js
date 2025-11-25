@@ -106,22 +106,6 @@ export const removeAllTextTrackCues = (textTrack) => {
   });
 };
 
-export const addNotificationCue = (videoDuration, textTrack, text) => {
-  if (!textTrack || !text) return;
-
-  removeAllTextTrackCues(textTrack);
-
-  const fallbackDuration = 3600;
-  const endTime = (
-    typeof videoDuration === 'number' &&
-    isFinite(videoDuration) &&
-    videoDuration > 0
-  ) ? videoDuration : fallbackDuration;
-
-  const cue = new VTTCue(0, endTime, text);
-  textTrack.addCue(cue);
-};
-
 export const refreshTextTrack = (textTrack) => {
   if (!textTrack || typeof textTrack.mode !== 'string') return;
 
