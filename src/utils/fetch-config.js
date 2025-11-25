@@ -1,5 +1,6 @@
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/common';
+import { utf8ToBase64 } from '../utils/utf8Base64';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
 
@@ -20,23 +21,16 @@ const fetchConfig = async (options) => {
     return getDefaultProfileConfig(profile);
   }
 
-  const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service/video_player_profiles';
+  const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service';
 
-  // TODO: when endpoints are ready
-  // const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service/video_player_config';
-  // And:
-  // `${urlPrefix}/profile/${profile.replaceAll(' ', '+')}.json`;
 
   let configUrl;
   if (profile) {
     configUrl = isRawUrl(profile) 
       ? profile 
-      : `${urlPrefix}/${profile.replaceAll(' ', '+')}.json`;
+      : `${urlPrefix}/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
   } else if (publicId) {
-    configUrl = `${urlPrefix}/video/${type}/${publicId}.json`;
-    // TODO: remove when endpoints are ready
-    console.log('This will fetch:', configUrl);
-    return {};
+    configUrl = `${urlPrefix}/video_player_config/video/${type}/${utf8ToBase64(publicId)}.json`;
   } else {
     return {};
   }

@@ -1,5 +1,7 @@
 import 'assets/styles/main.scss';
+import videojs from 'video.js';
 import VideoPlayer from './video-player';
+import defaults from './config/defaults';
 import { getResolveVideoElement, extractOptions } from './video-player.utils';
 import { fetchAndMergeConfig } from './utils/fetch-config';
 
@@ -10,12 +12,14 @@ const getConfig = (elem, playerOptions = {}) => {
   return { videoElement, options };
 };
 
+const mergeDefaults = (options) => videojs.obj.merge({}, defaults, options);
+
 export const videoPlayer = (id, playerOptions = {}, ready) => {  
   const { videoElement, options } = getConfig(id, playerOptions);
   if (options.profile) {
     console.warn('Profile option requires async initialization. Use cloudinary.player() instead of cloudinary.videoPlayer()');
   }
-  return new VideoPlayer(videoElement, options, ready);
+  return new VideoPlayer(videoElement, mergeDefaults(options), ready);
 };
 
 export const videoPlayers = (selector, playerOptions, ready) => {
@@ -27,10 +31,10 @@ export const player = async (id, playerOptions, ready) => {
   const { videoElement, options } = getConfig(id, playerOptions);
   
   try {
-    const mergedOptions = await fetchAndMergeConfig(options);
-    return new VideoPlayer(videoElement, mergedOptions, ready);
+    const videoConfig = await fetchAndMergeConfig(options);
+    return new VideoPlayer(videoElement, mergeDefaults(videoConfig), ready);
   } catch (e) {
-    const videoPlayer = new VideoPlayer(videoElement, options);
+    const videoPlayer = new VideoPlayer(videoElement, mergeDefaults(options));
     videoPlayer.videojs.error('Invalid profile');
     throw e;
   }

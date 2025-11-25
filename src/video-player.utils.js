@@ -1,7 +1,6 @@
 import videojs from 'video.js';
 import pick from 'lodash/pick';
 import Utils from './utils';
-import defaults from './config/defaults';
 import {
   PLAYER_PARAMS,
   SOURCE_PARAMS,
@@ -92,8 +91,7 @@ export const extractOptions = (elem, options) => {
     }
   }
   
-  // Default options < Markup options < Player options
-  return videojs.obj.merge({}, defaults, elemOptions, options);
+  return videojs.obj.merge({}, elemOptions, options);
 };
 
 export const splitOptions = (flatOptions) => {
