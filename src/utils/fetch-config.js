@@ -46,10 +46,19 @@ const fetchConfig = async (options) => {
 
 export const fetchAndMergeConfig = async (options) => {
   const profileOptions = await fetchConfig(options);
+  const fetchedConfig = profileOptions.playerOptions ? Object.keys(profileOptions.playerOptions) : [];
   const profileAnalytics = {
     _internalAnalyticsMetadata: {
       newPlayerMethod: true,
-      profile: options.profile ? (isDefaultProfile(options.profile) ? options.profile : true) : undefined
+      ...(options.profile ? {
+        profile: isDefaultProfile(options.profile) ? options.profile : true
+      } : {}),
+      ...(!options.profile && options.publicId ? {
+        videoConfig: true
+      } : {}),
+      ...(fetchedConfig.length > 0 ? {
+        fetchedConfig: fetchedConfig.join(',')
+      } : {})
     }
   };
   return Object.assign(
