@@ -90,11 +90,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this._setCssClasses();
-    this._initPlugins();
     this._initJumpButtons();
     this._initPictureInPicture();
     this._initBigPauseButton();
     this._setVideoJsListeners(ready);
+
+    this._pluginsReady = this._initPlugins();
   }
 
   getVPInstanceId() {
@@ -183,7 +184,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _initPlugins () {
-    this._initIma();
     this._initAutoplay();
     this._initContextMenu();
     this._initPerSrcBehaviors();
@@ -200,6 +200,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     this._initChapters();
     this._initInteractionAreas();
     this._initSourceSwitcher();
+
+    const asyncPlugins = [
+      // Initialize lazy plugins that should be awaited
+      this._initIma()
+    ];
+    return Promise.all(asyncPlugins);
   }
 
   _isFullScreen() {
@@ -208,8 +214,12 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _initIma() {
     if (this.playerOptions.ads && Object.keys(this.playerOptions.ads).length !== 0) {
-      plugins.imaPlugin(this.videojs, this.playerOptions);
+      return plugins.imaPlugin(this.videojs, this.playerOptions).then((result) => {
+        // Resolve even if imaPlugin returns false (ads not available)
+        return result !== false;
+      });
     }
+    return Promise.resolve();
   }
 
   setTextTracks(conf) {
@@ -564,6 +574,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   _onReady() {
     this._setExtendedEvents();
 
+    // await async plugins
+    this._pluginsReady.then(() => {
+      this._setInitialSource();
+    });
+  }
+
+  _setInitialSource() {
     // Load first video (mainly to support video tag 'source' and 'public-id' attributes)
     // Source parameters are set to playerOptions.sourceOptions
     const source = this.playerOptions.sourceOptions.source || this.playerOptions.sourceOptions.publicId;
