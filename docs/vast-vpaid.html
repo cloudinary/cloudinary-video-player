@@ -32,13 +32,12 @@
 
       player1 = cloudinary.videoPlayer('player', {
         cloud_name: 'demo',
+        publicId: 'elephants',
         ads: {
           adTagUrl: adTagUrl,
           debug: true
         }
       });
-
-      player1.source('elephants');
 
       player2 = cloudinary.videoPlayer('player-playlist', {
         cloud_name: 'demo',
@@ -132,13 +131,12 @@
 
         player1 = cloudinary.videoPlayer('player', {
           cloud_name: 'demo',
+          publicId: 'elephants',
           ads: {
             adTagUrl: AD_TAG_URL,
             debug: true
           }
         });
-
-        player1.source('elephants');
 
         player2 = cloudinary.videoPlayer('player-playlist', {
           cloud_name: 'demo',
