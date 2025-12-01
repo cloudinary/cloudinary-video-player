@@ -19,7 +19,13 @@
       <h1>Cloudinary Video Player</h1>
       <h3 class="mb-4">Profiles</h3>
 
-      <h5>Player with default profile</h5>
+      <p>
+        Player profiles provide a mechanism to define and save your video player configuration 
+        to your Cloudinary account and then reference this profile as part of your video player setup. 
+        For details, see the <a href="https://cloudinary.com/documentation/video_player_how_to_embed#player_profiles">player profiles documentation</a>.
+      </p>
+
+      <h4 class="mt-4 mb-2">Default profile - applies predefined player configuration</h4>
       <video
         id="player-default-profile"
         class="cld-video-player"
@@ -30,7 +36,7 @@
         muted
       ></video>
 
-      <h5>Player with custom profile</h5>
+      <h4 class="mt-4 mb-2">Custom profile - loads player and source config from profile</h4>
       <video
         id="player-custom-profile"
         class="cld-video-player"
@@ -41,9 +47,31 @@
         muted
       ></video>
 
-      <h5>Player with custom profile and overrides</h5>
+      <h4 class="mt-4 mb-2">Override player config - profile config overridden by JS player options</h4>
       <video
-        id="player-custom-profile-overrides"
+        id="player-profile-override"
+        class="cld-video-player"
+        width="500"
+        playsinline
+        controls
+        autoplay
+        muted
+      ></video>
+
+      <h4 class="mt-4 mb-2">Override source config - profile transformation overridden by JS source options</h4>
+      <video
+        id="player-source-override"
+        class="cld-video-player"
+        width="500"
+        playsinline
+        controls
+        autoplay
+        muted
+      ></video>
+
+      <h4 class="mt-4 mb-2">No profile - fetches asset-specific config from publicId/config.json</h4>
+      <video
+        id="player-asset-config"
         class="cld-video-player"
         width="500"
         playsinline
@@ -65,35 +93,51 @@
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       (async () => {
-        const playerWithDefaultProfile = await player('player-default-profile', {
+        const defaultPlayer = await player('player-default-profile', {
           cloudName: 'demo',
           profile: 'cld-default'
         });
 
-        playerWithDefaultProfile.source('sea_turtle');
+        defaultPlayer.source('samples/sea-turtle');
       })();
 
       (async () => {
-        const playerWithCustomProfile = await player('player-custom-profile', {
+        await player('player-custom-profile', {
           cloudName: 'prod',
-          profile: 'myCustomProfile'
+          profile: 'demo-profile',
+          publicId: 'samples/sea-turtle',
         });
-
-        playerWithCustomProfile.source('samples/cld-sample-video');
       })();
 
       (async () => {
-        const playerWithCustomProfileAndOverrides = await cloudinary.player('player-custom-profile-overrides', {
+        await player('player-profile-override', {
           cloudName: 'prod',
-          profile: 'myCustomProfile',
+          profile: 'demo-profile',
+          publicId: 'samples/sea-turtle',
           colors: {
-            base: "#1532a8"
+            base: '#22004D',
+            accent: '#FA65C7',
+            text: '#FF06D2'
           },
-          seekThumbnails: false,
-          aiHighlightsGraph: true,
         });
+      })();
 
-        playerWithCustomProfileAndOverrides.source('samples/cld-sample-video');
+      (async () => {
+        await player('player-source-override', {
+          cloudName: 'prod',
+          profile: 'demo-profile',
+          publicId: 'samples/sea-turtle',
+          transformation: {
+            effect: 'blur:500'
+          },
+        });
+      })();
+
+      (async () => {
+        await player('player-asset-config', {
+          cloudName: 'prod',
+          publicId: 'samples/sea-turtle',
+        });
       })();
     </script>
 
