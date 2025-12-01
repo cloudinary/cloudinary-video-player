@@ -12,6 +12,11 @@ const filterDefaultsAndNulls = (obj) => Object.entries(obj).reduce((filtered, [k
 }, {});
 
 const getSourceOptions = (sourceOptions = {}) => ({
+  poster: (() => {
+    if (sourceOptions.poster === true) return 'auto';
+    if (typeof sourceOptions.poster === 'string') return 'url';
+    return undefined;
+  })(),
   posterOptions: hasConfig(sourceOptions.posterOptions),
   posterOptionsPublicId: sourceOptions.posterOptions && hasConfig(sourceOptions.posterOptions.publicId),
   autoShowRecommendations: sourceOptions.autoShowRecommendations,
