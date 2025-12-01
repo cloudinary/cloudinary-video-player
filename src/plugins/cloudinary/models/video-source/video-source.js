@@ -14,7 +14,9 @@ import {
   hasCodec,
   normalizeFormat
 } from './video-source.utils';
-import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations } from '../../common';
+import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations, getCloudinaryUrlPrefix } from '../../common';
+import { utf8ToBase64 } from 'utils/utf8Base64';
+import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
 
@@ -127,9 +129,28 @@ class VideoSource extends BaseSource {
     }
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
-    
+
     options.resource_type = this.resourceType() || options.resource_type;
-    
+
+    if (publicId === true) {
+      const urlPrefix = getCloudinaryUrlPrefix(options.cloudinaryConfig);
+      const deliveryType = this.getInitOptions().type || 'upload';
+      const base64PublicId = utf8ToBase64(this.publicId());
+      let appletUrl = `${urlPrefix}/_applet_/video_service/elements/${deliveryType}/${base64PublicId}/poster`;
+
+      const transformation = this.getInitOptions().posterOptions?.transformation;
+      if (transformation) {
+        const transformationString = new Transformation(transformation).toString();
+        appletUrl += `?tx=${transformationString}`;
+      }
+
+      this._poster = new ImageSource(appletUrl, {
+        cloudinaryConfig: options.cloudinaryConfig
+      });
+
+      return this;
+    }
+
     this._poster = new ImageSource(publicId, options);
 
     return this;
