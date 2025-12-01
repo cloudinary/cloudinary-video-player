@@ -1,6 +1,5 @@
 import videojs from 'video.js';
 import SourceMenuItem from './source-switcher-menu-item';
-import './source-switcher-button.scss';
 
 const MenuButton = videojs.getComponent('MenuButton');
 const MenuItem = videojs.getComponent('MenuItem');
@@ -18,6 +17,11 @@ class SourceSwitcherButton extends MenuButton {
     this._onSelected = typeof options.onSelected === 'function' ? options.onSelected : null;
 
     this._setEnabled(this._items.length > 0);
+
+    const placeholder = this.el().querySelector('.vjs-icon-placeholder');
+    if (placeholder) {
+      placeholder.classList.add('vjs-icon-source-switcher');
+    }
   }
 
   buildCSSClass() {
