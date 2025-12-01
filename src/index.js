@@ -1,45 +1,57 @@
 import 'assets/styles/main.scss';
-import pick from 'lodash/pick';
+import videojs from 'video.js';
 import VideoPlayer from './video-player';
-import createPlayer from './player';
-import { convertKeysToSnakeCase } from './utils/object';
-import { CLOUDINARY_CONFIG_PARAM } from './video-player.const';
+import defaults from './config/defaults';
+import { getResolveVideoElement, extractOptions } from './video-player.utils';
+import { fetchAndMergeConfig } from './utils/fetch-config';
 
-const getConfig = (playerOptions = {}, cloudinaryConfig) => {
-  const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(playerOptions), CLOUDINARY_CONFIG_PARAM);
-
-  // pick cld-configurations and assign them to cloudinaryConfig
-  return Object.assign(playerOptions, {
-    cloudinaryConfig: cloudinaryConfig || snakeCaseCloudinaryConfig
-  });
+const getConfig = (elem, playerOptions = {}) => {
+  const videoElement = getResolveVideoElement(elem);
+  const options = extractOptions(videoElement, playerOptions);
+  
+  return { videoElement, options };
 };
 
-const getVideoPlayer = config => (id, playerOptions, ready) =>
-  new VideoPlayer(id, getConfig(playerOptions, config), ready);
+const mergeDefaults = (options) => videojs.obj.merge({}, defaults, options);
 
-const getVideoPlayers = config => (selector, playerOptions, ready) =>
-  VideoPlayer.all(selector, getConfig(playerOptions, config), ready);
+export const videoPlayer = (id, playerOptions = {}, ready) => {  
+  const { videoElement, options } = getConfig(id, playerOptions);
+  if (options.profile) {
+    console.warn('Profile option requires async initialization. Use cloudinary.player() instead of cloudinary.videoPlayer()');
+  }
+  return new VideoPlayer(videoElement, mergeDefaults(options), ready);
+};
 
-const getPlayer = config => (id, playerOptions, ready) => createPlayer(id, getConfig(playerOptions, config), ready);
-const getPlayers = config => (selector, playerOptions, ready) => {
+export const videoPlayers = (selector, playerOptions, ready) => {
   const nodeList = document.querySelectorAll(selector);
-  const playerConfig = getConfig(playerOptions, config);
-  return [...nodeList].map((node) => createPlayer(node, playerConfig, ready));
+  return [...nodeList].map(node => videoPlayer(node, playerOptions, ready));
 };
 
-export const videoPlayer = getVideoPlayer();
-export const videoPlayers = getVideoPlayers();
+export const player = async (id, playerOptions, ready) => {
+  const { videoElement, options } = getConfig(id, playerOptions);
+  
+  try {
+    const videoConfig = await fetchAndMergeConfig(options);
+    return new VideoPlayer(videoElement, mergeDefaults(videoConfig), ready);
+  } catch (e) {
+    const videoPlayer = new VideoPlayer(videoElement, mergeDefaults(options));
+    videoPlayer.videojs.error('Invalid profile');
+    throw e;
+  }
+};
 
-export const player = getPlayer();
-export const players = getPlayers();
+export const players = async (selector, playerOptions, ready) => {
+  const nodeList = document.querySelectorAll(selector);
+  return Promise.all([...nodeList].map(node => player(node, playerOptions, ready)));
+};
 
-const cloudinaryVideoPlayerLegacyConfig = config => {
+const cloudinaryVideoPlayerLegacyConfig = () => {
   console.warn(
     'Cloudinary.new() is deprecated and will be removed. Please use cloudinary.videoPlayer() instead.'
   );
   return {
-    videoPlayer: getVideoPlayer(config),
-    videoPlayers: getVideoPlayers(config)
+    videoPlayer,
+    videoPlayers
   };
 };
 
