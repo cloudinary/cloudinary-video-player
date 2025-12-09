@@ -526,6 +526,10 @@
       "enum": ["fastStart", "balanced", "highQuality"],
       "default": "balanced"
     },
+    "videoConfig": {
+      "type": "boolean",
+      "default": true
+    },
     "videoSources": {
       "type": "array",
       "items": {
