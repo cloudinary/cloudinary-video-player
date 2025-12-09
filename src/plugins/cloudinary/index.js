@@ -128,7 +128,12 @@ class CloudinaryContext {
       const defaultPosterOptions = posterOptionsForCurrent();
       const userPosterOptions = options.posterOptions || {};
       options.poster = options.poster || defaultPosterOptions;
-      options.posterOptions = Object.assign({}, defaultPosterOptions, userPosterOptions);
+      options.posterOptions = Object.assign(
+        {},
+        defaultPosterOptions,
+        userPosterOptions,
+        { hasUserPosterOptions: !!userPosterOptions || null }
+      );
       
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
