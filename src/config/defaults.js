@@ -29,6 +29,7 @@ export default {
   analytics: false,
   cloudinaryAnalytics: true,
   allowUsageReport: true,
+  videoConfig: true,
   playedEventPercents: [25, 50, 75, 100],
   adaptiveStreaming: {
     strategy: 'balanced',

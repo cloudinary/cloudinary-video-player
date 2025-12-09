@@ -17,7 +17,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
     if (typeof sourceOptions.poster === 'string') return 'url';
     return undefined;
   })(),
-  posterOptions: hasConfig(sourceOptions.posterOptions),
+  posterOptions: sourceOptions.posterOptions?.hasUserPosterOptions,
   posterOptionsPublicId: sourceOptions.posterOptions && hasConfig(sourceOptions.posterOptions.publicId),
   autoShowRecommendations: sourceOptions.autoShowRecommendations,
   fontFace: sourceOptions.fontFace,
@@ -44,11 +44,11 @@ const getSourceOptions = (sourceOptions = {}) => ({
   } : {}),
   ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {}),
   interactionAreas: hasConfig(sourceOptions.interactionAreas),
-  videoSources: !!sourceOptions.videoSources,
+  videoSources: !!sourceOptions.videoSources || null,
 });
 
 const getTextTracksOptions = (textTracks = {}) => {
-  const tracksArr = [textTracks.captions, ...(textTracks.subtitles || [])];
+  const tracksArr = [textTracks.captions, ...(textTracks.subtitles || [])].filter(Boolean);
   return {
     textTracks: hasConfig(textTracks),
     textTracksLength: tracksArr.length,
@@ -97,7 +97,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   bigPlayButton: playerOptions.bigPlayButton,
   className: playerOptions.class,
   cloudinaryAnalytics: !!playerOptions.cloudinaryAnalytics,
-  cloudinaryAnalyticsOptions: isObject(playerOptions.cloudinaryAnalytics),
+  cloudinaryAnalyticsOptions: isObject(playerOptions.cloudinaryAnalytics) || null,
   controls: playerOptions.controls,
   floatingWhenNotVisible: playerOptions.floatingWhenNotVisible,
   fluid: playerOptions.fluid,

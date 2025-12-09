@@ -15,7 +15,7 @@ const getDefaultProfileConfig = (profileName) => {
 };
 
 const fetchConfig = async (options) => {
-  const { profile, publicId, cloudinaryConfig, type = 'upload' } = options;
+  const { profile, publicId, cloudinaryConfig, type = 'upload', videoConfig } = options;
   
   if (profile && isDefaultProfile(profile)) {
     return getDefaultProfileConfig(profile);
@@ -23,13 +23,12 @@ const fetchConfig = async (options) => {
 
   const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service';
 
-
   let configUrl;
   if (profile) {
     configUrl = isRawUrl(profile) 
       ? profile 
       : `${urlPrefix}/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
-  } else if (publicId) {
+  } else if (publicId && videoConfig !== false) {
     configUrl = `${urlPrefix}/video_player_config/video/${type}/${utf8ToBase64(publicId)}.json`;
   } else {
     return {};
@@ -53,7 +52,7 @@ export const fetchAndMergeConfig = async (options) => {
       ...(options.profile ? {
         profile: isDefaultProfile(options.profile) ? options.profile : true
       } : {}),
-      ...(!options.profile && options.publicId ? {
+      ...(!options.profile && options.videoConfig !== false && options.publicId ? {
         videoConfig: true
       } : {}),
       ...(fetchedConfig.length > 0 ? {
