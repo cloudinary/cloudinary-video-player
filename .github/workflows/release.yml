@@ -28,10 +28,15 @@ jobs:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
           default-branch: master
+          package-name: cloudinary-video-player
+          include-v-in-tag: true
 
   publish:
     needs: release
     if: ${{ needs.release.outputs.release_created == 'true' }}
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/npm-publish.yml
 
   notify:
