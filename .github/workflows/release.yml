@@ -19,8 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: npm ci
-
       - name: Release PR
         uses: googleapis/release-please-action@v4
         id: release
