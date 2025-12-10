@@ -20,12 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: npm ci
-
       - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '24.x'
+
+      - run: npm ci
 
       - name: Get current version from package.json
         id: get_version
