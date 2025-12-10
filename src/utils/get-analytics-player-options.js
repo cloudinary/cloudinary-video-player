@@ -1,6 +1,5 @@
 import defaults from 'config/defaults';
 import isEmpty from 'lodash/isEmpty';
-import isObject from 'lodash/isObject';
 
 const hasConfig = (obj) => isEmpty(obj) ? null : true;
 
@@ -44,7 +43,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   } : {}),
   ...(hasConfig(sourceOptions.textTracks) ? getTextTracksOptions(sourceOptions.textTracks) : {}),
   interactionAreas: hasConfig(sourceOptions.interactionAreas),
-  videoSources: !!sourceOptions.videoSources || null,
+  videoSources: hasConfig(sourceOptions.videoSources),
 });
 
 const getTextTracksOptions = (textTracks = {}) => {
@@ -96,8 +95,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   autoplayMode: playerOptions.autoplayMode,
   bigPlayButton: playerOptions.bigPlayButton,
   className: playerOptions.class,
-  cloudinaryAnalytics: !!playerOptions.cloudinaryAnalytics,
-  cloudinaryAnalyticsOptions: isObject(playerOptions.cloudinaryAnalytics) || null,
+  cloudinaryAnalytics: hasConfig(playerOptions.cloudinaryAnalytics),
   controls: playerOptions.controls,
   floatingWhenNotVisible: playerOptions.floatingWhenNotVisible,
   fluid: playerOptions.fluid,
@@ -126,8 +124,8 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   debug: playerOptions.debug,
   type: playerOptions.type,
 
-  colors: playerOptions.colors && JSON.stringify(playerOptions.colors),
-  controlBar: (JSON.stringify(playerOptions.controlBar) !== JSON.stringify(defaults.controlBar)) && JSON.stringify(playerOptions.controlBar),
+  colors: hasConfig(playerOptions.colors),
+  controlBar: hasConfig(playerOptions.controlBar),
 
   ...getSourceOptions(playerOptions.sourceOptions || {}),
   ...getAdsOptions(playerOptions.ads),
