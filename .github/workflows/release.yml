@@ -26,7 +26,6 @@ jobs:
         id: release
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          release-type: node
 
   publish:
     needs: release
