@@ -5,19 +5,14 @@
 
 ### Features
 
-* add release-as input to force version ([28cb20c](https://github.com/cloudinary/cloudinary-video-player/commit/28cb20cc3baf04b1536f15854b66bc3e4550f523))
 * **VIDEO-20073:** video-specific config ([#920](https://github.com/cloudinary/cloudinary-video-player/issues/920)) ([210a235](https://github.com/cloudinary/cloudinary-video-player/commit/210a2352ad5c890174de10a03f7662b8c70482cf))
 * **VIDEO-20110:** video-elements - add support for poster ([#926](https://github.com/cloudinary/cloudinary-video-player/issues/926)) ([2dfb862](https://github.com/cloudinary/cloudinary-video-player/commit/2dfb86246375719eca06680598cd5c2d1faa0f94))
 
 
 ### Bug Fixes
 
-* add OIDC permissions to publish jobs ([b7edacf](https://github.com/cloudinary/cloudinary-video-player/commit/b7edacf7196d8ddb706674f432bce332581c8afa))
-* disable component-in-tag for release-please ([1389d45](https://github.com/cloudinary/cloudinary-video-player/commit/1389d4501685506d367a32bdc662f52ef4234247))
 * improved analytics ([620b4a0](https://github.com/cloudinary/cloudinary-video-player/commit/620b4a043f7bb967549613d0682803dbc6d6bfb7))
-* make video-config configurable ([ed1fbef](https://github.com/cloudinary/cloudinary-video-player/commit/ed1fbef2f79619f638ad536a0fbe5a015170ca5d))
-* small improvements to internal-analytics ([acbcd6b](https://github.com/cloudinary/cloudinary-video-player/commit/acbcd6b242acb0bd5367a107d1de3987dcd6e142))
-* update release-please config ([1f2c7b7](https://github.com/cloudinary/cloudinary-video-player/commit/1f2c7b7f568b7a6a25f7328b9c86f265a6873c85))
+* update release-please ([1f2c7b7](https://github.com/cloudinary/cloudinary-video-player/commit/1f2c7b7f568b7a6a25f7328b9c86f265a6873c85))
 
 ## [3.5.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.1...v3.5.2) (2025-11-06)
 
