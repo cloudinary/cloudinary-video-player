@@ -4,6 +4,10 @@
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudinary/cloudinary-video-player.git"
+  },
   "module": "./lib/cld-video-player.js",
   "main": "./dist/cld-video-player.min.js",
   "style": "./dist/cld-video-player.min.css",

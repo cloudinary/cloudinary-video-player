@@ -1,7 +1,6 @@
 # Changelog
 
-
-## [3.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.2...v3.6.0) (2025-12-09)
+## [3.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.2...v3.6.0) (2025-12-10)
 
 
 ### Features
@@ -12,8 +11,8 @@
 
 ### Bug Fixes
 
-* make video-config configurable ([ed1fbef](https://github.com/cloudinary/cloudinary-video-player/commit/ed1fbef2f79619f638ad536a0fbe5a015170ca5d))
-* small improvements to internal-analytics ([acbcd6b](https://github.com/cloudinary/cloudinary-video-player/commit/acbcd6b242acb0bd5367a107d1de3987dcd6e142))
+* improved analytics ([620b4a0](https://github.com/cloudinary/cloudinary-video-player/commit/620b4a043f7bb967549613d0682803dbc6d6bfb7))
+* update release-please ([1f2c7b7](https://github.com/cloudinary/cloudinary-video-player/commit/1f2c7b7f568b7a6a25f7328b9c86f265a6873c85))
 
 ## [3.5.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.1...v3.5.2) (2025-11-06)
 
