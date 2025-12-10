@@ -1,6 +1,20 @@
 # Changelog
 
 
+## [3.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.2...v3.6.0) (2025-12-09)
+
+
+### Features
+
+* **VIDEO-20073:** video-specific config ([#920](https://github.com/cloudinary/cloudinary-video-player/issues/920)) ([210a235](https://github.com/cloudinary/cloudinary-video-player/commit/210a2352ad5c890174de10a03f7662b8c70482cf))
+* **VIDEO-20110:** video-elements - add support for poster ([#926](https://github.com/cloudinary/cloudinary-video-player/issues/926)) ([2dfb862](https://github.com/cloudinary/cloudinary-video-player/commit/2dfb86246375719eca06680598cd5c2d1faa0f94))
+
+
+### Bug Fixes
+
+* make video-config configurable ([ed1fbef](https://github.com/cloudinary/cloudinary-video-player/commit/ed1fbef2f79619f638ad536a0fbe5a015170ca5d))
+* small improvements to internal-analytics ([acbcd6b](https://github.com/cloudinary/cloudinary-video-player/commit/acbcd6b242acb0bd5367a107d1de3987dcd6e142))
+
 ## [3.5.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.1...v3.5.2) (2025-11-06)
 
 
