@@ -69,6 +69,9 @@ jobs:
 
   publish:
     needs: prepare
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/npm-publish.yml
     with:
       tag: edge
