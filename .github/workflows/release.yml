@@ -5,12 +5,6 @@ on:
     branches:
       - 'master'
   workflow_dispatch:
-    inputs:
-      release-as:
-        description: 'Force a specific version (e.g., "3.6.0"). Leave empty for auto-detect.'
-        required: false
-        type: string
-        default: ''
 
 jobs:
   release:
@@ -28,15 +22,11 @@ jobs:
       - run: npm ci
 
       - name: Release PR
-        uses: google-github-actions/release-please-action@v3
+        uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.BOT_TOKEN }}
           release-type: node
-          default-branch: master
-          package-name: cloudinary-video-player
-          include-v-in-tag: true
-          release-as: ${{ inputs.release-as || '' }}
 
   publish:
     needs: release
