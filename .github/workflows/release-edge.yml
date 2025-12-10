@@ -7,8 +7,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  release:
+  prepare:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      edge_branch: ${{ steps.get_next_version.outputs.version }}-edge
+      new_version: ${{ steps.bump_version.outputs.new_version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -62,24 +67,34 @@ jobs:
         run: |
           git push origin ${{ steps.get_next_version.outputs.version }}-edge
 
-      - run: npm run build-all
+  publish:
+    needs: prepare
+    uses: ./.github/workflows/npm-publish.yml
+    with:
+      tag: edge
+      ref: ${{ needs.prepare.outputs.edge_branch }}
 
-      - name: Publish ${{ steps.bump_version.outputs.new_version }}
-        run: npm publish --tag edge
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  notify:
+    needs: [prepare, publish]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Set Notification Messages
         id: set-messages
         run: |
-          if [[ ${{ job.status }} == "success" ]]; then
-            echo "SLACK_TITLE=Video Player ${{ steps.bump_version.outputs.new_version }} Deployed" >> $GITHUB_OUTPUT
-            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ steps.bump_version.outputs.new_version }} deployed successfully" >> $GITHUB_OUTPUT
+          if [[ "${{ needs.publish.result }}" == "success" ]]; then
+            echo "SLACK_TITLE=Video Player ${{ needs.prepare.outputs.new_version }} Deployed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ needs.prepare.outputs.new_version }} deployed successfully" >> $GITHUB_OUTPUT
             echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=edge&min=true" >> $GITHUB_OUTPUT
+            echo "SLACK_COLOR=good" >> $GITHUB_OUTPUT
           else
             echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
-            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ steps.bump_version.outputs.new_version }}" >> $GITHUB_OUTPUT
-            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ needs.prepare.outputs.new_version }}" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
+            echo "SLACK_COLOR=danger" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
@@ -88,12 +103,13 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
           SLACK_CHANNEL: 'rnd-fe-releases'
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ steps.set-messages.outputs.SLACK_COLOR }}
           SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
           SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
           SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
 
       - name: Purge jsDelivr Cache
+        if: ${{ needs.publish.result == 'success' }}
         uses: ./.github/actions/purge-jsdelivr
         with:
           package: cloudinary-video-player@edge
