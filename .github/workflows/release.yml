@@ -9,6 +9,12 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
 
     steps:
       - uses: actions/checkout@v4
@@ -23,49 +29,47 @@ jobs:
           release-type: node
           default-branch: master
 
-      # The logic below handles the npm publication:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          registry-url: 'https://registry.npmjs.org'
-        # these if statements ensure that a publication only occurs when
-        # a new release is created:
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm run build-all
-        if: ${{ steps.release.outputs.release_created }}
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        if: ${{ steps.release.outputs.release_created }}
+  publish:
+    needs: release
+    if: ${{ needs.release.outputs.release_created == 'true' }}
+    uses: ./.github/workflows/npm-publish.yml
+
+  notify:
+    needs: [release, publish]
+    if: ${{ always() && needs.release.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Set Notification Messages
-        if: steps.release.outputs.release_created
         id: set-messages
         run: |
-          if [[ ${{ job.status }} == "success" ]]; then
-            echo "SLACK_TITLE=Video Player ${{ steps.release.outputs.tag_name }} Deployed" >> $GITHUB_OUTPUT
-            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ steps.release.outputs.tag_name }} deployed successfully" >> $GITHUB_OUTPUT
+          if [[ "${{ needs.publish.result }}" == "success" ]]; then
+            echo "SLACK_TITLE=Video Player ${{ needs.release.outputs.tag_name }} Deployed" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version ${{ needs.release.outputs.tag_name }} deployed successfully" >> $GITHUB_OUTPUT
             echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=latest&min=true" >> $GITHUB_OUTPUT
+            echo "SLACK_COLOR=good" >> $GITHUB_OUTPUT
           else
             echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
-            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ steps.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
-            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}" >> $GITHUB_OUTPUT
+            echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version ${{ needs.release.outputs.tag_name }}" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
+            echo "SLACK_COLOR=danger" >> $GITHUB_OUTPUT
           fi
         shell: bash
 
       - name: Slack Notification
-        if: steps.release.outputs.release_created
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
           SLACK_CHANNEL: 'rnd-fe-releases'
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: ${{ steps.set-messages.outputs.SLACK_COLOR }}
           SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
           SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
           SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
 
       - name: Purge jsDelivr Cache
-        if: steps.release.outputs.release_created
+        if: ${{ needs.publish.result == 'success' }}
         uses: ./.github/actions/purge-jsdelivr
         with:
           package: cloudinary-video-player
