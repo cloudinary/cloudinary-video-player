@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.0...v3.6.1) (2025-12-11)
+
+
+### Bug Fixes
+
+* use tag_name for release detection- ([3b7aa8a](https://github.com/cloudinary/cloudinary-video-player/commit/3b7aa8a761405f192170b02fc0264ed388486ea9))
+
 ## [3.6.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.5.2...v3.6.0) (2025-12-10)
 
 
