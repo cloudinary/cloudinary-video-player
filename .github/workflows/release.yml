@@ -29,7 +29,8 @@ jobs:
 
   publish-stable:
     needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
+    # Use tag_name as the definitive indicator - if a tag exists, a release was created
+    if: needs.release-please.outputs.tag_name != ''
     runs-on: ubuntu-latest
 
     steps:
@@ -49,7 +50,8 @@ jobs:
 
   publish-edge:
     needs: release-please
-    if: needs.release-please.outputs.release_created != 'true'
+    # Only publish edge if no tag was created (no stable release)
+    if: needs.release-please.outputs.tag_name == ''
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.bump_version.outputs.new_version }}
@@ -123,7 +125,7 @@ jobs:
         id: set-messages
         run: |
           # Determine version and result based on release type
-          if [[ "${{ needs.release-please.outputs.release_created }}" == "true" ]]; then
+          if [[ -n "${{ needs.release-please.outputs.tag_name }}" ]]; then
             VERSION="${{ needs.release-please.outputs.tag_name }}"
             PUBLISH_RESULT="${{ needs.publish-stable.result }}"
             VER_PARAM="latest"
@@ -164,7 +166,7 @@ jobs:
       - name: Determine Package for Cache Purge
         id: purge-cache
         run: |
-          if [[ "${{ needs.release-please.outputs.release_created }}" == "true" ]]; then
+          if [[ -n "${{ needs.release-please.outputs.tag_name }}" ]]; then
             if [[ "${{ needs.publish-stable.result }}" == "success" ]]; then
               echo "package=cloudinary-video-player" >> $GITHUB_OUTPUT
             fi
