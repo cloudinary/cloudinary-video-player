@@ -137,5 +137,8 @@
     "webpack-conditional-loader": "^1.0.12",
     "webpack-dev-server": "^5.2.2",
     "webpack-merge": "^6.0.1"
+  },
+  "overrides": {
+    "min-document": ">=2.19.2"
   }
 }
