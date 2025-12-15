@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.1...v3.6.2) (2025-12-15)
+
+
+### Bug Fixes
+
+* bump min-document from 2.19.0 to 2.19.2 ([b89b7a0](https://github.com/cloudinary/cloudinary-video-player/commit/b89b7a037e2c2332871cb77a3e46dc5a73af278d))
+
 ## [3.6.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.0...v3.6.1) (2025-12-11)
 
 
