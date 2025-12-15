@@ -5,7 +5,10 @@
   "include-component-in-tag": false,
   "separate-pull-requests": false,
   "tag-separator": "",
+  "pull-request-title-pattern": "chore: release ${version}",
   "packages": {
-    ".": {}
+    ".": {
+      "component": ""
+    }
   }
 }
