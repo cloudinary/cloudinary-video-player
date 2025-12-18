@@ -7,40 +7,97 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Existing git tag to publish to npm (e.g. v1.2.3)'
-        required: false
+        description: 'Publish existing tag to npm (e.g. v1.2.3)'
         type: string
+        required: false
+      dry_run:
+        description: 'Dry run (skip npm publish and tagging)'
+        type: boolean
+        default: false
+      debug:
+        description: 'Enable verbose logging'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
   pull-requests: write
   id-token: write
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  release-please:
-    if: github.event_name != 'workflow_dispatch' || github.event.inputs.release_tag == ''
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Release PR
-        uses: googleapis/release-please-action@v4
-        id: release
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-
   manual-publish:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != ''
+    if: inputs.release_tag != ''
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.release_tag }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+
+      - run: npm run build-all
+
+      - name: Publish to NPM
+        if: inputs.dry_run != true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
+
+  check-release:
+    if: inputs.release_tag == ''
+    runs-on: ubuntu-latest
+    outputs:
+      is_release: ${{ steps.check.outputs.is_release }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if this is a release merge
+        id: check
+        run: |
+          if [[ "${{ inputs.debug }}" == "true" ]]; then
+            set -x
+          fi
+
+          echo "::group::Checking merge commit"
+          COMMIT_MSG=$(git log -1 --pretty=%s)
+          echo "Commit message: $COMMIT_MSG"
+
+          # Check if this commit is from merging a release branch
+          if echo "$COMMIT_MSG" | grep -qE "release/v[0-9]+\.[0-9]+\.[0-9]+"; then
+            echo "::notice::This is a release merge"
+            echo "is_release=true" >> $GITHUB_OUTPUT
+
+            VERSION=$(echo "$COMMIT_MSG" | grep -oE "v[0-9]+\.[0-9]+\.[0-9]+" | head -1)
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "::notice::Version: $VERSION"
+          else
+            echo "::notice::This is NOT a release merge"
+            echo "is_release=false" >> $GITHUB_OUTPUT
+          fi
+          echo "::endgroup::"
+
+  publish-stable:
+    needs: check-release
+    if: needs.check-release.outputs.is_release == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      tag_name: ${{ steps.tag.outputs.tag_name }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
           fetch-depth: 0
 
       - uses: actions/setup-node@v4
@@ -48,38 +105,234 @@ jobs:
           node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Get version from package.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=v$VERSION" >> $GITHUB_OUTPUT
+          echo "::notice::Publishing stable version: v$VERSION"
+
+      - name: Create Git Tag
+        id: tag
+        if: inputs.dry_run != true
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          echo "::group::Creating tag $VERSION"
+
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "::warning::Tag $VERSION already exists, skipping tag creation"
+          else
+            git tag "$VERSION"
+            git push origin "$VERSION"
+            echo "::notice::Created and pushed tag $VERSION"
+          fi
+
+          echo "tag_name=$VERSION" >> $GITHUB_OUTPUT
+          echo "::endgroup::"
+
+      - name: Create GitHub Release
+        if: inputs.dry_run != true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          echo "::group::Creating GitHub release"
+
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "::warning::Release $VERSION already exists, skipping"
+          else
+            gh release create "$VERSION" \
+              --title "$VERSION" \
+              --generate-notes
+            echo "::notice::Created GitHub release $VERSION"
+          fi
+          echo "::endgroup::"
+
       - run: npm ci
 
       - run: npm run build-all
 
       - name: Publish to NPM
-        run: npm publish --provenance --access public
+        if: inputs.dry_run != true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "::notice::Publishing to npm (stable)"
+          npm publish --provenance --access public
 
-  publish-stable:
-    needs: release-please
-    # Use tag_name as the definitive indicator - if a tag exists, a release was created
-    if: needs.release-please.outputs.tag_name != ''
+      - name: Dry Run Summary
+        if: inputs.dry_run == true
+        run: |
+          echo "## 🧪 Dry Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Would have:" >> $GITHUB_STEP_SUMMARY
+          echo "- Created tag: ${{ steps.get_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Created GitHub release" >> $GITHUB_STEP_SUMMARY
+          echo "- Published to npm (stable)" >> $GITHUB_STEP_SUMMARY
+
+  create-release-pr:
+    needs: check-release
+    if: needs.check-release.outputs.is_release != 'true'
     runs-on: ubuntu-latest
+    outputs:
+      next_version: ${{ steps.calc_version.outputs.next_version }}
+      bump_type: ${{ steps.calc_version.outputs.bump_type }}
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.BOT_TOKEN }}
 
       - uses: actions/setup-node@v4
         with:
           node-version: '24.x'
-          registry-url: 'https://registry.npmjs.org'
 
-      - run: npm ci
+      - name: Configure Git
+        run: |
+          git config user.name "cloudinary-bot"
+          git config user.email "cloudinary-bot@users.noreply.github.com"
 
-      - run: npm run build-all
+      - name: Get current version
+        id: current_version
+        run: |
+          CURRENT=$(node -p "require('./package.json').version")
+          echo "version=$CURRENT" >> $GITHUB_OUTPUT
+          echo "::notice::Current version: $CURRENT"
 
-      - name: Publish to NPM
-        run: npm publish --provenance --access public
+      - name: Calculate next version
+        id: calc_version
+        run: |
+          if [[ "${{ inputs.debug }}" == "true" ]]; then
+            set -x
+          fi
+
+          echo "::group::Calculating next version"
+
+          npm install -g conventional-recommended-bump conventional-changelog-cli
+
+          BUMP_TYPE=$(conventional-recommended-bump -p angular 2>/dev/null || echo "")
+
+          if [[ -z "$BUMP_TYPE" || "$BUMP_TYPE" == "null" ]]; then
+            echo "::notice::No conventional commits found; skipping release PR creation"
+            echo "bump_type=" >> $GITHUB_OUTPUT
+            echo "next_version=" >> $GITHUB_OUTPUT
+            echo "::endgroup::"
+            exit 0
+          fi
+
+          echo "Bump type: $BUMP_TYPE"
+          echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
+
+          CURRENT="${{ steps.current_version.outputs.version }}"
+          NEXT=$(npx semver "$CURRENT" -i "$BUMP_TYPE")
+          echo "Next version: $NEXT"
+          echo "next_version=$NEXT" >> $GITHUB_OUTPUT
+          echo "::notice::Next version will be $NEXT ($BUMP_TYPE bump)"
+          echo "::endgroup::"
+
+      - name: Create or update release branch
+        if: steps.calc_version.outputs.bump_type != ''
+        run: |
+          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          BRANCH_NAME="release/v$NEXT_VERSION"
+
+          echo "::group::Setting up release branch: $BRANCH_NAME"
+
+          git push origin --delete "$BRANCH_NAME" 2>/dev/null || true
+          git branch -D "$BRANCH_NAME" 2>/dev/null || true
+
+          git checkout -b "$BRANCH_NAME"
+
+          echo "::endgroup::"
+
+      - name: Update version and changelog
+        if: steps.calc_version.outputs.bump_type != ''
+        run: |
+          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+
+          echo "::group::Updating version to $NEXT_VERSION"
+
+          npm version "$NEXT_VERSION" --no-git-tag-version
+
+          npm install --package-lock-only
+
+          echo "::endgroup::"
+
+          echo "::group::Generating changelog"
+
+          npx conventional-changelog -p angular -i CHANGELOG.md -s -r 1
+
+          echo "::endgroup::"
+
+      - name: Commit and push changes
+        if: steps.calc_version.outputs.bump_type != ''
+        run: |
+          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          BRANCH_NAME="release/v$NEXT_VERSION"
+
+          echo "::group::Committing changes"
+
+          git add package.json package-lock.json CHANGELOG.md
+          git commit -m "chore: release v$NEXT_VERSION"
+
+          git push origin "$BRANCH_NAME"
+
+          echo "::notice::Pushed release branch $BRANCH_NAME"
+          echo "::endgroup::"
+
+      - name: Create or update Pull Request
+        if: steps.calc_version.outputs.bump_type != ''
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          BRANCH_NAME="release/v$NEXT_VERSION"
+          BUMP_TYPE="${{ steps.calc_version.outputs.bump_type }}"
+
+          echo "::group::Creating/updating PR"
+
+          CHANGELOG_CONTENT=$(sed -n "/## \[$NEXT_VERSION\]/,/## \[/p" CHANGELOG.md | head -n -1)
+
+          EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --json number -q '.[0].number' || echo "")
+
+          PR_BODY=$(cat <<EOF
+          ## Release v$NEXT_VERSION
+
+          This PR was automatically created by the release workflow.
+
+          **Bump type:** $BUMP_TYPE
+
+          ### Changes
+          $CHANGELOG_CONTENT
+
+          ---
+          *Merge this PR to publish v$NEXT_VERSION to npm.*
+          EOF
+          )
+
+          if [[ -n "$EXISTING_PR" ]]; then
+            echo "Updating existing PR #$EXISTING_PR"
+            gh pr edit "$EXISTING_PR" --title "chore: release v$NEXT_VERSION" --body "$PR_BODY"
+            echo "::notice::Updated PR #$EXISTING_PR"
+          else
+            echo "Creating new PR"
+            gh pr create --base master --head "$BRANCH_NAME" --title "chore: release v$NEXT_VERSION" --body "$PR_BODY"
+            echo "::notice::Created new release PR"
+          fi
+
+          echo "::endgroup::"
+
+      - name: No changes summary
+        if: steps.calc_version.outputs.bump_type == ''
+        run: |
+          echo "## ℹ️ No Release Needed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "conventional-recommended-bump returned no bump; skipping release PR." >> $GITHUB_STEP_SUMMARY
 
   publish-edge:
-    needs: release-please
-    # Only publish edge if no tag was created (no stable release)
-    if: needs.release-please.outputs.tag_name == ''
+    needs: check-release
+    if: needs.check-release.outputs.is_release != 'true'
     runs-on: ubuntu-latest
     outputs:
       new_version: ${{ steps.bump_version.outputs.new_version }}
@@ -131,6 +384,7 @@ jobs:
           echo "new_version=${new_version}" >> $GITHUB_OUTPUT
 
       - name: Push version
+        if: inputs.dry_run != true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -139,11 +393,26 @@ jobs:
       - run: npm run build-all
 
       - name: Publish to NPM
-        run: npm publish --tag edge --provenance --access public
+        if: inputs.dry_run != true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          echo "::notice::Publishing to npm (edge)"
+          npm publish --tag edge --provenance --access public
+
+      - name: Dry Run Summary
+        if: inputs.dry_run == true
+        run: |
+          echo "## 🧪 Dry Run Summary (Edge)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Would have:" >> $GITHUB_STEP_SUMMARY
+          echo "- Created edge version: ${{ steps.bump_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Pushed to branch: ${{ steps.get_next_version.outputs.version }}-edge" >> $GITHUB_STEP_SUMMARY
+          echo "- Published to npm with edge tag" >> $GITHUB_STEP_SUMMARY
 
   notify:
-    needs: [release-please, publish-stable, publish-edge]
-    if: always() && (needs.publish-stable.result != null || needs.publish-edge.result != null)
+    needs: [check-release, publish-stable, publish-edge]
+    if: always() && (needs.publish-stable.result == 'success' || needs.publish-edge.result == 'success' || needs.publish-stable.result == 'failure' || needs.publish-edge.result == 'failure')
     runs-on: ubuntu-latest
 
     steps:
@@ -152,14 +421,12 @@ jobs:
       - name: Set Notification Messages
         id: set-messages
         run: |
-          # Determine version and result based on release type
-          if [[ -n "${{ needs.release-please.outputs.tag_name }}" ]]; then
-            VERSION="${{ needs.release-please.outputs.tag_name }}"
+          if [[ "${{ needs.check-release.outputs.is_release }}" == "true" ]]; then
+            VERSION="${{ needs.publish-stable.outputs.tag_name }}"
             PUBLISH_RESULT="${{ needs.publish-stable.result }}"
             VER_PARAM="latest"
           else
             VERSION="${{ needs.publish-edge.outputs.new_version }}"
-            # Fallback if version output is empty (e.g., if job failed before bump_version)
             if [[ -z "$VERSION" ]]; then
               VERSION="edge"
             fi
@@ -167,7 +434,6 @@ jobs:
             VER_PARAM="edge"
           fi
           
-          # Set messages based on publish result
           if [[ "$PUBLISH_RESULT" == "success" ]]; then
             echo "SLACK_TITLE=Video Player $VERSION Deployed" >> $GITHUB_OUTPUT
             echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version $VERSION deployed successfully" >> $GITHUB_OUTPUT
@@ -194,7 +460,7 @@ jobs:
       - name: Determine Package for Cache Purge
         id: purge-cache
         run: |
-          if [[ -n "${{ needs.release-please.outputs.tag_name }}" ]]; then
+          if [[ "${{ needs.check-release.outputs.is_release }}" == "true" ]]; then
             if [[ "${{ needs.publish-stable.result }}" == "success" ]]; then
               echo "package=cloudinary-video-player" >> $GITHUB_OUTPUT
             fi
