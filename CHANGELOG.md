@@ -1,4 +1,3 @@
-# Changelog
 
 ## [3.6.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.1...v3.6.2) (2025-12-15)
 
