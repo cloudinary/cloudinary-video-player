@@ -194,6 +194,8 @@ jobs:
         with:
           node-version: '24.x'
 
+      - run: npm ci
+
       - name: Configure Git
         run: |
           git config user.name "cloudinary-bot"
@@ -215,9 +217,7 @@ jobs:
 
           echo "::group::Calculating next version"
 
-          npm install -g conventional-recommended-bump conventional-changelog-cli
-
-          BUMP_TYPE=$(conventional-recommended-bump -p angular 2>/dev/null || echo "")
+          BUMP_TYPE=$(npx conventional-recommended-bump -p angular 2>/dev/null || echo "")
 
           if [[ -z "$BUMP_TYPE" || "$BUMP_TYPE" == "null" ]]; then
             echo "::notice::No conventional commits found; skipping release PR creation"
