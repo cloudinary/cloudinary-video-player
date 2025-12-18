@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   manual-publish:
-    if: github.event.inputs.release_tag != ''
+    if: inputs.release_tag != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
         run: npm publish --provenance --access public
 
   check-release:
-    if: github.event.inputs.release_tag == ''
+    if: inputs.release_tag == ''
     runs-on: ubuntu-latest
     outputs:
       is_release: ${{ steps.check.outputs.is_release }}
@@ -296,31 +296,28 @@ jobs:
 
           EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --json number -q '.[0].number' || echo "")
 
-          PR_BODY="## Release v$NEXT_VERSION
+          PR_BODY=$(cat <<EOF
+          ## Release v$NEXT_VERSION
 
-This PR was automatically created by the release workflow.
+          This PR was automatically created by the release workflow.
 
-**Bump type:** $BUMP_TYPE
+          **Bump type:** $BUMP_TYPE
 
-### Changes
-$CHANGELOG_CONTENT
+          ### Changes
+          $CHANGELOG_CONTENT
 
----
-*Merge this PR to publish v$NEXT_VERSION to npm.*"
+          ---
+          *Merge this PR to publish v$NEXT_VERSION to npm.*
+          EOF
+          )
 
           if [[ -n "$EXISTING_PR" ]]; then
             echo "Updating existing PR #$EXISTING_PR"
-            gh pr edit "$EXISTING_PR" \
-              --title "chore: release v$NEXT_VERSION" \
-              --body "$PR_BODY"
+            gh pr edit "$EXISTING_PR" --title "chore: release v$NEXT_VERSION" --body "$PR_BODY"
             echo "::notice::Updated PR #$EXISTING_PR"
           else
             echo "Creating new PR"
-            gh pr create \
-              --base master \
-              --head "$BRANCH_NAME" \
-              --title "chore: release v$NEXT_VERSION" \
-              --body "$PR_BODY"
+            gh pr create --base master --head "$BRANCH_NAME" --title "chore: release v$NEXT_VERSION" --body "$PR_BODY"
             echo "::notice::Created new release PR"
           fi
 
