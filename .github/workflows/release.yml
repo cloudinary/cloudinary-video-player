@@ -160,6 +160,12 @@ jobs:
           echo "::notice::Publishing to npm (stable)"
           npm publish --provenance --access public
 
+      - name: Purge jsDelivr Cache
+        if: inputs.dry_run != true
+        uses: ./.github/actions/purge-jsdelivr
+        with:
+          package: cloudinary-video-player
+
       - name: Dry Run Summary
         if: inputs.dry_run == true
         run: |
@@ -188,6 +194,8 @@ jobs:
         with:
           node-version: '24.x'
 
+      - run: npm ci
+
       - name: Configure Git
         run: |
           git config user.name "cloudinary-bot"
@@ -209,9 +217,7 @@ jobs:
 
           echo "::group::Calculating next version"
 
-          npm install -g conventional-recommended-bump conventional-changelog-cli
-
-          BUMP_TYPE=$(conventional-recommended-bump -p angular 2>/dev/null || echo "")
+          BUMP_TYPE=$(npx conventional-recommended-bump -p angular 2>/dev/null || echo "")
 
           if [[ -z "$BUMP_TYPE" || "$BUMP_TYPE" == "null" ]]; then
             echo "::notice::No conventional commits found; skipping release PR creation"
@@ -400,6 +406,12 @@ jobs:
           echo "::notice::Publishing to npm (edge)"
           npm publish --tag edge --provenance --access public
 
+      - name: Purge jsDelivr Cache
+        if: inputs.dry_run != true
+        uses: ./.github/actions/purge-jsdelivr
+        with:
+          package: cloudinary-video-player@edge
+
       - name: Dry Run Summary
         if: inputs.dry_run == true
         run: |
@@ -457,21 +469,3 @@ jobs:
           SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
           SLACK_FOOTER: ${{ steps.set-messages.outputs.SLACK_FOOTER }}
 
-      - name: Determine Package for Cache Purge
-        id: purge-cache
-        run: |
-          if [[ "${{ needs.check-release.outputs.is_release }}" == "true" ]]; then
-            if [[ "${{ needs.publish-stable.result }}" == "success" ]]; then
-              echo "package=cloudinary-video-player" >> $GITHUB_OUTPUT
-            fi
-          else
-            if [[ "${{ needs.publish-edge.result }}" == "success" ]]; then
-              echo "package=cloudinary-video-player@edge" >> $GITHUB_OUTPUT
-            fi
-          fi
-
-      - name: Purge jsDelivr Cache
-        if: steps.purge-cache.outputs.package != ''
-        uses: ./.github/actions/purge-jsdelivr
-        with:
-          package: ${{ steps.purge-cache.outputs.package }}
