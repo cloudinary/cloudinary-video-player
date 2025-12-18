@@ -1,12 +1,5 @@
 # Changelog
 
-## [3.6.3](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.2...v3.6.3) (2025-12-15)
-
-
-### Bug Fixes
-
-* empty component for release-please PR matching ([34aab4f](https://github.com/cloudinary/cloudinary-video-player/commit/34aab4ff272c6de3fb4814969c52602d59bc9647))
-
 ## [3.6.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.1...v3.6.2) (2025-12-15)
 
 
