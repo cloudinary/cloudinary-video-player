@@ -240,15 +240,13 @@ jobs:
       - name: Create or update release branch
         if: steps.calc_version.outputs.bump_type != ''
         run: |
-          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
-          BRANCH_NAME="release/v$NEXT_VERSION"
+          BRANCH_NAME="release/edge"
 
           echo "::group::Setting up release branch: $BRANCH_NAME"
 
-          git push origin --delete "$BRANCH_NAME" 2>/dev/null || true
-          git branch -D "$BRANCH_NAME" 2>/dev/null || true
-
-          git checkout -b "$BRANCH_NAME"
+          # Checkout release branch, reset to master
+          git fetch origin "$BRANCH_NAME" 2>/dev/null || true
+          git checkout -B "$BRANCH_NAME" origin/master
 
           echo "::endgroup::"
 
@@ -275,14 +273,14 @@ jobs:
         if: steps.calc_version.outputs.bump_type != ''
         run: |
           NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
-          BRANCH_NAME="release/v$NEXT_VERSION"
+          BRANCH_NAME="release/edge"
 
           echo "::group::Committing changes"
 
           git add package.json package-lock.json CHANGELOG.md
           git commit -m "chore: release v$NEXT_VERSION"
 
-          git push origin "$BRANCH_NAME"
+          git push -f origin "$BRANCH_NAME"
 
           echo "::notice::Pushed release branch $BRANCH_NAME"
           echo "::endgroup::"
@@ -293,7 +291,7 @@ jobs:
           GH_TOKEN: ${{ secrets.BOT_TOKEN }}
         run: |
           NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
-          BRANCH_NAME="release/v$NEXT_VERSION"
+          BRANCH_NAME="release/edge"
           BUMP_TYPE="${{ steps.calc_version.outputs.bump_type }}"
 
           echo "::group::Creating/updating PR"
