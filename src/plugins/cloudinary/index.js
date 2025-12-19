@@ -292,6 +292,8 @@ class CloudinaryContext {
         this.disablePoster(posterOptions.posterColor);
       } else if (src.poster()) {
         this.player.poster(src.poster().url());
+        const posterImg = this.player.posterImage.el().querySelector('img');
+        posterImg?.addEventListener('error', () => this.disablePoster(), { once: true });
       }
 
       _sources = src.generateSources().reduce((srcs, src) => {
