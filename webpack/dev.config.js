@@ -42,6 +42,7 @@ module.exports = merge(webpackCommon, {
   devServer: {
     port: env.devServer.port || 3000,
     open: ['index.html'],
+    allowedHosts: 'all',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': '*'
