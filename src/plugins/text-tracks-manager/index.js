@@ -3,6 +3,7 @@ import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { transcriptParser } from './parsers/transcriptParser';
 import { srtParser } from './parsers/srtParser';
 import { addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
+import { appendQueryParams } from '../../utils/querystring';
 
 const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
   `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
@@ -110,8 +111,9 @@ function textTracksManager() {
       const publicId = source.publicId();
       const deliveryType = source.resourceConfig().type;
       const urlPrefix = getCloudinaryUrlPrefix(player.cloudinary.cloudinaryConfig());
-      const baseUrl = getTranscriptionFileUrl(urlPrefix, deliveryType, publicId);
-      const localizedUrl = srclang ? getTranscriptionFileUrl(urlPrefix, deliveryType, publicId, srclang) : null;
+      const queryParams = source.queryParams();
+      const baseUrl = appendQueryParams(getTranscriptionFileUrl(urlPrefix, deliveryType, publicId), queryParams);
+      const localizedUrl = srclang ? appendQueryParams(getTranscriptionFileUrl(urlPrefix, deliveryType, publicId, srclang), queryParams) : null;
 
       return localizedUrl ? localizedUrl : baseUrl;
     };
