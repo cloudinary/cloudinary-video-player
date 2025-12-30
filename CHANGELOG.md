@@ -1,3 +1,18 @@
+## [3.6.3](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.2...v3.6.3) (2025-12-30)
+
+
+### Bug Fixes
+
+* build ([8c9fce2](https://github.com/cloudinary/cloudinary-video-player/commit/8c9fce2efe1d33806012048d85a6b82afecc3bc7))
+* build ([80ed77b](https://github.com/cloudinary/cloudinary-video-player/commit/80ed77b8168d96aee30a7ef9a3b52f7f79fd86bb))
+* changelog generation ([b131f8b](https://github.com/cloudinary/cloudinary-video-player/commit/b131f8b4eefcf5a5840dd3510eccb50c5d8769df))
+* conventional-recommended-bump in release workflow ([32ddc03](https://github.com/cloudinary/cloudinary-video-player/commit/32ddc031cd1c69d1a16574d217b04d10f5abc314))
+* empty component for release-please PR matching ([34aab4f](https://github.com/cloudinary/cloudinary-video-player/commit/34aab4ff272c6de3fb4814969c52602d59bc9647))
+* improve jsDelivr Cache purge ([f5aa239](https://github.com/cloudinary/cloudinary-video-player/commit/f5aa239b377c27562437dedfd0bba40afbf93b7c))
+* reuse branch for releases ([0e651e3](https://github.com/cloudinary/cloudinary-video-player/commit/0e651e34dc6e40dafefe41501964544f19bedf4b))
+
+
+
 
 ## [3.6.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.1...v3.6.2) (2025-12-15)
 
