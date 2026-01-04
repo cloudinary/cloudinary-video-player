@@ -65,25 +65,39 @@ jobs:
 
       - name: Check if this is a release merge
         id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [[ "${{ inputs.debug }}" == "true" ]]; then
             set -x
           fi
 
-          echo "::group::Checking merge commit"
-          COMMIT_MSG=$(git log -1 --pretty=%s)
-          echo "Commit message: $COMMIT_MSG"
+          echo "::group::Checking if commit came from release/edge branch"
 
-          # Check if this commit is from merging a release branch
-          if echo "$COMMIT_MSG" | grep -qE "release/v[0-9]+\.[0-9]+\.[0-9]+"; then
-            echo "::notice::This is a release merge"
+          # Get the PR associated with this commit
+          PR_INFO=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0] // empty' 2>/dev/null || echo "")
+
+          if [[ -z "$PR_INFO" ]]; then
+            echo "::notice::No PR found for this commit"
+            echo "is_release=false" >> $GITHUB_OUTPUT
+            echo "::endgroup::"
+            exit 0
+          fi
+
+          BRANCH=$(echo "$PR_INFO" | jq -r '.head.ref')
+          PR_NUMBER=$(echo "$PR_INFO" | jq -r '.number')
+          echo "PR #$PR_NUMBER merged from branch: $BRANCH"
+
+          if [[ "$BRANCH" == "release/edge" ]]; then
+            echo "::notice::This is a release merge from release/edge"
             echo "is_release=true" >> $GITHUB_OUTPUT
 
-            VERSION=$(echo "$COMMIT_MSG" | grep -oE "v[0-9]+\.[0-9]+\.[0-9]+" | head -1)
+            # Get version from package.json (already bumped in the PR)
+            VERSION="v$(jq -r '.version' package.json)"
             echo "version=$VERSION" >> $GITHUB_OUTPUT
             echo "::notice::Version: $VERSION"
           else
-            echo "::notice::This is NOT a release merge"
+            echo "::notice::This is NOT a release merge (branch: $BRANCH)"
             echo "is_release=false" >> $GITHUB_OUTPUT
           fi
           echo "::endgroup::"
