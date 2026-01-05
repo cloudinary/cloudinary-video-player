@@ -56,6 +56,7 @@ class AnalyticsPlugin {
 
   init() {
     const playerLoad = () => {
+      this.player.trigger(PLAYER_EVENT.PLAYER_LOAD, { url: window.location.href });
       this.track({ action: 'Player Load', label: window.location.href, nonInteraction: true });
     };
 
@@ -64,7 +65,8 @@ class AnalyticsPlugin {
     };
 
     const start = () => {
-      if (this._startTracked) {
+      if (!this._startTracked) {
+        this.player.trigger(PLAYER_EVENT.START);
         this.track({ action: 'Start' });
         this._startTracked = true;
       }
@@ -215,6 +217,8 @@ class AnalyticsPlugin {
   }
 
   videoload() {
+    const src = this.player.currentSource().src;
+    this.player.trigger(PLAYER_EVENT.VIDEO_LOAD, { src });
     this.track({ action: 'Video Load', nonInteraction: true });
   }
 
