@@ -1,6 +1,5 @@
 import videojs from 'video.js';
-import { sliceProperties } from 'utils/slicing';
-import { normalizeEventsParam, default as ExtendedEvents } from 'extended-events';
+import { normalizeEventsParam } from 'extended-events';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 const DEFAULT_EVENTS = [
@@ -38,16 +37,6 @@ class AnalyticsPlugin {
     this.options = videojs.obj.merge(DEFAULT_OPTIONS, initOptions);
     this.events = normalizeEventsParam(this.options.events, EVENT_DEFAULTS);
 
-    const extendedEvents = sliceProperties(this.events, PLAYER_EVENT.PERCENTS_PLAYED, PLAYER_EVENT.TIME_PLAYED, PLAYER_EVENT.PAUSE, PLAYER_EVENT.SEEK);
-
-    if (extendedEvents.pause) {
-      delete extendedEvents.pause;
-      extendedEvents.pausenoseek = {};
-    }
-
-    this._extendedEvents = new ExtendedEvents(player, { events: extendedEvents });
-
-    this._currentSource = null;
     this._startTracked = null;
     this._endTracked = null;
 
@@ -55,9 +44,9 @@ class AnalyticsPlugin {
   }
 
   init() {
-    const playerLoad = () => {
-      this.player.trigger(PLAYER_EVENT.PLAYER_LOAD, { url: window.location.href });
-      this.track({ action: 'Player Load', label: window.location.href, nonInteraction: true });
+    const playerLoad = (event, data) => {
+      const label = data?.url || window.location.href;
+      this.track({ action: 'Player Load', label, nonInteraction: true });
     };
 
     const play = () => {
@@ -65,11 +54,7 @@ class AnalyticsPlugin {
     };
 
     const start = () => {
-      if (!this._startTracked) {
-        this.player.trigger(PLAYER_EVENT.START);
-        this.track({ action: 'Start' });
-        this._startTracked = true;
-      }
+      this.track({ action: 'Start' });
     };
 
     const pause = () => {
@@ -176,7 +161,7 @@ class AnalyticsPlugin {
     }
 
     if (this.events.start) {
-      this.player.on(PLAYER_EVENT.PLAYING, start.bind(this));
+      this.player.on(PLAYER_EVENT.START, start.bind(this));
     }
 
     if (this.events.fullscreenchange) {
@@ -184,26 +169,28 @@ class AnalyticsPlugin {
     }
 
     if (this.events.percentsplayed) {
-      this._extendedEvents.on(PLAYER_EVENT.PERCENTS_PLAYED, percentsPlayed.bind(this));
+      this.player.on(PLAYER_EVENT.PERCENTS_PLAYED, percentsPlayed.bind(this));
     }
 
     if (this.events.timeplayed) {
-      this._extendedEvents.on(PLAYER_EVENT.TIME_PLAYED, timePlayed.bind(this));
+      this.player.on(PLAYER_EVENT.TIME_PLAYED, timePlayed.bind(this));
     }
 
     if (this.events.pause) {
-      this._extendedEvents.on(PLAYER_EVENT.PAUSE_NO_SEEK, pause.bind(this));
+      this.player.on(PLAYER_EVENT.PAUSE_NO_SEEK, pause.bind(this));
     }
 
     if (this.events.seek) {
-      this._extendedEvents.on(PLAYER_EVENT.SEEK, seek.bind(this));
+      this.player.on(PLAYER_EVENT.SEEK, seek.bind(this));
     }
 
     if (this.events.playerload) {
-      playerLoad();
+      this.player.on(PLAYER_EVENT.PLAYER_LOAD, playerLoad.bind(this));
     }
 
-    this.player.on(PLAYER_EVENT.LOADED_METADATA, this.loadedmetadata.bind(this));
+    if (this.events.videoload) {
+      this.player.on(PLAYER_EVENT.VIDEO_LOAD, this.videoload.bind(this));
+    }
   }
 
   track({ action, label, value = null, nonInteraction = false }) {
@@ -217,28 +204,12 @@ class AnalyticsPlugin {
   }
 
   videoload() {
-    const src = this.player.currentSource().src;
-    this.player.trigger(PLAYER_EVENT.VIDEO_LOAD, { src });
     this.track({ action: 'Video Load', nonInteraction: true });
   }
 
   resetState() {
-    this._currentSource = '';
     this._startTracked = false;
     this._endTracked = false;
-  }
-
-  loadedmetadata() {
-    const src = this.player.currentSource().src;
-
-    if (src !== this._currentSource) {
-      this.resetState();
-      this._currentSource = src;
-
-      if (this.events.videoload) {
-        this.videoload();
-      }
-    }
   }
 
 }

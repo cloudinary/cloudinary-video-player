@@ -577,7 +577,10 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   _setExtendedEvents() {
+    const options = {};
     const events = [];
+
+    // Add user-configured events; ExtendedEvents will merge with defaults
     if (this.playerOptions.playedEventPercents) {
       events.push({
         type: PLAYER_EVENT.PERCENTS_PLAYED,
@@ -592,15 +595,17 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     }
 
-    events.push(...[PLAYER_EVENT.SEEK, PLAYER_EVENT.MUTE, PLAYER_EVENT.UNMUTE, PLAYER_EVENT.QUALITY_CHANGED]);
+    if (events.length > 0) {
+      options.events = events;
+    }
 
-    const extendedEvents = new ExtendedEvents(this.videojs, { events });
+    const extendedEvents = new ExtendedEvents(this.videojs, options);
 
+    // Forward all extended events to the main player for developer access
     Object.keys(extendedEvents.events).forEach((_event) => {
-      const handler = (event, data) => {
-        this.videojs.trigger({ type: _event, eventData: data });
-      };
-      extendedEvents.on(_event, handler);
+      extendedEvents.on(_event, (event, data) => {
+        this.videojs.trigger(_event, data);
+      });
     });
   }
 

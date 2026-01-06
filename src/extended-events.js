@@ -9,27 +9,36 @@ const EVENT_DEFAULTS = {
   }
 };
 
+// Always-enabled events that the player will fire
 const DEFAULT_EVENTS = [
-  PLAYER_EVENT.PERCENTS_PLAYED,
+  PLAYER_EVENT.PLAYER_LOAD,
+  PLAYER_EVENT.VIDEO_LOAD,
+  PLAYER_EVENT.START,
   PLAYER_EVENT.PAUSE_NO_SEEK,
   PLAYER_EVENT.SEEK,
   PLAYER_EVENT.MUTE,
   PLAYER_EVENT.UNMUTE,
-  PLAYER_EVENT.QUALITY_CHANGED
+  PLAYER_EVENT.QUALITY_CHANGED,
+  PLAYER_EVENT.PERCENTS_PLAYED
 ];
 
 const DEFAULT_OPTIONS = {
   events: DEFAULT_EVENTS
 };
 
-// Emits the following additional events:
-// percentsplayed, timeplayed, pausenoseek, seek, mute, unmute
+// Emits custom Cloudinary player events:
+// playerload, videoload, start, percentsplayed, timeplayed, pausenoseek, seek, mute, unmute, qualitychanged
 class ExtendedEvents extends EventEmitter {
 
   constructor(player, initOptions = {}) {
     super();
     this.player = player;
+    
+    // Merge events arrays instead of replacing them
     const options = videojs.obj.merge(DEFAULT_OPTIONS, initOptions);
+    if (initOptions.events) {
+      options.events = [...DEFAULT_EVENTS, ...initOptions.events];
+    }
 
     let _muteData = { lastState: undefined };
     let _seekStart = 0;
@@ -39,6 +48,7 @@ class ExtendedEvents extends EventEmitter {
     let _timesTracked = [];
     let _currentSource = null;
     let _ended = false;
+    let _startTracked = false;
 
     const volumechange = (event) => {
       if (this.player.muted() && _muteData.lastState !== 'muted') {
@@ -114,9 +124,18 @@ class ExtendedEvents extends EventEmitter {
     };
 
     const loadedmetadata = () => {
-      if (this.player.currentSource().src !== _currentSource) {
+      const src = this.player.currentSource().src;
+      if (src !== _currentSource) {
         resetPerVideoState();
-        _currentSource = this.player.currentSource().src;
+        _currentSource = src;
+        this.emit(PLAYER_EVENT.VIDEO_LOAD, null, { src });
+      }
+    };
+
+    const playing = () => {
+      if (!_startTracked) {
+        _startTracked = true;
+        this.emit(PLAYER_EVENT.START);
       }
     };
 
@@ -157,12 +176,14 @@ class ExtendedEvents extends EventEmitter {
       _muteData = { lastState: undefined };
       _seekStart = _seekEnd = 0;
       _seeking = false;
+      _startTracked = false;
       resetPerVideoState();
     };
 
     const resetPerVideoState = () => {
       _percentsTracked = [];
       _timesTracked = [];
+      _startTracked = false;
     };
 
     const ended = () => {
@@ -171,6 +192,12 @@ class ExtendedEvents extends EventEmitter {
 
     this.events = normalizeEventsParam(options.events, EVENT_DEFAULTS);
     resetState();
+
+    // Always fire playerload event immediately
+    this.emit(PLAYER_EVENT.PLAYER_LOAD, null, { url: window.location.href });
+
+    // Always listen for start event
+    this.player.on(PLAYER_EVENT.PLAYING, playing.bind(this));
 
     this.player.on(PLAYER_EVENT.PLAY, replay.bind(this));
     this.player.on(PLAYER_EVENT.ENDED, ended.bind(this));
