@@ -10,7 +10,7 @@ import './components';
 import plugins from './plugins';
 import Utils from './utils';
 import defaults from './config/defaults';
-import Eventable from './mixins/eventable';
+import setupEventMethods from './utils/setup-event-methods';
 import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import {
@@ -35,7 +35,7 @@ Object.keys(plugins).forEach((key) => {
 
 overrideDefaultVideojsComponents();
 
-class VideoPlayer extends Utils.mixin(Eventable) {
+class VideoPlayer {
 
   static all(selector, ...args) {
     const nodeList = document.querySelectorAll(selector);
@@ -47,8 +47,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   constructor(elem, options, ready) {
-    super();
-
     this.videoElement = elem;
     this.options = splitOptions(options);
     this._videojsOptions = this.options.videojsOptions;
@@ -66,6 +64,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
+
+    // Setup event methods (on, one, off, trigger)
+    setupEventMethods(this, this.videojs);
 
     this._isPlayerConfigValid = true;
     if (this.playerOptions.debug) {
