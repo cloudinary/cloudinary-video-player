@@ -32,6 +32,8 @@ jobs:
   manual-publish:
     if: inputs.release_tag != ''
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ inputs.release_tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -52,6 +54,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
 
+      - name: Purge jsDelivr Cache
+        if: inputs.dry_run != true
+        uses: ./.github/actions/purge-jsdelivr
+        with:
+          package: cloudinary-video-player
+
   check-release:
     if: inputs.release_tag == ''
     runs-on: ubuntu-latest
@@ -65,25 +73,39 @@ jobs:
 
       - name: Check if this is a release merge
         id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [[ "${{ inputs.debug }}" == "true" ]]; then
             set -x
           fi
 
-          echo "::group::Checking merge commit"
-          COMMIT_MSG=$(git log -1 --pretty=%s)
-          echo "Commit message: $COMMIT_MSG"
+          echo "::group::Checking if commit came from release/edge branch"
 
-          # Check if this commit is from merging a release branch
-          if echo "$COMMIT_MSG" | grep -qE "release/v[0-9]+\.[0-9]+\.[0-9]+"; then
-            echo "::notice::This is a release merge"
+          # Get the PR associated with this commit
+          PR_INFO=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0] // empty' 2>/dev/null || echo "")
+
+          if [[ -z "$PR_INFO" ]]; then
+            echo "::notice::No PR found for this commit"
+            echo "is_release=false" >> $GITHUB_OUTPUT
+            echo "::endgroup::"
+            exit 0
+          fi
+
+          BRANCH=$(echo "$PR_INFO" | jq -r '.head.ref')
+          PR_NUMBER=$(echo "$PR_INFO" | jq -r '.number')
+          echo "PR #$PR_NUMBER merged from branch: $BRANCH"
+
+          if [[ "$BRANCH" == "release/edge" ]]; then
+            echo "::notice::This is a release merge from release/edge"
             echo "is_release=true" >> $GITHUB_OUTPUT
 
-            VERSION=$(echo "$COMMIT_MSG" | grep -oE "v[0-9]+\.[0-9]+\.[0-9]+" | head -1)
+            # Get version from package.json (already bumped in the PR)
+            VERSION="v$(jq -r '.version' package.json)"
             echo "version=$VERSION" >> $GITHUB_OUTPUT
             echo "::notice::Version: $VERSION"
           else
-            echo "::notice::This is NOT a release merge"
+            echo "::notice::This is NOT a release merge (branch: $BRANCH)"
             echo "is_release=false" >> $GITHUB_OUTPUT
           fi
           echo "::endgroup::"
@@ -93,7 +115,7 @@ jobs:
     if: needs.check-release.outputs.is_release == 'true'
     runs-on: ubuntu-latest
     outputs:
-      tag_name: ${{ steps.tag.outputs.tag_name }}
+      version: ${{ steps.tag.outputs.tag_name }}
 
     steps:
       - uses: actions/checkout@v4
@@ -421,8 +443,8 @@ jobs:
           echo "- Published to npm with edge tag" >> $GITHUB_STEP_SUMMARY
 
   notify:
-    needs: [check-release, publish-stable, publish-edge]
-    if: always() && (needs.publish-stable.result == 'success' || needs.publish-edge.result == 'success' || needs.publish-stable.result == 'failure' || needs.publish-edge.result == 'failure')
+    needs: [publish-stable, manual-publish]
+    if: always() && (needs.publish-stable.result == 'success' || needs.manual-publish.result == 'success' || needs.publish-stable.result == 'failure' || needs.manual-publish.result == 'failure')
     runs-on: ubuntu-latest
 
     steps:
@@ -431,23 +453,18 @@ jobs:
       - name: Set Notification Messages
         id: set-messages
         run: |
-          if [[ "${{ needs.check-release.outputs.is_release }}" == "true" ]]; then
-            VERSION="${{ needs.publish-stable.outputs.tag_name }}"
-            PUBLISH_RESULT="${{ needs.publish-stable.result }}"
-            VER_PARAM="latest"
+          VERSION="${{ needs.publish-stable.outputs.version }}${{ needs.manual-publish.outputs.version }}"
+          
+          if [[ "${{ needs.publish-stable.result }}" == "success" || "${{ needs.manual-publish.result }}" == "success" ]]; then
+            RESULT="success"
           else
-            VERSION="${{ needs.publish-edge.outputs.new_version }}"
-            if [[ -z "$VERSION" ]]; then
-              VERSION="edge"
-            fi
-            PUBLISH_RESULT="${{ needs.publish-edge.result }}"
-            VER_PARAM="edge"
+            RESULT="failure"
           fi
           
-          if [[ "$PUBLISH_RESULT" == "success" ]]; then
+          if [[ "$RESULT" == "success" ]]; then
             echo "SLACK_TITLE=Video Player $VERSION Deployed" >> $GITHUB_OUTPUT
             echo "SLACK_MESSAGE=Success :rocket: cloudinary-video-player version $VERSION deployed successfully" >> $GITHUB_OUTPUT
-            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=$VER_PARAM&min=true" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=Check it out at https://cloudinary.github.io/cloudinary-video-player/?ver=latest&min=true" >> $GITHUB_OUTPUT
             echo "SLACK_COLOR=good" >> $GITHUB_OUTPUT
           else
             echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
@@ -461,7 +478,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
-          SLACK_CHANNEL: 'rnd-fe-releases'
+          SLACK_CHANNEL: 'rnd-me-video-team-alerts'
           SLACK_COLOR: ${{ steps.set-messages.outputs.SLACK_COLOR }}
           SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
           SLACK_MESSAGE: ${{ steps.set-messages.outputs.SLACK_MESSAGE }}
