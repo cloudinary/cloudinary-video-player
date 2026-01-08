@@ -9,4 +9,13 @@ const objectToQuerystring = (obj) => {
   return `?${query}`;
 };
 
-export { objectToQuerystring };
+const appendQueryParams = (url, params) => {
+  const queryString = objectToQuerystring(params);
+  if (!queryString) {
+    return url;
+  }
+  const separator = url.includes('?') ? '&' : '?';
+  return `${url}${separator}${queryString.slice(1)}`;
+};
+
+export { objectToQuerystring, appendQueryParams };
