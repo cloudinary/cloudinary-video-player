@@ -12,6 +12,10 @@ jobs:
     name: install
     runs-on: ubuntu-latest
     steps:
+      - name: Set timestamp
+        id: timestamp
+        run: echo "TIMESTAMP=$(date +%Y%m%d_%H%M%S_%3N)" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -45,9 +49,9 @@ jobs:
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-         name: playwright-report
-         path: playwright-report/
-         retention-days: 30
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
 
       - name: Pushes to reports repository
         if: always()
@@ -60,8 +64,8 @@ jobs:
           destination-repository-name: 'cloudinary-video-player-reports'
           user-email: ''
           target-branch: main
-          target-directory: 'playwright-report_${{ github.run_id }}'
+          target-directory: 'playwright-report_ts_${{ env.TIMESTAMP }}'
 
       - name: Write URL in summary
         if: always()
-        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
+        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_ts_${{ env.TIMESTAMP }}" >> $GITHUB_STEP_SUMMARY
