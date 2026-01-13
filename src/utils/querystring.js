@@ -1,24 +1,14 @@
-const objectToQuerystring = (obj) => {
-  if (!obj) {
-    return '';
-  }
-  const keys = Object.keys(obj);
-
-  if (!keys.length) {
-    return '';
-  }
-
-  const query = keys.map((key) => `${key}=${obj[key]}`).join('&');
-  return `?${query}`;
-};
-
 const appendQueryParams = (url, params) => {
-  const queryString = objectToQuerystring(params);
-  if (!queryString) {
+  if (!params || !Object.keys(params).length) {
     return url;
   }
-  const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}${queryString.slice(1)}`;
+  const urlObj = new URL(url);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value != null) {
+      urlObj.searchParams.append(key, value);
+    }
+  });
+  return urlObj.href;
 };
 
-export { objectToQuerystring, appendQueryParams };
+export { appendQueryParams };
