@@ -1,4 +1,7 @@
 const objectToQuerystring = (obj) => {
+  if (!obj) {
+    return '';
+  }
   const keys = Object.keys(obj);
 
   if (!keys.length) {

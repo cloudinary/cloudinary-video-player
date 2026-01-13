@@ -126,7 +126,7 @@ class CloudinaryContext {
 
       
       const defaultPosterOptions = posterOptionsForCurrent();
-      const userPosterOptions = options.posterOptions || {};
+      const userPosterOptions = options.posterOptions;
       options.poster = options.poster || defaultPosterOptions;
       options.posterOptions = Object.assign(
         {},
