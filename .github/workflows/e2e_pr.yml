@@ -24,8 +24,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: ".nvmrc"
-          registry-url: "https://registry.npmjs.org"
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: NPM Install
         run: npm install
@@ -59,12 +59,12 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
         with:
-          source-directory: "playwright-report"
-          destination-github-username: "cloudinary"
-          destination-repository-name: "cloudinary-video-player-reports"
-          user-email: ""
+          source-directory: 'playwright-report'
+          destination-github-username: 'cloudinary'
+          destination-repository-name: 'cloudinary-video-player-reports'
+          user-email: ''
           target-branch: main
-          target-directory: "playwright-report_ts_${{ env.TIMESTAMP }}"
+          target-directory: 'playwright-report_ts_${{ env.TIMESTAMP }}'
 
       - name: Write URL in summary
         if: always()
