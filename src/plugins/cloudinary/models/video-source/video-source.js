@@ -1,4 +1,4 @@
-import { objectToQuerystring } from 'utils/querystring';
+import { appendQueryParams } from 'utils/querystring';
 import castArray from 'lodash/castArray';
 import { SOURCE_TYPE } from 'utils/consts';
 import { SOURCE_PARAMS } from 'video-player.const';
@@ -204,15 +204,11 @@ class VideoSource extends BaseSource {
         }
       }
 
-      const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
-
-      const src = this.config().url(this.publicId(), opts);
-      // if src is a url that already contains query params then replace '?' with '&'
-      const params = src.indexOf('?') > -1 ? queryString.replace('?', '&') : queryString;
+      const src = appendQueryParams(this.config().url(this.publicId(), opts), this.queryParams());
 
       return {
         type,
-        src: src + params,
+        src,
         cldSrc: this,
         isAdaptive: isAdaptive,
         withCredentials: this.withCredentials
