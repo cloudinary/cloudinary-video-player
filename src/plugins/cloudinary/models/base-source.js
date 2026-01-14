@@ -1,6 +1,6 @@
 import { getCloudinaryUrl, isRawUrl, mergeTransformations, normalizeOptions } from '../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { objectToQuerystring } from 'utils/querystring';
+import { appendQueryParams } from 'utils/querystring';
 
 
 class BaseSource {
@@ -55,9 +55,7 @@ class BaseSource {
 
   url({ transformation } = {}) {
     const url = this.config().url(this.publicId(), { transformation: transformation || this.transformation() });
-
-    const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
-    return `${url}${queryString}`;
+    return appendQueryParams(url, this.queryParams());
   }
 }
 
