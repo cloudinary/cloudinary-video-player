@@ -600,7 +600,8 @@ class VideoPlayer {
     // Forward all extended events to the main player for developer access
     Object.keys(extendedEvents.events).forEach((_event) => {
       extendedEvents.on(_event, (event, data) => {
-        this.videojs.trigger(_event, data);
+        const payload = Object.assign({ type: _event }, data);
+        this.videojs.trigger(payload);
       });
     });
   }
