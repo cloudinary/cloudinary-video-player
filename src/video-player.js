@@ -578,7 +578,6 @@ class VideoPlayer {
   }
 
   _setExtendedEvents() {
-    const options = {};
     const events = [];
 
     // Add user-configured events; ExtendedEvents will merge with defaults
@@ -596,11 +595,7 @@ class VideoPlayer {
       });
     }
 
-    if (events.length > 0) {
-      options.events = events;
-    }
-
-    const extendedEvents = new ExtendedEvents(this.videojs, options);
+    const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
     // Forward all extended events to the main player for developer access
     Object.keys(extendedEvents.events).forEach((_event) => {
