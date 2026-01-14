@@ -2,7 +2,7 @@ import VideoSource from '../video-source/video-source';
 import ImageSource from '../image-source';
 import { normalizeOptions } from '../../common';
 import { sliceAndUnsetProperties } from 'utils/slicing';
-import { objectToQuerystring } from 'utils/querystring';
+import { appendQueryParams } from 'utils/querystring';
 import { AUDIO_SUFFIX_REMOVAL_PATTERN, DEFAULT_AUDIO_PARAMS, DEFAULT_POSTER_PARAMS } from './audio-source.const';
 import { SOURCE_TYPE } from '../../../../utils/consts';
 
@@ -63,9 +63,7 @@ class AudioSource extends VideoSource {
         }
 
         Object.assign(opts, { resource_type: 'video', format });
-        const queryString = this.queryParams() ? objectToQuerystring(this.queryParams()) : '';
-
-        const src = `${this.config().url(this.publicId(), opts)}${queryString}`;
+        const src = appendQueryParams(this.config().url(this.publicId(), opts), this.queryParams());
         const type = 'video/mp4';
         return { type, src, cldSrc: this, poster: this.getPoster().url() };
       } else {
