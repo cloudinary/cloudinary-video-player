@@ -39,7 +39,7 @@ describe('ExtendedEvents', () => {
     // VideoPlayer should catch and re-trigger with payload
     expect(triggerSpy).toHaveBeenCalledWith(expect.objectContaining({
       type: 'percentsplayed',
-      percent: 10
+      eventData: expect.objectContaining({ percent: 10 })
     }));
   });
 });
