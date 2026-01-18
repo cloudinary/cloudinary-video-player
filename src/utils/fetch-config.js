@@ -1,6 +1,7 @@
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/common';
 import { utf8ToBase64 } from '../utils/utf8Base64';
+import { appendQueryParams } from './querystring';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
 
@@ -15,21 +16,22 @@ const getDefaultProfileConfig = (profileName) => {
 };
 
 const fetchConfig = async (options) => {
-  const { profile, publicId, cloudinaryConfig, type = 'upload', videoConfig } = options;
+  const { profile, publicId, cloudinaryConfig, type = 'upload', videoConfig, allowUsageReport = true } = options;
   
   if (profile && isDefaultProfile(profile)) {
     return getDefaultProfileConfig(profile);
   }
 
   const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service';
+  const queryParams = allowUsageReport ? { _s: `vp-${VERSION}` } : null;
 
   let configUrl;
   if (profile) {
     configUrl = isRawUrl(profile) 
       ? profile 
-      : `${urlPrefix}/video_player_profiles/${profile.replaceAll(' ', '+')}.json`;
+      : appendQueryParams(`${urlPrefix}/video_player_profiles/${profile.replaceAll(' ', '+')}.json`, queryParams);
   } else if (publicId && videoConfig !== false) {
-    configUrl = `${urlPrefix}/video_player_config/video/${type}/${utf8ToBase64(publicId)}.json`;
+    configUrl = appendQueryParams(`${urlPrefix}/video_player_config/video/${type}/${utf8ToBase64(publicId)}.json`, queryParams);
   } else {
     return {};
   }
