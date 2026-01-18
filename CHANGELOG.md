@@ -1,3 +1,21 @@
+## [3.6.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.4...v3.6.5) (2026-01-14)
+
+
+### Bug Fixes
+
+* **VIDEO-20638:** improved URL and search-queries handling  ([#967](https://github.com/cloudinary/cloudinary-video-player/issues/967)) ([66cfc40](https://github.com/cloudinary/cloudinary-video-player/commit/66cfc405f6aa2d25be3c843dd9a40cffd7b61900))
+
+
+
+## [3.6.4](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.3...v3.6.4) (2026-01-08)
+
+
+### Bug Fixes
+
+* **VIDEO-20100:** analytics improvements ([#959](https://github.com/cloudinary/cloudinary-video-player/issues/959)) ([e4571d2](https://github.com/cloudinary/cloudinary-video-player/commit/e4571d2597fb17b7bf509e6df04c249f7d1556d9))
+
+
+
 ## [3.6.3](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.2...v3.6.3) (2025-12-30)
 
 

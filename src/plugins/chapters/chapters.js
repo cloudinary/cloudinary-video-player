@@ -3,6 +3,7 @@ import videojs from 'video.js';
 import './chapters.scss';
 import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { utf8ToBase64 } from '../../utils/utf8Base64';
+import { appendQueryParams } from '../../utils/querystring';
 
 /**
  * Chapters plugin.
@@ -68,10 +69,11 @@ const ChaptersPlugin = (function () {
       return null;
     }
 
-    const { type: deliveryType } = this.player.cloudinary.source().resourceConfig();
+    const source = this.player.cloudinary.source();
+    const { type: deliveryType } = source.resourceConfig();
     const urlPrefix = getCloudinaryUrlPrefix(this.player.cloudinary.cloudinaryConfig());
     const fullUrl = `${urlPrefix}/_applet_/video_service/chapters/${deliveryType}/${utf8ToBase64(currentPublicId)}.vtt`;
-    return `${fullUrl}?t=${Date.now()}`;
+    return appendQueryParams(fullUrl, source.queryParams());
   };
 
   /**

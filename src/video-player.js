@@ -23,6 +23,7 @@ import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
 import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
+import { appendQueryParams } from './utils/querystring';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -266,9 +267,10 @@ class VideoPlayer {
         transformation.flags = transformation.flags || [];
         transformation.flags.push('sprite');
 
-        const vttSrc = source.config()
+        const vttUrl = source.config()
           .url(`${publicId}.vtt`, { transformation })
           .replace(/\.json$/, ''); // Handle playlist by tag
+        const vttSrc = appendQueryParams(vttUrl, source.queryParams());
 
         // vttThumbnails must be called differently on init and on source update.
         isFunction(this.videojs.vttThumbnails)
@@ -300,9 +302,10 @@ class VideoPlayer {
         transformation.flags = transformation.flags || [];
         transformation.flags.push('getinfo');
 
-        const aiHighlightsGraphSrc = source.config()
+        const aiHighlightsGraphUrl = source.config()
           .url(`${publicId}`, { transformation })
           .replace(/\.json$/, ''); // Handle playlist by tag
+        const aiHighlightsGraphSrc = appendQueryParams(aiHighlightsGraphUrl, source.queryParams());
 
         // Plugin is called differently on init and on source update.
         isFunction(this.videojs.aiHighlightsGraph)
