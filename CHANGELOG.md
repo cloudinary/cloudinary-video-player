@@ -1,3 +1,12 @@
+## [3.6.6](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.5...v3.6.6) (2026-01-18)
+
+
+### Bug Fixes
+
+* **VIDEO-20608:** add missing events  ([2707888](https://github.com/cloudinary/cloudinary-video-player/commit/270788837a5b5fd5ab3677d65072c2b24468b17f))
+
+
+
 ## [3.6.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.4...v3.6.5) (2026-01-14)
 
 
