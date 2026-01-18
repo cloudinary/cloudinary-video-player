@@ -10,7 +10,7 @@ import './components';
 import plugins from './plugins';
 import Utils from './utils';
 import defaults from './config/defaults';
-import Eventable from './mixins/eventable';
+import setupEventMethods from './utils/setup-event-methods';
 import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import {
@@ -36,7 +36,7 @@ Object.keys(plugins).forEach((key) => {
 
 overrideDefaultVideojsComponents();
 
-class VideoPlayer extends Utils.mixin(Eventable) {
+class VideoPlayer {
 
   static all(selector, ...args) {
     const nodeList = document.querySelectorAll(selector);
@@ -48,8 +48,6 @@ class VideoPlayer extends Utils.mixin(Eventable) {
   }
 
   constructor(elem, options, ready) {
-    super();
-
     this.videoElement = elem;
     this.options = splitOptions(options);
     this._videojsOptions = this.options.videojsOptions;
@@ -67,6 +65,9 @@ class VideoPlayer extends Utils.mixin(Eventable) {
     }
 
     this.videojs = videojs(this.videoElement, this._videojsOptions);
+
+    // Setup event methods (on, one, off, trigger)
+    setupEventMethods(this, this.videojs);
 
     this._isPlayerConfigValid = true;
     if (this.playerOptions.debug) {
@@ -581,6 +582,8 @@ class VideoPlayer extends Utils.mixin(Eventable) {
 
   _setExtendedEvents() {
     const events = [];
+
+    // Add user-configured events; ExtendedEvents will merge with defaults
     if (this.playerOptions.playedEventPercents) {
       events.push({
         type: PLAYER_EVENT.PERCENTS_PLAYED,
@@ -595,15 +598,13 @@ class VideoPlayer extends Utils.mixin(Eventable) {
       });
     }
 
-    events.push(...[PLAYER_EVENT.SEEK, PLAYER_EVENT.MUTE, PLAYER_EVENT.UNMUTE, PLAYER_EVENT.QUALITY_CHANGED]);
-
     const extendedEvents = new ExtendedEvents(this.videojs, { events });
 
+    // Forward all extended events to the main player for developer access
     Object.keys(extendedEvents.events).forEach((_event) => {
-      const handler = (event, data) => {
+      extendedEvents.on(_event, (event, data) => {
         this.videojs.trigger({ type: _event, eventData: data });
-      };
-      extendedEvents.on(_event, handler);
+      });
     });
   }
 
