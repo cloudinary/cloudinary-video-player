@@ -601,7 +601,6 @@ class VideoPlayer {
     Object.keys(extendedEvents.events).forEach((_event) => {
       extendedEvents.on(_event, (event, data) => {
         this.videojs.trigger({ type: _event, eventData: data });
-        debugger;
       });
     });
   }
