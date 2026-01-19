@@ -37,11 +37,17 @@ class AudioSource extends VideoSource {
       return this;
     }
 
-    ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }));
-
-    if (!publicId) {
+    // For audio, we convert poster: true to waveform poster (not applet)
+    if (publicId === true) {
       publicId = this.publicId();
       options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
+    } else {
+      ({ publicId, options } = normalizeOptions(publicId, options, { tolerateMissingId: true }));
+
+      if (!publicId) {
+        publicId = this.publicId();
+        options = Object.assign({}, options, DEFAULT_POSTER_PARAMS);
+      }
     }
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
