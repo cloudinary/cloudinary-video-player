@@ -19,7 +19,6 @@ export default {
   textTrackSettings: false,
   loop: false,
   muted: false,
-  poster: true,
   posterOptions: {},
   sourceTypes: ['auto'],
   contextMenu: {

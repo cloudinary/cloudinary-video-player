@@ -39,7 +39,7 @@ class VideoSource extends BaseSource {
       options.resource_type = options.resourceType;
     }
 
-    if (!options.poster) {
+    if (options.poster === undefined) {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
