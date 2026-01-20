@@ -126,25 +126,25 @@ class CloudinaryContext {
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
       
-      const defaultPosterOptions = posterOptionsForCurrent();
-      const userPosterOptions = options.posterOptions;
-      const hasUserPosterOptions = userPosterOptions && Object.keys(userPosterOptions).length > 0;
+      const posterOptions = posterOptionsForCurrent();
+      const hasUserPosterOptions = options.posterOptions && Object.keys(options.posterOptions).length > 0;
       
       if (options.poster === undefined) {
         if (isRawUrl(publicId)) {
           options.poster = false;
         } else if (!hasUserPosterOptions) {
           options.poster = true;
+        } else {
+          options.poster = posterOptions;
         }
       }
-      
+
       options.posterOptions = Object.assign(
         {},
-        defaultPosterOptions,
-        userPosterOptions,
+        posterOptions,
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
-      
+
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
       if (options.sourceTypes.indexOf('audio') > -1) {
