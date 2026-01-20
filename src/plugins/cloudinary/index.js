@@ -6,7 +6,8 @@ import {
   normalizeOptions,
   mergeTransformations,
   extendCloudinaryConfig,
-  setupCloudinaryMiddleware
+  setupCloudinaryMiddleware,
+  isRawUrl
 } from './common';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
@@ -127,12 +128,21 @@ class CloudinaryContext {
       
       const defaultPosterOptions = posterOptionsForCurrent();
       const userPosterOptions = options.posterOptions;
-      options.poster = options.poster || defaultPosterOptions;
+      const hasUserPosterOptions = userPosterOptions && Object.keys(userPosterOptions).length > 0;
+      
+      if (options.poster === undefined) {
+        if (isRawUrl(publicId)) {
+          options.poster = false;
+        } else if (!hasUserPosterOptions) {
+          options.poster = true;
+        }
+      }
+      
       options.posterOptions = Object.assign(
         {},
         defaultPosterOptions,
         userPosterOptions,
-        { hasUserPosterOptions: !!userPosterOptions || null }
+        { hasUserPosterOptions: hasUserPosterOptions || null }
       );
       
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
