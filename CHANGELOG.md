@@ -1,3 +1,17 @@
+# [3.7.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.5...v3.7.0) (2026-01-20)
+
+
+### Bug Fixes
+
+* **VIDEO-20608:** add missing events  ([2707888](https://github.com/cloudinary/cloudinary-video-player/commit/270788837a5b5fd5ab3677d65072c2b24468b17f))
+
+
+### Features
+
+* set poster default to true ([59c52e0](https://github.com/cloudinary/cloudinary-video-player/commit/59c52e097e07e043bbb75f84fe34099c201cb3b8))
+
+
+
 ## [3.6.5](https://github.com/cloudinary/cloudinary-video-player/compare/v3.6.4...v3.6.5) (2026-01-14)
 
 
