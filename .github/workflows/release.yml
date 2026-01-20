@@ -82,18 +82,30 @@ jobs:
 
           echo "::group::Checking if commit came from release/edge branch"
 
-          # Get the PR associated with this commit
-          PR_INFO=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" --jq '.[0] // empty' 2>/dev/null || echo "")
+          # Extract PR number from commit message (format: "... (#123)")
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          PR_NUMBER=$(echo "$COMMIT_MSG" | grep -oP '\(#\K\d+(?=\))' || echo "")
+
+          if [[ -z "$PR_NUMBER" ]]; then
+            echo "::notice::No PR number found in commit message"
+            echo "is_release=false" >> $GITHUB_OUTPUT
+            echo "::endgroup::"
+            exit 0
+          fi
+
+          echo "Found PR #$PR_NUMBER in commit message"
+
+          # Get PR details to check the source branch
+          PR_INFO=$(gh api "repos/${{ github.repository }}/pulls/$PR_NUMBER" 2>/dev/null || echo "")
 
           if [[ -z "$PR_INFO" ]]; then
-            echo "::notice::No PR found for this commit"
+            echo "::notice::Could not fetch PR #$PR_NUMBER details"
             echo "is_release=false" >> $GITHUB_OUTPUT
             echo "::endgroup::"
             exit 0
           fi
 
           BRANCH=$(echo "$PR_INFO" | jq -r '.head.ref')
-          PR_NUMBER=$(echo "$PR_INFO" | jq -r '.number')
           echo "PR #$PR_NUMBER merged from branch: $BRANCH"
 
           if [[ "$BRANCH" == "release/edge" ]]; then
@@ -318,7 +330,7 @@ jobs:
 
           echo "::group::Creating/updating PR"
 
-          CHANGELOG_CONTENT=$(sed -n "/## \[$NEXT_VERSION\]/,/## \[/p" CHANGELOG.md | head -n -1)
+          CHANGELOG_CONTENT=$(sed -n "/^#\{1,2\} \[$NEXT_VERSION\]/,/^#\{1,2\} \[/p" CHANGELOG.md | head -n -1)
 
           EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --json number -q '.[0].number' || echo "")
 
