@@ -1,3 +1,12 @@
+## [3.7.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.7.1...v3.7.2) (2026-01-21)
+
+
+### Bug Fixes
+
+* poster options ([#974](https://github.com/cloudinary/cloudinary-video-player/issues/974)) ([8ea95a5](https://github.com/cloudinary/cloudinary-video-player/commit/8ea95a5c48d87d035a62620ed613342fd6be7f8d))
+
+
+
 ## [3.7.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.7.0...v3.7.1) (2026-01-20)
 
 
