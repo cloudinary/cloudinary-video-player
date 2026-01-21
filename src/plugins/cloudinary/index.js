@@ -1,4 +1,5 @@
 import isFunction from 'lodash/isFunction';
+import isEmpty from 'lodash/isEmpty';
 import { applyWithProps } from 'utils/apply-with-props';
 import { sliceAndUnsetProperties } from 'utils/slicing';
 import { isKeyInTransformation } from 'utils/cloudinary';
@@ -127,7 +128,7 @@ class CloudinaryContext {
 
       
       const posterOptions = posterOptionsForCurrent();
-      const hasUserPosterOptions = options.posterOptions && Object.keys(options.posterOptions).length > 0;
+      const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
         if (isRawUrl(publicId)) {
