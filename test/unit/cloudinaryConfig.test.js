@@ -1,10 +1,11 @@
+import { describe, it, expect, vi } from 'vitest';
 import '../../src/';
 import VideoPlayer from '../../src/video-player';
 import { getResolveVideoElement, extractOptions } from '../../src/video-player.utils';
 
 describe('secure true test', () => {
   it('test force secure true', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     document.body.innerHTML = '<div><video id="test"/></div>';
     const elem = getResolveVideoElement('test');
     const options = extractOptions(elem, { hideContextMenu: true, cloudinaryConfig: { cloud_name: 'demo' } });
@@ -13,7 +14,7 @@ describe('secure true test', () => {
     expect(conf.secure).toEqual(true);
   });
   it('test explicit secure false', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
     document.body.innerHTML = '<div><video id="test"/></div>';
     const elem = getResolveVideoElement('test');
     const options = extractOptions(elem, { hideContextMenu: true, cloudinaryConfig: { cloud_name: 'demo', secure: false } });

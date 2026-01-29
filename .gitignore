@@ -14,6 +14,10 @@ dist/
 lib/
 .DS_Store
 
+# Test coverage
+coverage/
+.vitest/
+
 \.history/
 
 # playwright e2e tests

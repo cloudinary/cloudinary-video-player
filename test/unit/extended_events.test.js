@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import VideoPlayer from '../../src/video-player';
 import { getResolveVideoElement, extractOptions } from '../../src/video-player.utils';
 
@@ -6,7 +7,7 @@ describe('ExtendedEvents', () => {
 
   beforeAll(() => {
     originalFetch = global.fetch;
-    global.fetch = jest.fn();
+    global.fetch = vi.fn();
   });
 
   afterAll(() => {
@@ -26,11 +27,11 @@ describe('ExtendedEvents', () => {
     // Wait for player to be ready so ExtendedEvents are initialized
     await new Promise(resolve => vp.videojs.ready(resolve));
 
-    const triggerSpy = jest.spyOn(vp.videojs, 'trigger');
+    const triggerSpy = vi.spyOn(vp.videojs, 'trigger');
 
     // Simulate playback params
-    jest.spyOn(vp.videojs, 'currentTime').mockReturnValue(10);
-    jest.spyOn(vp.videojs, 'duration').mockReturnValue(100);
+    vi.spyOn(vp.videojs, 'currentTime').mockReturnValue(10);
+    vi.spyOn(vp.videojs, 'duration').mockReturnValue(100);
 
     // Trigger timeupdate
     vp.videojs.trigger('timeupdate');
