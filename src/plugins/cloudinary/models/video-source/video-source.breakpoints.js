@@ -9,7 +9,11 @@ const RENDITIONS = [640, 1280, 1920, 3840];
  */
 export const validateDpr = (dpr) => {
   const capped = (typeof dpr === 'number' && !isNaN(dpr) && dpr >= 1.0) ? Math.min(dpr, 2.0) : DEFAULT_DPR;
-  return capped < 1.25 ? 1.0 : capped < 1.75 ? 1.5 : 2.0;
+  return [1, 1.5, 2].reduce((closest, option) => {
+    return Math.abs(capped - option) < Math.abs(capped - closest)
+      ? option
+      : closest;
+  });
 };
 
 
