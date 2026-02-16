@@ -305,7 +305,9 @@ class CloudinaryContext {
         this.player.poster(src.poster().url());
       }
 
-      _sources = src.generateSources().reduce((srcs, src) => {
+      // Pass player element for breakpoint calculation (only for VideoSource)
+      const playerElement = src.getType && src.getType() === 'video' ? this.player.el() : null;
+      _sources = src.generateSources(playerElement).reduce((srcs, src) => {
         if (src.isAdaptive) {
           let codec = src.type.split('; ')[1] || null;
           if (codec && 'MediaSource' in window) {

@@ -71,3 +71,7 @@ export const FORMAT_MAPPINGS = {
   hls: 'm3u8',
   dash: 'mpd'
 };
+
+// Breakpoint configuration constants
+export const BREAKPOINT_RENDITIONS = [640, 1280, 1920, 3840];
+export const BREAKPOINT_DEFAULT_MAX_DPR = 2.0;  // Default maximum DPR cap

@@ -7,7 +7,9 @@ import {
   ADAPTIVE_SOURCETYPES,
   DEFAULT_POSTER_PARAMS,
   DEFAULT_VIDEO_PARAMS,
-  VIDEO_SUFFIX_REMOVAL_PATTERN
+  VIDEO_SUFFIX_REMOVAL_PATTERN,
+  BREAKPOINT_RENDITIONS,
+  BREAKPOINT_DEFAULT_MAX_DPR
 } from './video-source.const';
 import {
   formatToMimeTypeAndTransformation,
@@ -19,10 +21,65 @@ import { utf8ToBase64 } from 'utils/utf8Base64';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
+import {
+  calculateBreakpoint,
+  getContainerElement,
+  normalizeDpr
+} from './video-source.breakpoints';
 
 let objectId = 0;
 
 const generateId = () => objectId++;
+
+/**
+ * Calculate effective DPR based on device and user-specified maximum
+ * @private
+ * @param {number} maxDpr - Maximum DPR cap specified by user
+ * @returns {number} Effective DPR (capped and normalized)
+ */
+const calculateEffectiveDpr = (maxDpr) => {
+  // Get device DPR (default to 1.0 if not available, e.g., SSR)
+  const deviceDpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1.0;
+  
+  // Calculate effective DPR: Math.min(deviceDpr, maxDpr, 2.0)
+  const effectiveDpr = Math.min(deviceDpr, maxDpr, 2.0);
+  
+  return effectiveDpr;
+};
+
+/**
+ * Normalize and validate breakpoint configuration
+ * @private
+ * @param {boolean} breakpointsEnabled - Whether breakpoints are enabled
+ * @param {number} maxDpr - Maximum DPR cap (user-specified)
+ * @returns {Object|null} Normalized config or null if disabled/invalid
+ */
+const normalizeBreakpointConfig = (breakpointsEnabled, maxDpr) => {
+  // If breakpoints not enabled, return null
+  if (!breakpointsEnabled) return null;
+
+  // Use provided maxDpr or default
+  const maxDprValue = maxDpr !== undefined ? maxDpr : BREAKPOINT_DEFAULT_MAX_DPR;
+
+  // Validate maxDpr
+  if (typeof maxDprValue !== 'number' || isNaN(maxDprValue) || maxDprValue < 1.0) {
+    console.warn('Invalid DPR value:', maxDprValue, '- using default:', BREAKPOINT_DEFAULT_MAX_DPR);
+    const effectiveDpr = calculateEffectiveDpr(BREAKPOINT_DEFAULT_MAX_DPR);
+    return {
+      renditions: BREAKPOINT_RENDITIONS,
+      dpr: normalizeDpr(effectiveDpr)
+    };
+  }
+
+  // Calculate effective DPR based on device and user's max
+  const effectiveDpr = calculateEffectiveDpr(maxDprValue);
+
+  // Return normalized config
+  return {
+    renditions: BREAKPOINT_RENDITIONS,
+    dpr: normalizeDpr(effectiveDpr)
+  };
+};
 
 class VideoSource extends BaseSource {
   constructor(_publicId, initOptions = {}) {
@@ -39,6 +96,9 @@ class VideoSource extends BaseSource {
       options.resource_type = options.resourceType;
     }
 
+    // Normalize breakpoints configuration (flat structure: breakpoints + dpr)
+    options._breakpointsConfig = normalizeBreakpointConfig(options.breakpoints, options.dpr);
+
     if (options.poster === undefined) {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
@@ -53,14 +113,17 @@ class VideoSource extends BaseSource {
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
-      'poster',           // Has complex logic
-      'withCredentials',  // Direct property
-      'publicId',         // BaseSource method
-      'cloudinaryConfig', // BaseSource method
-      'transformation',   // BaseSource method
-      'queryParams',      // BaseSource method
-      'type',             // BaseSource handles getType()
-      'info'              // Custom override method
+      'poster',             // Has complex logic
+      'withCredentials',    // Direct property
+      'publicId',           // BaseSource method
+      'cloudinaryConfig',   // BaseSource method
+      'transformation',     // BaseSource method
+      'queryParams',        // BaseSource method
+      'type',               // BaseSource handles getType()
+      'info',               // Custom override method
+      'breakpoints',        // Custom handling below
+      'dpr',                // Custom handling below
+      '_breakpointsConfig'  // Internal property
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
@@ -76,6 +139,31 @@ class VideoSource extends BaseSource {
 
     // Initialize poster
     this.poster(options.poster);
+
+    // Initialize breakpoints and dpr with flat structure
+    this._breakpointsEnabled = !!options.breakpoints;
+    this._maxDpr = options.dpr !== undefined ? options.dpr : BREAKPOINT_DEFAULT_MAX_DPR;
+    this._breakpointsConfig = options._breakpointsConfig;
+
+    // Breakpoints getter/setter (boolean)
+    this.breakpoints = function(value) {
+      if (value === undefined) {
+        return this._breakpointsEnabled;
+      }
+      this._breakpointsEnabled = !!value;
+      this._breakpointsConfig = normalizeBreakpointConfig(this._breakpointsEnabled, this._maxDpr);
+      return this;
+    };
+
+    // DPR getter/setter (number) - this is the maximum DPR cap
+    this.dpr = function(value) {
+      if (value === undefined) {
+        return this._maxDpr;
+      }
+      this._maxDpr = value;
+      this._breakpointsConfig = normalizeBreakpointConfig(this._breakpointsEnabled, this._maxDpr);
+      return this;
+    };
 
     this.objectId = generateId();
   }
@@ -162,11 +250,40 @@ class VideoSource extends BaseSource {
     return sources.some(_source => isSrcEqual(_source, source));
   }
 
-  generateSources() {
+  /**
+   * Calculate and return breakpoint transformation based on container width and DPR
+   * @param {HTMLElement} playerElement - Video player element
+   * @returns {Object|null} Transformation object or null if disabled/unavailable
+   */
+  getBreakpointTransformation(playerElement) {
+    const config = this._breakpointsConfig;
+    if (!config) return null;
+    
+    const container = getContainerElement(playerElement);
+    if (!container?.clientWidth) return null;
+    
+    const { width } = calculateBreakpoint({
+      containerWidth: container.clientWidth,
+      dpr: config.dpr,
+      renditions: config.renditions
+    });
+    
+    return {
+      width,
+      crop: 'limit'  // Don't upscale beyond source dimensions
+    };
+  }
+
+  generateSources(playerElement = null) {
     if (this.isRawUrl) {
       const type = this.sourceTypes()[0] === 'auto' ? null : this.sourceTypes()[0];
       return [this.generateRawSource(this.publicId(), type)];
     }
+
+    // Get breakpoint transformation if enabled
+    const breakpointTransformation = this._breakpointsConfig && playerElement
+      ? this.getBreakpointTransformation(playerElement)
+      : null;
 
     const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
@@ -176,6 +293,11 @@ class VideoSource extends BaseSource {
 
       if (srcTransformation) {
         opts.transformation = castArray(srcTransformation);
+      }
+
+      // Merge breakpoint transformation if available
+      if (breakpointTransformation) {
+        opts.transformation = mergeTransformations(opts.transformation, breakpointTransformation);
       }
 
       Object.assign(opts, { format });
