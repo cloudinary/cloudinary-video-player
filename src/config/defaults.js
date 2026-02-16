@@ -22,7 +22,6 @@ export default {
   posterOptions: {},
   sourceTypes: ['auto'],
   breakpoints: false,
-  dpr: 2.0,  // Maximum DPR cap (actual DPR = Math.min(window.devicePixelRatio, dpr, 2.0))
   contextMenu: {
     content: contextMenuContent
   },
