@@ -15,11 +15,17 @@ describe('Breakpoints - Smoke Tests', () => {
 
   it('should apply breakpoints when enabled with playerElement', () => {
     const parent = document.createElement('div');
-    parent.style.width = '500px';
-    document.body.appendChild(parent);
+    // Mock clientWidth since element isn't rendered in test
+    Object.defineProperty(parent, 'clientWidth', {
+      configurable: true,
+      value: 500
+    });
     
     const player = document.createElement('video');
-    parent.appendChild(player);
+    Object.defineProperty(player, 'parentElement', {
+      configurable: true,
+      value: parent
+    });
     
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
@@ -29,8 +35,6 @@ describe('Breakpoints - Smoke Tests', () => {
     
     const srcs = source.generateSources(player);
     expect(srcs[0].src).toContain('c_limit');
-    
-    document.body.removeChild(parent);
   });
 
   it('should use default DPR 2.0', () => {
