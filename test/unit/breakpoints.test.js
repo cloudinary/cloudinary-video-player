@@ -1,5 +1,5 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
-import { normalizeDpr } from '../../src/plugins/cloudinary/models/video-source/video-source.breakpoints.js';
+import { validateDpr } from '../../src/plugins/cloudinary/models/video-source/video-source.breakpoints.js';
 
 const cld = { cloud_name: 'demo' };
 
@@ -30,10 +30,13 @@ describe('Breakpoints - Smoke Tests', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
       breakpoints: true,
-      dpr: 1.0
+      dpr: 1.5
     });
     
     const srcs = source.generateSources(player);
+    // Should contain width (500), DPR (1.5), and crop limit
+    expect(srcs[0].src).toContain('w_500');
+    expect(srcs[0].src).toContain('dpr_1.5');
     expect(srcs[0].src).toContain('c_limit');
   });
 
@@ -46,11 +49,13 @@ describe('Breakpoints - Smoke Tests', () => {
     expect(source.dpr()).toEqual(2.0);
   });
 
-  it('should normalize DPR values correctly', () => {
-    expect(normalizeDpr(1.0)).toEqual(1.0);
-    expect(normalizeDpr(1.5)).toEqual(1.5);
-    expect(normalizeDpr(2.0)).toEqual(2.0);
-    expect(normalizeDpr(3.0)).toEqual(2.0); // Cap at 2.0
+  it('should validate DPR values correctly', () => {
+    expect(validateDpr(1.0)).toEqual(1.0);
+    expect(validateDpr(1.5)).toEqual(1.5);
+    expect(validateDpr(2.0)).toEqual(2.0);
+    expect(validateDpr(3.0)).toEqual(2.0); // Cap at 2.0
+    expect(validateDpr(undefined)).toEqual(2.0); // Default
+    expect(validateDpr(0.5)).toEqual(2.0); // Invalid, use default
   });
 
   it('should skip breakpoints for raw URLs', () => {

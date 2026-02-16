@@ -7,9 +7,7 @@ import {
   ADAPTIVE_SOURCETYPES,
   DEFAULT_POSTER_PARAMS,
   DEFAULT_VIDEO_PARAMS,
-  VIDEO_SUFFIX_REMOVAL_PATTERN,
-  BREAKPOINT_RENDITIONS,
-  BREAKPOINT_DEFAULT_MAX_DPR
+  VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
 import {
   formatToMimeTypeAndTransformation,
@@ -22,64 +20,13 @@ import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
 import {
-  calculateBreakpoint,
-  getContainerElement,
-  normalizeDpr
+  getBreakpointTransformation as calculateBreakpointTransformation,
+  validateDpr
 } from './video-source.breakpoints';
 
 let objectId = 0;
 
 const generateId = () => objectId++;
-
-/**
- * Calculate effective DPR based on device and user-specified maximum
- * @private
- * @param {number} maxDpr - Maximum DPR cap specified by user
- * @returns {number} Effective DPR (capped and normalized)
- */
-const calculateEffectiveDpr = (maxDpr) => {
-  // Get device DPR (default to 1.0 if not available, e.g., SSR)
-  const deviceDpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1.0;
-  
-  // Calculate effective DPR: Math.min(deviceDpr, maxDpr, 2.0)
-  const effectiveDpr = Math.min(deviceDpr, maxDpr, 2.0);
-  
-  return effectiveDpr;
-};
-
-/**
- * Normalize and validate breakpoint configuration
- * @private
- * @param {boolean} breakpointsEnabled - Whether breakpoints are enabled
- * @param {number} maxDpr - Maximum DPR cap (user-specified)
- * @returns {Object|null} Normalized config or null if disabled/invalid
- */
-const normalizeBreakpointConfig = (breakpointsEnabled, maxDpr) => {
-  // If breakpoints not enabled, return null
-  if (!breakpointsEnabled) return null;
-
-  // Use provided maxDpr or default
-  const maxDprValue = maxDpr !== undefined ? maxDpr : BREAKPOINT_DEFAULT_MAX_DPR;
-
-  // Validate maxDpr
-  if (typeof maxDprValue !== 'number' || isNaN(maxDprValue) || maxDprValue < 1.0) {
-    console.warn('Invalid DPR value:', maxDprValue, '- using default:', BREAKPOINT_DEFAULT_MAX_DPR);
-    const effectiveDpr = calculateEffectiveDpr(BREAKPOINT_DEFAULT_MAX_DPR);
-    return {
-      renditions: BREAKPOINT_RENDITIONS,
-      dpr: normalizeDpr(effectiveDpr)
-    };
-  }
-
-  // Calculate effective DPR based on device and user's max
-  const effectiveDpr = calculateEffectiveDpr(maxDprValue);
-
-  // Return normalized config
-  return {
-    renditions: BREAKPOINT_RENDITIONS,
-    dpr: normalizeDpr(effectiveDpr)
-  };
-};
 
 class VideoSource extends BaseSource {
   constructor(_publicId, initOptions = {}) {
@@ -95,9 +42,6 @@ class VideoSource extends BaseSource {
     if (options.resourceType) {
       options.resource_type = options.resourceType;
     }
-
-    // Normalize breakpoints configuration (flat structure: breakpoints + dpr)
-    options._breakpointsConfig = normalizeBreakpointConfig(options.breakpoints, options.dpr);
 
     if (options.poster === undefined) {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
@@ -122,8 +66,7 @@ class VideoSource extends BaseSource {
       'type',               // BaseSource handles getType()
       'info',               // Custom override method
       'breakpoints',        // Custom handling below
-      'dpr',                // Custom handling below
-      '_breakpointsConfig'  // Internal property
+      'dpr'                 // Custom handling below
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
@@ -140,10 +83,9 @@ class VideoSource extends BaseSource {
     // Initialize poster
     this.poster(options.poster);
 
-    // Initialize breakpoints and dpr with flat structure
+    // Initialize breakpoints and dpr
     this._breakpointsEnabled = !!options.breakpoints;
-    this._maxDpr = options.dpr !== undefined ? options.dpr : BREAKPOINT_DEFAULT_MAX_DPR;
-    this._breakpointsConfig = options._breakpointsConfig;
+    this._dpr = validateDpr(options.dpr);
 
     // Breakpoints getter/setter (boolean)
     this.breakpoints = function(value) {
@@ -151,17 +93,15 @@ class VideoSource extends BaseSource {
         return this._breakpointsEnabled;
       }
       this._breakpointsEnabled = !!value;
-      this._breakpointsConfig = normalizeBreakpointConfig(this._breakpointsEnabled, this._maxDpr);
       return this;
     };
 
-    // DPR getter/setter (number) - this is the maximum DPR cap
+    // DPR getter/setter (number)
     this.dpr = function(value) {
       if (value === undefined) {
-        return this._maxDpr;
+        return this._dpr;
       }
-      this._maxDpr = value;
-      this._breakpointsConfig = normalizeBreakpointConfig(this._breakpointsEnabled, this._maxDpr);
+      this._dpr = validateDpr(value);
       return this;
     };
 
@@ -250,40 +190,17 @@ class VideoSource extends BaseSource {
     return sources.some(_source => isSrcEqual(_source, source));
   }
 
-  /**
-   * Calculate and return breakpoint transformation based on container width and DPR
-   * @param {HTMLElement} playerElement - Video player element
-   * @returns {Object|null} Transformation object or null if disabled/unavailable
-   */
-  getBreakpointTransformation(playerElement) {
-    const config = this._breakpointsConfig;
-    if (!config) return null;
-    
-    const container = getContainerElement(playerElement);
-    if (!container?.clientWidth) return null;
-    
-    const { width } = calculateBreakpoint({
-      containerWidth: container.clientWidth,
-      dpr: config.dpr,
-      renditions: config.renditions
-    });
-    
-    return {
-      width,
-      crop: 'limit'  // Don't upscale beyond source dimensions
-    };
-  }
-
-  generateSources(playerElement = null) {
+  generateSources() {
     if (this.isRawUrl) {
       const type = this.sourceTypes()[0] === 'auto' ? null : this.sourceTypes()[0];
       return [this.generateRawSource(this.publicId(), type)];
     }
 
     // Get breakpoint transformation if enabled
-    const breakpointTransformation = this._breakpointsConfig && playerElement
-      ? this.getBreakpointTransformation(playerElement)
-      : null;
+    const breakpointTransformation = calculateBreakpointTransformation({
+      breakpointsEnabled: this._breakpointsEnabled,
+      dpr: this._dpr
+    });
 
     const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
