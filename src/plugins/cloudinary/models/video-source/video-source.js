@@ -86,27 +86,9 @@ class VideoSource extends BaseSource {
     // Initialize poster
     this.poster(options.poster);
 
-    // Initialize breakpoints and dpr (using extracted values)
-    this._breakpointsEnabled = !!breakpointsOption;
+    // Initialize breakpoints and dpr with validation
+    this._breakpoints = Boolean(breakpointsOption);
     this._dpr = validateDpr(dprOption);
-
-    // Breakpoints getter/setter (boolean)
-    this.breakpoints = function(value) {
-      if (value === undefined) {
-        return this._breakpointsEnabled;
-      }
-      this._breakpointsEnabled = !!value;
-      return this;
-    };
-
-    // DPR getter/setter (number)
-    this.dpr = function(value) {
-      if (value === undefined) {
-        return this._dpr;
-      }
-      this._dpr = validateDpr(value);
-      return this;
-    };
 
     this.objectId = generateId();
   }
@@ -130,6 +112,22 @@ class VideoSource extends BaseSource {
         return this;
       };
     });
+  }
+
+  breakpoints(value) {
+    if (value === undefined) {
+      return this._breakpoints;
+    }
+    this._breakpoints = Boolean(value);
+    return this;
+  }
+
+  dpr(value) {
+    if (value === undefined) {
+      return this._dpr;
+    }
+    this._dpr = validateDpr(value);
+    return this;
   }
 
   poster(publicId) {
@@ -201,7 +199,7 @@ class VideoSource extends BaseSource {
 
     // Get breakpoint transformation if enabled
     const breakpointTransformation = calculateBreakpointTransformation({
-      breakpointsEnabled: this._breakpointsEnabled,
+      breakpointsEnabled: this._breakpoints,
       dpr: this._dpr
     });
 

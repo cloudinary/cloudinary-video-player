@@ -36,8 +36,8 @@ describe('Breakpoints - Smoke Tests', () => {
     // Clean up
     document.body.removeChild(player);
     
-    // Should contain width (500), DPR (1.5), and crop limit
-    expect(srcs[0].src).toContain('w_500');
+    // Should contain width (640 - rounded from 500), DPR (1.5), and crop limit
+    expect(srcs[0].src).toContain('w_640');
     expect(srcs[0].src).toContain('dpr_1.5');
     expect(srcs[0].src).toContain('c_limit');
   });
