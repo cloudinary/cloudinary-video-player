@@ -47,7 +47,10 @@ class VideoSource extends BaseSource {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    super(publicId, options);
+    // Extract breakpoints and dpr before passing to parent (handled separately)
+    const { breakpoints: breakpointsOption, dpr: dprOption, ...restOptions } = options;
+
+    super(publicId, restOptions);
 
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
@@ -83,9 +86,9 @@ class VideoSource extends BaseSource {
     // Initialize poster
     this.poster(options.poster);
 
-    // Initialize breakpoints and dpr
-    this._breakpointsEnabled = !!options.breakpoints;
-    this._dpr = validateDpr(options.dpr);
+    // Initialize breakpoints and dpr (using extracted values)
+    this._breakpointsEnabled = !!breakpointsOption;
+    this._dpr = validateDpr(dprOption);
 
     // Breakpoints getter/setter (boolean)
     this.breakpoints = function(value) {

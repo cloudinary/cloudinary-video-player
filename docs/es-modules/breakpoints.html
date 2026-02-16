@@ -10,6 +10,20 @@
     />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .player-container {
+        margin-bottom: 30px;
+      }
+      .video-url {
+        margin-top: 15px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 5px;
+        word-break: break-all;
+        font-family: monospace;
+        font-size: 12px;
+      }
+    </style>
   </head>
   <body>
     <div class="container p-4 col-12 col-md-9 col-xl-6">
@@ -21,25 +35,31 @@
 
       <p>
         Breakpoints automatically select the optimal video resolution based on player width and device pixel ratio (DPR).
+        Container width is rounded to the nearest rendition [640, 1280, 1920, 3840] and Cloudinary handles DPR scaling.
       </p>
 
-      <h4 class="mt-4">With Breakpoints (DPR 2.0)</h4>
-      <video
-        id="player-with-breakpoints"
-        class="cld-video-player"
-        controls
-        muted
-        width="500"
-      ></video>
+      <div class="player-container">
+        <h4 class="mt-4">Breakpoints Example (DPR 2.0)</h4>
+        <video
+          id="player-with-breakpoints"
+          class="cld-video-player"
+          controls
+          muted
+          width="500"
+        ></video>
 
-      <h4 class="mt-4">Without Breakpoints (Comparison)</h4>
-      <video
-        id="player-without-breakpoints"
-        class="cld-video-player"
-        controls
-        muted
-        width="500"
-      ></video>
+        <div class="video-url">
+          <strong>Video URL:</strong><br>
+          <span id="video-url">Loading...</span>
+        </div>
+      </div>
+
+      <h4 class="mt-4">Configuration</h4>
+      <ul>
+        <li><code>breakpoints</code> (boolean): Enable/disable breakpoints</li>
+        <li><code>dpr</code> (number): Device pixel ratio - 1.0, 1.5, or 2.0 (default: 2.0)</li>
+        <li><strong>Renditions:</strong> [640, 1280, 1920, 3840]</li>
+      </ul>
 
       <p class="mt-4">
         <a href="https://cloudinary.com/documentation/cloudinary_video_player"
@@ -52,19 +72,39 @@
       import videoPlayer from 'cloudinary-video-player/videoPlayer';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
-      // With breakpoints
-      const player1 = videoPlayer('player-with-breakpoints', {
+      const player = videoPlayer('player-with-breakpoints', {
         cloudName: 'demo',
         breakpoints: true,
         dpr: 2.0
       });
-      player1.source('sea_turtle');
+      player.source('sea_turtle');
 
-      // Without breakpoints
-      const player2 = videoPlayer('player-without-breakpoints', {
-        cloudName: 'demo'
-      });
-      player2.source('sea_turtle');
+      // Display video URL using multiple methods
+      function updateVideoUrl() {
+        // Try getting from video element
+        const videoElement = player.videojs?.el()?.querySelector('video') || 
+                           document.querySelector('#player-with-breakpoints video') ||
+                           document.querySelector('.vjs-tech');
+        
+        const src = videoElement?.currentSrc || videoElement?.src || '';
+        
+        if (src) {
+          document.getElementById('video-url').textContent = src;
+          return true;
+        }
+        return false;
+      }
+
+      // Try immediately
+      setTimeout(updateVideoUrl, 100);
+      
+      // Try after a delay
+      setTimeout(updateVideoUrl, 1000);
+      
+      // Listen to player events
+      player.on('loadstart', updateVideoUrl);
+      player.on('loadedmetadata', updateVideoUrl);
+      player.on('canplay', updateVideoUrl);
     </script>
 
     <!-- Bootstrap -->
