@@ -14,18 +14,16 @@ describe('Breakpoints - Smoke Tests', () => {
   });
 
   it('should apply breakpoints when enabled with playerElement', () => {
-    const parent = document.createElement('div');
+    const player = document.createElement('video');
+    player.className = 'cld-video-player';
     // Mock clientWidth since element isn't rendered in test
-    Object.defineProperty(parent, 'clientWidth', {
+    Object.defineProperty(player, 'clientWidth', {
       configurable: true,
       value: 500
     });
     
-    const player = document.createElement('video');
-    Object.defineProperty(player, 'parentElement', {
-      configurable: true,
-      value: parent
-    });
+    // Add player to DOM so document.querySelector can find it
+    document.body.appendChild(player);
     
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
@@ -33,7 +31,11 @@ describe('Breakpoints - Smoke Tests', () => {
       dpr: 1.5
     });
     
-    const srcs = source.generateSources(player);
+    const srcs = source.generateSources();
+    
+    // Clean up
+    document.body.removeChild(player);
+    
     // Should contain width (500), DPR (1.5), and crop limit
     expect(srcs[0].src).toContain('w_500');
     expect(srcs[0].src).toContain('dpr_1.5');
