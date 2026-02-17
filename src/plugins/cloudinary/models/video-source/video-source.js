@@ -43,17 +43,14 @@ class VideoSource extends BaseSource {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    // Extract breakpointTransformation before passing to parent (handled separately)
-    const { breakpointTransformation, ...restOptions } = options;
-
-    super(publicId, restOptions);
+    super(publicId, options);
 
     this._type = SOURCE_TYPE.VIDEO;
     this.isRawUrl = _isRawUrl;
     this.isLiveStream = options.type === 'live';
     this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
-    this._breakpointTransformation = breakpointTransformation;
+    this._breakpointTransformation = options.breakpointTransformation;
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
