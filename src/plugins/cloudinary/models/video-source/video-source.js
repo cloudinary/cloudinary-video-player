@@ -64,7 +64,7 @@ class VideoSource extends BaseSource {
       'transformation',     // BaseSource method
       'queryParams',        // BaseSource method
       'type',               // BaseSource handles getType()
-      'info'                // Custom override method
+      'info'               // Custom override method
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
