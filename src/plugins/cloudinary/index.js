@@ -141,7 +141,7 @@ class CloudinaryContext {
       const playerWidth = playerEl?.clientWidth;
       const playerHeight = playerEl?.clientHeight;
       
-      const posterOptions = posterOptionsForCurrent(playerWidth, playerHeight);
+      const posterOptions = posterOptionsForCurrent();
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -359,23 +359,20 @@ class CloudinaryContext {
       return v.canPlayType(codec) || 'MediaSource' in window && MediaSource.isTypeSupported(codec);
     };
 
-    const posterOptionsForCurrent = (playerWidth, playerHeight) => {
+    const posterOptionsForCurrent = () => {
       const opts = Object.assign({}, this.posterOptions());
 
       opts.transformation = opts.transformation || {};
 
-      if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
-        opts.transformation.crop = 'scale';
-      }
-
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
-      if (playerWidth && playerHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
+      const playerEl = this.player.el();
+      if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
         opts.transformation = mergeTransformations(opts.transformation, {
-          width: roundUp100(playerWidth),
-          height: roundUp100(playerHeight),
+          width: roundUp100(playerEl.clientWidth),
+          height: roundUp100(playerEl.clientHeight),
           crop: 'limit'
         });
       }
