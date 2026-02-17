@@ -19,10 +19,6 @@ import { utf8ToBase64 } from 'utils/utf8Base64';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
-import {
-  getBreakpointTransformation as calculateBreakpointTransformation,
-  roundedDpr
-} from './video-source.breakpoints';
 
 let objectId = 0;
 
@@ -47,8 +43,8 @@ class VideoSource extends BaseSource {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    // Extract breakpoints, dpr, and playerWidth before passing to parent (handled separately)
-    const { breakpoints: breakpointsOption, dpr: dprOption, playerWidth, ...restOptions } = options;
+    // Extract breakpointTransformation before passing to parent (handled separately)
+    const { breakpointTransformation, ...restOptions } = options;
 
     super(publicId, restOptions);
 
@@ -57,7 +53,7 @@ class VideoSource extends BaseSource {
     this.isLiveStream = options.type === 'live';
     this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
-    this._playerWidth = playerWidth;
+    this._breakpointTransformation = breakpointTransformation;
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
@@ -68,9 +64,7 @@ class VideoSource extends BaseSource {
       'transformation',     // BaseSource method
       'queryParams',        // BaseSource method
       'type',               // BaseSource handles getType()
-      'info',               // Custom override method
-      'breakpoints',        // Custom handling below
-      'dpr'                 // Custom handling below
+      'info'                // Custom override method
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
@@ -86,10 +80,6 @@ class VideoSource extends BaseSource {
 
     // Initialize poster
     this.poster(options.poster);
-
-    // Initialize breakpoints and dpr with validation
-    this._breakpoints = Boolean(breakpointsOption);
-    this._dpr = roundedDpr(dprOption);
 
     this.objectId = generateId();
   }
@@ -182,13 +172,6 @@ class VideoSource extends BaseSource {
       return [this.generateRawSource(this.publicId(), type)];
     }
 
-    // Get breakpoint transformation if enabled
-    const breakpointTransformation = calculateBreakpointTransformation({
-      breakpointsEnabled: this._breakpoints,
-      dpr: this._dpr,
-      playerWidth: this._playerWidth
-    });
-
     const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
       const format = normalizeFormat(sourceType);
@@ -200,8 +183,8 @@ class VideoSource extends BaseSource {
       }
 
       // Merge breakpoint transformation if available
-      if (breakpointTransformation) {
-        opts.transformation = mergeTransformations(opts.transformation, breakpointTransformation);
+      if (this._breakpointTransformation) {
+        opts.transformation = mergeTransformations(opts.transformation, this._breakpointTransformation);
       }
 
       Object.assign(opts, { format });

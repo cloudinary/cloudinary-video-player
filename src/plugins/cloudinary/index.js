@@ -13,8 +13,18 @@ import {
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
+import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.const';
 
 import recommendationsOverlay from 'components/recommendations-overlay';
+
+const roundedDpr = (value) => {
+  const dprValue = value || DEFAULT_DPR;
+  return [1, 1.5, 2].reduce((closest, option) => {
+    return Math.abs(dprValue - option) < Math.abs(dprValue - closest)
+      ? option
+      : closest;
+  });
+};
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -126,12 +136,7 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
-      // Get player dimensions once for both poster and breakpoints
-      const playerEl = this.player.el();
-      const playerWidth = playerEl?.clientWidth;
-      const playerHeight = playerEl?.clientHeight;
-      
-      const posterOptions = posterOptionsForCurrent(playerWidth, playerHeight);
+      const posterOptions = posterOptionsForCurrent();
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -150,8 +155,8 @@ class CloudinaryContext {
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
 
-      // Pass player width for breakpoints calculation
-      options.playerWidth = playerWidth;
+      // Calculate breakpoint transformation
+      options.breakpointTransformation = getBreakpointTransformation(options.breakpoints, options.dpr);
 
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
@@ -342,7 +347,7 @@ class CloudinaryContext {
       return v.canPlayType(codec) || 'MediaSource' in window && MediaSource.isTypeSupported(codec);
     };
 
-    const posterOptionsForCurrent = (playerWidth, playerHeight) => {
+    const posterOptionsForCurrent = () => {
       const opts = Object.assign({}, this.posterOptions());
 
       opts.transformation = opts.transformation || {};
@@ -353,6 +358,10 @@ class CloudinaryContext {
 
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
+      const playerEl = this.player.el();
+      const playerWidth = playerEl?.clientWidth;
+      const playerHeight = playerEl?.clientHeight;
+      
       if (playerWidth && playerHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
@@ -364,6 +373,23 @@ class CloudinaryContext {
       }
 
       return opts;
+    };
+
+    const getBreakpointTransformation = (breakpointsEnabled, dpr) => {
+      if (!breakpointsEnabled) return null;
+      
+      const playerEl = this.player.el();
+      const playerWidth = playerEl?.clientWidth;
+      
+      if (!playerWidth || typeof playerWidth !== 'number' || playerWidth <= 0) return null;
+      
+      const width = RENDITIONS.find(rendition => rendition >= playerWidth) || RENDITIONS[RENDITIONS.length - 1];
+      
+      return {
+        width,
+        dpr: roundedDpr(dpr),
+        crop: 'limit'
+      };
     };
 
     // Handle external (non-cloudinary plugin) source changes (e.g. by ad plugins)
