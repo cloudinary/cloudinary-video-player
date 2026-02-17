@@ -35,7 +35,7 @@ describe('Breakpoints - Smoke Tests', () => {
       breakpoints: true
     });
     
-    expect(source.dpr()).toEqual(2.0);
+    expect(source._dpr).toEqual(2.0);
   });
 
   it('should round DPR values to nearest valid option', () => {

@@ -115,22 +115,6 @@ class VideoSource extends BaseSource {
     });
   }
 
-  breakpoints(value) {
-    if (value === undefined) {
-      return this._breakpoints;
-    }
-    this._breakpoints = Boolean(value);
-    return this;
-  }
-
-  dpr(value) {
-    if (value === undefined) {
-      return this._dpr;
-    }
-    this._dpr = roundedDpr(value);
-    return this;
-  }
-
   poster(publicId) {
     let options = { type: this.getInitOptions().type };
 
