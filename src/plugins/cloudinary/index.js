@@ -364,6 +364,10 @@ class CloudinaryContext {
 
       opts.transformation = opts.transformation || {};
 
+      if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
+        opts.transformation.crop = 'scale';
+      }
+
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
       const playerEl = this.player.el();
