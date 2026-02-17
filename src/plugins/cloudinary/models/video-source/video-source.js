@@ -57,14 +57,14 @@ class VideoSource extends BaseSource {
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
-      'poster',             // Has complex logic
-      'withCredentials',    // Direct property
-      'publicId',           // BaseSource method
-      'cloudinaryConfig',   // BaseSource method
-      'transformation',     // BaseSource method
-      'queryParams',        // BaseSource method
-      'type',               // BaseSource handles getType()
-      'info'               // Custom override method
+      'poster',           // Has complex logic
+      'withCredentials',  // Direct property
+      'publicId',         // BaseSource method
+      'cloudinaryConfig', // BaseSource method
+      'transformation',   // BaseSource method
+      'queryParams',      // BaseSource method
+      'type',             // BaseSource handles getType()
+      'info'              // Custom override method
     ];
     const SIMPLE_PROPERTIES = SOURCE_PARAMS.filter(param => !EXCLUDED_PROPERTIES.includes(param));
 
