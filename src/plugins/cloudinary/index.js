@@ -136,12 +136,11 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
-      // Get player dimensions once for both poster and breakpoints
+      const posterOptions = posterOptionsForCurrent();
+      
+      // Get player width for breakpoints
       const playerEl = this.player.el();
       const playerWidth = playerEl?.clientWidth;
-      const playerHeight = playerEl?.clientHeight;
-      
-      const posterOptions = posterOptionsForCurrent();
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
