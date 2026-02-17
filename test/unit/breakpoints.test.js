@@ -58,4 +58,42 @@ describe('Breakpoints - Smoke Tests', () => {
     const srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
   });
+
+  it('should not apply breakpoints when playerWidth is invalid', () => {
+    // Test with negative width
+    const source1 = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      breakpoints: true,
+      dpr: 1.5,
+      playerWidth: -100
+    });
+    expect(source1.generateSources()[0].src).not.toContain('c_limit');
+
+    // Test with zero width
+    const source2 = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      breakpoints: true,
+      dpr: 1.5,
+      playerWidth: 0
+    });
+    expect(source2.generateSources()[0].src).not.toContain('c_limit');
+
+    // Test with string width
+    const source3 = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      breakpoints: true,
+      dpr: 1.5,
+      playerWidth: 'large'
+    });
+    expect(source3.generateSources()[0].src).not.toContain('c_limit');
+
+    // Test with undefined width
+    const source4 = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      breakpoints: true,
+      dpr: 1.5,
+      playerWidth: undefined
+    });
+    expect(source4.generateSources()[0].src).not.toContain('c_limit');
+  });
 });
