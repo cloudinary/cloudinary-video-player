@@ -22,6 +22,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player.html' },
     { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid.html' },
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles-ios.html' },
+    { name: ExampleLinkName.HDR, endpoint: 'hdr.html' },
     { name: ExampleLinkName.InteractionArea, endpoint: 'interaction-area.html' },
     { name: ExampleLinkName.MultiplePlayers, endpoint: 'multiple-players.html' },
     { name: ExampleLinkName.Playlist, endpoint: 'playlist.html' },

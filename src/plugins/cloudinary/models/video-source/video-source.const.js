@@ -3,6 +3,7 @@ export const DEFAULT_POSTER_PARAMS = { format: 'jpg', resource_type: 'video' };
 export const DEFAULT_VIDEO_PARAMS = {
   resource_type: 'video',
   type: 'upload',
+  hdr: false,
   transformation: [],
   sourceTransformation: {},
   sourceTypes: ['auto'],

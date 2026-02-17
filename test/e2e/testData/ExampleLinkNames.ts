@@ -19,6 +19,7 @@ export enum ExampleLinkName {
     FloatingPlayer = 'Floating Player',
     FluidLayouts = 'Fluid Layouts',
     ForceHLSSubtitles = 'Force HLS Subtitles',
+    HDR = 'HDR',
     InteractionArea = 'Interaction Area',
     MultiplePlayers = 'Multiple Players',
     Playlist = 'Playlist',
