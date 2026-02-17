@@ -21,7 +21,7 @@ import BaseSource from '../base-source';
 import ImageSource from '../image-source';
 import {
   getBreakpointTransformation as calculateBreakpointTransformation,
-  validateDpr
+  roundedDpr
 } from './video-source.breakpoints';
 
 let objectId = 0;
@@ -89,7 +89,7 @@ class VideoSource extends BaseSource {
 
     // Initialize breakpoints and dpr with validation
     this._breakpoints = Boolean(breakpointsOption);
-    this._dpr = validateDpr(dprOption);
+    this._dpr = roundedDpr(dprOption);
 
     this.objectId = generateId();
   }
@@ -127,7 +127,7 @@ class VideoSource extends BaseSource {
     if (value === undefined) {
       return this._dpr;
     }
-    this._dpr = validateDpr(value);
+    this._dpr = roundedDpr(value);
     return this;
   }
 

@@ -1,5 +1,5 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
-import { validateDpr } from '../../src/plugins/cloudinary/models/video-source/video-source.breakpoints.js';
+import { roundedDpr } from '../../src/plugins/cloudinary/models/video-source/video-source.breakpoints.js';
 
 const cld = { cloud_name: 'demo' };
 
@@ -38,13 +38,13 @@ describe('Breakpoints - Smoke Tests', () => {
     expect(source.dpr()).toEqual(2.0);
   });
 
-  it('should validate DPR values correctly', () => {
-    expect(validateDpr(1.0)).toEqual(1.0);
-    expect(validateDpr(1.5)).toEqual(1.5);
-    expect(validateDpr(2.0)).toEqual(2.0);
-    expect(validateDpr(3.0)).toEqual(2.0); // Cap at 2.0
-    expect(validateDpr(undefined)).toEqual(2.0); // Default
-    expect(validateDpr(0.5)).toEqual(2.0); // Invalid, use default
+  it('should round DPR values to nearest valid option', () => {
+    expect(roundedDpr(1.0)).toEqual(1.0);
+    expect(roundedDpr(1.5)).toEqual(1.5);
+    expect(roundedDpr(2.0)).toEqual(2.0);
+    expect(roundedDpr(1.2)).toEqual(1.0); // Closest to 1.0
+    expect(roundedDpr(1.3)).toEqual(1.5); // Closest to 1.5
+    expect(roundedDpr(1.8)).toEqual(2.0); // Closest to 2.0
   });
 
   it('should skip breakpoints for raw URLs', () => {
