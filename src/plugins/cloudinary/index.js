@@ -126,8 +126,12 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
+      // Get player dimensions once for both poster and breakpoints
+      const playerEl = this.player.el();
+      const playerWidth = playerEl?.clientWidth;
+      const playerHeight = playerEl?.clientHeight;
       
-      const posterOptions = posterOptionsForCurrent();
+      const posterOptions = posterOptionsForCurrent(playerWidth, playerHeight);
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -145,6 +149,9 @@ class CloudinaryContext {
         posterOptions,
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
+
+      // Pass player width for breakpoints calculation
+      options.playerWidth = playerWidth;
 
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
@@ -335,7 +342,7 @@ class CloudinaryContext {
       return v.canPlayType(codec) || 'MediaSource' in window && MediaSource.isTypeSupported(codec);
     };
 
-    const posterOptionsForCurrent = () => {
+    const posterOptionsForCurrent = (playerWidth, playerHeight) => {
       const opts = Object.assign({}, this.posterOptions());
 
       opts.transformation = opts.transformation || {};
@@ -346,13 +353,12 @@ class CloudinaryContext {
 
       // Set poster dimensions to player actual size.
       // (unless they were explicitly set via `posterOptions`)
-      const playerEl = this.player.el();
-      if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
+      if (playerWidth && playerHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
 
         opts.transformation = mergeTransformations(opts.transformation, {
-          width: roundUp100(playerEl.clientWidth),
-          height: roundUp100(playerEl.clientHeight),
+          width: roundUp100(playerWidth),
+          height: roundUp100(playerHeight),
           crop: 'limit'
         });
       }

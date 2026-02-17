@@ -17,17 +17,12 @@ export const validateDpr = (dpr) => {
 };
 
 
-export const getBreakpointTransformation = ({ breakpointsEnabled, dpr }) => {
+export const getBreakpointTransformation = ({ breakpointsEnabled, dpr, playerWidth }) => {
   if (!breakpointsEnabled) return null;
-  
-  // Get player element from DOM
-  const playerElement = document.querySelector('.cld-video-player, video.vjs-tech');
-  const containerWidth = playerElement?.clientWidth;
-  
-  if (!containerWidth) return null;
+  if (!playerWidth) return null;
   
   // Round container width to nearest rendition (Cloudinary will handle DPR multiplication)
-  const width = RENDITIONS.find(rendition => rendition >= containerWidth) || RENDITIONS[RENDITIONS.length - 1];
+  const width = RENDITIONS.find(rendition => rendition >= playerWidth) || RENDITIONS[RENDITIONS.length - 1];
   
   return {
     width,

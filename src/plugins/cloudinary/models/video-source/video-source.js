@@ -47,8 +47,8 @@ class VideoSource extends BaseSource {
       options.poster = Object.assign({ publicId }, DEFAULT_POSTER_PARAMS);
     }
 
-    // Extract breakpoints and dpr before passing to parent (handled separately)
-    const { breakpoints: breakpointsOption, dpr: dprOption, ...restOptions } = options;
+    // Extract breakpoints, dpr, and playerWidth before passing to parent (handled separately)
+    const { breakpoints: breakpointsOption, dpr: dprOption, playerWidth, ...restOptions } = options;
 
     super(publicId, restOptions);
 
@@ -57,6 +57,7 @@ class VideoSource extends BaseSource {
     this.isLiveStream = options.type === 'live';
     this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
+    this._playerWidth = playerWidth;
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
@@ -200,7 +201,8 @@ class VideoSource extends BaseSource {
     // Get breakpoint transformation if enabled
     const breakpointTransformation = calculateBreakpointTransformation({
       breakpointsEnabled: this._breakpoints,
-      dpr: this._dpr
+      dpr: this._dpr,
+      playerWidth: this._playerWidth
     });
 
     const srcs = this.sourceTypes().map(sourceType => {
