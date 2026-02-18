@@ -78,9 +78,7 @@ export const playerValidators = {
       posterOptions: {
         publicId: validator.isString,
         transformation: validator.isObject
-      },
-      breakpoints: validator.isBoolean,
-      dpr: validator.isNumber
+      }
     }
   }
 };
