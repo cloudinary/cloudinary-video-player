@@ -138,9 +138,6 @@ class CloudinaryContext {
 
       const posterOptions = posterOptionsForCurrent();
       
-      // Get player width for breakpoints
-      const playerEl = this.player.el();
-      const playerWidth = playerEl?.clientWidth;
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -161,6 +158,9 @@ class CloudinaryContext {
 
       // Calculate breakpoint transformation
       if (options.breakpoints) {
+        // Get player width for breakpoints
+        const playerEl = this.player.el();
+        const playerWidth = playerEl?.clientWidth;
         const width = RENDITIONS.find(rendition => rendition >= playerWidth) || RENDITIONS[RENDITIONS.length - 1];
         options.breakpointTransformation = {
           width,
