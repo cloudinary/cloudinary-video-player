@@ -204,6 +204,14 @@ class VideoSource extends BaseSource {
         }
       }
 
+      // dr (dynamic range) is not yet exposed by @cloudinary/url-gen, so we use raw_transformation
+      if (this.hdr() === true && window.matchMedia && window.matchMedia('(dynamic-range: high)').matches) {
+        opts.transformation = mergeTransformations(opts.transformation, {
+          video_codec: 'h265',
+          raw_transformation: 'dr_high'
+        });
+      }
+
       const src = appendQueryParams(this.config().url(this.publicId(), opts), this.queryParams());
 
       return {

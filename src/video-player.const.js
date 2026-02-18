@@ -7,6 +7,7 @@ export const SOURCE_PARAMS = [
   'cloudinaryConfig',
   'description',
   'download',
+  'hdr',
   'info',
   'interactionAreas',
   'poster',

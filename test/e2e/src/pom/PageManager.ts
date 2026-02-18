@@ -15,6 +15,7 @@ import { DisplayConfigurationsPage } from './displayConfigurationsPage';
 import { FloatingPlayerPage } from './floatingPlayerPgae';
 import { FluidLayoutsPage } from './fluidLayoutsPage';
 import { ForceHlsSubtitlesPage } from './forceHlsSubtitlesPage';
+import { HdrPage } from './hdrPage';
 import { MultiplePlayersPage } from './multiplePlayersPage';
 import { PlaylistPage } from './playlistPage';
 import { PlaylistByTagPage } from './playlistByTagPage';
@@ -140,6 +141,10 @@ export class PageManager {
 
     public get forceHlsSubtitlesPage(): ForceHlsSubtitlesPage {
         return this.getPage(ForceHlsSubtitlesPage);
+    }
+
+    public get hdrPage(): HdrPage {
+        return this.getPage(HdrPage);
     }
 
     public get multiplePlayersPage(): MultiplePlayersPage {

@@ -22,6 +22,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.FloatingPlayer, endpoint: 'floating-player' },
     { name: ExampleLinkName.FluidLayouts, endpoint: 'fluid' },
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles' },
+    { name: ExampleLinkName.HDR, endpoint: 'hdr' },
     { name: ExampleLinkName.InteractionArea, endpoint: 'interaction-area' },
     { name: ExampleLinkName.MultiplePlayers, endpoint: 'multiple-players' },
     { name: ExampleLinkName.Playlist, endpoint: 'playlist' },

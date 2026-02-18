@@ -24,7 +24,7 @@ for (const link of LINKS) {
  * Testing number of links in page.
  */
 vpTest('Link count test', async ({ page }) => {
-    const expectedNumberOfLinks = 39;
+    const expectedNumberOfLinks = 40;
     const numberOfLinks = await page.getByRole('link').count();
     expect(numberOfLinks).toBe(expectedNumberOfLinks);
 });
