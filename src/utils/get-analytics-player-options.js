@@ -45,6 +45,7 @@ const getSourceOptions = (sourceOptions = {}) => ({
   interactionAreas: hasConfig(sourceOptions.interactionAreas),
   videoSources: hasConfig(sourceOptions.videoSources),
   breakpoints: sourceOptions.breakpoints,
+  dpr: sourceOptions.dpr,
 });
 
 const getTextTracksOptions = (textTracks = {}) => {
