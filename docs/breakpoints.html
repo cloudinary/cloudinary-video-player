@@ -52,16 +52,8 @@
         return false;
       }
 
-      // Try immediately
-      setTimeout(updateVideoUrl, 100);
-      
-      // Try after a delay
-      setTimeout(updateVideoUrl, 1000);
-      
-      // Listen to player events
-      player.on('loadstart', updateVideoUrl);
+      // Update URL when video source is loaded
       player.on('loadedmetadata', updateVideoUrl);
-      player.on('canplay', updateVideoUrl);
 
     }, false);
   </script>
