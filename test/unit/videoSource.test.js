@@ -64,6 +64,12 @@ describe('video source tests', () => {
 describe('HDR option tests', () => {
   let matchMediaSpy;
 
+  beforeEach(() => {
+    if (typeof window.matchMedia === 'undefined') {
+      window.matchMedia = () => ({ matches: false });
+    }
+  });
+
   afterEach(() => {
     matchMediaSpy?.mockRestore();
   });
