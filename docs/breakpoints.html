@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Breakpoints - Cloudinary Video Player</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script type="text/javascript" src="scripts.js"></script>
+
+  <style>
+    .player-container {
+      margin-bottom: 30px;
+    }
+    .video-url {
+      margin-top: 15px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 12px;
+    }
+  </style>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function(){
+      
+      const player = cloudinary.videoPlayer('player-with-breakpoints', {
+        cloudName: 'demo',
+        breakpoints: true,
+        dpr: 2.0
+      });
+      player.source('sea_turtle');
+
+      // Display video URL using multiple methods
+      function updateVideoUrl() {
+        // Try getting from video element
+        const videoElement = player.videojs?.el()?.querySelector('video') || 
+                           document.querySelector('#player-with-breakpoints video') ||
+                           document.querySelector('.vjs-tech');
+        
+        const src = videoElement?.currentSrc || videoElement?.src || '';
+        
+        if (src) {
+          document.getElementById('video-url').textContent = src;
+          return true;
+        }
+        return false;
+      }
+
+      // Update URL when video source is loaded
+      player.on('loadedmetadata', updateVideoUrl);
+
+    }, false);
+  </script>
+
+</head>
+<body>
+
+  <div class="container p-4">
+    <h1 class="mb-4">Breakpoints - Responsive Video Resolution</h1>
+    
+    <p class="lead">
+      Breakpoints automatically select the optimal video resolution based on container width and device pixel ratio (DPR).
+    </p>
+
+    <div class="player-container">
+      <h3>Breakpoints Example (DPR 2.0)</h3>
+      <p>The player automatically rounds container width to the nearest rendition [640, 1280, 1920, 3840] and lets Cloudinary handle DPR scaling.</p>
+      
+      <video
+        id="player-with-breakpoints"
+        controls
+        muted
+        class="cld-video-player cld-video-player-skin-dark cld-fluid">
+      </video>
+      
+      <div class="video-url mt-3">
+        <strong>Video URL:</strong><br>
+        <span id="video-url">Loading...</span>
+      </div>
+      
+      <details class="mt-3">
+        <summary><strong>View Code</strong></summary>
+        <pre><code>const player = cloudinary.videoPlayer('player', {
+  cloudName: 'demo',
+  breakpoints: true,
+  dpr: 2.0
+});
+
+player.source('sea_turtle');</code></pre>
+      </details>
+    </div>
+
+    <h3 class="mt-5">Configuration Options</h3>
+    <ul>
+      <li><code>breakpoints</code> (boolean): Enable/disable breakpoints</li>
+      <li><code>dpr</code> (number): Device pixel ratio - 1.0, 1.5, or 2.0 (default: 2.0)</li>
+      <li><strong>Renditions:</strong> [640, 1280, 1920, 3840] - Container width is rounded to nearest value</li>
+    </ul>
+
+    <p class="mt-4">
+      <a href="./index.html">← Back to Examples</a>
+    </p>
+
+  </div>
+
+</body>
+</html>

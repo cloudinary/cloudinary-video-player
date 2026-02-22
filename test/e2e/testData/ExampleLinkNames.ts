@@ -8,6 +8,7 @@ export enum ExampleLinkName {
     APIAndEvents = 'API and Events',
     AudioPlayer = 'Audio Player',
     AutoplayOnScroll = 'Autoplay on Scroll',
+    Breakpoints = 'Breakpoints',
     Chapters = 'Chapters',
     CloudinaryAnalytics = 'Cloudinary Analytics',
     CodecsAndFormats = 'Codecs and formats',
