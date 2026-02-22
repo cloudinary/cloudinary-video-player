@@ -64,34 +64,3 @@ const BEHAVIOR_TABLE = [
   { playerWidth: 1000, deviceDpr: 2, maxDpr: 2, requiredWidth: 2000, selected: 2560 },
   { playerWidth: 2000, deviceDpr: 2, maxDpr: 2, requiredWidth: 4000, selected: 3840 }
 ];
-
-describe('Breakpoints - Behavior Examples table (temp)', () => {
-  BEHAVIOR_TABLE.forEach((row, index) => {
-    it(`row ${index + 1}: playerWidth=${row.playerWidth} deviceDpr=${row.deviceDpr} maxDpr=${row.maxDpr} requiredWidth=${row.requiredWidth} selected=${row.selected}`, () => {
-      const effectiveDpr = Math.min(row.deviceDpr, row.maxDpr);
-      const requiredWidth = row.playerWidth * effectiveDpr;
-      const width = widthFromRequired(requiredWidth);
-
-      expect(width).toBe(row.selected);
-
-      const source = new VideoSource(PUBLIC_ID, {
-        cloudinaryConfig: cld,
-        breakpointTransformation: { width, crop: 'limit' }
-      });
-      const srcs = source.generateSources();
-      const url = srcs[0].src;
-
-      expect(url).toContain('c_limit');
-      expect(url).not.toContain('dpr_');
-
-      // eslint-disable-next-line no-console
-      console.log(`\n--- Row ${index + 1} ---`);
-      // eslint-disable-next-line no-console
-      console.log(`  playerWidth: ${row.playerWidth}, deviceDpr: ${row.deviceDpr}, maxDpr: ${row.maxDpr}, requiredWidth: ${row.requiredWidth}, selected: ${row.selected}`);
-      // eslint-disable-next-line no-console
-      console.log(`  w_: ${width}`);
-      // eslint-disable-next-line no-console
-      console.log(`  URL: ${url}\n`);
-    });
-  });
-});
