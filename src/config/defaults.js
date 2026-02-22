@@ -21,6 +21,7 @@ export default {
   muted: false,
   posterOptions: {},
   sourceTypes: ['auto'],
+  breakpoints: false,
   contextMenu: {
     content: contextMenuContent
   },
