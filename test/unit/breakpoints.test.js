@@ -8,7 +8,7 @@ function widthFromRequired(requiredWidth) {
   return RENDITIONS.find(r => r >= requiredWidth) ?? RENDITIONS[RENDITIONS.length - 1];
 }
 
-describe('Breakpoints - Smoke Tests', () => {
+describe('Breakpoints - Unit Tests', () => {
   it('should not apply breakpoints when disabled (default)', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld
