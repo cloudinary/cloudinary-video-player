@@ -55,6 +55,34 @@ describe('Breakpoints - Unit Tests', () => {
     });
     expect(source.generateSources()[0].src).not.toContain('c_limit');
   });
+
+  it('dpr should not appear in the URL even when passed as a player option', () => {
+    // Simulates the state after buildSource strips dpr from options before creating VideoSource.
+    // If dpr were still present in options it would leak through resourceConfig() into the URL as dpr_X.
+    const source = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      breakpointTransformation: { width: 1280, crop: 'limit' }
+      // dpr intentionally absent — buildSource deletes it before reaching here
+    });
+
+    const url = source.generateSources()[0].src;
+    expect(url).not.toContain('dpr_');
+    expect(url).toContain('w_1280');
+    expect(url).toContain('c_limit');
+  });
+
+  it('dpr leaks into URL when NOT stripped (documents the bug that was fixed)', () => {
+    // This test documents what would happen WITHOUT the fix — dpr passed directly
+    // into VideoSource options leaks through resourceConfig() into the Cloudinary URL.
+    const source = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      dpr: 2,
+      breakpointTransformation: { width: 1280, crop: 'limit' }
+    });
+
+    const url = source.generateSources()[0].src;
+    expect(url).toContain('dpr_');
+  });
 });
 
 describe('Breakpoints - getEffectiveDpr', () => {
