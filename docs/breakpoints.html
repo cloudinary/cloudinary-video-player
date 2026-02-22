@@ -32,7 +32,7 @@
       const player = cloudinary.videoPlayer('player-with-breakpoints', {
         cloudName: 'demo',
         breakpoints: true,
-        dpr: 2.0
+        maxDpr: 2.0
       });
       player.source('sea_turtle');
 
@@ -89,7 +89,7 @@
         <pre><code>const player = cloudinary.videoPlayer('player', {
   cloudName: 'demo',
   breakpoints: true,
-  dpr: 2.0
+  maxDpr: 2.0
 });
 
 player.source('sea_turtle');</code></pre>

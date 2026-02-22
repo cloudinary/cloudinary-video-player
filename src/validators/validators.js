@@ -93,7 +93,7 @@ export const sourceValidators = {
   title: validator.or(validator.isString, validator.isBoolean),
   description: validator.or(validator.isString, validator.isBoolean),
   breakpoints: validator.isBoolean,
-  dpr: validator.isNumber,
+  maxDpr: validator.isNumber,
   interactionAreas: {
     enable: validator.isBoolean,
     template: validator.or(validator.isString(INTERACTION_AREAS_TEMPLATE), validator.isArray),
