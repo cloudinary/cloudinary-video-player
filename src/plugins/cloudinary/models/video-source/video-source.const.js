@@ -74,4 +74,4 @@ export const FORMAT_MAPPINGS = {
 
 // Breakpoints constants
 export const DEFAULT_DPR = 2.0;
-export const RENDITIONS = [640, 1280, 1920, 3840];
+export const RENDITIONS = [640, 1280, 1920, 2560, 3840];
