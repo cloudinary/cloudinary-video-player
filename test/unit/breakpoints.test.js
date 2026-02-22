@@ -55,12 +55,3 @@ describe('Breakpoints - Smoke Tests', () => {
     expect(source.generateSources()[0].src).not.toContain('c_limit');
   });
 });
-
-// Temp: Behavior Examples table – compute width from playerWidth, deviceDpr, maxDpr and show result URL.
-const BEHAVIOR_TABLE = [
-  { playerWidth: 300, deviceDpr: 2, maxDpr: 2, requiredWidth: 600, selected: 640 },
-  { playerWidth: 360, deviceDpr: 2, maxDpr: 2, requiredWidth: 720, selected: 848 },
-  { playerWidth: 500, deviceDpr: 1, maxDpr: 2, requiredWidth: 500, selected: 640 },
-  { playerWidth: 1000, deviceDpr: 2, maxDpr: 2, requiredWidth: 2000, selected: 2560 },
-  { playerWidth: 2000, deviceDpr: 2, maxDpr: 2, requiredWidth: 4000, selected: 3840 }
-];
