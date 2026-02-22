@@ -11,6 +11,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio' },
     { name: ExampleLinkName.AutoplayOnScroll, endpoint: 'autoplay-on-scroll' },
+    { name: ExampleLinkName.Breakpoints, endpoint: 'breakpoints' },
     { name: ExampleLinkName.Chapters, endpoint: 'chapters' },
     { name: ExampleLinkName.CloudinaryAnalytics, endpoint: 'cloudinary-analytics' },
     { name: ExampleLinkName.CodecsAndFormats, endpoint: 'codec-formats' },

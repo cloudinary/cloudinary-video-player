@@ -50,6 +50,7 @@ class VideoSource extends BaseSource {
     this.isLiveStream = options.type === 'live';
     this.withCredentials = !!options.withCredentials;
     this.getInitOptions = () => initOptions;
+    this._breakpointTransformation = options.breakpointTransformation;
 
     // Get properties that need simple getter/setter methods (exclude special cases)
     const EXCLUDED_PROPERTIES = [
@@ -176,6 +177,11 @@ class VideoSource extends BaseSource {
 
       if (srcTransformation) {
         opts.transformation = castArray(srcTransformation);
+      }
+
+      // Merge breakpoint transformation if available
+      if (this._breakpointTransformation) {
+        opts.transformation = mergeTransformations(opts.transformation, this._breakpointTransformation);
       }
 
       Object.assign(opts, { format });

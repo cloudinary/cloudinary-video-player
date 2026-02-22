@@ -71,3 +71,7 @@ export const FORMAT_MAPPINGS = {
   hls: 'm3u8',
   dash: 'mpd'
 };
+
+// Breakpoints constants
+export const DEFAULT_DPR = 2.0;
+export const RENDITIONS = [640, 848, 1280, 1920, 2560, 3840];

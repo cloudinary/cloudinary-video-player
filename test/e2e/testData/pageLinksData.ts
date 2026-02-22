@@ -11,6 +11,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api.html' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio.html' },
     { name: ExampleLinkName.AutoplayOnScroll, endpoint: 'autoplay-on-scroll.html' },
+    { name: ExampleLinkName.Breakpoints, endpoint: 'breakpoints.html' },
     { name: ExampleLinkName.Chapters, endpoint: 'chapters.html' },
     { name: ExampleLinkName.CloudinaryAnalytics, endpoint: 'cloudinary-analytics.html' },
     { name: ExampleLinkName.CodecsAndFormats, endpoint: 'codec-formats.html' },
