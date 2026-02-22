@@ -1,58 +1,36 @@
 import VideoSource from '../../src/plugins/cloudinary/models/video-source/video-source.js';
+import { RENDITIONS } from '../../src/plugins/cloudinary/models/video-source/video-source.const.js';
 
 const cld = { cloud_name: 'demo' };
+const PUBLIC_ID = 'sea_turtle';
 
-// Helper function to test DPR rounding (same logic as in index.js)
-const roundedDpr = (value) => {
-  const DEFAULT_DPR = 2.0;
-  const dprValue = value || DEFAULT_DPR;
-  return [1, 1.5, 2].reduce((closest, option) => {
-    return Math.abs(dprValue - option) < Math.abs(dprValue - closest)
-      ? option
-      : closest;
-  });
-};
+function widthFromRequired(requiredWidth) {
+  return RENDITIONS.find(r => r >= requiredWidth) ?? RENDITIONS[RENDITIONS.length - 1];
+}
 
 describe('Breakpoints - Smoke Tests', () => {
   it('should not apply breakpoints when disabled (default)', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld
     });
-    
+
     const srcs = source.generateSources();
     expect(srcs[0].src).not.toContain('c_limit');
   });
 
-  it('should apply breakpoints when enabled with playerWidth', () => {
+  it('should apply breakpoints when enabled with width only (no dpr in transformation)', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
       breakpointTransformation: {
         width: 640,
-        dpr: 1.5,
         crop: 'limit'
       }
     });
-    
+
     const srcs = source.generateSources();
-    
-    // Should contain width (640), DPR (1.5), and crop limit
+
     expect(srcs[0].src).toContain('w_640');
-    expect(srcs[0].src).toContain('dpr_1.5');
     expect(srcs[0].src).toContain('c_limit');
-  });
-
-  it('should use default DPR 2.0', () => {
-    expect(roundedDpr(undefined)).toEqual(2.0);
-    expect(roundedDpr(null)).toEqual(2.0);
-  });
-
-  it('should round DPR values to nearest valid option', () => {
-    expect(roundedDpr(1.0)).toEqual(1.0);
-    expect(roundedDpr(1.5)).toEqual(1.5);
-    expect(roundedDpr(2.0)).toEqual(2.0);
-    expect(roundedDpr(1.2)).toEqual(1.0); // Closest to 1.0
-    expect(roundedDpr(1.3)).toEqual(1.5); // Closest to 1.5
-    expect(roundedDpr(1.8)).toEqual(2.0); // Closest to 2.0
   });
 
   it('should skip breakpoints for raw URLs', () => {
@@ -61,11 +39,10 @@ describe('Breakpoints - Smoke Tests', () => {
       cloudinaryConfig: cld,
       breakpointTransformation: {
         width: 640,
-        dpr: 2.0,
         crop: 'limit'
       }
     });
-    
+
     const srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
   });
@@ -76,5 +53,45 @@ describe('Breakpoints - Smoke Tests', () => {
       breakpointTransformation: null
     });
     expect(source.generateSources()[0].src).not.toContain('c_limit');
+  });
+});
+
+// Temp: Behavior Examples table – compute width from playerWidth, deviceDpr, maxDpr and show result URL.
+const BEHAVIOR_TABLE = [
+  { playerWidth: 300, deviceDpr: 2, maxDpr: 2, requiredWidth: 600, selected: 640 },
+  { playerWidth: 360, deviceDpr: 2, maxDpr: 2, requiredWidth: 720, selected: 848 },
+  { playerWidth: 500, deviceDpr: 1, maxDpr: 2, requiredWidth: 500, selected: 640 },
+  { playerWidth: 1000, deviceDpr: 2, maxDpr: 2, requiredWidth: 2000, selected: 2560 },
+  { playerWidth: 2000, deviceDpr: 2, maxDpr: 2, requiredWidth: 4000, selected: 3840 }
+];
+
+describe('Breakpoints - Behavior Examples table (temp)', () => {
+  BEHAVIOR_TABLE.forEach((row, index) => {
+    it(`row ${index + 1}: playerWidth=${row.playerWidth} deviceDpr=${row.deviceDpr} maxDpr=${row.maxDpr} requiredWidth=${row.requiredWidth} selected=${row.selected}`, () => {
+      const effectiveDpr = Math.min(row.deviceDpr, row.maxDpr);
+      const requiredWidth = row.playerWidth * effectiveDpr;
+      const width = widthFromRequired(requiredWidth);
+
+      expect(width).toBe(row.selected);
+
+      const source = new VideoSource(PUBLIC_ID, {
+        cloudinaryConfig: cld,
+        breakpointTransformation: { width, crop: 'limit' }
+      });
+      const srcs = source.generateSources();
+      const url = srcs[0].src;
+
+      expect(url).toContain('c_limit');
+      expect(url).not.toContain('dpr_');
+
+      // eslint-disable-next-line no-console
+      console.log(`\n--- Row ${index + 1} ---`);
+      // eslint-disable-next-line no-console
+      console.log(`  playerWidth: ${row.playerWidth}, deviceDpr: ${row.deviceDpr}, maxDpr: ${row.maxDpr}, requiredWidth: ${row.requiredWidth}, selected: ${row.selected}`);
+      // eslint-disable-next-line no-console
+      console.log(`  w_: ${width}`);
+      // eslint-disable-next-line no-console
+      console.log(`  URL: ${url}\n`);
+    });
   });
 });

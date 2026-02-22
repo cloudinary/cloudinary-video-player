@@ -17,14 +17,11 @@ import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.cons
 
 import recommendationsOverlay from 'components/recommendations-overlay';
 
-const roundedDpr = (value) => {
-  const dprValue = value || DEFAULT_DPR;
-  return [1, 1.5, 2].reduce((closest, option) => {
-    return Math.abs(dprValue - option) < Math.abs(dprValue - closest)
-      ? option
-      : closest;
-  });
-};
+/**
+ * Effective DPR for breakpoints: min(user value, device DPR, cap of DEFAULT_DPR).
+ */
+export const getEffectiveDpr = (userDpr, deviceDpr) =>
+  Math.min(userDpr ?? DEFAULT_DPR, deviceDpr ?? DEFAULT_DPR, DEFAULT_DPR);
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -156,15 +153,17 @@ class CloudinaryContext {
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
 
-      // Calculate breakpoint transformation
+      // Calculate breakpoint transformation: requiredWidth = playerWidth * dpr, then closest breakpoint as width (no dpr in transformation).
       if (options.breakpoints) {
-        // Get player width for breakpoints
         const playerEl = this.player.el();
         const playerWidth = playerEl?.clientWidth;
-        const width = RENDITIONS.find(rendition => rendition >= playerWidth) || RENDITIONS[RENDITIONS.length - 1];
+        const win = playerEl?.ownerDocument?.defaultView;
+        const deviceDpr = win?.devicePixelRatio ?? DEFAULT_DPR;
+        const dpr = getEffectiveDpr(options.dpr, deviceDpr);
+        const requiredWidth = playerWidth * dpr;
+        const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
         options.breakpointTransformation = {
           width,
-          dpr: roundedDpr(options.dpr),
           crop: 'limit'
         };
       }
