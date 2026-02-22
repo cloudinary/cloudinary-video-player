@@ -17,9 +17,6 @@ import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.cons
 
 import recommendationsOverlay from 'components/recommendations-overlay';
 
-/**
- * Effective DPR for breakpoints: min(maxDpr user cap, device DPR, hard cap of DEFAULT_DPR).
- */
 export const getEffectiveDpr = (maxDpr, deviceDpr) =>
   Math.min(maxDpr ?? DEFAULT_DPR, deviceDpr ?? DEFAULT_DPR, DEFAULT_DPR);
 
