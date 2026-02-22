@@ -168,6 +168,9 @@ class CloudinaryContext {
         };
       }
 
+      // dpr is used only for rendition selection above; strip it so it does not leak into the Cloudinary URL transformation.
+      delete options.dpr;
+
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
       if (options.sourceTypes.indexOf('audio') > -1) {
