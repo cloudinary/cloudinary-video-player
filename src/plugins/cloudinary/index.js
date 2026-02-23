@@ -13,8 +13,12 @@ import {
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
+import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.const';
 
 import recommendationsOverlay from 'components/recommendations-overlay';
+
+export const getEffectiveDpr = (maxDpr, deviceDpr) =>
+  Math.min(maxDpr ?? DEFAULT_DPR, deviceDpr ?? DEFAULT_DPR, DEFAULT_DPR);
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -126,8 +130,8 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
-      
       const posterOptions = posterOptionsForCurrent();
+      
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -145,6 +149,21 @@ class CloudinaryContext {
         posterOptions,
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
+
+      // Calculate breakpoint transformation: requiredWidth = playerWidth * effectiveDpr, then closest breakpoint as width (no dpr in transformation).
+      if (options.breakpoints) {
+        const playerEl = this.player.el();
+        const playerWidth = playerEl?.clientWidth;
+        const win = playerEl?.ownerDocument?.defaultView;
+        const deviceDpr = win?.devicePixelRatio ?? DEFAULT_DPR;
+        const dpr = getEffectiveDpr(options.maxDpr, deviceDpr);
+        const requiredWidth = playerWidth * dpr;
+        const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
+        options.breakpointTransformation = {
+          width,
+          crop: 'limit'
+        };
+      }
 
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 

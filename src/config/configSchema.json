@@ -278,6 +278,18 @@
       },
       "default": ["auto"]
     },
+    "breakpoints": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable responsive video resolution based on player width and device pixel ratio"
+    },
+    "maxDpr": {
+      "type": "number",
+      "minimum": 1.0,
+      "maximum": 2.0,
+      "default": 2.0,
+      "description": "Maximum device pixel ratio cap for breakpoint rendition selection (1.0, 1.5, or 2.0)"
+    },
     "resourceType": {
       "type": "string",
       "default": "video"

@@ -1,3 +1,21 @@
+## [3.8.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.8.0...v3.8.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* remove dpr from url ([#985](https://github.com/cloudinary/cloudinary-video-player/issues/985)) ([ace2046](https://github.com/cloudinary/cloudinary-video-player/commit/ace2046ad24795d5b7ca39fbb187b8770002f884))
+
+
+
+# [3.8.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.7.2...v3.8.0) (2026-02-22)
+
+
+### Features
+
+* add responsive breakpoints ([#981](https://github.com/cloudinary/cloudinary-video-player/issues/981)) ([be477e6](https://github.com/cloudinary/cloudinary-video-player/commit/be477e6fe9e9ff76018c6cb07518fab2bd58066c))
+
+
+
 ## [3.7.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.7.1...v3.7.2) (2026-01-21)
 
 
