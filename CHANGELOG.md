@@ -3,7 +3,7 @@
 
 ### Features
 
-* high dynamic-range (HDR) detection ([#982](https://github.com/cloudinary/cloudinary-video-player/issues/982)) ([4e9d589](https://github.com/cloudinary/cloudinary-video-player/commit/4e9d5892acdafd95a34041975466490752f11597))
+* high dynamic-range (HDR) support ([#982](https://github.com/cloudinary/cloudinary-video-player/issues/982)) ([4e9d589](https://github.com/cloudinary/cloudinary-video-player/commit/4e9d5892acdafd95a34041975466490752f11597))
 
 
 
