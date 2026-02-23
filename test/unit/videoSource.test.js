@@ -60,6 +60,52 @@ describe('video source tests', () => {
     expect(srcs[0]).toContain('t_test');
   });
 });
+
+describe('HDR option tests', () => {
+  let matchMediaSpy;
+
+  beforeEach(() => {
+    if (typeof window.matchMedia === 'undefined') {
+      window.matchMedia = () => ({ matches: false });
+    }
+  });
+
+  afterEach(() => {
+    matchMediaSpy?.mockRestore();
+  });
+
+  it('adds vc_h265 and dr_high when hdr: true and device supports HDR', () => {
+    matchMediaSpy = vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: true });
+    const source = new VideoSource('sea_turtle', { cloudinaryConfig: cld, hdr: true });
+    source.sourceTypes(['hls']);
+    const srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).toContain('vc_h265');
+    expect(srcs[0]).toContain('dr_high');
+  });
+
+  it('does not add dr_high when hdr: true but device does not support HDR', () => {
+    matchMediaSpy = vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false });
+    const source = new VideoSource('sea_turtle', { cloudinaryConfig: cld, hdr: true });
+    source.sourceTypes(['hls']);
+    const srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).not.toContain('dr_high');
+  });
+
+  it('does not add HDR transformation when hdr: false', () => {
+    const source = new VideoSource('sea_turtle', { cloudinaryConfig: cld, hdr: false });
+    source.sourceTypes(['hls']);
+    const srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).not.toContain('dr_high');
+  });
+
+  it('does not add HDR transformation when hdr is not set (default)', () => {
+    const source = new VideoSource('sea_turtle', { cloudinaryConfig: cld });
+    source.sourceTypes(['hls']);
+    const srcs = source.generateSources().map(s => s.src);
+    expect(srcs[0]).not.toContain('dr_high');
+  });
+});
+
 describe('Adaptive source type tests', () => {
   it('Test hls no codec', () => {
     let sourceDef = {

@@ -143,6 +143,10 @@
       "type": "boolean",
       "default": false
     },
+    "hdr": {
+      "type": "boolean",
+      "default": false
+    },
     "seekThumbnails": {
       "type": "boolean",
       "default": true
