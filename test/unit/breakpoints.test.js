@@ -55,6 +55,22 @@ describe('Breakpoints - Unit Tests', () => {
     });
     expect(source.generateSources()[0].src).not.toContain('c_limit');
   });
+
+  it('maxDpr should not appear in the URL — SDK does not recognize it as a transformation param', () => {
+    // maxDpr is an internal hint for rendition selection only.
+    // Unlike the old 'dpr' name, the SDK does not recognize 'maxDpr' so it never leaks into the URL.
+    const source = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      maxDpr: 2,
+      breakpointTransformation: { width: 1280, crop: 'limit' }
+    });
+
+    const url = source.generateSources()[0].src;
+    expect(url).not.toContain('dpr_');
+    expect(url).not.toContain('maxDpr');
+    expect(url).toContain('w_1280');
+    expect(url).toContain('c_limit');
+  });
 });
 
 describe('Breakpoints - getEffectiveDpr', () => {
@@ -79,15 +95,15 @@ describe('Breakpoints - getEffectiveDpr', () => {
     expect(width).toBe(widthFromRequired(1000));
   });
 
-  it('user passes dpr 3 but device is 1 → effective is 1 (capped)', () => {
+  it('user passes maxDpr 3 but device is 1 → effective is 1 (capped)', () => {
     expect(getEffectiveDpr(3, 1)).toBe(1);
   });
 
-  it('user passes dpr 3 but device is 2 → effective is 2 (capped to max)', () => {
+  it('user passes maxDpr 3 but device is 2 → effective is 2 (capped to max)', () => {
     expect(getEffectiveDpr(3, 2)).toBe(2);
   });
 
-  it('user passes dpr 1.5 but device is 1 → effective is 1 (device is lower)', () => {
+  it('user passes maxDpr 1.5 but device is 1 → effective is 1 (device is lower)', () => {
     expect(getEffectiveDpr(1.5, 1)).toBe(1);
   });
 });
