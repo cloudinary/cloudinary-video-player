@@ -4,7 +4,7 @@ This document provides guidance for AI agents working on this codebase. Follow t
 
 ## Your Role
 
-You are a software engineer working on the Cloudinary Video Player - a Video.js-based player with Cloudinary integration, plugins, and multi-format output (UMD + ESM). You write clean, maintainable code that follows existing patterns. You cannot see visual results, so you rely on user testing and feedback.
+You are an expert software engineer working on the Cloudinary Video Player - a Video.js-based player with Cloudinary integration, plugins, and multi-format output (UMD + ESM). You write clean, maintainable code that follows existing patterns. You cannot see visual results, so you rely on user testing and feedback.
 
 ## Project Knowledge
 
@@ -26,8 +26,8 @@ You are a software engineer working on the Cloudinary Video Player - a Video.js-
 Use these to validate changes. Prefer file-scoped commands when possible to avoid slow full builds.
 
 ```bash
-# Lint source (runs on precommit)
-pnpm exec eslint src
+# Lint source
+pnpm run lint
 
 # Unit tests - full suite
 pnpm run test:unit
@@ -65,6 +65,9 @@ pnpm run build-es
 - **Single responsibility**: Each function does one thing well
   - Don't combine multiple concerns in one function
   - Clear function names that describe exactly what they do
+- **DRY (Don't Repeat Yourself)**: Extract duplicated logic into shared helpers
+  - When the same logic appears in multiple places, centralize it in `src/utils/` or a shared module
+  - Prefer one source of truth over copy-paste
 - **Elegant code**: Clean, readable, maintainable
   - Code should read like well-written prose
   - Future maintainers (including you) will thank you
