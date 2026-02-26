@@ -1,3 +1,17 @@
+# [3.10.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.9.0...v3.10.0) (2026-02-26)
+
+
+### Bug Fixes
+
+* menu text-overflow ([#989](https://github.com/cloudinary/cloudinary-video-player/issues/989)) ([8816699](https://github.com/cloudinary/cloudinary-video-player/commit/881669963f50d3a3b91b7c9483b143389204c9c8))
+
+
+### Features
+
+* agents.md ([#983](https://github.com/cloudinary/cloudinary-video-player/issues/983)) ([eeb88bf](https://github.com/cloudinary/cloudinary-video-player/commit/eeb88bf5fff9cbc4d32e9756216c393cfdd49e03))
+
+
+
 # [3.9.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.8.1...v3.9.0) (2026-02-23)
 
 
