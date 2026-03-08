@@ -2,9 +2,12 @@
 export const SOURCE_PARAMS = [
   'adaptiveStreaming',
   'allowUsageReport',
+  'aspectRatio',
   'autoShowRecommendations',
   'breakpoints',
   'chapters',
+  'cropMode',
+  'cropPadColor',
   'cloudinaryConfig',
   'description',
   'download',

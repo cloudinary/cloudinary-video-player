@@ -85,6 +85,9 @@ export const playerValidators = {
 
 export const sourceValidators = {
   raw_transformation: validator.isString,
+  aspectRatio: validator.isString,
+  cropMode: validator.isString,
+  cropPadColor: validator.isString,
   hdr: validator.isBoolean,
   resourceType: validator.isString,
   shoppable: validator.isPlainObject,

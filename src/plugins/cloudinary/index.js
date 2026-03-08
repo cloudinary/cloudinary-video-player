@@ -30,6 +30,25 @@ const DEFAULT_PARAMS = {
 export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 
+const normalizeAspectCrop = (options) => {
+  const { aspectRatio, cropMode, cropPadColor, transformation, ...rest } = options;
+  if (!aspectRatio && !cropMode) return options;
+
+  const base = Array.isArray(transformation) ? transformation[0] : transformation;
+  const tx = {};
+  if (aspectRatio) tx.aspect_ratio = aspectRatio;
+  if (cropMode) {
+    if (cropMode === 'smart') {
+      tx.crop = 'fill';
+      tx.gravity = 'auto';
+    } else {
+      tx.crop = cropMode;
+      if (cropMode === 'pad' && cropPadColor) tx.background = cropPadColor;
+    }
+  }
+  return { ...rest, transformation: mergeTransformations(base || {}, tx) };
+};
+
 class CloudinaryContext {
   constructor(player, options = {}) {
     setupCloudinaryMiddleware();
@@ -124,6 +143,7 @@ class CloudinaryContext {
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
+      options = normalizeAspectCrop(options);
 
       options.cloudinaryConfig = extendCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
       options.transformation = mergeTransformations(this.transformation(), options.transformation || {});
