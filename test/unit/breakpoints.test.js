@@ -56,6 +56,19 @@ describe('Breakpoints - Unit Tests', () => {
     expect(source.generateSources()[0].src).not.toContain('c_limit');
   });
 
+  it('should not add crop: limit when transformation already has crop (crop-mode set)', () => {
+    const source = new VideoSource('sea_turtle', {
+      cloudinaryConfig: cld,
+      transformation: { crop: 'fill' },
+      breakpointTransformation: { width: 640 }
+    });
+
+    const srcs = source.generateSources();
+    expect(srcs[0].src).toContain('w_640');
+    expect(srcs[0].src).toContain('c_fill');
+    expect(srcs[0].src).not.toContain('c_limit');
+  });
+
   it('maxDpr should not appear in the URL — SDK does not recognize it as a transformation param', () => {
     // maxDpr is an internal hint for rendition selection only.
     // Unlike the old 'dpr' name, the SDK does not recognize 'maxDpr' so it never leaks into the URL.

@@ -181,7 +181,7 @@ class CloudinaryContext {
         const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
         options.breakpointTransformation = {
           width,
-          crop: 'limit'
+          ...(!isKeyInTransformation(options.transformation, 'crop') && { crop: 'limit' })
         };
       }
 
