@@ -104,3 +104,9 @@ export const PRELOAD = {
   METADATA: 'metadata',
   NONE: 'none'
 };
+
+export const CROP_MODE = {
+  FILL: 'fill',
+  PAD: 'pad',
+  SMART: 'smart'
+};

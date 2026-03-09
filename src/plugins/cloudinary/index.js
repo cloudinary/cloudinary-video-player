@@ -10,6 +10,7 @@ import {
   setupCloudinaryMiddleware,
   isRawUrl
 } from './common';
+import { CROP_MODE } from 'video-player.const';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
@@ -37,12 +38,12 @@ const normalizeAspectCrop = (options) => {
   const tx = {};
   if (aspectRatio) tx.aspect_ratio = aspectRatio;
   if (cropMode) {
-    if (cropMode === 'smart') {
-      tx.crop = 'fill';
+    if (cropMode === CROP_MODE.SMART) {
+      tx.crop = CROP_MODE.FILL;
       tx.gravity = 'auto';
     } else {
       tx.crop = cropMode;
-      if (cropMode === 'pad' && cropPadColor) tx.background = cropPadColor;
+      if (cropMode === CROP_MODE.PAD && cropPadColor) tx.background = cropPadColor;
     }
   }
   return {

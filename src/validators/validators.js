@@ -1,4 +1,4 @@
-import { ADS_IN_PLAYLIST, AUTO_PLAY_MODE, FLOATING_TO } from '../video-player.const';
+import { ADS_IN_PLAYLIST, AUTO_PLAY_MODE, CROP_MODE, FLOATING_TO } from '../video-player.const';
 import {
   INTERACTION_AREAS_TEMPLATE,
   INTERACTION_AREAS_THEME
@@ -86,7 +86,7 @@ export const playerValidators = {
 export const sourceValidators = {
   raw_transformation: validator.isString,
   aspectRatio: validator.isString,
-  cropMode: validator.isString,
+  cropMode: validator.isString(CROP_MODE),
   cropPadColor: validator.isString,
   hdr: validator.isBoolean,
   resourceType: validator.isString,
