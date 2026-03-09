@@ -265,7 +265,7 @@ class VideoPlayer {
         }
 
         // fl_sprite must be in a separate URL component when transformation has params
-        const spriteTx = Object.keys(transformation).length > 0 ? [transformation, { flags: ['sprite'] }] : { flags: ['sprite'] };
+        const spriteTx = [...(Array.isArray(transformation) ? transformation : [transformation]), { flags: ['sprite'] }];
 
         const vttUrl = source.config()
           .url(`${publicId}.vtt`, { transformation: spriteTx })
