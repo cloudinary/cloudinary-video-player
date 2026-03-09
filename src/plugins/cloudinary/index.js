@@ -34,7 +34,6 @@ const normalizeAspectCrop = (options) => {
   const { aspectRatio, cropMode, cropPadColor, transformation, ...rest } = options;
   if (!aspectRatio && !cropMode) return options;
 
-  const base = Array.isArray(transformation) ? transformation[0] : transformation;
   const tx = {};
   if (aspectRatio) tx.aspect_ratio = aspectRatio;
   if (cropMode) {
@@ -46,7 +45,10 @@ const normalizeAspectCrop = (options) => {
       if (cropMode === 'pad' && cropPadColor) tx.background = cropPadColor;
     }
   }
-  return { ...rest, transformation: mergeTransformations(base || {}, tx) };
+  if (Array.isArray(transformation)) {
+    return { ...rest, transformation: [tx, ...transformation] };
+  }
+  return { ...rest, transformation: mergeTransformations(transformation || {}, tx) };
 };
 
 class CloudinaryContext {
