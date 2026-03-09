@@ -179,7 +179,7 @@ class VideoSource extends BaseSource {
         opts.transformation = castArray(srcTransformation);
       }
 
-      // Merge breakpoint transformation if available (prepend to preserve chain, aligned with aspect-crop)
+      // Merge breakpoint transformation if available
       if (this._breakpointTransformation) {
         opts.transformation = Array.isArray(opts.transformation)
           ? [this._breakpointTransformation, ...opts.transformation]

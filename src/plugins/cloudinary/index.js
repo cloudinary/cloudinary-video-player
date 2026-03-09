@@ -45,10 +45,12 @@ const normalizeAspectCrop = (options) => {
       if (cropMode === 'pad' && cropPadColor) tx.background = cropPadColor;
     }
   }
-  if (Array.isArray(transformation)) {
-    return { ...rest, transformation: [tx, ...transformation] };
-  }
-  return { ...rest, transformation: mergeTransformations(transformation || {}, tx) };
+  return {
+    ...rest,
+    transformation: Array.isArray(transformation)
+      ? [tx, ...transformation]
+      : mergeTransformations(transformation || {}, tx)
+  };
 };
 
 class CloudinaryContext {
