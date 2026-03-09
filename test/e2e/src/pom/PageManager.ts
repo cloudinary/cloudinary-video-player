@@ -4,6 +4,7 @@ import { BasePage } from './BasePage';
 import { MainPage } from './mainPage';
 import { AnalyticsPage } from './analyticsPage';
 import { ApiAndEventsPage } from './apiAndEventsPage';
+import { AspectRatioCropPage } from './aspectRatioCropPage';
 import { AudioPlayerPage } from './audioPlayerPage';
 import { AutoplayOnScrollPage } from './autoplayOnScrollPage';
 import { ChaptersPage } from './chaptersPage';
@@ -82,6 +83,10 @@ export class PageManager {
      */
     public get apiAndEventsPage(): ApiAndEventsPage {
         return this.getPage(ApiAndEventsPage);
+    }
+
+    public get aspectRatioCropPage(): AspectRatioCropPage {
+        return this.getPage(AspectRatioCropPage);
     }
 
     /**

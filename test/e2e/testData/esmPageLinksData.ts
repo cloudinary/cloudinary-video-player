@@ -9,6 +9,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.AIHighlightsGraph, endpoint: 'highlights-graph' },
     { name: ExampleLinkName.Analytics, endpoint: 'analytics' },
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api' },
+    { name: ExampleLinkName.AspectRatioCrop, endpoint: 'aspect-ratio-crop' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio' },
     { name: ExampleLinkName.AutoplayOnScroll, endpoint: 'autoplay-on-scroll' },
     { name: ExampleLinkName.Breakpoints, endpoint: 'breakpoints' },

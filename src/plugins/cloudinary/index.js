@@ -10,6 +10,7 @@ import {
   setupCloudinaryMiddleware,
   isRawUrl
 } from './common';
+import { CROP_MODE } from 'video-player.const';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
@@ -29,6 +30,29 @@ const DEFAULT_PARAMS = {
 
 export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
+
+const normalizeAspectCrop = (options) => {
+  const { aspectRatio, cropMode, cropPadColor, transformation, ...rest } = options;
+  if (!aspectRatio && !cropMode) return options;
+
+  const tx = {};
+  if (aspectRatio) tx.aspect_ratio = aspectRatio;
+  if (cropMode) {
+    if (cropMode === CROP_MODE.SMART) {
+      tx.crop = CROP_MODE.FILL;
+      tx.gravity = 'auto';
+    } else {
+      tx.crop = cropMode;
+      if (cropMode === CROP_MODE.PAD && cropPadColor) tx.background = cropPadColor;
+    }
+  }
+  return {
+    ...rest,
+    transformation: Array.isArray(transformation)
+      ? [tx, ...transformation]
+      : mergeTransformations(transformation || {}, tx)
+  };
+};
 
 class CloudinaryContext {
   constructor(player, options = {}) {
@@ -124,6 +148,7 @@ class CloudinaryContext {
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
+      options = normalizeAspectCrop(options);
 
       options.cloudinaryConfig = extendCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
       options.transformation = mergeTransformations(this.transformation(), options.transformation || {});
@@ -161,7 +186,7 @@ class CloudinaryContext {
         const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
         options.breakpointTransformation = {
           width,
-          crop: 'limit'
+          ...(!isKeyInTransformation(options.transformation, 'crop') && { crop: 'limit' })
         };
       }
 

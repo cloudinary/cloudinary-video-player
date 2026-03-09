@@ -635,4 +635,20 @@ describe('sourceOptions extraction and inheritance', () => {
     expect(playerOptions.sourceOptions.transformation).toEqual({ width: 640 });
     expect(playerOptions.colors).toEqual({ base: '#FF0000' });
   });
+
+  it('should extract aspectRatio, cropMode, cropPadColor into sourceOptions', () => {
+    let elem = document.createElement('video');
+    let options = {
+      cloudName: 'demo',
+      aspectRatio: '16:9',
+      cropMode: 'fill',
+      cropPadColor: '#000000'
+    };
+    let flatOptions = extractOptions(elem, options);
+    let { playerOptions } = splitOptions(flatOptions);
+
+    expect(playerOptions.sourceOptions.aspectRatio).toBe('16:9');
+    expect(playerOptions.sourceOptions.cropMode).toBe('fill');
+    expect(playerOptions.sourceOptions.cropPadColor).toBe('#000000');
+  });
 });

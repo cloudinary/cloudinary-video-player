@@ -290,6 +290,19 @@
       "default": 2.0,
       "description": "Maximum device pixel ratio cap for breakpoint rendition selection (1.0, 1.5, or 2.0)"
     },
+    "aspectRatio": {
+      "type": "string",
+      "description": "Aspect ratio for video resize (e.g. 16:9, 9:16, 1:1). Merged into transformation."
+    },
+    "cropMode": {
+      "type": "string",
+      "enum": ["fill", "pad", "smart"],
+      "description": "Resize mode: fill, pad, or smart. Merged into transformation."
+    },
+    "cropPadColor": {
+      "type": "string",
+      "description": "Background color for pad mode, e.g. #000000. Merged into transformation.background."
+    },
     "resourceType": {
       "type": "string",
       "default": "video"

@@ -6,6 +6,7 @@ export enum ExampleLinkName {
     AIHighlightsGraph = 'AI Highlights Graph',
     Analytics = 'Analytics',
     APIAndEvents = 'API and Events',
+    AspectRatioCrop = 'Aspect Ratio & Crop',
     AudioPlayer = 'Audio Player',
     AutoplayOnScroll = 'Autoplay on Scroll',
     Breakpoints = 'Breakpoints',

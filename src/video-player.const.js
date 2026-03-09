@@ -2,9 +2,12 @@
 export const SOURCE_PARAMS = [
   'adaptiveStreaming',
   'allowUsageReport',
+  'aspectRatio',
   'autoShowRecommendations',
   'breakpoints',
   'chapters',
+  'cropMode',
+  'cropPadColor',
   'cloudinaryConfig',
   'description',
   'download',
@@ -100,4 +103,10 @@ export const PRELOAD = {
   AUTO: 'auto',
   METADATA: 'metadata',
   NONE: 'none'
+};
+
+export const CROP_MODE = {
+  FILL: 'fill',
+  PAD: 'pad',
+  SMART: 'smart'
 };

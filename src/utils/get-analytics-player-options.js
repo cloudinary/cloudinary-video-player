@@ -47,6 +47,9 @@ const getSourceOptions = (sourceOptions = {}) => ({
   videoSources: hasConfig(sourceOptions.videoSources),
   breakpoints: sourceOptions.breakpoints,
   maxDpr: sourceOptions.maxDpr,
+  aspectRatio: sourceOptions.aspectRatio,
+  cropMode: sourceOptions.cropMode,
+  cropPadColor: hasConfig(sourceOptions.cropPadColor) ? sourceOptions.cropPadColor : undefined
 });
 
 const getTextTracksOptions = (textTracks = {}) => {

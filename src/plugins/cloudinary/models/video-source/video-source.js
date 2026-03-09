@@ -181,7 +181,9 @@ class VideoSource extends BaseSource {
 
       // Merge breakpoint transformation if available
       if (this._breakpointTransformation) {
-        opts.transformation = mergeTransformations(opts.transformation, this._breakpointTransformation);
+        opts.transformation = Array.isArray(opts.transformation)
+          ? [this._breakpointTransformation, ...opts.transformation]
+          : mergeTransformations(opts.transformation || {}, this._breakpointTransformation);
       }
 
       Object.assign(opts, { format });
@@ -213,7 +215,7 @@ class VideoSource extends BaseSource {
       // dr (dynamic range) is not yet exposed by @cloudinary/url-gen, so we use raw_transformation
       if (this.hdr() === true && window.matchMedia && window.matchMedia('(dynamic-range: high)').matches) {
         opts.transformation = mergeTransformations(opts.transformation, {
-          fetch_format:'mp4',
+          fetch_format: 'mp4',
           video_codec: 'h265',
           raw_transformation: 'dr_high'
         });

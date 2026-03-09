@@ -9,6 +9,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.AIHighlightsGraph, endpoint: 'highlights-graph.html' },
     { name: ExampleLinkName.Analytics, endpoint: 'analytics.html' },
     { name: ExampleLinkName.APIAndEvents, endpoint: 'api.html' },
+    { name: ExampleLinkName.AspectRatioCrop, endpoint: 'aspect-ratio-crop.html' },
     { name: ExampleLinkName.AudioPlayer, endpoint: 'audio.html' },
     { name: ExampleLinkName.AutoplayOnScroll, endpoint: 'autoplay-on-scroll.html' },
     { name: ExampleLinkName.Breakpoints, endpoint: 'breakpoints.html' },

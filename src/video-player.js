@@ -264,11 +264,11 @@ class VideoPlayer {
           delete transformation.video_codec;
         }
 
-        transformation.flags = transformation.flags || [];
-        transformation.flags.push('sprite');
+        // fl_sprite must be in a separate URL component when transformation has params
+        const spriteTx = [...(Array.isArray(transformation) ? transformation : [transformation]), { flags: ['sprite'] }];
 
         const vttUrl = source.config()
-          .url(`${publicId}.vtt`, { transformation })
+          .url(`${publicId}.vtt`, { transformation: spriteTx })
           .replace(/\.json$/, ''); // Handle playlist by tag
         const vttSrc = appendQueryParams(vttUrl, source.queryParams());
 
