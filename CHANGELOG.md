@@ -1,3 +1,12 @@
+# [3.11.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.10.0...v3.11.0) (2026-03-09)
+
+
+### Features
+
+* aspect-ratio & crop configs ([#996](https://github.com/cloudinary/cloudinary-video-player/issues/996)) ([b08315e](https://github.com/cloudinary/cloudinary-video-player/commit/b08315edf1b377ca86dacee34e05ebd6bc7922fb))
+
+
+
 # [3.10.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.9.0...v3.10.0) (2026-02-26)
 
 
