@@ -1,3 +1,12 @@
+# [3.12.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.11.0...v3.12.0) (2026-03-12)
+
+
+### Features
+
+* better error message for 423 (processing) ([#999](https://github.com/cloudinary/cloudinary-video-player/issues/999)) ([92dc982](https://github.com/cloudinary/cloudinary-video-player/commit/92dc982af5a94dd2b43ebf8147573134f242fbdc))
+
+
+
 # [3.11.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.10.0...v3.11.0) (2026-03-09)
 
 
