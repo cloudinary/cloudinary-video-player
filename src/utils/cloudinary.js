@@ -96,7 +96,11 @@ const isKeyInTransformation = (transformation, key) => {
     return !!transformation.getValue(key);
   }
 
-  // transformation is an Object so just check for key existence in object
+  // Cloudinary chained format: { transformation: [tx1, tx2, ...] }
+  if (Array.isArray(transformation.transformation)) {
+    return !!find(transformation.transformation, (t) => isKeyInTransformation(t, key));
+  }
+
   return !!transformation[key];
 };
 

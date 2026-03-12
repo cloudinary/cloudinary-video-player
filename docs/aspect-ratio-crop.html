@@ -17,23 +17,28 @@
 
   <script type="text/javascript">
     window.addEventListener('load', function(){
-      var player1 = cloudinary.videoPlayer('player-1', { cloudName: 'demo' });
-      player1.source({
+      var player1 = cloudinary.videoPlayer('player-1', { 
+        cloudName: 'demo',
         publicId: 'sea_turtle',
         aspectRatio: '1:1',
-        cropMode: 'fill'
+        cropMode: 'fill',
+        breakpoints: true,
+        transformation: [
+          { effect: 'blur:500' },
+          { effect: 'saturation:-100' }
+        ]
       });
 
-      var player2 = cloudinary.videoPlayer('player-2', { cloudName: 'demo' });
-      player2.source({
+      var player2 = cloudinary.videoPlayer('player-2', { 
+        cloudName: 'demo',
         publicId: 'sea_turtle',
         aspectRatio: '4:3',
         cropMode: 'pad',
         cropPadColor: 'blue'
       });
 
-      var player3 = cloudinary.videoPlayer('player-3', { cloudName: 'demo' });
-      player3.source({
+      var player3 = cloudinary.videoPlayer('player-3', { 
+        cloudName: 'demo',
         publicId: 'sea_turtle',
         aspectRatio: '9:16',
         cropMode: 'smart'
@@ -55,8 +60,6 @@
       id="player-1"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="500">
     </video>
@@ -66,8 +69,6 @@
       id="player-2"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="500">
     </video>
@@ -77,8 +78,6 @@
       id="player-3"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="280">
     </video>

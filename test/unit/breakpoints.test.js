@@ -22,10 +22,7 @@ describe('Breakpoints - Unit Tests', () => {
   it('should apply breakpoints when enabled with width only (no dpr in transformation)', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
-      breakpointTransformation: {
-        width: 640,
-        crop: 'limit'
-      }
+      transformation: { width: 640, crop: 'limit' }
     });
 
     const srcs = source.generateSources();
@@ -38,20 +35,17 @@ describe('Breakpoints - Unit Tests', () => {
     const url = 'https://example.com/test.mp4';
     const source = new VideoSource(url, {
       cloudinaryConfig: cld,
-      breakpointTransformation: {
-        width: 640,
-        crop: 'limit'
-      }
+      transformation: { width: 640, crop: 'limit' }
     });
 
     const srcs = source.generateSources();
     expect(srcs[0].src).toEqual(url);
   });
 
-  it('should not apply breakpoints when breakpointTransformation is null', () => {
+  it('should not apply breakpoints when transformation has no breakpoint params', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
-      breakpointTransformation: null
+      transformation: {}
     });
     expect(source.generateSources()[0].src).not.toContain('c_limit');
   });
@@ -59,8 +53,7 @@ describe('Breakpoints - Unit Tests', () => {
   it('should not add crop: limit when transformation already has crop (crop-mode set)', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
-      transformation: { crop: 'fill' },
-      breakpointTransformation: { width: 640 }
+      transformation: { width: 640, crop: 'fill' }
     });
 
     const srcs = source.generateSources();
@@ -75,7 +68,7 @@ describe('Breakpoints - Unit Tests', () => {
     const source = new VideoSource('sea_turtle', {
       cloudinaryConfig: cld,
       maxDpr: 2,
-      breakpointTransformation: { width: 1280, crop: 'limit' }
+      transformation: { width: 1280, crop: 'limit' }
     });
 
     const url = source.generateSources()[0].src;
@@ -87,36 +80,50 @@ describe('Breakpoints - Unit Tests', () => {
 });
 
 describe('Breakpoints - getEffectiveDpr', () => {
+  const originalDevicePixelRatio = Object.getOwnPropertyDescriptor(window, 'devicePixelRatio');
+
+  afterEach(() => {
+    if (originalDevicePixelRatio) {
+      Object.defineProperty(window, 'devicePixelRatio', originalDevicePixelRatio);
+    }
+  });
+
   it('dpr 1 → width based on playerWidth * 1', () => {
-    const effectiveDpr = getEffectiveDpr(1, 1);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 1, configurable: true });
+    const effectiveDpr = getEffectiveDpr(1);
     const width = widthFromRequired(500 * effectiveDpr);
     expect(effectiveDpr).toBe(1);
     expect(width).toBe(widthFromRequired(500));
   });
 
   it('dpr 1.5 → width based on playerWidth * 1.5', () => {
-    const effectiveDpr = getEffectiveDpr(1.5, 1.5);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 1.5, configurable: true });
+    const effectiveDpr = getEffectiveDpr(1.5);
     const width = widthFromRequired(500 * effectiveDpr);
     expect(effectiveDpr).toBe(1.5);
     expect(width).toBe(widthFromRequired(750));
   });
 
   it('dpr 2 (default) → width based on playerWidth * 2', () => {
-    const effectiveDpr = getEffectiveDpr(2, 2);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 2, configurable: true });
+    const effectiveDpr = getEffectiveDpr(2);
     const width = widthFromRequired(500 * effectiveDpr);
     expect(effectiveDpr).toBe(2);
     expect(width).toBe(widthFromRequired(1000));
   });
 
   it('user passes maxDpr 3 but device is 1 → effective is 1 (capped)', () => {
-    expect(getEffectiveDpr(3, 1)).toBe(1);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 1, configurable: true });
+    expect(getEffectiveDpr(3)).toBe(1);
   });
 
   it('user passes maxDpr 3 but device is 2 → effective is 2 (capped to max)', () => {
-    expect(getEffectiveDpr(3, 2)).toBe(2);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 2, configurable: true });
+    expect(getEffectiveDpr(3)).toBe(2);
   });
 
   it('user passes maxDpr 1.5 but device is 1 → effective is 1 (device is lower)', () => {
-    expect(getEffectiveDpr(1.5, 1)).toBe(1);
+    Object.defineProperty(window, 'devicePixelRatio', { value: 1, configurable: true });
+    expect(getEffectiveDpr(1.5)).toBe(1);
   });
 });

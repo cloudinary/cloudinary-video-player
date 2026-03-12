@@ -122,7 +122,11 @@ export const splitOptions = (flatOptions) => {
     Object.assign(options, options.videojs);
     delete options.videojs;
   }
-  
+  // Pass aspectRatio to videojs so it keeps applying aspect-ratio CSS to the video element
+  if (playerOptions.sourceOptions?.aspectRatio) {
+    options.aspectRatio = playerOptions.sourceOptions.aspectRatio;
+  }
+
   return { playerOptions, videojsOptions: options };
 };
 

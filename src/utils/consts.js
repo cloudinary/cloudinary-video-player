@@ -12,6 +12,7 @@ export const PLAYER_EVENT = {
   TIME_UPDATE: 'timeupdate',
   EMPTIED: 'emptied',
   RETRY_PLAYLIST: 'retryplaylist',
+  REFRESH: 'refresh',
   CAN_PLAY_THROUGH: 'canplaythrough',
   CLD_SOURCE_CHANGED: 'cldsourcechanged',
   SOURCE_CHANGED: 'sourcechanged',

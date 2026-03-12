@@ -21,7 +21,7 @@ import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
 import { getAnalyticsFromPlayerOptions } from './utils/get-analytics-player-options';
-import { extendCloudinaryConfig, normalizeOptions, isRawUrl, ERROR_CODE } from './plugins/cloudinary/common';
+import { extendCloudinaryConfig, normalizeOptions, isRawUrl, omitVideoOnlyTransformations, ERROR_CODE } from './plugins/cloudinary/common';
 import { isVideoInReadyState, checkIfVideoIsAvailable } from './utils/video-retry';
 import { appendQueryParams } from './utils/querystring';
 
@@ -130,6 +130,14 @@ class VideoPlayer {
     this.videojs.clearTimeout(this.reTryVideoStateTimeoutId);
   };
 
+  _handleRefresh = () => {
+    this.videojs.error(null);
+    const src = this.currentPublicId() || this.currentSourceUrl();
+    if (src) {
+      this.source(src, this.playerOptions.sourceOptions || {});
+    }
+  };
+
   _setVideoJsListeners(ready) {
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
@@ -171,6 +179,7 @@ class VideoPlayer {
     this.videojs.on(PLAYER_EVENT.PLAY, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
+    this.videojs.on(PLAYER_EVENT.REFRESH, this._handleRefresh.bind(this));
 
     this.videojs.ready(() => {
       this._onReady();
@@ -257,12 +266,9 @@ class VideoPlayer {
 
         const publicId = source.publicId();
 
-        const transformation = Object.assign({}, source.transformation());
-
-        if (transformation) {
-          delete transformation.streaming_profile;
-          delete transformation.video_codec;
-        }
+        const transformation = omitVideoOnlyTransformations(
+          Object.assign({}, source.transformation())
+        );
 
         // fl_sprite must be in a separate URL component when transformation has params
         const spriteTx = [...(Array.isArray(transformation) ? transformation : [transformation]), { flags: ['sprite'] }];

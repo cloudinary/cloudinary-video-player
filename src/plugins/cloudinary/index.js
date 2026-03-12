@@ -6,6 +6,7 @@ import { isKeyInTransformation } from 'utils/cloudinary';
 import {
   normalizeOptions,
   mergeTransformations,
+  omitVideoOnlyTransformations,
   extendCloudinaryConfig,
   setupCloudinaryMiddleware,
   isRawUrl
@@ -18,8 +19,12 @@ import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.cons
 
 import recommendationsOverlay from 'components/recommendations-overlay';
 
-export const getEffectiveDpr = (maxDpr, deviceDpr) =>
-  Math.min(maxDpr ?? DEFAULT_DPR, deviceDpr ?? DEFAULT_DPR, DEFAULT_DPR);
+export const getEffectiveDpr = (maxDpr) => {
+  const deviceDpr = typeof window !== 'undefined' && window.devicePixelRatio != null
+    ? window.devicePixelRatio
+    : DEFAULT_DPR;
+  return Math.min(maxDpr ?? DEFAULT_DPR, deviceDpr, DEFAULT_DPR);
+};
 
 const DEFAULT_PARAMS = {
   transformation: {},
@@ -32,8 +37,8 @@ export const CONSTRUCTOR_PARAMS = ['cloudinaryConfig', 'transformation',
   'sourceTypes', 'sourceTransformation', 'posterOptions', 'autoShowRecommendations'];
 
 const normalizeAspectCrop = (options) => {
-  const { aspectRatio, cropMode, cropPadColor, transformation, ...rest } = options;
-  if (!aspectRatio && !cropMode) return options;
+  const { aspectRatio, cropMode, cropPadColor, transformation, breakpointTransformation, ...rest } = options;
+  if (!aspectRatio && !cropMode && !breakpointTransformation) return options;
 
   const tx = {};
   if (aspectRatio) tx.aspect_ratio = aspectRatio;
@@ -46,11 +51,12 @@ const normalizeAspectCrop = (options) => {
       if (cropMode === CROP_MODE.PAD && cropPadColor) tx.background = cropPadColor;
     }
   }
+  const mergedTx = { ...(breakpointTransformation || {}), ...tx };
   return {
     ...rest,
     transformation: Array.isArray(transformation)
-      ? [tx, ...transformation]
-      : mergeTransformations(transformation || {}, tx)
+      ? [...transformation, mergedTx]
+      : mergeTransformations(transformation || {}, mergedTx)
   };
 };
 
@@ -148,6 +154,20 @@ class CloudinaryContext {
     this.buildSource = (publicId, options = {}) => {
       let builtSrc = null;
       ({ publicId, options } = normalizeOptions(publicId, options));
+
+      // Calculate breakpoint transformation.
+      // This should happen before normalizeAspectCrop so they can be merged.
+      if (options.breakpoints && this.player) {
+        const playerEl = this.player.el();
+        const playerWidth = playerEl?.clientWidth;
+        const dpr = getEffectiveDpr(options.maxDpr);
+        const requiredWidth = playerWidth * dpr;
+        const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
+        options.breakpointTransformation = {
+          width,
+          ...(!isKeyInTransformation(options.transformation, 'crop') && { crop: 'limit' })
+        };
+      }
       options = normalizeAspectCrop(options);
 
       options.cloudinaryConfig = extendCloudinaryConfig(this.cloudinaryConfig(), options.cloudinaryConfig || {});
@@ -155,8 +175,20 @@ class CloudinaryContext {
       options.sourceTransformation = options.sourceTransformation || this.sourceTransformation();
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
-      const posterOptions = posterOptionsForCurrent();
-      
+      const posterOptions = posterOptionsForCurrent(options);
+
+      // Inherit source transformation
+      const srcTx = options.transformation;
+      if (srcTx && !isEmpty(srcTx)) {
+        const imageSafeTx = omitVideoOnlyTransformations(srcTx);
+        const merged = mergeTransformations(posterOptions.transformation || {}, imageSafeTx);
+        // Remove height when aspect_ratio is set
+        if (merged.aspect_ratio) {
+          delete merged.height;
+        }
+        posterOptions.transformation = merged;
+      }
+
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
@@ -174,21 +206,6 @@ class CloudinaryContext {
         posterOptions,
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
-
-      // Calculate breakpoint transformation: requiredWidth = playerWidth * effectiveDpr, then closest breakpoint as width (no dpr in transformation).
-      if (options.breakpoints) {
-        const playerEl = this.player.el();
-        const playerWidth = playerEl?.clientWidth;
-        const win = playerEl?.ownerDocument?.defaultView;
-        const deviceDpr = win?.devicePixelRatio ?? DEFAULT_DPR;
-        const dpr = getEffectiveDpr(options.maxDpr, deviceDpr);
-        const requiredWidth = playerWidth * dpr;
-        const width = RENDITIONS.find(rendition => rendition >= requiredWidth) || RENDITIONS[RENDITIONS.length - 1];
-        options.breakpointTransformation = {
-          width,
-          ...(!isKeyInTransformation(options.transformation, 'crop') && { crop: 'limit' })
-        };
-      }
 
       options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
 
@@ -379,29 +396,34 @@ class CloudinaryContext {
       return v.canPlayType(codec) || 'MediaSource' in window && MediaSource.isTypeSupported(codec);
     };
 
-    const posterOptionsForCurrent = () => {
-      const opts = Object.assign({}, this.posterOptions());
+    const posterOptionsForCurrent = (sourceOpts) => {
+      const posterOpts = Object.assign({}, this.posterOptions());
+      posterOpts.transformation = posterOpts.transformation || {};
 
-      opts.transformation = opts.transformation || {};
-
-      if ((opts.transformation.width || opts.transformation.height) && !opts.transformation.crop) {
-        opts.transformation.crop = 'scale';
+      if ((posterOpts.transformation.width || posterOpts.transformation.height) && !posterOpts.transformation.crop) {
+        posterOpts.transformation.crop = 'scale';
       }
 
-      // Set poster dimensions to player actual size.
-      // (unless they were explicitly set via `posterOptions`)
+      // Skip when source already has sizing from breakpoints/aspectRatio.
+      const sourceHasSizing = isKeyInTransformation(sourceOpts.transformation, 'width') ||
+        isKeyInTransformation(sourceOpts.transformation, 'aspect_ratio');
       const playerEl = this.player.el();
-      if (playerEl && playerEl.clientWidth && playerEl.clientHeight && !isKeyInTransformation(opts.transformation, 'width') && !isKeyInTransformation(opts.transformation, 'height')) {
+      if (
+        !sourceHasSizing &&
+        playerEl?.clientWidth &&
+        playerEl?.clientHeight
+      ) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
+        const dpr = getEffectiveDpr(sourceOpts.maxDpr);
 
-        opts.transformation = mergeTransformations(opts.transformation, {
-          width: roundUp100(playerEl.clientWidth),
-          height: roundUp100(playerEl.clientHeight),
+        posterOpts.transformation = mergeTransformations(posterOpts.transformation, {
+          width: roundUp100(playerEl.clientWidth * dpr),
+          height: roundUp100(playerEl.clientHeight * dpr),
           crop: 'limit'
         });
       }
 
-      return opts;
+      return posterOpts;
     };
 
     // Handle external (non-cloudinary plugin) source changes (e.g. by ad plugins)
