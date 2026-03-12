@@ -85,6 +85,9 @@ export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec
 
 export const omitVideoOnlyTransformations = (transformation) => {
   if (!transformation || typeof transformation !== 'object') return transformation;
+  if (Array.isArray(transformation)) {
+    return transformation.map((t) => omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS)).filter((t) => Object.keys(t).length > 0);
+  }
   return omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
 };
 
