@@ -130,6 +130,14 @@ class VideoPlayer {
     this.videojs.clearTimeout(this.reTryVideoStateTimeoutId);
   };
 
+  _handleRefresh = () => {
+    this.videojs.error(null);
+    const src = this.currentPublicId() || this.currentSourceUrl();
+    if (src) {
+      this.source(src, this.playerOptions.sourceOptions || {});
+    }
+  };
+
   _setVideoJsListeners(ready) {
     this.videojs.on(PLAYER_EVENT.ERROR, () => {
       const error = this.videojs.error();
@@ -171,6 +179,7 @@ class VideoPlayer {
     this.videojs.on(PLAYER_EVENT.PLAY, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CAN_PLAY_THROUGH, this._resetReTryVideoState);
     this.videojs.on(PLAYER_EVENT.CLD_SOURCE_CHANGED, this._onSourceChange.bind(this));
+    this.videojs.on(PLAYER_EVENT.REFRESH, this._handleRefresh.bind(this));
 
     this.videojs.ready(() => {
       this._onReady();

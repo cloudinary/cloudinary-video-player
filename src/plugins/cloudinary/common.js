@@ -113,6 +113,9 @@ const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }
     error.message = `${msg} Requires authentication`;
     error.code = ERROR_CODE.UNAUTHENTICATED;
   }
+  if (statusCode === 423) {
+    error.message = 'Video is being processed. <br><a href="#" class="cld-error-refresh">Try again</a> in a moment.';
+  }
   return error;
 };
 
