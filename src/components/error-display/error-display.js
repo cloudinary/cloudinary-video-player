@@ -10,7 +10,11 @@ class CldErrorDisplay extends ErrorDisplay {
 
     const wrapper = videojs.dom.createEl('div', { className: 'cld-error-display-content' });
     const msg = videojs.dom.createEl('span', { className: 'cld-error-message' });
-    msg.innerHTML = this.localize(error.message);
+    if (error.isHtml) {
+      msg.innerHTML = this.localize(error.message);
+    } else {
+      msg.textContent = this.localize(error.message);
+    }
     wrapper.appendChild(msg);
 
     const refreshLink = msg.querySelector('.cld-error-refresh');

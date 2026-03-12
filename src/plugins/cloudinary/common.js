@@ -126,6 +126,7 @@ const cloudinaryErrorsConverter = ({ errorMsg, publicId, cloudName, statusCode }
   }
   if (statusCode === 423) {
     error.message = 'Video is being processed. <br><a href="#" class="cld-error-refresh">Try again</a> in a moment.';
+    error.isHtml = true;
   }
   return error;
 };
