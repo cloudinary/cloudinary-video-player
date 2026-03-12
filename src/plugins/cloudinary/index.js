@@ -156,7 +156,18 @@ class CloudinaryContext {
       options.sourceTypes = options.sourceTypes || this.sourceTypes();      
 
       const posterOptions = posterOptionsForCurrent();
-      
+
+      // Inherit source transformation
+      const srcTx = options.transformation;
+      if (srcTx && !isEmpty(srcTx)) {
+        const merged = mergeTransformations(posterOptions.transformation || {}, srcTx);
+        // Remove height when aspect_ratio is set
+        if (merged.aspect_ratio) {
+          delete merged.height;
+        }
+        posterOptions.transformation = merged;
+      }
+
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
       
       if (options.poster === undefined) {
