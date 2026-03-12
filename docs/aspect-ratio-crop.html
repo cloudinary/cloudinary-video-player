@@ -21,7 +21,13 @@
       player1.source({
         publicId: 'sea_turtle',
         aspectRatio: '1:1',
-        cropMode: 'fill'
+        cropMode: 'fill',
+        breakpoints: true,
+        transformation: [
+          { width: 400, crop: 'limit' },
+          { effect: 'blur:500' },
+          { effect: 'saturation:-100' }
+        ]
       });
 
       var player2 = cloudinary.videoPlayer('player-2', { cloudName: 'demo' });
@@ -55,8 +61,6 @@
       id="player-1"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="500">
     </video>
@@ -66,8 +70,6 @@
       id="player-2"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="500">
     </video>
@@ -77,8 +79,6 @@
       id="player-3"
       playsinline
       controls
-      muted
-      autoplay
       class="cld-video-player"
       width="280">
     </video>
