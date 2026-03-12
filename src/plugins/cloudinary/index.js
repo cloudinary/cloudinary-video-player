@@ -6,6 +6,7 @@ import { isKeyInTransformation } from 'utils/cloudinary';
 import {
   normalizeOptions,
   mergeTransformations,
+  omitVideoOnlyTransformations,
   extendCloudinaryConfig,
   setupCloudinaryMiddleware,
   isRawUrl
@@ -160,7 +161,8 @@ class CloudinaryContext {
       // Inherit source transformation
       const srcTx = options.transformation;
       if (srcTx && !isEmpty(srcTx)) {
-        const merged = mergeTransformations(posterOptions.transformation || {}, srcTx);
+        const imageSafeTx = omitVideoOnlyTransformations(srcTx);
+        const merged = mergeTransformations(posterOptions.transformation || {}, imageSafeTx);
         // Remove height when aspect_ratio is set
         if (merged.aspect_ratio) {
           delete merged.height;

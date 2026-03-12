@@ -80,6 +80,14 @@ const mergeTransformations = (initTransformation1, transformation2) => {
   return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
+// Video-only transformation keys invalid for static images (e.g. poster, sprite)
+export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec'];
+
+export const omitVideoOnlyTransformations = (transformation) => {
+  if (!transformation || typeof transformation !== 'object') return transformation;
+  return omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
+};
+
 const ERROR_CODE = {
   NO_SUPPORTED_MEDIA: 6,
   CUSTOM: 10,
