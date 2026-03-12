@@ -83,10 +83,18 @@ const mergeTransformations = (initTransformation1, transformation2) => {
 // Video-only transformation keys invalid for static images (e.g. poster, sprite)
 export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec'];
 
+const filterTxArray = (arr) =>
+  arr.map((t) => omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS)).filter((t) => Object.keys(t).length > 0);
+
 export const omitVideoOnlyTransformations = (transformation) => {
   if (!transformation || typeof transformation !== 'object') return transformation;
   if (Array.isArray(transformation)) {
-    return transformation.map((t) => omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS)).filter((t) => Object.keys(t).length > 0);
+    return filterTxArray(transformation);
+  }
+  if (Array.isArray(transformation?.transformation)) {
+    const result = omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
+    result.transformation = filterTxArray(transformation.transformation);
+    return result;
   }
   return omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
 };
