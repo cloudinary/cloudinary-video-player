@@ -1,3 +1,4 @@
+import 'assets/styles/main.scss';
 import { scheduleBootstrap, shouldUseScheduleBootstrap, getElementForSchedule } from './utils/schedule';
 
 export const videoPlayer = (id, playerOptions = {}, ready) => {
