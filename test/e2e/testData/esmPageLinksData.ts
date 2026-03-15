@@ -33,6 +33,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.Profiles, endpoint: 'profiles' },
     { name: ExampleLinkName.RawURL, endpoint: 'raw-url' },
     { name: ExampleLinkName.Recommendations, endpoint: 'recommendations' },
+    { name: ExampleLinkName.Schedule, endpoint: 'schedule' },
     { name: ExampleLinkName.SeekThumbnails, endpoint: 'seek-thumbs' },
     { name: ExampleLinkName.ShareAndDownload, endpoint: 'share-plugin' },
     { name: ExampleLinkName.ShoppableVideos, endpoint: 'shoppable' },

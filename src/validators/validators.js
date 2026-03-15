@@ -70,6 +70,13 @@ export const playerValidators = {
       postrollTimeout: validator.isNumber,
       adsInPlaylist: validator.isString(ADS_IN_PLAYLIST)
     },
+    schedule: {
+      weekly: validator.isArrayOfObjects({
+        day: validator.isString,
+        start: validator.isString,
+        end: validator.isString
+      })
+    },
     cloudinary: {
       autoShowRecommendations: validator.isBoolean,
       sourceTypes: validator.isArrayOfStrings,

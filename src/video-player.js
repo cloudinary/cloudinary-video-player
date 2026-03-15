@@ -1,3 +1,4 @@
+import 'assets/styles/main.scss';
 import videojs from 'video.js';
 import { v4 as uuidv4 } from 'uuid';
 import isEmpty from 'lodash/isEmpty';
@@ -15,8 +16,11 @@ import ExtendedEvents from './extended-events';
 import VideoSource from './plugins/cloudinary/models/video-source/video-source';
 import {
   overrideDefaultVideojsComponents,
-  splitOptions
+  splitOptions,
+  getResolveVideoElement,
+  extractOptions
 } from './video-player.utils';
+import { fetchAndMergeConfig } from './utils/fetch-config';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
@@ -890,5 +894,42 @@ class VideoPlayer {
     return this.videojs.el();
   }
 }
+
+const mergeDefaults = (options) => videojs.obj.merge({}, defaults, options);
+
+const getConfig = (elem, playerOptions = {}) => {
+  const videoElement = getResolveVideoElement(elem);
+  const options = extractOptions(videoElement, playerOptions);
+  return { videoElement, options };
+};
+
+export const createVideoPlayer = (elem, playerOptions = {}, ready) => {
+  const { videoElement, options } = getConfig(elem, playerOptions);
+  if (options.profile) {
+    console.warn('Profile option requires async initialization. Use cloudinary.player() instead of cloudinary.videoPlayer()');
+  }
+  return new VideoPlayer(videoElement, mergeDefaults(options), ready);
+};
+
+export const createPlayer = async (elem, playerOptions, ready) => {
+  const { videoElement, options } = getConfig(elem, playerOptions);
+  try {
+    const videoConfig = await fetchAndMergeConfig(options);
+    return new VideoPlayer(videoElement, mergeDefaults(videoConfig), ready);
+  } catch (e) {
+    const vp = new VideoPlayer(videoElement, mergeDefaults(options));
+    vp.videojs.error('Invalid profile');
+    throw e;
+  }
+};
+
+/**
+ * Create player with pre-merged config (skips fetch).
+ * Used by player() when config was already fetched for schedule check.
+ */
+export const createPlayerWithConfig = (elem, mergedOptions, ready) => {
+  const { videoElement, options } = getConfig(elem, mergedOptions);
+  return new VideoPlayer(videoElement, mergeDefaults(options), ready);
+};
 
 export default VideoPlayer;
