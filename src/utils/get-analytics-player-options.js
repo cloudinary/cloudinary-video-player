@@ -129,6 +129,7 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   withCredentials: playerOptions.withCredentials,
   debug: playerOptions.debug,
   type: playerOptions.type,
+  schedule: hasConfig(playerOptions.schedule?.weekly),
 
   colors: hasConfig(playerOptions.colors),
   controlBar: hasConfig(playerOptions.controlBar),

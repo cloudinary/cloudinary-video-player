@@ -30,6 +30,7 @@ export enum ExampleLinkName {
     Profiles = 'Profiles',
     RawURL = 'Raw URL',
     Recommendations = 'Recommendations',
+    Schedule = 'Schedule (weekly time slots)',
     SeekThumbnails = 'Seek Thumbnails',
     ShoppableVideos = 'Shoppable Videos',
     SubtitlesAndCaptions = 'Subtitles & Captions',

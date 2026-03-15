@@ -33,6 +33,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.Profiles, endpoint: 'profiles.html' },
     { name: ExampleLinkName.RawURL, endpoint: 'raw-url.html' },
     { name: ExampleLinkName.Recommendations, endpoint: 'recommendations.html' },
+    { name: ExampleLinkName.Schedule, endpoint: 'schedule.html' },
     { name: ExampleLinkName.SeekThumbnails, endpoint: 'seek-thumbs.html' },
     { name: ExampleLinkName.ShareAndDownload, endpoint: 'share-plugin.html' },
     { name: ExampleLinkName.ShoppableVideos, endpoint: 'shoppable.html' },
