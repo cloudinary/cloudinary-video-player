@@ -61,7 +61,7 @@ videoPlayer('player', {
     </div>
 
     <script type="module">
-      import { videoPlayer } from 'cloudinary-video-player';
+      import { player } from 'cloudinary-video-player/lazy';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -104,7 +104,7 @@ videoPlayer('player', {
           schedule: { weekly: schedule }
         };
 
-        currentPlayer = videoPlayer('player', options);
+        currentPlayer = player('player', options);
         if (currentPlayer && typeof currentPlayer.then === 'function') {
           currentPlayer.then((player) => { currentPlayer = player; });
         }
