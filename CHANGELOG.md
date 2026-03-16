@@ -1,3 +1,12 @@
+## [3.12.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.0...v3.12.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* remove aria-live from volumeBar ([#1002](https://github.com/cloudinary/cloudinary-video-player/issues/1002)) ([008220c](https://github.com/cloudinary/cloudinary-video-player/commit/008220cf3a5b55de3819b002c4cba1934292f1f8))
+
+
+
 # [3.12.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.11.0...v3.12.0) (2026-03-12)
 
 
