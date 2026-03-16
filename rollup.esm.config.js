@@ -100,7 +100,6 @@ module.exports = {
     videoJsAlias(),
     srcPathAlias(),
     stubScss(),
-    stripStyleImport(),
     nodeResolve({ preferBuiltins: false }),
     commonjs(),
     babel({
