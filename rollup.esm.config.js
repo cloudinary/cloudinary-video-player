@@ -3,7 +3,7 @@ const { babel } = require('@rollup/plugin-babel');
 const nodeResolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const replace = require('@rollup/plugin-replace');
-const { copyFileSync, mkdirSync, existsSync } = require('fs');
+const { copyFileSync, mkdirSync, existsSync, statSync } = require('fs');
 
 const pkg = require('./package.json');
 
@@ -22,7 +22,9 @@ function srcPathAlias() {
       if (!id.startsWith('~/')) return null;
       if (id.endsWith('.scss') || id.endsWith('.css')) return null;
       const resolved = path.join(srcDir, id.slice(2));
-      return resolved.endsWith('.js') || resolved.endsWith('.json') ? resolved : `${resolved}.js`;
+      if (resolved.endsWith('.js') || resolved.endsWith('.json')) return resolved;
+      if (existsSync(resolved) && statSync(resolved).isDirectory()) return path.join(resolved, 'index.js');
+      return `${resolved}.js`;
     }
   };
 }
