@@ -81,7 +81,7 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "141kb"
+        "maxSize": "140kb"
       },
       {
         "path": "./dist/cld-video-player-lazy.min.js",
