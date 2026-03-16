@@ -1,7 +1,7 @@
-import { appendQueryParams } from 'utils/querystring';
+import { appendQueryParams } from '~/utils/querystring';
 import castArray from 'lodash/castArray';
-import { SOURCE_TYPE } from 'utils/consts';
-import { SOURCE_PARAMS } from 'video-player.const';
+import { SOURCE_TYPE } from '~/utils/consts';
+import { SOURCE_PARAMS } from '../../../../video-player.const';
 import {
   CONTAINER_MIME_TYPES,
   ADAPTIVE_SOURCETYPES,
@@ -15,7 +15,7 @@ import {
   normalizeFormat
 } from './video-source.utils';
 import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations, getCloudinaryUrlPrefix } from '../../common';
-import { utf8ToBase64 } from 'utils/utf8Base64';
+import { utf8ToBase64 } from '~/utils/utf8Base64';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';

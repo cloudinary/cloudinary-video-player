@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import './upcoming-video-overlay.scss';
-import { PLAYER_EVENT } from 'utils/consts';
+import { PLAYER_EVENT } from '~/utils/consts';
 
 // support VJS5 & VJS6 at the same time
 const dom = videojs.dom || videojs;

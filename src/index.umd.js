@@ -1,8 +1,9 @@
+/**
+ * UMD entry: full player bundle for backwards-compatible sync videoPlayer().
+ * player() is async with profile and schedule support.
+ */
 import '~/assets/styles/main.scss';
-import videojs from 'video.js';
-import { createVideoPlayer, createPlayerWithConfig } from './video-player.js';
-
-export { videojs };
+import { createVideoPlayer, createPlayerWithConfig } from './video-player';
 import { scheduleBootstrap, shouldUseScheduleBootstrap, getElementForSchedule } from './utils/schedule';
 
 export const videoPlayer = (id, playerOptions = {}, ready) => {
@@ -14,7 +15,7 @@ export const videoPlayers = (selector, playerOptions, ready) => {
   return [...nodeList].map((node) => videoPlayer(node, playerOptions, ready));
 };
 
-export const player = async (id, playerOptions, ready) => {
+export const player = async (id, playerOptions = {}, ready) => {
   const mergedOptions = Object.assign({}, playerOptions);
   const videoElement = getElementForSchedule(id);
 

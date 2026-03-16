@@ -1,6 +1,6 @@
 import './components/download-button';
 import './share.scss';
-import { getCloudinaryUrl } from 'plugins/cloudinary/common';
+import { getCloudinaryUrl } from '~/plugins/cloudinary/common';
 import omit from 'lodash/omit';
 
 const SharePlugin = function (options = {}, playerInstance) {

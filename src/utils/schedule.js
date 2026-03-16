@@ -68,14 +68,13 @@ export const scheduleBootstrap = (elem, options) => {
 
   const stub = {
     source: () => stub,
-    loadPlayer: () =>
-      import(/* webpackChunkName: "cld-video-player-core" */ '../video-player.js').then(({ createVideoPlayer }) => {
-        if (container && container.parentNode) {
-          container.parentNode.removeChild(container);
-        }
-        vEl.style.display = '';
-        return createVideoPlayer(vEl, options);
-      }),
+    loadPlayer: () => {
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+      vEl.style.display = '';
+      return import('../video-player.js').then((m) => m.createVideoPlayer(vEl, options));
+    }
   };
 
   return stub;

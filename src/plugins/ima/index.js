@@ -1,6 +1,6 @@
 /* global google */
 import isFunction from 'lodash/isFunction';
-import { PLAYER_EVENT } from 'utils/consts';
+import { PLAYER_EVENT } from '~/utils/consts';
 
 export default async function imaPlugin(player, playerOptions) {
   await import(/* webpackChunkName: "ima" */ './ima');

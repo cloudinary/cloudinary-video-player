@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 import isFunction from 'lodash/isFunction';
 import ContextMenuItem from './context-menu-item';
-import { setPosition } from 'utils/positioning';
+import { setPosition } from '~/utils/positioning';
 
 const Menu = videojs.getComponent('Menu');
 

@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { createElement } from 'utils/dom';
+import { createElement } from '~/utils/dom';
 
 const MenuItem = videojs.getComponent('MenuItem');
 

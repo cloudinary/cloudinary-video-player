@@ -57,14 +57,11 @@
     </div>
 
     <script type="module">
-      import { videoPlayer } from 'cloudinary-video-player';
-      import 'cloudinary-video-player/playlist';
-
+      import { videoPlayer, videojs } from 'cloudinary-video-player';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
       // Get the ClickableComponent base class from Video.js
-      let vjs = window.videojs.default || window.videojs;
-      const ClickableComponent = vjs.getComponent('ClickableComponent');
+      const ClickableComponent = videojs.getComponent('ClickableComponent');
 
       // Create a common class for playlist buttons
       class PlaylistButton extends ClickableComponent {
@@ -83,7 +80,7 @@
 
           const typeCssClass = 'vjs-playlist-' + type + '-control';
 
-          return vjs.createEl('button', {
+          return videojs.createEl('button', {
             // Prefixing classes of elements within a player with "vjs-"
             // is a convention used in Video.js.
             className: 'vjs-control vjs-playlist-control vjs-button ' + typeCssClass
@@ -119,8 +116,8 @@
       }
 
       // Register the component with Video.js, so it can be used in players.
-      vjs.registerComponent('NextButton', NextButton);
-      vjs.registerComponent('PreviousButton', PreviousButton);
+      videojs.registerComponent('NextButton', NextButton);
+      videojs.registerComponent('PreviousButton', PreviousButton);
 
       // Cloudinary Video Player related code
       // ====================================

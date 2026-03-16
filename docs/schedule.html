@@ -9,7 +9,7 @@
   <!-- Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <script type="text/javascript" src="./scripts.js"></script>
+  <script type="text/javascript" src="./scripts.js?lazy"></script>
 
   <script type="text/javascript">
     (function () {
@@ -34,7 +34,7 @@
         return [{ day: DAY_NAMES[today], start: '00:00', end: '23:59' }];
       }
 
-      function loadPlayerWithMode(showPlayer) {
+      async function loadPlayerWithMode(showPlayer) {
         if (currentPlayer && typeof currentPlayer.dispose === 'function') {
           currentPlayer.dispose();
         }
@@ -53,10 +53,7 @@
           schedule: { weekly: schedule }
         };
 
-        currentPlayer = cloudinary.videoPlayer('player', options);
-        if (currentPlayer && typeof currentPlayer.then === 'function') {
-          currentPlayer.then(function (player) { currentPlayer = player; });
-        }
+        currentPlayer = await cloudinary.player('player', options);
       }
 
       window.addEventListener('load', function () {

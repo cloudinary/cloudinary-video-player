@@ -12,7 +12,14 @@ const webpackConfig = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
-    'cld-video-player': './index.js'
+    'cld-video-player': {
+      import: './index.umd.js',
+      library: { name: 'cloudinary-video-player', type: 'umd' }
+    },
+    'cld-video-player-lazy': {
+      import: './index.lazy.js',
+      library: { name: 'cloudinary-video-player', type: 'umd' }
+    }
   },
 
   output: {
@@ -20,10 +27,6 @@ const webpackConfig = {
     chunkFilename: `[name]${minFilenamePart}.js`,
     path: path.resolve(__dirname, '../dist'),
     publicPath: 'auto',
-    library: {
-      name: 'cloudinary-video-player',
-      type: 'umd'
-    },
     chunkLoadingGlobal: 'cloudinaryVideoPlayerChunkLoading'
   },
 
@@ -43,8 +46,9 @@ const webpackConfig = {
 
   resolve: {
     extensions: ['.js', '.scss'],
-    modules: [path.resolve(__dirname, '../src'), 'node_modules'],
+    modules: ['node_modules'],
     alias: {
+      '~': path.resolve(__dirname, '../src'),
       'video.js': path.resolve(__dirname, '../node_modules/video.js/dist/alt/video.core.js'),
       'video.root.js': path.resolve(__dirname, '../node_modules/video.js')
     }

@@ -1,5 +1,5 @@
-import { fontFace } from 'utils/fontFace';
-import { playerClassPrefix } from 'utils/css-prefix';
+import { fontFace } from '~/utils/fontFace';
+import { playerClassPrefix } from '~/utils/css-prefix';
 
 import './styled-text-tracks.scss';
 

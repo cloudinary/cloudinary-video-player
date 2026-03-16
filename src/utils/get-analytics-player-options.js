@@ -1,4 +1,4 @@
-import defaults from 'config/defaults';
+import defaults from '~/config/defaults';
 import isEmpty from 'lodash/isEmpty';
 
 const hasConfig = (obj) => isEmpty(obj) ? null : true;
