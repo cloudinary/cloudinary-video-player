@@ -569,9 +569,9 @@
             "properties": {
               "day": { "type": "string" },
               "start": { "type": "string" },
-              "end": { "type": "string" }
+              "duration": { "type": "number" }
             },
-            "required": ["day", "start", "end"]
+            "required": ["day", "start", "duration"]
           },
           "default": []
         }

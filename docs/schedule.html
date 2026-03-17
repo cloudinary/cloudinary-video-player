@@ -22,7 +22,7 @@
         var slots = [];
         for (var d = 0; d < 7; d++) {
           if (d !== today) {
-            slots.push({ day: DAY_NAMES[d], start: '00:00', end: '23:59' });
+            slots.push({ day: DAY_NAMES[d], start: '00:00', duration: 24 });
           }
         }
         return slots;
@@ -31,7 +31,7 @@
       function getScheduleForPlayerMode() {
         var now = new Date();
         var today = now.getDay();
-        return [{ day: DAY_NAMES[today], start: '00:00', end: '23:59' }];
+        return [{ day: DAY_NAMES[today], start: '00:00', duration: 24 }];
       }
 
       async function loadPlayerWithMode(showPlayer) {
@@ -102,8 +102,8 @@ cloudinary.videoPlayer('player', {
   publicId: 'sea_turtle',
   schedule: {
     weekly: [
-      { day: 'monday', start: '09:00', end: '17:00' },
-      { day: 'tuesday', start: '09:00', end: '17:00' }
+      { day: 'monday', start: '09:00', duration: 8 },
+      { day: 'tuesday', start: '09:00', duration: 8 }
     ]
   }
 });

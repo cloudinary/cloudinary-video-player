@@ -46,7 +46,7 @@ describe('schedule utils', () => {
     it('returns true when date falls within a slot', () => {
       const monday9am = new Date(2025, 2, 10, 9, 30);
       const schedule = {
-        weekly: [{ day: 'monday', start: '09:00', end: '17:00' }]
+        weekly: [{ day: 'monday', start: '09:00', duration: 8 }]
       };
       expect(isWithinSchedule(schedule, monday9am)).toBe(true);
     });
@@ -54,7 +54,7 @@ describe('schedule utils', () => {
     it('returns false when date is outside all slots', () => {
       const monday8am = new Date(2025, 2, 10, 8, 0);
       const schedule = {
-        weekly: [{ day: 'monday', start: '09:00', end: '17:00' }]
+        weekly: [{ day: 'monday', start: '09:00', duration: 8 }]
       };
       expect(isWithinSchedule(schedule, monday8am)).toBe(false);
     });
@@ -63,7 +63,7 @@ describe('schedule utils', () => {
       const monday9am = new Date(2025, 2, 10, 9, 0);
       const monday5pm = new Date(2025, 2, 10, 17, 0);
       const schedule = {
-        weekly: [{ day: 'monday', start: '09:00', end: '17:00' }]
+        weekly: [{ day: 'monday', start: '09:00', duration: 8 }]
       };
       expect(isWithinSchedule(schedule, monday9am)).toBe(true);
       expect(isWithinSchedule(schedule, monday5pm)).toBe(false);
@@ -73,8 +73,8 @@ describe('schedule utils', () => {
       const wednesday2pm = new Date(2025, 2, 12, 14, 0);
       const schedule = {
         weekly: [
-          { day: 'monday', start: '09:00', end: '17:00' },
-          { day: 'wednesday', start: '12:00', end: '18:00' }
+          { day: 'monday', start: '09:00', duration: 8 },
+          { day: 'wednesday', start: '12:00', duration: 6 }
         ]
       };
       expect(isWithinSchedule(schedule, wednesday2pm)).toBe(true);
