@@ -909,19 +909,6 @@ export const createVideoPlayer = (elem, playerOptions = {}, ready) => {
   return new VideoPlayer(videoElement, mergeDefaults(options), ready);
 };
 
-export const createPlayer = async (elem, playerOptions, ready) => {
-  const { videoElement, options } = getConfig(elem, playerOptions);
-  try {
-    const { fetchAndMergeConfig } = await import('./utils/fetch-config');
-    const videoConfig = await fetchAndMergeConfig(options);
-    return new VideoPlayer(videoElement, mergeDefaults(videoConfig), ready);
-  } catch (e) {
-    const vp = new VideoPlayer(videoElement, mergeDefaults(options));
-    vp.videojs.error('Invalid profile');
-    throw e;
-  }
-};
-
 /**
  * Create player with pre-merged config (skips fetch).
  * Used by player() when config was already fetched for schedule check.

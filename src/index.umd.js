@@ -4,42 +4,19 @@
  */
 import '~/assets/styles/main.scss';
 import { createVideoPlayer, createPlayerWithConfig } from './video-player';
-import { scheduleBootstrap, shouldUseScheduleBootstrap, getElementForSchedule } from './utils/schedule';
+import { createAsyncPlayer, createMultiplePlayers, createMultipleSync, setupCloudinaryGlobal } from './utils/player-api';
 
-export const videoPlayer = (id, playerOptions = {}, ready) => {
-  return createVideoPlayer(id, playerOptions, ready);
-};
+export const videoPlayer = (id, playerOptions = {}, ready) =>
+  createVideoPlayer(id, playerOptions, ready);
 
-export const videoPlayers = (selector, playerOptions, ready) => {
-  const nodeList = document.querySelectorAll(selector);
-  return [...nodeList].map((node) => videoPlayer(node, playerOptions, ready));
-};
+export const videoPlayers = (selector, playerOptions, ready) =>
+  createMultipleSync(selector, playerOptions, ready, videoPlayer);
 
-export const player = async (id, playerOptions = {}, ready) => {
-  const mergedOptions = Object.assign({}, playerOptions);
-  const videoElement = getElementForSchedule(id);
+export const player = (id, playerOptions = {}, ready) =>
+  createAsyncPlayer(id, playerOptions, ready, createPlayerWithConfig);
 
-  const opts = await (async () => {
-    try {
-      const { fetchAndMergeConfig } = await import('./utils/fetch-config');
-      const fetched = await fetchAndMergeConfig(mergedOptions);
-      return Object.assign({}, fetched, mergedOptions);
-    } catch {
-      return mergedOptions;
-    }
-  })();
-
-  if (shouldUseScheduleBootstrap(opts)) {
-    return scheduleBootstrap(id, opts);
-  }
-
-  return createPlayerWithConfig(videoElement, opts, ready);
-};
-
-export const players = async (selector, playerOptions, ready) => {
-  const nodeList = document.querySelectorAll(selector);
-  return Promise.all([...nodeList].map((node) => player(node, playerOptions, ready)));
-};
+export const players = (selector, playerOptions, ready) =>
+  createMultiplePlayers(selector, playerOptions, ready, player);
 
 const cloudinaryVideoPlayerLegacyConfig = () => {
   console.warn(
@@ -51,8 +28,7 @@ const cloudinaryVideoPlayerLegacyConfig = () => {
   };
 };
 
-const cloudinary = {
-  ...(window.cloudinary || {}),
+export default setupCloudinaryGlobal({
   videoPlayer,
   videoPlayers,
   player,
@@ -60,8 +36,4 @@ const cloudinary = {
   Cloudinary: {
     new: cloudinaryVideoPlayerLegacyConfig
   }
-};
-
-window.cloudinary = cloudinary;
-
-export default cloudinary;
+});
