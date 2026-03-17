@@ -121,7 +121,7 @@ const parseTime = (timeStr) => {
 
 /**
  * Check if a date falls within any configured weekly slot (local time).
- * @param {{ weekly?: Array<{ day: string, start: string, end: string }> }} schedule - schedule config
+ * @param {{ weekly?: Array<{ day: string, start: string, duration: number }> }} schedule - schedule config
  * @param {Date} date - date to check (uses local time)
  * @returns {boolean} true if within a slot
  */
@@ -139,8 +139,8 @@ export const isWithinSchedule = (schedule, date) => {
     if (slotDay !== day) continue;
 
     const startMin = parseTime(slot.start);
-    const endMin = parseTime(slot.end);
-    if (startMin === null || endMin === null) continue;
+    if (startMin === null || typeof slot.duration !== 'number' || slot.duration <= 0) continue;
+    const endMin = startMin + slot.duration * 60;
 
     if (startMin <= endMin) {
       if (minutes >= startMin && minutes < endMin) return true;
