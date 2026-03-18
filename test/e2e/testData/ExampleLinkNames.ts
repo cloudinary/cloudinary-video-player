@@ -44,4 +44,6 @@ export enum ExampleLinkName {
     SourceSwitcher = 'Source switcher',
     VisualSearch = 'Visual Search',
     VideoDetails = 'Video Details',
+    EntryPoints = 'Entry Points (all exports)',
+    LazyLoading = 'Lazy Loading',
 }
