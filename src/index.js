@@ -1,7 +1,7 @@
 import '~/assets/styles/main.scss';
 import videojs from 'video.js';
 import { createVideoPlayer, createPlayerWithConfig } from './video-player.js';
-import { createAsyncPlayer, createMultiplePlayers, createMultipleSync } from './utils/player-api';
+import { createAsyncPlayer, createMultiplePlayers, createMultipleSync, setupCloudinaryGlobal } from './utils/player-api';
 
 export { videojs };
 
@@ -17,4 +17,4 @@ export const player = (id, playerOptions = {}, ready) =>
 export const players = (selector, playerOptions, ready) =>
   createMultiplePlayers(selector, playerOptions, ready, player);
 
-export default { videoPlayer, videoPlayers, player, players };
+export default setupCloudinaryGlobal({ videoPlayer, videoPlayers, player, players });
