@@ -185,6 +185,7 @@ class VideoPlayer {
 
     this.videojs.ready(() => {
       this._onReady();
+      this._applyVolumeBarAriaLiveFix();
 
       if (ready) {
         ready(this);
@@ -580,6 +581,17 @@ class VideoPlayer {
     if (source) {
       const sourceOptions = Object.assign({}, this.playerOptions.sourceOptions);
       this.source(source, sourceOptions);
+    }
+  }
+
+  /**
+   * Temporary fix: remove aria-live from VolumeBar to avoid NVDA repeated announcements.
+   * TODO: Remove when Video.js includes the upstream fix (nvaccess/nvda#7996).
+   */
+  _applyVolumeBarAriaLiveFix() {
+    const volumeBar = this.videojs.$('.vjs-volume-bar');
+    if (volumeBar) {
+      volumeBar.removeAttribute('aria-live');
     }
   }
 
