@@ -128,24 +128,21 @@ export const isWithinSchedule = (schedule, date) => {
   const weekly = schedule?.weekly;
   if (!Array.isArray(weekly) || weekly.length === 0) return true;
 
-  const day = date.getDay();
-  const minutes = date.getHours() * 60 + date.getMinutes();
+  const WEEK = 7 * 1440;
+  const nowInWeek = date.getDay() * 1440 + date.getHours() * 60 + date.getMinutes();
 
   for (const slot of weekly) {
     const slotDay = parseDay(slot.day);
     if (slotDay === null) continue;
 
-    if (slotDay !== day) continue;
-
     const startMin = parseTime(slot.start);
     if (startMin === null || typeof slot.duration !== 'number' || slot.duration <= 0) continue;
-    const endMin = startMin + slot.duration * 60;
 
-    if (startMin <= endMin) {
-      if (minutes >= startMin && minutes < endMin) return true;
-    } else {
-      if (minutes >= startMin || minutes < endMin) return true;
-    }
+    const slotStart = slotDay * 1440 + startMin;
+    const durationMin = slot.duration * 60;
+    const elapsed = (nowInWeek - slotStart + WEEK) % WEEK;
+
+    if (elapsed < durationMin) return true;
   }
 
   return false;
