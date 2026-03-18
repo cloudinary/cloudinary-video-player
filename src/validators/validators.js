@@ -74,7 +74,7 @@ export const playerValidators = {
       weekly: validator.isArrayOfObjects({
         day: validator.isString,
         start: validator.isString,
-        end: validator.isString
+        duration: validator.isNumber
       })
     },
     cloudinary: {

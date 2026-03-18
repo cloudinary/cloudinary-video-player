@@ -1,5 +1,5 @@
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
-import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/common';
+import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/url-helpers';
 import { utf8ToBase64 } from '../utils/utf8Base64';
 import { appendQueryParams } from './querystring';
 

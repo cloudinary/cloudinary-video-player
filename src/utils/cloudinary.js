@@ -1,5 +1,5 @@
 import { cloudinaryErrorsConverter, ERROR_CODE } from '../plugins/cloudinary/common';
-import { find } from 'utils/find';
+import { find } from '~/utils/find';
 
 export const GET_ERROR_DEFAULT_REQUEST = { method: 'head' };
 const ERROR_WITH_GET_REQUEST = { method: 'get', credentials: 'include', headers: { 'Content-Range': 'bytes=0-0' } };

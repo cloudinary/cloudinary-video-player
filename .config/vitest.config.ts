@@ -31,6 +31,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '~': path.resolve(process.cwd(), './src'),
       '@': path.resolve(process.cwd(), './src'),
       'src': path.resolve(process.cwd(), './src'),
       'assets': path.resolve(process.cwd(), './src/assets'),

@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { normalizeEventsParam } from 'extended-events';
+import { normalizeEventsParam } from '../../extended-events';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 const DEFAULT_EVENTS = [

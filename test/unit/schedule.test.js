@@ -79,5 +79,31 @@ describe('schedule utils', () => {
       };
       expect(isWithinSchedule(schedule, wednesday2pm)).toBe(true);
     });
+
+    it('handles slot that crosses midnight into the next day', () => {
+      const schedule = {
+        weekly: [{ day: 'monday', start: '22:00', duration: 8 }]
+      };
+      // Monday 23:00 - within slot on start day
+      const monday11pm = new Date(2025, 2, 10, 23, 0);
+      expect(isWithinSchedule(schedule, monday11pm)).toBe(true);
+
+      // Tuesday 03:00 - within slot on next day
+      const tuesday3am = new Date(2025, 2, 11, 3, 0);
+      expect(isWithinSchedule(schedule, tuesday3am)).toBe(true);
+
+      // Tuesday 07:00 - outside slot (ends at 06:00)
+      const tuesday7am = new Date(2025, 2, 11, 7, 0);
+      expect(isWithinSchedule(schedule, tuesday7am)).toBe(false);
+    });
+
+    it('handles cross-midnight slot wrapping Saturday to Sunday', () => {
+      const schedule = {
+        weekly: [{ day: 'saturday', start: '23:00', duration: 4 }]
+      };
+      // Sunday 02:00 - within slot
+      const sunday2am = new Date(2025, 2, 9, 2, 0);
+      expect(isWithinSchedule(schedule, sunday2am)).toBe(true);
+    });
   });
 });

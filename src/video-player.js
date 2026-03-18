@@ -19,7 +19,6 @@ import {
   getResolveVideoElement,
   extractOptions
 } from './video-player.utils';
-import { fetchAndMergeConfig } from './utils/fetch-config';
 import { FLOATING_TO, FLUID_CLASS_NAME } from './video-player.const';
 import { isValidPlayerConfig, isValidSourceConfig } from './validators/validators-functions';
 import { PLAYER_EVENT, SOURCE_TYPE } from './utils/consts';
@@ -908,18 +907,6 @@ export const createVideoPlayer = (elem, playerOptions = {}, ready) => {
     console.warn('Profile option requires async initialization. Use cloudinary.player() instead of cloudinary.videoPlayer()');
   }
   return new VideoPlayer(videoElement, mergeDefaults(options), ready);
-};
-
-export const createPlayer = async (elem, playerOptions, ready) => {
-  const { videoElement, options } = getConfig(elem, playerOptions);
-  try {
-    const videoConfig = await fetchAndMergeConfig(options);
-    return new VideoPlayer(videoElement, mergeDefaults(videoConfig), ready);
-  } catch (e) {
-    const vp = new VideoPlayer(videoElement, mergeDefaults(options));
-    vp.videojs.error('Invalid profile');
-    throw e;
-  }
 };
 
 /**

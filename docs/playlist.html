@@ -21,10 +21,10 @@
     <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
   -->
 
-  <script type="text/javascript" src="./scripts.js"></script>
+  <script type="text/javascript" src="./scripts.js?lazy"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', function(){
+    window.addEventListener('load', async function(){
 
       var source1 = { publicId: 'snow_horses', info: { title: 'Snow Horses', subtitle: 'A movie about snow horses' } };
       var source2 = { publicId: 'dirt_bike', info: { title: 'Dirt Bike', subtitle: 'A short video of dirt bikes' } };
@@ -37,8 +37,8 @@
           presentUpcoming: 8
       };
 
-      var playerHorizontal = cloudinary.videoPlayer('player-horizontal',{
-        cloud_name: 'demo',
+      var playerHorizontal = await cloudinary.player('player-horizontal',{
+        cloudName: 'demo',
         playlistWidget: {
           direction: "horizontal",
           total: 4
@@ -48,8 +48,8 @@
       // Auto advance to next video after 0 seconds, repeat the playlist when final video ends, and present upcoming video 8 seconds before the current video ends.
       playerHorizontal.playlist(playlistSources, playlistOptions);
 
-      var playerVertical = cloudinary.videoPlayer('player-vertical',{
-        cloud_name: 'demo',
+      var playerVertical = await cloudinary.player('player-vertical',{
+        cloudName: 'demo',
         playlistWidget: {
           direction: "vertical",
           total: 4

@@ -1,9 +1,10 @@
+/**
+ * UMD entry: full player bundle for backwards-compatible sync videoPlayer().
+ * player() is async with profile and schedule support.
+ */
 import '~/assets/styles/main.scss';
-import videojs from 'video.js';
-import { createVideoPlayer, createPlayerWithConfig } from './video-player.js';
+import { createVideoPlayer, createPlayerWithConfig } from './video-player';
 import { createAsyncPlayer, createMultiplePlayers, createMultipleSync, setupCloudinaryGlobal } from './utils/player-api';
-
-export { videojs };
 
 export const videoPlayer = (id, playerOptions = {}, ready) =>
   createVideoPlayer(id, playerOptions, ready);
@@ -17,4 +18,22 @@ export const player = (id, playerOptions = {}, ready) =>
 export const players = (selector, playerOptions, ready) =>
   createMultiplePlayers(selector, playerOptions, ready, player);
 
-export default setupCloudinaryGlobal({ videoPlayer, videoPlayers, player, players });
+const cloudinaryVideoPlayerLegacyConfig = () => {
+  console.warn(
+    'Cloudinary.new() is deprecated and will be removed. Please use cloudinary.videoPlayer() instead.'
+  );
+  return {
+    videoPlayer,
+    videoPlayers
+  };
+};
+
+export default setupCloudinaryGlobal({
+  videoPlayer,
+  videoPlayers,
+  player,
+  players,
+  Cloudinary: {
+    new: cloudinaryVideoPlayerLegacyConfig
+  }
+});

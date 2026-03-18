@@ -1,8 +1,8 @@
 import VideoSource from '../video-source/video-source';
 import ImageSource from '../image-source';
 import { normalizeOptions } from '../../common';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { appendQueryParams } from 'utils/querystring';
+import { sliceAndUnsetProperties } from '~/utils/slicing';
+import { appendQueryParams } from '~/utils/querystring';
 import { AUDIO_SUFFIX_REMOVAL_PATTERN, DEFAULT_AUDIO_PARAMS, DEFAULT_POSTER_PARAMS } from './audio-source.const';
 import { SOURCE_TYPE } from '../../../../utils/consts';
 
