@@ -47,50 +47,52 @@
         return ok;
       };
 
-      try {
-        // 1. Default entry - named exports
-        const { videoPlayer, videoPlayers, player, players } = await import('cloudinary-video-player');
-        check('videoPlayer (named)', videoPlayer);
-        check('videoPlayers (named)', videoPlayers);
-        check('player (named)', player);
-        check('players (named)', players);
+      (async () => {
+        try {
+          // 1. Default entry - named exports
+          const { videoPlayer, videoPlayers, player, players } = await import('cloudinary-video-player');
+          check('videoPlayer (named)', videoPlayer);
+          check('videoPlayers (named)', videoPlayers);
+          check('player (named)', player);
+          check('players (named)', players);
 
-        // 2. /videoPlayer sub-path
-        const vpModule = await import('cloudinary-video-player/videoPlayer');
-        check('videoPlayer (default from /videoPlayer)', vpModule.default);
+          // 2. /videoPlayer sub-path
+          const vpModule = await import('cloudinary-video-player/videoPlayer');
+          check('videoPlayer (default from /videoPlayer)', vpModule.default);
 
-        // 3. /player sub-path
-        const pModule = await import('cloudinary-video-player/player');
-        check('player (default from /player)', pModule.default);
+          // 3. /player sub-path
+          const pModule = await import('cloudinary-video-player/player');
+          check('player (default from /player)', pModule.default);
 
-        // 4. /all - with plugins
-        const allModule = await import('cloudinary-video-player/all');
-        check('cloudinary (default from /all)', allModule.default);
-        check('videoPlayer (named from /all)', allModule.videoPlayer);
+          // 4. /all - with plugins
+          const allModule = await import('cloudinary-video-player/all');
+          check('cloudinary (default from /all)', allModule.default);
+          check('videoPlayer (named from /all)', allModule.videoPlayer);
 
-        // 5. /lazy
-        const lazyModule = await import('cloudinary-video-player/lazy');
-        check('player (named from /lazy)', lazyModule.player);
-        check('players (named from /lazy)', lazyModule.players);
+          // 5. /lazy
+          const lazyModule = await import('cloudinary-video-player/lazy');
+          check('player (named from /lazy)', lazyModule.player);
+          check('players (named from /lazy)', lazyModule.players);
 
-        // 6. CSS import
-        await import('cloudinary-video-player/cld-video-player.min.css');
-        log('✅ CSS import resolved');
+          // 6. CSS import
+          await import('cloudinary-video-player/cld-video-player.min.css');
+          log('✅ CSS import resolved');
 
-        // 7. Wildcard paths
-        const dashModule = await import('cloudinary-video-player/dash');
-        check('dash (wildcard export)', dashModule);
+          // 7. Wildcard paths
+          const dashModule = await import('cloudinary-video-player/dash');
+          check('dash (wildcard export)', dashModule);
 
-        const debugModule = await import('cloudinary-video-player/debug');
-        check('debug (wildcard export)', debugModule);
+          const debugModule = await import('cloudinary-video-player/debug');
+          check('debug (wildcard export)', debugModule);
 
-        log('\n--- Creating player to verify runtime works ---');
-        videoPlayer('player', { cloudName: 'demo', publicId: 'sea_turtle' });
-        log('✅ Player created successfully');
-      } catch (err) {
-        log(`❌ Error: ${err.message}`);
-        console.error(err);
-      }
+          log('\n--- Creating player to verify runtime works ---');
+          videoPlayer('player', { cloudName: 'demo', publicId: 'sea_turtle' });
+          log('✅ Player created successfully');
+        } catch (err) {
+          log(`❌ Error: ${err.message}`);
+          console.error(err);
+        }
+      })();
     </script>
 
     <link

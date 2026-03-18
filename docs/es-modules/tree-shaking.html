@@ -52,18 +52,20 @@
         document.getElementById('results').textContent += msg + '\n';
       };
 
-      try {
-        log('⏳ Creating player via /player sub-path...');
-        const p = await player('player', {
-          cloudName: 'demo',
-          publicId: 'sea_turtle',
-        });
-        log(`✅ Player created: ${p ? 'ok' : 'failed'}`);
-        log('\n📋 Check Network tab for loaded JS chunks.');
-      } catch (err) {
-        log(`❌ Error: ${err.message}`);
-        console.error(err);
-      }
+      (async () => {
+        try {
+          log('⏳ Creating player via /player sub-path...');
+          const p = await player('player', {
+            cloudName: 'demo',
+            publicId: 'sea_turtle',
+          });
+          log(`✅ Player created: ${p ? 'ok' : 'failed'}`);
+          log('\n📋 Check Network tab for loaded JS chunks.');
+        } catch (err) {
+          log(`❌ Error: ${err.message}`);
+          console.error(err);
+        }
+      })();
     </script>
 
     <link
