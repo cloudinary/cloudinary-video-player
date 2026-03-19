@@ -559,6 +559,25 @@
       "type": "boolean",
       "default": true
     },
+    "schedule": {
+      "type": "object",
+      "properties": {
+        "weekly": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "day": { "type": "string" },
+              "start": { "type": "string" },
+              "duration": { "type": "number" }
+            },
+            "required": ["day", "start", "duration"]
+          },
+          "default": []
+        }
+      },
+      "default": {}
+    },
     "videoSources": {
       "type": "array",
       "items": {

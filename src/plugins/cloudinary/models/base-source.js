@@ -1,6 +1,6 @@
 import { getCloudinaryUrl, isRawUrl, mergeTransformations, normalizeOptions } from '../common';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { appendQueryParams } from 'utils/querystring';
+import { sliceAndUnsetProperties } from '~/utils/slicing';
+import { appendQueryParams } from '~/utils/querystring';
 
 
 class BaseSource {

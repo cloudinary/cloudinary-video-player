@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/cloudinary/cloudinary-video-player.git"
   },
-  "module": "./lib/cld-video-player.js",
+  "module": "./lib/index.js",
   "main": "./dist/cld-video-player.min.js",
   "style": "./dist/cld-video-player.min.css",
   "types": "./types/cld-video-player.d.ts",
@@ -22,9 +22,28 @@
   "exports": {
     ".": {
       "types": "./types/cld-video-player.d.ts",
-      "import": "./lib/cld-video-player.js",
+      "import": "./lib/index.js",
       "require": "./dist/cld-video-player.min.js"
     },
+    "./videoPlayer": {
+      "import": "./lib/videoPlayer.js",
+      "require": "./dist/cld-video-player.min.js"
+    },
+    "./player": {
+      "import": "./lib/player.js",
+      "require": "./dist/cld-video-player.min.js"
+    },
+    "./all": {
+      "import": "./lib/all.js",
+      "require": "./dist/cld-video-player.min.js"
+    },
+    "./lazy": {
+      "import": "./lib/lazy.js",
+      "require": "./dist/cld-video-player-lazy.min.js"
+    },
+    "./cld-video-player.min.css": "./lib/cld-video-player.min.css",
+    "./shoppable": "./lib/shoppable-widget.js",
+    "./interaction-areas": "./lib/interaction-areas.service.js",
     "./*": "./lib/*",
     "./light/*": "./lib/*"
   },
@@ -34,7 +53,7 @@
     "start": "webpack serve --config webpack/dev.config.js",
     "build": "WEBPACK_BUILD_MIN=1 webpack --config webpack/build.config.js --progress --color",
     "build-dev": "webpack --config webpack/build.config.js  --progress --color --mode=development",
-    "build-es": "WEBPACK_BUILD_MIN=1 webpack --config webpack/es6.config.js --progress --color",
+    "build-es": "rollup -c rollup.esm.config.js",
     "build-light": "node webpack/copy-light-bundle.js",
     "build-all": "npm run clean && npm run build && npm run build-dev && npm run build-es && npm run build-light",
     "analyze": "webpack --config webpack/analyzer.config.js",
@@ -62,19 +81,11 @@
     "files": [
       {
         "path": "./dist/cld-video-player.min.js",
-        "maxSize": "137kb"
+        "maxSize": "140kb"
       },
       {
-        "path": "./lib/cld-video-player.js",
-        "maxSize": "137kb"
-      },
-      {
-        "path": "./lib/videoPlayer.js",
-        "maxSize": "137kb"
-      },
-      {
-        "path": "./lib/all.js",
-        "maxSize": "330kb"
+        "path": "./dist/cld-video-player-lazy.min.js",
+        "maxSize": "10kb"
       }
     ]
   },
@@ -96,6 +107,10 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.0",
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.1",
     "@babel/core": "^7.28.5",
@@ -116,6 +131,7 @@
     "conventional-changelog-angular": "^8.1.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-recommended-bump": "^11.2.0",
+    "rollup": "^4.28.1",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.2",

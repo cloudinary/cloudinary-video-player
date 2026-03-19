@@ -1,10 +1,10 @@
 import videojs from 'video.js';
-import { PLAYER_EVENT } from 'utils/consts';
+import { PLAYER_EVENT } from '~/utils/consts';
 import { wrap } from '../../utils/dom';
 import {
   skinClassPrefix,
   playerClassPrefix
-} from 'utils/css-prefix';
+} from '~/utils/css-prefix';
 
 const dom = videojs.dom || videojs;
 const Component = videojs.getComponent('Component');

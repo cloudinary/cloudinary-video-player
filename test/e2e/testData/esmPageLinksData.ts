@@ -33,6 +33,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.Profiles, endpoint: 'profiles' },
     { name: ExampleLinkName.RawURL, endpoint: 'raw-url' },
     { name: ExampleLinkName.Recommendations, endpoint: 'recommendations' },
+    { name: ExampleLinkName.Schedule, endpoint: 'schedule' },
     { name: ExampleLinkName.SeekThumbnails, endpoint: 'seek-thumbs' },
     { name: ExampleLinkName.ShareAndDownload, endpoint: 'share-plugin' },
     { name: ExampleLinkName.ShoppableVideos, endpoint: 'shoppable' },
@@ -42,6 +43,8 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.VR360Videos, endpoint: '360' },
     { name: ExampleLinkName.AllBuild, endpoint: 'all' },
     { name: ExampleLinkName.VideoDetails, endpoint: 'video-details' },
+    { name: ExampleLinkName.EntryPoints, endpoint: 'entry-points' },
+    { name: ExampleLinkName.LazyLoading, endpoint: 'lazy-loading' },
 ];
 
 /**

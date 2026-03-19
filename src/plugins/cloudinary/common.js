@@ -1,12 +1,11 @@
 import videojs from 'video.js';
 import omit from 'lodash/omit';
-import { sliceAndUnsetProperties } from 'utils/slicing';
+import { sliceAndUnsetProperties } from '~/utils/slicing';
 import isObject from 'lodash/isObject';
 import isString from 'lodash/isString';
-import { URL_PATTERN } from './models/video-source/video-source.const';
 import { createCloudinaryLegacyURL } from '@cloudinary/url-gen/backwards/createCloudinaryLegacyURL';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
-import { unsigned_url_prefix } from '@cloudinary/url-gen/backwards/utils/unsigned_url_prefix';
+export { isRawUrl, getCloudinaryUrlPrefix } from './url-helpers';
 
 const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {}) => {
   if (isObject(publicId)) {
@@ -25,8 +24,6 @@ const normalizeOptions = (publicId, options, { tolerateMissingId = false } = {})
 
   return { publicId, options };
 };
-
-export const isRawUrl = publicId => URL_PATTERN.test(publicId);
 
 const isSrcEqual = (source1, source2) => {
   let src1 = source1;
@@ -55,19 +52,6 @@ export const extendCloudinaryConfig = (currentConfig, newConfig) =>
 
 export const getCloudinaryUrl = (publicId, transformation) =>
   createCloudinaryLegacyURL(publicId, omit(transformation, ['chainTarget']));
-
-export const getCloudinaryUrlPrefix = (cloudinaryConfig) => {
-  return unsigned_url_prefix(
-    null,
-    cloudinaryConfig.cloud_name,
-    cloudinaryConfig.private_cdn,
-    cloudinaryConfig.cdn_subdomain,
-    cloudinaryConfig.secure_cdn_subdomain,
-    cloudinaryConfig.cname,
-    cloudinaryConfig.secure ?? true,
-    cloudinaryConfig.secure_distribution,
-  );
-};
 
 const isTransformationInstance = transformation =>
   transformation.constructor.name === 'Transformation' && transformation.toOptions;

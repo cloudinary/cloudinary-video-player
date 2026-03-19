@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { PLAYER_EVENT } from 'utils/consts';
+import { PLAYER_EVENT } from '~/utils/consts';
 import PlaylistLayoutHorizontal from './layout/playlist-layout-horizontal';
 import PlaylistLayoutVertical from './layout/playlist-layout-vertical';
 import PlaylistLayoutCustom from './layout/playlist-layout-custom';

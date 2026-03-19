@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import { PLAYER_EVENT } from 'utils/consts';
+import { PLAYER_EVENT } from '~/utils/consts';
 
 const ErrorDisplay = videojs.getComponent('ErrorDisplay');
 

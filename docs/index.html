@@ -17,12 +17,12 @@
     <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js"></script>
   -->
 
-  <script type="text/javascript" src="scripts.js"></script>
+  <script type="text/javascript" src="scripts.js?lazy"></script>
 
   <script type="text/javascript">
-    window.addEventListener('load', function(){
+    window.addEventListener('load', () => {
 
-      player = cloudinary.videoPlayer('player', { cloudName: 'demo' });
+      cloudinary.player('player', { cloudName: 'demo' });
 
     }, false);
   </script>
@@ -76,6 +76,7 @@
       <li><a href="./profiles.html">Profiles</a></li>
       <li><a href="./raw-url.html">Raw URL</a></li>
       <li><a href="./recommendations.html">Recommendations</a></li>
+      <li><a href="./schedule.html">Schedule (weekly time slots)</a></li>
       <li><a href="./seek-thumbs.html">Seek Thumbnails</a></li>
       <li><a href="./share-plugin.html">Share &amp; Download</a></li>
       <li><a href="./shoppable.html">Shoppable Videos</a></li>

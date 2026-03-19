@@ -1,8 +1,8 @@
 import videojs from 'video.js';
-import 'assets/styles/components/title-bar.scss';
+import '~/assets/styles/components/title-bar.scss';
 import componentUtils from '../component-utils';
 import { utf8ToBase64 } from '../../utils/utf8Base64';
-import { getCloudinaryUrlPrefix } from 'plugins/cloudinary/common';
+import { getCloudinaryUrlPrefix } from '~/plugins/cloudinary/common';
 import { appendQueryParams } from '../../utils/querystring';
 
 // support VJS5 & VJS6 at the same time

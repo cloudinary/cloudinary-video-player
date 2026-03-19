@@ -1,8 +1,8 @@
 import isFunction from 'lodash/isFunction';
 import isEmpty from 'lodash/isEmpty';
-import { applyWithProps } from 'utils/apply-with-props';
-import { sliceAndUnsetProperties } from 'utils/slicing';
-import { isKeyInTransformation } from 'utils/cloudinary';
+import { applyWithProps } from '~/utils/apply-with-props';
+import { sliceAndUnsetProperties } from '~/utils/slicing';
+import { isKeyInTransformation } from '~/utils/cloudinary';
 import {
   normalizeOptions,
   mergeTransformations,
@@ -11,13 +11,13 @@ import {
   setupCloudinaryMiddleware,
   isRawUrl
 } from './common';
-import { CROP_MODE } from 'video-player.const';
+import { CROP_MODE } from '~/video-player.const';
 import VideoSource from './models/video-source/video-source';
 import EventHandlerRegistry from './event-handler-registry';
 import AudioSource from './models/audio-source/audio-source';
 import { DEFAULT_DPR, RENDITIONS } from './models/video-source/video-source.const';
 
-import recommendationsOverlay from 'components/recommendations-overlay';
+import recommendationsOverlay from '~/components/recommendations-overlay';
 
 export const getEffectiveDpr = (maxDpr) => {
   const deviceDpr = typeof window !== 'undefined' && window.devicePixelRatio != null

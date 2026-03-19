@@ -1,7 +1,7 @@
 import videojs from 'video.js';
 const dom = videojs.dom || videojs;
-import { parseTime } from 'utils/time';
-import { find } from 'utils/find';
+import { parseTime } from '~/utils/time';
+import { find } from '~/utils/find';
 import {
   SHOPPABLE_PANEL_HIDDEN_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,

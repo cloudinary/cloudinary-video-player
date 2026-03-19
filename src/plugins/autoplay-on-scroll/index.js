@@ -1,5 +1,5 @@
-import { isElementInViewport } from 'utils/positioning';
-import { sliceProperties } from 'utils/slicing';
+import { isElementInViewport } from '~/utils/positioning';
+import { sliceProperties } from '~/utils/slicing';
 
 const defaults = {
   fraction: 0.5,

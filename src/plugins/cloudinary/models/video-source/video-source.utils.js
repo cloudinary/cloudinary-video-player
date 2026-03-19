@@ -1,7 +1,7 @@
 import { CONTAINER_MIME_TYPES, FORMAT_MAPPINGS } from './video-source.const';
 import { VIDEO_CODEC } from '../../common';
 import isString from 'lodash/isString';
-import { isKeyInTransformation } from 'utils/cloudinary';
+import { isKeyInTransformation } from '~/utils/cloudinary';
 
 export function formatToMimeTypeAndTransformation(format) {
   const [container, codec] = format.toLowerCase().split('/');

@@ -1,6 +1,6 @@
-import { sliceProperties } from 'utils/slicing';
-import { PLAYER_EVENT } from 'utils/consts';
-import { getCloudinaryUrl } from 'plugins/cloudinary/common';
+import { sliceProperties } from '~/utils/slicing';
+import { PLAYER_EVENT } from '~/utils/consts';
+import { getCloudinaryUrl } from '~/plugins/cloudinary/common';
 import { normalizeJsonResponse } from './utils/api';
 
 import Playlist from './ui/playlist';

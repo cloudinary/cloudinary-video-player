@@ -1,4 +1,4 @@
-import VideoSource from 'plugins/cloudinary/models/video-source/video-source';
+import VideoSource from '~/plugins/cloudinary/models/video-source/video-source';
 import isInteger from 'lodash/isInteger';
 
 import './components/upcoming-video-overlay';

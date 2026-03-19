@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player - Lazy Loading Test</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Bundler Test: Lazy Loading</h3>
+
+      <p>
+        Only the tiny lazy stub loads on page load. The full player core loads on demand
+        when you click the button below. Watch the <strong>Network</strong> tab.
+      </p>
+
+      <h4 class="mt-3">Results:</h4>
+      <pre id="results" class="bg-light p-3 border rounded" style="white-space: pre-wrap;"></pre>
+
+      <button type="button" id="load-btn" class="btn btn-primary mb-3">Load Player</button>
+
+      <video
+        id="player"
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        controls
+        muted
+        playsinline
+      ></video>
+
+      <h4 class="mt-4">What to check in DevTools:</h4>
+      <ul>
+        <li>On page load, only the lazy stub JS should appear in the Network tab</li>
+        <li>After clicking "Load Player", the core player chunks should load</li>
+        <li>The player should render and play video after loading</li>
+      </ul>
+    </div>
+
+    <script type="module">
+      import { player } from 'cloudinary-video-player/lazy';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      const log = (msg) => {
+        document.getElementById('results').textContent += msg + '\n';
+      };
+
+      log('✅ Lazy stub imported - core player NOT yet loaded');
+      log('📋 Check Network tab: only the lazy entry chunk should be present');
+      log('\n⏳ Click "Load Player" to trigger dynamic import...\n');
+
+      document.getElementById('load-btn').addEventListener('click', async () => {
+        log('🔄 Loading player core...');
+        const start = performance.now();
+
+        try {
+          const p = await player('player', {
+            cloudName: 'demo',
+            publicId: 'sea_turtle',
+            autoplay: true,
+          });
+          const elapsed = Math.round(performance.now() - start);
+          log(`✅ Player loaded and created in ${elapsed}ms`);
+          log('📋 Check Network tab: core chunks should now appear');
+        } catch (err) {
+          log(`❌ Error: ${err.message}`);
+          console.error(err);
+        }
+      });
+    </script>
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>

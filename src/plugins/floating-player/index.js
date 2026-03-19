@@ -1,5 +1,5 @@
-import { isElementInViewport } from 'utils/positioning';
-import { sliceProperties } from 'utils/slicing';
+import { isElementInViewport } from '~/utils/positioning';
+import { sliceProperties } from '~/utils/slicing';
 import './floating-player.scss';
 import { FLOATING_TO } from '../../video-player.const';
 

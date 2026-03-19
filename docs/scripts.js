@@ -118,8 +118,11 @@ var loadStyle = function (source, ver) {
   }
 
   function initPlayerExamples() {
+    var scriptUrl = new URL(document.currentScript.src, window.location);
+    var lazy = scriptUrl.searchParams.has('lazy');
+    var bundleName = lazy ? '/cld-video-player-lazy' : '/cld-video-player';
     loadStyle('/cld-video-player' + (min ? '.min' : '') + '.css', ver);
-    loadScript('/cld-video-player' + (min ? '.min' : '') + '.js', ver);
+    loadScript(bundleName + (min ? '.min' : '') + '.js', ver);
 
     window.addEventListener('load', function () {
 

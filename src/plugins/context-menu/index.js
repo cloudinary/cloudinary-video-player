@@ -1,8 +1,8 @@
 import videojs from 'video.js';
 import isFunction from 'lodash/isFunction';
 import ContextMenu from './components/context-menu';
-import { getPointerPosition } from 'utils/positioning';
-import { sliceProperties } from 'utils/slicing';
+import { getPointerPosition } from '~/utils/positioning';
+import { sliceProperties } from '~/utils/slicing';
 import './videojs-contextmenu';
 import './context-menu.scss';
 

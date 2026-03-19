@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player - Schedule (ESM)</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-4">Schedule (Weekly Time Slots) - ESM</h3>
+
+      <p class="mb-4">
+        Video plays only during configured time slots. Outside schedule, a poster image is shown.
+        Call <code>loadPlayer()</code> on the stub to load the player on demand (e.g. on click).
+      </p>
+
+      <div class="mb-3">
+        <label class="mr-2">Mode:</label>
+        <button type="button" id="btn-image" class="btn btn-sm btn-outline-primary mr-1">Show poster (image)</button>
+        <button type="button" id="btn-player" class="btn btn-sm btn-outline-primary">Show player</button>
+      </div>
+
+      <h4 class="mb-2" id="schedule-label">Schedule</h4>
+      <div id="player-container">
+        <video
+          id="player"
+          playsinline
+          controls
+          muted
+          class="cld-video-player cld-fluid"
+          width="500"
+        ></video>
+      </div>
+
+      <h3 class="mt-4">Example Code (ESM):</h3>
+      <pre><code class="language-javascript">
+import { videoPlayer } from 'cloudinary-video-player';
+import 'cloudinary-video-player/cld-video-player.min.css';
+
+videoPlayer('player', {
+  cloudName: 'demo',
+  publicId: 'sea_turtle',
+  schedule: {
+    weekly: [
+      { day: 'monday', start: '09:00', duration: 8 },
+      { day: 'tuesday', start: '09:00', duration: 8 }
+    ]
+  }
+});
+      </code></pre>
+    </div>
+
+    <script type="module">
+      import { player } from 'cloudinary-video-player/lazy';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+      let currentPlayer = null;
+
+      function getScheduleForImageMode() {
+        const now = new Date();
+        const today = now.getDay();
+        const slots = [];
+        for (let d = 0; d < 7; d++) {
+          if (d !== today) {
+            slots.push({ day: DAY_NAMES[d], start: '00:00', duration: 24 });
+          }
+        }
+        return slots;
+      }
+
+      function getScheduleForPlayerMode() {
+        const now = new Date();
+        const today = now.getDay();
+        return [{ day: DAY_NAMES[today], start: '00:00', duration: 24 }];
+      }
+
+      function loadPlayerWithMode(showPlayer) {
+        if (currentPlayer && typeof currentPlayer.dispose === 'function') {
+          currentPlayer.dispose();
+        }
+        const container = document.getElementById('player-container');
+        container.innerHTML = '<video id="player" playsinline controls muted class="cld-video-player cld-fluid" width="500"></video>';
+
+        const scheduleLabel = document.getElementById('schedule-label');
+        scheduleLabel.textContent = showPlayer
+          ? 'Schedule: Today 00:00-23:59 (player visible)'
+          : 'Schedule: All days except today (poster visible)';
+
+        const schedule = showPlayer ? getScheduleForPlayerMode() : getScheduleForImageMode();
+        const options = {
+          cloudName: 'demo',
+          publicId: 'sea_turtle',
+          schedule: { weekly: schedule }
+        };
+
+        currentPlayer = player('player', options);
+        if (currentPlayer && typeof currentPlayer.then === 'function') {
+          currentPlayer.then((player) => { currentPlayer = player; });
+        }
+      }
+
+      document.getElementById('btn-image').addEventListener('click', () => loadPlayerWithMode(false));
+      document.getElementById('btn-player').addEventListener('click', () => loadPlayerWithMode(true));
+      loadPlayerWithMode(false);
+    </script>
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>
