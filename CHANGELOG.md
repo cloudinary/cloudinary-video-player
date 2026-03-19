@@ -1,3 +1,12 @@
+# [3.13.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.1...v3.13.0) (2026-03-19)
+
+
+### Features
+
+* scheduler and rollup lazy-player ([#1003](https://github.com/cloudinary/cloudinary-video-player/issues/1003)) ([9c0d6b2](https://github.com/cloudinary/cloudinary-video-player/commit/9c0d6b258bd1ebc69c58a205377938bb5f964975)), closes [#1004](https://github.com/cloudinary/cloudinary-video-player/issues/1004)
+
+
+
 ## [3.12.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.0...v3.12.1) (2026-03-16)
 
 
