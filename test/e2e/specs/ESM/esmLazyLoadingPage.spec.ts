@@ -17,8 +17,6 @@ vpTest('Given lazy-loading page, when load button clicked, then player loads on 
     expect(results).not.toContain('Error');
 
     await page.locator('#load-btn').click();
-    await waitForPageToLoadWithTimeout(page, 10000);
 
-    const updatedResults = await page.locator('#results').textContent();
-    expect(updatedResults).toContain('Player loaded and created');
+    await expect(page.locator('#results')).toContainText('Player loaded and created', { timeout: 10000 });
 });
