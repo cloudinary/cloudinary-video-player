@@ -27,20 +27,20 @@ Use these to validate changes. Prefer file-scoped commands when possible to avoi
 
 ```bash
 # Lint source
-pnpm run lint
+npm run lint
 
 # Unit tests - full suite
-pnpm run test:unit
+npm run test:unit
 
 # Unit tests - single file
-pnpm run vitest run --config .config/vitest.config.ts test/unit/path/to/file.test.js
+npm run vitest run --config .config/vitest.config.ts test/unit/path/to/file.test.js
 
 # E2E tests (use sparingly)
-pnpm run test:e2e
+npm run test:e2e
 
 # Build (use when explicitly needed)
-pnpm run build
-pnpm run build-es
+npm run build
+npm run build-es
 ```
 
 ## Boundaries
@@ -101,7 +101,7 @@ pnpm run build-es
 - **Implement only what's asked**: Stick strictly to the user's explicit query. Do not add unsolicited features, refactor unrelated code, or introduce "improvements" without approval. If something seems missing, suggest it clearly but wait for confirmation.
 - **Suggest, don't impose**: Prefix suggestions with `[SUGGESTION]` and explain trade-offs, but never apply them without explicit user consent.
 - **Ground in evidence**: Base advice on observable facts from the repo - reference specific files, lines, or docs. Avoid vague claims like "best practices" without context.
-- **Prioritize verification**: End responses with testable steps or questions to validate the solution (e.g., "Run pnpm run test:unit to confirm"). Encourage user testing, especially for UI/visual changes.
+- **Prioritize verification**: End responses with testable steps or questions to validate the solution (e.g., "Run npm run test:unit to confirm"). Encourage user testing, especially for UI/visual changes.
 
 ### Communication & Iteration
 - **Test in real life**: Don't assume code works - have users test and approve
@@ -179,7 +179,7 @@ function buildVideoUrl(source) {
 ## PR Checklist
 
 Before considering a change complete:
-- Lint passes: `pnpm exec eslint src`
+- Lint passes: `npm exec eslint src`
 - Unit tests pass for affected code
 - Diff is small and focused - include a brief summary of what changed and why
 - Remove any debug logs or temporary comments
