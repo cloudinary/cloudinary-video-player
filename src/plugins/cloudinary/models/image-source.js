@@ -1,5 +1,5 @@
 import BaseSource from './base-source';
-import { normalizeOptions } from '../common';
+import { normalizeOptions, isRawUrl } from '../common';
 
 const COMMON_IMAGE_FORMATS = ['jpg', 'png', 'gif', 'webp'];
 const IMAGE_SUFFIX_REMOVAL_PATTERN = RegExp(`\\.(${COMMON_IMAGE_FORMATS.join('|')})$$`);
@@ -13,7 +13,10 @@ class ImageSource extends BaseSource {
   constructor(publicId, options = {}) {
     ({ publicId, options } = normalizeOptions(publicId, options));
 
-    publicId = publicId.replace(IMAGE_SUFFIX_REMOVAL_PATTERN, '');
+    // Only strip extensions for Cloudinary public IDs, not external URLs
+    if (!isRawUrl(publicId)) {
+      publicId = publicId.replace(IMAGE_SUFFIX_REMOVAL_PATTERN, '');
+    }
 
     options = Object.assign({}, DEFAULT_IMAGE_PARAMS, options);
 
