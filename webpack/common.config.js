@@ -58,7 +58,7 @@ const webpackConfig = {
     rules: [
       {
         test: /\.js$/,
-        exclude: [/node_modules/, /\/docs\/es-modules\//],
+        exclude: [/node_modules/],
         use: [
           {
             loader: 'babel-loader'
@@ -71,7 +71,14 @@ const webpackConfig = {
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                charset: false
+              }
+            }
+          }
         ],
       },
       {
