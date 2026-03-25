@@ -81,6 +81,11 @@ class CloudinaryContext {
     let _recommendations = null;
     let _autoShowRecommendations = false;
 
+    // Capture native poster state before the player modifies the DOM.
+    const videoEl = player.el()?.querySelector('video');
+    const _hasNativePoster = videoEl?.hasAttribute('poster') || false;
+    const _hasChildImg = videoEl?.querySelector('img') !== null;
+
     this.source = (source, options = {}) => {
       options = Object.assign({}, options);
 
@@ -197,14 +202,9 @@ class CloudinaryContext {
       }
 
       if (options.poster === undefined) {
-        // Check if the native <video> element already has a poster attribute
-        // or an <img> child (used for high-priority poster loading for CWV).
-        // If so, preserve it by skipping Cloudinary poster generation.
-        const videoEl = this.player.el()?.querySelector('video');
-        const hasNativePoster = videoEl?.hasAttribute('poster');
-        const hasChildImg = videoEl?.querySelector('img') !== null;
-
-        if (hasNativePoster || hasChildImg) {
+        // If the original HTML had a poster attribute or an <img> child,
+        // preserve it by skipping Cloudinary poster generation.
+        if (_hasNativePoster || _hasChildImg) {
           options.poster = false;
         } else if (isRawUrl(publicId)) {
           options.poster = false;
