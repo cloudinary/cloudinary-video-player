@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * remove charset notations from compiled styles ([#1010](https://github.com/cloudinary/cloudinary-video-player/issues/1010)) ([459f0aa](https://github.com/cloudinary/cloudinary-video-player/commit/459f0aa5b9b4ea8f467dfa8d9fbbfca951ae8a67))
+* remove height from default poster ([#1013](https://github.com/cloudinary/cloudinary-video-player/pull/1013))
 
 
 ### Features
