@@ -404,22 +404,19 @@ class CloudinaryContext {
         posterOpts.transformation.crop = 'scale';
       }
 
-      // Skip when source already has sizing from breakpoints/aspectRatio.
-      const sourceHasSizing = isKeyInTransformation(sourceOpts.transformation, 'width') ||
-        isKeyInTransformation(sourceOpts.transformation, 'aspect_ratio');
+      // Skip when source already has width (e.g. breakpoints).
+      const sourceHasSizing = isKeyInTransformation(sourceOpts.transformation, 'width');
       const playerEl = this.player.el();
       if (
         !sourceHasSizing &&
-        playerEl?.clientWidth &&
-        playerEl?.clientHeight
+        playerEl?.clientWidth
       ) {
         const roundUp100 = (val) => 100 * Math.ceil(val / 100);
         const dpr = getEffectiveDpr(sourceOpts.maxDpr);
 
         posterOpts.transformation = mergeTransformations(posterOpts.transformation, {
           width: roundUp100(playerEl.clientWidth * dpr),
-          height: roundUp100(playerEl.clientHeight * dpr),
-          crop: 'limit'
+          ...(!isKeyInTransformation(posterOpts.transformation, 'crop') && { crop: 'limit' })
         });
       }
 
