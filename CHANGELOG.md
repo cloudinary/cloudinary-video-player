@@ -1,3 +1,17 @@
+# [3.13.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.1...v3.13.0) (2026-03-30)
+
+
+### Bug Fixes
+
+* remove charset notations from compiled styles ([#1010](https://github.com/cloudinary/cloudinary-video-player/issues/1010)) ([459f0aa](https://github.com/cloudinary/cloudinary-video-player/commit/459f0aa5b9b4ea8f467dfa8d9fbbfca951ae8a67))
+
+
+### Features
+
+* scheduler and rollup lazy-player ([#1003](https://github.com/cloudinary/cloudinary-video-player/issues/1003)) ([9c0d6b2](https://github.com/cloudinary/cloudinary-video-player/commit/9c0d6b258bd1ebc69c58a205377938bb5f964975)), closes [#1004](https://github.com/cloudinary/cloudinary-video-player/issues/1004)
+
+
+
 ## [3.12.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.0...v3.12.1) (2026-03-16)
 
 
