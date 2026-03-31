@@ -3,7 +3,6 @@
  * Outside-schedule bootstrap reuses lazy placeholder DOM + deferred load helpers.
  * Uses browser local time. No videojs dependency for the bootstrap path.
  */
-import { buildPosterUrl } from './poster-url';
 import { loadPlayer } from './lazy-player';
 import { getVideoElement, preparePlayerPlaceholder } from './lazy-player';
 
@@ -47,7 +46,7 @@ export const shouldUseScheduleBootstrap = (options) => {
  * @param {function} [ready] - Video.js ready callback (passed when full player loads)
  * @returns {object} Stub with source() and loadPlayer()
  */
-export const scheduleBootstrap = (elem, options, ready) => {
+export const scheduleBootstrap = async (elem, options, ready) => {
   const videoElement = getVideoElement(elem);
   const cloudName = getCloudNameFromOptions(options);
   const publicId = getPublicIdFromOptions(options);
@@ -56,6 +55,7 @@ export const scheduleBootstrap = (elem, options, ready) => {
     throw new Error('schedule.weekly requires cloudName and publicId when outside schedule');
   }
 
+  const { buildPosterUrl } = await import('./poster-url');
   const cloudinaryConfig = options?.cloudinaryConfig || { cloud_name: cloudName };
   const posterUrl = buildPosterUrl(cloudName, publicId, cloudinaryConfig);
 

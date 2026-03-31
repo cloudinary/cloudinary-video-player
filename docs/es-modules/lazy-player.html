@@ -17,7 +17,8 @@
         <a href="/index.html">&#60;&#60; Back to examples index</a>
       </nav>
       <h1>Cloudinary Video Player</h1>
-      <h3 class="mb-3">Lazy player</h3>
+      <h3 class="mb-3">Lazy player (with poster URL)</h3>
+      <p class="text-muted small mb-2">Uses an explicit <code>poster</code> URL. Custom accent color and logo configured.</p>
 
       <video
         id="player"
@@ -33,7 +34,8 @@
         Click the player or the button above to initialize. The button calls <code>player.loadPlayer()</code>.
       </p>
 
-      <h3 class="mt-4">Scroll to load</h3>
+      <h3 class="mt-4">Scroll to load (auto-built poster)</h3>
+      <p class="text-muted small mb-2">No <code>poster</code> URL - built automatically from <code>cloudName</code> and <code>publicId</code>. Custom colors configured.</p>
       <p class="text-muted small mb-3">
         Scroll down - the player loads automatically when it enters the viewport.
       </p>
@@ -47,6 +49,7 @@
         playsinline
         controls
         muted
+        loop
         class="cld-video-player cld-fluid"
         width="500"
       ></video>
@@ -56,23 +59,22 @@
 import { player as createPlayer } from 'cloudinary-video-player/lazy';
 import 'cloudinary-video-player/cld-video-player.min.css';
 
-const poster = 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg';
-
-// Click to load
+// With explicit poster URL
 const player = await createPlayer('my-video', {
   cloudName: 'demo',
   publicId: 'sea_turtle',
-  poster,
-  lazy: true
+  poster: 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg',
+  lazy: true,
+  colors: { accent: '#ff4081' }
 });
 // await player.loadPlayer();
 
-// Scroll to load
+// Auto-built poster from cloudName + publicId
 createPlayer('my-video', {
   cloudName: 'demo',
   publicId: 'sea_turtle',
-  poster,
-  lazy: { loadOnScroll: true }
+  lazy: { loadOnScroll: true },
+  colors: { base: '#0d1b2a', accent: '#00b4d8' }
 });
       </code></pre>
     </div>
@@ -81,14 +83,15 @@ createPlayer('my-video', {
       import { player as createPlayer } from 'cloudinary-video-player/lazy';
       import 'cloudinary-video-player/cld-video-player.min.css';
 
-      const poster = 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg';
-
       (async () => {
         const player = await createPlayer('player', {
           cloudName: 'demo',
           publicId: 'sea_turtle',
-          poster,
-          lazy: true
+          poster: 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg',
+          lazy: true,
+          colors: { accent: '#ff4081' },
+          logoImageUrl: 'https://res.cloudinary.com/demo/image/upload/c_scale,w_100/cloudinary_logo.png',
+          logoOnclickUrl: 'https://cloudinary.com'
         });
 
         document.getElementById('btn-load').addEventListener('click', () => {
@@ -100,8 +103,8 @@ createPlayer('my-video', {
         createPlayer('player-scroll', {
           cloudName: 'demo',
           publicId: 'sea_turtle',
-          poster,
-          lazy: { loadOnScroll: true }
+          lazy: { loadOnScroll: true },
+          colors: { base: '#0d1b2a', accent: '#00b4d8' }
         });
       })();
     </script>

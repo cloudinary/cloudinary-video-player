@@ -16,7 +16,6 @@ import { convertKeysToSnakeCase } from './utils/object';
 * characters such as digits.
 * https://www.w3.org/International/questions/qa-escapes#css_identifiers
 */
-import cssEscape from 'css.escape';
 
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
@@ -41,7 +40,7 @@ export const getResolveVideoElement = (elem) => {
     }
 
     try {
-      elem = document.querySelector(`#${cssEscape(id)}`) || videojs.getPlayer(id);
+      elem = document.querySelector(`#${CSS.escape(id)}`) || videojs.getPlayer(id);
     } catch (err) { // eslint-disable-line no-unused-vars
       elem = null;
     }

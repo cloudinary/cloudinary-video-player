@@ -37,8 +37,8 @@ describe('lazy-bootstrap', () => {
       document.body.innerHTML = '';
     });
 
-    it('wraps video in overlay with big-play and sets poster', () => {
-      const stub = lazyBootstrap('lazy-vid', {
+    it('wraps video in overlay with big-play and sets poster', async () => {
+      const stub = await lazyBootstrap('lazy-vid', {
         lazy: true,
         cloudName: 'demo',
         publicId: 'dog'
@@ -59,9 +59,9 @@ describe('lazy-bootstrap', () => {
       expect(typeof stub.loadPlayer).toBe('function');
     });
 
-    it('uses light skin when video has skin-light class', () => {
+    it('uses light skin when video has skin-light class', async () => {
       document.body.innerHTML = '<div><video id="lazy-vid" class="cld-video-player-skin-light" width="400"></video></div>';
-      lazyBootstrap('lazy-vid', { lazy: true, cloudName: 'demo', publicId: 'dog' });
+      await lazyBootstrap('lazy-vid', { lazy: true, cloudName: 'demo', publicId: 'dog' });
       const video = document.getElementById('lazy-vid');
       const overlay = document.querySelector('.cld-lazy-preactivate-overlay');
       expect(video.classList.contains('cld-video-player-skin-light')).toBe(true);
@@ -69,8 +69,8 @@ describe('lazy-bootstrap', () => {
       expect(video.classList.contains('cld-video-player-skin-dark')).toBe(false);
     });
 
-    it('applies colors option as CSS custom properties on overlay wrapper', () => {
-      lazyBootstrap('lazy-vid', {
+    it('applies colors option as CSS custom properties on overlay wrapper', async () => {
+      await lazyBootstrap('lazy-vid', {
         lazy: true,
         cloudName: 'demo',
         publicId: 'dog',

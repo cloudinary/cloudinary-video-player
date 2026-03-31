@@ -1,4 +1,3 @@
-import { scheduleBootstrap, shouldUseScheduleBootstrap } from './schedule';
 import { lazyBootstrap, shouldUseLazyBootstrap } from './lazy-player';
 import { getVideoElement } from './lazy-player';
 
@@ -16,8 +15,11 @@ export const createAsyncPlayer = async (id, playerOptions, ready, createFn) => {
     }
   })();
 
-  if (shouldUseScheduleBootstrap(opts)) {
-    return scheduleBootstrap(id, opts, ready);
+  if (opts?.schedule?.weekly) {
+    const { shouldUseScheduleBootstrap, scheduleBootstrap } = await import('./schedule');
+    if (shouldUseScheduleBootstrap(opts)) {
+      return scheduleBootstrap(id, opts, ready);
+    }
   }
 
   if (shouldUseLazyBootstrap(opts)) {

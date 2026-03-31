@@ -1,4 +1,3 @@
-import cssEscape from 'css.escape';
 import { getPosterUrl } from './bootstrap-poster-url';
 
 const FLUID_CLASS = 'cld-fluid';
@@ -8,7 +7,7 @@ export const getVideoElement = (elem) => {
     let id = elem;
     if (id.indexOf('#') === 0) id = id.slice(1);
     try {
-      elem = document.querySelector(`#${cssEscape(id)}`);
+      elem = document.querySelector(`#${CSS.escape(id)}`);
     } catch {
       elem = null;
     }
@@ -80,9 +79,9 @@ export const shouldUseLazyBootstrap = (options) => !!options?.lazy;
 export const shouldLoadOnScroll = (lazy) =>
   lazy && typeof lazy === 'object' && lazy.loadOnScroll === true;
 
-export const lazyBootstrap = (elem, options, ready) => {
+export const lazyBootstrap = async (elem, options, ready) => {
   const videoElement = getVideoElement(elem);
-  const posterUrl = getPosterUrl(options);
+  const posterUrl = await getPosterUrl(options);
   const loadOnScroll = shouldLoadOnScroll(options.lazy);
 
   const { hadControls } = preparePlayerPlaceholder(videoElement, posterUrl, {
