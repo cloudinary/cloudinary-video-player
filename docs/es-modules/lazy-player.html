@@ -83,25 +83,27 @@ createPlayer('my-video', {
 
       const poster = 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg';
 
-      const player = await createPlayer('player', {
-        cloudName: 'demo',
-        publicId: 'sea_turtle',
-        poster,
-        lazy: true
-      });
+      (async () => {
+        const player = await createPlayer('player', {
+          cloudName: 'demo',
+          publicId: 'sea_turtle',
+          poster,
+          lazy: true
+        });
 
-      createPlayer('player-scroll', {
-        cloudName: 'demo',
-        publicId: 'sea_turtle',
-        poster,
-        lazy: { loadOnScroll: true }
-      });
+        document.getElementById('btn-load').addEventListener('click', () => {
+          if (player && typeof player.loadPlayer === 'function') {
+            player.loadPlayer();
+          }
+        });
 
-      document.getElementById('btn-load').addEventListener('click', () => {
-        if (player && typeof player.loadPlayer === 'function') {
-          player.loadPlayer();
-        }
-      });
+        createPlayer('player-scroll', {
+          cloudName: 'demo',
+          publicId: 'sea_turtle',
+          poster,
+          lazy: { loadOnScroll: true }
+        });
+      })();
     </script>
 
     <link
