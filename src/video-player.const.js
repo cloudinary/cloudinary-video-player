@@ -62,6 +62,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
   'showJumpControls',
   'videoConfig',
   'schedule',
+  'lazy',
 ]);
 
 // We support both camelCase and snake_case for cloudinary SDK params

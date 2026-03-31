@@ -578,6 +578,22 @@
       },
       "default": {}
     },
+    "lazy": {
+      "oneOf": [
+        {
+          "type": "boolean",
+          "default": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "loadOnScroll": { "type": "boolean", "default": false }
+          },
+          "additionalProperties": false
+        }
+      ],
+      "default": false
+    },
     "videoSources": {
       "type": "array",
       "items": {
