@@ -31,8 +31,10 @@ module.exports = merge(webpackCommon, {
       patterns: [{
         from: path.resolve(__dirname, '../docs'),
         globOptions: {
+          followSymbolicLinks: false,
           ignore: [
-            '**/node_modules',
+            '**/node_modules/**',
+            '**/docs/es-modules/**',
           ],
         },
       }],
