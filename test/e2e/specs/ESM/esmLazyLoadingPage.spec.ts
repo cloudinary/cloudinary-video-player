@@ -17,6 +17,6 @@ vpTest('Given lazy-player page, when load button clicked, then player loads on d
 
     await page.locator('#btn-load').click();
 
-    await expect(page.locator('.video-js').first()).toBeVisible({ timeout: 10000 });
-    await expect(overlay.first()).not.toBeVisible({ timeout: 5000 });
+    await expect(page.locator('#player.video-js')).toBeVisible({ timeout: 10000 });
+    await expect(overlay).toHaveCount(1, { timeout: 5000 });
 });
