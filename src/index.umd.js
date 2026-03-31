@@ -18,13 +18,16 @@ export const player = (id, playerOptions = {}, ready) =>
 export const players = (selector, playerOptions, ready) =>
   createMultiplePlayers(selector, playerOptions, ready, player);
 
-const cloudinaryVideoPlayerLegacyConfig = () => {
+const cloudinaryVideoPlayerLegacyConfig = (instanceConfig = {}) => {
   console.warn(
     'Cloudinary.new() is deprecated and will be removed. Please use cloudinary.videoPlayer() instead.'
   );
+  const mergeOpts = (callOpts = {}) => Object.assign({}, instanceConfig, callOpts);
   return {
-    videoPlayer,
-    videoPlayers
+    videoPlayer: (id, playerOptions = {}, ready) =>
+      createVideoPlayer(id, mergeOpts(playerOptions), ready),
+    videoPlayers: (selector, playerOptions = {}, ready) =>
+      createMultipleSync(selector, mergeOpts(playerOptions), ready, videoPlayer)
   };
 };
 
