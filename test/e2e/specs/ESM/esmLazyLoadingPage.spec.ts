@@ -5,7 +5,7 @@ import { ExampleLinkName } from '../../testData/ExampleLinkNames';
 import { getEsmLinkByName } from '../../testData/esmPageLinksData';
 import { waitForPageToLoadWithTimeout } from '../../src/helpers/waitForPageToLoadWithTimeout';
 
-const link = getEsmLinkByName(ExampleLinkName.LazyLoading);
+const link = getEsmLinkByName(ExampleLinkName.LazyPlayer);
 
 vpTest('Given lazy-loading page, when load button clicked, then player loads on demand', async ({ page, pomPages }) => {
     await page.goto(ESM_URL);
