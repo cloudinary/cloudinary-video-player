@@ -1,7 +1,10 @@
+import pick from 'lodash/pick';
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/url-helpers';
+import { CLOUDINARY_CONFIG_PARAM } from '../video-player.const';
 import { utf8ToBase64 } from '../utils/utf8Base64';
 import { appendQueryParams } from './querystring';
+import { convertKeysToSnakeCase } from './object';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
 
@@ -15,13 +18,23 @@ const getDefaultProfileConfig = (profileName) => {
   return profile.config;
 };
 
+const getCloudinaryConfigFromOptions = (options) => {
+  if (options.cloudinaryConfig) {
+    return options.cloudinaryConfig;
+  }
+
+  const fromFlat = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
+  return Object.assign({}, fromFlat, options.cloudinary || {});
+};
+
 const fetchConfig = async (options) => {
-  const { profile, publicId, cloudinaryConfig, type = 'upload', videoConfig, allowUsageReport = true } = options;
+  const { profile, publicId, type = 'upload', videoConfig, allowUsageReport = true } = options;
   
   if (profile && isDefaultProfile(profile)) {
     return getDefaultProfileConfig(profile);
   }
 
+  const cloudinaryConfig = getCloudinaryConfigFromOptions(options);
   const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service';
   const queryParams = allowUsageReport ? { _s: `vp-${VERSION}` } : null;
 
