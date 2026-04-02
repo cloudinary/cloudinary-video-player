@@ -23,8 +23,8 @@ const getCloudinaryConfigFromOptions = (options) => {
     return options.cloudinaryConfig;
   }
 
-  const fromFlat = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
-  return Object.assign({}, fromFlat, options.cloudinary || {});
+  const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
+  return Object.assign({}, snakeCaseCloudinaryConfig);
 };
 
 const fetchConfig = async (options) => {
