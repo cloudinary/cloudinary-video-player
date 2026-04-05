@@ -1,8 +1,9 @@
-import { scheduleBootstrap, shouldUseScheduleBootstrap, getElementForSchedule } from './schedule';
+import { lazyBootstrap, shouldUseLazyBootstrap } from './lazy-player';
+import { getVideoElement } from './lazy-player';
 
 export const createAsyncPlayer = async (id, playerOptions, ready, createFn) => {
   const mergedOptions = Object.assign({}, playerOptions);
-  const videoElement = getElementForSchedule(id);
+  const videoElement = getVideoElement(id);
 
   const opts = await (async () => {
     try {
@@ -14,8 +15,15 @@ export const createAsyncPlayer = async (id, playerOptions, ready, createFn) => {
     }
   })();
 
-  if (shouldUseScheduleBootstrap(opts)) {
-    return scheduleBootstrap(id, opts);
+  if (opts?.schedule?.weekly) {
+    const { shouldUseScheduleBootstrap, scheduleBootstrap } = await import('./schedule');
+    if (shouldUseScheduleBootstrap(opts)) {
+      return scheduleBootstrap(id, opts, ready);
+    }
+  }
+
+  if (shouldUseLazyBootstrap(opts)) {
+    return lazyBootstrap(id, opts, ready);
   }
 
   return createFn(videoElement, opts, ready);

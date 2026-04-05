@@ -26,6 +26,7 @@ export const LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.ForceHLSSubtitles, endpoint: 'force-hls-subtitles-ios.html' },
     { name: ExampleLinkName.HDR, endpoint: 'hdr.html' },
     { name: ExampleLinkName.InteractionArea, endpoint: 'interaction-area.html' },
+    { name: ExampleLinkName.LazyPlayer, endpoint: 'lazy-player.html' },
     { name: ExampleLinkName.MultiplePlayers, endpoint: 'multiple-players.html' },
     { name: ExampleLinkName.Playlist, endpoint: 'playlist.html' },
     { name: ExampleLinkName.PlaylistByTag, endpoint: 'playlist-by-tag-captions.html' },

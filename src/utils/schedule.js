@@ -1,9 +1,10 @@
 /**
- * Schedule utilities: weekly time-range parsing and bootstrap (poster rendering).
+ * Schedule utilities: weekly time-range parsing and bootstrap.
+ * Outside-schedule bootstrap reuses lazy placeholder DOM + deferred load helpers.
  * Uses browser local time. No videojs dependency for the bootstrap path.
  */
-import cssEscape from 'css.escape';
-import { buildPosterUrl } from './poster-url';
+import { loadPlayer } from './lazy-player';
+import { getVideoElement, preparePlayerPlaceholder } from './lazy-player';
 
 const INTERNAL_ANALYTICS_URL = 'https://analytics-api-s.cloudinary.com';
 
@@ -42,10 +43,11 @@ export const shouldUseScheduleBootstrap = (options) => {
  * Bootstrap path when outside schedule: render poster, return stub with loadPlayer().
  * @param {string|HTMLElement} elem - Element id or video element
  * @param {object} options - player options
+ * @param {function} [ready] - Video.js ready callback (passed when full player loads)
  * @returns {object} Stub with source() and loadPlayer()
  */
-export const scheduleBootstrap = (elem, options) => {
-  const videoElement = getElementForSchedule(elem);
+export const scheduleBootstrap = async (elem, options, ready) => {
+  const videoElement = getVideoElement(elem);
   const cloudName = getCloudNameFromOptions(options);
   const publicId = getPublicIdFromOptions(options);
 
@@ -53,15 +55,18 @@ export const scheduleBootstrap = (elem, options) => {
     throw new Error('schedule.weekly requires cloudName and publicId when outside schedule');
   }
 
+  const { buildPosterUrl } = await import('./poster-url');
   const cloudinaryConfig = options?.cloudinaryConfig || { cloud_name: cloudName };
   const posterUrl = buildPosterUrl(cloudName, publicId, cloudinaryConfig);
 
   const fluid = options?.fluid !== false;
-  const { container, videoElement: vEl } = renderScheduleImage(videoElement, posterUrl, {
+  const { videoElement: vEl, hadControls } = preparePlayerPlaceholder(videoElement, posterUrl, {
     fluid,
     width: options?.width,
     height: options?.height,
     cropMode: options?.sourceOptions?.cropMode,
+    sourceOptions: options?.sourceOptions,
+    aspectRatio: options?.aspectRatio
   });
 
   sendScheduleImageAnalytics(options);
@@ -69,11 +74,8 @@ export const scheduleBootstrap = (elem, options) => {
   const stub = {
     source: () => stub,
     loadPlayer: () => {
-      if (container && container.parentNode) {
-        container.parentNode.removeChild(container);
-      }
-      vEl.style.display = '';
-      return import('../video-player.js').then((m) => m.createVideoPlayer(vEl, options));
+      if (hadControls) vEl.setAttribute('controls', '');
+      return loadPlayer({ videoElement: vEl, options, ready });
     }
   };
 
@@ -89,8 +91,6 @@ const DAY_MAP = {
   friday: 5, fri: 5,
   saturday: 6, sat: 6
 };
-
-const FLUID_CLASS = 'cld-fluid';
 
 /**
  * Parse readable day-of-week string to JS Date.getDay() value (0=Sun .. 6=Sat).
@@ -148,58 +148,4 @@ export const isWithinSchedule = (schedule, date) => {
   return false;
 };
 
-/**
- * Resolve video element by id or return element. No videojs.
- * @param {string|HTMLElement} elem - Element id (with or without #) or video element
- * @returns {HTMLVideoElement}
- */
-export const getElementForSchedule = (elem) => {
-  if (typeof elem === 'string') {
-    let id = elem;
-    if (id.indexOf('#') === 0) id = id.slice(1);
-    try {
-      elem = document.querySelector(`#${cssEscape(id)}`);
-    } catch {
-      elem = null;
-    }
-    if (!elem) throw new Error(`Could not find element with id ${id}`);
-  }
-  if (!elem?.tagName) throw new Error('Must specify either an element or an element id.');
-  if (elem.tagName !== 'VIDEO') throw new Error('Element is not a video tag.');
-  return elem;
-};
-
-/**
- * Hide video, show poster image overlay. Keeps video in DOM for load().
- * @param {HTMLVideoElement} videoElement
- * @param {string} posterUrl
- * @param {object} options - fluid, width, height, etc.
- * @returns {{ img: HTMLImageElement, container: HTMLElement, videoElement: HTMLVideoElement }}
- */
-export const renderScheduleImage = (videoElement, posterUrl, options = {}) => {
-  const fluid = options.fluid !== false;
-  const parent = videoElement.parentNode;
-
-  const container = document.createElement('div');
-  container.className = 'cld-schedule-poster-container';
-  container.style.cssText = 'position:relative;width:100%;height:100%;';
-
-  const img = document.createElement('img');
-  img.src = posterUrl;
-  img.alt = '';
-  img.setAttribute('data-cld-schedule-poster', 'true');
-  img.style.cssText = 'display:block;width:100%;height:100%;object-fit:contain;';
-
-  if (fluid) {
-    container.classList.add(FLUID_CLASS);
-    img.style.objectFit = options.cropMode === 'fill' ? 'cover' : 'contain';
-  }
-  if (options.width) container.style.width = `${options.width}px`;
-  if (options.height) container.style.height = `${options.height}px`;
-
-  videoElement.style.display = 'none';
-  container.appendChild(img);
-  parent.insertBefore(container, videoElement);
-
-  return { img, container, videoElement };
-};
+export { getVideoElement as getElementForSchedule, preparePlayerPlaceholder as renderScheduleImage } from './lazy-player';

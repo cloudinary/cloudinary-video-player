@@ -30,7 +30,7 @@ export enum ExampleLinkName {
     Profiles = 'Profiles',
     RawURL = 'Raw URL',
     Recommendations = 'Recommendations',
-    Schedule = 'Schedule (weekly time slots)',
+    Schedule = 'Schedule',
     SeekThumbnails = 'Seek Thumbnails',
     ShoppableVideos = 'Shoppable Videos',
     SubtitlesAndCaptions = 'Subtitles & Captions',
@@ -45,5 +45,5 @@ export enum ExampleLinkName {
     VisualSearch = 'Visual Search',
     VideoDetails = 'Video Details',
     EntryPoints = 'Entry Points (all exports)',
-    LazyLoading = 'Lazy Loading',
+    LazyPlayer = 'Lazy player',
 }

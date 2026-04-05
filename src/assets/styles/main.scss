@@ -76,6 +76,11 @@ $icon-font-path: '../icon-font' !default;
     text-shadow: none;
   }
 
+  &.cld-lazy-preactivate-overlay {
+    width: auto;
+    height: auto;
+  }
+
   &.cld-fluid {
     width: 100%;
     max-width: 100%;

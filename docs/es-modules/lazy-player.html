@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloudinary Video Player - Lazy player (ESM)</title>
+    <link
+      href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32,e_hue:290/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="container p-4 col-12 col-md-9 col-xl-6">
+      <nav class="nav mb-2">
+        <a href="/index.html">&#60;&#60; Back to examples index</a>
+      </nav>
+      <h1>Cloudinary Video Player</h1>
+      <h3 class="mb-3">Lazy player (with poster URL)</h3>
+      <p class="text-muted small mb-2">Uses an explicit <code>poster</code> URL. Custom accent color and logo configured.</p>
+
+      <video
+        id="player"
+        playsinline
+        controls
+        muted
+        class="cld-video-player cld-fluid"
+        width="500"
+      ></video>
+
+      <button type="button" id="btn-load" class="btn btn-sm btn-outline-primary mt-2 mb-3">Load Player</button>
+      <p class="text-muted small mb-3">
+        Click the player or the button above to initialize. The button calls <code>player.loadPlayer()</code>.
+      </p>
+
+      <h3 class="mt-4">Scroll to load (auto-built poster)</h3>
+      <p class="text-muted small mb-2">No <code>poster</code> URL - built automatically from <code>cloudName</code> and <code>publicId</code>. Custom colors configured.</p>
+      <p class="text-muted small mb-3">
+        Scroll down - the player loads automatically when it enters the viewport.
+      </p>
+
+      <div style="height: 80vh; display: flex; color: #aaa; font-size: 2rem;">
+        &darr; &darr; &darr; &darr; &darr; &darr; &darr;
+      </div>
+
+      <video
+        id="player-scroll"
+        playsinline
+        controls
+        muted
+        loop
+        class="cld-video-player cld-fluid"
+        width="500"
+      ></video>
+
+      <h3 class="mt-4">Example code:</h3>
+      <pre><code class="language-javascript">
+import { player as createPlayer } from 'cloudinary-video-player/lazy';
+import 'cloudinary-video-player/cld-video-player.min.css';
+
+// With explicit poster URL
+const player = await createPlayer('my-video', {
+  cloudName: 'demo',
+  publicId: 'sea_turtle',
+  poster: 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg',
+  lazy: true,
+  colors: { accent: '#ff4081' }
+});
+// await player.loadPlayer();
+
+// Auto-built poster from cloudName + publicId
+createPlayer('my-video', {
+  cloudName: 'demo',
+  publicId: 'sea_turtle',
+  lazy: { loadOnScroll: true },
+  colors: { base: '#0d1b2a', accent: '#00b4d8' }
+});
+      </code></pre>
+    </div>
+
+    <script type="module">
+      import { player as createPlayer } from 'cloudinary-video-player/lazy';
+      import 'cloudinary-video-player/cld-video-player.min.css';
+
+      (async () => {
+        const player = await createPlayer('player', {
+          cloudName: 'demo',
+          publicId: 'sea_turtle',
+          poster: 'https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg',
+          lazy: true,
+          colors: { accent: '#ff4081' },
+          logoImageUrl: 'https://res.cloudinary.com/demo/image/upload/c_scale,w_100/cloudinary_logo.png',
+          logoOnclickUrl: 'https://cloudinary.com'
+        });
+
+        document.getElementById('btn-load').addEventListener('click', () => {
+          if (player && typeof player.loadPlayer === 'function') {
+            player.loadPlayer();
+          }
+        });
+
+        createPlayer('player-scroll', {
+          cloudName: 'demo',
+          publicId: 'sea_turtle',
+          lazy: { loadOnScroll: true },
+          colors: { base: '#0d1b2a', accent: '#00b4d8' }
+        });
+      })();
+    </script>
+
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </body>
+</html>
