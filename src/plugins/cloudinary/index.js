@@ -190,7 +190,7 @@ class CloudinaryContext {
       }
 
       const hasUserPosterOptions = !isEmpty(options.posterOptions);
-      
+
       if (options.poster === undefined) {
         if (isRawUrl(publicId)) {
           options.poster = false;

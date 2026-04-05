@@ -1,3 +1,13 @@
+## [3.13.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.13.0...v3.13.1) (2026-04-02)
+
+
+### Bug Fixes
+
+* cloudinary config is always undefined ([#1020](https://github.com/cloudinary/cloudinary-video-player/issues/1020)) ([ad18575](https://github.com/cloudinary/cloudinary-video-player/commit/ad18575e4b93ced0575f4b0a21ca317052fe5b18))
+* respect poster for html ([#1009](https://github.com/cloudinary/cloudinary-video-player/issues/1009)) ([91951d6](https://github.com/cloudinary/cloudinary-video-player/commit/91951d6b093cdff9f107c2d1aa190d6689413435))
+
+
+
 # [3.13.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.12.1...v3.13.0) (2026-03-30)
 
 
