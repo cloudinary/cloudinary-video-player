@@ -130,7 +130,10 @@ class VideoSource extends BaseSource {
 
     options.cloudinaryConfig = options.cloudinaryConfig || this.cloudinaryConfig();
     options.resource_type = this.resourceType() || options.resource_type;
-    options.queryParams = this.queryParams();
+
+    if (!isRawUrl(publicId)) {
+      options.queryParams = this.queryParams();
+    }
 
     if (publicId === true) {
       const urlPrefix = getCloudinaryUrlPrefix(options.cloudinaryConfig);

@@ -36,7 +36,7 @@ const fetchConfig = async (options) => {
 
   const cloudinaryConfig = getCloudinaryConfigFromOptions(options);
   const urlPrefix = getCloudinaryUrlPrefix(cloudinaryConfig) + '/_applet_/video_service';
-  const queryParams = allowUsageReport ? { _s: `vp-${VERSION}` } : null;
+  const queryParams = allowUsageReport ? { _s: 'vp' } : null;
 
   let configUrl;
   if (profile) {
