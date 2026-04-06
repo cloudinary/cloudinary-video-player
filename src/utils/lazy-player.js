@@ -1,6 +1,8 @@
-import { getPosterUrl } from './bootstrap-poster-url';
-
 const FLUID_CLASS = 'cld-fluid';
+
+/** Same condition as `getPosterUrl` in `poster-url.js` (explicit string `poster`); skips the `cld-poster-url` async chunk. */
+const hasExplicitPoster = (options) =>
+  typeof options?.poster === 'string' && options.poster.length > 0;
 
 export const getVideoElement = (elem) => {
   if (typeof elem === 'string') {
@@ -79,9 +81,19 @@ export const shouldUseLazyBootstrap = (options) => !!options?.lazy;
 export const shouldLoadOnScroll = (lazy) =>
   lazy && typeof lazy === 'object' && lazy.loadOnScroll === true;
 
+/**
+ * Renders the lazy placeholder (poster, big-play) before the main player chunk loads.
+ *
+ * @param {string|HTMLVideoElement} elem
+ * @param {object} options
+ * @param {function} [ready] - Passed through when the full player loads.
+ * @returns {Promise<{ source: function, loadPlayer: function }>}
+ */
 export const lazyBootstrap = async (elem, options, ready) => {
   const videoElement = getVideoElement(elem);
-  const posterUrl = await getPosterUrl(options);
+  const posterUrl = hasExplicitPoster(options)
+    ? options.poster
+    : (await import(/* webpackChunkName: "cld-poster-url" */ './poster-url')).getPosterUrl(options);
   const loadOnScroll = shouldLoadOnScroll(options.lazy);
 
   const { hadControls } = preparePlayerPlaceholder(videoElement, posterUrl, {
