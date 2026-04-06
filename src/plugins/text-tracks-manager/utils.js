@@ -9,7 +9,8 @@ export const fetchFileContent = async (
     signal,
     onSuccess,
     onError,
-    onAttempt
+    onAttempt,
+    credentials = 'omit',
   } = config;
 
   let attempts = 0;
@@ -22,7 +23,7 @@ export const fetchFileContent = async (
     attempts++;
     onAttempt?.(attempts);
 
-    const response = await fetch(url, { signal });
+    const response = await fetch(url, { signal, credentials });
 
     if (response.status === 202 && polling) {
       if (attempts < maxAttempts) {
