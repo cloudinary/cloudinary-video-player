@@ -47,7 +47,7 @@ describe('lazy-bootstrap', () => {
       const video = document.getElementById('lazy-vid');
       expect(video.poster).toContain('dog');
 
-      const overlay = document.querySelector('.cld-lazy-preactivate-overlay');
+      const overlay = document.querySelector('.cld-lazy-player');
       expect(overlay).toBeTruthy();
       expect(overlay.classList.contains('cld-video-player')).toBe(true);
       expect(overlay.classList.contains('cld-video-player-skin-dark')).toBe(true);
@@ -63,7 +63,7 @@ describe('lazy-bootstrap', () => {
       document.body.innerHTML = '<div><video id="lazy-vid" class="cld-video-player-skin-light" width="400"></video></div>';
       await lazyBootstrap('lazy-vid', { lazy: true, cloudName: 'demo', publicId: 'dog' });
       const video = document.getElementById('lazy-vid');
-      const overlay = document.querySelector('.cld-lazy-preactivate-overlay');
+      const overlay = document.querySelector('.cld-lazy-player');
       expect(video.classList.contains('cld-video-player-skin-light')).toBe(true);
       expect(overlay.classList.contains('cld-video-player-skin-light')).toBe(true);
       expect(video.classList.contains('cld-video-player-skin-dark')).toBe(false);
@@ -76,7 +76,7 @@ describe('lazy-bootstrap', () => {
         publicId: 'dog',
         colors: { base: '#112233', accent: '#aabbcc', text: '#ffeedd' }
       });
-      const overlay = document.querySelector('.cld-lazy-preactivate-overlay');
+      const overlay = document.querySelector('.cld-lazy-player');
       expect(overlay.style.getPropertyValue('--color-base').trim()).toBe('#112233');
       expect(overlay.style.getPropertyValue('--color-accent').trim()).toBe('#aabbcc');
       expect(overlay.style.getPropertyValue('--color-text').trim()).toBe('#ffeedd');

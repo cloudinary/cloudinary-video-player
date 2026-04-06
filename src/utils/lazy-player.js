@@ -52,7 +52,7 @@ export const loadPlayer = ({ overlayRoot, videoElement, options, ready }) => {
   return import('../video-player.js').then((m) => m.createVideoPlayer(videoElement, options, ready));
 };
 
-const PREACTIVATE_OVERLAY_CLASS = 'cld-lazy-preactivate-overlay';
+const LAZY_PLAYER_CLASS = 'cld-lazy-player';
 
 const isLightSkin = (videoElement, options) => {
   const cls = videoElement.className || '';
@@ -95,7 +95,7 @@ export const lazyBootstrap = async (elem, options, ready) => {
   const light = isLightSkin(videoElement, options);
 
   const overlayRoot = document.createElement('div');
-  overlayRoot.classList.add('cld-video-player', 'video-js', PREACTIVATE_OVERLAY_CLASS);
+  overlayRoot.classList.add('cld-video-player', 'video-js', LAZY_PLAYER_CLASS);
   overlayRoot.classList.add(light ? 'cld-video-player-skin-light' : 'cld-video-player-skin-dark');
 
   const colors = options?.colors;
@@ -123,7 +123,7 @@ export const lazyBootstrap = async (elem, options, ready) => {
     }
   };
 
-  const activate = (activationOpts = {}) => {
+  const activatePlayer = (activationOpts = {}) => {
     if (loadPromise) {
       return loadPromise;
     }
@@ -146,11 +146,11 @@ export const lazyBootstrap = async (elem, options, ready) => {
 
   function onPlayClick(e) {
     e.stopPropagation();
-    activate({ autoplayFromUserGesture: true });
+    activatePlayer({ autoplayFromUserGesture: true });
   }
 
   function onVideoClick() {
-    activate({ autoplayFromUserGesture: true });
+    activatePlayer({ autoplayFromUserGesture: true });
   }
 
   playBtn.addEventListener('click', onPlayClick);
@@ -161,7 +161,7 @@ export const lazyBootstrap = async (elem, options, ready) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            activate({});
+            activatePlayer({});
           }
         });
       },
@@ -172,7 +172,7 @@ export const lazyBootstrap = async (elem, options, ready) => {
 
   const stub = {
     source: () => stub,
-    loadPlayer: () => activate({ autoplayFromUserGesture: true })
+    loadPlayer: () => activatePlayer({ autoplayFromUserGesture: true })
   };
 
   return stub;

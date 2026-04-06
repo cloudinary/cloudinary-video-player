@@ -12,7 +12,7 @@ vpTest('Given lazy-player page, when load button clicked, then player loads on d
     await pomPages.mainPage.clickLinkByName(link.name);
     await waitForPageToLoadWithTimeout(page, 5000);
 
-    const overlay = page.locator('.cld-lazy-preactivate-overlay');
+    const overlay = page.locator('.cld-lazy-player');
     await expect(overlay.first()).toBeVisible({ timeout: 5000 });
 
     await page.locator('#btn-load').click();
