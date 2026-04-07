@@ -1,5 +1,4 @@
 import videojs from 'video.js';
-import pick from 'lodash/pick';
 import Utils from './utils';
 import {
   PLAYER_PARAMS,
@@ -9,14 +8,13 @@ import {
   AUTO_PLAY_MODE
 } from './video-player.const';
 import isString from 'lodash/isString';
-import { convertKeysToSnakeCase } from './utils/object';
+import { getCloudinaryConfigFromOptions } from './utils/cloudinary-config-from-options';
 
 /*
 * Used to escape element identifiers that begin with certain
 * characters such as digits.
 * https://www.w3.org/International/questions/qa-escapes#css_identifiers
 */
-import cssEscape from 'css.escape';
 
 export const addMetadataTrack = (videoJs, vttSource) => {
   return videoJs.addRemoteTextTrack({
@@ -41,7 +39,7 @@ export const getResolveVideoElement = (elem) => {
     }
 
     try {
-      elem = document.querySelector(`#${cssEscape(id)}`) || videojs.getPlayer(id);
+      elem = document.querySelector(`#${CSS.escape(id)}`) || videojs.getPlayer(id);
     } catch (err) { // eslint-disable-line no-unused-vars
       elem = null;
     }
@@ -85,7 +83,7 @@ export const extractOptions = (elem, options) => {
   
   // Extract cloudinaryConfig from playerOptions if not explicitly provided
   if (!options.cloudinaryConfig) {
-    const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
+    const snakeCaseCloudinaryConfig = getCloudinaryConfigFromOptions(options);
     if (Object.keys(snakeCaseCloudinaryConfig).length > 0) {
       options.cloudinaryConfig = snakeCaseCloudinaryConfig;
     }

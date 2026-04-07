@@ -1,10 +1,8 @@
-import pick from 'lodash/pick';
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import { isRawUrl, getCloudinaryUrlPrefix } from '../plugins/cloudinary/url-helpers';
-import { CLOUDINARY_CONFIG_PARAM } from '../video-player.const';
 import { utf8ToBase64 } from '../utils/utf8Base64';
 import { appendQueryParams } from './querystring';
-import { convertKeysToSnakeCase } from './object';
+import { getCloudinaryConfigFromOptions } from './cloudinary-config-from-options';
 
 const isDefaultProfile = (profileName) => !!defaultProfiles.find(({ name }) => profileName === name);
 
@@ -16,15 +14,6 @@ const getDefaultProfileConfig = (profileName) => {
   }
 
   return profile.config;
-};
-
-const getCloudinaryConfigFromOptions = (options) => {
-  if (options.cloudinaryConfig) {
-    return options.cloudinaryConfig;
-  }
-
-  const snakeCaseCloudinaryConfig = pick(convertKeysToSnakeCase(options), CLOUDINARY_CONFIG_PARAM);
-  return Object.assign({}, snakeCaseCloudinaryConfig);
 };
 
 const fetchConfig = async (options) => {
