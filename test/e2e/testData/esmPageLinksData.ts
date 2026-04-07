@@ -44,7 +44,7 @@ export const ESM_LINKS: ExampleLinkType[] = [
     { name: ExampleLinkName.AllBuild, endpoint: 'all' },
     { name: ExampleLinkName.VideoDetails, endpoint: 'video-details' },
     { name: ExampleLinkName.EntryPoints, endpoint: 'entry-points' },
-    { name: ExampleLinkName.LazyLoading, endpoint: 'lazy-loading' },
+    { name: ExampleLinkName.LazyPlayer, endpoint: 'lazy-player' },
 ];
 
 /**

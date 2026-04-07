@@ -1,16 +1,22 @@
 type VideoPlayerFunction = (id: string, options?: any, ready?: () => void) => VideoPlayer;
 type VideoMultiPlayersFunction = (selector: string, options?: any, ready?: () => void) => VideoPlayer[];
 type VideoPlayerWithProfileFunction = (id: string, options?: any, ready?: () => void) => Promise<VideoPlayer>;
+type AsyncPlayerFunction = (id: string, options?: any, ready?: () => void) => Promise<VideoPlayer | { source: () => unknown; loadPlayer: () => Promise<VideoPlayer> }>;
+type AsyncPlayersFunction = (selector: string, options?: any, ready?: () => void) => Promise<VideoPlayer[]>;
 
 export const videoPlayer: VideoPlayerFunction;
 export const videoPlayers: VideoMultiPlayersFunction;
 export const videoPlayerWithProfile: VideoPlayerWithProfileFunction;
+export const player: AsyncPlayerFunction;
+export const players: AsyncPlayersFunction;
 
 
 export interface Cloudinary {
   videoPlayer: VideoPlayerFunction;
   videoPlayers: VideoMultiPlayersFunction;
   videoPlayerWithProfile: VideoPlayerWithProfileFunction;
+  player: AsyncPlayerFunction;
+  players: AsyncPlayersFunction;
 }
 
 declare global {
