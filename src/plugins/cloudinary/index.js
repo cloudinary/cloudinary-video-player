@@ -207,7 +207,7 @@ class CloudinaryContext {
         { hasUserPosterOptions: hasUserPosterOptions || null }
       );
 
-      options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: `vp-${VERSION}` } : {});
+      options.queryParams = Object.assign(options.queryParams || {}, options.allowUsageReport ? { _s: 'vp' } : {});
 
       if (options.sourceTypes.indexOf('audio') > -1) {
         builtSrc = new AudioSource(publicId, options);
