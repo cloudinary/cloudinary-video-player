@@ -130,6 +130,10 @@ export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAn
   debug: playerOptions.debug,
   type: playerOptions.type,
   schedule: hasConfig(playerOptions.schedule?.weekly),
+  lazy: playerOptions.lazy === true || (playerOptions.lazy && typeof playerOptions.lazy === 'object'),
+  lazyLoadOnScroll: (playerOptions.lazy && typeof playerOptions.lazy === 'object' && playerOptions.lazy.loadOnScroll === true)
+    ? true
+    : undefined,
 
   colors: hasConfig(playerOptions.colors),
   controlBar: hasConfig(playerOptions.controlBar),

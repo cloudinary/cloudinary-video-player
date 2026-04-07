@@ -77,6 +77,7 @@ export const playerValidators = {
         duration: validator.isNumber
       })
     },
+    lazy: validator.or(validator.isBoolean, validator.isPlainObject),
     cloudinary: {
       autoShowRecommendations: validator.isBoolean,
       sourceTypes: validator.isArrayOfStrings,
