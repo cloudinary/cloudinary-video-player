@@ -126,6 +126,7 @@ function textTracksManager() {
         sourceUrl,
         {
           signal,
+          credentials: player.cloudinary.source?.().withCredentials ? 'include' : 'omit',
           polling: type === 'transcript' && !src,
           interval: 2000,
           maxAttempts: 10,
