@@ -571,6 +571,24 @@ describe('test hasCodec method', () => {
       expect(posterUrl).toContain('/video/upload/');
     });
 
+    it('does not append source queryParams to raw absolute poster URLs', () => {
+      const posterHref = 'https://cdn.example.com/assets/poster.jpg';
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        queryParams: { _s: 'vp' },
+        poster: posterHref
+      });
+      expect(source.poster().url()).toBe(posterHref);
+    });
+
+    it('appends stable _s to Cloudinary-built poster URLs', () => {
+      const source = new VideoSource('sea_turtle', {
+        cloudinaryConfig: cld,
+        queryParams: { _s: 'vp' }
+      });
+      expect(source.poster().url()).toContain('_s=vp');
+    });
+
     it('should use configured resourceType for seek thumbnails', () => {
       const source = new VideoSource('sample', {
         cloudinaryConfig: cld,
