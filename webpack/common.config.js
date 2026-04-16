@@ -12,12 +12,12 @@ const webpackConfig = {
   context: path.resolve(__dirname, '../src'),
 
   entry: {
-    'cld-video-player': {
-      import: './index.umd.js',
+    'player': {
+      import: './index.js',
       library: { name: 'cloudinary-video-player', type: 'umd' }
     },
-    'cld-video-player-lazy': {
-      import: './index.lazy.js',
+    'player-full': {
+      import: './index.full.js',
       library: { name: 'cloudinary-video-player', type: 'umd' }
     }
   },
@@ -102,8 +102,29 @@ const webpackConfig = {
     new ESLintPlugin(),
     new DefinePlugin({ VERSION }),
     new MiniCssExtractPlugin({
-      filename: `cld-video-player${minFilenamePart}.css`
-    })
+      filename: `player${minFilenamePart}.css`
+    }),
+    {
+      apply(compiler) {
+        compiler.hooks.afterEmit.tapAsync('CopyAliases', (compilation, callback) => {
+          const fs = compiler.outputFileSystem;
+          const outputPath = compilation.outputOptions.path;
+          const copies = [
+            [`player${minFilenamePart}.css`, `cld-video-player${minFilenamePart}.css`],
+            [`player-full${minFilenamePart}.js`, `cld-video-player${minFilenamePart}.js`]
+          ];
+          let pending = copies.length;
+          copies.forEach(([src, dest]) => {
+            fs.readFile(path.join(outputPath, src), (err, data) => {
+              if (err) return --pending === 0 ? callback() : null;
+              fs.writeFile(path.join(outputPath, dest), data, () => {
+                if (--pending === 0) callback();
+              });
+            });
+          });
+        });
+      }
+    }
   ]
 };
 

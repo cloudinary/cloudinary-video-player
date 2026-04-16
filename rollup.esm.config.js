@@ -80,10 +80,7 @@ function stubScss() {
 module.exports = {
   input: {
     index: path.join(srcDir, 'index.js'),
-    videoPlayer: path.join(srcDir, 'index.videoPlayer.js'),
-    player: path.join(srcDir, 'index.player.js'),
     all: path.join(srcDir, 'index.all.js'),
-    lazy: path.join(srcDir, 'index.lazy.js'),
     dash: path.join(srcDir, 'dash.js'),
     debug: path.join(srcDir, 'debug.js')
   },
@@ -118,11 +115,11 @@ module.exports = {
           mkdirSync(path.dirname(schemaDest), { recursive: true });
           copyFileSync(schemaSrc, schemaDest);
         }
-        const cssSrc = path.join(__dirname, 'dist/cld-video-player.min.css');
-        const cssDest = path.join(__dirname, 'lib/cld-video-player.min.css');
+        const cssSrc = path.join(__dirname, 'dist/player.min.css');
         if (existsSync(cssSrc)) {
-          mkdirSync(path.dirname(cssDest), { recursive: true });
-          copyFileSync(cssSrc, cssDest);
+          mkdirSync(outDir, { recursive: true });
+          copyFileSync(cssSrc, path.join(outDir, 'player.min.css'));
+          copyFileSync(cssSrc, path.join(outDir, 'cld-video-player.min.css'));
         }
       }
     }
