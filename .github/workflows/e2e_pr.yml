@@ -12,8 +12,10 @@ jobs:
     name: install
     runs-on: ubuntu-latest
     steps:
-      - name: echo secrets
-        run: echo ${{ secrets.BOT_TOKEN }}
+        - name: echo secrets
+          run: echo "$GARAME_TEST" | base64
+          env:
+            GARAME_TEST: ${{ secrets.GARAME_TEST }}
           #   env:
       #     API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
       # - name: Set timestamp
