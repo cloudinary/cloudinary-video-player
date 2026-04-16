@@ -34,7 +34,17 @@
     "./shoppable": "./lib/shoppable-widget.js",
     "./interaction-areas": "./lib/interaction-areas.service.js",
     "./*": "./lib/*",
-    "./light/*": "./lib/*"
+    "./light/*": "./lib/*",
+
+    "__deprecated_exports_below__": "Kept for backwards compatibility.",
+    "./videoPlayer": {
+      "import": "./lib/index.js",
+      "require": "./dist/player-full.min.js"
+    },
+    "./player": {
+      "import": "./lib/index.js",
+      "require": "./dist/player.min.js"
+    }
   },
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
