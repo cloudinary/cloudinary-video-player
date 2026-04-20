@@ -99,28 +99,26 @@
       });
 
       // Fetch playlist by tag. Since this operation involves an API call
-      // the function returns a Promise when the operation completes.
-      // The return value is 'player'.
-      player
-        .playlistByTag('video_race', {
-          autoAdvance: true,
-          repeat: true,
-          presentUpcoming: false,
-          sorter: sorter, // returns sources-list sorting function
-          sourceParams: getTextTracks // returns per-source configurations, handles captions
-        })
-        .then(function (player) {
-          const divElem = document.querySelector('div#playlist-data');
-          const list = player
-            .playlist()
-            .list()
-            .map(function (source) {
-              return source.publicId();
-            })
-            .join(', ');
+      // we await the deferred player first, then call playlistByTag.
+      const p = await player;
+      await p.playlistByTag('video_race', {
+        autoAdvance: true,
+        repeat: true,
+        presentUpcoming: false,
+        sorter: sorter,
+        sourceParams: getTextTracks
+      });
 
-          divElem.innerText = 'Playlist: ' + list;
-        });
+      const divElem = document.querySelector('div#playlist-data');
+      const list = p
+        .playlist()
+        .list()
+        .map(function (source) {
+          return source.publicId();
+        })
+        .join(', ');
+
+      divElem.innerText = 'Playlist: ' + list;
     </script>
 
     <!-- Bootstrap -->

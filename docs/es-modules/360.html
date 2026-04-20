@@ -47,7 +47,7 @@
         sourceTypes: ['mp4']
       });
 
-      player.videojs.vr({ projection: '360' });
+      player.then((p) => p.videojs.vr({ projection: '360' }));
 
     </script>
 
