@@ -57,40 +57,41 @@
       const adTagUrl =
         'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpreonly&cmsid=496&vid=short_onecue&correlator=';
 
-      const player1 = videoPlayer('player', {
-        cloudName: 'demo',
-        ads: {
-          adTagUrl: adTagUrl,
-          debug: true
-        }
-      });
+      (async () => {
+        const player1 = videoPlayer('player', {
+          cloudName: 'demo',
+          ads: {
+            adTagUrl: adTagUrl,
+            debug: true
+          }
+        });
 
-      player1.source('elephants');
+        player1.source('elephants');
 
-      const player2 = videoPlayer('player-playlist', {
-        cloudName: 'demo',
-        ads: {
-          adTagUrl: adTagUrl,
-          debug: true
-        }
-      });
+        const player2 = await videoPlayer('player-playlist', {
+          cloudName: 'demo',
+          ads: {
+            adTagUrl: adTagUrl,
+            debug: true
+          }
+        });
 
-      const p2 = await player2;
-      await p2.playlistByTag('video_race', {
-        autoAdvance: true,
-        repeat: true
-      });
+        await player2.playlistByTag('video_race', {
+          autoAdvance: true,
+          repeat: true
+        });
 
-      const divElem = document.querySelector('#playlist-data');
-      const list = p2
-        .playlist()
-        .list()
-        .map(function (source) {
-          return source.publicId();
-        })
-        .join(', ');
+        const divElem = document.querySelector('#playlist-data');
+        const list = player2
+          .playlist()
+          .list()
+          .map(function (source) {
+            return source.publicId();
+          })
+          .join(', ');
 
-      divElem.innerText = 'Playlist: ' + list;
+        divElem.innerText = 'Playlist: ' + list;
+      })();
     </script>
 
     <!-- Bootstrap -->

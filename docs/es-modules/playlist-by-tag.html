@@ -94,31 +94,32 @@
         return 0;
       };
 
-      const player = videoPlayer('player', {
-        cloudName: 'demo'
-      });
+      (async () => {
+        const player = await videoPlayer('player', {
+          cloudName: 'demo'
+        });
 
-      // Fetch playlist by tag. Since this operation involves an API call
-      // we await the deferred player first, then call playlistByTag.
-      const p = await player;
-      await p.playlistByTag('video_race', {
-        autoAdvance: true,
-        repeat: true,
-        presentUpcoming: false,
-        sorter: sorter,
-        sourceParams: getTextTracks
-      });
+        // Fetch playlist by tag. Since this operation involves an API call
+        // the function returns a Promise when the operation completes.
+        await player.playlistByTag('video_race', {
+          autoAdvance: true,
+          repeat: true,
+          presentUpcoming: false,
+          sorter: sorter,
+          sourceParams: getTextTracks
+        });
 
-      const divElem = document.querySelector('div#playlist-data');
-      const list = p
-        .playlist()
-        .list()
-        .map(function (source) {
-          return source.publicId();
-        })
-        .join(', ');
+        const divElem = document.querySelector('div#playlist-data');
+        const list = player
+          .playlist()
+          .list()
+          .map(function (source) {
+            return source.publicId();
+          })
+          .join(', ');
 
-      divElem.innerText = 'Playlist: ' + list;
+        divElem.innerText = 'Playlist: ' + list;
+      })();
     </script>
 
     <!-- Bootstrap -->
