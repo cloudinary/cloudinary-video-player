@@ -37,19 +37,17 @@
 
     <script type="module">
 
-      import { videoPlayer } from 'cloudinary-video-player';
+      import { videoPlayer } from 'cloudinary-video-player/full';
       import 'https://unpkg.com/videojs-vr@2.0.0/dist/videojs-vr.js';
       import 'cloudinary-video-player/player.min.css';
 
-      (async () => {
-        const player = await cloudinary.videoPlayer('player', {
-          cloudName: 'demo',
-          publicId: 'video-player/Golden-Gate-Bridge',
-          sourceTypes: ['mp4']
-        });
+      const player = videoPlayer('player', {
+        cloudName: 'demo',
+        publicId: 'video-player/Golden-Gate-Bridge',
+        sourceTypes: ['mp4']
+      });
 
-        player.videojs.vr({ projection: '360' });
-      })();
+      player.videojs.vr({ projection: '360' });
 
     </script>
 

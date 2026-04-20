@@ -80,6 +80,7 @@ function stubScss() {
 module.exports = {
   input: {
     index: path.join(srcDir, 'index.js'),
+    'index.full': path.join(srcDir, 'index.full.js'),
     all: path.join(srcDir, 'index.all.js'),
     dash: path.join(srcDir, 'dash.js'),
     debug: path.join(srcDir, 'debug.js')
