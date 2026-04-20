@@ -25,7 +25,7 @@ for (const link of ESM_LINKS) {
  */
 vpTest('ESM page Link count test', async ({ page }) => {
     await page.goto(ESM_URL);
-    const expectedNumberOfLinks = 44;
+    const expectedNumberOfLinks = 43;
     const numberOfLinks = await page.getByRole('link').count();
     expect(numberOfLinks).toBe(expectedNumberOfLinks);
 });
