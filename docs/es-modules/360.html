@@ -41,13 +41,15 @@
       import 'https://unpkg.com/videojs-vr@2.0.0/dist/videojs-vr.js';
       import 'cloudinary-video-player/player.min.css';
 
-      const player = cloudinary.videoPlayer('player', {
-        cloudName: 'demo',
-        publicId: 'video-player/Golden-Gate-Bridge',
-        sourceTypes: ['mp4']
-      });
+      (async () => {
+        const player = await cloudinary.videoPlayer('player', {
+          cloudName: 'demo',
+          publicId: 'video-player/Golden-Gate-Bridge',
+          sourceTypes: ['mp4']
+        });
 
-      player.then((p) => p.videojs.vr({ projection: '360' }));
+        player.videojs.vr({ projection: '360' });
+      })();
 
     </script>
 
