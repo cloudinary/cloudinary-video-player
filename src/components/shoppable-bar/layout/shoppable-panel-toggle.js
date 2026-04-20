@@ -6,7 +6,7 @@ import {
   CLOSE_ICON_CLASS,
   ICON_CART_CLASS,
   SHOPPABLE_ANIMATION_CLASS
-} from '../shoppable-widget.const';
+} from '../shoppable.const';
 import { PLAYER_EVENT } from '../../../utils/consts';
 const dom = videojs.dom || videojs;
 

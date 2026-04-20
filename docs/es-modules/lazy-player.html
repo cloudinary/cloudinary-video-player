@@ -56,8 +56,8 @@
 
       <h3 class="mt-4">Example code:</h3>
       <pre><code class="language-javascript">
-import { player as createPlayer } from 'cloudinary-video-player/lazy';
-import 'cloudinary-video-player/cld-video-player.min.css';
+import { player as createPlayer } from 'cloudinary-video-player';
+import 'cloudinary-video-player/player.min.css';
 
 // With explicit poster URL
 const player = await createPlayer('my-video', {
@@ -80,8 +80,8 @@ createPlayer('my-video', {
     </div>
 
     <script type="module">
-      import { player as createPlayer } from 'cloudinary-video-player/lazy';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { player as createPlayer } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/player.min.css';
 
       (async () => {
         const player = await createPlayer('player', {

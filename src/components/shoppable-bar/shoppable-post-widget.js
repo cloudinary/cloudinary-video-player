@@ -1,6 +1,6 @@
 import videojs from 'video.js';
 import ShoppablePanel from './panel/shoppable-panel.js';
-import { CLD_SPBL_PANEL_CLASS } from './shoppable-widget.const';
+import { CLD_SPBL_PANEL_CLASS } from './shoppable.const';
 const dom = videojs.dom || videojs;
 
 class ShoppablePostWidget {

@@ -17,16 +17,6 @@ This README includes basic information for installation and getting started. Vie
    ```js
    import cloudinary from 'cloudinary-video-player';
    import 'cloudinary-video-player/player.min.css';
-   // import required plugins like that:
-   // import 'cloudinary-video-player/chapters';
-   // import 'cloudinary-video-player/playlist';
-   ```
-
-* Note - import `/all` to get all available plugins in a single import:
-
-   ```js
-   import cloudinary from 'cloudinary-video-player/all';
-   import 'cloudinary-video-player/player.min.css';
    ```
 
 ### CDN
