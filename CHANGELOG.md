@@ -1,3 +1,18 @@
+# [3.14.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.13.1...v3.14.0) (2026-04-07)
+
+
+### Bug Fixes
+
+* analytics query-string for better browser cache ([#1024](https://github.com/cloudinary/cloudinary-video-player/issues/1024)) ([bca444f](https://github.com/cloudinary/cloudinary-video-player/commit/bca444fc52c3d0fe174da2bc1342a10172dd72b9))
+* apply credentials for native text tracks ([#1023](https://github.com/cloudinary/cloudinary-video-player/issues/1023)) ([fa56287](https://github.com/cloudinary/cloudinary-video-player/commit/fa56287168b0859285c50df19e7b1ba7a9672c17))
+
+
+### Features
+
+* lazy-loading player ([#1017](https://github.com/cloudinary/cloudinary-video-player/issues/1017)) ([17246c5](https://github.com/cloudinary/cloudinary-video-player/commit/17246c5d045ba37a10463b84bb2f0ceddd05ddfb))
+
+
+
 ## [3.13.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.13.0...v3.13.1) (2026-04-02)
 
 
