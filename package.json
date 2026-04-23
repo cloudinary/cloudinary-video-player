@@ -96,7 +96,7 @@
     "hls.js": "^1.6.15",
     "lodash": "^4.17.21",
     "srt-parser-2": "^1.2.3",
-    "uuid": "^11.0.3",
+    "uuid": "^14.0.0",
     "video.js": "^8.23.4",
     "videojs-contrib-ads": "^7.5.2",
     "videojs-contrib-dash": "^5.1.1",
