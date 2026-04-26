@@ -1,3 +1,7 @@
+## [3.14.2](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.1...v3.14.2) (2026-04-26)
+
+
+
 ## [3.14.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.0...v3.14.1) (2026-04-26)
 
 
