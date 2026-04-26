@@ -8,7 +8,7 @@ import {
   CLD_SPBL_ITEM,
   SHOPPABLE_CLICK_ACTIONS,
   SHOPPABLE_HOVER_ACTIONS
-} from '../shoppable-widget.const';
+} from '../shoppable.const';
 
 const widthTransformation = { width: 132 };
 

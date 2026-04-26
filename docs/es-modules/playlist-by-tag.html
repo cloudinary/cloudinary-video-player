@@ -43,7 +43,7 @@
       import { videoPlayer } from 'cloudinary-video-player';
 
 
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/player.min.css';
 
       const textTracks = {
         surf_competition: {
@@ -94,33 +94,32 @@
         return 0;
       };
 
-      const player = videoPlayer('player', {
-        cloudName: 'demo'
-      });
+      (async () => {
+        const player = await videoPlayer('player', {
+          cloudName: 'demo'
+        });
 
-      // Fetch playlist by tag. Since this operation involves an API call
-      // the function returns a Promise when the operation completes.
-      // The return value is 'player'.
-      player
-        .playlistByTag('video_race', {
+        // Fetch playlist by tag. Since this operation involves an API call
+        // the function returns a Promise when the operation completes.
+        await player.playlistByTag('video_race', {
           autoAdvance: true,
           repeat: true,
           presentUpcoming: false,
-          sorter: sorter, // returns sources-list sorting function
-          sourceParams: getTextTracks // returns per-source configurations, handles captions
-        })
-        .then(function (player) {
-          const divElem = document.querySelector('div#playlist-data');
-          const list = player
-            .playlist()
-            .list()
-            .map(function (source) {
-              return source.publicId();
-            })
-            .join(', ');
-
-          divElem.innerText = 'Playlist: ' + list;
+          sorter: sorter,
+          sourceParams: getTextTracks
         });
+
+        const divElem = document.querySelector('div#playlist-data');
+        const list = player
+          .playlist()
+          .list()
+          .map(function (source) {
+            return source.publicId();
+          })
+          .join(', ');
+
+        divElem.innerText = 'Playlist: ' + list;
+      })();
     </script>
 
     <!-- Bootstrap -->

@@ -20,7 +20,7 @@
       <h3 class="mb-4">Bundler Test: Tree Shaking</h3>
 
       <p>
-        Imports only <code>cloudinary-video-player/player</code>.
+        Imports only <code>{ player }</code> from <code>cloudinary-video-player</code>.
         Open the <strong>Network</strong> tab to verify that plugin chunks
         (shoppable, interaction-areas, playlist, etc.) are <strong>not</strong> loaded.
       </p>
@@ -39,14 +39,14 @@
 
       <h4 class="mt-4">What to check in DevTools:</h4>
       <ul>
-        <li>Network tab should <strong>not</strong> show: <code>shoppable-widget.js</code>, <code>interaction-areas.service.js</code>, <code>playlist.js</code></li>
+        <li>Network tab should <strong>not</strong> show: <code>shoppable.js</code>, <code>interaction-areas.js</code>, <code>playlist.js</code></li>
         <li>Compare total JS transferred here vs. the <a href="/all.html"><code>/all</code> build</a></li>
       </ul>
     </div>
 
     <script type="module">
-      import player from 'cloudinary-video-player/player';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { player } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/player.min.css';
 
       const log = (msg) => {
         document.getElementById('results').textContent += msg + '\n';
@@ -54,7 +54,7 @@
 
       (async () => {
         try {
-          log('⏳ Creating player via /player sub-path...');
+          log('⏳ Creating player via named import...');
           const p = await player('player', {
             cloudName: 'demo',
             publicId: 'sea_turtle',

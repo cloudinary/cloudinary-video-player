@@ -45,7 +45,7 @@
       <h3 class="mt-4">Example Code (ESM):</h3>
       <pre><code class="language-javascript">
 import { player } from 'cloudinary-video-player';
-import 'cloudinary-video-player/cld-video-player.min.css';
+import 'cloudinary-video-player/player.min.css';
 
 player('player', {
   cloudName: 'demo',
@@ -61,8 +61,8 @@ player('player', {
     </div>
 
     <script type="module">
-      import { player } from 'cloudinary-video-player/lazy';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { player } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/player.min.css';
 
       const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
       let currentPlayer = null;

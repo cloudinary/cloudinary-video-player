@@ -9,8 +9,8 @@
     "url": "https://github.com/cloudinary/cloudinary-video-player.git"
   },
   "module": "./lib/index.js",
-  "main": "./dist/cld-video-player.min.js",
-  "style": "./dist/cld-video-player.min.css",
+  "main": "./dist/player.min.js",
+  "style": "./dist/player.min.css",
   "types": "./types/cld-video-player.d.ts",
   "files": [
     "dist",
@@ -23,29 +23,31 @@
     ".": {
       "types": "./types/cld-video-player.d.ts",
       "import": "./lib/index.js",
-      "require": "./dist/cld-video-player.min.js"
+      "require": "./dist/player.min.js"
     },
-    "./videoPlayer": {
-      "import": "./lib/videoPlayer.js",
-      "require": "./dist/cld-video-player.min.js"
-    },
-    "./player": {
-      "import": "./lib/player.js",
-      "require": "./dist/cld-video-player.min.js"
+    "./full": {
+      "import": "./lib/index.full.js",
+      "require": "./dist/player-full.min.js"
     },
     "./all": {
       "import": "./lib/all.js",
-      "require": "./dist/cld-video-player.min.js"
+      "require": "./dist/player-full.min.js"
     },
-    "./lazy": {
-      "import": "./lib/lazy.js",
-      "require": "./dist/cld-video-player-lazy.min.js"
-    },
+
+    "./player.min.css": "./lib/player.min.css",
     "./cld-video-player.min.css": "./lib/cld-video-player.min.css",
-    "./shoppable": "./lib/shoppable-widget.js",
-    "./interaction-areas": "./lib/interaction-areas.service.js",
+
     "./*": "./lib/*",
-    "./light/*": "./lib/*"
+
+    "./light/*": "./lib/*",
+    "./videoPlayer": {
+      "import": "./lib/index.js",
+      "require": "./dist/player-full.min.js"
+    },
+    "./player": {
+      "import": "./lib/index.js",
+      "require": "./dist/player.min.js"
+    }
   },
   "scripts": {
     "prepare": "shx cp env.example.js env.js",
@@ -80,12 +82,12 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "./dist/cld-video-player.min.js",
-        "maxSize": "140kb"
+        "path": "./dist/player.min.js",
+        "maxSize": "10kb"
       },
       {
-        "path": "./dist/cld-video-player-lazy.min.js",
-        "maxSize": "10kb"
+        "path": "./dist/player-full.min.js",
+        "maxSize": "140kb"
       }
     ]
   },
