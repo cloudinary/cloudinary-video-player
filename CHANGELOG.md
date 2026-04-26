@@ -1,3 +1,12 @@
+## [3.14.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.0...v3.14.1) (2026-04-26)
+
+
+### Bug Fixes
+
+* emit a public lib/schema.json ([9fef6e9](https://github.com/cloudinary/cloudinary-video-player/commit/9fef6e9fd93301838fc0ed82fff061d2041b4a70))
+
+
+
 # [3.14.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.13.1...v3.14.0) (2026-04-07)
 
 
