@@ -52,4 +52,29 @@ export class VideoComponent extends BaseComponent {
             expect(isPaused).not.toEqual(expectedPlaying);
         }).toPass({ intervals: [500], timeout });
     }
+
+   /**
+ * Validates theme CSS custom properties on the `.cld-video-player` wrapper ancestor.
+ */
+public async validateColors(
+    expectedColors: { base: string; accent: string; text: string },
+    timeout: number = 10000
+  ): Promise<void> {
+    const wrapperLocator = this.locator.locator('xpath=ancestor::div[contains(@class, "cld-video-player")]');
+  
+    await expect(async () => {
+      const colors = await wrapperLocator.evaluate((el) => {
+        const styles = getComputedStyle(el as HTMLElement);
+        return {
+          base: styles.getPropertyValue('--color-base').trim(),
+          accent: styles.getPropertyValue('--color-accent').trim(),
+          text: styles.getPropertyValue('--color-text').trim(),
+        };
+      });
+  
+      expect(colors.base.toLowerCase()).toBe(expectedColors.base.toLowerCase());
+      expect(colors.accent.toLowerCase()).toBe(expectedColors.accent.toLowerCase());
+      expect(colors.text.toLowerCase()).toBe(expectedColors.text.toLowerCase());
+    }).toPass({ intervals: [500], timeout });
+  }
 }
