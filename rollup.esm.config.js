@@ -111,9 +111,8 @@ module.exports = {
       name: 'copy-assets',
       writeBundle() {
         const schemaSrc = path.join(__dirname, 'src/config/configSchema.json');
-        const schemaDest = path.join(outDir, 'config/configSchema.json');
+        const schemaDest = path.join(outDir, 'schema.json');
         if (existsSync(schemaSrc)) {
-          mkdirSync(path.dirname(schemaDest), { recursive: true });
           copyFileSync(schemaSrc, schemaDest);
         }
         const cssSrc = path.join(__dirname, 'dist/player.min.css');
