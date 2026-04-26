@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * emit a public lib/schema.json ([9fef6e9](https://github.com/cloudinary/cloudinary-video-player/commit/9fef6e9fd93301838fc0ed82fff061d2041b4a70))
+* multiple security updates (#1039, #1038)
 
 
 
