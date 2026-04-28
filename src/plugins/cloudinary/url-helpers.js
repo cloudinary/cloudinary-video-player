@@ -1,4 +1,4 @@
-import { URL_PATTERN } from './models/video-source/video-source.const';
+import { URL_PATTERN } from './profile-url-pattern';
 
 export { getCloudinaryUrlPrefix } from '../../utils/cloudinary-url-prefix';
 
