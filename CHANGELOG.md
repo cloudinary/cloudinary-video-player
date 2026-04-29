@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.1...v4.0.0) (2026-04-29)
+
+
+### Features
+
+* deliver lazy bundle by default ([2e8540c](https://github.com/cloudinary/cloudinary-video-player/commit/2e8540c67eb5e7dbaba805dd2c60d0471a416a0d))
+
+
+### BREAKING CHANGES
+
+* default bundle now loads the lazy player shell by default
+
+
+
 
 
 ---
