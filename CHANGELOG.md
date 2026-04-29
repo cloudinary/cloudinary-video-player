@@ -1,3 +1,27 @@
+
+
+---
+
+# v3 to v4 Changes - Lazy player by default
+
+This release should be backwards-compatible for most player usages -
+typical `cloudinary.videoPlayer(...)` / `cloudinary.player(...)` calls
+keep working as-is, and existing CDN `<script>` tags pointing at
+`dist/cld-video-player.min.js` will load the same full player.
+
+- Default UMD bundle is now `dist/player.min.js` (~4 KB lazy shell); the full
+  ~140 KB player loads on demand. `dist/cld-video-player.min.js` is kept as
+  an alias of `dist/player-full.min.js`, so existing CDN `<script>` tags keep
+  working unchanged.
+- `cloudinary.videoPlayer(...)` still returns synchronously, but the return
+  value is now a thenable proxy that buffers calls until the real player
+  loads. To keep the v3 sync contract (immediate `VideoPlayer` instance,
+  sync `ready`), opt into the full bundle: `import 'cloudinary-video-player/full'`
+  on NPM, or `dist/player-full.min.js` (or the existing
+  `dist/cld-video-player.min.js` alias) on the CDN.
+
+---
+
 ## [3.14.1](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.0...v3.14.1) (2026-04-26)
 
 
