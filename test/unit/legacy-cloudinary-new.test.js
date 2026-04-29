@@ -2,8 +2,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 vi.mock('~/assets/styles/main.scss', () => ({}));
 
-// Default export is the object returned by setupCloudinaryGlobal({ ... }) in src/index.umd.js
-import cloudinary from '../../src/index.umd.js';
+// Tests the full (sync) UMD entry that preserves the legacy Cloudinary.new() API.
+import cloudinary from '../../src/index.full.js';
 
 describe('Cloudinary.new() legacy instance config', () => {
   let warnSpy;

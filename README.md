@@ -16,17 +16,7 @@ This README includes basic information for installation and getting started. Vie
 
    ```js
    import cloudinary from 'cloudinary-video-player';
-   import 'cloudinary-video-player/cld-video-player.min.css';
-   // import required plugins like that:
-   // import 'cloudinary-video-player/chapters';
-   // import 'cloudinary-video-player/playlist';
-   ```
-
-* Note - import `/all` to get all available plugins in a single import:
-
-   ```js
-   import cloudinary from 'cloudinary-video-player/all';
-   import 'cloudinary-video-player/cld-video-player.min.css';
+   import 'cloudinary-video-player/player.min.css';
    ```
 
 ### CDN
@@ -34,9 +24,9 @@ This README includes basic information for installation and getting started. Vie
 Cloudinary Video Player can also be included directly from the [jsDelivr CDN](https://www.jsdelivr.com/), optional plugins will be lazy-loaded on demand:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.css" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/cld-video-player.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.js" type="text/javascript"></script>
 ```
 
 

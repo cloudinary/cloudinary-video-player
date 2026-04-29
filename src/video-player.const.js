@@ -66,21 +66,7 @@ export const PLAYER_PARAMS = SOURCE_PARAMS.concat([
 ]);
 
 // We support both camelCase and snake_case for cloudinary SDK params
-export const CLOUDINARY_CONFIG_PARAM = [
-  'api_secret',
-  'auth_token',
-  'cdn_subdomain',
-  'cloud_name',
-  'cname',
-  'private_cdn',
-  'secure',
-  'secure_cdn_subdomain',
-  'secure_distribution',
-  'shorten',
-  'sign_url',
-  'url_suffix',
-  'use_root_path'
-];
+export { CLOUDINARY_CONFIG_PARAM } from './utils/cloudinary-config-param';
 
 export const FLUID_CLASS_NAME = 'cld-fluid';
 

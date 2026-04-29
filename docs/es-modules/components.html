@@ -57,8 +57,9 @@
     </div>
 
     <script type="module">
-      import { videoPlayer, videojs } from 'cloudinary-video-player';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { videoPlayer } from 'cloudinary-video-player';
+      import videojs from 'video.js';
+      import 'cloudinary-video-player/player.min.css';
 
       // Get the ClickableComponent base class from Video.js
       const ClickableComponent = videojs.getComponent('ClickableComponent');

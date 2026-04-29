@@ -9,7 +9,7 @@ import {
   SHOPPABLE_PANEL_HIDDEN_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,
   SHOPPABLE_PRODUCTS_OVERLAY_CLASS
-} from '../shoppable-widget.const';
+} from '../shoppable.const';
 import { PLAYER_EVENT } from '../../../utils/consts';
 
 const Component = videojs.getComponent('Component');

@@ -81,5 +81,27 @@ describe('lazy-bootstrap', () => {
       expect(overlay.style.getPropertyValue('--color-accent').trim()).toBe('#aabbcc');
       expect(overlay.style.getPropertyValue('--color-text').trim()).toBe('#ffeedd');
     });
+
+    it('adds cld-fluid to lazy overlay when fluid is true (matches .cld-video-player.cld-fluid SCSS)', async () => {
+      await lazyBootstrap('lazy-vid', {
+        lazy: true,
+        cloudName: 'demo',
+        publicId: 'dog',
+        fluid: true
+      });
+      const overlay = document.querySelector('.cld-lazy-player');
+      expect(overlay.classList.contains('cld-fluid')).toBe(true);
+    });
+
+    it('does not add cld-fluid to lazy overlay when fluid is false', async () => {
+      await lazyBootstrap('lazy-vid', {
+        lazy: true,
+        cloudName: 'demo',
+        publicId: 'dog',
+        fluid: false
+      });
+      const overlay = document.querySelector('.cld-lazy-player');
+      expect(overlay.classList.contains('cld-fluid')).toBe(false);
+    });
   });
 });
