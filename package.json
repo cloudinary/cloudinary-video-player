@@ -1,6 +1,6 @@
 {
   "name": "cloudinary-video-player",
-  "version": "3.14.2-edge.0",
+  "version": "3.14.2-edge.1",
   "description": "Cloudinary Video Player",
   "author": "Cloudinary",
   "license": "MIT",
@@ -33,12 +33,9 @@
       "import": "./lib/all.js",
       "require": "./dist/player-full.min.js"
     },
-
     "./player.min.css": "./lib/player.min.css",
     "./cld-video-player.min.css": "./lib/cld-video-player.min.css",
-
     "./*": "./lib/*",
-
     "./light/*": "./lib/*",
     "./videoPlayer": {
       "import": "./lib/index.js",
