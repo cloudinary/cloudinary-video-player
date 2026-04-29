@@ -66,7 +66,7 @@
 
     <script type="module">
       import { videoPlayer } from 'cloudinary-video-player';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import 'cloudinary-video-player/player.min.css';
 
       const uap = new UAParser(navigator.userAgent);
 
@@ -93,17 +93,17 @@
         sourceTypes: ['webm/vp9']
       });
 
-      player.videojs.on('playing', function () {
+      player.on('playing', function () {
         document.getElementById('info').innerHTML =
           uap.getBrowser().name + ' is playing ' + player.videojs.currentSrc();
       });
 
-      playerAv1.videojs.on('playing', function () {
+      playerAv1.on('playing', function () {
         document.getElementById('info-mp4-av1').innerHTML =
           uap.getBrowser().name + ' is playing ' + playerAv1.videojs.currentSrc();
       });
 
-      playerVp9.videojs.on('playing', function () {
+      playerVp9.on('playing', function () {
         document.getElementById('info-vp9').innerHTML =
           uap.getBrowser().name + ' is playing ' + playerVp9.videojs.currentSrc();
       });

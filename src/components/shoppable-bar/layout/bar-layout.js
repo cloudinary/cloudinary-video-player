@@ -9,7 +9,7 @@ import {
   CLD_SPBL_INNER_BAR,
   SHOPPABLE_PANEL_HIDDEN_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS
-} from '../shoppable-widget.const';
+} from '../shoppable.const';
 import { PLAYER_EVENT } from '../../../utils/consts';
 
 class ShoppableBarLayout extends Component {

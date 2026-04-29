@@ -95,9 +95,10 @@ export const lazyBootstrap = async (elem, options, ready) => {
     ? options.poster
     : (await import(/* webpackChunkName: "cld-poster-url" */ './poster-url')).getPosterUrl(options);
   const loadOnScroll = shouldLoadOnScroll(options.lazy);
+  const fluidEnabled = options?.fluid !== false;
 
   const { hadControls } = preparePlayerPlaceholder(videoElement, posterUrl, {
-    fluid: options?.fluid !== false,
+    fluid: fluidEnabled,
     width: options?.width,
     height: options?.height,
     sourceOptions: options?.sourceOptions,
@@ -108,6 +109,10 @@ export const lazyBootstrap = async (elem, options, ready) => {
 
   const overlayRoot = document.createElement('div');
   overlayRoot.classList.add('cld-video-player', 'video-js', LAZY_PLAYER_CLASS);
+  // Fluid rules are `.cld-video-player.cld-fluid`; placeholder `<video>` alone cannot satisfy that selector.
+  if (fluidEnabled) {
+    overlayRoot.classList.add(FLUID_CLASS);
+  }
   overlayRoot.classList.add(light ? 'cld-video-player-skin-light' : 'cld-video-player-skin-dark');
 
   const colors = options?.colors;

@@ -1,14 +1,14 @@
 import videojs from 'video.js';
 import ShoppableBarLayout from './layout/bar-layout';
 import ShoppablePostWidget from './shoppable-post-widget';
-import './shoppable-widget.scss';
+import './shoppable.scss';
 import {
   CLD_SPBL_INNER_BAR,
   CLD_SPBL_PANEL_CLASS,
   CLD_SPBL_TOGGLE_CLASS,
   SHOPPABLE_PANEL_VISIBLE_CLASS,
   SHOPPABLE_WIDGET_OPTIONS_DEFAULTS
-} from './shoppable-widget.const';
+} from './shoppable.const';
 import { PLAYER_EVENT } from '../../utils/consts';
 
 

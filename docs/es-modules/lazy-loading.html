@@ -20,8 +20,9 @@
       <h3 class="mb-4">Bundler Test: Lazy Loading</h3>
 
       <p>
-        Only the tiny lazy stub loads on page load. The full player core loads on demand
-        when you click the button below. Watch the <strong>Network</strong> tab.
+        The default entry is lightweight - only a tiny stub loads on page load.
+        The full player core loads on demand when you click the button below.
+        Watch the <strong>Network</strong> tab.
       </p>
 
       <h4 class="mt-3">Results:</h4>
@@ -47,8 +48,8 @@
     </div>
 
     <script type="module">
-      import { player } from 'cloudinary-video-player/lazy';
-      import 'cloudinary-video-player/cld-video-player.min.css';
+      import { player } from 'cloudinary-video-player';
+      import 'cloudinary-video-player/player.min.css';
 
       const log = (msg) => {
         document.getElementById('results').textContent += msg + '\n';

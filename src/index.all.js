@@ -13,10 +13,10 @@ import './plugins/chapters/chapters.js';
 import './plugins/colors/colors.js';
 import './plugins/ima/ima.js';
 import './plugins/playlist/playlist.js';
-import './plugins/interaction-areas/interaction-areas.service.js';
+import './plugins/interaction-areas/interaction-areas.js';
 import './plugins/visual-search/visual-search.js';
 import './plugins/share/share.js';
-import './components/shoppable-bar/shoppable-widget.js';
+import './components/shoppable-bar/shoppable.js';
 import './components/recommendations-overlay/recommendations-overlay.js';
 
 export * from './index.js';
