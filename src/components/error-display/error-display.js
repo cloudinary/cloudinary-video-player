@@ -29,17 +29,6 @@ class CldErrorDisplay extends ErrorDisplay {
         e.preventDefault();
         this.player().trigger(PLAYER_EVENT.REFRESH);
       };
-    } else {
-      const retryButton = videojs.dom.createEl('button', {
-        className: 'cld-error-refresh',
-        type: 'button'
-      }, {}, this.localize('Try Again'));
-
-      retryButton.onclick = () => {
-        this.player().trigger(PLAYER_EVENT.REFRESH);
-      };
-
-      wrapper.appendChild(retryButton);
     }
     return wrapper;
   }
