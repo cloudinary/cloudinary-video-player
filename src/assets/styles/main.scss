@@ -198,29 +198,64 @@ $icon-font-path: '../icon-font' !default;
     visibility: visible;
   }
 
-  &.vjs-error .vjs-error-display {
-    background: #90a0b3;
-
-    &:before {
-      display: none;
+  &.vjs-error {
+    .vjs-poster {
+      filter: blur(3px) saturate(85%) brightness(85%);
     }
 
     .vjs-modal-dialog-content {
-      font-size: 20px;
-      font-weight: 500;
-      text-align: left;
-      padding: 0 10%;
+      padding: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cld-error-display-content {
+      max-width: 90%;
+      padding: 2em 2.5em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+      background: color-mix(in srgb, var(--color-base) 50%, transparent);
+      border-radius: 0.4em;
+    }
+
+    .cld-error-header {
       display: flex;
       align-items: center;
+      gap: 0.85em;
+      font-size: 1.1em;
+      font-weight: 600;
+      line-height: 1.2;
 
       &:before {
         content: '';
-        width: 34px;
-        height: 34px;
-        margin-right: 10px;
-        background: url('../icons/info-circle.svg');
-        transform: translateY(-1px);
+        width: 1.45em;
+        height: 1.45em;
         flex-shrink: 0;
+        background: currentColor;
+        mask: url('../icons/info-circle.svg') center / contain no-repeat;
+        -webkit-mask: url('../icons/info-circle.svg') center / contain no-repeat;
+      }
+    }
+
+    .cld-error-message {
+      font-size: 0.7em;
+    }
+
+    .cld-error-refresh {
+      color: var(--color-accent);
+      background: transparent;
+      font: inherit;
+      font-size: 0.7em;
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
       }
     }
   }
