@@ -1,3 +1,13 @@
+## [4.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.0...v4.0.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* improve error message display ([#1042](https://github.com/cloudinary/cloudinary-video-player/issues/1042)) ([da1551f](https://github.com/cloudinary/cloudinary-video-player/commit/da1551fbfd35c7c484a153249237e56220d57b4f))
+* track lazy bundle analytics ([#1045](https://github.com/cloudinary/cloudinary-video-player/issues/1045)) ([d71ec00](https://github.com/cloudinary/cloudinary-video-player/commit/d71ec00566dc64e752776bcaf7c098031d2d0584))
+
+
+
 # [4.0.0](https://github.com/cloudinary/cloudinary-video-player/compare/v3.14.1...v4.0.0) (2026-04-29)
 
 
