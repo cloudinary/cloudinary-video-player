@@ -13,7 +13,7 @@ export const DEFAULT_VIDEO_PARAMS = {
   chapters: {}
 };
 
-const COMMON_VIDEO_EXTENSIONS = [
+export const COMMON_VIDEO_EXTENSIONS = [
   '3g2',
   '3gp',
   'avi',

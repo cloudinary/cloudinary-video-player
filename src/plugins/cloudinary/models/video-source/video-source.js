@@ -7,6 +7,7 @@ import {
   ADAPTIVE_SOURCETYPES,
   DEFAULT_POSTER_PARAMS,
   DEFAULT_VIDEO_PARAMS,
+  COMMON_VIDEO_EXTENSIONS,
   VIDEO_SUFFIX_REMOVAL_PATTERN
 } from './video-source.const';
 import {
@@ -167,8 +168,7 @@ class VideoSource extends BaseSource {
 
   generateSources() {
     if (this.isRawUrl) {
-      const type = this.sourceTypes()[0] === 'auto' ? null : this.sourceTypes()[0];
-      return [this.generateRawSource(this.publicId(), type)];
+      return [this.generateRawSource(this.publicId(), this.sourceTypes()[0])];
     }
 
     const srcs = this.sourceTypes().map(sourceType => {
@@ -231,17 +231,21 @@ class VideoSource extends BaseSource {
   }
 
   generateRawSource(url, type) {
-    type = type || url.split('.').pop();
+    // If type is not provided (default is 'auto'), determine it from the URL extension
+    if (!type || type === 'auto') {
+      const ext = url.split('.').pop().split(/[?#]/)[0].toLowerCase();
+      type = COMMON_VIDEO_EXTENSIONS.includes(ext) ? ext : 'auto';
+    }
 
     const isAdaptive = ADAPTIVE_SOURCETYPES.includes(type);
 
-    if (CONTAINER_MIME_TYPES[type]) {
-      type = CONTAINER_MIME_TYPES[type];
-    } else {
-      type = type ? `video/${type}` : null;
-    }
-
-    return { type, src: url, cldSrc: this, isAdaptive, withCredentials: this.withCredentials };
+    return { 
+      type: CONTAINER_MIME_TYPES[type] || `video/${type}`, 
+      src: url, 
+      cldSrc: this, 
+      isAdaptive, 
+      withCredentials: this.withCredentials 
+    };
   }
 
   info(value) {
