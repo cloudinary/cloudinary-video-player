@@ -1,3 +1,12 @@
+## [4.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.1...v4.0.2) (2026-05-14)
+
+
+### Bug Fixes
+
+* handle f_auto extensionless raw-URLs ([#1048](https://github.com/cloudinary/cloudinary-video-player/issues/1048)) ([9e6485a](https://github.com/cloudinary/cloudinary-video-player/commit/9e6485a21cf246ae5dd8d76327204c254cd0e97f))
+
+
+
 ## [4.0.1](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.0...v4.0.1) (2026-05-12)
 
 
