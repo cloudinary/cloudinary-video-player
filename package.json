@@ -106,12 +106,8 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^28.0.1",
-    "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-replace": "^6.0.0",
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.1",
+    "@actions/github": "^9.1.1",
     "@babel/core": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
     "@babel/plugin-transform-runtime": "^7.28.5",
@@ -119,6 +115,10 @@
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
     "@playwright/test": "1.57.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.1",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-replace": "^6.0.0",
     "@types/node": "22.10.1",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
@@ -130,7 +130,6 @@
     "conventional-changelog-angular": "^8.1.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-recommended-bump": "^11.2.0",
-    "rollup": "^4.28.1",
     "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^8.0.0",
@@ -150,6 +149,7 @@
     "mini-css-extract-plugin": "^2.9.4",
     "puppeteer": "^22.15.0",
     "puppeteer-request-spy": "^1.4.0",
+    "rollup": "^4.28.1",
     "sass": "^1.94.2",
     "sass-loader": "^16.0.6",
     "semver": "^7.7.3",
@@ -165,15 +165,7 @@
     "webpack-merge": "^6.0.1"
   },
   "overrides": {
-    "min-document": ">=2.19.2",
-    "@xmldom/xmldom": "0.8.13",
     "basic-ftp": "5.2.2",
-    "follow-redirects": "1.16.0",
-    "handlebars": "4.7.9",
-    "micromatch": {
-      "picomatch": "2.3.2"
-    },
-    "node-forge": "1.4.0",
-    "serialize-javascript": "7.0.5"
+    "postcss": "8.5.14"
   }
 }
