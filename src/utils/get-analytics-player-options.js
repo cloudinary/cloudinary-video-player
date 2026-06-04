@@ -29,8 +29,8 @@ const getSourceOptions = (sourceOptions = {}) => ({
     return undefined;
   })(),
   visualSearch: sourceOptions.visualSearch,
-  download: hasConfig(sourceOptions.download),
-  hdr: hasConfig(sourceOptions.hdr),
+  download: sourceOptions.download === true ? true : undefined,
+  hdr: sourceOptions.hdr === true ? true : undefined,
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,
   ...(hasConfig(sourceOptions.adaptiveStreaming) ? {
     abrStrategy: sourceOptions?.adaptiveStreaming?.strategy === defaults.adaptiveStreaming.strategy ? undefined : sourceOptions?.adaptiveStreaming?.strategy,
@@ -96,7 +96,7 @@ const getPlaylistOptions = (playlistWidgetOptions = {}) => ({
 
 export const getAnalyticsFromPlayerOptions = (playerOptions) => filterDefaultsAndNulls({
   aiHighlightsGraph: playerOptions.aiHighlightsGraph,
-  analytics: hasConfig(playerOptions.analytics),
+  analytics: playerOptions.analytics === true ? true : undefined,
   autoplay: playerOptions.autoplay,
   autoplayMode: playerOptions.autoplayMode,
   bigPlayButton: playerOptions.bigPlayButton,
