@@ -1,3 +1,12 @@
+## [4.0.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.2...v4.0.3) (2026-06-07)
+
+
+### Bug Fixes
+
+* report hdr source option in internal analytics ([#1053](https://github.com/cloudinary/cloudinary-video-player/issues/1053)) ([4a5b5b1](https://github.com/cloudinary/cloudinary-video-player/commit/4a5b5b1f7274bc079ad85f9c754d96c6645231f0))
+
+
+
 ## [4.0.2](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.1...v4.0.2) (2026-05-14)
 
 
