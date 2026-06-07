@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.nvmrc'
+          node-version-file: 22
           registry-url: 'https://registry.npmjs.org'
 
       - name: NPM Install
@@ -38,18 +38,11 @@ jobs:
         run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
 
       - name: Install Playwright Browsers
-        timeout-minutes: 15
+        timeout-minutes: 10
         env:
           DEBUG: pw:install
           PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT: 120000
-        run: |
-          set -euxo pipefail
-          npx playwright --version
-          npx playwright install --list || true
-          npx playwright install --with-deps chrome
-          npx playwright install --list
-          google-chrome --version || true
-          df -h
+        run: npx playwright install --with-deps chrome
 
       - name: E2E tests
         run: npm run test:e2e
