@@ -38,7 +38,7 @@ jobs:
         run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chrome
 
       - name: E2E tests
         run: npm run test:e2e
