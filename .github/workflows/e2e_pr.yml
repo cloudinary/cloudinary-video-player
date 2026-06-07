@@ -28,7 +28,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: NPM Install
-        run: npm install
+        run: npm ci
 
       - name: Extract PR Number
         id: extract_pr_number
@@ -38,7 +38,18 @@ jobs:
         run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chrome
+        timeout-minutes: 15
+        env:
+          DEBUG: pw:install
+          PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT: 120000
+        run: |
+          set -euxo pipefail
+          npx playwright --version
+          npx playwright install --list || true
+          npx playwright install --with-deps chrome
+          npx playwright install --list
+          google-chrome --version || true
+          df -h
 
       - name: E2E tests
         run: npm run test:e2e
