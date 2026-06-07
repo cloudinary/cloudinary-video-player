@@ -11,6 +11,7 @@ jobs:
   e2e:
     name: install
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Set timestamp
         id: timestamp
@@ -24,12 +25,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24.15.0
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
 
       - name: NPM Install
         run: npm install
-        
+
       - name: Extract PR Number
         id: extract_pr_number
         run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
@@ -38,10 +39,8 @@ jobs:
         run: echo "PREVIEW_URL=https://deploy-preview-${{ env.PR_NUMBER }}--cld-vp-esm-pages.netlify.app" >> $GITHUB_ENV
 
       - name: Install Playwright Browsers
-        timeout-minutes: 10
         env:
           DEBUG: pw:install
-          PLAYWRIGHT_DOWNLOAD_CONNECTION_TIMEOUT: 120000
         run: npx playwright install --with-deps chrome
 
       - name: E2E tests

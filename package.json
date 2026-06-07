@@ -114,7 +114,7 @@
     "@babel/preset-env": "^7.28.5",
     "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.6.0",
-    "@playwright/test": "1.57.0",
+    "@playwright/test": "1.60.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.1",
     "@rollup/plugin-node-resolve": "^16.0.0",
