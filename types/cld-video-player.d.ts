@@ -116,17 +116,19 @@ export class VideoPlayer {
 
   // Event methods — installed at runtime by the player (see setupEventMethods).
   // Known extended events are typed with their payload; the trailing string
-  // overload covers every other (video.js / cloudinary) event.
-  on(event: 'percentsplayed', handler: VideoPlayerEventHandler<PercentsPlayedEvent>): VideoPlayer;
-  on(event: 'timeplayed', handler: VideoPlayerEventHandler<TimePlayedEvent>): VideoPlayer;
-  on(event: 'seek', handler: VideoPlayerEventHandler<SeekEvent>): VideoPlayer;
-  on(event: string, handler: VideoPlayerEventHandler): VideoPlayer;
-  one(event: 'percentsplayed', handler: VideoPlayerEventHandler<PercentsPlayedEvent>): VideoPlayer;
-  one(event: 'timeplayed', handler: VideoPlayerEventHandler<TimePlayedEvent>): VideoPlayer;
-  one(event: 'seek', handler: VideoPlayerEventHandler<SeekEvent>): VideoPlayer;
-  one(event: string, handler: VideoPlayerEventHandler): VideoPlayer;
-  off(event: string, handler?: VideoPlayerEventHandler): VideoPlayer;
-  trigger(event: string | { type: string; [key: string]: unknown }): VideoPlayer;
+  // overload covers every other (video.js / cloudinary) event. on/one/off
+  // return the underlying video.js player (what videojsInstance.on returns);
+  // trigger returns nothing.
+  on(event: 'percentsplayed', handler: VideoPlayerEventHandler<PercentsPlayedEvent>): VideoJsPlayer;
+  on(event: 'timeplayed', handler: VideoPlayerEventHandler<TimePlayedEvent>): VideoJsPlayer;
+  on(event: 'seek', handler: VideoPlayerEventHandler<SeekEvent>): VideoJsPlayer;
+  on(event: string, handler: VideoPlayerEventHandler): VideoJsPlayer;
+  one(event: 'percentsplayed', handler: VideoPlayerEventHandler<PercentsPlayedEvent>): VideoJsPlayer;
+  one(event: 'timeplayed', handler: VideoPlayerEventHandler<TimePlayedEvent>): VideoJsPlayer;
+  one(event: 'seek', handler: VideoPlayerEventHandler<SeekEvent>): VideoJsPlayer;
+  one(event: string, handler: VideoPlayerEventHandler): VideoJsPlayer;
+  off(event: string, handler?: VideoPlayerEventHandler): VideoJsPlayer;
+  trigger(event: string | { type: string; [key: string]: unknown }): void;
 
   /** Underlying video.js player instance. */
   videojs: VideoJsPlayer;
