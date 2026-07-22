@@ -27,3 +27,28 @@ async () => {
     profile: 'default'
   });
 };
+
+// Event methods and the video.js handle.
+player.on('ready', () => {});
+player.on('play', (event) => {
+  const emitter: VideoPlayer = event.Player;
+  emitter.pause();
+});
+player.on('percentsplayed', (event) => {
+  const percent: number = event.eventData.percent;
+  void percent;
+});
+player.on('timeplayed', (event) => {
+  const time: number = event.eventData.time;
+  void time;
+});
+player.one('seek', (event) => {
+  const from: number = event.eventData.seekStart;
+  const to: number = event.eventData.seekEnd;
+  void from;
+  void to;
+});
+player.off('play');
+
+const bigPlayButton = player.videojs.el().querySelector('.vjs-big-play-button');
+void bigPlayButton;
