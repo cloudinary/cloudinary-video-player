@@ -1,12 +1,51 @@
 # cloudinary-video-player
 
-Cloudinary Video Player is a JavaScript-based HTML video player bundled with many valuable customization and integration capabilities, and is monetization and analytics-ready. The player is fully responsive for use in any device or screen size, and is integrated with Cloudinary's video delivery and manipulation solution.
+Cloudinary Video Player is a JavaScript-based HTML5 video player with HLS/DASH adaptive streaming, chapters, playlists, live streaming, timeline preview, AI highlights graph, multi-language subtitles, Picture-in-Picture, video analytics, and the full Cloudinary Transformations SDK. Fully responsive, 4 kB default bundle.
 
-This README includes basic information for installation and getting started. View the [documentation](https://cloudinary.com/documentation/cloudinary_video_player) for comprehensive guidance on integration and all the available features.
+This README includes basic information for installation and getting started. View the [documentation](https://cloudinary.com/documentation/cloudinary_video_player) for comprehensive guidance on integration and all available features.
+
+## Key Features
+
+- **HLS / DASH adaptive streaming** with ABR quality strategies and auto breakpoints (DPR-aware)
+- **Chapters and playlists** with VTT file support and playlist-by-tag
+- **Live streaming and VOD** with live-to-VOD archiving
+- **Auto format** selection based on browser and device capabilities
+- **Auto crop** including AI smart crop via Cloudinary transformations
+- **Auto HDR** support
+- **Timeline preview** on scrub
+- **AI highlights graph** above the seek bar
+- **Multi-language subtitles** with pace control and word highlighting
+- **Picture-in-Picture (PiP)** support
+- **Video analytics** via Cloudinary Media Analytics
+- **Saved settings and profiles**
+- **All Cloudinary Transformations** available via SDK
+- **4 kB** default bundle (light entry point, advanced modules loaded on demand)
 
 ## Installation
 
+### Standard vs. Light bundle
+
+| Bundle          | Import                         | Includes                                        |
+| --------------- | ------------------------------ | ----------------------------------------------- |
+| Light (default) | `cloudinary-video-player`      | Core player, 4 kB, advanced modules lazy-loaded |
+| Standard (full) | `cloudinary-video-player/full` | All modules included synchronously              |
+
+Import only what you need:
+
+```js
+import 'cloudinary-video-player/adaptive-streaming'; // HLS and DASH
+import 'cloudinary-video-player/chapters';
+import 'cloudinary-video-player/playlist';
+```
+
+Or load everything at once:
+
+```js
+import cloudinary from 'cloudinary-video-player/all';
+```
+
 ### NPM
+
 1. Install using:
 
    ```shell
@@ -33,6 +72,7 @@ Cloudinary Video Player can also be included directly from the [jsDelivr CDN](ht
 ## Getting started
 
 Create a video tag containing `cld-video-player` class and a supported skin class:
+
 ```html
 <video
   id="player"
@@ -45,10 +85,68 @@ Create a video tag containing `cld-video-player` class and a supported skin clas
 
 Instantiate a new cloudinary Video Player:
 ```javascript
-cloudinary.videoPlayer('player', {
+cloudinary.player('player', {
    cloudName: 'demo',
    publicId: 'cld-sample-video'
 });
+```
+
+### Adaptive Bitrate Streaming (HLS / DASH)
+
+```js
+import 'cloudinary-video-player/adaptive-streaming';
+
+const player = await cloudinary.player('player', { cloudName: 'demo' });
+player.source('my-video', {
+  sourceTypes: ['hls'],
+  transformation: { streaming_profile: 'hd' }
+});
+```
+
+For automatic profile selection (no pre-transcoding required):
+
+```js
+player.source('my-video', { sourceTypes: ['hls'] });
+```
+
+### Live Streaming and VOD
+
+```js
+player.source({
+  publicId: 'my-live-stream-id',
+  type: 'live',
+  sourceTypes: ['hls']
+});
+```
+
+Cloudinary automatically archives live streams as VOD assets once the broadcast ends.
+
+### Chapters
+
+```js
+import 'cloudinary-video-player/chapters';
+
+player.source('my-video', {
+  chapters: {
+    0: 'Introduction',
+    30: 'Chapter 2',
+    90: 'Conclusion'
+  }
+});
+```
+
+Or use an auto-generated or uploaded VTT file:
+
+```js
+player.source('my-video', { chapters: true });
+```
+
+### Playlists
+
+```js
+import 'cloudinary-video-player/playlist';
+
+player.playlistByTag('highlights', { autoAdvance: true });
 ```
 
 ## Documentation
