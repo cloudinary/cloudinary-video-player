@@ -1,3 +1,12 @@
+# [4.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.3...v4.1.0) (2026-07-22)
+
+
+### Features
+
+* **types:** add event, videojs handle, and default export typings ([#1066](https://github.com/cloudinary/cloudinary-video-player/issues/1066)) ([c46375e](https://github.com/cloudinary/cloudinary-video-player/commit/c46375e6f92cc3882813e664aa63d0e1158eb80d))
+
+
+
 ## [4.0.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.2...v4.0.3) (2026-06-07)
 
 
