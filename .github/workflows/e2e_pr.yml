@@ -58,7 +58,7 @@ jobs:
 
       - name: Pushes to reports repository
         if: always()
-        uses: cpina/github-action-push-to-another-repository@main
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # main as of 2025-09-25
         env:
           API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
         with:
