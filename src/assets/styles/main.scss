@@ -384,9 +384,22 @@ $icon-font-path: '../icon-font' !default;
     }
   }
 
-  .vjs-playback-rate-value {
-    font-size: 1.3em;
-    line-height: 2.3em;
+  .vjs-playback-rate {
+    // Fit three-digit rates (e.g. 1.75) at the value's 1.3em font-size.
+    width: 3em;
+
+    .vjs-playback-rate-value {
+      font-size: 1.3em;
+      line-height: 2.3em;
+    }
+
+    // video.js caps this menu at 4em, which truncates rates like 1.75 once the
+    // item padding and the selected-item gutter are subtracted. The content is
+    // absolutely positioned, so it - not the menu - has to grow.
+    .vjs-menu .vjs-menu-content {
+      width: max-content;
+      min-width: 100%;
+    }
   }
 
   .vjs-subs-caps-button {
