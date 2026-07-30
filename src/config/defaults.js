@@ -15,7 +15,7 @@ export default {
   aiHighlightsGraph: false,
   visualSearch: false,
   download: false,
-  preload: PRELOAD.AUTO,
+  preload: PRELOAD.METADATA,
   textTrackSettings: false,
   loop: false,
   muted: false,
