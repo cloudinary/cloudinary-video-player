@@ -110,7 +110,7 @@ export const splitOptions = (flatOptions) => {
     delete playerOptions.cloudinaryConfig;
   }
   
-  // Source-level config (visualSearch, chapters, etc.)
+  // Source-level config (chapters, textTracks, etc.)
   playerOptions.sourceOptions = Utils.sliceAndUnsetProperties(playerOptions, ...SOURCE_PARAMS);
   
   // Allow explicitly passing options to videojs using the `videojs` namespace, in order

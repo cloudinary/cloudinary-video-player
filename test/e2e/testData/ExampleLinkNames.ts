@@ -42,7 +42,6 @@ export enum ExampleLinkName {
     AllBuild = '/all build',
     ShareAndDownload = 'Share & Download',
     SourceSwitcher = 'Source switcher',
-    VisualSearch = 'Visual Search',
     VideoDetails = 'Video Details',
     EntryPoints = 'Entry Points (all exports)',
     LazyPlayer = 'Lazy player',

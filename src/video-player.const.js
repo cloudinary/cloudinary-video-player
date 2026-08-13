@@ -29,7 +29,6 @@ export const SOURCE_PARAMS = [
   'title',
   'transformation',
   'type',
-  'visualSearch',
   'withCredentials',
   'videoSources'
 ];
