@@ -30,7 +30,6 @@ import { SubtitlesAndCaptionsPage } from './subtitlesAndCaptionsPage';
 import { VideoTransformationsPage } from './videoTransformationsPage';
 import { VastAndVpaidPage } from './vastAndVpaidPage';
 import { Vr360VideosPage } from './vr360VideosPage';
-import { VisualSearchPage } from './visualSearchPage';
 import { SharePluginPage } from './sharePluginPage';
 
 /**
@@ -206,13 +205,6 @@ export class PageManager {
 
     public get vr360VideosPage(): Vr360VideosPage {
         return this.getPage(Vr360VideosPage);
-    }
-
-    /**
-     * Returns visual search page object
-     */
-    public get visualSearchPage(): VisualSearchPage {
-        return this.getPage(VisualSearchPage);
     }
 }
 export default PageManager;

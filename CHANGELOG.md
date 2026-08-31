@@ -1,3 +1,18 @@
+# [4.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.3...v4.1.0) (2026-07-30)
+
+
+### Bug Fixes
+
+* **ui:** show full playback rate values in the rates menu ([#1074](https://github.com/cloudinary/cloudinary-video-player/issues/1074)) ([521ab11](https://github.com/cloudinary/cloudinary-video-player/commit/521ab112ad55563aaca43a1b558bc3fd65615659))
+
+
+### Features
+
+* **config:** default preload to metadata ([#1076](https://github.com/cloudinary/cloudinary-video-player/issues/1076)) ([344f535](https://github.com/cloudinary/cloudinary-video-player/commit/344f535a32e6901663d2b3482d8c34ec1ee67b1d))
+* **types:** add event, videojs handle, and default export typings ([#1066](https://github.com/cloudinary/cloudinary-video-player/issues/1066)) ([c46375e](https://github.com/cloudinary/cloudinary-video-player/commit/c46375e6f92cc3882813e664aa63d0e1158eb80d))
+
+
+
 ## [4.0.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.2...v4.0.3) (2026-06-07)
 
 
