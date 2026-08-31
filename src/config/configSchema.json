@@ -342,10 +342,6 @@
       ],
       "default": false
     },
-    "visualSearch": {
-      "type": "boolean",
-      "default": false
-    },
     "interactionAreas": {
       "type": "object",
       "properties": {

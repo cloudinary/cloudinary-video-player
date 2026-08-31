@@ -13,7 +13,6 @@ export default {
   pictureInPictureToggle: false,
   seekThumbnails: true,
   aiHighlightsGraph: false,
-  visualSearch: false,
   download: false,
   preload: PRELOAD.METADATA,
   textTrackSettings: false,

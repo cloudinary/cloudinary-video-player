@@ -28,7 +28,6 @@ const getSourceOptions = (sourceOptions = {}) => ({
     if (sourceOptions.chapters) return 'inline-chapters';
     return undefined;
   })(),
-  visualSearch: sourceOptions.visualSearch,
   download: sourceOptions.download === true ? true : undefined,
   hdr: sourceOptions.hdr === true ? true : undefined,
   recommendations: sourceOptions.recommendations && sourceOptions.recommendations.length,

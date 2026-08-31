@@ -18,7 +18,6 @@ import imaPlugin from './ima';
 import interactionAreas from './interaction-areas';
 import playlist from './playlist';
 import shoppable from './shoppable-plugin';
-import visualSearch from './visual-search';
 import share from './share';
 import adaptiveStreaming from './adaptive-streaming';
 import textTracksManager from './text-tracks-manager';
@@ -42,7 +41,6 @@ const plugins = {
   playlist,
   shoppable,
   interactionAreas,
-  visualSearch,
   share,
   adaptiveStreaming,
   textTracksManager,
