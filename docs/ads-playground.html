@@ -625,7 +625,8 @@
       // ---- snippet -----------------------------------------------------------------------
       function renderSnippet(s) {
         var lines = [];
-        lines.push("const player = await cloudinary.player('player', {");
+        var needsPlayerRef = s.mode === 'playlist';
+        lines.push((needsPlayerRef ? 'const player = ' : '') + "await cloudinary.player('player', {");
         lines.push("  cloudName: '" + s.cloudName + "',");
         if (s.mode !== 'playlist') {
           lines.push("  publicId: '" + s.publicId.replace(/'/g, "\\'") + "',");
