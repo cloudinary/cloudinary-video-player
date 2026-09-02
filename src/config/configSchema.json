@@ -407,33 +407,54 @@
       "properties": {
         "options": {
           "type": "object",
+          "description": "Visual customization of captions and subtitles.",
           "properties": {
             "theme": {
               "type": "string",
+              "description": "A set of predefined styles to apply to the text tracks. Built-in themes: default, videojs-default, yellow-outlined, player-colors (reflects the player's color scheme), 3d. Any other value adds a cld-styled-text-tracks-theme-<value> class you can style with your own CSS.",
+              "examples": ["player-colors", "yellow-outlined", "3d"],
               "default": "default"
             },
             "fontFace": {
               "type": "string",
+              "description": "The font face to use for the text tracks. Supports any Google font.",
+              "examples": ["Kanit", "Palatino"],
               "default": "Fira Sans"
             },
             "fontSize": {
               "type": "string",
+              "description": "The font size to use for the text tracks. Use relative units only, such as % or em.",
+              "examples": ["2rem", "90%"],
               "default": "medium"
             },
             "gravity": {
               "type": "string",
+              "description": "The position of the text tracks on the video or in the containing box.",
+              "enum": ["top", "right", "bottom", "left", "center", "top-right", "bottom-right", "bottom-left", "top-left"],
               "default": "bottom"
             },
             "box": {
               "type": "object",
+              "description": "The location and size of the containing box that shows the text tracks. Only x, y, width and height are used; values are CSS lengths.",
+              "properties": {
+                "x": { "type": "string" },
+                "y": { "type": "string" },
+                "width": { "type": "string" },
+                "height": { "type": "string" }
+              },
+              "examples": [{ "x": "0%", "y": "0%", "width": "100%", "height": "100%" }],
               "default": {}
             },
             "style": {
               "type": "object",
+              "description": "Custom CSS styling to apply to the text, as CSS property/value pairs.",
+              "examples": [{ "color": "black", "opacity": "0.6" }],
               "default": {}
             },
             "wordHighlightStyle": {
               "type": "object",
+              "description": "Custom CSS styling to apply to the highlighted word when using word highlighting for paced subtitles, as CSS property/value pairs.",
+              "examples": [{ "color": "royalblue" }],
               "default": {}
             }
           },
