@@ -625,15 +625,16 @@
       // ---- snippet -----------------------------------------------------------------------
       function renderSnippet(s) {
         var lines = [];
-        lines.push("const player = cloudinary.videoPlayer('player', {");
+        lines.push("const player = await cloudinary.player('player', {");
         lines.push("  cloudName: '" + s.cloudName + "',");
+        if (s.mode !== 'playlist') {
+          lines.push("  publicId: '" + s.publicId.replace(/'/g, "\\'") + "',");
+        }
         lines.push('  ads: ' + JSON.stringify(adsOptions(s), null, 2).replace(/\n/g, '\n  ').replace(/"([^"]+)":/g, '$1:').replace(/"/g, "'"));
         lines.push('});');
-        lines.push('');
         if (s.mode === 'playlist') {
+          lines.push('');
           lines.push("player.playlistByTag('" + s.playlistTag + "', { autoAdvance: true, repeat: true });");
-        } else {
-          lines.push("player.source('" + s.publicId.replace(/'/g, "\\'") + "');");
         }
         $('snippet').textContent = lines.join('\n');
       }
