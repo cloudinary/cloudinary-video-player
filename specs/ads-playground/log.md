@@ -68,3 +68,20 @@ Consequences:
 - Local-dev-only issue; the deployed docs site is HTTPS, so SEs are unaffected.
 - The page's ad-error notice now appends an "serve over https" hint when
   `location.protocol === 'http:'`.
+
+## Second bug found via deploy preview — contrib-ads loadstart race (2026-09-02)
+
+On the PR's Netlify preview the console showed videojs-contrib-ads' "has not seen a
+loadstart event 5 seconds after being initialized" error. Developer's hunch (correct):
+the plugin's async loading. `imaPlugin` awaits a dynamic `import('./ima')` (a
+network-fetched chunk that registers contrib-ads + videojs-ima) while the page sets the
+source synchronously — when the media element's `loadstart` beats the chunk download,
+contrib-ads misses it, and its preroll state machine waits indefinitely ("Waiting for
+loadstart..."), so ads never play. Localhost usually wins the race (fast chunk); a real
+CDN deploy usually loses it — which is why the playground worked locally but not on the
+preview.
+
+Fix: the plugin body runs synchronously up to the `await`, before any source exists, so
+it arms a one-shot `loadstart` recorder there and replays the event after `player.ima()`
+initializes (only when it was actually missed). Covered by two new unit tests; verified
+on the rebuilt preview — flag set, no error.
