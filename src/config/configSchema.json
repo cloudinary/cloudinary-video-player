@@ -237,6 +237,14 @@
           "type": "string",
           "enum": ["first-video", "every-video"],
           "default": "first-video"
+        },
+        "autoPlayAdBreaks": {
+          "type": "boolean",
+          "default": true
+        },
+        "debug": {
+          "type": "boolean",
+          "default": false
         }
       },
       "default": {
@@ -246,7 +254,9 @@
         "locale": "en",
         "prerollTimeout": 5000,
         "postrollTimeout": 5000,
-        "adsInPlaylist": "first-video"
+        "adsInPlaylist": "first-video",
+        "autoPlayAdBreaks": true,
+        "debug": false
       }
     },
     "autoShowRecommendations": {

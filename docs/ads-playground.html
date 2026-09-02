@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ads Playground · Cloudinary Video Player</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <script type="text/javascript" src="./scripts.js?full"></script>
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+
+  <style>
+    :root {
+      --bg: #070F1A;
+      --bg2: #0B1623;
+      --bg3: #162436;
+      --text: #ffffff;
+      --dim: rgba(255, 255, 255, 0.58);
+      --faint: rgba(255, 255, 255, 0.30);
+      --line: rgba(255, 255, 255, 0.09);
+      --accent: #0095FF;
+      --accent-hover: #33AAFF;
+      --accent-active: #007FDB;
+      --danger: #FE5981;
+      --radius-card: 16px;
+      --radius-small: 8px;
+      --radius-input: 6px;
+      --radius-btn: 32px;
+      --radius-badge: 4px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, "Segoe UI", system-ui, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    /* ---------- hero ---------- */
+    .hero {
+      background: linear-gradient(170deg, #162436 40%, #2A3E58 90%);
+      margin: 0 0 32px;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 36px;
+    }
+    .breadcrumb {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 8px;
+    }
+    .breadcrumb span { color: var(--dim); }
+    .hero h1 {
+      margin: 0 0 4px;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--dim);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+
+    /* ---------- layout ---------- */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 20px;
+    }
+
+    /* ---------- player ---------- */
+    .player-card { padding: 12px; }
+    .player-frame {
+      border-radius: var(--radius-small);
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16 / 9;
+    }
+    .player-frame .cld-video-player,
+    .player-frame video { width: 100%; height: 100%; }
+
+    .player-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 8px 4px;
+      min-height: 40px;
+    }
+    .now-playing {
+      color: var(--dim);
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .badge {
+      display: none;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: var(--radius-badge);
+    }
+    .badge.on { display: inline-block; }
+    .badge-ad { background: var(--accent); color: #fff; }
+
+    /* ---------- event log ---------- */
+    .log-card { margin-top: 24px; padding: 0; overflow: hidden; }
+    .log-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .log-head h2 { margin: 0; font-size: 14px; font-weight: 600; }
+    .log-body {
+      height: 200px;
+      overflow-y: auto;
+      padding: 12px 20px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .log-empty { color: var(--dim); font-family: Inter, sans-serif; }
+    .log-line { color: var(--dim); }
+    .log-line .t { color: var(--dim); margin-right: 10px; }
+    .log-line.is-ad { color: var(--accent); }
+    .log-line.is-error { color: var(--danger); }
+
+    /* ---------- controls ---------- */
+    .controls { display: flex; flex-direction: column; gap: 24px; }
+
+    .group h2 {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    .field { margin-bottom: 12px; }
+    .field:last-child { margin-bottom: 0; }
+    .field > label {
+      display: block;
+      font-size: 13px;
+      color: var(--dim);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-input);
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+      padding: 9px 12px;
+    }
+    input[type="text"]::placeholder { color: var(--faint); }
+    input[type="text"]:focus-visible, select:focus-visible,
+    button:focus-visible, .thumb:focus-visible, .seg label:focus-within {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,.5)' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* thumbnails */
+    .thumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .thumb {
+      width: 88px;
+      height: 50px;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: var(--radius-small);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--bg3);
+      flex-shrink: 0;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .thumb[aria-pressed="true"] { border-color: var(--accent); }
+    .thumb:hover { border-color: var(--faint); }
+    .thumb[aria-pressed="true"]:hover { border-color: var(--accent); }
+
+    /* segmented control */
+    .seg {
+      display: flex;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-input);
+      padding: 3px;
+      gap: 3px;
+    }
+    .seg label {
+      flex: 1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--dim);
+      padding: 6px 4px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .seg input { position: absolute; opacity: 0; pointer-events: none; }
+    .seg input:checked + span { color: var(--text); }
+    .seg label:has(input:checked) { background: var(--bg3); color: var(--text); }
+
+    /* toggle switch */
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+    .switch-row > span { font-size: 13px; color: var(--dim); }
+    .switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+    .switch .track {
+      position: absolute;
+      inset: 0;
+      background: var(--bg3);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      transition: background 0.15s ease;
+      pointer-events: none;
+    }
+    .switch .track::after {
+      content: "";
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--dim);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .switch input:checked ~ .track { background: var(--accent); border-color: var(--accent); }
+    .switch input:checked ~ .track::after { transform: translateX(16px); background: #fff; }
+    .switch input:focus-visible ~ .track { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* buttons */
+    .btn {
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border: 0;
+      border-radius: var(--radius-btn);
+      padding: 10px 22px;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { background: var(--accent-active); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--dim);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      padding: 7px 16px;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--faint); }
+
+    .actions { display: flex; flex-direction: column; gap: 10px; }
+    .actions .split { display: flex; gap: 10px; }
+    .actions .split .btn { flex: 1; }
+
+    /* snippet */
+    .snippet-card { margin-top: 24px; padding: 0; overflow: hidden; }
+    .snippet-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .snippet-head h2 { margin: 0; font-size: 14px; font-weight: 600; }
+    pre.snippet {
+      margin: 0;
+      padding: 16px 20px;
+      overflow-x: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--dim);
+    }
+
+    .notice {
+      display: none;
+      background: rgba(254, 89, 129, 0.1);
+      border: 1px solid rgba(254, 89, 129, 0.35);
+      border-radius: var(--radius-small);
+      color: var(--danger);
+      font-size: 13px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+    }
+    .notice.on { display: block; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translate(-50%, 8px);
+      background: var(--bg3);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-btn);
+      padding: 8px 18px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="breadcrumb">Video Player <span>/ Ads Playground</span></p>
+      <h1>Ads Playground</h1>
+      <p>Demo client-side ad insertion with any source, ad tag and configuration — then copy the exact player setup.</p>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="notice" id="notice" role="alert"></div>
+
+    <div class="layout">
+
+      <section aria-label="Player and events">
+        <div class="card player-card">
+          <div class="player-frame" id="player-frame">
+            <video id="player" playsinline controls muted class="cld-video-player"></video>
+          </div>
+          <div class="player-meta">
+            <span class="now-playing" id="now-playing"></span>
+            <span class="badge badge-ad" id="ad-badge">Ad playing</span>
+          </div>
+        </div>
+
+        <div class="card log-card">
+          <div class="log-head">
+            <h2>Event log</h2>
+            <button type="button" class="btn btn-ghost" id="clear-log">Clear</button>
+          </div>
+          <div class="log-body" id="log" aria-live="polite" aria-label="Ad event log">
+            <p class="log-empty">Ad and player events will appear here.</p>
+          </div>
+        </div>
+
+        <div class="card snippet-card">
+          <div class="snippet-head">
+            <h2>Player config</h2>
+            <button type="button" class="btn btn-ghost" id="copy-snippet">Copy</button>
+          </div>
+          <pre class="snippet" id="snippet"></pre>
+        </div>
+      </section>
+
+      <form class="card controls" id="controls" aria-label="Playground settings">
+
+        <div class="group">
+          <h2>Source</h2>
+          <div class="field">
+            <div class="seg" role="radiogroup" aria-label="Source mode">
+              <label><input type="radio" name="mode" value="single" checked><span>Single video</span></label>
+              <label><input type="radio" name="mode" value="playlist"><span>Playlist</span></label>
+            </div>
+          </div>
+          <div class="field" id="thumbs-field">
+            <label id="thumbs-label">Sample videos</label>
+            <div class="thumbs" role="group" aria-labelledby="thumbs-label" id="thumbs"></div>
+          </div>
+          <div class="field" id="publicid-field">
+            <label for="publicId">Public ID or video URL</label>
+            <input type="text" id="publicId" value="elephants" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="field" id="playlisttag-field" hidden>
+            <label for="playlistTag">Playlist tag</label>
+            <input type="text" id="playlistTag" value="video_race" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="field">
+            <label for="cloudName">Cloud name</label>
+            <input type="text" id="cloudName" value="demo" autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Ad scenario</h2>
+          <div class="field">
+            <label for="preset">Preset</label>
+            <select id="preset"></select>
+          </div>
+          <div class="field">
+            <label for="adTagUrl">Ad tag URL</label>
+            <input type="text" id="adTagUrl" autocomplete="off" spellcheck="false" placeholder="Paste a VAST/VMAP tag URL">
+          </div>
+        </div>
+
+        <div class="group">
+          <h2>Options</h2>
+          <div class="row2 field">
+            <div>
+              <label for="adLabel">Ad label</label>
+              <input type="text" id="adLabel" value="Advertisement" autocomplete="off">
+            </div>
+            <div>
+              <label for="locale">Locale</label>
+              <select id="locale">
+                <option value="en" selected>English (en)</option>
+                <option value="fr">French (fr)</option>
+                <option value="de">German (de)</option>
+                <option value="es">Spanish (es)</option>
+                <option value="ja">Japanese (ja)</option>
+                <option value="he">Hebrew (he)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row2 field">
+            <div>
+              <label for="prerollTimeout">Pre-roll timeout (ms)</label>
+              <input type="text" id="prerollTimeout" value="5000" inputmode="numeric" autocomplete="off">
+            </div>
+            <div>
+              <label for="postrollTimeout">Post-roll timeout (ms)</label>
+              <input type="text" id="postrollTimeout" value="5000" inputmode="numeric" autocomplete="off">
+            </div>
+          </div>
+          <div class="field" id="adsinplaylist-field" hidden>
+            <label>Ads in playlist</label>
+            <div class="seg" role="radiogroup" aria-label="Ads in playlist">
+              <label><input type="radio" name="adsInPlaylist" value="first-video" checked><span>First video</span></label>
+              <label><input type="radio" name="adsInPlaylist" value="every-video"><span>Every video</span></label>
+            </div>
+          </div>
+          <label class="switch-row">
+            <span>Show countdown</span>
+            <span class="switch"><input type="checkbox" id="showCountdown" checked><span class="track"></span></span>
+          </label>
+          <label class="switch-row">
+            <span>Debug logging (console)</span>
+            <span class="switch"><input type="checkbox" id="debug"><span class="track"></span></span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="apply">Apply &amp; reload player</button>
+          <div class="split">
+            <button type="button" class="btn btn-ghost" id="share">Copy share link</button>
+            <button type="button" class="btn btn-ghost" id="reset">Reset</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // ---- Google IMA public sample tags -------------------------------------------------
+      var GAMPAD = 'https://pubads.g.doubleclick.net/gampad/ads?';
+      var SINGLE = 'iu=/21775744923/external/single_ad_samples&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=&cust_params=';
+      var VMAP = 'iu=/21775744923/external/vmap_ad_samples&sz=640x480&ciu_szs=300x250&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&correlator=&cust_params=';
+
+      var PRESETS = [
+        { key: 'preroll', label: 'Pre-roll (linear)', url: GAMPAD + SINGLE + 'sample_ct%3Dlinear' },
+        { key: 'preonly-vmap', label: 'Pre-roll only (VMAP)', url: GAMPAD + 'sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpreonly&cmsid=496&vid=short_onecue&correlator=' },
+        { key: 'premidpost', label: 'Pre + mid + post-roll (VMAP)', url: GAMPAD + VMAP + 'sample_ar%3Dpremidpost' },
+        { key: 'pods', label: 'Ad pods (VMAP)', url: GAMPAD + VMAP + 'sample_ar%3Dpremidpostpod' },
+        { key: 'postonly', label: 'Post-roll only (VMAP)', url: GAMPAD + VMAP + 'sample_ar%3Dpostonly' },
+        { key: 'vpaid', label: 'VPAID 2 (JS)', url: GAMPAD + SINGLE + 'sample_ct%3Dlinearvpaid2js' },
+        { key: 'error', label: 'Broken tag (error handling)', url: 'https://pubads.g.doubleclick.net/gampad/ads?iu=/broken/tag&output=vast' },
+        { key: 'custom', label: 'Custom…', url: '' }
+      ];
+
+      var SAMPLES = ['elephants', 'sea_turtle', 'snow_horses', 'ski_jump'];
+
+      var AD_EVENTS = ['ads-request', 'ads-load', 'ads-manager', 'ads-ad-started', 'ads-ad-ended',
+        'ads-pod-started', 'ads-pod-ended', 'ads-allpods-completed', 'ads-first-quartile',
+        'ads-midpoint', 'ads-third-quartile', 'ads-click', 'ads-volumechange', 'ads-ad-skipped',
+        'adserror', 'aderror', 'ads-ad-timeout'];
+      var CONTENT_EVENTS = ['sourcechanged', 'play', 'ended', 'error'];
+
+      var $ = function (id) { return document.getElementById(id); };
+      var player = null;
+      var playerCount = 0;
+
+      // ---- settings <-> form -------------------------------------------------------------
+      function readForm() {
+        return {
+          mode: document.querySelector('input[name="mode"]:checked').value,
+          publicId: $('publicId').value.trim(),
+          playlistTag: $('playlistTag').value.trim(),
+          cloudName: $('cloudName').value.trim() || 'demo',
+          preset: $('preset').value,
+          adTagUrl: $('adTagUrl').value.trim(),
+          adLabel: $('adLabel').value,
+          locale: $('locale').value,
+          prerollTimeout: parseInt($('prerollTimeout').value, 10) || 5000,
+          postrollTimeout: parseInt($('postrollTimeout').value, 10) || 5000,
+          adsInPlaylist: document.querySelector('input[name="adsInPlaylist"]:checked').value,
+          showCountdown: $('showCountdown').checked,
+          debug: $('debug').checked
+        };
+      }
+
+      function writeForm(s) {
+        if (s.mode) document.querySelector('input[name="mode"][value="' + s.mode + '"]').checked = true;
+        if (s.publicId) $('publicId').value = s.publicId;
+        if (s.playlistTag) $('playlistTag').value = s.playlistTag;
+        if (s.cloudName) $('cloudName').value = s.cloudName;
+        if (s.preset) $('preset').value = s.preset;
+        if (s.adTagUrl) $('adTagUrl').value = s.adTagUrl;
+        if (s.adLabel) $('adLabel').value = s.adLabel;
+        if (s.locale) $('locale').value = s.locale;
+        if (s.prerollTimeout) $('prerollTimeout').value = s.prerollTimeout;
+        if (s.postrollTimeout) $('postrollTimeout').value = s.postrollTimeout;
+        if (s.adsInPlaylist) document.querySelector('input[name="adsInPlaylist"][value="' + s.adsInPlaylist + '"]').checked = true;
+        if (s.showCountdown !== undefined) $('showCountdown').checked = s.showCountdown === true || s.showCountdown === 'true';
+        if (s.debug !== undefined) $('debug').checked = s.debug === true || s.debug === 'true';
+      }
+
+      function adsOptions(s) {
+        var opts = {
+          adTagUrl: s.adTagUrl,
+          showCountdown: s.showCountdown,
+          adLabel: s.adLabel,
+          locale: s.locale,
+          prerollTimeout: s.prerollTimeout,
+          postrollTimeout: s.postrollTimeout,
+          debug: s.debug
+        };
+        if (s.mode === 'playlist') opts.adsInPlaylist = s.adsInPlaylist;
+        return opts;
+      }
+
+      // ---- URL state ---------------------------------------------------------------------
+      function settingsToUrl(s) {
+        var params = new URLSearchParams();
+        Object.keys(s).forEach(function (k) { params.set(k, s[k]); });
+        return location.origin + location.pathname + '?' + params.toString();
+      }
+
+      function settingsFromUrl() {
+        var params = new URLSearchParams(location.search);
+        var s = {};
+        params.forEach(function (v, k) { s[k] = v; });
+        return s;
+      }
+
+      // ---- event log ---------------------------------------------------------------------
+      function log(name, detail, kind) {
+        var body = $('log');
+        var empty = body.querySelector('.log-empty');
+        if (empty) empty.remove();
+        var line = document.createElement('div');
+        line.className = 'log-line' + (kind ? ' is-' + kind : '');
+        var t = document.createElement('span');
+        t.className = 't';
+        t.textContent = new Date().toLocaleTimeString();
+        line.appendChild(t);
+        line.appendChild(document.createTextNode(name + (detail ? ' — ' + detail : '')));
+        body.appendChild(line);
+        body.scrollTop = body.scrollHeight;
+      }
+
+      // ---- snippet -----------------------------------------------------------------------
+      function renderSnippet(s) {
+        var lines = [];
+        var needsPlayerRef = s.mode === 'playlist';
+        lines.push((needsPlayerRef ? 'const player = await ' : '') + "cloudinary.player('player', {");
+        lines.push("  cloudName: '" + s.cloudName + "',");
+        if (s.mode !== 'playlist') {
+          lines.push("  publicId: '" + s.publicId.replace(/'/g, "\\'") + "',");
+        }
+        lines.push('  ads: ' + JSON.stringify(adsOptions(s), null, 2).replace(/\n/g, '\n  ').replace(/"([^"]+)":/g, '$1:').replace(/"/g, "'"));
+        lines.push('});');
+        if (s.mode === 'playlist') {
+          lines.push('');
+          lines.push("player.playlistByTag('" + s.playlistTag + "', { autoAdvance: true, repeat: true });");
+        }
+        $('snippet').textContent = lines.join('\n');
+      }
+
+      // ---- player lifecycle ----------------------------------------------------------------
+      function buildPlayer(s) {
+        if (player) {
+          try { player.dispose(); } catch (e) { /* already gone */ }
+          player = null;
+        }
+        playerCount++;
+        var id = 'player';
+        var frame = $('player-frame');
+        frame.innerHTML = '';
+        var video = document.createElement('video');
+        video.id = id;
+        video.className = 'cld-video-player';
+        video.setAttribute('playsinline', '');
+        video.setAttribute('controls', '');
+        video.muted = true;
+        frame.appendChild(video);
+
+        $('ad-badge').classList.remove('on');
+
+        player = cloudinary.videoPlayer(id, {
+          cloudName: s.cloudName,
+          ads: adsOptions(s)
+        });
+
+        AD_EVENTS.forEach(function (ev) {
+          player.on(ev, function () {
+            var isErr = ev.indexOf('error') !== -1;
+            log(ev, '', isErr ? 'error' : 'ad');
+            if (isErr) {
+              var httpHint = window.location.protocol === 'http:'
+                ? ' Note: this page is served over http — some browsers block IMA ad requests from insecure origins, so serve it over https when testing locally.'
+                : '';
+              showNotice('The ad request failed. This is usually an ad blocker, a privacy extension, or a network filter blocking pubads.g.doubleclick.net — content plays without ads. Details in the event log.' + httpHint);
+            }
+            if (ev === 'ads-ad-started' || ev === 'ads-pod-started') $('ad-badge').classList.add('on');
+            if (ev === 'ads-ad-ended' || ev === 'ads-pod-ended' || ev === 'ads-allpods-completed' || isErr) $('ad-badge').classList.remove('on');
+          });
+        });
+        CONTENT_EVENTS.forEach(function (ev) {
+          player.on(ev, function () { log(ev, '', ev === 'error' ? 'error' : null); });
+        });
+
+        if (s.mode === 'playlist') {
+          player.playlistByTag(s.playlistTag, { autoAdvance: true, repeat: true }).then(function () {
+            var list = player.playlist().list().map(function (src) { return src.publicId(); }).join(', ');
+            $('now-playing').textContent = 'Playlist "' + s.playlistTag + '": ' + list;
+          }).catch(function (e) {
+            showNotice('Could not load playlist "' + s.playlistTag + '" — ' + e.message);
+          });
+        } else {
+          player.source(s.publicId);
+          $('now-playing').textContent = s.publicId;
+        }
+
+        renderSnippet(s);
+      }
+
+      // ---- ui helpers ----------------------------------------------------------------------
+      function showNotice(msg) {
+        var n = $('notice');
+        n.textContent = msg;
+        n.classList.add('on');
+      }
+
+      function toast(msg) {
+        var el = $('toast');
+        el.textContent = msg;
+        el.classList.add('on');
+        clearTimeout(el._t);
+        el._t = setTimeout(function () { el.classList.remove('on'); }, 1800);
+      }
+
+      function copy(text, doneMsg) {
+        navigator.clipboard.writeText(text).then(function () { toast(doneMsg); },
+          function () { toast('Copy failed — select and copy manually'); });
+      }
+
+      function syncModeUI() {
+        var mode = document.querySelector('input[name="mode"]:checked').value;
+        $('publicid-field').hidden = mode !== 'single';
+        $('thumbs-field').hidden = mode !== 'single';
+        $('playlisttag-field').hidden = mode !== 'playlist';
+        $('adsinplaylist-field').hidden = mode !== 'playlist';
+      }
+
+      function syncPresetUI() {
+        var key = $('preset').value;
+        var preset = PRESETS.filter(function (x) { return x.key === key; })[0];
+        if (preset && preset.key !== 'custom') $('adTagUrl').value = preset.url;
+      }
+
+      function buildStaticUI() {
+        PRESETS.forEach(function (x) {
+          var o = document.createElement('option');
+          o.value = x.key;
+          o.textContent = x.label;
+          $('preset').appendChild(o);
+        });
+        SAMPLES.forEach(function (pid, i) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'thumb';
+          b.setAttribute('aria-label', 'Sample video: ' + pid);
+          b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+          b.dataset.pid = pid;
+          var img = document.createElement('img');
+          img.src = 'https://res.cloudinary.com/demo/video/upload/w_176,h_100,c_fill,q_auto,f_jpg,so_auto/' + pid + '.jpg';
+          img.alt = '';
+          b.appendChild(img);
+          b.addEventListener('click', function () {
+            $('publicId').value = pid;
+            syncThumbs();
+          });
+          $('thumbs').appendChild(b);
+        });
+      }
+
+      function syncThumbs() {
+        var current = $('publicId').value.trim();
+        document.querySelectorAll('.thumb').forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.pid === current));
+        });
+      }
+
+      // ---- wire-up ---------------------------------------------------------------------------
+      window.addEventListener('load', function () {
+        buildStaticUI();
+
+        var urlState = settingsFromUrl();
+        var hasUrlState = Object.keys(urlState).length > 0;
+        $('preset').value = 'preroll';
+        if (hasUrlState) writeForm(urlState);
+        if (!$('adTagUrl').value) syncPresetUI();
+        syncModeUI();
+        syncThumbs();
+
+        if (typeof google !== 'object' || typeof google.ima !== 'object') {
+          showNotice('The Google IMA SDK could not load — ads are unavailable. Disable ad blockers and reload.');
+        }
+
+        $('controls').addEventListener('submit', function (e) {
+          e.preventDefault();
+          $('notice').classList.remove('on');
+          var s = readForm();
+          history.replaceState(null, '', settingsToUrl(s));
+          log('— player reloaded —');
+          buildPlayer(s);
+        });
+
+        document.querySelectorAll('input[name="mode"]').forEach(function (r) {
+          r.addEventListener('change', syncModeUI);
+        });
+        $('preset').addEventListener('change', syncPresetUI);
+        $('adTagUrl').addEventListener('input', function () {
+          var match = PRESETS.filter(function (x) { return x.url === $('adTagUrl').value; })[0];
+          $('preset').value = match ? match.key : 'custom';
+        });
+        $('publicId').addEventListener('input', syncThumbs);
+
+        $('clear-log').addEventListener('click', function () {
+          $('log').innerHTML = '<p class="log-empty">Ad and player events will appear here.</p>';
+        });
+        $('copy-snippet').addEventListener('click', function () {
+          copy($('snippet').textContent, 'Config copied');
+        });
+        $('share').addEventListener('click', function () {
+          copy(settingsToUrl(readForm()), 'Share link copied');
+        });
+        $('reset').addEventListener('click', function () {
+          history.replaceState(null, '', location.pathname);
+          location.reload();
+        });
+
+        buildPlayer(readForm());
+      }, false);
+    })();
+  </script>
+</body>
+</html>

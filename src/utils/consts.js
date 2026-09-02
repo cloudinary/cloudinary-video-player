@@ -16,6 +16,7 @@ export const PLAYER_EVENT = {
   CAN_PLAY_THROUGH: 'canplaythrough',
   CLD_SOURCE_CHANGED: 'cldsourcechanged',
   SOURCE_CHANGED: 'sourcechanged',
+  LOAD_START: 'loadstart',
   LOADED_METADATA: 'loadedmetadata',
   LOADED_DATA: 'loadeddata',
   REFRESH_TEXT_TRACKS: 'refreshTextTracks',
