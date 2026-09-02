@@ -30,7 +30,7 @@ export default async function imaPlugin(player, playerOptions) {
     adLabel: playerOptions.ads.adLabel || 'Advertisement',
     locale: playerOptions.ads.locale || 'en',
     autoPlayAdBreaks: playerOptions.ads.autoPlayAdBreaks !== false,
-    debug: playerOptions.ads.denug
+    debug: playerOptions.ads.debug
   });
 
   if (Object.keys(playerOptions.ads).length > 0 && typeof player.ima === 'object') {
