@@ -228,6 +228,23 @@
           ]
         }
       });
+
+      // Portrait (9:16) player - captions are sized by width and pinned to the bottom
+      const portraitPlayer = cloudinary.videoPlayer('portrait', {
+        cloudName: 'prod',
+        muted: true
+      });
+
+      portraitPlayer.source('video/examples/cloudinary-marketing-pm', {
+        aspectRatio: '9:16',
+        cropMode: 'fill',
+        textTracks: {
+          captions: {
+            label: 'English',
+            default: true
+          }
+        }
+      });
     }, false);
   </script>
 </head>
@@ -328,6 +345,17 @@
       class="cld-video-player cld-fluid"
       crossorigin="anonymous"
       width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Portrait (9:16) player</h4>
+
+    <video
+      id="portrait"
+      playsinline
+      controls
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="280"
     ></video>
 
     <p class="mt-4">
@@ -533,6 +561,23 @@
                 language: "uk-UA",
               }
             ]
+          }
+        });
+
+
+        // Portrait (9:16) player - captions are sized by width and pinned to the bottom
+        const portraitPlayer = cloudinary.videoPlayer('portrait', {
+          cloudName: 'prod'
+        });
+
+        portraitPlayer.source('video/examples/cloudinary-marketing-pm', {
+          aspectRatio: '9:16',
+          cropMode: 'fill',
+          textTracks: {
+            captions: {
+              label: 'English',
+              default: true
+            }
           }
         });
 
