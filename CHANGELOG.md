@@ -1,3 +1,14 @@
+## [4.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.0...v4.1.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* add missing options for textTracks in schema ([#1085](https://github.com/cloudinary/cloudinary-video-player/issues/1085)) ([bfe0097](https://github.com/cloudinary/cloudinary-video-player/commit/bfe00979cf189f2fb7bb3f7298ee756212251985))
+* allow textTracks redefinition on repeated HLS source-set  ([4a0e328](https://github.com/cloudinary/cloudinary-video-player/commit/4a0e32807be5bb81b49090a9d86ec87d46a5fd10))
+* remove visualSearch plugin (in-video search) ([#1081](https://github.com/cloudinary/cloudinary-video-player/issues/1081)) ([8f40a37](https://github.com/cloudinary/cloudinary-video-player/commit/8f40a3727fa1b7be83fdf9af407fd1899bd65897))
+
+
+
 # [4.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.3...v4.1.0) (2026-07-30)
 
 
