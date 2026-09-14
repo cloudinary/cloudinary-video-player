@@ -68,7 +68,9 @@ export const playerValidators = {
       locale: validator.isString,
       prerollTimeout: validator.isNumber,
       postrollTimeout: validator.isNumber,
-      adsInPlaylist: validator.isString(ADS_IN_PLAYLIST)
+      adsInPlaylist: validator.isString(ADS_IN_PLAYLIST),
+      autoPlayAdBreaks: validator.isBoolean,
+      debug: validator.isBoolean
     },
     schedule: {
       weekly: validator.isArrayOfObjects({
