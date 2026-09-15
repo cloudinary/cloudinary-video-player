@@ -1,8 +1,11 @@
 .cld-video-player {
   // Default captions styles
   // See styled-text-tracks plugin for more options
-  .vjs-text-track-display {
-    // When control-bar is shown
+  .vjs-text-track-display,
+  // video.js lifts this to 1em when the control-bar hides; keep it constant
+  // so captions don't move when the user hovers (cues are bottom-anchored)
+  &.vjs-user-inactive.vjs-playing .vjs-text-track-display {
+    // Leaves room for the control-bar
     bottom: 5em;
     z-index: 2;
     // Lets cue font-size use container query units (cqw/cqh) below
@@ -12,9 +15,8 @@
       color: var(--color-accent);
     }
   }
-  &.vjs-controls-disabled .vjs-text-track-display,
-  &.vjs-user-inactive.vjs-playing .vjs-text-track-display {
-    // When control-bar is hidden/disabled
+  &.vjs-controls-disabled .vjs-text-track-display {
+    // No control-bar at all
     bottom: 1em;
   }
 
