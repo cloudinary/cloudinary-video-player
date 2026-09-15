@@ -56,3 +56,9 @@
 - Impact: `docs/subtitles-and-captions.html` (new portrait section + code sample) — done. `docs/index.html` unchanged (page already listed). README: no text-track styling section to update. `configSchema.json`: no option added/changed. CHANGELOG is release-generated from commits.
 - Control-bar interaction verified with a Playwright script on the portrait demo: cue box bottom sits 22px above the player bottom while controls are hidden and moves to 70px when the control bar shows (display `bottom` 1em ↔ 5em) — video.js re-lays out on user activity, the auto-height box follows. An earlier in-pane experiment suggesting a stale cache was an artifact of a never-cleared `hasBeenReset` expando on native VTTCue objects.
 - Screenshots for the PR captured from the demo (before: 4-line ~50px caption spilling past the bottom; after: 2-line caption pinned above the control bar area).
+
+## 7. PR (2026-09-15)
+- Branch pushed after developer approval; PR https://github.com/cloudinary/cloudinary-video-player/pull/1088 opened against master (conventional-commit title, no AI attribution). Screenshots were shared with the developer in chat; not embedded in the PR (no image hosting path without publishing to an external service).
+- Final checklist: all items checked (ticket, context, spec, tests, docs, lint/unit, description, log).
+- master moved meanwhile (v4.1.1 release + `4a0e3280 fix: allow textTracks redefinition on repeated HLS source-set`); unrelated files, no conflict expected.
+- Pending stage 8 after review approval: remove `specs/portrait-captions/` from the branch; generalizable lesson to capture — "caption styling keyed on `.vjs-text-track-cue` is applied after vtt.js measures the box; keep the box auto-sized".
