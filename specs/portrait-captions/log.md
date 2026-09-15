@@ -62,3 +62,9 @@
 - Final checklist: all items checked (ticket, context, spec, tests, docs, lint/unit, description, log).
 - master moved meanwhile (v4.1.1 release + `4a0e3280 fix: allow textTracks redefinition on repeated HLS source-set`); unrelated files, no conflict expected.
 - Pending stage 8 after review approval: remove `specs/portrait-captions/` from the branch; generalizable lesson to capture — "caption styling keyed on `.vjs-text-track-cue` is applied after vtt.js measures the box; keep the box auto-sized".
+
+## Review feedback (2026-09-15)
+- Developer: after the fix, captions move when the control-bar appears on hover; on master they stay put. Cause: on master the cue box keeps a frozen `top` px from vtt.js, so it ignores the caption area shrinking from `bottom: 1em` (idle) to `5em` (controls shown). With the box now bottom-anchored it follows that shrink.
+- Decision: keep the caption area constant at `bottom: 5em` while playing (override video.js's `.vjs-user-inactive.vjs-playing` 1em rule); only `vjs-controls-disabled` keeps 1em. Captions therefore always sit above the control-bar zone and never move on hover. Rejected: anchoring by `top` with `bottom: auto` — would grow the text downward past the display again (the original cut-off).
+- Measured on the portrait demo: cue text bottom stays at 64px above the player bottom across idle → hover → idle.
+- Also: portrait demo player capped at 280px wide (developer found it huge).

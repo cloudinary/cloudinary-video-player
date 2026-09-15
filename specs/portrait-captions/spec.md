@@ -65,6 +65,8 @@ default font.
 
 - **FR-1** Cue box height follows its content for bottom and top gravity.
 - **FR-2** Cue font size is `min(5% of display height, 3.5% of display width)`.
+- **FR-2b** Captions do not move when the control-bar shows or hides: the caption area keeps
+  its control-bar offset while playing (only `controls: false` players use the smaller offset).
 - **FR-3** No change to JS, config schema, or public API. CSS-only in
   `src/assets/styles/components/text-tracks.scss` and
   `src/plugins/styled-text-tracks/styled-text-tracks.scss`.
