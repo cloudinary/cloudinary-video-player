@@ -1,3 +1,12 @@
+## [4.1.2](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.1...v4.1.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* **captions:** size cue text by width on portrait players and let the box follow its content ([#1088](https://github.com/cloudinary/cloudinary-video-player/issues/1088)) ([14b10d2](https://github.com/cloudinary/cloudinary-video-player/commit/14b10d2c959c0be8a5a45e08627d72c8432ab6e7))
+
+
+
 ## [4.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.0...v4.1.1) (2026-09-14)
 
 
