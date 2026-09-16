@@ -1,28 +1,46 @@
 .cld-video-player {
   // Default captions styles
   // See styled-text-tracks plugin for more options
-  .vjs-text-track-display {
-    // When control-bar is shown
+  .vjs-text-track-display,
+  // video.js lifts this to 1em when the control-bar hides; keep it constant
+  // so captions don't move when the user hovers (cues are bottom-anchored)
+  &.vjs-user-inactive.vjs-playing .vjs-text-track-display {
+    // Leaves room for the control-bar
     bottom: 5em;
     z-index: 2;
+    // Lets cue font-size use container query units (cqw/cqh) below
+    container-type: size;
     // Word highlight
     &.cld-paced-text-tracks b {
       color: var(--color-accent);
     }
   }
-  &.vjs-controls-disabled .vjs-text-track-display,
-  &.vjs-user-inactive.vjs-playing .vjs-text-track-display {
-    // When control-bar is hidden/disabled
+  &.vjs-controls-disabled .vjs-text-track-display {
+    // No control-bar at all
     bottom: 1em;
   }
 
   .vjs-text-track-cue {
     max-width: 100%;
+    // vtt.js sets the cue font to 5% of the display *height*, which is huge on
+    // portrait players. Keep that for landscape, cap by width for portrait.
+    // Browsers without cq units ignore this and keep the vtt.js inline size.
+    font-size: min(5cqh, 3.5cqw) !important;
     > div {
       display: inline-block !important;
       padding: 0.1em 0.3em;
       background-color: rgba(0, 0, 0, 0.5) !important;
     }
+  }
+
+  // vtt.js measures the cue and pixel-fixes its box *before* video.js adds the
+  // .vjs-text-track-cue class, so every rule here changes the text after the box
+  // is frozen (text spills out / floats inside a too-tall box). Let the box follow
+  // its content instead, keeping the bottom anchor vtt.js computed.
+  // Top gravity gets the mirror in styled-text-tracks.scss; center is left as is.
+  .vjs-text-track-display:not(.cld-styled-text-tracks-gravity-top):not(.cld-styled-text-tracks-gravity-center) .vjs-text-track-cue {
+    height: auto !important;
+    top: auto !important;
   }
 
   // Word highlight - default style
