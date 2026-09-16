@@ -75,8 +75,10 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
+          DEBUG: ${{ inputs.debug }}
+          REPOSITORY: ${{ github.repository }}
         run: |
-          if [[ "${{ inputs.debug }}" == "true" ]]; then
+          if [[ "$DEBUG" == "true" ]]; then
             set -x
           fi
 
@@ -96,7 +98,7 @@ jobs:
           echo "Found PR #$PR_NUMBER in commit message"
 
           # Get PR details to check the source branch
-          PR_INFO=$(gh api "repos/${{ github.repository }}/pulls/$PR_NUMBER" 2>/dev/null || echo "")
+          PR_INFO=$(gh api "repos/$REPOSITORY/pulls/$PR_NUMBER" 2>/dev/null || echo "")
 
           if [[ -z "$PR_INFO" ]]; then
             echo "::notice::Could not fetch PR #$PR_NUMBER details"
@@ -149,8 +151,10 @@ jobs:
       - name: Create Git Tag
         id: tag
         if: inputs.dry_run != true
+        env:
+          GET_VERSION_VERSION: ${{ steps.get_version.outputs.version }}
         run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
+          VERSION="$GET_VERSION_VERSION"
           echo "::group::Creating tag $VERSION"
 
           if git rev-parse "$VERSION" >/dev/null 2>&1; then
@@ -168,8 +172,9 @@ jobs:
         if: inputs.dry_run != true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GET_VERSION_VERSION: ${{ steps.get_version.outputs.version }}
         run: |
-          VERSION="${{ steps.get_version.outputs.version }}"
+          VERSION="$GET_VERSION_VERSION"
           echo "::group::Creating GitHub release"
 
           if gh release view "$VERSION" >/dev/null 2>&1; then
@@ -202,11 +207,13 @@ jobs:
 
       - name: Dry Run Summary
         if: inputs.dry_run == true
+        env:
+          GET_VERSION_VERSION: ${{ steps.get_version.outputs.version }}
         run: |
           echo "## 🧪 Dry Run Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Would have:" >> $GITHUB_STEP_SUMMARY
-          echo "- Created tag: ${{ steps.get_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Created tag: $GET_VERSION_VERSION" >> $GITHUB_STEP_SUMMARY
           echo "- Created GitHub release" >> $GITHUB_STEP_SUMMARY
           echo "- Published to npm (stable)" >> $GITHUB_STEP_SUMMARY
 
@@ -244,8 +251,11 @@ jobs:
 
       - name: Calculate next version
         id: calc_version
+        env:
+          DEBUG: ${{ inputs.debug }}
+          CURRENT_VERSION_VERSION: ${{ steps.current_version.outputs.version }}
         run: |
-          if [[ "${{ inputs.debug }}" == "true" ]]; then
+          if [[ "$DEBUG" == "true" ]]; then
             set -x
           fi
 
@@ -264,7 +274,7 @@ jobs:
           echo "Bump type: $BUMP_TYPE"
           echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
 
-          CURRENT="${{ steps.current_version.outputs.version }}"
+          CURRENT="$CURRENT_VERSION_VERSION"
           NEXT=$(npx semver "$CURRENT" -i "$BUMP_TYPE")
           echo "Next version: $NEXT"
           echo "next_version=$NEXT" >> $GITHUB_OUTPUT
@@ -286,8 +296,10 @@ jobs:
 
       - name: Update version and changelog
         if: steps.calc_version.outputs.bump_type != ''
+        env:
+          CALC_VERSION_NEXT_VERSION: ${{ steps.calc_version.outputs.next_version }}
         run: |
-          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          NEXT_VERSION="$CALC_VERSION_NEXT_VERSION"
 
           echo "::group::Updating version to $NEXT_VERSION"
 
@@ -305,8 +317,10 @@ jobs:
 
       - name: Commit and push changes
         if: steps.calc_version.outputs.bump_type != ''
+        env:
+          CALC_VERSION_NEXT_VERSION: ${{ steps.calc_version.outputs.next_version }}
         run: |
-          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          NEXT_VERSION="$CALC_VERSION_NEXT_VERSION"
           BRANCH_NAME="release/edge"
 
           echo "::group::Committing changes"
@@ -323,10 +337,12 @@ jobs:
         if: steps.calc_version.outputs.bump_type != ''
         env:
           GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CALC_VERSION_NEXT_VERSION: ${{ steps.calc_version.outputs.next_version }}
+          CALC_VERSION_BUMP_TYPE: ${{ steps.calc_version.outputs.bump_type }}
         run: |
-          NEXT_VERSION="${{ steps.calc_version.outputs.next_version }}"
+          NEXT_VERSION="$CALC_VERSION_NEXT_VERSION"
           BRANCH_NAME="release/edge"
-          BUMP_TYPE="${{ steps.calc_version.outputs.bump_type }}"
+          BUMP_TYPE="$CALC_VERSION_BUMP_TYPE"
 
           echo "::group::Creating/updating PR"
 
@@ -395,23 +411,29 @@ jobs:
 
       - name: Calculate next version
         id: get_next_version
+        env:
+          GET_VERSION_CURRENT_VERSION: ${{ steps.get_version.outputs.current_version }}
         run: |
-          next_version=$(npx semver ${{ steps.get_version.outputs.current_version }} -i patch)
+          next_version=$(npx semver "$GET_VERSION_CURRENT_VERSION" -i patch)
           echo "Next patch version: $next_version"
           echo "version=$next_version" >> $GITHUB_OUTPUT
 
       - name: Configure Git
+        env:
+          ACTOR: ${{ github.actor }}
         run: |
-          git config user.name "${{ github.actor }}"
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config user.name "$ACTOR"
+          git config user.email "$ACTOR@users.noreply.github.com"
 
       - name: Checkout or create edge branch
+        env:
+          GET_NEXT_VERSION_VERSION: ${{ steps.get_next_version.outputs.version }}
         run: |
-          if git rev-parse --verify origin/${{ steps.get_next_version.outputs.version }}-edge; then
-            git checkout ${{ steps.get_next_version.outputs.version }}-edge
+          if git rev-parse --verify origin/"$GET_NEXT_VERSION_VERSION"-edge; then
+            git checkout "$GET_NEXT_VERSION_VERSION"-edge
             git merge master -X ours --no-edit
           else
-            git checkout master -b ${{ steps.get_next_version.outputs.version }}-edge
+            git checkout master -b "$GET_NEXT_VERSION_VERSION"-edge
           fi
 
       - name: Bump version
@@ -425,8 +447,9 @@ jobs:
         if: inputs.dry_run != true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GET_NEXT_VERSION_VERSION: ${{ steps.get_next_version.outputs.version }}
         run: |
-          git push origin ${{ steps.get_next_version.outputs.version }}-edge
+          git push origin "$GET_NEXT_VERSION_VERSION"-edge
 
       - run: npm run build-all
 
@@ -446,12 +469,15 @@ jobs:
 
       - name: Dry Run Summary
         if: inputs.dry_run == true
+        env:
+          BUMP_VERSION_NEW_VERSION: ${{ steps.bump_version.outputs.new_version }}
+          GET_NEXT_VERSION_VERSION: ${{ steps.get_next_version.outputs.version }}
         run: |
           echo "## 🧪 Dry Run Summary (Edge)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Would have:" >> $GITHUB_STEP_SUMMARY
-          echo "- Created edge version: ${{ steps.bump_version.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Pushed to branch: ${{ steps.get_next_version.outputs.version }}-edge" >> $GITHUB_STEP_SUMMARY
+          echo "- Created edge version: $BUMP_VERSION_NEW_VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "- Pushed to branch: $GET_NEXT_VERSION_VERSION-edge" >> $GITHUB_STEP_SUMMARY
           echo "- Published to npm with edge tag" >> $GITHUB_STEP_SUMMARY
 
   notify:
@@ -464,10 +490,17 @@ jobs:
 
       - name: Set Notification Messages
         id: set-messages
+        env:
+          STABLE_VERSION: ${{ needs.publish-stable.outputs.version }}
+          PUBLISH_VERSION: ${{ needs.manual-publish.outputs.version }}
+          STABLE_RESULT: ${{ needs.publish-stable.result }}
+          PUBLISH_RESULT: ${{ needs.manual-publish.result }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
         run: |
-          VERSION="${{ needs.publish-stable.outputs.version }}${{ needs.manual-publish.outputs.version }}"
+          VERSION="$STABLE_VERSION$PUBLISH_VERSION"
           
-          if [[ "${{ needs.publish-stable.result }}" == "success" || "${{ needs.manual-publish.result }}" == "success" ]]; then
+          if [[ "$STABLE_RESULT" == "success" || "$PUBLISH_RESULT" == "success" ]]; then
             RESULT="success"
           else
             RESULT="failure"
@@ -481,7 +514,7 @@ jobs:
           else
             echo "SLACK_TITLE=Video Player Deployment Failed" >> $GITHUB_OUTPUT
             echo "SLACK_MESSAGE=:alert: Failed to deploy cloudinary-video-player version $VERSION" >> $GITHUB_OUTPUT
-            echo "SLACK_FOOTER=See log here https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_OUTPUT
+            echo "SLACK_FOOTER=See log here https://github.com/$REPOSITORY/actions/runs/$RUN_ID" >> $GITHUB_OUTPUT
             echo "SLACK_COLOR=danger" >> $GITHUB_OUTPUT
           fi
         shell: bash
