@@ -194,6 +194,10 @@ class AnalyticsPlugin {
   }
 
   track({ action, label, value = null, nonInteraction = false }) {
+    if (typeof window.gtag !== 'function') {
+      return;
+    }
+
     const eventData = {
       event_category: this.options.category,
       event_label: label || this.options.defaultLabel(this.player),
