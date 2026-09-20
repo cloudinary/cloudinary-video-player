@@ -27,7 +27,9 @@ describe('ExtendedEvents', () => {
     // Wait for player to be ready so ExtendedEvents are initialized
     await new Promise(resolve => vp.videojs.ready(resolve));
 
-    const triggerSpy = vi.spyOn(vp.videojs, 'trigger');
+    // Real consumer listening the way host apps / the analytics plugin do
+    const percentsPlayedListener = vi.fn();
+    vp.videojs.on('percentsplayed', percentsPlayedListener);
 
     // Simulate playback params
     vi.spyOn(vp.videojs, 'currentTime').mockReturnValue(10);
@@ -37,10 +39,11 @@ describe('ExtendedEvents', () => {
     vp.videojs.trigger('timeupdate');
 
     // ExtendedEvents should emit percentsplayed
-    // VideoPlayer should catch and re-trigger with payload
-    expect(triggerSpy).toHaveBeenCalledWith(expect.objectContaining({
-      type: 'percentsplayed',
-      eventData: expect.objectContaining({ percent: 10 })
-    }));
+    // VideoPlayer should catch and re-trigger, forwarding the payload as the
+    // listener's second (data) argument, not nested inside the event object
+    expect(percentsPlayedListener).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ percent: 10 })
+    );
   });
 });

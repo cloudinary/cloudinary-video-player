@@ -609,7 +609,7 @@ class VideoPlayer {
     // Forward all extended events to the main player for developer access
     Object.keys(extendedEvents.events).forEach((_event) => {
       extendedEvents.on(_event, (event, data) => {
-        this.videojs.trigger({ type: _event, eventData: data });
+        this.videojs.trigger(_event, data);
       });
     });
   }
