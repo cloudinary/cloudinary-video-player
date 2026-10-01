@@ -166,6 +166,9 @@
   },
   "overrides": {
     "basic-ftp": "5.2.2",
-    "postcss": "8.5.14"
+    "postcss": "8.5.14",
+    "mpd-parser": {
+      "@xmldom/xmldom": "0.9.12"
+    }
   }
 }
