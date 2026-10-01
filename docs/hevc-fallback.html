@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Cloudinary Video Player</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <style>
+    #log {
+      background: #111;
+      color: #ddd;
+      font-size: 12px;
+      max-height: 360px;
+      overflow: auto;
+      padding: 8px;
+      white-space: pre-wrap;
+    }
+    #log .error { color: #ff7b72; }
+    #log .ok { color: #7ee787; }
+  </style>
+
+  <script type="text/javascript">
+    // Must run before the player loads so hls.js sees the stubbed codec support.
+    // Simulates a browser that cannot decode HEVC (e.g. Windows Edge/Firefox without the HEVC extension).
+    var params = new URLSearchParams(window.location.search);
+    var simulateNoHevc = params.get('simulateNoHevc') === 'true';
+    var isHevc = function (type) {
+      return /hvc1|hev1|h265|hevc/i.test(type || '');
+    };
+
+    if (simulateNoHevc) {
+      var origCanPlayType = HTMLMediaElement.prototype.canPlayType;
+      HTMLMediaElement.prototype.canPlayType = function (type) {
+        return isHevc(type) ? '' : origCanPlayType.call(this, type);
+      };
+
+      [window.MediaSource, window.ManagedMediaSource].forEach(function (MS) {
+        if (!MS) {
+          return;
+        }
+        var origIsTypeSupported = MS.isTypeSupported.bind(MS);
+        MS.isTypeSupported = function (type) {
+          return isHevc(type) ? false : origIsTypeSupported(type);
+        };
+        var origAddSourceBuffer = MS.prototype.addSourceBuffer;
+        MS.prototype.addSourceBuffer = function (type) {
+          if (isHevc(type)) {
+            throw new DOMException('Simulated: HEVC not supported (' + type + ')', 'NotSupportedError');
+          }
+          return origAddSourceBuffer.call(this, type);
+        };
+      });
+    }
+  </script>
+
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.js"></script>
+  -->
+
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <script type="text/javascript">
+    var logEl;
+    var log = function (msg, cls) {
+      var line = document.createElement('div');
+      line.textContent = new Date().toISOString().substr(11, 12) + '  ' + msg;
+      if (cls) {
+        line.className = cls;
+      }
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
+    };
+
+    // Catches the customer's "Cannot read properties of undefined (reading 'videoSources')"
+    window.addEventListener('error', function (e) {
+      log('window.onerror: ' + e.message, 'error');
+    });
+
+    window.addEventListener('load', function () {
+      logEl = document.getElementById('log');
+
+      // Keep the tested player version (?ver=) on the repro links
+      document.querySelectorAll('a[data-query]').forEach(function (a) {
+        var query = new URLSearchParams(a.dataset.query);
+        if (params.get('ver')) {
+          query.set('ver', params.get('ver'));
+        }
+        a.href = '?' + query.toString();
+      });
+
+      var sourceTypes = (params.get('types') || 'hls/h265,hls/h264').split(',');
+      var hevcSupported = !!(window.MediaSource && MediaSource.isTypeSupported('video/mp4; codecs="hvc1.1.6.L93.B0"'));
+
+      document.getElementById('config').textContent =
+        'sourceTypes: ' + JSON.stringify(sourceTypes) +
+        ' | simulateNoHevc: ' + simulateNoHevc +
+        ' | browser HEVC (MSE): ' + hevcSupported;
+
+      // Attach listeners in the ready callback: the default (lazy) bundle resolves the player asynchronously
+      var onReady = function (player) {
+        var vjs = player.videojs;
+        var state = function () {
+          return 'paused=' + vjs.paused() +
+            ' currentTime=' + vjs.currentTime().toFixed(2) +
+            ' readyState=' + vjs.readyState() +
+            ' error=' + JSON.stringify(vjs.error() && { code: vjs.error().code, message: vjs.error().message });
+        };
+
+        vjs.on('loadstart', function () {
+          log('loadstart  src=' + vjs.currentSrc());
+        });
+        vjs.on('error', function () {
+          log('error  ' + state(), 'error');
+        });
+        vjs.on('canplay', function () {
+          log('canplay  ' + state());
+        });
+        vjs.on('playing', function () {
+          log('playing  src=' + vjs.currentSrc(), 'ok');
+        });
+
+        // Final snapshot, matching the log line in the ticket
+        vjs.setTimeout(function () {
+          log('snapshot @10s  ' + state(), vjs.error() ? 'error' : 'ok');
+        }, 10000);
+      };
+
+      var player = cloudinary.videoPlayer('player', {
+        cloudName: 'demo',
+        debug: true,
+        sourceTypes: sourceTypes,
+        sourceTransformation: {
+          'hls/h265': [{ streaming_profile: 'full_hd_h265' }],
+          'hls/h264': [{ streaming_profile: 'full_hd' }]
+        }
+      }, onReady);
+
+      player.source('dog');
+    }, false);
+  </script>
+
+</head>
+<body>
+  <div class="container p-4 col-12 col-md-9 col-xl-6">
+    <nav class="nav mb-2">
+      <a href="./index.html">&#60;&#60; Back to examples index</a>
+    </nav>
+    <h1>Cloudinary Video Player</h1>
+    <h3 class="mb-4">HEVC → H264 fallback (ONCALL-11435)</h3>
+
+    <p>
+      <code>sourceTypes: ['hls/h265', 'hls/h264']</code> on a browser that cannot decode HEVC
+      should fall back to H264. On v4.1.2 it ends in error 6 "No supported media sources".
+    </p>
+
+    <ul>
+      <li><a data-query="simulateNoHevc=true">Repro (simulated no-HEVC, any browser)</a></li>
+      <li><a data-query="">Real browser codec support (use Windows Edge/Firefox)</a></li>
+      <li><a data-query="simulateNoHevc=true&types=hls/h264">Control: h264 only (should play)</a></li>
+    </ul>
+
+    <p class="small">
+      Note: the simulated run makes the browser report no HEVC support, so hls.js rejects the h265 manifest up front.
+      On affected versions it shows the broken fallback but ends on error 4; a real Windows Edge/Firefox fails while
+      decoding and ends on error 6 with h264 loaded underneath, as reported in the ticket.
+      Add <code>&amp;ver=4.1.2</code> to compare against the published release.
+    </p>
+
+    <p class="text-muted small" id="config"></p>
+
+    <video
+      id="player"
+      playsinline
+      controls
+      muted
+      autoplay
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <h5 class="mt-4">Event log</h5>
+    <div id="log"></div>
+
+    <p class="mt-4">
+      <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
+    </p>
+
+    <h3 class="mt-4">Example Code:</h3>
+    <pre>
+      <code class="language-javascript">
+        const player = cloudinary.videoPlayer('player', {
+          cloudName: 'demo',
+          sourceTypes: ['hls/h265', 'hls/h264'],
+          sourceTransformation: {
+            'hls/h265': [{ streaming_profile: 'full_hd_h265' }],
+            'hls/h264': [{ streaming_profile: 'full_hd' }]
+          }
+        });
+
+        player.source('dog');
+      </code>
+    </pre>
+  </div>
+
+</body>
+</html>

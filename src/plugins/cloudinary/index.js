@@ -460,6 +460,8 @@ class CloudinaryContext {
   }
 
   currentSourceType() {
+    // TODO: throws when the source was reset (e.g. after handleCldError's src() on a single failing source).
+    // A plain `?.` guard changes error-handler flow (type becomes undefined), so it needs its own fix.
     return this.source().getType();
   }
 
