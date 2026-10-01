@@ -1,3 +1,12 @@
+## [4.1.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.2...v4.1.3) (2026-10-01)
+
+
+### Bug Fixes
+
+* don't undo Video.js source fallback on media error ([#1093](https://github.com/cloudinary/cloudinary-video-player/issues/1093)) ([d3ae070](https://github.com/cloudinary/cloudinary-video-player/commit/d3ae0701c5cc17446f408774aad23eed375f1c06))
+
+
+
 ## [4.1.2](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.1...v4.1.2) (2026-09-16)
 
 
