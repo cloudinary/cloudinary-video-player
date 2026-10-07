@@ -68,13 +68,25 @@
     "commitlint": "commitlint --edit"
   },
   "keywords": [
-    "dash",
-    "hls",
+    "cloudinary",
+    "video",
+    "video-player",
     "html5",
     "player",
-    "video",
+    "hls",
+    "dash",
+    "adaptive-streaming",
+    "live-streaming",
+    "vod",
+    "chapters",
+    "playlist",
+    "subtitles",
+    "picture-in-picture",
+    "video-analytics",
     "videojs",
-    "cloudinary"
+    "javascript",
+    "streaming",
+    "media-player"
   ],
   "bundlewatch": {
     "files": [
