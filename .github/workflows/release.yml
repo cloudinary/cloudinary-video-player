@@ -489,7 +489,7 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
-          SLACK_WEBHOOK: ${{ vars.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: ${{ secrets.FE_DEPLOYMENTS_SLACK_WEBHOOK }}
           SLACK_CHANNEL: 'rnd-me-video-team-alerts'
           SLACK_COLOR: ${{ steps.set-messages.outputs.SLACK_COLOR }}
           SLACK_TITLE: ${{ steps.set-messages.outputs.SLACK_TITLE }}
