@@ -17,6 +17,7 @@ import {
 } from './video-source.utils';
 import { normalizeOptions, isSrcEqual, isRawUrl, mergeTransformations, getCloudinaryUrlPrefix } from '../../common';
 import { utf8ToBase64 } from '~/utils/utf8Base64';
+import { getTransformationValue } from '~/utils/cloudinary';
 import Transformation from '@cloudinary/url-gen/backwards/transformation';
 import BaseSource from '../base-source';
 import ImageSource from '../image-source';
@@ -173,7 +174,9 @@ class VideoSource extends BaseSource {
 
     const srcs = this.sourceTypes().map(sourceType => {
       const srcTransformation = this.sourceTransformation()[sourceType] || this.transformation();
-      const format = normalizeFormat(sourceType);
+      // An empty source type delivers the asset as-is: like 'auto', but without f_auto:video
+      const deliverAsIs = sourceType === '';
+      const format = normalizeFormat(sourceType || 'auto');
       const isAdaptive = ADAPTIVE_SOURCETYPES.includes(format);
       const opts = {};
 
@@ -183,7 +186,7 @@ class VideoSource extends BaseSource {
 
       Object.assign(opts, { format });
 
-      const [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType);
+      let [type, codecTrans] = formatToMimeTypeAndTransformation(sourceType || 'auto');
 
       // If user's transformation include video_codec then don't add another video codec to transformation
       if (codecTrans && !(hasCodec(opts.transformation) || hasCodec(this.rawTransformation()))) {
@@ -191,10 +194,22 @@ class VideoSource extends BaseSource {
       }
 
       if (opts.format === 'auto') {
+        const fetchFormat = getTransformationValue(opts.transformation, 'fetch_format');
+        // `format` is an alias of `fetch_format`
+        const callerFormat = fetchFormat || getTransformationValue(opts.transformation, 'format');
         delete opts.format;
-        opts.transformation = mergeTransformations(opts.transformation, {
-          fetch_format: 'auto:video'
-        });
+
+        if (callerFormat && callerFormat !== 'auto') {
+          // Respect the caller's format instead of adding f_auto:video
+          if (!fetchFormat) {
+            opts.transformation = mergeTransformations(opts.transformation, { fetch_format: callerFormat });
+          }
+          [type] = formatToMimeTypeAndTransformation(callerFormat);
+        } else if (!deliverAsIs) {
+          opts.transformation = mergeTransformations(opts.transformation, {
+            fetch_format: 'auto:video'
+          });
+        }
       }
 
       if (isAdaptive) {
