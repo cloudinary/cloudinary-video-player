@@ -523,6 +523,73 @@ describe('test hasCodec method', () => {
 
   });
 
+  describe('caller-supplied format replaces f_auto:video', () => {
+    const getSource = (options) => new VideoSource('sea_turtle', { cloudinaryConfig: cld, ...options }).generateSources()[0];
+
+    it('keeps f_auto:video when fetch_format is auto', () => {
+      const src = getSource({ transformation: { fetch_format: 'auto' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto/f_auto:video/sea_turtle');
+      expect(src.type).toEqual('video/auto');
+    });
+
+    it('keeps f_auto:video when fetch_format is auto:video', () => {
+      const src = getSource({ transformation: { fetch_format: 'auto:video' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto:video/f_auto:video/sea_turtle');
+      expect(src.type).toEqual('video/auto');
+    });
+
+    it('uses caller fetch_format instead of f_auto:video', () => {
+      const src = getSource({ transformation: { fetch_format: 'mp4' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle');
+      expect(src.type).toEqual('video/mp4');
+    });
+
+    it('finds fetch_format in an array of transformations', () => {
+      const src = getSource({ transformation: [{ width: 400 }, { fetch_format: 'webm' }] });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/f_webm/sea_turtle');
+      expect(src.type).toEqual('video/webm');
+    });
+
+    it('treats format as an alias of fetch_format', () => {
+      const src = getSource({ transformation: { format: 'mp4' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle');
+      expect(src.type).toEqual('video/mp4');
+    });
+
+    it('supports format in sourceTransformation', () => {
+      const src = getSource({ sourceTransformation: { auto: [{ width: 400 }, { format: 'mp4' }] } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/f_mp4/sea_turtle');
+      expect(src.type).toEqual('video/mp4');
+    });
+
+    it('does not affect explicit sourceTypes', () => {
+      const src = getSource({ sourceTypes: ['webm'], transformation: { fetch_format: 'mp4' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle.webm');
+      expect(src.type).toEqual('video/webm');
+    });
+  });
+
+  describe('empty source type delivers the asset as-is', () => {
+    const getSource = (options) => new VideoSource('sea_turtle', { cloudinaryConfig: cld, sourceTypes: [''], ...options }).generateSources()[0];
+
+    it('omits f_auto:video and the extension', () => {
+      const src = getSource();
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/sea_turtle');
+      expect(src.type).toEqual('video/auto');
+    });
+
+    it('keeps caller transformations', () => {
+      const src = getSource({ transformation: { width: 400 } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/w_400/sea_turtle');
+    });
+
+    it('respects caller fetch_format', () => {
+      const src = getSource({ transformation: { fetch_format: 'mp4' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle');
+      expect(src.type).toEqual('video/mp4');
+    });
+  });
+
   describe('resourceType parameter tests', () => {
     it('should use image resourceType when specified', () => {
       const source = new VideoSource('sample', {
