@@ -66,6 +66,42 @@
         document.getElementById('info-vp9').innerHTML = uap.getBrowser().name + ' is playing ' + playerVp9.videojs.currentSrc();
       });
 
+      // fetch_format: 'mp4' player
+      playerFetchFormat = cloudinary.videoPlayer('player-fetch-format', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "fetch_format: 'mp4'" },
+        transformation: { fetch_format: 'mp4' }
+      });
+
+      playerFetchFormat.videojs.on('playing', function() {
+        document.getElementById('info-fetch-format').innerHTML = uap.getBrowser().name + ' is playing ' + playerFetchFormat.videojs.currentSrc();
+      });
+
+      // format: 'mp4' (alias of fetch_format) player
+      playerFormat = cloudinary.videoPlayer('player-format', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "format: 'mp4' (alias of fetch_format)" },
+        transformation: { format: 'mp4' }
+      });
+
+      playerFormat.videojs.on('playing', function() {
+        document.getElementById('info-format').innerHTML = uap.getBrowser().name + ' is playing ' + playerFormat.videojs.currentSrc();
+      });
+
+      // sourceTypes: [''] (as-is, no f_auto) player
+      playerAsIs = cloudinary.videoPlayer('player-as-is', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "sourceTypes: [''] (as-is, no f_auto)" },
+        sourceTypes: ['']
+      });
+
+      playerAsIs.videojs.on('playing', function() {
+        document.getElementById('info-as-is').innerHTML = uap.getBrowser().name + ' is playing ' + playerAsIs.videojs.currentSrc();
+      });
+
     }, false);
 
   </script>
@@ -121,6 +157,42 @@
 
     <p id="info-vp9"></p>
 
+    <h3 class="mb-4">fetch_format: 'mp4'</h3>
+    <video
+      id="player-fetch-format"
+      playsinline
+      controls
+      muted
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p id="info-fetch-format"></p>
+
+    <h3 class="mb-4">format: 'mp4' (alias of fetch_format)</h3>
+    <video
+      id="player-format"
+      playsinline
+      controls
+      muted
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p id="info-format"></p>
+
+    <h3 class="mb-4">sourceTypes: [''] (as-is, no f_auto)</h3>
+    <video
+      id="player-as-is"
+      playsinline
+      controls
+      muted
+      class="cld-video-player"
+      width="500"
+    ></video>
+
+    <p id="info-as-is"></p>
+
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
     </p>
@@ -160,6 +232,30 @@
           publicId: 'Image_Performance',
           info: { title: 'webm/vp9' },
           sourceTypes: ['webm/vp9']
+        });
+
+        // fetch_format: 'mp4' player
+        playerFetchFormat = cloudinary.videoPlayer('player-fetch-format', {
+          cloudName: 'demo',
+          publicId: 'product-gallery-tutorial_hlk0na',
+          info: { title: "fetch_format: 'mp4'" },
+          transformation: { fetch_format: 'mp4' }
+        });
+
+        // format: 'mp4' (alias of fetch_format) player
+        playerFormat = cloudinary.videoPlayer('player-format', {
+          cloudName: 'demo',
+          publicId: 'product-gallery-tutorial_hlk0na',
+          info: { title: "format: 'mp4' (alias of fetch_format)" },
+          transformation: { format: 'mp4' }
+        });
+
+        // sourceTypes: [''] (as-is, no f_auto) player
+        playerAsIs = cloudinary.videoPlayer('player-as-is', {
+          cloudName: 'demo',
+          publicId: 'product-gallery-tutorial_hlk0na',
+          info: { title: "sourceTypes: [''] (as-is, no f_auto)" },
+          sourceTypes: ['']
         });
 
       </code>
