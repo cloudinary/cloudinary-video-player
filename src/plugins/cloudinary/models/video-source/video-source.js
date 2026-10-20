@@ -199,7 +199,7 @@ class VideoSource extends BaseSource {
         const callerFormat = fetchFormat || getTransformationValue(opts.transformation, 'format');
         delete opts.format;
 
-        if (callerFormat && callerFormat !== 'auto') {
+        if (callerFormat && !callerFormat.startsWith('auto')) {
           // Respect the caller's format instead of adding f_auto:video
           if (!fetchFormat) {
             opts.transformation = mergeTransformations(opts.transformation, { fetch_format: callerFormat });

@@ -532,6 +532,12 @@ describe('test hasCodec method', () => {
       expect(src.type).toEqual('video/auto');
     });
 
+    it('keeps f_auto:video when fetch_format is auto:video', () => {
+      const src = getSource({ transformation: { fetch_format: 'auto:video' } });
+      expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_auto:video/f_auto:video/sea_turtle');
+      expect(src.type).toEqual('video/auto');
+    });
+
     it('uses caller fetch_format instead of f_auto:video', () => {
       const src = getSource({ transformation: { fetch_format: 'mp4' } });
       expect(src.src).toEqual('http://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle');
