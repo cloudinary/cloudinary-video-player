@@ -64,8 +64,9 @@ const mergeTransformations = (initTransformation1, transformation2) => {
   return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
-// Video-only transformation keys invalid for static images (e.g. poster, sprite)
-export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec'];
+// Video-only transformation keys invalid for static images (e.g. poster, sprite).
+// fetch_format and its format alias would turn a poster or sprite into a video (or a 400 for fl_sprite).
+export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec', 'fetch_format', 'format'];
 
 const filterTxArray = (arr) =>
   arr.map((t) => omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS)).filter((t) => Object.keys(t).length > 0);
