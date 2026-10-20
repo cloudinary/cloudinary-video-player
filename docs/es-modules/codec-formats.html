@@ -62,6 +62,42 @@
       ></video>
 
       <p id="info-vp9"></p>
+
+      <h3 class="mb-4">fetch_format: 'mp4'</h3>
+      <video
+        id="player-fetch-format"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <p id="info-fetch-format"></p>
+
+      <h3 class="mb-4">format: 'mp4' (alias of fetch_format)</h3>
+      <video
+        id="player-format"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <p id="info-format"></p>
+
+      <h3 class="mb-4">sourceTypes: [''] (as-is, no f_auto)</h3>
+      <video
+        id="player-as-is"
+        playsinline
+        controls
+        muted
+        class="cld-video-player"
+        width="500"
+      ></video>
+
+      <p id="info-as-is"></p>
     </div>
 
     <script type="module">
@@ -106,6 +142,45 @@
       playerVp9.on('playing', function () {
         document.getElementById('info-vp9').innerHTML =
           uap.getBrowser().name + ' is playing ' + playerVp9.videojs.currentSrc();
+      });
+
+      // fetch_format: 'mp4' player
+      const playerFetchFormat = videoPlayer('player-fetch-format', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "fetch_format: 'mp4'" },
+        transformation: { fetch_format: 'mp4' }
+      });
+
+      playerFetchFormat.on('playing', function () {
+        document.getElementById('info-fetch-format').innerHTML =
+          uap.getBrowser().name + ' is playing ' + playerFetchFormat.videojs.currentSrc();
+      });
+
+      // format: 'mp4' (alias of fetch_format) player
+      const playerFormat = videoPlayer('player-format', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "format: 'mp4' (alias of fetch_format)" },
+        transformation: { format: 'mp4' }
+      });
+
+      playerFormat.on('playing', function () {
+        document.getElementById('info-format').innerHTML =
+          uap.getBrowser().name + ' is playing ' + playerFormat.videojs.currentSrc();
+      });
+
+      // sourceTypes: [''] (as-is, no f_auto) player
+      const playerAsIs = videoPlayer('player-as-is', {
+        cloudName: 'demo',
+        publicId: 'product-gallery-tutorial_hlk0na',
+        info: { title: "sourceTypes: [''] (as-is, no f_auto)" },
+        sourceTypes: ['']
+      });
+
+      playerAsIs.on('playing', function () {
+        document.getElementById('info-as-is').innerHTML =
+          uap.getBrowser().name + ' is playing ' + playerAsIs.videojs.currentSrc();
       });
     </script>
 
