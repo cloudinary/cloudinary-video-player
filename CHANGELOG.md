@@ -1,3 +1,12 @@
+## [4.1.4](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.3...v4.1.4) (2026-10-20)
+
+
+### Bug Fixes
+
+* respect caller format and allow opting out of f_auto ([#1097](https://github.com/cloudinary/cloudinary-video-player/issues/1097)) ([18f7ca4](https://github.com/cloudinary/cloudinary-video-player/commit/18f7ca43fe69f89d5852c2a4580fb58c0e2bf369))
+
+
+
 ## [4.1.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.2...v4.1.3) (2026-10-01)
 
 
