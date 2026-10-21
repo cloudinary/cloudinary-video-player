@@ -234,8 +234,8 @@
     window.addEventListener('load', function () {
       var cloudName = 'prod';
       var publicId = 'video/examples/big_buck_bunny_trailer_720p';
-      // Any embeddable YouTube video works: ?yt=<videoId>. Default is Blender's own Big Buck Bunny upload.
-      var youtubeId = new URLSearchParams(window.location.search).get('yt') || 'aqz-KE-bpKQ';
+      // Any embeddable YouTube video works: ?yt=<videoId>. Default is the same 33 s Big Buck Bunny trailer.
+      var youtubeId = new URLSearchParams(window.location.search).get('yt') || 'GJVwbyAY4Sk';
       var YOUTUBE_TIMEOUT_MS = 10000;
       var SETTLE_TIMEOUT_MS = 30000;
       var YOUTUBE_HOSTS = /youtube|ytimg|googlevideo|google\.com|gstatic|doubleclick/;
@@ -546,7 +546,7 @@
     <section aria-labelledby="caveats-heading" class="prose">
       <h2 id="caveats-heading">How to read the numbers</h2>
       <ul>
-        <li><strong>Same film, different cuts.</strong> Cloudinary plays the Big Buck Bunny trailer at 720p. YouTube plays Blender's full upload at the quality YouTube picks. Read the numbers as player cost, not content cost. Media bytes are excluded.</li>
+        <li><strong>Same 33-second trailer on both sides.</strong> Cloudinary plays it at 720p with <code>f_auto</code>. YouTube plays its own 1080p upload at the quality YouTube picks. Read the numbers as player cost, not content cost. Media bytes are excluded.</li>
         <li><strong>The YouTube frame hides most of its weight.</strong> Resource Timing only shows the API loader. To see the player app and its tracking requests, open DevTools → Network and filter by frame.</li>
         <li><strong>Cloudinary's main script was already fetched by this demo page</strong> on load, by <code>scripts.js</code>. Its bytes are still counted, but its download time is not. "Player ready" for Cloudinary covers the lazy core chunk and the video. "Player ready" for YouTube covers everything, including <code>iframe_api</code>.</li>
         <li><strong>Main-thread blocking</strong> uses the Long Tasks API, which is available in Chromium browsers only. A blocker extension can change every number.</li>
@@ -730,7 +730,7 @@ cloudinary.videoPlayer('player-cld', {
 // YouTube: an iframe created by the IFrame Player API
 new YT.Player('player-yt', {
   host: 'https://www.youtube-nocookie.com',
-  videoId: 'aqz-KE-bpKQ',
+  videoId: 'GJVwbyAY4Sk',
   playerVars: { mute: 1, playsinline: 1, rel: 0 }
 });</code></pre>
       <p class="prose">Further reading: <a href="https://web.dev/articles/third-party-facades">Lazy load third-party resources with facades (web.dev)</a> and <a href="https://cloudinary.com/documentation/cloudinary_video_player">the Cloudinary Video Player documentation</a>.</p>
