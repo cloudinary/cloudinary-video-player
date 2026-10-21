@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudinary Video Player vs YouTube embed</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.js"></script>
+  -->
+
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <style>
+    :root {
+      /* Spacing (4px base) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+
+      /* Color: one accent, neutrals, semantic states */
+      --accent: #0056b3;
+      --accent-hover: #004494;
+      --accent-subtle: #e8f0fb;
+      --fg: #212529;
+      --fg-muted: #5f6b76;
+      --bg: #fff;
+      --bg-subtle: #f6f8fa;
+      --border: #dfe3e8;
+      --success-fg: #1b6b3a;
+      --warning-fg: #7a4d00;
+      --warning-bg: #fff7e6;
+      --warning-border: #f5d9a3;
+      --danger-fg: #a4161a;
+      --code-bg: #fdf6e3; /* matches the solarized-light highlight theme */
+
+      --radius-control: 4px;
+      --radius-card: 8px;
+      --radius-surface: 12px;
+      --shadow-subtle: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, strong, th { font-weight: 600; }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      /* Bottom padding clears the fixed version selector from scripts.js */
+      padding: var(--space-6) var(--space-4) var(--space-8);
+    }
+
+    .prose { max-width: 68ch; }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+
+    .page h1 { font-size: 32px; line-height: 1.2; margin-bottom: var(--space-4); }
+    .page h2 { font-size: 24px; line-height: 1.3; margin: var(--space-7) 0 var(--space-4); }
+    .page h3 { font-size: 20px; line-height: 1.3; margin-bottom: var(--space-2); }
+    .lead-text { font-size: 20px; color: var(--fg-muted); margin-bottom: var(--space-5); }
+
+    code { color: var(--fg); background: var(--bg-subtle); padding: 1px var(--space-1); border-radius: var(--radius-control); }
+    pre code { background: none; padding: 0; }
+
+    /* Measurement toolbar */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-3) var(--space-4);
+      padding: var(--space-4) var(--space-5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      background: var(--bg-subtle);
+      margin-bottom: var(--space-5);
+    }
+    .toolbar p { margin: 0; color: var(--fg-muted); font-size: 14px; flex: 1 1 28ch; }
+    .btn-run {
+      min-height: 44px;
+      padding: 0 var(--space-5);
+      border: 0;
+      border-radius: var(--radius-control);
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 600;
+      transition: background-color 150ms ease, opacity 150ms ease;
+    }
+    .btn-run:hover { background: var(--accent-hover); }
+    .btn-run:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .btn-run:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Variant cards */
+    .variants {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    @media (min-width: 992px) {
+      .variants { grid-template-columns: 1fr 1fr; }
+    }
+
+    .variant {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-surface);
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .variant-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); flex: 1; }
+    .variant-body p { margin: 0; color: var(--fg-muted); }
+
+    /* Both players sit in the same 16:9 frame so the cards stay aligned before and after loading */
+    .frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+    }
+    .frame > video, .frame > div, .frame > iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .frame > .video-js { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .frame-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fg-muted);
+      font-size: 14px;
+    }
+    .frame[data-state="loaded"] .frame-empty { display: none; }
+    .frame[data-state="empty"] > video { visibility: hidden; }
+
+    /* Live details */
+    .details { margin: 0; border-top: 1px solid var(--border); padding-top: var(--space-4); margin-top: auto; }
+    .details-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0 var(--space-3);
+      padding: var(--space-1) 0;
+      font-size: 14px;
+    }
+    @media (min-width: 480px) {
+      .details-row { grid-template-columns: calc(var(--space-8) * 2.5) 1fr; }
+    }
+    .details dt { color: var(--fg-muted); font-weight: 400; }
+    .details dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+    .details .note { display: block; color: var(--fg-muted); font-size: 12px; }
+
+    [data-state="idle"] { color: var(--fg-muted); }
+    [data-state="idle"]::after { content: "Not loaded yet"; }
+    [data-state="loading"] { color: var(--fg-muted); }
+    [data-state="loading"]::after { content: "Measuring…"; animation: pulse 1.2s ease-in-out infinite; }
+    [data-state="unsupported"] { color: var(--fg-muted); }
+    [data-state="error"] { color: var(--danger-fg); }
+    @keyframes pulse { 50% { opacity: 0.4; } }
+    @media (prefers-reduced-motion: reduce) {
+      [data-state="loading"]::after { animation: none; }
+      .btn-run { transition: none; }
+    }
+
+    /* Trade-offs */
+    .tradeoffs { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 768px) {
+      .tradeoffs { grid-template-columns: 1fr 1fr; }
+    }
+    .tradeoff {
+      border-radius: var(--radius-card);
+      padding: var(--space-4) var(--space-5);
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .tradeoff.is-warning { background: var(--warning-bg); border-color: var(--warning-border); }
+    .tradeoff.is-warning h3 { color: var(--warning-fg); }
+    .tradeoff h3 { font-size: 16px; }
+    .tradeoff ul { margin: 0; padding-left: var(--space-5); }
+    .tradeoff li + li { margin-top: var(--space-2); }
+
+    /* Comparison table */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); }
+    .ref-table { width: 100%; margin: 0; font-size: 14px; }
+    .ref-table caption { caption-side: top; padding: var(--space-3) var(--space-4); color: var(--fg-muted); }
+    .ref-table th, .ref-table td { padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border); vertical-align: top; }
+    .ref-table thead th { background: var(--bg-subtle); border-top: 0; }
+    .ref-table tbody th[scope="row"] { font-weight: 400; min-width: 12em; }
+    .ref-table th.group { background: var(--accent-subtle); color: var(--accent); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .ref-table td { min-width: 16em; }
+    .mark { font-weight: 600; }
+    .mark.is-yes { color: var(--success-fg); }
+    .mark.is-no { color: var(--danger-fg); }
+    .mark.is-partial { color: var(--warning-fg); }
+
+    pre.code-block {
+      background: var(--code-bg);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      font-size: 14px;
+    }
+
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-control); }
+  </style>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var cloudName = 'prod';
+      var publicId = 'video/examples/big_buck_bunny_trailer_720p';
+      // Any embeddable YouTube video works: ?yt=<videoId>. Default is Blender's own Big Buck Bunny upload.
+      var youtubeId = new URLSearchParams(window.location.search).get('yt') || 'aqz-KE-bpKQ';
+      var YOUTUBE_TIMEOUT_MS = 10000;
+      var SETTLE_TIMEOUT_MS = 30000;
+      var YOUTUBE_HOSTS = /youtube|ytimg|googlevideo|google\.com|gstatic|doubleclick/;
+      // Shared page assets that must not count against either player
+      var PAGE_ASSETS = /bootstrap|highlight\.js|\/scripts\.js|favicon|cloudinary_web_favicon/;
+
+      performance.setResourceTimingBufferSize(500);
+
+      var startTime = 0;
+      var longTasks = { cld: 0, yt: 0 };
+
+      function el(id) { return document.getElementById(id); }
+
+      function setDetail(id, state, text, note) {
+        var target = el(id);
+        target.dataset.state = state;
+        target.textContent = text || '';
+        if (note) {
+          var small = document.createElement('span');
+          small.className = 'note';
+          small.textContent = note;
+          target.appendChild(small);
+        }
+      }
+
+      function sinceStart() { return Math.round(performance.now() - startTime) + ' ms'; }
+
+      function formatBytes(bytes) {
+        return bytes >= 1e6 ? (bytes / 1e6).toFixed(2) + ' MB' : Math.round(bytes / 1e3) + ' KB';
+      }
+
+      // --- Main-thread blocking (Chromium only). Long tasks inside the YouTube frame are attributed to it.
+      function observeLongTasks() {
+        var supported = 'PerformanceObserver' in window
+          && PerformanceObserver.supportedEntryTypes
+          && PerformanceObserver.supportedEntryTypes.indexOf('longtask') !== -1;
+        if (!supported) {
+          setDetail('cld-blocking', 'unsupported', 'Long Tasks API not supported in this browser');
+          setDetail('yt-blocking', 'unsupported', 'Long Tasks API not supported in this browser');
+          return;
+        }
+        new PerformanceObserver(function (list) {
+          list.getEntries().forEach(function (task) {
+            var attribution = task.attribution && task.attribution[0];
+            var inYoutubeFrame = attribution && YOUTUBE_HOSTS.test(attribution.containerSrc || '');
+            longTasks[inYoutubeFrame ? 'yt' : 'cld'] += task.duration;
+          });
+        }).observe({ entryTypes: ['longtask'] });
+      }
+
+      function reportLongTasks() {
+        if (el('cld-blocking').dataset.state === 'unsupported') return;
+        setDetail('cld-blocking', 'ready', Math.round(longTasks.cld) + ' ms', 'Tasks over 50 ms on this page, outside the YouTube frame');
+        setDetail('yt-blocking', 'ready', Math.round(longTasks.yt) + ' ms', 'Tasks over 50 ms attributed to the YouTube frame');
+      }
+
+      // --- Player assets seen by this page (scripts and styles; media is excluded because the content differs)
+      function reportAssets(id, matches, note) {
+        var entries = performance.getEntriesByType('resource').filter(function (entry) {
+          return !PAGE_ASSETS.test(entry.name) && matches(entry);
+        });
+        var reported = entries.filter(function (entry) { return entry.transferSize > 0; });
+        var bytes = reported.reduce(function (sum, entry) { return sum + entry.transferSize; }, 0);
+        var withheld = entries.length - reported.length;
+        var size = reported.length ? formatBytes(bytes) : 'size withheld';
+        var text = entries.length + ' requests · ' + size;
+        if (reported.length && withheld) text += ' (' + withheld + ' withheld)';
+        setDetail(id, 'ready', text, note);
+      }
+
+      function reportAllAssets() {
+        reportAssets('cld-assets', function (entry) {
+          return !YOUTUBE_HOSTS.test(entry.name) && /\.(js|css)(\?|$)/.test(entry.name) && !/res\.cloudinary\.com/.test(entry.name);
+        }, 'Player script, styles and lazy chunks');
+        reportAssets('yt-assets', function (entry) {
+          return YOUTUBE_HOSTS.test(entry.name);
+        }, 'Only the API loader. The player app inside the frame is not visible to this page');
+      }
+
+      // --- Accessibility probe. Only possible for controls that live in this document.
+      function probeControls(player) {
+        var root = el('player-cld');
+        var controls = root.querySelectorAll('button, [role="button"], [role="slider"], [role="menuitem"]');
+        var labelled = 0;
+        controls.forEach(function (control) {
+          var text = control.getAttribute('aria-label') || control.getAttribute('title') || control.textContent.trim();
+          if (text) labelled += 1;
+        });
+        var tracks = player.videojs.textTracks().length;
+        setDetail('cld-a11y', 'ready', controls.length + ' controls, ' + labelled + ' labelled, ' + tracks + ' text tracks',
+          'Counted with querySelectorAll on the player element');
+      }
+
+      // --- Cloudinary
+      function loadCloudinary() {
+        ['cld-ready', 'cld-frame', 'cld-a11y'].forEach(function (id) { setDetail(id, 'loading'); });
+        cloudinary.videoPlayer('player-cld', {
+          cloudName: cloudName,
+          publicId: publicId,
+          muted: true,
+          playsinline: true
+        }).then(function (player) {
+          var vjs = player.videojs;
+          vjs.ready(function () {
+            el('cld-frame-box').dataset.state = 'loaded';
+            setDetail('cld-ready', 'ready', sinceStart());
+            probeControls(player);
+          });
+          vjs.one('playing', function () { setDetail('cld-frame', 'ready', sinceStart()); });
+          vjs.on('error', function () {
+            ['cld-ready', 'cld-frame', 'cld-a11y'].forEach(function (id) {
+              if (el(id).dataset.state === 'loading') setDetail(id, 'error', 'The video could not be loaded');
+            });
+          });
+          var playing = vjs.play();
+          if (playing && playing.catch) playing.catch(function () {});
+        }).catch(function () {
+          setDetail('cld-ready', 'error', 'The player could not be loaded');
+          setDetail('cld-frame', 'error', '—');
+          setDetail('cld-a11y', 'error', '—');
+        });
+      }
+
+      // --- YouTube. The IFrame API is injected only now, so it is measured from the same start time.
+      function loadYoutube() {
+        ['yt-ready', 'yt-frame'].forEach(function (id) { setDetail(id, 'loading'); });
+        var done = false;
+        var timer = setTimeout(function () {
+          if (done) return;
+          done = true;
+          setDetail('yt-ready', 'error', 'No response in ' + YOUTUBE_TIMEOUT_MS / 1000 + ' s. A content blocker may block youtube.com');
+          setDetail('yt-frame', 'error', '—');
+        }, YOUTUBE_TIMEOUT_MS);
+
+        window.onYouTubeIframeAPIReady = function () {
+          new YT.Player('player-yt', {
+            host: 'https://www.youtube-nocookie.com',
+            videoId: youtubeId,
+            playerVars: { mute: 1, playsinline: 1, rel: 0 },
+            events: {
+              onReady: function (event) {
+                if (done) return;
+                done = true;
+                clearTimeout(timer);
+                el('yt-frame-box').dataset.state = 'loaded';
+                setDetail('yt-ready', 'ready', sinceStart());
+                event.target.playVideo();
+              },
+              onStateChange: function (event) {
+                if (event.data === YT.PlayerState.PLAYING && el('yt-frame').dataset.state === 'loading') {
+                  setDetail('yt-frame', 'ready', sinceStart());
+                }
+              },
+              onError: function (event) {
+                done = true;
+                clearTimeout(timer);
+                setDetail('yt-ready', 'error', 'YouTube returned error ' + event.data + '. Try another video with ?yt=<id>');
+                setDetail('yt-frame', 'error', '—');
+              }
+            }
+          });
+        };
+
+        var script = document.createElement('script');
+        script.src = 'https://www.youtube.com/iframe_api';
+        script.onerror = function () {
+          done = true;
+          clearTimeout(timer);
+          setDetail('yt-ready', 'error', 'iframe_api could not be loaded');
+          setDetail('yt-frame', 'error', '—');
+        };
+        document.head.appendChild(script);
+      }
+
+      function allSettled() {
+        return ['cld-frame', 'yt-frame'].every(function (id) { return el(id).dataset.state !== 'loading'; });
+      }
+
+      function waitForSettled() {
+        var timedOut = performance.now() - startTime > SETTLE_TIMEOUT_MS;
+        if (!allSettled() && !timedOut) { setTimeout(waitForSettled, 250); return; }
+        ['cld-frame', 'yt-frame'].forEach(function (id) {
+          if (el(id).dataset.state === 'loading') setDetail(id, 'error', 'Did not start playing within ' + SETTLE_TIMEOUT_MS / 1000 + ' s');
+        });
+        // Give trailing requests and long tasks a moment to land before reading the buffers
+        setTimeout(function () {
+          reportAllAssets();
+          reportLongTasks();
+          el('run').textContent = 'Run again';
+          el('run').disabled = false;
+        }, 1000);
+      }
+
+      var hasRun = false;
+
+      el('run').addEventListener('click', function () {
+        if (hasRun) { window.location.reload(); return; }
+        hasRun = true;
+        this.disabled = true;
+        this.textContent = 'Loading both players…';
+        setDetail('cld-assets', 'loading');
+        setDetail('yt-assets', 'loading');
+        setDetail('cld-blocking', 'loading');
+        setDetail('yt-blocking', 'loading');
+        observeLongTasks();
+        startTime = performance.now();
+        loadCloudinary();
+        loadYoutube();
+        waitForSettled();
+      });
+    }, false);
+  </script>
+</head>
+<body>
+  <main class="page">
+    <nav class="mb-4">
+      <a href="./index.html">&#60;&#60; Back to examples index</a>
+    </nav>
+
+    <header class="prose">
+      <p class="eyebrow">Comparison</p>
+      <h1>Cloudinary Video Player vs the YouTube embed</h1>
+      <p class="lead-text">
+        Load both players side by side and compare what this browser measures. Then compare what the numbers cannot show: accessibility, privacy, branding and features.
+      </p>
+    </header>
+
+    <section aria-labelledby="live-heading">
+      <h2 id="live-heading">Measured in your browser</h2>
+      <div class="toolbar">
+        <button id="run" type="button" class="btn-run">Load both players</button>
+        <p>Nothing from either player loads until you click. Both start muted and play at once, so both are timed from the same moment.</p>
+      </div>
+
+      <div class="variants">
+        <article class="variant" aria-labelledby="cld-heading">
+          <div id="cld-frame-box" class="frame" data-state="empty">
+            <div class="frame-empty" aria-hidden="true">Cloudinary Video Player</div>
+            <video id="player-cld" class="cld-video-player" playsinline controls muted></video>
+          </div>
+          <div class="variant-body">
+            <div>
+              <h3 id="cld-heading">Cloudinary Video Player</h3>
+              <p>A <code>&lt;video&gt;</code> element in this page, enhanced by a first-party script. Controls, captions and events live in your DOM.</p>
+            </div>
+            <dl class="details" aria-live="polite">
+              <div class="details-row">
+                <dt>Player ready</dt>
+                <dd id="cld-ready" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>First frame played</dt>
+                <dd id="cld-frame" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Player assets</dt>
+                <dd id="cld-assets" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Main-thread blocking</dt>
+                <dd id="cld-blocking" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Control labels</dt>
+                <dd id="cld-a11y" data-state="idle"></dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="variant" aria-labelledby="yt-heading">
+          <div id="yt-frame-box" class="frame" data-state="empty">
+            <div class="frame-empty" aria-hidden="true">YouTube embed</div>
+            <div id="player-yt" title="YouTube video player"></div>
+          </div>
+          <div class="variant-body">
+            <div>
+              <h3 id="yt-heading">YouTube embed</h3>
+              <p>A cross-origin <code>&lt;iframe&gt;</code> driven by the IFrame Player API. The player app runs inside the frame, out of reach of your CSS, scripts and audits.</p>
+            </div>
+            <dl class="details" aria-live="polite">
+              <div class="details-row">
+                <dt>Player ready</dt>
+                <dd id="yt-ready" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>First frame played</dt>
+                <dd id="yt-frame" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Player assets</dt>
+                <dd id="yt-assets" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Main-thread blocking</dt>
+                <dd id="yt-blocking" data-state="idle"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Control labels</dt>
+                <dd id="yt-a11y" data-state="unsupported">Inside a cross-origin frame. Not inspectable from this page</dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="caveats-heading" class="prose">
+      <h2 id="caveats-heading">How to read the numbers</h2>
+      <ul>
+        <li><strong>Same film, different cuts.</strong> Cloudinary plays the Big Buck Bunny trailer at 720p. YouTube plays Blender's full upload at the quality YouTube picks. Read the numbers as player cost, not content cost. Media bytes are excluded.</li>
+        <li><strong>The YouTube frame hides most of its weight.</strong> Resource Timing only shows the API loader. To see the player app and its tracking requests, open DevTools → Network and filter by frame.</li>
+        <li><strong>Cloudinary's main script was already fetched by this demo page</strong> on load, by <code>scripts.js</code>. Its bytes are still counted, but its download time is not. "Player ready" for Cloudinary covers the lazy core chunk and the video. "Player ready" for YouTube covers everything, including <code>iframe_api</code>.</li>
+        <li><strong>Main-thread blocking</strong> uses the Long Tasks API, which is available in Chromium browsers only. A blocker extension can change every number.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="table-heading">
+      <h2 id="table-heading">What the numbers cannot show</h2>
+      <div class="table-wrap">
+        <table class="ref-table">
+          <caption>Side-by-side capabilities. "Yours" means you control it from your own page.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Criterion</th>
+              <th scope="col">Cloudinary Video Player</th>
+              <th scope="col">YouTube embed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="rowgroup" colspan="3" class="group">Performance</th></tr>
+            <tr>
+              <th scope="row">How it loads</th>
+              <td><span class="mark is-yes">First-party</span> script plus a lazy core chunk, in your document</td>
+              <td><span class="mark is-partial">Third-party</span> iframe that boots its own app. Lighthouse flags it under "third-party facades"</td>
+            </tr>
+            <tr>
+              <th scope="row">Load on demand</th>
+              <td><span class="mark is-yes">Built in</span> with <code>lazy: true</code> or load on scroll. See the <a href="./lazy-player.html">lazy player</a> demo</td>
+              <td><span class="mark is-partial">Add a facade</span> such as a thumbnail that swaps in the iframe on click</td>
+            </tr>
+            <tr>
+              <th scope="row">Adaptive streaming</th>
+              <td><span class="mark is-yes">Yes</span>. HLS and DASH with streaming profiles</td>
+              <td><span class="mark is-yes">Yes</span>. Automatic, not configurable</td>
+            </tr>
+            <tr>
+              <th scope="row">Format and codec choice</th>
+              <td><span class="mark is-yes">Yours</span>. <code>f_auto</code>, AV1, HEVC, or the original file. See <a href="./codec-formats.html">codecs and formats</a></td>
+              <td><span class="mark is-no">YouTube's</span>. Decided by YouTube's transcoding</td>
+            </tr>
+            <tr>
+              <th scope="row">Poster image</th>
+              <td><span class="mark is-yes">Yours</span>. Any frame or image, with transformations</td>
+              <td><span class="mark is-partial">YouTube's</span> thumbnail only</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr><th scope="rowgroup" colspan="3" class="group">Accessibility</th></tr>
+            <tr>
+              <th scope="row">Keyboard control</th>
+              <td><span class="mark is-yes">Yes</span>. Video.js keyboard handling</td>
+              <td><span class="mark is-yes">Yes</span>. YouTube keyboard shortcuts, once the frame has focus</td>
+            </tr>
+            <tr>
+              <th scope="row">Captions and subtitles</th>
+              <td><span class="mark is-yes">Yes</span>. Your WebVTT or SRT files, or auto-generated, styled with CSS. See <a href="./subtitles-and-captions.html">subtitles</a></td>
+              <td><span class="mark is-yes">Yes</span>. Auto-captions and uploads, styled only through YouTube's settings</td>
+            </tr>
+            <tr>
+              <th scope="row">Auditable controls</th>
+              <td><span class="mark is-yes">Yes</span>. Buttons are in your DOM, so axe, Lighthouse and screen reader tests reach them</td>
+              <td><span class="mark is-no">No</span>. Cross-origin frame. Your audits only see the <code>&lt;iframe&gt;</code> and its <code>title</code></td>
+            </tr>
+            <tr>
+              <th scope="row">Focus styles and reduced motion</th>
+              <td><span class="mark is-yes">Yours</span>. Plain CSS on the player classes</td>
+              <td><span class="mark is-no">YouTube's</span>. Not changeable</td>
+            </tr>
+            <tr>
+              <th scope="row">Native media semantics</th>
+              <td><span class="mark is-yes">Yes</span>. A real <code>&lt;video&gt;</code> element with text tracks</td>
+              <td><span class="mark is-no">No</span>. An iframe. Give it a descriptive <code>title</code></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr><th scope="rowgroup" colspan="3" class="group">Best practices</th></tr>
+            <tr>
+              <th scope="row">Third-party cookies and tracking</th>
+              <td><span class="mark is-yes">First-party only</span>. Playback analytics go to your own account. Disable with <code>cloudinaryAnalytics: false</code></td>
+              <td><span class="mark is-partial">Reduced</span> with <code>youtube-nocookie.com</code>, but Google scripts still load. Consent banners often gate it</td>
+            </tr>
+            <tr>
+              <th scope="row">Branding</th>
+              <td><span class="mark is-yes">Yours</span>. Logo, colors, skins and components. See <a href="./colors.html">colors</a> and <a href="./ui-config.html">display configurations</a></td>
+              <td><span class="mark is-no">YouTube's</span> logo and end screen. <code>rel=0</code> only limits related videos to the same channel</td>
+            </tr>
+            <tr>
+              <th scope="row">Ads</th>
+              <td><span class="mark is-yes">None</span> unless you add them. See <a href="./vast-vpaid.html">VAST and VPAID</a></td>
+              <td><span class="mark is-partial">Possible</span>. YouTube can show its ads on embedded videos</td>
+            </tr>
+            <tr>
+              <th scope="row">Content Security Policy</th>
+              <td><span class="mark is-yes">Simple</span>. Allow your CDN and <code>res.cloudinary.com</code></td>
+              <td><span class="mark is-partial">Wider</span>. Allow <code>frame-src</code> for youtube.com plus Google script and image origins</td>
+            </tr>
+            <tr>
+              <th scope="row">Video SEO</th>
+              <td><span class="mark is-yes">Your domain</span>. Add <code>VideoObject</code> structured data and a sitemap</td>
+              <td><span class="mark is-partial">youtube.com</span> gets the ranking. The embed can still help the page</td>
+            </tr>
+            <tr>
+              <th scope="row">Private content</th>
+              <td><span class="mark is-yes">Yes</span>. Signed URLs, token authentication, private assets</td>
+              <td><span class="mark is-no">No</span>. Only public and unlisted videos embed</td>
+            </tr>
+            <tr>
+              <th scope="row">Analytics ownership</th>
+              <td><span class="mark is-yes">Yours</span>. <a href="./cloudinary-analytics.html">Cloudinary analytics</a> plus every Video.js event in your page</td>
+              <td><span class="mark is-partial">YouTube Studio</span>, plus a limited state API in the page</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr><th scope="rowgroup" colspan="3" class="group">Features</th></tr>
+            <tr>
+              <th scope="row">Playlists and chapters</th>
+              <td><span class="mark is-yes">Yes</span>. <a href="./playlist.html">Playlist</a> and <a href="./chapters.html">chapters</a> plugins</td>
+              <td><span class="mark is-yes">Yes</span>. YouTube playlists and chapters</td>
+            </tr>
+            <tr>
+              <th scope="row">Interactive overlays</th>
+              <td><span class="mark is-yes">Yes</span>. <a href="./shoppable.html">Shoppable</a> and <a href="./interaction-area.html">interaction areas</a></td>
+              <td><span class="mark is-no">No</span>. Cards and end screens belong to YouTube</td>
+            </tr>
+            <tr>
+              <th scope="row">Floating player and autoplay on scroll</th>
+              <td><span class="mark is-yes">Yes</span>. <a href="./floating-player.html">Floating player</a> and <a href="./autoplay-on-scroll.html">autoplay on scroll</a></td>
+              <td><span class="mark is-no">No</span>. You build it around the iframe</td>
+            </tr>
+            <tr>
+              <th scope="row">Seek thumbnails</th>
+              <td><span class="mark is-yes">Yes</span>. See <a href="./seek-thumbs.html">seek thumbnails</a></td>
+              <td><span class="mark is-yes">Yes</span></td>
+            </tr>
+            <tr>
+              <th scope="row">360° and HDR</th>
+              <td><span class="mark is-yes">Yes</span>. See <a href="./360.html">360</a> and <a href="./hdr.html">HDR</a></td>
+              <td><span class="mark is-yes">Yes</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Live streaming</th>
+              <td><span class="mark is-yes">Yes</span>. See <a href="./live-streaming.html">live streaming</a></td>
+              <td><span class="mark is-yes">Yes</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="fit-heading">
+      <h2 id="fit-heading">Which one fits</h2>
+      <div class="tradeoffs">
+        <div class="tradeoff">
+          <h3>Cloudinary Video Player</h3>
+          <ul>
+            <li>Your brand, your page and your data. No third-party logo, ads or end screen.</li>
+            <li>Content that must stay private, gated or under your delivery rules.</li>
+            <li>Product and marketing pages where interactivity, SEO and consent handling matter.</li>
+          </ul>
+        </div>
+        <div class="tradeoff is-warning">
+          <h3>YouTube embed</h3>
+          <ul>
+            <li>Free hosting and transcoding, with no storage or bandwidth cost to you.</li>
+            <li>Discovery on YouTube itself, when the video is also a YouTube channel asset.</li>
+            <li>Quick embeds where branding, privacy and page performance are not a concern.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="code-heading">
+      <h2 id="code-heading">The two embeds on this page</h2>
+      <pre class="code-block"><code class="language-javascript">// Cloudinary: a &lt;video&gt; element in your page
+cloudinary.videoPlayer('player-cld', {
+  cloudName: 'prod',
+  publicId: 'video/examples/big_buck_bunny_trailer_720p',
+  muted: true
+});
+
+// YouTube: an iframe created by the IFrame Player API
+new YT.Player('player-yt', {
+  host: 'https://www.youtube-nocookie.com',
+  videoId: 'aqz-KE-bpKQ',
+  playerVars: { mute: 1, playsinline: 1, rel: 0 }
+});</code></pre>
+      <p class="prose">Further reading: <a href="https://web.dev/articles/third-party-facades">Lazy load third-party resources with facades (web.dev)</a> and <a href="https://cloudinary.com/documentation/cloudinary_video_player">the Cloudinary Video Player documentation</a>.</p>
+    </section>
+  </main>
+</body>
+</html>
