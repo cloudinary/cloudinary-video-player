@@ -414,6 +414,10 @@ $icon-font-path: '../icon-font' !default;
     }
   }
 
+  .vjs-descriptions-button > .vjs-icon-placeholder:before {
+    content: '\f12b';
+  }
+
   .vjs-menu {
     .vjs-selected {
       background: none;
