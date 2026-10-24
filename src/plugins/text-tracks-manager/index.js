@@ -11,7 +11,7 @@ const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode
 function textTracksManager() {
   const player = this;
   const textTracksData = new WeakMap();
-  let activeTrack = null;
+  let showingTracks = new Set();
 
   const removeAllTextTracks = () => {
     const currentTracks = player.remoteTextTracks();
@@ -162,44 +162,30 @@ function textTracksManager() {
       }
     });
 
-    const defaultTextTrack = Array.from(player.remoteTextTracks()).find((textTrack) => textTrack.default);
-    if (defaultTextTrack) {
-      onChangeActiveTrack(defaultTextTrack);
-    }
+    syncShowingTracks();
   };
 
-  const onChangeActiveTrack = (textTrack) => {
-    const prevActiveTrack = activeTrack;
-    activeTrack = textTrack;
+  // Several tracks can show at once (e.g. descriptions + captions), so each one needs its cues loaded
+  const syncShowingTracks = () => {
+    const textTracks = Array.from(player.textTracks());
+    const nowShowing = new Set(textTracks.filter((track) => track.mode === 'showing'));
 
-    const prevTextTrackData = textTracksData.get(prevActiveTrack);
-    if (prevTextTrackData) {
-      prevTextTrackData.abortLoading();
-    }
-
-    const selectedTextTrackData = textTracksData.get(activeTrack);
-    if (selectedTextTrackData) {
-      selectedTextTrackData.load();
-    }
-  };
-
-  player.on('texttrackchange', () => {
-    const textTracks = player.textTracks();
-    let newActiveTrack = null;
-
-    for (let i = 0; i < textTracks.length; i++) {
-      const track = textTracks[i];
-
-      if (track.mode === 'showing') {
-        newActiveTrack = track;
-        break;
+    showingTracks.forEach((track) => {
+      if (!nowShowing.has(track)) {
+        textTracksData.get(track)?.abortLoading();
       }
-    }
+    });
 
-    if (activeTrack !== newActiveTrack) {
-      onChangeActiveTrack(newActiveTrack);
-    }
-  });
+    nowShowing.forEach((track) => {
+      if (!showingTracks.has(track)) {
+        textTracksData.get(track)?.load();
+      }
+    });
+
+    showingTracks = nowShowing;
+  };
+
+  player.on('texttrackchange', syncShowingTracks);
 
   return {
     removeAllTextTracks,
