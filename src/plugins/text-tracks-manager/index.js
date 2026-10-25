@@ -168,7 +168,8 @@ function textTracksManager() {
   // Several tracks can show at once (e.g. descriptions + captions), so each one needs its cues loaded
   const syncShowingTracks = () => {
     const textTracks = Array.from(player.textTracks());
-    const nowShowing = new Set(textTracks.filter((track) => track.mode === 'showing'));
+    // texttrackchange can fire inside addRemoteTextTrack, before the track's data exists - skip it until then
+    const nowShowing = new Set(textTracks.filter((track) => track.mode === 'showing' && textTracksData.has(track)));
 
     showingTracks.forEach((track) => {
       if (!nowShowing.has(track)) {

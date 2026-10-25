@@ -27,6 +27,8 @@ const createPlayer = () => {
     addRemoteTextTrack: ({ kind, label, mode }) => {
       const track = { kind, label, mode };
       tracks.push(track);
+      // Video.js fires texttrackchange synchronously while adding the track
+      handlers.texttrackchange?.();
       return { track };
     },
     on: (event, handler) => { handlers[event] = handler; },
