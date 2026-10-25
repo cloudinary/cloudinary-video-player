@@ -64,24 +64,32 @@ const mergeTransformations = (initTransformation1, transformation2) => {
   return new Transformation(transformation1).fromOptions(transformation2).toOptions();
 };
 
-// Video-only transformation keys invalid for static images (e.g. poster, sprite).
-// fetch_format and its format alias would turn a poster or sprite into a video (or a 400 for fl_sprite).
-export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec', 'fetch_format', 'format'];
+// Video-only transformation keys invalid for static images (e.g. poster, sprite)
+export const VIDEO_ONLY_TRANSFORMATION_KEYS = ['streaming_profile', 'video_codec'];
 
-const filterTxArray = (arr) =>
-  arr.map((t) => omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS)).filter((t) => Object.keys(t).length > 0);
+// fetch_format and its format alias would turn a poster into a video, and fl_sprite rejects any format.
+// Posters may keep f_auto, which picks the best image format.
+const FORMAT_KEYS = ['fetch_format', 'format'];
 
-export const omitVideoOnlyTransformations = (transformation) => {
+const omitVideoOnlyKeys = (t, keepAutoFormat) => {
+  const formatKeys = FORMAT_KEYS.filter((key) => !(keepAutoFormat && t[key] === 'auto'));
+  return omit(t, VIDEO_ONLY_TRANSFORMATION_KEYS.concat(formatKeys));
+};
+
+const filterTxArray = (arr, keepAutoFormat) =>
+  arr.map((t) => omitVideoOnlyKeys(t, keepAutoFormat)).filter((t) => Object.keys(t).length > 0);
+
+export const omitVideoOnlyTransformations = (transformation, { keepAutoFormat = false } = {}) => {
   if (!transformation || typeof transformation !== 'object') return transformation;
   if (Array.isArray(transformation)) {
-    return filterTxArray(transformation);
+    return filterTxArray(transformation, keepAutoFormat);
   }
   if (Array.isArray(transformation?.transformation)) {
-    const result = omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
-    result.transformation = filterTxArray(transformation.transformation);
+    const result = omitVideoOnlyKeys(transformation, keepAutoFormat);
+    result.transformation = filterTxArray(transformation.transformation, keepAutoFormat);
     return result;
   }
-  return omit(transformation, VIDEO_ONLY_TRANSFORMATION_KEYS);
+  return omitVideoOnlyKeys(transformation, keepAutoFormat);
 };
 
 const ERROR_CODE = {
