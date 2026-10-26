@@ -1,3 +1,12 @@
+## [4.1.5](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.4...v4.1.5) (2026-10-26)
+
+
+### Bug Fixes
+
+* **VIDEO-21304:** stop pinning HEVC HLS to lowest level on iOS ([#1104](https://github.com/cloudinary/cloudinary-video-player/issues/1104)) ([ca85027](https://github.com/cloudinary/cloudinary-video-player/commit/ca8502785d81ad33eb8892f318eea214a1b050ee))
+
+
+
 ## [4.1.4](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.3...v4.1.4) (2026-10-25)
 
 
