@@ -31,8 +31,8 @@ describe('adaptive streaming hls.js config', () => {
 
   it('keeps hls.js defaults on other platforms', async () => {
     const config = await getHlsjsConfig(false);
-    expect(config.useMediaCapabilities).toBe(true);
-    expect(config.capLevelOnFPSDrop).toBe(false);
+    expect(config).not.toHaveProperty('useMediaCapabilities');
+    expect(config).not.toHaveProperty('capLevelOnFPSDrop');
   });
 
   it('keeps the selected strategy settings', async () => {

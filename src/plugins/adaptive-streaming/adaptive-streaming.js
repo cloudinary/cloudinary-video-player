@@ -10,9 +10,8 @@ export default async function adaptiveStreamingPlugin(player, options) {
   const config = {
     ...abrStrategies[options.strategy],
     // iOS reports HEVC renditions as not smooth despite HW decoding, so hls.js pins the lowest level.
-    // Rely on measured frame drops instead.
-    useMediaCapabilities: !videojs.browser.IS_IOS,
-    capLevelOnFPSDrop: videojs.browser.IS_IOS,
+    // Rely on measured frame drops instead. Other platforms keep the hls.js defaults.
+    ...(videojs.browser.IS_IOS && { useMediaCapabilities: false, capLevelOnFPSDrop: true }),
     videoPreference: hdrSupported ? { preferHDR: true } : undefined
   };
 
