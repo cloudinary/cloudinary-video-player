@@ -1,3 +1,14 @@
+## [4.1.4](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.3...v4.1.4) (2026-10-25)
+
+
+### Bug Fixes
+
+* drop fetch_format from poster and seek-thumbnail transformations ([#1100](https://github.com/cloudinary/cloudinary-video-player/issues/1100)) ([0bcb527](https://github.com/cloudinary/cloudinary-video-player/commit/0bcb52769bcb2cb2750b8e80d76ffc86fa278954))
+* respect caller format and allow opting out of f_auto ([#1097](https://github.com/cloudinary/cloudinary-video-player/issues/1097)) ([18f7ca4](https://github.com/cloudinary/cloudinary-video-player/commit/18f7ca43fe69f89d5852c2a4580fb58c0e2bf369))
+* **VIDEO-21274, VIDEO-21273:** captions with descriptions + AD button icon ([#1103](https://github.com/cloudinary/cloudinary-video-player/issues/1103)) ([bac77db](https://github.com/cloudinary/cloudinary-video-player/commit/bac77db67bff5da355a061a6a7bc8b05442dec05))
+
+
+
 ## [4.1.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.2...v4.1.3) (2026-10-01)
 
 
