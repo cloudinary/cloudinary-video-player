@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloudinary Video Player - As-is delivery</title>
+  <link href="https://res.cloudinary.com/cloudinary-marketing/image/upload/f_auto,q_auto/c_scale,w_32/v1597183771/creative_staging/cloudinary_internal/Website/Brand%20Updates/Favicon/cloudinary_web_favicon_192x192.png" rel="icon" type="image/png">
+
+  <!-- Bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!--
+    We're loading scripts & style dynamically for development/testing.
+    Real-world usage would look like this:
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.js"></script>
+  -->
+
+  <script type="text/javascript" src="./scripts.js"></script>
+
+  <style>
+    :root {
+      /* Spacing (4px base) */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 24px;
+      --space-6: 32px;
+      --space-7: 48px;
+      --space-8: 64px;
+
+      /* Color: one accent, neutrals, semantic states */
+      --accent: #0056b3;
+      --accent-subtle: #e8f0fb;
+      --fg: #212529;
+      --fg-muted: #5f6b76;
+      --bg: #fff;
+      --bg-subtle: #f6f8fa;
+      --border: #dfe3e8;
+      --warning-fg: #7a4d00;
+      --warning-bg: #fff7e6;
+      --warning-border: #f5d9a3;
+      --danger-fg: #a4161a;
+      --code-bg: #fdf6e3; /* matches the solarized-light highlight theme */
+
+      --radius-control: 4px;
+      --radius-card: 8px;
+      --radius-surface: 12px;
+      --shadow-subtle: 0 1px 2px rgba(16, 24, 40, 0.06), 0 1px 3px rgba(16, 24, 40, 0.08);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    h1, h2, h3, strong, th { font-weight: 600; }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      /* Bottom padding clears the fixed version selector from scripts.js */
+      padding: var(--space-6) var(--space-4) var(--space-8);
+    }
+
+    .prose { max-width: 68ch; }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2);
+    }
+
+    .page h1 { font-size: 32px; line-height: 1.2; margin-bottom: var(--space-4); }
+    .page h2 { font-size: 24px; line-height: 1.3; margin: var(--space-7) 0 var(--space-4); }
+    .page h3 { font-size: 20px; line-height: 1.3; margin-bottom: var(--space-2); }
+    .lead-text { font-size: 20px; color: var(--fg-muted); margin-bottom: var(--space-5); }
+
+    code { color: var(--fg); background: var(--bg-subtle); padding: 1px var(--space-1); border-radius: var(--radius-control); }
+    pre code { background: none; padding: 0; }
+
+    /* Variant cards */
+    .variants {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    @media (min-width: 992px) {
+      .variants { grid-template-columns: 1fr 1fr; }
+    }
+
+    .variant {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-surface);
+      box-shadow: var(--shadow-subtle);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .variant-body { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); flex: 1; }
+    .variant-body p { margin: 0; color: var(--fg-muted); }
+    .variant-config { font-size: 14px; }
+
+    /* Live delivery details */
+    .details { margin: 0; border-top: 1px solid var(--border); padding-top: var(--space-4); margin-top: auto; }
+    .details-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0 var(--space-3);
+      padding: var(--space-1) 0;
+      font-size: 14px;
+    }
+    @media (min-width: 480px) {
+      .details-row { grid-template-columns: calc(var(--space-8) * 2) 1fr; }
+    }
+    .details dt { color: var(--fg-muted); font-weight: 400; }
+    .details dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+    .url-host { color: var(--fg-muted); }
+    .url-path { font-weight: 600; }
+    .tag {
+      display: inline-block;
+      margin-left: var(--space-2);
+      padding: 0 var(--space-2);
+      border-radius: 9999px;
+      background: var(--accent-subtle);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    [data-state="loading"] { color: var(--fg-muted); }
+    [data-state="loading"]::after { content: "Measuring…"; animation: pulse 1.2s ease-in-out infinite; }
+    [data-state="error"] { color: var(--danger-fg); }
+    @keyframes pulse { 50% { opacity: 0.4; } }
+    @media (prefers-reduced-motion: reduce) {
+      [data-state="loading"]::after { animation: none; }
+    }
+
+    /* Trade-offs */
+    .tradeoffs { display: grid; grid-template-columns: 1fr; gap: var(--space-4); }
+    @media (min-width: 768px) {
+      .tradeoffs { grid-template-columns: 1fr 1fr; }
+    }
+    .tradeoff {
+      border-radius: var(--radius-card);
+      padding: var(--space-4) var(--space-5);
+      border: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .tradeoff.is-warning { background: var(--warning-bg); border-color: var(--warning-border); }
+    .tradeoff.is-warning h3 { color: var(--warning-fg); }
+    .tradeoff h3 { font-size: 16px; }
+    .tradeoff ul { margin: 0; padding-left: var(--space-5); }
+    .tradeoff li + li { margin-top: var(--space-2); }
+
+    /* Reference table */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); }
+    .ref-table { width: 100%; margin: 0; font-size: 14px; }
+    .ref-table caption { caption-side: top; padding: var(--space-3) var(--space-4); color: var(--fg-muted); }
+    .ref-table th, .ref-table td { padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border); vertical-align: top; }
+    .ref-table thead th { background: var(--bg-subtle); border-top: 0; }
+    .ref-table tr.is-highlight td { background: var(--accent-subtle); }
+
+    pre.code-block {
+      background: var(--code-bg);
+      border-radius: var(--radius-card);
+      padding: var(--space-4);
+      font-size: 14px;
+    }
+
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-control); }
+  </style>
+
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      var cloudName = 'demo';
+      var publicId = 'sea_turtle';
+
+      function formatBytes(bytes) {
+        return bytes >= 1e6 ? (bytes / 1e6).toFixed(1) + ' MB' : Math.round(bytes / 1e3) + ' KB';
+      }
+
+      function setDetail(el, state, text) {
+        el.dataset.state = state;
+        el.textContent = text || '';
+      }
+
+      // HEAD the delivery URL to report what this browser actually receives
+      function describe(url) {
+        return fetch(url, { method: 'HEAD' }).then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          var length = res.headers.get('content-length');
+          return {
+            type: res.headers.get('content-type'),
+            size: length ? formatBytes(Number(length)) : 'Not reported (generated on the fly)'
+          };
+        });
+      }
+
+      function showUrl(el, url) {
+        var parts = url.split('?')[0].split('/upload/');
+        var host = document.createElement('span');
+        host.className = 'url-host';
+        host.textContent = '…/upload/';
+        var path = document.createElement('span');
+        path.className = 'url-path';
+        path.textContent = parts[1];
+        el.textContent = '';
+        el.append(host, path);
+        el.dataset.state = 'ready';
+      }
+
+      function whenSrc(player) {
+        var vjs = player.videojs;
+        return vjs.currentSrc()
+          ? Promise.resolve(vjs.currentSrc())
+          : new Promise(function (resolve) { vjs.one('loadstart', function () { resolve(vjs.currentSrc()); }); });
+      }
+
+      function initVariant(key, sourceOptions, compareToDefault) {
+        var urlEl = document.getElementById(key + '-url');
+        var typeEl = document.getElementById(key + '-type');
+        var sizeEl = document.getElementById(key + '-size');
+        var defaultEl = document.getElementById(key + '-default');
+        var detailEls = [urlEl, typeEl, sizeEl, defaultEl].filter(Boolean);
+
+        function failPending(message) {
+          detailEls.forEach(function (el) {
+            if (el.dataset.state === 'loading') setDetail(el, 'error', message);
+          });
+        }
+
+        // The default bundle loads the player lazily, so wait for it before using videojs
+        cloudinary.videoPlayer('player-' + key, Object.assign({
+          cloudName: cloudName,
+          publicId: publicId,
+          fluid: true,
+          muted: true
+        }, sourceOptions)).then(function (player) {
+          player.videojs.on('error', function () { failPending('The video could not be loaded'); });
+          return whenSrc(player);
+        }).then(function (src) {
+          showUrl(urlEl, src);
+
+          describe(src).then(function (info) {
+            setDetail(typeEl, 'ready', info.type);
+            setDetail(sizeEl, 'ready', info.size);
+          }).catch(function (err) {
+            setDetail(typeEl, 'error', 'Could not load details (' + err.message + ')');
+            setDetail(sizeEl, 'error', '—');
+          });
+
+          if (compareToDefault) {
+            // Same asset with the player's default f_auto:video, for comparison
+            describe(src.replace('/upload/', '/upload/f_auto:video/')).then(function (info) {
+              setDetail(defaultEl, 'ready', info.size + ' · ' + info.type);
+            }).catch(function (err) {
+              setDetail(defaultEl, 'error', 'Could not load details (' + err.message + ')');
+            });
+          }
+        }).catch(function () {
+          failPending('The player could not be loaded');
+        });
+      }
+
+      initVariant('original', { sourceTypes: [''] }, true);
+      initVariant('resized', { sourceTypes: [''], transformation: { width: 640, crop: 'limit' } }, false);
+    }, false);
+  </script>
+</head>
+<body>
+  <main class="page">
+    <nav class="mb-4">
+      <a href="./index.html">&#60;&#60; Back to examples index</a>
+    </nav>
+
+    <header class="prose">
+      <p class="eyebrow">Delivery formats</p>
+      <h1>Deliver videos as-is</h1>
+      <p class="lead-text">
+        By default the player adds <code>f_auto:video</code> to every URL, so Cloudinary picks the best format for each browser.
+        Set <code>sourceTypes: ['']</code> to skip it and deliver the stored file unchanged.
+      </p>
+    </header>
+
+    <section aria-labelledby="examples-heading">
+      <h2 id="examples-heading" class="sr-only">Examples</h2>
+      <div class="variants">
+        <article class="variant" aria-labelledby="original-heading">
+          <video id="player-original" class="cld-video-player" playsinline controls muted></video>
+          <div class="variant-body">
+            <div>
+              <h3 id="original-heading">The original file</h3>
+              <p>No format conversion and no file extension. Cloudinary serves the file exactly as it was uploaded.</p>
+            </div>
+            <pre class="variant-config mb-0"><code class="language-javascript">sourceTypes: ['']</code></pre>
+            <dl class="details" aria-live="polite">
+              <div class="details-row">
+                <dt>Delivered URL</dt>
+                <dd><span id="original-url" data-state="loading"></span> <span class="tag">No transformation</span></dd>
+              </div>
+              <div class="details-row">
+                <dt>Content type</dt>
+                <dd id="original-type" data-state="loading"></dd>
+              </div>
+              <div class="details-row">
+                <dt>File size</dt>
+                <dd id="original-size" data-state="loading"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Default would be</dt>
+                <dd id="original-default" data-state="loading"></dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="variant" aria-labelledby="resized-heading">
+          <video id="player-resized" class="cld-video-player" playsinline controls muted></video>
+          <div class="variant-body">
+            <div>
+              <h3 id="resized-heading">With your own transformations</h3>
+              <p>Other transformations still apply. The player only leaves out <code>f_auto:video</code>, so the output keeps the original format.</p>
+            </div>
+            <pre class="variant-config mb-0"><code class="language-javascript">sourceTypes: [''],
+transformation: { width: 640, crop: 'limit' }</code></pre>
+            <dl class="details" aria-live="polite">
+              <div class="details-row">
+                <dt>Delivered URL</dt>
+                <dd id="resized-url" data-state="loading"></dd>
+              </div>
+              <div class="details-row">
+                <dt>Content type</dt>
+                <dd id="resized-type" data-state="loading"></dd>
+              </div>
+              <div class="details-row">
+                <dt>File size</dt>
+                <dd id="resized-size" data-state="loading"></dd>
+              </div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="tradeoffs-heading">
+      <h2 id="tradeoffs-heading">When to use it</h2>
+      <div class="tradeoffs">
+        <div class="tradeoff">
+          <h3>Good fit</h3>
+          <ul>
+            <li>You want the exact bytes you uploaded, for example for compliance or archival viewing.</li>
+            <li>Your files are already web-ready (for example MP4 with H.264), and you want to avoid format-conversion transformations.</li>
+          </ul>
+        </div>
+        <div class="tradeoff is-warning">
+          <h3>Trade-offs</h3>
+          <ul>
+            <li>No format optimization. Files are often much larger, which costs more bandwidth and loads more slowly. Compare the sizes above.</li>
+            <li>The browser must support the original container and codec. A <code>.mov</code> or HEVC upload may not play everywhere.</li>
+            <li>Account-level optimization settings, such as optimize by default, still apply to the URL.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="reference-heading">
+      <h2 id="reference-heading">How <code>sourceTypes</code> changes the URL</h2>
+      <div class="table-wrap">
+        <table class="ref-table">
+          <caption>Delivery URLs for <code>sea_turtle</code></caption>
+          <thead>
+            <tr>
+              <th scope="col">Configuration</th>
+              <th scope="col">Delivered path</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>sourceTypes: ['auto']</code> (default)</td>
+              <td><code>f_auto:video/sea_turtle</code></td>
+              <td>Best format for each browser</td>
+            </tr>
+            <tr>
+              <td><code>sourceTypes: ['mp4']</code></td>
+              <td><code>sea_turtle.mp4</code></td>
+              <td>Converted to MP4 if needed</td>
+            </tr>
+            <tr class="is-highlight">
+              <td><code>sourceTypes: ['']</code></td>
+              <td><code>sea_turtle</code></td>
+              <td>Original file, unchanged</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="code-heading">
+      <h2 id="code-heading">Example code</h2>
+      <p class="prose">Set it on the player to apply it to every source, or on a single source.</p>
+      <pre class="code-block"><code class="language-javascript">// Every source in this player
+const player = cloudinary.videoPlayer('player', {
+  cloudName: 'demo',
+  sourceTypes: ['']
+});
+
+// Or a single source
+player.source('sea_turtle', { sourceTypes: [''] });</code></pre>
+      <p class="mt-4">
+        <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
