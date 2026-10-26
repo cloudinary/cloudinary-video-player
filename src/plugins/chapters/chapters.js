@@ -4,6 +4,7 @@ import './chapters.scss';
 import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { utf8ToBase64 } from '../../utils/utf8Base64';
 import { appendQueryParams } from '../../utils/querystring';
+import { toCredentialedBlobUrl, revokeBlobUrls } from '../../utils/credentialed-blob-url';
 
 /**
  * Chapters plugin.
@@ -38,6 +39,7 @@ const ChaptersPlugin = (function () {
   function ChaptersPlugin(player, options) {
     this.player = player;
     this.options = options;
+    this.blobUrls = new Set();
     this.player.one('loadedmetadata', this.initializeChapters.bind(this));
     return this;
   }
@@ -60,6 +62,7 @@ const ChaptersPlugin = (function () {
       this.player.removeRemoteTextTrack(this.chaptersTrack);
       delete this.chaptersTrack;
     }
+    revokeBlobUrls(this.blobUrls);
   };
 
   ChaptersPlugin.prototype.getChaptersFileUrlByName = function getChaptersFileUrlByName() {
@@ -80,13 +83,20 @@ const ChaptersPlugin = (function () {
    * Bootstrap the plugin.
    */
   ChaptersPlugin.prototype.initializeChapters = async function initializeChapters() {
-    const chaptersUrl = this.options === true ? this.getChaptersFileUrlByName() : this.options.url;
+    const options = this.options;
+    const chaptersUrl = options === true ? this.getChaptersFileUrlByName() : options.url;
 
     if (chaptersUrl) {
-      // Fetch chapters VTT from URL
+      // A credentialed chapters file is fetched up front so Video.js loads it from a same-origin Blob URL
+      const withCredentials = this.player.cloudinary.source?.().withCredentials;
+      const src = withCredentials ? await toCredentialedBlobUrl(chaptersUrl, this.blobUrls) : chaptersUrl;
+      if (options !== this.options) {
+        // The source changed while fetching; resetPlugin revoked the blob url and re-armed initializeChapters
+        return;
+      }
       const chaptersTrack = {
         kind: 'chapters',
-        src: chaptersUrl,
+        src,
         default: true
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
