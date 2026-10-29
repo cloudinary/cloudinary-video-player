@@ -40,6 +40,7 @@ const ChaptersPlugin = (function () {
     this.player = player;
     this.options = options;
     this.blobUrls = new Set();
+    this.generation = 0;
     this.player.one('loadedmetadata', this.initializeChapters.bind(this));
     return this;
   }
@@ -55,6 +56,7 @@ const ChaptersPlugin = (function () {
   };
 
   ChaptersPlugin.prototype.resetPlugin = function resetPlugin() {
+    this.generation++;
     if (this.chaptersTrack) {
       this.player.$('.vjs-control-bar-chapter-display').remove();
       this.player.$('.vjs-chapter-display').remove();
@@ -83,17 +85,20 @@ const ChaptersPlugin = (function () {
    * Bootstrap the plugin.
    */
   ChaptersPlugin.prototype.initializeChapters = async function initializeChapters() {
-    const options = this.options;
-    const chaptersUrl = options === true ? this.getChaptersFileUrlByName() : options.url;
+    const chaptersUrl = this.options === true ? this.getChaptersFileUrlByName() : this.options.url;
 
     if (chaptersUrl) {
-      // A credentialed chapters file is fetched up front so Video.js loads it from a same-origin Blob URL
+      // A credentialed chapters file is fetched up front so Video.js loads it from a same-origin Blob URL.
+      // The result is dropped when resetPlugin ran meanwhile; it re-arms initializeChapters for a new source.
+      const generation = this.generation;
       const withCredentials = this.player.cloudinary.source?.().withCredentials;
-      const src = withCredentials ? await toCredentialedBlobUrl(chaptersUrl, this.blobUrls) : chaptersUrl;
-      if (options !== this.options) {
-        // The source changed while fetching; resetPlugin revoked the blob url and re-armed initializeChapters
+      const pendingBlobUrls = new Set();
+      const src = withCredentials ? await toCredentialedBlobUrl(chaptersUrl, pendingBlobUrls) : chaptersUrl;
+      if (generation !== this.generation) {
+        revokeBlobUrls(pendingBlobUrls);
         return;
       }
+      pendingBlobUrls.forEach((blobUrl) => this.blobUrls.add(blobUrl));
       const chaptersTrack = {
         kind: 'chapters',
         src,
