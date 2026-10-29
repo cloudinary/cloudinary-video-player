@@ -4,6 +4,7 @@ import './chapters.scss';
 import { getCloudinaryUrlPrefix } from '../cloudinary/common';
 import { utf8ToBase64 } from '../../utils/utf8Base64';
 import { appendQueryParams } from '../../utils/querystring';
+import { toCredentialedBlobUrl, revokeBlobUrls } from '../../utils/credentialed-blob-url';
 
 /**
  * Chapters plugin.
@@ -38,6 +39,8 @@ const ChaptersPlugin = (function () {
   function ChaptersPlugin(player, options) {
     this.player = player;
     this.options = options;
+    this.blobUrls = new Set();
+    this.generation = 0;
     this.player.one('loadedmetadata', this.initializeChapters.bind(this));
     return this;
   }
@@ -53,6 +56,7 @@ const ChaptersPlugin = (function () {
   };
 
   ChaptersPlugin.prototype.resetPlugin = function resetPlugin() {
+    this.generation++;
     if (this.chaptersTrack) {
       this.player.$('.vjs-control-bar-chapter-display').remove();
       this.player.$('.vjs-chapter-display').remove();
@@ -60,6 +64,7 @@ const ChaptersPlugin = (function () {
       this.player.removeRemoteTextTrack(this.chaptersTrack);
       delete this.chaptersTrack;
     }
+    revokeBlobUrls(this.blobUrls);
   };
 
   ChaptersPlugin.prototype.getChaptersFileUrlByName = function getChaptersFileUrlByName() {
@@ -83,10 +88,20 @@ const ChaptersPlugin = (function () {
     const chaptersUrl = this.options === true ? this.getChaptersFileUrlByName() : this.options.url;
 
     if (chaptersUrl) {
-      // Fetch chapters VTT from URL
+      // A credentialed chapters file is fetched up front so Video.js loads it from a same-origin Blob URL.
+      // The result is dropped when resetPlugin ran meanwhile; it re-arms initializeChapters for a new source.
+      const generation = this.generation;
+      const withCredentials = this.player.cloudinary.source?.().withCredentials;
+      const pendingBlobUrls = new Set();
+      const src = withCredentials ? await toCredentialedBlobUrl(chaptersUrl, pendingBlobUrls) : chaptersUrl;
+      if (generation !== this.generation) {
+        revokeBlobUrls(pendingBlobUrls);
+        return;
+      }
+      pendingBlobUrls.forEach((blobUrl) => this.blobUrls.add(blobUrl));
       const chaptersTrack = {
         kind: 'chapters',
-        src: chaptersUrl,
+        src,
         default: true
       };
       const textTrack = this.player.addRemoteTextTrack(chaptersTrack);
