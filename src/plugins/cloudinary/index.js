@@ -384,9 +384,6 @@ class CloudinaryContext {
         }
         return srcs;
       }, []);
-      if (src.withCredentials) {
-        this.player.crossOrigin('use-credentials');
-      }
       this.player.src(_sources);
 
       _lastSource = src;
