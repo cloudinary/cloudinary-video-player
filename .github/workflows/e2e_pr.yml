@@ -57,7 +57,7 @@ jobs:
           retention-days: 30
 
       - name: Pushes to reports repository
-        if: always()
+        if: always() && github.actor != 'dependabot[bot]'
         uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
