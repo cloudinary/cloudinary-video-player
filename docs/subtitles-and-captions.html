@@ -228,6 +228,45 @@
           ]
         }
       });
+
+      // Portrait (9:16) player - captions are sized by width and pinned to the bottom
+      const portraitPlayer = cloudinary.videoPlayer('portrait', {
+        cloudName: 'prod',
+        muted: true
+      });
+
+      portraitPlayer.source('video/examples/cloudinary-marketing-pm', {
+        aspectRatio: '9:16',
+        cropMode: 'fill',
+        textTracks: {
+          captions: {
+            label: 'English',
+            default: true
+          }
+        }
+      });
+
+      // Descriptions + subtitles (both load lazily from transcripts)
+      const descriptionsPlayer = cloudinary.videoPlayer('descriptions', {
+        cloudName: 'prod'
+      });
+
+      descriptionsPlayer.source('video/examples/cloudinary-marketing-pm', {
+        textTracks: {
+          descriptions: [
+            {
+              label: 'AD',
+              language: 'en-US'
+            }
+          ],
+          subtitles: [
+            {
+              label: 'Polish',
+              language: 'pl-PL'
+            }
+          ]
+        }
+      });
     }, false);
   </script>
 </head>
@@ -329,6 +368,32 @@
       crossorigin="anonymous"
       width="500"
     ></video>
+
+    <h4 class="mt-4 mb-2">Descriptions + Subtitles</h4>
+
+    <p>Turn on AD in the Descriptions menu, then select Polish in the CC menu. The subtitles should show.</p>
+
+    <video
+      id="descriptions"
+      playsinline
+      controls
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Portrait (9:16) player</h4>
+
+    <div style="max-width: 280px">
+      <video
+        id="portrait"
+        playsinline
+        controls
+        class="cld-video-player cld-fluid"
+        crossorigin="anonymous"
+        width="280"
+      ></video>
+    </div>
 
     <p class="mt-4">
       <a href="https://cloudinary.com/documentation/cloudinary_video_player">Full documentation</a>
@@ -536,6 +601,45 @@
           }
         });
 
+
+        // Portrait (9:16) player - captions are sized by width and pinned to the bottom
+        const portraitPlayer = cloudinary.videoPlayer('portrait', {
+          cloudName: 'prod'
+        });
+
+        portraitPlayer.source('video/examples/cloudinary-marketing-pm', {
+          aspectRatio: '9:16',
+          cropMode: 'fill',
+          textTracks: {
+            captions: {
+              label: 'English',
+              default: true
+            }
+          }
+        });
+
+
+        // Descriptions + subtitles (both load lazily from transcripts)
+        const descriptionsPlayer = cloudinary.videoPlayer('descriptions', {
+          cloudName: 'prod'
+        });
+
+        descriptionsPlayer.source('video/examples/cloudinary-marketing-pm', {
+          textTracks: {
+            descriptions: [
+              {
+                label: 'AD',
+                language: 'en-US'
+              }
+            ],
+            subtitles: [
+              {
+                label: 'Polish',
+                language: 'pl-PL'
+              }
+            ]
+          }
+        });
 
       </code>
     </pre>

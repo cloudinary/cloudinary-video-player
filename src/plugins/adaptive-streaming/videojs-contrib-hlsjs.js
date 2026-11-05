@@ -105,6 +105,7 @@ function Html5HlsJS(source, tech) {
   // if native text tracks are not supported on this browser.
   if (!tech.featuresNativeTextTracks) {
     Object.defineProperty(el, 'textTracks', {
+      configurable: true,
       get: function() {
         try {
           return typeof tech.textTracks === 'function' ? tech.textTracks() : tech.textTracks;

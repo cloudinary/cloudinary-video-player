@@ -4,6 +4,7 @@ import { transcriptParser } from './parsers/transcriptParser';
 import { srtParser } from './parsers/srtParser';
 import { addTextTrackCues, fetchFileContent, refreshTextTrack, removeAllTextTrackCues } from './utils';
 import { appendQueryParams } from '../../utils/querystring';
+import { toCredentialedBlobUrl, revokeBlobUrls } from '../../utils/credentialed-blob-url';
 
 const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode = null) =>
   `${urlPrefix}/_applet_/video_service/transcription/${deliveryType}/${languageCode ? `${languageCode}/` : ''}${utf8ToBase64(publicId)}.transcript`;
@@ -11,9 +12,13 @@ const getTranscriptionFileUrl = (urlPrefix, deliveryType, publicId, languageCode
 function textTracksManager() {
   const player = this;
   const textTracksData = new WeakMap();
-  let activeTrack = null;
+  const blobUrls = new Set();
+  let showingTracks = new Set();
+  let generation = 0;
 
   const removeAllTextTracks = () => {
+    generation++;
+    revokeBlobUrls(blobUrls);
     const currentTracks = player.remoteTextTracks();
     if (currentTracks) {
       for (let i = currentTracks.tracks_.length - 1; i >= 0; i--) {
@@ -151,10 +156,12 @@ function textTracksManager() {
   };
 
 
-  const addTextTracks = (textTracks) => {
-    textTracks.forEach(textTrackConfig => {
-      if (textTrackConfig.src && textTrackConfig.src.endsWith('.vtt')) {
-        addNativeVttTrack(textTrackConfig);
+  const isNativeVtt = (textTrackConfig) => textTrackConfig.src && textTrackConfig.src.endsWith('.vtt');
+
+  const addResolvedTextTracks = (textTracks, nativeVttSrcs) => {
+    textTracks.forEach((textTrackConfig, index) => {
+      if (isNativeVtt(textTrackConfig)) {
+        addNativeVttTrack({ ...textTrackConfig, src: nativeVttSrcs[index] });
       } else if (textTrackConfig.src && textTrackConfig.src.endsWith('.srt')) {
         addTextTrack('srt', textTrackConfig);
       } else if (!textTrackConfig.src || textTrackConfig.src.endsWith('.transcript')) {
@@ -162,44 +169,55 @@ function textTracksManager() {
       }
     });
 
-    const defaultTextTrack = Array.from(player.remoteTextTracks()).find((textTrack) => textTrack.default);
-    if (defaultTextTrack) {
-      onChangeActiveTrack(defaultTextTrack);
-    }
+    syncShowingTracks();
   };
 
-  const onChangeActiveTrack = (textTrack) => {
-    const prevActiveTrack = activeTrack;
-    activeTrack = textTrack;
-
-    const prevTextTrackData = textTracksData.get(prevActiveTrack);
-    if (prevTextTrackData) {
-      prevTextTrackData.abortLoading();
+  // Credentialed VTT files are fetched up front, in parallel, so Video.js loads them from
+  // same-origin Blob URLs. Tracks are added only once all are resolved to keep their order,
+  // and skipped when the source changed meanwhile.
+  const addTextTracks = (textTracks) => {
+    const withCredentials = player.cloudinary.source?.().withCredentials;
+    if (!withCredentials || !textTracks.some(isNativeVtt)) {
+      addResolvedTextTracks(textTracks, textTracks.map((textTrackConfig) => textTrackConfig.src));
+      return;
     }
 
-    const selectedTextTrackData = textTracksData.get(activeTrack);
-    if (selectedTextTrackData) {
-      selectedTextTrackData.load();
-    }
-  };
-
-  player.on('texttrackchange', () => {
-    const textTracks = player.textTracks();
-    let newActiveTrack = null;
-
-    for (let i = 0; i < textTracks.length; i++) {
-      const track = textTracks[i];
-
-      if (track.mode === 'showing') {
-        newActiveTrack = track;
-        break;
+    const currentGeneration = generation;
+    const pendingBlobUrls = new Set();
+    Promise.all(textTracks.map((textTrackConfig) => (
+      isNativeVtt(textTrackConfig) ? toCredentialedBlobUrl(textTrackConfig.src, pendingBlobUrls) : textTrackConfig.src
+    ))).then((srcs) => {
+      if (currentGeneration !== generation) {
+        revokeBlobUrls(pendingBlobUrls);
+        return;
       }
-    }
+      pendingBlobUrls.forEach((blobUrl) => blobUrls.add(blobUrl));
+      addResolvedTextTracks(textTracks, srcs);
+    });
+  };
 
-    if (activeTrack !== newActiveTrack) {
-      onChangeActiveTrack(newActiveTrack);
-    }
-  });
+  // Several tracks can show at once (e.g. descriptions + captions), so each one needs its cues loaded
+  const syncShowingTracks = () => {
+    const textTracks = Array.from(player.textTracks());
+    // texttrackchange can fire inside addRemoteTextTrack, before the track's data exists - skip it until then
+    const nowShowing = new Set(textTracks.filter((track) => track.mode === 'showing' && textTracksData.has(track)));
+
+    showingTracks.forEach((track) => {
+      if (!nowShowing.has(track)) {
+        textTracksData.get(track)?.abortLoading();
+      }
+    });
+
+    nowShowing.forEach((track) => {
+      if (!showingTracks.has(track)) {
+        textTracksData.get(track)?.load();
+      }
+    });
+
+    showingTracks = nowShowing;
+  };
+
+  player.on('texttrackchange', syncShowingTracks);
 
   return {
     removeAllTextTracks,

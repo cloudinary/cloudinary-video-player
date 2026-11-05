@@ -1,3 +1,52 @@
+## [4.1.5](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.4...v4.1.5) (2026-10-26)
+
+
+### Bug Fixes
+
+* **VIDEO-21304:** stop pinning HEVC HLS to lowest level on iOS ([#1104](https://github.com/cloudinary/cloudinary-video-player/issues/1104)) ([ca85027](https://github.com/cloudinary/cloudinary-video-player/commit/ca8502785d81ad33eb8892f318eea214a1b050ee))
+
+
+
+## [4.1.4](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.3...v4.1.4) (2026-10-25)
+
+
+### Bug Fixes
+
+* drop fetch_format from poster and seek-thumbnail transformations ([#1100](https://github.com/cloudinary/cloudinary-video-player/issues/1100)) ([0bcb527](https://github.com/cloudinary/cloudinary-video-player/commit/0bcb52769bcb2cb2750b8e80d76ffc86fa278954))
+* respect caller format and allow opting out of f_auto ([#1097](https://github.com/cloudinary/cloudinary-video-player/issues/1097)) ([18f7ca4](https://github.com/cloudinary/cloudinary-video-player/commit/18f7ca43fe69f89d5852c2a4580fb58c0e2bf369))
+* **VIDEO-21274, VIDEO-21273:** captions with descriptions + AD button icon ([#1103](https://github.com/cloudinary/cloudinary-video-player/issues/1103)) ([bac77db](https://github.com/cloudinary/cloudinary-video-player/commit/bac77db67bff5da355a061a6a7bc8b05442dec05))
+
+
+
+## [4.1.3](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.2...v4.1.3) (2026-10-01)
+
+
+### Bug Fixes
+
+* don't undo Video.js source fallback on media error ([#1093](https://github.com/cloudinary/cloudinary-video-player/issues/1093)) ([d3ae070](https://github.com/cloudinary/cloudinary-video-player/commit/d3ae0701c5cc17446f408774aad23eed375f1c06))
+
+
+
+## [4.1.2](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.1...v4.1.2) (2026-09-16)
+
+
+### Bug Fixes
+
+* **captions:** size cue text by width on portrait players and let the box follow its content ([#1088](https://github.com/cloudinary/cloudinary-video-player/issues/1088)) ([14b10d2](https://github.com/cloudinary/cloudinary-video-player/commit/14b10d2c959c0be8a5a45e08627d72c8432ab6e7))
+
+
+
+## [4.1.1](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.0...v4.1.1) (2026-09-14)
+
+
+### Bug Fixes
+
+* add missing options for textTracks in schema ([#1085](https://github.com/cloudinary/cloudinary-video-player/issues/1085)) ([bfe0097](https://github.com/cloudinary/cloudinary-video-player/commit/bfe00979cf189f2fb7bb3f7298ee756212251985))
+* allow textTracks redefinition on repeated HLS source-set  ([4a0e328](https://github.com/cloudinary/cloudinary-video-player/commit/4a0e32807be5bb81b49090a9d86ec87d46a5fd10))
+* remove visualSearch plugin (in-video search) ([#1081](https://github.com/cloudinary/cloudinary-video-player/issues/1081)) ([8f40a37](https://github.com/cloudinary/cloudinary-video-player/commit/8f40a3727fa1b7be83fdf9af407fd1899bd65897))
+
+
+
 # [4.1.0](https://github.com/cloudinary/cloudinary-video-player/compare/v4.0.3...v4.1.0) (2026-07-30)
 
 

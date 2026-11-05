@@ -6,6 +6,7 @@ const PLAYLIST_SUBTITLES_VIDEO_SELECTOR = '//*[@id="playlist_html5_api"]';
 const PACED_STYLES_CAPTIONS_VIDEO_SELECTOR = '//*[@id="paced_html5_api"]';
 const KARAOKE_VIDEO_SELECTOR = '//*[@id="karaoke_html5_api"]';
 const TRANSLATED_TRANSCRIPT_VIDEO_SELECTOR = '//*[@id="translated-transcript_html5_api"]';
+const PORTRAIT_VIDEO_SELECTOR = '//*[@id="portrait_html5_api"]';
 /**
  * Video player examples subtitles and captions page object
  */
@@ -15,6 +16,7 @@ export class SubtitlesAndCaptionsPage extends BasePage {
     public pacedStyledVideoComponent: VideoComponent;
     public karaokeVideoComponent: VideoComponent;
     public translatedTranscriptVideoComponent: VideoComponent;
+    public portraitVideoComponent: VideoComponent;
 
     constructor(page: Page) {
         super(page);
@@ -23,5 +25,6 @@ export class SubtitlesAndCaptionsPage extends BasePage {
         this.pacedStyledVideoComponent = new VideoComponent(page, PACED_STYLES_CAPTIONS_VIDEO_SELECTOR);
         this.karaokeVideoComponent = new VideoComponent(page, KARAOKE_VIDEO_SELECTOR);
         this.translatedTranscriptVideoComponent = new VideoComponent(page, TRANSLATED_TRANSCRIPT_VIDEO_SELECTOR);
+        this.portraitVideoComponent = new VideoComponent(page, PORTRAIT_VIDEO_SELECTOR);
     }
 }
