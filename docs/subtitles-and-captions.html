@@ -245,6 +245,28 @@
           }
         }
       });
+
+      // Descriptions + subtitles (both load lazily from transcripts)
+      const descriptionsPlayer = cloudinary.videoPlayer('descriptions', {
+        cloudName: 'prod'
+      });
+
+      descriptionsPlayer.source('video/examples/cloudinary-marketing-pm', {
+        textTracks: {
+          descriptions: [
+            {
+              label: 'AD',
+              language: 'en-US'
+            }
+          ],
+          subtitles: [
+            {
+              label: 'Polish',
+              language: 'pl-PL'
+            }
+          ]
+        }
+      });
     }, false);
   </script>
 </head>
@@ -340,6 +362,19 @@
 
     <video
       id="translated-transcript"
+      playsinline
+      controls
+      class="cld-video-player cld-fluid"
+      crossorigin="anonymous"
+      width="500"
+    ></video>
+
+    <h4 class="mt-4 mb-2">Descriptions + Subtitles</h4>
+
+    <p>Turn on AD in the Descriptions menu, then select Polish in the CC menu. The subtitles should show.</p>
+
+    <video
+      id="descriptions"
       playsinline
       controls
       class="cld-video-player cld-fluid"
@@ -583,6 +618,28 @@
           }
         });
 
+
+        // Descriptions + subtitles (both load lazily from transcripts)
+        const descriptionsPlayer = cloudinary.videoPlayer('descriptions', {
+          cloudName: 'prod'
+        });
+
+        descriptionsPlayer.source('video/examples/cloudinary-marketing-pm', {
+          textTracks: {
+            descriptions: [
+              {
+                label: 'AD',
+                language: 'en-US'
+              }
+            ],
+            subtitles: [
+              {
+                label: 'Polish',
+                language: 'pl-PL'
+              }
+            ]
+          }
+        });
 
       </code>
     </pre>
