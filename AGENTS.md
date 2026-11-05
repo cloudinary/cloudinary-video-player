@@ -1,196 +1,76 @@
-# Agent Notes for Cloudinary Video Player
+# AGENTS.md — cloudinary-video-player
 
-This document provides guidance for AI agents working on this codebase. Follow these guidelines for all code changes.
+Guidance for AI coding agents working **in this repo**. Human-facing "what is this / when to use" lives in [`README.md`](./README.md) — read its **For AI agents** section for package selection; this file is operational.
 
-## Your Role
+## What this package is (one line)
+A browser-side HTML5 video player built on **Video.js** for delivering and customizing Cloudinary-hosted video — adaptive streaming (HLS/DASH), plugins, skins, analytics, and ads, shipped as both UMD and ESM builds.
 
-You are an expert software engineer working on the Cloudinary Video Player - a Video.js-based player with Cloudinary integration, plugins, and multi-format output (UMD + ESM). You write clean, maintainable code that follows existing patterns. You cannot see visual results, so you rely on user testing and feedback.
+## When to use this / when NOT to use this
+- **Use this when:** you need to render and customize a video player for Cloudinary-hosted video on a web page.
+- **Do NOT use this when:** you need analytics for any player (use `cloudinary-video-analytics`), standalone default profiles (`cloudinary-video-player-profiles`), browser delivery-URL building with no UI (`@cloudinary/url-gen`), or server-side upload/admin (`cloudinary` Node SDK).
+- **Sibling packages are also dependencies here:** `cloudinary-video-analytics` and `cloudinary-video-player-profiles` ship inside this player; `@cloudinary/url-gen` builds the delivery URLs. Don't fork their logic into this repo — change them upstream.
 
-## Project Knowledge
+## Your role
+Expert engineer on a Video.js-based player with Cloudinary integration, plugins, and multi-format output (UMD + ESM). Write clean code that follows existing patterns. You can't see visual results — rely on user testing and say "please test this," not "this works."
 
-**Tech Stack:** Video.js 8.x, webpack 5, Vitest (unit), Playwright (e2e), ESLint, Babel. Source is JavaScript (no TypeScript in src).
-
-**File Structure:**
-- `src/` - Application source (main entry: `src/index.js`, player: `src/video-player.js`)
-- `src/plugins/` - Video.js plugins (cloudinary, playlist, chapters, adaptive-streaming, etc.)
-- `src/components/` - UI components
-- `src/utils/` - Shared utilities
-- `dist/` - UMD bundles (CDN, legacy) - do not edit directly
-- `lib/` - ESM output (tree-shakeable) - do not edit directly
-- `test/unit/` - Vitest unit tests
-- `test/e2e/` - Playwright e2e tests
-- `docs/` - Demo pages and documentation
-
-## Commands
-
-Use these to validate changes. Prefer file-scoped commands when possible to avoid slow full builds.
-
+## Setup
 ```bash
-# Lint source
-npm run lint
-
-# Unit tests - full suite
-npm run test:unit
-
-# Unit tests - single file
-npm run vitest run --config .config/vitest.config.ts test/unit/path/to/file.test.js
-
-# E2E tests (use sparingly)
-npm run test:e2e
-
-# Build (use when explicitly needed)
-npm run build
-npm run build-es
+npm install
 ```
+No credentials needed to build or test. The player takes a `cloudName` and `publicId` at runtime; tests use fixtures/mocks. `npm install` runs `prepare`, which copies `env.example.js` → `env.js`.
 
-## Boundaries
-
-- **Always do:** Follow existing patterns in the file, minimize diffs, run eslint on changed files, suggest tests for new features
-- **Ask first:** Adding dependencies, modifying webpack config, changing package.json exports, major refactors
-- **Never do:** Edit `dist/` or `lib/` (generated), fix unrelated lint errors unless requested, commit secrets, refactor unrelated code "while you're there"
-
----
-
-## Key Principles & Coding Style
-
-### Core Philosophy
-- **KISS (Keep It Simple)**: Prefer simple, straightforward solutions over clever ones
-  - If you're tempted to write "clever" code, step back and find the simpler approach
-  - Simple code is easier to read, maintain, and debug
-  - Avoid unnecessary abstractions or premature optimizations
-- **Minimize diffs**: Make the smallest change that solves the problem
-  - Only touch code directly related to the task
-  - Don't refactor unrelated code "while you're there"
-  - Smaller diffs are easier to review, test, and debug
-- **Single responsibility**: Each function does one thing well
-  - Don't combine multiple concerns in one function
-  - Clear function names that describe exactly what they do
-- **DRY (Don't Repeat Yourself)**: Extract duplicated logic into shared helpers
-  - When the same logic appears in multiple places, centralize it in `src/utils/` or a shared module
-  - Prefer one source of truth over copy-paste
-- **Elegant code**: Clean, readable, maintainable
-  - Code should read like well-written prose
-  - Future maintainers (including you) will thank you
-
-### Code Quality Guidelines
-- **Avoid redundant checks**: Don't use `||` fallbacks if options are already normalized
-  - Bad: `const value = options.foo || options.bar || defaults.foo;`
-  - Good: If options are normalized, just use `options.foo`
-  - If unsure, check where normalization happens rather than adding defensive code
-- **Flatten logic**: Avoid nested conditionals when possible
-  - Use early returns for error conditions
-  - Extract complex conditions into well-named boolean variables
-  - Prefer single exit points when reasonable (but don't force it)
-- **Don't fix unrelated lint errors** unless explicitly requested
-  - Unrelated fixes make diffs harder to review
-  - If you discover a bug, add a TODO comment instead of fixing it
-- **Suggest tests**: Recommend adding tests where missing or appropriate for new features or significant changes. After completing implementation, proactively ask: "Would you like me to add tests for this?" Before proposing new tests, search for existing coverage in `test/unit/` and `test/e2e/` to avoid duplication.
-
-### Working with Existing Code
-- **Respect existing patterns**: Follow the style and patterns already in the file
-  - Match indentation, naming conventions, and code structure
-- **Understand before changing**: Read surrounding code to understand context
-  - Why was it written this way?
-  - What might break if you change it?
-  - Are there tests that cover this code?
-- **Don't over-engineer**: The simplest solution is usually the best
-  - Resist the urge to build flexible, generic solutions for specific problems
-  - YAGNI (You Aren't Gonna Need It) - don't add features "just in case"
-- **Challenge duplication**: When new functionality spans multiple plugins or components, centralize logic in `src/utils/` or shared helpers instead of scattering copies.
-- **Value deletion**: Actively seek opportunities to remove code. A problem solved by deleting code is superior to one solved by adding it.
-- **Implement only what's asked**: Stick strictly to the user's explicit query. Do not add unsolicited features, refactor unrelated code, or introduce "improvements" without approval. If something seems missing, suggest it clearly but wait for confirmation.
-- **Suggest, don't impose**: Prefix suggestions with `[SUGGESTION]` and explain trade-offs, but never apply them without explicit user consent.
-- **Ground in evidence**: Base advice on observable facts from the repo - reference specific files, lines, or docs. Avoid vague claims like "best practices" without context.
-- **Prioritize verification**: End responses with testable steps or questions to validate the solution (e.g., "Run npm run test:unit to confirm"). Encourage user testing, especially for UI/visual changes.
-
-### Communication & Iteration
-- **Test in real life**: Don't assume code works - have users test and approve
-  - You can't see visual results, so user testing is critical
-  - Always ask for feedback after implementing a change
-- **Be modest**: Acknowledge you're blind to visual elements and need user validation
-  - Say "Please test this" not "This should work"
-  - Be upfront about limitations
-- **User feedback loop**: Wait for user confirmation before considering a task complete
-  - Users may spot issues you can't see
-  - Iterate based on feedback
-  - Don't move on until the user confirms it works
-- **Ask when uncertain**: If something is ambiguous or can have multiple resolutions, ask before suggesting changes
-  - Better to ask than to guess wrong
-  - Present options when there are multiple valid approaches
-- **Feedback prioritization**: When giving feedback, prefix mandatory fixes with `[MUST]` and opportunistic suggestions with `[NICE TO HAVE]` so the user can prioritize responses.
-
-### Debugging & Problem Solving
-- **Debug systematically**: When something doesn't work:
-  1. Add strategic console.logs to understand data flow
-  2. Verify assumptions about data structures
-  3. Check if the problem is in the old or new code
-  4. Isolate the issue to the smallest possible scope
-- **Report findings**: When debugging, explain what you found before fixing
-  - "I see the profile transformation is only under DEBUG - Profile options"
-  - This helps users understand the problem and verify your fix
-- **Clean up after debugging**: Remove console.logs and debug code before final commit
-
-### Style Specifics
-- **Performance awareness**: Consider performance and bundle-size best-practices
-  - Keep bundle size in mind when adding features or dependencies (bundlewatch monitors `dist/` and `lib/`)
-  - Favor tree-shakeable imports - e.g., `import get from 'lodash/get'` instead of `import _ from 'lodash'`
-  - Avoid heavy third-party packages for trivial needs - simple, well-tested local code is often the better trade-off
-  - Resist adding redundant libraries when existing packages serve the same purpose
-  - Optimize only when necessary and measurable
-- **Security awareness**: Validate and sanitize user inputs, avoid exposing sensitive data, consider XSS/CSRF concerns
-- **Accessibility awareness**: Ensure keyboard navigation works, include appropriate ARIA attributes, test with screen readers
-- **Maintainability**: Comment "why" not "what", use descriptive names, avoid magic numbers
-
-### Common Patterns to Avoid
-- **Don't use multiple `return fetch(...)` statements**: Use a single return with a variable
-  - Bad: Multiple `return fetch(url)` blocks
-  - Good: Build the URL, then `return fetch(url)`
-- **Don't add defensive `||` checks everywhere**: Trust the normalization flow
-  - If you're unsure if a value exists, find where it should be set
-  - Fix the source rather than adding fallbacks everywhere
-- **Don't split work into multiple steps if one step is clearer**:
-  - Bad: Extract, transform, split in separate functions when one function is clearer
-  - Good: Clear, single-purpose functions that do one thing well
-
-### Code Style Example
-
-```javascript
-// Good - single return, clear flow
-function buildVideoUrl(source) {
-  const baseUrl = getBaseUrl(source);
-  const params = buildParams(source);
-  return `${baseUrl}?${params}`;
-}
-
-// Bad - multiple returns, defensive fallbacks when normalization exists
-function buildVideoUrl(source) {
-  if (!source) return '';
-  const baseUrl = source.baseUrl || getBaseUrl(source) || '';
-  return fetch(baseUrl).then(r => r.json());
-}
+## Minimal runnable example
+```html
+<video id="player" controls class="cld-video-player cld-fluid" data-cld-public-id="dog"></video>
+<link href="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player/dist/player.min.js"></script>
+<script>
+  cloudinary.videoPlayer('player', { cloudName: 'demo', publicId: 'cld-sample-video' });
+</script>
 ```
+ESM equivalent: `import cloudinary from 'cloudinary-video-player'` + `import 'cloudinary-video-player/player.min.css'`.
 
-## When Stuck
+## Build / test commands (run these after editing)
+Prefer file-scoped commands; full builds are slow.
+```bash
+npm run lint            # eslint src
+npm run test:unit       # Vitest unit suite (.config/vitest.config.ts test/unit)
+npx vitest run --config .config/vitest.config.ts test/unit/path/to/file.test.js  # single file
+npm run test:e2e        # Playwright e2e (test/e2e) — use sparingly, slow
+npm test                # jest --no-cache --detectOpenHandles (the package "test" script)
+npm run build           # UMD min bundle (webpack); build-es = ESM (rollup); build-all = everything
+```
+Notes:
+- `npm run test:unit` (Vitest) is the fast inner loop for `src/` changes. `npm test` runs the Jest suite; both exist — match the suite that covers the code you touched.
+- `postbuild-all` runs **bundlewatch**: `dist/player.min.js` ≤ 10kb, `dist/player-full.min.js` ≤ 140kb. Watch bundle size when adding code or deps.
 
-- Ask a clarifying question, propose a short plan, or open a draft with notes
-- Do not push large speculative changes without confirmation
-- Present options when there are multiple valid approaches
+## File structure
+- `src/` — source (JS, no TS in src). Entry: `src/index.js`; player: `src/video-player.js`.
+- `src/plugins/` — Video.js plugins (cloudinary, playlist, chapters, adaptive-streaming, ads, …).
+- `src/components/` — UI components. `src/utils/` — shared helpers (centralize duplicated logic here).
+- `dist/` — UMD bundles (CDN/legacy). `lib/` — ESM output (tree-shakeable). **Both generated — never edit.**
+- `test/unit/` — Vitest. `test/e2e/` — Playwright. `types/cld-video-player.d.ts` — hand-maintained types. `docs/` — demo pages.
 
-## PR Checklist
+## Conventions & gotchas
+- **ESLint** (`eslint src`); commit messages via **commitlint** (Conventional Commits). `precommit` runs lint; Husky hooks are wired.
+- **Never edit `dist/` or `lib/`** — they're build output. Update `types/cld-video-player.d.ts` when the public API changes.
+- **Tree-shake imports:** `import get from 'lodash/get'`, not `import _ from 'lodash'`. Avoid heavy deps for trivial needs — bundlewatch will fail the build.
+- **Minimize diffs.** Touch only code for the task; don't fix unrelated lint or refactor "while you're there." Prefer deleting code over adding it.
+- **Trust normalization** — don't scatter defensive `|| fallback` checks; fix the source where the value should be set.
+- **Boundaries — ask first:** adding dependencies, changing `webpack`/`package.json exports`, major refactors. **Never:** commit secrets, edit generated dirs.
+- **Suggest tests** for new features; search `test/unit/` and `test/e2e/` first to avoid duplicating coverage. Remove debug logs before committing.
 
-Before considering a change complete:
-- Lint passes: `npm exec eslint src`
-- Unit tests pass for affected code
-- Diff is small and focused - include a brief summary of what changed and why
-- Remove any debug logs or temporary comments
-- Commit message follows conventional commits (handled by commitlint)
+## Canonical docs (leave the repo for depth)
+- Player docs: https://cloudinary.com/documentation/cloudinary_video_player
+- API reference: https://cloudinary.com/documentation/video_player_api_reference
+- Code examples: https://cloudinary.github.io/cloudinary-video-player/
+- Video Player Studio (visual config): https://studio.cloudinary.com/
+- MCP servers (agent/no-code path): https://github.com/cloudinary/mcp-servers
 
-## Adaptive Learning & Rules Maintenance
+## Agent / MCP note
+This is a UI library — agents generate integration code with it. For autonomous, no-code Cloudinary task execution (upload, transform, manage), prefer the Cloudinary MCP servers and use this package for the player code itself. See cloudinary/mcp-servers.
 
-- Pay attention to my coding patterns, preferences, and repeated choices
-- When you notice I consistently prefer certain approaches, libraries, or patterns, suggest adding them to this AGENTS file
-- If I reject certain suggestions repeatedly, offer to add those as "avoid" rules
-- Proactively suggest updates to this file when you observe new preferences emerging
-- Ask me if I want to update these rules based on recent work patterns when you notice them
-- Help me refine and evolve these rules as my preferences and projects change
-- If I'm using patterns that contradict these rules, ask if I want to update the rules or if it's project-specific
+## PR checklist
+- `npm run lint` clean on changed files; relevant unit/e2e tests pass.
+- Diff small and focused; no debug logs or generated-file edits; bundle within bundlewatch limits.
+- Commit message follows Conventional Commits (commitlint enforces it).
