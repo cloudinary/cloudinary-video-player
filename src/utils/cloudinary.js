@@ -76,35 +76,45 @@ const handleCldError = (that, options) => {
 };
 
 /**
+ * Get the first value of key in transformation
+ * @param transformation
+ * @param key
+ * @returns the value of key in transformation, undefined if not set
+ */
+const getTransformationValue = (transformation, key) => {
+  if (!transformation || !key) {
+    return undefined;
+  }
+
+  // transformation is an array so run this function for each item
+  if (Array.isArray(transformation)) {
+    const match = find(transformation, (t) => getTransformationValue(t, key));
+    return getTransformationValue(match, key);
+  }
+
+  // transformation is a Transformation object so use getValue() to get key
+  if (transformation.getValue) {
+    return transformation.getValue(key);
+  }
+
+  // Cloudinary chained format: { transformation: [tx1, tx2, ...] }
+  if (Array.isArray(transformation.transformation)) {
+    return getTransformationValue(transformation.transformation, key);
+  }
+
+  return transformation[key];
+};
+
+/**
  * Check if key exist in transformation
  * @param transformation
  * @param key
  * @returns true if key exists in transformation, false otherwise
  */
-const isKeyInTransformation = (transformation, key) => {
-  if (!transformation || !key) {
-    return false;
-  }
-
-  // transformation is an array so run this function for each item
-  if (Array.isArray(transformation)) {
-    return !!find(transformation, (t) => isKeyInTransformation(t, key));
-  }
-
-  // transformation is a Transformation object so use getValue() to check key
-  if (transformation.getValue) {
-    return !!transformation.getValue(key);
-  }
-
-  // Cloudinary chained format: { transformation: [tx1, tx2, ...] }
-  if (Array.isArray(transformation.transformation)) {
-    return !!find(transformation.transformation, (t) => isKeyInTransformation(t, key));
-  }
-
-  return !!transformation[key];
-};
+const isKeyInTransformation = (transformation, key) => !!getTransformationValue(transformation, key);
 
 export {
   handleCldError,
+  getTransformationValue,
   isKeyInTransformation,
 };
