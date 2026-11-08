@@ -126,7 +126,7 @@
     "@vitest/ui": "^4.0.16",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.2.1",
-    "bundlewatch": "^0.4.1",
+    "bundlewatch": "^1.2.0",
     "conventional-changelog-angular": "^8.1.0",
     "conventional-changelog-cli": "^5.0.0",
     "conventional-recommended-bump": "^11.2.0",
