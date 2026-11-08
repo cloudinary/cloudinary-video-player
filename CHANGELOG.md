@@ -1,3 +1,19 @@
+## [4.1.6](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.5...v4.1.6) (2026-11-08)
+
+
+### Bug Fixes
+
+* **adaptive-streaming:** support withCredentials for dash sources ([#1121](https://github.com/cloudinary/cloudinary-video-player/issues/1121)) ([e909463](https://github.com/cloudinary/cloudinary-video-player/commit/e909463aada36afd6afb3ee7b46c9d7eae01a927))
+* **ci:** move workflow expressions into env to prevent script injection ([#1075](https://github.com/cloudinary/cloudinary-video-player/issues/1075)) ([4981aa8](https://github.com/cloudinary/cloudinary-video-player/commit/4981aa84d8b7bc1d7ce29c329c94e5021040a0e4))
+* **ci:** pin cpina/github-action-push-to-another-repository to a commit SHA ([#1077](https://github.com/cloudinary/cloudinary-video-player/issues/1077)) ([f2e2139](https://github.com/cloudinary/cloudinary-video-player/commit/f2e2139498ec02741ff6ef356198b2513bd3a40b))
+* **deps:** update @xmldom/xmldom to 0.8.15 ([#1120](https://github.com/cloudinary/cloudinary-video-player/issues/1120)) ([963ecb1](https://github.com/cloudinary/cloudinary-video-player/commit/963ecb180967bf6953df9104560a15c520effc9a))
+* forward extended event payload as trigger hash, not event property ([#1091](https://github.com/cloudinary/cloudinary-video-player/issues/1091)) ([d8873d9](https://github.com/cloudinary/cloudinary-video-player/commit/d8873d95890f4efd4a6b696e630ea19e5f7b5f73)), closes [#1125](https://github.com/cloudinary/cloudinary-video-player/issues/1125)
+* **gha:** use slack webhook from secrets storage ([#1090](https://github.com/cloudinary/cloudinary-video-player/issues/1090)) ([ad5e8f2](https://github.com/cloudinary/cloudinary-video-player/commit/ad5e8f208d31be82d7f2c33f630adf14f4f12494))
+* guard analytics track() against non-callable window.gtag ([#1092](https://github.com/cloudinary/cloudinary-video-player/issues/1092)) ([8b8262e](https://github.com/cloudinary/cloudinary-video-player/commit/8b8262e3b4dd0022baa2049cb57bb9006eeee56b)), closes [#388711](https://github.com/cloudinary/cloudinary-video-player/issues/388711)
+* load credentialed text tracks via blob urls instead of crossorigin ([#1106](https://github.com/cloudinary/cloudinary-video-player/issues/1106)) ([b529827](https://github.com/cloudinary/cloudinary-video-player/commit/b529827b7cca3733b325c3df331717fd785c9ec4)), closes [#1023](https://github.com/cloudinary/cloudinary-video-player/issues/1023)
+
+
+
 ## [4.1.5](https://github.com/cloudinary/cloudinary-video-player/compare/v4.1.4...v4.1.5) (2026-10-26)
 
 
