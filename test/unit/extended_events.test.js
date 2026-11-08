@@ -39,10 +39,10 @@ describe('ExtendedEvents', () => {
     vp.videojs.trigger('timeupdate');
 
     // ExtendedEvents should emit percentsplayed
-    // VideoPlayer should catch and re-trigger, forwarding the payload as the
-    // listener's second (data) argument, not nested inside the event object
+    // VideoPlayer should catch and re-trigger, forwarding the payload both as
+    // the listener's second (data) argument and as event.eventData (public API)
     expect(percentsPlayedListener).toHaveBeenCalledWith(
-      expect.anything(),
+      expect.objectContaining({ eventData: expect.objectContaining({ percent: 10 }) }),
       expect.objectContaining({ percent: 10 })
     );
   });
