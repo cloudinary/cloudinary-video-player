@@ -161,8 +161,14 @@ class VideoPlayer {
             });
             this.reloadVideoUntilAvailable();
           } else {
-            this.videojs.error(null);
-            Utils.handleCldError(this, this.playerOptions);
+            // Video.js retries the next source on its own (before playback) and clears the error -
+            // only recover if it didn't, otherwise we'd undo its fallback
+            this.videojs.setTimeout(() => {
+              if (this.videojs.error() === error) {
+                this.videojs.error(null);
+                Utils.handleCldError(this, this.playerOptions);
+              }
+            }, 0);
           }
         } else {
           this._resetReTryVideoState();
