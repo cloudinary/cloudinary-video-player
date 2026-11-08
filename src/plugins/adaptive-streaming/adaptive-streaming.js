@@ -15,11 +15,13 @@ export default async function adaptiveStreamingPlugin(player, options) {
     videoPreference: hdrSupported ? { preferHDR: true } : undefined
   };
 
-  // Add xhrSetup configuration for withCredentials support
+  // withCredentials support: hls.js via xhrSetup, dash.js via tech options
   if (options.withCredentials) {
     config.xhrSetup = function(xhr) {
       xhr.withCredentials = true;
     };
+    // No request type sets dash.js's default, covering the manifest and all segments
+    player.tech_.options_.dash = { ...player.tech_.options_.dash, setXHRWithCredentialsForType: [undefined, true] };
   }
 
   player.tech_.options_.hlsjsConfig = config;
