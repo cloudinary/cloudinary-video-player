@@ -15,11 +15,15 @@ vi.mock('../../src/plugins/adaptive-streaming/quality-levels', () => ({
 
 import adaptiveStreamingPlugin from '../../src/plugins/adaptive-streaming/adaptive-streaming';
 
+const getTechOptions = async (options, techOptions = {}) => {
+  const player = { tech_: { options_: techOptions }, on: vi.fn(), qualityMenu: vi.fn() };
+  await adaptiveStreamingPlugin(player, { strategy: 'highQuality', ...options });
+  return player.tech_.options_;
+};
+
 const getHlsjsConfig = async (isIOS) => {
   browser.IS_IOS = isIOS;
-  const player = { tech_: { options_: {} }, on: vi.fn(), qualityMenu: vi.fn() };
-  await adaptiveStreamingPlugin(player, { strategy: 'highQuality' });
-  return player.tech_.options_.hlsjsConfig;
+  return (await getTechOptions()).hlsjsConfig;
 };
 
 describe('adaptive streaming hls.js config', () => {
@@ -39,5 +43,42 @@ describe('adaptive streaming hls.js config', () => {
     const config = await getHlsjsConfig(true);
     expect(config.capLevelToPlayerSize).toBe(true);
     expect(config.ignoreDevicePixelRatio).toBe(false);
+  });
+});
+
+describe('adaptive streaming withCredentials', () => {
+  describe('hls.js', () => {
+    it('sends xhr requests with credentials', async () => {
+      const { hlsjsConfig } = await getTechOptions({ withCredentials: true });
+      const xhr = { withCredentials: false };
+      hlsjsConfig.xhrSetup(xhr);
+      expect(xhr.withCredentials).toBe(true);
+    });
+
+    it('leaves xhr requests alone without withCredentials', async () => {
+      const { hlsjsConfig } = await getTechOptions({ withCredentials: false });
+      expect(hlsjsConfig).not.toHaveProperty('xhrSetup');
+    });
+  });
+
+  describe('dash.js', () => {
+    it('enables credentials for every request type', async () => {
+      const { dash } = await getTechOptions({ withCredentials: true, isDash: true });
+      expect(dash.setXHRWithCredentialsForType).toEqual([undefined, true]);
+    });
+
+    it('keeps dash options passed by the user', async () => {
+      const { dash } = await getTechOptions(
+        { withCredentials: true, isDash: true },
+        { dash: { setLogLevel: 0 } }
+      );
+      expect(dash.setLogLevel).toBe(0);
+      expect(dash.setXHRWithCredentialsForType).toEqual([undefined, true]);
+    });
+
+    it('sets no dash options without withCredentials', async () => {
+      const techOptions = await getTechOptions({ withCredentials: false, isDash: true });
+      expect(techOptions).not.toHaveProperty('dash');
+    });
   });
 });
