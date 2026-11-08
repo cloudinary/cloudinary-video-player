@@ -245,7 +245,7 @@ const qualityLevels = (player, options) => {
         to: currentRes
       };
       // Trigger custom 'qualitychanged' event on videojs
-      player.trigger({ type: 'qualitychanged', eventData: data });
+      player.trigger({ type: 'qualitychanged', eventData: data }, data);
     }
     previousResolution = currentRes;
 
