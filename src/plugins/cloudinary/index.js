@@ -180,7 +180,7 @@ class CloudinaryContext {
       // Inherit source transformation
       const srcTx = options.transformation;
       if (srcTx && !isEmpty(srcTx)) {
-        const imageSafeTx = omitVideoOnlyTransformations(srcTx);
+        const imageSafeTx = omitVideoOnlyTransformations(srcTx, { keepAutoFormat: true });
         const merged = mergeTransformations(posterOptions.transformation || {}, imageSafeTx);
         // Remove height when aspect_ratio is set
         if (merged.aspect_ratio) {
@@ -384,9 +384,6 @@ class CloudinaryContext {
         }
         return srcs;
       }, []);
-      if (src.withCredentials) {
-        this.player.crossOrigin('use-credentials');
-      }
       this.player.src(_sources);
 
       _lastSource = src;
