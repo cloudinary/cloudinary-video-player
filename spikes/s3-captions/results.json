@@ -1,0 +1,2180 @@
+{
+  "videojs": "10.7.0",
+  "video": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+  "maxWords": 3,
+  "cues": 11,
+  "engines": {
+    "chromium": {
+      "engine": "chromium",
+      "browserVersion": "148.0.7778.96",
+      "setup": {
+        "videoError": null,
+        "duration": 15.215215,
+        "enModeFromDefault": "showing",
+        "subtitlesShowingFromDefault": true,
+        "addTextTrackInitialMode": "hidden",
+        "claimedDefault": true,
+        "enCues": 11,
+        "afterCreate": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": "en"
+        }
+      },
+      "seekChecks": [
+        {
+          "t": 1.15,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          }
+        },
+        {
+          "t": 1.55,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          }
+        },
+        {
+          "t": 2,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          }
+        },
+        {
+          "t": 2.4,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": null
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": null
+          }
+        },
+        {
+          "t": 2.75,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "through"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "through"
+          }
+        },
+        {
+          "t": 2.95,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "the"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "the"
+          }
+        },
+        {
+          "t": 3.2,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "reef"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "reef"
+          }
+        },
+        {
+          "t": 5.1,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "and"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "and"
+          }
+        },
+        {
+          "t": 5.5,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "surface"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "surface"
+          }
+        },
+        {
+          "t": 5.9,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "to"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "to"
+          }
+        },
+        {
+          "t": 6.5,
+          "ok": true,
+          "expected": {
+            "text": "breathe",
+            "word": "breathe"
+          },
+          "actual": {
+            "text": "breathe",
+            "word": "breathe"
+          }
+        },
+        {
+          "t": 0.5,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 4.2,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 9,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        }
+      ],
+      "styles": {
+        "color": "rgb(254, 249, 74)",
+        "backgroundColor": "rgba(0, 0, 128, 0.8)",
+        "fontFamily": "Georgia, serif",
+        "fontSize": "27px",
+        "textShadow": true,
+        "wordElement": "b http://www.w3.org/1999/xhtml",
+        "wordColor": "rgb(65, 105, 225)",
+        "wordDecoration": "underline"
+      },
+      "paint": {
+        "overlayPaints": true,
+        "videoPaints": true,
+        "containerContainsOverlay": true
+      },
+      "fullscreen": {
+        "element": "media-container",
+        "containsOverlay": true,
+        "overlaySize": [
+          800,
+          600
+        ],
+        "viewport": [
+          800,
+          600
+        ],
+        "overlayText": "Sea turtles glide"
+      },
+      "layout": {
+        "bottom": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "top": {
+          "cueCenterY": 0.127,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "center": {
+          "cueCenterY": 0.482,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "bottom-right": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.04,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "box": {
+          "cueCenterY": 0.387,
+          "cueRightGap": 0.523,
+          "overlay": {
+            "left": 0.05,
+            "top": 0.05,
+            "width": 0.5,
+            "height": 0.5
+          }
+        }
+      },
+      "timing": {
+        "lags": [
+          0.005527999999999977,
+          0.005468000000000028,
+          0.006148000000000042,
+          0.0004239999999997579,
+          0.0034320000000001016,
+          0.002032000000000256,
+          0.001599000000000128,
+          0.008460999999999608,
+          0.0029729999999998924,
+          0.009343000000000323,
+          0.004870999999999626
+        ],
+        "renderedCues": 11,
+        "totalCues": 11
+      },
+      "vjs": {
+        "textTrackListIds": [
+          "en",
+          "track:1:subtitles:es:Español"
+        ],
+        "steps": [
+          {
+            "label": "ours: select(en)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: play 1 s, pause, seek",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles()",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(false)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(true)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack('track:1:subtitles:es:Español')",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack(null)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: new src (reload, <track default>)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "built-in <media-captions-button> click",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "<media-hotkey keys='c'> press",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          }
+        ],
+        "claimOn": [
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          },
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          }
+        ]
+      },
+      "reselectProbe": {
+        "no seek": {
+          "shown": true,
+          "activeCues": 1
+        },
+        "seek to same time": {
+          "shown": true,
+          "activeCues": 1
+        },
+        "seek to 1.6 s": {
+          "shown": true,
+          "activeCues": 1
+        }
+      },
+      "ios": {
+        "inline": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en",
+          "shown": true,
+          "enActiveCues": 1
+        },
+        "begin": {
+          "modes": {
+            "en": "showing",
+            "es": "disabled"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "end": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        },
+        "nativeMenuPicksEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "showing"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "endAfterEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "hidden"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Las tortugas marinas se deslizan",
+          "active": "es"
+        },
+        "endAfterOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "beginWhileOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "nativeDrawsShowingTrack": true,
+        "endAfterOn": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        }
+      },
+      "appTrack": {
+        "available": true,
+        "copyFound": true,
+        "copyInitialMode": "hidden",
+        "rightAfterSelect": "hidden",
+        "after500ms": "disabled",
+        "afterReselect": "hidden",
+        "storeListMode": "hidden",
+        "overlay": ""
+      },
+      "errors": [],
+      "verdicts": {
+        "c1": true,
+        "c1Parts": {
+          "seek": true,
+          "styles": true,
+          "paint": true,
+          "layout": true
+        },
+        "c3": true,
+        "lagMs": {
+          "median": 5,
+          "max": 9,
+          "min": 0
+        }
+      },
+      "hls": {
+        "claimOn": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "showing",
+            "subtitleTrack": 0
+          },
+          "defaultClaimed": {
+            "mode": "hidden",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 14,
+            "overlay": "Subtitles: Bop!"
+          },
+          "bridgedBegin": {
+            "mode": "showing",
+            "overlay": ""
+          },
+          "bridgedEnd": {
+            "mode": "hidden"
+          }
+        },
+        "claimOff": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "showing",
+            "subtitleTrack": 0
+          },
+          "hiddenOnly": {
+            "mode": "hidden",
+            "subtitleTrack": -1,
+            "cuesNearPlayhead": 0,
+            "overlay": ""
+          },
+          "hiddenPlusEngineSubtitleTrack": {
+            "mode": "hidden",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": "Subtitles: Bop!"
+          },
+          "showing": {
+            "mode": "showing",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": ""
+          }
+        }
+      }
+    },
+    "firefox": {
+      "engine": "firefox",
+      "browserVersion": "150.0.2",
+      "setup": {
+        "videoError": null,
+        "duration": 15.215965,
+        "enModeFromDefault": "showing",
+        "subtitlesShowingFromDefault": true,
+        "addTextTrackInitialMode": "hidden",
+        "claimedDefault": true,
+        "enCues": 11,
+        "afterCreate": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": "en"
+        }
+      },
+      "seekChecks": [
+        {
+          "t": 1.15,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          }
+        },
+        {
+          "t": 1.55,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          }
+        },
+        {
+          "t": 2,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          }
+        },
+        {
+          "t": 2.4,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": null
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": null
+          }
+        },
+        {
+          "t": 2.75,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "through"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "through"
+          }
+        },
+        {
+          "t": 2.95,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "the"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "the"
+          }
+        },
+        {
+          "t": 3.2,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "reef"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "reef"
+          }
+        },
+        {
+          "t": 5.1,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "and"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "and"
+          }
+        },
+        {
+          "t": 5.5,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "surface"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "surface"
+          }
+        },
+        {
+          "t": 5.9,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "to"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "to"
+          }
+        },
+        {
+          "t": 6.5,
+          "ok": true,
+          "expected": {
+            "text": "breathe",
+            "word": "breathe"
+          },
+          "actual": {
+            "text": "breathe",
+            "word": "breathe"
+          }
+        },
+        {
+          "t": 0.5,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 4.2,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 9,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        }
+      ],
+      "styles": {
+        "color": "rgb(254, 249, 74)",
+        "backgroundColor": "rgba(0, 0, 128, 0.8)",
+        "fontFamily": "Georgia, serif",
+        "fontSize": "27px",
+        "textShadow": true,
+        "wordElement": "b http://www.w3.org/1999/xhtml",
+        "wordColor": "rgb(65, 105, 225)",
+        "wordDecoration": "underline"
+      },
+      "paint": {
+        "overlayPaints": true,
+        "videoPaints": true,
+        "containerContainsOverlay": true
+      },
+      "fullscreen": {
+        "element": "media-container",
+        "containsOverlay": true,
+        "overlaySize": [
+          1366,
+          768
+        ],
+        "viewport": [
+          1366,
+          768
+        ],
+        "overlayText": "Sea turtles glide"
+      },
+      "layout": {
+        "bottom": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "top": {
+          "cueCenterY": 0.127,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "center": {
+          "cueCenterY": 0.482,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "bottom-right": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.04,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "box": {
+          "cueCenterY": 0.387,
+          "cueRightGap": 0.523,
+          "overlay": {
+            "left": 0.05,
+            "top": 0.05,
+            "width": 0.5,
+            "height": 0.5
+          }
+        }
+      },
+      "timing": {
+        "lags": [
+          0.01600200000000007,
+          0.01887099999999986,
+          0.035167999999999866,
+          0.022987999999999786,
+          0.010488999999999749,
+          0.008485000000000298,
+          0.03463800000000017,
+          0.022318000000000282,
+          0.03857100000000013,
+          0.04142199999999985,
+          0.0083479999999998
+        ],
+        "renderedCues": 11,
+        "totalCues": 11
+      },
+      "vjs": {
+        "textTrackListIds": [
+          "en",
+          "track:1:subtitles:es:Español"
+        ],
+        "steps": [
+          {
+            "label": "ours: select(en)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: play 1 s, pause, seek",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles()",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(false)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(true)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack('track:1:subtitles:es:Español')",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack(null)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: new src (reload, <track default>)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "built-in <media-captions-button> click",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "<media-hotkey keys='c'> press",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          }
+        ],
+        "claimOn": [
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          },
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          }
+        ]
+      },
+      "reselectProbe": {
+        "no seek": {
+          "shown": true,
+          "activeCues": 1
+        },
+        "seek to same time": {
+          "shown": true,
+          "activeCues": 1
+        },
+        "seek to 1.6 s": {
+          "shown": true,
+          "activeCues": 1
+        }
+      },
+      "ios": {
+        "inline": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en",
+          "shown": true,
+          "enActiveCues": 1
+        },
+        "begin": {
+          "modes": {
+            "en": "showing",
+            "es": "disabled"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "end": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        },
+        "nativeMenuPicksEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "showing"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "endAfterEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "hidden"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Las tortugas marinas se deslizan",
+          "active": "es"
+        },
+        "endAfterOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "beginWhileOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "nativeDrawsShowingTrack": true,
+        "endAfterOn": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        }
+      },
+      "appTrack": {
+        "available": true,
+        "copyFound": true,
+        "copyInitialMode": "hidden",
+        "rightAfterSelect": "hidden",
+        "after500ms": "disabled",
+        "afterReselect": "hidden",
+        "storeListMode": "hidden",
+        "overlay": "Les tortues"
+      },
+      "errors": [],
+      "verdicts": {
+        "c1": true,
+        "c1Parts": {
+          "seek": true,
+          "styles": true,
+          "paint": true,
+          "layout": true
+        },
+        "c3": true,
+        "lagMs": {
+          "median": 22,
+          "max": 41,
+          "min": 8
+        }
+      },
+      "hls": {
+        "claimOn": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "showing",
+            "subtitleTrack": 0
+          },
+          "defaultClaimed": {
+            "mode": "hidden",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 14,
+            "overlay": "Subtitles: Bop!"
+          },
+          "bridgedBegin": {
+            "mode": "showing",
+            "overlay": ""
+          },
+          "bridgedEnd": {
+            "mode": "hidden"
+          }
+        },
+        "claimOff": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "showing",
+            "subtitleTrack": 0
+          },
+          "hiddenOnly": {
+            "mode": "hidden",
+            "subtitleTrack": -1,
+            "cuesNearPlayhead": 0,
+            "overlay": ""
+          },
+          "hiddenPlusEngineSubtitleTrack": {
+            "mode": "hidden",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": "Subtitles: Bop!"
+          },
+          "showing": {
+            "mode": "showing",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": ""
+          }
+        }
+      }
+    },
+    "webkit": {
+      "engine": "webkit",
+      "browserVersion": "26.4",
+      "setup": {
+        "videoError": null,
+        "duration": 15.216,
+        "enModeFromDefault": "showing",
+        "subtitlesShowingFromDefault": true,
+        "addTextTrackInitialMode": "hidden",
+        "claimedDefault": true,
+        "enCues": 11,
+        "afterCreate": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": "en"
+        }
+      },
+      "seekChecks": [
+        {
+          "t": 1.15,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "Sea"
+          }
+        },
+        {
+          "t": 1.55,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "turtles"
+          }
+        },
+        {
+          "t": 2,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": "glide"
+          }
+        },
+        {
+          "t": 2.4,
+          "ok": true,
+          "expected": {
+            "text": "Sea turtles glide",
+            "word": null
+          },
+          "actual": {
+            "text": "Sea turtles glide",
+            "word": null
+          }
+        },
+        {
+          "t": 2.75,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "through"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "through"
+          }
+        },
+        {
+          "t": 2.95,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "the"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "the"
+          }
+        },
+        {
+          "t": 3.2,
+          "ok": true,
+          "expected": {
+            "text": "through the reef",
+            "word": "reef"
+          },
+          "actual": {
+            "text": "through the reef",
+            "word": "reef"
+          }
+        },
+        {
+          "t": 5.1,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "and"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "and"
+          }
+        },
+        {
+          "t": 5.5,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "surface"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "surface"
+          }
+        },
+        {
+          "t": 5.9,
+          "ok": true,
+          "expected": {
+            "text": "and surface to",
+            "word": "to"
+          },
+          "actual": {
+            "text": "and surface to",
+            "word": "to"
+          }
+        },
+        {
+          "t": 6.5,
+          "ok": true,
+          "expected": {
+            "text": "breathe",
+            "word": "breathe"
+          },
+          "actual": {
+            "text": "breathe",
+            "word": "breathe"
+          }
+        },
+        {
+          "t": 0.5,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 4.2,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        },
+        {
+          "t": 9,
+          "ok": true,
+          "expected": {
+            "text": "",
+            "word": null
+          },
+          "actual": {
+            "text": "",
+            "word": null
+          }
+        }
+      ],
+      "styles": {
+        "color": "rgb(254, 249, 74)",
+        "backgroundColor": "rgba(0, 0, 128, 0.8)",
+        "fontFamily": "Georgia, serif",
+        "fontSize": "27px",
+        "textShadow": true,
+        "wordElement": "b http://www.w3.org/1999/xhtml",
+        "wordColor": "rgb(65, 105, 225)",
+        "wordDecoration": "underline"
+      },
+      "paint": {
+        "overlayPaints": true,
+        "videoPaints": true,
+        "containerContainsOverlay": true
+      },
+      "fullscreen": {
+        "element": "media-container",
+        "containsOverlay": true,
+        "overlaySize": [
+          800,
+          600
+        ],
+        "viewport": [
+          800,
+          600
+        ],
+        "overlayText": "Sea turtles glide"
+      },
+      "layout": {
+        "bottom": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "top": {
+          "cueCenterY": 0.127,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "center": {
+          "cueCenterY": 0.482,
+          "cueRightGap": 0.323,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "bottom-right": {
+          "cueCenterY": 0.837,
+          "cueRightGap": 0.04,
+          "overlay": {
+            "left": 0,
+            "top": 0,
+            "width": 1,
+            "height": 1
+          }
+        },
+        "box": {
+          "cueCenterY": 0.387,
+          "cueRightGap": 0.523,
+          "overlay": {
+            "left": 0.05,
+            "top": 0.05,
+            "width": 0.5,
+            "height": 0.5
+          }
+        }
+      },
+      "timing": {
+        "lags": [
+          0.25066874935606753,
+          0.002097124424210506,
+          0.0017105000918953284,
+          0.0018589162758844147,
+          0.0027223750875888797,
+          0.0024120834193528395,
+          0.0025393334020527014,
+          0.0096394161257356,
+          0.0013327912859129043,
+          0.0019626667070093973,
+          0.0022949994750085523
+        ],
+        "renderedCues": 11,
+        "totalCues": 11
+      },
+      "vjs": {
+        "textTrackListIds": [
+          "en",
+          "track:1:subtitles:es:Español"
+        ],
+        "steps": [
+          {
+            "label": "ours: select(en)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: play 1 s, pause, seek",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles()",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(false)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.toggleSubtitles(true)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "showing",
+                "es": "disabled"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack('track:1:subtitles:es:Español')",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "store.selectSubtitlesTrack(null)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "passive: new src (reload, <track default>)",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            }
+          },
+          {
+            "label": "built-in <media-captions-button> click",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          },
+          {
+            "label": "<media-hotkey keys='c'> press",
+            "before": {
+              "modes": {
+                "en": "hidden",
+                "es": "disabled"
+              },
+              "subtitlesShowing": false,
+              "builtInButtonActive": false,
+              "overlay": "Sea turtles glide",
+              "active": "en"
+            },
+            "after": {
+              "modes": {
+                "en": "disabled",
+                "es": "showing"
+              },
+              "subtitlesShowing": true,
+              "builtInButtonActive": true,
+              "overlay": "",
+              "active": "en"
+            }
+          }
+        ],
+        "claimOn": [
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          },
+          {
+            "modes": {
+              "en": "disabled",
+              "es": "hidden"
+            },
+            "subtitlesShowing": false,
+            "builtInButtonActive": false,
+            "overlay": "Las tortugas marinas se deslizan",
+            "active": "es"
+          }
+        ]
+      },
+      "reselectProbe": {
+        "no seek": {
+          "shown": true,
+          "activeCues": 1
+        },
+        "seek to same time": {
+          "shown": false,
+          "activeCues": 0
+        },
+        "seek to 1.6 s": {
+          "shown": true,
+          "activeCues": 1
+        }
+      },
+      "ios": {
+        "inline": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en",
+          "shown": true,
+          "enActiveCues": 1
+        },
+        "begin": {
+          "modes": {
+            "en": "showing",
+            "es": "disabled"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "end": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        },
+        "nativeMenuPicksEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "showing"
+          },
+          "subtitlesShowing": true,
+          "builtInButtonActive": true,
+          "overlay": "",
+          "active": "en"
+        },
+        "endAfterEs": {
+          "modes": {
+            "en": "disabled",
+            "es": "hidden"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Las tortugas marinas se deslizan",
+          "active": "es"
+        },
+        "endAfterOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "beginWhileOff": {
+          "modes": {
+            "en": "disabled",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "",
+          "active": null
+        },
+        "nativeDrawsShowingTrack": true,
+        "endAfterOn": {
+          "modes": {
+            "en": "hidden",
+            "es": "disabled"
+          },
+          "subtitlesShowing": false,
+          "builtInButtonActive": false,
+          "overlay": "Sea turtles glide",
+          "active": "en"
+        }
+      },
+      "appTrack": {
+        "available": true,
+        "copyFound": true,
+        "copyInitialMode": "hidden",
+        "rightAfterSelect": "hidden",
+        "after500ms": "disabled",
+        "afterReselect": "hidden",
+        "storeListMode": "hidden",
+        "overlay": ""
+      },
+      "errors": [],
+      "verdicts": {
+        "c1": true,
+        "c1Parts": {
+          "seek": true,
+          "styles": true,
+          "paint": true,
+          "layout": true
+        },
+        "c3": true,
+        "lagMs": {
+          "median": 2,
+          "max": 251,
+          "min": 1
+        }
+      },
+      "hls": {
+        "claimOn": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "showing",
+            "subtitleTrack": 0
+          },
+          "defaultClaimed": {
+            "mode": "hidden",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 14,
+            "overlay": "Subtitles: Bop!"
+          },
+          "bridgedBegin": {
+            "mode": "showing",
+            "overlay": ""
+          },
+          "bridgedEnd": {
+            "mode": "hidden"
+          }
+        },
+        "claimOff": {
+          "ready": true,
+          "engineName": "hlsjs",
+          "initial": {
+            "mode": "disabled",
+            "subtitleTrack": 0
+          },
+          "hiddenOnly": {
+            "mode": "showing",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": ""
+          },
+          "hiddenPlusEngineSubtitleTrack": {
+            "mode": "showing",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": ""
+          },
+          "showing": {
+            "mode": "showing",
+            "subtitleTrack": 0,
+            "cuesNearPlayhead": 15,
+            "overlay": ""
+          }
+        }
+      }
+    }
+  }
+}
