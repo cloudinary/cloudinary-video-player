@@ -55,11 +55,13 @@ Removed: `@cloudinary/url-gen` (own builder, D-10), `lodash`, `uuid` (`crypto.ra
 | Default player: shell + main chunks + default CSS, **without** streaming engines and ads | **60 KB** start (SC-007; never > 70 KB) | ≈ 167 KB (140 KB JS + 27 KB CSS) |
 | — of which default CSS (`player.min.css`, both v4-look skins) | 12 KB | 27 KB (icon font inlined) |
 | Each optional feature chunk (own code) | 15 KB | e.g. playlist 6 KB, ima 20 KB |
-| hls.js adapter chunk | ≤ v4 (162 KB); set after S-1 | 162 KB |
+| hls.js adapter chunk | **Pending decision.** S-1 measured 204 KB (Video.js 10.7.0, hls.js 1.7.4 alone 174 KB), above ≤ v4 (162 KB); see `log.md` §7 | 162 KB |
 | dash.js adapter chunk | ≤ v4 (199 KB) (tracked) | 199 KB |
 | Fonts (Inter, Latin subset, ≤ 2 weights, `woff2`) | Not in SC-007 (not code or styles); tracked ≤ 60 KB total, `font-display: swap` | Google Fonts request |
 
 Budgets start here and can only go down without a plan amendment (D-21: "a principle, not a number").
+
+S-1 note (2026-11-26): the default player fits only with **design B**: the quality, audio, rate, captions and chapters menus load with their feature chunk, not in the first load (estimate 62.6 KB on 10.7.0, 57.7 KB on 10.3.0, with a 15 KB allowance for own code). All v4 controls in the first load measure 79.3 KB. T127 re-measures with real code.
 
 ## Scripts
 

@@ -37,7 +37,7 @@ description: "Task list for the Cloudinary Video Player v5 rewrite on Video.js 1
 - [x] T008 [P] [US2] S-5 DASH in `spikes/s5-dash/`: rendition and audio-track lists and ABR presets from the dash.js 5.2 engine behind `<dash-video>`, or a recorded decision to drop DASH menus (FR-014)
 - [x] T009 [P] S-6 build and CDN loading in `spikes/s6-build/`: tsdown IIFE keeps native `import()`; predictable per-chunk CSS names; cross-origin load from jsDelivr and unpkg with CORS, with `defer` and `async`; loader ≤ 10 KB; ts-json-schema-generator reads TypeScript 7 types; oxlint ring rules work (`research.md` R-01, R-09)
 - [x] T010 [P] [US1] S-7 media element and overlay in `spikes/s7-media/`: the integrator's `<video>` becomes the media element (`slot="media"`) for native and hls.js and survives an engine switch; overlay API drives an upcoming overlay and an end screen; check whether Video.js 10 seeks while dragging on touch (decides the `disableSeekWhileScrubbingOnMobile` behavior)
-- [ ] T011 Record each spike result (yes/no, sketch, numbers) in `specs/001-v5-videojs10-rewrite/log.md`; set the hls.js chunk budget in `plan.md` from T004; if S-1 > 70 KB, stop and ask the developer before Phase 1
+- [x] T011 Record each spike result (yes/no, sketch, numbers) in `specs/001-v5-videojs10-rewrite/log.md`; set the hls.js chunk budget in `plan.md` from T004; if S-1 > 70 KB, stop and ask the developer before Phase 1
 
 **Checkpoint**: design confirmed; budgets final; fixtures recorded.
 
