@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>S-4 v4 ads probe</title>
+  <!-- The published v4 release, as docs/vast-vpaid.html loads it (read-only CDN GET). -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cloudinary-video-player@4.1.6/dist/cld-video-player.min.css">
+  <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cloudinary-video-player@4.1.6/dist/cld-video-player.min.js"></script>
+</head>
+<body>
+  <video id="player" playsinline controls muted class="cld-video-player" width="640" height="360"></video>
+  <script>
+    // URL parameters: tag (ad tag URL), ains (adsInPlaylist), pto (postrollTimeout),
+    // mode = playlist | single, late = 1 (single mode: set the source only after the
+    // async ima chunk has started contrib-ads, instead of in the same tick).
+    const q = new URLSearchParams(location.search);
+    const t0 = performance.now();
+    const log = [];
+    const add = (name, extra) => log.push({ t: Math.round(performance.now() - t0), name, ...extra });
+
+    const ads = { adTagUrl: q.get('tag') };
+    if (q.get('ains')) ads.adsInPlaylist = q.get('ains');
+    if (q.get('pto')) ads.postrollTimeout = Number(q.get('pto'));
+
+    // Analytics off: the probe must not send beacons.
+    const player = cloudinary.videoPlayer('player', {
+      cloud_name: 'demo', muted: true, sourceTypes: ['mp4'],
+      cloudinaryAnalytics: false, allowUsageReport: false, ads
+    });
+    const vjs = player.videojs;
+    const EVENTS = ['loadstart', 'adsready', 'readyforpreroll', 'adstart', 'adend', 'adtimeout', 'adskip', 'adserror',
+      'nopreroll', 'nopostroll', 'readyforpostroll', 'contentchanged', 'sourcechanged', 'ads-request',
+      'ads-manager', 'ads-ad-started', 'ads-allpods-completed', 'play', 'playing', 'ended'];
+    // This listener is bound before the async ima chunk loads contrib-ads, so it sees the
+    // raw tech events before contrib-ads redispatches (prefixes or cancels) them.
+    // `state` is the contrib-ads state name (internal, read only for this probe).
+    vjs.on(EVENTS, (e) => add(e.type, {
+      src: (vjs.currentSrc() || '').split('/').pop(),
+      adMode: vjs.ads?.isInAdMode?.(),
+      state: vjs.ads?._state?.constructor?._getName?.()
+    }));
+
+    // The ima chunk loads async; once player.ima exists, log the effective settings
+    // and every playAdBreak() call (the call adsInPlaylist makes).
+    const settings = {};
+    const poll = setInterval(() => {
+      const sdk = vjs.ima?.controller?.sdkImpl;
+      if (!sdk) return;
+      clearInterval(poll);
+      const ima = vjs.ima.controller.settings;
+      Object.assign(settings, {
+        imaPluginSettings: { prerollTimeout: ima.prerollTimeout, postrollTimeout: ima.postrollTimeout, timeout: ima.timeout, autoPlayAdBreaks: ima.autoPlayAdBreaks },
+        contribAdsSettings: { timeout: vjs.ads.settings.timeout, prerollTimeout: vjs.ads.settings.prerollTimeout, postrollTimeout: vjs.ads.settings.postrollTimeout },
+        sdkAutoPlayAdBreaks: sdk.autoPlayAdBreaks
+      });
+      add('ima-plugin-ready');
+      if (q.get('mode') !== 'playlist' && q.get('late')) player.source('dog');
+      const original = sdk.playAdBreak.bind(sdk);
+      sdk.playAdBreak = () => {
+        add('playAdBreak()', { autoPlayAdBreaks: sdk.autoPlayAdBreaks, effect: sdk.autoPlayAdBreaks ? 'no-op' : 'adsManager.start()' });
+        return original();
+      };
+    }, 5);
+
+    if (q.get('mode') === 'playlist') {
+      player.playlist([{ publicId: 'dog' }, { publicId: 'sea_turtle' }], { autoAdvance: false });
+    } else if (!q.get('late')) {
+      player.source('dog'); // same tick, as docs/vast-vpaid.html does
+    }
+    window.v4 = { player, log, settings, add };
+  </script>
+</body>
+</html>
