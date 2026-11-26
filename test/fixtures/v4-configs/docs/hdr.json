@@ -1,0 +1,42 @@
+{
+  "page": "docs/hdr.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "prod"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/hdr",
+            {
+              "hdr": true,
+              "info": {
+                "title": "HDR"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

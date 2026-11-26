@@ -1,0 +1,142 @@
+{
+  "recordedFrom": {
+    "player": "cloudinary-video-player@4.1.6",
+    "commit": "61d0b53c"
+  },
+  "environment": "jsdom; canPlayType() = \"maybe\"; MediaSource.isTypeSupported() = true; fetch answers 404. Source cases call VideoSource directly with the player's secure default; the player adds ?_s=vp on top (see player cases).",
+  "cases": [
+    {
+      "id": "config-video",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "publicId": "sea_turtle"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/upload/c2VhX3R1cnRsZQ==.json?_s=vp"
+        ]
+      }
+    },
+    {
+      "id": "config-video-cloudinary-config",
+      "input": {
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "publicId": "sea_turtle"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/upload/c2VhX3R1cnRsZQ==.json?_s=vp"
+        ]
+      }
+    },
+    {
+      "id": "config-video-private-unicode",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "publicId": "folder/été vidéo",
+          "type": "private"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/private/Zm9sZGVyL8OpdMOpIHZpZMOpbw==.json?_s=vp"
+        ]
+      }
+    },
+    {
+      "id": "config-video-usage-report-off",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "publicId": "sea_turtle",
+          "allowUsageReport": false
+        }
+      },
+      "output": {
+        "requests": [
+          "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/upload/c2VhX3R1cnRsZQ==.json"
+        ]
+      }
+    },
+    {
+      "id": "config-video-off",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "publicId": "sea_turtle",
+          "videoConfig": false
+        }
+      },
+      "output": {
+        "requests": []
+      }
+    },
+    {
+      "id": "config-video-cname",
+      "input": {
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true,
+            "secure_distribution": "media.example.com"
+          },
+          "publicId": "sea_turtle"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://media.example.com/_applet_/video_service/video_player_config/video/upload/c2VhX3R1cnRsZQ==.json?_s=vp"
+        ]
+      }
+    },
+    {
+      "id": "config-profile-custom",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "profile": "My Profile",
+          "publicId": "sea_turtle"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://res.cloudinary.com/demo/_applet_/video_service/video_player_profiles/My+Profile.json?_s=vp"
+        ]
+      }
+    },
+    {
+      "id": "config-profile-raw-url",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "profile": "https://example.com/profiles/custom.json"
+        }
+      },
+      "output": {
+        "requests": [
+          "https://example.com/profiles/custom.json"
+        ]
+      }
+    },
+    {
+      "id": "config-profile-built-in",
+      "input": {
+        "options": {
+          "cloudName": "demo",
+          "profile": "cld-default",
+          "publicId": "sea_turtle"
+        }
+      },
+      "output": {
+        "requests": []
+      }
+    }
+  ]
+}

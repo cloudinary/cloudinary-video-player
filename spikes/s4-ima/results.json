@@ -1,0 +1,6059 @@
+{
+ "videojs": "10.7.0",
+ "date": "2026-11-26",
+ "v5": [
+  {
+   "name": "C1 negative control: light-DOM ad container before the content <video>",
+   "browser": "chromium 148.0.7778.96",
+   "layout": "before",
+   "ios": "default",
+   "device": "desktop",
+   "timedOut": false,
+   "errors": [
+    "console.warning: [.WebGL-0x13c00551a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+   ],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 17,
+     "storeMedia": [
+      "ima"
+     ],
+     "discovery": [
+      "ima"
+     ],
+     "imaVideosInContainer": [
+      2
+     ],
+     "storePaused": [
+      true,
+      false
+     ],
+     "storeDuration": [
+      0,
+      10
+     ],
+     "storeSrc": [
+      "",
+      "redirector.gvt1.com/…/file.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "contentPaused": true,
+     "contentTime": 0,
+     "imaVideos": 2
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "ima",
+      "discovery": "ima",
+      "storeSrc": "redirector.gvt1.com/…/file.mp4",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "ima",
+      "discovery": "ima"
+     }
+    },
+    "eventOrder": [
+     "6 store:paused=true",
+     "8 content:loadstart",
+     "54 store:media=content",
+     "540 content:durationchange",
+     "588 ima:sdk-loaded",
+     "604 store:media=ima",
+     "1407 ima:ADS_MANAGER_LOADED",
+     "1444 ui:click",
+     "1489 ima:adMetadata",
+     "1714 ima:loaded",
+     "1714 ima:contentPauseRequested",
+     "2847 store:paused=false",
+     "2854 ima:adCanPlay",
+     "2854 ima:impression",
+     "2854 ima:start",
+     "5764 ima:firstQuartile",
+     "8155 ima:midpoint",
+     "10545 ima:thirdQuartile",
+     "13048 store:paused=true",
+     "13050 ima:complete",
+     "13053 ima:contentResumeRequested",
+     "13053 ads:resume-content",
+     "13053 store:paused=false",
+     "13053 ima:allAdsCompleted",
+     "16366 content:loadstart",
+     "16523 content:durationchange"
+    ]
+   },
+   "log": [
+    {
+     "t": 6,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 8,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 54,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 540,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 588,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 588,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 593,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 604,
+     "kind": "store",
+     "name": "media=ima"
+    },
+    {
+     "t": 1407,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 1444,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 1444,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1489,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 1714,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 1714,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 1715,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 2716,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 2847,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 2854,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 2854,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 2854,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 2854,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 3715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 4715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 1.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5716,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 2.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5764,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 5764,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 2.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 3.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 7715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 4.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8155,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 8155,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 5.1,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 5.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9716,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 6.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10545,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 10545,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 7.5,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10716,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 7.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11716,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 8.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 12715,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 9.7,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13048,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 13050,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 13050,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 10,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13053,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 13053,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 10,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13053,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 13053,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 13053,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 13053,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 10,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 14055,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16054,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16064,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16365,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16366,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16523,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16667,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ]
+  },
+  {
+   "name": "C1 light-DOM ad container after the content <video>",
+   "browser": "chromium 148.0.7778.96",
+   "layout": "after",
+   "ios": "default",
+   "device": "desktop",
+   "timedOut": false,
+   "errors": [],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 17,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      2
+     ],
+     "storePaused": [
+      true
+     ],
+     "storeDuration": [
+      15.2
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 3,
+     "imaVideos": 2
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "ima",
+      "discovery": "ima",
+      "storeSrc": "redirector.gvt1.com/…/file.mp4",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "6 store:paused=true",
+     "9 content:loadstart",
+     "54 store:media=content",
+     "632 content:durationchange",
+     "776 ima:sdk-loaded",
+     "1925 ima:ADS_MANAGER_LOADED",
+     "1991 ui:click",
+     "2041 ima:adMetadata",
+     "2356 ima:loaded",
+     "2357 ima:contentPauseRequested",
+     "3563 ima:adCanPlay",
+     "3563 ima:impression",
+     "3563 ima:start",
+     "6472 ima:firstQuartile",
+     "8863 ima:midpoint",
+     "11519 ima:thirdQuartile",
+     "13882 ima:complete",
+     "13885 ima:contentResumeRequested",
+     "13885 ads:resume-content",
+     "13885 store:paused=false",
+     "13885 ima:allAdsCompleted",
+     "13885 content:play",
+     "13885 content:playing",
+     "16891 store:paused=true",
+     "16891 content:pause",
+     "16904 store:media=ima",
+     "17193 content:loadstart",
+     "17204 store:media=content-2",
+     "17441 content:durationchange"
+    ]
+   },
+   "log": [
+    {
+     "t": 6,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 9,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 54,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 632,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 776,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 776,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 781,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1925,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 1991,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 1991,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 2041,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 2356,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 2357,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 2357,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 3357,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 3563,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 3563,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 3563,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 3563,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 4358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6472,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 6472,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 7358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8357,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8863,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 8863,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11519,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 11519,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 12358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13358,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13882,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 13882,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13885,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 13885,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13885,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 13885,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 13885,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 13885,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13885,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 13885,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 14887,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 1,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 1,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16887,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16890,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16891,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 16891,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 3,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16904,
+     "kind": "store",
+     "name": "media=ima"
+    },
+    {
+     "t": 17191,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "ima",
+     "discovery": "ima",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 17193,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 17204,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 17441,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 17493,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ]
+  },
+  {
+   "name": "C1+C2 shadow-root ad container (host before the content <video>)",
+   "browser": "chromium 148.0.7778.96",
+   "layout": "shadow",
+   "ios": "default",
+   "device": "desktop",
+   "timedOut": false,
+   "errors": [
+    "console.warning: [.WebGL-0x11400578000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+   ],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 17,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      2
+     ],
+     "storePaused": [
+      true
+     ],
+     "storeDuration": [
+      15.2
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 3,
+     "imaVideos": 2
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "null",
+      "discovery": "null",
+      "storeSrc": "",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "7 store:paused=true",
+     "10 content:loadstart",
+     "55 store:media=content",
+     "543 content:durationchange",
+     "716 ima:sdk-loaded",
+     "1755 ima:ADS_MANAGER_LOADED",
+     "1806 ui:click",
+     "1852 ima:adMetadata",
+     "2123 ima:loaded",
+     "2123 ima:contentPauseRequested",
+     "3375 ima:adCanPlay",
+     "3376 ima:impression",
+     "3376 ima:start",
+     "6285 ima:firstQuartile",
+     "8675 ima:midpoint",
+     "11066 ima:thirdQuartile",
+     "13588 ima:complete",
+     "13591 ima:contentResumeRequested",
+     "13591 ads:resume-content",
+     "13591 store:paused=false",
+     "13591 ima:allAdsCompleted",
+     "13591 content:play",
+     "13592 content:playing",
+     "16604 store:paused=true",
+     "16604 store:media=null",
+     "16604 content:pause",
+     "16906 content:loadstart",
+     "16954 store:media=content-2",
+     "17036 content:durationchange"
+    ]
+   },
+   "log": [
+    {
+     "t": 7,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 10,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 55,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 543,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 716,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 716,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 721,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1755,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 1806,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 1806,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1852,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 2123,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 2123,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 2123,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 3125,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 3375,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 3376,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 3376,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 3376,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 4125,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6285,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 6285,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 7125,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8675,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 8675,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11066,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 11066,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11125,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 12124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13124,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13588,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 13588,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13591,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 13591,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13591,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 13591,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 13591,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 13591,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13591,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 13592,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 14591,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 1,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 1,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16592,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16604,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16604,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 16604,
+     "kind": "store",
+     "name": "media=null"
+    },
+    {
+     "t": 16604,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 3,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16905,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "null",
+     "discovery": "null",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16906,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16954,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 17036,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 17206,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ]
+  },
+  {
+   "name": "extra: shadow layout, Firefox",
+   "browser": "firefox 150.0.2",
+   "layout": "shadow",
+   "ios": "default",
+   "device": "desktop",
+   "timedOut": false,
+   "errors": [
+    "console.warning: [JavaScript Warning: \"initMouseEvent() is deprecated. Use the MouseEvent() constructor instead.\" {file: \"https://imasdk.googleapis.com/js/sdkloader/ima3.js\" lin",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js\" ",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l",
+    "console.warning: [JavaScript Warning: \"unreachable code after return statement\" {file: \"https://pagead2.googlesyndication.com/bg/Z4x1aK_9z8avgBkDMULgyabWdPVsrxsMGL2jqwC3Qu0.js l"
+   ],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 17,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      2
+     ],
+     "storePaused": [
+      true
+     ],
+     "storeDuration": [
+      15.2
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 2.9,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 2.9,
+     "imaVideos": 2
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "null",
+      "discovery": "null",
+      "storeSrc": "",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "12 store:paused=true",
+     "36 content:loadstart",
+     "65 store:media=content",
+     "618 content:durationchange",
+     "667 ima:sdk-loaded",
+     "1528 ima:ADS_MANAGER_LOADED",
+     "1598 ui:click",
+     "1601 ima:adMetadata",
+     "1838 ima:loaded",
+     "1838 ima:contentPauseRequested",
+     "3073 ima:adBuffering",
+     "3121 ima:adCanPlay",
+     "3122 ima:impression",
+     "3122 ima:start",
+     "5771 ima:firstQuartile",
+     "8349 ima:midpoint",
+     "10693 ima:thirdQuartile",
+     "13156 ima:complete",
+     "13164 ima:contentResumeRequested",
+     "13164 ads:resume-content",
+     "13164 store:paused=false",
+     "13164 ima:allAdsCompleted",
+     "13165 content:play",
+     "13165 content:playing",
+     "16180 store:paused=true",
+     "16180 store:media=null",
+     "16180 content:pause",
+     "16486 content:loadstart",
+     "16486 content:durationchange",
+     "16494 store:media=content-2"
+    ]
+   },
+   "log": [
+    {
+     "t": 12,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 36,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 65,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 618,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 667,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 668,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 673,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1528,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 1598,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 1599,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1601,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 1838,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 1838,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 1839,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 2840,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 3073,
+     "kind": "ima",
+     "name": "adBuffering"
+    },
+    {
+     "t": 3121,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 3122,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 3122,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 3122,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 3841,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 4841,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5771,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 5771,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 5843,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 6852,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 7852,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8349,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 8349,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8857,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9862,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10693,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 10693,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 10862,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 11862,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 12862,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13156,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 13156,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13164,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 13164,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13164,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 13164,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 13164,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 13164,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 13165,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 13165,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 14168,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0.9,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0.9,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16167,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.9,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 2.9,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16180,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16180,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 16180,
+     "kind": "store",
+     "name": "media=null"
+    },
+    {
+     "t": 16180,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 3,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16483,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "null",
+     "discovery": "null",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16486,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16486,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 16494,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 16787,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ]
+  },
+  {
+   "name": "extra: shadow layout, WebKit",
+   "browser": "webkit 26.4",
+   "layout": "shadow",
+   "ios": "default",
+   "device": "desktop",
+   "timedOut": false,
+   "errors": [],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 18,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      2
+     ],
+     "storePaused": [
+      true
+     ],
+     "storeDuration": [
+      15.2
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 2.9,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 2.9,
+     "imaVideos": 2
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "null",
+      "discovery": "null",
+      "storeSrc": "",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "7 store:paused=true",
+     "12 content:loadstart",
+     "55 store:media=content",
+     "572 content:durationchange",
+     "749 ima:sdk-loaded",
+     "1693 ima:ADS_MANAGER_LOADED",
+     "12517 ui:click",
+     "12521 ima:adMetadata",
+     "12781 ima:loaded",
+     "12781 ima:contentPauseRequested",
+     "14061 ima:adBuffering",
+     "14622 ima:adCanPlay",
+     "14622 ima:impression",
+     "14622 ima:start",
+     "17579 ima:firstQuartile",
+     "20082 ima:midpoint",
+     "22584 ima:thirdQuartile",
+     "24940 ima:complete",
+     "24944 ima:contentResumeRequested",
+     "24944 ads:resume-content",
+     "24944 store:paused=false",
+     "24944 ima:allAdsCompleted",
+     "24945 content:play",
+     "24945 content:playing",
+     "27960 store:paused=true",
+     "27961 content:pause",
+     "27988 store:media=null",
+     "28261 content:loadstart",
+     "28300 store:media=content-2"
+    ]
+   },
+   "log": [
+    {
+     "t": 7,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 12,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 55,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 572,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 749,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 749,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 754,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1693,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 12517,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 12517,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 12521,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 12781,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 12781,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 12781,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 13782,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 14061,
+     "kind": "ima",
+     "name": "adBuffering"
+    },
+    {
+     "t": 14622,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 14622,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 14622,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 14623,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 14782,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 15783,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 16783,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 17579,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 17579,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 17783,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 18783,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 19787,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20082,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 20082,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20791,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 21795,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 22584,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 22584,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 22799,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 23804,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24807,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24940,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 24940,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24944,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 24944,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24944,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 24944,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 24944,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 24944,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24945,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 24945,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 25944,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0.9,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0.9,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 27945,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.9,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 2.9,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 27960,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 27960,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 27961,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 3,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 27988,
+     "kind": "store",
+     "name": "media=null"
+    },
+    {
+     "t": 28260,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "null",
+     "discovery": "null",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 28261,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 28300,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 28561,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 2,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ]
+  },
+  {
+   "name": "C2 iPhone emulation (WebKit + iPhone UA), disableCustomPlaybackForIOS10Plus default",
+   "browser": "webkit 26.4",
+   "layout": "shadow",
+   "ios": "default",
+   "device": "iPhone 13 (emulated)",
+   "timedOut": false,
+   "errors": [],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "never",
+    "adDuration": 10,
+    "customPlaybackUsed": true,
+    "duringAd": {
+     "snapshots": 19,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      0
+     ],
+     "storePaused": [
+      true,
+      false
+     ],
+     "storeDuration": [
+      15.2,
+      0,
+      10
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4",
+      "redirector.gvt1.com/…/file.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4",
+      "redirector.gvt1.com/…/file.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      10
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 2.4,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 2.4,
+     "imaVideos": 0
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "null",
+      "discovery": "null",
+      "storeSrc": "",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "26 store:paused=true",
+     "45 content:loadstart",
+     "68 store:media=content",
+     "649 ima:sdk-loaded",
+     "1061 content:durationchange",
+     "1677 ima:ADS_MANAGER_LOADED",
+     "7533 ui:click",
+     "7537 ima:adMetadata",
+     "7914 ima:loaded",
+     "7915 ima:contentPauseRequested",
+     "7920 content:emptied",
+     "7925 content:loadstart",
+     "9193 content:durationchange",
+     "9197 content:play",
+     "9197 store:paused=false",
+     "9198 ima:adBuffering",
+     "9296 content:playing",
+     "9299 ima:adCanPlay",
+     "10072 ima:impression",
+     "10072 ima:start",
+     "12560 ima:firstQuartile",
+     "15065 ima:midpoint",
+     "17576 ima:thirdQuartile",
+     "20006 store:paused=true",
+     "20006 content:pause",
+     "20006 content:ended",
+     "20006 content:ended-during-ad-ignored",
+     "20012 ima:complete",
+     "20023 ima:allAdsCompleted",
+     "20023 content:emptied",
+     "20024 content:loadstart",
+     "20462 content:durationchange",
+     "20463 ima:contentResumeRequested",
+     "20463 ads:resume-content",
+     "20465 store:paused=false",
+     "20465 content:play",
+     "21068 content:playing",
+     "23477 store:paused=true",
+     "23478 content:pause",
+     "23513 store:media=null",
+     "23782 content:loadstart",
+     "23828 store:media=content-2"
+    ]
+   },
+   "log": [
+    {
+     "t": 26,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 45,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 68,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 649,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 649,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 655,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1061,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 1677,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 7533,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 7533,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 7537,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 7914,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 7915,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 7915,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 7920,
+     "kind": "content",
+     "name": "emptied",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 7925,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 8917,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 9193,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9197,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9197,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 9198,
+     "kind": "ima",
+     "name": "adBuffering"
+    },
+    {
+     "t": 9296,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 9299,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 9917,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 10072,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 10072,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": true
+    },
+    {
+     "t": 10072,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0.1,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 0.2,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 10918,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 0.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 11919,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 1.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 1.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 12560,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 12561,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.5,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 2.6,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 12919,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 2.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 13921,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 3.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 14924,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 4.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 4.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 15065,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 15065,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 5,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 5.1,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 15928,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 5.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 5.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 16933,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 6.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 6.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 17576,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 17576,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 7.6,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 7.6,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 17937,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 7.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 7.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 18939,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 8.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 8.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 19944,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 9.9,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": false,
+     "contentTime": 9.9,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 20006,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 20006,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 10,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20006,
+     "kind": "content",
+     "name": "ended",
+     "role": "content",
+     "time": 10,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20006,
+     "kind": "content",
+     "name": "ended-during-ad-ignored"
+    },
+    {
+     "t": 20012,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 20012,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 10,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 10,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 20023,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 20023,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 10,
+     "storeDuration": 10,
+     "storeSrc": "redirector.gvt1.com/…/file.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "redirector.gvt1.com/…/file.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 20023,
+     "kind": "content",
+     "name": "emptied",
+     "role": "content",
+     "time": 0,
+     "src": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20024,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 20462,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 20463,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 20463,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 20463,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 20465,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 20465,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 21068,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 21464,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0.4,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0.4,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 23464,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.4,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 2.4,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 23474,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 2.4,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 2.4,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 23477,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 23478,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 2.4,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 23513,
+     "kind": "store",
+     "name": "media=null"
+    },
+    {
+     "t": 23777,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "null",
+     "discovery": "null",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 2.4,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 23782,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 23828,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 24079,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    }
+   ],
+   "date": "2026-11-26"
+  },
+  {
+   "name": "C2 iPhone emulation (WebKit + iPhone UA), disableCustomPlaybackForIOS10Plus true",
+   "browser": "webkit 26.4",
+   "layout": "shadow",
+   "ios": "true",
+   "device": "iPhone 13 (emulated)",
+   "timedOut": false,
+   "errors": [],
+   "summary": {
+    "imaVersion": "3.800.0",
+    "adError": null,
+    "imaVideoFirstSeenAt": "after-AdDisplayContainer",
+    "adDuration": 10,
+    "customPlaybackUsed": false,
+    "duringAd": {
+     "snapshots": 18,
+     "storeMedia": [
+      "content"
+     ],
+     "discovery": [
+      "content"
+     ],
+     "imaVideosInContainer": [
+      1
+     ],
+     "storePaused": [
+      true
+     ],
+     "storeDuration": [
+      15.2
+     ],
+     "storeSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentSrc": [
+      "res.cloudinary.com/…/sea_turtle.mp4"
+     ],
+     "contentTimeRange": [
+      0,
+      0
+     ]
+    },
+    "afterResume": {
+     "media": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "contentPaused": false,
+     "contentTime": 3,
+     "imaVideos": 1
+    },
+    "gap": {
+     "contentRemoved": {
+      "media": "null",
+      "discovery": "null",
+      "storeSrc": "",
+      "storeDuration": 0
+     },
+     "content2Inserted": {
+      "media": "content-2",
+      "discovery": "content-2"
+     }
+    },
+    "eventOrder": [
+     "14 store:paused=true",
+     "21 content:loadstart",
+     "59 store:media=content",
+     "344 content:durationchange",
+     "876 ima:sdk-loaded",
+     "1877 ima:ADS_MANAGER_LOADED",
+     "18710 ui:click",
+     "18722 ima:adMetadata",
+     "18992 ima:loaded",
+     "18992 ima:contentPauseRequested",
+     "20355 ima:adBuffering",
+     "20434 ima:adCanPlay",
+     "21233 ima:impression",
+     "21233 ima:start",
+     "23981 ima:firstQuartile",
+     "26485 ima:midpoint",
+     "28985 ima:thirdQuartile",
+     "31326 ima:complete",
+     "31332 ima:contentResumeRequested",
+     "31332 ads:resume-content",
+     "31332 store:paused=false",
+     "31332 ima:allAdsCompleted",
+     "31333 content:play",
+     "31333 content:playing",
+     "34350 store:paused=true",
+     "34350 content:pause",
+     "34368 store:media=null",
+     "34651 content:loadstart",
+     "34679 store:media=content-2",
+     "34807 content:durationchange"
+    ]
+   },
+   "log": [
+    {
+     "t": 14,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 21,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 59,
+     "kind": "store",
+     "name": "media=content"
+    },
+    {
+     "t": 344,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 876,
+     "kind": "ima",
+     "name": "sdk-loaded",
+     "version": "3.800.0"
+    },
+    {
+     "t": 877,
+     "kind": "snap",
+     "name": "before-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 0,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 881,
+     "kind": "snap",
+     "name": "after-AdDisplayContainer",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 1877,
+     "kind": "ima",
+     "name": "ADS_MANAGER_LOADED",
+     "cuePoints": [
+      0
+     ]
+    },
+    {
+     "t": 18710,
+     "kind": "ui",
+     "name": "click"
+    },
+    {
+     "t": 18711,
+     "kind": "snap",
+     "name": "after-initialize",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 18722,
+     "kind": "ima",
+     "name": "adMetadata"
+    },
+    {
+     "t": 18992,
+     "kind": "ima",
+     "name": "loaded"
+    },
+    {
+     "t": 18992,
+     "kind": "ima",
+     "name": "contentPauseRequested"
+    },
+    {
+     "t": 18993,
+     "kind": "snap",
+     "name": "ima:contentPauseRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": ""
+    },
+    {
+     "t": 19994,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 20355,
+     "kind": "ima",
+     "name": "adBuffering"
+    },
+    {
+     "t": 20434,
+     "kind": "ima",
+     "name": "adCanPlay"
+    },
+    {
+     "t": 21000,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 21233,
+     "kind": "ima",
+     "name": "impression"
+    },
+    {
+     "t": 21233,
+     "kind": "ima",
+     "name": "start",
+     "adDuration": 10,
+     "linear": true,
+     "customPlaybackUsed": false
+    },
+    {
+     "t": 21233,
+     "kind": "snap",
+     "name": "ima:start",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 22000,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 23001,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 23981,
+     "kind": "ima",
+     "name": "firstQuartile"
+    },
+    {
+     "t": 23981,
+     "kind": "snap",
+     "name": "ima:firstQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 24002,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 25002,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 26003,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 26485,
+     "kind": "ima",
+     "name": "midpoint"
+    },
+    {
+     "t": 26485,
+     "kind": "snap",
+     "name": "ima:midpoint",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 27007,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 28012,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 28985,
+     "kind": "ima",
+     "name": "thirdQuartile"
+    },
+    {
+     "t": 28985,
+     "kind": "snap",
+     "name": "ima:thirdQuartile",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 29016,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 30020,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 31023,
+     "kind": "snap",
+     "name": "during-ad",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 31326,
+     "kind": "ima",
+     "name": "complete"
+    },
+    {
+     "t": 31326,
+     "kind": "snap",
+     "name": "ima:complete",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 31332,
+     "kind": "ima",
+     "name": "contentResumeRequested"
+    },
+    {
+     "t": 31332,
+     "kind": "snap",
+     "name": "ima:contentResumeRequested",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 31332,
+     "kind": "ads",
+     "name": "resume-content",
+     "reason": "CONTENT_RESUME_REQUESTED"
+    },
+    {
+     "t": 31332,
+     "kind": "store",
+     "name": "paused=false"
+    },
+    {
+     "t": 31332,
+     "kind": "ima",
+     "name": "allAdsCompleted"
+    },
+    {
+     "t": 31332,
+     "kind": "snap",
+     "name": "ima:allAdsCompleted",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 31333,
+     "kind": "content",
+     "name": "play",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 31333,
+     "kind": "content",
+     "name": "playing",
+     "role": "content",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 32333,
+     "kind": "snap",
+     "name": "content+1s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 1,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 1,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 34333,
+     "kind": "snap",
+     "name": "content+3s",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 34349,
+     "kind": "snap",
+     "name": "gap:before",
+     "media": "content",
+     "discovery": "content",
+     "storePaused": false,
+     "storeTime": 3,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": false,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 34350,
+     "kind": "store",
+     "name": "paused=true"
+    },
+    {
+     "t": 34350,
+     "kind": "content",
+     "name": "pause",
+     "role": "content",
+     "time": 3,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 34368,
+     "kind": "store",
+     "name": "media=null"
+    },
+    {
+     "t": 34650,
+     "kind": "snap",
+     "name": "gap:content-removed",
+     "media": "null",
+     "discovery": "null",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 0,
+     "storeSrc": "",
+     "contentPaused": true,
+     "contentTime": 3,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    },
+    {
+     "t": 34651,
+     "kind": "content",
+     "name": "loadstart",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 34679,
+     "kind": "store",
+     "name": "media=content-2"
+    },
+    {
+     "t": 34807,
+     "kind": "content",
+     "name": "durationchange",
+     "role": "content-2",
+     "time": 0,
+     "src": "res.cloudinary.com/…/sea_turtle.mp4"
+    },
+    {
+     "t": 34951,
+     "kind": "snap",
+     "name": "gap:content-2-inserted",
+     "media": "content-2",
+     "discovery": "content-2",
+     "storePaused": true,
+     "storeTime": 0,
+     "storeDuration": 15.2,
+     "storeSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "contentPaused": true,
+     "contentTime": 0,
+     "contentSrc": "res.cloudinary.com/…/sea_turtle.mp4",
+     "imaVideos": 1,
+     "imaVideoSrc": "redirector.gvt1.com/…/file.mp4"
+    }
+   ],
+   "date": "2026-11-26"
+  }
+ ],
+ "v4": [
+  {
+   "name": "C3 v4 playlist, adsInPlaylist unset",
+   "mode": "playlist",
+   "adsInPlaylist": "unset",
+   "postrollTimeout": "unset",
+   "tag": "preonly",
+   "sourceSet": "same tick",
+   "settings": {
+    "imaPluginSettings": {
+     "prerollTimeout": 5000,
+     "postrollTimeout": 5000,
+     "timeout": 5000,
+     "autoPlayAdBreaks": true
+    },
+    "contribAdsSettings": {
+     "timeout": 5000,
+     "prerollTimeout": 5000
+    },
+    "sdkAutoPlayAdBreaks": true
+   },
+   "adRequests": [
+    {
+     "t": 977,
+     "vpos": "vmap"
+    },
+    {
+     "t": 2762,
+     "vpos": "preroll"
+    }
+   ],
+   "errors": [],
+   "summary": {
+    "adStarts": [
+     3771
+    ],
+    "playAdBreakCalls": [
+     {
+      "t": 136,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     },
+     {
+      "t": 16043,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     }
+    ],
+    "sourcechanged": [
+     "136 dog.mp4",
+     "16043 sea_turtle.mp4"
+    ],
+    "imaPluginReadyAt": 109,
+    "item2": {
+     "contentchangedAfterMs": 4,
+     "adStarted": false,
+     "adtimeoutAfterContentchangedMs": 5009,
+     "playingAfterContentchangedMs": 5010
+    }
+   },
+   "log": [
+    {
+     "t": 109,
+     "name": "ima-plugin-ready"
+    },
+    {
+     "t": 120,
+     "name": "ads-request",
+     "src": "",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 134,
+     "name": "loadstart",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 136,
+     "name": "sourcechanged",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 136,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 1138,
+     "name": "ads-manager",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1138,
+     "name": "adsready",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 2140,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 2140,
+     "name": "readyforpreroll",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 2564,
+     "name": "adstart",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 3771,
+     "name": "ads-ad-started",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14025,
+     "name": "adend",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14028,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14029,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 16037,
+     "name": "probe:playNext()"
+    },
+    {
+     "t": 16041,
+     "name": "loadstart",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 16041,
+     "name": "contentchanged",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 16041,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 16043,
+     "name": "sourcechanged",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 16043,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 21050,
+     "name": "adtimeout",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 21050,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 21051,
+     "name": "playing",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    }
+   ],
+   "date": "2026-11-26"
+  },
+  {
+   "name": "C3 v4 playlist, adsInPlaylist every-video",
+   "mode": "playlist",
+   "adsInPlaylist": "every-video",
+   "postrollTimeout": "unset",
+   "tag": "preonly",
+   "sourceSet": "same tick",
+   "settings": {
+    "imaPluginSettings": {
+     "prerollTimeout": 5000,
+     "postrollTimeout": 5000,
+     "timeout": 5000,
+     "autoPlayAdBreaks": true
+    },
+    "contribAdsSettings": {
+     "timeout": 5000,
+     "prerollTimeout": 5000
+    },
+    "sdkAutoPlayAdBreaks": true
+   },
+   "adRequests": [
+    {
+     "t": 1112,
+     "vpos": "vmap"
+    },
+    {
+     "t": 2791,
+     "vpos": "preroll"
+    }
+   ],
+   "errors": [],
+   "summary": {
+    "adStarts": [
+     3329
+    ],
+    "playAdBreakCalls": [
+     {
+      "t": 141,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     },
+     {
+      "t": 15554,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     }
+    ],
+    "sourcechanged": [
+     "141 dog.mp4",
+     "15554 sea_turtle.mp4"
+    ],
+    "imaPluginReadyAt": 128,
+    "item2": {
+     "contentchangedAfterMs": 4,
+     "adStarted": false,
+     "adtimeoutAfterContentchangedMs": 5001,
+     "playingAfterContentchangedMs": 5002
+    }
+   },
+   "log": [
+    {
+     "t": 123,
+     "name": "ads-request",
+     "src": "",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 128,
+     "name": "ima-plugin-ready"
+    },
+    {
+     "t": 139,
+     "name": "loadstart",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 141,
+     "name": "sourcechanged",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 141,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 1262,
+     "name": "ads-manager",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1262,
+     "name": "adsready",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 2031,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 2031,
+     "name": "readyforpreroll",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 2486,
+     "name": "adstart",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 3329,
+     "name": "ads-ad-started",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13542,
+     "name": "adend",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13544,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13544,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 15549,
+     "name": "probe:playNext()"
+    },
+    {
+     "t": 15553,
+     "name": "loadstart",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 15553,
+     "name": "contentchanged",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 15553,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 15554,
+     "name": "sourcechanged",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 15554,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 20554,
+     "name": "adtimeout",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 20555,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 20555,
+     "name": "playing",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    }
+   ],
+   "date": "2026-11-26"
+  },
+  {
+   "name": "C3 v4 playlist, adsInPlaylist first-video",
+   "mode": "playlist",
+   "adsInPlaylist": "first-video",
+   "postrollTimeout": "unset",
+   "tag": "preonly",
+   "sourceSet": "same tick",
+   "settings": {
+    "imaPluginSettings": {
+     "prerollTimeout": 5000,
+     "postrollTimeout": 5000,
+     "timeout": 5000,
+     "autoPlayAdBreaks": true
+    },
+    "contribAdsSettings": {
+     "timeout": 5000,
+     "prerollTimeout": 5000
+    },
+    "sdkAutoPlayAdBreaks": true
+   },
+   "adRequests": [
+    {
+     "t": 950,
+     "vpos": "vmap"
+    },
+    {
+     "t": 2156,
+     "vpos": "preroll"
+    }
+   ],
+   "errors": [],
+   "summary": {
+    "adStarts": [
+     2837
+    ],
+    "playAdBreakCalls": [
+     {
+      "t": 135,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     }
+    ],
+    "sourcechanged": [
+     "135 dog.mp4",
+     "15289 sea_turtle.mp4"
+    ],
+    "imaPluginReadyAt": 125,
+    "item2": {
+     "contentchangedAfterMs": 3,
+     "adStarted": false,
+     "adtimeoutAfterContentchangedMs": 5008,
+     "playingAfterContentchangedMs": 5008
+    }
+   },
+   "log": [
+    {
+     "t": 121,
+     "name": "ads-request",
+     "src": "",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 125,
+     "name": "ima-plugin-ready"
+    },
+    {
+     "t": 133,
+     "name": "loadstart",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 135,
+     "name": "sourcechanged",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 135,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 1155,
+     "name": "ads-manager",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1155,
+     "name": "adsready",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1535,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1536,
+     "name": "readyforpreroll",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 2008,
+     "name": "adstart",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 2837,
+     "name": "ads-ad-started",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13274,
+     "name": "adend",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13275,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 13275,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 15286,
+     "name": "probe:playNext()"
+    },
+    {
+     "t": 15289,
+     "name": "loadstart",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 15289,
+     "name": "contentchanged",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 15289,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 15289,
+     "name": "sourcechanged",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 20297,
+     "name": "adtimeout",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 20297,
+     "name": "play",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 20297,
+     "name": "playing",
+     "src": "sea_turtle.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    }
+   ],
+   "date": "2026-11-26"
+  },
+  {
+   "name": "C3 v4 single video, source set in the same tick (as docs/vast-vpaid.html), pre+post-roll tag",
+   "mode": "single",
+   "adsInPlaylist": "unset",
+   "postrollTimeout": 1000,
+   "tag": "premidpost",
+   "sourceSet": "same tick",
+   "delayPostrollMs": 20000,
+   "settings": {
+    "imaPluginSettings": {
+     "prerollTimeout": 5000,
+     "postrollTimeout": 1000,
+     "timeout": 5000,
+     "autoPlayAdBreaks": true
+    },
+    "contribAdsSettings": {
+     "timeout": 5000,
+     "prerollTimeout": 5000
+    },
+    "sdkAutoPlayAdBreaks": true
+   },
+   "adRequests": [
+    {
+     "t": 1672,
+     "vpos": "vmap"
+    }
+   ],
+   "errors": [
+    "console.error: VIDEOJS: ERROR: videojs-contrib-ads has not seen a loadstart event 5 seconds after being initialized, but a source is present. This indicates that videojs-contrib-ads was initialized too late. It must",
+    "runner: no readyforpostroll + ended within 30 s"
+   ],
+   "summary": {
+    "adStarts": [],
+    "playAdBreakCalls": [],
+    "sourcechanged": [
+     "37 dog.mp4"
+    ],
+    "imaPluginReadyAt": 168
+   },
+   "log": [
+    {
+     "t": 35,
+     "name": "loadstart",
+     "src": "dog.mp4"
+    },
+    {
+     "t": 37,
+     "name": "sourcechanged",
+     "src": "dog.mp4"
+    },
+    {
+     "t": 165,
+     "name": "ads-request",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 168,
+     "name": "ima-plugin-ready"
+    },
+    {
+     "t": 1013,
+     "name": "ads-manager",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1013,
+     "name": "adsready",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 4676,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 4680,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 9676,
+     "name": "adtimeout",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 18273,
+     "name": "ended",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    }
+   ],
+   "date": "2026-11-26"
+  },
+  {
+   "name": "C3 v4 single video, source set after the ima plugin started, postrollTimeout 1000, post-roll ad tag held 20 s",
+   "mode": "single",
+   "adsInPlaylist": "unset",
+   "postrollTimeout": 1000,
+   "tag": "premidpost",
+   "sourceSet": "after ima plugin ready",
+   "delayPostrollMs": 20000,
+   "settings": {
+    "imaPluginSettings": {
+     "prerollTimeout": 5000,
+     "postrollTimeout": 1000,
+     "timeout": 5000,
+     "autoPlayAdBreaks": true
+    },
+    "contribAdsSettings": {
+     "timeout": 5000,
+     "prerollTimeout": 5000
+    },
+    "sdkAutoPlayAdBreaks": true
+   },
+   "adRequests": [
+    {
+     "t": 1023,
+     "vpos": "vmap"
+    },
+    {
+     "t": 2596,
+     "vpos": "preroll"
+    },
+    {
+     "t": 17695,
+     "vpos": "midroll"
+    },
+    {
+     "t": 18033,
+     "vpos": "postroll"
+    },
+    {
+     "t": 23039,
+     "vpos": "postroll"
+    }
+   ],
+   "errors": [],
+   "summary": {
+    "adStarts": [
+     4073
+    ],
+    "playAdBreakCalls": [
+     {
+      "t": 164,
+      "name": "playAdBreak()",
+      "autoPlayAdBreaks": true,
+      "effect": "no-op"
+     }
+    ],
+    "sourcechanged": [
+     "164 dog.mp4"
+    ],
+    "imaPluginReadyAt": 152,
+    "postroll": {
+     "adtimeoutAfterReadyforpostrollMs": 5000,
+     "adStarted": false,
+     "nopostroll": false,
+     "endedAfterReadyforpostrollMs": 5001
+    }
+   },
+   "log": [
+    {
+     "t": 149,
+     "name": "ads-request",
+     "src": "",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 152,
+     "name": "ima-plugin-ready"
+    },
+    {
+     "t": 162,
+     "name": "loadstart",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 164,
+     "name": "sourcechanged",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 164,
+     "name": "playAdBreak()",
+     "autoPlayAdBreaks": true,
+     "effect": "no-op"
+    },
+    {
+     "t": 642,
+     "name": "ads-manager",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 642,
+     "name": "adsready",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1948,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "BeforePreroll"
+    },
+    {
+     "t": 1948,
+     "name": "readyforpreroll",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 2224,
+     "name": "adstart",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 4073,
+     "name": "ads-ad-started",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14313,
+     "name": "adend",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14316,
+     "name": "play",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 14316,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Preroll"
+    },
+    {
+     "t": 16329,
+     "name": "probe:seek-to-end"
+    },
+    {
+     "t": 16367,
+     "name": "playing",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 17432,
+     "name": "ended",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 17432,
+     "name": "readyforpostroll",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "ContentPlayback"
+    },
+    {
+     "t": 22432,
+     "name": "adtimeout",
+     "src": "dog.mp4",
+     "adMode": true,
+     "state": "Postroll"
+    },
+    {
+     "t": 22433,
+     "name": "ended",
+     "src": "dog.mp4",
+     "adMode": false,
+     "state": "AdsDone"
+    }
+   ],
+   "date": "2026-11-26"
+  }
+ ]
+}

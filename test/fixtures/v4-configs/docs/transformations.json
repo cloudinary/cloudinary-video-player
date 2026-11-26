@@ -1,0 +1,114 @@
+{
+  "page": "docs/transformations.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-1",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-1",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "snow_horses",
+              "info": {
+                "title": "Snow Horses",
+                "subtitle": "A movie about horses"
+              },
+              "transformation": [
+                {
+                  "width": 400,
+                  "crop": "limit"
+                },
+                {
+                  "effect": "blur:500"
+                },
+                {
+                  "effect": "saturation:-100"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-2",
+      "options": {
+        "cloud_name": "demo",
+        "transformation": [
+          {
+            "width": 400,
+            "crop": "limit"
+          },
+          {
+            "effect": "blur:500"
+          },
+          {
+            "effect": "saturation:-100"
+          }
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-2",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "data-cld-source": "{ \"publicId\": \"dog\", \"info\": { \"title\": \"Dog\", \"subtitle\": \"Short movie about a dog\" } }"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-3",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-3",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "data-cld-source": "{ \"publicId\": \"sea_turtle\", \"info\": { \"title\": \"Sea turtle\", \"subtitle\": \"Short movie about a sea turtle\" } }",
+            "data-cld-transformation": "[{ \"width\": \"400\", \"crop\": \"limit\" },{ \"effect\": \"blur:500\" },{ \"effect\": \"saturation:-100\" }]"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

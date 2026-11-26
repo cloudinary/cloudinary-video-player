@@ -1,0 +1,123 @@
+{
+  "page": "docs/playlist.html",
+  "players": [
+    {
+      "factory": "player",
+      "target": "player-horizontal",
+      "options": {
+        "cloudName": "demo",
+        "playlistWidget": {
+          "direction": "horizontal",
+          "total": 4
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "playsinline": "",
+            "id": "player-horizontal",
+            "controls": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlist",
+          "args": [
+            [
+              {
+                "publicId": "snow_horses",
+                "info": {
+                  "title": "Snow Horses",
+                  "subtitle": "A movie about snow horses"
+                }
+              },
+              {
+                "publicId": "dirt_bike",
+                "info": {
+                  "title": "Dirt Bike",
+                  "subtitle": "A short video of dirt bikes"
+                }
+              },
+              {
+                "publicId": "marmots",
+                "info": {
+                  "title": "Marmots"
+                }
+              }
+            ],
+            {
+              "autoAdvance": true,
+              "repeat": true,
+              "presentUpcoming": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "player",
+      "target": "player-vertical",
+      "options": {
+        "cloudName": "demo",
+        "playlistWidget": {
+          "direction": "vertical",
+          "total": 4
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "playsinline": "",
+            "id": "player-vertical",
+            "controls": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlist",
+          "args": [
+            [
+              {
+                "publicId": "snow_horses",
+                "info": {
+                  "title": "Snow Horses",
+                  "subtitle": "A movie about snow horses"
+                }
+              },
+              {
+                "publicId": "dirt_bike",
+                "info": {
+                  "title": "Dirt Bike",
+                  "subtitle": "A short video of dirt bikes"
+                }
+              },
+              {
+                "publicId": "marmots",
+                "info": {
+                  "title": "Marmots"
+                }
+              }
+            ],
+            {
+              "autoAdvance": true,
+              "repeat": true,
+              "presentUpcoming": 8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1576 @@
+{
+  "flatten": {
+    "default": {
+      "before": {
+        "scopeBlocks": 98,
+        "scopeTo": 0,
+        "styleRules": 455,
+        "nestedRules": 0,
+        "nestingSelectors": 59,
+        "scopePseudo": 12,
+        "scopePseudoOutside": 2,
+        "badKeyframes": 0
+      },
+      "after": {
+        "scopeBlocks": 0,
+        "scopeTo": 0,
+        "styleRules": 455,
+        "nestedRules": 0,
+        "nestingSelectors": 0,
+        "scopePseudo": 0,
+        "scopePseudoOutside": 2,
+        "badKeyframes": 0
+      },
+      "checks": {
+        "no @scope left": true,
+        "no @scope … to (…) in source": true,
+        "no rule nested in a rule (true CSS nesting) in source": true,
+        "no & and no scoped :scope left": true,
+        "keyframe selectors untouched": true,
+        "same number of style rules": true,
+        "Lightning CSS parses the output without warnings": true
+      },
+      "size": {
+        "raw": {
+          "bytes": 108.7,
+          "minGzip": 10.3
+        },
+        "flat": {
+          "bytes": 123.9,
+          "minGzip": 10.5
+        }
+      }
+    },
+    "compat": {
+      "before": {
+        "scopeBlocks": 65,
+        "scopeTo": 0,
+        "styleRules": 380,
+        "nestedRules": 0,
+        "nestingSelectors": 42,
+        "scopePseudo": 11,
+        "scopePseudoOutside": 2,
+        "badKeyframes": 0
+      },
+      "after": {
+        "scopeBlocks": 0,
+        "scopeTo": 0,
+        "styleRules": 380,
+        "nestedRules": 0,
+        "nestingSelectors": 0,
+        "scopePseudo": 0,
+        "scopePseudoOutside": 2,
+        "badKeyframes": 0
+      },
+      "checks": {
+        "no @scope left": true,
+        "no @scope … to (…) in source": true,
+        "no rule nested in a rule (true CSS nesting) in source": true,
+        "no & and no scoped :scope left": true,
+        "keyframe selectors untouched": true,
+        "same number of style rules": true,
+        "Lightning CSS parses the output without warnings": true
+      },
+      "size": {
+        "raw": {
+          "bytes": 87.9,
+          "minGzip": 8.8
+        },
+        "flat": {
+          "bytes": 106.3,
+          "minGzip": 9
+        }
+      }
+    }
+  },
+  "audit": {
+    "floor": {
+      "chrome": 111,
+      "firefox": 121,
+      "safari": 16.4
+    },
+    "rows": [
+      {
+        "feature": "@scope",
+        "kind": "at",
+        "support": {
+          "chrome": 118,
+          "firefox": 146,
+          "safari": 17.4,
+          "source": "caniuse-lite 1.0.30001760: css-cascade-scope"
+        },
+        "uses": {
+          "default (registry, raw)": "98 (bare 98, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": 0,
+          "default (packaged dist skin.css)": 0,
+          "compat (registry, raw)": "65 (bare 65, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "not used",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": "CSS nesting (&)",
+        "kind": "sel",
+        "support": {
+          "chrome": 120,
+          "firefox": 117,
+          "safari": 17.2,
+          "source": "caniuse-lite 1.0.30001760: css-nesting"
+        },
+        "uses": {
+          "default (registry, raw)": "59 (bare 59, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": 0,
+          "default (packaged dist skin.css)": 0,
+          "compat (registry, raw)": "42 (bare 42, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "not used",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": ":has()",
+        "kind": "sel",
+        "support": {
+          "chrome": 105,
+          "firefox": 121,
+          "safari": 15.4,
+          "source": "caniuse-lite 1.0.30001760: css-has"
+        },
+        "uses": {
+          "default (registry, raw)": "4 (bare 2, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "4 (bare 2, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "3 (bare 1, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": ":dir()",
+        "kind": "sel",
+        "support": {
+          "chrome": 120,
+          "firefox": 49,
+          "safari": 16.4,
+          "source": "caniuse-lite 1.0.30001760: css-dir-pseudo"
+        },
+        "uses": {
+          "default (registry, raw)": "9 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 9)",
+          "default (flattened)": "9 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 9)",
+          "default (packaged dist skin.css)": "9 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 9)",
+          "compat (registry, raw)": "11 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 11)",
+          "compat (flattened)": "11 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 11)",
+          "compat (packaged dist compat-skin.css)": "11 (bare 0, @supports 0, fallback 0, custom-prop 0, :is/:where 11)"
+        },
+        "verdict": {
+          "default": "guarded (above floor in chrome; all uses in @supports, :is()/:where() or after a fallback)",
+          "compat": "guarded (above floor in chrome; all uses in @supports, :is()/:where() or after a fallback)"
+        }
+      },
+      {
+        "feature": ":popover-open (Popover API)",
+        "kind": "sel",
+        "support": {
+          "chrome": 114,
+          "firefox": 125,
+          "safari": 17,
+          "source": "node_modules/@videojs/html/docs/guides/browser-support.md"
+        },
+        "uses": {
+          "default (registry, raw)": 0,
+          "default (flattened)": 0,
+          "default (packaged dist skin.css)": 0,
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "not used",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": "@container",
+        "kind": "at",
+        "support": {
+          "chrome": 106,
+          "firefox": 110,
+          "safari": 16,
+          "source": "caniuse-lite 1.0.30001760: css-container-queries"
+        },
+        "uses": {
+          "default (registry, raw)": "32 (bare 32, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "32 (bare 32, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "32 (bare 32, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "15 (bare 15, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "15 (bare 15, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "15 (bare 15, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": "container style queries (custom properties)",
+        "kind": "at",
+        "support": {
+          "chrome": 111,
+          "firefox": null,
+          "safari": 18,
+          "source": "caniuse-lite 1.0.30001760: css-container-queries-style (first partial support)"
+        },
+        "uses": {
+          "default (registry, raw)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ABOVE FLOOR in firefox, safari: 2 bare (the at-rule is ignored)",
+          "compat": "ABOVE FLOOR in firefox, safari: 2 bare (the at-rule is ignored)"
+        },
+        "samples default": [
+          "@container not style(--media-controls-before-start: visible)",
+          "@container not style(--media-controls-before-start: visible)"
+        ],
+        "samples compat": [
+          "@container not style(--media-controls-before-start: visible)",
+          "@container not style(--media-controls-before-start: visible)"
+        ]
+      },
+      {
+        "feature": "media query range syntax",
+        "kind": "at",
+        "support": {
+          "chrome": 104,
+          "firefox": 63,
+          "safari": 16.4,
+          "source": "caniuse-lite 1.0.30001760: css-media-range-syntax"
+        },
+        "uses": {
+          "default (registry, raw)": 0,
+          "default (flattened)": 0,
+          "default (packaged dist skin.css)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "not used",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": "@layer",
+        "kind": "at",
+        "support": {
+          "chrome": 99,
+          "firefox": 97,
+          "safari": 15.4,
+          "source": "caniuse-lite 1.0.30001760: css-cascade-layers"
+        },
+        "uses": {
+          "default (registry, raw)": "11 (bare 11, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "11 (bare 11, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "6 (bare 6, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "13 (bare 13, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "13 (bare 13, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "6 (bare 6, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": "@property",
+        "kind": "at",
+        "support": {
+          "chrome": null,
+          "firefox": null,
+          "safari": null,
+          "source": "no local data (not in caniuse-lite 1.0.30001760 or the bundled docs)"
+        },
+        "uses": {
+          "default (registry, raw)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "2 (bare 2, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "version not verified here: 2 bare (the at-rule is ignored)",
+          "compat": "version not verified here: 2 bare (the at-rule is ignored)"
+        },
+        "samples default": [
+          "@property --media-slider-fill",
+          "@property --media-slider-buffer"
+        ],
+        "samples compat": [
+          "@property --media-slider-fill",
+          "@property --media-slider-buffer"
+        ]
+      },
+      {
+        "feature": "color-mix()",
+        "kind": "value",
+        "support": {
+          "chrome": 111,
+          "firefox": 113,
+          "safari": 16.2,
+          "source": "node_modules/@videojs/html/docs/guides/browser-support.md"
+        },
+        "uses": {
+          "default (registry, raw)": "26 (bare 0, @supports 26, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "26 (bare 0, @supports 26, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "26 (bare 0, @supports 26, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "11 (bare 0, @supports 11, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "11 (bare 0, @supports 11, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "11 (bare 0, @supports 11, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": "oklch()",
+        "kind": "value",
+        "support": {
+          "chrome": 111,
+          "firefox": 113,
+          "safari": 15,
+          "source": "caniuse-lite 1.0.30001760: css-lch-lab"
+        },
+        "uses": {
+          "default (registry, raw)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "1 (bare 0, @supports 1, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": "relative color (from …)",
+        "kind": "value",
+        "support": {
+          "chrome": 131,
+          "firefox": 133,
+          "safari": 18,
+          "source": "caniuse-lite 1.0.30001760: css-relative-colors"
+        },
+        "uses": {
+          "default (registry, raw)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)",
+          "default (flattened)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)",
+          "default (packaged dist skin.css)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)",
+          "compat (registry, raw)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)",
+          "compat (flattened)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "10 (bare 0, @supports 9, fallback 0, custom-prop 1, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ABOVE FLOOR in chrome, firefox, safari: 1 in a custom property (invalid at computed-value time where used)",
+          "compat": "ABOVE FLOOR in chrome, firefox, safari: 1 in a custom property (invalid at computed-value time where used)"
+        },
+        "samples default": [
+          ".media-skin { --media-shadow-current-color: oklch(from currentColor 0 0 0 / clamp(0, calc((l - 0.5) * 0.5), 0.15)) }"
+        ],
+        "samples compat": [
+          ".media-skin { --media-shadow-current-color: oklch(from currentColor 0 0 0 / clamp(0, calc((l - 0.5) * 0.5), 0.15)) }"
+        ]
+      },
+      {
+        "feature": "light-dark()",
+        "kind": "value",
+        "support": {
+          "chrome": 123,
+          "firefox": 120,
+          "safari": 17.5,
+          "source": "lightningcss 1.33.0 compat data (probe: .a{color:light-dark(red,blue)})"
+        },
+        "uses": {
+          "default (registry, raw)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "15 (bare 0, @supports 15, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "15 (bare 0, @supports 15, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "15 (bare 0, @supports 15, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "guarded (above floor in chrome, safari; all uses in @supports, :is()/:where() or after a fallback)",
+          "compat": "guarded (above floor in chrome, safari; all uses in @supports, :is()/:where() or after a fallback)"
+        }
+      },
+      {
+        "feature": "linear() easing",
+        "kind": "value",
+        "support": {
+          "chrome": null,
+          "firefox": null,
+          "safari": null,
+          "source": "no local data (not in caniuse-lite 1.0.30001760 or Lightning CSS 1.33 compat data)"
+        },
+        "uses": {
+          "default (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "version not verified here: 1 bare (the declaration is dropped)",
+          "compat": "not used"
+        },
+        "samples default": [
+          ":where(.media-skin[data-theme=\"default\"]) .media-volume-indicator:is([data-min], [data-max]):not([data-starting-style], [data-ending-style])"
+        ]
+      },
+      {
+        "feature": "contrast-color()",
+        "kind": "value",
+        "support": {
+          "chrome": 147,
+          "firefox": 146,
+          "safari": 26,
+          "source": "node_modules/@videojs/html/docs/guides/customize-skins.md"
+        },
+        "uses": {
+          "default (registry, raw)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "2 (bare 0, @supports 2, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "5 (bare 0, @supports 5, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "5 (bare 0, @supports 5, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "5 (bare 0, @supports 5, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "guarded (above floor in chrome, firefox, safari; all uses in @supports, :is()/:where() or after a fallback)",
+          "compat": "guarded (above floor in chrome, firefox, safari; all uses in @supports, :is()/:where() or after a fallback)"
+        }
+      },
+      {
+        "feature": "anchor positioning",
+        "kind": "decl",
+        "support": {
+          "chrome": 125,
+          "firefox": 147,
+          "safari": 26,
+          "source": "caniuse-lite 1.0.30001760: css-anchor-positioning"
+        },
+        "uses": {
+          "default (registry, raw)": "8 (bare 2, @supports 6, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "8 (bare 2, @supports 6, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "8 (bare 2, @supports 6, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "ABOVE FLOOR in chrome, firefox, safari: 2 bare (the declaration is dropped)",
+          "compat": "not used"
+        },
+        "samples default": [
+          ":where(.media-skin[data-theme=\"default\"]) .media-menu-content { anchor-scope: --media-menu-item-highlight-anchor }",
+          ":where(.media-skin[data-theme=\"default\"]) .media-menu-radio-group { anchor-scope: --media-menu-item-highlight-anchor }"
+        ]
+      },
+      {
+        "feature": "container query units",
+        "kind": "value",
+        "support": {
+          "chrome": 105,
+          "firefox": 110,
+          "safari": 16,
+          "source": "caniuse-lite 1.0.30001760: css-container-query-units"
+        },
+        "uses": {
+          "default (registry, raw)": "3 (bare 0, @supports 0, fallback 0, custom-prop 3, :is/:where 0)",
+          "default (flattened)": "3 (bare 0, @supports 0, fallback 0, custom-prop 3, :is/:where 0)",
+          "default (packaged dist skin.css)": "3 (bare 0, @supports 0, fallback 0, custom-prop 3, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": "dvh / svh / lvh",
+        "kind": "value",
+        "support": {
+          "chrome": 108,
+          "firefox": 101,
+          "safari": 15.4,
+          "source": "caniuse-lite 1.0.30001760: viewport-unit-variants"
+        },
+        "uses": {
+          "default (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ok at floor",
+          "compat": "ok at floor"
+        }
+      },
+      {
+        "feature": "backdrop-filter (unprefixed)",
+        "kind": "decl",
+        "support": {
+          "chrome": 76,
+          "firefox": 103,
+          "safari": 18,
+          "source": "caniuse-lite 1.0.30001760: css-backdrop-filter"
+        },
+        "uses": {
+          "default (registry, raw)": "11 (bare 11, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "11 (bare 11, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "10 (bare 10, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "4 (bare 4, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "4 (bare 4, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "4 (bare 4, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ABOVE FLOOR in safari: 11 bare (the declaration is dropped)",
+          "compat": "ABOVE FLOOR in safari: 4 bare (the declaration is dropped)"
+        },
+        "samples default": [
+          ":where(.media-skin[data-theme=\"default\"]) .media-dialog-backdrop { backdrop-filter: var(--media-backdrop-filter-dialog) }",
+          ":where(.media-skin[data-theme=\"default\"]) .media-dialog-popup { backdrop-filter: var(--media-backdrop-filter-surface) }",
+          ":where(.media-skin[data-theme=\"default\"]) .media-buffering-indicator:before { backdrop-filter: var(--media-backdrop-filter-indicator) }",
+          ":where(.media-skin[data-theme=\"default\"]) .media-indicator { backdrop-filter: var(--media-backdrop-filter-surface) }"
+        ],
+        "samples compat": [
+          ":where(.media-skin[data-theme=\"compat\"][data-preset=\"video\"]) .media-tooltip-popup { backdrop-filter: var(--media-backdrop-filter-surface) }",
+          ":where(.media-skin[data-theme=\"compat\"][data-preset=\"video\"]) .media-menu-popup { backdrop-filter: var(--media-backdrop-filter-surface) }",
+          ":where(.media-skin[data-theme=\"compat\"][data-preset=\"video\"]) .media-time-slider-audio-preview-meta { backdrop-filter: var(--media-backdrop-",
+          ":where(.media-skin[data-theme=\"compat\"][data-preset=\"video\"]) .media-volume-popover-popup { backdrop-filter: var(--media-backdrop-filter-sur"
+        ]
+      },
+      {
+        "feature": "-webkit-backdrop-filter (Safari < 18 needs it)",
+        "kind": "decl",
+        "support": {
+          "chrome": 0,
+          "firefox": 0,
+          "safari": 0,
+          "source": "prefix: reference count only"
+        },
+        "uses": {
+          "default (registry, raw)": 0,
+          "default (flattened)": 0,
+          "default (packaged dist skin.css)": "10 (bare 10, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": "4 (bare 4, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "not used",
+          "compat": "not used"
+        }
+      },
+      {
+        "feature": "scrollbar-color / scrollbar-width",
+        "kind": "decl",
+        "support": {
+          "chrome": 121,
+          "firefox": 64,
+          "safari": null,
+          "source": "caniuse-lite 1.0.30001760: css-scrollbar"
+        },
+        "uses": {
+          "default (registry, raw)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "3 (bare 3, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "ABOVE FLOOR in chrome, safari: 3 bare (the declaration is dropped)",
+          "compat": "ABOVE FLOOR in chrome, safari: 3 bare (the declaration is dropped)"
+        },
+        "samples default": [
+          ".media-skin { scrollbar-color: var(--media-scrollbar-thumb-color) transparent }",
+          ".media-skin { scrollbar-width: thin }",
+          ".media-skin { scrollbar-width: auto }"
+        ],
+        "samples compat": [
+          ".media-skin { scrollbar-color: var(--media-scrollbar-thumb-color) transparent }",
+          ".media-skin { scrollbar-width: thin }",
+          ".media-skin { scrollbar-width: auto }"
+        ]
+      },
+      {
+        "feature": "corner-shape",
+        "kind": "decl",
+        "support": {
+          "chrome": null,
+          "firefox": null,
+          "safari": null,
+          "source": "no local data (not in caniuse-lite; a progressive declaration)"
+        },
+        "uses": {
+          "default (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": 0,
+          "compat (flattened)": 0,
+          "compat (packaged dist compat-skin.css)": 0
+        },
+        "verdict": {
+          "default": "version not verified here: 1 bare (the declaration is dropped)",
+          "compat": "not used"
+        },
+        "samples default": [
+          ":where(.media-skin[data-theme=\"default\"]) .media-button { corner-shape: var(--media-control-corner-shape) }"
+        ]
+      },
+      {
+        "feature": "interpolate-size",
+        "kind": "decl",
+        "support": {
+          "chrome": null,
+          "firefox": null,
+          "safari": null,
+          "source": "no local data (not in caniuse-lite; a progressive declaration)"
+        },
+        "uses": {
+          "default (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "default (packaged dist skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (registry, raw)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (flattened)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)",
+          "compat (packaged dist compat-skin.css)": "1 (bare 1, @supports 0, fallback 0, custom-prop 0, :is/:where 0)"
+        },
+        "verdict": {
+          "default": "version not verified here: 1 bare (the declaration is dropped)",
+          "compat": "version not verified here: 1 bare (the declaration is dropped)"
+        },
+        "samples default": [
+          ".media-skin { interpolate-size: allow-keywords }"
+        ],
+        "samples compat": [
+          ".media-skin { interpolate-size: allow-keywords }"
+        ]
+      }
+    ],
+    "reference": {
+      "default": {
+        "declarations": {
+          "flat": 1531,
+          "packaged": 1548,
+          "same": 1442,
+          "sameKeyOtherValue": 0,
+          "onlyFlat": 89,
+          "onlyPackaged": 106,
+          "onlyPackagedNotShadowDom": 92
+        },
+        "onlyFlatSample": [
+          "@layer components | :where(.media-skin[data-theme=default]) :where(.media-seek-indicator)[data-direction] .media-seek-indicator-icon | display",
+          "@layer components | :where(.media-skin[data-theme=default]) :where(.media-seek-indicator)[data-direction=backward] .media-seek-indicator-icon | scale"
+        ],
+        "onlyPackagedSample": [
+          " | video-player,live-video-player,media-i18n,media-dialog,media-alert-dialog,media-error-dialog,media-controls | display",
+          " | media-container video,media-container [slot=poster] | width"
+        ],
+        "prefixes": {
+          "flat": {
+            "-webkit-user-select": 6,
+            "-webkit-font-smoothing": 1,
+            "-moz-osx-font-smoothing": 1
+          },
+          "packaged": {
+            "-webkit-user-select": 6,
+            "-webkit-backdrop-filter": 10,
+            "-webkit-font-smoothing": 1,
+            "-moz-osx-font-smoothing": 1
+          },
+          "flat + Lightning CSS (floor targets)": {
+            "-webkit-user-select": 6,
+            "-webkit-backdrop-filter": 10,
+            "-webkit-font-smoothing": 1,
+            "-moz-osx-font-smoothing": 1
+          }
+        }
+      },
+      "compat": {
+        "declarations": {
+          "flat": 1273,
+          "packaged": 1287,
+          "same": 1227,
+          "sameKeyOtherValue": 0,
+          "onlyFlat": 46,
+          "onlyPackaged": 60,
+          "onlyPackagedNotShadowDom": 46
+        },
+        "onlyFlatSample": [
+          "@layer components | :where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=captions-off] .media-status-indicator-captions-off-icon,:where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=captions-on] .media-status-indicator-captions-on-icon,:where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=fullscreen] .media-status-indicator-fullscreen-enter-icon,:where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=exit-fullscreen] .media-status-indicator-fullscreen-exit-icon | display",
+          "@layer components | :where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=pip] .media-status-indicator-pip-enter-icon,:where(.media-skin[data-theme=compat][data-preset=video]) :where(.media-status-indicator)[data-status=exit-pip] .media-status-indicator-pip-exit-icon | display"
+        ],
+        "onlyPackagedSample": [
+          " | video-player,live-video-player,media-i18n,media-dialog,media-alert-dialog,media-error-dialog,media-controls | display",
+          " | media-container video,media-container [slot=poster] | width"
+        ],
+        "prefixes": {
+          "flat": {},
+          "packaged": {
+            "-webkit-backdrop-filter": 4
+          },
+          "flat + Lightning CSS (floor targets)": {
+            "-webkit-backdrop-filter": 4
+          }
+        }
+      }
+    }
+  },
+  "versions": {
+    "@videojs/html": "10.7.0",
+    "postcss": "8.5.14",
+    "postcss-selector-parser": "7.1.7",
+    "lightningcss": "1.33.0",
+    "caniuse-lite": "1.0.30001760"
+  },
+  "browser": {
+    "media": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+    "bundles": {
+      "default": {
+        "firstLoadGzip": 68.8,
+        "lazyChunks": 54
+      },
+      "compat": {
+        "firstLoadGzip": 68.1,
+        "lazyChunks": 54
+      }
+    },
+    "engines": {
+      "chromium": "148.0.7778.96",
+      "firefox": "150.0.2",
+      "webkit": "26.4"
+    },
+    "runs": [
+      {
+        "engine": "chromium",
+        "skin": "default",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "59px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 455,
+          "styleRulesInSheet": 455
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.52,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 1.99,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.61,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-primary video-controls-compact-primary",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.video-skin",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            41,
+            84,
+            307,
+            140
+          ],
+          "viewport": [
+            1024,
+            700
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      },
+      {
+        "engine": "chromium",
+        "skin": "compat",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "58px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 380,
+          "styleRulesInSheet": 380
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.53,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 2,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.61,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-group",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.media-video",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            41,
+            84,
+            307,
+            140
+          ],
+          "viewport": [
+            1024,
+            700
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      },
+      {
+        "engine": "firefox",
+        "skin": "default",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "59px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 455,
+          "styleRulesInSheet": 455
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.47,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 1.98,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.58,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-primary video-controls-compact-primary",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.video-skin",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            55,
+            92,
+            410,
+            154
+          ],
+          "viewport": [
+            1366,
+            768
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      },
+      {
+        "engine": "firefox",
+        "skin": "compat",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "58px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 380,
+          "styleRulesInSheet": 380
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.48,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 1.99,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.61,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-group",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.media-video",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            55,
+            92,
+            410,
+            154
+          ],
+          "viewport": [
+            1366,
+            768
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      },
+      {
+        "engine": "webkit",
+        "skin": "default",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "59px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 455,
+          "styleRulesInSheet": 455
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.5,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 1.98,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.57,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-primary video-controls-compact-primary",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.video-skin",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            41,
+            84,
+            307,
+            140
+          ],
+          "viewport": [
+            1024,
+            700
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      },
+      {
+        "engine": "webkit",
+        "skin": "compat",
+        "metadata": true,
+        "render": {
+          "size": [
+            800,
+            450
+          ],
+          "notUpgraded": [],
+          "playButtonStyle": {
+            "display": "grid",
+            "cursor": "pointer",
+            "width": "58px"
+          },
+          "controlsZIndex": "30",
+          "styleRulesParsed": 380,
+          "styleRulesInSheet": 380
+        },
+        "logoBeforeStart": {
+          "dataPaused": true,
+          "updates": 1
+        },
+        "play": {
+          "playingEvent": true,
+          "paused": false,
+          "currentTime": 1.51,
+          "duration": 15.22
+        },
+        "logoWhilePlaying": {
+          "dataPaused": false,
+          "updates": 2
+        },
+        "pause": {
+          "pauseEvent": true,
+          "paused": true,
+          "currentTime": 1.98,
+          "duration": 15.22
+        },
+        "logoWhilePaused": {
+          "dataPaused": true,
+          "updates": 3
+        },
+        "seekPointer": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 7.61,
+          "duration": 15.22,
+          "ariaValueText": null,
+          "nearHalf": true
+        },
+        "seekKey": {
+          "seekedEvent": true,
+          "paused": true,
+          "currentTime": 9,
+          "duration": 15.22,
+          "moved": true
+        },
+        "ownControl": {
+          "group": "video-controls-group",
+          "size": [
+            36,
+            36
+          ],
+          "neighbour": "button",
+          "neighbourSize": [
+            36,
+            36
+          ],
+          "sameRow": true,
+          "role": "button",
+          "label": "Cloudinary",
+          "tabIndex": 0,
+          "activations": 3,
+          "stillPausedAfterSpace": true,
+          "reactsToState": true
+        },
+        "overlay": {
+          "zIndex": "25",
+          "parent": "media-container",
+          "hitAtOverlayCenter": "overlay",
+          "coverAllHitAtBarPlayButton": "media-play-button"
+        },
+        "fullscreen": {
+          "entered": true,
+          "element": "media-container.media-skin.media-container.media-video",
+          "containsOverlay": true,
+          "containsOwnControl": true,
+          "overlayBox": [
+            41,
+            84,
+            307,
+            140
+          ],
+          "viewport": [
+            1024,
+            700
+          ],
+          "hitAtOverlayCenter": "overlay"
+        },
+        "errors": []
+      }
+    ],
+    "styleDiff": {
+      "chromium default": {
+        "elements": 429,
+        "styleRulesParsed": {
+          "raw": 455,
+          "flat": 455
+        },
+        "baseline": {
+          "compared": 698691,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 698691,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        }
+      },
+      "chromium compat": {
+        "elements": 409,
+        "styleRulesParsed": {
+          "raw": 380,
+          "flat": 380
+        },
+        "baseline": {
+          "compared": 669591,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 669591,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        }
+      },
+      "firefox default": {
+        "elements": 429,
+        "styleRulesParsed": {
+          "raw": 455,
+          "flat": 455
+        },
+        "baseline": {
+          "compared": 604653,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 604653,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        }
+      },
+      "firefox compat": {
+        "elements": 409,
+        "styleRulesParsed": {
+          "raw": 380,
+          "flat": 380
+        },
+        "baseline": {
+          "compared": 579387,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 579387,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        }
+      },
+      "webkit default": {
+        "elements": 429,
+        "styleRulesParsed": {
+          "raw": 455,
+          "flat": 455
+        },
+        "baseline": {
+          "compared": 649455,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 649455,
+          "differ": 424,
+          "elements": [
+            "media-poster",
+            "img",
+            "media-slider-thumbnail",
+            "media-icon",
+            "svg",
+            "style",
+            "path"
+          ],
+          "properties": [
+            "border-block-end-style",
+            "border-block-start-style",
+            "border-bottom-style",
+            "border-inline-end-style",
+            "border-inline-start-style",
+            "border-left-style",
+            "border-right-style",
+            "border-top-style",
+            "box-sizing",
+            "max-inline-size",
+            "max-width",
+            "inline-size",
+            "inset-inline-end",
+            "perspective-origin",
+            "right",
+            "transform-origin",
+            "width",
+            "display"
+          ],
+          "sample": [
+            "media-poster.media-poster border-block-end-style: none -> solid",
+            "media-poster.media-poster border-block-start-style: none -> solid",
+            "media-poster.media-poster border-bottom-style: none -> solid",
+            "media-poster.media-poster border-inline-end-style: none -> solid",
+            "media-poster.media-poster border-inline-start-style: none -> solid",
+            "media-poster.media-poster border-left-style: none -> solid"
+          ]
+        }
+      },
+      "webkit compat": {
+        "elements": 409,
+        "styleRulesParsed": {
+          "raw": 380,
+          "flat": 380
+        },
+        "baseline": {
+          "compared": 622695,
+          "differ": 0,
+          "elements": [],
+          "properties": [],
+          "sample": []
+        },
+        "rawVsFlat": {
+          "compared": 622695,
+          "differ": 113,
+          "elements": [
+            "media-poster",
+            "img",
+            "media-slider-thumbnail"
+          ],
+          "properties": [
+            "border-block-end-style",
+            "border-block-start-style",
+            "border-bottom-style",
+            "border-inline-end-style",
+            "border-inline-start-style",
+            "border-left-style",
+            "border-right-style",
+            "border-top-style",
+            "box-sizing",
+            "display",
+            "max-inline-size",
+            "max-width"
+          ],
+          "sample": [
+            "media-poster.media-poster border-block-end-style: none -> solid",
+            "media-poster.media-poster border-block-start-style: none -> solid",
+            "media-poster.media-poster border-bottom-style: none -> solid",
+            "media-poster.media-poster border-inline-end-style: none -> solid",
+            "media-poster.media-poster border-inline-start-style: none -> solid",
+            "media-poster.media-poster border-left-style: none -> solid"
+          ]
+        }
+      }
+    }
+  }
+}

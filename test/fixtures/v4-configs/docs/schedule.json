@@ -1,0 +1,63 @@
+{
+  "page": "docs/schedule.html",
+  "players": [
+    {
+      "factory": "player",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "schedule": {
+          "weekly": [
+            {
+              "day": "sunday",
+              "start": "00:00",
+              "duration": 24
+            },
+            {
+              "day": "monday",
+              "start": "00:00",
+              "duration": 24
+            },
+            {
+              "day": "tuesday",
+              "start": "00:00",
+              "duration": 24
+            },
+            {
+              "day": "wednesday",
+              "start": "00:00",
+              "duration": 24
+            },
+            {
+              "day": "friday",
+              "start": "00:00",
+              "duration": 24
+            },
+            {
+              "day": "saturday",
+              "start": "00:00",
+              "duration": 24
+            }
+          ]
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player cld-fluid",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

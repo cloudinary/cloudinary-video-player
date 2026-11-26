@@ -1,0 +1,30 @@
+{
+  "page": "docs/seek-thumbs.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "seekThumbnails": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-fluid cld-video-player-skin-light",
+            "data-cld-public-id": "elephants"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

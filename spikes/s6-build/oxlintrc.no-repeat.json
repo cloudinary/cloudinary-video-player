@@ -1,0 +1,139 @@
+{
+  "$schema": "../../node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "off"
+  },
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "@videojs/html",
+            "importNames": [
+              "definePlayerFeature",
+              "PlayerExtension",
+              "defineSlice",
+              "extensionContext",
+              "mediaContext",
+              "createMediaAttachMixin"
+            ],
+            "message": "Video.js @internal API: use public APIs only (research.md R-02)."
+          },
+          {
+            "name": "@videojs/core",
+            "importNames": [
+              "definePlayerFeature",
+              "PlayerExtension",
+              "defineSlice",
+              "extensionContext",
+              "mediaContext",
+              "createMediaAttachMixin"
+            ],
+            "message": "Video.js @internal API: use public APIs only (research.md R-02)."
+          },
+          {
+            "name": "@videojs/core/dom",
+            "importNames": [
+              "definePlayerFeature",
+              "PlayerExtension",
+              "defineSlice",
+              "extensionContext",
+              "mediaContext",
+              "createMediaAttachMixin"
+            ],
+            "message": "Video.js @internal API: use public APIs only (research.md R-02)."
+          },
+          {
+            "name": "@videojs/store",
+            "importNames": [
+              "definePlayerFeature",
+              "PlayerExtension",
+              "defineSlice",
+              "extensionContext",
+              "mediaContext",
+              "createMediaAttachMixin"
+            ],
+            "message": "Video.js @internal API: use public APIs only (research.md R-02)."
+          }
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/core/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "(^|/)(shell|player|features|entries)(/|$)",
+                "message": "core imports nothing from the other rings."
+              },
+              {
+                "regex": "^@videojs/",
+                "message": "core and shell have no Video.js imports."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/shell/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "(^|/)(player|features|entries)(/|$)",
+                "message": "shell imports only core; the layer comes in through its loader parameter."
+              },
+              {
+                "regex": "^@videojs/",
+                "message": "core and shell have no Video.js imports."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "src/features/**"
+      ],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "regex": "^\\.\\./[^.]",
+                "message": "features never import each other."
+              },
+              {
+                "regex": "(^|/)(shell|entries|features)(/|$)",
+                "message": "features import only core and player/context."
+              },
+              {
+                "group": [
+                  "**/player",
+                  "**/player/**",
+                  "!**/player/context.js"
+                ],
+                "message": "features import only core and player/context."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

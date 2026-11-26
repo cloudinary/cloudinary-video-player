@@ -22,9 +22,9 @@ v4 shapes stay (option names, factory forms, CDN names, `window.cloudinary`); ev
 
 | Package | Why | Replaces (v4) |
 |---|---|---|
-| Video.js 10 packages, 10.3.0 (`@videojs/html` with `createPlayer` + `videoFeatures`; ejected skin, R-05) | Player, store, controls, captions, chapters segments, storyboard thumbnails, PiP, fullscreen, hotkeys, i18n | `video.js` 8, `videojs-per-source-behaviors` |
-| `@videojs/hlsjs-video` (10.3.0 pins hls.js 1.7.3) | HLS incl. AES-128 and TS live (D-18) | `hls.js`, vendored contrib-hlsjs, `videojs-contrib-quality-levels/-menu` |
-| `@videojs/dash-video` (10.3.0 pins dash.js 5.2.0) | DASH (D-18) | `videojs-contrib-dash` |
+| Video.js 10 packages, 10.7.0 (`@videojs/html` with `createPlayer` + `videoFeatures`; ejected skin, R-05) | Player, store, controls, captions, chapters segments, storyboard thumbnails, PiP, fullscreen, hotkeys, i18n | `video.js` 8, `videojs-per-source-behaviors` |
+| `@videojs/hlsjs-video` (10.7.0 pins hls.js 1.7.4) | HLS incl. AES-128 and TS live (D-18) | `hls.js`, vendored contrib-hlsjs, `videojs-contrib-quality-levels/-menu` |
+| `@videojs/dash-video` (10.7.0 pins dash.js 5.2.0) | DASH (D-18) | `videojs-contrib-dash` |
 | Google IMA SDK `ima3.js` (runtime script, not npm) | Ads, only when `ads` is set (D-13) | `videojs-ima`, `videojs-contrib-ads` |
 | `cloudinary-video-analytics` | Cloudinary analytics (kept) | same |
 | `cloudinary-video-player-profiles` | Built-in profiles (kept) | same |
@@ -55,11 +55,13 @@ Removed: `@cloudinary/url-gen` (own builder, D-10), `lodash`, `uuid` (`crypto.ra
 | Default player: shell + main chunks + default CSS, **without** streaming engines and ads | **60 KB** start (SC-007; never > 70 KB) | ≈ 167 KB (140 KB JS + 27 KB CSS) |
 | — of which default CSS (`player.min.css`, both v4-look skins) | 12 KB | 27 KB (icon font inlined) |
 | Each optional feature chunk (own code) | 15 KB | e.g. playlist 6 KB, ima 20 KB |
-| hls.js adapter chunk | ≤ v4 (162 KB); set after S-1 | 162 KB |
+| hls.js adapter chunk | ≤ 205 KB (developer, 2026-11-26: full hls.js for v4 parity; S-1 measured 204 KB, hls.js 1.7.4 alone 174 KB; `log.md` §8) | 162 KB |
 | dash.js adapter chunk | ≤ v4 (199 KB) (tracked) | 199 KB |
 | Fonts (Inter, Latin subset, ≤ 2 weights, `woff2`) | Not in SC-007 (not code or styles); tracked ≤ 60 KB total, `font-display: swap` | Google Fonts request |
 
 Budgets start here and can only go down without a plan amendment (D-21: "a principle, not a number").
+
+S-1 note (2026-11-26): the default player fits only with **design B**: the quality, audio, rate, captions and chapters menus load with their feature chunk, not in the first load (estimate 62.6 KB on 10.7.0, 57.7 KB on 10.3.0, with a 15 KB allowance for own code). All v4 controls in the first load measure 79.3 KB. T127 re-measures with real code.
 
 ## Scripts
 
@@ -208,8 +210,8 @@ docs/v5/                       # written docs: MIGRATION.md, options.md, release
 | IMA's `<video>` may be picked as the main media | Ads break playback | S-4; place our media first, keep the ad container outside media discovery. |
 | `<dash-video>` is "Unstable API" and lists no renditions or audio tracks | DASH quality/audio menus (FR-014) | S-5; fall back to a developer decision. |
 | Ejected skin drifts from upstream | Missed Video.js fixes | Re-eject and diff on each minor (R-05). |
-| tsdown is 0.x; `css.splitting` is experimental | Build breakage on upgrade | Exact pin; Rolldown fallback (R-01, S-6). |
-| Ejected skin CSS uses `@scope` (Safari 17.4, Chrome 118, Firefox 146), above the floor (Safari 16.4, Chrome 111, Firefox 121) | Broken layout on supported browsers | S-2: eject the Compat skin or flatten `@scope` at build time. |
+| tsdown is 0.x; `css.splitting` is experimental and needs `@tsdown/css` | Build breakage on upgrade | Exact pins of both; Rolldown fallback with an own CSS plugin (R-01, S-6, `spikes/s6-build/css-split-plugin.mjs`). |
+| Ejected skin CSS uses `@scope` (Safari 17.4, Chrome 118, Firefox 146), above the floor (Safari 16.4, Chrome 111, Firefox 121) | Broken layout on supported browsers | S-2 (decided 2026-11-26): eject the Compat skin and flatten `@scope` and `&` once, at eject. |
 | Own code grows (caption renderer, captions/quality menus, error display, ads state) | SC-008 (≤ 5,850 lines) | Count per phase in CI (`cloc src`, TypeScript only). Ejected skin script and markup count (we own them); CSS does not (SC-008 excludes styles). |
 | Ads land in Video.js "late 2026" | Our ads module may duplicate a future official one | Narrow ads interface (R-04) so it can be swapped later. |
 
@@ -217,8 +219,8 @@ docs/v5/                       # written docs: MIGRATION.md, options.md, release
 
 Approved by the developer on 2026-11-12:
 
-1. **New runtime dependencies**: the Video.js 10 packages, 10.3.0 (`@videojs/html`, `@videojs/hlsjs-video` → hls.js 1.7.3, `@videojs/dash-video` → dash.js 5.2.0); IMA SDK loaded at run time.
-2. **New dev dependencies**: `typescript` 7, `tsdown` (exact pin), `vite` 8 (demo server), `size-limit` + `@size-limit/file`, `ts-json-schema-generator`, `oxlint`, `vitest` 5 + `@vitest/browser-playwright`, `@playwright/test`, `@axe-core/playwright`; on 2026-11-23 also `publint` and `@arethetypeswrong/cli` (checked: MIT, npm provenance, no install scripts).
+1. **New runtime dependencies**: the Video.js 10 packages, 10.7.0 (pin changed from 10.3.0 on 2026-11-26 after the spikes; `@videojs/html`, `@videojs/hlsjs-video` → hls.js 1.7.4, `@videojs/dash-video` → dash.js 5.2.0); IMA SDK loaded at run time.
+2. **New dev dependencies**: `typescript` 7, `tsdown` (exact pin), `vite` 8 (demo server), `size-limit` + `@size-limit/file`, `ts-json-schema-generator`, `oxlint`, `@tsdown/css` (exact pin, approved 2026-11-26), `vitest` 5 + `@vitest/browser-playwright`, `@playwright/test`, `@axe-core/playwright`; on 2026-11-23 also `publint` and `@arethetypeswrong/cli` (checked: MIT, npm provenance, no install scripts).
 3. **Removed dependencies**: listed in Technical Context.
 
 ## Decisions taken after the plan draft (2026-11-12)
@@ -227,7 +229,7 @@ Approved by the developer on 2026-11-12:
 - **`player-full.min.js`**: published as one more copy of the loader (zero cost; no customer page breaks).
 - **v4 getter/setter methods** (`contracts/public-api.md` §3–4): split into named getters and setters (`getVolume()`/`setVolume()`, `seek()`, …) so that old calls fail loudly instead of silently; `width()`/`height()` and the run-time source-default setters are removed. Basis: the developer's FR-004 confirmation (2026-11-11: "never really in use … we can remove them").
 
-- **Video.js 8 pass-through options** (2026-11-23): keep `playbackRates`, `maxTries`, `videoTimeout`, `fetchErrorUsingGet` (D-09); remove `videojs`, `html5` (D-30) and `videoJS`, `qualitySelector`, `ima` (no effect in v4); remove `disableSeekWhileScrubbingOnMobile` as an option but keep its behavior; remove `textTrackSettings` in 5.0 (5.x candidate). Details: `contracts/options.md`.
+- **Video.js 8 pass-through options** (2026-11-23): keep `playbackRates`, `maxTries`, `videoTimeout`, `fetchErrorUsingGet` (D-09); remove `videojs`, `html5` (D-30) and `videoJS`, `qualitySelector`, `ima` (no effect in v4); remove `disableSeekWhileScrubbingOnMobile` and its behavior (2026-11-26: S-7 found that Video.js 10 seeks while dragging; the developer accepts the Video.js 10 behavior); remove `textTrackSettings` in 5.0 (5.x candidate). Details: `contracts/options.md`.
 - **Test plan** (2026-11-23): R-08 reopened and replaced by `test-plan.md` (developer: "our current testing strategy in the player is very weak"). Compact and KISS (developer: "I'd rather keep it compact", "no coverage, only confidence"): unit, browser and end-to-end layers plus static checks; no type tests, consumer apps, visual regression, contract check or coverage gates. Full e2e on the local built artifact; live Cloudinary media; one `player.html` with presets (`?preset=&delivery=`); Netlify builds the preview on the current site as in v4, with a smoke test on it; reports pushed to the reports repository as in v4; four PR jobs. Phase 1: 2 → 3 eng-weeks.
 - **Jira** (2026-11-23): one story per delivery phase (8 stories) under the existing epic VIDEO-21286; a short plan summary as a comment on the epic; the epic's status and due date stay as they are.
 

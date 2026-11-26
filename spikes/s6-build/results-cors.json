@@ -1,0 +1,432 @@
+[
+  {
+    "engine": "chromium",
+    "version": "148.0.7778.96",
+    "mode": "defer",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "chromium",
+    "version": "148.0.7778.96",
+    "mode": "defer",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:51345/esm/player.js",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [
+      {
+        "url": "B/esm/player.js",
+        "error": "net::ERR_FAILED"
+      }
+    ],
+    "consoleErrors": [
+      "Access to script at 'http://127.0.0.1:51345/esm/player.js' from origin 'http://127.0.0.1:51343' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED"
+    ]
+  },
+  {
+    "engine": "chromium",
+    "version": "148.0.7778.96",
+    "mode": "async",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "chromium",
+    "version": "148.0.7778.96",
+    "mode": "async",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:51345/esm/player.js",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [
+      {
+        "url": "B/esm/player.js",
+        "error": "net::ERR_FAILED"
+      }
+    ],
+    "consoleErrors": [
+      "Access to script at 'http://127.0.0.1:51345/esm/player.js' from origin 'http://127.0.0.1:51343' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "Failed to load resource: net::ERR_FAILED"
+    ]
+  },
+  {
+    "engine": "firefox",
+    "version": "150.0.2",
+    "mode": "defer",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "firefox",
+    "version": "150.0.2",
+    "mode": "defer",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: error loading dynamically imported module: http://127.0.0.1:51345/esm/player.js",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": [
+      "[JavaScript Error: \"Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://127.0.0.1:51345/esm/player.js. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing). Status code: 200.\"]"
+    ]
+  },
+  {
+    "engine": "firefox",
+    "version": "150.0.2",
+    "mode": "async",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "firefox",
+    "version": "150.0.2",
+    "mode": "async",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: error loading dynamically imported module: http://127.0.0.1:51345/esm/player.js",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": [
+      "[JavaScript Error: \"Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://127.0.0.1:51345/esm/player.js. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing). Status code: 200.\"]"
+    ]
+  },
+  {
+    "engine": "webkit",
+    "version": "26.4",
+    "mode": "defer",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "webkit",
+    "version": "26.4",
+    "mode": "defer",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: Cross-origin script load denied by Cross-Origin Resource Sharing policy.",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [
+      {
+        "url": "B/esm/player.js",
+        "error": "Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200"
+      }
+    ],
+    "consoleErrors": [
+      "Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200",
+      "Failed to load resource: Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200"
+    ]
+  },
+  {
+    "engine": "webkit",
+    "version": "26.4",
+    "mode": "async",
+    "cdn": "B+cors",
+    "outcome": "loaded",
+    "expected": "loaded",
+    "asExpected": true,
+    "ready": [
+      "chapters",
+      "title"
+    ],
+    "error": null,
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": "rgb(1, 2, 3)",
+    "titleColor": "rgb(7, 8, 9)",
+    "links": [
+      "esm/chapters-D3mG6B3Z.css",
+      "esm/title-D-f1KiRM.css"
+    ],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/cloud-75HROuhl.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/context-BFoIHpXI.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors",
+      "/esm/title-D-f1KiRM.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/title-D-f1KiRM.css origin=- mode=no-cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [],
+    "consoleErrors": []
+  },
+  {
+    "engine": "webkit",
+    "version": "26.4",
+    "mode": "async",
+    "cdn": "B-nocors",
+    "outcome": "blocked",
+    "expected": "blocked",
+    "asExpected": true,
+    "ready": null,
+    "error": "TypeError: Cross-origin script load denied by Cross-Origin Resource Sharing policy.",
+    "elementUpgraded": true,
+    "windowCloudinary": "object",
+    "chaptersColor": null,
+    "titleColor": null,
+    "links": [],
+    "cssProbe": {
+      "loaded": true,
+      "color": "rgb(1, 2, 3)"
+    },
+    "requests": [
+      "/player.min.js origin=- mode=no-cors",
+      "/esm/player.js origin=http://127.0.0.1:51343 mode=cors",
+      "/esm/chapters-D3mG6B3Z.css origin=- mode=no-cors"
+    ],
+    "failed": [
+      {
+        "url": "B/esm/player.js",
+        "error": "Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200"
+      }
+    ],
+    "consoleErrors": [
+      "Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200",
+      "Failed to load resource: Origin http://127.0.0.1:51343 is not allowed by Access-Control-Allow-Origin. Status code: 200"
+    ]
+  }
+]

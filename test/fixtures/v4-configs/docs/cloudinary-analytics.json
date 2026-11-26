@@ -1,0 +1,147 @@
+{
+  "page": "docs/cloudinary-analytics.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "secure": true,
+        "cloudinaryAnalytics": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "elephants"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "adpPlayer",
+      "options": {
+        "cloudName": "demo",
+        "secure": true,
+        "cloudinaryAnalytics": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "adpPlayer",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-custom-data-plain-object",
+      "options": {
+        "cloudName": "demo",
+        "secure": true,
+        "cloudinaryAnalytics": {
+          "customData": {
+            "customData1": "my-value",
+            "customData2": "11111",
+            "customData3": "custom-data-3-value",
+            "customData4": "Hello world",
+            "customData5": "false"
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-custom-data-plain-object",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "elephants"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-custom-data-function",
+      "options": {
+        "cloudName": "demo",
+        "secure": true,
+        "cloudinaryAnalytics": {
+          "customData": "[Function]"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-custom-data-function",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "elephants"
+          ]
+        }
+      ]
+    }
+  ]
+}

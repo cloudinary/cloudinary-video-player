@@ -1,0 +1,58 @@
+{
+  "page": "docs/colors.html",
+  "players": [
+    {
+      "factory": "videoPlayers",
+      "target": ".cld-video-player",
+      "options": {
+        "cloud_name": "demo",
+        "autoplay": true,
+        "controls": true,
+        "transformation": {
+          "width": 700,
+          "crop": "limit"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "muted": "",
+            "playsinline": "",
+            "data-cld-source": "{ \"publicId\": \"dog\", \"info\": { \"title\": \"Sea turtle\", \"subtitle\": \"Short movie about a sea turtle\" } }",
+            "data-cld-colors": "{ \"base\": \"#0b602b\", \"accent\": \"#cddc39\", \"text\": \"#fff\" }",
+            "class": "cld-video-player cld-fluid",
+            "id": "player-1"
+          },
+          "sources": []
+        },
+        {
+          "tag": "video",
+          "attributes": {
+            "muted": "",
+            "playsinline": "",
+            "data-cld-source": "{ \"publicId\": \"sea_turtle\", \"info\": { \"title\": \"Sea turtle\", \"subtitle\": \"Short movie about a sea turtle\" } }",
+            "data-cld-colors": "{ \"base\": \"#111\", \"accent\": \"#03a9f4\", \"text\": \"#ffeb3b\" }",
+            "class": "cld-video-player cld-fluid cld-video-player-skin-dark",
+            "id": "player-2"
+          },
+          "sources": []
+        },
+        {
+          "tag": "video",
+          "attributes": {
+            "muted": "",
+            "playsinline": "",
+            "data-cld-source": "{ \"publicId\": \"elephants\", \"info\": { \"title\": \"Elephants\", \"subtitle\": \"Short movie about elephants\" } }",
+            "data-cld-colors": "{ \"base\": \"#ffffff\", \"accent\": \"#676a46\", \"text\": \"#007d29\" }",
+            "class": "cld-video-player cld-fluid cld-video-player-skin-light",
+            "id": "player-3"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

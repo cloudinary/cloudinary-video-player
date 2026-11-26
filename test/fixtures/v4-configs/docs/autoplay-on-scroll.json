@@ -1,0 +1,29 @@
+{
+  "page": "docs/autoplay-on-scroll.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player",
+            "width": "500",
+            "data-cld-public-id": "sea_turtle",
+            "data-cld-autoplay-mode": "on-scroll"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "page": "docs/custom-cld-errors.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo_err",
+        "publicId": "snow_horses"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "on",
+          "args": [
+            "error",
+            "[Function]"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "page": "docs/interaction-area.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "manually",
+      "options": {
+        "cloud_name": "demo",
+        "bigPlayButton": false,
+        "interactionDisplay": {
+          "theme": {
+            "template": "pulsing"
+          },
+          "layout": {
+            "enable": true,
+            "showAgain": false
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "manually",
+            "width": "250",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video-player/girl_in_a_dress",
+            {
+              "interactionAreas": {
+                "enable": true,
+                "template": [
+                  {
+                    "left": 10,
+                    "top": 10,
+                    "width": 80,
+                    "height": 40,
+                    "id": "topSource"
+                  },
+                  {
+                    "left": 10,
+                    "top": 75,
+                    "width": 80,
+                    "height": 20,
+                    "id": "bottomSource"
+                  }
+                ],
+                "onClick": "[Function]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "custom-template",
+      "options": {
+        "cloud_name": "demo",
+        "bigPlayButton": false,
+        "interactionDisplay": {
+          "theme": {
+            "template": "pulsing"
+          },
+          "layout": {
+            "enable": true,
+            "showAgain": false
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "custom-template",
+            "width": "250",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video-player/girl_in_a_dress",
+            {
+              "interactionAreas": {
+                "enable": true,
+                "template": "portrait",
+                "onClick": "[Function]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "custom-vtt",
+      "options": {
+        "cloud_name": "demo",
+        "bigPlayButton": false,
+        "interactionDisplay": {
+          "theme": {
+            "template": "pulsing"
+          },
+          "layout": {
+            "enable": true,
+            "showAgain": false
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "custom-vtt",
+            "width": "250",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video-player/girl_in_a_dress",
+            {
+              "interactionAreas": {
+                "enable": true,
+                "vttUrl": "https://res.cloudinary.com/prod/raw/upload/v1623250265/video-player/vtts/center.vtt",
+                "onClick": "[Function]"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "auto-zoom",
+      "options": {
+        "cloud_name": "demo",
+        "bigPlayButton": false,
+        "interactionDisplay": {
+          "theme": {
+            "template": "pulsing"
+          },
+          "layout": {
+            "enable": true,
+            "showAgain": false
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "auto-zoom",
+            "width": "250",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video-player/girl_in_a_dress",
+            {
+              "transformation": {
+                "quality": "auto"
+              },
+              "interactionAreas": {
+                "enable": true,
+                "template": "portrait",
+                "onClick": "[Function]"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+## https://cdn.jsdelivr.net/npm/@videojs/html@10.7.0/dist/default/index.js  (Origin: none)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=31536000, s-maxage=31536000, immutable
+cross-origin-resource-policy: cross-origin
+content-type: application/javascript; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://cdn.jsdelivr.net/npm/@videojs/html@10.7.0/dist/default/index.js  (Origin: https://customer.example)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=31536000, s-maxage=31536000, immutable
+cross-origin-resource-policy: cross-origin
+content-type: application/javascript; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://unpkg.com/@videojs/html@10.7.0/dist/default/index.js  (Origin: none)
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+
+## https://unpkg.com/@videojs/html@10.7.0/dist/default/index.js  (Origin: https://customer.example)
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+
+## https://cdn.jsdelivr.net/npm/@videojs/html@10.7.0/dist/default/define/video/compat-skin.css  (Origin: none)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=31536000, s-maxage=31536000, immutable
+cross-origin-resource-policy: cross-origin
+content-type: text/css; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://cdn.jsdelivr.net/npm/@videojs/html@10.7.0/dist/default/define/video/compat-skin.css  (Origin: https://customer.example)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=31536000, s-maxage=31536000, immutable
+cross-origin-resource-policy: cross-origin
+content-type: text/css; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://unpkg.com/@videojs/html@10.7.0/dist/default/define/video/compat-skin.css  (Origin: none)
+HTTP/2 200 
+content-type: text/css; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+
+## https://unpkg.com/@videojs/html@10.7.0/dist/default/define/video/compat-skin.css  (Origin: https://customer.example)
+HTTP/2 200 
+content-type: text/css; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+
+## https://cdn.jsdelivr.net/npm/@videojs/html@10/dist/default/index.js  (Origin: none)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=604800, s-maxage=43200
+cross-origin-resource-policy: cross-origin
+content-type: application/javascript; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://cdn.jsdelivr.net/npm/@videojs/html@10/dist/default/index.js  (Origin: https://customer.example)
+HTTP/2 200 
+access-control-allow-origin: *
+timing-allow-origin: *
+cache-control: public, max-age=604800, s-maxage=43200
+cross-origin-resource-policy: cross-origin
+content-type: application/javascript; charset=utf-8
+x-jsd-version: 10.7.0
+x-jsd-version-type: version
+
+## https://unpkg.com/@videojs/html@10/dist/default/index.js  (Origin: none)
+HTTP/2 302 
+content-type: text/plain;charset=UTF-8
+location: /@videojs/html@10.7.0/dist/default/index.js
+access-control-allow-origin: *
+cache-control: public, max-age=60, s-maxage=300
+cross-origin-resource-policy: cross-origin
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+
+## https://unpkg.com/@videojs/html@10/dist/default/index.js  (Origin: https://customer.example)
+HTTP/2 302 
+content-type: text/plain;charset=UTF-8
+location: /@videojs/html@10.7.0/dist/default/index.js
+access-control-allow-origin: *
+cache-control: public, max-age=60, s-maxage=300
+cross-origin-resource-policy: cross-origin
+HTTP/2 200 
+content-type: text/javascript; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=31536000
+cross-origin-resource-policy: cross-origin
+

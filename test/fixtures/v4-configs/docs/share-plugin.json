@@ -1,0 +1,79 @@
+{
+  "page": "docs/share-plugin.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player1",
+      "options": {
+        "cloudName": "demo",
+        "transformation": {
+          "effect": "saturation:-100"
+        },
+        "download": true,
+        "publicId": "snow_horses"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player1",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player2",
+      "options": {
+        "cloudName": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player2",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "snow_horses",
+              "sourceTypes": [
+                "hls"
+              ],
+              "transformation": [
+                {
+                  "streaming_profile": "full_hd"
+                },
+                {
+                  "angle": 180
+                }
+              ],
+              "download": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

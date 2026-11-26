@@ -1,0 +1,112 @@
+{
+  "page": "docs/video-details.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player1",
+      "options": {
+        "cloudName": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player1",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "snow_horses",
+              "title": true,
+              "description": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player2",
+      "options": {
+        "cloudName": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player2",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "snow_horses",
+              "title": true,
+              "description": "Hard-coded description for snow horses video"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player3",
+      "options": {
+        "cloudName": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player3",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "snow_horses",
+              "title": true,
+              "info": {
+                "subtitle": "Fallback description from legacy format"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

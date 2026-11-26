@@ -1,0 +1,22 @@
+{
+  "source": "https://res.cloudinary.com/prod/_applet_/video_service/video_player_profiles/demo-profile.json",
+  "fetchedOn": "2026-11-26",
+  "status": 200,
+  "response": {
+    "playerOptions": {
+      "aiHighlightsGraph": true,
+      "colors": {
+        "accent": "#FFC661",
+        "base": "#FF6B35",
+        "text": "#FFFFFF"
+      },
+      "showJumpControls": true,
+      "transformation": [
+        {
+          "effect": "reverse"
+        }
+      ]
+    },
+    "sourceOptions": {}
+  }
+}

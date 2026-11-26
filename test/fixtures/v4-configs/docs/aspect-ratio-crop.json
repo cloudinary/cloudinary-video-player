@@ -1,0 +1,90 @@
+{
+  "page": "docs/aspect-ratio-crop.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-1",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "aspectRatio": "1:1",
+        "cropMode": "fill",
+        "breakpoints": true,
+        "transformation": [
+          {
+            "effect": "blur:500"
+          },
+          {
+            "effect": "saturation:-100"
+          }
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-1",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-2",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "aspectRatio": "4:3",
+        "cropMode": "pad",
+        "cropPadColor": "blue"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-2",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-3",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "aspectRatio": "9:16",
+        "cropMode": "smart"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-3",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player",
+            "width": "280"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

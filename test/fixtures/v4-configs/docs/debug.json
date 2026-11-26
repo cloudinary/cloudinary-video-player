@@ -1,0 +1,40 @@
+{
+  "page": "docs/debug.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "fluid": "yes",
+        "debug": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "elephants"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
