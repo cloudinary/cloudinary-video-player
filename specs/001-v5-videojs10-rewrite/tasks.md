@@ -53,7 +53,7 @@ description: "Task list for the Cloudinary Video Player v5 rewrite on Video.js 1
 - [ ] T013 Delete the v4 build and source tree on `v5`: `src/**/*.js`, `src/**/*.scss`, `webpack/`, Babel, rollup and jest configs, `test/` (v4) **except** `test/fixtures/url-parity/` and `test/fixtures/v4-configs/` (written by T002/T003), `lib/` output config; keep `docs/` v4 pages until Phase 6
 - [ ] T014 Rewrite `package.json`: same name, `"type": "module"`, `exports` (`.` with types, `./cld-video-player.min.css`, `./schema.json`), `sideEffects: ["*.css"]`, `engines.node >= 22.12`, the approved runtime and dev dependencies, and the scripts from `plan.md` → "Scripts"
 - [ ] T015 [P] Add `tsconfig.json`: TypeScript 7, `strict`, `isolatedDeclarations`, target ES2022, DOM libs, path rules for the rings
-- [ ] T016 [P] Add `tsdown.config.ts`: ESM build of `src/entries/index.ts` with chunks, per-chunk CSS and `.d.ts`; IIFE build of `src/entries/cdn-loader.ts` → `dist/player.min.js`; copies to `dist/cld-video-player.min.js` and `dist/player-full.min.js`; CSS copies `player.min.css` / `cld-video-player.min.css`; fonts to `dist/fonts/`
+- [ ] T016 [P] Add `tsdown.config.ts`: ESM build of `src/entries/index.ts` with chunks, per-chunk CSS (`css.splitting` through `@tsdown/css`, 2026-11-26) and `.d.ts`; IIFE build of `src/entries/cdn-loader.ts` → `dist/player.min.js`; copies to `dist/cld-video-player.min.js` and `dist/player-full.min.js`; CSS copies `player.min.css` / `cld-video-player.min.css`; fonts to `dist/fonts/`
 - [ ] T017 [P] Add `.oxlintrc.json` with `--type-aware` rules: ring imports (`core` imports nothing else; `shell` imports only `core`; features import only `core` and `player/context`), banned `@internal` Video.js names (`definePlayerFeature`, `PlayerExtension`, `defineSlice`, `extensionContext`, `mediaContext`, `createMediaAttachMixin`), no `innerHTML`
 - [ ] T018 [P] Add `.size-limit.json` with the budgets from `plan.md` → "Size budgets" (gzip, FR-032)
 - [ ] T019 [P] Add `scripts/build-schema.mjs` (ts-json-schema-generator over `src/core/options/types.ts` → committed `schema.json` at the repository root, copied to `dist/schema.json` by the build; `dist/` is git-ignored) and a drift check that fails CI when the regenerated schema differs from the committed one
@@ -215,7 +215,7 @@ description: "Task list for the Cloudinary Video Player v5 rewrite on Video.js 1
 ### Ads
 
 - [ ] T103 [US5] Implement `src/features/ads/`: load `ima3.js` with timeout and error = "no ads, play content"; one `AdDisplayContainer` and `AdsLoader`; states `idle → waiting → ad → content → postroll-wait → done`; idempotent resume; `ResizeObserver` resize; iPhone branch (R-04, FR-020)
-- [ ] T104 [US5] In `src/features/ads/`, map the ad settings (`locale`, `adTagUrl`, `showCountdown`, `adLabel`, `prerollTimeout`, `postrollTimeout`) and implement `adsInPlaylist` (`first-video`, `every-video`) as recorded by S-4
+- [ ] T104 [US5] In `src/features/ads/`, map the ad settings (`locale`, `adTagUrl`, `showCountdown`, `adLabel`, `prerollTimeout`, `postrollTimeout`) and implement `adsInPlaylist` (`first-video`, `every-video`) with the v4 behavior recorded by S-4 (ads are requested once per page; a per-item fix is a future option, `log.md` §8); honor `postrollTimeout` (v4 ignored it; default 5000 ms)
 - [ ] T105 [P] [US5] Add `test/browser/features/ads.test.ts` with a fake `google.ima` (pre-roll, blocked SDK, ad error, playlist ads, post-roll hold)
 
 ### Other features

@@ -212,3 +212,22 @@ Also pending: approval of new runtime and dev dependencies (AGENTS.md "ask first
 - Budgets (T011): the hls.js adapter chunk is **204 KB** gzip (hls.js 1.7.4 alone 174 KB; the light build, 111 KB, has no alternate audio). The plan's "≤ v4 (162 KB)" cannot be met with full hls.js. Recorded in `plan.md` as pending; the developer decides the number.
 - Incident: a stray `pnpm start` ran during the spikes. It ran a pnpm install in the checkout (pnpm layout in `node_modules`, untracked `pnpm-lock.yaml`, `videojs-ima` 2.5.0 → 2.6.0) and a failing webpack start. All spike packages still resolve; both recorders were re-run afterwards and give the same fixtures. `pnpm-lock.yaml` is not committed.
 - Questions for the developer (asked once, after the story 1 PR): S-1 design B and the hls.js budget; the Video.js pin (10.3.0 vs 10.7.0); approval of the D-26 drafts (T012); S-2 flatten at build time (postcss and postcss-selector-parser as devDependencies) or once at eject; S-5 DASH (accept the "Unstable API" element, presets for DASH or HLS only); S-6 per-chunk CSS (own plugin or `@tsdown/css`); S-7 touch seek (accept, throttle, or own logic for `disableSeekWhileScrubbingOnMobile`); S-4 parity for `adsInPlaylist` and `postrollTimeout`; the Netlify base directory; real saved and per-asset config samples for `test/fixtures/v4-configs/saved/`.
+
+## 8. Spike decisions (2026-11-26)
+
+The developer answered the §7 questions the same day.
+
+| # | Question | Decision |
+|---|---|---|
+| 1 | Video.js pin | **10.7.0** (was 10.3.0). `plan.md` dependencies and approvals updated. |
+| 2 | hls.js chunk budget | **≤ 205 KB** with full hls.js (alternate audio kept for v4 parity). The light build was rejected. |
+| 3 | Per-chunk CSS | **`@tsdown/css`** (new dev dependency, exact pin). The own plugin from S-6 stays as the Rolldown fallback. |
+| 4 | D-26 drafts | **Approved as written.** T012 applies them on `v5`. |
+| 5 | Netlify | "We need to test the CDN build and the ESM build, do what makes sense and enables that." T025 keeps both delivery modes testable on the previews (`?delivery=cdn` loads the IIFE loader from `dist/`, `?delivery=npm` the ESM build). Site settings stay ask-first. |
+| 6 | First load (S-1) | **Design B**: feature menus load with their feature chunk. |
+| 7 | Skin (S-2) | **Compat, flattened once at eject.** No postcss dependencies. |
+| 8 | DASH (S-5) | **Accept `<dash-video>`**, add the own audio bridge, ABR presets for **HLS only** (as v4). |
+| 9 | IMA parity (S-4) | `adsInPlaylist`: **v4 behavior** (ads requested once per page); a per-item fix is recorded as a future option. `postrollTimeout`: **honored** (default 5000 ms = v4). |
+| 10 | iOS ads (S-4) | **Keep the IMA default** (`disableCustomPlaybackForIOS10Plus = false`): the ad plays in the content element; v5 ignores `ended` during an ad. |
+| 11 | Touch seek (S-7) | **Accept Video.js 10**: seek while dragging. `disableSeekWhileScrubbingOnMobile` and its behavior go; the migration guide lists it as a behavior change. `contracts/options.md` and `plan.md` updated. |
+| 12 | Saved config samples | Skipped for now; `test/fixtures/v4-configs/saved/` keeps the two samples. |
