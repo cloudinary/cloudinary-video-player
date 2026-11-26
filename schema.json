@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/PlayerOptions",
+  "definitions": {
+    "PlayerOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Options of one player: the single definition (plan.md, contracts/options.md). Phase 2 adds the options; `schema.json` is generated from this file."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Loader (player.min.js)",
+    "path": "dist/player.min.js",
+    "limit": "10 KB",
+    "gzip": true
+  },
+  {
+    "name": "Default CSS (player.min.css)",
+    "path": "dist/player.min.css",
+    "limit": "12 KB",
+    "gzip": true
+  }
+]

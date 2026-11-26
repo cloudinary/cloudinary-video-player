@@ -1,0 +1,14 @@
+{
+  "//": "ts-json-schema-generator only (scripts/build-schema.mjs): it removes `declaration`, which `isolatedDeclarations` needs, so it gets its own config.",
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": []
+  },
+  "files": ["src/core/options/types.ts"]
+}

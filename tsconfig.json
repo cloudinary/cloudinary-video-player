@@ -1,18 +1,32 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "declaration": true,
-        "declarationDir": "./types"
-    },
-    "include": [
-        "dist/**/*",
-        "lib/**/*",
-        "types/**/*"
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
     ],
-    "exclude": [
-        "node_modules"
-    ]
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": [],
+    "paths": {
+      "cloudinary-video-player": [
+        "./src/entries/index.ts"
+      ]
+    },
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "src",
+    "test",
+    "examples",
+    "*.config.ts"
+  ],
+  "exclude": [
+    "test/fixtures"
+  ]
 }

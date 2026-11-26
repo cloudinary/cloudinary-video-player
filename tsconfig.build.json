@@ -1,0 +1,11 @@
+{
+  "//": "Build and public types: src only, with isolatedDeclarations (tsdown writes .d.ts with oxc; TypeScript 7 has no JS API).",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "isolatedDeclarations": true,
+    "declaration": true
+  },
+  "include": [
+    "src"
+  ]
+}
