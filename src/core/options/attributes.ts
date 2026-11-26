@@ -1,4 +1,4 @@
-import type { PlayerOptions } from './types.ts';
+import type { PlayerOptions } from './types.js';
 
 /**
  * Options from element attributes (FR-036, contracts/element.md). Input is name/value pairs and the

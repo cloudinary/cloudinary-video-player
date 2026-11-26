@@ -1,5 +1,5 @@
-import { OPTION_CHANGES, SECRETS } from './renames.ts';
-import type { InternalOptions, PlayerOptions } from './types.ts';
+import { OPTION_CHANGES, SECRETS } from './renames.js';
+import type { InternalOptions, PlayerOptions } from './types.js';
 
 /**
  * The debug report (FR-008): one message per unknown, removed or invalid option.

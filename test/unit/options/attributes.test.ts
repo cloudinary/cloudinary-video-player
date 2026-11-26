@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseAttributes, parseAttributeValue, toOptionName } from '../../../src/core/options/attributes.ts';
+import { parseAttributes, parseAttributeValue, toOptionName } from '../../../src/core/options/attributes.js';
 
 const attrs = (record: Record<string, string>) => Object.entries(record).map(([name, value]) => ({ name, value }));
 

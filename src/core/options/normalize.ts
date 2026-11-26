@@ -1,7 +1,7 @@
-import { warn } from '../log.ts';
-import { DEFAULTS } from './defaults.ts';
-import { OPTION_CHANGES, SECRETS } from './renames.ts';
-import type { CloudConfig, CloudinaryConfig, InternalOptions, PlayerOptions, SourceOptions } from './types.ts';
+import { warn } from '../log.js';
+import { DEFAULTS } from './defaults.js';
+import { OPTION_CHANGES, SECRETS } from './renames.js';
+import type { CloudConfig, CloudinaryConfig, InternalOptions, PlayerOptions, SourceOptions } from './types.js';
 
 /** Options as an integrator, an attribute or a saved configuration gives them. */
 export type RawOptions = Record<string, unknown>;

@@ -1,4 +1,4 @@
-import type { AdOptions, PlayerOptions, PlaylistWidgetOptions } from './types.ts';
+import type { AdOptions, PlayerOptions, PlaylistWidgetOptions } from './types.js';
 
 /**
  * Default option values: the v4 run-time defaults (`src/config/defaults.js` on `master`).

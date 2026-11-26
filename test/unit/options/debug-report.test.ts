@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import schema from '../../../schema.json' with { type: 'json' };
-import { DEFAULTS } from '../../../src/core/options/defaults.ts';
-import { OPTION_CHANGES } from '../../../src/core/options/renames.ts';
-import { debugReport } from '../../../src/core/options/validate.ts';
+import { DEFAULTS } from '../../../src/core/options/defaults.js';
+import { OPTION_CHANGES } from '../../../src/core/options/renames.js';
+import { debugReport } from '../../../src/core/options/validate.js';
 
 const properties: Record<string, { default?: unknown; [key: string]: unknown }> = schema.definitions.PlayerOptions.properties;
 

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { DEFAULTS } from '../../../src/core/options/defaults.ts';
-import { cleanOptions, normalizeOptions, resolveCloudConfig } from '../../../src/core/options/normalize.ts';
+import { DEFAULTS } from '../../../src/core/options/defaults.js';
+import { cleanOptions, normalizeOptions, resolveCloudConfig } from '../../../src/core/options/normalize.js';
 
 let warn: ReturnType<typeof vi.spyOn>;
 beforeEach(() => {

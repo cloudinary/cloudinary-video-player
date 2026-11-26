@@ -12,7 +12,7 @@ import {
   isPlainObject,
   isString,
   or,
-} from '../../../src/core/options/validate.ts';
+} from '../../../src/core/options/validate.js';
 
 const isValidConfig = (config: Record<string, unknown>, specs: Record<string, Spec>): boolean =>
   invalidPaths(config, specs).length === 0;
