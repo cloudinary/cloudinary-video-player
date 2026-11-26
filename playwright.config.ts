@@ -32,9 +32,13 @@ export default defineConfig({
     },
   ],
   // The built examples site (`npm run build && npm run build:examples`), as Netlify serves it.
-  webServer: {
-    command: 'npx vite preview --config examples/vite.config.ts',
-    url: 'http://localhost:4173/player.html',
-    reuseExistingServer: !CI,
-  },
+  // Not started for a remote PREVIEW_URL: the preview job tests the Netlify deploy only.
+  webServer:
+    process.env.PREVIEW_URL && !localPreview
+      ? undefined
+      : {
+          command: 'npx vite preview --config examples/vite.config.ts',
+          url: 'http://localhost:4173/player.html',
+          reuseExistingServer: !CI,
+        },
 });
