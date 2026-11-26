@@ -1,0 +1,133 @@
+{
+  "videojs": "10.3.0",
+  "method": "rolldown minify, gzip -9 (node:zlib), brotli q11",
+  "entries": {
+    "compat": {
+      "initial": {
+        "raw": 338,
+        "gzip": 75.3,
+        "brotli": 64.4
+      },
+      "lazyChunks": 53,
+      "lazyGzipTotal": 61.3,
+      "largestLazy": [
+        {
+          "name": "el-CWyPnoVm.js",
+          "raw": 2.7,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "ru-BIFqwFBP.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "uk-By5Oht4H.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        }
+      ]
+    },
+    "default": {
+      "initial": {
+        "raw": 339.8,
+        "gzip": 76.1,
+        "brotli": 64.8
+      },
+      "lazyChunks": 53,
+      "lazyGzipTotal": 61.3,
+      "largestLazy": [
+        {
+          "name": "el-CWyPnoVm.js",
+          "raw": 2.7,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "ru-BIFqwFBP.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "uk-By5Oht4H.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        }
+      ]
+    },
+    "features-only": {
+      "initial": {
+        "raw": 41,
+        "gzip": 12.5,
+        "brotli": 11.3
+      },
+      "lazyChunks": 0,
+      "lazyGzipTotal": 0,
+      "largestLazy": []
+    },
+    "scaffold": {
+      "initial": {
+        "raw": 319.9,
+        "gzip": 72.7,
+        "brotli": 62.2
+      },
+      "lazyChunks": 53,
+      "lazyGzipTotal": 61.3,
+      "largestLazy": [
+        {
+          "name": "el-CWyPnoVm.js",
+          "raw": 2.7,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "ru-BIFqwFBP.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        },
+        {
+          "name": "uk-By5Oht4H.js",
+          "raw": 2.6,
+          "gzip": 1.5,
+          "brotli": 1.2
+        }
+      ]
+    },
+    "skin-template-and-icons": {
+      "initial": {
+        "raw": 17.5,
+        "gzip": 2.4,
+        "brotli": 2
+      },
+      "lazyChunks": 0,
+      "lazyGzipTotal": 0,
+      "largestLazy": []
+    },
+    "v4-controls-lazy-menus": {
+      "initial": {
+        "raw": 104.7,
+        "gzip": 29.7,
+        "brotli": 26.3
+      },
+      "lazyChunks": 0,
+      "lazyGzipTotal": 0,
+      "largestLazy": []
+    },
+    "v4-controls": {
+      "initial": {
+        "raw": 164.6,
+        "gzip": 46.2,
+        "brotli": 40.3
+      },
+      "lazyChunks": 0,
+      "lazyGzipTotal": 0,
+      "largestLazy": []
+    }
+  }
+}
