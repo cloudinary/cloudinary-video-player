@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.json",
+  "include": ["videojs-internal-names.ts"],
+  "exclude": []
+}

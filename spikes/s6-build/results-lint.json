@@ -1,0 +1,236 @@
+{
+  "oxlint": "Version: 1.95.0",
+  "filesLinted": 27,
+  "exitCode": 1,
+  "allOk": true,
+  "cases": [
+    {
+      "file": "src/core/cloud.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/core/imports-shell.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../shell/index.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/core/imports-videojs.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '@videojs/html' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/core/options.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/core/types.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/entries/cdn-loader.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/entries/index.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/env.d.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/features/chapters/imports-sibling.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../title/index.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/features/chapters/index.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/features/chapters/internal-name.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): 'extensionContext' import from '@videojs/html' is restricted."
+      ]
+    },
+    {
+      "file": "src/features/title/alias-sibling.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../../features/chapters/index.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/features/title/imports-player-internal.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../../player/features.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/features/title/index.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/player/context.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/player/features.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/player/index.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/player/internal-core.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): 'definePlayerFeature' import from '@videojs/core' is restricted.",
+        "eslint(no-restricted-imports): 'defineSlice' import from '@videojs/store' is restricted."
+      ]
+    },
+    {
+      "file": "src/player/internal-name.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): 'mediaContext' import from '@videojs/html' is restricted.",
+        "eslint(no-restricted-imports): 'createMediaAttachMixin' import from '@videojs/html' is restricted."
+      ]
+    },
+    {
+      "file": "src/player/namespace.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): * import is invalid because 'definePlayerFeature, PlayerExtension, defineSlice, extensionContext, mediaContext, createMediaAttachMixin' from '@videojs/html' is restricted."
+      ]
+    },
+    {
+      "file": "src/player/reexport.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): 'mediaContext' import from '@videojs/html' is restricted."
+      ]
+    },
+    {
+      "file": "src/player/type-import.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): 'PlayerExtension' import from '@videojs/html' is restricted."
+      ]
+    },
+    {
+      "file": "src/player/videojs-public.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    },
+    {
+      "file": "src/shell/dir-import.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../player' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/shell/dynamic-player.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../player/index.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/shell/imports-player.bad.ts",
+      "expectError": true,
+      "caught": true,
+      "ok": true,
+      "errors": [
+        "eslint(no-restricted-imports): '../player/index.js' import is restricted from being used by a pattern."
+      ]
+    },
+    {
+      "file": "src/shell/index.ts",
+      "expectError": false,
+      "caught": false,
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "overrideReplacesBaseOptions": {
+    "probe": "src/features/chapters/internal-name.bad.ts",
+    "caughtWithPathsRepeated": true,
+    "caughtWithoutRepeat": false
+  },
+  "typeAware": {
+    "exitCode": 1,
+    "output": "Failed to find type-aware linter executable. You may need to add the `tsrs` or `oxlint-tsgolint` package to your project?"
+  }
+}

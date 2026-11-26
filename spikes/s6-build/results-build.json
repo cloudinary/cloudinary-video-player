@@ -1,0 +1,123 @@
+{
+  "versions": {
+    "tsdown": "0.23.7",
+    "rolldown": "1.3.3",
+    "rolldown-plugin-dts": "0.30.2",
+    "lightningcss": "1.33.0"
+  },
+  "target": [
+    "chrome111",
+    "firefox121",
+    "safari16.4"
+  ],
+  "tsdownFiles": [
+    "dist/esm/chapters-D3mG6B3Z.css",
+    "dist/esm/chapters-D3mG6B3Z.js",
+    "dist/esm/cloud-75HROuhl.js",
+    "dist/esm/context-BFoIHpXI.js",
+    "dist/esm/index.d.ts",
+    "dist/esm/index.js",
+    "dist/esm/player.d.ts",
+    "dist/esm/player.js",
+    "dist/esm/title-D-f1KiRM.css",
+    "dist/esm/title-D-f1KiRM.js",
+    "dist/esm/types-DSLjahzE.d.ts",
+    "dist/player.min.js"
+  ],
+  "iife": {
+    "minifiedImportCall": ".currentScript,a=new URL(`.`,i.src),o=new URL(`./esm/player.js`,a).href,s=r(()=>import(o));s.defineElement(),window.cloudinary=s}",
+    "unminifiedImportLines": [
+      "const script = document.currentScript;",
+      "const layerUrl = new URL(\"./esm/player.js\", base).href;",
+      "const shell = createShell(() => import(layerUrl));"
+    ],
+    "layerCodeAbsent": true,
+    "staticImportOrRequire": false
+  },
+  "size": {
+    "loader": {
+      "file": "dist/player.min.js",
+      "raw": 1064,
+      "gzip": 571,
+      "brotli": 454
+    },
+    "mechanismOnly": {
+      "file": "dist/names/iife/min-loader.js",
+      "raw": 123,
+      "gzip": 126,
+      "code": "(function(){let e=new URL(`.`,document.currentScript.src);window.cldLoad=()=>import(new URL(`./esm/player.js`,e).href)})();"
+    },
+    "budgetGzip": 10240
+  },
+  "tsdownCssDefault": "error: Error: CSS file \"./src/features/chapters/chapters.css\" was encountered but `@tsdown/css` is not installed. Please install it: `npm install @tsdown/css` | Error: CSS file \"./src/features/title/title.css\" was encountered but `@tsdown/css` is not installed. Please install it: `npm install @tsdown/css`",
+  "rolldownNoPlugin": "error: [UNSUPPORTED_FEATURE] Bundling CSS is no longer supported (experimental support has been removed). See https://github.com/rolldown/rolldown/issues/4271 for details. | [UNSUPPORTED_FEATURE] Bundling CSS is no longer supported (experimental support has been removed). See https://github.com/rolldown/rolldown/issues/4271 for details.",
+  "rolldownFallback": {
+    "files": [
+      "dist/rolldown/esm/chapters-D3mG6B3Z.css",
+      "dist/rolldown/esm/chapters-D3mG6B3Z.js",
+      "dist/rolldown/esm/cloud-75HROuhl.js",
+      "dist/rolldown/esm/context-BFoIHpXI.js",
+      "dist/rolldown/esm/index.js",
+      "dist/rolldown/esm/player.js",
+      "dist/rolldown/esm/title-D-f1KiRM.css",
+      "dist/rolldown/esm/title-D-f1KiRM.js",
+      "dist/rolldown/player.min.js"
+    ],
+    "iifeKeepsImport": true,
+    "iifeGzip": 571
+  },
+  "naming": {
+    "tsdown-default": [
+      "chapters-D3mG6B3Z.css",
+      "chapters-D3mG6B3Z.js",
+      "cloud-75HROuhl.js",
+      "context-BFoIHpXI.js",
+      "index.js",
+      "player.js",
+      "title-D-f1KiRM.css",
+      "title-D-f1KiRM.js"
+    ],
+    "hash-false": [
+      "chapters.css",
+      "chapters.js",
+      "cloud.js",
+      "context.js",
+      "index.js",
+      "player.js",
+      "title.css",
+      "title.js"
+    ],
+    "name-only": [
+      "chapters.css",
+      "chapters.js",
+      "cloud.js",
+      "context.js",
+      "index.js",
+      "player.js",
+      "title.css",
+      "title.js"
+    ]
+  },
+  "stability": {
+    "sameInputSameNames": true,
+    "names": [
+      "chapters-D3mG6B3Z.css",
+      "chapters-D3mG6B3Z.js",
+      "cloud-75HROuhl.js",
+      "context-BFoIHpXI.js",
+      "player.js",
+      "title-D-f1KiRM.css",
+      "title-D-f1KiRM.js"
+    ],
+    "afterCssOnlyChange": [
+      "chapters-D3mG6B3Z.css",
+      "chapters-D3mG6B3Z.js",
+      "cloud-75HROuhl.js",
+      "context-BFoIHpXI.js",
+      "player.js",
+      "title-D-f1KiRM.css",
+      "title-D-f1KiRM.js"
+    ],
+    "cssNameChangesWithCss": false
+  }
+}

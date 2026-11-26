@@ -1,0 +1,106 @@
+{
+  "$ref": "#/definitions/PlayerOptions",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AutoplayMode": {
+      "description": "When autoplay starts.",
+      "enum": [
+        "always",
+        "never",
+        "on-scroll"
+      ],
+      "type": "string"
+    },
+    "ChaptersOptions": {
+      "additionalProperties": false,
+      "description": "Chapters from a VTT file.",
+      "properties": {
+        "url": {
+          "description": "URL of the chapters VTT file.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
+    "PlayerOptions": {
+      "additionalProperties": false,
+      "description": "Options of one player (fixture subset).",
+      "properties": {
+        "autoplayMode": {
+          "$ref": "#/definitions/AutoplayMode",
+          "default": "never",
+          "description": "When autoplay starts."
+        },
+        "autoplayOnScroll": {
+          "default": false,
+          "deprecated": "Use `autoplayMode: \"on-scroll\"`.",
+          "description": "Start playback when the player scrolls into view.",
+          "type": "boolean"
+        },
+        "chapters": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/ChaptersOptions"
+            }
+          ],
+          "description": "Chapters: `true` reads them from the video service."
+        },
+        "cloudName": {
+          "description": "Cloudinary cloud name.",
+          "type": "string"
+        },
+        "playbackRates": {
+          "default": [
+            0.5,
+            1,
+            1.5,
+            2
+          ],
+          "description": "Playback rates in the rate menu.",
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "publicId": {
+          "description": "Public ID of the video.",
+          "type": "string"
+        },
+        "skin": {
+          "$ref": "#/definitions/Skin",
+          "default": "dark",
+          "description": "Skin color scheme."
+        },
+        "title": {
+          "description": "Show the title bar.",
+          "type": "boolean"
+        },
+        "volume": {
+          "default": 1,
+          "description": "Start volume, 0 to 1.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "cloudName"
+      ],
+      "type": "object"
+    },
+    "Skin": {
+      "description": "Skin color scheme.",
+      "enum": [
+        "dark",
+        "light"
+      ],
+      "type": "string"
+    }
+  }
+}

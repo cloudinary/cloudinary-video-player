@@ -1,0 +1,59 @@
+{
+  "typescript7": "Version 7.0.2",
+  "generator": "2.10.0",
+  "generatorTypeScriptPeer": ">=5.9 <7",
+  "generatorResolvesTypeScript": {
+    "path": "node_modules/typescript/lib/typescript.js",
+    "version": "5.9.3"
+  },
+  "tsc7Fixture": {
+    "exitCode": 0,
+    "output": ""
+  },
+  "tsc7NegativeControl": {
+    "exitCode": 1,
+    "output": "spikes/s6-build/cases/no-return-type.ts(3,10): error TS9013: Expression type can't be inferred with --isolatedDeclarations."
+  },
+  "schemaSeparateTsconfig": {
+    "exitCode": 0,
+    "output": ""
+  },
+  "schemaMainTsconfig": {
+    "exitCode": 1,
+    "output": "Error: Type check error\n    at createProgram (node_modules/ts-json-schema-generator/dist/factory/program.js:73:19)\n    at createGenerator (node_modules/ts-json-schema-generator/dist/factory/generator.js:11:72)\n    at Object.<anonymous> (node_modules/ts-json-schema-generator/dist/ts-json-schema-generator.js:62:55)",
+    "cause": [
+      "TS5069: Option 'isolatedDeclarations' cannot be specified without specifying option 'declaration' or option 'composite'."
+    ]
+  },
+  "videojsInternalNameProbe": {
+    "exitCode": 1,
+    "output": [
+      "spikes/s6-build/cases/videojs-internal-names.ts(4,42): error TS2305: Module '\"@videojs/core\"' has no exported member 'PlayerExtension'.",
+      "spikes/s6-build/cases/videojs-internal-names.ts(4,65): error TS2305: Module '\"@videojs/core\"' has no exported member 'defineSlice'.",
+      "spikes/s6-build/cases/videojs-internal-names.ts(5,65): error TS2305: Module '\"@videojs/core/dom\"' has no exported member 'defineSlice'.",
+      "spikes/s6-build/cases/videojs-internal-names.ts(8,53): error TS2305: Module '\"@videojs/html\"' has no exported member 'defineSlice'."
+    ]
+  },
+  "schemaChecks": {
+    "skinEnum": [
+      "dark",
+      "light"
+    ],
+    "autoplayModeEnum": [
+      "always",
+      "never",
+      "on-scroll"
+    ],
+    "skinDefault": "dark",
+    "volume": {
+      "default": 1,
+      "minimum": 0,
+      "maximum": 1
+    },
+    "deprecated": "Use `autoplayMode: \"on-scroll\"`.",
+    "functionHidden": true,
+    "required": [
+      "cloudName"
+    ]
+  }
+}
