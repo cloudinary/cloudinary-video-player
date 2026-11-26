@@ -79,39 +79,39 @@ description: "Task list for the Cloudinary Video Player v5 rewrite on Video.js 1
 
 ### Options
 
-- [ ] T029 [US3] Define every option once in `src/core/options/types.ts` with `@default` and `@description`, following the dispositions in `contracts/options.md` (cloud config, source options, player options) (FR-007)
-- [ ] T030 [P] [US3] Add defaults in `src/core/options/defaults.ts` (v4 values, including `muted` → volume 0.4)
-- [ ] T031 [P] [US3] Add the rename and removal table in `src/core/options/renames.ts`: every Map and Remove row in `contracts/options.md`, including the Video.js 8 options (`videojs`/`html5` name `player.videojs`; `videoJS`, `qualitySelector`, `ima` get the generic message; `textTrackSettings` says "5.x")
-- [ ] T032 [US3] Implement `normalizeOptions` in `src/core/options/normalize.ts`: cloud settings from `cloud_name`/`cloudName` at top level or in `cloudinaryConfig`; player/source split; profile and per-asset config merge order (`data-model.md` §12, `{...playerOptions, ...sourceOptions, ...options}`); frozen result (FR-006)
-- [ ] T033 [P] [US3] Implement the debug report in `src/core/options/validate.ts` (unknown, renamed, removed and invalid options, FR-008) and the always-on secrets warning for `api_secret`, `sign_url`, `auth_token` (FR-029)
-- [ ] T034 [P] [US1] Implement `<video>` attribute parsing in `src/core/options/attributes.ts`: `data-cld-*` plus native media attributes, the `cld-fluid`/`vjs-fluid` class, value parsing rules (`contracts/element.md`, FR-036)
+- [x] T029 [US3] Define every option once in `src/core/options/types.ts` with `@default` and `@description`, following the dispositions in `contracts/options.md` (cloud config, source options, player options) (FR-007)
+- [x] T030 [P] [US3] Add defaults in `src/core/options/defaults.ts` (v4 values, including `muted` → volume 0.4)
+- [x] T031 [P] [US3] Add the rename and removal table in `src/core/options/renames.ts`: every Map and Remove row in `contracts/options.md`, including the Video.js 8 options (`videojs`/`html5` name `player.videojs`; `videoJS`, `qualitySelector`, `ima` get the generic message; `textTrackSettings` says "5.x")
+- [x] T032 [US3] Implement `normalizeOptions` in `src/core/options/normalize.ts`: cloud settings from `cloud_name`/`cloudName` at top level or in `cloudinaryConfig`; player/source split; profile and per-asset config merge order (`data-model.md` §12, `{...playerOptions, ...sourceOptions, ...options}`); frozen result (FR-006)
+- [x] T033 [P] [US3] Implement the debug report in `src/core/options/validate.ts` (unknown, renamed, removed and invalid options, FR-008) and the always-on secrets warning for `api_secret`, `sign_url`, `auth_token` (FR-029)
+- [x] T034 [P] [US1] Implement `<video>` attribute parsing in `src/core/options/attributes.ts`: `data-cld-*` plus native media attributes, the `cld-fluid`/`vjs-fluid` class, value parsing rules (`contracts/element.md`, FR-036)
 
 ### URLs and sources
 
-- [ ] T035 [P] [US2] Implement the delivery prefix in `src/core/url/cloud.ts`: every cloud-config key in `contracts/options.md` (`secure`, `private_cdn`/`privateCdn`, `secure_distribution`/`secureDistribution`, `cname`, `cdn_subdomain`, `secure_cdn_subdomain`, `use_root_path`, `url_suffix`, `shorten`)
-- [ ] T036 [US2] Implement the own transformation builder in `src/core/url/transformation.ts`: every key in `research.md` R-07, variables, `if` conditions, chains and raw strings (`rawTransformation`), v4 input format (D-10)
-- [ ] T037 [US2] Implement media, poster, thumbnail-sprite and caption URLs in `src/core/url/media-url.ts` (`publicId` or raw URL, `resourceType`, `sourceTransformation` per source type, `posterOptions`, source types, codecs, automatic format, `queryParams`, `breakpoints`/`maxDpr`, `aspectRatio` with `cropMode`/`cropPadColor`, `hdr`; width, DPR and HDR support are inputs, so the core stays pure) (FR-012)
-- [ ] T038 [P] [US2] Implement codec and source-type helpers in `src/core/source/codecs.ts`
-- [ ] T039 [US2] Implement `buildSource` in `src/core/source/build-source.ts`: pure, immutable `Source` (`data-model.md` §3); no state shared between calls (FR-009)
-- [ ] T040 [P] [US2] Implement renditions in `src/core/source/renditions.ts`: `url`, `mimeType`, `sourceType`, `engine` (native/hls/dash), ordered for fallback (FR-013)
-- [ ] T041 [P] [US2] Implement poster precedence in `src/core/source/poster.ts`: explicit → saved (video-elements URL, FR-038) → image → waveform (`data-model.md` §5)
+- [x] T035 [P] [US2] Implement the delivery prefix in `src/core/url/cloud.ts`: every cloud-config key in `contracts/options.md` (`secure`, `private_cdn`/`privateCdn`, `secure_distribution`/`secureDistribution`, `cname`, `cdn_subdomain`, `secure_cdn_subdomain`, `use_root_path`, `url_suffix`, `shorten`)
+- [x] T036 [US2] Implement the own transformation builder in `src/core/url/transformation.ts`: every key in `research.md` R-07, variables, `if` conditions, chains and raw strings (`rawTransformation`), v4 input format (D-10)
+- [x] T037 [US2] Implement media, poster, thumbnail-sprite and caption URLs in `src/core/url/media-url.ts` (`publicId` or raw URL, `resourceType`, `sourceTransformation` per source type, `posterOptions`, source types, codecs, automatic format, `queryParams`, `breakpoints`/`maxDpr`, `aspectRatio` with `cropMode`/`cropPadColor`, `hdr`; width, DPR and HDR support are inputs, so the core stays pure) (FR-012)
+- [x] T038 [P] [US2] Implement codec and source-type helpers in `src/core/source/codecs.ts`
+- [x] T039 [US2] Implement `buildSource` in `src/core/source/build-source.ts`: pure, immutable `Source` (`data-model.md` §3); no state shared between calls (FR-009)
+- [x] T040 [P] [US2] Implement renditions in `src/core/source/renditions.ts`: `url`, `mimeType`, `sourceType`, `engine` (native/hls/dash), ordered for fallback (FR-013)
+- [x] T041 [P] [US2] Implement poster precedence in `src/core/source/poster.ts`: explicit → saved (video-elements URL, FR-038) → image → waveform (`data-model.md` §5)
 
 ### Video service, tracks, playlist, events, errors
 
-- [ ] T042 [US3] Implement the one video-service client in `src/core/video-service.ts`: `profileUrl`, `assetConfigUrl`, `posterUrl`, `chaptersUrl`, `transcriptUrl`, `metadataUrl`; base64 as v4; `_s=vp` with `allowUsageReport`; credentials; `AbortSignal`; the `X-Cld-Video-Player-Version` header (`contracts/video-service.md`)
-- [ ] T043 [P] [US4] Implement `src/core/tracks/vtt.ts`, `src/core/tracks/srt.ts` (SRT → cues, replaces `srt-parser-2`) and `src/core/tracks/transcript.ts` (transcript → cues with word timings; waits on 202 while pending)
-- [ ] T044 [P] [US6] Implement playlist state in `src/core/playlist/state.ts`: items, index, auto-advance, repeat, queue-safe next/previous (`data-model.md` §8)
-- [ ] T045 [P] [US9] Implement `PlayerEventMap` and the extended-event logic in `src/core/events.ts`: `percentsplayed`/`timeplayed` (`playedEventPercents`, `playedEventTimes`), `seek {seekStart, seekEnd}`, `pausenoseek`, `start`, `mute`/`unmute` (`contracts/events.md`, FR-027)
-- [ ] T046 [P] [US9] Implement the usage-report payload in `src/core/analytics/usage-report.ts`: player version, cloud name and features only (FR-028)
-- [ ] T047 [P] [US2] Implement `src/core/errors.ts`: Cloudinary error mapping from the error-header probe (`HEAD`, or `GET` with credentials and a `Range: bytes=0-0` header when `fetchErrorUsingGet`); the not-ready watchdog (`maxTries` × `videoTimeout`); live "not started" retry policy (FR-016)
+- [x] T042 [US3] Implement the one video-service client in `src/core/video-service.ts`: `profileUrl`, `assetConfigUrl`, `posterUrl`, `chaptersUrl`, `transcriptUrl`, `metadataUrl`; base64 as v4; `_s=vp` with `allowUsageReport`; credentials; `AbortSignal`; the `X-Cld-Video-Player-Version` header (`contracts/video-service.md`)
+- [x] T043 [P] [US4] Implement `src/core/tracks/vtt.ts`, `src/core/tracks/srt.ts` (SRT → cues, replaces `srt-parser-2`) and `src/core/tracks/transcript.ts` (transcript → cues with word timings; waits on 202 while pending)
+- [x] T044 [P] [US6] Implement playlist state in `src/core/playlist/state.ts`: items, index, auto-advance, repeat, queue-safe next/previous (`data-model.md` §8)
+- [x] T045 [P] [US9] Implement `PlayerEventMap` and the extended-event logic in `src/core/events.ts`: `percentsplayed`/`timeplayed` (`playedEventPercents`, `playedEventTimes`), `seek {seekStart, seekEnd}`, `pausenoseek`, `start`, `mute`/`unmute` (`contracts/events.md`, FR-027)
+- [x] T046 [P] [US9] Implement the usage-report payload in `src/core/analytics/usage-report.ts`: player version, cloud name and features only (FR-028)
+- [x] T047 [P] [US2] Implement `src/core/errors.ts`: Cloudinary error mapping from the error-header probe (`HEAD`, or `GET` with credentials and a `Range: bytes=0-0` header when `fetchErrorUsingGet`); the not-ready watchdog (`maxTries` × `videoTimeout`); live "not started" retry policy (FR-016)
 
 ### Core tests
 
-- [ ] T048 [US2] Add `test/unit/url-parity.test.ts`: every fixture in `test/fixtures/url-parity/` matches, or is listed in `test/fixtures/url-parity/intentional-changes.json` (SC-002, FR-011)
-- [ ] T049 [P] [US3] Add `test/unit/options/*.test.ts`: normalization, renames, debug report, secrets warning, attributes, profile merge; port the 19 validator cases from the v4 jest files on `master`
-- [ ] T050 [P] [US2] Add `test/unit/source/*.test.ts`: source isolation (US2-2), rendition order, poster precedence
-- [ ] T051 [P] Add `test/unit/video-service.test.ts` (mocks from `test/fixtures/video-service/*.json`, recorded from the live service), `test/unit/tracks/*.test.ts`, `test/unit/playlist-state.test.ts`, `test/unit/events.test.ts`, `test/unit/errors.test.ts`, `test/unit/usage-report.test.ts` (fetch mocked)
-- [ ] T052 Generate and commit `schema.json` (repository root) through T019; drift check green
+- [x] T048 [US2] Add `test/unit/url-parity.test.ts`: every fixture in `test/fixtures/url-parity/` matches, or is listed in `test/fixtures/url-parity/intentional-changes.json` (SC-002, FR-011)
+- [x] T049 [P] [US3] Add `test/unit/options/*.test.ts`: normalization, renames, debug report, secrets warning, attributes, profile merge; port the 19 validator cases from the v4 jest files on `master`
+- [x] T050 [P] [US2] Add `test/unit/source/*.test.ts`: source isolation (US2-2), rendition order, poster precedence
+- [x] T051 [P] Add `test/unit/video-service.test.ts` (mocks from `test/fixtures/video-service/*.json`, recorded from the live service), `test/unit/tracks/*.test.ts`, `test/unit/playlist-state.test.ts`, `test/unit/events.test.ts`, `test/unit/errors.test.ts`, `test/unit/usage-report.test.ts` (fetch mocked)
+- [x] T052 Generate and commit `schema.json` (repository root) through T019; drift check green
 
 **Checkpoint**: core complete and proven without a browser.
 
