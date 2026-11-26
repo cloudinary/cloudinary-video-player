@@ -1,0 +1,378 @@
+{
+  "page": "docs/subtitles-and-captions.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "prod",
+        "muted": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/big_buck_bunny_trailer_720p",
+            {
+              "info": {
+                "title": "SRT & VTT from URL"
+              },
+              "textTracks": {
+                "options": {
+                  "theme": "videojs-default"
+                },
+                "captions": {
+                  "label": "VTT from URL",
+                  "default": true,
+                  "url": "https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.vtt"
+                },
+                "subtitles": [
+                  {
+                    "label": "SRT from URL",
+                    "url": "https://res.cloudinary.com/prod/raw/upload/video/examples/big_buck_bunny_trailer_720p.srt"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "playlist",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "playlist",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlist",
+          "args": [
+            [
+              {
+                "publicId": "video-player/stubhub",
+                "info": {
+                  "title": "Subtitles & Captions playlist"
+                },
+                "textTracks": {
+                  "captions": {
+                    "label": "English captions",
+                    "language": "en",
+                    "default": true,
+                    "url": "https://res.cloudinary.com/demo/raw/upload/v1636972013/video-player/vtt/Meetup_english.vtt"
+                  },
+                  "subtitles": [
+                    {
+                      "label": "German subtitles",
+                      "language": "de",
+                      "url": "https://res.cloudinary.com/demo/raw/upload/v1636970250/video-player/vtt/Meetup_german.vtt"
+                    },
+                    {
+                      "label": "Russian subtitles",
+                      "language": "ru",
+                      "url": "https://res.cloudinary.com/demo/raw/upload/v1636970275/video-player/vtt/Meetup_russian.vtt"
+                    }
+                  ]
+                }
+              },
+              {
+                "publicId": "video-player/outdoors",
+                "info": {
+                  "title": "Outdoors",
+                  "subtitle": "Outdoors movie with captions"
+                },
+                "textTracks": {
+                  "captions": {
+                    "label": "English captions",
+                    "language": "en",
+                    "default": true,
+                    "url": "https://res.cloudinary.com/demo/raw/upload/v1636971261/video-player/vtt/outdoors.vtt"
+                  }
+                }
+              },
+              {
+                "publicId": "video-player/dog",
+                "info": {
+                  "title": "Dog",
+                  "subtitle": "Video of a dog, no captions"
+                }
+              }
+            ],
+            {
+              "autoAdvance": true,
+              "repeat": true,
+              "presentUpcoming": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "paced",
+      "options": {
+        "cloudName": "prod"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "paced",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/cloudinary-marketing",
+            {
+              "textTracks": {
+                "options": {},
+                "captions": {
+                  "label": "English Paced",
+                  "maxWords": 4,
+                  "default": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "karaoke",
+      "options": {
+        "cloudName": "prod"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "karaoke",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/cld-imagine_1080p",
+            {
+              "textTracks": {
+                "options": {
+                  "fontFace": "Lobster",
+                  "fontSize": "200%",
+                  "gravity": "top",
+                  "wordHighlightStyle": {
+                    "color": "white",
+                    "text-shadow": "2px 2px 0px violet,\n                4px 4px 0px indigo,\n                6px 6px 0px blue,\n                8px 8px 0px green,\n                10px 10px 0px yellow,\n                12px 12px 0px orange,\n                14px 14px 0px red"
+                  }
+                },
+                "captions": {
+                  "label": "KARAOKE",
+                  "wordHighlight": true,
+                  "maxWords": 8,
+                  "url": "https://res.cloudinary.com/prod/raw/upload/v1/video/examples/cld-imagine_1080p.transcript",
+                  "default": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "translated-transcript",
+      "options": {
+        "cloudName": "prod"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "translated-transcript",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/cloudinary-marketing-pm",
+            {
+              "textTracks": {
+                "captions": {
+                  "label": "Original",
+                  "default": true
+                },
+                "subtitles": [
+                  {
+                    "label": "English",
+                    "language": "en-US"
+                  },
+                  {
+                    "label": "Polish",
+                    "language": "pl-PL"
+                  },
+                  {
+                    "label": "Hebrew",
+                    "language": "he-IL"
+                  },
+                  {
+                    "label": "Italian",
+                    "language": "it-IT"
+                  },
+                  {
+                    "label": "Ukrainian",
+                    "language": "uk-UA"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "portrait",
+      "options": {
+        "cloudName": "prod",
+        "muted": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "portrait",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "280"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/cloudinary-marketing-pm",
+            {
+              "aspectRatio": "9:16",
+              "cropMode": "fill",
+              "textTracks": {
+                "captions": {
+                  "label": "English",
+                  "default": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "descriptions",
+      "options": {
+        "cloudName": "prod"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "descriptions",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "crossorigin": "anonymous",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "video/examples/cloudinary-marketing-pm",
+            {
+              "textTracks": {
+                "descriptions": [
+                  {
+                    "label": "AD",
+                    "language": "en-US"
+                  }
+                ],
+                "subtitles": [
+                  {
+                    "label": "Polish",
+                    "language": "pl-PL"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "page": "docs/raw-url.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "secure": true,
+        "posterOptions": {
+          "posterColor": "#000"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "https://res.cloudinary.com/prod/video/upload/video/examples/big_buck_bunny_trailer_720p.mp4"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "adpPlayer",
+      "options": {
+        "cloud_name": "demo",
+        "secure": true,
+        "posterOptions": {
+          "posterColor": "#000"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "adpPlayer",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "https://res.cloudinary.com/demo/video/upload/sp_hd/sea_turtle.mpd"
+          ]
+        }
+      ]
+    }
+  ]
+}

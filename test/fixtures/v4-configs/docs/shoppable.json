@@ -1,0 +1,181 @@
+{
+  "page": "docs/shoppable.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player cld-fluid cld-video-player-skin-light"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "snow_horses",
+            {
+              "info": {
+                "title": "Shoppable Video",
+                "description": "Browse products shown in the video."
+              },
+              "shoppable": {
+                "startState": "openOnPlay",
+                "autoClose": 2,
+                "showPostPlayOverlay": true,
+                "bannerMsg": "START SHOPPING",
+                "width": "20%",
+                "toggleIcon": "https://res.cloudinary.com/cloudinary/image/upload/c_scale,w_200/v1/logo/for_white_bg/cloudinary_icon_for_white_bg.png",
+                "transformation": {
+                  "crop": "fill",
+                  "aspect_ratio": "1"
+                },
+                "products": [
+                  {
+                    "productId": 1,
+                    "productName": "Bell Pepper",
+                    "startTime": 0,
+                    "endTime": 2,
+                    "title": "Overlay on-hover & seek on-click",
+                    "publicId": "docs/pepper",
+                    "hotspots": [
+                      {
+                        "time": "00:02",
+                        "x": "80%",
+                        "y": "30%",
+                        "tooltipPosition": "bottom",
+                        "clickUrl": "https://www.example.net/product-one"
+                      }
+                    ],
+                    "onHover": {
+                      "action": "overlay",
+                      "args": "Click to see this product in the video"
+                    },
+                    "onClick": {
+                      "action": "seek",
+                      "pause": 5,
+                      "args": {
+                        "time": "00:02"
+                      }
+                    }
+                  },
+                  {
+                    "productId": 2,
+                    "productName": "Tomato",
+                    "startTime": 2,
+                    "endTime": 5,
+                    "publicId": "docs/tomatoes",
+                    "onHover": {
+                      "action": "switch",
+                      "args": {
+                        "publicId": "docs/tomatoes_alternate"
+                      }
+                    },
+                    "onClick": {
+                      "action": "goto",
+                      "pause": true,
+                      "args": {
+                        "url": "https://www.example.net/product-two"
+                      }
+                    }
+                  },
+                  {
+                    "productId": 3,
+                    "productName": "Banana",
+                    "startTime": 7,
+                    "endTime": 11,
+                    "publicId": "docs/banana",
+                    "onHover": {
+                      "action": "switch",
+                      "args": {
+                        "publicId": "docs/banana_alternate"
+                      }
+                    },
+                    "onClick": {
+                      "action": "goto",
+                      "pause": true,
+                      "args": {
+                        "url": "https://www.example.net/product-three"
+                      }
+                    }
+                  },
+                  {
+                    "productName": "Product 4",
+                    "productId": 4,
+                    "publicId": "balloons"
+                  },
+                  {
+                    "productName": "Product 5",
+                    "productId": 5,
+                    "publicId": "friends"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productHover",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productClick",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productBarMin",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productBarMax",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "replay",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productHoverPost",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "productClickPost",
+            "[Function]"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "page": "docs/live-streaming.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "https://res.cloudinary.com/demo/video/live/sea_turtle",
+        "type": "live",
+        "sourceTypes": [
+          "hls"
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "controls": "",
+            "muted": "",
+            "width": "500",
+            "class": "cld-video-player"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

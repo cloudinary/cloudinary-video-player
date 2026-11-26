@@ -1,0 +1,42 @@
+{
+  "page": "docs/360.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "video-player/Golden-Gate-Bridge",
+        "sourceTypes": [
+          "mp4"
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "crossorigin": "anonymous",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "videojs.vr",
+          "args": [
+            {
+              "projection": "360"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

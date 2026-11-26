@@ -1,0 +1,116 @@
+{
+  "page": "docs/api.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "600"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlist",
+          "args": [
+            [
+              "snow_deer",
+              "sea_turtle",
+              "snow_horses"
+            ],
+            {
+              "autoAdvance": 0
+            }
+          ]
+        },
+        {
+          "call": "play",
+          "args": []
+        },
+        {
+          "call": "on",
+          "args": [
+            "play",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "pause",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "volumechange",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "mute",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "unmute",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "fullscreenchange",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "seek",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "sourcechanged",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "percentsplayed",
+            "[Function]"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "ended",
+            "[Function]"
+          ]
+        }
+      ]
+    }
+  ]
+}

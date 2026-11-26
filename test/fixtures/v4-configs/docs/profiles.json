@@ -1,0 +1,148 @@
+{
+  "page": "docs/profiles.html",
+  "players": [
+    {
+      "factory": "player",
+      "target": "player-default-profile",
+      "options": {
+        "cloudName": "demo",
+        "profile": "cld-default"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-default-profile",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "samples/sea-turtle"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "player",
+      "target": "player-custom-profile",
+      "options": {
+        "cloudName": "prod",
+        "profile": "demo-profile",
+        "publicId": "samples/sea-turtle"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-custom-profile",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "player",
+      "target": "player-profile-override",
+      "options": {
+        "cloudName": "prod",
+        "profile": "demo-profile",
+        "publicId": "samples/sea-turtle",
+        "colors": {
+          "base": "#22004D",
+          "accent": "#FA65C7",
+          "text": "#FF06D2"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-profile-override",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "player",
+      "target": "player-source-override",
+      "options": {
+        "cloudName": "prod",
+        "profile": "demo-profile",
+        "publicId": "samples/sea-turtle",
+        "transformation": {
+          "effect": "blur:500"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-source-override",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "player",
+      "target": "player-asset-config",
+      "options": {
+        "cloudName": "prod",
+        "publicId": "samples/sea-turtle"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-asset-config",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

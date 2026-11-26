@@ -1,0 +1,56 @@
+{
+  "page": "docs/source-switcher.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-multiple-sources",
+      "options": {
+        "cloudName": "demo",
+        "videoSources": [
+          {
+            "publicId": "snow_horses"
+          },
+          {
+            "publicId": "dirt_bike",
+            "textTracks": {
+              "captions": {
+                "label": "Original",
+                "default": true
+              },
+              "subtitles": [
+                {
+                  "label": "English",
+                  "language": "en-US"
+                },
+                {
+                  "label": "Polish",
+                  "language": "pl-PL"
+                }
+              ]
+            }
+          },
+          {
+            "publicId": "marmots",
+            "label": "Custom video name",
+            "download": true
+          }
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "playsinline": "",
+            "id": "player-multiple-sources",
+            "controls": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

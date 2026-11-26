@@ -1,0 +1,55 @@
+{
+  "page": "docs/recommendations.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "autoShowRecommendations": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "surf_competition",
+              "info": {
+                "title": "Surf competition",
+                "subtitle": "A movie about a surf competition",
+                "description": "A description of the surf competition movie"
+              },
+              "recommendations": [
+                {
+                  "publicId": "finish_line",
+                  "info": {
+                    "title": "Finish line",
+                    "subtitle": "A short video of a finish line",
+                    "description": "A description of the finish line movie."
+                  },
+                  "recommendations": {}
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

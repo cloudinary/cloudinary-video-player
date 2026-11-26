@@ -1,0 +1,46 @@
+{
+  "page": "docs/ui-config.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses",
+        "title": "Snow Horses",
+        "description": "A movie about horses",
+        "hideContextMenu": true,
+        "logoImageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/38/Facebook_Like_React.png",
+        "logoOnclickUrl": "https://google.com",
+        "showLogo": true,
+        "showJumpControls": true,
+        "pictureInPictureToggle": true,
+        "fontFace": "Lobster",
+        "bigPlayButton": false,
+        "playbackRates": [
+          0.5,
+          1,
+          1.5,
+          2
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

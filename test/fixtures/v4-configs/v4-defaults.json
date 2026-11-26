@@ -1,0 +1,50 @@
+{
+  "source": "src/config/defaults.js",
+  "commit": "61d0b53c",
+  "environment": "jsdom (videojs.browser.IS_IOS is false, so playsinline is false here)",
+  "defaults": {
+    "logoOnclickUrl": "https://cloudinary.com/",
+    "showLogo": true,
+    "showJumpControls": false,
+    "playsinline": false,
+    "skin": "dark",
+    "controls": false,
+    "chaptersButton": false,
+    "pictureInPictureToggle": false,
+    "seekThumbnails": true,
+    "aiHighlightsGraph": false,
+    "download": false,
+    "preload": "metadata",
+    "textTrackSettings": false,
+    "loop": false,
+    "muted": false,
+    "posterOptions": {},
+    "sourceTypes": [
+      "auto"
+    ],
+    "breakpoints": false,
+    "contextMenu": {
+      "content": "[Function]"
+    },
+    "floatingWhenNotVisible": "none",
+    "hideContextMenu": false,
+    "analytics": false,
+    "cloudinaryAnalytics": true,
+    "allowUsageReport": true,
+    "videoConfig": true,
+    "playedEventPercents": [
+      25,
+      50,
+      75,
+      100
+    ],
+    "adaptiveStreaming": {
+      "strategy": "balanced"
+    },
+    "html5": {
+      "handlePartialData": false,
+      "nativeTextTracks": false
+    },
+    "disableSeekWhileScrubbingOnMobile": true
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "page": "docs/audio.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "download": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "dog",
+              "sourceTypes": [
+                "audio"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-t",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-t",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-video-player-skin-light",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "dog",
+              "sourceTypes": [
+                "audio"
+              ],
+              "transformation": {
+                "start_offset": 3,
+                "duration": 5
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

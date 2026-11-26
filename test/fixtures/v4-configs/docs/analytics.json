@@ -1,0 +1,67 @@
+{
+  "page": "docs/analytics.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "analytics": {
+          "events": [
+            "play",
+            "pause",
+            "volumechange",
+            {
+              "type": "percentsplayed",
+              "percents": [
+                10,
+                50,
+                75,
+                100
+              ]
+            },
+            "start",
+            "ended",
+            "seek",
+            "fullscreenchange"
+          ]
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            {
+              "publicId": "marmots",
+              "info": {
+                "title": "marmots",
+                "subtitle": "marmots subtitle",
+                "description": "lorem ipsum marmots"
+              }
+            }
+          ]
+        },
+        {
+          "call": "play",
+          "args": []
+        }
+      ]
+    }
+  ]
+}

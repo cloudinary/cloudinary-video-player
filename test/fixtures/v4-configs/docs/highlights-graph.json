@@ -1,0 +1,31 @@
+{
+  "page": "docs/highlights-graph.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "cld-imagine",
+        "aiHighlightsGraph": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-fluid",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

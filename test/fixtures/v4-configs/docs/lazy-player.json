@@ -1,0 +1,67 @@
+{
+  "page": "docs/lazy-player.html",
+  "players": [
+    {
+      "factory": "player",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "poster": "https://res.cloudinary.com/demo/video/upload/so_0,f_auto,q_auto/sea_turtle.jpg",
+        "lazy": true,
+        "colors": {
+          "accent": "#ff4081"
+        },
+        "logoImageUrl": "https://res.cloudinary.com/demo/image/upload/c_scale,w_100/cloudinary_logo.png",
+        "logoOnclickUrl": "https://cloudinary.com"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "class": "cld-video-player cld-fluid",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "player",
+      "target": "player-scroll",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "sea_turtle",
+        "lazy": {
+          "loadOnScroll": true
+        },
+        "colors": {
+          "accent": "#ff4081"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-scroll",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "loop": "",
+            "class": "cld-video-player cld-fluid",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

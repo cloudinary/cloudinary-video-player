@@ -1,0 +1,7 @@
+{
+  "page": "docs/embedded-iframe.html",
+  "players": [],
+  "iframes": [
+    "https://player.cloudinary.com/embed/?public_id=race_road_car&cloud_name=demo&vpv=edge"
+  ]
+}

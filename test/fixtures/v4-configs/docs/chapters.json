@@ -1,0 +1,99 @@
+{
+  "page": "docs/chapters.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-vtt",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses",
+        "chapters": {
+          "url": "https://res.cloudinary.com/tsachi/raw/upload/tests/snow_horses_chapters_k1e1ff.vtt"
+        },
+        "chaptersButton": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-vtt",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "600"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-config",
+      "options": {
+        "cloud_name": "demo",
+        "chaptersButton": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-config",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "600"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "snow_horses",
+            {
+              "chapters": {
+                "0": "Opening credits",
+                "3": "A dangerous quest",
+                "8": "The attack"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-auto-vtt",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses",
+        "chapters": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-auto-vtt",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "600"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

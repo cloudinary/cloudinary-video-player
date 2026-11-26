@@ -1,0 +1,43 @@
+{
+  "page": "docs/playlist-by-tag-captions.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "autoplay": "",
+            "muted": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlistByTag",
+          "args": [
+            "video_race",
+            {
+              "autoAdvance": true,
+              "repeat": true,
+              "presentUpcoming": false,
+              "sorter": "[Function]",
+              "sourceParams": "[Function]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

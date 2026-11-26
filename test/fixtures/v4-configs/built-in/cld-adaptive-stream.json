@@ -1,0 +1,23 @@
+{
+  "source": "cloudinary-video-player-profiles@1.3.0",
+  "name": "cld-adaptive-stream",
+  "isDefault": true,
+  "config": {
+    "playerOptions": {
+      "fluid": true,
+      "controls": true,
+      "controlBar": {
+        "fullscreenToggle": false
+      },
+      "showJumpControls": true,
+      "hideContextMenu": false,
+      "floatingWhenNotVisible": "none"
+    },
+    "sourceOptions": {
+      "chapters": true,
+      "sourceTypes": [
+        "hls"
+      ]
+    }
+  }
+}

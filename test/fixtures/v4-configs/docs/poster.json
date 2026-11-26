@@ -1,0 +1,124 @@
+{
+  "page": "docs/poster.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-image-poster",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-image-poster",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "data-cld-transformation": "{ \"effect\": [\"saturation:-100\"] }",
+            "data-cld-poster-options": "{ \"publicId\": \"sample\", \"effect\": [\"saturation:-100\"] }"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-frame-0",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses",
+        "posterOptions": {
+          "transformation": {
+            "startOffset": "0"
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-frame-0",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-poster-options",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "dog"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-poster-options",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid",
+            "data-cld-poster-options": "{ \"transformation\": [{\"width\": \"640\", \"height\": \"360\", \"crop\": \"pad\", \"effect\": \"grayscale\" },{\"overlay\":\"cloudinary_icon\", \"width\":\"300\"},{\"quality\": \"auto\", \"fetch_format\": \"auto\"}] }"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-raw",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8"
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-raw",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-applet-poster",
+      "options": {
+        "cloud_name": "demo",
+        "publicId": "snow_horses",
+        "poster": true
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-applet-poster",
+            "playsinline": "",
+            "controls": "",
+            "class": "cld-video-player cld-fluid"
+          },
+          "sources": []
+        }
+      ],
+      "calls": []
+    }
+  ]
+}

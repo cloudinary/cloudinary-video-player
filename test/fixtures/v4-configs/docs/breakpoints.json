@@ -1,0 +1,45 @@
+{
+  "page": "docs/breakpoints.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player-with-breakpoints",
+      "options": {
+        "cloudName": "demo",
+        "breakpoints": true,
+        "maxDpr": 2
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-with-breakpoints",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player cld-video-player-skin-dark cld-fluid",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "source",
+          "args": [
+            "sea_turtle"
+          ]
+        },
+        {
+          "call": "on",
+          "args": [
+            "loadedmetadata",
+            "[Function]"
+          ]
+        }
+      ]
+    }
+  ]
+}

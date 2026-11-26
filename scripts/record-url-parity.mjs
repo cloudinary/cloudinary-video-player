@@ -6,9 +6,6 @@
 // in jsdom) through the v4 Vitest setup; no URL is typed by hand.
 //
 //   npm ci && node scripts/record-url-parity.mjs
-import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { runV4Vitest } from './run-v4-vitest.mjs';
 
-const config = fileURLToPath(new URL('./url-parity/vitest.config.mjs', import.meta.url));
-const { status } = spawnSync('npx', ['vitest', 'run', '--config', config], { stdio: 'inherit' });
-process.exit(status ?? 1);
+runV4Vitest(new URL('./url-parity/vitest.config.mjs', import.meta.url));

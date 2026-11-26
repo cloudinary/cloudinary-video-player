@@ -1,0 +1,9 @@
+{
+  "source": "cloudinary-video-player-profiles@1.3.0",
+  "name": "cld-default",
+  "isDefault": true,
+  "config": {
+    "playerOptions": {},
+    "sourceOptions": {}
+  }
+}

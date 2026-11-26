@@ -1,0 +1,119 @@
+{
+  "page": "docs/codec-formats.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "product-gallery-tutorial_hlk0na",
+        "info": {
+          "title": "f_auto"
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "videojs.on",
+          "args": [
+            "playing",
+            "[Function]"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-av1",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "product-gallery-tutorial_hlk0na",
+        "info": {
+          "title": "mp4/av1"
+        },
+        "sourceTypes": [
+          "mp4/av1"
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-av1",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "videojs.on",
+          "args": [
+            "playing",
+            "[Function]"
+          ]
+        }
+      ]
+    },
+    {
+      "factory": "videoPlayer",
+      "target": "player-vp9",
+      "options": {
+        "cloudName": "demo",
+        "publicId": "product-gallery-tutorial_hlk0na",
+        "info": {
+          "title": "webm/vp9"
+        },
+        "sourceTypes": [
+          "webm/vp9"
+        ]
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player-vp9",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "videojs.on",
+          "args": [
+            "playing",
+            "[Function]"
+          ]
+        }
+      ]
+    }
+  ]
+}

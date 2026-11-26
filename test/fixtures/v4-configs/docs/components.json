@@ -1,0 +1,55 @@
+{
+  "page": "docs/components.html",
+  "players": [
+    {
+      "factory": "videoPlayer",
+      "target": "player",
+      "options": {
+        "cloud_name": "demo",
+        "seekThumbnails": false,
+        "videojs": {
+          "controlBar": {
+            "children": [
+              "PreviousButton",
+              "playToggle",
+              "NextButton"
+            ]
+          }
+        }
+      },
+      "readyCallback": false,
+      "elements": [
+        {
+          "tag": "video",
+          "attributes": {
+            "id": "player",
+            "playsinline": "",
+            "controls": "",
+            "muted": "",
+            "autoplay": "",
+            "class": "cld-video-player",
+            "width": "500"
+          },
+          "sources": []
+        }
+      ],
+      "calls": [
+        {
+          "call": "playlist",
+          "args": [
+            [
+              {
+                "publicId": "elephants"
+              },
+              "sea_turtle"
+            ],
+            {
+              "autoAdvance": 0,
+              "repeat": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
