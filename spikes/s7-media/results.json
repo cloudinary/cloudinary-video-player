@@ -1,0 +1,959 @@
+{
+  "versions": {
+    "@videojs/html": "10.7.0",
+    "@videojs/hlsjs-video": "10.7.0",
+    "hls.js": "1.7.4",
+    "@playwright/test": "1.60.0"
+  },
+  "engines": {
+    "chromium": {
+      "build": "Playwright Chromium 148.0.7778.96",
+      "media": {
+        "support": {
+          "mp4H264": "probably",
+          "nativeHls": "maybe",
+          "mse": true,
+          "managedMediaSource": false
+        },
+        "legs": [
+          {
+            "name": "1. native MP4",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "2. hls.js wrapper",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": true,
+            "wrapperTargetIsOurs": true,
+            "engineName": "hlsjs",
+            "currentSrc": "blob:http://127.0.0.1:51913/9fc6a098-b89d-48be-9fe8-1e63774e",
+            "videoRect": [
+              1280,
+              720
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "videoRectWithFillCss": [
+              640,
+              360
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "blob:http://127.0.0.1:51913/9fc6a098-b89"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "3. back to native MP4",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "oldWrapper": {
+              "connected": false,
+              "engine": null
+            },
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "x1. wrapper, preferPlayback native",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_tur",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x2. wrapper with an MP4 source",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x3. hls.js -> MP4, src set before detach",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          }
+        ],
+        "pageErrors": []
+      },
+      "overlay": {
+        "at8sLeft": {
+          "t": 7.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": false
+        },
+        "upcomingShown": true,
+        "whenUpcomingShown": {
+          "t": 10.22,
+          "d": 15.22,
+          "upcoming": true,
+          "end": false
+        },
+        "upcomingTextIsText": true,
+        "hitTestUpcoming": true,
+        "layer": {
+          "zIndex": "25",
+          "assignedSlotParent": "media-container",
+          "coversContainer": true
+        },
+        "hiddenAfterSeekBack": true,
+        "endScreenShown": true,
+        "whenEnded": {
+          "t": 15.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": true
+        },
+        "hitTest": {
+          "centerIsEndScreen": true,
+          "controlBarAboveOverlay": true
+        },
+        "fullscreen": {
+          "fullscreenElement": "video-skin",
+          "shadowFullscreenElement": "media-container",
+          "endScreenRect": [
+            800,
+            600
+          ],
+          "viewport": [
+            800,
+            600
+          ],
+          "endScreenOnTop": true
+        },
+        "buttonClick": {
+          "handlerRan": true,
+          "stillPausedAtEnd": true
+        },
+        "backgroundClick": {
+          "playbackToggled": true,
+          "endScreenVisible": false
+        },
+        "backgroundClickWithStopPropagation": {
+          "playbackToggled": false,
+          "endScreenVisible": true
+        }
+      },
+      "touch": [
+        {
+          "changeThrottle": "100 (default)",
+          "draggingRecognized": true,
+          "currentTimeDuringDrag": [
+            3.1,
+            4.5,
+            6.1,
+            7.6,
+            9.1,
+            10.7,
+            12.2,
+            13.7
+          ],
+          "seekingDuringDrag": 8,
+          "seekingAfterRelease": 0,
+          "mediaRequestsDuringDrag": 3,
+          "mediaRequestsAfterRelease": 0,
+          "finalTime": 13.69
+        },
+        {
+          "changeThrottle": 600000,
+          "draggingRecognized": true,
+          "currentTimeDuringDrag": [
+            3.1,
+            3.1,
+            3.1,
+            3.1,
+            3.1,
+            3.1,
+            3.1,
+            3.1
+          ],
+          "seekingDuringDrag": 1,
+          "seekingAfterRelease": 1,
+          "mediaRequestsDuringDrag": 0,
+          "mediaRequestsAfterRelease": 1,
+          "finalTime": 13.69
+        }
+      ]
+    },
+    "webkit": {
+      "build": "Playwright WebKit 26.4",
+      "media": {
+        "support": {
+          "mp4H264": "probably",
+          "nativeHls": "maybe",
+          "mse": true,
+          "managedMediaSource": true
+        },
+        "legs": [
+          {
+            "name": "1. native MP4",
+            "attached": true,
+            "ready": false,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              362
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "2. hls.js wrapper",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": true,
+            "wrapperTargetIsOurs": true,
+            "engineName": "hlsjs",
+            "currentSrc": "blob:http://127.0.0.1:51913/aae45ac7-d0c6-4762-8955-a57a8005",
+            "videoRect": [
+              1280,
+              720
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "videoRectWithFillCss": [
+              640,
+              362
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "blob:http://127.0.0.1:51913/aae45ac7-d0c"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "3. back to native MP4",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              362
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "oldWrapper": {
+              "connected": false,
+              "engine": null
+            },
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "x1. wrapper, preferPlayback native",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_tur",
+            "videoRect": [
+              640,
+              362
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x2. wrapper with an MP4 source",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              362
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x3. hls.js -> MP4, src set before detach",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              362
+            ],
+            "containerRect": [
+              640,
+              362
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          }
+        ],
+        "pageErrors": []
+      },
+      "overlay": {
+        "at8sLeft": {
+          "t": 7.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": false
+        },
+        "upcomingShown": true,
+        "whenUpcomingShown": {
+          "t": 10.22,
+          "d": 15.22,
+          "upcoming": true,
+          "end": false
+        },
+        "upcomingTextIsText": true,
+        "hitTestUpcoming": true,
+        "layer": {
+          "zIndex": "25",
+          "assignedSlotParent": "media-container",
+          "coversContainer": true
+        },
+        "hiddenAfterSeekBack": true,
+        "endScreenShown": true,
+        "whenEnded": {
+          "t": 15.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": true
+        },
+        "hitTest": {
+          "centerIsEndScreen": true,
+          "controlBarAboveOverlay": true
+        },
+        "fullscreen": {
+          "fullscreenElement": "video-skin",
+          "shadowFullscreenElement": "media-container",
+          "endScreenRect": [
+            800,
+            600
+          ],
+          "viewport": [
+            800,
+            600
+          ],
+          "endScreenOnTop": true
+        },
+        "buttonClick": {
+          "handlerRan": true,
+          "stillPausedAtEnd": true
+        },
+        "backgroundClick": {
+          "playbackToggled": true,
+          "endScreenVisible": false
+        },
+        "backgroundClickWithStopPropagation": {
+          "playbackToggled": false,
+          "endScreenVisible": true
+        }
+      }
+    },
+    "firefox": {
+      "build": "Playwright Firefox 150.0.2",
+      "media": {
+        "support": {
+          "mp4H264": "probably",
+          "nativeHls": "",
+          "mse": true,
+          "managedMediaSource": false
+        },
+        "legs": [
+          {
+            "name": "1. native MP4",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "2. hls.js wrapper",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": true,
+            "wrapperTargetIsOurs": true,
+            "engineName": "hlsjs",
+            "currentSrc": "blob:http://127.0.0.1:51913/12883154-c4b9-4250-9766-da5beb5f",
+            "videoRect": [
+              1280,
+              720
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "videoRectWithFillCss": [
+              640,
+              360
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "blob:http://127.0.0.1:51913/12883154-c4b"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "3. back to native MP4",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "oldWrapper": {
+              "connected": false,
+              "engine": null
+            },
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          },
+          {
+            "name": "x1. wrapper, preferPlayback native",
+            "attached": true,
+            "ready": false,
+            "clickedPlay": false,
+            "playbackAdvanced": false,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_tur",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x2. wrapper with an MP4 source",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "hlsjs-video",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "hlsjs-video",
+            "engineMediaIsOurs": false,
+            "wrapperTargetIsOurs": true,
+            "engineName": "browser",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 2,
+            "otherVideos": [
+              {
+                "inShadowOf": "hlsjs-video",
+                "src": null,
+                "currentSrc": ""
+              }
+            ],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ],
+              "slot": [
+                null,
+                "media"
+              ]
+            }
+          },
+          {
+            "name": "x3. hls.js -> MP4, src set before detach",
+            "attached": true,
+            "ready": true,
+            "clickedPlay": true,
+            "playbackAdvanced": true,
+            "storeFollowsVideo": true,
+            "storeMedia": "<video> (ours)",
+            "storeContainerIsSkinContainer": true,
+            "sameNodeById": true,
+            "parent": "video-skin",
+            "engineMediaIsOurs": null,
+            "wrapperTargetIsOurs": null,
+            "engineName": "n/a (plain video)",
+            "currentSrc": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "videoRect": [
+              640,
+              360
+            ],
+            "containerRect": [
+              640,
+              360
+            ],
+            "videosInDocument": 1,
+            "otherVideos": [],
+            "attributeDiffVsOriginal": {
+              "src": [
+                null,
+                "https://res.cloudinary.com/demo/video/up"
+              ]
+            }
+          }
+        ],
+        "pageErrors": []
+      },
+      "overlay": {
+        "at8sLeft": {
+          "t": 7.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": false
+        },
+        "upcomingShown": true,
+        "whenUpcomingShown": {
+          "t": 10.24,
+          "d": 15.22,
+          "upcoming": true,
+          "end": false
+        },
+        "upcomingTextIsText": true,
+        "hitTestUpcoming": true,
+        "layer": {
+          "zIndex": "25",
+          "assignedSlotParent": "media-container",
+          "coversContainer": true
+        },
+        "hiddenAfterSeekBack": true,
+        "endScreenShown": true,
+        "whenEnded": {
+          "t": 15.22,
+          "d": 15.22,
+          "upcoming": false,
+          "end": true
+        },
+        "hitTest": {
+          "centerIsEndScreen": true,
+          "controlBarAboveOverlay": true
+        },
+        "fullscreen": {
+          "fullscreenElement": "video-skin",
+          "shadowFullscreenElement": "media-container",
+          "endScreenRect": [
+            1366,
+            768
+          ],
+          "viewport": [
+            1366,
+            768
+          ],
+          "endScreenOnTop": true
+        },
+        "buttonClick": {
+          "handlerRan": true,
+          "stillPausedAtEnd": true
+        },
+        "backgroundClick": {
+          "playbackToggled": true,
+          "endScreenVisible": false
+        },
+        "backgroundClickWithStopPropagation": {
+          "playbackToggled": false,
+          "endScreenVisible": true
+        }
+      }
+    }
+  }
+}
