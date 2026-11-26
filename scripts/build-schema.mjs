@@ -11,6 +11,8 @@ const schema = createGenerator({
   type: 'PlayerOptions',
   functions: 'hide',
 }).createSchema('PlayerOptions');
+// Unknown top-level options are reported in debug mode, not rejected (contracts/options.md).
+schema.definitions.PlayerOptions.additionalProperties = true;
 const json = `${JSON.stringify(schema, null, 2)}\n`;
 
 if (process.argv.includes('--check')) {
