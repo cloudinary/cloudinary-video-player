@@ -15,4 +15,5 @@ const sections = [...byFeature].map(([feature, list]) => {
   section.append(ul);
   return section;
 });
-document.getElementById('presets')?.replaceChildren(...sections);
+const empty = Object.assign(document.createElement('p'), { className: 'muted', textContent: 'No examples yet.' });
+document.getElementById('presets')?.replaceChildren(...(sections.length ? sections : [empty]));

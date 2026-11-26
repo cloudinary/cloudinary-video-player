@@ -57,17 +57,19 @@ const createMedia = (id: string, player: PresetPlayer): HTMLElement => {
 const codePanel = (code: string): HTMLElement => {
   const panel = document.createElement('div');
   panel.className = 'code';
-  const pre = document.createElement('pre');
+  // Focusable, so keyboard users can scroll a long snippet
+  const pre = Object.assign(document.createElement('pre'), { tabIndex: 0 });
   pre.append(Object.assign(document.createElement('code'), { textContent: code }));
   const button = Object.assign(document.createElement('button'), { type: 'button', textContent: 'Copy code' });
   const status = Object.assign(document.createElement('span'), { className: 'visually-hidden' });
   status.setAttribute('role', 'status');
   button.addEventListener('click', async () => {
-    const copied = await navigator.clipboard.writeText(code).then(() => true, () => false);
+    // navigator.clipboard is missing outside secure contexts
+    const copied = await navigator.clipboard?.writeText(code).then(() => true, () => false);
     status.textContent = button.textContent = copied ? 'Copied' : 'Copy failed';
     setTimeout(() => (button.textContent = 'Copy code'), 2000);
   });
-  panel.append(pre, button, status);
+  panel.append(button, status, pre);
   return panel;
 };
 
@@ -82,13 +84,18 @@ const renderDeliveryNav = (presetId: string): void => {
   byId('delivery').replaceChildren(...items);
 };
 
+const message = (text: string, role?: 'alert'): HTMLElement => {
+  const paragraph = Object.assign(document.createElement('p'), { className: role ? '' : 'muted', textContent: text });
+  if (role) paragraph.setAttribute('role', role);
+  return paragraph;
+};
+
 const render = async (): Promise<void> => {
   const container = byId('players');
   if (!preset) {
+    byId('delivery').closest('nav')?.setAttribute('hidden', '');
     byId('title').textContent = 'Example not found';
-    const alert = Object.assign(document.createElement('p'), { textContent: `No preset named "${params.get('preset') ?? ''}".` });
-    alert.setAttribute('role', 'alert');
-    container.replaceChildren(alert);
+    container.replaceChildren(message(`No preset named "${params.get('preset') ?? ''}".`, 'alert'));
     return;
   }
   document.title = `${preset.title} · Cloudinary Video Player`;
@@ -96,7 +103,16 @@ const render = async (): Promise<void> => {
   renderDeliveryNav(preset.id);
   container.classList.toggle('layout-scroll', preset.layout === 'scroll');
   container.setAttribute('aria-busy', 'true');
-  const api = await loadPlayer();
+  container.replaceChildren(message('Loading the player…'));
+  let api: PlayerApi;
+  try {
+    api = await loadPlayer();
+  } catch (error) {
+    container.removeAttribute('aria-busy');
+    container.replaceChildren(message('The player files did not load. Run npm run build, then reload.', 'alert'));
+    throw error;
+  }
+  container.replaceChildren();
   preset.players.forEach((player, index) => {
     const id = `player-${index + 1}`;
     const section = Object.assign(document.createElement('section'), { className: 'player' });
