@@ -5,6 +5,7 @@
 import { defaultProfiles } from 'cloudinary-video-player-profiles';
 import type { CloudConfig } from './options/types.js';
 import { deliveryPrefix } from './url/cloud.js';
+import { isRawUrl } from './url/media-url.js';
 import { utf8ToBase64 } from './utf8-base64.js';
 
 export { fetchTranscript } from './tracks/transcript.js';
@@ -62,7 +63,6 @@ export function metadataUrl(target: AssetTarget, query: QueryParams): string {
   return withQuery(`${assetPath('video_metadata', target)}.json`, query);
 }
 
-const RAW_URL = /^https?:\/\//i;
 
 /** The saved configuration of a built-in profile (`cld-default`, …), bundled, or `undefined`. */
 export function builtInProfile(name: string): ServiceConfig | undefined {
@@ -72,7 +72,7 @@ export function builtInProfile(name: string): ServiceConfig | undefined {
 /** A profile URL: `null` for a built-in profile (no request), a raw URL as is, else a named profile. */
 export function profileUrl(cloud: CloudConfig, profile: string, query: QueryParams): string | null {
   if (builtInProfile(profile)) return null;
-  if (RAW_URL.test(profile)) return profile;
+  if (isRawUrl(profile)) return profile;
   return withQuery(`${servicePrefix(cloud)}/video_player_profiles/${profile.replaceAll(' ', '+')}.json`, query);
 }
 

@@ -28,3 +28,40 @@ export function deliveryPrefix(cloud: CloudConfig): string {
   const prefix = `${secure ? 'https' : 'http'}://${host}`;
   return sharedDomain ? `${prefix}/${cloudName}` : prefix;
 }
+
+/** Settings that change the `<resource type>/<type>` part of a delivery URL. */
+export interface PathOptions {
+  readonly urlSuffix?: string;
+  readonly useRootPath?: boolean;
+  readonly shorten?: boolean;
+}
+
+/** The short forms an SEO suffix needs (url-gen `finalize_resource_type`). */
+const SUFFIX_PATHS: Readonly<Record<string, string>> = {
+  'image/upload': 'images',
+  'image/private': 'private_images',
+  'image/authenticated': 'authenticated_images',
+  'raw/upload': 'files',
+  'video/upload': 'videos',
+};
+
+/**
+ * The `<resource type>/<type>` part of a delivery URL, with the v4 rules: a suffix needs a short form
+ * (`videos`, `images`, …), the root path is for image uploads only (`''`), `shorten` turns an image
+ * upload into `iu`. Throws, as v4, for a combination that Cloudinary does not deliver.
+ */
+export function deliveryPath(resourceType: string, type: string, { urlSuffix, useRootPath, shorten }: PathOptions): string {
+  let path = `${resourceType}/${type}`;
+  if (urlSuffix) {
+    const short = SUFFIX_PATHS[path];
+    if (!short) {
+      throw new Error('URL Suffix only supported for image/upload, image/private, image/authenticated, video/upload and raw/upload');
+    }
+    path = short;
+  }
+  if (useRootPath) {
+    if (path !== 'image/upload' && path !== 'images') throw new Error('Root path only supported for image/upload');
+    return '';
+  }
+  return shorten && path === 'image/upload' ? 'iu' : path;
+}
