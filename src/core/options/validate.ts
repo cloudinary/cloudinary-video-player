@@ -90,7 +90,7 @@ const OPTION_SPECS: Readonly<Record<keyof PlayerOptions, Spec>> = {
   cropMode: oneOf('fill', 'pad', 'smart'),
   cropPadColor: isString,
   hdr: isBoolean,
-  poster: isString,
+  poster: or(isString, isBoolean, isPlainObject),
   posterOptions: { publicId: isString, transformation: isTransformation, posterColor: isString },
   textTracks: {
     options: {

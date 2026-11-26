@@ -160,8 +160,30 @@
           "default": false
         },
         "poster": {
-          "type": "string",
-          "description": "Poster image URL. Default: the poster saved for the video in Cloudinary."
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
         },
         "posterOptions": {
           "$ref": "#/definitions/PosterOptions",
@@ -490,7 +512,7 @@
         },
         "fetchErrorUsingGet": {
           "type": "boolean",
-          "description": "Read the Cloudinary error with `GET` and credentials instead of `HEAD`.",
+          "description": "Read the Cloudinary error with a one-byte `GET` instead of `HEAD` (cookies only with `withCredentials`).",
           "default": false
         }
       },
@@ -655,8 +677,30 @@
           "default": false
         },
         "poster": {
-          "type": "string",
-          "description": "Poster image URL. Default: the poster saved for the video in Cloudinary."
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
         },
         "posterOptions": {
           "$ref": "#/definitions/PosterOptions",
@@ -1190,8 +1234,30 @@
           "default": false
         },
         "poster": {
-          "type": "string",
-          "description": "Poster image URL. Default: the poster saved for the video in Cloudinary."
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
         },
         "posterOptions": {
           "$ref": "#/definitions/PosterOptions",

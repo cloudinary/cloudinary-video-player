@@ -83,8 +83,8 @@ export interface UsageReportInput {
   readonly version: string;
   readonly cloudName: string;
   readonly options: UsageReportOptions;
-  /** The player defaults: an option equal to its default is not a feature in use. */
-  readonly defaults?: UsageReportOptions;
+  /** The player defaults (`DEFAULTS`): an option equal to its default is not a feature in use. */
+  readonly defaults: UsageReportOptions;
 }
 
 /** Query parameters for the report request: `vpVersion`, `cloudName` and one entry per feature in use. */
@@ -175,7 +175,7 @@ const playlistWidgetFeatures = (widget: unknown): Features => ({
 });
 
 /** Builds the usage report for one source. Sending it (and honoring `allowUsageReport`) is the caller's job. */
-export function buildUsageReport({ version, cloudName, options, defaults = {} }: UsageReportInput): UsageReport {
+export function buildUsageReport({ version, cloudName, options, defaults }: UsageReportInput): UsageReport {
   const set = (key: UsageReportOption): unknown => changed(options[key], defaults[key]);
   const lazy = set('lazy');
   const poster = set('poster');

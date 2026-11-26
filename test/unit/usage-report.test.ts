@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { buildUsageReport } from '../../src/core/analytics/usage-report.js';
 import type { UsageReportOptions } from '../../src/core/analytics/usage-report.js';
 
-const report = (options: UsageReportOptions, defaults?: UsageReportOptions) =>
+const report = (options: UsageReportOptions, defaults: UsageReportOptions = {}) =>
   buildUsageReport({ version: '5.0.0', cloudName: 'demo', options, defaults });
 
 describe('buildUsageReport', () => {

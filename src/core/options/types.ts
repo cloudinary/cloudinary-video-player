@@ -203,8 +203,11 @@ export interface SourceOptions extends CloudinaryConfig {
    * @default false
    */
   hdr?: boolean;
-  /** Poster image URL. Default: the poster saved for the video in Cloudinary. */
-  poster?: string;
+  /**
+   * Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster,
+   * or `false` for none. Default: the poster saved for the video in Cloudinary.
+   */
+  poster?: string | boolean | { publicId: string; transformation?: Transformation };
   /** Poster settings. */
   posterOptions?: PosterOptions;
   /** Captions and subtitles. */
@@ -512,7 +515,7 @@ export interface PlayerOptions extends SourceOptions {
    */
   videoTimeout?: number;
   /**
-   * Read the Cloudinary error with `GET` and credentials instead of `HEAD`.
+   * Read the Cloudinary error with a one-byte `GET` instead of `HEAD` (cookies only with `withCredentials`).
    * @default false
    */
   fetchErrorUsingGet?: boolean;
