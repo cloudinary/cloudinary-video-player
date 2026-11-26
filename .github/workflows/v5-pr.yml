@@ -1,0 +1,105 @@
+name: v5 PR
+
+on:
+  pull_request:
+
+concurrency:
+  group: v5-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run lint:package
+      - run: npm run size
+      - run: npm run schema:check
+      - run: npm run test:unit
+
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+
+  e2e:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Set timestamp
+        run: echo "TIMESTAMP=$(date +%Y%m%d_%H%M%S_%3N)" >> $GITHUB_ENV
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:examples
+      - run: npx playwright install --with-deps chrome firefox webkit
+      - name: E2E (branded Chrome full; Firefox and WebKit @smoke)
+        run: npm run test:e2e:smoke
+      - name: Upload report to artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+      - name: Push report to the reports repository
+        if: ${{ !cancelled() && github.actor != 'dependabot[bot]' }}
+        uses: cpina/github-action-push-to-another-repository@55306faa4ed53b815ae49e564af8cfb359d32ae2 # main as of 2025-09-25
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
+        with:
+          source-directory: 'playwright-report'
+          destination-github-username: 'cloudinary'
+          destination-repository-name: 'cloudinary-video-player-reports'
+          user-email: ''
+          target-branch: main
+          target-directory: 'playwright-report_ts_${{ env.TIMESTAMP }}'
+      - name: Write report URL in summary
+        if: ${{ !cancelled() }}
+        run: echo "### Test results https://cloudinary.github.io/cloudinary-video-player-reports/playwright-report_ts_${{ env.TIMESTAMP }}" >> $GITHUB_STEP_SUMMARY
+
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PREVIEW_URL: https://deploy-preview-${{ github.event.pull_request.number }}--cld-vp-esm-pages.netlify.app/
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - name: Wait for the Netlify preview of the PR head
+        run: node scripts/wait-for-preview.mjs
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e:preview

@@ -1,0 +1,63 @@
+name: v5 nightly
+
+# GitHub runs `schedule` only from the default branch. Until v5 is the default branch, this
+# workflow needs a copy on master (ask first) or a manual run; it always tests the v5 branch.
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run test:browser
+        env:
+          VITEST_BROWSERS: chromium,firefox,webkit
+
+  e2e:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-24.04, projects: '--project=chrome --project=firefox', browsers: 'chrome firefox' }
+          - { os: macos-latest, projects: '--project=webkit', browsers: 'webkit' }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:examples
+      - run: npx playwright install --with-deps ${{ matrix.browsers }}
+      - run: npx playwright test ${{ matrix.projects }}
+        env:
+          E2E_FULL: 1
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ matrix.os }}
+          path: playwright-report/
+          retention-days: 30

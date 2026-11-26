@@ -1,2 +1,9 @@
+# Netlify site cld-vp-esm-pages (base directory docs/es-modules). On v5 the build settings live here,
+# so they override the site's UI settings for v5 branches only (master keeps its own files).
 [build]
   ignore = "false"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"

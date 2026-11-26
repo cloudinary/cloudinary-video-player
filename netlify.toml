@@ -1,0 +1,9 @@
+# Netlify site cld-video-player (base directory: repository root). On v5 the build settings live here,
+# so they override the site's UI settings for v5 branches only (master has no netlify.toml at the root).
+# Both sites publish the same examples site: every delivery mode (CDN script, npm import, element) of the built player.
+[build]
+  command = "npm run build && npm run build:examples && node scripts/write-build-info.mjs"
+  publish = "examples/dist"
+
+[build.environment]
+  NODE_VERSION = "24"
