@@ -36,3 +36,18 @@ Totals add separately gzipped files (code and CSS ship as separate files), so th
 - **Own (ejected) skin with design B: yes, with a plan note** (62.6 KB on 10.7.0). The quality and audio menus move into the adaptive-streaming chunk, the rate menu loads when `playbackRates` is set, captions and chapters menus load with their features. This matches the plan's lazy feature modules (T071, T093, T094), so it changes no task.
 - **Design A: no** (79.3 KB). It needs a budget decision if the menus must be in the first load.
 - **Not verified here:** the v4-look CSS size (the Default skin CSS stands in for it) and the real own-code size (15 KB allowance). T127 re-measures with real numbers.
+
+## hls.js adapter chunk (for T011)
+
+`node spikes/s1-size/hls-chunk.mjs` measures what design B adds when an HLS source loads: `<hlsjs-video>` plus the quality and audio menus, on top of `v4-controls-lazy-menus`.
+
+| Part (gzip KB, 10.7.0, hls.js 1.7.4) | Size |
+|---|---|
+| hls.js full build alone | 173.9 |
+| hls.js light build alone (no alt audio, subtitles, EME, CMCD, content steering) | 111.2 |
+| `<hlsjs-video>` define alone | 190.4 |
+| **Chunk added to the default player** | **204.0** |
+
+The plan's budget for this chunk is "≤ v4 (162 KB)". hls.js 1.7 alone is above it, and the light build drops the alternate audio that the audio menu needs. The budget is a developer decision (see `log.md`).
+
+Note from S-3: the `v4-controls` entries define the player element after `<media-container>`. That does not change the size, but at run time the player element must be defined first, or the container never registers.
