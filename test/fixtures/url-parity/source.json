@@ -1,0 +1,2765 @@
+{
+  "recordedFrom": {
+    "player": "cloudinary-video-player@4.1.6",
+    "commit": "61d0b53c"
+  },
+  "environment": "jsdom; canPlayType() = \"maybe\"; MediaSource.isTypeSupported() = true; fetch answers 404. Source cases call VideoSource directly with the player's secure default; the player adds ?_s=vp on top (see player cases).",
+  "cases": [
+    {
+      "id": "tx-object",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "fetch_format": "auto"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-array",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "fetch_format": "auto"
+            },
+            {
+              "streaming_profile": "hd"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto/sp_hd/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-named",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": "test"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video,t_test/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-width-array",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "width": 400
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/w_400/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-common-keys",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "width": 640,
+            "height": 360,
+            "crop": "fill",
+            "gravity": "auto",
+            "quality": "auto:good",
+            "dpr": 2,
+            "background": "blue",
+            "angle": 10,
+            "radius": 20,
+            "opacity": 80,
+            "border": "3px_solid_black",
+            "color": "red",
+            "effect": "sepia",
+            "flags": [
+              "splice",
+              "awebp"
+            ],
+            "start_offset": 2,
+            "end_offset": 8,
+            "duration": 6,
+            "fps": "15-25",
+            "audio_codec": "aac",
+            "bit_rate": "500k",
+            "video_sampling": 20,
+            "overlay": "cloudinary_icon",
+            "x": 10,
+            "y": 20,
+            "zoom": 1.5,
+            "page": 2,
+            "density": 72,
+            "delay": 20,
+            "default_image": "avatar.png",
+            "aspect_ratio": "16:9",
+            "keyframe_interval": 2,
+            "streaming_profile": "hd"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/a_10,ac_aac,ar_16:9,b_blue,bo_3px_solid_black,br_500k,c_fill,co_red,d_avatar.png,dl_20,dn_72,dpr_2.0,du_6,e_sepia,eo_8,fl_splice.awebp,fps_15-25,g_auto,h_360,ki_2,l_cloudinary_icon,o_80,pg_2,q_auto:good,r_20,so_2,sp_hd,vs_20,w_640,x_10,y_20,z_1.5/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-offset-range",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "offset": [
+              2.5,
+              8
+            ]
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/eo_8,so_2.5,8/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-offset-percent",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "start_offset": "10p",
+            "end_offset": "90p"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/eo_90p,so_10p/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-variables",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "variables": [
+                [
+                  "$w",
+                  400
+                ],
+                [
+                  "$h",
+                  "$w / 2"
+                ]
+              ]
+            },
+            {
+              "width": "$w",
+              "height": "$h",
+              "crop": "fill"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/$w_400,$h_$w_div_2/c_fill,h_$h,w_$w/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-variable-keys",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "$ratio": "iw / ih",
+            "width": "$ratio * 300",
+            "crop": "scale"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/$ratio_iw_div_ih,c_scale,w_$ratio_mul_300/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-condition",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "if": "w_gt_1000"
+            },
+            {
+              "width": 1000,
+              "crop": "scale"
+            },
+            {
+              "if": "end"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/if_w_gt_1000/c_scale,w_1000/if_end/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-condition-else",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "if": "duration > 30"
+            },
+            {
+              "end_offset": 30
+            },
+            {
+              "if": "else"
+            },
+            {
+              "effect": "accelerate:50"
+            },
+            {
+              "if": "end"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/if_du_gt_30/eo_30/if_else/e_accelerate:50/if_end/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-raw-string",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "raw_transformation": "e_blur:300/l_text:arial_40:Hello"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/e_blur:300/l_text:arial_40:Hello/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-raw-and-keys",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "width": 300,
+            "raw_transformation": "e_loop:3"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/w_300,e_loop:3/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-chain-overlay",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "overlay": "video:dog",
+              "width": 200,
+              "gravity": "south_east"
+            },
+            {
+              "flags": "layer_apply"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/g_south_east,l_video:dog,w_200/fl_layer_apply/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "tx-text-overlay",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "overlay": {
+                "font_family": "Arial",
+                "font_size": 40,
+                "text": "Hello, World!"
+              },
+              "color": "white"
+            },
+            {
+              "flags": "layer_apply",
+              "gravity": "north"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/co_white,l_text:Arial_40:Hello%252C%20World!/fl_layer_apply,g_north/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-default",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-hls",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-hls-h265",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "hls/h265"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto,vc_h265/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-dash",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "dash"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/dash+xml",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.mpd",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-dash-vp9",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "dash/vp9"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/dash+xml",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto,vc_vp9/sea_turtle.mpd",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-dash-vp9-tx",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "fetch_format": "auto"
+            },
+            {
+              "streaming_profile": "hd"
+            }
+          ]
+        },
+        "sourceTypes": [
+          "dash/vp9"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/dash+xml",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto/sp_hd/sea_turtle.mpd",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-hls-h265-tx",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "fetch_format": "auto"
+            },
+            {
+              "streaming_profile": "hd"
+            }
+          ]
+        },
+        "sourceTypes": [
+          "hls/h265"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto/sp_hd/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-many",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "hls",
+            "dash",
+            "webm/vp9",
+            "mp4/h265",
+            "mp4",
+            "ogv"
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          },
+          {
+            "type": "application/dash+xml",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.mpd",
+            "isAdaptive": true,
+            "withCredentials": false
+          },
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_h265/sea_turtle.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          },
+          {
+            "type": "video/ogg",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle.ogv",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-mp4-av1",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "mp4/av1"
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_av1/sea_turtle.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-webm-vp8",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "webm/vp8"
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_vp8/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-hls-sp-custom",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "streaming_profile": "full_hd"
+          }
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_full_hd/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-source-transformation",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "hls",
+            "mp4"
+          ],
+          "transformation": {
+            "width": 300
+          },
+          "sourceTransformation": {
+            "hls": [
+              {
+                "streaming_profile": "sd"
+              }
+            ],
+            "mp4": [
+              {
+                "quality": "auto"
+              }
+            ]
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_sd/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/q_auto/sea_turtle.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-source-transformation-auto",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTransformation": {
+            "auto": [
+              {
+                "width": 400
+              },
+              {
+                "format": "mp4"
+              }
+            ]
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/w_400/f_mp4/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-empty",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            ""
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-empty-tx",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            ""
+          ],
+          "transformation": {
+            "width": 400
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/w_400/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "type-empty-format",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            ""
+          ],
+          "transformation": {
+            "fetch_format": "mp4"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-default",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-webm-vp9",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "webm"
+          ],
+          "transformation": {
+            "video_codec": "vp9"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_vp9/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-vp9-no-type",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "video_codec": "vp9"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_vp9/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-h265",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "video_codec": "h265"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_h265/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-raw-vp9",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "raw_transformation": "vc_vp9"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/vc_vp9/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-raw-h265",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "raw_transformation": "h265"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/h265/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-array-h265",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "video_codec": "h265"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_h265/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "codec-object",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "video_codec": {
+              "codec": "h264",
+              "profile": "basic",
+              "level": "3.1"
+            }
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/vc_h264:basic:3.1/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-auto",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "fetch_format": "auto"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-auto-video",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "fetch_format": "auto:video"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-mp4",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "fetch_format": "mp4"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-in-array",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": [
+            {
+              "width": 400
+            },
+            {
+              "fetch_format": "webm"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/w_400/f_webm/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-alias",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "transformation": {
+            "format": "mp4"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "format-explicit-type",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "webm"
+          ],
+          "transformation": {
+            "fetch_format": "mp4"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_mp4/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "id-folder",
+      "input": {
+        "publicId": "samples/elephants",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/v1/samples/elephants",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/v1/samples/elephants.jpg"
+      }
+    },
+    {
+      "id": "id-extension",
+      "input": {
+        "publicId": "sea_turtle.mp4",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "id-unicode-space",
+      "input": {
+        "publicId": "folder/été vidéo",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/v1/folder/%C3%A9t%C3%A9%20vid%C3%A9o",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/v1/folder/%C3%A9t%C3%A9%20vid%C3%A9o.jpg"
+      }
+    },
+    {
+      "id": "id-version",
+      "input": {
+        "publicId": "v1612345678/sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/v1612345678/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/v1612345678/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "delivery-fetch",
+      "input": {
+        "publicId": "https://res.cloudinary.com/demo/video/upload/dog.mp4",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "fetch"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/dog.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/dog.mp4"
+      }
+    },
+    {
+      "id": "delivery-private",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "private"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/private/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/private/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "delivery-authenticated",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "authenticated"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/authenticated/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/authenticated/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "delivery-live",
+      "input": {
+        "publicId": "live_stream",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "live"
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/live/live_stream.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": null
+      }
+    },
+    {
+      "id": "resource-image",
+      "input": {
+        "publicId": "sample",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "resourceType": "image",
+          "transformation": [
+            {
+              "effect": "ai:model_veo-animate;details_(prompt_!flying bee!)"
+            },
+            {
+              "format": "auto:video"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/image/upload/e_ai:model_veo-animate;details_(prompt_!flying_bee!)/f_auto:video/sample",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+      }
+    },
+    {
+      "id": "resource-image-poster",
+      "input": {
+        "publicId": "sample",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "resourceType": "image",
+          "transformation": [
+            {
+              "effect": "ai:model_veo-animate"
+            }
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/image/upload/e_ai:model_veo-animate/f_auto:video/sample",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+      }
+    },
+    {
+      "id": "raw-webm-type",
+      "input": {
+        "publicId": "https://exmaple.com/test.mp4",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "webm"
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://exmaple.com/test.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.mp4"
+      }
+    },
+    {
+      "id": "raw-no-type",
+      "input": {
+        "publicId": "https://exmaple.com/test.mp4",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://exmaple.com/test.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.mp4"
+      }
+    },
+    {
+      "id": "raw-with-tx",
+      "input": {
+        "publicId": "https://media.castit.biz/castit-dev/video/upload/a_0,c_limit,f_mp4,vc_h264,w_600/cit-qa/Videoback/2020/08/03/269085_358976.mp4",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://media.castit.biz/castit-dev/video/upload/a_0,c_limit,f_mp4,vc_h264,w_600/cit-qa/Videoback/2020/08/03/269085_358976.mp4",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://media.castit.biz/castit-dev/video/upload/a_0,c_limit,f_mp4,vc_h264,w_600/cit-qa/Videoback/2020/08/03/269085_358976.mp4"
+      }
+    },
+    {
+      "id": "raw-no-extension",
+      "input": {
+        "publicId": "https://exmaple.com/test",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "sourceTypes": [
+            "mp4"
+          ]
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/mp4",
+            "src": "https://exmaple.com/test",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test"
+      }
+    },
+    {
+      "id": "raw-params",
+      "input": {
+        "publicId": "https://exmaple.com/test.mp4?test=1234&user=eeeee&format=webm",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "webm"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://exmaple.com/test.mp4?test=1234&user=eeeee&format=webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.mp4?test=1234&user=eeeee&format=webm"
+      }
+    },
+    {
+      "id": "raw-anchor",
+      "input": {
+        "publicId": "https://exmaple.com/test.mp4#123454",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "webm"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://exmaple.com/test.mp4#123454",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.mp4#123454"
+      }
+    },
+    {
+      "id": "raw-m3u8",
+      "input": {
+        "publicId": "https://exmaple.com/test.m3u8",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://exmaple.com/test.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.m3u8"
+      }
+    },
+    {
+      "id": "raw-hls",
+      "input": {
+        "publicId": "https://exmaple.com/test",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://exmaple.com/test",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test"
+      }
+    },
+    {
+      "id": "raw-mpd",
+      "input": {
+        "publicId": "https://exmaple.com/test.mpd",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/dash+xml",
+            "src": "https://exmaple.com/test.mpd",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test.mpd"
+      }
+    },
+    {
+      "id": "raw-dash",
+      "input": {
+        "publicId": "https://exmaple.com/test",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "sourceTypes": [
+          "dash"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/dash+xml",
+            "src": "https://exmaple.com/test",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://exmaple.com/test"
+      }
+    },
+    {
+      "id": "raw-cloudinary",
+      "input": {
+        "publicId": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "queryParams": {
+            "_s": "vp"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8"
+      }
+    },
+    {
+      "id": "credentials-true",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "withCredentials": true
+        },
+        "sourceTypes": [
+          "webm"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": true
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "credentials-false",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "withCredentials": false
+        },
+        "sourceTypes": [
+          "webm"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/webm",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle.webm",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "credentials-hls",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "withCredentials": true
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": true
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "query-usage",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "queryParams": {
+            "_s": "vp"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle?_s=vp",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg?_s=vp"
+      }
+    },
+    {
+      "id": "query-many",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "queryParams": {
+            "_s": "vp",
+            "token": "a b&c",
+            "n": 1
+          }
+        },
+        "sourceTypes": [
+          "hls",
+          "mp4"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8?_s=vp&token=a+b%26c&n=1",
+            "isAdaptive": true,
+            "withCredentials": false
+          },
+          {
+            "type": "video/mp4",
+            "src": "https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4?_s=vp&token=a+b%26c&n=1",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg?_s=vp&token=a+b%26c&n=1"
+      }
+    },
+    {
+      "id": "poster-default",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "poster-raw-url",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "queryParams": {
+            "_s": "vp"
+          },
+          "poster": "https://cdn.example.com/assets/poster.jpg"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle?_s=vp",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://cdn.example.com/assets/poster.jpg"
+      }
+    },
+    {
+      "id": "poster-query",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "queryParams": {
+            "_s": "vp"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle?_s=vp",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg?_s=vp"
+      }
+    },
+    {
+      "id": "poster-public-id",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "poster": "sample"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/image/upload/sample"
+      }
+    },
+    {
+      "id": "poster-object",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "poster": {
+            "publicId": "sample",
+            "transformation": {
+              "width": 300,
+              "crop": "fill",
+              "effect": "sepia"
+            }
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/image/upload/c_fill,e_sepia,w_300/sample"
+      }
+    },
+    {
+      "id": "poster-saved",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "poster": true
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/_applet_/video_service/elements/upload/c2VhX3R1cnRsZQ==/poster"
+      }
+    },
+    {
+      "id": "poster-saved-tx",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "poster": true,
+          "posterOptions": {
+            "transformation": {
+              "width": 400,
+              "crop": "scale"
+            }
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/_applet_/video_service/elements/upload/c2VhX3R1cnRsZQ==/poster?tx=c_scale,w_400"
+      }
+    },
+    {
+      "id": "poster-saved-private",
+      "input": {
+        "publicId": "folder/été vidéo",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "private",
+          "poster": true,
+          "queryParams": {
+            "_s": "vp"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/private/f_auto:video/v1/folder/%C3%A9t%C3%A9%20vid%C3%A9o?_s=vp",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/_applet_/video_service/elements/private/Zm9sZGVyL8OpdMOpIHZpZMOpbw==/poster?_s=vp"
+      }
+    },
+    {
+      "id": "poster-live",
+      "input": {
+        "publicId": "live_stream",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "type": "live"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/live/f_auto:video/live_stream",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": null
+      }
+    },
+    {
+      "id": "hdr-supported",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "hdr": true
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": true
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_mp4,sp_auto,vc_h265,dr_high/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "hdr-unsupported",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "hdr": true
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "hdr-off",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo"
+          },
+          "hdr": false
+        },
+        "sourceTypes": [
+          "hls"
+        ],
+        "display": {
+          "hdr": true
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "application/x-mpegURL",
+            "src": "https://res.cloudinary.com/demo/video/upload/sp_auto/sea_turtle.m3u8",
+            "isAdaptive": true,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-http",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "secure": false
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "http://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "http://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-private-cdn",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://demo-res.cloudinary.com/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://demo-res.cloudinary.com/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-secure-distribution",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true,
+            "secure_distribution": "media.example.com"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://media.example.com/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://media.example.com/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-cname-http",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "secure": false,
+            "cname": "video.example.com"
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "http://video.example.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "http://video.example.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-cdn-subdomain-http",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "secure": false,
+            "cdn_subdomain": true
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "http://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "http://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-secure-cdn-subdomain",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true,
+            "secure_cdn_subdomain": true
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://demo-res.cloudinary.com/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://demo-res.cloudinary.com/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-use-root-path",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true,
+            "use_root_path": true
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "error": "Root path only supported for image/upload"
+      }
+    },
+    {
+      "id": "cloud-url-suffix",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "private_cdn": true
+          },
+          "url_suffix": "my-video"
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://demo-res.cloudinary.com/videos/f_auto:video/sea_turtle/my-video",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://demo-res.cloudinary.com/video/upload/sea_turtle.jpg"
+      }
+    },
+    {
+      "id": "cloud-shorten",
+      "input": {
+        "publicId": "sea_turtle",
+        "options": {
+          "cloudinaryConfig": {
+            "cloud_name": "demo",
+            "shorten": true
+          }
+        },
+        "display": {
+          "hdr": false
+        }
+      },
+      "output": {
+        "sources": [
+          {
+            "type": "video/auto",
+            "src": "https://res.cloudinary.com/demo/video/upload/f_auto:video/sea_turtle",
+            "isAdaptive": false,
+            "withCredentials": false
+          }
+        ],
+        "poster": "https://res.cloudinary.com/demo/video/upload/sea_turtle.jpg"
+      }
+    }
+  ]
+}
