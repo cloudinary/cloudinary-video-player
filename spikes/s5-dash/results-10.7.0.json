@@ -1,0 +1,1792 @@
+{
+  "videojs": "10.7.0",
+  "streams": {
+    "quality": "https://res.cloudinary.com/demo/video/upload/sp_full_hd/sea_turtle.mpd",
+    "audio": "https://dash.akamaized.net/dash264/TestCases/10a/1/iis_forest_short_poem_multi_lang_480p_single_adapt_aaclc_sidx.mpd"
+  },
+  "browsers": {
+    "chromium": "148.0.7778.96",
+    "firefox": "150.0.2",
+    "webkit": "26.4"
+  },
+  "scenarios": {
+    "chromium": {
+      "codecs": {
+        "avcHigh": true,
+        "avcBaseline": true,
+        "aacLc": true,
+        "nativeAudioTracks": false,
+        "errors": []
+      },
+      "quality": {
+        "engineVersion": "5.2.0",
+        "listed": {
+          "ok": true,
+          "ms": 760
+        },
+        "storeList": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "bitrate": 103689,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "bitrate": 193159,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "bitrate": 322836,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "bitrate": 552651,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 928141,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 2677871,
+            "frameRate": 29.97,
+            "codec": "avc1.640028",
+            "selected": false
+          }
+        ],
+        "qualityMenu": {
+          "items": 7,
+          "hidden": false
+        },
+        "engineReps": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "kbps": 193,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "kbps": 553,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "kbps": 928,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          }
+        ],
+        "atStart": {
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 720,
+          "autoSwitchVideo": true,
+          "storeActive": "5",
+          "storeSelected": []
+        },
+        "storePinLowest": {
+          "target": "1",
+          "ok": true,
+          "ms": 2013,
+          "engineRep": {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 180,
+          "autoSwitchVideo": false,
+          "storeActive": "1",
+          "storeSelected": [
+            "1"
+          ]
+        },
+        "storePinHighest": {
+          "target": "6",
+          "ok": true,
+          "ms": 4021,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "6",
+          "storeSelected": [
+            "6"
+          ]
+        },
+        "pinSurvivesDashJsChange": {
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "6",
+          "storeSelected": [
+            "6"
+          ],
+          "bufferTimeAtTopQuality": 31
+        },
+        "directUpdateSettingsAfterSourceChange": {
+          "before": 777,
+          "after": -1
+        },
+        "storeAuto": {
+          "ok": true,
+          "ms": 2,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": true,
+          "storeActive": "6",
+          "storeSelected": []
+        },
+        "enginePin": {
+          "target": "3",
+          "ok": true,
+          "ms": 2514,
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "storeAutoAfterEnginePin": {
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "log": [
+          {
+            "t": 582,
+            "ev": "streamInitialized",
+            "id": "5"
+          },
+          {
+            "t": 1011,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "5",
+            "id": "6"
+          },
+          {
+            "t": 1019,
+            "ev": "canplay",
+            "id": "6",
+            "height": 1080
+          },
+          {
+            "t": 1293,
+            "ev": "trackChangeRendered",
+            "type": "video",
+            "lang": "und"
+          },
+          {
+            "t": 1293,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "id": "5",
+            "height": 720
+          },
+          {
+            "t": 1548,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "6",
+            "id": "1"
+          },
+          {
+            "t": 2495,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "5",
+            "id": "1",
+            "height": 180
+          },
+          {
+            "t": 3566,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "1",
+            "id": "6"
+          },
+          {
+            "t": 5870,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "1",
+            "id": "6",
+            "height": 1080
+          },
+          {
+            "t": 9616,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "6",
+            "id": "3"
+          },
+          {
+            "t": 10637,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "6",
+            "id": "3",
+            "height": 360
+          }
+        ],
+        "errors": []
+      },
+      "audioBuiltIn": {
+        "started": {
+          "ok": true,
+          "ms": 4028
+        },
+        "engineAudioTracks": [
+          {
+            "index": 1,
+            "id": null,
+            "lang": "en",
+            "roles": [],
+            "labels": []
+          },
+          {
+            "index": 2,
+            "id": null,
+            "lang": "de",
+            "roles": [],
+            "labels": []
+          }
+        ],
+        "storeAudioTrackList": [],
+        "audioMenu": {
+          "items": 0,
+          "hidden": true
+        },
+        "elementAudioTracks": [],
+        "engineCurrent": "en",
+        "requestsEn": 5,
+        "requestsDe": 0,
+        "engineSwitchToDe": {
+          "ok": true,
+          "ms": 1006,
+          "storeAudioTrackList": [],
+          "audioMenu": {
+            "items": 0,
+            "hidden": true
+          },
+          "elementAudioTracks": [],
+          "engineCurrent": "de",
+          "requestsEn": 5,
+          "requestsDe": 9
+        },
+        "errors": []
+      },
+      "audioBridge": {
+        "started": {
+          "ok": true,
+          "ms": 3277
+        },
+        "beforeBridge": {
+          "storeAudioTrackList": [],
+          "audioMenu": {
+            "items": 0,
+            "hidden": true
+          },
+          "elementAudioTracks": [],
+          "engineCurrent": "en",
+          "requestsEn": 5,
+          "requestsDe": 0
+        },
+        "bridged": true,
+        "filled": {
+          "ok": true,
+          "ms": 2
+        },
+        "afterBridge": {
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 5,
+          "requestsDe": 0
+        },
+        "storeSelectDe": {
+          "ok": true,
+          "ms": 1006,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": false
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": true
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": false
+            },
+            {
+              "lang": "de",
+              "enabled": true
+            }
+          ],
+          "engineCurrent": "de",
+          "requestsEn": 5,
+          "requestsDe": 10
+        },
+        "storeSelectEn": {
+          "ok": true,
+          "ms": 752,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 16,
+          "requestsDe": 10
+        },
+        "errors": []
+      },
+      "abrPresets": {
+        "dashjsDefault": {
+          "started": {
+            "ok": true,
+            "ms": 1011
+          },
+          "settings": {
+            "autoSwitchBitrate": {
+              "audio": true,
+              "video": true
+            },
+            "maxBitrate": {
+              "audio": -1,
+              "video": -1
+            },
+            "initialBitrate": {
+              "audio": -1,
+              "video": -1
+            },
+            "limitBitrateByPortal": false,
+            "usePixelRatioInLimitBitrateByPortal": false
+          },
+          "clientSize": [
+            640,
+            360
+          ],
+          "devicePixelRatio": 2,
+          "firstVideoFetchWidths": [
+            1280,
+            1280,
+            1920,
+            1920,
+            1920,
+            1920
+          ],
+          "firstRepAtCanplay": {
+            "t": 1019,
+            "ev": "canplay",
+            "id": "6",
+            "height": 1080
+          },
+          "requested": [
+            "5->6"
+          ],
+          "videoSwitches": [
+            {
+              "t": 1294,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "id": "5",
+              "height": 720
+            },
+            {
+              "t": 1825,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "from": "5",
+              "id": "6",
+              "height": 1080
+            }
+          ],
+          "maxHeightSeen": 1080,
+          "currentTime": 12,
+          "errors": []
+        },
+        "fastStart": {
+          "started": {
+            "ok": true,
+            "ms": 760
+          },
+          "settings": {
+            "autoSwitchBitrate": {
+              "audio": true,
+              "video": true
+            },
+            "maxBitrate": {
+              "audio": -1,
+              "video": -1
+            },
+            "initialBitrate": {
+              "audio": -1,
+              "video": 1
+            },
+            "limitBitrateByPortal": true,
+            "usePixelRatioInLimitBitrateByPortal": false
+          },
+          "clientSize": [
+            640,
+            360
+          ],
+          "devicePixelRatio": 2,
+          "firstVideoFetchWidths": [
+            320,
+            320,
+            640,
+            640,
+            640,
+            640
+          ],
+          "firstRepAtCanplay": {
+            "t": 664,
+            "ev": "canplay",
+            "id": "3",
+            "height": 360
+          },
+          "requested": [
+            "1->3"
+          ],
+          "videoSwitches": [
+            {
+              "t": 937,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "id": "1",
+              "height": 180
+            },
+            {
+              "t": 1203,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "from": "1",
+              "id": "3",
+              "height": 360
+            }
+          ],
+          "maxHeightSeen": 360,
+          "currentTime": 12.1,
+          "errors": []
+        },
+        "balanced": {
+          "started": {
+            "ok": true,
+            "ms": 757
+          },
+          "settings": {
+            "autoSwitchBitrate": {
+              "audio": true,
+              "video": true
+            },
+            "maxBitrate": {
+              "audio": -1,
+              "video": -1
+            },
+            "initialBitrate": {
+              "audio": -1,
+              "video": 4096
+            },
+            "limitBitrateByPortal": true,
+            "usePixelRatioInLimitBitrateByPortal": false
+          },
+          "clientSize": [
+            640,
+            360
+          ],
+          "devicePixelRatio": 2,
+          "firstVideoFetchWidths": [
+            640,
+            640,
+            640,
+            640,
+            640,
+            640
+          ],
+          "firstRepAtCanplay": {
+            "t": 552,
+            "ev": "canplay",
+            "id": "3",
+            "height": 360
+          },
+          "requested": [],
+          "videoSwitches": [
+            {
+              "t": 821,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "id": "3",
+              "height": 360
+            }
+          ],
+          "maxHeightSeen": 360,
+          "currentTime": 12.2,
+          "errors": []
+        },
+        "highQuality": {
+          "started": {
+            "ok": true,
+            "ms": 1015
+          },
+          "settings": {
+            "autoSwitchBitrate": {
+              "audio": true,
+              "video": true
+            },
+            "maxBitrate": {
+              "audio": -1,
+              "video": -1
+            },
+            "initialBitrate": {
+              "audio": -1,
+              "video": 4096
+            },
+            "limitBitrateByPortal": true,
+            "usePixelRatioInLimitBitrateByPortal": true
+          },
+          "clientSize": [
+            640,
+            360
+          ],
+          "devicePixelRatio": 2,
+          "firstVideoFetchWidths": [
+            1280,
+            1280,
+            1280,
+            1280,
+            1280,
+            1280
+          ],
+          "firstRepAtCanplay": {
+            "t": 867,
+            "ev": "canplay",
+            "id": "5",
+            "height": 720
+          },
+          "requested": [],
+          "videoSwitches": [
+            {
+              "t": 1137,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "id": "5",
+              "height": 720
+            }
+          ],
+          "maxHeightSeen": 720,
+          "currentTime": 12.2,
+          "errors": []
+        },
+        "maxBitrate600": {
+          "started": {
+            "ok": true,
+            "ms": 760
+          },
+          "settings": {
+            "autoSwitchBitrate": {
+              "audio": true,
+              "video": true
+            },
+            "maxBitrate": {
+              "audio": -1,
+              "video": 600
+            },
+            "initialBitrate": {
+              "audio": -1,
+              "video": 4096
+            },
+            "limitBitrateByPortal": false,
+            "usePixelRatioInLimitBitrateByPortal": false
+          },
+          "clientSize": [
+            640,
+            360
+          ],
+          "devicePixelRatio": 2,
+          "firstVideoFetchWidths": [
+            960,
+            960,
+            960,
+            960,
+            960,
+            960
+          ],
+          "firstRepAtCanplay": {
+            "t": 569,
+            "ev": "canplay",
+            "id": "4",
+            "height": 540
+          },
+          "requested": [],
+          "videoSwitches": [
+            {
+              "t": 827,
+              "ev": "qualityChangeRendered",
+              "type": "video",
+              "id": "4",
+              "height": 540
+            }
+          ],
+          "maxHeightSeen": 540,
+          "currentTime": 12.2,
+          "errors": []
+        }
+      }
+    },
+    "firefox": {
+      "codecs": {
+        "avcHigh": true,
+        "avcBaseline": true,
+        "aacLc": true,
+        "nativeAudioTracks": false,
+        "errors": []
+      },
+      "quality": {
+        "engineVersion": "5.2.0",
+        "listed": {
+          "ok": true,
+          "ms": 819
+        },
+        "storeList": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "bitrate": 103689,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "bitrate": 193159,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "bitrate": 322836,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "bitrate": 552651,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 928141,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 2677871,
+            "frameRate": 29.97,
+            "codec": "avc1.640028",
+            "selected": false
+          }
+        ],
+        "qualityMenu": {
+          "items": 7,
+          "hidden": false
+        },
+        "engineReps": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "kbps": 193,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "kbps": 553,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "kbps": 928,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          }
+        ],
+        "atStart": {
+          "engineRep": {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "kbps": 928,
+            "codecs": "avc1.4d401f"
+          },
+          "videoHeight": 720,
+          "autoSwitchVideo": true,
+          "storeActive": "5",
+          "storeSelected": []
+        },
+        "storePinLowest": {
+          "target": "1",
+          "ok": true,
+          "ms": 509,
+          "engineRep": {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 180,
+          "autoSwitchVideo": false,
+          "storeActive": "1",
+          "storeSelected": [
+            "1"
+          ]
+        },
+        "storePinHighest": {
+          "target": "6",
+          "ok": true,
+          "ms": 762,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "1",
+          "storeSelected": [
+            "6"
+          ]
+        },
+        "pinSurvivesDashJsChange": {
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "6",
+          "storeSelected": [
+            "6"
+          ],
+          "bufferTimeAtTopQuality": 31
+        },
+        "directUpdateSettingsAfterSourceChange": {
+          "before": 777,
+          "after": -1
+        },
+        "storeAuto": {
+          "ok": true,
+          "ms": 2,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": true,
+          "storeActive": "6",
+          "storeSelected": []
+        },
+        "enginePin": {
+          "target": "3",
+          "ok": true,
+          "ms": 760,
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "storeAutoAfterEnginePin": {
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "log": [
+          {
+            "t": 823,
+            "ev": "streamInitialized",
+            "id": "5"
+          },
+          {
+            "t": 1159,
+            "ev": "canplay",
+            "id": "5",
+            "height": 720
+          },
+          {
+            "t": 1358,
+            "ev": "trackChangeRendered",
+            "type": "video",
+            "lang": "und"
+          },
+          {
+            "t": 1358,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "id": "5",
+            "height": 720
+          },
+          {
+            "t": 1681,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "5",
+            "id": "1"
+          },
+          {
+            "t": 2130,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "5",
+            "id": "1",
+            "height": 180
+          },
+          {
+            "t": 2198,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "1",
+            "id": "6"
+          },
+          {
+            "t": 2981,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "1",
+            "id": "6",
+            "height": 1080
+          },
+          {
+            "t": 4984,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "6",
+            "id": "3"
+          },
+          {
+            "t": 5306,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "6",
+            "id": "3",
+            "height": 360
+          }
+        ],
+        "errors": []
+      },
+      "audioBuiltIn": {
+        "started": {
+          "ok": true,
+          "ms": 3298
+        },
+        "engineAudioTracks": [
+          {
+            "index": 1,
+            "id": null,
+            "lang": "en",
+            "roles": [],
+            "labels": []
+          },
+          {
+            "index": 2,
+            "id": null,
+            "lang": "de",
+            "roles": [],
+            "labels": []
+          }
+        ],
+        "storeAudioTrackList": [],
+        "audioMenu": {
+          "items": 0,
+          "hidden": true
+        },
+        "elementAudioTracks": [],
+        "engineCurrent": "en",
+        "requestsEn": 7,
+        "requestsDe": 0,
+        "engineSwitchToDe": {
+          "ok": true,
+          "ms": 1278,
+          "storeAudioTrackList": [],
+          "audioMenu": {
+            "items": 0,
+            "hidden": true
+          },
+          "elementAudioTracks": [],
+          "engineCurrent": "de",
+          "requestsEn": 7,
+          "requestsDe": 11
+        },
+        "errors": []
+      },
+      "audioBridge": {
+        "started": {
+          "ok": true,
+          "ms": 3049
+        },
+        "beforeBridge": {
+          "storeAudioTrackList": [],
+          "audioMenu": {
+            "items": 0,
+            "hidden": true
+          },
+          "elementAudioTracks": [],
+          "engineCurrent": "en",
+          "requestsEn": 7,
+          "requestsDe": 0
+        },
+        "bridged": true,
+        "filled": {
+          "ok": true,
+          "ms": 3
+        },
+        "afterBridge": {
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 7,
+          "requestsDe": 0
+        },
+        "storeSelectDe": {
+          "ok": true,
+          "ms": 1265,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": false
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": true
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": false
+            },
+            {
+              "lang": "de",
+              "enabled": true
+            }
+          ],
+          "engineCurrent": "de",
+          "requestsEn": 7,
+          "requestsDe": 10
+        },
+        "storeSelectEn": {
+          "ok": true,
+          "ms": 1010,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 18,
+          "requestsDe": 10
+        },
+        "errors": []
+      }
+    },
+    "webkit": {
+      "codecs": {
+        "avcHigh": true,
+        "avcBaseline": true,
+        "aacLc": true,
+        "nativeAudioTracks": true,
+        "errors": []
+      },
+      "quality": {
+        "engineVersion": "5.2.0",
+        "listed": {
+          "ok": true,
+          "ms": 759
+        },
+        "storeList": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "bitrate": 103689,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "bitrate": 193159,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "bitrate": 322836,
+            "frameRate": 29.97,
+            "codec": "avc1.42c01e",
+            "selected": false
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "bitrate": 552651,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 928141,
+            "frameRate": 29.97,
+            "codec": "avc1.4d401f",
+            "selected": false
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "bitrate": 2677871,
+            "frameRate": 29.97,
+            "codec": "avc1.640028",
+            "selected": false
+          }
+        ],
+        "qualityMenu": {
+          "items": 7,
+          "hidden": false
+        },
+        "engineReps": [
+          {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "2",
+            "width": 480,
+            "height": 270,
+            "kbps": 193,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          {
+            "id": "4",
+            "width": 960,
+            "height": 540,
+            "kbps": 553,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "5",
+            "width": 1280,
+            "height": 720,
+            "kbps": 928,
+            "codecs": "avc1.4d401f"
+          },
+          {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          }
+        ],
+        "atStart": {
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": true,
+          "storeActive": "5",
+          "storeSelected": []
+        },
+        "storePinLowest": {
+          "target": "1",
+          "ok": true,
+          "ms": 254,
+          "engineRep": {
+            "id": "1",
+            "width": 320,
+            "height": 180,
+            "kbps": 104,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 180,
+          "autoSwitchVideo": false,
+          "storeActive": "5",
+          "storeSelected": [
+            "1"
+          ]
+        },
+        "storePinHighest": {
+          "target": "6",
+          "ok": true,
+          "ms": 757,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "5",
+          "storeSelected": [
+            "6"
+          ]
+        },
+        "pinSurvivesDashJsChange": {
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": false,
+          "storeActive": "6",
+          "storeSelected": [
+            "6"
+          ],
+          "bufferTimeAtTopQuality": 31
+        },
+        "directUpdateSettingsAfterSourceChange": {
+          "before": 777,
+          "after": -1
+        },
+        "storeAuto": {
+          "ok": true,
+          "ms": 2,
+          "engineRep": {
+            "id": "6",
+            "width": 1920,
+            "height": 1080,
+            "kbps": 2678,
+            "codecs": "avc1.640028"
+          },
+          "videoHeight": 1080,
+          "autoSwitchVideo": true,
+          "storeActive": "6",
+          "storeSelected": []
+        },
+        "enginePin": {
+          "target": "3",
+          "ok": true,
+          "ms": 755,
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "storeAutoAfterEnginePin": {
+          "engineRep": {
+            "id": "3",
+            "width": 640,
+            "height": 360,
+            "kbps": 323,
+            "codecs": "avc1.42c01e"
+          },
+          "videoHeight": 360,
+          "autoSwitchVideo": false,
+          "storeActive": "3",
+          "storeSelected": []
+        },
+        "log": [
+          {
+            "t": 547,
+            "ev": "streamInitialized",
+            "id": "5"
+          },
+          {
+            "t": 811,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "5",
+            "id": "6"
+          },
+          {
+            "t": 917,
+            "ev": "canplay",
+            "id": "6",
+            "height": 1080
+          },
+          {
+            "t": 1547,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "6",
+            "id": "1"
+          },
+          {
+            "t": 1810,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "1",
+            "id": "6"
+          },
+          {
+            "t": 3252,
+            "ev": "trackChangeRendered",
+            "type": "video",
+            "lang": "und"
+          },
+          {
+            "t": 3252,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "id": "6",
+            "height": 1080
+          },
+          {
+            "t": 4592,
+            "ev": "qualityChangeRequested",
+            "type": "video",
+            "from": "6",
+            "id": "3"
+          },
+          {
+            "t": 5121,
+            "ev": "qualityChangeRendered",
+            "type": "video",
+            "from": "6",
+            "id": "3",
+            "height": 360
+          }
+        ],
+        "errors": []
+      },
+      "audioBuiltIn": {
+        "started": {
+          "ok": true,
+          "ms": 3529
+        },
+        "engineAudioTracks": [
+          {
+            "index": 1,
+            "id": null,
+            "lang": "en",
+            "roles": [],
+            "labels": []
+          },
+          {
+            "index": 2,
+            "id": null,
+            "lang": "de",
+            "roles": [],
+            "labels": []
+          }
+        ],
+        "storeAudioTrackList": [
+          {
+            "id": "1",
+            "kind": "main",
+            "label": "",
+            "language": "eng",
+            "enabled": true
+          }
+        ],
+        "audioMenu": {
+          "items": 1,
+          "hidden": true
+        },
+        "elementAudioTracks": [
+          {
+            "id": "1",
+            "lang": "eng",
+            "enabled": true
+          }
+        ],
+        "engineCurrent": "en",
+        "requestsEn": 9,
+        "requestsDe": 0,
+        "engineSwitchToDe": {
+          "ok": true,
+          "ms": 753,
+          "storeAudioTrackList": [
+            {
+              "id": "1",
+              "kind": "main",
+              "label": "",
+              "language": "eng",
+              "enabled": true
+            }
+          ],
+          "audioMenu": {
+            "items": 1,
+            "hidden": true
+          },
+          "elementAudioTracks": [
+            {
+              "id": "1",
+              "lang": "eng",
+              "enabled": true
+            }
+          ],
+          "engineCurrent": "de",
+          "requestsEn": 9,
+          "requestsDe": 9
+        },
+        "errors": []
+      },
+      "audioBridge": {
+        "started": {
+          "ok": true,
+          "ms": 3772
+        },
+        "beforeBridge": {
+          "storeAudioTrackList": [
+            {
+              "id": "1",
+              "kind": "main",
+              "label": "",
+              "language": "eng",
+              "enabled": true
+            }
+          ],
+          "audioMenu": {
+            "items": 1,
+            "hidden": true
+          },
+          "elementAudioTracks": [
+            {
+              "id": "1",
+              "lang": "eng",
+              "enabled": true
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 5,
+          "requestsDe": 0
+        },
+        "bridged": true,
+        "filled": {
+          "ok": true,
+          "ms": 2
+        },
+        "afterBridge": {
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 5,
+          "requestsDe": 0
+        },
+        "storeSelectDe": {
+          "ok": true,
+          "ms": 1005,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": false
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": true
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": false
+            },
+            {
+              "lang": "de",
+              "enabled": true
+            }
+          ],
+          "engineCurrent": "de",
+          "requestsEn": 5,
+          "requestsDe": 8
+        },
+        "storeSelectEn": {
+          "ok": true,
+          "ms": 1505,
+          "storeAudioTrackList": [
+            {
+              "id": "0",
+              "kind": "main",
+              "label": "",
+              "language": "en",
+              "enabled": true
+            },
+            {
+              "id": "1",
+              "kind": "alternative",
+              "label": "",
+              "language": "de",
+              "enabled": false
+            }
+          ],
+          "audioMenu": {
+            "items": 2,
+            "hidden": false
+          },
+          "elementAudioTracks": [
+            {
+              "lang": "en",
+              "enabled": true
+            },
+            {
+              "lang": "de",
+              "enabled": false
+            }
+          ],
+          "engineCurrent": "en",
+          "requestsEn": 15,
+          "requestsDe": 8
+        },
+        "errors": []
+      }
+    }
+  }
+}
