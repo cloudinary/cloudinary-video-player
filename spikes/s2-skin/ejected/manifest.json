@@ -1,0 +1,95 @@
+{
+  "fetched": "2026-11-26",
+  "skins": {
+    "default": {
+      "registry": "https://shadcn.videojs.org/r/html/{name}.json",
+      "items": [
+        {
+          "name": "video",
+          "title": "Default Video Skin",
+          "dependencies": [
+            "@videojs/html@10.7.0"
+          ],
+          "files": [
+            "@components/videojs/video/skin.html",
+            "@components/videojs/video/skin.ts",
+            "@components/videojs/video/skin.css"
+          ]
+        },
+        {
+          "name": "_style-video",
+          "title": "Video.js video styles",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/video/base.css",
+            "@components/videojs/styles/video/captions.css",
+            "@components/videojs/styles/video/theme.css"
+          ]
+        },
+        {
+          "name": "_style-theme",
+          "title": "Video.js media theme",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/base.css",
+            "@components/videojs/styles/themes/preferences.css",
+            "@components/videojs/styles/themes/theme.css"
+          ]
+        }
+      ]
+    },
+    "compat": {
+      "registry": "https://shadcn.videojs.org/r/html/compat/{name}.json",
+      "items": [
+        {
+          "name": "video",
+          "title": "Compat Video Skin",
+          "dependencies": [
+            "@videojs/html@10.7.0"
+          ],
+          "files": [
+            "@components/videojs/video/skin.html",
+            "@components/videojs/video/skin.ts",
+            "@components/videojs/video/skin.css"
+          ]
+        },
+        {
+          "name": "_style-video-compat",
+          "title": "Video.js Compat video styles",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/video/compat.css"
+          ]
+        },
+        {
+          "name": "_style-compat",
+          "title": "Video.js Compat theme",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/themes/compat.css"
+          ]
+        },
+        {
+          "name": "_style-video",
+          "title": "Video.js video styles",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/video/base.css",
+            "@components/videojs/styles/video/captions.css",
+            "@components/videojs/styles/video/theme.css"
+          ]
+        },
+        {
+          "name": "_style-theme",
+          "title": "Video.js media theme",
+          "dependencies": [],
+          "files": [
+            "@components/videojs/styles/base.css",
+            "@components/videojs/styles/themes/preferences.css",
+            "@components/videojs/styles/themes/theme.css"
+          ]
+        }
+      ]
+    }
+  }
+}

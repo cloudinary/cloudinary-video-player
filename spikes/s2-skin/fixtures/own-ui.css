@@ -1,0 +1,21 @@
+/* S-2 fixture styles. The skins stack their layers at z-index 10 (scrim), 20 (title, indicators, popups),
+   30 (controls), 40 and 50 (dialogs). The overlay takes 25: above the media and the scrim, below the controls. */
+.media-skin .cld-overlay {
+  position: absolute;
+  z-index: 25;
+  top: 12%;
+  left: 4%;
+  width: 30%;
+  height: 20%;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.6);
+  color: white;
+  font: 600 14px/1.2 system-ui, sans-serif;
+}
+
+.media-skin cld-logo-button svg {
+  width: 60%;
+  height: 60%;
+}
