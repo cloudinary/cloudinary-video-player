@@ -32,7 +32,8 @@ export const oneOf =
   (value) =>
     values.includes(value);
 const isHttpUrl: Check = (value) => isString(value) && /^https?:\/\//i.test(value as string);
-const isTransformation: Check = or(isString, isPlainObject, isArrayOfObjects({}));
+const isTransformation: Check = (value) =>
+  isString(value) || isPlainObject(value) || (Array.isArray(value) && value.every((step) => isString(step) || isPlainObject(step)));
 
 /** Paths of the invalid values in `value` (the v4 `isValidConfig`, which returned `paths.length === 0`). */
 export function invalidPaths(value: unknown, spec: Spec, path = ''): string[] {

@@ -7,8 +7,11 @@
 /** One transformation step with v4/SDK keys (`width`, `crop`, `effect`, `overlay`, `variables`, `if`, …). */
 export type TransformationStep = Record<string, unknown>;
 
-/** A transformation: one step, a chain of steps, or a raw string such as `"e_blur:200"` (research.md R-07). */
-export type Transformation = TransformationStep | TransformationStep[] | string;
+/**
+ * A transformation, as v4: one step, a named transformation (`"my_named"` → `t_my_named`), or a chain
+ * of steps and names. Raw strings such as `"e_blur:200"` go in `rawTransformation` (research.md R-07).
+ */
+export type Transformation = TransformationStep | string | Array<TransformationStep | string>;
 
 /**
  * Cloudinary delivery settings. Every key is accepted in snake_case (v4 SDK names) or camelCase.

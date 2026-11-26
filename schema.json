@@ -886,16 +886,23 @@
           "$ref": "#/definitions/TransformationStep"
         },
         {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TransformationStep"
-          }
+          "type": "string"
         },
         {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/TransformationStep"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
         }
       ],
-      "description": "A transformation: one step, a chain of steps, or a raw string such as `\"e_blur:200\"` (research.md R-07)."
+      "description": "A transformation, as v4: one step, a named transformation (`\"my_named\"` → `t_my_named`), or a chain of steps and names. Raw strings such as `\"e_blur:200\"` go in `rawTransformation` (research.md R-07)."
     },
     "TransformationStep": {
       "type": "object",
