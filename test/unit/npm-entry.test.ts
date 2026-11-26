@@ -2,10 +2,11 @@ import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
 
 // The built npm entry (`npm run build` first) imports in Node without a DOM (test-plan.md §3).
+// The package name resolves through the exports map to dist/ at run time; tsc maps it to src/.
 describe('npm entry', () => {
   it('imports in Node without a DOM', async () => {
     expect(globalThis.document).toBeUndefined();
-    await expect(import('../../dist/index.js')).resolves.toBeDefined();
+    await expect(import('cloudinary-video-player')).resolves.toBeDefined();
   });
 
   it('exports the files the package.json exports map names', async () => {
