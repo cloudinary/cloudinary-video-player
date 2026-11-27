@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-11-26",
+  "request": "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/upload/c2VhX3R1cnRsZQ==.json?_s=vp",
+  "status": 200,
+  "body": {
+    "playerOptions": {},
+    "sourceOptions": {}
+  }
+}

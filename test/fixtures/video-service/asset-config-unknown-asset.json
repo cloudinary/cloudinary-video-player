@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-11-26",
+  "request": "https://res.cloudinary.com/demo/_applet_/video_service/video_player_config/video/upload/bm9fc3VjaF9hc3NldF94eXo=.json?_s=vp",
+  "status": 404,
+  "body": {
+    "request_id": "1b6a600dee39588b243e05e441c142f0",
+    "error": {
+      "message": "resource not found: video 'no_such_asset_xyz' not found"
+    }
+  }
+}

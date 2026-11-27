@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-11-26",
+  "request": "https://res.cloudinary.com/demo/_applet_/video_service/video_player_profiles/My+Profile.json?_s=vp",
+  "status": 404,
+  "body": {
+    "request_id": "78b72981a0549699ba13bad951700a0b",
+    "error": {
+      "message": "resource not found: video player profile not found"
+    }
+  }
+}

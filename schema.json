@@ -4,8 +4,1554 @@
   "definitions": {
     "PlayerOptions": {
       "type": "object",
+      "properties": {
+        "cloudName": {
+          "type": "string",
+          "description": "Cloudinary cloud name. Alias: `cloud_name`.",
+          "examples": [
+            "demo"
+          ]
+        },
+        "cloud_name": {
+          "type": "string",
+          "description": "Alias of `cloudName`."
+        },
+        "secure": {
+          "type": "boolean",
+          "description": "Use HTTPS URLs.",
+          "default": true
+        },
+        "privateCdn": {
+          "type": "boolean",
+          "description": "Deliver from a private CDN distribution. Alias: `private_cdn`."
+        },
+        "private_cdn": {
+          "type": "boolean",
+          "description": "Alias of `privateCdn`."
+        },
+        "secureDistribution": {
+          "type": "string",
+          "description": "Custom domain for HTTPS delivery. Alias: `secure_distribution`."
+        },
+        "secure_distribution": {
+          "type": "string",
+          "description": "Alias of `secureDistribution`."
+        },
+        "cname": {
+          "type": "string",
+          "description": "Custom domain (CNAME) for HTTP delivery."
+        },
+        "cdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTP delivery over CDN subdomains. Alias: `cdn_subdomain`."
+        },
+        "cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `cdnSubdomain`."
+        },
+        "secureCdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTPS delivery over CDN subdomains. Alias: `secure_cdn_subdomain`."
+        },
+        "secure_cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `secureCdnSubdomain`."
+        },
+        "useRootPath": {
+          "type": "boolean",
+          "description": "Use the root path (images only; a video URL with it fails, as in v4). Alias: `use_root_path`."
+        },
+        "use_root_path": {
+          "type": "boolean",
+          "description": "Alias of `useRootPath`."
+        },
+        "urlSuffix": {
+          "type": "string",
+          "description": "SEO suffix added to the URL. Alias: `url_suffix`."
+        },
+        "url_suffix": {
+          "type": "string",
+          "description": "Alias of `urlSuffix`."
+        },
+        "shorten": {
+          "type": "boolean",
+          "description": "Use the short `/iu/` URL form for image uploads."
+        },
+        "publicId": {
+          "type": "string",
+          "description": "Public ID of the video, or an absolute media URL.",
+          "examples": [
+            "cld-sample-video"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/SourceOptions",
+          "description": "The source object (v4 `player()` configurations)."
+        },
+        "cloudinaryConfig": {
+          "$ref": "#/definitions/CloudinaryConfig",
+          "description": "Cloudinary settings for this source; snake_case or camelCase keys."
+        },
+        "type": {
+          "type": "string",
+          "description": "Delivery type, for example `upload`, `private`, `authenticated` or `live`.",
+          "default": "upload"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type. Alias: `resource_type`.",
+          "default": "video"
+        },
+        "transformation": {
+          "$ref": "#/definitions/Transformation",
+          "description": "Transformation of this source only. The next source does not inherit it."
+        },
+        "sourceTransformation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Transformation"
+          },
+          "description": "Transformation per source type, for example `{ \"hls\": [...] }`."
+        },
+        "rawTransformation": {
+          "type": "string",
+          "description": "Raw transformation string added to the URL. Alias: `raw_transformation`."
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Source types in order of preference: `auto`, `hls`, `dash`, `mp4`, `webm/vp9`, `audio`, and so on.",
+          "default": [
+            "auto"
+          ]
+        },
+        "breakpoints": {
+          "type": "boolean",
+          "description": "Choose the resolution from the player width and the device pixel ratio.",
+          "default": false
+        },
+        "maxDpr": {
+          "type": "number",
+          "description": "Maximum device pixel ratio for `breakpoints` (1, 1.5 or 2).",
+          "default": 2
+        },
+        "aspectRatio": {
+          "type": "string",
+          "description": "Aspect ratio of the delivered video, for example `16:9`."
+        },
+        "cropMode": {
+          "type": "string",
+          "enum": [
+            "fill",
+            "pad",
+            "smart"
+          ],
+          "description": "How `aspectRatio` resizes: `fill`, `pad` or `smart` (automatic gravity)."
+        },
+        "cropPadColor": {
+          "type": "string",
+          "description": "Background color for `cropMode: 'pad'`, for example `#000000`."
+        },
+        "hdr": {
+          "type": "boolean",
+          "description": "Deliver HDR where the device supports it.",
+          "default": false
+        },
+        "poster": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
+        },
+        "posterOptions": {
+          "$ref": "#/definitions/PosterOptions",
+          "description": "Poster settings."
+        },
+        "textTracks": {
+          "$ref": "#/definitions/TextTracks",
+          "description": "Captions and subtitles."
+        },
+        "chapters": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Chapters: `true` (from Cloudinary), a VTT URL, `{ \"url\": \"…\" }`, or `{ \"<seconds>\": \"<title>\" }`."
+        },
+        "title": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Title: text, or `true` to read it from the asset metadata."
+        },
+        "description": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Description: text, or `true` to read it from the asset metadata."
+        },
+        "info": {
+          "$ref": "#/definitions/SourceInfo",
+          "description": "Title, subtitle and description."
+        },
+        "download": {
+          "type": "boolean",
+          "description": "Show a download button.",
+          "default": false
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceOptions"
+          },
+          "description": "Sources recommended at the end of this source, or a function that returns them."
+        },
+        "autoShowRecommendations": {
+          "type": "boolean",
+          "description": "Show the recommendations when the source ends.",
+          "default": false
+        },
+        "videoSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoSourceItem"
+          },
+          "description": "Sources for the source switcher."
+        },
+        "queryParams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "description": "Query parameters added to every media URL."
+        },
+        "withCredentials": {
+          "type": "boolean",
+          "description": "Send cookies with every request for this source.",
+          "default": false
+        },
+        "adaptiveStreaming": {
+          "$ref": "#/definitions/AdaptiveStreamingOptions",
+          "description": "Adaptive streaming settings.",
+          "default": {
+            "strategy": "balanced"
+          }
+        },
+        "allowUsageReport": {
+          "type": "boolean",
+          "description": "Send the anonymous usage report and `_s=vp` on video-service requests.",
+          "default": true
+        },
+        "autoplay": {
+          "type": "boolean",
+          "description": "Start playback when the player loads.",
+          "default": false
+        },
+        "autoplayMode": {
+          "type": "string",
+          "enum": [
+            "always",
+            "on-scroll",
+            "never"
+          ],
+          "description": "When to start playback: `always`, `on-scroll` (when the player is visible) or `never`."
+        },
+        "muted": {
+          "type": "boolean",
+          "description": "Start muted. The volume is preset to 0.4, so that unmuting is not at full volume.",
+          "default": false
+        },
+        "loop": {
+          "type": "boolean",
+          "description": "Play again from the start at the end.",
+          "default": false
+        },
+        "controls": {
+          "type": "boolean",
+          "description": "Show the controls.",
+          "default": false
+        },
+        "playsinline": {
+          "type": "boolean",
+          "description": "Play inline on iPhone. Default: `true` on iOS, `false` elsewhere."
+        },
+        "preload": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "metadata",
+            "none"
+          ],
+          "description": "How much media to load before play.",
+          "default": "metadata"
+        },
+        "fluid": {
+          "type": "boolean",
+          "description": "Fill the width of the container and keep the aspect ratio.",
+          "default": false
+        },
+        "bigPlayButton": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "init"
+            }
+          ],
+          "description": "Show the large play button: `true`, `false`, or `init` (only before the first play).",
+          "default": true
+        },
+        "playbackRates": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Playback speeds in the speed menu, for example `[0.5, 1, 1.5, 2]`. Empty: no menu."
+        },
+        "skin": {
+          "type": "string",
+          "enum": [
+            "dark",
+            "light"
+          ],
+          "description": "Skin.",
+          "default": "dark"
+        },
+        "colors": {
+          "$ref": "#/definitions/Colors",
+          "description": "Player colors.",
+          "default": {
+            "base": "#000000",
+            "accent": "#FF620C",
+            "text": "#FFFFFF"
+          }
+        },
+        "fontFace": {
+          "type": "string",
+          "description": "Font of the player UI. Any Google font.",
+          "default": "Inter"
+        },
+        "showLogo": {
+          "type": "boolean",
+          "description": "Show the Cloudinary logo.",
+          "default": true
+        },
+        "logoImageUrl": {
+          "type": "string",
+          "description": "Logo image URL (http or https). Default: the Cloudinary logo."
+        },
+        "logoOnclickUrl": {
+          "type": "string",
+          "description": "Page opened by a click on the logo (http or https).",
+          "default": "https://cloudinary.com/"
+        },
+        "showJumpControls": {
+          "type": "boolean",
+          "description": "Show the 10-second jump buttons.",
+          "default": false
+        },
+        "pictureInPictureToggle": {
+          "type": "boolean",
+          "description": "Show the picture-in-picture button.",
+          "default": false
+        },
+        "chaptersButton": {
+          "type": "boolean",
+          "description": "Show the chapters menu button.",
+          "default": false
+        },
+        "seekThumbnails": {
+          "type": "boolean",
+          "description": "Show thumbnails over the seek bar.",
+          "default": true
+        },
+        "aiHighlightsGraph": {
+          "type": "boolean",
+          "description": "Show the AI highlights graph over the seek bar.",
+          "default": false
+        },
+        "hideContextMenu": {
+          "type": "boolean",
+          "description": "Disable the browser context menu on the player.",
+          "default": false
+        },
+        "floatingWhenNotVisible": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "none"
+          ],
+          "description": "Float the player in a corner when it scrolls out of view.",
+          "default": "none"
+        },
+        "playlistWidget": {
+          "$ref": "#/definitions/PlaylistWidgetOptions",
+          "description": "Playlist widget."
+        },
+        "ads": {
+          "$ref": "#/definitions/AdOptions",
+          "description": "Video ads (IMA)."
+        },
+        "analytics": {
+          "type": "boolean",
+          "description": "Send events to Google Analytics.",
+          "default": false
+        },
+        "cloudinaryAnalytics": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/CloudinaryAnalyticsOptions"
+            }
+          ],
+          "description": "Send Cloudinary analytics: `true`, `false`, or custom data.",
+          "default": true
+        },
+        "playedEventPercents": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Percentages of the video that send `percentsplayed`.",
+          "default": [
+            25,
+            50,
+            75,
+            100
+          ]
+        },
+        "playedEventTimes": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "description": "Seconds of playback that send `timeplayed`."
+        },
+        "profile": {
+          "type": "string",
+          "description": "Player profile: built-in name, saved name or URL. `player()` and the element only."
+        },
+        "videoConfig": {
+          "type": "boolean",
+          "description": "Apply the configuration saved for the video in Cloudinary. `player()` and the element only.",
+          "default": true
+        },
+        "lazy": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/LazyOptions"
+            }
+          ],
+          "description": "Load the player on click (or on scroll); show the poster until then.",
+          "default": false
+        },
+        "schedule": {
+          "$ref": "#/definitions/ScheduleOptions",
+          "description": "Weekly schedule: outside it, the player shows the poster only."
+        },
+        "debug": {
+          "type": "boolean",
+          "description": "Report unknown, renamed, removed and invalid options in the console.",
+          "default": false
+        },
+        "maxTries": {
+          "type": "number",
+          "description": "Number of \"video not ready\" checks before the error.",
+          "default": 3
+        },
+        "videoTimeout": {
+          "type": "number",
+          "description": "Milliseconds between \"video not ready\" checks.",
+          "default": 55000
+        },
+        "fetchErrorUsingGet": {
+          "type": "boolean",
+          "description": "Read the Cloudinary error with a one-byte `GET` instead of `HEAD` (cookies only with `withCredentials`).",
+          "default": false
+        }
+      },
+      "additionalProperties": true,
+      "description": "Options of `player()`, `videoPlayer()` and `<cld-video-player>`."
+    },
+    "SourceOptions": {
+      "type": "object",
+      "properties": {
+        "cloudName": {
+          "type": "string",
+          "description": "Cloudinary cloud name. Alias: `cloud_name`.",
+          "examples": [
+            "demo"
+          ]
+        },
+        "cloud_name": {
+          "type": "string",
+          "description": "Alias of `cloudName`."
+        },
+        "secure": {
+          "type": "boolean",
+          "description": "Use HTTPS URLs.",
+          "default": true
+        },
+        "privateCdn": {
+          "type": "boolean",
+          "description": "Deliver from a private CDN distribution. Alias: `private_cdn`."
+        },
+        "private_cdn": {
+          "type": "boolean",
+          "description": "Alias of `privateCdn`."
+        },
+        "secureDistribution": {
+          "type": "string",
+          "description": "Custom domain for HTTPS delivery. Alias: `secure_distribution`."
+        },
+        "secure_distribution": {
+          "type": "string",
+          "description": "Alias of `secureDistribution`."
+        },
+        "cname": {
+          "type": "string",
+          "description": "Custom domain (CNAME) for HTTP delivery."
+        },
+        "cdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTP delivery over CDN subdomains. Alias: `cdn_subdomain`."
+        },
+        "cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `cdnSubdomain`."
+        },
+        "secureCdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTPS delivery over CDN subdomains. Alias: `secure_cdn_subdomain`."
+        },
+        "secure_cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `secureCdnSubdomain`."
+        },
+        "useRootPath": {
+          "type": "boolean",
+          "description": "Use the root path (images only; a video URL with it fails, as in v4). Alias: `use_root_path`."
+        },
+        "use_root_path": {
+          "type": "boolean",
+          "description": "Alias of `useRootPath`."
+        },
+        "urlSuffix": {
+          "type": "string",
+          "description": "SEO suffix added to the URL. Alias: `url_suffix`."
+        },
+        "url_suffix": {
+          "type": "string",
+          "description": "Alias of `urlSuffix`."
+        },
+        "shorten": {
+          "type": "boolean",
+          "description": "Use the short `/iu/` URL form for image uploads."
+        },
+        "publicId": {
+          "type": "string",
+          "description": "Public ID of the video, or an absolute media URL.",
+          "examples": [
+            "cld-sample-video"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/SourceOptions",
+          "description": "The source object (v4 `player()` configurations)."
+        },
+        "cloudinaryConfig": {
+          "$ref": "#/definitions/CloudinaryConfig",
+          "description": "Cloudinary settings for this source; snake_case or camelCase keys."
+        },
+        "type": {
+          "type": "string",
+          "description": "Delivery type, for example `upload`, `private`, `authenticated` or `live`.",
+          "default": "upload"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type. Alias: `resource_type`.",
+          "default": "video"
+        },
+        "transformation": {
+          "$ref": "#/definitions/Transformation",
+          "description": "Transformation of this source only. The next source does not inherit it."
+        },
+        "sourceTransformation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Transformation"
+          },
+          "description": "Transformation per source type, for example `{ \"hls\": [...] }`."
+        },
+        "rawTransformation": {
+          "type": "string",
+          "description": "Raw transformation string added to the URL. Alias: `raw_transformation`."
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Source types in order of preference: `auto`, `hls`, `dash`, `mp4`, `webm/vp9`, `audio`, and so on.",
+          "default": [
+            "auto"
+          ]
+        },
+        "breakpoints": {
+          "type": "boolean",
+          "description": "Choose the resolution from the player width and the device pixel ratio.",
+          "default": false
+        },
+        "maxDpr": {
+          "type": "number",
+          "description": "Maximum device pixel ratio for `breakpoints` (1, 1.5 or 2).",
+          "default": 2
+        },
+        "aspectRatio": {
+          "type": "string",
+          "description": "Aspect ratio of the delivered video, for example `16:9`."
+        },
+        "cropMode": {
+          "type": "string",
+          "enum": [
+            "fill",
+            "pad",
+            "smart"
+          ],
+          "description": "How `aspectRatio` resizes: `fill`, `pad` or `smart` (automatic gravity)."
+        },
+        "cropPadColor": {
+          "type": "string",
+          "description": "Background color for `cropMode: 'pad'`, for example `#000000`."
+        },
+        "hdr": {
+          "type": "boolean",
+          "description": "Deliver HDR where the device supports it.",
+          "default": false
+        },
+        "poster": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
+        },
+        "posterOptions": {
+          "$ref": "#/definitions/PosterOptions",
+          "description": "Poster settings."
+        },
+        "textTracks": {
+          "$ref": "#/definitions/TextTracks",
+          "description": "Captions and subtitles."
+        },
+        "chapters": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Chapters: `true` (from Cloudinary), a VTT URL, `{ \"url\": \"…\" }`, or `{ \"<seconds>\": \"<title>\" }`."
+        },
+        "title": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Title: text, or `true` to read it from the asset metadata."
+        },
+        "description": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Description: text, or `true` to read it from the asset metadata."
+        },
+        "info": {
+          "$ref": "#/definitions/SourceInfo",
+          "description": "Title, subtitle and description."
+        },
+        "download": {
+          "type": "boolean",
+          "description": "Show a download button.",
+          "default": false
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceOptions"
+          },
+          "description": "Sources recommended at the end of this source, or a function that returns them."
+        },
+        "autoShowRecommendations": {
+          "type": "boolean",
+          "description": "Show the recommendations when the source ends.",
+          "default": false
+        },
+        "videoSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoSourceItem"
+          },
+          "description": "Sources for the source switcher."
+        },
+        "queryParams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "description": "Query parameters added to every media URL."
+        },
+        "withCredentials": {
+          "type": "boolean",
+          "description": "Send cookies with every request for this source.",
+          "default": false
+        },
+        "adaptiveStreaming": {
+          "$ref": "#/definitions/AdaptiveStreamingOptions",
+          "description": "Adaptive streaming settings.",
+          "default": {
+            "strategy": "balanced"
+          }
+        },
+        "allowUsageReport": {
+          "type": "boolean",
+          "description": "Send the anonymous usage report and `_s=vp` on video-service requests.",
+          "default": true
+        }
+      },
       "additionalProperties": false,
-      "description": "Options of one player: the single definition (plan.md, contracts/options.md). Phase 2 adds the options; `schema.json` is generated from this file."
+      "description": "Options of one source. At player level they are the defaults for every source."
+    },
+    "CloudinaryConfig": {
+      "type": "object",
+      "properties": {
+        "cloudName": {
+          "type": "string",
+          "description": "Cloudinary cloud name. Alias: `cloud_name`.",
+          "examples": [
+            "demo"
+          ]
+        },
+        "cloud_name": {
+          "type": "string",
+          "description": "Alias of `cloudName`."
+        },
+        "secure": {
+          "type": "boolean",
+          "description": "Use HTTPS URLs.",
+          "default": true
+        },
+        "privateCdn": {
+          "type": "boolean",
+          "description": "Deliver from a private CDN distribution. Alias: `private_cdn`."
+        },
+        "private_cdn": {
+          "type": "boolean",
+          "description": "Alias of `privateCdn`."
+        },
+        "secureDistribution": {
+          "type": "string",
+          "description": "Custom domain for HTTPS delivery. Alias: `secure_distribution`."
+        },
+        "secure_distribution": {
+          "type": "string",
+          "description": "Alias of `secureDistribution`."
+        },
+        "cname": {
+          "type": "string",
+          "description": "Custom domain (CNAME) for HTTP delivery."
+        },
+        "cdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTP delivery over CDN subdomains. Alias: `cdn_subdomain`."
+        },
+        "cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `cdnSubdomain`."
+        },
+        "secureCdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTPS delivery over CDN subdomains. Alias: `secure_cdn_subdomain`."
+        },
+        "secure_cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `secureCdnSubdomain`."
+        },
+        "useRootPath": {
+          "type": "boolean",
+          "description": "Use the root path (images only; a video URL with it fails, as in v4). Alias: `use_root_path`."
+        },
+        "use_root_path": {
+          "type": "boolean",
+          "description": "Alias of `useRootPath`."
+        },
+        "urlSuffix": {
+          "type": "string",
+          "description": "SEO suffix added to the URL. Alias: `url_suffix`."
+        },
+        "url_suffix": {
+          "type": "string",
+          "description": "Alias of `urlSuffix`."
+        },
+        "shorten": {
+          "type": "boolean",
+          "description": "Use the short `/iu/` URL form for image uploads."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Cloudinary delivery settings. Every key is accepted in snake_case (v4 SDK names) or camelCase. `api_secret`, `sign_url` and `auth_token` are never used: sign URLs on your server."
+    },
+    "Transformation": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TransformationStep"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/TransformationStep"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      ],
+      "description": "A transformation, as v4: one step, a named transformation (`\"my_named\"` → `t_my_named`), or a chain of steps and names. Raw strings such as `\"e_blur:200\"` go in `rawTransformation` (research.md R-07)."
+    },
+    "TransformationStep": {
+      "type": "object",
+      "additionalProperties": {},
+      "description": "One transformation step with v4/SDK keys (`width`, `crop`, `effect`, `overlay`, `variables`, `if`, …)."
+    },
+    "PosterOptions": {
+      "type": "object",
+      "properties": {
+        "publicId": {
+          "type": "string",
+          "description": "Public ID of an image to use as the poster."
+        },
+        "transformation": {
+          "$ref": "#/definitions/Transformation",
+          "description": "Transformation of the poster image."
+        },
+        "posterColor": {
+          "type": "string",
+          "description": "Show a solid color instead of a poster image."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Poster settings."
+    },
+    "TextTracks": {
+      "type": "object",
+      "properties": {
+        "options": {
+          "$ref": "#/definitions/TextTrackOptions",
+          "description": "Style of all tracks."
+        },
+        "captions": {
+          "$ref": "#/definitions/TextTrack",
+          "description": "The captions track."
+        },
+        "subtitles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTrack"
+          },
+          "description": "Subtitle tracks."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Captions, subtitles and their style."
+    },
+    "TextTrackOptions": {
+      "type": "object",
+      "properties": {
+        "theme": {
+          "type": "string",
+          "description": "Built-in caption theme (for example `default`, `videojs-default`, `yellow-outlined`, `player-colors`, `3d`).",
+          "default": "default"
+        },
+        "fontFace": {
+          "type": "string",
+          "description": "Font of the captions. Any Google font."
+        },
+        "fontSize": {
+          "type": "string",
+          "description": "Font size in relative units, such as `%` or `em`.",
+          "default": "medium"
+        },
+        "gravity": {
+          "type": "string",
+          "enum": [
+            "top",
+            "right",
+            "bottom",
+            "left",
+            "center",
+            "top-right",
+            "bottom-right",
+            "bottom-left",
+            "top-left"
+          ],
+          "description": "Position of the captions on the video or in `box`.",
+          "default": "bottom"
+        },
+        "box": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "string"
+            },
+            "y": {
+              "type": "string"
+            },
+            "width": {
+              "type": "string"
+            },
+            "height": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Location and size of the box that shows the captions."
+        },
+        "style": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "CSS properties of the caption text."
+        },
+        "wordHighlight": {
+          "type": "boolean",
+          "description": "Highlight the spoken word (paced captions)."
+        },
+        "wordHighlightStyle": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "CSS properties of the highlighted word."
+        },
+        "maxWords": {
+          "type": "number",
+          "description": "Maximum number of words in one cue (paced captions)."
+        },
+        "timeOffset": {
+          "type": "number",
+          "description": "Seconds added to every cue time."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Style of captions and subtitles."
+    },
+    "TextTrack": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Label in the captions menu."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language code, for example `en`."
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Show this track at start."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of a VTT or SRT file."
+        },
+        "maxWords": {
+          "type": "number",
+          "description": "Maximum number of words in one cue (paced captions)."
+        },
+        "wordHighlight": {
+          "type": "boolean",
+          "description": "Highlight the spoken word (paced captions)."
+        },
+        "timeOffset": {
+          "type": "number",
+          "description": "Seconds added to every cue time."
+        }
+      },
+      "additionalProperties": false,
+      "description": "One caption or subtitle track. Without `url`, the Cloudinary transcript of the video is used."
+    },
+    "SourceInfo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Title, subtitle and description shown in the title bar. Plain text only."
+    },
+    "VideoSourceItem": {
+      "type": "object",
+      "properties": {
+        "cloudName": {
+          "type": "string",
+          "description": "Cloudinary cloud name. Alias: `cloud_name`.",
+          "examples": [
+            "demo"
+          ]
+        },
+        "cloud_name": {
+          "type": "string",
+          "description": "Alias of `cloudName`."
+        },
+        "secure": {
+          "type": "boolean",
+          "description": "Use HTTPS URLs.",
+          "default": true
+        },
+        "privateCdn": {
+          "type": "boolean",
+          "description": "Deliver from a private CDN distribution. Alias: `private_cdn`."
+        },
+        "private_cdn": {
+          "type": "boolean",
+          "description": "Alias of `privateCdn`."
+        },
+        "secureDistribution": {
+          "type": "string",
+          "description": "Custom domain for HTTPS delivery. Alias: `secure_distribution`."
+        },
+        "secure_distribution": {
+          "type": "string",
+          "description": "Alias of `secureDistribution`."
+        },
+        "cname": {
+          "type": "string",
+          "description": "Custom domain (CNAME) for HTTP delivery."
+        },
+        "cdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTP delivery over CDN subdomains. Alias: `cdn_subdomain`."
+        },
+        "cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `cdnSubdomain`."
+        },
+        "secureCdnSubdomain": {
+          "type": "boolean",
+          "description": "Spread HTTPS delivery over CDN subdomains. Alias: `secure_cdn_subdomain`."
+        },
+        "secure_cdn_subdomain": {
+          "type": "boolean",
+          "description": "Alias of `secureCdnSubdomain`."
+        },
+        "useRootPath": {
+          "type": "boolean",
+          "description": "Use the root path (images only; a video URL with it fails, as in v4). Alias: `use_root_path`."
+        },
+        "use_root_path": {
+          "type": "boolean",
+          "description": "Alias of `useRootPath`."
+        },
+        "urlSuffix": {
+          "type": "string",
+          "description": "SEO suffix added to the URL. Alias: `url_suffix`."
+        },
+        "url_suffix": {
+          "type": "string",
+          "description": "Alias of `urlSuffix`."
+        },
+        "shorten": {
+          "type": "boolean",
+          "description": "Use the short `/iu/` URL form for image uploads."
+        },
+        "publicId": {
+          "type": "string",
+          "description": "Public ID of the video, or an absolute media URL.",
+          "examples": [
+            "cld-sample-video"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/SourceOptions",
+          "description": "The source object (v4 `player()` configurations)."
+        },
+        "cloudinaryConfig": {
+          "$ref": "#/definitions/CloudinaryConfig",
+          "description": "Cloudinary settings for this source; snake_case or camelCase keys."
+        },
+        "type": {
+          "type": "string",
+          "description": "Delivery type, for example `upload`, `private`, `authenticated` or `live`.",
+          "default": "upload"
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource type. Alias: `resource_type`.",
+          "default": "video"
+        },
+        "transformation": {
+          "$ref": "#/definitions/Transformation",
+          "description": "Transformation of this source only. The next source does not inherit it."
+        },
+        "sourceTransformation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Transformation"
+          },
+          "description": "Transformation per source type, for example `{ \"hls\": [...] }`."
+        },
+        "rawTransformation": {
+          "type": "string",
+          "description": "Raw transformation string added to the URL. Alias: `raw_transformation`."
+        },
+        "sourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Source types in order of preference: `auto`, `hls`, `dash`, `mp4`, `webm/vp9`, `audio`, and so on.",
+          "default": [
+            "auto"
+          ]
+        },
+        "breakpoints": {
+          "type": "boolean",
+          "description": "Choose the resolution from the player width and the device pixel ratio.",
+          "default": false
+        },
+        "maxDpr": {
+          "type": "number",
+          "description": "Maximum device pixel ratio for `breakpoints` (1, 1.5 or 2).",
+          "default": 2
+        },
+        "aspectRatio": {
+          "type": "string",
+          "description": "Aspect ratio of the delivered video, for example `16:9`."
+        },
+        "cropMode": {
+          "type": "string",
+          "enum": [
+            "fill",
+            "pad",
+            "smart"
+          ],
+          "description": "How `aspectRatio` resizes: `fill`, `pad` or `smart` (automatic gravity)."
+        },
+        "cropPadColor": {
+          "type": "string",
+          "description": "Background color for `cropMode: 'pad'`, for example `#000000`."
+        },
+        "hdr": {
+          "type": "boolean",
+          "description": "Deliver HDR where the device supports it.",
+          "default": false
+        },
+        "poster": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "publicId": {
+                  "type": "string"
+                },
+                "transformation": {
+                  "$ref": "#/definitions/Transformation"
+                }
+              },
+              "required": [
+                "publicId"
+              ],
+              "additionalProperties": false
+            }
+          ],
+          "description": "Poster: an image URL or public ID, `{ publicId, transformation }`, `true` for the saved poster, or `false` for none. Default: the poster saved for the video in Cloudinary."
+        },
+        "posterOptions": {
+          "$ref": "#/definitions/PosterOptions",
+          "description": "Poster settings."
+        },
+        "textTracks": {
+          "$ref": "#/definitions/TextTracks",
+          "description": "Captions and subtitles."
+        },
+        "chapters": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          ],
+          "description": "Chapters: `true` (from Cloudinary), a VTT URL, `{ \"url\": \"…\" }`, or `{ \"<seconds>\": \"<title>\" }`."
+        },
+        "title": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Title: text, or `true` to read it from the asset metadata."
+        },
+        "description": {
+          "type": [
+            "string",
+            "boolean"
+          ],
+          "description": "Description: text, or `true` to read it from the asset metadata."
+        },
+        "info": {
+          "$ref": "#/definitions/SourceInfo",
+          "description": "Title, subtitle and description."
+        },
+        "download": {
+          "type": "boolean",
+          "description": "Show a download button.",
+          "default": false
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceOptions"
+          },
+          "description": "Sources recommended at the end of this source, or a function that returns them."
+        },
+        "autoShowRecommendations": {
+          "type": "boolean",
+          "description": "Show the recommendations when the source ends.",
+          "default": false
+        },
+        "videoSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoSourceItem"
+          },
+          "description": "Sources for the source switcher."
+        },
+        "queryParams": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "description": "Query parameters added to every media URL."
+        },
+        "withCredentials": {
+          "type": "boolean",
+          "description": "Send cookies with every request for this source.",
+          "default": false
+        },
+        "adaptiveStreaming": {
+          "$ref": "#/definitions/AdaptiveStreamingOptions",
+          "description": "Adaptive streaming settings.",
+          "default": {
+            "strategy": "balanced"
+          }
+        },
+        "allowUsageReport": {
+          "type": "boolean",
+          "description": "Send the anonymous usage report and `_s=vp` on video-service requests.",
+          "default": true
+        },
+        "label": {
+          "type": "string",
+          "description": "Label in the source switcher."
+        }
+      },
+      "additionalProperties": false,
+      "description": "One entry of the source switcher."
+    },
+    "AdaptiveStreamingOptions": {
+      "type": "object",
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "fastStart",
+            "balanced",
+            "highQuality"
+          ],
+          "description": "Quality strategy for HLS and DASH.",
+          "default": "balanced"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Adaptive streaming settings."
+    },
+    "Colors": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "string",
+          "description": "Background color of the controls.",
+          "default": "#000000"
+        },
+        "accent": {
+          "type": "string",
+          "description": "Color of the progress bar and the active elements.",
+          "default": "#FF620C"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text and icon color.",
+          "default": "#FFFFFF"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Player colors."
+    },
+    "PlaylistWidgetOptions": {
+      "type": "object",
+      "properties": {
+        "show": {
+          "type": "boolean",
+          "description": "Show the widget."
+        },
+        "direction": {
+          "type": "string",
+          "enum": [
+            "horizontal",
+            "vertical"
+          ],
+          "description": "Layout direction.",
+          "default": "horizontal"
+        },
+        "total": {
+          "type": "number",
+          "description": "Number of items shown (0 = all).",
+          "default": 0
+        },
+        "selector": {
+          "type": "string",
+          "description": "CSS selector of an element outside the player to render the widget in."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Playlist widget."
+    },
+    "AdOptions": {
+      "type": "object",
+      "properties": {
+        "adTagUrl": {
+          "type": "string",
+          "description": "VAST or VMAP ad tag URL."
+        },
+        "showCountdown": {
+          "type": "boolean",
+          "description": "Show the remaining ad time.",
+          "default": true
+        },
+        "adLabel": {
+          "type": "string",
+          "description": "Label shown during an ad.",
+          "default": "Advertisement"
+        },
+        "locale": {
+          "type": "string",
+          "description": "Language of the ad UI.",
+          "default": "en"
+        },
+        "prerollTimeout": {
+          "type": "number",
+          "description": "Milliseconds to wait for a pre-roll.",
+          "default": 5000
+        },
+        "postrollTimeout": {
+          "type": "number",
+          "description": "Milliseconds to wait for a post-roll.",
+          "default": 5000
+        },
+        "adsInPlaylist": {
+          "type": "string",
+          "enum": [
+            "first-video",
+            "every-video"
+          ],
+          "description": "Which playlist items show ads.",
+          "default": "first-video"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Video ads (IMA)."
+    },
+    "CloudinaryAnalyticsOptions": {
+      "type": "object",
+      "properties": {
+        "customData1": {
+          "type": "string"
+        },
+        "customData2": {
+          "type": "string"
+        },
+        "customData3": {
+          "type": "string"
+        },
+        "customData4": {
+          "type": "string"
+        },
+        "customData5": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Custom data sent with Cloudinary analytics."
+    },
+    "LazyOptions": {
+      "type": "object",
+      "properties": {
+        "loadOnScroll": {
+          "type": "boolean",
+          "description": "Load the player when it scrolls into view, without a click.",
+          "default": false
+        }
+      },
+      "additionalProperties": false,
+      "description": "Lazy loading settings."
+    },
+    "ScheduleOptions": {
+      "type": "object",
+      "properties": {
+        "weekly": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScheduleRange"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "description": "Weekly schedule: outside it, the player shows the poster only."
+    },
+    "ScheduleRange": {
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "string",
+          "description": "Day of the week, for example `monday`."
+        },
+        "start": {
+          "type": "string",
+          "description": "Start time, `HH:MM` in the viewer's local time."
+        },
+        "duration": {
+          "type": "number",
+          "description": "Duration in hours."
+        }
+      },
+      "required": [
+        "day",
+        "start",
+        "duration"
+      ],
+      "additionalProperties": false,
+      "description": "One weekly time range."
     }
   }
 }

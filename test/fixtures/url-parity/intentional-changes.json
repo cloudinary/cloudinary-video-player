@@ -1,0 +1,18 @@
+{
+  "source.json:raw-webm-type": "Raw URL: no poster. v4 used the video URL itself as the poster image, which cannot load as an image (data-model §5).",
+  "source.json:raw-no-type": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-with-tx": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-no-extension": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-params": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-anchor": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-m3u8": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-hls": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-mpd": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-dash": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:raw-cloudinary": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:delivery-fetch": "Raw URL: no poster (data-model §5); v4 used the video URL as the poster.",
+  "source.json:poster-saved-tx": "Saved poster: tx is always URL-encoded (c_scale%2Cw_400). v4 encoded it only when another query parameter followed; the service answers both forms the same.",
+  "player.json:player-usage-report-off": "Saved poster: tx is always URL-encoded (c_limit%2Cw_700), as v4 did whenever _s=vp followed; the service answers both forms the same.",
+  "player.json:player-poster-options": "Default poster is the saved poster with posterOptions.transformation as tx (FR-038, contracts/options.md); v4 used the video still.",
+  "player.json:player-seek-thumbnails": "Saved poster gets the image-safe source transformation (tx=w_500), as the seek-thumbnail sprite does; v4 sent an empty tx."
+}
